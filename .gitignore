@@ -37,3 +37,5 @@ tags
 .#*
 .*.swp
 .DS_store
+/kex3_anubis/msvc/*.ncb
+/kex3_anubis/msvc/*.suo
