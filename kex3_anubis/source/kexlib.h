@@ -168,6 +168,7 @@ typedef union
 #include "array.h"
 #include "mathlib.h"
 #include "dict.h"
+#include "actions.h"
 #include "system.h"
 
 KEXLIB_NAMESPACE_START(kex)
@@ -175,6 +176,7 @@ KEXLIB_NAMESPACE_START(kex)
 extern kexSystem        *cSystem;
 extern kexCvarManager   *cCvars;
 extern kexCommand       *cCommands;
+extern kexInputAction   *cActions;
 
 KEXLIB_NAMESPACE_END
 

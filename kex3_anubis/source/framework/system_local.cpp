@@ -492,4 +492,5 @@ void kexSystemLocal::Main(int argc, char **argv)
 
     kex::cSystem->Init();
     kex::cCvars->Init();
+    kex::cActions->Init();
 }

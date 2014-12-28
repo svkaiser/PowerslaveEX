@@ -197,6 +197,10 @@
 				Name="framework"
 				>
 				<File
+					RelativePath="..\source\framework\actions.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\cmd.cpp"
 					>
 				</File>
@@ -286,6 +290,10 @@
 			<Filter
 				Name="framework"
 				>
+				<File
+					RelativePath="..\source\framework\actions.h"
+					>
+				</File>
 				<File
 					RelativePath="..\source\framework\array.h"
 					>
