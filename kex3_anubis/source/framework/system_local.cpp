@@ -16,16 +16,7 @@
 //
 
 #include "SDL.h"
-#include "SDL_endian.h"
 #include "kexlib.h"
-
-// Defines for checking the endianness of the system.
-
-#if SDL_BYTEORDER == SYS_LIL_ENDIAN
-#define SYS_LITTLE_ENDIAN
-#elif SDL_BYTEORDER == SYS_BIG_ENDIAN
-#define SYS_BIG_ENDIAN
-#endif
 
 class kexSystemLocal : public kexSystem
 {
@@ -46,10 +37,6 @@ public:
     virtual void            SetWindowTitle(const char *string);
     virtual void            SetWindowGrab(const bool bEnable);
     virtual void            WarpMouseToCenter(void);
-    virtual short           SwapLE16(const short val);
-    virtual short           SwapBE16(const short val);
-    virtual int             SwapLE32(const int val);
-    virtual int             SwapBE32(const int val);
     virtual void            *GetProcAddress(const char *proc);
     virtual int             CheckParam(const char *check);
     virtual const char      *GetBaseDirectory(void);
@@ -63,14 +50,34 @@ public:
     virtual void            *Window(void) { return window; }
 
 private:
+    void                    InitVideo(void);
+
     SDL_Window              *window;
     SDL_GLContext           glContext;
 };
+
+kexCvar cvarFixedTime("fixedtime", CVF_INT|CVF_CONFIG, "0", "TODO");
+kexCvar cvarVidWidth("v_width", CVF_INT|CVF_CONFIG, "640", "TODO");
+kexCvar cvarVidHeight("v_height", CVF_INT|CVF_CONFIG, "480", "TODO");
+kexCvar cvarVidWindowed("v_windowed", CVF_BOOL|CVF_CONFIG, "1", "TODO");
+kexCvar cvarVidVSync("v_vsync", CVF_BOOL|CVF_CONFIG, "1", "TODO");
+kexCvar cvarVidDepthSize("v_depthsize", CVF_INT|CVF_CONFIG, "24", "TODO");
+kexCvar cvarVidStencilSize("v_stencilsize", CVF_INT|CVF_CONFIG, "8", "TODO");
+kexCvar cvarVidBuffSize("v_buffersize", CVF_INT|CVF_CONFIG, "32", "TODO");
 
 static kexSystemLocal systemLocal;
 kexSystem *kex::cSystem = &systemLocal;
 
 static char buffer[4096];
+
+//
+// quit
+//
+
+COMMAND(quit)
+{
+    kex::cSystem->Shutdown();
+}
 
 //
 // kexSystemLocal::kexSystemLocal
@@ -172,31 +179,107 @@ uint64_t kexSystemLocal::GetPerformanceCounter(void)
 
 void kexSystemLocal::Init(void)
 {
-    uint32_t f = SDL_INIT_VIDEO;
-    uint32_t flags = 0;
-
-    if(SDL_Init(f) < 0)
+    if(SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         kex::cSystem->Error("Failed to initialize SDL");
         return;
     }
 
-    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 24);
-    SDL_GL_SetAttribute(SDL_GL_RETAINED_BACKING, 1);
-    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+    SDL_ShowCursor(0);
+    kex::cSystem->Printf("SDL Initialized\n");
+}
 
-    flags |= SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
+//
+// kexSystemLocal::InitVideo
+//
+
+void kexSystemLocal::InitVideo(void)
+{
+    int newwidth;
+    int newheight;
+    int p;
+    uint32_t flags = 0;
+    
+    bWindowed = cvarVidWindowed.GetBool();
+    videoWidth = cvarVidWidth.GetInt();
+    videoHeight = cvarVidHeight.GetInt();
+    videoRatio = (float)videoWidth / (float)videoHeight;
+    
+    if(CheckParam("-window"))
+    {
+        bWindowed = true;
+    }
+
+    if(CheckParam("-fullscreen"))
+    {
+        bWindowed = false;
+    }
+    
+    newwidth = newheight = 0;
+    
+    p = CheckParam("-width");
+    if(p && p < argc - 1)
+    {
+        newwidth = atoi(argv[p+1]);
+    }
+
+    p = CheckParam("-height");
+    if(p && p < argc - 1)
+    {
+        newheight = atoi(argv[p+1]);
+    }
+    
+    if(newwidth && newheight)
+    {
+        videoWidth = newwidth;
+        videoHeight = newheight;
+    }
+
+    if(cvarVidDepthSize.GetInt() != 8 &&
+       cvarVidDepthSize.GetInt() != 16 &&
+       cvarVidDepthSize.GetInt() != 24)
+    {
+        cvarVidDepthSize.Set(24);
+    }
+
+    if(cvarVidStencilSize.GetInt() != 8)
+    {
+        cvarVidStencilSize.Set(8);
+    }
+    
+    if(cvarVidBuffSize.GetInt() != 8 &&
+       cvarVidBuffSize.GetInt() != 16 &&
+       cvarVidBuffSize.GetInt() != 24 &&
+       cvarVidBuffSize.GetInt() != 32)
+    {
+        cvarVidBuffSize.Set(32);
+    }
+
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, cvarVidBuffSize.GetInt());
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, cvarVidDepthSize.GetInt());
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, cvarVidStencilSize.GetInt());
+    SDL_GL_SetSwapInterval(cvarVidVSync.GetBool());
+    
+    flags |= SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_MOUSE_FOCUS;
+    
+    if(!bWindowed)
+    {
+        flags |= SDL_WINDOW_FULLSCREEN;
+    }
 
     window = SDL_CreateWindow(kexStr::Format("Kex Engine (Anubis) - Version Date: %s", __DATE__),
                               SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                               videoWidth, videoHeight, flags);
-
+    
     if(window == NULL)
     {
         kex::cSystem->Error("kexSystem::InitVideo: Failed to create window");
@@ -210,7 +293,7 @@ void kexSystemLocal::Init(void)
     SDL_GL_MakeCurrent(window, glContext);
     SDL_GL_SetSwapInterval(1);
 
-    kex::cSystem->Printf("SDL Initialized\n");
+    kex::cSystem->Printf("Video Initialized\n");
 }
 
 //
@@ -296,42 +379,6 @@ void kexSystemLocal::WarpMouseToCenter(void)
 }
 
 //
-// kexSystemLocal::SwapLE16
-//
-
-short kexSystemLocal::SwapLE16(const short val)
-{
-    return SDL_SwapLE16(val);
-}
-
-//
-// kexSystemLocal::SwapBE16
-//
-
-short kexSystemLocal::SwapBE16(const short val)
-{
-    return SDL_SwapBE16(val);
-}
-
-//
-// kexSystemLocal::SwapLE32
-//
-
-int kexSystemLocal::SwapLE32(const int val)
-{
-    return SDL_SwapLE32(val);
-}
-
-//
-// kexSystemLocal::SwapBE32
-//
-
-int kexSystemLocal::SwapBE32(const int val)
-{
-    return SDL_SwapBE32(val);
-}
-
-//
 // kexSystemLocal::GetProcAddress
 //
 
@@ -343,6 +390,7 @@ void *kexSystemLocal::GetProcAddress(const char *proc)
     {
         Warning("GetProcAddress: %s not found\n", proc);
     }
+
     return func;
 }
 
@@ -495,4 +543,8 @@ void kexSystemLocal::Main(int argc, char **argv)
     kex::cCvars->Init();
     kex::cActions->Init();
     kex::cPakFiles->Init();
+    
+    InitVideo();
+
+    kex::cGLContext->Init();
 }

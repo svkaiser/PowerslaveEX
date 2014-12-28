@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math"
+				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math"
+				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -213,6 +213,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\endian.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\kpf.cpp"
 					>
 				</File>
@@ -281,6 +285,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="opengl"
+				>
+				<File
+					RelativePath="..\source\opengl\glcontext.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -327,6 +339,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\endian.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\kpf.h"
 					>
 				</File>
@@ -356,6 +372,18 @@
 				>
 				<File
 					RelativePath="..\source\math\mathlib.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="opengl"
+				>
+				<File
+					RelativePath="..\source\opengl\dgl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\opengl\glcontext.h"
 					>
 				</File>
 			</Filter>

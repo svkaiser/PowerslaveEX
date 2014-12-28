@@ -112,42 +112,6 @@ void kexSystem::WarpMouseToCenter(void)
 }
 
 //
-// kexSystem::SwapLE16
-//
-
-short kexSystem::SwapLE16(const short val)
-{
-    return val;
-}
-
-//
-// kexSystem::SwapBE16
-//
-
-short kexSystem::SwapBE16(const short val)
-{
-    return val;
-}
-
-//
-// kexSystem::SwapLE32
-//
-
-int kexSystem::SwapLE32(const int val)
-{
-    return val;
-}
-
-//
-// kexSystem::SwapBE32
-//
-
-int kexSystem::SwapBE32(const int val)
-{
-    return val;
-}
-
-//
 // kexSystem::GetProcAddress
 //
 

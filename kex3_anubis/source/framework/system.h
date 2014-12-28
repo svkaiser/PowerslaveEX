@@ -33,10 +33,6 @@ public:
     virtual void            SetWindowTitle(const char *string);
     virtual void            SetWindowGrab(const bool bEnable);
     virtual void            WarpMouseToCenter(void);
-    virtual short           SwapLE16(const short val);
-    virtual short           SwapBE16(const short val);
-    virtual int             SwapLE32(const int val);
-    virtual int             SwapBE32(const int val);
     virtual void            *GetProcAddress(const char *proc);
     virtual int             CheckParam(const char *check);
     virtual const char      *GetBaseDirectory(void);

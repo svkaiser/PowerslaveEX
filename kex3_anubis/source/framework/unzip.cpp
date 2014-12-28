@@ -1101,7 +1101,7 @@ static int unzlocal_getShort (FILE* fin, uLong *pX)
 
 	fread( &v, sizeof(v), 1, fin );
 
-	*pX = kex::cSystem->SwapLE16( v);
+	*pX = kex::cEndian->SwapLE16( v);
 	return UNZ_OK;
 
 /*
@@ -1130,7 +1130,7 @@ static int unzlocal_getLong (FILE *fin, uLong *pX)
 
 	fread( &v, sizeof(v), 1, fin );
 
-    *pX = kex::cSystem->SwapLE32( v);
+    *pX = kex::cEndian->SwapLE32( v);
 	return UNZ_OK;
 
 /*
