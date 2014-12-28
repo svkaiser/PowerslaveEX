@@ -18,6 +18,8 @@
 #include "SDL.h"
 #include "kexlib.h"
 
+kexCvar kex::cvarDeveloper("developer", CVF_BOOL|CVF_CONFIG, "0", "Developer mode");
+
 //
 // main
 //

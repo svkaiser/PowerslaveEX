@@ -170,13 +170,18 @@ typedef union
 #include "dict.h"
 #include "actions.h"
 #include "system.h"
+#include "kpf.h"
+#include "object.h"
 
 KEXLIB_NAMESPACE_START(kex)
+
+extern kexCvar          cvarDeveloper;
 
 extern kexSystem        *cSystem;
 extern kexCvarManager   *cCvars;
 extern kexCommand       *cCommands;
 extern kexInputAction   *cActions;
+extern kexPakFile       *cPakFiles;
 
 KEXLIB_NAMESPACE_END
 

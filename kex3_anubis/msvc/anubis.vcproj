@@ -213,6 +213,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\kpf.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\kstring.cpp"
 					>
 				</File>
@@ -221,11 +225,19 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\object.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\system.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\source\framework\system_local.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\unzip.cpp"
 					>
 				</File>
 			</Filter>
@@ -315,6 +327,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\kpf.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\kstring.h"
 					>
 				</File>
@@ -323,7 +339,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\object.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\system.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\unzip.h"
 					>
 				</File>
 			</Filter>

@@ -193,7 +193,7 @@ void kexSystemLocal::Init(void)
 
     flags |= SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 
-    window = SDL_CreateWindow(kexStr::Format("Kex Engine - Version Date: %s", __DATE__),
+    window = SDL_CreateWindow(kexStr::Format("Kex Engine (Anubis) - Version Date: %s", __DATE__),
                               SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                               videoWidth, videoHeight, flags);
 
@@ -491,6 +491,8 @@ void kexSystemLocal::Main(int argc, char **argv)
     f_stderr = freopen("stderr.txt", "wt", stderr);
 
     kex::cSystem->Init();
+    kexObject::Init();
     kex::cCvars->Init();
     kex::cActions->Init();
+    kex::cPakFiles->Init();
 }
