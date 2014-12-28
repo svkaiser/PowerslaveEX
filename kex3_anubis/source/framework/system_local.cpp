@@ -191,22 +191,11 @@ void kexSystemLocal::Init(void)
     SDL_GL_SetAttribute(SDL_GL_RETAINED_BACKING, 1);
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
-#ifdef KEX_IPHONE
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-#endif
-
-    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 0);
-
     flags |= SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 
     window = SDL_CreateWindow(kexStr::Format("Kex Engine - Version Date: %s", __DATE__),
                               SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                               videoWidth, videoHeight, flags);
-
-#ifdef KEX_IPHONE
-    SDL_GetWindowSize(window, &videoWidth, &videoHeight);
-#endif
 
     if(window == NULL)
     {
@@ -500,4 +489,7 @@ void kexSystemLocal::Main(int argc, char **argv)
 
     f_stdout = freopen("stdout.txt", "wt", stdout);
     f_stderr = freopen("stderr.txt", "wt", stderr);
+
+    kex::cSystem->Init();
+    kex::cCvars->Init();
 }

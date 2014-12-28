@@ -163,13 +163,19 @@ typedef union
 
 #include "kstring.h"
 #include "memHeap.h"
+#include "cmd.h"
+#include "cvar.h"
 #include "array.h"
 #include "mathlib.h"
 #include "dict.h"
 #include "system.h"
 
 KEXLIB_NAMESPACE_START(kex)
-extern kexSystem    *cSystem;
+
+extern kexSystem        *cSystem;
+extern kexCvarManager   *cCvars;
+extern kexCommand       *cCommands;
+
 KEXLIB_NAMESPACE_END
 
 #endif

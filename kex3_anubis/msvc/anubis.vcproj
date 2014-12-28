@@ -197,6 +197,14 @@
 				Name="framework"
 				>
 				<File
+					RelativePath="..\source\framework\cmd.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\cvar.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\dict.cpp"
 					>
 				</File>
@@ -280,6 +288,14 @@
 				>
 				<File
 					RelativePath="..\source\framework\array.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\cmd.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\cvar.h"
 					>
 				</File>
 				<File
