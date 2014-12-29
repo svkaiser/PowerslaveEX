@@ -38,6 +38,8 @@ public:
     virtual void            Warning(const char *string, ...);
     virtual void            DPrintf(const char *string, ...);
     virtual void            Error(const char *string, ...);
+    virtual void            ReadConfigFile(const char *file);
+    virtual void            WriteConfigFile(void);
 
     int                     VideoWidth(void) { return videoWidth; }
     int                     VideoHeight(void) { return videoHeight; }

@@ -198,6 +198,7 @@ extern kexGLContext         *cGLContext;
 KEXLIB_NAMESPACE_START(render)
 
 extern kexRenderBackend     *cBackend;
+extern kexTextureManager    *cTextures;
 
 KEXLIB_NAMESPACE_END
 

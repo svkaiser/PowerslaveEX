@@ -217,6 +217,7 @@ void kexRenderBackend::Init(void)
     }
 
     bIsInit = true;
+    kex::render::cTextures->Init();
 
     kex::cSystem->Printf("Backend Renderer Initialized\n");
 }
@@ -227,20 +228,8 @@ void kexRenderBackend::Init(void)
 
 void kexRenderBackend::Shutdown(void)
 {
-    kexTexture *texture;
-
     kex::cSystem->Printf("Shutting down render system\n");
-
-    for(int i = 0; i < MAX_HASH; i++)
-    {
-        for(texture = textureList.GetData(i); texture; texture = textureList.Next())
-        {
-            texture->Delete();
-        }
-    }
-
-    // do last round of texture flushing to make sure we freed everything
-    Mem_Purge(kexTexture::hb_texture);
+    kex::render::cTextures->Shutdown();
 }
 
 //
@@ -798,29 +787,6 @@ void kexRenderBackend::SetTextureUnit(int unit)
     dglActiveTextureARB(GL_TEXTURE0_ARB + unit);
     dglClientActiveTextureARB(GL_TEXTURE0_ARB + unit);
     glState.currentUnit = unit;
-}
-
-//
-// kexRenderBackend::CacheTexture
-//
-
-kexTexture *kexRenderBackend::CacheTexture(const char *name, texClampMode_t clampMode,
-                                           texFilterMode_t filterMode)
-{
-    kexTexture *texture = NULL;
-
-    if(name == NULL || name[0] == 0)
-    {
-        return NULL;
-    }
-
-    if(!(texture = textureList.Find(name)))
-    {
-        texture = textureList.Add(name, kexTexture::hb_texture);
-        texture->LoadFromFile(name, clampMode, filterMode);
-    }
-
-    return texture;
 }
 
 //

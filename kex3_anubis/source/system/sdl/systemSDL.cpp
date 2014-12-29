@@ -91,6 +91,12 @@ void kexSystemSDL::Shutdown(void)
 {
     bShuttingDown = true;
 
+    WriteConfigFile();
+    
+    kex::render::cBackend->Shutdown();
+    kex::cPakFiles->Shutdown();
+    kex::cCvars->Shutdown();
+    
     Mem_Purge(hb_static);
     Mem_Purge(hb_object);
 
@@ -106,6 +112,7 @@ void kexSystemSDL::Shutdown(void)
         window = NULL;
     }
 
+    kex::cSystem->Printf("Shutting down\n");
     SDL_Quit();
 
     fclose(f_stdout);
@@ -481,10 +488,13 @@ void kexSystemSDL::Main(int argc, char **argv)
 
     kex::cSystem->Init();
     kex::cTimer->Init();
-    kexObject::Init();
     kex::cCvars->Init();
+    kexObject::Init();
+    kex::cInput->Init();
     kex::cActions->Init();
     kex::cPakFiles->Init();
+    
+    ReadConfigFile("config.cfg");
     
     InitVideo();
 

@@ -12,6 +12,7 @@
 		41DA07431A51FDE000562B25 /* timerSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07421A51FDE000562B25 /* timerSDL.cpp */; };
 		41DA07451A51FEFC00562B25 /* systemSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07441A51FEFC00562B25 /* systemSDL.cpp */; };
 		41DA07471A52014400562B25 /* inputSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07461A52014400562B25 /* inputSDL.cpp */; };
+		41DA074B1A52115900562B25 /* textureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07491A52115900562B25 /* textureManager.cpp */; };
 		41E2CDFD1A51CF2000FC28DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E2CDFC1A51CF2000FC28DC /* Cocoa.framework */; };
 		41E2CE071A51CF2000FC28DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41E2CE051A51CF2000FC28DC /* InfoPlist.strings */; };
 		41E2CE0D1A51CF2000FC28DC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 41E2CE0B1A51CF2000FC28DC /* Credits.rtf */; };
@@ -104,6 +105,8 @@
 		41DA07421A51FDE000562B25 /* timerSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timerSDL.cpp; path = ../../source/system/sdl/timerSDL.cpp; sourceTree = "<group>"; };
 		41DA07441A51FEFC00562B25 /* systemSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = systemSDL.cpp; path = ../../source/system/sdl/systemSDL.cpp; sourceTree = "<group>"; };
 		41DA07461A52014400562B25 /* inputSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = inputSDL.cpp; path = ../../source/system/sdl/inputSDL.cpp; sourceTree = "<group>"; };
+		41DA07491A52115900562B25 /* textureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = textureManager.cpp; sourceTree = "<group>"; };
+		41DA074A1A52115900562B25 /* textureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textureManager.h; sourceTree = "<group>"; };
 		41E2CDF91A51CF2000FC28DC /* anubis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = anubis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E2CDFC1A51CF2000FC28DC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		41E2CDFF1A51CF2000FC28DC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -342,10 +345,12 @@
 				41E2CE681A51D39B00FC28DC /* fbo.cpp */,
 				41E2CE6A1A51D39B00FC28DC /* image.cpp */,
 				41E2CE6C1A51D39B00FC28DC /* renderBackend.cpp */,
+				41DA07491A52115900562B25 /* textureManager.cpp */,
 				41E2CE6E1A51D39B00FC28DC /* textureObject.cpp */,
 				41E2CE691A51D39B00FC28DC /* fbo.h */,
 				41E2CE6B1A51D39B00FC28DC /* image.h */,
 				41E2CE6D1A51D39B00FC28DC /* renderBackend.h */,
+				41DA074A1A52115900562B25 /* textureManager.h */,
 				41E2CE6F1A51D39B00FC28DC /* textureObject.h */,
 			);
 			name = renderer;
@@ -507,6 +512,7 @@
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,
 				41E2CE851A51D39B00FC28DC /* quaternion.cpp in Sources */,
 				41E2CE761A51D39B00FC28DC /* dict.cpp in Sources */,
+				41DA074B1A52115900562B25 /* textureManager.cpp in Sources */,
 				41E2CE791A51D39B00FC28DC /* kstring.cpp in Sources */,
 				41E2CE831A51D39B00FC28DC /* plane.cpp in Sources */,
 				41DA07471A52014400562B25 /* inputSDL.cpp in Sources */,

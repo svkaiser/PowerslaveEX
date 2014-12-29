@@ -112,6 +112,47 @@ int kexSystem::CheckParam(const char *check)
 }
 
 //
+// kexSystem::ReadConfigFile
+//
+
+void kexSystem::ReadConfigFile(const char *file)
+{
+    char *buffer;
+    int len;
+    
+    len = kex::cPakFiles->OpenExternalFile(file, (byte**)(&buffer));
+    
+    if(len == -1)
+    {
+        Warning("Warning: %s not found\n", file);
+        return;
+    }
+    
+    kex::cCommands->Execute(buffer);
+    Mem_Free(buffer);
+}
+
+//
+// kexSystem::WriteConfigFile
+//
+
+void kexSystem::WriteConfigFile(void)
+{
+    extern kexCvar cvarBasePath;
+    kexStr str(kexStr::Format("%s\\config.cfg", cvarBasePath.GetValue()));
+    str.NormalizeSlashes();
+    
+    FILE *f = fopen(str.c_str(), "w");
+    
+    if(f)
+    {
+        kex::cActions->WriteBindings(f);
+        kex::cCvars->WriteToFile(f);
+        fclose(f);
+    }
+}
+
+//
 // kexSystem::Printf
 //
 

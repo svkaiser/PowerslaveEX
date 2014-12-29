@@ -115,6 +115,7 @@ typedef struct
 #include "dgl.h"
 #include "image.h"
 #include "textureObject.h"
+#include "textureManager.h"
 #include "fbo.h"
 
 class kexRenderBackend
@@ -148,8 +149,6 @@ public:
     void                            ResetViewPort(void);
     void                            SetDrawBuffer(const GLenum state);
     void                            SetReadBuffer(const GLenum state);
-    kexTexture                      *CacheTexture(const char *name, texClampMode_t clampMode,
-                                                  texFilterMode_t filterMode = TF_LINEAR);
 
     const int                       MaxTextureUnits(void) const { return maxTextureUnits; }
     const int                       MaxTextureSize(void) const { return maxTextureSize; }
@@ -204,8 +203,6 @@ private:
     bool                            bWideScreen;
     bool                            bFullScreen;
     bool                            bIsInit;
-
-    kexHashList<kexTexture>         textureList;
 
     const char                      *gl_vendor;
     const char                      *gl_renderer;
