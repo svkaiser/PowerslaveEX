@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>36419AEF-5BFE-477E-A600-8459F3A7BA5D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>anubis</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>97A95E45-CECA-47BE-90F0-CAECD2807D35</key>
+		<string>https://bitbucket.org/svkaiser/powerslaveex.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>kex3_anubis/xcode/anubis/anubis.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>97A95E45-CECA-47BE-90F0-CAECD2807D35</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/svkaiser/powerslaveex.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>97A95E45-CECA-47BE-90F0-CAECD2807D35</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>97A95E45-CECA-47BE-90F0-CAECD2807D35</string>
+			<key>IDESourceControlWCCName</key>
+			<string>pslave</string>
+		</dict>
+	</array>
+</dict>
+</plist>
