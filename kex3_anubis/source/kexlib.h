@@ -166,26 +166,35 @@ typedef union
 #include "cmd.h"
 #include "cvar.h"
 #include "array.h"
-#include "mathlib.h"
+#include "hashlist.h"
 #include "dict.h"
+#include "mathlib.h"
 #include "actions.h"
+#include "binFile.h"
 #include "endian.h"
 #include "system.h"
 #include "kpf.h"
 #include "object.h"
 #include "glcontext.h"
+#include "renderBackend.h"
 
 KEXLIB_NAMESPACE_START(kex)
 
-extern kexCvar          cvarDeveloper;
+extern kexCvar              cvarDeveloper;
 
-extern kexSystem        *cSystem;
-extern kexEndian        *cEndian;
-extern kexCvarManager   *cCvars;
-extern kexCommand       *cCommands;
-extern kexInputAction   *cActions;
-extern kexPakFile       *cPakFiles;
-extern kexGLContext     *cGLContext;
+extern kexSystem            *cSystem;
+extern kexEndian            *cEndian;
+extern kexCvarManager       *cCvars;
+extern kexCommand           *cCommands;
+extern kexInputAction       *cActions;
+extern kexPakFile           *cPakFiles;
+extern kexGLContext         *cGLContext;
+
+KEXLIB_NAMESPACE_START(render)
+
+extern kexRenderBackend     *cBackend;
+
+KEXLIB_NAMESPACE_END
 
 KEXLIB_NAMESPACE_END
 

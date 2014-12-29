@@ -547,4 +547,5 @@ void kexSystemLocal::Main(int argc, char **argv)
     InitVideo();
 
     kex::cGLContext->Init();
+    kex::render::cBackend->Init();
 }

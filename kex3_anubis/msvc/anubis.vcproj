@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl"
+				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -59,7 +59,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\openal32.lib .\..\openal\lib\eaxguid.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
+				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\openal32.lib .\..\openal\lib\eaxguid.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="LIBCMT;MSVCRT;LIBCMTD"
 				GenerateDebugInformation="true"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl"
+				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -134,7 +134,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\openal32.lib .\..\openal\lib\eaxguid.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
+				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\openal32.lib .\..\openal\lib\eaxguid.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
 				IgnoreDefaultLibraryNames="LIBCMT;MSVCRT;LIBCMTD"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -198,6 +198,10 @@
 				>
 				<File
 					RelativePath="..\source\framework\actions.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\binFile.cpp"
 					>
 				</File>
 				<File
@@ -293,6 +297,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="renderer"
+				>
+				<File
+					RelativePath="..\source\renderer\fbo.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\image.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\renderBackend.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\textureObject.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -301,10 +325,6 @@
 			>
 			<File
 				RelativePath="..\source\kexlib.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resource.h"
 				>
 			</File>
 			<Filter
@@ -327,6 +347,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\binFile.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\cmd.h"
 					>
 				</File>
@@ -340,6 +364,10 @@
 				</File>
 				<File
 					RelativePath="..\source\framework\endian.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\hashlist.h"
 					>
 				</File>
 				<File
@@ -384,6 +412,26 @@
 				</File>
 				<File
 					RelativePath="..\source\opengl\glcontext.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="renderer"
+				>
+				<File
+					RelativePath="..\source\renderer\fbo.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\image.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\renderBackend.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\textureObject.h"
 					>
 				</File>
 			</Filter>
