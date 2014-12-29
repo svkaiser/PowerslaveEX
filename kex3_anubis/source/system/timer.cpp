@@ -15,11 +15,7 @@
 //      Timer Class
 //
 
-#include "SDL.h"
 #include "kexlib.h"
-
-static kexTimer timer;
-kexTimer *kex::cTimer = &timer;
 
 //
 // kexTimer::Init
@@ -27,7 +23,6 @@ kexTimer *kex::cTimer = &timer;
 
 void kexTimer::Init(void)
 {
-    SDL_Init(SDL_INIT_TIMER);
 }
 
 //
@@ -36,7 +31,6 @@ void kexTimer::Init(void)
 
 void kexTimer::Sleep(unsigned long usecs)
 {
-    SDL_Delay(usecs);
 }
 
 //
@@ -45,7 +39,7 @@ void kexTimer::Sleep(unsigned long usecs)
 
 int kexTimer::GetTicks(void)
 {
-    return SDL_GetTicks();
+    return 0;
 }
 
 //
@@ -54,17 +48,7 @@ int kexTimer::GetTicks(void)
 
 int kexTimer::GetMS(void)
 {
-    uint32_t ticks;
-    static int basetime = 0;
-    
-    ticks = GetTicks();
-    
-    if(basetime == 0)
-    {
-        basetime = ticks;
-    }
-    
-    return ticks - basetime;
+    return 0;
 }
 
 //
@@ -73,5 +57,5 @@ int kexTimer::GetMS(void)
 
 uint64_t kexTimer::GetPerformanceCounter(void)
 {
-    return SDL_GetPerformanceCounter();
+    return 0;
 }

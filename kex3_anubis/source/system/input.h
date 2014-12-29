@@ -15,8 +15,6 @@
 #ifndef __INPUT_H__
 #define __INPUT_H__
 
-#include "SDL.h"
-
 // Input event types.
 typedef enum
 {
@@ -29,6 +27,11 @@ typedef enum
     ev_gamepad
 } evtype_t;
 
+extern kexCvar cvarMSensitivityX;
+extern kexCvar cvarMSensitivityY;
+extern kexCvar cvarMAcceleration;
+extern kexCvar cvarInvertLook;
+
 // Event structure.
 typedef struct
 {
@@ -39,42 +42,32 @@ typedef struct
     int         data4;  // misc data
 } event_t;
 
-#define SDL_BUTTON_WHEELUP SDL_BUTTON_X1
-#define SDL_BUTTON_WHEELDOWN SDL_BUTTON_X2
-
 class kexInput
 {
 public:
     kexInput();
     ~kexInput();
 
-    bool            IsShiftDown(int c) const;
-    bool            IsCtrlDown(int c) const;
-    bool            IsAltDown(int c) const;
-    void            PollInput(void);
-    void            MoveMouse(int x, int y);
-    void            UpdateGrab(void);
-    void            CenterMouse(void);
-    void            Init(void);
-    void            ActivateMouse(void);
-    void            DeactivateMouse(void);
-    float           AccelerateMouse(int val) const;
+    virtual bool    IsShiftDown(int c) const;
+    virtual bool    IsCtrlDown(int c) const;
+    virtual bool    IsAltDown(int c) const;
+    virtual void    PollInput(void);
+    virtual void    MoveMouse(int x, int y);
+    virtual void    UpdateGrab(void);
+    virtual void    CenterMouse(void);
+    virtual void    Init(void);
+    virtual void    ActivateMouse(void);
+    virtual void    DeactivateMouse(void);
+    virtual float   AccelerateMouse(int val) const;
 
     void            SetEnabled(bool enable) { bEnabled = enable; }
+    const int       MouseX(void) const { return mouse_x; }
+    const int       MouseY(void) const { return mouse_y; }
 
-private:
-    void            ReadMouse(void);
-    bool            MouseShouldBeGrabbed(void) const;
-    void            GetEvent(const SDL_Event *Event);
-    void            UpdateFocus(void);
-    int             GetButtonState(Uint8 buttonstate) const;
-
-    bool            bWindowFocused;
-    bool            bGrabbed;
+protected:
     bool            bEnabled;
     int             mouse_x;
     int             mouse_y;
-    Uint8           lastmbtn;
 };
 
 #endif

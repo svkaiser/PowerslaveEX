@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		41DA07321A51E79800562B25 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07301A51E79800562B25 /* input.cpp */; };
+		41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07401A51FD8900562B25 /* endianSDL.cpp */; };
+		41DA07431A51FDE000562B25 /* timerSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07421A51FDE000562B25 /* timerSDL.cpp */; };
+		41DA07451A51FEFC00562B25 /* systemSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07441A51FEFC00562B25 /* systemSDL.cpp */; };
+		41DA07471A52014400562B25 /* inputSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07461A52014400562B25 /* inputSDL.cpp */; };
 		41E2CDFD1A51CF2000FC28DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E2CDFC1A51CF2000FC28DC /* Cocoa.framework */; };
 		41E2CE071A51CF2000FC28DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41E2CE051A51CF2000FC28DC /* InfoPlist.strings */; };
 		41E2CE0D1A51CF2000FC28DC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 41E2CE0B1A51CF2000FC28DC /* Credits.rtf */; };
@@ -44,7 +48,6 @@
 		41E2CEA31A51D68C00FC28DC /* SDL2.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 41E2CE351A51D1EE00FC28DC /* SDL2.framework */; };
 		41E2CEAC1A51D8DF00FC28DC /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CEA51A51D8DF00FC28DC /* actions.cpp */; };
 		41E2CEAD1A51D8DF00FC28DC /* endian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CEA71A51D8DF00FC28DC /* endian.cpp */; };
-		41E2CEAE1A51D8DF00FC28DC /* system_local.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CEA91A51D8DF00FC28DC /* system_local.cpp */; };
 		41E2CEAF1A51D8DF00FC28DC /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CEAA1A51D8DF00FC28DC /* system.cpp */; };
 		41E2CEB21A51DB8000FC28DC /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CEB01A51DB8000FC28DC /* timer.cpp */; };
 /* End PBXBuildFile section */
@@ -97,6 +100,10 @@
 		41DA07301A51E79800562B25 /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = input.cpp; path = ../../source/system/input.cpp; sourceTree = "<group>"; };
 		41DA07311A51E79800562B25 /* input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../../source/system/input.h; sourceTree = "<group>"; };
 		41DA07381A51F01000562B25 /* queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
+		41DA07401A51FD8900562B25 /* endianSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = endianSDL.cpp; path = ../../source/system/sdl/endianSDL.cpp; sourceTree = "<group>"; };
+		41DA07421A51FDE000562B25 /* timerSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timerSDL.cpp; path = ../../source/system/sdl/timerSDL.cpp; sourceTree = "<group>"; };
+		41DA07441A51FEFC00562B25 /* systemSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = systemSDL.cpp; path = ../../source/system/sdl/systemSDL.cpp; sourceTree = "<group>"; };
+		41DA07461A52014400562B25 /* inputSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = inputSDL.cpp; path = ../../source/system/sdl/inputSDL.cpp; sourceTree = "<group>"; };
 		41E2CDF91A51CF2000FC28DC /* anubis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = anubis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E2CDFC1A51CF2000FC28DC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		41E2CDFF1A51CF2000FC28DC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -160,7 +167,6 @@
 		41E2CEA61A51D8DF00FC28DC /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actions.h; path = ../../source/system/actions.h; sourceTree = "<group>"; };
 		41E2CEA71A51D8DF00FC28DC /* endian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = endian.cpp; path = ../../source/system/endian.cpp; sourceTree = "<group>"; };
 		41E2CEA81A51D8DF00FC28DC /* endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = endian.h; path = ../../source/system/endian.h; sourceTree = "<group>"; };
-		41E2CEA91A51D8DF00FC28DC /* system_local.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = system_local.cpp; path = ../../source/system/system_local.cpp; sourceTree = "<group>"; };
 		41E2CEAA1A51D8DF00FC28DC /* system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = system.cpp; path = ../../source/system/system.cpp; sourceTree = "<group>"; };
 		41E2CEAB1A51D8DF00FC28DC /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = system.h; path = ../../source/system/system.h; sourceTree = "<group>"; };
 		41E2CEB01A51DB8000FC28DC /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = ../../source/system/timer.cpp; sourceTree = "<group>"; };
@@ -184,6 +190,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41DA073F1A51FD1800562B25 /* sdl */ = {
+			isa = PBXGroup;
+			children = (
+				41DA07401A51FD8900562B25 /* endianSDL.cpp */,
+				41DA07461A52014400562B25 /* inputSDL.cpp */,
+				41DA07441A51FEFC00562B25 /* systemSDL.cpp */,
+				41DA07421A51FDE000562B25 /* timerSDL.cpp */,
+			);
+			name = sdl;
+			sourceTree = "<group>";
+		};
 		41E2CDF01A51CF2000FC28DC = {
 			isa = PBXGroup;
 			children = (
@@ -360,13 +377,13 @@
 				41E2CEA71A51D8DF00FC28DC /* endian.cpp */,
 				41DA07301A51E79800562B25 /* input.cpp */,
 				41E2CEAA1A51D8DF00FC28DC /* system.cpp */,
-				41E2CEA91A51D8DF00FC28DC /* system_local.cpp */,
 				41E2CEB01A51DB8000FC28DC /* timer.cpp */,
 				41E2CEA61A51D8DF00FC28DC /* actions.h */,
 				41E2CEA81A51D8DF00FC28DC /* endian.h */,
 				41DA07311A51E79800562B25 /* input.h */,
 				41E2CEAB1A51D8DF00FC28DC /* system.h */,
 				41E2CEB11A51DB8000FC28DC /* timer.h */,
+				41DA073F1A51FD1800562B25 /* sdl */,
 			);
 			name = system;
 			sourceTree = "<group>";
@@ -468,11 +485,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				41E2CE7E1A51D39B00FC28DC /* unzip.cpp in Sources */,
-				41E2CEAE1A51D8DF00FC28DC /* system_local.cpp in Sources */,
+				41DA07431A51FDE000562B25 /* timerSDL.cpp in Sources */,
 				41DA07321A51E79800562B25 /* input.cpp in Sources */,
 				41E2CE8C1A51D39B00FC28DC /* textureObject.cpp in Sources */,
 				41E2CE7A1A51D39B00FC28DC /* memHeap.cpp in Sources */,
 				41E2CE861A51D39B00FC28DC /* random.cpp in Sources */,
+				41DA07451A51FEFC00562B25 /* systemSDL.cpp in Sources */,
 				41E2CE871A51D39B00FC28DC /* vector.cpp in Sources */,
 				41E2CE741A51D39B00FC28DC /* cmd.cpp in Sources */,
 				41E2CEAD1A51D8DF00FC28DC /* endian.cpp in Sources */,
@@ -491,8 +509,10 @@
 				41E2CE761A51D39B00FC28DC /* dict.cpp in Sources */,
 				41E2CE791A51D39B00FC28DC /* kstring.cpp in Sources */,
 				41E2CE831A51D39B00FC28DC /* plane.cpp in Sources */,
+				41DA07471A52014400562B25 /* inputSDL.cpp in Sources */,
 				41E2CE811A51D39B00FC28DC /* mathlib.cpp in Sources */,
 				41E2CE8B1A51D39B00FC28DC /* renderBackend.cpp in Sources */,
+				41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */,
 				41E2CEAF1A51D8DF00FC28DC /* system.cpp in Sources */,
 				41E2CE731A51D39B00FC28DC /* binFile.cpp in Sources */,
 				41E2CE881A51D39B00FC28DC /* glcontext.cpp in Sources */,

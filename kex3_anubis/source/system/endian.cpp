@@ -15,19 +15,7 @@
 //      Endian Swapping Class
 //
 
-#include "SDL_endian.h"
 #include "kexlib.h"
-
-// Defines for checking the endianness of the system.
-
-#if SDL_BYTEORDER == SYS_LIL_ENDIAN
-#define SYS_LITTLE_ENDIAN
-#elif SDL_BYTEORDER == SYS_BIG_ENDIAN
-#define SYS_BIG_ENDIAN
-#endif
-
-static kexEndian endianLocal;
-kexEndian *kex::cEndian = &endianLocal;
 
 //
 // kexEndian::SwapLE16
@@ -35,7 +23,7 @@ kexEndian *kex::cEndian = &endianLocal;
 
 short kexEndian::SwapLE16(const short val)
 {
-    return SDL_SwapLE16(val);
+    return val;
 }
 
 //
@@ -44,7 +32,7 @@ short kexEndian::SwapLE16(const short val)
 
 short kexEndian::SwapBE16(const short val)
 {
-    return SDL_SwapBE16(val);
+    return val;
 }
 
 //
@@ -53,7 +41,7 @@ short kexEndian::SwapBE16(const short val)
 
 int kexEndian::SwapLE32(const int val)
 {
-    return SDL_SwapLE32(val);
+    return val;
 }
 
 //
@@ -62,5 +50,5 @@ int kexEndian::SwapLE32(const int val)
 
 int kexEndian::SwapBE32(const int val)
 {
-    return SDL_SwapBE32(val);
+    return val;
 }

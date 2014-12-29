@@ -18,6 +18,15 @@
 #include "kexlib.h"
 
 //
+// quit
+//
+
+COMMAND(quit)
+{
+    kex::cSystem->Shutdown();
+}
+
+//
 // kexSystem::kexSystem
 //
 

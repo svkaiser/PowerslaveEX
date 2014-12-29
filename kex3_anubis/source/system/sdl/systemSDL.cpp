@@ -12,17 +12,17 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Main System
+//      Main System (SDL)
 //
 
 #include "SDL.h"
 #include "kexlib.h"
 
-class kexSystemLocal : public kexSystem
+class kexSystemSDL : public kexSystem
 {
 public:
-    kexSystemLocal(void);
-    ~kexSystemLocal(void);
+    kexSystemSDL(void);
+    ~kexSystemSDL(void);
 
     virtual void            Main(int argc, char **argv);
     virtual void            Init(void);
@@ -61,42 +61,33 @@ kexCvar cvarVidDepthSize("v_depthsize", CVF_INT|CVF_CONFIG, "24", "TODO");
 kexCvar cvarVidStencilSize("v_stencilsize", CVF_INT|CVF_CONFIG, "8", "TODO");
 kexCvar cvarVidBuffSize("v_buffersize", CVF_INT|CVF_CONFIG, "32", "TODO");
 
-static kexSystemLocal systemLocal;
+static kexSystemSDL systemLocal;
 kexSystem *kex::cSystem = &systemLocal;
 
 static char buffer[4096];
 
 //
-// quit
+// kexSystemSDL::kexSystemSDL
 //
 
-COMMAND(quit)
-{
-    kex::cSystem->Shutdown();
-}
-
-//
-// kexSystemLocal::kexSystemLocal
-//
-
-kexSystemLocal::kexSystemLocal(void)
+kexSystemSDL::kexSystemSDL(void)
 {
     bShuttingDown = false;
 }
 
 //
-// kexSystemLocal::~kexSystemLocal
+// kexSystemSDL::~kexSystemSDL
 //
 
-kexSystemLocal::~kexSystemLocal(void)
+kexSystemSDL::~kexSystemSDL(void)
 {
 }
 
 //
-// kexSystemLocal::Shutdown
+// kexSystemSDL::Shutdown
 //
 
-void kexSystemLocal::Shutdown(void)
+void kexSystemSDL::Shutdown(void)
 {
     bShuttingDown = true;
 
@@ -124,10 +115,10 @@ void kexSystemLocal::Shutdown(void)
 }
 
 //
-// kexSystemLocal::Init
+// kexSystemSDL::Init
 //
 
-void kexSystemLocal::Init(void)
+void kexSystemSDL::Init(void)
 {
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -140,10 +131,10 @@ void kexSystemLocal::Init(void)
 }
 
 //
-// kexSystemLocal::InitVideo
+// kexSystemSDL::InitVideo
 //
 
-void kexSystemLocal::InitVideo(void)
+void kexSystemSDL::InitVideo(void)
 {
     int newwidth;
     int newheight;
@@ -247,10 +238,10 @@ void kexSystemLocal::InitVideo(void)
 }
 
 //
-// kexSystemLocal::Log
+// kexSystemSDL::Log
 //
 
-void kexSystemLocal::Log(const char *fmt, ...)
+void kexSystemSDL::Log(const char *fmt, ...)
 {
 #define MAX_LOGMESSAGE_LENGTH   3584
     va_list list;
@@ -273,55 +264,55 @@ void kexSystemLocal::Log(const char *fmt, ...)
 }
 
 //
-// kexSystemLocal::SwapBuffers
+// kexSystemSDL::SwapBuffers
 //
 
-void kexSystemLocal::SwapBuffers(void)
+void kexSystemSDL::SwapBuffers(void)
 {
     SDL_GL_SwapWindow(window);
 }
 
 //
-// kexSystemLocal::GetWindowFlags
+// kexSystemSDL::GetWindowFlags
 //
 
-int kexSystemLocal::GetWindowFlags(void)
+int kexSystemSDL::GetWindowFlags(void)
 {
     return SDL_GetWindowFlags(window);
 }
 
 //
-// kexSystemLocal::GetWindowTitle
+// kexSystemSDL::GetWindowTitle
 //
 
-const char *kexSystemLocal::GetWindowTitle(void)
+const char *kexSystemSDL::GetWindowTitle(void)
 {
     return SDL_GetWindowTitle(window);
 }
 
 //
-// kexSystemLocal::SetWindowTitle
+// kexSystemSDL::SetWindowTitle
 //
 
-void kexSystemLocal::SetWindowTitle(const char *string)
+void kexSystemSDL::SetWindowTitle(const char *string)
 {
     SDL_SetWindowTitle(window, string);
 }
 
 //
-// kexSystemLocal::SetWindowGrab
+// kexSystemSDL::SetWindowGrab
 //
 
-void kexSystemLocal::SetWindowGrab(const bool bEnable)
+void kexSystemSDL::SetWindowGrab(const bool bEnable)
 {
     SDL_SetWindowGrab(window, (SDL_bool)bEnable);
 }
 
 //
-// kexSystemLocal::WarpMouseToCenter
+// kexSystemSDL::WarpMouseToCenter
 //
 
-void kexSystemLocal::WarpMouseToCenter(void)
+void kexSystemSDL::WarpMouseToCenter(void)
 {
     SDL_WarpMouseInWindow(window,
                           (unsigned short)(kex::cSystem->VideoWidth()/2),
@@ -329,10 +320,10 @@ void kexSystemLocal::WarpMouseToCenter(void)
 }
 
 //
-// kexSystemLocal::GetProcAddress
+// kexSystemSDL::GetProcAddress
 //
 
-void *kexSystemLocal::GetProcAddress(const char *proc)
+void *kexSystemSDL::GetProcAddress(const char *proc)
 {
     void *func = SDL_GL_GetProcAddress(proc);
 
@@ -345,10 +336,10 @@ void *kexSystemLocal::GetProcAddress(const char *proc)
 }
 
 //
-// kexSystemLocal::CheckParam
+// kexSystemSDL::CheckParam
 //
 
-int kexSystemLocal::CheckParam(const char *check)
+int kexSystemSDL::CheckParam(const char *check)
 {
     for(int i = 1; i < argc; i++)
     {
@@ -361,42 +352,42 @@ int kexSystemLocal::CheckParam(const char *check)
 }
 
 //
-// kexSystemLocal::Printf
+// kexSystemSDL::Printf
 //
 
-void kexSystemLocal::Printf(const char *string, ...)
+void kexSystemSDL::Printf(const char *string, ...)
 {
 }
 
 //
-// kexSystemLocal::CPrintf
+// kexSystemSDL::CPrintf
 //
 
-void kexSystemLocal::CPrintf(rcolor color, const char *string, ...)
+void kexSystemSDL::CPrintf(rcolor color, const char *string, ...)
 {
 }
 
 //
-// kexSystemLocal::Warning
+// kexSystemSDL::Warning
 //
 
-void kexSystemLocal::Warning(const char *string, ...)
+void kexSystemSDL::Warning(const char *string, ...)
 {
 }
 
 //
-// kexSystemLocal::DPrintf
+// kexSystemSDL::DPrintf
 //
 
-void kexSystemLocal::DPrintf(const char *string, ...)
+void kexSystemSDL::DPrintf(const char *string, ...)
 {
 }
 
 //
-// kexSystemLocal::Error
+// kexSystemSDL::Error
 //
 
-void kexSystemLocal::Error(const char* string, ...)
+void kexSystemSDL::Error(const char* string, ...)
 {
     va_list	va;
 
@@ -438,10 +429,10 @@ void kexSystemLocal::Error(const char* string, ...)
 }
 
 //
-// kexSystemLocal::GetBaseDirectory
+// kexSystemSDL::GetBaseDirectory
 //
 
-const char *kexSystemLocal::GetBaseDirectory(void)
+const char *kexSystemSDL::GetBaseDirectory(void)
 {
     static const char dummyDirectory[] = {"."};
     // cache multiple requests
@@ -477,10 +468,10 @@ const char *kexSystemLocal::GetBaseDirectory(void)
 }
 
 //
-// kexSystemLocal::Main
+// kexSystemSDL::Main
 //
 
-void kexSystemLocal::Main(int argc, char **argv)
+void kexSystemSDL::Main(int argc, char **argv)
 {
     this->argc = argc;
     this->argv = argv;
