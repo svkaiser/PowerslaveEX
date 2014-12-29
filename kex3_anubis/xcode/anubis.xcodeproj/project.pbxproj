@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41DA07321A51E79800562B25 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07301A51E79800562B25 /* input.cpp */; };
 		41E2CDFD1A51CF2000FC28DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E2CDFC1A51CF2000FC28DC /* Cocoa.framework */; };
 		41E2CE071A51CF2000FC28DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41E2CE051A51CF2000FC28DC /* InfoPlist.strings */; };
 		41E2CE0D1A51CF2000FC28DC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 41E2CE0B1A51CF2000FC28DC /* Credits.rtf */; };
@@ -93,6 +94,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		41DA07301A51E79800562B25 /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = input.cpp; path = ../../source/system/input.cpp; sourceTree = "<group>"; };
+		41DA07311A51E79800562B25 /* input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../../source/system/input.h; sourceTree = "<group>"; };
 		41E2CDF91A51CF2000FC28DC /* anubis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = anubis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E2CDFC1A51CF2000FC28DC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		41E2CDFF1A51CF2000FC28DC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -353,11 +356,13 @@
 			children = (
 				41E2CEA51A51D8DF00FC28DC /* actions.cpp */,
 				41E2CEA71A51D8DF00FC28DC /* endian.cpp */,
+				41DA07301A51E79800562B25 /* input.cpp */,
 				41E2CEAA1A51D8DF00FC28DC /* system.cpp */,
 				41E2CEA91A51D8DF00FC28DC /* system_local.cpp */,
 				41E2CEB01A51DB8000FC28DC /* timer.cpp */,
 				41E2CEA61A51D8DF00FC28DC /* actions.h */,
 				41E2CEA81A51D8DF00FC28DC /* endian.h */,
+				41DA07311A51E79800562B25 /* input.h */,
 				41E2CEAB1A51D8DF00FC28DC /* system.h */,
 				41E2CEB11A51DB8000FC28DC /* timer.h */,
 			);
@@ -462,6 +467,7 @@
 			files = (
 				41E2CE7E1A51D39B00FC28DC /* unzip.cpp in Sources */,
 				41E2CEAE1A51D8DF00FC28DC /* system_local.cpp in Sources */,
+				41DA07321A51E79800562B25 /* input.cpp in Sources */,
 				41E2CE8C1A51D39B00FC28DC /* textureObject.cpp in Sources */,
 				41E2CE7A1A51D39B00FC28DC /* memHeap.cpp in Sources */,
 				41E2CE861A51D39B00FC28DC /* random.cpp in Sources */,

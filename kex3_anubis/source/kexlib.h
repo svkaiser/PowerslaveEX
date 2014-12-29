@@ -174,6 +174,7 @@ typedef union
 #include "endian.h"
 #include "timer.h"
 #include "system.h"
+#include "input.h"
 #include "kpf.h"
 #include "object.h"
 #include "glcontext.h"
@@ -186,6 +187,7 @@ extern kexCvar              cvarDeveloper;
 extern kexSystem            *cSystem;
 extern kexTimer             *cTimer;
 extern kexEndian            *cEndian;
+extern kexInput             *cInput;
 extern kexCvarManager       *cCvars;
 extern kexCommand           *cCommands;
 extern kexInputAction       *cActions;
