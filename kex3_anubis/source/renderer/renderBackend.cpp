@@ -18,7 +18,6 @@
 #include "kexlib.h"
 
 kexCvar cvarRenderFinish("r_finish", CVF_BOOL|CVF_CONFIG, "0", "Force a GL command sync");
-extern kexCvar cvarVidDepthSize;
 
 static kexRenderBackend renderBackend;
 kexRenderBackend *kex::render::cBackend = &renderBackend;
@@ -843,6 +842,7 @@ void kexRenderBackend::DisableShaders(void)
 
 const int kexRenderBackend::GetDepthSizeComponent(void)
 {
+    extern kexCvar cvarVidDepthSize;
     int depthSize = cvarVidDepthSize.GetInt();
 
     switch(depthSize)

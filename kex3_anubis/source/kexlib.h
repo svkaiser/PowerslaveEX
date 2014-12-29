@@ -172,6 +172,7 @@ typedef union
 #include "actions.h"
 #include "binFile.h"
 #include "endian.h"
+#include "timer.h"
 #include "system.h"
 #include "kpf.h"
 #include "object.h"
@@ -183,6 +184,7 @@ KEXLIB_NAMESPACE_START(kex)
 extern kexCvar              cvarDeveloper;
 
 extern kexSystem            *cSystem;
+extern kexTimer             *cTimer;
 extern kexEndian            *cEndian;
 extern kexCvarManager       *cCvars;
 extern kexCommand           *cCommands;
