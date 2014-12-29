@@ -166,6 +166,7 @@ typedef union
 #include "cmd.h"
 #include "cvar.h"
 #include "array.h"
+#include "queue.h"
 #include "hashlist.h"
 #include "dict.h"
 #include "mathlib.h"

@@ -96,6 +96,7 @@
 /* Begin PBXFileReference section */
 		41DA07301A51E79800562B25 /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = input.cpp; path = ../../source/system/input.cpp; sourceTree = "<group>"; };
 		41DA07311A51E79800562B25 /* input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../../source/system/input.h; sourceTree = "<group>"; };
+		41DA07381A51F01000562B25 /* queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
 		41E2CDF91A51CF2000FC28DC /* anubis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = anubis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E2CDFC1A51CF2000FC28DC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		41E2CDFF1A51CF2000FC28DC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -282,6 +283,7 @@
 				41E2CE4E1A51D39B00FC28DC /* kstring.h */,
 				41E2CE501A51D39B00FC28DC /* memHeap.h */,
 				41E2CE521A51D39B00FC28DC /* object.h */,
+				41DA07381A51F01000562B25 /* queue.h */,
 				41E2CE571A51D39B00FC28DC /* unzip.h */,
 			);
 			name = framework;
