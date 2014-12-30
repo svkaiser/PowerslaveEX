@@ -53,7 +53,7 @@ void kexInput::Init(void)
 
 bool kexInput::IsShiftDown(int c) const
 {
-    return false;
+    return(c == KKEY_RSHIFT || c == KKEY_LSHIFT);
 }
 
 //
@@ -62,7 +62,7 @@ bool kexInput::IsShiftDown(int c) const
 
 bool kexInput::IsCtrlDown(int c) const
 {
-    return false;
+    return(c == KKEY_RCTRL || c == KKEY_LCTRL);
 }
 
 //
@@ -71,7 +71,7 @@ bool kexInput::IsCtrlDown(int c) const
 
 bool kexInput::IsAltDown(int c) const
 {
-    return false;
+    return(c == KKEY_RALT || c == KKEY_LALT);
 }
 
 //
@@ -113,6 +113,24 @@ void kexInput::MoveMouse(int x, int y)
 
     ctrl->mousex += ((AccelerateMouse(x) * cvarMSensitivityX.GetFloat()) / 128.0f);
     ctrl->mousey += ((AccelerateMouse(y) * cvarMSensitivityY.GetFloat()) / 128.0f);
+}
+
+//
+// kexInput::TranslateKeyboard
+//
+
+int kexInput::TranslateKeyboard(const int val)
+{
+    return val;
+}
+
+//
+// kexInput::TranslateMouse
+//
+
+int kexInput::TranslateMouse(const int val)
+{
+    return val;
 }
 
 //

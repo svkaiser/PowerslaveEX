@@ -15,6 +15,9 @@
 #ifndef __INPUT_H__
 #define __INPUT_H__
 
+#include "keyboard.h"
+#include "mouse.h"
+
 // Input event types.
 typedef enum
 {
@@ -59,6 +62,8 @@ public:
     virtual void    ActivateMouse(void);
     virtual void    DeactivateMouse(void);
     virtual float   AccelerateMouse(int val) const;
+    virtual int     TranslateKeyboard(const int val);
+    virtual int     TranslateMouse(const int val);
 
     void            SetEnabled(bool enable) { bEnabled = enable; }
     const int       MouseX(void) const { return mouse_x; }

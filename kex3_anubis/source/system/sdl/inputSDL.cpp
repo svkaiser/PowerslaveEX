@@ -20,31 +20,26 @@
 #include "SDL.h"
 #include "kexlib.h"
 
-#define SDL_BUTTON_WHEELUP SDL_BUTTON_X1
-#define SDL_BUTTON_WHEELDOWN SDL_BUTTON_X2
-
 class kexInputSDL : public kexInput
 {
 public:
     kexInputSDL();
     ~kexInputSDL();
     
-    virtual bool        IsShiftDown(int c) const;
-    virtual bool        IsCtrlDown(int c) const;
-    virtual bool        IsAltDown(int c) const;
     virtual void        PollInput(void);
     virtual void        UpdateGrab(void);
     virtual void        CenterMouse(void);
     virtual void        Init(void);
     virtual void        ActivateMouse(void);
     virtual void        DeactivateMouse(void);
+    virtual int         TranslateKeyboard(const int val);
+    virtual int         TranslateMouse(const int val);
     
 private:
     void                ReadMouse(void);
     bool                MouseShouldBeGrabbed(void) const;
     void                GetEvent(const SDL_Event *Event);
     void                UpdateFocus(void);
-    int                 GetButtonState(Uint8 buttonstate) const;
     
     bool                bWindowFocused;
     bool                bGrabbed;
@@ -107,9 +102,9 @@ void kexInputSDL::ReadMouse(void)
     if(x != 0 || y != 0 || btn || (lastmbtn != btn))
     {
         ev.type = ev_mouse;
-        ev.data1 = GetButtonState(btn);
-        ev.data2 = x << 5;
-        ev.data3 = (-y) << 5;
+        ev.data1 = x << 5;
+        ev.data2 = (-y) << 5;
+        ev.data3 = 0;
         ev.data4 = 0;
 
         kex::cSession->EventQueue().Push(&ev);
@@ -121,18 +116,6 @@ void kexInputSDL::ReadMouse(void)
     {
         CenterMouse();
     }
-}
-
-//
-// kexInputSDL::GetButtonState
-//
-
-int kexInputSDL::GetButtonState(Uint8 buttonstate) const
-{
-    return 0
-           | (buttonstate & SDL_BUTTON(SDL_BUTTON_LEFT)      ? 1 : 0)
-           | (buttonstate & SDL_BUTTON(SDL_BUTTON_MIDDLE)    ? 2 : 0)
-           | (buttonstate & SDL_BUTTON(SDL_BUTTON_RIGHT)     ? 4 : 0);
 }
 
 //
@@ -150,30 +133,96 @@ void kexInputSDL::UpdateFocus(void)
 }
 
 //
-// kexInputSDL::IsShiftDown
+// kexInput::TranslateKeyboard
 //
 
-bool kexInputSDL::IsShiftDown(int c) const
+int kexInputSDL::TranslateKeyboard(const int val)
 {
-    return(c == SDLK_RSHIFT || c == SDLK_LSHIFT);
+    int code = val;
+    
+    if(code >= SDLK_0 && code <= SDLK_9)
+    {
+        return KKEY_0 - (SDLK_0 - code);
+    }
+    
+    if(code >= SDLK_a && code <= SDLK_z)
+    {
+        return KKEY_z - (SDLK_z - code);
+    }
+    
+    switch(code)
+    {
+        case SDLK_RETURN:           return KKEY_RETURN;
+        case SDLK_ESCAPE:           return KKEY_ESCAPE;
+        case SDLK_BACKSPACE:        return KKEY_BACKSPACE;
+        case SDLK_TAB:              return KKEY_TAB;
+        case SDLK_SPACE:            return KKEY_SPACE;
+        case SDLK_EXCLAIM:          return KKEY_EXCLAIM;
+        case SDLK_QUOTEDBL:         return KKEY_QUOTEDBL;
+        case SDLK_HASH:             return KKEY_HASH;
+        case SDLK_PERCENT:          return KKEY_PERCENT;
+        case SDLK_DOLLAR:           return KKEY_DOLLAR;
+        case SDLK_AMPERSAND:        return KKEY_AMPERSAND;
+        case SDLK_QUOTE:            return KKEY_QUOTE;
+        case SDLK_LEFTPAREN:        return KKEY_LEFTPAREN;
+        case SDLK_RIGHTPAREN:       return KKEY_RIGHTPAREN;
+        case SDLK_ASTERISK:         return KKEY_ASTERISK;
+        case SDLK_PLUS:             return KKEY_PLUS;
+        case SDLK_COMMA:            return KKEY_COMMA;
+        case SDLK_MINUS:            return KKEY_MINUS;
+        case SDLK_PERIOD:           return KKEY_PERIOD;
+        case SDLK_SLASH:            return KKEY_SLASH;
+        case SDLK_COLON:            return KKEY_COLON;
+        case SDLK_SEMICOLON:        return KKEY_SEMICOLON;
+        case SDLK_LESS:             return KKEY_LESS;
+        case SDLK_EQUALS:           return KKEY_EQUALS;
+        case SDLK_GREATER:          return KKEY_GREATER;
+        case SDLK_QUESTION:         return KKEY_QUESTION;
+        case SDLK_AT:               return KKEY_AT;
+        case SDLK_LEFTBRACKET:      return KKEY_LEFTBRACKET;
+        case SDLK_BACKSLASH:        return KKEY_BACKSLASH;
+        case SDLK_RIGHTBRACKET:     return KKEY_RIGHTBRACKET;
+        case SDLK_CARET:            return KKEY_CARET;
+        case SDLK_UNDERSCORE:       return KKEY_UNDERSCORE;
+        case SDLK_BACKQUOTE:        return KKEY_BACKQUOTE;
+    }
+    
+    code &= ~SDLK_SCANCODE_MASK;
+    
+    if(code >= SDL_SCANCODE_CAPSLOCK && code <= SDL_SCANCODE_KP_PERIOD)
+    {
+        return KKEY_CAPSLOCK + (code - SDL_SCANCODE_KP_PERIOD);
+    }
+    
+    switch(code)
+    {
+        case SDL_SCANCODE_LCTRL:    return KKEY_LCTRL;
+        case SDL_SCANCODE_LSHIFT:   return KKEY_LSHIFT;
+        case SDL_SCANCODE_LALT:     return KKEY_LALT;
+        case SDL_SCANCODE_RCTRL:    return KKEY_RCTRL;
+        case SDL_SCANCODE_RSHIFT:   return KKEY_RSHIFT;
+        case SDL_SCANCODE_RALT:     return KKEY_RALT;
+    }
+    
+    return KKEY_UNDEFINED;
 }
 
 //
-// kexInputSDL::IsCtrlDown
+// kexInputSDL::TranslateMouse
 //
 
-bool kexInputSDL::IsCtrlDown(int c) const
+int kexInputSDL::TranslateMouse(const int val)
 {
-    return(c == SDLK_RCTRL || c == SDLK_LCTRL);
-}
-
-//
-// kexInputSDL::IsAltDown
-//
-
-bool kexInputSDL::IsAltDown(int c) const
-{
-    return(c == SDLK_RALT || c == SDLK_LALT);
+    switch(val)
+    {
+        case SDL_BUTTON_LEFT:   return KMSB_LEFT;
+        case SDL_BUTTON_MIDDLE: return KMSB_MIDDLE;
+        case SDL_BUTTON_RIGHT:  return KMSB_RIGHT;
+        case SDL_BUTTON_X1:     return KMSB_MISC1;
+        case SDL_BUTTON_X2:     return KMSB_MISC2;
+    }
+    
+    return KMSB_UNDEFINED;
 }
 
 //
@@ -192,13 +241,13 @@ void kexInputSDL::GetEvent(const SDL_Event *Event)
             break;
         }
         event.type = ev_keydown;
-        event.data1 = Event->key.keysym.sym;
+        event.data1 = TranslateKeyboard(Event->key.keysym.sym);
         kex::cSession->EventQueue().Push(&event);
         break;
 
     case SDL_KEYUP:
         event.type = ev_keyup;
-        event.data1 = Event->key.keysym.sym;
+        event.data1 = TranslateKeyboard(Event->key.keysym.sym);
         kex::cSession->EventQueue().Push(&event);
         break;
 
@@ -210,7 +259,7 @@ void kexInputSDL::GetEvent(const SDL_Event *Event)
         }
         event.type = Event->type ==
                      SDL_MOUSEBUTTONUP ? ev_mouseup : ev_mousedown;
-        event.data1 = Event->button.button;
+        event.data1 = TranslateMouse(Event->button.button);
         event.data2 = event.data3 = 0;
         kex::cSession->EventQueue().Push(&event);
         break;
@@ -221,7 +270,7 @@ void kexInputSDL::GetEvent(const SDL_Event *Event)
             break;
         }
         event.type = ev_mousewheel;
-        event.data1 = Event->wheel.y > 0 ? SDL_BUTTON_WHEELUP : SDL_BUTTON_WHEELDOWN;
+        event.data1 = Event->wheel.y > 0 ? 1 : -1;
         event.data2 = event.data3 = 0;
         kex::cSession->EventQueue().Push(&event);
         break;

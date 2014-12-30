@@ -1,0 +1,148 @@
+//
+// Copyright(C) 2014-2015 Samuel Villarreal
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+
+#ifndef __KEYBOARD_H__
+#define __KEYBOARD_H__
+
+typedef enum
+{
+    KKEY_UNDEFINED = 0,
+    KKEY_RETURN = '\r',
+    KKEY_ESCAPE = '\033',
+    KKEY_BACKSPACE = '\b',
+    KKEY_TAB = '\t',
+    KKEY_SPACE = ' ',
+    KKEY_EXCLAIM = '!',
+    KKEY_QUOTEDBL = '"',
+    KKEY_HASH = '#',
+    KKEY_PERCENT = '%',
+    KKEY_DOLLAR = '$',
+    KKEY_AMPERSAND = '&',
+    KKEY_QUOTE = '\'',
+    KKEY_LEFTPAREN = '(',
+    KKEY_RIGHTPAREN = ')',
+    KKEY_ASTERISK = '*',
+    KKEY_PLUS = '+',
+    KKEY_COMMA = ',',
+    KKEY_MINUS = '-',
+    KKEY_PERIOD = '.',
+    KKEY_SLASH = '/',
+    KKEY_0 = '0',
+    KKEY_1 = '1',
+    KKEY_2 = '2',
+    KKEY_3 = '3',
+    KKEY_4 = '4',
+    KKEY_5 = '5',
+    KKEY_6 = '6',
+    KKEY_7 = '7',
+    KKEY_8 = '8',
+    KKEY_9 = '9',
+    KKEY_COLON = ':',
+    KKEY_SEMICOLON = ';',
+    KKEY_LESS = '<',
+    KKEY_EQUALS = '=',
+    KKEY_GREATER = '>',
+    KKEY_QUESTION = '?',
+    KKEY_AT = '@',
+    KKEY_LEFTBRACKET = '[',
+    KKEY_BACKSLASH = '\\',
+    KKEY_RIGHTBRACKET = ']',
+    KKEY_CARET = '^',
+    KKEY_UNDERSCORE = '_',
+    KKEY_BACKQUOTE = '`',
+    KKEY_a = 'a',
+    KKEY_b = 'b',
+    KKEY_c = 'c',
+    KKEY_d = 'd',
+    KKEY_e = 'e',
+    KKEY_f = 'f',
+    KKEY_g = 'g',
+    KKEY_h = 'h',
+    KKEY_i = 'i',
+    KKEY_j = 'j',
+    KKEY_k = 'k',
+    KKEY_l = 'l',
+    KKEY_m = 'm',
+    KKEY_n = 'n',
+    KKEY_o = 'o',
+    KKEY_p = 'p',
+    KKEY_q = 'q',
+    KKEY_r = 'r',
+    KKEY_s = 's',
+    KKEY_t = 't',
+    KKEY_u = 'u',
+    KKEY_v = 'v',
+    KKEY_w = 'w',
+    KKEY_x = 'x',
+    KKEY_y = 'y',
+    KKEY_z = 'z',
+    
+    KKEY_CAPSLOCK = 256,
+    
+    KKEY_F1,
+    KKEY_F2,
+    KKEY_F3,
+    KKEY_F4,
+    KKEY_F5,
+    KKEY_F6,
+    KKEY_F7,
+    KKEY_F8,
+    KKEY_F9,
+    KKEY_F10,
+    KKEY_F11,
+    KKEY_F12,
+    
+    KKEY_PRINTSCREEN,
+    KKEY_SCROLLLOCK,
+    KKEY_PAUSE,
+    KKEY_INSERT,
+    KKEY_HOME,
+    KKEY_PAGEUP,
+    KKEY_DELETE,
+    KKEY_END,
+    KKEY_PAGEDOWN,
+    KKEY_RIGHT,
+    KKEY_LEFT,
+    KKEY_DOWN,
+    KKEY_UP,
+    
+    KKEY_NUMLOCKCLEAR,
+    KKEY_KP_DIVIDE,
+    KKEY_KP_MULTIPLY,
+    KKEY_KP_MINUS,
+    KKEY_KP_PLUS,
+    KKEY_KP_ENTER,
+    KKEY_KP_1,
+    KKEY_KP_2,
+    KKEY_KP_3,
+    KKEY_KP_4,
+    KKEY_KP_5,
+    KKEY_KP_6,
+    KKEY_KP_7,
+    KKEY_KP_8,
+    KKEY_KP_9,
+    KKEY_KP_0,
+    KKEY_KP_PERIOD,
+    
+    KKEY_LCTRL,
+    KKEY_LSHIFT,
+    KKEY_LALT,
+    KKEY_RCTRL,
+    KKEY_RSHIFT,
+    KKEY_RALT,
+    
+    NUMKEYBOARDKEYS
+} keyboardKeys_t;
+
+#endif

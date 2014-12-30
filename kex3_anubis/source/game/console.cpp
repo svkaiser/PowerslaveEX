@@ -328,8 +328,8 @@ void kexConsole::CheckShift(const inputEvent_t *ev)
 void kexConsole::CheckStickyKeys(const inputEvent_t *ev)
 {
     if(kex::cInput->IsShiftDown(ev->data1) ||
-        ev->data1 == SDLK_RETURN ||
-        ev->data1 == SDLK_TAB)
+        ev->data1 == KKEY_RETURN ||
+        ev->data1 == KKEY_TAB)
     {
         return;
     }
@@ -363,27 +363,27 @@ void kexConsole::ParseKey(int c)
 {
     switch(c)
     {
-    case SDLK_BACKSPACE:
+    case KKEY_BACKSPACE:
         BackSpace();
         return;
-    case SDLK_DELETE:
+    case KKEY_DELETE:
         DeleteChar();
         return;
-    case SDLK_LEFT:
+    case KKEY_LEFT:
         MoveTypePos(0);
         return;
-    case SDLK_RIGHT:
+    case KKEY_RIGHT:
         MoveTypePos(1);
         return;
-    case SDLK_PAGEUP:
+    case KKEY_PAGEUP:
         LineScroll(1);
         return;
-    case SDLK_PAGEDOWN:
+    case KKEY_PAGEDOWN:
         LineScroll(0);
         return;
     }
 
-    if(c >= SDLK_SPACE && c <= SDLK_z)
+    if(c >= KKEY_SPACE && c <= KKEY_z)
     {
         if(typeStrPos >= CON_INPUT_LENGTH)
         {
@@ -471,10 +471,10 @@ bool kexConsole::ProcessInput(const inputEvent_t *ev)
     {
         switch(ev->data1)
         {
-        case SDL_BUTTON_X1:
+        case 1:
             LineScroll(1);
             break;
-        case SDL_BUTTON_X2:
+        case -1:
             LineScroll(0);
             break;
         }
@@ -494,19 +494,19 @@ bool kexConsole::ProcessInput(const inputEvent_t *ev)
         {
             switch(c)
             {
-            case SDLK_BACKQUOTE:
+            case KKEY_BACKQUOTE:
                 state = CON_STATE_UP;
                 return true;
-            case SDLK_RETURN:
+            case KKEY_RETURN:
                 ParseInput();
                 return true;
-            case SDLK_UP:
+            case KKEY_UP:
                 GetHistory(false);
                 return true;
-            case SDLK_DOWN:
+            case KKEY_DOWN:
                 GetHistory(true);
                 return true;
-            case SDLK_TAB:
+            case KKEY_TAB:
                 kex::cCvars->AutoComplete(typeStr);
                 kex::cCommands->AutoComplete(typeStr);
                 return true;
@@ -523,7 +523,7 @@ bool kexConsole::ProcessInput(const inputEvent_t *ev)
         {
             switch(c)
             {
-            case SDLK_BACKQUOTE:
+            case KKEY_BACKQUOTE:
                 state = CON_STATE_DOWN;
                 return true;
             default:

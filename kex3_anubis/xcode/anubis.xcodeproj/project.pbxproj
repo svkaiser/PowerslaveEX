@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		410A94081A532CB300CBDD42 /* renderScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410A94061A532CB300CBDD42 /* renderScreen.cpp */; };
+		410A94121A53571D00CBDD42 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410A94101A53571D00CBDD42 /* actions.cpp */; };
 		41BACC6E1A5311F60054A04A /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC6A1A5311F60054A04A /* console.cpp */; };
 		41BACC6F1A5311F60054A04A /* session.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC6C1A5311F60054A04A /* session.cpp */; };
 		41BACC721A5312140054A04A /* cpuVertexList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC701A5312140054A04A /* cpuVertexList.cpp */; };
@@ -53,7 +54,6 @@
 		41E2CE9F1A51D57700FC28DC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E2CE9E1A51D57700FC28DC /* OpenGL.framework */; };
 		41E2CEA11A51D5CC00FC28DC /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E2CE971A51D3E300FC28DC /* libpng.a */; };
 		41E2CEA31A51D68C00FC28DC /* SDL2.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 41E2CE351A51D1EE00FC28DC /* SDL2.framework */; };
-		41E2CEAC1A51D8DF00FC28DC /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CEA51A51D8DF00FC28DC /* actions.cpp */; };
 		41E2CEAD1A51D8DF00FC28DC /* endian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CEA71A51D8DF00FC28DC /* endian.cpp */; };
 		41E2CEAF1A51D8DF00FC28DC /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CEAA1A51D8DF00FC28DC /* system.cpp */; };
 		41E2CEB21A51DB8000FC28DC /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CEB01A51DB8000FC28DC /* timer.cpp */; };
@@ -107,6 +107,10 @@
 		410A94031A53247300CBDD42 /* renderMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderMain.h; sourceTree = "<group>"; };
 		410A94061A532CB300CBDD42 /* renderScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = renderScreen.cpp; sourceTree = "<group>"; };
 		410A94071A532CB300CBDD42 /* renderScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderScreen.h; sourceTree = "<group>"; };
+		410A940C1A53459300CBDD42 /* keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = keyboard.h; path = ../../source/system/keyboard.h; sourceTree = "<group>"; };
+		410A940F1A53539100CBDD42 /* mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mouse.h; path = ../../source/system/mouse.h; sourceTree = "<group>"; };
+		410A94101A53571D00CBDD42 /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actions.cpp; path = ../../source/game/actions.cpp; sourceTree = "<group>"; };
+		410A94111A53571D00CBDD42 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actions.h; path = ../../source/game/actions.h; sourceTree = "<group>"; };
 		41BACC6A1A5311F60054A04A /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = console.cpp; path = ../../source/game/console.cpp; sourceTree = "<group>"; };
 		41BACC6B1A5311F60054A04A /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = console.h; path = ../../source/game/console.h; sourceTree = "<group>"; };
 		41BACC6C1A5311F60054A04A /* session.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = session.cpp; path = ../../source/game/session.cpp; sourceTree = "<group>"; };
@@ -185,8 +189,6 @@
 		41E2CE8E1A51D3E300FC28DC /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = libpng/xcode/libpng.xcodeproj; sourceTree = "<group>"; };
 		41E2CE9C1A51D40700FC28DC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		41E2CE9E1A51D57700FC28DC /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		41E2CEA51A51D8DF00FC28DC /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actions.cpp; path = ../../source/system/actions.cpp; sourceTree = "<group>"; };
-		41E2CEA61A51D8DF00FC28DC /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actions.h; path = ../../source/system/actions.h; sourceTree = "<group>"; };
 		41E2CEA71A51D8DF00FC28DC /* endian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = endian.cpp; path = ../../source/system/endian.cpp; sourceTree = "<group>"; };
 		41E2CEA81A51D8DF00FC28DC /* endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = endian.h; path = ../../source/system/endian.h; sourceTree = "<group>"; };
 		41E2CEAA1A51D8DF00FC28DC /* system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = system.cpp; path = ../../source/system/system.cpp; sourceTree = "<group>"; };
@@ -215,8 +217,10 @@
 		41BACC671A5311EA0054A04A /* game */ = {
 			isa = PBXGroup;
 			children = (
+				410A94101A53571D00CBDD42 /* actions.cpp */,
 				41BACC6A1A5311F60054A04A /* console.cpp */,
 				41BACC6C1A5311F60054A04A /* session.cpp */,
+				410A94111A53571D00CBDD42 /* actions.h */,
 				41BACC6B1A5311F60054A04A /* console.h */,
 				41BACC6D1A5311F60054A04A /* session.h */,
 			);
@@ -418,14 +422,14 @@
 		41E2CEA41A51D8D400FC28DC /* system */ = {
 			isa = PBXGroup;
 			children = (
-				41E2CEA51A51D8DF00FC28DC /* actions.cpp */,
 				41E2CEA71A51D8DF00FC28DC /* endian.cpp */,
 				41DA07301A51E79800562B25 /* input.cpp */,
 				41E2CEAA1A51D8DF00FC28DC /* system.cpp */,
 				41E2CEB01A51DB8000FC28DC /* timer.cpp */,
-				41E2CEA61A51D8DF00FC28DC /* actions.h */,
 				41E2CEA81A51D8DF00FC28DC /* endian.h */,
 				41DA07311A51E79800562B25 /* input.h */,
+				410A940C1A53459300CBDD42 /* keyboard.h */,
+				410A940F1A53539100CBDD42 /* mouse.h */,
 				41E2CEAB1A51D8DF00FC28DC /* system.h */,
 				41E2CEB11A51DB8000FC28DC /* timer.h */,
 				41DA073F1A51FD1800562B25 /* sdl */,
@@ -534,6 +538,7 @@
 				41DA07321A51E79800562B25 /* input.cpp in Sources */,
 				41E2CE8C1A51D39B00FC28DC /* textureObject.cpp in Sources */,
 				41E2CE7A1A51D39B00FC28DC /* memHeap.cpp in Sources */,
+				410A94121A53571D00CBDD42 /* actions.cpp in Sources */,
 				41E2CE861A51D39B00FC28DC /* random.cpp in Sources */,
 				41BACC7B1A5317580054A04A /* renderFont.cpp in Sources */,
 				41DA07451A51FEFC00562B25 /* systemSDL.cpp in Sources */,
@@ -545,7 +550,6 @@
 				41E2CEB21A51DB8000FC28DC /* timer.cpp in Sources */,
 				41E2CE781A51D39B00FC28DC /* kpf.cpp in Sources */,
 				41E2CE7B1A51D39B00FC28DC /* object.cpp in Sources */,
-				41E2CEAC1A51D8DF00FC28DC /* actions.cpp in Sources */,
 				41E2CE751A51D39B00FC28DC /* cvar.cpp in Sources */,
 				41E2CE821A51D39B00FC28DC /* matrix.cpp in Sources */,
 				41E2CE841A51D39B00FC28DC /* pluecker.cpp in Sources */,
