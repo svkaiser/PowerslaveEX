@@ -111,6 +111,8 @@
 		410A940F1A53539100CBDD42 /* mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mouse.h; path = ../../source/system/mouse.h; sourceTree = "<group>"; };
 		410A94101A53571D00CBDD42 /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actions.cpp; path = ../../source/game/actions.cpp; sourceTree = "<group>"; };
 		410A94111A53571D00CBDD42 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actions.h; path = ../../source/game/actions.h; sourceTree = "<group>"; };
+		410A94151A53711800CBDD42 /* kstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kstring.h; sourceTree = "<group>"; };
+		410A94181A53715400CBDD42 /* linkedlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linkedlist.h; sourceTree = "<group>"; };
 		41BACC6A1A5311F60054A04A /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = console.cpp; path = ../../source/game/console.cpp; sourceTree = "<group>"; };
 		41BACC6B1A5311F60054A04A /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = console.h; path = ../../source/game/console.h; sourceTree = "<group>"; };
 		41BACC6C1A5311F60054A04A /* session.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = session.cpp; path = ../../source/game/session.cpp; sourceTree = "<group>"; };
@@ -156,7 +158,6 @@
 		41E2CE4B1A51D39B00FC28DC /* kpf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kpf.cpp; sourceTree = "<group>"; };
 		41E2CE4C1A51D39B00FC28DC /* kpf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kpf.h; sourceTree = "<group>"; };
 		41E2CE4D1A51D39B00FC28DC /* kstring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kstring.cpp; sourceTree = "<group>"; };
-		41E2CE4E1A51D39B00FC28DC /* kstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kstring.h; sourceTree = "<group>"; };
 		41E2CE4F1A51D39B00FC28DC /* memHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memHeap.cpp; sourceTree = "<group>"; };
 		41E2CE501A51D39B00FC28DC /* memHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memHeap.h; sourceTree = "<group>"; };
 		41E2CE511A51D39B00FC28DC /* object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object.cpp; sourceTree = "<group>"; };
@@ -336,7 +337,8 @@
 				41E2CE471A51D39B00FC28DC /* dict.h */,
 				41E2CE4A1A51D39B00FC28DC /* hashlist.h */,
 				41E2CE4C1A51D39B00FC28DC /* kpf.h */,
-				41E2CE4E1A51D39B00FC28DC /* kstring.h */,
+				410A94151A53711800CBDD42 /* kstring.h */,
+				410A94181A53715400CBDD42 /* linkedlist.h */,
 				41E2CE501A51D39B00FC28DC /* memHeap.h */,
 				41E2CE521A51D39B00FC28DC /* object.h */,
 				41BACC741A53135C0054A04A /* parser.h */,

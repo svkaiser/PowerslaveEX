@@ -169,6 +169,7 @@ typedef union
 #include "queue.h"
 #include "hashlist.h"
 #include "dict.h"
+#include "linkedlist.h"
 #include "mathlib.h"
 #include "actions.h"
 #include "binFile.h"
