@@ -364,6 +364,14 @@ int kexSystemSDL::CheckParam(const char *check)
 
 void kexSystemSDL::Printf(const char *string, ...)
 {
+    va_list	va;
+    
+    va_start(va, string);
+    vsprintf(buffer, string, va);
+    va_end(va);
+    
+    kex::cConsole->Print(COLOR_WHITE, buffer);
+    Log(buffer);
 }
 
 //
@@ -372,6 +380,14 @@ void kexSystemSDL::Printf(const char *string, ...)
 
 void kexSystemSDL::CPrintf(rcolor color, const char *string, ...)
 {
+    va_list	va;
+    
+    va_start(va, string);
+    vsprintf(buffer, string, va);
+    va_end(va);
+    
+    kex::cConsole->Print(color, buffer);
+    Log(buffer);
 }
 
 //
@@ -380,6 +396,14 @@ void kexSystemSDL::CPrintf(rcolor color, const char *string, ...)
 
 void kexSystemSDL::Warning(const char *string, ...)
 {
+    va_list	va;
+    
+    va_start(va, string);
+    vsprintf(buffer, string, va);
+    va_end(va);
+    
+    kex::cConsole->Print(COLOR_YELLOW, buffer);
+    Log(buffer);
 }
 
 //
@@ -388,6 +412,17 @@ void kexSystemSDL::Warning(const char *string, ...)
 
 void kexSystemSDL::DPrintf(const char *string, ...)
 {
+    if(kex::cvarDeveloper.GetBool())
+    {
+        static char buffer[1024];
+        va_list	va;
+        
+        va_start(va, string);
+        vsprintf(buffer, string, va);
+        va_end(va);
+        
+        CPrintf(RGBA(0xE0, 0xE0, 0xE0, 0xff), buffer);
+    }
 }
 
 //
@@ -441,6 +476,9 @@ void kexSystemSDL::Error(const char* string, ...)
 
 const char *kexSystemSDL::GetBaseDirectory(void)
 {
+#ifdef KEX_MACOSX
+    return "./";
+#else
     static const char dummyDirectory[] = {"."};
     // cache multiple requests
     if(!basePath)
@@ -470,8 +508,9 @@ const char *kexSystemSDL::GetBaseDirectory(void)
             }
         }
     }
-
+    
     return basePath;
+#endif
 }
 
 //
@@ -500,6 +539,7 @@ void kexSystemSDL::Main(int argc, char **argv)
 
     kex::cGLContext->Init();
     kex::render::cBackend->Init();
+    kex::cConsole->Init();
 
     kex::cSession->RunGame();
 }

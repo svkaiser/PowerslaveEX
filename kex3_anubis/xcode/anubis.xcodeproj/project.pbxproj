@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41BACC6E1A5311F60054A04A /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC6A1A5311F60054A04A /* console.cpp */; };
+		41BACC6F1A5311F60054A04A /* session.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC6C1A5311F60054A04A /* session.cpp */; };
+		41BACC721A5312140054A04A /* cpuVertexList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC701A5312140054A04A /* cpuVertexList.cpp */; };
+		41BACC751A53135C0054A04A /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC731A53135C0054A04A /* parser.cpp */; };
+		41BACC7B1A5317580054A04A /* renderFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC791A5317580054A04A /* renderFont.cpp */; };
 		41DA07321A51E79800562B25 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07301A51E79800562B25 /* input.cpp */; };
 		41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07401A51FD8900562B25 /* endianSDL.cpp */; };
 		41DA07431A51FDE000562B25 /* timerSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07421A51FDE000562B25 /* timerSDL.cpp */; };
@@ -98,6 +103,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		41BACC6A1A5311F60054A04A /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = console.cpp; path = ../../source/game/console.cpp; sourceTree = "<group>"; };
+		41BACC6B1A5311F60054A04A /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = console.h; path = ../../source/game/console.h; sourceTree = "<group>"; };
+		41BACC6C1A5311F60054A04A /* session.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = session.cpp; path = ../../source/game/session.cpp; sourceTree = "<group>"; };
+		41BACC6D1A5311F60054A04A /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = session.h; path = ../../source/game/session.h; sourceTree = "<group>"; };
+		41BACC701A5312140054A04A /* cpuVertexList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cpuVertexList.cpp; sourceTree = "<group>"; };
+		41BACC711A5312140054A04A /* cpuVertexList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpuVertexList.h; sourceTree = "<group>"; };
+		41BACC731A53135C0054A04A /* parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parser.cpp; sourceTree = "<group>"; };
+		41BACC741A53135C0054A04A /* parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
+		41BACC791A5317580054A04A /* renderFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = renderFont.cpp; sourceTree = "<group>"; };
+		41BACC7A1A5317580054A04A /* renderFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderFont.h; sourceTree = "<group>"; };
 		41DA07301A51E79800562B25 /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = input.cpp; path = ../../source/system/input.cpp; sourceTree = "<group>"; };
 		41DA07311A51E79800562B25 /* input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../../source/system/input.h; sourceTree = "<group>"; };
 		41DA07381A51F01000562B25 /* queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
@@ -193,6 +208,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41BACC671A5311EA0054A04A /* game */ = {
+			isa = PBXGroup;
+			children = (
+				41BACC6A1A5311F60054A04A /* console.cpp */,
+				41BACC6C1A5311F60054A04A /* session.cpp */,
+				41BACC6B1A5311F60054A04A /* console.h */,
+				41BACC6D1A5311F60054A04A /* session.h */,
+			);
+			name = game;
+			sourceTree = "<group>";
+		};
 		41DA073F1A51FD1800562B25 /* sdl */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +299,7 @@
 				41E2CE711A51D39B00FC28DC /* main.cpp */,
 				41E2CE701A51D39B00FC28DC /* kexlib.h */,
 				41E2CE3C1A51D39B00FC28DC /* framework */,
+				41BACC671A5311EA0054A04A /* game */,
 				41E2CE581A51D39B00FC28DC /* math */,
 				41E2CE631A51D39B00FC28DC /* opengl */,
 				41E2CE671A51D39B00FC28DC /* renderer */,
@@ -292,6 +319,7 @@
 				41E2CE4D1A51D39B00FC28DC /* kstring.cpp */,
 				41E2CE4F1A51D39B00FC28DC /* memHeap.cpp */,
 				41E2CE511A51D39B00FC28DC /* object.cpp */,
+				41BACC731A53135C0054A04A /* parser.cpp */,
 				41E2CE561A51D39B00FC28DC /* unzip.cpp */,
 				41E2CE3F1A51D39B00FC28DC /* array.h */,
 				41E2CE411A51D39B00FC28DC /* binFile.h */,
@@ -303,6 +331,7 @@
 				41E2CE4E1A51D39B00FC28DC /* kstring.h */,
 				41E2CE501A51D39B00FC28DC /* memHeap.h */,
 				41E2CE521A51D39B00FC28DC /* object.h */,
+				41BACC741A53135C0054A04A /* parser.h */,
 				41DA07381A51F01000562B25 /* queue.h */,
 				41E2CE571A51D39B00FC28DC /* unzip.h */,
 			);
@@ -342,14 +371,18 @@
 		41E2CE671A51D39B00FC28DC /* renderer */ = {
 			isa = PBXGroup;
 			children = (
+				41BACC701A5312140054A04A /* cpuVertexList.cpp */,
 				41E2CE681A51D39B00FC28DC /* fbo.cpp */,
 				41E2CE6A1A51D39B00FC28DC /* image.cpp */,
 				41E2CE6C1A51D39B00FC28DC /* renderBackend.cpp */,
+				41BACC791A5317580054A04A /* renderFont.cpp */,
 				41DA07491A52115900562B25 /* textureManager.cpp */,
 				41E2CE6E1A51D39B00FC28DC /* textureObject.cpp */,
+				41BACC711A5312140054A04A /* cpuVertexList.h */,
 				41E2CE691A51D39B00FC28DC /* fbo.h */,
 				41E2CE6B1A51D39B00FC28DC /* image.h */,
 				41E2CE6D1A51D39B00FC28DC /* renderBackend.h */,
+				41BACC7A1A5317580054A04A /* renderFont.h */,
 				41DA074A1A52115900562B25 /* textureManager.h */,
 				41E2CE6F1A51D39B00FC28DC /* textureObject.h */,
 			);
@@ -495,6 +528,7 @@
 				41E2CE8C1A51D39B00FC28DC /* textureObject.cpp in Sources */,
 				41E2CE7A1A51D39B00FC28DC /* memHeap.cpp in Sources */,
 				41E2CE861A51D39B00FC28DC /* random.cpp in Sources */,
+				41BACC7B1A5317580054A04A /* renderFont.cpp in Sources */,
 				41DA07451A51FEFC00562B25 /* systemSDL.cpp in Sources */,
 				41E2CE871A51D39B00FC28DC /* vector.cpp in Sources */,
 				41E2CE741A51D39B00FC28DC /* cmd.cpp in Sources */,
@@ -509,18 +543,22 @@
 				41E2CE821A51D39B00FC28DC /* matrix.cpp in Sources */,
 				41E2CE841A51D39B00FC28DC /* pluecker.cpp in Sources */,
 				41E2CE891A51D39B00FC28DC /* fbo.cpp in Sources */,
+				41BACC751A53135C0054A04A /* parser.cpp in Sources */,
+				41BACC6F1A5311F60054A04A /* session.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,
 				41E2CE851A51D39B00FC28DC /* quaternion.cpp in Sources */,
 				41E2CE761A51D39B00FC28DC /* dict.cpp in Sources */,
 				41DA074B1A52115900562B25 /* textureManager.cpp in Sources */,
 				41E2CE791A51D39B00FC28DC /* kstring.cpp in Sources */,
 				41E2CE831A51D39B00FC28DC /* plane.cpp in Sources */,
+				41BACC6E1A5311F60054A04A /* console.cpp in Sources */,
 				41DA07471A52014400562B25 /* inputSDL.cpp in Sources */,
 				41E2CE811A51D39B00FC28DC /* mathlib.cpp in Sources */,
 				41E2CE8B1A51D39B00FC28DC /* renderBackend.cpp in Sources */,
 				41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */,
 				41E2CEAF1A51D8DF00FC28DC /* system.cpp in Sources */,
 				41E2CE731A51D39B00FC28DC /* binFile.cpp in Sources */,
+				41BACC721A5312140054A04A /* cpuVertexList.cpp in Sources */,
 				41E2CE881A51D39B00FC28DC /* glcontext.cpp in Sources */,
 				41E2CE801A51D39B00FC28DC /* bounds.cpp in Sources */,
 			);

@@ -180,6 +180,7 @@ typedef union
 #include "kpf.h"
 #include "object.h"
 #include "console.h"
+#include "parser.h"
 #include "glcontext.h"
 #include "renderBackend.h"
 
@@ -197,6 +198,7 @@ extern kexInputAction       *cActions;
 extern kexPakFile           *cPakFiles;
 extern kexSession           *cSession;
 extern kexConsole           *cConsole;
+extern kexParser            *cParser;
 extern kexGLContext         *cGLContext;
 
 KEXLIB_NAMESPACE_START(render)

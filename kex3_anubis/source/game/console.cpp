@@ -16,6 +16,7 @@
 //
 
 #include "kexlib.h"
+#include "renderFont.h"
 
 kexCvar cvarDisplayConsole("con_alwaysShowConsole", CVF_BOOL|CVF_CONFIG, "0", "TODO");
 kexCvar cvarShowFPS("con_showfps", CVF_BOOL|CVF_CONFIG, "0", "Displays current FPS");
@@ -65,6 +66,15 @@ kexConsole::kexConsole(void)
 kexConsole::~kexConsole(void)
 {
     ClearOutput();
+}
+
+//
+// kexConsole::Init
+//
+
+void kexConsole::Init(void)
+{
+    font.LoadKFont("fonts/confont.kfont");
 }
 
 //
@@ -561,8 +571,8 @@ void kexConsole::Draw(void)
 
     if(cvarShowFPS.GetBool())
     {
-        //tsRenderer::conFont->DrawString(kexStr::Format("fps: %i", kex::cSession->GetFPS()),
-        //                                w - 64, 32, 1, false);
+        font.DrawString(kexStr::Format("fps: %i", kex::cSession->GetFPS()),
+                                        w - 64, 32, 1, false);
     }
 
     if(state == CON_STATE_UP && !cvarDisplayConsole.GetBool())
@@ -606,17 +616,16 @@ void kexConsole::Draw(void)
         vl->DrawElements();
 
         color = RGBA(255, 255, 255, 255);
-        //tsRenderer::conFont->DrawString("> ", 0, h-15, 1, false);
+        font.DrawString("> ", 0, h-15, 1, false);
 
         if(bShowPrompt)
         {
-            //tsRenderer::conFont->DrawString("_", 16 +
-            //                                tsRenderer::conFont->StringWidth(typeStr, 1.0f, typeStrPos), h-15, 1, false);
+            font.DrawString("_", 16 + font.StringWidth(typeStr, 1.0f, typeStrPos), h-15, 1, false);
         }
 
         if(strlen(typeStr) > 0)
         {
-            //tsRenderer::conFont->DrawString(typeStr, 16, h-15, 1, false);
+            font.DrawString(typeStr, 16, h-15, 1, false);
         }
     }
 
@@ -632,7 +641,7 @@ void kexConsole::Draw(void)
             }
 
             color = lineColor[i];
-            //tsRenderer::conFont->DrawString(scrollBackStr[i], 0, scy, 1, false, color);
+            font.DrawString(scrollBackStr[i], 0, scy, 1, false, color);
             scy -= 16;
         }
     }
