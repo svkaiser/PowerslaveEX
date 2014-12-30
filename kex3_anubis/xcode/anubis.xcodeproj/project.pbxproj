@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410A94081A532CB300CBDD42 /* renderScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410A94061A532CB300CBDD42 /* renderScreen.cpp */; };
 		41BACC6E1A5311F60054A04A /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC6A1A5311F60054A04A /* console.cpp */; };
 		41BACC6F1A5311F60054A04A /* session.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC6C1A5311F60054A04A /* session.cpp */; };
 		41BACC721A5312140054A04A /* cpuVertexList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC701A5312140054A04A /* cpuVertexList.cpp */; };
@@ -104,6 +105,8 @@
 
 /* Begin PBXFileReference section */
 		410A94031A53247300CBDD42 /* renderMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderMain.h; sourceTree = "<group>"; };
+		410A94061A532CB300CBDD42 /* renderScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = renderScreen.cpp; sourceTree = "<group>"; };
+		410A94071A532CB300CBDD42 /* renderScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderScreen.h; sourceTree = "<group>"; };
 		41BACC6A1A5311F60054A04A /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = console.cpp; path = ../../source/game/console.cpp; sourceTree = "<group>"; };
 		41BACC6B1A5311F60054A04A /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = console.h; path = ../../source/game/console.h; sourceTree = "<group>"; };
 		41BACC6C1A5311F60054A04A /* session.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = session.cpp; path = ../../source/game/session.cpp; sourceTree = "<group>"; };
@@ -377,6 +380,7 @@
 				41E2CE6A1A51D39B00FC28DC /* image.cpp */,
 				41E2CE6C1A51D39B00FC28DC /* renderBackend.cpp */,
 				41BACC791A5317580054A04A /* renderFont.cpp */,
+				410A94061A532CB300CBDD42 /* renderScreen.cpp */,
 				41DA07491A52115900562B25 /* textureManager.cpp */,
 				41E2CE6E1A51D39B00FC28DC /* textureObject.cpp */,
 				41BACC711A5312140054A04A /* cpuVertexList.h */,
@@ -385,6 +389,7 @@
 				41E2CE6D1A51D39B00FC28DC /* renderBackend.h */,
 				41BACC7A1A5317580054A04A /* renderFont.h */,
 				410A94031A53247300CBDD42 /* renderMain.h */,
+				410A94071A532CB300CBDD42 /* renderScreen.h */,
 				41DA074A1A52115900562B25 /* textureManager.h */,
 				41E2CE6F1A51D39B00FC28DC /* textureObject.h */,
 			);
@@ -549,6 +554,7 @@
 				41BACC6F1A5311F60054A04A /* session.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,
 				41E2CE851A51D39B00FC28DC /* quaternion.cpp in Sources */,
+				410A94081A532CB300CBDD42 /* renderScreen.cpp in Sources */,
 				41E2CE761A51D39B00FC28DC /* dict.cpp in Sources */,
 				41DA074B1A52115900562B25 /* textureManager.cpp in Sources */,
 				41E2CE791A51D39B00FC28DC /* kstring.cpp in Sources */,

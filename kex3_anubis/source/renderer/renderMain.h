@@ -16,6 +16,7 @@
 #define __RENDERMAIN_H__
 
 #include "renderBackend.h"
+#include "renderScreen.h"
 
 class kexRender
 {
@@ -23,6 +24,7 @@ public:
     static kexRenderBackend     *cBackend;
     static kexTextureManager    *cTextures;
     static kexCpuVertList       *cVertList;
+    static kexRenderScreen      *cScreen;
 };
 
 #endif

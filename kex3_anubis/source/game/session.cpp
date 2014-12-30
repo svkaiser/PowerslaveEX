@@ -126,6 +126,8 @@ void kexSession::RunGame(void)
 
             // check for new inputs
             ProcessEvents();
+            
+            kex::cConsole->Tick();
 
             // draw scene
             DrawFrame();
