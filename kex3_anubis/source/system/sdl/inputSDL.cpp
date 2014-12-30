@@ -185,6 +185,7 @@ int kexInputSDL::TranslateKeyboard(const int val)
         case SDLK_CARET:            return KKEY_CARET;
         case SDLK_UNDERSCORE:       return KKEY_UNDERSCORE;
         case SDLK_BACKQUOTE:        return KKEY_BACKQUOTE;
+        case SDLK_DELETE:           return KKEY_DELETE;
     }
     
     code &= ~SDLK_SCANCODE_MASK;
