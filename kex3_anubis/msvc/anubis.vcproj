@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer"
+				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\system;.\..\source\system\sdl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer"
+				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\system;.\..\source\system\sdl"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -197,10 +197,6 @@
 				Name="framework"
 				>
 				<File
-					RelativePath="..\source\framework\actions.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\source\framework\binFile.cpp"
 					>
 				</File>
@@ -217,10 +213,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\source\framework\endian.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\source\framework\kpf.cpp"
 					>
 				</File>
@@ -234,14 +226,6 @@
 				</File>
 				<File
 					RelativePath="..\source\framework\object.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\source\framework\system.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\source\framework\system_local.cpp"
 					>
 				</File>
 				<File
@@ -313,9 +297,57 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\textureManager.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\textureObject.cpp"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="system"
+				>
+				<File
+					RelativePath="..\source\system\actions.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\endian.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\input.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\system.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\timer.cpp"
+					>
+				</File>
+				<Filter
+					Name="sdl"
+					>
+					<File
+						RelativePath="..\source\system\sdl\endianSDL.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\source\system\sdl\inputSDL.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\source\system\sdl\systemSDL.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\source\system\sdl\timerSDL.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -339,10 +371,6 @@
 				Name="framework"
 				>
 				<File
-					RelativePath="..\source\framework\actions.h"
-					>
-				</File>
-				<File
 					RelativePath="..\source\framework\array.h"
 					>
 				</File>
@@ -360,10 +388,6 @@
 				</File>
 				<File
 					RelativePath="..\source\framework\dict.h"
-					>
-				</File>
-				<File
-					RelativePath="..\source\framework\endian.h"
 					>
 				</File>
 				<File
@@ -387,7 +411,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\source\framework\system.h"
+					RelativePath="..\source\framework\queue.h"
 					>
 				</File>
 				<File
@@ -431,7 +455,35 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\textureManager.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\textureObject.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="system"
+				>
+				<File
+					RelativePath="..\source\system\actions.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\endian.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\input.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\system.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\timer.h"
 					>
 				</File>
 			</Filter>
