@@ -55,7 +55,7 @@ static kexInputSDL inputSystem;
 kexInput *kex::cInput = &inputSystem;
 
 //
-// kexInputSDLSDL::kexInputSDLSDL
+// kexInputSDL::kexInputSDL
 //
 
 kexInputSDL::kexInputSDL()
@@ -94,9 +94,9 @@ void kexInputSDL::ReadMouse(void)
 {
     int x, y;
     Uint8 btn;
-    event_t ev;
+    inputEvent_t ev;
 
-    if(kex::cSystem->IsWindowed() /*&& console.IsActive()*/)
+    if(kex::cSystem->IsWindowed() && kex::cConsole->IsActive())
     {
         return;
     }
@@ -111,7 +111,8 @@ void kexInputSDL::ReadMouse(void)
         ev.data2 = x << 5;
         ev.data3 = (-y) << 5;
         ev.data4 = 0;
-        //client.PostEvent(&ev);
+
+        kex::cSession->EventQueue().Push(&ev);
     }
 
     lastmbtn = btn;
@@ -181,7 +182,7 @@ bool kexInputSDL::IsAltDown(int c) const
 
 void kexInputSDL::GetEvent(const SDL_Event *Event)
 {
-    event_t event;
+    inputEvent_t event;
 
     switch(Event->type)
     {
@@ -192,13 +193,13 @@ void kexInputSDL::GetEvent(const SDL_Event *Event)
         }
         event.type = ev_keydown;
         event.data1 = Event->key.keysym.sym;
-        //client.PostEvent(&event);
+        kex::cSession->EventQueue().Push(&event);
         break;
 
     case SDL_KEYUP:
         event.type = ev_keyup;
         event.data1 = Event->key.keysym.sym;
-        //client.PostEvent(&event);
+        kex::cSession->EventQueue().Push(&event);
         break;
 
     case SDL_MOUSEBUTTONDOWN:
@@ -211,7 +212,7 @@ void kexInputSDL::GetEvent(const SDL_Event *Event)
                      SDL_MOUSEBUTTONUP ? ev_mouseup : ev_mousedown;
         event.data1 = Event->button.button;
         event.data2 = event.data3 = 0;
-        //client.PostEvent(&event);
+        kex::cSession->EventQueue().Push(&event);
         break;
 
     case SDL_MOUSEWHEEL:
@@ -222,7 +223,7 @@ void kexInputSDL::GetEvent(const SDL_Event *Event)
         event.type = ev_mousewheel;
         event.data1 = Event->wheel.y > 0 ? SDL_BUTTON_WHEELUP : SDL_BUTTON_WHEELDOWN;
         event.data2 = event.data3 = 0;
-        //client.PostEvent(&event);
+        kex::cSession->EventQueue().Push(&event);
         break;
 
     case SDL_WINDOWEVENT:
@@ -278,10 +279,10 @@ bool kexInputSDL::MouseShouldBeGrabbed(void) const
 
     if(kex::cSystem->IsWindowed())
     {
-        //if(console.IsActive())
-        //{
-        //    return false;
-        //}
+        if(kex::cConsole->IsActive())
+        {
+            return false;
+        }
     }
 
     return bEnabled;

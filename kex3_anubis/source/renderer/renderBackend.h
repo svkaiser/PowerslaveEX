@@ -117,6 +117,7 @@ typedef struct
 #include "textureObject.h"
 #include "textureManager.h"
 #include "fbo.h"
+#include "cpuVertexList.h"
 
 class kexRenderBackend
 {

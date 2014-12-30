@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\system;.\..\source\system\sdl"
+				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\system;.\..\source\system\sdl"
+				AdditionalIncludeDirectories=".\..\openal\include\;.\..\SDL2\include\;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -285,6 +285,10 @@
 				Name="renderer"
 				>
 				<File
+					RelativePath="..\source\renderer\cpuVertexList.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\fbo.cpp"
 					>
 				</File>
@@ -348,6 +352,18 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="game"
+				>
+				<File
+					RelativePath="..\source\game\console.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\session.cpp"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -443,6 +459,10 @@
 				Name="renderer"
 				>
 				<File
+					RelativePath="..\source\renderer\cpuVertexList.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\fbo.h"
 					>
 				</File>
@@ -484,6 +504,18 @@
 				</File>
 				<File
 					RelativePath="..\source\system\timer.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="game"
+				>
+				<File
+					RelativePath="..\source\game\console.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\session.h"
 					>
 				</File>
 			</Filter>

@@ -500,4 +500,6 @@ void kexSystemSDL::Main(int argc, char **argv)
 
     kex::cGLContext->Init();
     kex::render::cBackend->Init();
+
+    kex::cSession->RunGame();
 }

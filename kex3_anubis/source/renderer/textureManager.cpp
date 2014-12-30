@@ -39,13 +39,67 @@ kexTextureManager::~kexTextureManager(void)
 }
 
 //
+// kexTextureManager::CreateWhiteTexture
+//
+
+void kexTextureManager::CreateWhiteTexture(void)
+{
+    byte rgb[48]; // 4x4 RGB texture
+    memset(rgb, 0xff, 48);
+
+    whiteTexture = textureList.Add("_white", kexTexture::hb_texture);
+
+    whiteTexture->colorMode = TCR_RGB;
+    whiteTexture->origwidth = 4;
+    whiteTexture->origheight = 4;
+    whiteTexture->width = 4;
+    whiteTexture->height = 4;
+
+    whiteTexture->Upload(rgb, TC_CLAMP, TF_NEAREST);
+}
+
+//
+// kexTextureManager::CreateDefaultTexture
+//
+
+void kexTextureManager::CreateDefaultTexture(void)
+{
+    byte rgb[64*64*3];
+    memset(rgb, 0xff, 64*64*3);
+
+    for(int h = 0; h < 32; ++h)
+    {
+        for(int w = 0; w < 32; ++w)
+        {
+            rgb[(64 * h + w) * 3 + 0] = 0;
+            rgb[(64 * h + w) * 3 + 1] = 0xff;
+            rgb[(64 * h + w) * 3 + 2] = 0xff;
+
+            rgb[(64 * (h+32) + (w+32)) * 3 + 0] = 0;
+            rgb[(64 * (h+32) + (w+32)) * 3 + 1] = 0xff;
+            rgb[(64 * (h+32) + (w+32)) * 3 + 2] = 0xff;
+        }
+    }
+
+    defaultTexture = textureList.Add("_default", kexTexture::hb_texture);
+
+    defaultTexture->colorMode = TCR_RGB;
+    defaultTexture->origwidth = 64;
+    defaultTexture->origheight = 64;
+    defaultTexture->width = 64;
+    defaultTexture->height = 64;
+
+    defaultTexture->Upload(rgb, TC_CLAMP, TF_NEAREST);
+}
+
+//
 // kexTextureManager::Init
 //
 
 void kexTextureManager::Init(void)
 {
-    defaultTexture = Cache("textures/default.tga", TC_CLAMP, TF_LINEAR);
-    whiteTexture = Cache("textures/white.tga", TC_CLAMP, TF_LINEAR);
+    CreateWhiteTexture();
+    CreateDefaultTexture();
 }
 
 //

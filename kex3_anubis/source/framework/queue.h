@@ -15,14 +15,16 @@
 #ifndef __KEXQUEUE_H__
 #define __KEXQUEUE_H__
 
+#include <assert.h>
+
 template<class type>
 class kexQueue
 {
 public:
     kexQueue(void);
-    kexQueue(const unsigned int size);
     ~kexQueue(void);
     
+    void            Init(const unsigned int size);
     void            Push(type *t);
     type            *Pop(void);
 
@@ -47,11 +49,26 @@ kexQueue<type>::kexQueue(void)
 }
 
 //
-// kexQueue::kexQueue
+// kexQueue::~kexQueue
 //
 template<class type>
-kexQueue<type>::kexQueue(const unsigned int size)
+kexQueue<type>::~kexQueue(void)
 {
+    if(data != defaultDataSize)
+    {
+        delete[] data;
+        data = NULL;
+    }
+}
+
+//
+// kexQueue::Init
+//
+template<class type>
+void kexQueue<type>::Init(const unsigned int size)
+{
+    assert(size > 0);
+
     this->length = size;
     this->head = 0;
     this->tail = 0;
@@ -63,19 +80,6 @@ kexQueue<type>::kexQueue(const unsigned int size)
     else
     {
         this->data = this->defaultDataSize;
-    }
-}
-
-//
-// kexQueue::~kexQueue
-//
-template<class type>
-kexQueue<type>::~kexQueue(void)
-{
-    if(data != defaultDataSize)
-    {
-        delete[] data;
-        data = NULL;
     }
 }
 

@@ -152,9 +152,9 @@ void kexTexture::LoadFromFile(const char *file, const texClampMode_t clamp, cons
 // kexTexture::Upload
 //
 
-void kexTexture::Upload(kexImage &image, texClampMode_t clamp, texFilterMode_t filter)
+void kexTexture::Upload(const byte *data, texClampMode_t clamp, texFilterMode_t filter)
 {
-    if(image.Data() == NULL)
+    if(data == NULL)
     {
         return;
     }
@@ -186,12 +186,21 @@ void kexTexture::Upload(kexImage &image, texClampMode_t clamp, texFilterMode_t f
         0,
         (colorMode == TCR_RGBA) ? GL_RGBA : GL_RGB,
         GL_UNSIGNED_BYTE,
-        image.Data());
+        data);
 
     SetParameters();
 
     bLoaded = true;
     dglBindTexture(GL_TEXTURE_2D, 0);
+}
+
+//
+// kexTexture::Upload
+//
+
+void kexTexture::Upload(kexImage &image, texClampMode_t clamp, texFilterMode_t filter)
+{
+    Upload(image.Data(), clamp, filter);
 }
 
 //

@@ -176,8 +176,10 @@ typedef union
 #include "timer.h"
 #include "system.h"
 #include "input.h"
+#include "session.h"
 #include "kpf.h"
 #include "object.h"
+#include "console.h"
 #include "glcontext.h"
 #include "renderBackend.h"
 
@@ -193,12 +195,15 @@ extern kexCvarManager       *cCvars;
 extern kexCommand           *cCommands;
 extern kexInputAction       *cActions;
 extern kexPakFile           *cPakFiles;
+extern kexSession           *cSession;
+extern kexConsole           *cConsole;
 extern kexGLContext         *cGLContext;
 
 KEXLIB_NAMESPACE_START(render)
 
 extern kexRenderBackend     *cBackend;
 extern kexTextureManager    *cTextures;
+extern kexCpuVertList       *cVertList;
 
 KEXLIB_NAMESPACE_END
 

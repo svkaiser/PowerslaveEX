@@ -32,10 +32,13 @@ typedef enum
 
 class kexTexture
 {
+    friend class kexTextureManager;
+
 public:
     kexTexture(void);
     ~kexTexture(void);
 
+    void                    Upload(const byte *data, texClampMode_t clamp, texFilterMode_t filter);
     void                    Upload(kexImage &image, texClampMode_t clamp, texFilterMode_t filter);
     void                    SetParameters(void);
     void                    ChangeParameters(const texClampMode_t clamp, const texFilterMode_t filter);

@@ -31,6 +31,9 @@ public:
     kexTexture              *whiteTexture;
 
 private:
+    void                    CreateWhiteTexture(void);
+    void                    CreateDefaultTexture(void);
+
     kexHashList<kexTexture> textureList;
 };
 

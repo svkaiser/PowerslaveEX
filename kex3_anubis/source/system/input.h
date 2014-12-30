@@ -25,7 +25,7 @@ typedef enum
     ev_mouseup,
     ev_mousewheel,
     ev_gamepad
-} evtype_t;
+} eventType_t;
 
 extern kexCvar cvarMSensitivityX;
 extern kexCvar cvarMSensitivityY;
@@ -40,7 +40,7 @@ typedef struct
     int         data2;  // mouse/joystick x move
     int         data3;  // mouse/joystick y move
     int         data4;  // misc data
-} event_t;
+} inputEvent_t;
 
 class kexInput
 {
