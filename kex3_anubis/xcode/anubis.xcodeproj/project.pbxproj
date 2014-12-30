@@ -242,10 +242,11 @@
 		41E2CDF01A51CF2000FC28DC = {
 			isa = PBXGroup;
 			children = (
-				41E2CE021A51CF2000FC28DC /* anubis */,
 				41E2CEA01A51D59000FC28DC /* Dependencies */,
 				41E2CDFB1A51CF2000FC28DC /* Frameworks */,
 				41E2CDFA1A51CF2000FC28DC /* Products */,
+				41E2CE3B1A51D38A00FC28DC /* Source */,
+				41E2CE031A51CF2000FC28DC /* Supporting Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -281,15 +282,6 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		41E2CE021A51CF2000FC28DC /* anubis */ = {
-			isa = PBXGroup;
-			children = (
-				41E2CE3B1A51D38A00FC28DC /* Source */,
-				41E2CE031A51CF2000FC28DC /* Supporting Files */,
-			);
-			path = anubis;
-			sourceTree = "<group>";
-		};
 		41E2CE031A51CF2000FC28DC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +292,7 @@
 				41E2CE051A51CF2000FC28DC /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			path = anubis;
 			sourceTree = "<group>";
 		};
 		41E2CE3B1A51D38A00FC28DC /* Source */ = {
@@ -315,6 +308,7 @@
 				41E2CEA41A51D8D400FC28DC /* system */,
 			);
 			name = Source;
+			path = anubis;
 			sourceTree = "<group>";
 		};
 		41E2CE3C1A51D39B00FC28DC /* framework */ = {
