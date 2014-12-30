@@ -17,6 +17,7 @@
 
 #include "SDL.h"
 #include "kexlib.h"
+#include "renderMain.h"
 
 class kexSystemSDL : public kexSystem
 {
@@ -93,7 +94,7 @@ void kexSystemSDL::Shutdown(void)
 
     WriteConfigFile();
     
-    kex::render::cBackend->Shutdown();
+    kexRender::cBackend->Shutdown();
     kex::cPakFiles->Shutdown();
     kex::cCvars->Shutdown();
     
@@ -538,7 +539,7 @@ void kexSystemSDL::Main(int argc, char **argv)
     InitVideo();
 
     kex::cGLContext->Init();
-    kex::render::cBackend->Init();
+    kexRender::cBackend->Init();
     kex::cConsole->Init();
 
     kex::cSession->RunGame();

@@ -15,7 +15,7 @@
 //      Framebuffer objects
 //
 
-#include "kexlib.h"
+#include "renderMain.h"
 
 //
 // kexFBO::kexFBO
@@ -92,7 +92,7 @@ void kexFBO::InitColorAttachment(const int attachment, const int width, const in
         return;
     }
 
-    if(attachment < 0 || attachment >= kex::render::cBackend->MaxColorAttachments())
+    if(attachment < 0 || attachment >= kexRender::cBackend->MaxColorAttachments())
     {
         return;
     }
@@ -146,7 +146,7 @@ void kexFBO::InitColorAttachment(const int attachment, const int width, const in
     CheckStatus();
 
     dglBindTexture(GL_TEXTURE_2D, 0);
-    kex::render::cBackend->RestoreFrameBuffer();
+    kexRender::cBackend->RestoreFrameBuffer();
 }
 
 //
@@ -208,7 +208,7 @@ void kexFBO::InitDepthAttachment(const int width, const int height)
     CheckStatus();
 
     dglBindTexture(GL_TEXTURE_2D, 0);
-    kex::render::cBackend->RestoreFrameBuffer();
+    kexRender::cBackend->RestoreFrameBuffer();
 }
 
 //
@@ -266,7 +266,7 @@ void kexFBO::CopyBackBuffer(void)
                        GL_COLOR_BUFFER_BIT,
                        GL_LINEAR);
 
-    kex::render::cBackend->RestoreFrameBuffer();
+    kexRender::cBackend->RestoreFrameBuffer();
 }
 
 //
@@ -305,7 +305,7 @@ void kexFBO::CopyFrameBuffer(const kexFBO &fbo)
                        GL_COLOR_BUFFER_BIT,
                        GL_LINEAR);
 
-    kex::render::cBackend->RestoreFrameBuffer();
+    kexRender::cBackend->RestoreFrameBuffer();
 }
 
 //
@@ -326,7 +326,7 @@ kexImage kexFBO::ToImage(void)
 
 void kexFBO::Bind(void)
 {
-    if(fboId == kex::render::cBackend->glState.currentFBO)
+    if(fboId == kexRender::cBackend->glState.currentFBO)
     {
         return;
     }
@@ -334,7 +334,7 @@ void kexFBO::Bind(void)
     dglBindFramebuffer(GL_FRAMEBUFFER_EXT, fboId);
     dglReadBuffer(fboAttachment);
     dglDrawBuffer(fboAttachment);
-    kex::render::cBackend->glState.currentFBO = fboId;
+    kexRender::cBackend->glState.currentFBO = fboId;
 }
 
 //
@@ -343,12 +343,12 @@ void kexFBO::Bind(void)
 
 void kexFBO::UnBind(void)
 {
-    if(kex::render::cBackend->glState.currentFBO == 0)
+    if(kexRender::cBackend->glState.currentFBO == 0)
     {
         return;
     }
 
-    kex::render::cBackend->RestoreFrameBuffer();
+    kexRender::cBackend->RestoreFrameBuffer();
 }
 
 //
@@ -357,7 +357,7 @@ void kexFBO::UnBind(void)
 
 void kexFBO::BindImage(void)
 {
-    kexRenderBackend::glState_t *state = &kex::render::cBackend->glState;
+    kexRenderBackend::glState_t *state = &kexRender::cBackend->glState;
     int unit = state->currentUnit;
     dtexture currentTexture = state->textureUnits[unit].currentTexture;
 
@@ -376,7 +376,7 @@ void kexFBO::BindImage(void)
 
 void kexFBO::UnBindImage(void)
 {
-    kexRenderBackend::glState_t *state = &kex::render::cBackend->glState;
+    kexRenderBackend::glState_t *state = &kexRender::cBackend->glState;
     int unit = state->currentUnit;
 
     if(state->textureUnits[unit].currentTexture == 0)

@@ -16,6 +16,7 @@
 //
 
 #include "kexlib.h"
+#include "renderMain.h"
 #include "renderFont.h"
 
 kexCvar cvarDisplayConsole("con_alwaysShowConsole", CVF_BOOL|CVF_CONFIG, "0", "TODO");
@@ -565,7 +566,7 @@ void kexConsole::Draw(void)
     float   h;
     rcolor  color;
 
-    kex::render::cBackend->SetOrtho();
+    kexRender::cBackend->SetOrtho();
 
     w = (float)kex::cSystem->VideoWidth();
 
@@ -586,9 +587,9 @@ void kexConsole::Draw(void)
 
     if(!bOverlay)
     {
-        kexCpuVertList *vl = kex::render::cVertList;
+        kexCpuVertList *vl = kexRender::cVertList;
 
-        kex::render::cTextures->whiteTexture->Bind();
+        kexRender::cTextures->whiteTexture->Bind();
         vl->BindDrawPointers();
 
         // tint overlay

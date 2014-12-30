@@ -15,7 +15,7 @@
 //      Font mapping
 //
 
-#include "kexlib.h"
+#include "renderMain.h"
 #include "renderFont.h"
 
 //
@@ -73,11 +73,11 @@ void kexFont::LoadKFont(const char *file)
         if(lexer->Matches("texture"))
         {
             lexer->GetString();
-            texture = kex::render::cTextures->Cache(lexer->StringToken(), TC_CLAMP, TF_NEAREST);
+            texture = kexRender::cTextures->Cache(lexer->StringToken(), TC_CLAMP, TF_NEAREST);
             
             if(!texture)
             {
-                texture = kex::render::cTextures->defaultTexture;
+                texture = kexRender::cTextures->defaultTexture;
             }
         }
 
@@ -156,7 +156,7 @@ void kexFont::DrawString(const char *string, float x, float y, float scale,
     tri = 0;
     len = strlen(string);
 
-    kex::render::cVertList->BindDrawPointers();
+    kexRender::cVertList->BindDrawPointers();
 
     for(i = 0; i < len; i++)
     {
@@ -172,13 +172,13 @@ void kexFont::DrawString(const char *string, float x, float y, float scale,
         ty2     = (ty1 + at->h / h);
         check   = (char*)string+i;
 
-        kex::render::cVertList->AddVertex(vx1, vy1, 0, tx1, ty1, rgba1);
-        kex::render::cVertList->AddVertex(vx2, vy1, 0, tx2, ty1, rgba1);
-        kex::render::cVertList->AddVertex(vx1, vy2, 0, tx1, ty2, rgba2);
-        kex::render::cVertList->AddVertex(vx2, vy2, 0, tx2, ty2, rgba2);
+        kexRender::cVertList->AddVertex(vx1, vy1, 0, tx1, ty1, rgba1);
+        kexRender::cVertList->AddVertex(vx2, vy1, 0, tx2, ty1, rgba1);
+        kexRender::cVertList->AddVertex(vx1, vy2, 0, tx1, ty2, rgba2);
+        kexRender::cVertList->AddVertex(vx2, vy2, 0, tx2, ty2, rgba2);
 
-        kex::render::cVertList->AddTriangle(0+tri, 2+tri, 1+tri);
-        kex::render::cVertList->AddTriangle(1+tri, 2+tri, 3+tri);
+        kexRender::cVertList->AddTriangle(0+tri, 2+tri, 1+tri);
+        kexRender::cVertList->AddTriangle(1+tri, 2+tri, 3+tri);
 
         x += at->w * scale;
         tri += 4;
@@ -186,9 +186,9 @@ void kexFont::DrawString(const char *string, float x, float y, float scale,
 
     texture->Bind();
     
-    kex::render::cBackend->SetState(GLSTATE_ALPHATEST, true);
-    kex::render::cBackend->SetState(GLSTATE_BLEND, true);
-    kex::render::cVertList->DrawElements();
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+    kexRender::cVertList->DrawElements();
 }
 
 //

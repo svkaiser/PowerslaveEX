@@ -182,33 +182,24 @@ typedef union
 #include "console.h"
 #include "parser.h"
 #include "glcontext.h"
-#include "renderBackend.h"
 
-KEXLIB_NAMESPACE_START(kex)
-
-extern kexCvar              cvarDeveloper;
-
-extern kexSystem            *cSystem;
-extern kexTimer             *cTimer;
-extern kexEndian            *cEndian;
-extern kexInput             *cInput;
-extern kexCvarManager       *cCvars;
-extern kexCommand           *cCommands;
-extern kexInputAction       *cActions;
-extern kexPakFile           *cPakFiles;
-extern kexSession           *cSession;
-extern kexConsole           *cConsole;
-extern kexParser            *cParser;
-extern kexGLContext         *cGLContext;
-
-KEXLIB_NAMESPACE_START(render)
-
-extern kexRenderBackend     *cBackend;
-extern kexTextureManager    *cTextures;
-extern kexCpuVertList       *cVertList;
-
-KEXLIB_NAMESPACE_END
-
-KEXLIB_NAMESPACE_END
+class kex
+{
+public:
+    static kexCvar              cvarDeveloper;
+    
+    static kexSystem            *cSystem;
+    static kexTimer             *cTimer;
+    static kexEndian            *cEndian;
+    static kexInput             *cInput;
+    static kexCvarManager       *cCvars;
+    static kexCommand           *cCommands;
+    static kexInputAction       *cActions;
+    static kexPakFile           *cPakFiles;
+    static kexSession           *cSession;
+    static kexConsole           *cConsole;
+    static kexParser            *cParser;
+    static kexGLContext         *cGLContext;
+};
 
 #endif

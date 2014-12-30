@@ -103,6 +103,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		410A94031A53247300CBDD42 /* renderMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderMain.h; sourceTree = "<group>"; };
 		41BACC6A1A5311F60054A04A /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = console.cpp; path = ../../source/game/console.cpp; sourceTree = "<group>"; };
 		41BACC6B1A5311F60054A04A /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = console.h; path = ../../source/game/console.h; sourceTree = "<group>"; };
 		41BACC6C1A5311F60054A04A /* session.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = session.cpp; path = ../../source/game/session.cpp; sourceTree = "<group>"; };
@@ -383,6 +384,7 @@
 				41E2CE6B1A51D39B00FC28DC /* image.h */,
 				41E2CE6D1A51D39B00FC28DC /* renderBackend.h */,
 				41BACC7A1A5317580054A04A /* renderFont.h */,
+				410A94031A53247300CBDD42 /* renderMain.h */,
 				41DA074A1A52115900562B25 /* textureManager.h */,
 				41E2CE6F1A51D39B00FC28DC /* textureObject.h */,
 			);

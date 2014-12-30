@@ -16,6 +16,7 @@
 //
 
 #include "kexlib.h"
+#include "renderMain.h"
 
 static kexSession sessionLocal;
 kexSession *kex::cSession = &sessionLocal;
@@ -84,10 +85,10 @@ void kexSession::ProcessEvents(void)
 
 void kexSession::DrawFrame(void)
 {
-    kex::render::cBackend->ClearBuffer();
+    kexRender::cBackend->ClearBuffer();
 
     kex::cConsole->Draw();
-    kex::render::cBackend->SwapBuffers();
+    kexRender::cBackend->SwapBuffers();
 }
 
 //

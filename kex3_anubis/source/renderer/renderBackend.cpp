@@ -16,11 +16,12 @@
 //
 
 #include "kexlib.h"
+#include "renderMain.h"
 
 kexCvar cvarRenderFinish("r_finish", CVF_BOOL|CVF_CONFIG, "0", "Force a GL command sync");
 
 static kexRenderBackend renderBackend;
-kexRenderBackend *kex::render::cBackend = &renderBackend;
+kexRenderBackend *kexRender::cBackend = &renderBackend;
 
 //
 // statglbackend
@@ -217,7 +218,7 @@ void kexRenderBackend::Init(void)
     }
 
     bIsInit = true;
-    kex::render::cTextures->Init();
+    kexRender::cTextures->Init();
 
     kex::cSystem->Printf("Backend Renderer Initialized\n");
 }
@@ -229,7 +230,7 @@ void kexRenderBackend::Init(void)
 void kexRenderBackend::Shutdown(void)
 {
     kex::cSystem->Printf("Shutting down render system\n");
-    kex::render::cTextures->Shutdown();
+    kexRender::cTextures->Shutdown();
 }
 
 //

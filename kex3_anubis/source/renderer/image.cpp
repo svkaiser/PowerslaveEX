@@ -17,6 +17,7 @@
 
 #include "png.h"
 #include "kexlib.h"
+#include "renderMain.h"
 
 kexCvar cvarGamma("gl_gamma", CVF_FLOAT|CVF_CONFIG, "1", "TODO");
 

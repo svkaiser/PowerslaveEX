@@ -15,10 +15,10 @@
 //      Vertex pointers
 //
 
-#include "kexlib.h"
+#include "renderMain.h"
 
 static kexCpuVertList cpuVertList;
-kexCpuVertList *kex::render::cVertList = &cpuVertList;
+kexCpuVertList *kexRender::cVertList = &cpuVertList;
 
 //
 // kexCpuVertList::kexCpuVertList

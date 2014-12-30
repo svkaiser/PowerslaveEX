@@ -19,6 +19,7 @@
 //
 
 #include "kexlib.h"
+#include "renderMain.h"
 
 kexCvar cvarGLFilter("gl_filter", CVF_INT|CVF_CONFIG, "0", "Texture filter mode");
 kexCvar cvarGLAnisotropic("gl_anisotropic", CVF_INT|CVF_CONFIG, "0", "TODO");
@@ -102,7 +103,7 @@ void kexTexture::SetParameters(void)
     {
         if(cvarGLAnisotropic.GetInt())
         {
-            dglTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, kex::render::cBackend->MaxAnisotropic());
+            dglTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, kexRender::cBackend->MaxAnisotropic());
         }
         else
         {
@@ -162,7 +163,7 @@ void kexTexture::Upload(const byte *data, texClampMode_t clamp, texFilterMode_t 
     clampMode = clamp;
     filterMode = filter;
 
-    if(!kex::render::cBackend->IsInitialized())
+    if(!kexRender::cBackend->IsInitialized())
     {
         return;
     }
@@ -209,7 +210,7 @@ void kexTexture::Upload(kexImage &image, texClampMode_t clamp, texFilterMode_t f
 
 void kexTexture::Bind(void)
 {
-    kexRenderBackend::glState_t *state = &kex::render::cBackend->glState;
+    kexRenderBackend::glState_t *state = &kexRender::cBackend->glState;
     dtexture tid = texid;
 
     if(bLoaded == false)
@@ -240,8 +241,8 @@ void kexTexture::Bind(void)
 
 void kexTexture::Unbind(void)
 {
-    int unit = kex::render::cBackend->glState.currentUnit;
-    kex::render::cBackend->glState.textureUnits[unit].currentTexture = 0;
+    int unit = kexRender::cBackend->glState.currentUnit;
+    kexRender::cBackend->glState.textureUnits[unit].currentTexture = 0;
 
     dglBindTexture(GL_TEXTURE_2D, 0);
 }
@@ -252,7 +253,7 @@ void kexTexture::Unbind(void)
 
 void kexTexture::Update(byte *data)
 {
-    kexRenderBackend::glState_t *state = &kex::render::cBackend->glState;
+    kexRenderBackend::glState_t *state = &kexRender::cBackend->glState;
 
     if(texid == 0)
     {
@@ -282,9 +283,9 @@ void kexTexture::Update(byte *data)
 
 void kexTexture::BindFrameBuffer(const bool bReadBuffer)
 {
-    kexRenderBackend::glState_t *state = &kex::render::cBackend->glState;
+    kexRenderBackend::glState_t *state = &kexRender::cBackend->glState;
 
-    if(!kex::render::cBackend->IsInitialized())
+    if(!kexRender::cBackend->IsInitialized())
     {
         return;
     }
@@ -338,9 +339,9 @@ void kexTexture::BindFrameBuffer(const bool bReadBuffer)
 
 void kexTexture::BindDepthBuffer(const bool bReadDepth)
 {
-    kexRenderBackend::glState_t *state = &kex::render::cBackend->glState;
+    kexRenderBackend::glState_t *state = &kexRender::cBackend->glState;
 
-    if(!kex::render::cBackend->IsInitialized())
+    if(!kexRender::cBackend->IsInitialized())
     {
         return;
     }

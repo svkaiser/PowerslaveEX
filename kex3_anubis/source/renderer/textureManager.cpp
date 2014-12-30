@@ -15,10 +15,10 @@
 //      Texture manager
 //
 
-#include "kexlib.h"
+#include "renderMain.h"
 
 static kexTextureManager textureManagerLocal;
-kexTextureManager *kex::render::cTextures = &textureManagerLocal;
+kexTextureManager *kexRender::cTextures = &textureManagerLocal;
 
 //
 // kexTextureManager::kexTextureManager
