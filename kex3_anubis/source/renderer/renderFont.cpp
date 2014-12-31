@@ -18,6 +18,8 @@
 #include "renderMain.h"
 #include "renderFont.h"
 
+kexHashList<kexFont> kexFont::fontList;
+
 //
 // kexFont::kexFont
 //
@@ -42,6 +44,24 @@ kexFont::~kexFont(void)
 
 void kexFont::Delete(void)
 {
+}
+
+//
+// kexFont::Alloc
+//
+
+kexFont *kexFont::Alloc(const char *name)
+{
+    return fontList.Add(name, hb_static);
+}
+
+//
+// kexFont::Get
+//
+
+kexFont *kexFont::Get(const char *name)
+{
+    return fontList.Find(name);
 }
 
 //

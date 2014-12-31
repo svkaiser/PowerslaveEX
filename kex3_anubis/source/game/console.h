@@ -55,7 +55,7 @@ public:
     void                SetInputText(const char *string) { strcpy(typeStr, string); }
     void                ResetInputText(void) { typeStr[0] = '\0'; typeStrPos = 0; }
     const bool          IsActive(void) const { return (state == CON_STATE_DOWN); }
-    kexFont             &Font(void) { return font; }
+    kexFont             *Font(void) { return font; }
 
 private:
     char                scrollBackStr[CON_BUFFER_SIZE][CON_LINE_LENGTH];
@@ -77,7 +77,7 @@ private:
     int                 timePressed;
     bool                bShowPrompt;
     int                 outputLength;
-    kexFont             font;
+    kexFont             *font;
 };
 
 #endif

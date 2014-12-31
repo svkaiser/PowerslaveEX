@@ -16,6 +16,8 @@
 	<string>ShowActiveSchemeOnly</string>
 	<key>LiveSourceIssuesEnabled</key>
 	<true/>
+	<key>SharedBuildFolderName</key>
+	<string>Build</string>
 	<key>SnapshotAutomaticallyBeforeSignificantChanges</key>
 	<true/>
 	<key>SnapshotLocationStyle</key>

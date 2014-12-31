@@ -33,7 +33,6 @@ public:
                                  byte r, byte g, byte b, byte a);
     void                DrawQuad(float x, float w, float y, float h);
     
-private:
     static const int    SCREEN_WIDTH;
     static const int    SCREEN_HEIGHT;
 };

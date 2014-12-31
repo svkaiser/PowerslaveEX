@@ -32,24 +32,29 @@ public:
     kexFont(void);
     ~kexFont(void);
 
-    void                    LoadKFont(const char *file);
-    void                    Delete(void);
-    void                    DrawString(const char *string, float x, float y, float scale,
-                                       bool center, byte *rgba1, byte *rgba2);
-    void                    DrawString(const char *string, float x, float y, float scale,
-                                       bool center, rcolor color);
-    void                    DrawString(const char *string, float x, float y, float scale,
-                                       bool center);
-    float                   StringWidth(const char* string, float scale, int fixedLen);
-    float                   StringHeight(const char* string, float scale, int fixedLen);
+    void                        LoadKFont(const char *file);
+    void                        Delete(void);
+    void                        DrawString(const char *string, float x, float y, float scale,
+                                           bool center, byte *rgba1, byte *rgba2);
+    void                        DrawString(const char *string, float x, float y, float scale,
+                                           bool center, rcolor color);
+    void                        DrawString(const char *string, float x, float y, float scale,
+                                           bool center);
+    float                       StringWidth(const char* string, float scale, int fixedLen);
+    float                       StringHeight(const char* string, float scale, int fixedLen);
+    
+    static kexFont              *Alloc(const char *name);
+    static kexFont              *Get(const char *name);
 
-    const bool              IsLoaded(void) const { return bLoaded; }
-    const kexTexture        *Texture(void) { return texture; }
+    const bool                  IsLoaded(void) const { return bLoaded; }
+    const kexTexture            *Texture(void) { return texture; }
 
 private:
-    atlas_t                 atlas[256];
-    bool                    bLoaded;
-    kexTexture              *texture;
+    static kexHashList<kexFont> fontList;
+    
+    atlas_t                     atlas[256];
+    bool                        bLoaded;
+    kexTexture                  *texture;
 };
 
 #endif
