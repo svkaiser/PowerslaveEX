@@ -59,6 +59,7 @@ kexInputSDL::kexInputSDL()
     bGrabbed        = false;
     bWindowFocused  = false;
     bEnabled        = true;
+    bGrabMouse      = false;
 }
 
 //
@@ -91,13 +92,14 @@ void kexInputSDL::ReadMouse(void)
     Uint8 btn;
     inputEvent_t ev;
 
-    if(kex::cSystem->IsWindowed() && kex::cConsole->IsActive())
+    btn = SDL_GetMouseState(&mouse_x, &mouse_y);
+    
+    if(!bGrabMouse)
     {
         return;
     }
 
     SDL_GetRelativeMouseState(&x, &y);
-    btn = SDL_GetMouseState(&mouse_x, &mouse_y);
 
     if(x != 0 || y != 0 || btn || (lastmbtn != btn))
     {
@@ -322,17 +324,9 @@ void kexInputSDL::PollInput(void)
 bool kexInputSDL::MouseShouldBeGrabbed(void) const
 {
     // if the window doesnt have focus, never grab it
-    if(!bWindowFocused)
+    if(!bWindowFocused || !bGrabMouse)
     {
         return false;
-    }
-
-    if(kex::cSystem->IsWindowed())
-    {
-        if(kex::cConsole->IsActive())
-        {
-            return false;
-        }
     }
 
     return bEnabled;

@@ -15,6 +15,8 @@
 #ifndef __SESSION_H__
 #define __SESSION_H__
 
+class kexTexture;
+
 class kexSession
 {
 public:
@@ -31,10 +33,15 @@ public:
     const int                   GetFPS(void) const { return fps; }
     void                        UpdateTicks(void) { ticks++; }
     kexQueue<inputEvent_t>      &EventQueue(void) { return eventQueue; }
+    const bool                  CursorVisible(void) const { return bShowCursor; }
+    void                        ToggleCursor(const bool b) { bShowCursor = b; }
 
 private:
     void                        ProcessEvents(void);
     void                        DrawFrame(void);
+    void                        RunFrame(void);
+    void                        InitCursor(void);
+    void                        DrawCursor(void);
 
     uint64_t                    gameTimeMS;
 
@@ -44,6 +51,8 @@ private:
     float                       deltaTime;
     int                         ticks;
     bool                        bPaused;
+    bool                        bShowCursor;
+    kexTexture                  *cursorTexture;
 
     kexQueue<inputEvent_t>      eventQueue;
 };

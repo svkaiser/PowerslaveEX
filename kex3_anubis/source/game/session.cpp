@@ -50,6 +50,7 @@ kexSession::kexSession(void)
     this->deltaTime     = 0;
     this->ticks         = 0;
     this->bPaused       = false;
+    this->bShowCursor   = false;
 }
 
 //
@@ -80,6 +81,20 @@ void kexSession::ProcessEvents(void)
 }
 
 //
+// kexSession::RunFrame
+//
+
+void kexSession::RunFrame(void)
+{
+    kex::cConsole->Tick();
+    
+    if(IsPaused())
+    {
+        return;
+    }
+}
+
+//
 // kexSession::DrawFrame
 //
 
@@ -88,7 +103,34 @@ void kexSession::DrawFrame(void)
     kexRender::cBackend->ClearBuffer();
     
     kex::cConsole->Draw();
+    DrawCursor();
+    
     kexRender::cBackend->SwapBuffers();
+}
+
+//
+// kexSession::DrawCursor
+//
+
+void kexSession::DrawCursor(void)
+{
+    if(!bShowCursor)
+    {
+        return;
+    }
+    
+    kexRender::cBackend->SetOrtho();
+    kexRender::cScreen->DrawTexture(cursorTexture, kex::cInput->MouseX(), kex::cInput->MouseY());
+}
+
+//
+// kexSession::InitCursor
+//
+
+void kexSession::InitCursor(void)
+{
+    cursorTexture = kexRender::cTextures->Cache("gfx/cursor.png", TC_CLAMP, TF_NEAREST);
+    bShowCursor = true;
 }
 
 //
@@ -101,6 +143,7 @@ void kexSession::RunGame(void)
     int prevmsec;
     int nextmsec;
 
+    InitCursor();
     prevmsec = kex::cTimer->GetMS();
 
     while(1)
@@ -127,7 +170,8 @@ void kexSession::RunGame(void)
             // check for new inputs
             ProcessEvents();
             
-            kex::cConsole->Tick();
+            // process game logic
+            RunFrame();
 
             // draw scene
             DrawFrame();

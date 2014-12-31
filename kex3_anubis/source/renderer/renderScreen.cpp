@@ -101,7 +101,7 @@ void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const floa
     kexRender::cBackend->SetCull(GLCULL_BACK);
     
     texture->Bind();
-    DrawQuad(tex_x, tex_x + texwidth, tex_y, tex_y + texheight);
+    DrawQuad(tex_x, texwidth, tex_y, texheight);
 }
 
 //
@@ -135,7 +135,7 @@ void kexRenderScreen::DrawStretchPic(kexTexture *texture, const float x, const f
     kexRender::cBackend->SetCull(GLCULL_BACK);
     
     texture->Bind();
-    DrawQuad(x, x + width, y, y + height);
+    DrawQuad(x, width, y, height);
 }
 
 //

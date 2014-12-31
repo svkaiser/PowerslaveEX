@@ -58,12 +58,15 @@ public:
     virtual int     TranslateKeyboard(const int val);
     virtual int     TranslateMouse(const int val);
 
+    const bool      MouseGrabbed(void) const { return bGrabMouse; }
     void            SetEnabled(bool enable) { bEnabled = enable; }
+    void            ToggleMouseGrab(bool enable) { bGrabMouse = enable; }
     const int       MouseX(void) const { return mouse_x; }
     const int       MouseY(void) const { return mouse_y; }
 
 protected:
     bool            bEnabled;
+    bool            bGrabMouse;
     int             mouse_x;
     int             mouse_y;
 };
