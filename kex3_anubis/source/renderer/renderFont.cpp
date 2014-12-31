@@ -52,7 +52,17 @@ void kexFont::Delete(void)
 
 kexFont *kexFont::Alloc(const char *name)
 {
-    return fontList.Add(name, hb_static);
+    kexFont *font;
+    
+    if(!(font = fontList.Find(name)))
+    {
+        kexStr fontfile(kexStr::Format("fonts/%s.kfont", name));
+        
+        font = fontList.Add(name, hb_static);
+        font->LoadKFont(fontfile.c_str());
+    }
+    
+    return font;
 }
 
 //

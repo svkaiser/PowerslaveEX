@@ -76,7 +76,6 @@ kexConsole::~kexConsole(void)
 void kexConsole::Init(void)
 {
     font = kexFont::Alloc("confont");
-    font->LoadKFont("fonts/confont.kfont");
 }
 
 //
