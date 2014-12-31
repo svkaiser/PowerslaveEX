@@ -25,6 +25,15 @@ const int kexRenderScreen::SCREEN_WIDTH     = 320;
 const int kexRenderScreen::SCREEN_HEIGHT    = 240;
 
 //
+// kexRenderScreen::SetOrtho
+//
+
+void kexRenderScreen::SetOrtho(void)
+{
+    kexRender::cBackend->SetOrtho(SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
+//
 // kexRenderScreen::SetAspectDimentions
 //
 // Sets up the dimentions that confines to the aspect ratio
@@ -48,7 +57,7 @@ void kexRenderScreen::SetAspectDimentions(float &x, float &y, float &width, floa
         aspectwidth = (SCREEN_WIDTH - (SCREEN_WIDTH * ratio)) / 2;
         
         x = (x * ratio) + aspectwidth;
-        width = width * ratio;
+        width = (width * ratio) - aspectwidth;
     }
     else // narrow (letterboxed)
     {
