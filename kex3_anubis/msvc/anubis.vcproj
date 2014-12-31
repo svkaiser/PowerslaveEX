@@ -229,6 +229,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\parser.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\unzip.cpp"
 					>
 				</File>
@@ -301,6 +305,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\renderFont.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\renderScreen.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\textureManager.cpp"
 					>
 				</File>
@@ -312,10 +324,6 @@
 			<Filter
 				Name="system"
 				>
-				<File
-					RelativePath="..\source\system\actions.cpp"
-					>
-				</File>
 				<File
 					RelativePath="..\source\system\endian.cpp"
 					>
@@ -356,6 +364,10 @@
 			<Filter
 				Name="game"
 				>
+				<File
+					RelativePath="..\source\game\actions.cpp"
+					>
+				</File>
 				<File
 					RelativePath="..\source\game\console.cpp"
 					>
@@ -419,11 +431,19 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\linkedlist.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\memHeap.h"
 					>
 				</File>
 				<File
 					RelativePath="..\source\framework\object.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\parser.h"
 					>
 				</File>
 				<File
@@ -475,6 +495,18 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\renderFont.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\renderMain.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\renderScreen.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\textureManager.h"
 					>
 				</File>
@@ -486,10 +518,6 @@
 			<Filter
 				Name="system"
 				>
-				<File
-					RelativePath="..\source\system\actions.h"
-					>
-				</File>
 				<File
 					RelativePath="..\source\system\endian.h"
 					>
@@ -510,6 +538,10 @@
 			<Filter
 				Name="game"
 				>
+				<File
+					RelativePath="..\source\game\actions.h"
+					>
+				</File>
 				<File
 					RelativePath="..\source\game\console.h"
 					>

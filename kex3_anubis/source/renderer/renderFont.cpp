@@ -105,6 +105,7 @@ void kexFont::LoadKFont(const char *file)
                 atlas[ch].y = lexer->GetNumber();
                 atlas[ch].w = lexer->GetNumber();
                 atlas[ch].h = lexer->GetNumber();
+                atlas[ch].o = lexer->GetNumber();
 
                 lexer->Find();
             }
@@ -163,7 +164,7 @@ void kexFont::DrawString(const char *string, float x, float y, float scale,
         ch      = string[i];
         at      = &atlas[ch];
         vx1     = x;
-        vy1     = y;
+        vy1     = y + (at->o * scale);
         vx2     = vx1 + at->w * scale;
         vy2     = vy1 + at->h * scale;
         tx1     = (at->x / w) + 0.001f;

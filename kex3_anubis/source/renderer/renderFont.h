@@ -21,6 +21,7 @@ typedef struct
     int y;
     int w;
     int h;
+    int o;
 } atlas_t;
 
 class kexTexture;
