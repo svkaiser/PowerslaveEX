@@ -86,7 +86,7 @@ void kexSession::ProcessEvents(void)
 void kexSession::DrawFrame(void)
 {
     kexRender::cBackend->ClearBuffer();
-
+    
     kex::cConsole->Draw();
     kexRender::cBackend->SwapBuffers();
 }
@@ -114,12 +114,12 @@ void kexSession::RunGame(void)
 
         curtime += msec;
 
-        if(curtime >= (1000 / cvarClientFPS.GetInt()))
+        if(curtime >= (int)kexMath::FrameSec(cvarClientFPS.GetInt()))
         {
-            deltaTime = (float)curtime / 1000.0f;
+            deltaTime = kexMath::MSec2Sec(curtime);
             kexMath::Clamp(deltaTime, 0.0f, 1.0f);
 
-            fps = (int)(1000.0f / (deltaTime * 1000.0f));
+            fps = (int)kexMath::FrameSec(kexMath::Sec2MSec(deltaTime));
 
             time += curtime;
             curtime = 0;

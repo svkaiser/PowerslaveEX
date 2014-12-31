@@ -17,11 +17,6 @@
 
 #include "kexlib.h"
 
-kexCvar cvarMSensitivityX("cl_msensitivityx", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-X sensitivity");
-kexCvar cvarMSensitivityY("cl_msensitivityy", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-Y sensitivity");
-kexCvar cvarMAcceleration("cl_macceleration", CVF_FLOAT|CVF_CONFIG, "0", "Mouse acceleration");
-kexCvar cvarInvertLook("cl_mlookinvert", CVF_BOOL|CVF_CONFIG, "0", "Invert mouse-look");
-
 //
 // kexInput::kexInput
 //
@@ -80,39 +75,6 @@ bool kexInput::IsAltDown(int c) const
 
 void kexInput::PollInput(void)
 {
-}
-
-//
-// kexInput::AccelerateMouse
-//
-
-float kexInput::AccelerateMouse(int val) const
-{
-    if(!cvarMAcceleration.GetFloat())
-    {
-        return (float)val;
-    }
-
-    if(val < 0)
-    {
-        return -AccelerateMouse(-val);
-    }
-
-    return kexMath::Pow((float)val, (cvarMAcceleration.GetFloat() / 200.0f + 1.0f));
-}
-
-//
-// kexInput::MoveMouse
-//
-
-void kexInput::MoveMouse(int x, int y)
-{
-    control_t *ctrl;
-
-    ctrl = kex::cActions->Controls();
-
-    ctrl->mousex += ((AccelerateMouse(x) * cvarMSensitivityX.GetFloat()) / 128.0f);
-    ctrl->mousey += ((AccelerateMouse(y) * cvarMSensitivityY.GetFloat()) / 128.0f);
 }
 
 //

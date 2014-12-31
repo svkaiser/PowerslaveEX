@@ -102,10 +102,10 @@ void kexInputSDL::ReadMouse(void)
     if(x != 0 || y != 0 || btn || (lastmbtn != btn))
     {
         ev.type = ev_mouse;
-        ev.data1 = x << 5;
-        ev.data2 = (-y) << 5;
-        ev.data3 = 0;
-        ev.data4 = 0;
+        ev.data1 = x;
+        ev.data2 = y;
+        ev.data3 = mouse_x;
+        ev.data4 = mouse_y;
 
         kex::cSession->EventQueue().Push(&ev);
     }

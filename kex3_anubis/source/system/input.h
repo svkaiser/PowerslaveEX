@@ -30,11 +30,6 @@ typedef enum
     ev_gamepad
 } eventType_t;
 
-extern kexCvar cvarMSensitivityX;
-extern kexCvar cvarMSensitivityY;
-extern kexCvar cvarMAcceleration;
-extern kexCvar cvarInvertLook;
-
 // Event structure.
 typedef struct
 {
@@ -55,13 +50,11 @@ public:
     virtual bool    IsCtrlDown(int c) const;
     virtual bool    IsAltDown(int c) const;
     virtual void    PollInput(void);
-    virtual void    MoveMouse(int x, int y);
     virtual void    UpdateGrab(void);
     virtual void    CenterMouse(void);
     virtual void    Init(void);
     virtual void    ActivateMouse(void);
     virtual void    DeactivateMouse(void);
-    virtual float   AccelerateMouse(int val) const;
     virtual int     TranslateKeyboard(const int val);
     virtual int     TranslateMouse(const int val);
 

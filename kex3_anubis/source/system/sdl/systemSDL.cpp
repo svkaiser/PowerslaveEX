@@ -113,7 +113,7 @@ void kexSystemSDL::Shutdown(void)
         window = NULL;
     }
 
-    kex::cSystem->Printf("Shutting down\n");
+    kex::cSystem->Printf("Shutting down SDL\n");
     SDL_Quit();
 
     fclose(f_stdout);
@@ -542,5 +542,6 @@ void kexSystemSDL::Main(int argc, char **argv)
     kexRender::cBackend->Init();
     kex::cConsole->Init();
 
+    kex::cSystem->Printf("Running game session\n");
     kex::cSession->RunGame();
 }
