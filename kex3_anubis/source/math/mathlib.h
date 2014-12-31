@@ -16,19 +16,12 @@
 #define __MATHLIB_H__
 
 #include <math.h>
+#include <assert.h>
 #include "kexlib.h"
 
 #ifdef M_PI
 #undef M_PI
 #endif
-
-#define M_PI        3.1415926535897932384626433832795f
-#define M_RAD       (M_PI / 180.0f)
-#define M_DEG       (180.0f / M_PI)
-#define M_INFINITY  1e30f
-
-#define DEG2RAD(x) ((x) * M_RAD)
-#define RAD2DEG(x) ((x) * M_DEG)
 
 #define FLOATSIGNBIT(f)  (reinterpret_cast<const unsigned int&>(f) >> 31)
 
@@ -41,6 +34,11 @@ class kexStr;
 class kexMath
 {
 public:
+    static const float      pi;
+    static const float      rad;
+    static const float      deg;
+    static const float      infinity;
+    
     static float            Sin(float x) { return sinf(x); }
     static float            Cos(float x) { return cosf(x); }
     static float            Tan(float x) { return tanf(x); }
@@ -51,8 +49,11 @@ public:
     static float            Log(float x) { return logf(x); }
     static float            Floor(float x) { return floorf(x); }
     static float            Ceil(float x) { return ceilf(x); }
-    static float            Deg2Rad(float x) { return DEG2RAD(x); }
-    static float            Rad2Deg(float x) { return RAD2DEG(x); }
+    static float            Deg2Rad(float x) { return x * rad; }
+    static float            Rad2Deg(float x) { return x * deg; }
+    static float            Sec2MSec(float x) { return x * 1000.0f; }
+    static float            MSec2Sec(float x) { return x * 0.001f; }
+    static float            FrameSec(float x) { assert(x != 0); return 1000.0f / x; }
 
     static int              Abs(int x);
     static float            Fabs(float x);

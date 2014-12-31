@@ -374,7 +374,7 @@ kexMatrix kexMatrix::Invert(kexMatrix &mtx)
 
 void kexMatrix::SetViewProjection(float aspect, float fov, float zNear, float zFar)
 {
-    float top       = zNear * kexMath::Tan(fov * M_PI / 360.0f);
+    float top       = zNear * kexMath::Tan(fov * kexMath::pi / 360.0f);
     float bottom    = -top;
     float left      = bottom * aspect;
     float right     = top * aspect;

@@ -743,11 +743,11 @@ float kexVec3::ToPitch(void) const
     {
         if(y > 0.0f)
         {
-            return DEG2RAD(90);
+            return kexMath::Deg2Rad(90);
         }
         else
         {
-            return DEG2RAD(-90);
+            return kexMath::Deg2Rad(-90);
         }
     }
 

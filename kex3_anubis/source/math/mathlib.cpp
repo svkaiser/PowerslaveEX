@@ -17,6 +17,11 @@
 
 #include "mathlib.h"
 
+const float kexMath::pi         = 3.1415926535897932384626433832795f;
+const float kexMath::rad        = (kexMath::pi / 180.0f);
+const float kexMath::deg        = (180.0f / kexMath::pi);
+const float kexMath::infinity   = 1e30f;
+
 //
 // kexMath::Abs
 //
@@ -116,7 +121,7 @@ float kexMath::ATanPositive(float y, float x)
     if(y > x)
     {
         a = -x / y;
-        d = M_PI / 2;
+        d = kexMath::pi / 2;
     }
     else
     {

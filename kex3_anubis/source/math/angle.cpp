@@ -17,7 +17,7 @@
 
 #include "mathlib.h"
 
-#define FULLCIRCLE  (M_PI * 2)
+#define FULLCIRCLE  (kexMath::pi * 2)
 
 //
 // kexAngle::kexAngle
@@ -71,9 +71,9 @@ kexAngle::kexAngle(const kexAngle &an)
 
 kexAngle &kexAngle::Clamp180(void)
 {
-#define CLAMP180(x)                                             \
-    if(x < -M_PI) for(; x < -M_PI; x = x + FULLCIRCLE);         \
-    if(x >  M_PI) for(; x >  M_PI; x = x - FULLCIRCLE)
+#define CLAMP180(x)                                                     \
+    if(x < -kexMath::pi) for(; x < -kexMath::pi; x = x + FULLCIRCLE);   \
+    if(x >  kexMath::pi) for(; x >  kexMath::pi; x = x - FULLCIRCLE)
     CLAMP180(yaw);
     CLAMP180(pitch);
     CLAMP180(roll);
@@ -89,8 +89,8 @@ kexAngle &kexAngle::Clamp180(void)
 kexAngle &kexAngle::Clamp180Invert(void)
 {
 #define CLAMP180(x)                                             \
-    for(; x < -M_PI; x = x + FULLCIRCLE);                       \
-    for(; x >  M_PI; x = x - FULLCIRCLE)
+    for(; x < -kexMath::pi; x = x + FULLCIRCLE);                \
+    for(; x >  kexMath::pi; x = x - FULLCIRCLE)
     CLAMP180(yaw);
     CLAMP180(pitch);
     CLAMP180(roll);
@@ -132,9 +132,9 @@ kexAngle &kexAngle::Clamp180InvertSum(const kexAngle &angle)
 
 kexAngle &kexAngle::Round(void)
 {
-#define ROUND(x)                                        \
-    x = DEG2RAD((360.0f / 65536.0f) *                   \
-    ((int)(RAD2DEG(x) * (65536.0f / 360.0f)) & 65535))
+#define ROUND(x)                                                \
+    x = kexMath::Deg2Rad((360.0f / 65536.0f) *                  \
+    ((int)(kexMath::Rad2Deg(x) * (65536.0f / 360.0f)) & 65535))
     yaw     = ROUND(yaw);
     pitch   = ROUND(pitch);
     roll    = ROUND(roll);
