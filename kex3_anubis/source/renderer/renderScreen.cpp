@@ -30,7 +30,7 @@ const int kexRenderScreen::SCREEN_HEIGHT    = 240;
 
 void kexRenderScreen::SetOrtho(void)
 {
-    kexRender::cBackend->SetOrtho(SCREEN_WIDTH, SCREEN_HEIGHT);
+    kexRender::cBackend->SetOrtho((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT);
 }
 
 //
@@ -86,8 +86,8 @@ void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const floa
     float tex_x;
     float tex_y;
     
-    texwidth = fixedWidth > 0 ? fixedWidth : texture->Width();
-    texheight = fixedHeight > 0 ? fixedHeight : texture->Height();
+    texwidth = fixedWidth > 0 ? (float)fixedWidth : (float)texture->Width();
+    texheight = fixedHeight > 0 ? (float)fixedHeight : (float)texture->Height();
     tex_x = x;
     tex_y = y;
     

@@ -87,11 +87,7 @@ void kexSession::ProcessEvents(void)
 void kexSession::RunFrame(void)
 {
     kex::cConsole->Tick();
-    
-    if(IsPaused())
-    {
-        return;
-    }
+    kex::cGame->Tick();
 }
 
 //
@@ -120,7 +116,9 @@ void kexSession::DrawCursor(void)
     }
     
     kexRender::cBackend->SetOrtho();
-    kexRender::cScreen->DrawTexture(cursorTexture, kex::cInput->MouseX(), kex::cInput->MouseY());
+    kexRender::cScreen->DrawTexture(cursorTexture,
+                                    (float)kex::cInput->MouseX(),
+                                    (float)kex::cInput->MouseY());
 }
 
 //
@@ -144,6 +142,8 @@ void kexSession::RunGame(void)
     int nextmsec;
 
     InitCursor();
+    kex::cGame->Init();
+
     prevmsec = kex::cTimer->GetMS();
 
     while(1)
@@ -157,9 +157,9 @@ void kexSession::RunGame(void)
 
         curtime += msec;
 
-        if(curtime >= (int)kexMath::FrameSec(cvarClientFPS.GetInt()))
+        if(curtime >= (int)kexMath::FrameSec(cvarClientFPS.GetFloat()))
         {
-            deltaTime = kexMath::MSec2Sec(curtime);
+            deltaTime = kexMath::MSec2Sec((float)curtime);
             kexMath::Clamp(deltaTime, 0.0f, 1.0f);
 
             fps = (int)kexMath::FrameSec(kexMath::Sec2MSec(deltaTime));

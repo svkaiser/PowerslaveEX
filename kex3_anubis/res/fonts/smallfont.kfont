@@ -1,4 +1,5 @@
 texture "fonts/smallfont.png"
+padwidth    1.0
 
 mapchar
 {

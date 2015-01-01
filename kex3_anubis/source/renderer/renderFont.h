@@ -54,6 +54,7 @@ private:
     
     atlas_t                     atlas[256];
     bool                        bLoaded;
+    float                       padWidth;
     kexTexture                  *texture;
 };
 

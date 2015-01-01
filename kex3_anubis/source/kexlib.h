@@ -178,6 +178,7 @@ typedef union
 #include "system.h"
 #include "input.h"
 #include "session.h"
+#include "game.h"
 #include "kpf.h"
 #include "object.h"
 #include "console.h"
@@ -198,6 +199,7 @@ public:
     static kexInputAction       *cActions;
     static kexPakFile           *cPakFiles;
     static kexSession           *cSession;
+    static kexGame              *cGame;
     static kexConsole           *cConsole;
     static kexParser            *cParser;
     static kexGLContext         *cGLContext;

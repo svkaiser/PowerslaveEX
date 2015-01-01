@@ -28,6 +28,7 @@ kexFont::kexFont(void)
 {
     this->bLoaded = false;
     this->texture = NULL;
+    this->padWidth = 0;
 }
 
 //
@@ -109,6 +110,11 @@ void kexFont::LoadKFont(const char *file)
             {
                 texture = kexRender::cTextures->defaultTexture;
             }
+        }
+
+        if(lexer->Matches("padwidth"))
+        {
+            padWidth = (float)lexer->GetFloat();
         }
 
         if(lexer->Matches("mapchar"))
@@ -211,7 +217,7 @@ void kexFont::DrawString(const char *string, float x, float y, float scale,
         kexRender::cVertList->AddTriangle(0+tri, 2+tri, 1+tri);
         kexRender::cVertList->AddTriangle(1+tri, 2+tri, 3+tri);
 
-        x += at->w * scale;
+        x += (at->w + padWidth) * scale;
         tri += 4;
     }
 
