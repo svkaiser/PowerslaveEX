@@ -13,7 +13,6 @@ config.hin
 config.log
 config.status
 configure
-lib
 obj
 rpm.spec
 stamp-h

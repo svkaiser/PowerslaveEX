@@ -97,6 +97,7 @@ void kexSystemSDL::Shutdown(void)
     kexRender::cBackend->Shutdown();
     kex::cPakFiles->Shutdown();
     kex::cCvars->Shutdown();
+    kex::cSound->Shutdown();
     
     Mem_Purge(hb_static);
     Mem_Purge(hb_object);
@@ -528,6 +529,7 @@ void kexSystemSDL::Main(int argc, char **argv)
 
     kex::cSystem->Init();
     kex::cTimer->Init();
+    kex::cSound->Init();
     kex::cCvars->Init();
     kexObject::Init();
     kex::cInput->Init();

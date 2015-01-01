@@ -52,7 +52,9 @@ public:
     static float            Deg2Rad(float x) { return x * rad; }
     static float            Rad2Deg(float x) { return x * deg; }
     static float            Sec2MSec(float x) { return x * 1000.0f; }
+    static int              Sec2MSec(int x) { return x * 1000; }
     static float            MSec2Sec(float x) { return x * 0.001f; }
+    static int              MSec2Sec(int x) { return x / 1000; }
     static float            FrameSec(float x) { assert(x != 0); return 1000.0f / x; }
 
     static int              Abs(int x);

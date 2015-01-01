@@ -184,6 +184,7 @@ typedef union
 #include "console.h"
 #include "parser.h"
 #include "glcontext.h"
+#include "sound.h"
 
 class kex
 {
@@ -194,6 +195,7 @@ public:
     static kexTimer             *cTimer;
     static kexEndian            *cEndian;
     static kexInput             *cInput;
+    static kexSound             *cSound;
     static kexCvarManager       *cCvars;
     static kexCommand           *cCommands;
     static kexInputAction       *cActions;
