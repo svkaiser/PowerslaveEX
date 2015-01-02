@@ -385,6 +385,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\localization.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\menu.cpp"
 					>
 				</File>
@@ -584,6 +588,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\game.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\localization.h"
 					>
 				</File>
 				<File

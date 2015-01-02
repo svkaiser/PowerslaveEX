@@ -17,6 +17,7 @@
 
 class kexFont;
 class kexTitleScreen;
+class kexTranslation;
 
 class kexGame
 {
@@ -30,6 +31,7 @@ public:
     bool                ProcessInput(inputEvent_t *ev);
 
     kexTitleScreen      *TitleScreen(void) { return titleScreen; }
+    kexTranslation      *Translation(void) { return translation; }
     kexFont             *SmallFont(void) { return smallFont; }
     kexFont             *BigFont(void) { return bigFont; }
 
@@ -40,6 +42,7 @@ private:
     kexFont             *smallFont;
     kexFont             *bigFont;
     kexTitleScreen      *titleScreen;
+    kexTranslation      *translation;
 };
 
 #endif

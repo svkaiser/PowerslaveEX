@@ -19,6 +19,7 @@
 #include "renderMain.h"
 #include "game.h"
 #include "titlescreen.h"
+#include "localization.h"
 
 static kexGame gameLocal;
 kexGame *kex::cGame = &gameLocal;
@@ -33,6 +34,7 @@ kexGame::kexGame(void)
     this->bigFont   = NULL;
 
     this->titleScreen = new kexTitleScreen;
+    this->translation = new kexTranslation;
 }
 
 //
@@ -42,6 +44,7 @@ kexGame::kexGame(void)
 kexGame::~kexGame(void)
 {
     delete titleScreen;
+    delete translation;
 }
 
 //
@@ -54,6 +57,7 @@ void kexGame::Init(void)
     bigFont     = kexFont::Alloc("bigfont");
 
     titleScreen->Init();
+    translation->Init();
 }
 
 //
