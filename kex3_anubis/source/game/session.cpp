@@ -123,9 +123,11 @@ void kexSession::DrawCursor(void)
     }
     
     kexRender::cBackend->SetOrtho();
-    kexRender::cScreen->DrawTexture(cursorTexture,
-                                    (float)kex::cInput->MouseX(),
-                                    (float)kex::cInput->MouseY());
+    kexRender::cScreen->DrawStretchPic(cursorTexture,
+                                      (float)kex::cInput->MouseX(),
+                                      (float)kex::cInput->MouseY(),
+                                      (float)cursorTexture->Width(),
+                                      (float)cursorTexture->Height());
 }
 
 //
