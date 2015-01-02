@@ -67,7 +67,7 @@ void kexRenderScreen::SetAspectDimentions(float &x, float &y, float &width, floa
         aspectwidth = (SCREEN_WIDTH - (SCREEN_WIDTH * ratio)) / 2;
         
         x = (x * ratio) + aspectwidth;
-        width = (width * ratio) - aspectwidth;
+        width = (width * ratio);
     }
     else // narrow (letterboxed)
     {
