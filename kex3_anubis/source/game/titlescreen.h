@@ -17,25 +17,6 @@
 
 #include "menu.h"
 
-typedef void(*menuItemSelect_t)(kexMenuItem*);
-
-typedef enum
-{
-    TSI_NEWGAME     = 0,
-    TSI_LOADGAME,
-    TSI_OPTIONS,
-    TSI_QUIT,
-    TSI_GAMEPLAY,
-    TSI_KEYBOARD,
-    TSI_MOUSE,
-    TSI_GAMEPAD,
-    TSI_GRAPHICS,
-    TSI_AUDIO,
-    TSI_EXIT_OPTIONS,
-
-    NUMTITLESCREENITEMS
-} titleScreenItems_t;
-
 class kexTitleScreen
 {
 public:
@@ -53,14 +34,6 @@ public:
     void                        OnSelectExitOptions(kexMenuItem *item);
 
     const int                   SelectedItem(void) const { return selectedItem; }
-
-    typedef struct
-    {
-        kexMenuItem             item;
-        menuItemSelect_t        callback;
-    } menuGroup_t;
-
-    static menuGroup_t          titleMenu[NUMTITLESCREENITEMS];
 
 private:
     int                         fadeTime;

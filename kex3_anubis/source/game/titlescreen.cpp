@@ -20,6 +20,31 @@
 #include "game.h"
 #include "titlescreen.h"
 
+typedef void(*menuItemSelect_t)(kexMenuItem*);
+
+typedef enum
+{
+    TSI_NEWGAME     = 0,
+    TSI_LOADGAME,
+    TSI_OPTIONS,
+    TSI_QUIT,
+    TSI_GAMEPLAY,
+    TSI_KEYBOARD,
+    TSI_MOUSE,
+    TSI_GAMEPAD,
+    TSI_GRAPHICS,
+    TSI_AUDIO,
+    TSI_EXIT_OPTIONS,
+
+    NUMTITLESCREENITEMS
+} titleScreenItems_t;
+
+typedef struct
+{
+    kexMenuItem         item;
+    menuItemSelect_t    callback;
+} menuGroup_t;
+
 static void TitleMenuCallback_Options(kexMenuItem *item);
 static void TitleMenuCallback_Quit(kexMenuItem *item);
 static void TitleMenuCallback_ExitOptions(kexMenuItem *item);
@@ -27,7 +52,7 @@ static void TitleMenuCallback_ExitOptions(kexMenuItem *item);
 static void MenuItemLerpCallback_Options(kexMenuItem *item);
 static void MenuItemLerpCallback_ExitOptions(kexMenuItem *item);
 
-kexTitleScreen::menuGroup_t kexTitleScreen::titleMenu[NUMTITLESCREENITEMS] =
+static menuGroup_t titleMenu[NUMTITLESCREENITEMS] =
 {
     { kexMenuItem("New Game",  -100, 128, 1) },
     { kexMenuItem("Load Game",  420, 146, 1) },
@@ -80,13 +105,13 @@ static void MenuItemLerpCallback_Options(kexMenuItem *item)
         return;
     }
 
-    kexTitleScreen::titleMenu[TSI_GAMEPLAY].item.LerpTo(160);
-    kexTitleScreen::titleMenu[TSI_KEYBOARD].item.LerpTo(160);
-    kexTitleScreen::titleMenu[TSI_MOUSE].item.LerpTo(160);
-    kexTitleScreen::titleMenu[TSI_GAMEPAD].item.LerpTo(160);
-    kexTitleScreen::titleMenu[TSI_GRAPHICS].item.LerpTo(160);
-    kexTitleScreen::titleMenu[TSI_AUDIO].item.LerpTo(160);
-    kexTitleScreen::titleMenu[TSI_EXIT_OPTIONS].item.LerpTo(160);
+    titleMenu[TSI_GAMEPLAY].item.LerpTo(160);
+    titleMenu[TSI_KEYBOARD].item.LerpTo(160);
+    titleMenu[TSI_MOUSE].item.LerpTo(160);
+    titleMenu[TSI_GAMEPAD].item.LerpTo(160);
+    titleMenu[TSI_GRAPHICS].item.LerpTo(160);
+    titleMenu[TSI_AUDIO].item.LerpTo(160);
+    titleMenu[TSI_EXIT_OPTIONS].item.LerpTo(160);
 }
 
 //
@@ -100,10 +125,10 @@ static void MenuItemLerpCallback_ExitOptions(kexMenuItem *item)
         return;
     }
 
-    kexTitleScreen::titleMenu[TSI_NEWGAME].item.LerpTo(160);
-    kexTitleScreen::titleMenu[TSI_LOADGAME].item.LerpTo(160);
-    kexTitleScreen::titleMenu[TSI_OPTIONS].item.LerpTo(160, 164);
-    kexTitleScreen::titleMenu[TSI_QUIT].item.LerpTo(160);
+    titleMenu[TSI_NEWGAME].item.LerpTo(160);
+    titleMenu[TSI_LOADGAME].item.LerpTo(160);
+    titleMenu[TSI_OPTIONS].item.LerpTo(160, 164);
+    titleMenu[TSI_QUIT].item.LerpTo(160);
     kex::cGame->TitleScreen()->DeselectAllItems();
 }
 
