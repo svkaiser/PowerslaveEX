@@ -82,6 +82,15 @@ void kexMenuItem::LerpTo(const float destx, const float desty)
 }
 
 //
+// kexMenuItem::LerpTo
+//
+
+void kexMenuItem::LerpTo(const float destx)
+{
+    LerpTo(destx, y);
+}
+
+//
 // kexMenuItem::Move
 //
 

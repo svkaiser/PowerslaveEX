@@ -34,6 +34,7 @@ public:
     void                            DrawBigString(const char *string, float x, float y, float scale,
                                                   bool center, bool flash);
     void                            LerpTo(const float destx, const float desty);
+    void                            LerpTo(const float destx);
 
     const bool                      IsHighlighted(void) const { return bHighLighted; }
     void                            Select(const bool b) { bSelected = b; }

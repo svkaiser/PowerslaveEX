@@ -25,8 +25,9 @@ static void TitleMenuCallback_Quit(kexMenuItem *item);
 static void TitleMenuCallback_ExitOptions(kexMenuItem *item);
 
 static void MenuItemLerpCallback_Options(kexMenuItem *item);
+static void MenuItemLerpCallback_ExitOptions(kexMenuItem *item);
 
-kexTitleScreen::menuGroup_t kexTitleScreen::titleMenu[11] =
+kexTitleScreen::menuGroup_t kexTitleScreen::titleMenu[NUMTITLESCREENITEMS] =
 {
     { kexMenuItem("New Game",  -100, 128, 1) },
     { kexMenuItem("Load Game",  420, 146, 1) },
@@ -38,7 +39,7 @@ kexTitleScreen::menuGroup_t kexTitleScreen::titleMenu[11] =
     { kexMenuItem("Gamepad",    420, 150, 1) },
     { kexMenuItem("Graphics",  -100, 168, 1) },
     { kexMenuItem("Audio",      420, 186, 1) },
-    { kexMenuItem("Exit",      -100, 204, 1), TitleMenuCallback_ExitOptions }
+    { kexMenuItem("Exit",      -100, 204, 1, MenuItemLerpCallback_ExitOptions), TitleMenuCallback_ExitOptions }
 };
 
 //
@@ -74,28 +75,36 @@ static void TitleMenuCallback_ExitOptions(kexMenuItem *item)
 
 static void MenuItemLerpCallback_Options(kexMenuItem *item)
 {
-    switch(kex::cGame->TitleScreen()->SelectedItem())
+    if(kex::cGame->TitleScreen()->SelectedItem() != TSI_OPTIONS)
     {
-    case 2:
-        kexTitleScreen::titleMenu[ 4].item.LerpTo(160, 96);
-        kexTitleScreen::titleMenu[ 5].item.LerpTo(160, 114);
-        kexTitleScreen::titleMenu[ 6].item.LerpTo(160, 132);
-        kexTitleScreen::titleMenu[ 7].item.LerpTo(160, 150);
-        kexTitleScreen::titleMenu[ 8].item.LerpTo(160, 168);
-        kexTitleScreen::titleMenu[ 9].item.LerpTo(160, 186);
-        kexTitleScreen::titleMenu[10].item.LerpTo(160, 204);
-        break;
-
-    case 10:
-        kexTitleScreen::titleMenu[0].item.LerpTo(160, 128);
-        kexTitleScreen::titleMenu[1].item.LerpTo(160, 146);
-        kexTitleScreen::titleMenu[3].item.LerpTo(160, 182);
-        kex::cGame->TitleScreen()->DeselectAllItems();
-        break;
-
-    default:
-        break;
+        return;
     }
+
+    kexTitleScreen::titleMenu[TSI_GAMEPLAY].item.LerpTo(160);
+    kexTitleScreen::titleMenu[TSI_KEYBOARD].item.LerpTo(160);
+    kexTitleScreen::titleMenu[TSI_MOUSE].item.LerpTo(160);
+    kexTitleScreen::titleMenu[TSI_GAMEPAD].item.LerpTo(160);
+    kexTitleScreen::titleMenu[TSI_GRAPHICS].item.LerpTo(160);
+    kexTitleScreen::titleMenu[TSI_AUDIO].item.LerpTo(160);
+    kexTitleScreen::titleMenu[TSI_EXIT_OPTIONS].item.LerpTo(160);
+}
+
+//
+// MenuItemLerpCallback_ExitOptions
+//
+
+static void MenuItemLerpCallback_ExitOptions(kexMenuItem *item)
+{
+    if(kex::cGame->TitleScreen()->SelectedItem() != TSI_EXIT_OPTIONS)
+    {
+        return;
+    }
+
+    kexTitleScreen::titleMenu[TSI_NEWGAME].item.LerpTo(160);
+    kexTitleScreen::titleMenu[TSI_LOADGAME].item.LerpTo(160);
+    kexTitleScreen::titleMenu[TSI_OPTIONS].item.LerpTo(160, 164);
+    kexTitleScreen::titleMenu[TSI_QUIT].item.LerpTo(160);
+    kex::cGame->TitleScreen()->DeselectAllItems();
 }
 
 //
@@ -159,10 +168,10 @@ void kexTitleScreen::DeselectAllItems(void)
 
 void kexTitleScreen::FadeDone(void)
 {
-    titleMenu[0].item.LerpTo(160, 128);
-    titleMenu[1].item.LerpTo(160, 146);
-    titleMenu[2].item.LerpTo(160, 164);
-    titleMenu[3].item.LerpTo(160, 182);
+    titleMenu[TSI_NEWGAME].item.LerpTo(160);
+    titleMenu[TSI_LOADGAME].item.LerpTo(160);
+    titleMenu[TSI_OPTIONS].item.LerpTo(160);
+    titleMenu[TSI_QUIT].item.LerpTo(160);
 }
 
 //
@@ -171,10 +180,10 @@ void kexTitleScreen::FadeDone(void)
 
 void kexTitleScreen::OnSelectOptions(kexMenuItem *item)
 {
-    titleMenu[0].item.LerpTo(-100, 128);
-    titleMenu[1].item.LerpTo(420, 146);
-    titleMenu[2].item.LerpTo(160, 64);
-    titleMenu[3].item.LerpTo(-100, 182);
+    titleMenu[TSI_NEWGAME].item.LerpTo(-100);
+    titleMenu[TSI_LOADGAME].item.LerpTo(420);
+    titleMenu[TSI_OPTIONS].item.LerpTo(160, 64);
+    titleMenu[TSI_QUIT].item.LerpTo(-100);
 }
 
 //
@@ -183,14 +192,13 @@ void kexTitleScreen::OnSelectOptions(kexMenuItem *item)
 
 void kexTitleScreen::OnSelectExitOptions(kexMenuItem *item)
 {
-    titleMenu[ 2].item.LerpTo(160, 164);
-    titleMenu[ 4].item.LerpTo(-100, 96);
-    titleMenu[ 5].item.LerpTo(420, 114);
-    titleMenu[ 6].item.LerpTo(-100, 132);
-    titleMenu[ 7].item.LerpTo(420, 150);
-    titleMenu[ 8].item.LerpTo(-100, 168);
-    titleMenu[ 9].item.LerpTo(420, 186);
-    titleMenu[10].item.LerpTo(-100, 204);
+    titleMenu[TSI_GAMEPLAY].item.LerpTo(-100);
+    titleMenu[TSI_KEYBOARD].item.LerpTo(420);
+    titleMenu[TSI_MOUSE].item.LerpTo(-100);
+    titleMenu[TSI_GAMEPAD].item.LerpTo(420);
+    titleMenu[TSI_GRAPHICS].item.LerpTo(-100);
+    titleMenu[TSI_AUDIO].item.LerpTo(420);
+    titleMenu[TSI_EXIT_OPTIONS].item.LerpTo(-100);
 }
 
 //
