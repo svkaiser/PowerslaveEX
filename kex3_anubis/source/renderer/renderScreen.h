@@ -19,7 +19,11 @@ class kexRenderScreen
 {
 public:
     void                SetOrtho(void);
+    void                CoordsToRenderScreenCoords(float &x, float &y);
     void                SetAspectDimentions(float &x, float &y, float &width, float &height);
+    void                DrawTexture(kexTexture *texture, const float x, const float y,
+                                    byte r, byte g, byte b, byte a,
+                                    const int fixedWidth = 0, const int fixedHeight = 0);
     void                DrawTexture(kexTexture *texture, const float x, const float y,
                                     const int fixedWidth = 0, const int fixedHeight = 0);
     void                DrawTexture(const char *name, const float x, const float y,
@@ -32,6 +36,7 @@ public:
                                  float tu1, float tu2, float tv1, float tv2,
                                  byte r, byte g, byte b, byte a);
     void                DrawQuad(float x, float w, float y, float h);
+    void                DrawQuad(float x, float w, float y, float h, byte r, byte g, byte b, byte a);
     
     static const int    SCREEN_WIDTH;
     static const int    SCREEN_HEIGHT;

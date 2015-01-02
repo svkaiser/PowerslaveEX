@@ -115,6 +115,8 @@ typedef union
 #define BIT(num) (1<<(num))
 #endif
 
+#define ARRLEN(array) (sizeof(array) / sizeof(*array))
+
 #if defined(KEX_WIN32) && !defined(__GNUC__)
 #define KDECL __cdecl
 #else

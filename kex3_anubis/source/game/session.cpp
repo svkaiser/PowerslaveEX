@@ -77,6 +77,11 @@ void kexSession::ProcessEvents(void)
         {
             continue;
         }
+
+        if(kex::cGame->ProcessInput(ev))
+        {
+            continue;
+        }
     }
 }
 
@@ -98,7 +103,9 @@ void kexSession::DrawFrame(void)
 {
     kexRender::cBackend->ClearBuffer();
     
+    kex::cGame->Draw();
     kex::cConsole->Draw();
+
     DrawCursor();
     
     kexRender::cBackend->SwapBuffers();
@@ -141,7 +148,10 @@ void kexSession::RunGame(void)
     int prevmsec;
     int nextmsec;
 
+    // setup mouse cursor
     InitCursor();
+
+    // initialize the core game logic
     kex::cGame->Init();
 
     prevmsec = kex::cTimer->GetMS();

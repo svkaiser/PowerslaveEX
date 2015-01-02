@@ -16,6 +16,7 @@
 #define __GAME_H__
 
 class kexFont;
+class kexTitleScreen;
 
 class kexGame
 {
@@ -23,14 +24,22 @@ public:
     kexGame(void);
     ~kexGame(void);
 
-    void            Init(void);
-    void            Tick(void);
-    void            DrawSmallString(const char *string, float x, float y, float scale, bool center);
-    void            DrawBigString(const char *string, float x, float y, float scale, bool center);
+    void                Init(void);
+    void                Tick(void);
+    void                Draw(void);
+    bool                ProcessInput(inputEvent_t *ev);
+
+    kexTitleScreen      *TitleScreen(void) { return titleScreen; }
+    kexFont             *SmallFont(void) { return smallFont; }
+    kexFont             *BigFont(void) { return bigFont; }
+
+    void                DrawSmallString(const char *string, float x, float y, float scale, bool center);
+    void                DrawBigString(const char *string, float x, float y, float scale, bool center);
 
 private:
-    kexFont         *smallFont;
-    kexFont         *bigFont;
+    kexFont             *smallFont;
+    kexFont             *bigFont;
+    kexTitleScreen      *titleScreen;
 };
 
 #endif

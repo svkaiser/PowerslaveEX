@@ -385,7 +385,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\menu.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\session.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\titlescreen.cpp"
 					>
 				</File>
 			</Filter>
@@ -543,6 +551,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\system\keyboard.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\mouse.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\system\sound.h"
 					>
 				</File>
@@ -571,7 +587,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\menu.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\session.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\titlescreen.h"
 					>
 				</File>
 			</Filter>

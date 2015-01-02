@@ -614,6 +614,7 @@ void kexConsole::Draw(void)
         vl->AddTriangle(8, 10, 9);
         vl->AddTriangle(9, 10, 11);
 
+        kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
         vl->DrawElements();
 
         color = RGBA(255, 255, 255, 255);

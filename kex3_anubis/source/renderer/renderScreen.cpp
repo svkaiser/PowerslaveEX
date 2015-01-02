@@ -34,6 +34,16 @@ void kexRenderScreen::SetOrtho(void)
 }
 
 //
+// kexRenderScreen::CoordsToRenderScreenCoords
+//
+
+void kexRenderScreen::CoordsToRenderScreenCoords(float &x, float &y)
+{
+    x = (x / (float)kex::cSystem->VideoWidth()) * (float)SCREEN_WIDTH;
+    y = (y / (float)kex::cSystem->VideoHeight()) * (float)SCREEN_HEIGHT;
+}
+
+//
 // kexRenderScreen::SetAspectDimentions
 //
 // Sets up the dimentions that confines to the aspect ratio
@@ -79,7 +89,8 @@ void kexRenderScreen::SetAspectDimentions(float &x, float &y, float &width, floa
 //
 
 void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const float y,
-                                  const int fixedWidth, const int fixedHeight)
+                                    byte r, byte g, byte b, byte a,
+                                    const int fixedWidth, const int fixedHeight)
 {
     float texwidth;
     float texheight;
@@ -101,7 +112,19 @@ void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const floa
     kexRender::cBackend->SetCull(GLCULL_BACK);
     
     texture->Bind();
-    DrawQuad(tex_x, texwidth, tex_y, texheight);
+    DrawQuad(tex_x, texwidth, tex_y, texheight, r, g, b, a);
+}
+
+//
+// kexRenderScreen::DrawTexture
+//
+// Draws a textured quad that's confined to the aspect ratio
+//
+
+void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const float y,
+                                  const int fixedWidth, const int fixedHeight)
+{
+    DrawTexture(texture, x, y, 255, 255, 255, 255, fixedWidth, fixedHeight);
 }
 
 //
@@ -176,4 +199,13 @@ void kexRenderScreen::DrawQuad(float x, float w, float y, float h,
 void kexRenderScreen::DrawQuad(float x, float w, float y, float h)
 {
     DrawQuad(x, w, y, h, 0, 1, 0, 1, 255, 255, 255, 255);
+}
+
+//
+// kexRenderScreen::DrawQuad
+//
+
+void kexRenderScreen::DrawQuad(float x, float w, float y, float h, byte r, byte g, byte b, byte a)
+{
+    DrawQuad(x, w, y, h, 0, 1, 0, 1, r, g, b, a);
 }

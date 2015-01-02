@@ -18,6 +18,7 @@
 #include "kexlib.h"
 #include "renderMain.h"
 #include "game.h"
+#include "titlescreen.h"
 
 static kexGame gameLocal;
 kexGame *kex::cGame = &gameLocal;
@@ -30,6 +31,8 @@ kexGame::kexGame(void)
 {
     this->smallFont = NULL;
     this->bigFont   = NULL;
+
+    this->titleScreen = new kexTitleScreen;
 }
 
 //
@@ -38,6 +41,7 @@ kexGame::kexGame(void)
 
 kexGame::~kexGame(void)
 {
+    delete titleScreen;
 }
 
 //
@@ -48,6 +52,8 @@ void kexGame::Init(void)
 {
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");
+
+    titleScreen->Init();
 }
 
 //
@@ -56,6 +62,30 @@ void kexGame::Init(void)
 
 void kexGame::Tick(void)
 {
+    titleScreen->Tick();
+}
+
+//
+// kexGame::Draw
+//
+
+void kexGame::Draw(void)
+{
+    titleScreen->Draw();
+}
+
+//
+// kexGame::ProcessInput
+//
+
+bool kexGame::ProcessInput(inputEvent_t *ev)
+{
+    if(titleScreen->ProcessInput(ev))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 //
@@ -64,6 +94,7 @@ void kexGame::Tick(void)
 
 void kexGame::DrawSmallString(const char *string, float x, float y, float scale, bool center)
 {
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     smallFont->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
     smallFont->DrawString(string, x, y, scale, center);
 }
@@ -74,6 +105,7 @@ void kexGame::DrawSmallString(const char *string, float x, float y, float scale,
 
 void kexGame::DrawBigString(const char *string, float x, float y, float scale, bool center)
 {
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     bigFont->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
     bigFont->DrawString(string, x, y, scale, center);
 }
