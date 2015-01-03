@@ -29,89 +29,109 @@ typedef struct
     const char  *name;
 } keyinfo_t;
 
-static keyinfo_t Keys[] =
+static keyinfo_t keynames[] =
 {
-    { SDL_BUTTON_LEFT,      "mouse1" },
-    { SDL_BUTTON_MIDDLE,    "mouse2" },
-    { SDL_BUTTON_RIGHT,     "mouse3" },
-    { SDLK_RIGHT,           "right" },
-    { SDLK_LEFT,            "left" },
-    { SDLK_UP,              "up" },
-    { SDLK_DOWN,            "down" },
-    { SDLK_ESCAPE,          "escape" },
-    { SDLK_RETURN,          "enter" },
-    { SDLK_TAB,             "tab" },
-    { SDLK_BACKSPACE,       "backsp" },
-    { SDLK_PAUSE,           "pause" },
-    { SDLK_LSHIFT,          "shift" },
-    { SDLK_LALT,            "alt" },
-    { SDLK_LCTRL,           "ctrl" },
-    { SDLK_PLUS,            "+" },
-    { SDLK_MINUS,           "-" },
-    { SDLK_CAPSLOCK,        "caps" },
-    { SDLK_INSERT,          "ins" },
-    { SDLK_DELETE,          "del" },
-    { SDLK_HOME,            "home" },
-    { SDLK_END,             "end" },
-    { SDLK_PAGEUP,          "pgup" },
-    { SDLK_PAGEDOWN,        "pgdn" },
-    { SDLK_SPACE,           "space" },
-    { SDLK_F1,              "f1" },
-    { SDLK_F2,              "f2" },
-    { SDLK_F3,              "f3" },
-    { SDLK_F4,              "f4" },
-    { SDLK_F5,              "f5" },
-    { SDLK_F6,              "f6" },
-    { SDLK_F7,              "f7" },
-    { SDLK_F8,              "f8" },
-    { SDLK_F9,              "f9" },
-    { SDLK_F10,             "f10" },
-    { SDLK_F11,             "f11" },
-    { SDLK_F12,             "f12" },
-    { SDLK_KP_ENTER,        "keypadenter" },
-    { SDLK_KP_MULTIPLY,     "keypad*" },
-    { SDLK_KP_PLUS,         "keypad+" },
-    { SDLK_NUMLOCKCLEAR,    "numlock" },
-    { SDLK_KP_MINUS,        "keypad-" },
-    { SDLK_KP_PERIOD,       "keypad." },
-    { SDLK_KP_DIVIDE,       "keypad/" },
-    { SDLK_KP_0,            "keypad0" },
-    { SDLK_KP_1,            "keypad1" },
-    { SDLK_KP_2,            "keypad2" },
-    { SDLK_KP_3,            "keypad3" },
-    { SDLK_KP_4,            "keypad4" },
-    { SDLK_KP_5,            "keypad5" },
-    { SDLK_KP_6,            "keypad6" },
-    { SDLK_KP_7,            "keypad7" },
-    { SDLK_KP_8,            "keypad8" },
-    { SDLK_KP_9,            "keypad9" },
+    { KKEY_RETURN,          "enter" },
+    { KKEY_ESCAPE,          "escape" },
+    { KKEY_BACKSPACE,       "backspace" },
+    { KKEY_TAB,             "tab" },
+    { KKEY_SPACE,           "space" },
+    { KKEY_0,               "0" },
+    { KKEY_1,               "1" },
+    { KKEY_2,               "2" },
+    { KKEY_3,               "3" },
+    { KKEY_4,               "4" },
+    { KKEY_5,               "5" },
+    { KKEY_6,               "6" },
+    { KKEY_7,               "7" },
+    { KKEY_8,               "8" },
+    { KKEY_9,               "9" },
+    { KKEY_SEMICOLON,       ";" },
+    { KKEY_LESS,            "<" },
+    { KKEY_EQUALS,          "=" },
+    { KKEY_GREATER,         ">" },
+    { KKEY_QUESTION,        "?" },
+    { KKEY_LEFTBRACKET,     "[" },
+    { KKEY_BACKSLASH,       "backslash" },
+    { KKEY_RIGHTBRACKET,    "]" },
+    { KKEY_CARET,           "^" },
+    { KKEY_a,               "a" },
+    { KKEY_b,               "b" },
+    { KKEY_c,               "c" },
+    { KKEY_d,               "d" },
+    { KKEY_e,               "e" },
+    { KKEY_f,               "f" },
+    { KKEY_g,               "g" },
+    { KKEY_h,               "h" },
+    { KKEY_i,               "i" },
+    { KKEY_j,               "j" },
+    { KKEY_k,               "k" },
+    { KKEY_l,               "l" },
+    { KKEY_m,               "m" },
+    { KKEY_n,               "n" },
+    { KKEY_o,               "o" },
+    { KKEY_p,               "p" },
+    { KKEY_q,               "q" },
+    { KKEY_r,               "r" },
+    { KKEY_s,               "s" },
+    { KKEY_t,               "t" },
+    { KKEY_u,               "u" },
+    { KKEY_v,               "v" },
+    { KKEY_w,               "w" },
+    { KKEY_x,               "x" },
+    { KKEY_y,               "y" },
+    { KKEY_z,               "z" },
+    { KKEY_CAPSLOCK,        "caps_lock" },
+    { KKEY_F1,              "f1" },
+    { KKEY_F2,              "f2" },
+    { KKEY_F3,              "f3" },
+    { KKEY_F4,              "f4" },
+    { KKEY_F5,              "f5" },
+    { KKEY_F6,              "f6" },
+    { KKEY_F7,              "f7" },
+    { KKEY_F8,              "f8" },
+    { KKEY_F9,              "f9" },
+    { KKEY_F10,             "f10" },
+    { KKEY_F11,             "f11" },
+    { KKEY_F12,             "f12" },
+    { KKEY_PRINTSCREEN,     "prnscreen" },
+    { KKEY_SCROLLLOCK,      "scrlock" },
+    { KKEY_PAUSE,           "pause" },
+    { KKEY_INSERT,          "insert" },
+    { KKEY_HOME,            "home" },
+    { KKEY_PAGEUP,          "pageup" },
+    { KKEY_DELETE,          "delete" },
+    { KKEY_END,             "end" },
+    { KKEY_PAGEDOWN,        "pagedown" },
+    { KKEY_RIGHT,           "right" },
+    { KKEY_LEFT,            "left" },
+    { KKEY_DOWN,            "down" },
+    { KKEY_UP,              "up" },
+    { KKEY_NUMLOCKCLEAR,    "numlock" },
+    { KKEY_KP_DIVIDE,       "kp_divide" },
+    { KKEY_KP_MULTIPLY,     "kp_mul" },
+    { KKEY_KP_MINUS,        "kp_minus" },
+    { KKEY_KP_PLUS,         "kp_plus" },
+    { KKEY_KP_ENTER,        "kp_enter" },
+    { KKEY_KP_1,            "kp_1" },
+    { KKEY_KP_2,            "kp_2" },
+    { KKEY_KP_3,            "kp_3" },
+    { KKEY_KP_4,            "kp_4" },
+    { KKEY_KP_5,            "kp_5" },
+    { KKEY_KP_6,            "kp_6" },
+    { KKEY_KP_7,            "kp_7" },
+    { KKEY_KP_8,            "kp_8" },
+    { KKEY_KP_9,            "kp_9" },
+    { KKEY_KP_0,            "kp_0" },
+    { KKEY_KP_PERIOD,       "kp_period" },
+    { KKEY_LCTRL,           "lctrl" },
+    { KKEY_LSHIFT,          "lshift" },
+    { KKEY_LALT,            "lalt" },
+    { KKEY_RCTRL,           "rctrl" },
+    { KKEY_RSHIFT,          "rshift" },
+    { KKEY_RALT,            "ralt" },
     { 0,                    NULL }
 };
-
-//
-// FCmd_KeyAction
-//
-
-static void FCmd_KeyAction(void)
-{
-    char *argv;
-    int action;
-
-    argv = kex::cCommands->GetArgv(0);
-    action = actions.FindAction(argv);
-
-    if(action == -1)
-    {
-        return;
-    }
-
-    if(argv[0] == '-')
-    {
-        action |= CKF_UP;
-    }
-
-    actions.HandleControl(action);
-}
 
 //
 // bind
@@ -132,7 +152,7 @@ COMMAND(bind)
         return;
     }
 
-    if(!(key = actions.GetKeyCode(kex::cCommands->GetArgv(1))))
+    if((key = actions.GetKeyCode(kex::cCommands->GetArgv(1))) <= -1)
     {
         kex::cSystem->Warning("\"%s\" isn't a valid key\n", kex::cCommands->GetArgv(1));
         return;
@@ -175,21 +195,11 @@ COMMAND(listbinds)
 int kexInputAction::GetKeyCode(char *key)
 {
     keyinfo_t *pkey;
-    int len;
     kexStr tmp(key);
 
     tmp.ToLower();
-    len = tmp.Length();
 
-    if(len == 1)
-    {
-        if(((*key >= 'a') && (*key <= 'z')) || ((*key >= '0') && (*key <= '9')))
-        {
-            return *key;
-        }
-    }
-
-    for(pkey = Keys; pkey->name; pkey++)
+    for(pkey = keynames; pkey->name; pkey++)
     {
         if(!strcmp(key, pkey->name))
         {
@@ -197,86 +207,50 @@ int kexInputAction::GetKeyCode(char *key)
         }
     }
 
-    return 0;
+    return -1;
 }
 
 //
-// kexInputAction::GetName
+// kexInputAction::GetKeyName
 //
 
-bool kexInputAction::GetName(char *buff, int key)
+char *kexInputAction::GetKeyName(int key)
 {
     keyinfo_t *pkey;
 
-    if(((key >= 'a') && (key <= 'z')) || ((key >= '0') && (key <= '9')))
+    for(pkey = keynames; pkey->name; pkey++)
     {
-        buff[0] = (char)toupper(key);
-        buff[1] = 0;
-
-        return true;
-    }
-
-    for(pkey = Keys; pkey->name; pkey++)
-    {
-        int keycode = pkey->code;
-        keycode &= ~SDLK_SCANCODE_MASK;
-
-        if(keycode == key)
+        if(key == pkey->code)
         {
-            strcpy(buff, pkey->name);
-            return true;
+            return (char*)pkey->name;
         }
     }
-    sprintf(buff, "Key%02x", key);
-    return false;
+
+    return NULL;
 }
 
 //
 // kexInputAction::BindCommand
 //
 
-void kexInputAction::BindCommand(char key, const char *string)
+void kexInputAction::BindCommand(int key, const char *string)
 {
     keycmd_t *keycmd;
     cmdlist_t *newcmd;
+    int actionid;
 
-    keycmd = &keycmds[keycode[bShiftdown][key]];
+    keycmd = &keycmds[key];
     newcmd = (cmdlist_t*)Mem_Malloc(sizeof(cmdlist_t), hb_static);
     newcmd->command = Mem_Strdup(string, hb_static);
     newcmd->next = keycmd->cmds;
+    newcmd->action = NULL;
+
+    if((actionid = FindAction(string)) != -1)
+    {
+        newcmd->action = &keyActions[actionid];
+    }
+
     keycmd->cmds = newcmd;
-}
-
-//
-// kexInputAction::Clear
-//
-
-void kexInputAction::Clear(void)
-{
-    memset(&control, 0, sizeof(control_t));
-}
-
-//
-// kexInputAction::HandleControl
-//
-
-void kexInputAction::HandleControl(int ctrl)
-{
-    int ctrlkey;
-
-    ctrlkey = (ctrl & CKF_COUNTMASK);
-
-    if(ctrl & CKF_UP)
-    {
-        if((control.actions[ctrlkey] & CKF_COUNTMASK) > 0)
-        {
-            control.actions[ctrlkey] = 0;
-        }
-    }
-    else
-    {
-        control.actions[ctrlkey] = 1;
-    }
 }
 
 //
@@ -287,7 +261,7 @@ void kexInputAction::ListBindings(void)
 {
     keycmd_t *keycmd;
     cmdlist_t *cmd;
-    kexStr tmp;
+    char *tmp;
 
     kex::cSystem->Printf("\n");
 
@@ -295,15 +269,14 @@ void kexInputAction::ListBindings(void)
     {
         keycmd = &keycmds[i];
 
+        if((tmp = GetKeyName(i)) == NULL)
+        {
+            continue;
+        }
+
         for(cmd = keycmd->cmds; cmd; cmd = cmd->next)
         {
-            char buff[32];
-
-            GetName(buff, i);
-            tmp = buff;
-            tmp.ToLower();
-
-            kex::cSystem->CPrintf(COLOR_GREEN, "%s : \"%s\"\n", tmp.c_str(), cmd->command);
+            kex::cSystem->CPrintf(COLOR_GREEN, "%s : \"%s\"\n", tmp, cmd->command);
         }
     }
 }
@@ -314,25 +287,32 @@ void kexInputAction::ListBindings(void)
 
 int kexInputAction::FindAction(const char *name)
 {
-    keyaction_t *action;
-    unsigned int hash;
-
-    if(name[0] == 0)
+    for(unsigned int i = 0; i < keyActions.Length(); ++i)
     {
-        return -1;
-    }
-
-    hash = kexStr::Hash(name);
-
-    for(action = keyactions[hash]; action; action = action->next)
-    {
-        if(!strcmp(name, action->name))
+        if(!strcmp(name, keyActions[i].name))
         {
-            return action->keyid;
+            return keyActions[i].keyid;
         }
     }
 
     return -1;
+}
+
+//
+// kexInputAction::ActionExists
+//
+
+bool kexInputAction::ActionExists(const char *name)
+{
+    for(unsigned int i = 0; i < keyActions.Length(); ++i)
+    {
+        if(!strcmp(name, keyActions[i].name))
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 //
@@ -344,30 +324,13 @@ void kexInputAction::ExecuteCommand(int key, bool keyup)
     keycmd_t *keycmd;
     cmdlist_t *cmd;
 
-    key &= ~SDLK_SCANCODE_MASK;
-
-    if(key >= MAX_KEYS)
-    {
-        return;
-    }
-
-    keycmd = &keycmds[keycode[bShiftdown][key]];
+    keycmd = &keycmds[key];
 
     for(cmd = keycmd->cmds; cmd; cmd = cmd->next)
     {
-        if(cmd->command[0] == '+' || cmd->command[0] == '-')
+        if(cmd->action != NULL)
         {
-            if(keyup && cmd->command[0] == '+')
-            {
-                cmd->command[0] = '-';
-            }
-
-            kex::cCommands->Execute(cmd->command);
-
-            if(keyup && cmd->command[0] == '-')
-            {
-                cmd->command[0] = '+';
-            }
+            heldActions[cmd->action->keyid] = !keyup;
         }
         else if(!keyup)
         {
@@ -382,37 +345,12 @@ void kexInputAction::ExecuteCommand(int key, bool keyup)
 
 void kexInputAction::AddAction(byte id, const char *name)
 {
-    keyaction_t *keyaction;
-    unsigned int hash;
+    keyaction_t keyaction;
 
-    if(strlen(name) >= MAX_FILEPATH)
-    {
-        kex::cSystem->Error("Key_AddAction: \"%s\" is too long", name);
-    }
+    keyaction.keyid = id;
+    keyaction.name = name;
 
-    if(!kex::cCommands->Verify(name))
-    {
-        return;
-    }
-
-    keyaction = (keyaction_t*)Mem_Malloc(sizeof(keyaction_t), hb_static);
-    keyaction->keyid = id;
-    strcpy(keyaction->name, name);
-
-    kex::cCommands->Add(keyaction->name, FCmd_KeyAction);
-
-    hash = kexStr::Hash(keyaction->name);
-    keyaction->next = keyactions[hash];
-    keyactions[hash] = keyaction;
-}
-
-//
-// kexInputAction::AddAction
-//
-
-void kexInputAction::AddAction(byte id, const kexStr &str)
-{
-    AddAction(id, str.c_str());
+    keyActions.Push(keyaction);
 }
 
 //
@@ -423,21 +361,21 @@ void kexInputAction::WriteBindings(FILE *file)
 {
     keycmd_t *keycmd;
     cmdlist_t *cmd;
-    kexStr tmp;
+    char *tmp;
 
     for(int i = 0; i < MAX_KEYS; i++)
     {
         keycmd = &keycmds[i];
 
+        if((tmp = GetKeyName(i)) == NULL)
+        {
+            continue;
+        }
+
         for(cmd = keycmd->cmds; cmd; cmd = cmd->next)
         {
-            char buff[32];
-
-            GetName(buff, i);
-            tmp = buff;
-            tmp.ToLower();
-
-            fprintf(file, "bind %s \"%s\"\n", tmp.c_str(), cmd->command);
+            fprintf(file, "bind %s \"%s\"\n", tmp,
+                (cmd->action == NULL) ? cmd->command : cmd->action->name);
         }
     }
 }
@@ -448,40 +386,16 @@ void kexInputAction::WriteBindings(FILE *file)
 
 void kexInputAction::Init(void)
 {
-    for(int c = 0; c < MAX_KEYS; c++)
-    {
-        keycode[0][c] = c;
-        keycode[1][c] = c;
-        keydown[c] = false;
-        keycmds[c].cmds = NULL;
-    }
-
-    keycode[1]['1'] = '!';
-    keycode[1]['2'] = '@';
-    keycode[1]['3'] = '#';
-    keycode[1]['4'] = '$';
-    keycode[1]['5'] = '%';
-    keycode[1]['6'] = '^';
-    keycode[1]['7'] = '&';
-    keycode[1]['8'] = '*';
-    keycode[1]['9'] = '(';
-    keycode[1]['0'] = ')';
-    keycode[1]['-'] = '_';
-    keycode[1]['='] = '+';
-    keycode[1]['['] = '{';
-    keycode[1][']'] = '}';
-    keycode[1]['\\'] = '|';
-    keycode[1][';'] = ':';
-    keycode[1]['\''] = '"';
-    keycode[1][','] = '<';
-    keycode[1]['.'] = '>';
-    keycode[1]['/'] = '?';
-    keycode[1]['`'] = '~';
-
-    for(int c = 'a'; c <= 'z'; c++)
-    {
-        keycode[1][c] = toupper(c);
-    }
+    AddAction(IA_ATTACK, "+attack");
+    AddAction(IA_JUMP, "+jump");
+    AddAction(IA_FORWARD, "+forward");
+    AddAction(IA_BACKWARD, "+backward");
+    AddAction(IA_LEFT, "+left");
+    AddAction(IA_RIGHT, "+right");
+    AddAction(IA_STRAFELEFT, "+strafeleft");
+    AddAction(IA_STRAFERIGHT, "+straferight");
+    AddAction(IA_WEAPNEXT, "weapnext");
+    AddAction(IA_WEAPPREV, "weapprev");
 
     kex::cSystem->Printf("Key System Initialized\n");
 }

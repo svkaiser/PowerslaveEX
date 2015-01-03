@@ -366,6 +366,12 @@ void kexCommand::Add(const char *name, cmd_t function)
         return;
     }
 
+    if(kex::cActions->ActionExists(name))
+    {
+        kex::cSystem->Warning("%s is already added as an action\n", name);
+        return;
+    }
+
     cmd = new kexCommandItem(name, function);
     cmd->bAllocated = true;
 }

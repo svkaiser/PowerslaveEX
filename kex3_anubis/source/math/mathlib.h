@@ -420,6 +420,7 @@ public:
     kexAngle(const kexVec3 &vector);
     kexAngle(const kexAngle &an);
 
+    void                    Clear(void);
     kexAngle                &Round(void);
     kexAngle                &Clamp180(void);
     kexAngle                &Clamp180Invert(void);

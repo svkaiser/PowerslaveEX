@@ -25,6 +25,15 @@
 
 kexAngle::kexAngle(void)
 {
+    Clear();
+}
+
+//
+// kexAngle::Clear
+//
+
+void kexAngle::Clear(void)
+{
     this->yaw   = 0;
     this->pitch = 0;
     this->roll  = 0;

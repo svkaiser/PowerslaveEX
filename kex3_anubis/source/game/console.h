@@ -78,6 +78,7 @@ private:
     bool                bShowPrompt;
     int                 outputLength;
     kexFont             *font;
+    char                shiftcode[256];
 };
 
 #endif

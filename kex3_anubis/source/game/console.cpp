@@ -76,6 +76,34 @@ kexConsole::~kexConsole(void)
 void kexConsole::Init(void)
 {
     font = kexFont::Alloc("confont");
+    memset(shiftcode, ' ', 256);
+
+    shiftcode['1']  = '!';
+    shiftcode['2']  = '@';
+    shiftcode['3']  = '#';
+    shiftcode['4']  = '$';
+    shiftcode['5']  = '%';
+    shiftcode['6']  = '^';
+    shiftcode['7']  = '&';
+    shiftcode['8']  = '*';
+    shiftcode['9']  = '(';
+    shiftcode['0']  = ')';
+    shiftcode['-']  = '_';
+    shiftcode['=']  = '+';
+    shiftcode['[']  = '{';
+    shiftcode[']']  = '}';
+    shiftcode['\\'] = '|';
+    shiftcode[';']  = ':';
+    shiftcode['\''] = '"';
+    shiftcode[',']  = '<';
+    shiftcode['.']  = '>';
+    shiftcode['/']  = '?';
+    shiftcode['`']  = '~';
+
+    for(int c = 'a'; c <= 'z'; c++)
+    {
+        shiftcode[c] = toupper(c);
+    }
 }
 
 //
@@ -390,7 +418,12 @@ void kexConsole::ParseKey(int c)
             return;
         }
 
-        typeStr[typeStrPos++] = kex::cActions->GetAsciiKey((char)c, bShiftDown);
+        if(bShiftDown)
+        {
+            c = shiftcode[c];
+        }
+
+        typeStr[typeStrPos++] = c;
         typeStr[typeStrPos] = '\0';
     }
 }

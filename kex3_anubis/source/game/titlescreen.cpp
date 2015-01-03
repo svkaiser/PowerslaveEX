@@ -295,6 +295,8 @@ void kexTitleScreen::Tick(void)
 
 bool kexTitleScreen::ProcessInput(inputEvent_t *ev)
 {
+    kex::cGame->ProcessActions(ev);
+
     if(ev->type == ev_mousedown)
     {
         if(ev->data1 == KMSB_LEFT)

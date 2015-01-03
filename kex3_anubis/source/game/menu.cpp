@@ -73,6 +73,8 @@ kexMenuItem::~kexMenuItem(void)
 void kexMenuItem::LerpTo(const float destx, const float desty)
 {
     this->bLerping = true;
+    this->startX = x;
+    this->startY = y;
     this->destX = destx;
     this->destY = desty;
     this->time = 1;
@@ -96,14 +98,14 @@ void kexMenuItem::LerpTo(const float destx)
 
 void kexMenuItem::Move(void)
 {
-    float c = (kexMath::Cos((1.0f - time) * kexMath::pi) - 1.0f) * -0.5f;
+    float c = 1.0f - time;
 
-    x = c * (destX - x) + x;
-    y = c * (destY - y) + y;
+    x = c * (destX - startX) + startX;
+    y = c * (destY - startY) + startY;
 
-    time -= 0.01f;
+    time -= 0.03f;
 
-    if(time <= 0.525f)
+    if(time <= 0)
     {
         bLerping = false;
         bInteract = true;
@@ -168,9 +170,7 @@ void kexMenuItem::DrawSmallString(const char *string, float x, float y, float sc
     byte c = (flash || bSelected) ? 255 : 224;
     kexFont *font = kex::cGame->SmallFont();
 
-    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-    font->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
-    font->DrawString(string, x, y, scale, center, RGBA(c, c, c, 0xff));
+    kex::cGame->DrawSmallString(string, x, y, scale, center, c, c, c);
 
     if(flash)
     {
@@ -190,9 +190,7 @@ void kexMenuItem::DrawBigString(const char *string, float x, float y, float scal
     byte c = (flash || bSelected) ? 255 : 224;
     kexFont *font = kex::cGame->BigFont();
 
-    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-    font->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
-    font->DrawString(string, x, y, scale, center, RGBA(c, c, c, 0xff));
+    kex::cGame->DrawBigString(string, x, y, scale, center, c, c, c);
 
     if(flash)
     {

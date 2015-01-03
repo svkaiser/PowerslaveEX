@@ -393,6 +393,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\player.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\playerCmd.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\session.cpp"
 					>
 				</File>
@@ -596,6 +604,14 @@
 				</File>
 				<File
 					RelativePath="..\source\game\menu.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\player.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\playerCmd.h"
 					>
 				</File>
 				<File

@@ -32,6 +32,7 @@ kexGame::kexGame(void)
 {
     this->smallFont = NULL;
     this->bigFont   = NULL;
+    this->ticks     = 0;
 
     this->titleScreen = new kexTitleScreen;
     this->translation = new kexTranslation;
@@ -67,6 +68,7 @@ void kexGame::Init(void)
 void kexGame::Tick(void)
 {
     titleScreen->Tick();
+    ticks++;
 }
 
 //
@@ -76,6 +78,24 @@ void kexGame::Tick(void)
 void kexGame::Draw(void)
 {
     titleScreen->Draw();
+}
+
+//
+// kexGame::ProcessActions
+//
+
+void kexGame::ProcessActions(inputEvent_t *ev)
+{
+    switch(ev->type)
+    {
+    case ev_keydown:
+        kex::cActions->ExecuteCommand(ev->data1, false);
+        break;
+
+    case ev_keyup:
+        kex::cActions->ExecuteCommand(ev->data1, true);
+        break;
+    }
 }
 
 //
@@ -96,20 +116,22 @@ bool kexGame::ProcessInput(inputEvent_t *ev)
 // kexGame::DrawSmallString
 //
 
-void kexGame::DrawSmallString(const char *string, float x, float y, float scale, bool center)
+void kexGame::DrawSmallString(const char *string, float x, float y, float scale, bool center,
+                              byte r, byte g, byte b)
 {
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     smallFont->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
-    smallFont->DrawString(string, x, y, scale, center);
+    smallFont->DrawString(string, x, y, scale, center, RGBA(r, g, b, 0xff));
 }
 
 //
 // kexGame::DrawBigString
 //
 
-void kexGame::DrawBigString(const char *string, float x, float y, float scale, bool center)
+void kexGame::DrawBigString(const char *string, float x, float y, float scale, bool center,
+                            byte r, byte g, byte b)
 {
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     bigFont->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
-    bigFont->DrawString(string, x, y, scale, center);
+    bigFont->DrawString(string, x, y, scale, center, RGBA(r, g, b, 0xff));
 }

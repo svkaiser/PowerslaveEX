@@ -29,20 +29,25 @@ public:
     void                Tick(void);
     void                Draw(void);
     bool                ProcessInput(inputEvent_t *ev);
+    void                ProcessActions(inputEvent_t *ev);
 
     kexTitleScreen      *TitleScreen(void) { return titleScreen; }
     kexTranslation      *Translation(void) { return translation; }
     kexFont             *SmallFont(void) { return smallFont; }
     kexFont             *BigFont(void) { return bigFont; }
+    const int           GetTicks(void) const { return ticks; }
 
-    void                DrawSmallString(const char *string, float x, float y, float scale, bool center);
-    void                DrawBigString(const char *string, float x, float y, float scale, bool center);
+    void                DrawSmallString(const char *string, float x, float y, float scale, bool center,
+                                        byte r = 0xff, byte g = 0xff, byte b = 0xff);
+    void                DrawBigString(const char *string, float x, float y, float scale, bool center,
+                                        byte r = 0xff, byte g = 0xff, byte b = 0xff);
 
 private:
     kexFont             *smallFont;
     kexFont             *bigFont;
     kexTitleScreen      *titleScreen;
     kexTranslation      *translation;
+    int                 ticks;
 };
 
 #endif

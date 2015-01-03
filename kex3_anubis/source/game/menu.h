@@ -58,6 +58,8 @@ private:
     bool                            bLerping;
     bool                            bHighLighted;
     float                           time;
+    float                           startX;
+    float                           startY;
     float                           destX;
     float                           destY;
 };
