@@ -24,6 +24,7 @@ public:
     ~kexSession(void);
 
     void                        RunGame(void);
+    void                        Shutdown(void);
 
     const bool                  IsPaused(void) const { return bPaused; }
     void                        TogglePause(const bool bToggle) { bPaused = bToggle; }

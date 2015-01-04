@@ -52,6 +52,7 @@ void kexPlayer::Reset(void)
     ankahs = 0;
 
     angle.Clear();
+    cmd.Reset();
 
     bob = 0;
     weaponBob.Clear();

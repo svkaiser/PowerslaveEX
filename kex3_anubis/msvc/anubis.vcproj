@@ -412,6 +412,10 @@
 					RelativePath="..\source\game\titlescreen.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\source\game\world.cpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="sound"
@@ -624,6 +628,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\titlescreen.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\world.h"
 					>
 				</File>
 			</Filter>

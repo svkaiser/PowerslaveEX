@@ -141,6 +141,15 @@ void kexSession::InitCursor(void)
 }
 
 //
+// kexSession::Shutdown
+//
+
+void kexSession::Shutdown(void)
+{
+    kex::cGame->Shutdown();
+}
+
+//
 // kexSession::RunGame
 //
 

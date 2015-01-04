@@ -330,7 +330,24 @@ void kexInputAction::ExecuteCommand(int key, bool keyup)
     {
         if(cmd->action != NULL)
         {
-            heldActions[cmd->action->keyid] = !keyup;
+            if(cmd->command[0] == '+' || cmd->command[0] == '-')
+            {
+                if(keyup && cmd->command[0] == '+')
+                {
+                    cmd->command[0] = '-';
+                }
+
+                heldActions[cmd->action->keyid] = (cmd->command[0] != '-');
+
+                if(keyup && cmd->command[0] == '-')
+                {
+                    cmd->command[0] = '+';
+                }
+            }
+            else
+            {
+                heldActions[cmd->action->keyid] = !keyup;
+            }
         }
         else if(!keyup)
         {
@@ -386,16 +403,16 @@ void kexInputAction::WriteBindings(FILE *file)
 
 void kexInputAction::Init(void)
 {
-    AddAction(IA_ATTACK, "+attack");
-    AddAction(IA_JUMP, "+jump");
-    AddAction(IA_FORWARD, "+forward");
-    AddAction(IA_BACKWARD, "+backward");
-    AddAction(IA_LEFT, "+left");
-    AddAction(IA_RIGHT, "+right");
-    AddAction(IA_STRAFELEFT, "+strafeleft");
-    AddAction(IA_STRAFERIGHT, "+straferight");
-    AddAction(IA_WEAPNEXT, "weapnext");
-    AddAction(IA_WEAPPREV, "weapprev");
+    AddAction(IA_ATTACK, "attack");
+    AddAction(IA_JUMP, "jump");
+    AddAction(IA_FORWARD, "forward");
+    AddAction(IA_BACKWARD, "backward");
+    AddAction(IA_LEFT, "left");
+    AddAction(IA_RIGHT, "right");
+    AddAction(IA_STRAFELEFT, "strafeleft");
+    AddAction(IA_STRAFERIGHT, "straferight");
+    AddAction(IA_WEAPNEXT, "+weapnext");
+    AddAction(IA_WEAPPREV, "+weapprev");
 
     kex::cSystem->Printf("Key System Initialized\n");
 }

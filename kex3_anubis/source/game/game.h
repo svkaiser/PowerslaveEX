@@ -18,6 +18,15 @@
 class kexFont;
 class kexTitleScreen;
 class kexTranslation;
+class kexWorld;
+
+typedef enum
+{
+    GS_NONE     = 0,
+    GS_TITLE,
+    GS_OVERWORLD,
+    GS_LEVEL
+} gameState_t;
 
 class kexGame
 {
@@ -26,6 +35,7 @@ public:
     ~kexGame(void);
 
     void                Init(void);
+    void                Shutdown(void);
     void                Tick(void);
     void                Draw(void);
     bool                ProcessInput(inputEvent_t *ev);
@@ -33,9 +43,12 @@ public:
 
     kexTitleScreen      *TitleScreen(void) { return titleScreen; }
     kexTranslation      *Translation(void) { return translation; }
+    kexWorld            *World(void) { return world; }
     kexFont             *SmallFont(void) { return smallFont; }
     kexFont             *BigFont(void) { return bigFont; }
     const int           GetTicks(void) const { return ticks; }
+    const gameState_t   GameState(void) const { return gameState; }
+    void                SetGameState(const gameState_t state) { gameState = state; }
 
     void                DrawSmallString(const char *string, float x, float y, float scale, bool center,
                                         byte r = 0xff, byte g = 0xff, byte b = 0xff);
@@ -47,7 +60,9 @@ private:
     kexFont             *bigFont;
     kexTitleScreen      *titleScreen;
     kexTranslation      *translation;
+    kexWorld            *world;
     int                 ticks;
+    gameState_t         gameState;
 };
 
 #endif

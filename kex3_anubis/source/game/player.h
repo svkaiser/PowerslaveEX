@@ -15,6 +15,8 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
+#include "playerCmd.h"
+
 typedef enum
 {
     PW_MACHETE     =  0,
@@ -96,7 +98,11 @@ public:
 
     void                    Reset(void);
 
+    kexPlayerCmd            &Cmd(void) { return cmd; }
+
 private:
+    kexPlayerCmd            cmd;
+
     int16_t                 health;
     int16_t                 ankahs;
     kexAngle                angle;

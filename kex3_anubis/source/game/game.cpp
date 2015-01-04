@@ -20,9 +20,30 @@
 #include "game.h"
 #include "titlescreen.h"
 #include "localization.h"
+#include "world.h"
 
 static kexGame gameLocal;
 kexGame *kex::cGame = &gameLocal;
+
+//
+// map
+//
+
+COMMAND(map)
+{
+    int argc = kex::cCommands->GetArgc();
+
+    if(argc != 2)
+    {
+        kex::cSystem->Printf("map <filename>\n");
+        return;
+    }
+
+    if(gameLocal.World()->LoadMap(kex::cCommands->GetArgv(1)))
+    {
+        kex::cGame->SetGameState(GS_LEVEL);
+    }
+}
 
 //
 // kexGame::kexGame
@@ -33,9 +54,11 @@ kexGame::kexGame(void)
     this->smallFont = NULL;
     this->bigFont   = NULL;
     this->ticks     = 0;
+    this->gameState = GS_NONE;
 
     this->titleScreen = new kexTitleScreen;
     this->translation = new kexTranslation;
+    this->world = new kexWorld;
 }
 
 //
@@ -46,6 +69,7 @@ kexGame::~kexGame(void)
 {
     delete titleScreen;
     delete translation;
+    delete world;
 }
 
 //
@@ -59,6 +83,17 @@ void kexGame::Init(void)
 
     titleScreen->Init();
     translation->Init();
+
+    gameState = GS_TITLE;
+}
+
+//
+// kexGame::Shutdown
+//
+
+void kexGame::Shutdown(void)
+{
+    Mem_Purge(kexWorld::hb_world);
 }
 
 //
@@ -67,7 +102,15 @@ void kexGame::Init(void)
 
 void kexGame::Tick(void)
 {
-    titleScreen->Tick();
+    switch(gameState)
+    {
+    case GS_TITLE:
+        titleScreen->Tick();
+        break;
+
+    default:
+        break;
+    }
     ticks++;
 }
 
@@ -77,7 +120,15 @@ void kexGame::Tick(void)
 
 void kexGame::Draw(void)
 {
-    titleScreen->Draw();
+    switch(gameState)
+    {
+    case GS_TITLE:
+        titleScreen->Draw();
+        break;
+
+    default:
+        break;
+    }
 }
 
 //
@@ -104,9 +155,17 @@ void kexGame::ProcessActions(inputEvent_t *ev)
 
 bool kexGame::ProcessInput(inputEvent_t *ev)
 {
-    if(titleScreen->ProcessInput(ev))
+    switch(gameState)
     {
-        return true;
+    case GS_TITLE:
+       if(titleScreen->ProcessInput(ev))
+        {
+            return true;
+        }
+        break;
+
+    default:
+        break;
     }
 
     return false;

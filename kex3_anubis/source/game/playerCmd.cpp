@@ -18,3 +18,56 @@
 #include "kexlib.h"
 #include "game.h"
 #include "playerCmd.h"
+
+//
+// kexPlayerCmd::kexPlayerCmd
+//
+
+kexPlayerCmd::kexPlayerCmd(void)
+{
+    Reset();
+}
+
+//
+// kexPlayerCmd::~kexPlayerCmd
+//
+
+kexPlayerCmd::~kexPlayerCmd(void)
+{
+}
+
+//
+// kexPlayerCmd::Reset
+//
+
+void kexPlayerCmd::Reset(void)
+{
+    buttons = 0;
+    angles[0] = angles[1] = 0;
+    mousex = mousey = 0;
+}
+
+//
+// kexPlayerCmd::BuildButtons
+//
+
+void kexPlayerCmd::BuildButtons(void)
+{
+    for(int i = 0; i < NUMINPUTACTIONS; ++i)
+    {
+        if(kex::cActions->GetAction(i) != 0)
+        {
+            buttons |= (1 << i);
+        }
+    }
+}
+
+//
+// kexPlayerCmd::BuildCommands
+//
+
+void kexPlayerCmd::BuildCommands(void)
+{
+    Reset();
+    BuildButtons();
+}

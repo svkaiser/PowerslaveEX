@@ -19,12 +19,32 @@ typedef enum
 {
     BC_ATTACK       = BIT(0),
     BC_JUMP         = BIT(1),
-    BC_BUTTON2      = BIT(2),
-    BC_BUTTON3      = BIT(3),
-    BC_BUTTON4      = BIT(4),
-    BC_BUTTON5      = BIT(5),
-    BC_BUTTON6      = BIT(6),
-    BC_BUTTON7      = BIT(7)
+    BC_FORWARD      = BIT(2),
+    BC_BACKWARD     = BIT(3),
+    BC_LEFT         = BIT(4),
+    BC_RIGHT        = BIT(5),
+    BC_STRAFELEFT   = BIT(6),
+    BC_STRAFERIGHT  = BIT(7)
 } buttonCommand_t;
+
+class kexPlayerCmd
+{
+public:
+    kexPlayerCmd(void);
+    ~kexPlayerCmd(void);
+
+    void                BuildCommands(void);
+    void                Reset(void);
+
+private:
+    void                BuildButtons(void);
+
+    word                buttons;
+    short               angles[2];
+    int                 frame;
+    int                 time;
+    short               mousex;
+    short               mousey;
+};
 
 #endif
