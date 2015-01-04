@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\SDL2_mixer\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -59,7 +59,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\SDL2_mixer\lib\x86\SDL2_mixer.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
+				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="LIBCMT;MSVCRT;LIBCMTD"
 				GenerateDebugInformation="true"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\SDL2_mixer\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -134,7 +134,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\SDL2_mixer\lib\x86\SDL2_mixer.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
+				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
 				IgnoreDefaultLibraryNames="LIBCMT;MSVCRT;LIBCMTD"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -356,15 +356,19 @@
 						>
 					</File>
 					<File
-						RelativePath="..\source\system\sdl\soundSDL.cpp"
-						>
-					</File>
-					<File
 						RelativePath="..\source\system\sdl\systemSDL.cpp"
 						>
 					</File>
 					<File
 						RelativePath="..\source\system\sdl\timerSDL.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="al"
+					>
+					<File
+						RelativePath="..\source\system\al\soundOAL.cpp"
 						>
 					</File>
 				</Filter>
