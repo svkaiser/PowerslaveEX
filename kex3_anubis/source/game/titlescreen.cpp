@@ -39,22 +39,32 @@ typedef enum
     NUMTITLESCREENITEMS
 } titleScreenItems_t;
 
+typedef enum
+{
+    TSS_IDLE    = 0,
+    TSS_NEWGAME,
+
+    NUMTITLESCREENSTATES
+} titleScreenState_t;
+
 typedef struct
 {
     kexMenuItem         item;
     menuItemSelect_t    callback;
 } menuGroup_t;
 
+static void TitleMenuCallback_NewGame(kexMenuItem *item);
 static void TitleMenuCallback_Options(kexMenuItem *item);
 static void TitleMenuCallback_Quit(kexMenuItem *item);
 static void TitleMenuCallback_ExitOptions(kexMenuItem *item);
 
+static void MenuItemLerpCallback_NewGame(kexMenuItem *item);
 static void MenuItemLerpCallback_Options(kexMenuItem *item);
 static void MenuItemLerpCallback_ExitOptions(kexMenuItem *item);
 
 static menuGroup_t titleMenu[NUMTITLESCREENITEMS] =
 {
-    { kexMenuItem("New Game",  -100, 128, 1) },
+    { kexMenuItem("New Game",  -100, 128, 1, MenuItemLerpCallback_NewGame), TitleMenuCallback_NewGame },
     { kexMenuItem("Load Game",  420, 146, 1) },
     { kexMenuItem("Options",    420, 164, 1, MenuItemLerpCallback_Options), TitleMenuCallback_Options },
     { kexMenuItem("Quit",       420, 182, 1), TitleMenuCallback_Quit },
@@ -66,6 +76,15 @@ static menuGroup_t titleMenu[NUMTITLESCREENITEMS] =
     { kexMenuItem("Audio",      420, 186, 1) },
     { kexMenuItem("Exit",      -100, 204, 1, MenuItemLerpCallback_ExitOptions), TitleMenuCallback_ExitOptions }
 };
+
+//
+// TitleMenuCallback_NewGame
+//
+
+static void TitleMenuCallback_NewGame(kexMenuItem *item)
+{
+    kex::cGame->TitleScreen()->OnSelectNewGame(item);
+}
 
 //
 // TitleMenuCallback_Options
@@ -83,6 +102,20 @@ static void TitleMenuCallback_Options(kexMenuItem *item)
 static void TitleMenuCallback_Quit(kexMenuItem *item)
 {
     kex::cCommands->Execute("quit");
+}
+
+//
+// MenuItemLerpCallback_NewGame
+//
+
+static void MenuItemLerpCallback_NewGame(kexMenuItem *item)
+{
+    if(kex::cGame->TitleScreen()->SelectedItem() != TSI_NEWGAME)
+    {
+        return;
+    }
+
+    kex::cGame->TitleScreen()->FadeOut(TSS_NEWGAME);
 }
 
 //
@@ -170,8 +203,22 @@ void kexTitleScreen::Init(void)
 void kexTitleScreen::Start(void)
 {
     fadeTime = kex::cSession->GetTicks();
+    state = TSS_IDLE;
     curFadeTime = 0;
     bFading = true;
+}
+
+//
+// kexTitleScreen::FadeOut
+//
+
+void kexTitleScreen::FadeOut(int state)
+{
+    fadeTime = kex::cSession->GetTicks();
+    this->state = state;
+    curFadeTime = 0;
+    bFading = true;
+    bFadeIn = false;
 }
 
 //
@@ -193,10 +240,32 @@ void kexTitleScreen::DeselectAllItems(void)
 
 void kexTitleScreen::FadeDone(void)
 {
-    titleMenu[TSI_NEWGAME].item.LerpTo(160);
-    titleMenu[TSI_LOADGAME].item.LerpTo(160);
-    titleMenu[TSI_OPTIONS].item.LerpTo(160);
-    titleMenu[TSI_QUIT].item.LerpTo(160);
+    switch(state)
+    {
+    case TSS_IDLE:
+        titleMenu[TSI_NEWGAME].item.LerpTo(160);
+        titleMenu[TSI_LOADGAME].item.LerpTo(160);
+        titleMenu[TSI_OPTIONS].item.LerpTo(160);
+        titleMenu[TSI_QUIT].item.LerpTo(160);
+        break;
+    case TSS_NEWGAME:
+        kex::cGame->SetGameState(GS_LEVEL);
+        break;
+    default:
+        break;
+    }
+}
+
+//
+// kexTitleScreen::OnSelectNewGame
+//
+
+void kexTitleScreen::OnSelectNewGame(kexMenuItem *item)
+{
+    titleMenu[TSI_NEWGAME].item.LerpTo(-100);
+    titleMenu[TSI_LOADGAME].item.LerpTo(420);
+    titleMenu[TSI_OPTIONS].item.LerpTo(-100);
+    titleMenu[TSI_QUIT].item.LerpTo(420);
 }
 
 //
@@ -281,11 +350,13 @@ void kexTitleScreen::Tick(void)
     {
         curFadeTime = ((kex::cSession->GetTicks() - fadeTime)) << 3;
     }
-
-    for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
+    else
     {
-        kexMenuItem *item = &titleMenu[i].item;
-        item->Tick();
+        for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
+        {
+            kexMenuItem *item = &titleMenu[i].item;
+            item->Tick();
+        }
     }
 }
 
@@ -295,8 +366,6 @@ void kexTitleScreen::Tick(void)
 
 bool kexTitleScreen::ProcessInput(inputEvent_t *ev)
 {
-    kex::cGame->ProcessActions(ev);
-
     if(ev->type == ev_mousedown)
     {
         if(ev->data1 == KMSB_LEFT)

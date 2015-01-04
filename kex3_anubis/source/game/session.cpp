@@ -155,9 +155,12 @@ void kexSession::Shutdown(void)
 
 void kexSession::RunGame(void)
 {
+    static int clockspeed = kexMath::FrameSec(60);
     int msec;
+    int framemsec = 0;
     int prevmsec;
     int nextmsec;
+    int ticsToRun = 0;
 
     // setup mouse cursor
     InitCursor();
@@ -188,17 +191,24 @@ void kexSession::RunGame(void)
             time += curtime;
             curtime = 0;
 
-            // check for new inputs
-            ProcessEvents();
-            
-            // process game logic
-            RunFrame();
+            do
+            {
+                // check for new inputs
+                ProcessEvents();
+
+                // process game logic
+                RunFrame();
+            } while(--ticsToRun > 0);
 
             // draw scene
             DrawFrame();
 
+            int afterms = kexMath::Sec2MSec(kex::cTimer->GetMS());
+            ticsToRun = kexMath::MSec2Sec((afterms - framemsec) / clockspeed);
+
             // update ticks
             UpdateTicks();
+            framemsec = kexMath::Sec2MSec(kex::cTimer->GetMS());
         }
 
         prevmsec = nextmsec;

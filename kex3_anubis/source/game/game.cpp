@@ -21,6 +21,7 @@
 #include "titlescreen.h"
 #include "localization.h"
 #include "world.h"
+#include "player.h"
 
 static kexGame gameLocal;
 kexGame *kex::cGame = &gameLocal;
@@ -59,6 +60,7 @@ kexGame::kexGame(void)
     this->titleScreen = new kexTitleScreen;
     this->translation = new kexTranslation;
     this->world = new kexWorld;
+    this->player = new kexPlayer;
 }
 
 //
@@ -70,6 +72,7 @@ kexGame::~kexGame(void)
     delete titleScreen;
     delete translation;
     delete world;
+    delete player;
 }
 
 //
@@ -84,6 +87,7 @@ void kexGame::Init(void)
     titleScreen->Init();
     translation->Init();
 
+    player->Reset();
     gameState = GS_TITLE;
 }
 
@@ -111,6 +115,7 @@ void kexGame::Tick(void)
     default:
         break;
     }
+
     ticks++;
 }
 
@@ -132,29 +137,26 @@ void kexGame::Draw(void)
 }
 
 //
-// kexGame::ProcessActions
-//
-
-void kexGame::ProcessActions(inputEvent_t *ev)
-{
-    switch(ev->type)
-    {
-    case ev_keydown:
-        kex::cActions->ExecuteCommand(ev->data1, false);
-        break;
-
-    case ev_keyup:
-        kex::cActions->ExecuteCommand(ev->data1, true);
-        break;
-    }
-}
-
-//
 // kexGame::ProcessInput
 //
 
 bool kexGame::ProcessInput(inputEvent_t *ev)
 {
+    switch(ev->type)
+    {
+    case ev_keydown:
+    case ev_mousedown:
+        kex::cActions->ExecuteCommand(ev->data1, false, ev->type);
+        break;
+
+    case ev_keyup:
+    case ev_mouseup:
+        kex::cActions->ExecuteCommand(ev->data1, true, ev->type);
+        break;
+    }
+
+    player->Cmd().BuildCommands();
+
     switch(gameState)
     {
     case GS_TITLE:

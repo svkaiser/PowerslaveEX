@@ -63,7 +63,7 @@ public:
     void                    AddAction(byte id, const char *name);
     bool                    ActionExists(const char *name);
     void                    WriteBindings(FILE *file);
-    void                    ExecuteCommand(int key, bool up);
+    void                    ExecuteCommand(int key, bool up, const int eventType);
     void                    ExecuteMouseCommand(int button, bool up);
     int                     GetKeyCode(char *key);
     char                    *GetKeyName(int key);

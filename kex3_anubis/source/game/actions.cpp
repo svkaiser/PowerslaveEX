@@ -133,6 +133,19 @@ static keyinfo_t keynames[] =
     { 0,                    NULL }
 };
 
+static keyinfo_t mousenames[] =
+{
+    { KMSB_LEFT+NUMKEYBOARDKEYS,        "mouse_left" },
+    { KMSB_MIDDLE+NUMKEYBOARDKEYS,      "mouse_middle" },
+    { KMSB_RIGHT+NUMKEYBOARDKEYS,       "mouse_right" },
+    { KMSB_MISC1+NUMKEYBOARDKEYS,       "mouse_misc1" },
+    { KMSB_MISC2+NUMKEYBOARDKEYS,       "mouse_misc2" },
+    { KMSB_MISC3+NUMKEYBOARDKEYS,       "mouse_misc3" },
+    { KMSB_MISC4+NUMKEYBOARDKEYS,       "mouse_misc4" },
+    { KMSB_MISC5+NUMKEYBOARDKEYS,       "mouse_misc5" },
+    { 0,                                NULL }
+};
+
 //
 // bind
 //
@@ -207,6 +220,14 @@ int kexInputAction::GetKeyCode(char *key)
         }
     }
 
+    for(pkey = mousenames; pkey->name; pkey++)
+    {
+        if(!strcmp(key, pkey->name))
+        {
+            return pkey->code;
+        }
+    }
+
     return -1;
 }
 
@@ -219,6 +240,14 @@ char *kexInputAction::GetKeyName(int key)
     keyinfo_t *pkey;
 
     for(pkey = keynames; pkey->name; pkey++)
+    {
+        if(key == pkey->code)
+        {
+            return (char*)pkey->name;
+        }
+    }
+
+    for(pkey = mousenames; pkey->name; pkey++)
     {
         if(key == pkey->code)
         {
@@ -319,10 +348,15 @@ bool kexInputAction::ActionExists(const char *name)
 // kexInputAction::ExecuteCommand
 //
 
-void kexInputAction::ExecuteCommand(int key, bool keyup)
+void kexInputAction::ExecuteCommand(int key, bool keyup, const int eventType)
 {
     keycmd_t *keycmd;
     cmdlist_t *cmd;
+
+    if(eventType == ev_mousedown || eventType == ev_mouseup)
+    {
+        key += NUMKEYBOARDKEYS;
+    }
 
     keycmd = &keycmds[key];
 
