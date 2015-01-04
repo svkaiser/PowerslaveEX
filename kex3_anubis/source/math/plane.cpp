@@ -225,6 +225,40 @@ const kexPlane::planeAxis_t kexPlane::BestAxis(void) const
 }
 
 //
+// kexPlane::operator[]
+//
+
+float kexPlane::operator[](int index) const
+{
+    assert(index >= 0 && index < 4);
+    return (&a)[index];
+}
+
+//
+// kexPlane::operator[]
+//
+
+float &kexPlane::operator[](int index)
+{
+    assert(index >= 0 && index < 4);
+    return (&a)[index];
+}
+
+//
+// kexPlane::operator=
+//
+
+kexPlane &kexPlane::operator=(const kexPlane &p)
+{
+    a = p.a;
+    b = p.b;
+    c = p.c;
+    d = p.d;
+    
+    return *this;
+}
+
+//
 // kexPlane::GetInclination
 //
 
