@@ -297,6 +297,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\frustum.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\image.cpp"
 					>
 				</File>
@@ -310,6 +314,10 @@
 				</File>
 				<File
 					RelativePath="..\source\renderer\renderScreen.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\renderView.cpp"
 					>
 				</File>
 				<File
@@ -531,6 +539,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\frustum.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\image.h"
 					>
 				</File>
@@ -548,6 +560,10 @@
 				</File>
 				<File
 					RelativePath="..\source\renderer\renderScreen.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\renderView.h"
 					>
 				</File>
 				<File
