@@ -15,7 +15,7 @@
 #ifndef __CPUVERTEXLIST_H__
 #define __CPUVERTEXLIST_H__
 
-#define CPU_VERT_MAXSIZE        512
+#define CPU_VERT_MAXSIZE        0x10000
 
 #define CPU_VERT_NUM_XYZ        CPU_VERT_MAXSIZE * 3
 #define CPU_VERT_NUM_COORDS     CPU_VERT_MAXSIZE * 2
