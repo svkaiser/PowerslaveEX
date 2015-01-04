@@ -15,31 +15,45 @@
 #ifndef __RENDERVIEW_H__
 #define __RENDERVIEW_H__
 
+#include "frustum.h"
+
 class kexRenderView
 {
 public:
     kexRenderView(void);
     ~kexRenderView(void);
 
-    kexVec3         &Origin(void) { return origin; }
-    kexAngle        &Angle(void) { return angle; }
-    kexVec3         &Forward(void) { return forward; }
-    kexVec3         &Right(void) { return right; }
-    kexVec3         &Up(void) { return up; }
-    kexMatrix       &ProjectionView(void) { return projectionView; }
-    kexMatrix       &ModelView(void) { return modelView; }
-    kexFrustum      &Frustum(void) { return frustum; }
+    kexVec3             &Origin(void) { return origin; }
+    kexAngle            &Yaw(void) { return yaw; }
+    kexAngle            &Pitch(void) { return pitch; }
+    kexAngle            &Roll(void) { return roll; }
+    kexVec3             &Forward(void) { return forward; }
+    kexVec3             &Right(void) { return right; }
+    kexVec3             &Up(void) { return up; }
+    kexMatrix           &ProjectionView(void) { return projectionView; }
+    kexMatrix           &ModelView(void) { return modelView; }
+    kexFrustum          &Frustum(void) { return frustum; }
+    kexQuat             &Rotation(void) { return rotation; }
+
+    void                Render(void);
+
+    static const float  Z_NEAR;
 
 private:
-    kexVec3         origin;
-    kexAngle        angle;
-    kexVec3         forward;
-    kexVec3         right;
-    kexVec3         up;
-    kexMatrix       projectionView;
-    kexMatrix       modelView;
-    kexFrustum      frustum;
-    float           fov;
+    void                SetupMatrices(void);
+
+    kexVec3             origin;
+    kexAngle            yaw;
+    kexAngle            pitch;
+    kexAngle            roll;
+    kexVec3             forward;
+    kexVec3             right;
+    kexVec3             up;
+    kexMatrix           projectionView;
+    kexMatrix           modelView;
+    kexQuat             rotation;
+    kexFrustum          frustum;
+    float               fov;
 };
 
 #endif

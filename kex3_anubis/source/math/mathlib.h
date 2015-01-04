@@ -231,7 +231,6 @@ public:
     float                   DistanceSq(const kexVec3 &vec) const;
     float                   Distance(const kexVec3 &vec) const;
     kexVec3                 &Normalize(void);
-    kexAngle                PointAt(kexVec3 &location) const;
     kexVec3                 Lerp(const kexVec3 &next, const float movement) const;
     kexVec3                 &Lerp(const kexVec3 &next, const float movement);
     kexVec3                 &Lerp(const kexVec3 &start, const kexVec3 &next, const float movement);
@@ -325,6 +324,9 @@ public:
     kexMatrix               &SetTranslation(const kexVec3 &vector);
     kexMatrix               &AddTranslation(const float x, const float y, const float z);
     kexMatrix               &AddTranslation(const kexVec3 &vector);
+    void                    RotateX(float angle);
+    void                    RotateY(float angle);
+    void                    RotateZ(float angle);
     kexMatrix               &Scale(const float x, const float y, const float z);
     kexMatrix               &Scale(const kexVec3 &vector);
     static kexMatrix        Scale(const kexMatrix &mtx, const float x, const float y, const float z);
@@ -417,44 +419,28 @@ class kexAngle
 {
 public:
     kexAngle(void);
-    kexAngle(const float yaw, const float pitch, const float roll);
-    kexAngle(const kexVec3 &vector);
-    kexAngle(const kexAngle &an);
+    kexAngle(const float f);
 
-    void                    Clear(void);
-    kexAngle                &Round(void);
-    kexAngle                &Clamp180(void);
-    kexAngle                &Clamp180Invert(void);
-    kexAngle                &Clamp180InvertSum(const kexAngle &angle);
-    kexAngle                Diff(kexAngle &angle);
-    void                    ToAxis(kexVec3 *forward, kexVec3 *up, kexVec3 *right) const;
-    kexVec3                 ToForwardAxis(void) const;
-    kexVec3                 ToUpAxis(void) const;
-    kexVec3                 ToRightAxis(void) const;
-    const kexVec3           &ToVec3(void) const;
-    kexVec3                 &ToVec3(void);
-    kexQuat                 ToQuat(void);
+    void                    Clamp(void);
+    static void             Clamp(float &f);
+    float                   Diff(const float f);
+    float                   Diff(const kexAngle &ang);
 
-    static float            Round(float angle);
-    static void             Clamp(float *angle);
-    static float            ClampInvert(float angle);
-    static float            ClampInvertSums(float angle1, float angle2);
-    static float            DiffAngles(float angle1, float angle2);
+    operator                float (void) { return an; }
 
-    kexAngle                operator+(const kexAngle &angle);
-    kexAngle                operator-(const kexAngle &angle);
-    kexAngle                &operator+=(const kexAngle &angle);
-    kexAngle                &operator-=(const kexAngle &angle);
-    kexAngle                &operator=(const kexAngle &angle);
-    kexAngle                &operator=(const kexVec3 &vector);
-    kexAngle                &operator=(const float *vecs);
-    kexAngle                operator-(void);
-    float                   operator[](int index) const;
-    float                   &operator[](int index);
+    kexAngle                operator+(const float f) const;
+    kexAngle                &operator+=(const float f);
+    kexAngle                operator-(const float f) const;
+    kexAngle                &operator-=(const float f);
+    kexAngle                operator+(const kexAngle &ang) const;
+    kexAngle                &operator+=(const kexAngle &ang);
+    kexAngle                operator-(const kexAngle &ang) const;
+    kexAngle                &operator-=(const kexAngle &ang);
+    kexAngle                &operator=(const float f);
+    kexAngle                &operator=(const kexAngle &ang);
+    kexAngle                operator-(void) const;
 
-    float                   yaw;
-    float                   pitch;
-    float                   roll;
+    float                   an;
 };
 
 class kexBBox

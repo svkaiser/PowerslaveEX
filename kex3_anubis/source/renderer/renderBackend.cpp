@@ -270,6 +270,26 @@ void kexRenderBackend::SetOrtho(void)
 }
 
 //
+// kexRenderBackend::LoadProjectionMatrix
+//
+
+void kexRenderBackend::LoadProjectionMatrix(kexMatrix &matrix)
+{
+    dglMatrixMode(GL_PROJECTION);
+    dglLoadMatrixf(matrix.ToFloatPtr());
+}
+
+//
+// kexRenderBackend::LoadModelViewMatrix
+//
+
+void kexRenderBackend::LoadModelViewMatrix(kexMatrix &matrix)
+{
+    dglMatrixMode(GL_MODELVIEW);
+    dglLoadMatrixf(matrix.ToFloatPtr());
+}
+
+//
 // kexRenderBackend::SwapBuffers
 //
 

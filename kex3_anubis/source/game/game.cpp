@@ -17,6 +17,7 @@
 
 #include "kexlib.h"
 #include "renderMain.h"
+#include "renderView.h"
 #include "game.h"
 #include "titlescreen.h"
 #include "localization.h"
@@ -57,10 +58,11 @@ kexGame::kexGame(void)
     this->ticks     = 0;
     this->gameState = GS_NONE;
 
-    this->titleScreen = new kexTitleScreen;
-    this->translation = new kexTranslation;
-    this->world = new kexWorld;
-    this->player = new kexPlayer;
+    this->titleScreen   = new kexTitleScreen;
+    this->translation   = new kexTranslation;
+    this->world         = new kexWorld;
+    this->player        = new kexPlayer;
+    this->renderView    = new kexRenderView;
 }
 
 //
@@ -73,6 +75,7 @@ kexGame::~kexGame(void)
     delete translation;
     delete world;
     delete player;
+    delete renderView;
 }
 
 //
@@ -129,6 +132,9 @@ void kexGame::Draw(void)
     {
     case GS_TITLE:
         titleScreen->Draw();
+        break;
+
+    case GS_LEVEL:
         break;
 
     default:

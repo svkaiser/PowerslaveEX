@@ -20,6 +20,7 @@ class kexTitleScreen;
 class kexTranslation;
 class kexWorld;
 class kexPlayer;
+class kexRenderView;
 
 typedef enum
 {
@@ -44,6 +45,7 @@ public:
     kexTitleScreen      *TitleScreen(void) { return titleScreen; }
     kexTranslation      *Translation(void) { return translation; }
     kexWorld            *World(void) { return world; }
+    kexRenderView       *RenderView(void) { return renderView; }
     kexFont             *SmallFont(void) { return smallFont; }
     kexFont             *BigFont(void) { return bigFont; }
     const int           GetTicks(void) const { return ticks; }
@@ -65,6 +67,7 @@ private:
     int                 ticks;
     gameState_t         gameState;
     kexPlayer           *player;
+    kexRenderView       *renderView;
 };
 
 #endif

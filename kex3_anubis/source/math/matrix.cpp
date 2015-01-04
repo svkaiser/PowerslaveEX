@@ -275,6 +275,95 @@ kexMatrix kexMatrix::Scale(const kexMatrix &mtx, const float x, const float y, c
 }
 
 //
+// kexMatrix::RotateX
+//
+
+void kexMatrix::RotateX(float angle)
+{
+    float s;
+    float c;
+    float tm1;
+    float tm5;
+    float tm9;
+    float tm13;
+
+    s = kexMath::Sin(angle);
+    c = kexMath::Cos(angle);
+
+    tm1     = vectors[0].y;
+    tm5     = vectors[1].y;
+    tm9     = vectors[2].y;
+    tm13    = vectors[3].y;
+
+    vectors[0].y = tm1  * c - s * vectors[0].z;
+    vectors[0].z = c * vectors[0].z + tm1  * s;
+    vectors[1].y = tm5  * c - s * vectors[1].z;
+    vectors[1].z = c * vectors[1].z + tm5  * s;
+    vectors[2].y = tm9  * c - s * vectors[2].z;
+    vectors[2].z = c * vectors[2].z + tm9  * s;
+    vectors[3].y = tm13 * c - s * vectors[3].z;
+    vectors[3].z = c * vectors[3].z + tm13 * s;
+}
+
+//
+// kexMatrix::RotateY
+//
+
+void kexMatrix::RotateY(float angle)
+{
+    float s;
+    float c;
+    float tm0;
+    float tm1;
+    float tm2;
+
+    s = kexMath::Sin(angle);
+    c = kexMath::Cos(angle);
+
+    tm0     = vectors[0].x;
+    tm1     = vectors[0].y;
+    tm2     = vectors[0].z;
+
+    vectors[0].x = tm0 * c - s * vectors[2].x;
+    vectors[2].x = c * vectors[2].x + tm0 * s;
+    vectors[0].y = tm1 * c - s * vectors[2].y;
+    vectors[2].y = c * vectors[2].y + tm1 * s;
+    vectors[0].z = tm2 * c - s * vectors[2].z;
+    vectors[2].z = c * vectors[2].z + tm2 * s;
+}
+
+//
+// kexMatrix::RotateZ
+//
+
+void kexMatrix::RotateZ(float angle)
+{
+    float s;
+    float c;
+    float tm0;
+    float tm8;
+    float tm4;
+    float tm12;
+
+    s = kexMath::Sin(angle);
+    c = kexMath::Cos(angle);
+
+    tm0     = vectors[0].x;
+    tm4     = vectors[1].x;
+    tm8     = vectors[2].x;
+    tm12    = vectors[3].x;
+
+    vectors[0].x = s * vectors[0].z + tm0  * c;
+    vectors[0].z = c * vectors[0].z - tm0  * s;
+    vectors[1].x = s * vectors[1].z + tm4  * c;
+    vectors[1].z = c * vectors[1].z - tm4  * s;
+    vectors[2].x = s * vectors[2].z + tm8  * c;
+    vectors[2].z = c * vectors[2].z - tm8  * s;
+    vectors[3].x = s * vectors[3].z + tm12 * c;
+    vectors[3].z = c * vectors[3].z - tm12 * s;
+}
+
+//
 // kexMatrix::Transpose
 //
 

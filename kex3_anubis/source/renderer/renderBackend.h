@@ -150,6 +150,8 @@ public:
     void                            ResetViewPort(void);
     void                            SetDrawBuffer(const GLenum state);
     void                            SetReadBuffer(const GLenum state);
+    void                            LoadProjectionMatrix(kexMatrix &matrix);
+    void                            LoadModelViewMatrix(kexMatrix &matrix);
 
     const int                       MaxTextureUnits(void) const { return maxTextureUnits; }
     const int                       MaxTextureSize(void) const { return maxTextureSize; }

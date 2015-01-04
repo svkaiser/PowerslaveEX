@@ -51,7 +51,6 @@ void kexPlayer::Reset(void)
     health = maxHealth;
     ankahs = 0;
 
-    angle.Clear();
     cmd.Reset();
 
     bob = 0;

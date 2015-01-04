@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Player commands
+//      World/Level logic
 //
 
 #include "kexlib.h"

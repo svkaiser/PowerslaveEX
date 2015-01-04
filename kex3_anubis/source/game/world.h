@@ -15,6 +15,70 @@
 #ifndef __WORLD_H__
 #define __WORLD_H__
 
+typedef struct
+{
+    short       x;
+    short       y;
+    short       z;
+    byte        rgba[4];
+} mapVertex_t;
+
+typedef struct
+{
+    word        faceStart;
+    word        faceEnd;
+    word        lightLevel;
+    short       ceilingHeight;
+    short       floorHeight;
+    float       ceilingSlope;
+    float       floorSlope;
+    word        flags;
+} mapSector_t;
+
+typedef struct
+{
+    short       sstart;
+    short       send;
+    short       sector;
+    float       angle;
+    kexPlane    plane;
+    word        flags;
+    short       tag;
+    word        pstart;
+    word        pend;
+} mapFace_t;
+
+typedef struct
+{
+    byte        indices[4];
+    short       texture;
+    short       flipped;
+    word        tcoord;
+} mapPoly_t;
+
+typedef struct
+{
+    float       uv[4][2];
+} mapTexCoords_t;
+
+typedef struct
+{
+    short       type;
+    short       sector;
+    short       tag;
+    short       unknown;
+} mapEvent_t;
+
+typedef struct
+{
+    short       type;
+    short       sector;
+    short       x;
+    short       y;
+    short       z;
+    float       angle;
+} mapActor_t;
+
 class kexWorld
 {
 public:
@@ -22,70 +86,6 @@ public:
     ~kexWorld(void);
 
     bool                LoadMap(const char *mapname);
-
-    typedef struct
-    {
-        short       x;
-        short       y;
-        short       z;
-        byte        rgba[4];
-    } mapVertex_t;
-
-    typedef struct
-    {
-        word        faceStart;
-        word        faceEnd;
-        word        lightLevel;
-        short       ceilingHeight;
-        short       floorHeight;
-        float       ceilingSlope;
-        float       floorSlope;
-        word        flags;
-    } mapSector_t;
-
-    typedef struct
-    {
-        short       sstart;
-        short       send;
-        short       sector;
-        float       angle;
-        kexPlane    plane;
-        word        flags;
-        short       tag;
-        word        pstart;
-        word        pend;
-    } mapFace_t;
-
-    typedef struct
-    {
-        byte        indices[4];
-        short       texture;
-        short       flipped;
-        word        tcoord;
-    } mapPoly_t;
-
-    typedef struct
-    {
-        float       uv[4][2];
-    } mapTexCoords_t;
-
-    typedef struct
-    {
-        short       type;
-        short       sector;
-        short       tag;
-        short       unknown;
-    } mapEvent_t;
-
-    typedef struct
-    {
-        short       type;
-        short       sector;
-        short       x;
-        short       y;
-        short       z;
-        float       angle;
-    } mapActor_t;
 
     const unsigned int  NumVertices(void) const { return numVertices; }
     const unsigned int  NumSectors(void) const { return numSectors; }

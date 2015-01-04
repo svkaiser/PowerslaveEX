@@ -676,17 +676,6 @@ kexVec3 &kexVec3::Normalize(void)
 }
 
 //
-// kexVec3::PointAt
-//
-
-kexAngle kexVec3::PointAt(kexVec3 &location) const
-{
-    kexVec3 dir = (*this - location).Normalize();
-
-    return kexAngle(dir.ToYaw(), dir.ToPitch(), 0);
-}
-
-//
 // kexVec3::Lerp
 //
 

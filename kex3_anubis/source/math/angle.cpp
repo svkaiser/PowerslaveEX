@@ -25,319 +25,184 @@
 
 kexAngle::kexAngle(void)
 {
-    Clear();
-}
-
-//
-// kexAngle::Clear
-//
-
-void kexAngle::Clear(void)
-{
-    this->yaw   = 0;
-    this->pitch = 0;
-    this->roll  = 0;
+    an = 0;
 }
 
 //
 // kexAngle::kexAngle
 //
 
-kexAngle::kexAngle(const float yaw, const float pitch, const float roll)
+kexAngle::kexAngle(const float f)
 {
-    this->yaw   = yaw;
-    this->pitch = pitch;
-    this->roll  = roll;
+    an = f;
+    Clamp();
 }
 
 //
-// kexAngle::kexAngle
+// kexAngle::Clamp
 //
 
-kexAngle::kexAngle(const kexVec3 &vector)
+void kexAngle::Clamp(void)
 {
-    this->yaw   = vector.x;
-    this->pitch = vector.y;
-    this->roll  = vector.z;
-
-    Clamp180();
+    if(an < -kexMath::pi) for(; an < -kexMath::pi; an = an + FULLCIRCLE);
+    if(an >  kexMath::pi) for(; an >  kexMath::pi; an = an - FULLCIRCLE);
 }
 
 //
-// kexAngle::kexAngle
+// kexAngle::Clamp
 //
 
-kexAngle::kexAngle(const kexAngle &an)
+void kexAngle::Clamp(float &f)
 {
-    this->yaw   = an.yaw;
-    this->pitch = an.pitch;
-    this->roll  = an.roll;
-}
-
-//
-// kexAngle::Clamp180
-//
-
-kexAngle &kexAngle::Clamp180(void)
-{
-#define CLAMP180(x)                                                     \
-    if(x < -kexMath::pi) for(; x < -kexMath::pi; x = x + FULLCIRCLE);   \
-    if(x >  kexMath::pi) for(; x >  kexMath::pi; x = x - FULLCIRCLE)
-    CLAMP180(yaw);
-    CLAMP180(pitch);
-    CLAMP180(roll);
-#undef CLAMP180
-
-    return *this;
-}
-
-//
-// kexAngle::Clamp180Invert
-//
-
-kexAngle &kexAngle::Clamp180Invert(void)
-{
-#define CLAMP180(x)                                             \
-    for(; x < -kexMath::pi; x = x + FULLCIRCLE);                \
-    for(; x >  kexMath::pi; x = x - FULLCIRCLE)
-    CLAMP180(yaw);
-    CLAMP180(pitch);
-    CLAMP180(roll);
-#undef CLAMP180
-
-    yaw     = -yaw;
-    pitch   = -pitch;
-    roll    = -roll;
-
-    return *this;
-}
-
-//
-// kexAngle::Clamp180InvertSum
-//
-
-kexAngle &kexAngle::Clamp180InvertSum(const kexAngle &angle)
-{
-    kexAngle an = angle;
-
-    an.Clamp180Invert();
-
-    an.yaw      += this->yaw;
-    an.pitch    += this->pitch;
-    an.roll     += this->roll;
-
-    an.Clamp180Invert();
-
-    this->yaw   = an.yaw;
-    this->pitch = an.pitch;
-    this->roll  = an.roll;
-
-    return *this;
-}
-
-//
-// kexAngle::Round
-//
-
-kexAngle &kexAngle::Round(void)
-{
-#define ROUND(x)                                                \
-    x = kexMath::Deg2Rad((360.0f / 65536.0f) *                  \
-    ((int)(kexMath::Rad2Deg(x) * (65536.0f / 360.0f)) & 65535))
-    yaw     = ROUND(yaw);
-    pitch   = ROUND(pitch);
-    roll    = ROUND(roll);
-#undef ROUND
-
-    return Clamp180();
-}
-
-//
-// kexAngle::Diff
-//
-
-kexAngle kexAngle::Diff(kexAngle &angle)
-{
-    float an;
-    kexAngle out;
-
-    Clamp180();
-    angle.Clamp180();
-
-#define DIFF(x)                     \
-    if(x <= angle.x) {              \
-        an = angle.x + FULLCIRCLE;  \
-        if(x - angle.x > an - x) {  \
-            out.x = x - an;         \
-        }                           \
-        else {                      \
-            out.x = x - angle.x;    \
-        }                           \
-    }                               \
-    else {                          \
-        an = angle.x - FULLCIRCLE;  \
-        if(angle.x - x <= x - an) { \
-            out.x = x - angle.x;    \
-        }                           \
-        else {                      \
-            out.x = x - an;         \
-        }                           \
-    }
-    DIFF(yaw);
-    DIFF(pitch);
-    DIFF(roll);
-#undef DIFF
-
-    return out;
-}
-
-//
-// kexAngle::ToAxis
-//
-
-void kexAngle::ToAxis(kexVec3 *forward, kexVec3 *up, kexVec3 *right) const
-{
-    float sy = kexMath::Sin(yaw);
-    float cy = kexMath::Cos(yaw);
-    float sp = kexMath::Sin(pitch);
-    float cp = kexMath::Cos(pitch);
-    float sr = kexMath::Sin(roll);
-    float cr = kexMath::Cos(roll);
-
-    if(forward)
-    {
-        forward->x  = sy * cp;
-        forward->y  = sp;
-        forward->z  = cy * cp;
-    }
-    if(right)
-    {
-        right->x    = sr * sp * sy + cr * cy;
-        right->y    = sr * cp;
-        right->z    = sr * sp * cy + cr * -sy;
-    }
-    if(up)
-    {
-        up->x       = cr * sp * sy + -sr * cy;
-        up->y       = cr * cp;
-        up->z       = cr * sp * cy + -sr * -sy;
-    }
-}
-
-//
-// kexAngle::ToForwardAxis
-//
-
-kexVec3 kexAngle::ToForwardAxis(void) const
-{
-    kexVec3 vec;
-
-    ToAxis(&vec, NULL, NULL);
-    return vec;
-}
-
-//
-// kexAngle::ToUpAxis
-//
-
-kexVec3 kexAngle::ToUpAxis(void) const
-{
-    kexVec3 vec;
-
-    ToAxis(NULL, &vec, NULL);
-    return vec;
-}
-
-//
-// kexAngle::ToRightAxis
-//
-
-kexVec3 kexAngle::ToRightAxis(void) const
-{
-    kexVec3 vec;
-
-    ToAxis(NULL, NULL, &vec);
-    return vec;
-}
-
-//
-// kexAngle::ToVec3
-//
-
-const kexVec3 &kexAngle::ToVec3(void) const
-{
-    return *reinterpret_cast<const kexVec3*>(&yaw);
-}
-
-//
-// kexAngle::ToVec3
-//
-
-kexVec3 &kexAngle::ToVec3(void)
-{
-    return *reinterpret_cast<kexVec3*>(&yaw);
-}
-
-//
-// kexAngle::ToQuat
-//
-
-kexQuat kexAngle::ToQuat(void)
-{
-    return
-        (kexQuat(pitch, kexVec3::vecRight) *
-         (kexQuat(yaw, kexVec3::vecUp) *
-          kexQuat(roll, kexVec3::vecForward)));
+    if(f < -kexMath::pi) for(; f < -kexMath::pi; f = f + FULLCIRCLE);
+    if(f >  kexMath::pi) for(; f >  kexMath::pi; f = f - FULLCIRCLE);
 }
 
 //
 // kexAngle::operator+
 //
 
-kexAngle kexAngle::operator+(const kexAngle &angle)
+kexAngle kexAngle::operator+(const float f) const
 {
-    return kexAngle(yaw + angle.yaw, pitch + angle.pitch, roll + angle.roll);
+    return kexAngle(an + f);
+}
+
+//
+// kexAngle::operator+
+//
+
+kexAngle &kexAngle::operator+=(const float f)
+{
+    float fa = f;
+    Clamp(fa);
+    an += fa;
+    Clamp();
+    return *this;
 }
 
 //
 // kexAngle::operator-
 //
 
-kexAngle kexAngle::operator-(const kexAngle &angle)
+kexAngle kexAngle::operator-(const float f) const
 {
-    return kexAngle(yaw - angle.yaw, pitch - angle.pitch, roll - angle.roll);
+    float fa = f;
+    Clamp(fa);
+    return kexAngle(an - fa);
 }
 
 //
 // kexAngle::operator-
 //
 
-kexAngle kexAngle::operator-(void)
+kexAngle &kexAngle::operator-=(const float f)
 {
-    return kexAngle(-yaw, -pitch, -roll);
-}
-
-//
-// kexAngle::operator+=
-//
-
-kexAngle &kexAngle::operator+=(const kexAngle &angle)
-{
-    yaw     += angle.yaw;
-    pitch   += angle.pitch;
-    roll    += angle.roll;
+    float fa = f;
+    Clamp(fa);
+    an -= fa;
+    Clamp();
     return *this;
 }
 
 //
-// kexAngle::operator-=
+// kexAngle::operator+
 //
 
-kexAngle &kexAngle::operator-=(const kexAngle &angle)
+kexAngle kexAngle::operator+(const kexAngle &ang) const
 {
-    yaw     -= angle.yaw;
-    pitch   -= angle.pitch;
-    roll    -= angle.roll;
+    return kexAngle(an + ang.an);
+}
+
+//
+// kexAngle::operator+
+//
+
+kexAngle &kexAngle::operator+=(const kexAngle &ang)
+{
+    an += ang.an;
+    Clamp();
+    return *this;
+}
+
+//
+// kexAngle::operator-
+//
+
+kexAngle kexAngle::operator-(const kexAngle &ang) const
+{
+    return kexAngle(an - ang.an);
+}
+
+//
+// kexAngle::operator-
+//
+
+kexAngle &kexAngle::operator-=(const kexAngle &ang)
+{
+    an -= ang.an;
+    Clamp();
+    return *this;
+}
+
+//
+// kexAngle::Diff
+//
+
+float kexAngle::Diff(const float f)
+{
+    float an1;
+    float an2;
+    float fa = f;
+
+    Clamp(fa);
+
+    an2 = 0.0f;
+
+    if(an <= fa)
+    {
+        an1 = fa + FULLCIRCLE;
+        if(an - fa > an1 - an)
+        {
+            an2 = an - an1;
+        }
+        else
+        {
+            an2 = an - fa;
+        }
+    }
+    else
+    {
+        an1 = fa - FULLCIRCLE;
+        if(fa - an <= an - an1)
+        {
+            an2 = an - fa;
+        }
+        else
+        {
+            an2 = an - an1;
+        }
+    }
+
+    return an2;
+}
+
+//
+// kexAngle::Diff
+//
+
+float kexAngle::Diff(const kexAngle &ang)
+{
+    return Diff(ang.an);
+}
+
+//
+// kexAngle::operator=
+//
+
+kexAngle &kexAngle::operator=(const float f)
+{
+    an = f;
+    Clamp();
     return *this;
 }
 
@@ -345,54 +210,17 @@ kexAngle &kexAngle::operator-=(const kexAngle &angle)
 // kexAngle::operator=
 //
 
-kexAngle &kexAngle::operator=(const kexAngle &angle)
+kexAngle &kexAngle::operator=(const kexAngle &ang)
 {
-    yaw     = angle.yaw;
-    pitch   = angle.pitch;
-    roll    = angle.roll;
+    an = ang.an;
     return *this;
 }
 
 //
-// kexAngle::operator=
+// kexAngle::operator-
 //
 
-kexAngle &kexAngle::operator=(const kexVec3 &vector)
+kexAngle kexAngle::operator-(void) const
 {
-    yaw     = vector.x;
-    pitch   = vector.y;
-    roll    = vector.z;
-    return *this;
-}
-
-//
-// kexAngle::operator=
-//
-
-kexAngle &kexAngle::operator=(const float *vecs)
-{
-    yaw     = vecs[0];
-    pitch   = vecs[1];
-    roll    = vecs[2];
-    return *this;
-}
-
-//
-// kexAngle::operator[]
-//
-
-float kexAngle::operator[](int index) const
-{
-    assert(index >= 0 && index < 3);
-    return (&yaw)[index];
-}
-
-//
-// kexAngle::operator[]
-//
-
-float &kexAngle::operator[](int index)
-{
-    assert(index >= 0 && index < 3);
-    return (&yaw)[index];
+    return kexAngle(-an);
 }

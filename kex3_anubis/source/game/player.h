@@ -105,7 +105,8 @@ private:
 
     int16_t                 health;
     int16_t                 ankahs;
-    kexAngle                angle;
+    kexAngle                yaw;
+    kexAngle                pitch;
     float                   bob;
     kexVec2                 weaponBob;
 
