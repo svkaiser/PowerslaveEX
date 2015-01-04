@@ -42,7 +42,7 @@ kexTranslation::~kexTranslation(void)
 void kexTranslation::Init(void)
 {
     kexBinFile tranfile;
-    int startOffs;
+    unsigned int startOffs;
     int offset;
 
     if(!tranfile.Open("localization/localization.dat"))

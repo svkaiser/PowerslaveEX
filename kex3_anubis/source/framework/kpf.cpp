@@ -230,6 +230,7 @@ int kexPakFile::OpenFile(const char *filename, byte **data, kexHeapBlock &hb) co
         }
     }
 
+    *data = NULL;
     return 0;
 }
 
