@@ -178,7 +178,7 @@ void kexSession::RunGame(void)
 
         curtime += msec;
 
-        if(curtime >= (int)kexMath::FrameSec(cvarClientFPS.GetFloat()))
+        if(curtime >= kexMath::FrameSec(cvarClientFPS.GetInt()))
         {
             deltaTime = kexMath::MSec2Sec((float)curtime);
             kexMath::Clamp(deltaTime, 0.0f, 1.0f);

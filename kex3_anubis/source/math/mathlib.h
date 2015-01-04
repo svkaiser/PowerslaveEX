@@ -56,6 +56,7 @@ public:
     static float            MSec2Sec(float x) { return x * 0.001f; }
     static int              MSec2Sec(int x) { return x / 1000; }
     static float            FrameSec(float x) { assert(x != 0); return 1000.0f / x; }
+    static int              FrameSec(int x) { assert(x != 0); return 1000 / x; }
 
     static int              Abs(int x);
     static float            Fabs(float x);
