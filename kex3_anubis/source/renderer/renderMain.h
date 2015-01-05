@@ -17,6 +17,7 @@
 
 #include "renderBackend.h"
 #include "renderScreen.h"
+#include "renderUtils.h"
 
 class kexRender
 {
@@ -25,6 +26,7 @@ public:
     static kexTextureManager    *cTextures;
     static kexCpuVertList       *cVertList;
     static kexRenderScreen      *cScreen;
+    static kexRenderUtils       *cUtils;
 };
 
 #endif

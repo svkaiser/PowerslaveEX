@@ -53,9 +53,10 @@ void kexRenderView::SetupMatrices(void)
     projectionView.SetViewProjection(kex::cSystem->VideoRatio(), fov, Z_NEAR, -1);
 
     // setup rotation matrix
-    // start off with the matrix on it's z-axis and then rotate it along the x-axis
-    kexMatrix rotMatrix(-yaw + kexMath::Deg2Rad(90), 2);
-    rotMatrix.RotateZ(-pitch - kexMath::Deg2Rad(90));
+    // start off with the matrix on it's z-axis and then rotate it along the z and y axis
+    kexMatrix rotMatrix(-pitch + kexMath::Deg2Rad(90), 2);
+    rotMatrix.RotateZ(-yaw - kexMath::Deg2Rad(90));
+    rotMatrix.RotateY(kexMath::Deg2Rad(90));
 
     // setup modelview matrix
     transform.SetTranslation(-origin);

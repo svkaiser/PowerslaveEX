@@ -321,6 +321,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\renderUtils.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\renderView.cpp"
 					>
 				</File>
@@ -572,6 +576,10 @@
 				</File>
 				<File
 					RelativePath="..\source\renderer\renderScreen.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\renderUtils.h"
 					>
 				</File>
 				<File

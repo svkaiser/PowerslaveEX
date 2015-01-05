@@ -1,6 +1,5 @@
 //
-// Copyright(C) 2007-2014 Samuel Villarreal
-// Copyright(C) 2014 Night Dive Studios, Inc.
+// Copyright(C) 2014-2015 Samuel Villarreal
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
