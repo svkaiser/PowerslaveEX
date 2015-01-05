@@ -26,7 +26,6 @@ class kexCpuVertList
 {
 public:
     kexCpuVertList(void);
-    ~kexCpuVertList(void);
 
     void                    Reset(void);
     void                    BindDrawPointers(void);
@@ -41,6 +40,15 @@ public:
                                     float x2, float y2, float z2,
                                     byte r1, byte g1, byte b1, byte a1,
                                     byte r2, byte g2, byte b2, byte a2);
+    void                    AddQuad(float x, float y, float z, float w, float h,
+                                    float s1, float t1, float s2, float t2,
+                                    byte r, byte g, byte b, byte a);
+    void                    AddQuad(float x, float y, float z, float w, float h,
+                                    byte r, byte g, byte b, byte a);
+    void                    AddQuad(float x, float y, float w, float h,
+                                    byte r, byte g, byte b, byte a);
+    void                    AddQuad(float x, float y, float z, float w, float h);
+    void                    AddQuad(float x, float y, float w, float h);
     void                    DrawElements(const bool bClearCount = true);
     void                    DrawLineElements(void);
 

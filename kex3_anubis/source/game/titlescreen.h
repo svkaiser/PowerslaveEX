@@ -17,7 +17,7 @@
 
 #include "menu.h"
 
-class kexTitleScreen
+class kexTitleScreen : public kexGameLoop
 {
 public:
     kexTitleScreen(void);
@@ -25,6 +25,7 @@ public:
 
     void                        Init(void);
     void                        Start(void);
+    void                        Stop(void);
     void                        Draw(void);
     void                        Tick(void);
     bool                        ProcessInput(inputEvent_t *ev);

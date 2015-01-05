@@ -26,14 +26,7 @@ kexCpuVertList *kexRender::cVertList = &cpuVertList;
 
 kexCpuVertList::kexCpuVertList(void)
 {
-}
-
-//
-// kexCpuVertList::~kexCpuVertList
-//
-
-kexCpuVertList::~kexCpuVertList(void)
-{
+    Reset();
 }
 
 //
@@ -148,6 +141,63 @@ void kexCpuVertList::AddLine(float x1, float y1, float z1,
     *(roverIndices++) = vertexCount;
     indiceCount++;
     AddVertex(x2, y2, z2, 0, 0, r2, g2, b2, a2);
+}
+
+//
+// kexCpuVertList::AddQuad
+//
+
+void kexCpuVertList::AddQuad(float x, float y, float z, float w, float h,
+                             float s1, float t1, float s2, float t2,
+                             byte r, byte g, byte b, byte a)
+{
+    int cnt = vertexCount;
+    
+    AddVertex(x, y, z, s1, t1, r, g, b, a);
+    AddVertex(x+w, y, z, s2, t1, r, g, b, a);
+    AddVertex(x, y+h, z, s1, t2, r, g, b, a);
+    AddVertex(x+w, y+h, z, s2, t2, r, g, b, a);
+    
+    AddTriangle(cnt+0, cnt+2, cnt+1);
+    AddTriangle(cnt+1, cnt+2, cnt+3);
+}
+
+//
+// kexCpuVertList::AddQuad
+//
+
+void kexCpuVertList::AddQuad(float x, float y, float z, float w, float h,
+                             byte r, byte g, byte b, byte a)
+{
+    AddQuad(x, y, z, w, h, 0, 0, 1, 1, r, g, b, a);
+}
+
+//
+// kexCpuVertList::AddQuad
+//
+
+void kexCpuVertList::AddQuad(float x, float y, float w, float h,
+                             byte r, byte g, byte b, byte a)
+{
+    AddQuad(x, y, 0, w, h, 0, 0, 1, 1, r, g, b, a);
+}
+
+//
+// kexCpuVertList::AddQuad
+//
+
+void kexCpuVertList::AddQuad(float x, float y, float z, float w, float h)
+{
+    AddQuad(x, y, z, w, h, 0, 0, 1, 1, 255, 255, 255, 255);
+}
+
+//
+// kexCpuVertList::AddQuad
+//
+
+void kexCpuVertList::AddQuad(float x, float y, float w, float h)
+{
+    AddQuad(x, y, 0, w, h, 0, 0, 1, 1);
 }
 
 //

@@ -55,8 +55,8 @@ void kexRenderView::SetupMatrices(void)
 
     // setup rotation quaternion
     kexQuat qroll(roll, kexVec3::vecForward);
-    kexQuat qyaw(yaw, kexVec3::vecUp);
-    kexQuat qpitch(pitch, kexVec3::vecRight);
+    kexQuat qyaw(-yaw, kexVec3::vecUp);
+    kexQuat qpitch(pitch - kexMath::Deg2Rad(90), kexVec3::vecRight);
     
     rotation = qyaw * (qpitch * qroll);
     

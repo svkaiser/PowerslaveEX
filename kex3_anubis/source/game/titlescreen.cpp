@@ -210,6 +210,16 @@ void kexTitleScreen::Start(void)
 }
 
 //
+// kexTitleScreen::Stop
+//
+
+void kexTitleScreen::Stop(void)
+{
+    kex::cInput->ToggleMouseGrab(true);
+    kex::cSession->ToggleCursor(false);
+}
+
+//
 // kexTitleScreen::FadeOut
 //
 
@@ -251,8 +261,6 @@ void kexTitleScreen::FadeDone(void)
         break;
     case TSS_NEWGAME:
         kex::cGame->SetGameState(GS_LEVEL);
-        kex::cInput->ToggleMouseGrab(true);
-        kex::cSession->ToggleCursor(false);
         break;
     default:
         break;

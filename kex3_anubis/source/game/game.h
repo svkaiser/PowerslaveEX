@@ -26,9 +26,20 @@ typedef enum
 {
     GS_NONE     = 0,
     GS_TITLE,
-    GS_OVERWORLD,
-    GS_LEVEL
+    GS_LEVEL,
+    NUMGAMESTATES
 } gameState_t;
+
+class kexGameLoop
+{
+public:
+    virtual void        Init(void) {};
+    virtual void        Start(void) {};
+    virtual void        Stop(void) {};
+    virtual void        Draw(void) {};
+    virtual void        Tick(void) {};
+    virtual bool        ProcessInput(inputEvent_t *ev) { return false; }
+};
 
 class kexGame
 {
@@ -50,7 +61,7 @@ public:
     kexFont             *BigFont(void) { return bigFont; }
     const int           GetTicks(void) const { return ticks; }
     const gameState_t   GameState(void) const { return gameState; }
-    void                SetGameState(const gameState_t state) { gameState = state; }
+    void                SetGameState(const gameState_t state) { pendingGameState = state; }
     kexPlayer           *Player(void) { return player; }
 
     void                DrawSmallString(const char *string, float x, float y, float scale, bool center,
@@ -66,8 +77,11 @@ private:
     kexWorld            *world;
     int                 ticks;
     gameState_t         gameState;
+    gameState_t         pendingGameState;
     kexPlayer           *player;
     kexRenderView       *renderView;
+    kexGameLoop         gameLoopStub;
+    kexGameLoop         *gameLoop;
 };
 
 #endif

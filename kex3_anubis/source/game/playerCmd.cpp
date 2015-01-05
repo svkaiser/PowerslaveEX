@@ -21,9 +21,8 @@
 
 kexCvar cvarMSensitivityX("cl_msensitivityx", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-X sensitivity");
 kexCvar cvarMSensitivityY("cl_msensitivityy", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-Y sensitivity");
-kexCvar cvarMAcceleration("cl_macceleration", CVF_FLOAT|CVF_CONFIG, "0", "Mouse acceleration");
 kexCvar cvarInvertLook("cl_mlookinvert", CVF_BOOL|CVF_CONFIG, "0", "Invert mouse-look");
-kexCvar cvarMSmooth("cl_mousesmooth", CVF_BOOL|CVF_CONFIG, "0", "Enables smooth mouse movement");
+kexCvar cvarMSmooth("cl_mousesmooth", CVF_INT|CVF_CONFIG, "4", 1, 4, "Set smooth mouse threshold");
 
 //
 // kexPlayerCmd::kexPlayerCmd
@@ -74,8 +73,30 @@ void kexPlayerCmd::BuildButtons(void)
 
 void kexPlayerCmd::BuildTurning(void)
 {
-    angles[0] = ((float)turnx * cvarMSensitivityX.GetFloat()) / 128.0f;
-    angles[1] = ((float)turny * cvarMSensitivityY.GetFloat()) / 128.0f;
+    static float history[4][2];
+    static int historyCount = 0;
+    int smooth;
+    
+    angles[0] = ((float)turnx * cvarMSensitivityX.GetFloat()) / 1024.0f;
+    angles[1] = ((float)turny * cvarMSensitivityY.GetFloat()) / 1024.0f;
+    
+    history[historyCount & 3][0] = angles[0];
+    history[historyCount & 3][1] = angles[1];
+    
+    smooth = cvarMSmooth.GetInt();
+    kexMath::Clamp(smooth, 1, 4);
+    cvarMSmooth.Set(smooth);
+    
+    for(int i = 0; i < cvarMSmooth.GetInt(); ++i)
+    {
+        angles[0] += (float)history[(historyCount - i + 4) & 3][0];
+        angles[1] += (float)history[(historyCount - i + 4) & 3][1];
+    }
+    
+    angles[0] /= cvarMSmooth.GetFloat();
+    angles[1] /= cvarMSmooth.GetFloat();
+    
+    historyCount++;
 }
 
 //

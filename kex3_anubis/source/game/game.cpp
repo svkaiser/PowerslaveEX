@@ -53,10 +53,12 @@ COMMAND(map)
 
 kexGame::kexGame(void)
 {
-    this->smallFont = NULL;
-    this->bigFont   = NULL;
-    this->ticks     = 0;
-    this->gameState = GS_NONE;
+    this->smallFont         = NULL;
+    this->bigFont           = NULL;
+    this->ticks             = 0;
+    this->gameState         = GS_NONE;
+    this->pendingGameState  = GS_NONE;
+    this->gameLoop          = &this->gameLoopStub;
 
     this->titleScreen   = new kexTitleScreen;
     this->translation   = new kexTranslation;
@@ -91,7 +93,7 @@ void kexGame::Init(void)
     translation->Init();
 
     player->Reset();
-    gameState = GS_TITLE;
+    pendingGameState = GS_TITLE;
 }
 
 //
@@ -109,22 +111,32 @@ void kexGame::Shutdown(void)
 
 void kexGame::Tick(void)
 {
-    player->Cmd().BuildCommands();
-
-    switch(gameState)
+    if(pendingGameState != GS_NONE)
     {
-    case GS_TITLE:
-        titleScreen->Tick();
-        break;
-
-    case GS_LEVEL:
-        break;
-
-    default:
-        break;
+        gameLoop->Stop();
+        
+        switch(pendingGameState)
+        {
+            case GS_TITLE:
+                gameLoop = titleScreen;
+                break;
+                
+            default:
+                gameLoop = &gameLoopStub;
+                break;
+        }
+        
+        gameLoop->Start();
+        gameState = pendingGameState;
+        pendingGameState = GS_NONE;
     }
-
+    
+    player->Cmd().BuildCommands();
+    
+    gameLoop->Tick();
+    
     player->Cmd().Reset();
+    
     ticks++;
 }
 
@@ -136,10 +148,6 @@ void kexGame::Draw(void)
 {
     switch(gameState)
     {
-    case GS_TITLE:
-        titleScreen->Draw();
-        break;
-
     case GS_LEVEL:
         {
             // TEMP
@@ -153,6 +161,7 @@ void kexGame::Draw(void)
         break;
 
     default:
+        gameLoop->Draw();
         break;
     }
 }
@@ -180,20 +189,7 @@ bool kexGame::ProcessInput(inputEvent_t *ev)
         break;
     }
 
-    switch(gameState)
-    {
-    case GS_TITLE:
-       if(titleScreen->ProcessInput(ev))
-        {
-            return true;
-        }
-        break;
-
-    default:
-        break;
-    }
-
-    return false;
+    return gameLoop->ProcessInput(ev);
 }
 
 //

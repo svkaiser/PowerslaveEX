@@ -626,26 +626,10 @@ void kexConsole::Draw(void)
         vl->BindDrawPointers();
 
         // tint overlay
-        vl->AddVertex(0, 0, 0, 0, 0, 4, 8, 16, 192);
-        vl->AddVertex(w, 0, 0, 0, 0, 4, 8, 16, 192);
-        vl->AddVertex(0, h, 0, 0, 0, 4, 8, 16, 192);
-        vl->AddVertex(w, h, 0, 0, 0, 4, 8, 16, 192);
+        vl->AddQuad(0, 0, w, h, 4, 8, 16, 192);
         // borders
-        vl->AddVertex(0, h-17, 0, 0, 0, 0, 128, 255, 255);
-        vl->AddVertex(w, h-17, 0, 0, 0, 0, 128, 255, 255);
-        vl->AddVertex(0, h-16, 0, 0, 0, 0, 128, 255, 255);
-        vl->AddVertex(w, h-16, 0, 0, 0, 0, 128, 255, 255);
-        vl->AddVertex(0, h, 0, 0, 0, 0, 128, 255, 255);
-        vl->AddVertex(w, h, 0, 0, 0, 0, 128, 255, 255);
-        vl->AddVertex(0, h+1, 0, 0, 0, 0, 128, 255, 255);
-        vl->AddVertex(w, h+1, 0, 0, 0, 0, 128, 255, 255);
-
-        vl->AddTriangle(0, 2, 1);
-        vl->AddTriangle(1, 2, 3);
-        vl->AddTriangle(4, 6, 5);
-        vl->AddTriangle(5, 6, 7);
-        vl->AddTriangle(8, 10, 9);
-        vl->AddTriangle(9, 10, 11);
+        vl->AddQuad(0, h-17, w, 1, 0, 128, 255, 255);
+        vl->AddQuad(0, h, w, 1, 0, 128, 255, 255);
 
         kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
         vl->DrawElements();
