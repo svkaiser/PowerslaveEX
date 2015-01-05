@@ -117,17 +117,23 @@ void kexSession::DrawFrame(void)
 
 void kexSession::DrawCursor(void)
 {
+    float mx;
+    float my;
+    float mw;
+    float mh;
+    
     if(!bShowCursor)
     {
         return;
     }
     
+    mx = (float)kex::cInput->MouseX();
+    my = (float)kex::cInput->MouseY();
+    mw = (float)cursorTexture->Width();
+    mh = (float)cursorTexture->Height();
+    
     kexRender::cBackend->SetOrtho();
-    kexRender::cScreen->DrawStretchPic(cursorTexture,
-                                      (float)kex::cInput->MouseX(),
-                                      (float)kex::cInput->MouseY(),
-                                      (float)cursorTexture->Width(),
-                                      (float)cursorTexture->Height());
+    kexRender::cScreen->DrawStretchPic(cursorTexture, mx, my, mw, mh);
 }
 
 //

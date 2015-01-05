@@ -15,9 +15,6 @@
 //      Key input handling and binding
 //
 
-#include "SDL_mouse.h"
-#include "SDL_keycode.h"
-
 #include "kexlib.h"
 
 static kexInputAction actions;
@@ -426,7 +423,7 @@ void kexInputAction::WriteBindings(FILE *file)
         for(cmd = keycmd->cmds; cmd; cmd = cmd->next)
         {
             fprintf(file, "bind %s \"%s\"\n", tmp,
-                (cmd->action == NULL) ? cmd->command : cmd->action->name);
+                (cmd->action == NULL) ? cmd->command : cmd->action->name.c_str());
         }
     }
 }

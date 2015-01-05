@@ -75,7 +75,7 @@ void kexPlayerCmd::BuildButtons(void)
 void kexPlayerCmd::BuildTurning(void)
 {
     angles[0] = ((float)turnx * cvarMSensitivityX.GetFloat()) / 128.0f;
-    angles[1] = ((float)turny * cvarMSensitivityX.GetFloat()) / 128.0f;
+    angles[1] = ((float)turny * cvarMSensitivityY.GetFloat()) / 128.0f;
 }
 
 //

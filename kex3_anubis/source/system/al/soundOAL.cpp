@@ -15,13 +15,8 @@
 //      Sound System (SDL)
 //
 
-#if defined(_WIN32) && defined(_MSC_VER)
 #include "al.h"
 #include "alc.h"
-#else
-#include "OpenAL/al.h"
-#include "OpenAL/alc.h"
-#endif
 
 #include "kexlib.h"
 
