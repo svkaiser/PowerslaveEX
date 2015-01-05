@@ -109,16 +109,22 @@ void kexGame::Shutdown(void)
 
 void kexGame::Tick(void)
 {
+    player->Cmd().BuildCommands();
+
     switch(gameState)
     {
     case GS_TITLE:
         titleScreen->Tick();
         break;
 
+    case GS_LEVEL:
+        break;
+
     default:
         break;
     }
 
+    player->Cmd().Reset();
     ticks++;
 }
 
@@ -135,6 +141,15 @@ void kexGame::Draw(void)
         break;
 
     case GS_LEVEL:
+        {
+            // TEMP
+            renderView->Render();
+            kexRender::cBackend->LoadProjectionMatrix(renderView->ProjectionView());
+            kexRender::cBackend->LoadModelViewMatrix(renderView->ModelView());
+            kexRender::cUtils->DrawBoundingBox(kexBBox(
+                kexVec3(-64, -128, -32),
+                kexVec3(64, 128, 32)), 255, 0, 0);
+        }
         break;
 
     default:
@@ -150,6 +165,10 @@ bool kexGame::ProcessInput(inputEvent_t *ev)
 {
     switch(ev->type)
     {
+    case ev_mouse:
+        player->Cmd().SetTurnXY(ev->data1, ev->data2);
+        break;
+
     case ev_keydown:
     case ev_mousedown:
         kex::cActions->ExecuteCommand(ev->data1, false, ev->type);
@@ -160,8 +179,6 @@ bool kexGame::ProcessInput(inputEvent_t *ev)
         kex::cActions->ExecuteCommand(ev->data1, true, ev->type);
         break;
     }
-
-    player->Cmd().BuildCommands();
 
     switch(gameState)
     {

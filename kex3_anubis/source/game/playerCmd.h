@@ -36,15 +36,22 @@ public:
     void                BuildCommands(void);
     void                Reset(void);
 
+    const word          Buttons(void) const { return buttons; }
+    void                SetTurnXY(const int x, const int y) { turnx = x; turny = y; }
+    const int           TurnX(void) const { return turnx; }
+    const int           TurnY(void) const { return turny; }
+    float               *Angles(void) { return angles; }
+
 private:
     void                BuildButtons(void);
+    void                BuildTurning(void);
 
     word                buttons;
-    short               angles[2];
+    float               angles[2];
     int                 frame;
     int                 time;
-    short               mousex;
-    short               mousey;
+    int                 turnx;
+    int                 turny;
 };
 
 #endif

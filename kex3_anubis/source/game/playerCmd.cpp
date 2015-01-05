@@ -19,6 +19,12 @@
 #include "game.h"
 #include "playerCmd.h"
 
+kexCvar cvarMSensitivityX("cl_msensitivityx", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-X sensitivity");
+kexCvar cvarMSensitivityY("cl_msensitivityy", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-Y sensitivity");
+kexCvar cvarMAcceleration("cl_macceleration", CVF_FLOAT|CVF_CONFIG, "0", "Mouse acceleration");
+kexCvar cvarInvertLook("cl_mlookinvert", CVF_BOOL|CVF_CONFIG, "0", "Invert mouse-look");
+kexCvar cvarMSmooth("cl_mousesmooth", CVF_BOOL|CVF_CONFIG, "0", "Enables smooth mouse movement");
+
 //
 // kexPlayerCmd::kexPlayerCmd
 //
@@ -44,7 +50,7 @@ void kexPlayerCmd::Reset(void)
 {
     buttons = 0;
     angles[0] = angles[1] = 0;
-    mousex = mousey = 0;
+    turnx = turny = 0;
 }
 
 //
@@ -63,11 +69,21 @@ void kexPlayerCmd::BuildButtons(void)
 }
 
 //
+// kexPlayerCmd::BuildTurning
+//
+
+void kexPlayerCmd::BuildTurning(void)
+{
+    angles[0] = ((float)turnx * cvarMSensitivityX.GetFloat()) / 128.0f;
+    angles[1] = ((float)turny * cvarMSensitivityX.GetFloat()) / 128.0f;
+}
+
+//
 // kexPlayerCmd::BuildCommands
 //
 
 void kexPlayerCmd::BuildCommands(void)
 {
-    Reset();
     BuildButtons();
+    BuildTurning();
 }
