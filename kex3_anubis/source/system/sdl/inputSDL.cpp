@@ -194,7 +194,7 @@ int kexInputSDL::TranslateKeyboard(const int val)
     
     if(code >= SDL_SCANCODE_CAPSLOCK && code <= SDL_SCANCODE_KP_PERIOD)
     {
-        return KKEY_CAPSLOCK + (code - SDL_SCANCODE_KP_PERIOD);
+        return KKEY_CAPSLOCK + (code - SDL_SCANCODE_CAPSLOCK);
     }
     
     switch(code)
