@@ -27,13 +27,14 @@ kexHeapBlock kexWorld::hb_world("world", false, NULL, NULL);
 
 kexWorld::kexWorld(void)
 {
-    this->vertices  = NULL;
-    this->sectors   = NULL;
-    this->faces     = NULL;
-    this->polys     = NULL;
-    this->texCoords = NULL;
-    this->events    = NULL;
-    this->actors    = NULL;
+    this->vertices      = NULL;
+    this->sectors       = NULL;
+    this->faces         = NULL;
+    this->polys         = NULL;
+    this->texCoords     = NULL;
+    this->events        = NULL;
+    this->actors        = NULL;
+    this->bMapLoaded    = false;
 }
 
 //
@@ -107,8 +108,8 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
 
     for(unsigned int i = 0; i < count; ++i)
     {
-        faces[i].sstart     = mapfile.Read16();
-        faces[i].send       = mapfile.Read16();
+        faces[i].polyStart  = mapfile.Read16();
+        faces[i].polyEnd    = mapfile.Read16();
         faces[i].sector     = mapfile.Read16();
         faces[i].angle      = mapfile.ReadFloat();
         faces[i].plane.a    = mapfile.ReadFloat();
@@ -116,8 +117,8 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
         faces[i].plane.c    = mapfile.ReadFloat();
         faces[i].flags      = mapfile.Read16();
         faces[i].tag        = mapfile.Read16();
-        faces[i].pstart     = mapfile.Read16();
-        faces[i].pend       = mapfile.Read16();
+        faces[i].vertStart  = mapfile.Read16();
+        faces[i].vertEnd    = mapfile.Read16();
     }
 }
 
@@ -141,7 +142,7 @@ void kexWorld::ReadPolys(kexBinFile &mapfile, const unsigned int count)
         polys[i].indices[3] = mapfile.Read8();
         polys[i].texture    = mapfile.Read16();
         polys[i].flipped    = mapfile.Read16();
-        polys[i].tcoord     = mapfile.Read16();
+        polys[i].tcoord     = mapfile.Read32();
     }
 }
 
@@ -159,14 +160,14 @@ void kexWorld::ReadTexCoords(kexBinFile &mapfile, const unsigned int count)
 
     for(unsigned int i = 0; i < count; ++i)
     {
-        texCoords[i].uv[0][0] = mapfile.ReadFloat();
-        texCoords[i].uv[0][1] = mapfile.ReadFloat();
-        texCoords[i].uv[1][0] = mapfile.ReadFloat();
-        texCoords[i].uv[1][1] = mapfile.ReadFloat();
-        texCoords[i].uv[2][0] = mapfile.ReadFloat();
-        texCoords[i].uv[2][1] = mapfile.ReadFloat();
-        texCoords[i].uv[3][0] = mapfile.ReadFloat();
-        texCoords[i].uv[3][1] = mapfile.ReadFloat();
+        texCoords[i].uv[0].s = mapfile.ReadFloat();
+        texCoords[i].uv[0].t = mapfile.ReadFloat();
+        texCoords[i].uv[1].s = mapfile.ReadFloat();
+        texCoords[i].uv[1].t = mapfile.ReadFloat();
+        texCoords[i].uv[2].s = mapfile.ReadFloat();
+        texCoords[i].uv[2].t = mapfile.ReadFloat();
+        texCoords[i].uv[3].s = mapfile.ReadFloat();
+        texCoords[i].uv[3].t = mapfile.ReadFloat();
     }
 }
 
@@ -221,6 +222,8 @@ bool kexWorld::LoadMap(const char *mapname)
 {
     kexBinFile mapfile;
 
+    bMapLoaded = false;
+
     if(!mapfile.Open(mapname))
     {
         kex::cSystem->Warning("kexWorld::LoadMap - %s not found\n", mapname);
@@ -252,5 +255,7 @@ bool kexWorld::LoadMap(const char *mapname)
     ReadTexCoords(mapfile, numTCoords);
     ReadEvents(mapfile, numEvents);
     ReadActors(mapfile, numActors);
+
+    bMapLoaded = true;
     return true;
 }
