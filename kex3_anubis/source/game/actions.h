@@ -20,22 +20,6 @@
 
 #define MAX_KEYS    (NUMKEYBOARDKEYS + NUMMOUSEBUTTONS)
 
-typedef enum
-{
-    IA_ATTACK   = 0,
-    IA_JUMP,
-    IA_FORWARD,
-    IA_BACKWARD,
-    IA_LEFT,
-    IA_RIGHT,
-    IA_STRAFELEFT,
-    IA_STRAFERIGHT,
-    IA_WEAPNEXT,
-    IA_WEAPPREV,
-
-    NUMINPUTACTIONS
-} inputActions_t;
-
 typedef struct keyaction_s
 {
     byte                keyid;
@@ -76,7 +60,7 @@ public:
 private:
     keycmd_t                keycmds[MAX_KEYS];
     kexArray<keyaction_t>   keyActions;
-    int                     heldActions[NUMINPUTACTIONS];
+    kexArray<int>           heldActions;
 };
 
 #endif

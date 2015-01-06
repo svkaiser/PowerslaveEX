@@ -413,6 +413,7 @@ void kexInputAction::AddAction(byte id, const char *name)
     keyaction.name = name;
 
     keyActions.Push(keyaction);
+    heldActions.Push(0);
 }
 
 //
@@ -448,16 +449,5 @@ void kexInputAction::WriteBindings(FILE *file)
 
 void kexInputAction::Init(void)
 {
-    AddAction(IA_ATTACK, "attack");
-    AddAction(IA_JUMP, "jump");
-    AddAction(IA_FORWARD, "forward");
-    AddAction(IA_BACKWARD, "backward");
-    AddAction(IA_LEFT, "left");
-    AddAction(IA_RIGHT, "right");
-    AddAction(IA_STRAFELEFT, "strafeleft");
-    AddAction(IA_STRAFERIGHT, "straferight");
-    AddAction(IA_WEAPNEXT, "+weapnext");
-    AddAction(IA_WEAPPREV, "+weapprev");
-
     kex::cSystem->Printf("Key System Initialized\n");
 }

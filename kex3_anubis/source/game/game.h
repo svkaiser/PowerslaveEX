@@ -24,6 +24,22 @@ class kexRenderView;
 
 typedef enum
 {
+    IA_ATTACK   = 0,
+    IA_JUMP,
+    IA_FORWARD,
+    IA_BACKWARD,
+    IA_LEFT,
+    IA_RIGHT,
+    IA_STRAFELEFT,
+    IA_STRAFERIGHT,
+    IA_WEAPNEXT,
+    IA_WEAPPREV,
+    
+    NUMINPUTACTIONS
+} inputActions_t;
+
+typedef enum
+{
     GS_NONE     = 0,
     GS_TITLE,
     GS_LEVEL,

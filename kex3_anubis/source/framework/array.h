@@ -41,6 +41,7 @@ public:
     type                GetData(const int index) { return data[index]; }
 
     type                &operator[](unsigned int index);
+    const type          &operator[](unsigned int index) const;
     kexArray<type>      &operator=(const kexArray<type> &arr);
 
 protected:
@@ -263,6 +264,16 @@ void kexArray<type>::Sort(compare_t *function, unsigned int count)
 //
 template <class type>
 type &kexArray<type>::operator[](unsigned int index)
+{
+    assert(index < length);
+    return data[index];
+}
+
+//
+// kexArray::operator[]
+//
+template <class type>
+const type &kexArray<type>::operator[](unsigned int index) const
 {
     assert(index < length);
     return data[index];
