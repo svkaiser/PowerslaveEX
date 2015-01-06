@@ -153,6 +153,8 @@ COMMAND(bind)
     int key;
     int i;
     char cmd[1024];
+    keycmd_t *keycmd;
+    cmdlist_t *cmdlist;
 
     argc = kex::cCommands->GetArgc();
 
@@ -175,6 +177,18 @@ COMMAND(bind)
         if(i != (argc - 1))
         {
             strcat(cmd, " ");
+        }
+    }
+    
+    keycmd = &kex::cActions->KeyCommands()[key];
+    
+    for(cmdlist = keycmd->cmds; cmdlist; cmdlist = cmdlist->next)
+    {
+        if(!strcmp(cmdlist->command, cmd))
+        {
+            kex::cSystem->Warning("\"%s\" is already binded to %s\n",
+                                  kex::cCommands->GetArgv(1), cmdlist->command);
+            return;
         }
     }
 

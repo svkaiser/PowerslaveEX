@@ -69,7 +69,9 @@ public:
     char                    *GetKeyName(int key);
     void                    BindCommand(int key, const char *string);
     void                    ListBindings(void);
+    
     const int               GetAction(const int id) const { return heldActions[id]; }
+    keycmd_t                *KeyCommands(void) { return keycmds; }
 
 private:
     keycmd_t                keycmds[MAX_KEYS];
