@@ -40,6 +40,37 @@ kexRenderView::~kexRenderView(void)
 }
 
 //
+// kexRenderView::ProjectPoint
+//
+
+kexVec3 kexRenderView::ProjectPoint(const kexVec3 &point)
+{
+    kexVec4 proj, model;
+    float w, h;
+    
+    model.Set(point.x, point.y, point.z, 0);
+    model *= modelView;
+    
+    proj = model;
+    proj *= projectionView;
+    
+    proj.ToVec3() *= model.w;
+    
+    if(proj.w != 0)
+    {
+        proj.w = 1.0f / proj.w;
+        proj.ToVec3() *= proj.w;
+    }
+    
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+    
+    return kexVec3( (proj.x * 0.5f + 0.5f) * w,
+                   (-proj.y * 0.5f + 0.5f) * h,
+                   (1.0f + proj.z) * 0.5f);
+}
+
+//
 // kexRenderView::SetupMatrices
 //
 

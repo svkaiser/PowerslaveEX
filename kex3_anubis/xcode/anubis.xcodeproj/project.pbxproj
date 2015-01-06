@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		41BB267F1A547A9A00311383 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BB267E1A547A9A00311383 /* OpenAL.framework */; };
+		41BC0EA81A5C5F59007BD866 /* viewBounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BC0EA61A5C5F59007BD866 /* viewBounds.cpp */; };
 		41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC091A5AFB6E003864CB /* binFile.cpp */; };
 		41C7FC211A5AFB6E003864CB /* cmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0B1A5AFB6E003864CB /* cmd.cpp */; };
 		41C7FC221A5AFB6E003864CB /* cvar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0D1A5AFB6E003864CB /* cvar.cpp */; };
@@ -119,6 +120,8 @@
 
 /* Begin PBXFileReference section */
 		41BB267E1A547A9A00311383 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		41BC0EA61A5C5F59007BD866 /* viewBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewBounds.cpp; sourceTree = "<group>"; };
+		41BC0EA71A5C5F59007BD866 /* viewBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewBounds.h; sourceTree = "<group>"; };
 		41C7FC081A5AFB6E003864CB /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
 		41C7FC091A5AFB6E003864CB /* binFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = binFile.cpp; sourceTree = "<group>"; };
 		41C7FC0A1A5AFB6E003864CB /* binFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binFile.h; sourceTree = "<group>"; };
@@ -452,6 +455,7 @@
 				41C7FC5E1A5AFB98003864CB /* renderView.cpp */,
 				41C7FC601A5AFB98003864CB /* textureManager.cpp */,
 				41C7FC621A5AFB98003864CB /* textureObject.cpp */,
+				41BC0EA61A5C5F59007BD866 /* viewBounds.cpp */,
 				41C7FC4C1A5AFB98003864CB /* cpuVertexList.h */,
 				41C7FC4E1A5AFB98003864CB /* drawLists.h */,
 				41C7FC501A5AFB98003864CB /* fbo.h */,
@@ -465,6 +469,7 @@
 				41C7FC5F1A5AFB98003864CB /* renderView.h */,
 				41C7FC611A5AFB98003864CB /* textureManager.h */,
 				41C7FC631A5AFB98003864CB /* textureObject.h */,
+				41BC0EA71A5C5F59007BD866 /* viewBounds.h */,
 			);
 			name = renderer;
 			path = ../../source/renderer;
@@ -627,6 +632,7 @@
 				41E2CE821A51D39B00FC28DC /* matrix.cpp in Sources */,
 				41C7FC7C1A5AFBAB003864CB /* endian.cpp in Sources */,
 				41C7FC681A5AFB98003864CB /* image.cpp in Sources */,
+				41BC0EA81A5C5F59007BD866 /* viewBounds.cpp in Sources */,
 				41C7FC691A5AFB98003864CB /* renderBackend.cpp in Sources */,
 				41C7FC491A5AFB84003864CB /* titlescreen.cpp in Sources */,
 				41E2CE841A51D39B00FC28DC /* pluecker.cpp in Sources */,

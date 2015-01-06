@@ -19,14 +19,13 @@ typedef enum
 {
     FP_RIGHT    = 0,
     FP_LEFT,
-    FP_BOTTOM,
     FP_TOP,
+    FP_BOTTOM,
     FP_FAR,
     FP_NEAR,
     NUMFRUSTUMPLANES
 } frustumPlane_t;
 
-#define FRUSTUM_CLIPPED     BIT(NUMFRUSTUMPLANES)
 #define NUMFRUSTUMPOINTS    8
 
 class kexFrustum
@@ -40,10 +39,8 @@ public:
                                         const float near, const float far);
     bool                TestBoundingBox(const kexBBox &bbox);
     bool                TestSphere(const kexVec3 &org, const float radius);
+    byte                SphereBits(const kexVec3 &org, const float radius);
     bool                BoxDistance(const kexBBox &box, const float distance);
-    bool                ClipSegment(kexVec3 &out1, kexVec3 &out2,
-                                    int &clipbits1, int &clipbits2,
-                                    const kexVec3 &start, const kexVec3 &end);
 
     kexPlane            &Right(void) { return p[FP_RIGHT]; }
     kexPlane            &Left(void) { return p[FP_LEFT]; }

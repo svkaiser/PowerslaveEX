@@ -160,6 +160,26 @@ bool kexFrustum::TestSphere(const kexVec3 &org, const float radius)
 }
 
 //
+// kexFrustum::SphereBits
+//
+
+byte kexFrustum::SphereBits(const kexVec3 &org, const float radius)
+{
+    byte bits = 0x3f;
+    
+    for(int i = 0; i < NUMFRUSTUMPLANES; i++)
+    {
+        if(p[i].Distance(org) + p[i].d <= -radius)
+        {
+            bits &= ~(1 << i);
+        }
+        
+    }
+    
+    return bits;
+}
+
+//
 // kexFrustum::BoxDistance
 //
 
@@ -168,77 +188,4 @@ bool kexFrustum::BoxDistance(const kexBBox &box, const float distance)
     kexPlane nearPlane = Near();
 
     return (nearPlane.Distance(box.Center()) + nearPlane.d) > distance;
-}
-
-//
-// kexFrustum::ClipSegment
-//
-//
-
-bool kexFrustum::ClipSegment(kexVec3 &out1, kexVec3 &out2,
-                             int &clipbits1, int &clipbits2,
-                             const kexVec3 &start, const kexVec3 &end)
-{
-    float d1;
-    float d2;
-    float frac;
-    float f1;
-    float f2;
-    int bit1;
-    int bit2;
-    kexVec3 hit;
-
-    clipbits1 = 0;
-    clipbits2 = 0;
-    f1 = 1.0f;
-    f2 = 1.0f;
-
-    out1 = start;
-    out2 = end;
-
-    for(int i = 0; i < NUMFRUSTUMPLANES; i++)
-    {
-        d1 = p[i].Distance(start) + p[i].d;
-        d2 = p[i].Distance(end) + p[i].d;
-
-        bit1 = FLOATSIGNBIT(d1);
-        bit2 = FLOATSIGNBIT(d2);
-
-        if(d1 <= 0 && d2 <= 0)
-        {
-            clipbits1 |= FRUSTUM_CLIPPED | (bit1 << i);
-            clipbits2 |= FRUSTUM_CLIPPED | (bit2 << i);
-            return false;
-        }
-
-        if(bit1 ^ bit2)
-        {
-            if(d2 < d1)
-            {
-                frac = (d1 / (d1 - d2));
-
-                if(frac > 1 || frac > f1)
-                {
-                    continue;
-                }
-                clipbits2 |= (bit2 << i);
-                out2 = start.Lerp(end, frac);
-                f1 = frac;
-            }
-            else
-            {
-                frac = (d2 / (d2 - d1));
-
-                if(frac > 1 || frac > f2)
-                {
-                    continue;
-                }
-                clipbits1 |= (bit1 << i);
-                out1 = end.Lerp(start, frac);
-                f2 = frac;
-            }
-        }
-    }
-
-    return true;
 }

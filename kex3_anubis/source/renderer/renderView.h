@@ -34,8 +34,10 @@ public:
     kexMatrix           &ModelView(void) { return modelView; }
     kexFrustum          &Frustum(void) { return frustum; }
     kexQuat             &Rotation(void) { return rotation; }
+    float               &Fov(void) { return fov; }
 
     void                Render(void);
+    kexVec3             ProjectPoint(const kexVec3 &point);
 
     static const float  Z_NEAR;
 

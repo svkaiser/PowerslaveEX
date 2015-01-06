@@ -1156,10 +1156,10 @@ float *kexVec4::ToFloatPtr(void)
 }
 
 //
-// kexVec4::operator|
+// kexVec4::operator*
 //
 
-kexVec4 kexVec4::operator|(const kexMatrix &mtx)
+kexVec4 kexVec4::operator*(const kexMatrix &mtx)
 {
     return kexVec4(
                mtx.vectors[1].x * y + mtx.vectors[2].x * z + mtx.vectors[0].x * x + mtx.vectors[3].x,
@@ -1169,10 +1169,10 @@ kexVec4 kexVec4::operator|(const kexMatrix &mtx)
 }
 
 //
-// kexVec4::operator|=
+// kexVec4::operator*=
 //
 
-kexVec4 &kexVec4::operator|=(const kexMatrix &mtx)
+kexVec4 &kexVec4::operator*=(const kexMatrix &mtx)
 {
     float _x = x;
     float _y = y;
