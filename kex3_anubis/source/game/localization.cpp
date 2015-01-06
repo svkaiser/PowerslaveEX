@@ -50,8 +50,6 @@ void kexTranslation::Init(void)
         kex::cSystem->Error("kexTranslation::Init - Could not load localization file");
         return;
     }
-    
-    tranfile.Read32();
 
     if(tranfile.Read32() != NUMLANGUAGES)
     {
