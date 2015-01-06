@@ -600,6 +600,7 @@ void kexConsole::Draw(void)
     rcolor  color;
 
     kexRender::cBackend->SetOrtho();
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
 
     w = (float)kex::cSystem->VideoWidth();
 
