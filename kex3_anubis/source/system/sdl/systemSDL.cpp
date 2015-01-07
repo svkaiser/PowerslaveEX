@@ -534,7 +534,6 @@ void kexSystemSDL::Main(int argc, char **argv)
     kex::cCvars->Init();
     kexObject::Init();
     kex::cInput->Init();
-    kex::cActions->Init();
     kex::cPakFiles->Init();
     
     ReadConfigFile("config.cfg");

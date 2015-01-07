@@ -41,7 +41,6 @@ typedef struct
 class kexInputAction
 {
 public:
-    void                    Init(void);
     void                    Clear(void);
     int                     FindAction(const char *name);
     void                    AddAction(byte id, const char *name);

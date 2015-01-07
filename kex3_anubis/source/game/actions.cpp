@@ -442,12 +442,3 @@ void kexInputAction::WriteBindings(FILE *file)
         }
     }
 }
-
-//
-// kexInputAction::Init
-//
-
-void kexInputAction::Init(void)
-{
-    kex::cSystem->Printf("Key System Initialized\n");
-}
