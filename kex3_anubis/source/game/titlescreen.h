@@ -31,9 +31,6 @@ public:
     bool                        ProcessInput(inputEvent_t *ev);
     void                        FadeDone(void);
     void                        DeselectAllItems(void);
-    void                        OnSelectNewGame(kexMenuItem *item);
-    void                        OnSelectOptions(kexMenuItem *item);
-    void                        OnSelectExitOptions(kexMenuItem *item);
     void                        FadeOut(int state);
 
     const int                   SelectedItem(void) const { return selectedItem; }

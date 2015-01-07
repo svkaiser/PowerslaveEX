@@ -31,6 +31,7 @@ kexMenuItem::kexMenuItem(void)
     this->bLerping      = false;
     this->bHighLighted  = false;
     this->bInteract     = true;
+    this->bDisabled     = false;
     this->destX         = 0;
     this->destY         = 0;
     this->time          = 0;
@@ -148,7 +149,7 @@ void kexMenuItem::Tick(void)
         Move();
     }
 
-    if(bInteract && !bSelected)
+    if(bInteract && !bSelected && !bDisabled)
     {
         if(!(bHighLighted = OnCursor()))
         {
@@ -167,7 +168,7 @@ void kexMenuItem::Tick(void)
 
 void kexMenuItem::DrawSmallString(const char *string, float x, float y, float scale, bool center, bool flash)
 {
-    byte c = (flash || bSelected) ? 255 : 224;
+    byte c = (flash || bSelected || bDisabled) ? 255 : 224;
     kexFont *font = kex::cGame->SmallFont();
 
     kex::cGame->DrawSmallString(string, x, y, scale, center, c, c, c);
@@ -187,7 +188,7 @@ void kexMenuItem::DrawSmallString(const char *string, float x, float y, float sc
 
 void kexMenuItem::DrawBigString(const char *string, float x, float y, float scale, bool center, bool flash)
 {
-    byte c = (flash || bSelected) ? 255 : 224;
+    byte c = (flash || bSelected || bDisabled) ? 255 : 224;
     kexFont *font = kex::cGame->BigFont();
 
     kex::cGame->DrawBigString(string, x, y, scale, center, c, c, c);

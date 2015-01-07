@@ -38,6 +38,7 @@ public:
 
     const bool                      IsHighlighted(void) const { return bHighLighted; }
     void                            Select(const bool b) { bSelected = b; }
+    void                            Toggle(const bool b) { bDisabled = !b; }
 
     virtual kexMenuItem             &operator=(const kexMenuItem &item);
 
@@ -53,6 +54,7 @@ private:
 
     float                           highlightTime;
     kexStr                          label;
+    bool                            bDisabled;
     bool                            bSelected;
     bool                            bInteract;
     bool                            bLerping;
