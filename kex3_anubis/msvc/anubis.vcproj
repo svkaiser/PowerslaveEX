@@ -336,6 +336,10 @@
 					RelativePath="..\source\renderer\textureObject.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\source\renderer\viewBounds.cpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="system"
@@ -592,6 +596,10 @@
 				</File>
 				<File
 					RelativePath="..\source\renderer\textureObject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\viewBounds.h"
 					>
 				</File>
 			</Filter>
