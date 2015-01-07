@@ -601,6 +601,7 @@ void kexConsole::Draw(void)
 
     kexRender::cBackend->SetOrtho();
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
 
     w = (float)kex::cSystem->VideoWidth();
 
@@ -632,7 +633,6 @@ void kexConsole::Draw(void)
         vl->AddQuad(0, h-17, w, 1, 0, 128, 255, 255);
         vl->AddQuad(0, h, w, 1, 0, 128, 255, 255);
 
-        kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
         vl->DrawElements();
 
         color = RGBA(255, 255, 255, 255);

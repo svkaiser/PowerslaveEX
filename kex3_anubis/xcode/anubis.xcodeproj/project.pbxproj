@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
+		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
 		41BB267F1A547A9A00311383 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BB267E1A547A9A00311383 /* OpenAL.framework */; };
 		41BC0EA81A5C5F59007BD866 /* viewBounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BC0EA61A5C5F59007BD866 /* viewBounds.cpp */; };
 		41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC091A5AFB6E003864CB /* binFile.cpp */; };
@@ -19,8 +21,6 @@
 		41C7FC271A5AFB6E003864CB /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC191A5AFB6E003864CB /* object.cpp */; };
 		41C7FC281A5AFB6E003864CB /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC1B1A5AFB6E003864CB /* parser.cpp */; };
 		41C7FC291A5AFB6E003864CB /* unzip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC1E1A5AFB6E003864CB /* unzip.cpp */; };
-		41C7FC401A5AFB84003864CB /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC2A1A5AFB84003864CB /* actions.cpp */; };
-		41C7FC411A5AFB84003864CB /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC2C1A5AFB84003864CB /* console.cpp */; };
 		41C7FC421A5AFB84003864CB /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC2E1A5AFB84003864CB /* game.cpp */; };
 		41C7FC431A5AFB84003864CB /* gameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC301A5AFB84003864CB /* gameObject.cpp */; };
 		41C7FC441A5AFB84003864CB /* localization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC321A5AFB84003864CB /* localization.cpp */; };
@@ -119,6 +119,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		41B3A5471A5DEE84006DCCB9 /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actions.cpp; sourceTree = "<group>"; };
+		41B3A5481A5DEE84006DCCB9 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
+		41B3A54A1A5DEEBC006DCCB9 /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = console.cpp; sourceTree = "<group>"; };
+		41B3A54B1A5DEEBC006DCCB9 /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = console.h; sourceTree = "<group>"; };
 		41BB267E1A547A9A00311383 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		41BC0EA61A5C5F59007BD866 /* viewBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewBounds.cpp; sourceTree = "<group>"; };
 		41BC0EA71A5C5F59007BD866 /* viewBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewBounds.h; sourceTree = "<group>"; };
@@ -146,10 +150,6 @@
 		41C7FC1D1A5AFB6E003864CB /* queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
 		41C7FC1E1A5AFB6E003864CB /* unzip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unzip.cpp; sourceTree = "<group>"; };
 		41C7FC1F1A5AFB6E003864CB /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
-		41C7FC2A1A5AFB84003864CB /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actions.cpp; path = ../../source/game/actions.cpp; sourceTree = "<group>"; };
-		41C7FC2B1A5AFB84003864CB /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actions.h; path = ../../source/game/actions.h; sourceTree = "<group>"; };
-		41C7FC2C1A5AFB84003864CB /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = console.cpp; path = ../../source/game/console.cpp; sourceTree = "<group>"; };
-		41C7FC2D1A5AFB84003864CB /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = console.h; path = ../../source/game/console.h; sourceTree = "<group>"; };
 		41C7FC2E1A5AFB84003864CB /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = game.cpp; path = ../../source/game/game.cpp; sourceTree = "<group>"; };
 		41C7FC2F1A5AFB84003864CB /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../../source/game/game.h; sourceTree = "<group>"; };
 		41C7FC301A5AFB84003864CB /* gameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gameObject.cpp; path = ../../source/game/gameObject.cpp; sourceTree = "<group>"; };
@@ -262,8 +262,6 @@
 		41BACC671A5311EA0054A04A /* game */ = {
 			isa = PBXGroup;
 			children = (
-				41C7FC2A1A5AFB84003864CB /* actions.cpp */,
-				41C7FC2C1A5AFB84003864CB /* console.cpp */,
 				41C7FC2E1A5AFB84003864CB /* game.cpp */,
 				41C7FC301A5AFB84003864CB /* gameObject.cpp */,
 				41C7FC321A5AFB84003864CB /* localization.cpp */,
@@ -273,8 +271,6 @@
 				41C7FC3A1A5AFB84003864CB /* session.cpp */,
 				41C7FC3C1A5AFB84003864CB /* titlescreen.cpp */,
 				41C7FC3E1A5AFB84003864CB /* world.cpp */,
-				41C7FC2B1A5AFB84003864CB /* actions.h */,
-				41C7FC2D1A5AFB84003864CB /* console.h */,
 				41C7FC2F1A5AFB84003864CB /* game.h */,
 				41C7FC311A5AFB84003864CB /* gameObject.h */,
 				41C7FC331A5AFB84003864CB /* localization.h */,
@@ -382,8 +378,10 @@
 		41E2CE3C1A51D39B00FC28DC /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				41B3A5471A5DEE84006DCCB9 /* actions.cpp */,
 				41C7FC091A5AFB6E003864CB /* binFile.cpp */,
 				41C7FC0B1A5AFB6E003864CB /* cmd.cpp */,
+				41B3A54A1A5DEEBC006DCCB9 /* console.cpp */,
 				41C7FC0D1A5AFB6E003864CB /* cvar.cpp */,
 				41C7FC0F1A5AFB6E003864CB /* dict.cpp */,
 				41C7FC121A5AFB6E003864CB /* kpf.cpp */,
@@ -392,9 +390,11 @@
 				41C7FC191A5AFB6E003864CB /* object.cpp */,
 				41C7FC1B1A5AFB6E003864CB /* parser.cpp */,
 				41C7FC1E1A5AFB6E003864CB /* unzip.cpp */,
+				41B3A5481A5DEE84006DCCB9 /* actions.h */,
 				41C7FC081A5AFB6E003864CB /* array.h */,
 				41C7FC0A1A5AFB6E003864CB /* binFile.h */,
 				41C7FC0C1A5AFB6E003864CB /* cmd.h */,
+				41B3A54B1A5DEEBC006DCCB9 /* console.h */,
 				41C7FC0E1A5AFB6E003864CB /* cvar.h */,
 				41C7FC101A5AFB6E003864CB /* dict.h */,
 				41C7FC111A5AFB6E003864CB /* hashlist.h */,
@@ -623,7 +623,6 @@
 				41E2CE861A51D39B00FC28DC /* random.cpp in Sources */,
 				41DA07451A51FEFC00562B25 /* systemSDL.cpp in Sources */,
 				41C7FC441A5AFB84003864CB /* localization.cpp in Sources */,
-				41C7FC411A5AFB84003864CB /* console.cpp in Sources */,
 				41E2CE871A51D39B00FC28DC /* vector.cpp in Sources */,
 				41C7FC6C1A5AFB98003864CB /* renderUtils.cpp in Sources */,
 				41E2CE7F1A51D39B00FC28DC /* angle.cpp in Sources */,
@@ -636,16 +635,17 @@
 				41C7FC691A5AFB98003864CB /* renderBackend.cpp in Sources */,
 				41C7FC491A5AFB84003864CB /* titlescreen.cpp in Sources */,
 				41E2CE841A51D39B00FC28DC /* pluecker.cpp in Sources */,
-				41C7FC401A5AFB84003864CB /* actions.cpp in Sources */,
 				41C7FC481A5AFB84003864CB /* session.cpp in Sources */,
 				41C7FC241A5AFB6E003864CB /* kpf.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,
 				41C7FC6D1A5AFB98003864CB /* renderView.cpp in Sources */,
 				41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */,
 				41C7FC231A5AFB6E003864CB /* dict.cpp in Sources */,
+				41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */,
 				41E2CE851A51D39B00FC28DC /* quaternion.cpp in Sources */,
 				41C7FC801A5AFBAB003864CB /* timer.cpp in Sources */,
 				41C7FC671A5AFB98003864CB /* frustum.cpp in Sources */,
+				41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */,
 				41C7FC651A5AFB98003864CB /* drawLists.cpp in Sources */,
 				41C7FC251A5AFB6E003864CB /* kstring.cpp in Sources */,
 				41C7FC451A5AFB84003864CB /* menu.cpp in Sources */,
