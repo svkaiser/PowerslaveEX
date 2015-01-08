@@ -215,6 +215,27 @@ void kexWorld::ReadActors(kexBinFile &mapfile, const unsigned int count)
 }
 
 //
+// kexWorld::BuildAreaNodes
+//
+
+void kexWorld::BuildAreaNodes(void)
+{
+    kexBBox rootBounds;
+    kexVec3 point;
+    
+    areaNodes.Init(8);
+    
+    for(int i = 0; i < numVertices; ++i)
+    {
+        point.Set((float)vertices[i].x, (float)vertices[i].y, 0);
+        rootBounds.AddPoint(point);
+    }
+    
+    areaNodes.AddBoxToRoot(rootBounds);
+    areaNodes.BuildNodes();
+}
+
+//
 // kexWorld::LoadMap
 //
 
@@ -229,8 +250,6 @@ bool kexWorld::LoadMap(const char *mapname)
         kex::cSystem->Warning("kexWorld::LoadMap - %s not found\n", mapname);
         return false;
     }
-
-    Mem_Purge(hb_world);
 
     numVertices     = mapfile.Read32();
     numSectors      = mapfile.Read32();
@@ -255,7 +274,24 @@ bool kexWorld::LoadMap(const char *mapname)
     ReadTexCoords(mapfile, numTCoords);
     ReadEvents(mapfile, numEvents);
     ReadActors(mapfile, numActors);
+    
+    BuildAreaNodes();
 
     bMapLoaded = true;
     return true;
+}
+
+//
+// kexWorld::UnloadMap
+//
+
+void kexWorld::UnloadMap(void)
+{
+    if(!bMapLoaded)
+    {
+        return;
+    }
+    
+    areaNodes.Destroy();
+    Mem_Purge(hb_world);
 }

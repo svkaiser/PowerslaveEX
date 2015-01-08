@@ -73,6 +73,7 @@ public:
     bool                ProcessInput(inputEvent_t *ev);
 
     kexTitleScreen      *TitleScreen(void) { return titleScreen; }
+    kexPlayLoop         *PlayLoop(void) { return playLoop; }
     kexTranslation      *Translation(void) { return translation; }
     kexWorld            *World(void) { return world; }
     kexRenderView       *RenderView(void) { return renderView; }

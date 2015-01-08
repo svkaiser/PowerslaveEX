@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Title screen logic
+//      Play loop (in-game) logic
 //
 
 #include "kexlib.h"

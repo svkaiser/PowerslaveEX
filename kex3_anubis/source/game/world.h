@@ -96,6 +96,7 @@ public:
     ~kexWorld(void);
 
     bool                    LoadMap(const char *mapname);
+    void                    UnloadMap(void);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
@@ -120,6 +121,8 @@ public:
     static kexHeapBlock     hb_world;
 
 private:
+    void                    BuildAreaNodes(void);
+    
     void                    ReadVertices(kexBinFile &mapfile, const unsigned int count);
     void                    ReadSectors(kexBinFile &mapfile, const unsigned int count);
     void                    ReadFaces(kexBinFile &mapfile, const unsigned int count);

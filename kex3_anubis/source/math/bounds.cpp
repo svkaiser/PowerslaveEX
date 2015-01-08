@@ -88,6 +88,30 @@ float kexBBox::Radius(void) const
 }
 
 //
+// kexBBox::AddPoint
+//
+
+void kexBBox::AddPoint(const kexVec3 &vec)
+{
+    float lowx  = min.x;
+    float lowy  = min.y;
+    float lowz  = min.z;
+    float hix   = max.x;
+    float hiy   = max.y;
+    float hiz   = max.z;
+    
+    if(vec.x < lowx) lowx = vec.x;
+    if(vec.y < lowy) lowy = vec.y;
+    if(vec.z < lowz) lowz = vec.z;
+    if(vec.x > hix) hix = vec.x;
+    if(vec.y > hiy) hiy = vec.y;
+    if(vec.z > hiz) hiz = vec.z;
+    
+    min.Set(lowx, lowy, lowz);
+    max.Set(hix, hiy, hiz);
+}
+
+//
 // kexBBox::PointInside
 //
 
