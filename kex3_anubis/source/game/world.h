@@ -15,6 +15,8 @@
 #ifndef __WORLD_H__
 #define __WORLD_H__
 
+#include "sdNodes.h"
+
 typedef struct
 {
     short       x;
@@ -85,6 +87,8 @@ typedef struct
     float       angle;
 } mapActor_t;
 
+class kexActor;
+
 class kexWorld
 {
 public:
@@ -110,6 +114,8 @@ public:
     mapTexCoords_t          *TexCoords(void) { return texCoords; }
     mapEvent_t              *Events(void) { return events; }
     mapActor_t              *Actors(void) { return actors; }
+
+    kexSDNode<kexActor>     &AreaNodes(void) { return areaNodes; }
 
     static kexHeapBlock     hb_world;
 
@@ -139,6 +145,8 @@ private:
     mapTexCoords_t          *texCoords;
     mapEvent_t              *events;
     mapActor_t              *actors;
+
+    kexSDNode<kexActor>     areaNodes;
 };
 
 #endif

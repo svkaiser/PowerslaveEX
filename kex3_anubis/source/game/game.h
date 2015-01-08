@@ -15,9 +15,12 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
+#include "object.h"
+
 class kexFont;
 class kexTitleScreen;
 class kexTranslation;
+class kexPlayLoop;
 class kexWorld;
 class kexPlayer;
 class kexRenderView;
@@ -80,6 +83,7 @@ public:
     void                SetGameState(const gameState_t state) { pendingGameState = state; }
     kexPlayer           *Player(void) { return player; }
 
+    kexObject           *ConstructObject(const char *className);
     void                DrawSmallString(const char *string, float x, float y, float scale, bool center,
                                         byte r = 0xff, byte g = 0xff, byte b = 0xff);
     void                DrawBigString(const char *string, float x, float y, float scale, bool center,
@@ -89,6 +93,7 @@ private:
     kexFont             *smallFont;
     kexFont             *bigFont;
     kexTitleScreen      *titleScreen;
+    kexPlayLoop         *playLoop;
     kexTranslation      *translation;
     kexWorld            *world;
     int                 ticks;

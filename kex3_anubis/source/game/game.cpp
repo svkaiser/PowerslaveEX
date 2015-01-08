@@ -20,6 +20,7 @@
 #include "renderView.h"
 #include "game.h"
 #include "titlescreen.h"
+#include "playLoop.h"
 #include "localization.h"
 #include "world.h"
 #include "player.h"
@@ -61,6 +62,7 @@ kexGame::kexGame(void)
     this->gameLoop          = &this->gameLoopStub;
 
     this->titleScreen   = new kexTitleScreen;
+    this->playLoop      = new kexPlayLoop;
     this->translation   = new kexTranslation;
     this->world         = new kexWorld;
     this->player        = new kexPlayer;
@@ -74,6 +76,7 @@ kexGame::kexGame(void)
 kexGame::~kexGame(void)
 {
     delete titleScreen;
+    delete playLoop;
     delete translation;
     delete world;
     delete player;
@@ -131,6 +134,10 @@ void kexGame::Tick(void)
             case GS_TITLE:
                 gameLoop = titleScreen;
                 break;
+
+            case GS_LEVEL:
+                gameLoop = playLoop;
+                break;
                 
             default:
                 gameLoop = &gameLoopStub;
@@ -157,24 +164,7 @@ void kexGame::Tick(void)
 
 void kexGame::Draw(void)
 {
-    switch(gameState)
-    {
-    case GS_LEVEL:
-        {
-            // TEMP
-            renderView->Render();
-            kexRender::cBackend->LoadProjectionMatrix(renderView->ProjectionView());
-            kexRender::cBackend->LoadModelViewMatrix(renderView->ModelView());
-            kexRender::cUtils->DrawBoundingBox(kexBBox(
-                kexVec3(-64, -128, -32),
-                kexVec3(64, 128, 32)), 255, 0, 0);
-        }
-        break;
-
-    default:
-        gameLoop->Draw();
-        break;
-    }
+    gameLoop->Draw();
 }
 
 //
@@ -201,6 +191,30 @@ bool kexGame::ProcessInput(inputEvent_t *ev)
     }
 
     return gameLoop->ProcessInput(ev);
+}
+
+//
+// kexGame::ConstructObject
+//
+
+kexObject *kexGame::ConstructObject(const char *className)
+{
+    kexObject *obj;
+    kexRTTI *objType;
+    
+    if(!(objType = kexObject::Get(className)))
+    {
+        kex::cSystem->Error("kexGame::ConstructObject: unknown class (\"%s\")\n", className);
+        return NULL;
+    }
+        
+    if(!(obj = objType->Create()))
+    {
+        kex::cSystem->Error("kexGame::ConstructObject: could not spawn (\"%s\")\n", className);
+        return NULL;
+    }
+    
+    return obj;
 }
 
 //

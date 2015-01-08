@@ -17,6 +17,7 @@
 
 #include "kexlib.h"
 #include "game.h"
+#include "actor.h"
 #include "player.h"
 
 const int16_t kexPlayer::maxHealth = 200;
@@ -50,6 +51,7 @@ void kexPlayer::Reset(void)
 {
     health = maxHealth;
     ankahs = 0;
+    actor = NULL;
 
     cmd.Reset();
 

@@ -90,6 +90,8 @@ typedef enum
     TD_DOLL23   = BIT(22)
 } teamDolls_t;
 
+class kexActor;
+
 class kexPlayer
 {
 public:
@@ -99,6 +101,7 @@ public:
     void                    Reset(void);
 
     kexPlayerCmd            &Cmd(void) { return cmd; }
+    kexActor                *Actor(void) { return actor; }
 
 private:
     kexPlayerCmd            cmd;
@@ -124,6 +127,7 @@ private:
     int16_t                 keys;
     int16_t                 transmitter;
     int                     teamDolls;
+    kexActor                *actor;
 };
 
 #endif

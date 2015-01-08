@@ -61,7 +61,7 @@ static menuGroup_t *titleMenu[NUMTITLESCREENITEMS];
 #define MENUITEM(name, label, x, y, center, lerpblock, block)   \
     static void LerpCallback_ ## name(kexMenuItem *item);   \
     static void Callback_ ## name(kexMenuItem *item);   \
-    static menuGroup_t menuGroup_ ## name { kexMenuItem(label, x, y, center, LerpCallback_ ## name), Callback_ ## name };   \
+    static menuGroup_t menuGroup_ ## name = { kexMenuItem(label, x, y, center, LerpCallback_ ## name), Callback_ ## name };   \
     static void LerpCallback_ ## name(kexMenuItem *item)    \
     lerpblock   \
     static void Callback_ ## name(kexMenuItem *item)    \
@@ -274,7 +274,7 @@ MENUITEM(OptionExit, "Exit", -100, 204, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(SoundVolume, "SFX Volume", -100, 146, 1,
+MENUITEM(SoundVolume, "Sound FX Volume", -100, 146, 1,
 {
 },
 {
