@@ -46,6 +46,7 @@ typedef enum
     GS_NONE     = 0,
     GS_TITLE,
     GS_LEVEL,
+    GS_CHANGELEVEL,
     NUMGAMESTATES
 } gameState_t;
 
@@ -60,50 +61,63 @@ public:
     virtual bool        ProcessInput(inputEvent_t *ev) { return false; }
 };
 
+class kexActor;
+
 class kexGame
 {
 public:
     kexGame(void);
     ~kexGame(void);
 
-    void                Init(void);
-    void                Shutdown(void);
-    void                Tick(void);
-    void                Draw(void);
-    bool                ProcessInput(inputEvent_t *ev);
+    void                    Init(void);
+    void                    Shutdown(void);
+    void                    Tick(void);
+    void                    Draw(void);
+    bool                    ProcessInput(inputEvent_t *ev);
+    void                    UpdateActors(void);
+    void                    AddActor(kexActor *actor);
+    void                    RemoveActor(kexActor *actor);
+    void                    RemoveAllActors(void);
+    void                    ChangeMap(const char *name);
+    
+    kexTitleScreen          *TitleScreen(void) { return titleScreen; }
+    kexPlayLoop             *PlayLoop(void) { return playLoop; }
+    kexTranslation          *Translation(void) { return translation; }
+    kexWorld                *World(void) { return world; }
+    kexRenderView           *RenderView(void) { return renderView; }
+    kexFont                 *SmallFont(void) { return smallFont; }
+    kexFont                 *BigFont(void) { return bigFont; }
+    const int               GetTicks(void) const { return ticks; }
+    const gameState_t       GameState(void) const { return gameState; }
+    void                    SetGameState(const gameState_t state) { pendingGameState = state; }
+    kexPlayer               *Player(void) { return player; }
+    kexLinklist<kexActor>   &Actors(void) { return actors; }
 
-    kexTitleScreen      *TitleScreen(void) { return titleScreen; }
-    kexPlayLoop         *PlayLoop(void) { return playLoop; }
-    kexTranslation      *Translation(void) { return translation; }
-    kexWorld            *World(void) { return world; }
-    kexRenderView       *RenderView(void) { return renderView; }
-    kexFont             *SmallFont(void) { return smallFont; }
-    kexFont             *BigFont(void) { return bigFont; }
-    const int           GetTicks(void) const { return ticks; }
-    const gameState_t   GameState(void) const { return gameState; }
-    void                SetGameState(const gameState_t state) { pendingGameState = state; }
-    kexPlayer           *Player(void) { return player; }
-
-    kexObject           *ConstructObject(const char *className);
-    void                DrawSmallString(const char *string, float x, float y, float scale, bool center,
-                                        byte r = 0xff, byte g = 0xff, byte b = 0xff);
-    void                DrawBigString(const char *string, float x, float y, float scale, bool center,
-                                        byte r = 0xff, byte g = 0xff, byte b = 0xff);
+    kexObject               *ConstructObject(const char *className);
+    void                    DrawSmallString(const char *string, float x, float y, float scale, bool center,
+                                            byte r = 0xff, byte g = 0xff, byte b = 0xff);
+    void                    DrawBigString(const char *string, float x, float y, float scale, bool center,
+                                            byte r = 0xff, byte g = 0xff, byte b = 0xff);
 
 private:
-    kexFont             *smallFont;
-    kexFont             *bigFont;
-    kexTitleScreen      *titleScreen;
-    kexPlayLoop         *playLoop;
-    kexTranslation      *translation;
-    kexWorld            *world;
-    int                 ticks;
-    gameState_t         gameState;
-    gameState_t         pendingGameState;
-    kexPlayer           *player;
-    kexRenderView       *renderView;
-    kexGameLoop         gameLoopStub;
-    kexGameLoop         *gameLoop;
+    void                    LoadNewMap(void);
+    
+    kexFont                 *smallFont;
+    kexFont                 *bigFont;
+    kexTitleScreen          *titleScreen;
+    kexPlayLoop             *playLoop;
+    kexTranslation          *translation;
+    kexWorld                *world;
+    int                     ticks;
+    gameState_t             gameState;
+    gameState_t             pendingGameState;
+    kexPlayer               *player;
+    kexRenderView           *renderView;
+    kexGameLoop             gameLoopStub;
+    kexGameLoop             *gameLoop;
+    kexActor                *actorRover;
+    kexLinklist<kexActor>   actors;
+    kexStr                  pendingMap;
 };
 
 #endif

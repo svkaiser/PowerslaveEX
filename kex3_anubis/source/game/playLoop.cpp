@@ -82,7 +82,7 @@ void kexPlayLoop::Draw(void)
 
 void kexPlayLoop::Tick(void)
 {
-    UpdateActors();
+    kex::cGame->UpdateActors();
 }
 
 //
@@ -92,46 +92,4 @@ void kexPlayLoop::Tick(void)
 bool kexPlayLoop::ProcessInput(inputEvent_t *ev)
 {
     return false;
-}
-
-//
-// kexPlayLoop::UpdateActors
-//
-
-void kexPlayLoop::UpdateActors(void)
-{
-    kexActor *next = NULL;
-
-    for(actorRover = actors.Next(); actorRover != NULL; actorRover = next)
-    {
-        next = actorRover->Link().Next();
-        actorRover->Tick();
-
-        if(actorRover->Removing())
-        {
-            RemoveActor(actorRover);
-        }
-    }
-}
-
-//
-// kexPlayLoop::AddActor
-//
-
-void kexPlayLoop::AddActor(kexActor *actor)
-{
-    actor->Link().Add(actors);
-    actor->CallSpawn();
-}
-
-//
-// kexPlayLoop::RemoveActor
-//
-
-void kexPlayLoop::RemoveActor(kexActor *actor)
-{
-    actor->SetTarget(NULL);
-    actor->Link().Remove();
-    actor->UnlinkArea();
-    delete actor;
 }

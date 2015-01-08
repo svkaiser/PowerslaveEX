@@ -15,8 +15,6 @@
 #ifndef __PLAYLOOP_H__
 #define __PLAYLOOP_H__
 
-#include "actor.h"
-
 class kexPlayLoop : public kexGameLoop
 {
 public:
@@ -29,16 +27,6 @@ public:
     void                        Draw(void);
     void                        Tick(void);
     bool                        ProcessInput(inputEvent_t *ev);
-
-    kexLinklist<kexActor>       &Actors(void) { return actors; }
-
-private:
-    void                        UpdateActors(void);
-    void                        AddActor(kexActor *actor);
-    void                        RemoveActor(kexActor *actor);
-
-    kexActor                    *actorRover;
-    kexLinklist<kexActor>       actors;
 };
 
 #endif

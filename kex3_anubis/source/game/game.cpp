@@ -21,6 +21,7 @@
 #include "game.h"
 #include "titlescreen.h"
 #include "playLoop.h"
+#include "actor.h"
 #include "localization.h"
 #include "world.h"
 #include "player.h"
@@ -42,10 +43,7 @@ COMMAND(map)
         return;
     }
 
-    if(gameLocal.World()->LoadMap(kex::cCommands->GetArgv(1)))
-    {
-        kex::cGame->SetGameState(GS_LEVEL);
-    }
+    gameLocal.ChangeMap(kex::cCommands->GetArgv(1));
 }
 
 //
@@ -116,7 +114,7 @@ void kexGame::Init(void)
 
 void kexGame::Shutdown(void)
 {
-    Mem_Purge(kexWorld::hb_world);
+    world->UnloadMap();
 }
 
 //
@@ -138,6 +136,11 @@ void kexGame::Tick(void)
             case GS_LEVEL:
                 gameLoop = playLoop;
                 break;
+                
+            case GS_CHANGELEVEL:
+                pendingGameState = GS_NONE;
+                LoadNewMap();
+                return;
                 
             default:
                 gameLoop = &gameLoopStub;
@@ -218,6 +221,31 @@ kexObject *kexGame::ConstructObject(const char *className)
 }
 
 //
+// kexGame::ChangeMap
+//
+
+void kexGame::ChangeMap(const char *name)
+{
+    SetGameState(GS_CHANGELEVEL);
+    pendingMap = name;
+}
+
+//
+// kexGame::LoadMap
+//
+
+void kexGame::LoadNewMap(void)
+{
+    if(!world->LoadMap(pendingMap.c_str()))
+    {
+        kex::cGame->SetGameState(GS_TITLE);
+        return;
+    }
+    
+    kex::cGame->SetGameState(GS_LEVEL);
+}
+
+//
 // kexGame::DrawSmallString
 //
 
@@ -239,4 +267,65 @@ void kexGame::DrawBigString(const char *string, float x, float y, float scale, b
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     bigFont->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
     bigFont->DrawString(string, x, y, scale, center, RGBA(r, g, b, 0xff));
+}
+
+//
+// kexGame::UpdateActors
+//
+
+void kexGame::UpdateActors(void)
+{
+    kexActor *next = NULL;
+    
+    for(actorRover = actors.Next(); actorRover != NULL; actorRover = next)
+    {
+        next = actorRover->Link().Next();
+        actorRover->Tick();
+        
+        if(actorRover->Removing())
+        {
+            RemoveActor(actorRover);
+        }
+    }
+}
+
+//
+// kexGame::AddActor
+//
+
+void kexGame::AddActor(kexActor *actor)
+{
+    actor->Link().Add(actors);
+    actor->CallSpawn();
+}
+
+//
+// kexGame::RemoveActor
+//
+
+void kexGame::RemoveActor(kexActor *actor)
+{
+    actor->SetTarget(NULL);
+    actor->Link().Remove();
+    actor->UnlinkArea();
+    delete actor;
+}
+
+//
+// kexGame::RemoveAllActors
+//
+
+void kexGame::RemoveAllActors(void)
+{
+    kexActor *actor;
+    kexActor *next;
+    
+    // remove all actors
+    for(actor = actors.Next(); actor != NULL; actor = next)
+    {
+        next = actor->Link().Next();
+        RemoveActor(actor);
+    }
+    
+    actors.Clear();
 }

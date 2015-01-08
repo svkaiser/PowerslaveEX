@@ -287,11 +287,11 @@ bool kexWorld::LoadMap(const char *mapname)
 
 void kexWorld::UnloadMap(void)
 {
-    if(!bMapLoaded)
+    if(bMapLoaded)
     {
-        return;
+        kex::cGame->RemoveAllActors();
+        areaNodes.Destroy();
     }
     
-    areaNodes.Destroy();
     Mem_Purge(hb_world);
 }
