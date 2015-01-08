@@ -18,6 +18,8 @@
 #include "kexlib.h"
 #include "game.h"
 #include "world.h"
+#include "actor.h"
+#include "player.h"
 
 kexHeapBlock kexWorld::hb_world("world", false, NULL, NULL);
 
@@ -211,6 +213,8 @@ void kexWorld::ReadActors(kexBinFile &mapfile, const unsigned int count)
         actors[i].y         = mapfile.Read16();
         actors[i].z         = mapfile.Read16();
         actors[i].angle     = mapfile.ReadFloat();
+        
+        SpawnMapActor(&actors[i]);
     }
 }
 
@@ -233,6 +237,30 @@ void kexWorld::BuildAreaNodes(void)
     
     areaNodes.AddBoxToRoot(rootBounds);
     areaNodes.BuildNodes();
+}
+
+//
+// kexWorld::SpawnMapActor
+//
+
+void kexWorld::SpawnMapActor(mapActor_t *mapActor)
+{
+    float x, y, z;
+    float an;
+    kexActor *actor;
+    
+    if(mapActor->type <= -1 || mapActor->type >= NUMACTORTYPES)
+    {
+        return;
+    }
+    
+    x   = (float)mapActor->x;
+    y   = (float)mapActor->y;
+    z   = (float)mapActor->z;
+    an  = kexMath::Deg2Rad((360 - (float)mapActor->angle) + 90);
+    
+    actor = kex::cGame->SpawnActor(mapActor->type, x, y, z, an);
+    actor->SetMapActor(mapActor);
 }
 
 //
@@ -273,9 +301,10 @@ bool kexWorld::LoadMap(const char *mapname)
     ReadPolys(mapfile, numPolys);
     ReadTexCoords(mapfile, numTCoords);
     ReadEvents(mapfile, numEvents);
-    ReadActors(mapfile, numActors);
     
     BuildAreaNodes();
+    
+    ReadActors(mapfile, numActors);
 
     bMapLoaded = true;
     return true;
@@ -291,6 +320,7 @@ void kexWorld::UnloadMap(void)
     {
         kex::cGame->RemoveAllActors();
         areaNodes.Destroy();
+        kex::cGame->Player()->ClearActor();
     }
     
     Mem_Purge(hb_world);

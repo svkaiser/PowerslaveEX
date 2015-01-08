@@ -87,7 +87,7 @@ void kexRenderView::SetupMatrices(void)
     // setup rotation quaternion
     kexQuat qroll(roll, kexVec3::vecForward);
     kexQuat qyaw(yaw, kexVec3::vecUp);
-    kexQuat qpitch(pitch, kexVec3::vecRight);
+    kexQuat qpitch(-kexMath::Deg2Rad(90) + pitch, kexVec3::vecRight);
     
     rotation = qyaw * (qpitch * qroll);
     
@@ -97,10 +97,10 @@ void kexRenderView::SetupMatrices(void)
 }
 
 //
-// kexRenderView::Render
+// kexRenderView::Setup
 //
 
-void kexRenderView::Render(void)
+void kexRenderView::Setup(void)
 {
     SetupMatrices();
     frustum.MakeClipPlanes(projectionView, modelView);

@@ -27,6 +27,11 @@ public:
     void                        Draw(void);
     void                        Tick(void);
     bool                        ProcessInput(inputEvent_t *ev);
+    
+    const int                   Ticks(void) const { return ticks; }
+    
+private:
+    int                         ticks;
 };
 
 #endif

@@ -122,6 +122,7 @@ public:
 
 private:
     void                    BuildAreaNodes(void);
+    void                    SpawnMapActor(mapActor_t *mapActor);
     
     void                    ReadVertices(kexBinFile &mapfile, const unsigned int count);
     void                    ReadSectors(kexBinFile &mapfile, const unsigned int count);

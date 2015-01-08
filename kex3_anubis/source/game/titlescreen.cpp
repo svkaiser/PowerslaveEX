@@ -376,11 +376,15 @@ void kexTitleScreen::Init(void)
 
 void kexTitleScreen::Start(void)
 {
+    DeselectAllItems();
     fadeTime = kex::cSession->GetTicks();
     state = TSS_IDLE;
     curFadeTime = 0;
     bFading = true;
+    bFadeIn = true;
+    selectedItem = -1;
     kex::cInput->ToggleMouseGrab(false);
+    kex::cSession->ToggleCursor(true);
 }
 
 //
@@ -389,6 +393,7 @@ void kexTitleScreen::Start(void)
 
 void kexTitleScreen::Stop(void)
 {
+    DeselectAllItems();
     kex::cInput->ToggleMouseGrab(true);
     kex::cSession->ToggleCursor(false);
 }
@@ -434,7 +439,8 @@ void kexTitleScreen::FadeDone(void)
         titleMenu[TSI_QUIT]->item.LerpTo(160);
         break;
     case TSS_NEWGAME:
-        kex::cGame->SetGameState(GS_LEVEL);
+        //kex::cGame->SetGameState(GS_LEVEL);
+        kex::cGame->ChangeMap("maps/tomb.map");
         break;
     default:
         break;

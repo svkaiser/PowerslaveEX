@@ -147,9 +147,15 @@ void kexGame::Tick(void)
                 break;
         }
         
-        gameLoop->Start();
         gameState = pendingGameState;
         pendingGameState = GS_NONE;
+        
+        gameLoop->Start();
+        
+        if(pendingGameState != GS_NONE)
+        {
+            return;
+        }
     }
     
     player->Cmd().BuildCommands();
@@ -167,6 +173,11 @@ void kexGame::Tick(void)
 
 void kexGame::Draw(void)
 {
+    if(pendingGameState != GS_NONE)
+    {
+        return;
+    }
+    
     gameLoop->Draw();
 }
 
@@ -290,16 +301,6 @@ void kexGame::UpdateActors(void)
 }
 
 //
-// kexGame::AddActor
-//
-
-void kexGame::AddActor(kexActor *actor)
-{
-    actor->Link().Add(actors);
-    actor->CallSpawn();
-}
-
-//
 // kexGame::RemoveActor
 //
 
@@ -328,4 +329,33 @@ void kexGame::RemoveAllActors(void)
     }
     
     actors.Clear();
+}
+
+//
+// kexGame::SpawnActor
+//
+
+kexActor *kexGame::SpawnActor(const int type, const float x, const float y, const float z, const float yaw)
+{
+    kexActor *actor;
+    
+    switch(type)
+    {
+    case AT_PLAYER:
+        actor = static_cast<kexActor*>(ConstructObject("kexPuppet"));
+        break;
+            
+    default:
+        actor = static_cast<kexActor*>(ConstructObject("kexActor"));
+        break;
+    }
+    
+    actor->Origin().Set(x, y, z);
+    actor->Yaw() = yaw;
+    
+    actor->Link().Add(actors);
+    actor->LinkArea();
+    actor->CallSpawn();
+    
+    return actor;
 }

@@ -223,10 +223,11 @@ public:
     kexBBox                         &Bounds(void) { return bounds; }
     const actorType_t               Type(void) const { return type; }
     int16_t                         &Health(void) { return health; }
+    void                            SetMapActor(mapActor_t *ma) { mapActor = ma; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
-private:
+protected:
     kexSDNodeRef<kexActor>          areaLink;
 
     float                           radius;

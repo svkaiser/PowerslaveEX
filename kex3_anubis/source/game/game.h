@@ -75,7 +75,6 @@ public:
     void                    Draw(void);
     bool                    ProcessInput(inputEvent_t *ev);
     void                    UpdateActors(void);
-    void                    AddActor(kexActor *actor);
     void                    RemoveActor(kexActor *actor);
     void                    RemoveAllActors(void);
     void                    ChangeMap(const char *name);
@@ -94,6 +93,8 @@ public:
     kexLinklist<kexActor>   &Actors(void) { return actors; }
 
     kexObject               *ConstructObject(const char *className);
+    kexActor                *SpawnActor(const int type, const float x, const float y, const float z,
+                                        const float yaw);
     void                    DrawSmallString(const char *string, float x, float y, float scale, bool center,
                                             byte r = 0xff, byte g = 0xff, byte b = 0xff);
     void                    DrawBigString(const char *string, float x, float y, float scale, bool center,

@@ -26,6 +26,137 @@ const int kexPlayer::maxAmmo[NUMPLAYERWEAPONS] =
     0, 60, 50, 20, 60, 20, 250, 15
 };
 
+//-----------------------------------------------------------------------------
+//
+// kexPuppet
+//
+//-----------------------------------------------------------------------------
+
+const kexVec3 kexPuppet::accelSpeed(0.1f, 0.1f, 0.1f);
+const kexVec3 kexPuppet::deaccelSpeed(0.1f, 0.1f, 0.1f);
+const kexVec3 kexPuppet::forwardSpeed(0.2f, 0.2f, 0.2f);
+const kexVec3 kexPuppet::backwardSpeed(0.2f, 0.2f, 0.2f);
+
+DECLARE_CLASS(kexPuppet, kexActor)
+
+//
+// kexPuppet::kexPuppet
+//
+
+kexPuppet::kexPuppet(void)
+{
+    this->owner = NULL;
+}
+
+//
+// kexPuppet::~kexPuppet
+//
+
+kexPuppet::~kexPuppet(void)
+{
+}
+
+//
+// kexPuppet::Tick
+//
+
+void kexPuppet::Tick(void)
+{
+    kexPlayerCmd *cmd = &owner->Cmd();
+    
+    yaw += cmd->Angles()[0];
+    pitch += cmd->Angles()[1];
+}
+
+//
+// kexPuppet::Spawn
+//
+
+void kexPuppet::Spawn(void)
+{
+    owner = kex::cGame->Player();
+    kex::cGame->Player()->SetActor(this);
+}
+
+//
+// kexPuppet::Accelerate
+//
+
+void kexPuppet::Accelerate(int direction, int axis)
+{
+    float time = 0;
+    float lerp = 0;
+    
+    switch(axis)
+    {
+    case 0:
+        lerp = acceleration.x;
+        break;
+    case 1:
+        lerp = acceleration.y;
+        break;
+    case 2:
+        lerp = acceleration.z;
+        break;
+    }
+    
+    if(direction == 1)
+    {
+        time = accelSpeed[axis];
+        if(time > 1)
+        {
+            lerp = forwardSpeed[axis];
+        }
+        else
+        {
+            lerp = (forwardSpeed[axis] - lerp) * time + lerp;
+        }
+    }
+    else if(direction == -1)
+    {
+        time = accelSpeed[axis];
+        if(time > 1)
+        {
+            lerp = backwardSpeed[axis];
+        }
+        else
+        {
+            lerp = (backwardSpeed[axis] - lerp) * time + lerp;
+        }
+    }
+    else
+    {
+        time = deaccelSpeed[axis];
+        if(time > 1)
+        {
+            lerp = 0;
+        }
+        else
+        {
+            lerp = (0 - lerp) * time + lerp;
+        }
+    }
+    
+    switch(axis)
+    {
+    case 0:
+        acceleration.x = lerp;
+        break;
+    case 1:
+        acceleration.y = lerp;
+        break;
+    case 2:
+        acceleration.z = lerp;
+        break;
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexPlayer
+//
+//-----------------------------------------------------------------------------
+
 //
 // kexPlayer::kexPlayer
 //

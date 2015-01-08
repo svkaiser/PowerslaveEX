@@ -91,6 +91,42 @@ typedef enum
 } teamDolls_t;
 
 class kexActor;
+class kexPlayer;
+
+//-----------------------------------------------------------------------------
+//
+// kexPuppet
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_CLASS(kexPuppet, kexActor);
+public:
+    kexPuppet(void);
+    ~kexPuppet(void);
+
+    virtual void                    Tick(void);
+    void                            Spawn(void);
+
+    kexPlayer                       *Owner(void) { return owner; }
+    kexVec3                         &Acceleration(void) { return acceleration; }
+
+private:
+    static const kexVec3            accelSpeed;
+    static const kexVec3            deaccelSpeed;
+    static const kexVec3            forwardSpeed;
+    static const kexVec3            backwardSpeed;
+
+    void                            Accelerate(int direction, int axis);
+
+    kexPlayer                       *owner;
+    kexVec3                         acceleration;
+END_CLASS();
+
+//-----------------------------------------------------------------------------
+//
+// kexPlayer
+//
+//-----------------------------------------------------------------------------
 
 class kexPlayer
 {
@@ -102,6 +138,8 @@ public:
 
     kexPlayerCmd            &Cmd(void) { return cmd; }
     kexActor                *Actor(void) { return actor; }
+    void                    SetActor(kexActor *_actor) { actor = _actor; }
+    void                    ClearActor(void) { actor = NULL; }
 
 private:
     kexPlayerCmd            cmd;
