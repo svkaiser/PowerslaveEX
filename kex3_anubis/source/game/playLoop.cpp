@@ -94,12 +94,12 @@ void kexPlayLoop::Draw(void)
     kexCpuVertList *vl = kexRender::cVertList;
     kexWorld *world = kex::cGame->World();
     
-    kexRender::cTextures->defaultTexture->Bind();
+    //kexRender::cTextures->defaultTexture->Bind();
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
     
     if(world->MapLoaded())
     {
-        for(int i = 0; i < world->NumSectors(); ++i)
+        for(unsigned int i = 0; i < world->NumSectors(); ++i)
         {
             mapSector_t *sector = &world->Sectors()[i];
             
@@ -108,7 +108,6 @@ void kexPlayLoop::Draw(void)
             
             for(int j = start; j < end+3; ++j)
             {
-                int tris = 0;
                 mapFace_t *face = &world->Faces()[j];
                 
                 if(face->polyStart == -1 || face->polyEnd == -1)
@@ -118,12 +117,19 @@ void kexPlayLoop::Draw(void)
                 
                 for(int k = face->polyStart; k <= face->polyEnd; ++k)
                 {
+                    int tris = 0;
+
                     mapPoly_t *poly = &world->Polys()[k];
                     mapTexCoords_t *tcoord = &world->TexCoords()[poly->tcoord];
                     mapVertex_t *vertex;
                     
                     int indices[4] = { 0, 0, 0, 0 };
                     int curIdx = 0;
+
+                    if(world->Textures()[poly->texture])
+                    {
+                        world->Textures()[poly->texture]->Bind();
+                    }
                     
                     for(int idx = 0; idx < 4; idx++)
                     {
@@ -180,9 +186,9 @@ void kexPlayLoop::Draw(void)
                         
                         tris += curIdx;
                     }
+
+                    vl->DrawElements();
                 }
-                
-                vl->DrawElements();
             }
         }
     }

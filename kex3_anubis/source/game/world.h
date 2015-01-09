@@ -88,6 +88,7 @@ typedef struct
 } mapActor_t;
 
 class kexActor;
+class kexTexture;
 
 class kexWorld
 {
@@ -108,6 +109,7 @@ public:
     const unsigned int      NumEvents(void) const { return numEvents; }
     const unsigned int      NumActors(void) const { return numActors; }
 
+    kexTexture              **Textures(void) { return textures; }
     mapVertex_t             *Vertices(void) { return vertices; }
     mapSector_t             *Sectors(void) { return sectors; }
     mapFace_t               *Faces(void) { return faces; }
@@ -124,6 +126,7 @@ private:
     void                    BuildAreaNodes(void);
     void                    SpawnMapActor(mapActor_t *mapActor);
     
+    void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);
     void                    ReadVertices(kexBinFile &mapfile, const unsigned int count);
     void                    ReadSectors(kexBinFile &mapfile, const unsigned int count);
     void                    ReadFaces(kexBinFile &mapfile, const unsigned int count);
@@ -134,6 +137,7 @@ private:
 
     bool                    bMapLoaded;
 
+    unsigned int            numTextures;
     unsigned int            numVertices;
     unsigned int            numSectors;
     unsigned int            numFaces;
@@ -142,6 +146,7 @@ private:
     unsigned int            numEvents;
     unsigned int            numActors;
 
+    kexTexture              **textures;
     mapVertex_t             *vertices;
     mapSector_t             *sectors;
     mapFace_t               *faces;

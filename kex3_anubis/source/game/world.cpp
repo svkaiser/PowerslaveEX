@@ -20,6 +20,7 @@
 #include "world.h"
 #include "actor.h"
 #include "player.h"
+#include "renderMain.h"
 
 kexHeapBlock kexWorld::hb_world("world", false, NULL, NULL);
 
@@ -45,6 +46,42 @@ kexWorld::kexWorld(void)
 
 kexWorld::~kexWorld(void)
 {
+}
+
+//
+// kexWorld::ReadTextures
+//
+
+void kexWorld::ReadTextures(kexBinFile &mapfile, const unsigned int count)
+{
+    int len;
+
+    if(count == 0)
+    {
+        return;
+    }
+
+    for(unsigned int i = 0; i < count; ++i)
+    {
+        kexStr str;
+        len = mapfile.Read16();
+
+        if(len > 0)
+        {
+            for(int j = 0; j < len; ++j)
+            {
+                char c = (char)mapfile.Read8();
+                str += c;
+            }
+
+            textures[i] = kexRender::cTextures->Cache(str.c_str(), TC_REPEAT, TF_NEAREST);
+        }
+        else
+        {
+            mapfile.Read16();
+            textures[i] = NULL;
+        }
+    }
 }
 
 //
@@ -229,7 +266,7 @@ void kexWorld::BuildAreaNodes(void)
     
     areaNodes.Init(8);
     
-    for(int i = 0; i < numVertices; ++i)
+    for(unsigned int i = 0; i < numVertices; ++i)
     {
         point.Set((float)vertices[i].x, (float)vertices[i].y, 0);
         rootBounds.AddPoint(point);
@@ -279,6 +316,7 @@ bool kexWorld::LoadMap(const char *mapname)
         return false;
     }
 
+    numTextures     = mapfile.Read32();
     numVertices     = mapfile.Read32();
     numSectors      = mapfile.Read32();
     numFaces        = mapfile.Read32();
@@ -287,6 +325,7 @@ bool kexWorld::LoadMap(const char *mapname)
     numEvents       = mapfile.Read32();
     numActors       = mapfile.Read32();
 
+    if(numTextures  > 0) textures  = (kexTexture**)   Mem_Malloc(sizeof(kexTexture*) * numTextures, hb_world);
     if(numVertices  > 0) vertices  = (mapVertex_t*)   Mem_Malloc(sizeof(mapVertex_t) * numVertices, hb_world);
     if(numSectors   > 0) sectors   = (mapSector_t*)   Mem_Malloc(sizeof(mapSector_t) * numSectors, hb_world);
     if(numFaces     > 0) faces     = (mapFace_t*)     Mem_Malloc(sizeof(mapFace_t) * numFaces, hb_world);
@@ -295,6 +334,7 @@ bool kexWorld::LoadMap(const char *mapname)
     if(numEvents    > 0) events    = (mapEvent_t*)    Mem_Malloc(sizeof(mapEvent_t) * numEvents, hb_world);
     if(numActors    > 0) actors    = (mapActor_t*)    Mem_Malloc(sizeof(mapActor_t) * numActors, hb_world);
 
+    ReadTextures(mapfile, numTextures);
     ReadVertices(mapfile, numVertices);
     ReadSectors(mapfile, numSectors);
     ReadFaces(mapfile, numFaces);
@@ -319,8 +359,8 @@ void kexWorld::UnloadMap(void)
     if(bMapLoaded)
     {
         kex::cGame->RemoveAllActors();
-        areaNodes.Destroy();
         kex::cGame->Player()->ClearActor();
+        areaNodes.Destroy();
     }
     
     Mem_Purge(hb_world);

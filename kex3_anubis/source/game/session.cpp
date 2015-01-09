@@ -171,8 +171,8 @@ void kexSession::RunGame(void)
     // setup mouse cursor
     InitCursor();
 
-    // initialize the core game logic
-    kex::cGame->Init();
+    // begin the core game logic
+    kex::cGame->Start();
 
     prevmsec = kex::cTimer->GetMS();
 
