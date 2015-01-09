@@ -38,6 +38,8 @@ public:
                                const byte r, const byte g, const byte b);
     static void     DrawLine(const kexVec3 &p1, const kexVec3 &p2,
                              const byte r, const byte g, const byte b);
+    static void     DrawArrow(const kexVec3 &p1, const kexVec3 &p2, const int size,
+                              const byte r, const byte g, const byte b);
     static void     PrintStatsText(const char *title, const char *s, ...);
 
     static void     ClearDebugLine(void) { debugLineNum = DEBUG_LINE_TOP; }

@@ -297,6 +297,73 @@ void kexRenderUtils::DrawLine(const kexVec3 &p1, const kexVec3 &p2,
 }
 
 //
+// kexRenderUtils::DrawArrow
+//
+
+void kexRenderUtils::DrawArrow(const kexVec3 &p1, const kexVec3 &p2, const int size,
+                               const byte r, const byte g, const byte b)
+{
+    kexVec3 forward, right, up, v1, v2;
+    float a, s, d;
+    int i;
+    static float arrowCos[6];
+    static float arrowSin[6];
+    static int bMakeTable = false;
+    
+    DrawLine(p1, p2, r, g, b);
+    
+    if(bMakeTable == false)
+    {
+        bMakeTable = true;
+        
+        for(i = 0, a = 0; a < 360.0f; a += 60, ++i)
+        {
+            arrowCos[i] = kexMath::Cos(kexMath::Deg2Rad(a));
+            arrowSin[i] = kexMath::Sin(kexMath::Deg2Rad(a));
+        }
+        
+        arrowCos[i] = arrowCos[0];
+        arrowSin[i] = arrowSin[0];
+    }
+    
+    forward = p2 - p1;
+    forward.Normalize();
+    
+    d = forward.x * forward.x + forward.y * forward.y;
+    if(!d)
+    {
+        right.Set(1, 0, 0);
+    }
+    else
+    {
+        d = kexMath::InvSqrt(d);
+        right.x = -forward.y * d;
+        right.y = forward.x * d;
+        right.z = 0;
+    }
+    
+    up = right.Cross(forward);
+    
+    for(i = 0, a = 0; a < 360.0f; a += 60, ++i)
+    {
+        s = 0.5f * size * arrowCos[i];
+        v1 = p2 - (forward * size);
+        v1 = v1 + (right * s);
+        s = 0.5f * size * arrowSin[i];
+        v1 = v1 + (up * s);
+        
+        s = 0.5f * size * arrowCos[i+1];
+        v2 = p2 - (forward * size);
+        v2 = v2 + (right * s);
+        s = 0.5f * size * arrowSin[i+1];
+        v2 = v2 + (up * s);
+        
+        DrawLine(v1, p2, r, g, b);
+        DrawLine(v1, v2, r, g, b);
+    }
+}
+
+//
 // kexRenderUtils::PrintStatsText
 //
 
