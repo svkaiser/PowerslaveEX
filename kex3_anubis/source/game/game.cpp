@@ -145,6 +145,7 @@ void kexGame::Tick(void)
                 break;
                 
             case GS_CHANGELEVEL:
+                gameLoop = &gameLoopStub;
                 pendingGameState = GS_NONE;
                 LoadNewMap();
                 return;
