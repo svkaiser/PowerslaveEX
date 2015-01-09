@@ -139,6 +139,10 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
 
 void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
 {
+    kexVec3 point;
+    float x, y, z;
+    mapVertex_t *v;
+    
     if(count == 0)
     {
         kex::cSystem->Error("kexWorld::ReadFaces - No faces present\n");
@@ -158,6 +162,15 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
         faces[i].tag        = mapfile.Read16();
         faces[i].vertStart  = mapfile.Read16();
         faces[i].vertEnd    = mapfile.Read16();
+        
+        v = &vertices[faces[i].vertStart];
+        x = (float)v->x;
+        y = (float)v->y;
+        z = (float)v->z;
+        
+        point.Set(x, y, z);
+        
+        faces[i].plane.SetDistance(point);
     }
 }
 
