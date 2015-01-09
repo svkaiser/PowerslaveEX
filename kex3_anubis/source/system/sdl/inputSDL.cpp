@@ -34,6 +34,7 @@ public:
     virtual void        DeactivateMouse(void);
     virtual int         TranslateKeyboard(const int val);
     virtual int         TranslateMouse(const int val);
+    virtual bool        CapslockOn(void);
     
 private:
     void                ReadMouse(void);
@@ -226,6 +227,15 @@ int kexInputSDL::TranslateMouse(const int val)
     }
     
     return KMSB_UNDEFINED;
+}
+
+//
+// kexInputSDL::CapslockOn
+//
+
+bool kexInputSDL::CapslockOn(void)
+{
+    return (SDL_GetModState() & KMOD_CAPS);
 }
 
 //

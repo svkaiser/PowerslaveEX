@@ -68,6 +68,7 @@ private:
     char                typeStr[CON_INPUT_LENGTH];
     int                 typeStrPos;
     bool                bShiftDown;
+    bool                bCapsDown;
     bool                bCtrlDown;
     int                 state;
     int                 blinkTime;

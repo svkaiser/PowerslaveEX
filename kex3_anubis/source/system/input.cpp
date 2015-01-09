@@ -120,6 +120,15 @@ void kexInput::UpdateGrab(void)
 }
 
 //
+// kexInput::CapsLockOn
+//
+
+bool kexInput::CapslockOn(void)
+{
+    return false;
+}
+
+//
 // kexInput::CenterMouse
 // Warp the mouse back to the middle of the screen
 //

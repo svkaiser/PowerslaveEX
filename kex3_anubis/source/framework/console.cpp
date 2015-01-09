@@ -47,6 +47,7 @@ kexConsole::kexConsole(void)
     this->typeStrPos        = 0;
     this->scrollBackLines   = 0;
     this->bShiftDown        = false;
+    this->bCapsDown         = false;
     this->bCtrlDown         = false;
     this->state             = CON_STATE_UP;
     this->blinkTime         = 0;
@@ -418,7 +419,7 @@ void kexConsole::ParseKey(int c)
             return;
         }
 
-        if(bShiftDown)
+        if(bShiftDown ^ bCapsDown)
         {
             c = shiftcode[c];
         }
@@ -514,6 +515,8 @@ bool kexConsole::ProcessInput(const inputEvent_t *ev)
 
         return true;
     }
+    
+    bCapsDown = kex::cInput->CapslockOn();
 
     CheckShift(ev);
     CheckStickyKeys(ev);

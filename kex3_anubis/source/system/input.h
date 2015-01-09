@@ -57,6 +57,7 @@ public:
     virtual void    DeactivateMouse(void);
     virtual int     TranslateKeyboard(const int val);
     virtual int     TranslateMouse(const int val);
+    virtual bool    CapslockOn(void);
 
     const bool      MouseGrabbed(void) const { return bGrabMouse; }
     void            SetEnabled(bool enable) { bEnabled = enable; }
