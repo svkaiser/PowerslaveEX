@@ -180,6 +180,7 @@ void kexSession::RunGame(void)
     {
         do
         {
+            kex::cTimer->Sleep(1);
             nextmsec = kex::cTimer->GetMS();
             msec = nextmsec - prevmsec;
         }
