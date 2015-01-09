@@ -99,7 +99,7 @@ void kexPakFile::LoadZipFile(const char *file)
     const char *filepath;
     kexStr fPath;
 
-    filepath = kex::cSystem->GetBaseDirectory();
+    filepath = cvarBasePath.GetValue();
 
     fPath = filepath;
     fPath = fPath + "/" + file;
