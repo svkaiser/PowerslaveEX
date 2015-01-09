@@ -744,6 +744,40 @@ float kexVec3::ToPitch(void) const
 }
 
 //
+// kexVec3::ToAxis
+//
+
+void kexVec3::ToAxis(kexVec3 *forward, kexVec3 *up, kexVec3 *right,
+                     const float yaw, const float pitch, const float roll)
+{
+    float sy = kexMath::Sin(yaw);
+    float cy = kexMath::Cos(yaw);
+    float sp = kexMath::Sin(pitch);
+    float cp = kexMath::Cos(pitch);
+    float sr = kexMath::Sin(roll);
+    float cr = kexMath::Cos(roll);
+
+    if(forward)
+    {
+        forward->x  = sy * cp;
+        forward->y  = cy * cp;
+        forward->z  = -sp;
+    }
+    if(right)
+    {
+        right->x    = sr * sp * sy + cr * cy;
+        right->y    = sr * sp * cy + cr * -sy;
+        right->z    = sr * cp;
+    }
+    if(up)
+    {
+        up->x       = cr * sp * sy + -sr * cy;
+        up->y       = cr * sp * cy + -sr * -sy;
+        up->z       = cr * cp;
+    }
+}
+
+//
 // kexVec3::ToString
 //
 

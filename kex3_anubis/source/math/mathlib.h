@@ -237,6 +237,8 @@ public:
     kexQuat                 ToQuat(void);
     float                   ToYaw(void) const;
     float                   ToPitch(void) const;
+    static void             ToAxis(kexVec3 *forward, kexVec3 *up, kexVec3 *right,
+                                   const float yaw, const float pitch, const float roll);
     kexStr                  ToString(void) const;
     float                   *ToFloatPtr(void);
     kexVec2                 ToVec2(void);

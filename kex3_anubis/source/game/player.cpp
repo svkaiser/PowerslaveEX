@@ -20,6 +20,10 @@
 #include "actor.h"
 #include "player.h"
 
+#define PMOVE_FRICTION  0.9375f
+#define PMOVE_MIN       0.125f
+#define PMOVE_SPEED     0.976f
+
 const int16_t kexPlayer::maxHealth = 200;
 const int kexPlayer::maxAmmo[NUMPLAYERWEAPONS] =
 {
@@ -31,11 +35,6 @@ const int kexPlayer::maxAmmo[NUMPLAYERWEAPONS] =
 // kexPuppet
 //
 //-----------------------------------------------------------------------------
-
-const kexVec3 kexPuppet::accelSpeed(0.1f, 0.1f, 0.1f);
-const kexVec3 kexPuppet::deaccelSpeed(0.1f, 0.1f, 0.1f);
-const kexVec3 kexPuppet::forwardSpeed(0.2f, 0.2f, 0.2f);
-const kexVec3 kexPuppet::backwardSpeed(0.2f, 0.2f, 0.2f);
 
 DECLARE_CLASS(kexPuppet, kexActor)
 
@@ -63,9 +62,61 @@ kexPuppet::~kexPuppet(void)
 void kexPuppet::Tick(void)
 {
     kexPlayerCmd *cmd = &owner->Cmd();
+    kexVec3 forward, right;
     
     yaw += cmd->Angles()[0];
     pitch += cmd->Angles()[1];
+
+    kexVec3::ToAxis(&forward, NULL, &right, yaw, pitch, 0);
+
+    velocity.x *= PMOVE_FRICTION;
+    velocity.y *= PMOVE_FRICTION;
+    velocity.z *= PMOVE_FRICTION;
+
+    if(kexMath::Fabs(velocity.x) < PMOVE_MIN)
+    {
+        velocity.x = 0;
+    }
+
+    if(kexMath::Fabs(velocity.y) < PMOVE_MIN)
+    {
+        velocity.y = 0;
+    }
+
+    if(kexMath::Fabs(velocity.z) < PMOVE_MIN)
+    {
+        velocity.z = 0;
+    }
+
+    if(cmd->Buttons() & BC_FORWARD)
+    {
+        velocity.x += forward.x * PMOVE_SPEED;
+        velocity.y += forward.y * PMOVE_SPEED;
+        velocity.z += forward.z * PMOVE_SPEED;
+    }
+
+    if(cmd->Buttons() & BC_BACKWARD)
+    {
+        velocity.x -= forward.x * PMOVE_SPEED;
+        velocity.y -= forward.y * PMOVE_SPEED;
+        velocity.z -= forward.z * PMOVE_SPEED;
+    }
+
+    if(cmd->Buttons() & BC_STRAFELEFT)
+    {
+        velocity.x -= right.x * PMOVE_SPEED;
+        velocity.y -= right.y * PMOVE_SPEED;
+    }
+
+    if(cmd->Buttons() & BC_STRAFERIGHT)
+    {
+        velocity.x += right.x * PMOVE_SPEED;
+        velocity.y += right.y * PMOVE_SPEED;
+    }
+
+    origin.x += velocity.x;
+    origin.y += velocity.y;
+    origin.z += velocity.z;
 }
 
 //
@@ -76,79 +127,6 @@ void kexPuppet::Spawn(void)
 {
     owner = kex::cGame->Player();
     kex::cGame->Player()->SetActor(this);
-}
-
-//
-// kexPuppet::Accelerate
-//
-
-void kexPuppet::Accelerate(int direction, int axis)
-{
-    float time = 0;
-    float lerp = 0;
-    
-    switch(axis)
-    {
-    case 0:
-        lerp = acceleration.x;
-        break;
-    case 1:
-        lerp = acceleration.y;
-        break;
-    case 2:
-        lerp = acceleration.z;
-        break;
-    }
-    
-    if(direction == 1)
-    {
-        time = accelSpeed[axis];
-        if(time > 1)
-        {
-            lerp = forwardSpeed[axis];
-        }
-        else
-        {
-            lerp = (forwardSpeed[axis] - lerp) * time + lerp;
-        }
-    }
-    else if(direction == -1)
-    {
-        time = accelSpeed[axis];
-        if(time > 1)
-        {
-            lerp = backwardSpeed[axis];
-        }
-        else
-        {
-            lerp = (backwardSpeed[axis] - lerp) * time + lerp;
-        }
-    }
-    else
-    {
-        time = deaccelSpeed[axis];
-        if(time > 1)
-        {
-            lerp = 0;
-        }
-        else
-        {
-            lerp = (0 - lerp) * time + lerp;
-        }
-    }
-    
-    switch(axis)
-    {
-    case 0:
-        acceleration.x = lerp;
-        break;
-    case 1:
-        acceleration.y = lerp;
-        break;
-    case 2:
-        acceleration.z = lerp;
-        break;
-    }
 }
 
 //-----------------------------------------------------------------------------

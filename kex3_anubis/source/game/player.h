@@ -108,18 +108,9 @@ public:
     void                            Spawn(void);
 
     kexPlayer                       *Owner(void) { return owner; }
-    kexVec3                         &Acceleration(void) { return acceleration; }
 
 private:
-    static const kexVec3            accelSpeed;
-    static const kexVec3            deaccelSpeed;
-    static const kexVec3            forwardSpeed;
-    static const kexVec3            backwardSpeed;
-
-    void                            Accelerate(int direction, int axis);
-
     kexPlayer                       *owner;
-    kexVec3                         acceleration;
 END_CLASS();
 
 //-----------------------------------------------------------------------------
