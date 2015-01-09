@@ -535,8 +535,11 @@ void kexSystemSDL::Main(int argc, char **argv)
     kexObject::Init();
     kex::cInput->Init();
     kex::cPakFiles->Init();
+    kex::cGame->Init();
     
     ReadConfigFile("config.cfg");
+
+    kex::cPakFiles->LoadZipFile("game.kpf");
     
     InitVideo();
 

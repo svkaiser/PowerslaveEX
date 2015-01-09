@@ -70,6 +70,7 @@ public:
     ~kexGame(void);
 
     void                    Init(void);
+    void                    Start(void);
     void                    Shutdown(void);
     void                    Tick(void);
     void                    Draw(void);

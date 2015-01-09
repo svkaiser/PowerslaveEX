@@ -440,7 +440,7 @@ void kexTitleScreen::FadeDone(void)
         break;
     case TSS_NEWGAME:
         //kex::cGame->SetGameState(GS_LEVEL);
-        kex::cGame->ChangeMap("maps/tomb.map");
+        kex::cGame->ChangeMap("maps/TOMB.MAP");
         break;
     default:
         break;

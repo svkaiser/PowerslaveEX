@@ -97,7 +97,14 @@ void kexGame::Init(void)
     kex::cActions->AddAction(IA_STRAFERIGHT, "straferight");
     kex::cActions->AddAction(IA_WEAPNEXT, "+weapnext");
     kex::cActions->AddAction(IA_WEAPPREV, "+weapprev");
-    
+}
+
+//
+// kexGame::Start
+//
+
+void kexGame::Start(void)
+{
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");
 
