@@ -124,6 +124,7 @@ void kexPlayLoop::Draw(void)
                     mapVertex_t *vertex;
                     
                     int indices[4] = { 0, 0, 0, 0 };
+                    int tcoords[4] = { 0, 0, 0, 0 };
                     int curIdx = 0;
 
                     if(world->Textures()[poly->texture])
@@ -139,53 +140,46 @@ void kexPlayLoop::Draw(void)
                         }
                         
                         indices[curIdx] = poly->indices[idx];
+                        tcoords[curIdx] = idx;
                         curIdx++;
                     }
                     
                     if(poly->flipped == 0)
-                    {
-                        for(int idx = (curIdx-1); idx >= 0; idx--)
-                        {
-                            vertex = &world->Vertices()[face->vertStart + indices[idx]];
-                            
-                            vl->AddVertex((float)vertex->x, (float)vertex->y, (float)vertex->z,
-                                          tcoord->uv[idx].s, tcoord->uv[idx].t,
-                                          vertex->rgba[0],
-                                          vertex->rgba[1],
-                                          vertex->rgba[2],
-                                          255);
-                        }
-                        
-                        vl->AddTriangle(tris+1, tris+2, tris+0);
-                        if(curIdx == 4)
-                        {
-                            vl->AddTriangle(tris+2, tris+3, tris+0);
-                        }
-                        
-                        tris += curIdx;
-                    }
-                    else
                     {
                         for(int idx = 0; idx < curIdx; idx++)
                         {
                             vertex = &world->Vertices()[face->vertStart + indices[idx]];
                             
                             vl->AddVertex((float)vertex->x, (float)vertex->y, (float)vertex->z,
-                                          tcoord->uv[idx].s, tcoord->uv[idx].t,
+                                          tcoord->uv[tcoords[idx]].s, 1.0f - tcoord->uv[tcoords[idx]].t,
                                           vertex->rgba[0],
                                           vertex->rgba[1],
                                           vertex->rgba[2],
                                           255);
                         }
-                        
-                        vl->AddTriangle(tris+1, tris+2, tris+0);
-                        if(curIdx == 4)
-                        {
-                            vl->AddTriangle(tris+2, tris+3, tris+0);
-                        }
-                        
-                        tris += curIdx;
                     }
+                    else
+                    {
+                        for(int idx = (curIdx-1); idx >= 0; idx--)
+                        {
+                            vertex = &world->Vertices()[face->vertStart + indices[idx]];
+                            
+                            vl->AddVertex((float)vertex->x, (float)vertex->y, (float)vertex->z,
+                                          tcoord->uv[tcoords[idx]].s, 1.0f - tcoord->uv[tcoords[idx]].t,
+                                          vertex->rgba[0],
+                                          vertex->rgba[1],
+                                          vertex->rgba[2],
+                                          255);
+                        }
+                    }
+                    
+                    vl->AddTriangle(tris+0, tris+2, tris+1);
+                    if(curIdx == 4)
+                    {
+                        vl->AddTriangle(tris+0, tris+3, tris+2);
+                    }
+                    
+                    tris += curIdx;
 
                     vl->DrawElements();
                 }
