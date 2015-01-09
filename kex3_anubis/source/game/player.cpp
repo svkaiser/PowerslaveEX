@@ -117,6 +117,8 @@ void kexPuppet::Tick(void)
     origin.x += velocity.x;
     origin.y += velocity.y;
     origin.z += velocity.z;
+    
+    LinkArea();
 }
 
 //

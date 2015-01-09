@@ -275,7 +275,7 @@ public:
     static const kexVec3    vecForward;
     static const kexVec3    vecUp;
     static const kexVec3    vecRight;
-    static kexVec3          vecZero;
+    static const kexVec3    vecZero;
 
     float                   x;
     float                   y;
