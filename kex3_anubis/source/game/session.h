@@ -38,6 +38,7 @@ public:
     void                        ToggleCursor(const bool b) { bShowCursor = b; }
 
 private:
+    int                         GetNextTickCount(void);
     void                        ProcessEvents(void);
     void                        DrawFrame(void);
     void                        RunFrame(void);

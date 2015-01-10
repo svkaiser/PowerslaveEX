@@ -21,6 +21,8 @@
 static kexSession sessionLocal;
 kexSession *kex::cSession = &sessionLocal;
 
+static const float clockspeed = kexMath::FrameSec(60.0f);
+
 kexCvar cvarClientFPS("cl_maxfps", CVF_INT|CVF_CONFIG, "60", 1, 60, "Game render FPS");
 
 //
@@ -156,14 +158,52 @@ void kexSession::Shutdown(void)
 }
 
 //
+// kexSession::GetNextTickCount
+//
+// Determines how many game ticks to run for
+// the next frame
+//
+
+int kexSession::GetNextTickCount(void)
+{
+    static int framemsec = 0;
+    static float leftOverTime = 0;
+    int afterms, ticsToRun;
+    float t;
+
+    afterms = kexMath::Sec2MSec(kex::cTimer->GetMS()) - framemsec;
+    t = kexMath::MSec2Sec((float)afterms) / clockspeed;
+
+    ticsToRun = (int)t;
+
+    // accumulate the remainder
+    leftOverTime += (t - ticsToRun);
+
+    if(leftOverTime < 0)
+    {
+        // don't go under
+        leftOverTime = 0;
+    }
+
+    // add another game tick when the remainder is equal
+    // to a full tick
+    if(leftOverTime >= 1.0f)
+    {
+        ticsToRun++;
+        leftOverTime -= 1.0f;
+    }
+
+    framemsec = kexMath::Sec2MSec(kex::cTimer->GetMS());
+    return ticsToRun;
+}
+
+//
 // kexSession::RunGame
 //
 
 void kexSession::RunGame(void)
 {
-    static int clockspeed = kexMath::FrameSec(60);
     int msec;
-    int framemsec = 0;
     int prevmsec;
     int nextmsec;
     int ticsToRun = 0;
@@ -185,6 +225,8 @@ void kexSession::RunGame(void)
 
             if(msec < 1 && ticsToRun <= 0 && fps >= 60)
             {
+                // don't thrash the cpu while waiting for
+                // the next frame
                 kex::cTimer->Sleep(1);
             }
         }
@@ -209,20 +251,21 @@ void kexSession::RunGame(void)
 
                 // process game logic
                 RunFrame();
+
+                // update ticks
+                UpdateTicks();
             } while(--ticsToRun > 0);
 
             // draw scene
             DrawFrame();
 
-            int afterms = kexMath::Sec2MSec(kex::cTimer->GetMS());
-            ticsToRun = kexMath::MSec2Sec((afterms - framemsec) / clockspeed);
+            // decide how many game ticks to run for next loop
+            ticsToRun = GetNextTickCount();
 
-            // update ticks
-            UpdateTicks();
-            framemsec = kexMath::Sec2MSec(kex::cTimer->GetMS());
+            // handle garbage collection
+            Mem_GC();
         }
 
         prevmsec = nextmsec;
-        Mem_GC();
     }
 }
