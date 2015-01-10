@@ -96,6 +96,8 @@ void kexPlayLoop::Draw(void)
     
     //kexRender::cTextures->defaultTexture->Bind();
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
     
     if(world->MapLoaded())
     {

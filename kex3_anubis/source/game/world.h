@@ -41,6 +41,7 @@ typedef struct
 {
     short       polyStart;
     short       polyEnd;
+    word        vertexStart;
     short       sector;
     float       angle;
     kexPlane    plane;

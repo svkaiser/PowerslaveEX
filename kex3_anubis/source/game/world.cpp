@@ -151,17 +151,18 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
 
     for(unsigned int i = 0; i < count; ++i)
     {
-        faces[i].polyStart  = mapfile.Read16();
-        faces[i].polyEnd    = mapfile.Read16();
-        faces[i].sector     = mapfile.Read16();
-        faces[i].angle      = mapfile.ReadFloat();
-        faces[i].plane.a    = mapfile.ReadFloat();
-        faces[i].plane.b    = mapfile.ReadFloat();
-        faces[i].plane.c    = mapfile.ReadFloat();
-        faces[i].flags      = mapfile.Read16();
-        faces[i].tag        = mapfile.Read16();
-        faces[i].vertStart  = mapfile.Read16();
-        faces[i].vertEnd    = mapfile.Read16();
+        faces[i].polyStart      = mapfile.Read16();
+        faces[i].polyEnd        = mapfile.Read16();
+        faces[i].vertexStart    = mapfile.Read16();
+        faces[i].sector         = mapfile.Read16();
+        faces[i].angle          = mapfile.ReadFloat();
+        faces[i].plane.a        = mapfile.ReadFloat();
+        faces[i].plane.b        = mapfile.ReadFloat();
+        faces[i].plane.c        = mapfile.ReadFloat();
+        faces[i].flags          = mapfile.Read16();
+        faces[i].tag            = mapfile.Read16();
+        faces[i].vertStart      = mapfile.Read16();
+        faces[i].vertEnd        = mapfile.Read16();
         
         v = &vertices[faces[i].vertStart];
         x = (float)v->x;
