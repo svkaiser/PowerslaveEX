@@ -149,12 +149,12 @@ void kexViewBounds::AddBox(kexRenderView *view, kexBBox &box)
 bool kexViewBounds::ViewBoundInside(const kexViewBounds &viewBounds)
 {
     if(((viewBounds.min[0] < min[0] && viewBounds.max[0] < min[0]) ||
-            (viewBounds.min[0] > max[0] && viewBounds.max[0] > max[0])))
+        (viewBounds.min[0] > max[0] && viewBounds.max[0] > max[0])))
     {
         return false;
     }
     if(((viewBounds.min[1] < min[1] && viewBounds.max[1] < min[1]) ||
-            (viewBounds.min[1] > max[1] && viewBounds.max[1] > max[1])))
+        (viewBounds.min[1] > max[1] && viewBounds.max[1] > max[1])))
     {
         return false;
     }

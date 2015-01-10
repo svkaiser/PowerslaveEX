@@ -152,7 +152,7 @@ void kexPlayLoop::Draw(void)
                         {
                             vertex = &world->Vertices()[face->vertStart + indices[idx]];
                             
-                            vl->AddVertex((float)vertex->x, (float)vertex->y, (float)vertex->z,
+                            vl->AddVertex(vertex->origin,
                                           tcoord->uv[tcoords[idx]].s, 1.0f - tcoord->uv[tcoords[idx]].t,
                                           vertex->rgba[0],
                                           vertex->rgba[1],
@@ -166,7 +166,7 @@ void kexPlayLoop::Draw(void)
                         {
                             vertex = &world->Vertices()[face->vertStart + indices[idx]];
                             
-                            vl->AddVertex((float)vertex->x, (float)vertex->y, (float)vertex->z,
+                            vl->AddVertex(vertex->origin,
                                           tcoord->uv[tcoords[idx]].s, 1.0f - tcoord->uv[tcoords[idx]].t,
                                           vertex->rgba[0],
                                           vertex->rgba[1],

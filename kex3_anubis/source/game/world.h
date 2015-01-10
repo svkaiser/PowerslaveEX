@@ -19,9 +19,7 @@
 
 typedef struct
 {
-    short       x;
-    short       y;
-    short       z;
+    kexVec3     origin;
     byte        rgba[4];
 } mapVertex_t;
 
@@ -99,6 +97,8 @@ public:
 
     bool                    LoadMap(const char *mapname);
     void                    UnloadMap(void);
+    float                   PointOnFaceSide(kexVec3 &origin, mapFace_t *face);
+    bool                    PointInsideSector(kexVec3 &origin, mapSector_t *sector);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 

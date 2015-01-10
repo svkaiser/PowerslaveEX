@@ -98,13 +98,13 @@ void kexWorld::ReadVertices(kexBinFile &mapfile, const unsigned int count)
 
     for(unsigned int i = 0; i < count; ++i)
     {
-        vertices[i].x       = mapfile.Read16();
-        vertices[i].y       = mapfile.Read16();
-        vertices[i].z       = mapfile.Read16();
-        vertices[i].rgba[0] = mapfile.Read8();
-        vertices[i].rgba[1] = mapfile.Read8();
-        vertices[i].rgba[2] = mapfile.Read8();
-        vertices[i].rgba[3] = mapfile.Read8();
+        vertices[i].origin.x    = (float)mapfile.Read16();
+        vertices[i].origin.y    = (float)mapfile.Read16();
+        vertices[i].origin.z    = (float)mapfile.Read16();
+        vertices[i].rgba[0]     = mapfile.Read8();
+        vertices[i].rgba[1]     = mapfile.Read8();
+        vertices[i].rgba[2]     = mapfile.Read8();
+        vertices[i].rgba[3]     = mapfile.Read8();
     }
 }
 
@@ -139,8 +139,6 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
 
 void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
 {
-    kexVec3 point;
-    float x, y, z;
     mapVertex_t *v;
     
     if(count == 0)
@@ -164,14 +162,8 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
         faces[i].vertStart      = mapfile.Read16();
         faces[i].vertEnd        = mapfile.Read16();
         
-        v = &vertices[faces[i].vertStart];
-        x = (float)v->x;
-        y = (float)v->y;
-        z = (float)v->z;
-        
-        point.Set(x, y, z);
-        
-        faces[i].plane.SetDistance(point);
+        v = &vertices[faces[i].vertexStart];
+        faces[i].plane.SetDistance(v->origin);
     }
 }
 
@@ -282,7 +274,7 @@ void kexWorld::BuildAreaNodes(void)
     
     for(unsigned int i = 0; i < numVertices; ++i)
     {
-        point.Set((float)vertices[i].x, (float)vertices[i].y, 0);
+        point.Set(vertices[i].origin.x, vertices[i].origin.y, 0);
         rootBounds.AddPoint(point);
     }
     
@@ -312,6 +304,36 @@ void kexWorld::SpawnMapActor(mapActor_t *mapActor)
     
     actor = kex::cGame->SpawnActor(mapActor->type, x, y, z, an);
     actor->SetMapActor(mapActor);
+}
+
+//
+// kexWorld::PointOnFaceSide
+//
+
+float kexWorld::PointOnFaceSide(kexVec3 &origin, mapFace_t *face)
+{
+    return face->plane.Distance(origin) - face->plane.d;
+}
+
+//
+// kexWorld::PointInsideSector
+//
+
+bool kexWorld::PointInsideSector(kexVec3 &origin, mapSector_t *sector)
+{
+    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
+    {
+        mapFace_t *face = &faces[i];
+
+        if(PointOnFaceSide(origin, face) >= 0)
+        {
+            continue;
+        }
+
+        return false;
+    }
+
+    return true;
 }
 
 //
