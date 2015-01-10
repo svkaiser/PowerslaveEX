@@ -26,6 +26,8 @@ public:
     static void     DrawQuad(const kexVec2 &start, const kexVec2 &end,
                              const float height1, const float height2,
                              const byte r, const byte g, const byte b);
+    static void     DrawQuad(const kexVec3 &p1, const kexVec3 &p2, const kexVec3 &p3, const kexVec3 &p4,
+                             const byte r, const byte g, const byte b, const byte a);
     static void     DrawBoundingBox(const kexBBox &bbox,
                                     const byte r, const byte g, const byte b);
     static void     DrawFilledBoundingBox(const kexBBox &bbox,

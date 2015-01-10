@@ -54,6 +54,25 @@ void kexRenderUtils::DrawQuad(const kexVec2 &start, const kexVec2 &end,
 }
 
 //
+// kexRenderUtils::DrawQuad
+//
+
+void kexRenderUtils::DrawQuad(const kexVec3 &p1, const kexVec3 &p2, const kexVec3 &p3, const kexVec3 &p4,
+                              const byte r, const byte g, const byte b, const byte a)
+{
+    kexRender::cTextures->whiteTexture->Bind();
+
+    kexRender::cVertList->BindDrawPointers();
+    kexRender::cVertList->AddVertex(p1, 0, 0, r, g, b, a);
+    kexRender::cVertList->AddVertex(p2, 1, 0, r, g, b, a);
+    kexRender::cVertList->AddVertex(p3, 0, 1, r, g, b, a);
+    kexRender::cVertList->AddVertex(p4, 1, 1, r, g, b, a);
+    kexRender::cVertList->AddTriangle(0, 1, 2);
+    kexRender::cVertList->AddTriangle(2, 1, 3);
+    kexRender::cVertList->DrawElements();
+}
+
+//
 // kexRenderUtils::DrawBoundingBox
 //
 
@@ -347,13 +366,13 @@ void kexRenderUtils::DrawArrow(const kexVec3 &p1, const kexVec3 &p2, const int s
     for(i = 0, a = 0; a < 360.0f; a += 60, ++i)
     {
         s = 0.5f * size * arrowCos[i];
-        v1 = p2 - (forward * size);
+        v1 = p2 - (forward * (float)size);
         v1 = v1 + (right * s);
         s = 0.5f * size * arrowSin[i];
         v1 = v1 + (up * s);
         
         s = 0.5f * size * arrowCos[i+1];
-        v2 = p2 - (forward * size);
+        v2 = p2 - (forward * (float)size);
         v2 = v2 + (right * s);
         s = 0.5f * size * arrowSin[i+1];
         v2 = v2 + (up * s);

@@ -89,22 +89,21 @@ void kexViewBounds::AddPoint(const float x, const float y, const float z)
 void kexViewBounds::AddVector(kexRenderView *view, kexVec3 &vector)
 {
     int bits;
+    float w, h;
     kexFrustum frustum;
     kexVec3 pmin;
 
     frustum = view->Frustum();
     bits = frustum.SphereBits(vector, 1);
-    
-    if(bits == 0)
-    {
-        return;
-    }
 
     pmin = view->ProjectPoint(vector);
 
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+
     if(!(bits & BIT(FP_RIGHT)))
     {
-        pmin[0] = (float)kex::cSystem->VideoWidth();
+        pmin[0] = w;
     }
 
     if(!(bits & BIT(FP_LEFT)))
@@ -112,14 +111,14 @@ void kexViewBounds::AddVector(kexRenderView *view, kexVec3 &vector)
         pmin[0] = 0;
     }
 
-    if(!(bits & BIT(FP_TOP)))
+    if(!(bits & BIT(FP_BOTTOM)))
     {
         pmin[1] = 0;
     }
 
-    if(!(bits & BIT(FP_BOTTOM)))
+    if(!(bits & BIT(FP_TOP)))
     {
-        pmin[1] = (float)kex::cSystem->VideoHeight();
+        pmin[1] = h;
     }
 
     AddPoint(pmin[0], pmin[1], pmin[2]);
