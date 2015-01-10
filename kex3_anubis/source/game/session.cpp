@@ -180,9 +180,13 @@ void kexSession::RunGame(void)
     {
         do
         {
-            kex::cTimer->Sleep(1);
             nextmsec = kex::cTimer->GetMS();
             msec = nextmsec - prevmsec;
+
+            if(msec < 1 && ticsToRun <= 0 && fps >= 60)
+            {
+                kex::cTimer->Sleep(1);
+            }
         }
         while(msec < 1);
 
