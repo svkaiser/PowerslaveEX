@@ -235,7 +235,7 @@ int kexInputSDL::TranslateMouse(const int val)
 
 bool kexInputSDL::CapslockOn(void)
 {
-    return (SDL_GetModState() & KMOD_CAPS);
+    return (SDL_GetModState() & KMOD_CAPS) != 0;
 }
 
 //
