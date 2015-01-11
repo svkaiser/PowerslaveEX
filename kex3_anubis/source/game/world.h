@@ -23,6 +23,11 @@ typedef struct
     byte        rgba[4];
 } mapVertex_t;
 
+typedef enum
+{
+    SF_WATER    = BIT(8)
+} sectorFlags_t;
+
 typedef struct
 {
     word        faceStart;
@@ -34,6 +39,24 @@ typedef struct
     float       floorSlope;
     word        flags;
 } mapSector_t;
+
+typedef enum
+{
+    FF_SOLID        = BIT(0),
+    FF_UNKNOWN1     = BIT(1),
+    FF_SECRET       = BIT(2),
+    FF_UNKNOWN2     = BIT(3),
+    FF_INVISIBLE    = BIT(4),
+    FF_LAVA         = BIT(5),
+    FF_WATER        = BIT(6),
+    FF_SLIME        = BIT(7),
+    FF_TOGGLE       = BIT(8),
+    FF_FORCEFIELD   = BIT(9),
+    FF_FULLBRIGHT   = BIT(10),
+    FF_HIDDEN       = BIT(12),
+    FF_PORTAL       = BIT(13),
+    FF_UNDERWATER   = BIT(14)
+} faceFlags_t;
 
 typedef struct
 {

@@ -304,6 +304,7 @@ void kexWorld::SpawnMapActor(mapActor_t *mapActor)
     
     actor = kex::cGame->SpawnActor(mapActor->type, x, y, z, an);
     actor->SetMapActor(mapActor);
+    actor->SetSector(&sectors[mapActor->sector]);
 }
 
 //

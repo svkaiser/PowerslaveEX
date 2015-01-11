@@ -218,6 +218,7 @@ public:
     void                            UnlinkArea(void);
 
     mapSector_t                     *Sector(void) { return sector; }
+    void                            SetSector(mapSector_t *s) { sector = s; }
     mapActor_t                      *MapActor(void) { return mapActor; }
     kexLinklist<kexActor>           &Link(void) { return link; }
     kexBBox                         &Bounds(void) { return bounds; }
