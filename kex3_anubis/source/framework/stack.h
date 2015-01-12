@@ -22,6 +22,7 @@ class kexStack
 {
 public:
     kexStack(void);
+    kexStack(const unsigned int stackSize);
     ~kexStack(void);
     
     void                Init(const unsigned int stackSize);
@@ -53,6 +54,15 @@ kexStack<type>::kexStack(void)
     length = 0;
     aidx = 0;
     size = 128;
+}
+
+//
+// kexStack::kexStack
+//
+template<class type>
+kexStack<type>::kexStack(const unsigned int stackSize)
+{
+    Init(stackSize);
 }
 
 //
