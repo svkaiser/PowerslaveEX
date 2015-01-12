@@ -216,6 +216,7 @@
 		41C7FC821A5AFBC0003864CB /* soundOAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = soundOAL.cpp; path = ../../source/system/al/soundOAL.cpp; sourceTree = "<group>"; };
 		41C979F71A642CCA00E9C798 /* cmodel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cmodel.cpp; path = ../../source/game/cmodel.cpp; sourceTree = "<group>"; };
 		41C979F81A642CCA00E9C798 /* cmodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cmodel.h; path = ../../source/game/cmodel.h; sourceTree = "<group>"; };
+		41C979FF1A645A2000E9C798 /* stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
 		41DA07401A51FD8900562B25 /* endianSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = endianSDL.cpp; path = ../../source/system/sdl/endianSDL.cpp; sourceTree = "<group>"; };
 		41DA07421A51FDE000562B25 /* timerSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timerSDL.cpp; path = ../../source/system/sdl/timerSDL.cpp; sourceTree = "<group>"; };
 		41DA07441A51FEFC00562B25 /* systemSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = systemSDL.cpp; path = ../../source/system/sdl/systemSDL.cpp; sourceTree = "<group>"; };
@@ -422,6 +423,7 @@
 				41C7FC1C1A5AFB6E003864CB /* parser.h */,
 				41C7FC1D1A5AFB6E003864CB /* queue.h */,
 				41BAB90B1A5EF30E00DD0D11 /* sdNodes.h */,
+				41C979FF1A645A2000E9C798 /* stack.h */,
 				41C7FC1F1A5AFB6E003864CB /* unzip.h */,
 			);
 			name = framework;

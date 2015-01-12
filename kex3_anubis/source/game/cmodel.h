@@ -29,6 +29,7 @@ public:
     float                   PointOnFaceSide(const kexVec3 &origin, mapFace_t *face, const float extent = 0);
     float                   GetFloorHeight(const kexVec3 &origin, mapSector_t *sector);
     float                   GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector);
+    bool                    PointWithinSectorEdges(const kexVec3 &origin, mapSector_t *sector, const float extent = 0);
     bool                    PointInsideSector(const kexVec3 &origin, mapSector_t *sector, const float extent = 0);
     bool                    PointInsideFace(const kexVec3 &origin, mapFace_t *face, const float extent = 0);
 
