@@ -18,6 +18,7 @@
 #include "kexlib.h"
 #include "game.h"
 #include "actor.h"
+#include "cmodel.h"
 #include "player.h"
 
 #define PMOVE_FRICTION  0.9375f
@@ -102,6 +103,8 @@ void kexPuppet::Tick(void)
         velocity.z -= forward.z * PMOVE_SPEED;
     }
 
+    //velocity.z -= 1 * PMOVE_SPEED;
+
     if(cmd->Buttons() & BC_STRAFELEFT)
     {
         velocity.x -= right.x * PMOVE_SPEED;
@@ -114,9 +117,10 @@ void kexPuppet::Tick(void)
         velocity.y += right.y * PMOVE_SPEED;
     }
 
-    origin.x += velocity.x;
-    origin.y += velocity.y;
-    origin.z += velocity.z;
+    if(!kex::cGame->CModel()->TryMove(this, origin + velocity))
+    {
+        velocity.Clear();
+    }
     
     LinkArea();
 }
@@ -129,6 +133,10 @@ void kexPuppet::Spawn(void)
 {
     owner = kex::cGame->Player();
     kex::cGame->Player()->SetActor(this);
+
+    radius = 96;
+    height = 96;
+    health = 200;
 }
 
 //-----------------------------------------------------------------------------

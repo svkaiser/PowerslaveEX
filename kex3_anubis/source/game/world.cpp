@@ -18,6 +18,7 @@
 #include "kexlib.h"
 #include "game.h"
 #include "world.h"
+#include "cmodel.h"
 #include "actor.h"
 #include "player.h"
 #include "renderMain.h"
@@ -130,6 +131,7 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].ceilingSlope     = mapfile.ReadFloat();
         sectors[i].floorSlope       = mapfile.ReadFloat();
         sectors[i].flags            = mapfile.Read16();
+        sectors[i].validcount       = -1;
     }
 }
 
@@ -283,6 +285,37 @@ void kexWorld::BuildAreaNodes(void)
 }
 
 //
+// kexWorld::BuildSectorBounds
+//
+
+void kexWorld::BuildSectorBounds(void)
+{
+    for(unsigned int i = 0; i < numSectors; ++i)
+    {
+        mapSector_t *sector = &sectors[i];
+        int start = sector->faceStart;
+        int end = sector->faceEnd;
+
+        mapFace_t *f1 = &faces[end+1];
+        mapFace_t *f2 = &faces[end+2];
+
+        int vs1 = f1->vertexStart;
+        int vs2 = f2->vertexStart;
+
+        sector->bounds.Clear();
+
+        sector->bounds.AddPoint(vertices[vs1+0].origin);
+        sector->bounds.AddPoint(vertices[vs1+1].origin);
+        sector->bounds.AddPoint(vertices[vs1+2].origin);
+        sector->bounds.AddPoint(vertices[vs1+3].origin);
+        sector->bounds.AddPoint(vertices[vs2+0].origin);
+        sector->bounds.AddPoint(vertices[vs2+1].origin);
+        sector->bounds.AddPoint(vertices[vs2+2].origin);
+        sector->bounds.AddPoint(vertices[vs2+3].origin);
+    }
+}
+
+//
 // kexWorld::SpawnMapActor
 //
 
@@ -305,36 +338,6 @@ void kexWorld::SpawnMapActor(mapActor_t *mapActor)
     actor = kex::cGame->SpawnActor(mapActor->type, x, y, z, an);
     actor->SetMapActor(mapActor);
     actor->SetSector(&sectors[mapActor->sector]);
-}
-
-//
-// kexWorld::PointOnFaceSide
-//
-
-float kexWorld::PointOnFaceSide(kexVec3 &origin, mapFace_t *face)
-{
-    return face->plane.Distance(origin) - face->plane.d;
-}
-
-//
-// kexWorld::PointInsideSector
-//
-
-bool kexWorld::PointInsideSector(kexVec3 &origin, mapSector_t *sector)
-{
-    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
-    {
-        mapFace_t *face = &faces[i];
-
-        if(PointOnFaceSide(origin, face) >= 0)
-        {
-            continue;
-        }
-
-        return false;
-    }
-
-    return true;
 }
 
 //
@@ -380,8 +383,10 @@ bool kexWorld::LoadMap(const char *mapname)
     ReadEvents(mapfile, numEvents);
     
     BuildAreaNodes();
+    BuildSectorBounds();
     
     ReadActors(mapfile, numActors);
+    kex::cGame->CModel()->Setup(this);
 
     bMapLoaded = true;
     return true;
@@ -400,5 +405,6 @@ void kexWorld::UnloadMap(void)
         areaNodes.Destroy();
     }
     
+    kex::cGame->CModel()->Reset();
     Mem_Purge(hb_world);
 }

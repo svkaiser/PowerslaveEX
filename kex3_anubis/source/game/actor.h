@@ -217,6 +217,7 @@ public:
     void                            LinkArea(void);
     void                            UnlinkArea(void);
 
+    kexVec3                         &Velocity(void) { return velocity; }
     mapSector_t                     *Sector(void) { return sector; }
     void                            SetSector(mapSector_t *s) { sector = s; }
     mapActor_t                      *MapActor(void) { return mapActor; }
@@ -225,6 +226,8 @@ public:
     const actorType_t               Type(void) const { return type; }
     int16_t                         &Health(void) { return health; }
     void                            SetMapActor(mapActor_t *ma) { mapActor = ma; }
+    const float                     Radius(void) const { return radius; }
+    const float                     Height(void) const { return height; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 

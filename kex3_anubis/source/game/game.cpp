@@ -24,6 +24,7 @@
 #include "actor.h"
 #include "localization.h"
 #include "world.h"
+#include "cmodel.h"
 #include "player.h"
 
 static kexGame gameLocal;
@@ -65,6 +66,7 @@ kexGame::kexGame(void)
     this->world         = new kexWorld;
     this->player        = new kexPlayer;
     this->renderView    = new kexRenderView;
+    this->cmodel        = new kexCModel;
 }
 
 //
@@ -79,6 +81,7 @@ kexGame::~kexGame(void)
     delete world;
     delete player;
     delete renderView;
+    delete cmodel;
 }
 
 //

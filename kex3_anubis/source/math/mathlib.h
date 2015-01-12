@@ -466,8 +466,10 @@ public:
     kexBBox                 operator+(const float radius) const;
     kexBBox                 &operator+=(const float radius);
     kexBBox                 operator+(const kexVec3 &vec) const;
+    kexBBox                 &operator+=(const kexVec3 &vec);
     kexBBox                 operator-(const float radius) const;
     kexBBox                 operator-(const kexVec3 &vec) const;
+    kexBBox                 &operator-=(const kexVec3 &vec);
     kexBBox                 &operator-=(const float radius);
     kexBBox                 operator*(const kexMatrix &matrix) const;
     kexBBox                 &operator*=(const kexMatrix &matrix);

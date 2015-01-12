@@ -203,7 +203,7 @@ int kexSession::GetNextTickCount(void)
 
 void kexSession::RunGame(void)
 {
-    int msec;
+    int msec = 0;
     int prevmsec;
     int nextmsec;
     int ticsToRun = 0;
@@ -222,13 +222,6 @@ void kexSession::RunGame(void)
         {
             nextmsec = kex::cTimer->GetMS();
             msec = nextmsec - prevmsec;
-
-            if(msec < 1 && ticsToRun <= 0 && fps >= 60)
-            {
-                // don't thrash the cpu while waiting for
-                // the next frame
-                kex::cTimer->Sleep(1);
-            }
         }
         while(msec < 1);
 

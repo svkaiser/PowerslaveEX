@@ -24,6 +24,7 @@ class kexPlayLoop;
 class kexWorld;
 class kexPlayer;
 class kexRenderView;
+class kexCModel;
 
 typedef enum
 {
@@ -92,6 +93,7 @@ public:
     void                    SetGameState(const gameState_t state) { pendingGameState = state; }
     kexPlayer               *Player(void) { return player; }
     kexLinklist<kexActor>   &Actors(void) { return actors; }
+    kexCModel               *CModel(void) { return cmodel; }
 
     kexObject               *ConstructObject(const char *className);
     kexActor                *SpawnActor(const int type, const float x, const float y, const float z,
@@ -110,6 +112,7 @@ private:
     kexPlayLoop             *playLoop;
     kexTranslation          *translation;
     kexWorld                *world;
+    kexCModel               *cmodel;
     int                     ticks;
     gameState_t             gameState;
     gameState_t             pendingGameState;

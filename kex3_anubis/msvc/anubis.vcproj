@@ -409,6 +409,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\cmodel.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\game.cpp"
 					>
 				</File>
@@ -656,6 +660,10 @@
 				>
 				<File
 					RelativePath="..\source\game\actor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\cmodel.h"
 					>
 				</File>
 				<File

@@ -42,8 +42,8 @@ kexBBox::kexBBox(const kexVec3 &vMin, const kexVec3 &vMax)
 
 void kexBBox::Clear(void)
 {
-    min.Clear();
-    max.Clear();
+    min.Set(kexMath::infinity, kexMath::infinity, kexMath::infinity);
+    max.Set(-kexMath::infinity, -kexMath::infinity, -kexMath::infinity);
 }
 
 //
@@ -234,6 +234,25 @@ kexBBox kexBBox::operator+(const kexVec3 &vec) const
 }
 
 //
+// kexBBox::operator+=
+//
+
+kexBBox &kexBBox::operator+=(const kexVec3 &vec)
+{
+    kexVec3 vmin = min;
+    kexVec3 vmax = max;
+
+    min.x -= vec.x;
+    min.y -= vec.y;
+    min.z -= vec.z;
+    max.x += vec.x;
+    max.y += vec.y;
+    max.z += vec.z;
+
+    return *this;
+}
+
+//
 // kexBBox::operator-
 //
 
@@ -285,6 +304,25 @@ kexBBox &kexBBox::operator-=(const float radius)
     max.x -= radius;
     max.y -= radius;
     max.z -= radius;
+    return *this;
+}
+
+//
+// kexBBox::operator+
+//
+
+kexBBox &kexBBox::operator-=(const kexVec3 &vec)
+{
+    kexVec3 vmin = min;
+    kexVec3 vmax = max;
+
+    min.x -= vec.x;
+    min.y -= vec.y;
+    min.z -= vec.z;
+    max.x += vec.x;
+    max.y += vec.y;
+    max.z += vec.z;
+
     return *this;
 }
 

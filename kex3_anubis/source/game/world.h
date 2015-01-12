@@ -38,6 +38,8 @@ typedef struct
     float       ceilingSlope;
     float       floorSlope;
     word        flags;
+    kexBBox     bounds;
+    int         validcount;
 } mapSector_t;
 
 typedef enum
@@ -55,7 +57,7 @@ typedef enum
     FF_FULLBRIGHT   = BIT(10),
     FF_HIDDEN       = BIT(12),
     FF_PORTAL       = BIT(13),
-    FF_UNDERWATER   = BIT(14)
+    FF_UNDERWATER   = BIT(14),
 } faceFlags_t;
 
 typedef struct
@@ -111,6 +113,7 @@ typedef struct
 
 class kexActor;
 class kexTexture;
+class kexCModel;
 
 class kexWorld
 {
@@ -120,8 +123,6 @@ public:
 
     bool                    LoadMap(const char *mapname);
     void                    UnloadMap(void);
-    float                   PointOnFaceSide(kexVec3 &origin, mapFace_t *face);
-    bool                    PointInsideSector(kexVec3 &origin, mapSector_t *sector);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
@@ -148,6 +149,7 @@ public:
 
 private:
     void                    BuildAreaNodes(void);
+    void                    BuildSectorBounds(void);
     void                    SpawnMapActor(mapActor_t *mapActor);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);

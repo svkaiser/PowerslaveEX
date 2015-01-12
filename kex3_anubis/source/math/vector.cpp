@@ -511,7 +511,7 @@ kexVec2 &kexVec2::operator=(kexVec3 &vec)
 kexVec2 &kexVec2::operator=(const float *vecs)
 {
     x = vecs[0];
-    y = vecs[2];
+    y = vecs[1];
     return *this;
 }
 
@@ -683,6 +683,16 @@ kexVec3 &kexVec3::Normalize(void)
 kexVec3 kexVec3::Lerp(const kexVec3 &next, float movement) const
 {
     return (next - *this) * movement + *this;
+}
+
+//
+// kexVec3::Lerp
+//
+
+kexVec3 &kexVec3::Lerp(const kexVec3 &next, const float movement)
+{
+    *this = (next - *this) * movement + *this;
+    return *this;
 }
 
 //
