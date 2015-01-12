@@ -50,6 +50,7 @@
 		41C7FC7F1A5AFBAB003864CB /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC781A5AFBAB003864CB /* system.cpp */; };
 		41C7FC801A5AFBAB003864CB /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC7A1A5AFBAB003864CB /* timer.cpp */; };
 		41C7FC831A5AFBC0003864CB /* soundOAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC821A5AFBC0003864CB /* soundOAL.cpp */; };
+		41C979F91A642CCA00E9C798 /* cmodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C979F71A642CCA00E9C798 /* cmodel.cpp */; };
 		41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07401A51FD8900562B25 /* endianSDL.cpp */; };
 		41DA07431A51FDE000562B25 /* timerSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07421A51FDE000562B25 /* timerSDL.cpp */; };
 		41DA07451A51FEFC00562B25 /* systemSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DA07441A51FEFC00562B25 /* systemSDL.cpp */; };
@@ -213,6 +214,8 @@
 		41C7FC7A1A5AFBAB003864CB /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = ../../source/system/timer.cpp; sourceTree = "<group>"; };
 		41C7FC7B1A5AFBAB003864CB /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = timer.h; path = ../../source/system/timer.h; sourceTree = "<group>"; };
 		41C7FC821A5AFBC0003864CB /* soundOAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = soundOAL.cpp; path = ../../source/system/al/soundOAL.cpp; sourceTree = "<group>"; };
+		41C979F71A642CCA00E9C798 /* cmodel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cmodel.cpp; path = ../../source/game/cmodel.cpp; sourceTree = "<group>"; };
+		41C979F81A642CCA00E9C798 /* cmodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cmodel.h; path = ../../source/game/cmodel.h; sourceTree = "<group>"; };
 		41DA07401A51FD8900562B25 /* endianSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = endianSDL.cpp; path = ../../source/system/sdl/endianSDL.cpp; sourceTree = "<group>"; };
 		41DA07421A51FDE000562B25 /* timerSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timerSDL.cpp; path = ../../source/system/sdl/timerSDL.cpp; sourceTree = "<group>"; };
 		41DA07441A51FEFC00562B25 /* systemSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = systemSDL.cpp; path = ../../source/system/sdl/systemSDL.cpp; sourceTree = "<group>"; };
@@ -270,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				41BAB90E1A5EF32100DD0D11 /* actor.cpp */,
+				41C979F71A642CCA00E9C798 /* cmodel.cpp */,
 				41C7FC2E1A5AFB84003864CB /* game.cpp */,
 				41C7FC301A5AFB84003864CB /* gameObject.cpp */,
 				41C7FC321A5AFB84003864CB /* localization.cpp */,
@@ -281,6 +285,7 @@
 				41C7FC3C1A5AFB84003864CB /* titlescreen.cpp */,
 				41C7FC3E1A5AFB84003864CB /* world.cpp */,
 				41BAB90F1A5EF32100DD0D11 /* actor.h */,
+				41C979F81A642CCA00E9C798 /* cmodel.h */,
 				41C7FC2F1A5AFB84003864CB /* game.h */,
 				41C7FC311A5AFB84003864CB /* gameObject.h */,
 				41C7FC331A5AFB84003864CB /* localization.h */,
@@ -649,6 +654,7 @@
 				41C7FC491A5AFB84003864CB /* titlescreen.cpp in Sources */,
 				41E2CE841A51D39B00FC28DC /* pluecker.cpp in Sources */,
 				41C7FC481A5AFB84003864CB /* session.cpp in Sources */,
+				41C979F91A642CCA00E9C798 /* cmodel.cpp in Sources */,
 				41C7FC241A5AFB6E003864CB /* kpf.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,
 				41C7FC6D1A5AFB98003864CB /* renderView.cpp in Sources */,

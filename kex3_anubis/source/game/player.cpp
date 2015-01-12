@@ -117,7 +117,9 @@ void kexPuppet::Tick(void)
         velocity.y += right.y * PMOVE_SPEED;
     }
 
-    if(!kex::cGame->CModel()->TryMove(this, origin + velocity))
+    kexVec3 newPosition = origin + velocity;
+    
+    if(!kex::cGame->CModel()->TryMove(this, newPosition))
     {
         velocity.Clear();
     }

@@ -239,9 +239,6 @@ kexBBox kexBBox::operator+(const kexVec3 &vec) const
 
 kexBBox &kexBBox::operator+=(const kexVec3 &vec)
 {
-    kexVec3 vmin = min;
-    kexVec3 vmax = max;
-
     min.x -= vec.x;
     min.y -= vec.y;
     min.z -= vec.z;
@@ -313,9 +310,6 @@ kexBBox &kexBBox::operator-=(const float radius)
 
 kexBBox &kexBBox::operator-=(const kexVec3 &vec)
 {
-    kexVec3 vmin = min;
-    kexVec3 vmax = max;
-
     min.x -= vec.x;
     min.y -= vec.y;
     min.z -= vec.z;

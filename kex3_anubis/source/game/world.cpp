@@ -293,7 +293,6 @@ void kexWorld::BuildSectorBounds(void)
     for(unsigned int i = 0; i < numSectors; ++i)
     {
         mapSector_t *sector = &sectors[i];
-        int start = sector->faceStart;
         int end = sector->faceEnd;
 
         mapFace_t *f1 = &faces[end+1];

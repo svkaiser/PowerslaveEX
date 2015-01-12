@@ -71,7 +71,7 @@ mapSector_t *kexCModel::GetNextSector(kexActor *actor, mapSector_t *sector, kexV
 {
     mapFace_t *face;
     mapSector_t *next = sector;
-    float dist = -kexMath::infinity;
+    //float dist = -kexMath::infinity;
 
     if(sector->validcount == kex::cGame->PlayLoop()->Ticks())
     {

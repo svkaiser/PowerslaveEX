@@ -131,12 +131,12 @@ void kexPlayLoop::Draw(void)
                 {
                     if(j <= end)
                     {
-                        int vstart = face->vertexStart;
+                        //int vstart = face->vertexStart;
 
-                        kexVec3 p1 = world->Vertices()[vstart+3].origin;
-                        kexVec3 p2 = world->Vertices()[vstart+2].origin;
-                        kexVec3 p3 = world->Vertices()[vstart+1].origin;
-                        kexVec3 p4 = world->Vertices()[vstart+0].origin;
+                        //kexVec3 p1 = world->Vertices()[vstart+3].origin;
+                        //kexVec3 p2 = world->Vertices()[vstart+2].origin;
+                        //kexVec3 p3 = world->Vertices()[vstart+1].origin;
+                        //kexVec3 p4 = world->Vertices()[vstart+0].origin;
 
                         //kexRender::cUtils->DrawQuad(p1, p2, p4, p3, 255, 0, 255, 64);
                         //kexRender::cUtils->DrawLine(p1, p2, 255, 0, 0);
