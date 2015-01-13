@@ -72,6 +72,8 @@ typedef struct
     short       tag;
     word        vertStart;
     word        vertEnd;
+    kexBBox     bounds;
+    int         validcount;
 } mapFace_t;
 
 typedef struct

@@ -163,6 +163,13 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
         faces[i].tag            = mapfile.Read16();
         faces[i].vertStart      = mapfile.Read16();
         faces[i].vertEnd        = mapfile.Read16();
+        faces[i].validcount     = -1;
+        
+        faces[i].bounds.Clear();
+        faces[i].bounds.AddPoint(vertices[faces[i].vertexStart+0].origin);
+        faces[i].bounds.AddPoint(vertices[faces[i].vertexStart+1].origin);
+        faces[i].bounds.AddPoint(vertices[faces[i].vertexStart+2].origin);
+        faces[i].bounds.AddPoint(vertices[faces[i].vertexStart+3].origin);
         
         v = &vertices[faces[i].vertexStart];
         faces[i].plane.SetDistance(v->origin);
