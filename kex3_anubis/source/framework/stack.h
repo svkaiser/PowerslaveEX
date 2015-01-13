@@ -29,6 +29,7 @@ public:
     void                Reset(void);
     void                Empty(void);
     type                *Get(void);
+    void                Set(type t);
     
     const unsigned int  MaxLength(void) const { return length; }
     const unsigned int  CurrentLength(void) const { return aidx; }
@@ -149,6 +150,39 @@ type *kexStack<type>::Get(void)
     }
     
     return &data[aidx++];
+}
+
+//
+// kexStack::Set
+//
+template<class type>
+void kexStack<type>::Set(type t)
+{
+    assert(size != 0);
+    
+    if(data == NULL)
+    {
+        Init(size);
+    }
+    
+    // exceeded max capacity?
+    if(aidx == length)
+    {
+        type *olddata = data;
+        type *newdata;
+        
+        // expand stack
+        length += size;
+        
+        // allocate new array
+        newdata = new type[length];
+        memcpy(newdata, olddata, aidx * sizeof(type));
+        
+        data = newdata;
+        delete[] olddata;
+    }
+    
+    data[aidx++] = t;
 }
 
 //
