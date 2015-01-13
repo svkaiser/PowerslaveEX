@@ -22,6 +22,7 @@
 #include "actor.h"
 #include "player.h"
 #include "playLoop.h"
+#include "cmodel.h"
 
 //
 // kexPlayLoop::kexPlayLoop
@@ -98,10 +99,6 @@ void kexPlayLoop::Draw(void)
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
     kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
     kexRender::cBackend->SetState(GLSTATE_BLEND, true);
-
-    kexBBox box(kexVec3(-1024, -1024, -1024), kexVec3(1024, 1024, 1024));
-    box.min += kex::cGame->RenderView()->Origin();
-    box.max += kex::cGame->RenderView()->Origin();
     
     if(world->MapLoaded())
     {
@@ -112,16 +109,15 @@ void kexPlayLoop::Draw(void)
             int start = sector->faceStart;
             int end = sector->faceEnd;
 
-            if(!box.IntersectingBox(sector->bounds))
+            if(!kex::cGame->RenderView()->Frustum().TestBoundingBox(sector->bounds))
             {
                 continue;
             }
 
-#if 0
+            if(sector->validcount == kex::cGame->CModel()->ValidCount()-1)
             {
                 kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 128, 0);
             }
-#endif
             
             for(int j = start; j < end+3; ++j)
             {
@@ -149,9 +145,9 @@ void kexPlayLoop::Draw(void)
                 {
                     int vstart = face->vertexStart;
 
-                        kexVec3 p1 = world->Vertices()[vstart+3].origin;
-                        kexVec3 p2 = world->Vertices()[vstart+2].origin;
-                        kexRender::cUtils->DrawLine(p1, p2, 255, 0, 0);
+                    kexVec3 p1 = world->Vertices()[vstart+3].origin;
+                    kexVec3 p2 = world->Vertices()[vstart+2].origin;
+                    kexRender::cUtils->DrawLine(p1, p2, 255, 0, 0);
                 }
                 
                 for(int k = face->polyStart; k <= face->polyEnd; ++k)

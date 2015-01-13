@@ -26,30 +26,41 @@ public:
 
     void                    Setup(kexWorld *world);
 
-    float                   PointOnFaceSide(const kexVec3 &origin, mapFace_t *face, const float extent = 0);
+    float                   PointOnFaceSide(const kexVec3 &origin, mapFace_t *face,
+                                            const float extent = 0);
     float                   GetFloorHeight(const kexVec3 &origin, mapSector_t *sector);
     float                   GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector);
-    bool                    PointWithinSectorEdges(const kexVec3 &origin, mapSector_t *sector, const float extent = 0);
-    bool                    PointInsideSector(const kexVec3 &origin, mapSector_t *sector, const float extent = 0);
-    bool                    PointInsideFace(const kexVec3 &origin, mapFace_t *face, const float extent = 0);
+    bool                    PointWithinSectorEdges(const kexVec3 &origin, mapSector_t *sector,
+                                                   const float extent = 0);
+    bool                    SectorLinksToSector(const kexVec3 &origin, mapSector_t *source, mapSector_t *dest,
+                                                const float extent = 0);
+    bool                    PointInsideSector(const kexVec3 &origin, mapSector_t *sector,
+                                              const float extent = 0);
+    bool                    PointInsideFace(const kexVec3 &origin, mapFace_t *face,
+                                            const float extent = 0);
 
-    bool                    TryMove(kexActor *actor, kexVec3 &position);
+    bool                    MoveActor(kexActor *actor);
     bool                    CheckActorPosition(kexActor *actor);
     void                    SlideAgainstFaces(mapSector_t *sector);
     void                    Reset(void);
 
+    const int               ValidCount(void) const { return validcount; }
+
 private:
+    void                    GetSurroundingSectors(void);
     bool                    CollideFace(mapFace_t *face);
     bool                    IntersectFaceEdge(mapFace_t *face);
     bool                    CollideVertex(const kexVec2 &point);
-
-    mapSector_t             *GetNextSector(kexActor *actor, mapSector_t *sector, kexVec3 &position);
+    void                    RecursiveFindSectors(mapSector_t *sector);
 
     mapVertex_t             *vertices;
     mapSector_t             *sectors;
     mapFace_t               *faces;
     mapPoly_t               *polys;
 
+    static int              validcount;
+
+    kexStack<mapSector_t*>  sectorList;
     kexActor                *moveActor;
     kexVec3                 interceptVector;
     kexVec3                 start;
