@@ -140,7 +140,21 @@ void kexPlayLoop::Draw(void)
                     }
                     continue;
                 }
+                
+                if(!kex::cGame->RenderView()->Frustum().TestBoundingBox(face->bounds))
+                {
+                    continue;
+                }
 
+                if(j <= end)
+                {
+                    kexRender::cUtils->DrawBoundingBox(face->bounds, 8, 255, 32);
+                }
+                else
+                {
+                    kexRender::cUtils->DrawBoundingBox(face->bounds, 128, 64, 255);
+                }
+                
                 if(j == 1922)
                 {
                     int vstart = face->vertexStart;

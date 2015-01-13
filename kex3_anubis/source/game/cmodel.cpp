@@ -33,6 +33,7 @@ kexCModel::kexCModel(void)
     Reset();
 
     sectorList.Init(64);
+    faceList.Init(64);
 }
 
 //
@@ -206,7 +207,7 @@ bool kexCModel::CollideVertex(const kexVec2 &point)
     float rd;
     float r;
     
-    org = (point - start.ToVec2());
+    org = (point - end.ToVec2());
     dir = moveDir;
     dir.Normalize();
     
@@ -269,19 +270,20 @@ bool kexCModel::CollideVertex(const kexVec2 &point)
 
 bool kexCModel::IntersectFaceEdge(mapFace_t *face)
 {
-    if(PointOnFaceSide(start, face) > 0)
+    if(PointOnFaceSide(end, face) >= 0)
     {
         kexVec3 points[4];
         int vstart = face->vertexStart;
-        float rSq = (actorRadius * actorRadius);
         
         points[0] = vertices[vstart+3].origin; // bottom
         points[1] = vertices[vstart+2].origin; // bottom
         points[2] = vertices[vstart+1].origin; // top
         points[3] = vertices[vstart+0].origin; // top
         
-        if((points[3].z >= start.z || points[2].z >= start.z) &&
-           (points[0].z <= start.z || points[1].z <= start.z))
+        float rSq = (actorRadius * actorRadius) + (points[3] - points[2]).UnitSq();
+        
+        if((points[3].z >= end.z || points[2].z >= end.z) &&
+           (points[0].z <= end.z || points[1].z <= end.z))
         {
             kexVec2 Q = end.ToVec2();
             kexVec2 A = points[3].ToVec2();
@@ -302,10 +304,7 @@ bool kexCModel::IntersectFaceEdge(mapFace_t *face)
                     return false;
                 }
                 
-                if(CollideVertex(P))
-                {
-                    return true;
-                }
+                return CollideVertex(P);
             }
             
             if(u <= 0)
@@ -319,10 +318,7 @@ bool kexCModel::IntersectFaceEdge(mapFace_t *face)
                     return false;
                 }
                 
-                if(CollideVertex(P))
-                {
-                    return true;
-                }
+                return CollideVertex(P);
             }
         }
     }
@@ -550,8 +546,7 @@ void kexCModel::GetSurroundingSectors(void)
 {
     mapSector_t *s;
     float floorz, diff;
-
-    sectorList.Reset();
+    
     RecursiveFindSectors(moveActor->Sector());
 
     // see if any of the sectors can be stepped into
@@ -584,6 +579,8 @@ void kexCModel::GetSurroundingSectors(void)
 bool kexCModel::MoveActor(kexActor *actor)
 {
     mapSector_t *sector = actor->Sector();
+    mapSector_t *oldSector = sector;
+    bool bInside = false;
     float r, h;
 
     if(sector == NULL)
@@ -609,6 +606,9 @@ bool kexCModel::MoveActor(kexActor *actor)
     actorBounds.min += end;
     actorBounds.max += end;
     actorBounds *= moveDir;
+    
+    sectorList.Reset();
+    faceList.Reset();
 
     GetSurroundingSectors();
     //IntersectFaceEdge(&faces[1922]);
@@ -618,11 +618,17 @@ bool kexCModel::MoveActor(kexActor *actor)
     {
         sector = &sectors[i];
 
-        if(PointInsideSector(actor->Origin(), sector))
+        if(PointInsideSector(end, sector))
         {
             actor->SetSector(sector);
+            bInside = true;
             break;
         }
+    }
+    
+    if(bInside == false)
+    {
+        sector = oldSector;
     }
 
     float floorz = GetFloorHeight(end, sector);

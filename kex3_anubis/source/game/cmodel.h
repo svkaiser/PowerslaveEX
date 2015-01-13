@@ -61,6 +61,7 @@ private:
     static int              validcount;
 
     kexStack<mapSector_t*>  sectorList;
+    kexStack<mapFace_t*>    faceList;
     kexActor                *moveActor;
     kexVec3                 interceptVector;
     kexVec3                 start;
