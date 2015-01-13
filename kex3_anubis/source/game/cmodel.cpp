@@ -225,7 +225,7 @@ bool kexCModel::CollideVertex(const kexVec2 &point)
     
     cp      = dir.Dot(org);
     cDist   = (org - (dir * cp));
-    r       = actorRadius + 8.192f;
+    r       = actorRadius;
     rd      = r * r - cDist.UnitSq();
     
     if(rd < 0)

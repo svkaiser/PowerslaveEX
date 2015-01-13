@@ -196,14 +196,14 @@ void kexRenderUtils::DrawRadius(float x, float y, float z,
         float c2 = kexMath::Cos(an * ((i+1)%31));
         float x1 = x + (radius * s1);
         float x2 = x + (radius * s2);
-        float y1 = y;
-        float y2 = y + height;
-        float z1 = z + (radius * c1);
-        float z2 = z + (radius * c2);
+        float y1 = y + (radius * c1);
+        float y2 = y + (radius * c2);
+        float z1 = z;
+        float z2 = z + height;
 
-        kexRender::cVertList->AddLine(x1, y1, z1, x1, y2, z1, r, g, b, 255);
-        kexRender::cVertList->AddLine(x1, y1, z1, x2, y1, z2, r, g, b, 255);
-        kexRender::cVertList->AddLine(x1, y2, z1, x2, y2, z2, r, g, b, 255);
+        kexRender::cVertList->AddLine(x1, y1, z1, x1, y1, z2, r, g, b, 255);
+        kexRender::cVertList->AddLine(x1, y1, z1, x2, y2, z1, r, g, b, 255);
+        kexRender::cVertList->AddLine(x1, y1, z2, x2, y2, z2, r, g, b, 255);
     }
 
     kexRender::cVertList->DrawLineElements();
