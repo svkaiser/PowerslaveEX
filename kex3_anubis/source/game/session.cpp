@@ -176,21 +176,29 @@ int kexSession::GetNextTickCount(void)
 
     ticsToRun = (int)t;
 
-    // accumulate the remainder
-    leftOverTime += (t - ticsToRun);
-
-    if(leftOverTime < 0)
+    if(kexMath::Sec2MSec(deltaTime) <= clockspeed)
     {
-        // don't go under
         leftOverTime = 0;
+        ticsToRun = 0;
     }
-
-    // add another game tick when the remainder is equal
-    // to a full tick
-    if(leftOverTime >= 1.0f)
+    else
     {
-        ticsToRun++;
-        leftOverTime -= 1.0f;
+        // accumulate the remainder
+        leftOverTime += (t - ticsToRun);
+
+        if(leftOverTime < 0)
+        {
+            // don't go under
+            leftOverTime = 0;
+        }
+
+        // add another game tick when the remainder is equal
+        // to a full tick
+        if(leftOverTime >= 1.0f)
+        {
+            ticsToRun++;
+            leftOverTime -= 1.0f;
+        }
     }
 
     framemsec = kexMath::Sec2MSec(kex::cTimer->GetMS());
