@@ -269,57 +269,60 @@ bool kexCModel::CollideVertex(const kexVec2 &point)
 
 bool kexCModel::IntersectFaceEdge(mapFace_t *face)
 {
-    kexVec3 points[4];
-    int vstart = face->vertexStart;
-    float rSq = (actorRadius * actorRadius);
-    
-    points[0] = vertices[vstart+3].origin; // bottom
-    points[1] = vertices[vstart+2].origin; // bottom
-    points[2] = vertices[vstart+1].origin; // top
-    points[3] = vertices[vstart+0].origin; // top
-    
-    if((points[3].z >= start.z || points[2].z >= start.z) &&
-       (points[0].z <= start.z || points[1].z <= start.z))
+    if(PointOnFaceSide(start, face) > 0)
     {
-        kexVec2 Q = end.ToVec2();
-        kexVec2 A = points[3].ToVec2();
-        kexVec2 B = points[2].ToVec2();
-        kexVec2 e = B - A;
+        kexVec3 points[4];
+        int vstart = face->vertexStart;
+        float rSq = (actorRadius * actorRadius);
         
-        float u = e.Dot(B - Q);
-        float v = e.Dot(Q - A);
+        points[0] = vertices[vstart+3].origin; // bottom
+        points[1] = vertices[vstart+2].origin; // bottom
+        points[2] = vertices[vstart+1].origin; // top
+        points[3] = vertices[vstart+0].origin; // top
         
-        if(v <= 0 && (points[3] - points[0]) > 0)
+        if((points[3].z >= start.z || points[2].z >= start.z) &&
+           (points[0].z <= start.z || points[1].z <= start.z))
         {
-            kexVec2 P = A;
-            kexVec2 d = Q - P;
-            float dd = d.UnitSq();
+            kexVec2 Q = end.ToVec2();
+            kexVec2 A = points[3].ToVec2();
+            kexVec2 B = points[2].ToVec2();
+            kexVec2 e = B - A;
             
-            if(dd > rSq)
+            float u = e.Dot(B - Q);
+            float v = e.Dot(Q - A);
+            
+            if(v <= 0)
             {
-                return false;
+                kexVec2 P = A;
+                kexVec2 d = Q - P;
+                float dd = d.UnitSq();
+                
+                if(dd > rSq)
+                {
+                    return false;
+                }
+                
+                if(CollideVertex(P))
+                {
+                    return true;
+                }
             }
             
-            if(CollideVertex(P))
+            if(u <= 0)
             {
-                return true;
-            }
-        }
-        
-        if(u <= 0 && (points[2] - points[1]) > 0)
-        {
-            kexVec2 P = B;
-            kexVec2 d = Q - P;
-            float dd = d.UnitSq();
-            
-            if(dd > rSq)
-            {
-                return false;
-            }
-            
-            if(CollideVertex(P))
-            {
-                return true;
+                kexVec2 P = B;
+                kexVec2 d = Q - P;
+                float dd = d.UnitSq();
+                
+                if(dd > rSq)
+                {
+                    return false;
+                }
+                
+                if(CollideVertex(P))
+                {
+                    return true;
+                }
             }
         }
     }
@@ -592,9 +595,9 @@ bool kexCModel::MoveActor(kexActor *actor)
     actorRadius = actor->Radius();
     actorHeight = actor->Height();
     fraction = 1;
+    moveDir = actor->Velocity();
     start = actor->Origin();
-    end = start + actor->Velocity();
-    moveDir = end - start;
+    end = start + moveDir;
     interceptVector = start;
 
     r = actorRadius*2;
@@ -608,6 +611,7 @@ bool kexCModel::MoveActor(kexActor *actor)
     actorBounds *= moveDir;
 
     GetSurroundingSectors();
+    //IntersectFaceEdge(&faces[1922]);
 
     // TEMP
     for(unsigned int i = 0; i < kex::cGame->World()->NumSectors(); ++i)
@@ -636,6 +640,7 @@ bool kexCModel::MoveActor(kexActor *actor)
 
     actor->SetSector(sector);
     actor->Origin() = end;
+    actor->Velocity() = moveDir;
 
     validcount++;
     return true;
