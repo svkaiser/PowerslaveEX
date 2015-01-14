@@ -103,8 +103,6 @@ void kexPuppet::Tick(void)
         velocity.z -= forward.z * PMOVE_SPEED;
     }
 
-    //velocity.z -= 1 * PMOVE_SPEED;
-
     if(cmd->Buttons() & BC_STRAFELEFT)
     {
         velocity.x -= right.x * PMOVE_SPEED;
@@ -134,9 +132,10 @@ void kexPuppet::Spawn(void)
     owner = kex::cGame->Player();
     kex::cGame->Player()->SetActor(this);
 
-    radius = 96;
-    height = 96;
-    health = 200;
+    radius      = 96;
+    height      = 96;
+    stepHeight  = 48;
+    health      = 200;
 }
 
 //-----------------------------------------------------------------------------

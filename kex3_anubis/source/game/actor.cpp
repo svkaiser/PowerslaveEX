@@ -34,6 +34,7 @@ kexActor::kexActor(void)
     this->health = 100;
     this->radius = 16;
     this->height = 32;
+    this->stepHeight = 16;
     this->areaLink.link.SetData(this);
     this->areaLink.node = NULL;
 }

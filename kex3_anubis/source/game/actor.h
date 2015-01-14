@@ -237,6 +237,8 @@ protected:
     float                           radius;
     float                           height;
     float                           scale;
+    float                           stepHeight;
+    float                           gravity;
     int16_t                         health;
     kexVec3                         velocity;
     kexLinklist<kexActor>           link;
