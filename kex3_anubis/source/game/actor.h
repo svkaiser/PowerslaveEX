@@ -228,6 +228,8 @@ public:
     void                            SetMapActor(mapActor_t *ma) { mapActor = ma; }
     const float                     Radius(void) const { return radius; }
     const float                     Height(void) const { return height; }
+    const float                     StepHeight(void) const { return stepHeight; }
+    const float                     Gravity(void) const { return gravity; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
