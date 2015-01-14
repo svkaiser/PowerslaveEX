@@ -479,7 +479,7 @@ float kexCModel::GetFloorHeight(const kexVec3 &origin, mapSector_t *sector)
     float dist;
 
     face = &faces[sector->faceEnd+2];
-    v = &vertices[face->vertexStart + polys[face->polyStart].indices[0]];
+    v = &vertices[face->vertexStart];
 
     dist = kexVec3::Dot(kexVec3(v->origin.x - origin.x,
                                 v->origin.y - origin.y,
@@ -499,7 +499,7 @@ float kexCModel::GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector)
     float dist;
 
     face = &faces[sector->faceEnd+1];
-    v = &vertices[face->vertexStart + polys[face->polyStart].indices[0]];
+    v = &vertices[face->vertexStart];
 
     dist = kexVec3::Dot(kexVec3(v->origin.x - origin.x,
                                 v->origin.y - origin.y,
@@ -602,6 +602,7 @@ bool kexCModel::MoveActor(kexActor *actor)
     actorRadius = actor->Radius();
     actorHeight = actor->Height();
     moveDir = actor->Velocity();
+    kexVec3::ToAxis(&forwardDir, NULL, NULL, moveDir.ToYaw(), 0, 0);
     start = actor->Origin();
     end = start + moveDir;
 

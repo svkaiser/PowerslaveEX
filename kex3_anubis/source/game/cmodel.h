@@ -67,6 +67,7 @@ private:
     kexVec3                 start;
     kexVec3                 end;
     kexVec3                 moveDir;
+    kexVec3                 forwardDir;
     kexVec3                 contactNormal;
     kexBBox                 actorBounds;
     float                   actorRadius;

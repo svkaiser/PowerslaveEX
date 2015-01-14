@@ -731,14 +731,14 @@ kexQuat kexVec3::ToQuat(void)
 
 float kexVec3::ToYaw(void) const
 {
-    float d = x * x + z * z;
+    float d = x * x + y * y;
 
     if(d == 0.0f)
     {
         return 0.0f;
     }
 
-    return kexMath::ATan2(x, z);
+    return kexMath::ATan2(x, y);
 }
 
 //
@@ -747,11 +747,11 @@ float kexVec3::ToYaw(void) const
 
 float kexVec3::ToPitch(void) const
 {
-    float d = x * x + z * z;
+    float d = x * x + y * y;
 
     if(d == 0.0f)
     {
-        if(y > 0.0f)
+        if(z > 0.0f)
         {
             return kexMath::Deg2Rad(90);
         }
@@ -761,7 +761,7 @@ float kexVec3::ToPitch(void) const
         }
     }
 
-    return kexMath::ATan2(y, d);
+    return kexMath::ATan2(z, d);
 }
 
 //

@@ -132,6 +132,11 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].floorSlope       = mapfile.ReadFloat();
         sectors[i].flags            = mapfile.Read16();
         sectors[i].validcount       = -1;
+        
+        for(int j = sectors[i].faceStart; j < sectors[i].faceEnd+3; ++j)
+        {
+            faces[j].sectorOwner = i;
+        }
     }
 }
 
@@ -141,8 +146,6 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
 
 void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
 {
-    mapVertex_t *v;
-    
     if(count == 0)
     {
         kex::cSystem->Error("kexWorld::ReadFaces - No faces present\n");
@@ -151,28 +154,33 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
 
     for(unsigned int i = 0; i < count; ++i)
     {
-        faces[i].polyStart      = mapfile.Read16();
-        faces[i].polyEnd        = mapfile.Read16();
-        faces[i].vertexStart    = mapfile.Read16();
-        faces[i].sector         = mapfile.Read16();
-        faces[i].angle          = mapfile.ReadFloat();
-        faces[i].plane.a        = mapfile.ReadFloat();
-        faces[i].plane.b        = mapfile.ReadFloat();
-        faces[i].plane.c        = mapfile.ReadFloat();
-        faces[i].flags          = mapfile.Read16();
-        faces[i].tag            = mapfile.Read16();
-        faces[i].vertStart      = mapfile.Read16();
-        faces[i].vertEnd        = mapfile.Read16();
-        faces[i].validcount     = -1;
+        mapFace_t *f = &faces[i];
         
-        faces[i].bounds.Clear();
-        faces[i].bounds.AddPoint(vertices[faces[i].vertexStart+0].origin);
-        faces[i].bounds.AddPoint(vertices[faces[i].vertexStart+1].origin);
-        faces[i].bounds.AddPoint(vertices[faces[i].vertexStart+2].origin);
-        faces[i].bounds.AddPoint(vertices[faces[i].vertexStart+3].origin);
+        f->polyStart    = mapfile.Read16();
+        f->polyEnd      = mapfile.Read16();
+        f->vertexStart  = mapfile.Read16();
+        f->sector       = mapfile.Read16();
+        f->angle        = mapfile.ReadFloat();
+        f->plane.a      = mapfile.ReadFloat();
+        f->plane.b      = mapfile.ReadFloat();
+        f->plane.c      = mapfile.ReadFloat();
+        f->flags        = mapfile.Read16();
+        f->tag          = mapfile.Read16();
+        f->vertStart    = mapfile.Read16();
+        f->vertEnd      = mapfile.Read16();
+        f->validcount   = -1;
         
-        v = &vertices[faces[i].vertexStart];
-        faces[i].plane.SetDistance(v->origin);
+        f->bounds.Clear();
+        
+        for(int j = 0; j < 4; ++j)
+        {
+            f->bounds.AddPoint(vertices[f->vertexStart+j].origin);
+            f->segments[j].v1 = &vertices[f->vertexStart+j].origin;
+            f->segments[j].v2 = &vertices[f->vertexStart+((j+1)&3)].origin;
+            f->segments[j].p.SetLine(*f->segments[j].v1, *f->segments[j].v2);
+        }
+        
+        f->plane.SetDistance(vertices[f->vertexStart].origin);
     }
 }
 

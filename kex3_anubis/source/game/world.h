@@ -19,8 +19,8 @@
 
 typedef struct
 {
-    kexVec3     origin;
-    byte        rgba[4];
+    kexVec3         origin;
+    byte            rgba[4];
 } mapVertex_t;
 
 typedef enum
@@ -31,16 +31,16 @@ typedef enum
 
 typedef struct
 {
-    word        faceStart;
-    word        faceEnd;
-    word        lightLevel;
-    short       ceilingHeight;
-    short       floorHeight;
-    float       ceilingSlope;
-    float       floorSlope;
-    word        flags;
-    kexBBox     bounds;
-    int         validcount;
+    word            faceStart;
+    word            faceEnd;
+    word            lightLevel;
+    short           ceilingHeight;
+    short           floorHeight;
+    float           ceilingSlope;
+    float           floorSlope;
+    word            flags;
+    kexBBox         bounds;
+    int             validcount;
 } mapSector_t;
 
 typedef enum
@@ -63,55 +63,64 @@ typedef enum
 
 typedef struct
 {
-    short       polyStart;
-    short       polyEnd;
-    word        vertexStart;
-    short       sector;
-    float       angle;
-    kexPlane    plane;
-    word        flags;
-    short       tag;
-    word        vertStart;
-    word        vertEnd;
-    kexBBox     bounds;
-    int         validcount;
+    kexVec3         *v1;
+    kexVec3         *v2;
+    kexPluecker     p;
+} mapSegment_t;
+
+typedef struct
+{
+    short           polyStart;
+    short           polyEnd;
+    word            vertexStart;
+    short           sector;
+    float           angle;
+    kexPlane        plane;
+    word            flags;
+    short           tag;
+    word            vertStart;
+    word            vertEnd;
+    kexBBox         bounds;
+    int             validcount;
+    int             sectorOwner;
+    mapSegment_t    segments[4];
 } mapFace_t;
 
 typedef struct
 {
-    byte        indices[4];
-    short       texture;
-    short       flipped;
-    word        tcoord;
+    byte            indices[4];
+    short           texture;
+    short           flipped;
+    word            tcoord;
 } mapPoly_t;
 
 typedef struct
 {
-    float s;
-    float t;
+    float           s;
+    float           t;
 } mapUV_t;
 
 typedef struct
 {
-    mapUV_t     uv[4];
+    mapUV_t         uv[4];
 } mapTexCoords_t;
 
 typedef struct
 {
-    short       type;
-    short       sector;
-    short       tag;
-    short       unknown;
+    short           type;
+    short           sector;
+    short           tag;
+    short           unknown;
 } mapEvent_t;
 
 typedef struct
 {
-    short       type;
-    short       sector;
-    short       x;
-    short       y;
-    short       z;
-    float       angle;
+    short           type;
+    short           sector;
+    short           x;
+    short           y;
+    short           z;
+    float           angle;
 } mapActor_t;
 
 class kexActor;

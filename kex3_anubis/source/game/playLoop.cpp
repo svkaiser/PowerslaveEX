@@ -128,43 +128,54 @@ void kexPlayLoop::Draw(void)
                 {
                     if(j <= end)
                     {
-                        //int vstart = face->vertexStart;
-
-                        //kexVec3 p1 = world->Vertices()[vstart+3].origin;
-                        //kexVec3 p2 = world->Vertices()[vstart+2].origin;
-                        //kexVec3 p3 = world->Vertices()[vstart+1].origin;
-                        //kexVec3 p4 = world->Vertices()[vstart+0].origin;
-
-                        //kexRender::cUtils->DrawQuad(p1, p2, p4, p3, 255, 0, 255, 64);
-                        //kexRender::cUtils->DrawLine(p1, p2, 255, 0, 0);
-                        //kexRender::cUtils->DrawLine(p4, p3, 255, 0, 0);
+                        kexVec3 bv1 = *face->segments[2].v1;
+                        kexVec3 bv2 = *face->segments[2].v2;
+                        kexVec3 tv1 = *face->segments[0].v1;
+                        kexVec3 tv2 = *face->segments[0].v2;
+                        
+                        for(int k = start; k < end+1; ++k)
+                        {
+                            if(k == j)
+                            {
+                                continue;
+                            }
+                            
+                            mapFace_t *f = &world->Faces()[k];
+                            
+                            if(f->polyStart == -1 || f->polyEnd == -1)
+                            {
+                                continue;
+                            }
+                            
+                            kexVec3 pv1 = *f->segments[0].v1;
+                            kexVec3 pv2 = *f->segments[0].v2;
+                            kexVec3 pv3 = *f->segments[2].v1;
+                            kexVec3 pv4 = *f->segments[2].v2;
+                            
+                            if(!(pv1.z > bv1.z || pv2.z > bv2.z))
+                            {
+                                if(bv1.z - pv1.z <= 0 && bv2.z - pv2.z <= 0)
+                                {
+                                    for(int s = 0; s < 4; ++s)
+                                    {
+                                        kexRender::cUtils->DrawLine(*f->segments[s].v1, *f->segments[s].v2, 255, 0, 0);
+                                    }
+                                }
+                            }
+                            
+                            if(!(pv3.z < tv1.z || pv4.z < tv2.z))
+                            {
+                                if(pv3.z - tv1.z <= 0 && pv4.z - tv2.z <= 0)
+                                {
+                                    for(int s = 0; s < 4; ++s)
+                                    {
+                                        kexRender::cUtils->DrawLine(*f->segments[s].v1, *f->segments[s].v2, 0, 255, 0);
+                                    }
+                                }
+                            }
+                        }
                     }
                     continue;
-                }
-                
-                //if(j == 1922)
-                if(j <= end)
-                {
-                    //int vstart = face->vertexStart;
-                    
-                    //kexVec3 p1 = world->Vertices()[vstart+3].origin;
-                    //kexVec3 p2 = world->Vertices()[vstart+2].origin;
-                    //kexVec3 p3 = world->Vertices()[vstart+1].origin;
-                    //kexVec3 p4 = world->Vertices()[vstart+0].origin;
-                    
-                    /*kexRender::cUtils->DrawRadius(p1.x, p1.y, p1.z, 96, p3.z - p1.z, 0, 224, 255);
-                    kexRender::cUtils->DrawRadius(p2.x, p2.y, p2.z, 96, p4.z - p2.z, 0, 224, 255);
-                    
-                    p1 += (face->plane.Normal() * 96);
-                    p2 += (face->plane.Normal() * 96);
-                    p3 += (face->plane.Normal() * 96);
-                    p4 += (face->plane.Normal() * 96);*/
-                    
-                    //kexRender::cUtils->DrawLine(p1, p2, 255, 0, 0);
-                    //kexRender::cUtils->DrawLine(p3, p2, 0, 0, 255);
-                    //kexRender::cUtils->DrawLine(p3, p4, 255, 0, 255);
-                    //kexRender::cUtils->DrawLine(p4, p1, 0, 255, 255);
-                    //kexRender::cUtils->DrawQuad(p1, p2, p4, p3, 255, 0, 255, 64);
                 }
                 
                 if(!kex::cGame->RenderView()->Frustum().TestBoundingBox(face->bounds))
