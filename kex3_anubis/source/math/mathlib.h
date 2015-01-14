@@ -234,6 +234,7 @@ public:
     kexVec3                 Lerp(const kexVec3 &next, const float movement) const;
     kexVec3                 &Lerp(const kexVec3 &next, const float movement);
     kexVec3                 &Lerp(const kexVec3 &start, const kexVec3 &next, const float movement);
+    kexVec3                 &Project(const kexVec3 &normal, const float amount);
     kexQuat                 ToQuat(void);
     float                   ToYaw(void) const;
     float                   ToPitch(void) const;

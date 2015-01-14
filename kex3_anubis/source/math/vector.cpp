@@ -706,6 +706,16 @@ kexVec3 &kexVec3::Lerp(const kexVec3 &start, const kexVec3 &next, float movement
 }
 
 //
+// kexVec3::Project
+//
+
+kexVec3 &kexVec3::Project(const kexVec3 &normal, const float amount)
+{
+    *this -= (normal * (this->Dot(normal) * amount));
+    return *this;
+}
+
+//
 // kexVec3::ToQuat
 //
 

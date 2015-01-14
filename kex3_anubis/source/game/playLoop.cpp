@@ -114,7 +114,7 @@ void kexPlayLoop::Draw(void)
                 continue;
             }
 
-            if(sector->validcount == kex::cGame->CModel()->ValidCount()-1)
+            if(sector->validcount == kex::cGame->CModel()->ValidCount())
             {
                 kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 128, 0);
             }
@@ -141,7 +141,8 @@ void kexPlayLoop::Draw(void)
                     continue;
                 }
                 
-                if(j == 1922)
+                //if(j == 1922)
+                if(j <= end)
                 {
                     int vstart = face->vertexStart;
                     
@@ -150,16 +151,19 @@ void kexPlayLoop::Draw(void)
                     kexVec3 p3 = world->Vertices()[vstart+1].origin;
                     kexVec3 p4 = world->Vertices()[vstart+0].origin;
                     
-                    kexRender::cUtils->DrawRadius(p1.x, p1.y, p1.z, 96, p3.z - p1.z, 0, 224, 255);
+                    /*kexRender::cUtils->DrawRadius(p1.x, p1.y, p1.z, 96, p3.z - p1.z, 0, 224, 255);
                     kexRender::cUtils->DrawRadius(p2.x, p2.y, p2.z, 96, p4.z - p2.z, 0, 224, 255);
                     
                     p1 += (face->plane.Normal() * 96);
                     p2 += (face->plane.Normal() * 96);
                     p3 += (face->plane.Normal() * 96);
-                    p4 += (face->plane.Normal() * 96);
+                    p4 += (face->plane.Normal() * 96);*/
                     
-                    kexRender::cUtils->DrawLine(p1, p2, 255, 0, 0);
-                    kexRender::cUtils->DrawQuad(p1, p2, p4, p3, 255, 0, 255, 64);
+                    //kexRender::cUtils->DrawLine(p1, p2, 255, 0, 0);
+                    //kexRender::cUtils->DrawLine(p3, p2, 0, 0, 255);
+                    //kexRender::cUtils->DrawLine(p3, p4, 255, 0, 255);
+                    //kexRender::cUtils->DrawLine(p4, p1, 0, 255, 255);
+                    //kexRender::cUtils->DrawQuad(p1, p2, p4, p3, 255, 0, 255, 64);
                 }
                 
                 if(!kex::cGame->RenderView()->Frustum().TestBoundingBox(face->bounds))
@@ -167,14 +171,14 @@ void kexPlayLoop::Draw(void)
                     continue;
                 }
 
-                if(j <= end)
+                /*if(j <= end)
                 {
                     kexRender::cUtils->DrawBoundingBox(face->bounds, 8, 255, 32);
                 }
                 else
                 {
                     kexRender::cUtils->DrawBoundingBox(face->bounds, 128, 64, 255);
-                }
+                }*/
                 
                 for(int k = face->polyStart; k <= face->polyEnd; ++k)
                 {

@@ -48,9 +48,9 @@ public:
 
 private:
     void                    GetSurroundingSectors(void);
-    bool                    CollideFace(mapFace_t *face);
+    bool                    CollideFace(mapFace_t *face, const float extent1 = 0, const float extent2 = 0);
     bool                    IntersectFaceEdge(mapFace_t *face);
-    bool                    CollideVertex(const kexVec2 &point);
+    bool                    CollideVertex(mapFace_t *face, const kexVec2 &point);
     void                    RecursiveFindSectors(mapSector_t *sector);
 
     mapVertex_t             *vertices;
@@ -61,12 +61,13 @@ private:
     static int              validcount;
 
     kexStack<mapSector_t*>  sectorList;
-    kexStack<mapFace_t*>    faceList;
     kexActor                *moveActor;
+    mapFace_t               *contactFace;
     kexVec3                 interceptVector;
     kexVec3                 start;
     kexVec3                 end;
     kexVec3                 moveDir;
+    kexVec3                 contactNormal;
     kexBBox                 actorBounds;
     float                   actorRadius;
     float                   actorHeight;
