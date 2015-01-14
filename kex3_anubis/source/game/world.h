@@ -25,6 +25,7 @@ typedef struct
 
 typedef enum
 {
+    SF_DEBUG    = BIT(0),
     SF_WATER    = BIT(8)
 } sectorFlags_t;
 

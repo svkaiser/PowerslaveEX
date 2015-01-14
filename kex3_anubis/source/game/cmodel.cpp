@@ -510,6 +510,7 @@ void kexCModel::RecursiveFindSectors(mapSector_t *sector)
     }
 
     sector->validcount = validcount;
+    sector->flags |= SF_DEBUG;
     sectorList.Set(sector);
 
     for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
@@ -559,7 +560,7 @@ void kexCModel::GetSurroundingSectors(void)
             floorz = GetFloorHeight(end, s);
             diff = end.z - floorz;
 
-            if(diff < 0 && diff >= -48)
+            if(diff < 0 && diff >= -moveActor->StepHeight())
             {
                 end.z = floorz;
             }

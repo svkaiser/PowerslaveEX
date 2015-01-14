@@ -114,9 +114,10 @@ void kexPlayLoop::Draw(void)
                 continue;
             }
 
-            if(sector->validcount == kex::cGame->CModel()->ValidCount())
+            if(sector->flags & SF_DEBUG)
             {
                 kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 128, 0);
+                sector->flags &= ~SF_DEBUG;
             }
             
             for(int j = start; j < end+3; ++j)
@@ -144,12 +145,12 @@ void kexPlayLoop::Draw(void)
                 //if(j == 1922)
                 if(j <= end)
                 {
-                    int vstart = face->vertexStart;
+                    //int vstart = face->vertexStart;
                     
-                    kexVec3 p1 = world->Vertices()[vstart+3].origin;
-                    kexVec3 p2 = world->Vertices()[vstart+2].origin;
-                    kexVec3 p3 = world->Vertices()[vstart+1].origin;
-                    kexVec3 p4 = world->Vertices()[vstart+0].origin;
+                    //kexVec3 p1 = world->Vertices()[vstart+3].origin;
+                    //kexVec3 p2 = world->Vertices()[vstart+2].origin;
+                    //kexVec3 p3 = world->Vertices()[vstart+1].origin;
+                    //kexVec3 p4 = world->Vertices()[vstart+0].origin;
                     
                     /*kexRender::cUtils->DrawRadius(p1.x, p1.y, p1.z, 96, p3.z - p1.z, 0, 224, 255);
                     kexRender::cUtils->DrawRadius(p2.x, p2.y, p2.z, 96, p4.z - p2.z, 0, 224, 255);
