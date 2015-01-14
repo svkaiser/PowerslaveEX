@@ -48,9 +48,9 @@ public:
 
 private:
     void                    GetSurroundingSectors(void);
-    bool                    CollideFace(mapFace_t *face, const float extent1 = 0, const float extent2 = 0);
-    bool                    IntersectFaceEdge(mapFace_t *face);
-    bool                    CollideVertex(mapFace_t *face, const kexVec2 &point);
+    bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0);
+    bool                    CollideFace(mapFace_t *face);
+    bool                    TraceFaceVertex(mapFace_t *face, const kexVec2 &point);
     void                    RecursiveFindSectors(mapSector_t *sector);
 
     mapVertex_t             *vertices;

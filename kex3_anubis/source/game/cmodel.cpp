@@ -90,6 +90,7 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
     points[2] = vertices[vstart+1].origin; // top
     points[3] = vertices[vstart+0].origin; // top
 
+    // adjust origin so it lies exactly on the plane
     org = origin - (face->plane.Normal() * PointOnFaceSide(origin, face));
 
     for(int i = 0; i < 4; ++i)
@@ -113,6 +114,7 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
             return false;
         }
 
+        // handle radius range checks here
         edge = pt1 - pt2;
         eSq = edge.UnitSq();
 
@@ -125,6 +127,7 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
 
         if(d < 0)
         {
+            // check left edge
             edge = pt1 - pt3;
             if(edge.Dot(dp1) < 0 && dp1.UnitSq() > rSq)
             {
@@ -133,6 +136,7 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
         }
         else if(d > eSq)
         {
+            // check right edge
             edge = pt2 - pt3;
             if(edge.Dot(dp2) < 0 && dp2.UnitSq() > rSq)
             {
@@ -145,10 +149,10 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
 }
 
 //
-// kexCModel::CollideFace
+// kexCModel::TraceFacePlane
 //
 
-bool kexCModel::CollideFace(mapFace_t *face, const float extent1, const float extent2)
+bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float extent2)
 {
     float d1, d2;
     kexVec3 hit;
@@ -158,6 +162,7 @@ bool kexCModel::CollideFace(mapFace_t *face, const float extent1, const float ex
 
     if(d1 <= d2 || d1 < 0 || d2 > 0)
     {
+        // no intersection
         return false;
     }
 
@@ -179,6 +184,7 @@ bool kexCModel::CollideFace(mapFace_t *face, const float extent1, const float ex
 
     if(!PointInsideFace(hit, face, extent2))
     {
+        // intersect point not on the face
         return false;
     }
 
@@ -190,10 +196,10 @@ bool kexCModel::CollideFace(mapFace_t *face, const float extent1, const float ex
 }
 
 //
-// kexCModel::CollideVertex
+// kexCModel::TraceFaceVertex
 //
 
-bool kexCModel::CollideVertex(mapFace_t *face, const kexVec2 &point)
+bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
 {
     kexVec2 org;
     kexVec2 dir;
@@ -253,11 +259,12 @@ bool kexCModel::CollideVertex(mapFace_t *face, const kexVec2 &point)
 }
 
 //
-// kexCModel::IntersectFaceEdge
+// kexCModel::CollideFace
 //
 
-bool kexCModel::IntersectFaceEdge(mapFace_t *face)
+bool kexCModel::CollideFace(mapFace_t *face)
 {
+    // try colliding with the end points of the face segment
     if(PointOnFaceSide(end, face) >= 0)
     {
         kexVec3 points[4];
@@ -281,6 +288,7 @@ bool kexCModel::IntersectFaceEdge(mapFace_t *face)
             float u = e.Dot(B - Q);
             float v = e.Dot(Q - A);
             
+            // left side
             if(v <= 0)
             {
                 kexVec2 P = A;
@@ -292,9 +300,10 @@ bool kexCModel::IntersectFaceEdge(mapFace_t *face)
                     return false;
                 }
                 
-                return CollideVertex(face, P);
+                return TraceFaceVertex(face, P);
             }
             
+            // right side
             if(u <= 0)
             {
                 kexVec2 P = B;
@@ -306,12 +315,13 @@ bool kexCModel::IntersectFaceEdge(mapFace_t *face)
                     return false;
                 }
                 
-                return CollideVertex(face, P);
+                return TraceFaceVertex(face, P);
             }
         }
     }
     
-    return CollideFace(face, actorRadius);
+    // collide with face plane
+    return TraceFacePlane(face, actorRadius);
 }
 
 //
@@ -331,11 +341,11 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
 
         if(i <= sector->faceEnd)
         {
-            IntersectFaceEdge(face);
+            CollideFace(face);
         }
         else
         {
-            CollideFace(face, (i == sector->faceEnd+1) ? actorHeight : 0);
+            TraceFacePlane(face, (i == sector->faceEnd+1) ? actorHeight : 0);
         }
     }
 }
