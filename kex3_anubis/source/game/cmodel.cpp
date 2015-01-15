@@ -208,7 +208,7 @@ bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
     float rd;
     float r;
     
-    org = (point - end.ToVec2());
+    org = (point - start.ToVec2());
     dir = moveDir;
     dir.Normalize();
     
@@ -265,7 +265,7 @@ bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
 bool kexCModel::CollideFace(mapFace_t *face)
 {
     // try colliding with the end points of the face segment
-    if(PointOnFaceSide(end, face) >= 0)
+    if(PointOnFaceSide(start, face) >= 0)
     {
         kexVec3 points[4];
         int vstart = face->vertexStart;
@@ -275,10 +275,10 @@ bool kexCModel::CollideFace(mapFace_t *face)
         points[2] = vertices[vstart+1].origin; // top
         points[3] = vertices[vstart+0].origin; // top
         
-        float rSq = (actorRadius * actorRadius) + (points[3] - points[2]).UnitSq();
+        float rSq = (actorRadius * actorRadius);
         
-        if((points[3].z >= end.z || points[2].z >= end.z) &&
-           (points[0].z <= end.z || points[1].z <= end.z))
+        if((points[3].z >= start.z || points[2].z >= start.z) &&
+           (points[0].z <= start.z || points[1].z <= start.z))
         {
             kexVec2 Q = end.ToVec2();
             kexVec2 A = points[3].ToVec2();
@@ -345,7 +345,14 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
         }
         else
         {
-            TraceFacePlane(face, (i == sector->faceEnd+1) ? actorHeight : 0);
+            if(i == sector->faceEnd+1 && moveActor->Flags() & AF_CEILINGFRICTION)
+            {
+                TraceFacePlane(face, actorHeight, actorRadius);
+            }
+            else if(moveActor->Flags() & AF_FLOORFRICTION)
+            {
+                TraceFacePlane(face, 0, actorRadius);
+            }
         }
     }
 }
@@ -708,6 +715,7 @@ bool kexCModel::MoveActor(kexActor *actor)
     if(end.z - floorz < 0)
     {
         end.z = floorz;
+        moveDir.z = 0;
     }
 
     if(ceilingz - end.z < actorHeight)
@@ -715,8 +723,11 @@ bool kexCModel::MoveActor(kexActor *actor)
         end.z = ceilingz - actorHeight;
     }
 
+    actor->FloorHeight() = floorz;
+    actor->CeilingHeight() = ceilingz;
     actor->SetSector(sector);
     actor->Origin() = end;
     actor->Velocity() = moveDir;
+    actor->LinkArea();
     return true;
 }

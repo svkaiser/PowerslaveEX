@@ -39,6 +39,7 @@ public:
     kexVec3                     &Origin(void) { return origin; }
     kexAngle                    &Yaw(void) { return yaw; }
     kexAngle                    &Pitch(void) { return pitch; }
+    kexAngle                    &Roll(void) { return roll; }
     kexGameObject               *Target(void) { return target; }
     int                         &TimeStamp(void) { return timeStamp; }
 
@@ -53,6 +54,7 @@ protected:
     kexVec3                     origin;
     kexAngle                    yaw;
     kexAngle                    pitch;
+    kexAngle                    roll;
     kexGameObject               *target;
     int                         timeStamp;
 

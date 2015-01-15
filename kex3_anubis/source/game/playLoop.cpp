@@ -81,9 +81,10 @@ void kexPlayLoop::Draw(void)
     // TEMP
     kex::cGame->RenderView()->Yaw() = kex::cGame->Player()->Actor()->Yaw();
     kex::cGame->RenderView()->Pitch() = kex::cGame->Player()->Actor()->Pitch();
+    kex::cGame->RenderView()->Roll() = kex::cGame->Player()->Actor()->Roll();
     kex::cGame->RenderView()->Origin() = kex::cGame->Player()->Actor()->Origin();
     
-    kex::cGame->RenderView()->Origin().z += 64;
+    kex::cGame->RenderView()->Origin().z += 64 + kex::cGame->Player()->Bob();
     
     kex::cGame->RenderView()->Setup();
     kexRender::cBackend->LoadProjectionMatrix(kex::cGame->RenderView()->ProjectionView());
@@ -274,6 +275,7 @@ void kexPlayLoop::Tick(void)
     if(ticks > 4)
     {
         kex::cGame->UpdateActors();
+        kex::cGame->Player()->Tick();
     }
     
     ticks++;

@@ -21,6 +21,7 @@
 
 typedef enum
 {
+    AT_INVALID  = -1,
     AT_PLAYER   = 0,
     AT_ANUBIS,
     AT_BASTET,
@@ -200,6 +201,12 @@ typedef enum
     NUMACTORTYPES
 } actorType_t;
 
+typedef enum
+{
+    AF_FLOORFRICTION    = BIT(0),
+    AF_CEILINGFRICTION  = BIT(1)
+} actorFlags_t;
+
 //-----------------------------------------------------------------------------
 //
 // kexActor
@@ -230,6 +237,9 @@ public:
     const float                     Height(void) const { return height; }
     const float                     StepHeight(void) const { return stepHeight; }
     const float                     Gravity(void) const { return gravity; }
+    unsigned int                    &Flags(void) { return flags; }
+    float                           &FloorHeight(void) { return floorHeight; }
+    float                           &CeilingHeight(void) { return ceilingHeight; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
@@ -248,6 +258,9 @@ protected:
     mapSector_t                     *sector;
     mapActor_t                      *mapActor;
     actorType_t                     type;
+    unsigned int                    flags;
+    float                           floorHeight;
+    float                           ceilingHeight;
 END_CLASS();
 
 #endif

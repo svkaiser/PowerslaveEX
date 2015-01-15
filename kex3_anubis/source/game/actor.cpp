@@ -30,11 +30,12 @@ kexActor::kexActor(void)
     this->link.SetData(this);
     this->bounds.min.Set(-32, -32, -32);
     this->bounds.max.Set(32, 32, 32);
-    this->type = AT_R1;
+    this->type = AT_INVALID;
     this->health = 100;
     this->radius = 16;
     this->height = 32;
     this->stepHeight = 16;
+    this->flags = 0;
     this->areaLink.link.SetData(this);
     this->areaLink.node = NULL;
 }

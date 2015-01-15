@@ -48,6 +48,72 @@ COMMAND(map)
 }
 
 //
+// noclip
+//
+
+COMMAND(noclip)
+{
+    kexGame *game = kex::cGame;
+    kexPuppet *puppet;
+
+    if(kex::cCommands->GetArgc() < 1)
+    {
+        return;
+    }
+
+    if(game->GameState() != GS_LEVEL || game->Player()->Actor() == NULL)
+    {
+        return;
+    }
+
+    puppet = static_cast<kexPuppet*>(game->Player()->Actor());
+
+    if(puppet->PlayerFlags() & PF_NOCLIP)
+    {
+        kex::cSystem->Printf("no clipping off\n");
+        puppet->PlayerFlags() &= ~PF_NOCLIP;
+    }
+    else
+    {
+        kex::cSystem->Printf("no clipping on\n");
+        puppet->PlayerFlags() |= PF_NOCLIP;
+    }
+}
+
+//
+// fly
+//
+
+COMMAND(fly)
+{
+    kexGame *game = kex::cGame;
+    kexPuppet *puppet;
+
+    if(kex::cCommands->GetArgc() < 1)
+    {
+        return;
+    }
+
+    if(game->GameState() != GS_LEVEL || game->Player()->Actor() == NULL)
+    {
+        return;
+    }
+
+    puppet = static_cast<kexPuppet*>(game->Player()->Actor());
+
+    if(puppet->PlayerFlags() & PF_FLY)
+    {
+        kex::cSystem->Printf("fly mode off\n");
+        puppet->PlayerFlags() &= ~PF_FLY;
+    }
+    else
+    {
+        kex::cSystem->Printf("fly mode on\n");
+        puppet->PlayerFlags() |= PF_FLY;
+    }
+}
+
+//
 // kexGame::kexGame
 //
 
