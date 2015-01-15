@@ -72,7 +72,11 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     
     yaw += cmd->Angles()[0];
     pitch += cmd->Angles()[1];
-
+    roll -= (cmd->Angles()[0] * 0.25f);
+    
+    kexMath::Clamp(pitch.an, kexMath::Deg2Rad(-90), kexMath::Deg2Rad(90));
+    kexMath::Clamp(roll.an, -0.1f, 0.1f);
+    
     kexVec3::ToAxis(&forward, NULL, &right, yaw, 0, 0);
 
     velocity.x *= PMOVE_FRICTION;
@@ -236,6 +240,8 @@ void kexPuppet::FlyMove(kexPlayerCmd *cmd)
 void kexPuppet::Tick(void)
 {
     kexPlayerCmd *cmd = &owner->Cmd();
+    
+    roll = (0 - roll) * 0.25f + roll;
     
     if(playerFlags & (PF_NOCLIP|PF_FLY))
     {
