@@ -161,6 +161,11 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     
     if(origin.z + velocity.z <= floorHeight)
     {
+        if(velocity.z < -3.5f)
+        {
+            owner->LandTime() = velocity.z;
+        }
+
         origin.z = floorHeight;
         velocity.z = 0;
         jumpTicks = 0;
@@ -313,6 +318,7 @@ void kexPlayer::Reset(void)
     bobTime = 0;
     bobSpeed = 0;
     weaponBob.Clear();
+    landTime = 0;
 
     currentWeapon = PW_MACHETE;
     weaponState = -1;
@@ -350,5 +356,14 @@ void kexPlayer::Tick(void)
         bobSpeed = 0;
         bobTime = 0;
         bob = (0 - bob) * 0.1f + bob;
+    }
+
+    if(landTime < 0)
+    {
+        landTime += 2;
+        if(landTime >= 0)
+        {
+            landTime = 0;
+        }
     }
 }

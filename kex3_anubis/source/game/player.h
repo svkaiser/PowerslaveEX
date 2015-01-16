@@ -148,6 +148,7 @@ public:
     void                    ClearActor(void) { actor = NULL; }
 
     const float             Bob(void) const { return bob; }
+    float                   &LandTime(void) { return landTime; }
 
 private:
     kexPlayerCmd            cmd;
@@ -157,6 +158,7 @@ private:
     float                   bob;
     float                   bobTime;
     float                   bobSpeed;
+    float                   landTime;
     kexVec2                 weaponBob;
 
     byte                    currentWeapon;

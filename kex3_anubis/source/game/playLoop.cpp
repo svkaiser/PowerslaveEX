@@ -78,13 +78,15 @@ void kexPlayLoop::Stop(void)
 
 void kexPlayLoop::Draw(void)
 {
+    kexPlayer *p = kex::cGame->Player();
+
     // TEMP
-    kex::cGame->RenderView()->Yaw() = kex::cGame->Player()->Actor()->Yaw();
-    kex::cGame->RenderView()->Pitch() = kex::cGame->Player()->Actor()->Pitch();
-    kex::cGame->RenderView()->Roll() = kex::cGame->Player()->Actor()->Roll();
-    kex::cGame->RenderView()->Origin() = kex::cGame->Player()->Actor()->Origin();
+    kex::cGame->RenderView()->Yaw() = p->Actor()->Yaw();
+    kex::cGame->RenderView()->Pitch() = p->Actor()->Pitch();
+    kex::cGame->RenderView()->Roll() = p->Actor()->Roll();
+    kex::cGame->RenderView()->Origin() = p->Actor()->Origin();
     
-    kex::cGame->RenderView()->Origin().z += 64 + kex::cGame->Player()->Bob();
+    kex::cGame->RenderView()->Origin().z += 64 + p->Bob() + p->LandTime();
     
     kex::cGame->RenderView()->Setup();
     kexRender::cBackend->LoadProjectionMatrix(kex::cGame->RenderView()->ProjectionView());
