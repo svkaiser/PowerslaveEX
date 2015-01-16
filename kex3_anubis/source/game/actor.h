@@ -221,6 +221,7 @@ public:
     virtual void                    Tick(void);
 
     void                            Spawn(void);
+    bool                            FindSector(const kexVec3 &pos);
     void                            LinkArea(void);
     void                            UnlinkArea(void);
 

@@ -32,23 +32,23 @@ public:
     float                   GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector);
     bool                    PointWithinSectorEdges(const kexVec3 &origin, mapSector_t *sector,
                                                    const float extent = 0);
-    bool                    SectorLinksToSector(const kexVec3 &origin, mapSector_t *source, mapSector_t *dest,
-                                                const float extent = 0);
     bool                    PointInsideSector(const kexVec3 &origin, mapSector_t *sector,
-                                              const float extent = 0);
+                                              const float extent = 0, const float floorOffset = 0);
     bool                    PointInsideFace(const kexVec3 &origin, mapFace_t *face,
                                             const float extent = 0);
 
     bool                    MoveActor(kexActor *actor);
     bool                    CheckActorPosition(kexActor *actor);
-    void                    SlideAgainstFaces(mapSector_t *sector);
     void                    Reset(void);
 
     const int               ValidCount(void) const { return validcount; }
 
 private:
+    void                    CollideActorWithWorld(void);
+    void                    AdvanceActorToSector(void);
+    void                    SlideAgainstFaces(mapSector_t *sector);
     bool                    CheckEdgeSide(mapEdge_t *edge, const kexVec3 &dir, const float heightAdjust);
-    void                    GetSurroundingSectors(void);
+    void                    CheckSurroundingSectors(void);
     bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0);
     bool                    CollideFace(mapFace_t *face);
     bool                    TraceFaceVertex(mapFace_t *face, const kexVec2 &point);

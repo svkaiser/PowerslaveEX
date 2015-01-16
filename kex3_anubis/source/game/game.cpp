@@ -72,11 +72,13 @@ COMMAND(noclip)
     {
         kex::cSystem->Printf("no clipping off\n");
         puppet->PlayerFlags() &= ~PF_NOCLIP;
+        puppet->FindSector(puppet->Origin());
     }
     else
     {
         kex::cSystem->Printf("no clipping on\n");
         puppet->PlayerFlags() |= PF_NOCLIP;
+        puppet->Velocity().Clear();
     }
 }
 
@@ -110,6 +112,7 @@ COMMAND(fly)
     {
         kex::cSystem->Printf("fly mode on\n");
         puppet->PlayerFlags() |= PF_FLY;
+        puppet->Velocity().Clear();
     }
 }
 

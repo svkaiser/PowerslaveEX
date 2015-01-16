@@ -110,15 +110,18 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
     
     // could potentially slip through solid walls so extend the top and bottom edges of
     // the wall to prevent this
-    if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
+    if(&sectors[face->sectorOwner] == moveActor->Sector())
     {
-        points[0].z -= actorHeight;
-        points[1].z -= actorHeight;
-    }
-    if(!(face->TopEdge()->flags & EGF_BOTTOMSTEP))
-    {
-        points[2].z += actorHeight;
-        points[3].z += actorHeight;
+        if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
+        {
+            points[0].z -= actorHeight;
+            points[1].z -= actorHeight;
+        }
+        if(!(face->TopEdge()->flags & EGF_BOTTOMSTEP))
+        {
+            points[2].z += actorHeight;
+            points[3].z += actorHeight;
+        }
     }
 
     // adjust origin so it lies exactly on the plane
@@ -434,38 +437,13 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
 
 bool kexCModel::CheckActorPosition(kexActor *actor)
 {
-    mapFace_t *face;
-    mapSector_t *sector = actor->Sector();
-
-    for(int i = sector->faceStart; i < sector->faceEnd+1; ++i)
-    {
-        float d;
-        face = &faces[i];
-
-        if(!(face->flags & FF_SOLID))
-        {
-            continue;
-        }
-
-        d = PointOnFaceSide(actor->Origin(), face);
-
-        if(d < actorRadius)
-        {
-            kexVec3 pt = actor->Origin() + (face->plane.Normal() * kexMath::Fabs(actorRadius - d));
-
-            if(PointInsideFace(pt, face, actorRadius))
-            {
-                actor->Origin() = pt;
-                return false;
-            }
-        }
-    }
-
     return true;
 }
 
 //
 // kexCModel::PointOnFaceSide
+//
+// Returns the distance from the face's plane
 //
 
 float kexCModel::PointOnFaceSide(const kexVec3 &origin, mapFace_t *face, const float extent)
@@ -475,6 +453,9 @@ float kexCModel::PointOnFaceSide(const kexVec3 &origin, mapFace_t *face, const f
 
 //
 // kexCModel::PointWithinSectorEdges
+//
+// Returns true if the origin point is in front of
+// all walls in the sector
 //
 
 bool kexCModel::PointWithinSectorEdges(const kexVec3 &origin, mapSector_t *sector, const float extent)
@@ -497,15 +478,19 @@ bool kexCModel::PointWithinSectorEdges(const kexVec3 &origin, mapSector_t *secto
 //
 // kexCModel::PointInsideSector
 //
+// Returns true if the origin point is completely inside
+// the sector
+//
 
-bool kexCModel::PointInsideSector(const kexVec3 &origin, mapSector_t *sector, const float extent)
+bool kexCModel::PointInsideSector(const kexVec3 &origin, mapSector_t *sector,
+                                  const float extent, const float floorOffset)
 {
     if(origin.z > GetCeilingHeight(origin, sector))
     {
         return false;
     }
 
-    if(origin.z < GetFloorHeight(origin, sector))
+    if((origin.z + floorOffset) < GetFloorHeight(origin, sector))
     {
         return false;
     }
@@ -514,56 +499,12 @@ bool kexCModel::PointInsideSector(const kexVec3 &origin, mapSector_t *sector, co
 }
 
 //
-// kexCModel::SectorLinksToSector
-//
-
-bool kexCModel::SectorLinksToSector(const kexVec3 &origin, mapSector_t *source, mapSector_t *dest,
-                                    const float extent)
-{
-    for(int i = source->faceStart; i < source->faceEnd+3; ++i)
-    {
-        mapFace_t *face = &faces[i];
-        mapSector_t *s;
-
-        if(!(face->flags & FF_PORTAL) || face->sector <= -1)
-        {
-            continue;
-        }
-
-        s = &sectors[face->sector];
-
-        if(s != dest || s == source)
-        {
-            continue;
-        }
-
-        if(PointOnFaceSide(origin, face, extent) < 0)
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-//
 // kexCModel::GetFloorHeight
 //
 
 float kexCModel::GetFloorHeight(const kexVec3 &origin, mapSector_t *sector)
 {
-    mapVertex_t *v;
-    mapFace_t *face;
-    float dist;
-
-    face = &faces[sector->faceEnd+2];
-    v = &vertices[face->vertexStart];
-
-    dist = kexVec3::Dot(kexVec3(v->origin.x - origin.x,
-                                v->origin.y - origin.y,
-                                v->origin.z), face->plane.Normal()) / face->plane.c;
-
-    return dist;
+    return origin.z - PointOnFaceSide(origin, &faces[sector->faceEnd+2]);
 }
 
 //
@@ -572,22 +513,15 @@ float kexCModel::GetFloorHeight(const kexVec3 &origin, mapSector_t *sector)
 
 float kexCModel::GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector)
 {
-    mapVertex_t *v;
-    mapFace_t *face;
-    float dist;
-
-    face = &faces[sector->faceEnd+1];
-    v = &vertices[face->vertexStart];
-
-    dist = kexVec3::Dot(kexVec3(v->origin.x - origin.x,
-                                v->origin.y - origin.y,
-                                v->origin.z), face->plane.Normal()) / face->plane.c;
-
-    return dist;
+    return PointOnFaceSide(origin, &faces[sector->faceEnd+1]) + origin.z;
 }
 
 //
 // kexCModel::RecursiveFindSectors
+//
+// Creates a list of all sectors that were contacted
+// by the actor's bounding box. Recursively checks
+// sectors linked by a face portal as well
 //
 
 void kexCModel::RecursiveFindSectors(mapSector_t *sector)
@@ -598,7 +532,6 @@ void kexCModel::RecursiveFindSectors(mapSector_t *sector)
     }
 
     sector->validcount = validcount;
-    sector->flags |= SF_DEBUG;
     sectorList.Set(sector);
 
     for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
@@ -610,11 +543,13 @@ void kexCModel::RecursiveFindSectors(mapSector_t *sector)
 
         if(!(face->flags & FF_PORTAL) || face->sector <= -1)
         {
+            // could be a solid wall or something
             continue;
         }
 
         s = &sectors[face->sector];
 
+        // is this linked sector reachable?
         if(actorBounds.IntersectingBox(s->bounds))
         {
             RecursiveFindSectors(s);
@@ -623,35 +558,234 @@ void kexCModel::RecursiveFindSectors(mapSector_t *sector)
 }
 
 //
-// kexCModel::GetSurroundingSectors
+// kexCModel::CheckSurroundingSectors
+//
+// Looks for linked sectors within the actor's radius
+// and tries to clip the actor's z-axis with the ceiling
+// or floor height. Actor is not linked to any sectors it
+// interacts with
 //
 
-void kexCModel::GetSurroundingSectors(void)
+void kexCModel::CheckSurroundingSectors(void)
 {
-    mapSector_t *s;
-    float floorz, diff;
-
-    // see if any of the sectors can be stepped into
-    for(unsigned int i = 0; i < sectorList.CurrentLength(); ++i)
+    mapSector_t *sec, *s, *best = NULL;
+    float maxfloorz, maxceilingz;
+    float floorz, ceilingz, diff;
+    bool bChangeFloorHeight, bChangeCeilingHeight;
+    
+    sec = moveActor->Sector();
+    maxfloorz = moveActor->FloorHeight();
+    maxceilingz = end.z;
+    
+    bChangeFloorHeight = false;
+    bChangeCeilingHeight = false;
+    
+    for(int i = sec->faceStart; i < sec->faceEnd+3; ++i)
     {
-        s = sectorList[i];
-
-        if(s == moveActor->Sector())
+        mapFace_t *face = &faces[i];
+        
+        if(face->sector <= -1)
         {
+            // doesn't link another sector
             continue;
         }
-
-        if(SectorLinksToSector(end, moveActor->Sector(), s, actorRadius))
+        
+        s = &sectors[face->sector];
+        
+        if(s == sec)
         {
+            // skip the sector that we're already in
+            continue;
+        }
+        
+        // is the actor crossing this portal face?
+        if(PointOnFaceSide(end, face, actorRadius) < 0)
+        {
+            ceilingz = GetCeilingHeight(end, s);
             floorz = GetFloorHeight(end, s);
+            
             diff = end.z - floorz;
-
-            if(diff < 0 && diff >= -moveActor->StepHeight())
+            
+            // determine the closest floor that can be stepped on
+            if(diff <= 0 && diff >= -moveActor->StepHeight())
             {
-                end.z = floorz;
+                if(floorz > maxfloorz)
+                {
+                    best = s;
+                    maxfloorz = floorz;
+                    bChangeFloorHeight = true;
+                }
+            }
+            
+            // determine the ceiling closest to the actor
+            if(ceilingz > floorz && ceilingz - end.z < actorHeight)
+            {
+                if(ceilingz > maxceilingz)
+                {
+                    best = s;
+                    maxceilingz = ceilingz;
+                    bChangeCeilingHeight = true;
+                }
             }
         }
     }
+    
+    if(bChangeFloorHeight && best)
+    {
+        if(PointInsideSector(end, best, -actorRadius, moveActor->StepHeight()))
+        {
+            // step up into this sector
+            end.z = maxfloorz;
+            moveActor->FloorHeight() = maxfloorz;
+        }
+    }
+    
+    if(bChangeCeilingHeight)
+    {
+        // bump into the ceiling
+        end.z = maxceilingz - actorHeight;
+        moveActor->CeilingHeight() = maxceilingz;
+    }
+}
+
+//
+// kexCModel::CollideActorWithWorld
+//
+// Project the movement direction with all faces and sectors
+// the actor makes contact with
+//
+
+void kexCModel::CollideActorWithWorld(void)
+{
+    mapSector_t *sector = moveActor->Sector();
+    int moves;
+    float r, h, d;
+    kexVec3 cDir;
+    kexVec3 contactNormals[CONTACT_COUNT];
+    
+    moves = 0;
+    r = actorRadius*2;
+    h = actorHeight*2;
+    
+    for(int i = 0; i < CONTACT_COUNT; ++i)
+    {
+        kexVec3::ToAxis(&forwardDir, NULL, NULL, moveDir.ToYaw(), 0, 0);
+        
+        fraction = 1;
+        end = start + moveDir;
+        interceptVector = end;
+        
+        contactNormal.Clear();
+        contactFace = NULL;
+        
+        actorBounds.min.Set(-r, -r, -h);
+        actorBounds.max.Set( r,  r,  h);
+        
+        actorBounds.min += end;
+        actorBounds.max += end;
+        actorBounds *= moveDir;
+        
+        sectorList.Reset();
+        RecursiveFindSectors(sector);
+        validcount++;
+        
+        // start tracing against all faces per contacted sector
+        for(unsigned int j = 0; j < sectorList.CurrentLength(); ++j)
+        {
+            SlideAgainstFaces(sectorList[j]);
+        }
+        
+        if(fraction >= 1)
+        {
+            // went the entire distance
+            break;
+        }
+        
+        if(moves >= CONTACT_COUNT)
+        {
+            break;
+        }
+        
+        contactNormals[moves++] = contactNormal;
+        
+        // try all interacted normals
+        for(int j = 0; j < moves; ++j)
+        {
+            if(moveDir.Dot(contactNormals[j]) >= 0)
+            {
+                continue;
+            }
+            
+            moveDir.Project(contactNormals[j], 1.01f);
+            
+            // try bumping against another plane
+            for(int k = 0; k < moves; ++k)
+            {
+                if(k == j || moveDir.Dot(contactNormals[k]) >= 0)
+                {
+                    continue;
+                }
+                
+                // bump into second plane
+                moveDir.Project(contactNormals[k], 1.01f);
+                
+                if(moveDir.Dot(contactNormals[j]) >= 0)
+                {
+                    continue;
+                }
+                
+                // slide along the crease between two planes
+                cDir = contactNormals[j].Cross(contactNormals[k]).Normalize();
+                d = cDir.Dot(moveDir);
+                moveDir = cDir * d;
+            }
+        }
+    }
+}
+
+//
+// kexCModel::AdvanceActorToSector
+//
+// Determines the sector that the new origin point has landed
+// on. Assumes that the actor's movement was already clipped
+//
+
+void kexCModel::AdvanceActorToSector(void)
+{
+    mapSector_t *sector = moveActor->Sector();
+    
+    for(unsigned int i = 0; i < sectorList.CurrentLength(); ++i)
+    {
+        if(PointInsideSector(end, sectorList[i], 0, moveActor->StepHeight()))
+        {
+            sector = sectorList[i];
+        }
+    }
+    
+    // clamp z-axis to floor and ceiling
+    float floorz = GetFloorHeight(end, sector);
+    float ceilingz = GetCeilingHeight(end, sector);
+    
+    if(end.z - floorz < 0)
+    {
+        end.z = floorz;
+        moveDir.z = 0;
+    }
+    
+    if(ceilingz - end.z < actorHeight)
+    {
+        end.z = ceilingz - actorHeight;
+    }
+    
+    if(PointInsideSector(end, sector))
+    {
+        sector->flags |= SF_DEBUG;
+    }
+    
+    // update actor info
+    moveActor->FloorHeight() = floorz;
+    moveActor->CeilingHeight() = ceilingz;
+    moveActor->SetSector(sector);
 }
 
 //
@@ -661,13 +795,6 @@ void kexCModel::GetSurroundingSectors(void)
 bool kexCModel::MoveActor(kexActor *actor)
 {
     mapSector_t *sector = actor->Sector();
-    mapSector_t *oldSector = sector;
-    bool bInside = false;
-    float r, h;
-    int moves;
-    kexVec3 cDir;
-    float d;
-    kexVec3 contactNormals[CONTACT_COUNT];
 
     if(sector == NULL)
     {
@@ -680,120 +807,16 @@ bool kexCModel::MoveActor(kexActor *actor)
     moveDir = actor->Velocity();
     start = actor->Origin();
 
-    moves = 0;
-    r = actorRadius*2;
-    h = actorHeight*2;
-
-    for(int i = 0; i < CONTACT_COUNT; ++i)
-    {
-        kexVec3::ToAxis(&forwardDir, NULL, NULL, moveDir.ToYaw(), 0, 0);
-        
-        fraction = 1;
-        end = start + moveDir;
-        interceptVector = end;
-
-        contactNormal.Clear();
-        contactFace = NULL;
-
-        actorBounds.min.Set(-r, -r, -h);
-        actorBounds.max.Set( r,  r,  h);
-
-        actorBounds.min += end;
-        actorBounds.max += end;
-        actorBounds *= moveDir;
-        
-        sectorList.Reset();
-        RecursiveFindSectors(sector);
-        validcount++;
-
-        for(unsigned int j = 0; j < sectorList.CurrentLength(); ++j)
-        {
-            SlideAgainstFaces(sectorList[j]);
-        }
-
-        if(fraction >= 1)
-        {
-            // went the entire distance
-            break;
-        }
-
-        if(moves >= CONTACT_COUNT)
-        {
-            break;
-        }
-
-        contactNormals[moves++] = contactNormal;
-
-        // try all interacted normals
-        for(int j = 0; j < moves; ++j)
-        {
-            if(moveDir.Dot(contactNormals[j]) >= 0)
-            {
-                continue;
-            }
-
-            moveDir.Project(contactNormals[j], 1.01f);
-
-            // try bumping against another plane
-            for(int k = 0; k < moves; ++k)
-            {
-                if(k == j || moveDir.Dot(contactNormals[k]) >= 0)
-                {
-                    continue;
-                }
-
-                // bump into second plane
-                moveDir.Project(contactNormals[k], 1.01f);
-
-                if(moveDir.Dot(contactNormals[j]) >= 0)
-                {
-                    continue;
-                }
-
-                // slide along the crease between two planes
-                cDir = contactNormals[j].Cross(contactNormals[k]).Normalize();
-                d = cDir.Dot(moveDir);
-                moveDir = cDir * d;
-            }
-        }
-    }
-
-    // TEMP
-    for(unsigned int i = 0; i < kex::cGame->World()->NumSectors(); ++i)
-    {
-        sector = &sectors[i];
-
-        if(PointWithinSectorEdges(end, sector))
-        {
-            actor->SetSector(sector);
-            bInside = true;
-            break;
-        }
-    }
+    // interact with world
+    CollideActorWithWorld();
     
-    if(bInside == false)
-    {
-        sector = oldSector;
-        end = start;
-    }
-
-    float floorz = GetFloorHeight(end, sector);
-    float ceilingz = GetCeilingHeight(end, sector);
-
-    if(end.z - floorz < 0)
-    {
-        end.z = floorz;
-        moveDir.z = 0;
-    }
-
-    if(ceilingz - end.z < actorHeight)
-    {
-        end.z = ceilingz - actorHeight;
-    }
-
-    actor->FloorHeight() = floorz;
-    actor->CeilingHeight() = ceilingz;
-    actor->SetSector(sector);
+    // update sector position
+    AdvanceActorToSector();
+    
+    // check surrounding sectors that can be
+    // stepped on
+    CheckSurroundingSectors();
+    
     actor->Origin() = end;
     actor->Velocity() = moveDir;
     actor->LinkArea();

@@ -18,6 +18,7 @@
 #include "kexlib.h"
 #include "actor.h"
 #include "world.h"
+#include "cmodel.h"
 
 DECLARE_CLASS(kexActor, kexGameObject)
 
@@ -62,6 +63,28 @@ void kexActor::Tick(void)
 
 void kexActor::Spawn(void)
 {
+}
+
+//
+// kexActor::FindSector
+//
+
+bool kexActor::FindSector(const kexVec3 &pos)
+{
+    mapSector_t *sector;
+    
+    for(unsigned int i = 0; i < kex::cGame->World()->NumSectors(); ++i)
+    {
+        sector = &kex::cGame->World()->Sectors()[i];
+        
+        if(kex::cGame->CModel()->PointWithinSectorEdges(pos, sector))
+        {
+            SetSector(sector);
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 //
