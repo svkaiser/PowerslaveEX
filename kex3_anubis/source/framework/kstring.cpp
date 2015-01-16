@@ -588,13 +588,18 @@ int kexStr::Hash(const char *s)
 char *kexStr::Format(const char *str, ...)
 {
     va_list v;
-    static char vastr[1024];
+    static char vastr[4][1024];
+    static int num = 0;
+    char *c;
 
     va_start(v, str);
-    vsprintf(vastr, str,v);
+    vsprintf(vastr[num], str,v);
     va_end(v);
 
-    return vastr;
+    c = vastr[num];
+    num = (num+1)&3;
+
+    return c;
 }
 
 //
