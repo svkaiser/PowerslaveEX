@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
+		41B96A9F1A697996004397E6 /* spriteMake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B96A9D1A697996004397E6 /* spriteMake.cpp */; };
 		41BAB9121A5EF32100DD0D11 /* actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BAB90E1A5EF32100DD0D11 /* actor.cpp */; };
 		41BAB9131A5EF32100DD0D11 /* playLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BAB9101A5EF32100DD0D11 /* playLoop.cpp */; };
 		41BB267F1A547A9A00311383 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BB267E1A547A9A00311383 /* OpenAL.framework */; };
@@ -126,6 +127,8 @@
 		41B3A5481A5DEE84006DCCB9 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
 		41B3A54A1A5DEEBC006DCCB9 /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = console.cpp; sourceTree = "<group>"; };
 		41B3A54B1A5DEEBC006DCCB9 /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = console.h; sourceTree = "<group>"; };
+		41B96A9D1A697996004397E6 /* spriteMake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spriteMake.cpp; path = ../../source/tools/spriteMake.cpp; sourceTree = "<group>"; };
+		41B96A9E1A697996004397E6 /* spriteMake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spriteMake.h; path = ../../source/tools/spriteMake.h; sourceTree = "<group>"; };
 		41BAB90B1A5EF30E00DD0D11 /* sdNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdNodes.h; sourceTree = "<group>"; };
 		41BAB90E1A5EF32100DD0D11 /* actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actor.cpp; path = ../../source/game/actor.cpp; sourceTree = "<group>"; };
 		41BAB90F1A5EF32100DD0D11 /* actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actor.h; path = ../../source/game/actor.h; sourceTree = "<group>"; };
@@ -270,6 +273,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41B96A9A1A69798B004397E6 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				41B96A9D1A697996004397E6 /* spriteMake.cpp */,
+				41B96A9E1A697996004397E6 /* spriteMake.h */,
+			);
+			name = tools;
+			sourceTree = "<group>";
+		};
 		41BACC671A5311EA0054A04A /* game */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +399,7 @@
 				41E2CE631A51D39B00FC28DC /* opengl */,
 				41E2CE671A51D39B00FC28DC /* renderer */,
 				41E2CEA41A51D8D400FC28DC /* system */,
+				41B96A9A1A69798B004397E6 /* tools */,
 			);
 			name = Source;
 			path = anubis;
@@ -685,6 +698,7 @@
 				41C7FC7E1A5AFBAB003864CB /* sound.cpp in Sources */,
 				41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */,
 				41C7FC271A5AFB6E003864CB /* object.cpp in Sources */,
+				41B96A9F1A697996004397E6 /* spriteMake.cpp in Sources */,
 				41E2CE881A51D39B00FC28DC /* glcontext.cpp in Sources */,
 				41E2CE801A51D39B00FC28DC /* bounds.cpp in Sources */,
 			);

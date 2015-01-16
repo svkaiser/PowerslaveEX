@@ -106,9 +106,7 @@ typedef struct
 // ------------------------------------------------------
 //
 
-static byte *pngWriteData;
 static byte *pngReadData;
-static uint pngWritePos = 0;
 
 //
 // PNGRowSize
@@ -134,17 +132,6 @@ static void PNGReadFunc(png_structp ctx, png_bytep area, png_size_t size)
 {
     memcpy(area, pngReadData, size);
     pngReadData += size;
-}
-
-//
-// PNGWriteFunc
-//
-
-static void PNGWriteFunc(png_structp png_ptr, png_bytep data, png_size_t length)
-{
-    pngWriteData = (byte*)Mem_Realloc(pngWriteData, pngWritePos + length, hb_static);
-    memcpy(pngWriteData + pngWritePos, data, length);
-    pngWritePos += length;
 }
 
 //

@@ -110,10 +110,13 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
     
     // could potentially slip through solid walls so extend the top and bottom edges of
     // the wall to prevent this
-    if(!(face->BottomEdge()->flags & EGF_TOPSTEP || face->TopEdge()->flags & EGF_BOTTOMSTEP))
+    if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
     {
         points[0].z -= actorHeight;
         points[1].z -= actorHeight;
+    }
+    if(!(face->TopEdge()->flags & EGF_BOTTOMSTEP))
+    {
         points[2].z += actorHeight;
         points[3].z += actorHeight;
     }
@@ -675,7 +678,6 @@ bool kexCModel::MoveActor(kexActor *actor)
     actorRadius = actor->Radius();
     actorHeight = actor->Height();
     moveDir = actor->Velocity();
-    kexVec3::ToAxis(&forwardDir, NULL, NULL, moveDir.ToYaw(), 0, 0);
     start = actor->Origin();
 
     moves = 0;
@@ -684,6 +686,8 @@ bool kexCModel::MoveActor(kexActor *actor)
 
     for(int i = 0; i < CONTACT_COUNT; ++i)
     {
+        kexVec3::ToAxis(&forwardDir, NULL, NULL, moveDir.ToYaw(), 0, 0);
+        
         fraction = 1;
         end = start + moveDir;
         interceptVector = end;
