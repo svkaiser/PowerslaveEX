@@ -91,7 +91,7 @@ void kexRenderView::SetupMatrices(void)
     kexQuat qyaw(yaw, kexVec3::vecUp);
     kexQuat qpitch(-kexMath::Deg2Rad(90) + pitch, kexVec3::vecRight);
     
-    rotation = qyaw * (qpitch * qroll);
+    rotation = (qyaw * qroll) * (qpitch * qroll);
     
     // setup model view matrix
     modelView = kexMatrix(rotation);
