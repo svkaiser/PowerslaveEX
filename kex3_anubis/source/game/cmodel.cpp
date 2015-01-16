@@ -69,7 +69,25 @@ void kexCModel::Reset(void)
 }
 
 //
+// kexCModel::CheckEdgeSide
+//
+// Utilizes pluecker coordinates to determine what side of the specified edge the
+// ray is set on. Returns true if the ray is over the edge. Assumes edges are
+// always in clockwise order
+//
+
+bool kexCModel::CheckEdgeSide(mapEdge_t *edge, const kexVec3 &dir, const float heightAdjust)
+{
+    kexPluecker r;
+    r.SetRay(start + kexVec3(0, 0, heightAdjust), dir);
+    
+    return (r.InnerProduct(edge->p) > 0);
+}
+
+//
 // kexCModel::PointInsideFace
+//
+// Determines if the point is within the boundaries of the face polygon
 //
 
 bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const float extent)
@@ -89,6 +107,16 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
     points[1] = vertices[vstart+2].origin; // bottom
     points[2] = vertices[vstart+1].origin; // top
     points[3] = vertices[vstart+0].origin; // top
+    
+    // could potentially slip through solid walls so extend the top and bottom edges of
+    // the wall to prevent this
+    if(!(face->BottomEdge()->flags & EGF_TOPSTEP || face->TopEdge()->flags & EGF_BOTTOMSTEP))
+    {
+        points[0].z -= actorHeight;
+        points[1].z -= actorHeight;
+        points[2].z += actorHeight;
+        points[3].z += actorHeight;
+    }
 
     // adjust origin so it lies exactly on the plane
     org = origin - (face->plane.Normal() * PointOnFaceSide(origin, face));
@@ -151,6 +179,8 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
 //
 // kexCModel::TraceFacePlane
 //
+// Performs a simple intersection test on the face polygon
+//
 
 bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float extent2)
 {
@@ -184,8 +214,21 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
 
     if(!PointInsideFace(hit, face, extent2))
     {
-        // intersect point not on the face
-        return false;
+        if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
+        {
+            // intersect point not on the face
+            return false;
+        }
+        else
+        {
+            // check to see if there's enough headroom to go under this face
+            if(CheckEdgeSide(face->BottomEdge(), moveDir, actorHeight) &&
+               CheckEdgeSide(face->BottomEdge(), forwardDir, actorHeight))
+            {
+                // didn't contact the face
+                return false;
+            }
+        }
     }
 
     fraction = frac;
@@ -197,6 +240,8 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
 
 //
 // kexCModel::TraceFaceVertex
+//
+// Performs a intersection test on a 2D-circle
 //
 
 bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
@@ -261,13 +306,39 @@ bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
 //
 // kexCModel::CollideFace
 //
+// Performs a collision test between a moving actor and a face
+// polygon and edges. Can also check for collision between the
+// end points of the face
+//
 
 bool kexCModel::CollideFace(mapFace_t *face)
 {
+    // if this face can be stepped over, then ignore it
+    if(face->TopEdge()->flags & EGF_BOTTOMSTEP)
+    {
+        if(CheckEdgeSide(face->TopEdge(), forwardDir, moveActor->StepHeight()))
+        {
+            // walk over this face
+            return false;
+        }
+    }
+    
+    // check to see if there's enough headroom to go under this face
+    if(face->BottomEdge()->flags & EGF_TOPSTEP)
+    {
+        if(CheckEdgeSide(face->BottomEdge(), forwardDir, actorHeight))
+        {
+            // we're under the bottom edge of this face, so skip
+            return false;
+        }
+    }
+    
     // try colliding with the end points of the face segment
     if(PointOnFaceSide(start, face) >= 0)
     {
         kexVec3 points[4];
+        float zf = start.z + moveActor->StepHeight();
+        float zc = start.z + actorHeight;
         int vstart = face->vertexStart;
         
         points[0] = vertices[vstart+3].origin; // bottom
@@ -277,46 +348,43 @@ bool kexCModel::CollideFace(mapFace_t *face)
         
         float rSq = (actorRadius * actorRadius);
         
-        if((points[3].z >= start.z || points[2].z >= start.z) &&
-           (points[0].z <= start.z || points[1].z <= start.z))
+        // compute barycentric coordinates
+        kexVec2 Q = end.ToVec2();
+        kexVec2 A = points[3].ToVec2();
+        kexVec2 B = points[2].ToVec2();
+        kexVec2 e = B - A;
+        
+        float u = e.Dot(B - Q);
+        float v = e.Dot(Q - A);
+        
+        // left side
+        if(v <= 0 && (points[3].z >= zf && points[0].z <= zc))
         {
-            kexVec2 Q = end.ToVec2();
-            kexVec2 A = points[3].ToVec2();
-            kexVec2 B = points[2].ToVec2();
-            kexVec2 e = B - A;
+            kexVec2 P = A;
+            kexVec2 d = Q - P;
+            float dd = d.UnitSq();
             
-            float u = e.Dot(B - Q);
-            float v = e.Dot(Q - A);
-            
-            // left side
-            if(v <= 0)
+            if(dd > rSq)
             {
-                kexVec2 P = A;
-                kexVec2 d = Q - P;
-                float dd = d.UnitSq();
-                
-                if(dd > rSq)
-                {
-                    return false;
-                }
-                
-                return TraceFaceVertex(face, P);
+                return false;
             }
             
-            // right side
-            if(u <= 0)
+            return TraceFaceVertex(face, P);
+        }
+        
+        // right side
+        if(u <= 0 && (points[2].z >= zf && points[1].z <= zc))
+        {
+            kexVec2 P = B;
+            kexVec2 d = Q - P;
+            float dd = d.UnitSq();
+            
+            if(dd > rSq)
             {
-                kexVec2 P = B;
-                kexVec2 d = Q - P;
-                float dd = d.UnitSq();
-                
-                if(dd > rSq)
-                {
-                    return false;
-                }
-                
-                return TraceFaceVertex(face, P);
+                return false;
             }
+            
+            return TraceFaceVertex(face, P);
         }
     }
     
@@ -559,8 +627,6 @@ void kexCModel::GetSurroundingSectors(void)
 {
     mapSector_t *s;
     float floorz, diff;
-    
-    RecursiveFindSectors(moveActor->Sector());
 
     // see if any of the sectors can be stepped into
     for(unsigned int i = 0; i < sectorList.CurrentLength(); ++i)
@@ -611,9 +677,10 @@ bool kexCModel::MoveActor(kexActor *actor)
     moveDir = actor->Velocity();
     kexVec3::ToAxis(&forwardDir, NULL, NULL, moveDir.ToYaw(), 0, 0);
     start = actor->Origin();
-    end = start + moveDir;
 
     moves = 0;
+    r = actorRadius*2;
+    h = actorHeight*2;
 
     for(int i = 0; i < CONTACT_COUNT; ++i)
     {
@@ -623,9 +690,6 @@ bool kexCModel::MoveActor(kexActor *actor)
 
         contactNormal.Clear();
         contactFace = NULL;
-
-        r = actorRadius*2;
-        h = actorHeight*2;
 
         actorBounds.min.Set(-r, -r, -h);
         actorBounds.max.Set( r,  r,  h);

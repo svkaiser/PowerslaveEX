@@ -61,12 +61,19 @@ typedef enum
     FF_UNDERWATER   = BIT(14),
 } faceFlags_t;
 
+typedef enum
+{
+    EGF_TOPSTEP     = BIT(0),
+    EGF_BOTTOMSTEP  = BIT(1)
+} edgeFlags_t;
+
 typedef struct
 {
     kexVec3         *v1;
     kexVec3         *v2;
     kexPluecker     p;
-} mapSegment_t;
+    unsigned int    flags;
+} mapEdge_t;
 
 typedef struct
 {
@@ -83,7 +90,15 @@ typedef struct
     kexBBox         bounds;
     int             validcount;
     int             sectorOwner;
-    mapSegment_t    segments[4];
+    mapEdge_t       edges[4];
+    
+    mapEdge_t       *BottomEdge(void) { return &edges[2]; }
+    mapEdge_t       *TopEdge(void) { return &edges[0]; }
+    mapEdge_t       *RightEdge(void) { return &edges[1]; }
+    mapEdge_t       *LeftEdge(void) { return &edges[3]; }
+    
+    float           RightEdgeHeight(void) { return edges[1].v1->z - edges[1].v2->z; }
+    float           LeftEdgeHeight(void) { return edges[3].v2->z - edges[3].v1->z; }
 } mapFace_t;
 
 typedef struct
@@ -162,6 +177,7 @@ public:
 private:
     void                    BuildAreaNodes(void);
     void                    BuildSectorBounds(void);
+    void                    SetupEdges(void);
     void                    SpawnMapActor(mapActor_t *mapActor);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);

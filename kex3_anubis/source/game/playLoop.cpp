@@ -127,61 +127,21 @@ void kexPlayLoop::Draw(void)
                 
                 if(face->polyStart == -1 || face->polyEnd == -1)
                 {
-                    if(j <= end)
-                    {
-                        kexVec3 bv1 = *face->segments[2].v1;
-                        kexVec3 bv2 = *face->segments[2].v2;
-                        kexVec3 tv1 = *face->segments[0].v1;
-                        kexVec3 tv2 = *face->segments[0].v2;
-                        
-                        for(int k = start; k < end+1; ++k)
-                        {
-                            if(k == j)
-                            {
-                                continue;
-                            }
-                            
-                            mapFace_t *f = &world->Faces()[k];
-                            
-                            if(f->polyStart == -1 || f->polyEnd == -1)
-                            {
-                                continue;
-                            }
-                            
-                            kexVec3 pv1 = *f->segments[0].v1;
-                            kexVec3 pv2 = *f->segments[0].v2;
-                            kexVec3 pv3 = *f->segments[2].v1;
-                            kexVec3 pv4 = *f->segments[2].v2;
-                            
-                            if(!(pv1.z > bv1.z || pv2.z > bv2.z))
-                            {
-                                if(bv1.z - pv1.z <= 0 && bv2.z - pv2.z <= 0)
-                                {
-                                    for(int s = 0; s < 4; ++s)
-                                    {
-                                        kexRender::cUtils->DrawLine(*f->segments[s].v1, *f->segments[s].v2, 255, 0, 0);
-                                    }
-                                }
-                            }
-                            
-                            if(!(pv3.z < tv1.z || pv4.z < tv2.z))
-                            {
-                                if(pv3.z - tv1.z <= 0 && pv4.z - tv2.z <= 0)
-                                {
-                                    for(int s = 0; s < 4; ++s)
-                                    {
-                                        kexRender::cUtils->DrawLine(*f->segments[s].v1, *f->segments[s].v2, 0, 255, 0);
-                                    }
-                                }
-                            }
-                        }
-                    }
                     continue;
                 }
                 
                 if(!kex::cGame->RenderView()->Frustum().TestBoundingBox(face->bounds))
                 {
                     continue;
+                }
+                
+                if(face->BottomEdge()->flags & EGF_TOPSTEP)
+                {
+                    kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
+                }
+                if(face->TopEdge()->flags & EGF_BOTTOMSTEP)
+                {
+                    kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 255, 0, 0);
                 }
 
                 /*if(j <= end)

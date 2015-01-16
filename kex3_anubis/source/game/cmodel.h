@@ -47,6 +47,7 @@ public:
     const int               ValidCount(void) const { return validcount; }
 
 private:
+    bool                    CheckEdgeSide(mapEdge_t *edge, const kexVec3 &dir, const float heightAdjust);
     void                    GetSurroundingSectors(void);
     bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0);
     bool                    CollideFace(mapFace_t *face);

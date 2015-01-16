@@ -183,6 +183,7 @@ float kexAngle::Diff(const float f)
         }
     }
 
+    Clamp(an2);
     return an2;
 }
 

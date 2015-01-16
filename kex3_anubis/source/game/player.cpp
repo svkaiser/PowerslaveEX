@@ -153,6 +153,12 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         velocity.y += right.y * PMOVE_SPEED;
     }
 
+    if((origin.z + height) + velocity.z >= ceilingHeight)
+    {
+        origin.z = ceilingHeight - height;
+        velocity.z = -1;
+    }
+    
     if(origin.z + velocity.z <= floorHeight)
     {
         origin.z = floorHeight;
@@ -263,7 +269,7 @@ void kexPuppet::Spawn(void)
     kex::cGame->Player()->SetActor(this);
 
     radius      = 96;
-    height      = 96;
+    height      = 160;
     stepHeight  = 48;
     health      = 200;
 }

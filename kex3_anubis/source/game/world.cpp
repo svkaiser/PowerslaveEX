@@ -171,13 +171,15 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
         f->validcount   = -1;
         
         f->bounds.Clear();
+        kexAngle::Clamp(f->angle);
         
         for(int j = 0; j < 4; ++j)
         {
             f->bounds.AddPoint(vertices[f->vertexStart+j].origin);
-            f->segments[j].v1 = &vertices[f->vertexStart+j].origin;
-            f->segments[j].v2 = &vertices[f->vertexStart+((j+1)&3)].origin;
-            f->segments[j].p.SetLine(*f->segments[j].v1, *f->segments[j].v2);
+            f->edges[j].v1 = &vertices[f->vertexStart+j].origin;
+            f->edges[j].v2 = &vertices[f->vertexStart+((j+1)&3)].origin;
+            f->edges[j].p.SetLine(*f->edges[j].v1, *f->edges[j].v2);
+            f->edges[j].flags = 0;
         }
         
         f->plane.SetDistance(vertices[f->vertexStart].origin);
@@ -330,6 +332,61 @@ void kexWorld::BuildSectorBounds(void)
 }
 
 //
+// kexWorld::SetupEdges
+//
+
+void kexWorld::SetupEdges(void)
+{
+    for(unsigned int i = 0; i < numSectors; ++i)
+    {
+        mapSector_t *sector = &sectors[i];
+        int start = sector->faceStart;
+        int end = sector->faceEnd;
+        
+        for(int j = start; j < end+1; ++j)
+        {
+            mapFace_t *face = &faces[j];
+            
+            if(face->polyStart == -1 || face->polyEnd == -1)
+            {
+                mapEdge_t *l1 = face->LeftEdge();
+                mapEdge_t *r1 = face->RightEdge();
+                
+                for(int k = start; k < end+1; ++k)
+                {
+                    if(k == j)
+                    {
+                        continue;
+                    }
+                    
+                    mapFace_t *f = &faces[k];
+                    
+                    if(f->polyStart == -1 || f->polyEnd == -1)
+                    {
+                        continue;
+                    }
+                    
+                    mapEdge_t *l2 = f->LeftEdge();
+                    mapEdge_t *r2 = f->RightEdge();
+                    
+                    if(kexMath::Fabs(r2->v2->z - r1->v1->z) <= 0.001f &&
+                       kexMath::Fabs(l2->v1->z - l1->v2->z) <= 0.001f)
+                    {
+                        f->BottomEdge()->flags |= EGF_TOPSTEP;
+                    }
+                    
+                    if(kexMath::Fabs(r2->v1->z - r1->v2->z) <= 0.001f &&
+                       kexMath::Fabs(l2->v2->z - l1->v1->z) <= 0.001f)
+                    {
+                        f->TopEdge()->flags |= EGF_BOTTOMSTEP;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
 // kexWorld::SpawnMapActor
 //
 
@@ -398,6 +455,7 @@ bool kexWorld::LoadMap(const char *mapname)
     
     BuildAreaNodes();
     BuildSectorBounds();
+    SetupEdges();
     
     ReadActors(mapfile, numActors);
     kex::cGame->CModel()->Setup(this);
