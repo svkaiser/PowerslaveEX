@@ -453,6 +453,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="tools"
+				>
+				<File
+					RelativePath="..\source\tools\spriteMake.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -708,6 +716,14 @@
 				</File>
 				<File
 					RelativePath="..\source\game\world.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="tools"
+				>
+				<File
+					RelativePath="..\source\tools\spriteMake.h"
 					>
 				</File>
 			</Filter>
