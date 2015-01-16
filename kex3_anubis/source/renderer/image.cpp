@@ -792,11 +792,7 @@ void kexImage::WritePNG(kexBinFile &binFile)
 {
     png_structp     png_ptr;
     png_infop       info_ptr;
-    uint            i = 0;
-    byte            *pic;
-    byte            **row_pointers;
-    uint            j = 0;
-    uint            row;
+    int             i = 0;
 
     // setup png pointer
     png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, 0, 0, 0);
@@ -815,8 +811,7 @@ void kexImage::WritePNG(kexBinFile &binFile)
         return;
     }
 
-    // setup custom data writing procedure
-    png_set_write_fn(png_ptr, NULL, PNGWriteFunc, NULL);
+    png_init_io(png_ptr, binFile.Handle());
 
     // setup image
     png_set_IHDR(
@@ -833,45 +828,14 @@ void kexImage::WritePNG(kexBinFile &binFile)
     // add png info to data
     png_write_info(png_ptr, info_ptr);
 
-    row_pointers = (byte**)Mem_AllocStatic(sizeof(byte*)*height);
-    row = PNGRowSize(width, colorMode == TCR_RGB ? 24 : 32);
-    pic = data;
-
-    for(i = 0; i < (uint)height; i++)
+    for(i = height-1; i >= 0; --i)
     {
-        row_pointers[i] = NULL;
-        row_pointers[i] = (byte*)Mem_AllocStatic(row);
-
-        for(j = 0; j < row; j++)
-        {
-            row_pointers[i][j] = *pic;
-            pic++;
-        }
+        png_write_row(png_ptr, data + i * (width * (colorMode == TCR_RGB ? 3 : 4)));
     }
-
-    png_write_image(png_ptr, row_pointers);
 
     // cleanup
     png_write_end(png_ptr, info_ptr);
-
-    for(i = 0; i < (uint)height; i++)
-    {
-        Mem_Free(row_pointers[i]);
-    }
-
-    Mem_Free(row_pointers);
-    row_pointers = NULL;
-
     png_destroy_write_struct(&png_ptr, &info_ptr);
-
-    for(i = 0; i < pngWritePos; i++)
-    {
-        binFile.Write8(pngWriteData[i]);
-    }
-
-    Mem_Free(pngWriteData);
-    pngWriteData = NULL;
-    pngWritePos = 0;
 }
 
 //
@@ -882,49 +846,33 @@ void kexImage::Blit(kexImage &image, const int x, const int y)
 {
     const int bits = colorMode == TCR_RGB ? 3 : 4;
     const int srcBits = image.colorMode == TCR_RGB ? 3 : 4;
-    const int srcW = image.OriginalWidth();
-    const int srcH = image.OriginalHeight();
-    int delta = y;
-
-    if(width > height)
-    {
-        delta = y * (width / height);
-    }
-    else if(height > width)
-    {
-        delta =  y / (height / width);
-    }
+    const int srcW = image.Width();
+    const int srcH = image.Height();
 
     for(int h = 0; h < srcH; h++)
     {
-        int delta_y = (height * delta) * srcBits;
-        int delta_x = ((width * bits) * ((srcH - h) - 1)) + (x * bits);
-
-        byte *pdst = &data[delta_y + delta_x];
-        byte *psrc = &image.data[(image.Width() * srcBits) * h];
-
-        assert((pdst - data) < (width * height) * bits);
+        byte *pdst = data;
+        byte *psrc = image.data;
 
         for(int w = 0; w < srcW; w++)
         {
-            *pdst++ = *psrc++;
-            *pdst++ = *psrc++;
-            *pdst++ = *psrc++;
+            int dstdelta = ((width * (h + y)) + (w + x)) * bits;
+            int srcdelta = (((srcW * h) + w) * srcBits);
+
+            pdst[dstdelta + 0] = psrc[srcdelta + 0];
+            pdst[dstdelta + 1] = psrc[srcdelta + 1];
+            pdst[dstdelta + 2] = psrc[srcdelta + 2];
 
             if(colorMode == TCR_RGBA)
             {
                 if(image.colorMode == TCR_RGB)
                 {
-                    *pdst++ = 255;
+                    pdst[dstdelta + 3] = 0xff;
                 }
                 else
                 {
-                    *pdst++ = *psrc++;
+                    pdst[dstdelta + 3] = psrc[srcdelta + 3];
                 }
-            }
-            else if(image.colorMode == TCR_RGBA)
-            {
-                psrc++;
             }
         }
     }
