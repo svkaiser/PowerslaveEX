@@ -87,14 +87,16 @@ void kexRenderView::SetupMatrices(void)
     projectionView.SetViewProjection(kex::cSystem->VideoRatio(), fov, Z_NEAR, -1);
 
     // setup rotation quaternion
-    kexQuat qroll(roll, kexVec3::vecForward);
     kexQuat qyaw(yaw, kexVec3::vecUp);
     kexQuat qpitch(-kexMath::Deg2Rad(90) + pitch, kexVec3::vecRight);
     
-    rotation = (qyaw * qroll) * (qpitch * qroll);
+    rotation = qyaw * qpitch;
     
     // setup model view matrix
     modelView = kexMatrix(rotation);
+    
+    modelView = kexMatrix(roll * kexMath::Sin(yaw), 1) * modelView;
+    modelView.RotateY(roll * kexMath::Cos(yaw));
 
     // scale to aspect ratio
     modelView.Scale(1, 1, 1.07142f);
