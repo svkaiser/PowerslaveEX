@@ -139,11 +139,11 @@ void kexPlayLoop::Draw(void)
                 
                 if(face->BottomEdge()->flags & EGF_TOPSTEP)
                 {
-                    kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
+                    //kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
                 }
                 if(face->TopEdge()->flags & EGF_BOTTOMSTEP)
                 {
-                    kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 255, 0, 0);
+                    //kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 255, 0, 0);
                 }
 
                 /*if(j <= end)

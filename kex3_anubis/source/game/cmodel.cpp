@@ -71,17 +71,13 @@ void kexCModel::Reset(void)
 //
 // kexCModel::CheckEdgeSide
 //
-// Utilizes pluecker coordinates to determine what side of the specified edge the
-// ray is set on. Returns true if the ray is over the edge. Assumes edges are
-// always in clockwise order
-//
 
 bool kexCModel::CheckEdgeSide(mapEdge_t *edge, const kexVec3 &dir, const float heightAdjust)
 {
-    kexPluecker r;
-    r.SetRay(start + kexVec3(0, 0, heightAdjust), dir);
-    
-    return (r.InnerProduct(edge->p) > 0);
+    kexVec3 ldir = *edge->v2 - *edge->v1;
+    kexVec3 pdir = (end + kexVec3(0, 0, heightAdjust)) - *edge->v1;
+
+    return (pdir.Cross(ldir).Dot(dir) < 0);
 }
 
 //
@@ -110,18 +106,15 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
     
     // could potentially slip through solid walls so extend the top and bottom edges of
     // the wall to prevent this
-    if(&sectors[face->sectorOwner] == moveActor->Sector())
+    if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
     {
-        if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
-        {
-            points[0].z -= actorHeight;
-            points[1].z -= actorHeight;
-        }
-        if(!(face->TopEdge()->flags & EGF_BOTTOMSTEP))
-        {
-            points[2].z += actorHeight;
-            points[3].z += actorHeight;
-        }
+        points[0].z -= moveActor->StepHeight();
+        points[1].z -= moveActor->StepHeight();
+    }
+    if(!(face->TopEdge()->flags & EGF_BOTTOMSTEP))
+    {
+        points[2].z += moveActor->StepHeight();
+        points[3].z += moveActor->StepHeight();
     }
 
     // adjust origin so it lies exactly on the plane
@@ -228,8 +221,8 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
         else
         {
             // check to see if there's enough headroom to go under this face
-            if(CheckEdgeSide(face->BottomEdge(), moveDir, actorHeight) &&
-               CheckEdgeSide(face->BottomEdge(), forwardDir, actorHeight))
+            if(CheckEdgeSide(face->BottomEdge(), face->plane.Normal(), actorHeight) ||
+               CheckEdgeSide(face->TopEdge(), face->plane.Normal(), moveActor->StepHeight()))
             {
                 // didn't contact the face
                 return false;
@@ -322,7 +315,7 @@ bool kexCModel::CollideFace(mapFace_t *face)
     // if this face can be stepped over, then ignore it
     if(face->TopEdge()->flags & EGF_BOTTOMSTEP)
     {
-        if(CheckEdgeSide(face->TopEdge(), forwardDir, moveActor->StepHeight()))
+        if(CheckEdgeSide(face->TopEdge(), face->plane.Normal(), moveActor->StepHeight()))
         {
             // walk over this face
             return false;
@@ -332,7 +325,7 @@ bool kexCModel::CollideFace(mapFace_t *face)
     // check to see if there's enough headroom to go under this face
     if(face->BottomEdge()->flags & EGF_TOPSTEP)
     {
-        if(CheckEdgeSide(face->BottomEdge(), forwardDir, actorHeight))
+        if(CheckEdgeSide(face->BottomEdge(), face->plane.Normal(), actorHeight))
         {
             // we're under the bottom edge of this face, so skip
             return false;
@@ -504,7 +497,18 @@ bool kexCModel::PointInsideSector(const kexVec3 &origin, mapSector_t *sector,
 
 float kexCModel::GetFloorHeight(const kexVec3 &origin, mapSector_t *sector)
 {
-    return origin.z - PointOnFaceSide(origin, &faces[sector->faceEnd+2]);
+    mapVertex_t *v;
+    mapFace_t *face;
+    float dist;
+
+    face = &faces[sector->faceEnd+2];
+    v = &vertices[face->vertexStart];
+
+    dist = kexVec3::Dot(kexVec3(v->origin.x - origin.x,
+                                v->origin.y - origin.y,
+                                v->origin.z), face->plane.Normal()) / face->plane.c;
+
+    return dist;
 }
 
 //
@@ -513,7 +517,18 @@ float kexCModel::GetFloorHeight(const kexVec3 &origin, mapSector_t *sector)
 
 float kexCModel::GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector)
 {
-    return PointOnFaceSide(origin, &faces[sector->faceEnd+1]) + origin.z;
+    mapVertex_t *v;
+    mapFace_t *face;
+    float dist;
+
+    face = &faces[sector->faceEnd+1];
+    v = &vertices[face->vertexStart];
+
+    dist = kexVec3::Dot(kexVec3(v->origin.x - origin.x,
+                                v->origin.y - origin.y,
+                                v->origin.z), face->plane.Normal()) / face->plane.c;
+
+    return dist;
 }
 
 //
@@ -609,7 +624,7 @@ void kexCModel::CheckSurroundingSectors(void)
             // determine the closest floor that can be stepped on
             if(diff <= 0 && diff >= -moveActor->StepHeight())
             {
-                if(floorz > maxfloorz)
+                if(floorz > maxfloorz && moveActor->Velocity().z <= 0)
                 {
                     best = s;
                     maxfloorz = floorz;
@@ -777,10 +792,7 @@ void kexCModel::AdvanceActorToSector(void)
         end.z = ceilingz - actorHeight;
     }
     
-    if(PointInsideSector(end, sector))
-    {
-        sector->flags |= SF_DEBUG;
-    }
+    sector->flags |= SF_DEBUG;
     
     // update actor info
     moveActor->FloorHeight() = floorz;
