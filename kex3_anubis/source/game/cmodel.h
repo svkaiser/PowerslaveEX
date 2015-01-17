@@ -47,7 +47,8 @@ private:
     void                    CollideActorWithWorld(void);
     void                    AdvanceActorToSector(void);
     void                    SlideAgainstFaces(mapSector_t *sector);
-    bool                    CheckEdgeSide(mapEdge_t *edge, const kexVec3 &dir, const float heightAdjust);
+    bool                    CheckEdgeSide(mapEdge_t *edge, mapFace_t *face,
+                                          const float heightAdjust, const float extent = 0);
     void                    CheckSurroundingSectors(void);
     bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0);
     bool                    CollideFace(mapFace_t *face);

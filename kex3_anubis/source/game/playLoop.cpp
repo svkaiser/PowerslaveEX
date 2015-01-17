@@ -86,7 +86,7 @@ void kexPlayLoop::Draw(void)
     kex::cGame->RenderView()->Roll() = p->Actor()->Roll();
     kex::cGame->RenderView()->Origin() = p->Actor()->Origin();
     
-    kex::cGame->RenderView()->Origin().z += 64 + p->Bob() + p->LandTime();
+    kex::cGame->RenderView()->Origin().z += 64 + p->Bob() + p->LandTime() + p->StepViewZ();
     
     kex::cGame->RenderView()->Setup();
     kexRender::cBackend->LoadProjectionMatrix(kex::cGame->RenderView()->ProjectionView());
@@ -105,6 +105,11 @@ void kexPlayLoop::Draw(void)
     
     if(world->MapLoaded())
     {
+        for(kexActor *actor = kex::cGame->Actors().Next(); actor != NULL; actor = actor->Link().Next())
+        {
+            kexRender::cUtils->DrawOrigin(actor->Origin().x, actor->Origin().y, actor->Origin().z, 16);
+        }
+
         for(unsigned int i = 0; i < world->NumSectors(); ++i)
         {
             mapSector_t *sector = &world->Sectors()[i];

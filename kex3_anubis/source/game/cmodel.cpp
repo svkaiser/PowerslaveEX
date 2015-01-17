@@ -21,6 +21,7 @@
 #include "actor.h"
 #include "cmodel.h"
 #include "playLoop.h"
+#include "player.h"
 
 #define CONTACT_COUNT   64
 
@@ -71,13 +72,36 @@ void kexCModel::Reset(void)
 //
 // kexCModel::CheckEdgeSide
 //
+// Returns true if the end point of the trace
+// is away from the edge (assumes the edge is in
+// clockwise order)
+//
 
-bool kexCModel::CheckEdgeSide(mapEdge_t *edge, const kexVec3 &dir, const float heightAdjust)
+bool kexCModel::CheckEdgeSide(mapEdge_t *edge, mapFace_t *face,
+                              const float heightAdjust, const float extent)
 {
     kexVec3 ldir = *edge->v2 - *edge->v1;
     kexVec3 pdir = (end + kexVec3(0, 0, heightAdjust)) - *edge->v1;
+    kexVec3 cp = pdir.Cross(ldir);
 
-    return (pdir.Cross(ldir).Dot(dir) < 0);
+    if(cp.Dot(face->plane.Normal()) < 0)
+    {
+        float rSq;
+
+        if(extent == 0)
+        {
+            return true;
+        }
+
+        rSq = extent * extent;
+
+        if(cp.UnitSq() > (ldir.UnitSq() * rSq))
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 //
@@ -221,8 +245,8 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
         else
         {
             // check to see if there's enough headroom to go under this face
-            if(CheckEdgeSide(face->BottomEdge(), face->plane.Normal(), actorHeight) ||
-               CheckEdgeSide(face->TopEdge(), face->plane.Normal(), moveActor->StepHeight()))
+            if(CheckEdgeSide(face->BottomEdge(), face, actorHeight) ||
+               CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
             {
                 // didn't contact the face
                 return false;
@@ -315,7 +339,7 @@ bool kexCModel::CollideFace(mapFace_t *face)
     // if this face can be stepped over, then ignore it
     if(face->TopEdge()->flags & EGF_BOTTOMSTEP)
     {
-        if(CheckEdgeSide(face->TopEdge(), face->plane.Normal(), moveActor->StepHeight()))
+        if(CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
         {
             // walk over this face
             return false;
@@ -325,7 +349,7 @@ bool kexCModel::CollideFace(mapFace_t *face)
     // check to see if there's enough headroom to go under this face
     if(face->BottomEdge()->flags & EGF_TOPSTEP)
     {
-        if(CheckEdgeSide(face->BottomEdge(), face->plane.Normal(), actorHeight))
+        if(CheckEdgeSide(face->BottomEdge(), face, actorHeight))
         {
             // we're under the bottom edge of this face, so skip
             return false;
@@ -613,33 +637,37 @@ void kexCModel::CheckSurroundingSectors(void)
             continue;
         }
         
-        // is the actor crossing this portal face?
-        if(PointOnFaceSide(end, face, actorRadius) < 0)
+        if(!CheckEdgeSide(face->LeftEdge(), face, 0, actorRadius) &&
+           !CheckEdgeSide(face->RightEdge(), face, 0, actorRadius))
         {
-            ceilingz = GetCeilingHeight(end, s);
-            floorz = GetFloorHeight(end, s);
-            
-            diff = end.z - floorz;
-            
-            // determine the closest floor that can be stepped on
-            if(diff <= 0 && diff >= -moveActor->StepHeight())
+            // is the actor crossing this portal face?
+            if(PointOnFaceSide(end, face, actorRadius) < 0)
             {
-                if(floorz > maxfloorz && moveActor->Velocity().z <= 0)
+                ceilingz = GetCeilingHeight(end, s);
+                floorz = GetFloorHeight(end, s);
+                
+                diff = end.z - floorz;
+                
+                // determine the closest floor that can be stepped on
+                if(diff <= 0 && diff >= -moveActor->StepHeight())
                 {
-                    best = s;
-                    maxfloorz = floorz;
-                    bChangeFloorHeight = true;
+                    if(floorz > maxfloorz && moveActor->Velocity().z <= 0)
+                    {
+                        best = s;
+                        maxfloorz = floorz;
+                        bChangeFloorHeight = true;
+                    }
                 }
-            }
-            
-            // determine the ceiling closest to the actor
-            if(ceilingz > floorz && ceilingz - end.z < actorHeight)
-            {
-                if(ceilingz > maxceilingz)
+                
+                // determine the ceiling closest to the actor
+                if(ceilingz > floorz && ceilingz - end.z < actorHeight)
                 {
-                    best = s;
-                    maxceilingz = ceilingz;
-                    bChangeCeilingHeight = true;
+                    if(ceilingz > maxceilingz)
+                    {
+                        best = s;
+                        maxceilingz = ceilingz;
+                        bChangeCeilingHeight = true;
+                    }
                 }
             }
         }
@@ -649,6 +677,16 @@ void kexCModel::CheckSurroundingSectors(void)
     {
         if(PointInsideSector(end, best, -actorRadius, moveActor->StepHeight()))
         {
+            if(moveActor->InstanceOf(&kexPuppet::info))
+            {
+                float step = (end.z - maxfloorz);
+
+                if(step < 0)
+                {
+                    static_cast<kexPuppet*>(moveActor)->Owner()->StepViewZ() = step;
+                }
+            }
+
             // step up into this sector
             end.z = maxfloorz;
             moveActor->FloorHeight() = maxfloorz;

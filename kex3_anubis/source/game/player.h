@@ -149,6 +149,7 @@ public:
 
     const float             Bob(void) const { return bob; }
     float                   &LandTime(void) { return landTime; }
+    float                   &StepViewZ(void) { return stepViewZ; }
 
 private:
     kexPlayerCmd            cmd;
@@ -159,6 +160,7 @@ private:
     float                   bobTime;
     float                   bobSpeed;
     float                   landTime;
+    float                   stepViewZ;
     kexVec2                 weaponBob;
 
     byte                    currentWeapon;

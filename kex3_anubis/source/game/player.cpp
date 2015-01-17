@@ -319,6 +319,7 @@ void kexPlayer::Reset(void)
     bobSpeed = 0;
     weaponBob.Clear();
     landTime = 0;
+    stepViewZ = 0;
 
     currentWeapon = PW_MACHETE;
     weaponState = -1;
@@ -364,6 +365,15 @@ void kexPlayer::Tick(void)
         if(landTime >= 0)
         {
             landTime = 0;
+        }
+    }
+
+    if(stepViewZ < 0)
+    {
+        stepViewZ += 8;
+        if(stepViewZ >= 0)
+        {
+            stepViewZ = 0;
         }
     }
 }
