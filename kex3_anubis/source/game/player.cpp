@@ -27,7 +27,7 @@
 #define PMOVE_SPEED             0.976f
 #define PMOVE_SPEED_JUMP        10.25f
 #define PMOVE_SPEED_FALL        0.75f
-#define PMOVE_MAX_JUMPTICKS     12
+#define PMOVE_MAX_JUMPTICKS     13
 
 const int16_t kexPlayer::maxHealth = 200;
 const int kexPlayer::maxAmmo[NUMPLAYERWEAPONS] =
@@ -252,7 +252,7 @@ void kexPuppet::Tick(void)
 {
     kexPlayerCmd *cmd = &owner->Cmd();
     
-    roll = (0 - roll) * 0.25f + roll;
+    roll = (0 - roll) * 0.35f + roll;
     
     if(playerFlags & (PF_NOCLIP|PF_FLY))
     {
@@ -347,7 +347,7 @@ void kexPlayer::Tick(void)
 {
     if(cmd.Buttons() & (BC_FORWARD|BC_BACKWARD|BC_STRAFELEFT|BC_STRAFERIGHT))
     {
-        bobSpeed = (0.1475f - bobSpeed) * 0.35f + bobSpeed;
+        bobSpeed = (0.148f - bobSpeed) * 0.35f + bobSpeed;
         bob = kexMath::Sin(bobTime) * 7.0f;
         bobTime += bobSpeed;
     }
