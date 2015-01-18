@@ -244,6 +244,12 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
         }
         else
         {
+            if(CheckEdgeSide(face->LeftEdge(), face, 0, extent1) ||
+               CheckEdgeSide(face->RightEdge(), face, 0, extent1))
+            {
+                return false;
+            }
+
             // check to see if there's enough headroom to go under this face
             if(CheckEdgeSide(face->BottomEdge(), face, actorHeight) ||
                CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
