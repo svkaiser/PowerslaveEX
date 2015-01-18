@@ -208,11 +208,7 @@ void kexImage::Alloc(void)
     int size = width * height * (colorMode == TCR_RGBA ? 4 : 3);
 
     data = new byte[size];
-
-    if(width != origwidth || height != origheight)
-    {
-        memset(data, 0, size);
-    }
+    memset(data, 0, size);
 }
 
 //
