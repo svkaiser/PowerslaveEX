@@ -253,11 +253,19 @@ void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
             while((ent = readdir(dir)) != NULL)
             {
                 idx = kexStr::IndexOf(ent->d_name, ".");
-                if(idx == -1 || idx == 0)
+
+                if(ent->d_name[0] == '.')
                 {
                     continue;
                 }
-                list.Push(kexStr(ent->d_name));
+
+                if(idx == -1 || idx == 0)
+                {
+                    GetMatchingFiles(list, (kexStr(search) + ent->d_name + "/").c_str());
+                    continue;
+                }
+
+                list.Push(kexStr(search) + ent->d_name);
             }
             closedir(dir);
         }
@@ -271,12 +279,18 @@ void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
 
             if(strstr(file->name, search))
             {
-                if(kexStr::IndexOf(file->name, ".") == -1)
+                if(file->name[0] == '.')
                 {
                     continue;
                 }
 
-                list.Push(kexStr(file->name));
+                if(kexStr::IndexOf(file->name, ".") == -1)
+                {
+                    GetMatchingFiles(list, (kexStr(search) + file->name + "/").c_str());
+                    continue;
+                }
+
+                list.Push(kexStr(search) + file->name);
             }
         }
     }
