@@ -94,8 +94,8 @@ void kexSystemSDL::Shutdown(void)
 
     WriteConfigFile();
     
-    kexRender::cBackend->Shutdown();
     kex::cSession->Shutdown();
+    kexRender::cBackend->Shutdown();
     kex::cPakFiles->Shutdown();
     kex::cCvars->Shutdown();
     kex::cSound->Shutdown();
