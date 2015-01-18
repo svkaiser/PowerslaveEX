@@ -370,7 +370,7 @@ void kexImage::LoadFromTGA(byte *input)
                 Alloc();
                 rover += (3 * tga.cmap_len);
 
-                for(r = tga.height - 1; r >= 0; r--)
+                for(r = tga.height-1; r >= 0; r--)
                 {
                     data_r = data + r * width * 3;
                     for(c = 0; c < tga.width; c++)
@@ -387,7 +387,7 @@ void kexImage::LoadFromTGA(byte *input)
                 Alloc();
                 rover += (4 * tga.cmap_len);
 
-                for(r = tga.height - 1; r >= 0; r--)
+                for(r = tga.height-1; r >= 0; r--)
                 {
                     data_r = data + r * width * 4;
                     for(c = 0; c < tga.width; c++)
@@ -429,7 +429,7 @@ void kexImage::LoadFromTGA(byte *input)
 
         Alloc();
 
-        for(r = tga.height - 1; r >= 0; r--)
+        for(r = tga.height-1; r >= 0; r--)
         {
             data_r = data + r * width * bitStride;
             for(c = 0; c < tga.width; c++)
@@ -840,7 +840,7 @@ void kexImage::Blit(kexImage &image, const int x, const int y)
         for(int w = 0; w < srcW; w++)
         {
             int dstdelta = ((width * (h + y)) + (w + x)) * bits;
-            int srcdelta = (((srcW * h) + w) * srcBits);
+            int srcdelta = ((srcW * h) + w) * srcBits;
 
             pdst[dstdelta + 0] = psrc[srcdelta + 0];
             pdst[dstdelta + 1] = psrc[srcdelta + 1];
@@ -854,7 +854,10 @@ void kexImage::Blit(kexImage &image, const int x, const int y)
                 }
                 else
                 {
-                    pdst[dstdelta + 3] = psrc[srcdelta + 3];
+                    if(psrc[srcdelta + 3])
+                    {
+                        pdst[dstdelta + 3] = psrc[srcdelta + 3];
+                    }
                 }
             }
         }
