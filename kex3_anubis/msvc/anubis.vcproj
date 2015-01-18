@@ -445,6 +445,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\sprite.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\titlescreen.cpp"
 					>
 				</File>
@@ -708,6 +712,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\session.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\sprite.h"
 					>
 				</File>
 				<File
