@@ -53,6 +53,7 @@ private:
     bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0);
     bool                    CollideFace(mapFace_t *face);
     bool                    TraceFaceVertex(mapFace_t *face, const kexVec2 &point);
+    void                    PushFromRadialBounds(const kexVec2 &point, const float radius = 0);
     void                    RecursiveFindSectors(mapSector_t *sector);
 
     mapVertex_t             *vertices;
@@ -66,6 +67,7 @@ private:
     kexActor                *moveActor;
     mapFace_t               *contactFace;
     kexVec3                 interceptVector;
+    kexVec3                 pushDir;
     kexVec3                 start;
     kexVec3                 end;
     kexVec3                 moveDir;

@@ -333,6 +333,31 @@ bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
 }
 
 //
+// kexCModel::PushFromRadialBounds
+//
+
+void kexCModel::PushFromRadialBounds(const kexVec2 &point, const float radius)
+{
+    kexVec2 org;
+    float dist;
+    float r;
+    
+    org = end;
+    dist = org.DistanceSq(point);
+    r = actorRadius + 1.024f;
+
+    if(dist <= (r * r))
+    {
+        kexVec2 dir = (org - point).Normalize();
+
+        dist = kexMath::Sqrt(dist);
+        pushDir.x = dir.x * ((r - dist) + 0.1f);
+        pushDir.y = dir.y * ((r - dist) + 0.1f);
+        pushDir.z = 0;
+    }
+}
+
+//
 // kexCModel::CollideFace
 //
 // Performs a collision test between a moving actor and a face
@@ -398,7 +423,8 @@ bool kexCModel::CollideFace(mapFace_t *face)
                 return false;
             }
             
-            return TraceFaceVertex(face, P);
+            PushFromRadialBounds(P);
+            return false;
         }
         
         // right side
@@ -413,7 +439,8 @@ bool kexCModel::CollideFace(mapFace_t *face)
                 return false;
             }
             
-            return TraceFaceVertex(face, P);
+            PushFromRadialBounds(P);
+            return false;
         }
     }
     
@@ -723,6 +750,7 @@ void kexCModel::CollideActorWithWorld(void)
     kexVec3 contactNormals[CONTACT_COUNT];
     
     moves = 0;
+    pushDir.Clear();
     r = actorRadius*2;
     h = actorHeight*2;
     
@@ -732,6 +760,8 @@ void kexCModel::CollideActorWithWorld(void)
         
         fraction = 1;
         end = start + moveDir;
+        end += pushDir;
+        pushDir.Clear();
         interceptVector = end;
         
         contactNormal.Clear();
@@ -756,6 +786,11 @@ void kexCModel::CollideActorWithWorld(void)
         
         if(fraction >= 1)
         {
+            if(pushDir.UnitSq() > 0)
+            {
+                continue;
+            }
+
             // went the entire distance
             break;
         }
