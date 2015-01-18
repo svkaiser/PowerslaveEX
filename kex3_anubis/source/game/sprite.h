@@ -15,6 +15,14 @@
 #ifndef __SPRITE_H__
 #define __SPRITE_H__
 
+typedef struct
+{
+    int spriteID;
+    atlas_t atlas;
+    float u[2];
+    float v[2];
+} spriteInfo_t;
+
 class kexSprite
 {
     friend class kexSpriteManager;
@@ -22,20 +30,15 @@ public:
     kexSprite(void);
 
     void                            Delete(void);
+    void                            LoadTexture(void);
 
-    atlas_t                         *Atlas(const int idx) { return &infoList[idx].atlas; }
     kexTexture                      *Texture(void) { return texture; }
     kexStr                          &TextureFile(void) { return textureFile; }
+    kexArray<spriteInfo_t>          &InfoList(void) { return infoList; }
 
 private:
     kexTexture                      *texture;
     kexStr                          textureFile;
-
-    typedef struct
-    {
-        int spriteID;
-        atlas_t atlas;
-    } spriteInfo_t;
 
     kexArray<spriteInfo_t>          infoList;
 };
@@ -48,10 +51,13 @@ public:
 
     void                            Init(void);
     void                            Shutdown(void);
-    kexSprite                       *Load(const char *name);
+
+    kexSprite                       *Get(const char *name) { return spriteList.Find(name); }
 
 private:
     kexHashList<kexSprite>          spriteList;
+
+    kexSprite                       *Load(const char *name);
 };
 
 #endif

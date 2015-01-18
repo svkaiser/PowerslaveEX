@@ -44,6 +44,21 @@ void kexSprite::Delete(void)
     infoList.Empty();
 }
 
+//
+// kexSprite::LoadTexture
+//
+
+void kexSprite::LoadTexture(void)
+{
+    if(texture == NULL)
+    {
+        if(!(texture = kexRender::cTextures->Cache(textureFile.c_str(), TC_CLAMP, TF_NEAREST)))
+        {
+            texture = kexRender::cTextures->defaultTexture;
+        }
+    }
+}
+
 //-----------------------------------------------------------------------------
 //
 // kexSpriteManager
@@ -109,18 +124,30 @@ void kexSpriteManager::Shutdown(void)
 kexSprite *kexSpriteManager::Load(const char *name)
 {
     kexSprite *sprite;
+    kexStr str1, str2, sprName;
+    const char *sprDirectory = "sprites/";
+    int len;
+    int sep;
 
-    if(!(sprite = spriteList.Find(name)))
+    len = strlen(sprDirectory);
+
+    str1 = name;
+    sep = str1.IndexOf(sprDirectory);
+    str2 = str1.Substr(sep + len, str1.Length() - (sep + len));
+    sep = str2.IndexOf("_sprite.\0");
+
+    sprName = str2.Substr(0, sep);
+
+    if(!(sprite = spriteList.Find(sprName.c_str())))
     {
         kexLexer *lexer;
 
         if(!(lexer = kex::cParser->Open(name)))
         {
-            kex::cSystem->Warning("kexSpriteManager::Load: %s not found\n", name);
             return NULL;
         }
 
-        sprite = spriteList.Add(name);
+        sprite = spriteList.Add(sprName.c_str());
 
         while(lexer->CheckState())
         {
@@ -134,18 +161,34 @@ kexSprite *kexSpriteManager::Load(const char *name)
             if(lexer->Matches("texture"))
             {
                 lexer->GetString();
-                sprite->texture = kexRender::cTextures->defaultTexture;
+                sprite->texture = NULL;
                 sprite->textureFile = lexer->StringToken();
+
+                sprite->LoadTexture();
             }
             else if(lexer->Matches("sprite"))
             {
-                kexSprite::spriteInfo_t info;
+                spriteInfo_t info;
 
                 info.spriteID = lexer->GetNumber();
                 info.atlas.x = lexer->GetNumber();
                 info.atlas.y = lexer->GetNumber();
                 info.atlas.w = lexer->GetNumber();
                 info.atlas.h = lexer->GetNumber();
+
+                if(sprite->texture)
+                {
+                    float w = (float)sprite->texture->Width();
+                    float h = (float)sprite->texture->Height();
+
+                    assert(w != 0);
+                    assert(h != 0);
+
+                    info.u[0] = (float)info.atlas.x / w;
+                    info.v[0] = (float)info.atlas.y / h;
+                    info.u[1] = (float)info.atlas.w / w + info.u[0];
+                    info.v[1] = (float)info.atlas.h / h + info.v[0];
+                }
 
                 sprite->infoList.Push(info);
             }

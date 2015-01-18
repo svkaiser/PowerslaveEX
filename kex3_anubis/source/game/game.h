@@ -26,6 +26,7 @@ class kexPlayer;
 class kexRenderView;
 class kexCModel;
 class kexSpriteManager;
+class kexSpriteAnimManager;
 
 typedef enum
 {
@@ -95,6 +96,8 @@ public:
     kexPlayer               *Player(void) { return player; }
     kexLinklist<kexActor>   &Actors(void) { return actors; }
     kexCModel               *CModel(void) { return cmodel; }
+    kexSpriteManager        *SpriteManager(void) { return spriteManager; }
+    kexSpriteAnimManager    *SpriteAnimManager(void) { return spriteAnimManager; }
 
     kexObject               *ConstructObject(const char *className);
     kexActor                *SpawnActor(const int type, const float x, const float y, const float z,
@@ -115,6 +118,7 @@ private:
     kexWorld                *world;
     kexCModel               *cmodel;
     kexSpriteManager        *spriteManager;
+    kexSpriteAnimManager    *spriteAnimManager;
 
     int                     ticks;
     gameState_t             gameState;

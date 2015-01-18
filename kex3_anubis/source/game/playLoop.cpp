@@ -23,6 +23,7 @@
 #include "player.h"
 #include "playLoop.h"
 #include "cmodel.h"
+#include "spriteAnim.h"
 
 //
 // kexPlayLoop::kexPlayLoop

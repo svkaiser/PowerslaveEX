@@ -27,6 +27,7 @@
 #include "cmodel.h"
 #include "player.h"
 #include "sprite.h"
+#include "spriteAnim.h"
 
 static kexGame gameLocal;
 kexGame *kex::cGame = &gameLocal;
@@ -130,14 +131,15 @@ kexGame::kexGame(void)
     this->pendingGameState  = GS_NONE;
     this->gameLoop          = &this->gameLoopStub;
 
-    this->titleScreen   = new kexTitleScreen;
-    this->playLoop      = new kexPlayLoop;
-    this->translation   = new kexTranslation;
-    this->world         = new kexWorld;
-    this->player        = new kexPlayer;
-    this->renderView    = new kexRenderView;
-    this->cmodel        = new kexCModel;
-    this->spriteManager = new kexSpriteManager;
+    this->titleScreen       = new kexTitleScreen;
+    this->playLoop          = new kexPlayLoop;
+    this->translation       = new kexTranslation;
+    this->world             = new kexWorld;
+    this->player            = new kexPlayer;
+    this->renderView        = new kexRenderView;
+    this->cmodel            = new kexCModel;
+    this->spriteManager     = new kexSpriteManager;
+    this->spriteAnimManager = new kexSpriteAnimManager;
 }
 
 //
@@ -154,6 +156,7 @@ kexGame::~kexGame(void)
     delete renderView;
     delete cmodel;
     delete spriteManager;
+    delete spriteAnimManager;
 }
 
 //
@@ -186,6 +189,7 @@ void kexGame::Start(void)
     titleScreen->Init();
     translation->Init();
     spriteManager->Init();
+    spriteAnimManager->Init();
 
     player->Reset();
     pendingGameState = GS_TITLE;
