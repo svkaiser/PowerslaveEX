@@ -414,12 +414,16 @@ void kexConsole::ParseKey(int c)
 
     if(c >= KKEY_SPACE && c <= KKEY_z)
     {
+        bool bCaps;
+
         if(typeStrPos >= CON_INPUT_LENGTH)
         {
             return;
         }
 
-        if(bShiftDown ^ bCapsDown)
+        bCaps = (bCapsDown && (c >= KKEY_a && c <= KKEY_z));
+
+        if(bShiftDown ^ bCaps)
         {
             c = shiftcode[c];
         }
