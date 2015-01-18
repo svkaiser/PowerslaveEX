@@ -19,6 +19,8 @@ template<class type>
 class kexHashList
 {
 public:
+    kexHashList(void);
+
     type                *Add(const char *tname, kexHeapBlock &hb = hb_static);
     type                *Find(const char *tname) const;
     type                *GetData(const int index);
@@ -35,6 +37,15 @@ public:
     hashKey_t           *hashlist[MAX_HASH];
     hashKey_t           *rover;
 };
+
+//
+// kexHashList::kexHashList
+//
+template<class type>
+kexHashList<type>::kexHashList(void)
+{
+    memset(hashlist, 0, sizeof(hashKey_t*) * MAX_HASH);
+}
 
 //
 // kexHashList::Add
