@@ -23,7 +23,8 @@ public:
     kexSpriteMake(void);
     ~kexSpriteMake(void);
 
-    void                    GenerateSprite(const char *path, const char *outname);
+    void                    GenerateSprite(const char *path, const char *outname,
+                                           const int texWidth, const int texHeight);
 
 private:
     void                    GenerateSpriteInfo(const char *outname);

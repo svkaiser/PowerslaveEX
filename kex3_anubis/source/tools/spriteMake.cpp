@@ -27,13 +27,25 @@ static kexSpriteMake spriteMakeLocal;
 
 COMMAND(makesprite)
 {
+    int tw = 0, th = 0;
+
     if(kex::cCommands->GetArgc() < 3)
     {
         return;
     }
 
+    if(kex::cCommands->GetArgc() >= 4)
+    {
+        tw = kexMath::RoundPowerOfTwo(atoi(kex::cCommands->GetArgv(3)));
+    }
+    if(kex::cCommands->GetArgc() >= 5)
+    {
+        th = kexMath::RoundPowerOfTwo(atoi(kex::cCommands->GetArgv(4)));
+    }
+
     spriteMakeLocal.GenerateSprite(kex::cCommands->GetArgv(1),
-                                   kex::cCommands->GetArgv(2));
+                                   kex::cCommands->GetArgv(2),
+                                   tw, th);
 }
 
 //
@@ -59,7 +71,8 @@ kexSpriteMake::~kexSpriteMake(void)
 // kexSpriteMake::GenerateSprite
 //
 
-void kexSpriteMake::GenerateSprite(const char *path, const char *outname)
+void kexSpriteMake::GenerateSprite(const char *path, const char *outname,
+                                   const int texWidth, const int texHeight)
 {
     extern kexCvar cvarBasePath;
     kexArray<kexImage*> images;
@@ -89,6 +102,15 @@ void kexSpriteMake::GenerateSprite(const char *path, const char *outname)
 
     // determine the size of the sprite atlas texture
     SumTextureSize(images);
+
+    if(texWidth > 0)
+    {
+        textureWidth = texWidth;
+    }
+    if(texHeight > 0)
+    {
+        textureHeight = texHeight;
+    }
 
     // determine where each sprite will be placed in the atlas
     SetBlocks(images, &outWidth, &outHeight);
@@ -140,7 +162,7 @@ void kexSpriteMake::GenerateSpriteInfo(const char *outname)
                                  spriteInfos[i].w, spriteInfos[i].h);
     }
 
-    kexStr outFile = kexStr::Format("%s/%s.kspr", cvarBasePath.GetValue(), outname);
+    kexStr outFile = kexStr::Format("%s/%s.txt", cvarBasePath.GetValue(), outname);
     outFile.NormalizeSlashes();
 
     buffer.WriteToFile(outFile.c_str());
