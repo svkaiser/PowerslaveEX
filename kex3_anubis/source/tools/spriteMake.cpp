@@ -158,11 +158,11 @@ void kexSpriteMake::GenerateSpriteInfo(const char *outname)
     {
         buffer += kexStr::Format("// %s\n", spriteFiles[i].c_str());
         buffer += kexStr::Format("sprite %i %i %i %i %i\n\n", i,
-                                 spriteInfos[i].x, textureHeight - (spriteInfos[i].h + spriteInfos[i].y),
+                                 spriteInfos[i].x, spriteInfos[i].y,
                                  spriteInfos[i].w, spriteInfos[i].h);
     }
 
-    kexStr outFile = kexStr::Format("%s/%s.txt", cvarBasePath.GetValue(), outname);
+    kexStr outFile = kexStr::Format("%s/%s_sprite.txt", cvarBasePath.GetValue(), outname);
     outFile.NormalizeSlashes();
 
     buffer.WriteToFile(outFile.c_str());
@@ -186,7 +186,7 @@ void kexSpriteMake::FindImages(const char *path, kexArray<kexImage*> &images)
         }
 
         kexImage *sprite = new kexImage;
-        sprite->LoadFromFile(kexStr::Format("%s%s", path, spriteFiles[i].c_str()));
+        sprite->LoadFromFile(spriteFiles[i].c_str());
 
         images.Push(sprite);
     }
@@ -306,8 +306,8 @@ void kexSpriteMake::SetBlocks(kexArray<kexImage*> &images, int *outWidth, int *o
 
         info.x = x;
         info.y = y;
-        info.w = image->Width();
-        info.h = image->Height();
+        info.w = image->OriginalWidth();
+        info.h = image->OriginalHeight();
 
         if(x + info.w > hiW) { hiW = x + info.w; }
         if(y + info.h > hiH) { hiH = y + info.h; }
