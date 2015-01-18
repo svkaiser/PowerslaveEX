@@ -28,6 +28,7 @@ public:
 
     void                Push(type o);
     void                Pop(void);
+    type                *Grow(void);
     void                Empty(void);
     void                Init(void);
     void                Resize(unsigned int size);
@@ -142,6 +143,16 @@ void kexArray<type>::Pop(void)
 
     Resize(length-1);
     aidx--;
+}
+
+//
+// kexArray::Grow
+//
+template<class type>
+type *kexArray<type>::Grow(void)
+{
+    Resize(length+1);
+    return &data[length-1];
 }
 
 //
