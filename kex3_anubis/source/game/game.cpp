@@ -26,6 +26,7 @@
 #include "world.h"
 #include "cmodel.h"
 #include "player.h"
+#include "sprite.h"
 
 static kexGame gameLocal;
 kexGame *kex::cGame = &gameLocal;
@@ -136,6 +137,7 @@ kexGame::kexGame(void)
     this->player        = new kexPlayer;
     this->renderView    = new kexRenderView;
     this->cmodel        = new kexCModel;
+    this->spriteManager = new kexSpriteManager;
 }
 
 //
@@ -151,6 +153,7 @@ kexGame::~kexGame(void)
     delete player;
     delete renderView;
     delete cmodel;
+    delete spriteManager;
 }
 
 //
@@ -182,6 +185,7 @@ void kexGame::Start(void)
 
     titleScreen->Init();
     translation->Init();
+    spriteManager->Init();
 
     player->Reset();
     pendingGameState = GS_TITLE;
@@ -194,6 +198,7 @@ void kexGame::Start(void)
 void kexGame::Shutdown(void)
 {
     world->UnloadMap();
+    spriteManager->Shutdown();
 }
 
 //

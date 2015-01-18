@@ -25,6 +25,7 @@ class kexWorld;
 class kexPlayer;
 class kexRenderView;
 class kexCModel;
+class kexSpriteManager;
 
 typedef enum
 {
@@ -113,6 +114,8 @@ private:
     kexTranslation          *translation;
     kexWorld                *world;
     kexCModel               *cmodel;
+    kexSpriteManager        *spriteManager;
+
     int                     ticks;
     gameState_t             gameState;
     gameState_t             pendingGameState;
