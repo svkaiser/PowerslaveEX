@@ -1,0 +1,41 @@
+texture "sprites/weapons/m60.png"
+
+// working\weapon3\sprite0177.tga
+sprite 0 0 0 64 64
+
+// working\weapon3\sprite0178.tga
+sprite 1 64 0 16 64
+
+// working\weapon3\sprite0179.tga
+sprite 2 80 0 64 13
+
+// working\weapon3\sprite0180.tga
+sprite 3 144 0 16 13
+
+// working\weapon3\sprite0181.tga
+sprite 4 160 0 64 64
+
+// working\weapon3\sprite0182.tga
+sprite 5 224 0 48 64
+
+// working\weapon3\sprite0183.tga
+sprite 6 272 0 64 12
+
+// working\weapon3\sprite0184.tga
+sprite 7 336 0 48 12
+
+// working\weapon3\sprite0185.tga
+sprite 8 384 0 64 64
+
+// working\weapon3\sprite0186.tga
+sprite 9 448 0 44 64
+
+// working\weapon3\sprite0187.tga
+sprite 10 272 12 64 15
+
+// working\weapon3\sprite0188.tga
+sprite 11 336 12 44 15
+
+// working\weapon3\sprite0189.tga
+sprite 12 492 0 16 16
+

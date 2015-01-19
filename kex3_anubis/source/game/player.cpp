@@ -17,10 +17,6 @@
 
 #include "kexlib.h"
 #include "game.h"
-#include "playLoop.h"
-#include "actor.h"
-#include "cmodel.h"
-#include "player.h"
 
 #define PMOVE_FRICTION          0.9375f
 #define PMOVE_MIN               0.125f
@@ -69,6 +65,7 @@ kexPuppet::~kexPuppet(void)
 void kexPuppet::GroundMove(kexPlayerCmd *cmd)
 {
     kexVec3 forward, right;
+    mapSector_t *oldSector;
     
     yaw += cmd->Angles()[0];
     pitch += cmd->Angles()[1];
@@ -81,6 +78,14 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
 
     velocity.x *= PMOVE_FRICTION;
     velocity.y *= PMOVE_FRICTION;
+
+    if(cmd->Buttons() & BC_ATTACK)
+    {
+        if(owner->WeaponState() == WS_IDLE)
+        {
+            owner->WeaponState() = WS_FIRE;
+        }
+    }
 
     if(cmd->Buttons() & BC_JUMP)
     {
@@ -171,10 +176,22 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         jumpTicks = 0;
         playerFlags &= ~PF_JUMPING;
     }
+
+    oldSector = sector;
     
-    if(!kex::cGame->CModel()->MoveActor(this))
+    if(!kexGame::cLocal->CModel()->MoveActor(this))
     {
         velocity.Clear();
+    }
+
+    if(oldSector == sector && velocity.z <= 0 && sector->floorFace->plane.IsFacing(velocity.ToYaw()))
+    {
+        float diff = origin.z - floorHeight;
+
+        if(diff > 0 && diff <= 8)
+        {
+            origin.z = floorHeight;
+        }
     }
 }
 
@@ -232,7 +249,7 @@ void kexPuppet::FlyMove(kexPlayerCmd *cmd)
     
     if(!(playerFlags & PF_NOCLIP))
     {
-        if(!kex::cGame->CModel()->MoveActor(this))
+        if(!kexGame::cLocal->CModel()->MoveActor(this))
         {
             velocity.Clear();
         }
@@ -270,8 +287,8 @@ void kexPuppet::Tick(void)
 
 void kexPuppet::Spawn(void)
 {
-    owner = kex::cGame->Player();
-    kex::cGame->Player()->SetActor(this);
+    owner = kexGame::cLocal->Player();
+    kexGame::cLocal->Player()->SetActor(this);
 
     radius      = 96;
     height      = 160;
@@ -291,7 +308,6 @@ void kexPuppet::Spawn(void)
 
 kexPlayer::kexPlayer(void)
 {
-    Reset();
 }
 
 //
@@ -311,18 +327,21 @@ void kexPlayer::Reset(void)
     health = maxHealth;
     ankahs = 0;
     actor = NULL;
+    weaponAnim = NULL;
 
     cmd.Reset();
 
     bob = 0;
     bobTime = 0;
     bobSpeed = 0;
-    weaponBob.Clear();
+    weaponBob_x = 0;
+    weaponBob_y = 0;
+    weaponBobTime = 0;
     landTime = 0;
     stepViewZ = 0;
 
-    currentWeapon = PW_MACHETE;
-    weaponState = -1;
+    currentWeapon = PW_M60;
+    weaponState = WS_RAISE;
     weaponFrame = 0;
     weaponTicks = 0;
 
@@ -338,25 +357,68 @@ void kexPlayer::Reset(void)
     keys = 0;
     transmitter = 0;
     teamDolls = 0;
+
+    weaponAnim = kexGame::cLocal->WeaponInfo(currentWeapon)->raise;
 }
 
 //
-// kexPlayer::Tick
+// kexPlayer::UpdateWeaponBob
 //
 
-void kexPlayer::Tick(void)
+void kexPlayer::UpdateWeaponBob(void)
 {
-    if(cmd.Buttons() & (BC_FORWARD|BC_BACKWARD|BC_STRAFELEFT|BC_STRAFERIGHT))
+    float movement = actor->Velocity().ToVec2().Unit();
+
+    if(movement > 0 && actor->Origin().z <= actor->FloorHeight())
     {
-        bobSpeed = (0.148f - bobSpeed) * 0.35f + bobSpeed;
-        bob = kexMath::Sin(bobTime) * 7.0f;
-        bobTime += bobSpeed;
+        float t = (float)weaponBobTime;
+        float x, y;
+
+        movement = movement / 16.0f;
+        kexMath::Clamp(movement, 0, 1);
+
+        x = kexMath::Sin(t * 0.075f) * (16*movement);
+        y = kexMath::Fabs(kexMath::Sin(t * 0.075f) * (16*movement));
+
+        weaponBob_x = (x - weaponBob_x) * 0.25f + weaponBob_x;
+        weaponBob_y = (y - weaponBob_y) * 0.25f + weaponBob_y;
+
+        weaponBobTime++;
     }
     else
     {
-        bobSpeed = 0;
+        weaponBobTime = 0;
+        weaponBob_x = (0 - weaponBob_x) * 0.25f + weaponBob_x;
+        weaponBob_y = (0 - weaponBob_y) * 0.25f + weaponBob_y;
+    }
+}
+
+//
+// kexPlayer::UpdateViewBob
+//
+
+void kexPlayer::UpdateViewBob(void)
+{
+    if(actor->Origin().z > actor->FloorHeight())
+    {
+        bob = 0;
         bobTime = 0;
-        bob = (0 - bob) * 0.1f + bob;
+        bobSpeed = 0;
+    }
+    else
+    {
+        if(cmd.Buttons() & (BC_FORWARD|BC_BACKWARD|BC_STRAFELEFT|BC_STRAFERIGHT))
+        {
+            bobSpeed = (0.148f - bobSpeed) * 0.35f + bobSpeed;
+            bob = kexMath::Sin(bobTime) * 7.0f;
+            bobTime += bobSpeed;
+        }
+        else
+        {
+            bobSpeed = 0;
+            bobTime = 0;
+            bob = (0 - bob) * 0.1f + bob;
+        }
     }
 
     if(landTime < 0)
@@ -376,4 +438,63 @@ void kexPlayer::Tick(void)
             stepViewZ = 0;
         }
     }
+}
+
+//
+// kexPlayer::UpdateWeaponSprite
+//
+
+void kexPlayer::UpdateWeaponSprite(void)
+{
+    spriteFrame_t *frame;
+    const kexGameLocal::weaponInfo_t *weaponInfo;
+
+    if(weaponAnim == NULL)
+    {
+        return;
+    }
+
+    frame = &weaponAnim->frames[weaponFrame];
+
+    weaponTicks += (1.0f / (float)frame->delay) * 0.5f;
+    if(weaponTicks >= 1)
+    {
+        weaponTicks = 0;
+        
+        if(++weaponFrame >= (int16_t)weaponAnim->NumFrames())
+        {
+            weaponFrame = 0;
+        }
+    }
+
+    weaponInfo = kexGame::cLocal->WeaponInfo(currentWeapon);
+
+    if(frame->HasNextFrame())
+    {
+        weaponAnim = kexGame::cLocal->SpriteAnimManager()->Get(frame->nextFrame);
+        weaponFrame = 0;
+        weaponTicks = 0;
+
+        if(weaponAnim == weaponInfo->idle)
+        {
+            weaponState = WS_IDLE;
+        }
+    }
+
+    if(weaponState == WS_FIRE)
+    {
+        weaponAnim = weaponInfo->fire;
+        weaponState = WS_SPECIAL;
+    }
+}
+
+//
+// kexPlayer::Tick
+//
+
+void kexPlayer::Tick(void)
+{
+    UpdateViewBob();
+    UpdateWeaponBob();
+    UpdateWeaponSprite();
 }

@@ -1,0 +1,14 @@
+texture "sprites/weapons/pistol.png"
+
+// working\weapon2\sprite0178.tga
+sprite 0 0 0 56 64
+
+// working\weapon2\sprite0179.tga
+sprite 1 56 0 32 61
+
+// working\weapon2\sprite0180.tga
+sprite 2 88 0 52 64
+
+// working\weapon2\sprite0181.tga
+sprite 3 140 0 52 17
+

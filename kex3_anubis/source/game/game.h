@@ -16,17 +16,19 @@
 #define __GAME_H__
 
 #include "object.h"
+#include "actor.h"
+#include "world.h"
+#include "cmodel.h"
+#include "playLoop.h"
+#include "sprite.h"
+#include "spriteAnim.h"
+#include "player.h"
 
 class kexFont;
 class kexTitleScreen;
 class kexTranslation;
 class kexPlayLoop;
-class kexWorld;
-class kexPlayer;
 class kexRenderView;
-class kexCModel;
-class kexSpriteManager;
-class kexSpriteAnimManager;
 
 typedef enum
 {
@@ -53,28 +55,21 @@ typedef enum
     NUMGAMESTATES
 } gameState_t;
 
-class kexGameLoop
+//-----------------------------------------------------------------------------
+//
+// Local Game
+//
+//-----------------------------------------------------------------------------
+
+class kexGameLocal : public kexGameLoop
 {
 public:
-    virtual void        Init(void) {};
-    virtual void        Start(void) {};
-    virtual void        Stop(void) {};
-    virtual void        Draw(void) {};
-    virtual void        Tick(void) {};
-    virtual bool        ProcessInput(inputEvent_t *ev) { return false; }
-};
-
-class kexActor;
-
-class kexGame
-{
-public:
-    kexGame(void);
-    ~kexGame(void);
+    kexGameLocal(void);
+    ~kexGameLocal(void);
 
     void                    Init(void);
     void                    Start(void);
-    void                    Shutdown(void);
+    void                    Stop(void);
     void                    Tick(void);
     void                    Draw(void);
     bool                    ProcessInput(inputEvent_t *ev);
@@ -82,6 +77,19 @@ public:
     void                    RemoveActor(kexActor *actor);
     void                    RemoveAllActors(void);
     void                    ChangeMap(const char *name);
+
+    typedef struct
+    {
+        playerWeapons_t     type;
+        float               offsetX;
+        float               offsetY;
+        spriteAnim_t        *raise;
+        spriteAnim_t        *lower;
+        spriteAnim_t        *idle;
+        spriteAnim_t        *fire;
+        spriteAnim_t        *charge;
+        spriteAnim_t        *special;
+    } weaponInfo_t;
     
     kexTitleScreen          *TitleScreen(void) { return titleScreen; }
     kexPlayLoop             *PlayLoop(void) { return playLoop; }
@@ -98,6 +106,7 @@ public:
     kexCModel               *CModel(void) { return cmodel; }
     kexSpriteManager        *SpriteManager(void) { return spriteManager; }
     kexSpriteAnimManager    *SpriteAnimManager(void) { return spriteAnimManager; }
+    const weaponInfo_t      *WeaponInfo(const playerWeapons_t id) const { return &weaponInfo[id]; }
 
     kexObject               *ConstructObject(const char *className);
     kexActor                *SpawnActor(const int type, const float x, const float y, const float z,
@@ -130,6 +139,19 @@ private:
     kexActor                *actorRover;
     kexLinklist<kexActor>   actors;
     kexStr                  pendingMap;
+    weaponInfo_t            weaponInfo[NUMPLAYERWEAPONS];
+};
+
+//-----------------------------------------------------------------------------
+//
+// Public Game Class
+//
+//-----------------------------------------------------------------------------
+
+class kexGame
+{
+public:
+    static kexGameLocal     *cLocal;
 };
 
 #endif

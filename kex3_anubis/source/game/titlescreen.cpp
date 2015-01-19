@@ -75,12 +75,12 @@ static menuGroup_t *titleMenu[NUMTITLESCREENITEMS];
 
 MENUITEM(NewGame, "New Game", -100, 128, 1,
 {
-    if(kex::cGame->TitleScreen()->SelectedItem() != TSI_NEWGAME)
+    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_NEWGAME)
     {
         return;
     }
     
-    kex::cGame->TitleScreen()->FadeOut(TSS_NEWGAME);
+    kexGame::cLocal->TitleScreen()->FadeOut(TSS_NEWGAME);
 },
 {
     titleMenu[TSI_NEWGAME]->item.LerpTo(-100);
@@ -99,7 +99,7 @@ MENUITEM(LoadGame, "Load Game", 420, 146, 1,
 {
 },
 {
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -110,7 +110,7 @@ MENUITEM(LoadGame, "Load Game", 420, 146, 1,
 
 MENUITEM(Options, "Options", 420, 164, 1,
 {
-    if(kex::cGame->TitleScreen()->SelectedItem() != TSI_OPTIONS)
+    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_OPTIONS)
     {
         return;
     }
@@ -154,7 +154,7 @@ MENUITEM(Gameplay, "Gameplay", -100, 96, 1,
 {
 },
 {
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -167,7 +167,7 @@ MENUITEM(Keyboard, "Keyboard", 420, 114, 1,
 {
 },
 {
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -180,7 +180,7 @@ MENUITEM(Mouse, "Mouse", -100, 132, 1,
 {
 },
 {
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -193,7 +193,7 @@ MENUITEM(Gamepad, "Gamepad", 420, 150, 1,
 {
 },
 {
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -206,7 +206,7 @@ MENUITEM(Graphics, "Graphics", -100, 168, 1,
 {
 },
 {
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -217,7 +217,7 @@ MENUITEM(Graphics, "Graphics", -100, 168, 1,
 
 MENUITEM(Audio, "Audio", 420, 186, 1,
 {
-    if(kex::cGame->TitleScreen()->SelectedItem() != TSI_AUDIO)
+    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_AUDIO)
     {
         return;
     }
@@ -246,7 +246,7 @@ MENUITEM(Audio, "Audio", 420, 186, 1,
 
 MENUITEM(OptionExit, "Exit", -100, 204, 1,
 {
-    if(kex::cGame->TitleScreen()->SelectedItem() != TSI_EXIT_OPTIONS)
+    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_EXIT_OPTIONS)
     {
         return;
     }
@@ -256,7 +256,7 @@ MENUITEM(OptionExit, "Exit", -100, 204, 1,
     titleMenu[TSI_OPTIONS]->item.LerpTo(160, 164);
     titleMenu[TSI_OPTIONS]->item.Toggle(true);
     titleMenu[TSI_QUIT]->item.LerpTo(160);
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 },
 {
     titleMenu[TSI_GAMEPLAY]->item.LerpTo(-100);
@@ -278,7 +278,7 @@ MENUITEM(SoundVolume, "Sound FX Volume", -100, 146, 1,
 {
 },
 {
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -291,7 +291,7 @@ MENUITEM(MusicVolume, "Music Volume", 420, 164, 1,
 {
 },
 {
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -302,7 +302,7 @@ MENUITEM(MusicVolume, "Music Volume", 420, 164, 1,
 
 MENUITEM(AudioExit, "Exit", 420, 182, 1,
 {
-    if(kex::cGame->TitleScreen()->SelectedItem() != TSI_EXIT_AUDIO)
+    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_EXIT_AUDIO)
     {
         return;
     }
@@ -316,7 +316,7 @@ MENUITEM(AudioExit, "Exit", 420, 182, 1,
     titleMenu[TSI_AUDIO]->item.LerpTo(160, 186);
     titleMenu[TSI_AUDIO]->item.Toggle(true);
     titleMenu[TSI_EXIT_OPTIONS]->item.LerpTo(160);
-    kex::cGame->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 },
 {
     titleMenu[TSI_SFXVOLUME]->item.LerpTo(-100);
@@ -439,8 +439,8 @@ void kexTitleScreen::FadeDone(void)
         titleMenu[TSI_QUIT]->item.LerpTo(160);
         break;
     case TSS_NEWGAME:
-        //kex::cGame->SetGameState(GS_LEVEL);
-        kex::cGame->ChangeMap("maps/TOMB.MAP");
+        //kexGame::cLocal->SetGameState(GS_LEVEL);
+        kexGame::cLocal->ChangeMap("maps/TOMB.MAP");
         break;
     default:
         break;

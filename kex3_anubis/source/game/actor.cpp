@@ -16,9 +16,7 @@
 //
 
 #include "kexlib.h"
-#include "actor.h"
-#include "world.h"
-#include "cmodel.h"
+#include "game.h"
 
 DECLARE_CLASS(kexActor, kexGameObject)
 
@@ -73,11 +71,11 @@ bool kexActor::FindSector(const kexVec3 &pos)
 {
     mapSector_t *sector;
     
-    for(unsigned int i = 0; i < kex::cGame->World()->NumSectors(); ++i)
+    for(unsigned int i = 0; i < kexGame::cLocal->World()->NumSectors(); ++i)
     {
-        sector = &kex::cGame->World()->Sectors()[i];
+        sector = &kexGame::cLocal->World()->Sectors()[i];
         
-        if(kex::cGame->CModel()->PointWithinSectorEdges(pos, sector))
+        if(kexGame::cLocal->CModel()->PointWithinSectorEdges(pos, sector))
         {
             SetSector(sector);
             return true;
@@ -105,7 +103,7 @@ void kexActor::LinkArea(void)
     box.min += origin;
     box.max += origin;
 
-    areaLink.Link(kex::cGame->World()->AreaNodes(), box);
+    areaLink.Link(kexGame::cLocal->World()->AreaNodes(), box);
 }
 
 //

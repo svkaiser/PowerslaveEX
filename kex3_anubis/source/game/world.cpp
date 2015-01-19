@@ -17,10 +17,6 @@
 
 #include "kexlib.h"
 #include "game.h"
-#include "world.h"
-#include "cmodel.h"
-#include "actor.h"
-#include "player.h"
 #include "renderMain.h"
 
 kexHeapBlock kexWorld::hb_world("world", false, NULL, NULL);
@@ -132,6 +128,8 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].floorSlope       = mapfile.ReadFloat();
         sectors[i].flags            = mapfile.Read16();
         sectors[i].validcount       = -1;
+        sectors[i].ceilingFace      = &faces[sectors[i].faceEnd+1];
+        sectors[i].floorFace        = &faces[sectors[i].faceEnd+2];
         
         for(int j = sectors[i].faceStart; j < sectors[i].faceEnd+3; ++j)
         {
@@ -406,7 +404,7 @@ void kexWorld::SpawnMapActor(mapActor_t *mapActor)
     z   = (float)mapActor->z;
     an  = kexMath::Deg2Rad((360 - (float)mapActor->angle) + 90);
     
-    actor = kex::cGame->SpawnActor(mapActor->type, x, y, z, an);
+    actor = kexGame::cLocal->SpawnActor(mapActor->type, x, y, z, an);
     actor->SetMapActor(mapActor);
     actor->SetSector(&sectors[mapActor->sector]);
 }
@@ -458,7 +456,7 @@ bool kexWorld::LoadMap(const char *mapname)
     SetupEdges();
     
     ReadActors(mapfile, numActors);
-    kex::cGame->CModel()->Setup(this);
+    kexGame::cLocal->CModel()->Setup(this);
 
     bMapLoaded = true;
     return true;
@@ -472,11 +470,11 @@ void kexWorld::UnloadMap(void)
 {
     if(bMapLoaded)
     {
-        kex::cGame->RemoveAllActors();
-        kex::cGame->Player()->ClearActor();
+        kexGame::cLocal->RemoveAllActors();
+        kexGame::cLocal->Player()->ClearActor();
         areaNodes.Destroy();
     }
     
-    kex::cGame->CModel()->Reset();
+    kexGame::cLocal->CModel()->Reset();
     Mem_Purge(hb_world);
 }

@@ -1,0 +1,38 @@
+texture "sprites/effects/gib_death.png"
+
+// working\gib_death\sprite0053.tga
+sprite 0 0 0 24 23
+
+// working\gib_death\sprite0054.tga
+sprite 1 24 0 64 64
+
+// working\gib_death\sprite0055.tga
+sprite 2 88 0 28 64
+
+// working\gib_death\sprite0056.tga
+sprite 3 116 0 64 50
+
+// working\gib_death\sprite0057.tga
+sprite 4 180 0 28 50
+
+// working\gib_death\sprite0058.tga
+sprite 5 116 50 64 64
+
+// working\gib_death\sprite0059.tga
+sprite 6 208 0 36 64
+
+// working\gib_death\sprite0060.tga
+sprite 7 0 64 64 49
+
+// working\gib_death\sprite0061.tga
+sprite 8 64 64 36 49
+
+// working\gib_death\sprite0062.tga
+sprite 9 180 64 44 64
+
+// working\gib_death\sprite0063.tga
+sprite 10 0 113 44 30
+
+// working\gib_death\sprite0064.tga
+sprite 11 44 113 56 58
+

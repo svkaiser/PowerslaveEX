@@ -17,11 +17,6 @@
 
 #include "kexlib.h"
 #include "game.h"
-#include "world.h"
-#include "actor.h"
-#include "cmodel.h"
-#include "playLoop.h"
-#include "player.h"
 
 #define CONTACT_COUNT   64
 
@@ -349,10 +344,10 @@ void kexCModel::PushFromRadialBounds(const kexVec2 &point, const float radius)
     if(dist <= (r * r))
     {
         kexVec2 dir = (org - point).Normalize();
+        dist = (r - kexMath::Sqrt(dist)) + 0.1f;
 
-        dist = kexMath::Sqrt(dist);
-        pushDir.x = dir.x * ((r - dist) + 0.1f);
-        pushDir.y = dir.y * ((r - dist) + 0.1f);
+        pushDir.x = dir.x * dist;
+        pushDir.y = dir.y * dist;
         pushDir.z = 0;
     }
 }
@@ -458,7 +453,7 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
     {
         mapFace_t *face = &faces[i];
 
-        if(face->flags & FF_PORTAL || !(face->flags & FF_SOLID))
+        if(!(face->flags & FF_SOLID) || face->flags & FF_WATER)
         {
             continue;
         }

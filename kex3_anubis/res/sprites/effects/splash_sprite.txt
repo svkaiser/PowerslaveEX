@@ -1,0 +1,65 @@
+texture "sprites/effects/splash.png"
+
+// working\splash\sprite0011.tga
+sprite 0 0 0 52 29
+
+// working\splash\sprite0012.tga
+sprite 1 52 0 24 6
+
+// working\splash\sprite0013.tga
+sprite 2 76 0 52 43
+
+// working\splash\sprite0014.tga
+sprite 3 128 0 40 9
+
+// working\splash\sprite0015.tga
+sprite 4 168 0 32 7
+
+// working\splash\sprite0016.tga
+sprite 5 200 0 52 60
+
+// working\splash\sprite0017.tga
+sprite 6 52 6 24 26
+
+// working\splash\sprite0018.tga
+sprite 7 128 9 56 64
+
+// working\splash\sprite0019.tga
+sprite 8 0 29 20 5
+
+// working\splash\sprite0020.tga
+sprite 9 0 34 64 64
+
+// working\splash\sprite0021.tga
+sprite 10 64 43 64 4
+
+// working\splash\sprite0022.tga
+sprite 11 184 7 8 16
+
+// working\splash\sprite0023.tga
+sprite 12 64 47 64 64
+
+// working\splash\sprite0024.tga
+sprite 13 252 0 4 64
+
+// working\splash\sprite0025.tga
+sprite 14 184 60 64 8
+
+// working\splash\sprite0026.tga
+sprite 15 248 64 8 7
+
+// working\splash\sprite0027.tga
+sprite 16 184 68 8 6
+
+// working\splash\sprite0028.tga
+sprite 17 192 68 8 5
+
+// working\splash\sprite0029.tga
+sprite 18 200 68 4 4
+
+// working\splash\sprite0030.tga
+sprite 19 204 68 4 4
+
+// working\splash\sprite0031.tga
+sprite 20 208 68 8 8
+

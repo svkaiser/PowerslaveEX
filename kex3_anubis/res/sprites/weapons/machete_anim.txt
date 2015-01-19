@@ -1,0 +1,1057 @@
+machete_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/machete", 0,    -24,  -80,    0 }
+            { "weapons/machete", 1,     40,  -80,    0 }
+            { "weapons/machete", 2,    -24,  -16,    0 }
+            { "weapons/machete", 3,     40,  -16,    0 }
+            { "weapons/machete", 4,    104,  -16,    0 }
+        }
+    }
+}
+
+machete_raise
+{
+    frame
+    {
+        delay 6
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0, -257, -113, 0 }
+            { "weapons/machete", 1, -193, -113, 0 }
+            { "weapons/machete", 2, -257,  -49, 0 }
+            { "weapons/machete", 3, -193,  -49, 0 }
+            { "weapons/machete", 4, -129,  -49, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0, -231, -119, 0 }
+            { "weapons/machete", 1, -167, -119, 0 }
+            { "weapons/machete", 2, -231,  -55, 0 }
+            { "weapons/machete", 3, -167,  -55, 0 }
+            { "weapons/machete", 4, -103,  -55, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0, -196, -128, 0 }
+            { "weapons/machete", 1, -132, -128, 0 }
+            { "weapons/machete", 2, -196,  -64, 0 }
+            { "weapons/machete", 3, -132,  -64, 0 }
+            { "weapons/machete", 4,  -68,  -64, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0, -151, -138, 0 }
+            { "weapons/machete", 1,  -87, -138, 0 }
+            { "weapons/machete", 2, -151,  -74, 0 }
+            { "weapons/machete", 3,  -87,  -74, 0 }
+            { "weapons/machete", 4,  -23,  -74, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0, -105, -138, 0 }
+            { "weapons/machete", 1,  -41, -138, 0 }
+            { "weapons/machete", 2, -105,  -74, 0 }
+            { "weapons/machete", 3,  -41,  -74, 0 }
+            { "weapons/machete", 4,   23,  -74, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,  -56, -132, 0 }
+            { "weapons/machete", 1,    8, -132, 0 }
+            { "weapons/machete", 2,  -56,  -68, 0 }
+            { "weapons/machete", 3,    8,  -68, 0 }
+            { "weapons/machete", 4,   72,  -68, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,    4, -120, 0 }
+            { "weapons/machete", 1,   68, -120, 0 }
+            { "weapons/machete", 2,    4,  -56, 0 }
+            { "weapons/machete", 3,   68,  -56, 0 }
+            { "weapons/machete", 4,  132,  -56, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,   67, -102, 0 }
+            { "weapons/machete", 1,  131, -102, 0 }
+            { "weapons/machete", 2,   67,  -38, 0 }
+            { "weapons/machete", 3,  131,  -38, 0 }
+            { "weapons/machete", 4,  195,  -38, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,  138,  -77, 0 }
+            { "weapons/machete", 1,  202,  -77, 0 }
+            { "weapons/machete", 2,  138,  -13, 0 }
+            { "weapons/machete", 3,  202,  -13, 0 }
+            { "weapons/machete", 4,  266,  -13, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 5
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,  143,  -54, 0 }
+            { "weapons/machete", 1,  207,  -54, 0 }
+            { "weapons/machete", 2,  143,   10, 0 }
+            { "weapons/machete", 3,  207,   10, 0 }
+            { "weapons/machete", 4,  271,   10, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,   94,  -71, 0 }
+            { "weapons/machete", 1,  158,  -71, 0 }
+            { "weapons/machete", 2,   94,   -7, 0 }
+            { "weapons/machete", 3,  158,   -7, 0 }
+            { "weapons/machete", 4,  222,   -7, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,   29,  -84, 0 }
+            { "weapons/machete", 1,   93,  -84, 0 }
+            { "weapons/machete", 2,   29,  -20, 0 }
+            { "weapons/machete", 3,   93,  -20, 0 }
+            { "weapons/machete", 4,  157,  -20, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,  -14,  -81, 0 }
+            { "weapons/machete", 1,   50,  -81, 0 }
+            { "weapons/machete", 2,  -14,  -17, 0 }
+            { "weapons/machete", 3,   50,  -17, 0 }
+            { "weapons/machete", 4,  114,  -17, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,  -23,  -80, 0 }
+            { "weapons/machete", 1,   41,  -80, 0 }
+            { "weapons/machete", 2,  -23,  -16, 0 }
+            { "weapons/machete", 3,   41,  -16, 0 }
+            { "weapons/machete", 4,  105,  -16, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        sprites
+        {
+            { "weapons/machete", 0,  -27,  -80, 0 }
+            { "weapons/machete", 1,   37,  -80, 0 }
+            { "weapons/machete", 2,  -27,  -16, 0 }
+            { "weapons/machete", 3,   37,  -16, 0 }
+            { "weapons/machete", 4,  101,  -16, 0 }
+        }
+    }
+    
+    frame
+    {
+        delay 1
+        goto "weapons/machete_idle"
+        sprites
+        {
+            { "weapons/machete", 0,  -24,  -80, 0 }
+            { "weapons/machete", 1,   40,  -80, 0 }
+            { "weapons/machete", 2,  -24,  -16, 0 }
+            { "weapons/machete", 3,   40,  -16, 0 }
+            { "weapons/machete", 4,  104,  -16, 0 }
+        }
+    }
+}
+
+machete_lower
+{
+    // frames:    6
+    frame
+    {
+        // ##000   60    0
+        sprites
+        {
+            { "weapons/machete", 0,    -10,  -77,    0 }
+            { "weapons/machete", 1,     54,  -77,    0 }
+            { "weapons/machete", 2,    -10,  -13,    0 }
+            { "weapons/machete", 3,     54,  -13,    0 }
+            { "weapons/machete", 4,    118,  -13,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     21,  -61,    0 }
+            { "weapons/machete", 1,     85,  -61,    0 }
+            { "weapons/machete", 2,     21,    3,    0 }
+            { "weapons/machete", 3,     85,    3,    0 }
+            { "weapons/machete", 4,    149,    3,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     52,  -45,    0 }
+            { "weapons/machete", 1,    116,  -45,    0 }
+            { "weapons/machete", 2,     52,   19,    0 }
+            { "weapons/machete", 3,    116,   19,    0 }
+            { "weapons/machete", 4,    180,   19,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##004    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##005    0    0 (no groups)
+        delay 1
+
+    }
+}
+
+machete_fire
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/machete", 0,    -23,  -79,    0 }
+            { "weapons/machete", 1,     41,  -79,    0 }
+            { "weapons/machete", 2,    -23,  -15,    0 }
+            { "weapons/machete", 3,     41,  -15,    0 }
+            { "weapons/machete", 4,    105,  -15,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/machete", 0,      7,  -64,    0 }
+            { "weapons/machete", 1,     71,  -64,    0 }
+            { "weapons/machete", 2,      7,    0,    0 }
+            { "weapons/machete", 3,     71,    0,    0 }
+            { "weapons/machete", 4,    135,    0,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     39,  -45,    0 }
+            { "weapons/machete", 1,    103,  -45,    0 }
+            { "weapons/machete", 2,     39,   19,    0 }
+            { "weapons/machete", 3,    103,   19,    0 }
+            { "weapons/machete", 4,    167,   19,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     67,  -22,    0 }
+            { "weapons/machete", 1,    131,  -22,    0 }
+            { "weapons/machete", 2,     67,   42,    0 }
+            { "weapons/machete", 3,    131,   42,    0 }
+            { "weapons/machete", 4,    195,   42,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##005    0    0 (no groups)
+        delay 1
+        goto "weapons/machete_swing_left_start"
+    }
+}
+
+machete_fire_raise
+{
+    // frames:   10
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##001    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##002    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##003    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##004    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##005    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/machete", 0,    -61,  -43,    0 }
+            { "weapons/machete", 1,      3,  -43,    0 }
+            { "weapons/machete", 2,    -61,   21,    0 }
+            { "weapons/machete", 3,      3,   21,    0 }
+            { "weapons/machete", 4,     67,   21,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/machete", 0,    -42,  -65,    0 }
+            { "weapons/machete", 1,     22,  -65,    0 }
+            { "weapons/machete", 2,    -42,   -1,    0 }
+            { "weapons/machete", 3,     22,   -1,    0 }
+            { "weapons/machete", 4,     86,   -1,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        goto "weapons/machete_idle"
+        sprites
+        {
+            { "weapons/machete", 0,    -25,  -80,    0 }
+            { "weapons/machete", 1,     39,  -80,    0 }
+            { "weapons/machete", 2,    -25,  -16,    0 }
+            { "weapons/machete", 3,     39,  -16,    0 }
+            { "weapons/machete", 4,    103,  -16,    0 }
+        }
+    }
+}
+
+machete_swing_left_start
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##001    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##002    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/machete", 0,   -244, -126,    0 }
+            { "weapons/machete", 1,   -180, -126,    0 }
+            { "weapons/machete", 2,   -244,  -62,    0 }
+            { "weapons/machete", 3,   -180,  -62,    0 }
+            { "weapons/machete", 4,   -116,  -62,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/machete", 0,   -168, -126,    0 }
+            { "weapons/machete", 1,   -104, -126,    0 }
+            { "weapons/machete", 2,   -168,  -62,    0 }
+            { "weapons/machete", 3,   -104,  -62,    0 }
+            { "weapons/machete", 4,    -40,  -62,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0  128
+        goto "weapons/machete_swing_left_finish"
+        sprites
+        {
+            { "weapons/machete", 0,    -91, -121,    0 }
+            { "weapons/machete", 1,    -27, -121,    0 }
+            { "weapons/machete", 2,    -91,  -57,    0 }
+            { "weapons/machete", 3,    -27,  -57,    0 }
+            { "weapons/machete", 4,     37,  -57,    0 }
+        }
+    }
+}
+
+machete_swing_left_finish
+{
+    // frames:    4
+    frame
+    {
+        // ##000   57    0
+        sprites
+        {
+            { "weapons/machete", 0,     -3,  -99,    0 }
+            { "weapons/machete", 1,     61,  -99,    0 }
+            { "weapons/machete", 2,     -3,  -35,    0 }
+            { "weapons/machete", 3,     61,  -35,    0 }
+            { "weapons/machete", 4,    125,  -35,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     87,  -73,    0 }
+            { "weapons/machete", 1,    151,  -73,    0 }
+            { "weapons/machete", 2,     87,   -9,    0 }
+            { "weapons/machete", 3,    151,   -9,    0 }
+            { "weapons/machete", 4,    215,   -9,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##003    0    0 (no groups)
+        delay 1
+        goto "weapons/machete_swing_right_start"
+    }
+
+}
+
+machete_hit_solid_left
+{
+    // frames:    8
+    frame
+    {
+        // ##000   61    0
+        sprites
+        {
+            { "weapons/machete", 0,    -20, -101,    0 }
+            { "weapons/machete", 1,     44, -101,    0 }
+            { "weapons/machete", 2,    -20,  -37,    0 }
+            { "weapons/machete", 3,     44,  -37,    0 }
+            { "weapons/machete", 4,    108,  -37,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/machete", 0,    -18, -101,    0 }
+            { "weapons/machete", 1,     46, -101,    0 }
+            { "weapons/machete", 2,    -18,  -37,    0 }
+            { "weapons/machete", 3,     46,  -37,    0 }
+            { "weapons/machete", 4,    110,  -37,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/machete", 0,    -18, -101,    0 }
+            { "weapons/machete", 1,     46, -101,    0 }
+            { "weapons/machete", 2,    -18,  -37,    0 }
+            { "weapons/machete", 3,     46,  -37,    0 }
+            { "weapons/machete", 4,    110,  -37,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     -8,  -89,    0 }
+            { "weapons/machete", 1,     56,  -89,    0 }
+            { "weapons/machete", 2,     -8,  -25,    0 }
+            { "weapons/machete", 3,     56,  -25,    0 }
+            { "weapons/machete", 4,    120,  -25,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     19,  -59,    0 }
+            { "weapons/machete", 1,     83,  -59,    0 }
+            { "weapons/machete", 2,     19,    5,    0 }
+            { "weapons/machete", 3,     83,    5,    0 }
+            { "weapons/machete", 4,    147,    5,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##007    0    0 (no groups)
+        delay 1
+        goto "weapons/machete_fire_raise"
+    }
+}
+
+machete_hit_object_left
+{
+    // frames:    8
+    frame
+    {
+        // ##000   58    0
+        sprites
+        {
+            { "weapons/machete", 0,    -19, -103,    0 }
+            { "weapons/machete", 1,     45, -103,    0 }
+            { "weapons/machete", 2,    -19,  -39,    0 }
+            { "weapons/machete", 3,     45,  -39,    0 }
+            { "weapons/machete", 4,    109,  -39,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/machete", 0,    -33,  -82,    0 }
+            { "weapons/machete", 1,     31,  -82,    0 }
+            { "weapons/machete", 2,    -33,  -18,    0 }
+            { "weapons/machete", 3,     31,  -18,    0 }
+            { "weapons/machete", 4,     95,  -18,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/machete", 0,    -17,  -55,    0 }
+            { "weapons/machete", 1,     47,  -55,    0 }
+            { "weapons/machete", 2,    -17,    9,    0 }
+            { "weapons/machete", 3,     47,    9,    0 }
+            { "weapons/machete", 4,    111,    9,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##004    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##005    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##007    0    0 (no groups)
+        delay 1
+        goto "weapons/machete_fire_raise"
+    }
+}
+
+machete_swing_right_start
+{
+    // frames:    4
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/machete", 0,    173, -145,    1 }
+            { "weapons/machete", 1,    109, -145,    1 }
+            { "weapons/machete", 2,    173,  -81,    1 }
+            { "weapons/machete", 3,    109,  -81,    1 }
+            { "weapons/machete", 4,     97,  -81,    1 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     88, -143,    1 }
+            { "weapons/machete", 1,     24, -143,    1 }
+            { "weapons/machete", 2,     88,  -79,    1 }
+            { "weapons/machete", 3,     24,  -79,    1 }
+            { "weapons/machete", 4,     12,  -79,    1 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0  128
+        goto "weapons/machete_swing_right_finish"
+        sprites
+        {
+            { "weapons/machete", 0,     13, -127,    1 }
+            { "weapons/machete", 1,    -51, -127,    1 }
+            { "weapons/machete", 2,     13,  -63,    1 }
+            { "weapons/machete", 3,    -51,  -63,    1 }
+            { "weapons/machete", 4,    -63,  -63,    1 }
+        }
+    }
+}
+
+machete_swing_right_finish
+{
+    // frames:    6
+    frame
+    {
+        // ##000   57    0
+        sprites
+        {
+            { "weapons/machete", 0,    -35, -116,    1 }
+            { "weapons/machete", 1,    -99, -116,    1 }
+            { "weapons/machete", 2,    -35,  -52,    1 }
+            { "weapons/machete", 3,    -99,  -52,    1 }
+            { "weapons/machete", 4,   -111,  -52,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/machete", 0,   -132,  -85,    1 }
+            { "weapons/machete", 1,   -196,  -85,    1 }
+            { "weapons/machete", 2,   -132,  -21,    1 }
+            { "weapons/machete", 3,   -196,  -21,    1 }
+            { "weapons/machete", 4,   -208,  -21,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##003    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##004    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##005    0    0 (no groups)
+        delay 1
+        goto "weapons/machete_fire_raise"
+    }
+}
+
+machete_hit_solid_right
+{
+    // frames:    8
+    frame
+    {
+        // ##000   61    0
+        sprites
+        {
+            { "weapons/machete", 0,      5, -125,    1 }
+            { "weapons/machete", 1,    -59, -125,    1 }
+            { "weapons/machete", 2,      5,  -61,    1 }
+            { "weapons/machete", 3,    -59,  -61,    1 }
+            { "weapons/machete", 4,    -71,  -61,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/machete", 0,      4, -120,    1 }
+            { "weapons/machete", 1,    -60, -120,    1 }
+            { "weapons/machete", 2,      4,  -56,    1 }
+            { "weapons/machete", 3,    -60,  -56,    1 }
+            { "weapons/machete", 4,    -72,  -56,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/machete", 0,      4, -120,    1 }
+            { "weapons/machete", 1,    -60, -120,    1 }
+            { "weapons/machete", 2,      4,  -56,    1 }
+            { "weapons/machete", 3,    -60,  -56,    1 }
+            { "weapons/machete", 4,    -72,  -56,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     11,  -93,    1 }
+            { "weapons/machete", 1,    -53,  -93,    1 }
+            { "weapons/machete", 2,     11,  -29,    1 }
+            { "weapons/machete", 3,    -53,  -29,    1 }
+            { "weapons/machete", 4,    -65,  -29,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     18,  -59,    1 }
+            { "weapons/machete", 1,    -46,  -59,    1 }
+            { "weapons/machete", 2,     18,    5,    1 }
+            { "weapons/machete", 3,    -46,    5,    1 }
+            { "weapons/machete", 4,    -58,    5,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     21,  -30,    1 }
+            { "weapons/machete", 1,    -43,  -30,    1 }
+            { "weapons/machete", 2,     21,   34,    1 }
+            { "weapons/machete", 3,    -43,   34,    1 }
+            { "weapons/machete", 4,    -55,   34,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##007    0    0 (no groups)
+        delay 1
+        goto "weapons/machete_fire_raise"
+    }
+}
+
+machete_hit_object_right
+{
+    // frames:    8
+    frame
+    {
+        // ##000   58    0
+        sprites
+        {
+            { "weapons/machete", 0,      7, -125,    1 }
+            { "weapons/machete", 1,    -57, -125,    1 }
+            { "weapons/machete", 2,      7,  -61,    1 }
+            { "weapons/machete", 3,    -57,  -61,    1 }
+            { "weapons/machete", 4,    -69,  -61,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     14, -121,    1 }
+            { "weapons/machete", 1,    -50, -121,    1 }
+            { "weapons/machete", 2,     14,  -57,    1 }
+            { "weapons/machete", 3,    -50,  -57,    1 }
+            { "weapons/machete", 4,    -62,  -57,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     30, -108,    1 }
+            { "weapons/machete", 1,    -34, -108,    1 }
+            { "weapons/machete", 2,     30,  -44,    1 }
+            { "weapons/machete", 3,    -34,  -44,    1 }
+            { "weapons/machete", 4,    -46,  -44,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     44,  -85,    1 }
+            { "weapons/machete", 1,    -20,  -85,    1 }
+            { "weapons/machete", 2,     44,  -21,    1 }
+            { "weapons/machete", 3,    -20,  -21,    1 }
+            { "weapons/machete", 4,    -32,  -21,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     41,  -59,    1 }
+            { "weapons/machete", 1,    -23,  -59,    1 }
+            { "weapons/machete", 2,     41,    5,    1 }
+            { "weapons/machete", 3,    -23,    5,    1 }
+            { "weapons/machete", 4,    -35,    5,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/machete", 0,     36,  -43,    1 }
+            { "weapons/machete", 1,    -28,  -43,    1 }
+            { "weapons/machete", 2,     36,   21,    1 }
+            { "weapons/machete", 3,    -28,   21,    1 }
+            { "weapons/machete", 4,    -40,   21,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##007    0    0 (no groups)
+        delay 1
+        goto "weapons/machete_fire_raise"
+    }
+}

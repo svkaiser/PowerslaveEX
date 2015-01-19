@@ -167,6 +167,7 @@ void kexRenderBackend::SetDefaultState(void)
     SetState(GLSTATE_TEXTURE0, true);
     SetState(GLSTATE_CULL, true);
     SetState(GLSTATE_FOG, false);
+    SetState(GLSTATE_SCISSOR, false);
     SetCull(GLCULL_BACK);
     SetDepth(GLFUNC_LEQUAL);
     SetAlphaFunc(GLFUNC_GEQUAL, 0.01f);
@@ -179,7 +180,6 @@ void kexRenderBackend::SetDefaultState(void)
     dglHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     dglFogi(GL_FOG_MODE, GL_LINEAR);
     dglHint(GL_FOG_HINT, GL_NICEST);
-    dglDisable(GL_SCISSOR_TEST);
     dglEnable(GL_DITHER);
     dglTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
     dglTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
@@ -344,7 +344,7 @@ void kexRenderBackend::ClearBuffer(const glClearBit_t bit)
 
 void kexRenderBackend::SetScissorRect(const int x, const int y, const int w, const int h)
 {
-    if(!(glState.glStateBits & GLSTATE_SCISSOR))
+    if(!(glState.glStateBits & (1 << GLSTATE_SCISSOR)))
     {
         return;
     }
@@ -923,7 +923,6 @@ void kexRenderBackend::ScreenShot(void)
     }
 
     image.LoadFromScreenBuffer();
-    image.FlipVertical();
     image.WritePNG(file);
 
     file.Close();

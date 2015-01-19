@@ -31,16 +31,18 @@ typedef enum
 
 typedef struct
 {
-    word            faceStart;
-    word            faceEnd;
-    word            lightLevel;
-    short           ceilingHeight;
-    short           floorHeight;
-    float           ceilingSlope;
-    float           floorSlope;
-    word            flags;
-    kexBBox         bounds;
-    int             validcount;
+    word                faceStart;
+    word                faceEnd;
+    word                lightLevel;
+    short               ceilingHeight;
+    short               floorHeight;
+    float               ceilingSlope;
+    float               floorSlope;
+    word                flags;
+    kexBBox             bounds;
+    int                 validcount;
+    struct mapFace_s    *floorFace;
+    struct mapFace_s    *ceilingFace;
 } mapSector_t;
 
 typedef enum
@@ -75,7 +77,7 @@ typedef struct
     unsigned int    flags;
 } mapEdge_t;
 
-typedef struct
+typedef struct mapFace_s
 {
     short           polyStart;
     short           polyEnd;

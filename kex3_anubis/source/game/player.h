@@ -33,6 +33,18 @@ typedef enum
 
 typedef enum
 {
+    WS_IDLE         = 0,
+    WS_RAISE,
+    WS_LOWER,
+    WS_FIRE,
+    WS_CHARGE,
+    WS_SPECIAL,
+
+    NUMWEAPONSTATES
+} weaponState_t;
+
+typedef enum
+{
     PA_SANDALS      = BIT(0),
     PA_MASK         = BIT(1),
     PA_SHAWL        = BIT(2),
@@ -139,45 +151,72 @@ public:
     kexPlayer(void);
     ~kexPlayer(void);
 
-    void                    Reset(void);
-    void                    Tick(void);
+    void                        Reset(void);
+    void                        Tick(void);
 
-    kexPlayerCmd            &Cmd(void) { return cmd; }
-    kexActor                *Actor(void) { return actor; }
-    void                    SetActor(kexActor *_actor) { actor = _actor; }
-    void                    ClearActor(void) { actor = NULL; }
+    kexPlayerCmd                &Cmd(void) { return cmd; }
+    kexActor                    *Actor(void) { return actor; }
+    void                        SetActor(kexActor *_actor) { actor = _actor; }
+    void                        ClearActor(void) { actor = NULL; }
 
-    const float             Bob(void) const { return bob; }
-    float                   &LandTime(void) { return landTime; }
-    float                   &StepViewZ(void) { return stepViewZ; }
+    const float                 Bob(void) const { return bob; }
+    float                       &LandTime(void) { return landTime; }
+    float                       &StepViewZ(void) { return stepViewZ; }
+
+    spriteAnim_t                *WeaponAnim(void) { return weaponAnim; }
+    spriteFrame_t               *WeaponFrame(void) { return &weaponAnim->frames[weaponFrame]; }
+    const int                   WeaponFrameID(void) const { return weaponFrame; }
+    weaponState_t               &WeaponState(void) { return weaponState; }
+    float                       &WeaponBobX(void) { return weaponBob_x; }
+    float                       &WeaponBobY(void) { return weaponBob_y; }
+    float                       &WeaponTicks(void) { return weaponTicks; }
+    const playerWeapons_t       CurrentWeapon(void) const { return currentWeapon; }
+
+    float                       &WeaponStartX(void) { return weaponStart_x; }
+    float                       &WeaponStartY(void) { return weaponStart_y; }
+
+    float                       &WeaponPrevX(void) { return weaponPrev_x; }
+    float                       &WeaponPrevY(void) { return weaponPrev_y; }
 
 private:
-    kexPlayerCmd            cmd;
+    void                        UpdateWeaponBob(void);
+    void                        UpdateViewBob(void);
+    void                        UpdateWeaponSprite(void);
 
-    int16_t                 health;
-    int16_t                 ankahs;
-    float                   bob;
-    float                   bobTime;
-    float                   bobSpeed;
-    float                   landTime;
-    float                   stepViewZ;
-    kexVec2                 weaponBob;
+    kexPlayerCmd                cmd;
 
-    byte                    currentWeapon;
-    byte                    weaponState;
-    int16_t                 weaponFrame;
-    int16_t                 weaponTicks;
-    bool                    weapons[NUMPLAYERWEAPONS];
-    int16_t                 ammo[NUMPLAYERWEAPONS];
+    int16_t                     health;
+    int16_t                     ankahs;
+    float                       bob;
+    float                       bobTime;
+    float                       bobSpeed;
+    float                       landTime;
+    float                       stepViewZ;
 
-    static const int        maxAmmo[NUMPLAYERWEAPONS];
-    static const int16_t    maxHealth;
+    float                       weaponBob_x;
+    float                       weaponBob_y;
+    int                         weaponBobTime;
+    spriteAnim_t                *weaponAnim;
+    playerWeapons_t             currentWeapon;
+    weaponState_t               weaponState;
+    int16_t                     weaponFrame;
+    float                       weaponTicks;
+    float                       weaponStart_x;
+    float                       weaponStart_y;
+    float                       weaponPrev_x;
+    float                       weaponPrev_y;
 
-    int16_t                 artifacts;
-    int16_t                 keys;
-    int16_t                 transmitter;
-    int                     teamDolls;
-    kexActor                *actor;
+    bool                        weapons[NUMPLAYERWEAPONS];
+    int16_t                     ammo[NUMPLAYERWEAPONS];
+
+    static const int            maxAmmo[NUMPLAYERWEAPONS];
+    static const int16_t        maxHealth;
+
+    int16_t                     artifacts;
+    int16_t                     keys;
+    int16_t                     transmitter;
+    int                         teamDolls;
+    kexActor                    *actor;
 };
 
 #endif

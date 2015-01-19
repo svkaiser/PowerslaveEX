@@ -1,0 +1,352 @@
+pistol_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -87,    0 }
+        }
+
+    }
+}
+
+pistol_raise
+{
+    // frames:   10
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -33,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -45,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -56,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -68,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -80,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -84,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -86,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -87,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        goto "weapons/pistol_idle"
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -87,    0 }
+        }
+    }
+}
+
+pistol_lower
+{
+    // frames:   15
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -87,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -79,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -69,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -57,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -45,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -26,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##007    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##008    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##009    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##010    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##011    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##012    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##013    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##014    0    0 (no groups)
+        delay 1
+    }
+}
+
+pistol_fire
+{
+    // frames:   14
+    frame
+    {
+        // ##000   62  128
+        sprites
+        {
+            { "weapons/pistol", 0,     -8,  -73,    0 }
+            { "weapons/pistol", 1,      1, -106,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,     -6,  -63,    0 }
+            { "weapons/pistol", 1,      3,  -96,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/pistol", 2,     -5,  -99,    0 }
+            { "weapons/pistol", 3,     -5,  -35,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/pistol", 2,     -3,  -97,    0 }
+            { "weapons/pistol", 3,     -3,  -33,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,     -8,  -74,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,     -9,  -66,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -68,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -73,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -78,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -82,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -86,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -87,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -87,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##013    0    0
+        goto "weapons/pistol_idle"
+        sprites
+        {
+            { "weapons/pistol", 0,    -10,  -87,    0 }
+        }
+    }
+}

@@ -19,11 +19,6 @@
 #include "renderMain.h"
 #include "renderView.h"
 #include "game.h"
-#include "actor.h"
-#include "player.h"
-#include "playLoop.h"
-#include "cmodel.h"
-#include "spriteAnim.h"
 
 //
 // kexPlayLoop::kexPlayLoop
@@ -57,10 +52,10 @@ void kexPlayLoop::Start(void)
 {
     ticks = 0;
     
-    if(kex::cGame->Player()->Actor() == NULL)
+    if(kexGame::cLocal->Player()->Actor() == NULL)
     {
         kex::cSystem->Warning("No player starts present\n");
-        kex::cGame->SetGameState(GS_TITLE);
+        kexGame::cLocal->SetGameState(GS_TITLE);
     }
 }
 
@@ -70,7 +65,7 @@ void kexPlayLoop::Start(void)
 
 void kexPlayLoop::Stop(void)
 {
-    kex::cGame->World()->UnloadMap();
+    kexGame::cLocal->World()->UnloadMap();
 }
 
 //
@@ -79,34 +74,38 @@ void kexPlayLoop::Stop(void)
 
 void kexPlayLoop::Draw(void)
 {
-    kexPlayer *p = kex::cGame->Player();
+    kexPlayer *p = kexGame::cLocal->Player();
 
     // TEMP
-    kex::cGame->RenderView()->Yaw() = p->Actor()->Yaw();
-    kex::cGame->RenderView()->Pitch() = p->Actor()->Pitch();
-    kex::cGame->RenderView()->Roll() = p->Actor()->Roll();
-    kex::cGame->RenderView()->Origin() = p->Actor()->Origin();
+    kexGame::cLocal->RenderView()->Yaw() = p->Actor()->Yaw();
+    kexGame::cLocal->RenderView()->Pitch() = p->Actor()->Pitch();
+    kexGame::cLocal->RenderView()->Roll() = p->Actor()->Roll();
+    kexGame::cLocal->RenderView()->Origin() = p->Actor()->Origin();
     
-    kex::cGame->RenderView()->Origin().z += 64 + p->Bob() + p->LandTime() + p->StepViewZ();
+    kexGame::cLocal->RenderView()->Origin().z += 64 + p->Bob() + p->LandTime() + p->StepViewZ();
     
-    kex::cGame->RenderView()->Setup();
-    kexRender::cBackend->LoadProjectionMatrix(kex::cGame->RenderView()->ProjectionView());
-    kexRender::cBackend->LoadModelViewMatrix(kex::cGame->RenderView()->ModelView());
+    kexGame::cLocal->RenderView()->Setup();
+    kexRender::cBackend->LoadProjectionMatrix(kexGame::cLocal->RenderView()->ProjectionView());
+    kexRender::cBackend->LoadModelViewMatrix(kexGame::cLocal->RenderView()->ModelView());
     kexRender::cUtils->DrawBoundingBox(kexBBox(
         kexVec3(-64, -128, -32),
         kexVec3(64, 128, 32)), 255, 0, 0);
     
     kexCpuVertList *vl = kexRender::cVertList;
-    kexWorld *world = kex::cGame->World();
+    kexWorld *world = kexGame::cLocal->World();
     
     //kexRender::cTextures->defaultTexture->Bind();
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
     kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
     kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
+
+    int clipY = (int)((float)kex::cSystem->VideoHeight() / (240.0f / 24.0f));
+    kexRender::cBackend->SetScissorRect(0, clipY, kex::cSystem->VideoWidth(), kex::cSystem->VideoHeight());
     
     if(world->MapLoaded())
     {
-        for(kexActor *actor = kex::cGame->Actors().Next(); actor != NULL; actor = actor->Link().Next())
+        for(kexActor *actor = kexGame::cLocal->Actors().Next(); actor != NULL; actor = actor->Link().Next())
         {
             kexRender::cUtils->DrawOrigin(actor->Origin().x, actor->Origin().y, actor->Origin().z, 16);
         }
@@ -118,7 +117,7 @@ void kexPlayLoop::Draw(void)
             int start = sector->faceStart;
             int end = sector->faceEnd;
 
-            if(!kex::cGame->RenderView()->Frustum().TestBoundingBox(sector->bounds))
+            if(!kexGame::cLocal->RenderView()->Frustum().TestBoundingBox(sector->bounds))
             {
                 continue;
             }
@@ -138,7 +137,7 @@ void kexPlayLoop::Draw(void)
                     continue;
                 }
                 
-                if(!kex::cGame->RenderView()->Frustum().TestBoundingBox(face->bounds))
+                if(!kexGame::cLocal->RenderView()->Frustum().TestBoundingBox(face->bounds))
                 {
                     continue;
                 }
@@ -231,7 +230,58 @@ void kexPlayLoop::Draw(void)
                 }
             }
         }
+
+        {
+            static spriteAnim_t *anim = p->WeaponAnim();
+            const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(p->CurrentWeapon());
+
+            if(anim)
+            {
+                spriteFrame_t *frame = p->WeaponFrame();
+                spriteSet_t *spriteSet;
+                kexSprite *sprite;
+                spriteInfo_t *info;
+
+                kexRender::cScreen->SetOrtho();
+                kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+                kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+
+                kexCpuVertList *vl = kexRender::cVertList;
+                vl->BindDrawPointers();
+
+                for(unsigned int i = 0; i < frame->spriteSet.Length(); ++i)
+                {
+                    spriteSet = &frame->spriteSet[i];
+                    sprite = spriteSet->sprite;
+                    info = &sprite->InfoList()[spriteSet->index];
+
+                    float x = (float)spriteSet->x;
+                    float y = (float)spriteSet->y;
+                    float w = (float)info->atlas.w;
+                    float h = (float)info->atlas.h;
+
+                    float u1, u2, v1, v2;
+                    
+                    u1 = info->u[0 ^ spriteSet->bFlipped];
+                    u2 = info->u[1 ^ spriteSet->bFlipped];
+                    v1 = info->v[0];
+                    v2 = info->v[1];
+
+                    kexRender::cScreen->SetAspectDimentions(x, y, w, h);
+
+                    sprite->Texture()->Bind();
+
+                    x += p->WeaponBobX() + 160;
+                    y += p->WeaponBobY() + 132;
+
+                    vl->AddQuad(x, y + 8, 0, w, h, u1, v1, u2, v2, 255, 255, 255, 255);
+                    vl->DrawElements();
+                }
+            }
+        }
     }
+
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
 }
 
 //
@@ -242,8 +292,8 @@ void kexPlayLoop::Tick(void)
 {
     if(ticks > 4)
     {
-        kex::cGame->UpdateActors();
-        kex::cGame->Player()->Tick();
+        kexGame::cLocal->UpdateActors();
+        kexGame::cLocal->Player()->Tick();
     }
     
     ticks++;

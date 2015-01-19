@@ -1,0 +1,808 @@
+effects_splash
+{
+    // frames:   23
+    frame
+    {
+        // ##000   41    0
+        sprites
+        {
+            { "effects/splash", 1,    -10,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "effects/splash", 1,    -10,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "effects/splash", 0,    -25,  -31,    0 }
+            { "effects/splash", 3,    -19,   -7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "effects/splash", 2,    -25,  -47,    0 }
+            { "effects/splash", 3,    -19,   -7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "effects/splash", 5,    -25,  -63,    0 }
+            { "effects/splash", 3,    -19,   -7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "effects/splash", 7,    -28,  -70,    0 }
+            { "effects/splash", 3,    -19,   -7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "effects/splash", 9,    -32,  -77,    0 }
+            { "effects/splash", 10,    -32,  -13,    0 }
+            { "effects/splash", 4,    -14,   -6,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "effects/splash", 9,    -32,  -81,    0 }
+            { "effects/splash", 10,    -32,  -17,    0 }
+            { "effects/splash", 6,    -10,  -26,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "effects/splash", 12,    -35,  -89,    0 }
+            { "effects/splash", 13,     29,  -89,    0 }
+            { "effects/splash", 14,    -35,  -25,    0 }
+            { "effects/splash", 6,    -10,  -26,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "effects/splash", 12,    -34,  -94,    0 }
+            { "effects/splash", 13,     30,  -94,    0 }
+            { "effects/splash", 14,    -34,  -30,    0 }
+            { "effects/splash", 11,     -3,  -29,    0 }
+            { "effects/splash", 8,     -8,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "effects/splash", 12,    -34,  -95,    0 }
+            { "effects/splash", 13,     30,  -95,    0 }
+            { "effects/splash", 14,    -34,  -31,    0 }
+            { "effects/splash", 11,     -3,  -39,    0 }
+            { "effects/splash", 8,     -8,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "effects/splash", 17,     -2,  -35,    0 }
+            { "effects/splash", 19,     15,  -37,    0 }
+            { "effects/splash", 17,      0,  -56,    0 }
+            { "effects/splash", 15,     -3,  -48,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "effects/splash", 17,     -2,  -38,    0 }
+            { "effects/splash", 19,     16,  -40,    0 }
+            { "effects/splash", 17,      0,  -68,    0 }
+            { "effects/splash", 15,     -3,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "effects/splash", 17,     -2,  -41,    0 }
+            { "effects/splash", 19,     17,  -41,    0 }
+            { "effects/splash", 18,      0,  -72,    0 }
+            { "effects/splash", 15,     -4,  -59,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "effects/splash", 18,     -2,  -43,    0 }
+            { "effects/splash", 19,     18,  -40,    0 }
+            { "effects/splash", 18,      0,  -73,    0 }
+            { "effects/splash", 15,     -5,  -61,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "effects/splash", 18,     -2,  -43,    0 }
+            { "effects/splash", 19,     19,  -37,    0 }
+            { "effects/splash", 19,      1,  -75,    0 }
+            { "effects/splash", 15,     -5,  -62,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "effects/splash", 18,     -2,  -42,    0 }
+            { "effects/splash", 19,     20,  -32,    0 }
+            { "effects/splash", 19,      1,  -76,    0 }
+            { "effects/splash", 16,     -5,  -61,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "effects/splash", 19,     -2,  -39,    0 }
+            { "effects/splash", 19,     21,  -23,    0 }
+            { "effects/splash", 19,      1,  -76,    0 }
+            { "effects/splash", 16,     -6,  -60,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "effects/splash", 19,     -3,  -33,    0 }
+            { "effects/splash", 19,      1,  -75,    0 }
+            { "effects/splash", 17,     -8,  -57,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        sprites
+        {
+            { "effects/splash", 19,     -3,  -20,    0 }
+            { "effects/splash", 19,      1,  -71,    0 }
+            { "effects/splash", 17,    -10,  -50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##020    0    0
+        sprites
+        {
+            { "effects/splash", 19,      1,  -64,    0 }
+            { "effects/splash", 18,    -11,  -37,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##021    0    0
+        sprites
+        {
+            { "effects/splash", 19,      1,  -52,    0 }
+            { "effects/splash", 19,    -11,  -24,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##022    0    0
+        sprites
+        {
+            { "effects/splash", 19,    -12,   -5,    0 }
+        }
+
+    }
+}
+
+effects_gib_death
+{
+    // frames:   19
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "effects/gib_death", 11,    -28,  -53,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "effects/gib_death", 11,    -28,  -53,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "effects/gib_death", 1,    -48,  -90,    0 }
+            { "effects/gib_death", 2,     16,  -90,    0 }
+            { "effects/gib_death", 3,    -48,  -26,    0 }
+            { "effects/gib_death", 4,     16,  -26,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "effects/gib_death", 1,    -48,  -90,    0 }
+            { "effects/gib_death", 2,     16,  -90,    0 }
+            { "effects/gib_death", 3,    -48,  -26,    0 }
+            { "effects/gib_death", 4,     16,  -26,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "effects/gib_death", 0,    -22,    7,    1 }
+            { "effects/gib_death", 5,    -48, -101,    0 }
+            { "effects/gib_death", 6,     16, -101,    0 }
+            { "effects/gib_death", 7,    -48,  -37,    0 }
+            { "effects/gib_death", 8,     16,  -37,    0 }
+            { "effects/gib_death", 0,      4,    9,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "effects/gib_death", 0,     -9,  -23,    1 }
+            { "effects/gib_death", 0,     -8,  -43,    0 }
+            { "effects/gib_death", 9,    -18,  -75,    0 }
+            { "effects/gib_death", 10,    -18,  -11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "effects/gib_death", 0,     -9,  -23,    1 }
+            { "effects/gib_death", 0,     -8,  -43,    0 }
+            { "effects/gib_death", 9,    -18,  -75,    0 }
+            { "effects/gib_death", 10,    -18,  -11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "effects/gib_death", 0,     -9,  -21,    1 }
+            { "effects/gib_death", 0,     -8,  -35,    0 }
+            { "effects/gib_death", 9,    -18,  -70,    0 }
+            { "effects/gib_death", 10,    -18,   -6,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "effects/gib_death", 0,     -9,   -9,    1 }
+            { "effects/gib_death", 0,     -8,  -19,    0 }
+            { "effects/gib_death", 9,    -18,  -66,    0 }
+            { "effects/gib_death", 10,    -18,   -2,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "effects/gib_death", 0,     -9,   -4,    1 }
+            { "effects/gib_death", 9,    -18,  -61,    0 }
+            { "effects/gib_death", 10,    -18,    3,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "effects/gib_death", 0,     -9,    7,    1 }
+            { "effects/gib_death", 9,    -18,  -50,    0 }
+            { "effects/gib_death", 10,    -18,   14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "effects/gib_death", 0,     -9,   19,    1 }
+            { "effects/gib_death", 9,    -18,  -38,    0 }
+            { "effects/gib_death", 10,    -18,   26,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "effects/gib_death", 9,    -18,  -22,    0 }
+            { "effects/gib_death", 10,    -18,   42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##015    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##016    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##017    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##018    0    0 (no groups)
+        delay 1
+
+    }
+}
+
+effects_orb_spawn
+{
+    // frames:   23
+    frame
+    {
+        // ##000   54    0
+        sprites
+        {
+            { "effects/orb_spawn", 10,    -84,  -43,    0 }
+            { "effects/orb_spawn", 11,    -20,  -43,    0 }
+            { "effects/orb_spawn", 12,     44,  -43,    0 }
+            { "effects/orb_spawn", 13,    -84,   21,    0 }
+            { "effects/orb_spawn", 14,    -20,   21,    0 }
+            { "effects/orb_spawn", 15,     44,   21,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 10,    -84,  -43,    0 }
+            { "effects/orb_spawn", 11,    -20,  -43,    0 }
+            { "effects/orb_spawn", 12,     44,  -43,    0 }
+            { "effects/orb_spawn", 13,    -84,   21,    0 }
+            { "effects/orb_spawn", 14,    -20,   21,    0 }
+            { "effects/orb_spawn", 15,     44,   21,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 10,    -84,  -43,    0 }
+            { "effects/orb_spawn", 11,    -20,  -43,    0 }
+            { "effects/orb_spawn", 12,     44,  -43,    0 }
+            { "effects/orb_spawn", 13,    -84,   21,    0 }
+            { "effects/orb_spawn", 14,    -20,   21,    0 }
+            { "effects/orb_spawn", 15,     44,   21,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 16,    -88,  -43,    0 }
+            { "effects/orb_spawn", 17,    -24,  -43,    0 }
+            { "effects/orb_spawn", 18,     40,  -43,    0 }
+            { "effects/orb_spawn", 19,    -88,   21,    0 }
+            { "effects/orb_spawn", 20,    -24,   21,    0 }
+            { "effects/orb_spawn", 21,     40,   21,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 16,    -88,  -43,    0 }
+            { "effects/orb_spawn", 17,    -24,  -43,    0 }
+            { "effects/orb_spawn", 18,     40,  -43,    0 }
+            { "effects/orb_spawn", 19,    -88,   21,    0 }
+            { "effects/orb_spawn", 20,    -24,   21,    0 }
+            { "effects/orb_spawn", 21,     40,   21,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 16,    -88,  -43,    0 }
+            { "effects/orb_spawn", 17,    -24,  -43,    0 }
+            { "effects/orb_spawn", 18,     40,  -43,    0 }
+            { "effects/orb_spawn", 19,    -88,   21,    0 }
+            { "effects/orb_spawn", 20,    -24,   21,    0 }
+            { "effects/orb_spawn", 21,     40,   21,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 22,    -99,  -42,    0 }
+            { "effects/orb_spawn", 23,    -35,  -42,    0 }
+            { "effects/orb_spawn", 24,     29,  -42,    0 }
+            { "effects/orb_spawn", 25,    -99,   22,    0 }
+            { "effects/orb_spawn", 26,    -35,   22,    0 }
+            { "effects/orb_spawn", 27,     29,   22,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 22,    -99,  -42,    0 }
+            { "effects/orb_spawn", 23,    -35,  -42,    0 }
+            { "effects/orb_spawn", 24,     29,  -42,    0 }
+            { "effects/orb_spawn", 25,    -99,   22,    0 }
+            { "effects/orb_spawn", 26,    -35,   22,    0 }
+            { "effects/orb_spawn", 27,     29,   22,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 22,    -99,  -42,    0 }
+            { "effects/orb_spawn", 23,    -35,  -42,    0 }
+            { "effects/orb_spawn", 24,     29,  -42,    0 }
+            { "effects/orb_spawn", 25,    -99,   22,    0 }
+            { "effects/orb_spawn", 26,    -35,   22,    0 }
+            { "effects/orb_spawn", 27,     29,   22,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 28,    -86,  -49,    0 }
+            { "effects/orb_spawn", 29,    -22,  -49,    0 }
+            { "effects/orb_spawn", 30,     42,  -49,    0 }
+            { "effects/orb_spawn", 31,    -86,   15,    0 }
+            { "effects/orb_spawn", 32,    -22,   15,    0 }
+            { "effects/orb_spawn", 33,     42,   15,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 28,    -86,  -49,    0 }
+            { "effects/orb_spawn", 29,    -22,  -49,    0 }
+            { "effects/orb_spawn", 30,     42,  -49,    0 }
+            { "effects/orb_spawn", 31,    -86,   15,    0 }
+            { "effects/orb_spawn", 32,    -22,   15,    0 }
+            { "effects/orb_spawn", 33,     42,   15,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 28,    -86,  -49,    0 }
+            { "effects/orb_spawn", 29,    -22,  -49,    0 }
+            { "effects/orb_spawn", 30,     42,  -49,    0 }
+            { "effects/orb_spawn", 31,    -86,   15,    0 }
+            { "effects/orb_spawn", 32,    -22,   15,    0 }
+            { "effects/orb_spawn", 33,     42,   15,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 34,    -95,  -42,    0 }
+            { "effects/orb_spawn", 35,    -31,  -42,    0 }
+            { "effects/orb_spawn", 36,     33,  -42,    0 }
+            { "effects/orb_spawn", 37,    -95,   22,    0 }
+            { "effects/orb_spawn", 38,    -31,   22,    0 }
+            { "effects/orb_spawn", 39,     33,   22,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 34,    -95,  -42,    0 }
+            { "effects/orb_spawn", 35,    -31,  -42,    0 }
+            { "effects/orb_spawn", 36,     33,  -42,    0 }
+            { "effects/orb_spawn", 37,    -95,   22,    0 }
+            { "effects/orb_spawn", 38,    -31,   22,    0 }
+            { "effects/orb_spawn", 39,     33,   22,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 34,    -95,  -42,    0 }
+            { "effects/orb_spawn", 35,    -31,  -42,    0 }
+            { "effects/orb_spawn", 36,     33,  -42,    0 }
+            { "effects/orb_spawn", 37,    -95,   22,    0 }
+            { "effects/orb_spawn", 38,    -31,   22,    0 }
+            { "effects/orb_spawn", 39,     33,   22,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 0,    -81,  -41,    0 }
+            { "effects/orb_spawn", 1,    -17,  -41,    0 }
+            { "effects/orb_spawn", 2,     47,  -41,    0 }
+            { "effects/orb_spawn", 3,    -81,   23,    0 }
+            { "effects/orb_spawn", 4,    -17,   23,    0 }
+            { "effects/orb_spawn", 5,     47,   23,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 0,    -81,  -41,    0 }
+            { "effects/orb_spawn", 1,    -17,  -41,    0 }
+            { "effects/orb_spawn", 2,     47,  -41,    0 }
+            { "effects/orb_spawn", 3,    -81,   23,    0 }
+            { "effects/orb_spawn", 4,    -17,   23,    0 }
+            { "effects/orb_spawn", 5,     47,   23,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 6,    -52,  -28,    0 }
+            { "effects/orb_spawn", 7,     12,  -28,    0 }
+            { "effects/orb_spawn", 8,     12,   36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 6,    -52,  -28,    0 }
+            { "effects/orb_spawn", 7,     12,  -28,    0 }
+            { "effects/orb_spawn", 8,     12,   36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 9,    -12,  -12,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##020    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 9,    -12,  -12,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##021    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 9,    -12,  -12,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##022    0    0
+        sprites
+        {
+            { "effects/orb_spawn", 9,    -12,  -12,    0 }
+        }
+
+    }
+}

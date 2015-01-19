@@ -1,0 +1,122 @@
+texture "sprites/effects/orb_spawn.png"
+
+// working\orb_spawn\sprite0065.tga
+sprite 0 0 0 64 64
+
+// working\orb_spawn\sprite0066.tga
+sprite 1 64 0 64 64
+
+// working\orb_spawn\sprite0067.tga
+sprite 2 128 0 44 64
+
+// working\orb_spawn\sprite0068.tga
+sprite 3 172 0 64 52
+
+// working\orb_spawn\sprite0069.tga
+sprite 4 236 0 64 52
+
+// working\orb_spawn\sprite0070.tga
+sprite 5 300 0 44 52
+
+// working\orb_spawn\sprite0071.tga
+sprite 6 344 0 64 64
+
+// working\orb_spawn\sprite0072.tga
+sprite 7 408 0 36 64
+
+// working\orb_spawn\sprite0073.tga
+sprite 8 444 0 36 17
+
+// working\orb_spawn\sprite0074.tga
+sprite 9 480 0 28 25
+
+// working\orb_spawn\sprite0075.tga
+sprite 10 444 25 64 64
+
+// working\orb_spawn\sprite0076.tga
+sprite 11 172 52 64 64
+
+// working\orb_spawn\sprite0077.tga
+sprite 12 236 52 28 64
+
+// working\orb_spawn\sprite0078.tga
+sprite 13 264 52 64 54
+
+// working\orb_spawn\sprite0079.tga
+sprite 14 0 64 64 54
+
+// working\orb_spawn\sprite0080.tga
+sprite 15 64 64 28 54
+
+// working\orb_spawn\sprite0081.tga
+sprite 16 92 64 64 64
+
+// working\orb_spawn\sprite0082.tga
+sprite 17 328 64 64 64
+
+// working\orb_spawn\sprite0083.tga
+sprite 18 392 64 44 64
+
+// working\orb_spawn\sprite0084.tga
+sprite 19 436 89 64 53
+
+// working\orb_spawn\sprite0085.tga
+sprite 20 264 106 64 53
+
+// working\orb_spawn\sprite0086.tga
+sprite 21 156 116 44 53
+
+// working\orb_spawn\sprite0087.tga
+sprite 22 200 116 64 64
+
+// working\orb_spawn\sprite0088.tga
+sprite 23 0 118 64 64
+
+// working\orb_spawn\sprite0089.tga
+sprite 24 64 128 64 64
+
+// working\orb_spawn\sprite0090.tga
+sprite 25 328 128 64 52
+
+// working\orb_spawn\sprite0091.tga
+sprite 26 392 142 64 52
+
+// working\orb_spawn\sprite0092.tga
+sprite 27 264 159 64 52
+
+// working\orb_spawn\sprite0093.tga
+sprite 28 128 169 64 64
+
+// working\orb_spawn\sprite0094.tga
+sprite 29 192 180 64 64
+
+// working\orb_spawn\sprite0095.tga
+sprite 30 456 142 56 64
+
+// working\orb_spawn\sprite0096.tga
+sprite 31 328 180 64 52
+
+// working\orb_spawn\sprite0097.tga
+sprite 32 0 182 64 52
+
+// working\orb_spawn\sprite0098.tga
+sprite 33 64 192 56 52
+
+// working\orb_spawn\sprite0099.tga
+sprite 34 392 194 64 64
+
+// working\orb_spawn\sprite0100.tga
+sprite 35 256 211 64 64
+
+// working\orb_spawn\sprite0101.tga
+sprite 36 320 232 60 64
+
+// working\orb_spawn\sprite0102.tga
+sprite 37 120 233 64 53
+
+// working\orb_spawn\sprite0103.tga
+sprite 38 0 234 64 53
+
+// working\orb_spawn\sprite0104.tga
+sprite 39 184 244 60 53
+

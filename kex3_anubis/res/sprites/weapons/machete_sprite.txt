@@ -1,0 +1,17 @@
+texture "sprites/weapons/machete.png"
+
+// working\weapon1\sprite0173.tga
+sprite 0 0 0 64 64
+
+// working\weapon1\sprite0174.tga
+sprite 1 64 0 64 64
+
+// working\weapon1\sprite0175.tga
+sprite 2 128 0 64 60
+
+// working\weapon1\sprite0176.tga
+sprite 3 192 0 64 60
+
+// working\weapon1\sprite0177.tga
+sprite 4 128 60 12 60
+

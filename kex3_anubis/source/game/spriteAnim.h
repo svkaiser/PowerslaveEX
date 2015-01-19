@@ -15,7 +15,7 @@
 #ifndef __SPRITEANIM_H__
 #define __SPRITEANIM_H__
 
-#include "sprite.h"
+class kexSprite;
 
 typedef struct
 {
@@ -30,8 +30,10 @@ typedef struct
 {
     uint16_t                    delay;
     uint16_t                    flags;
+    kexStr                      nextFrame;
     kexArray<spriteSet_t>       spriteSet;
 
+    bool                        HasNextFrame(void) { return nextFrame[0] != '-'; }
     const unsigned int          NumSpriteSets(void) const { return spriteSet.Length(); }
 } spriteFrame_t;
 

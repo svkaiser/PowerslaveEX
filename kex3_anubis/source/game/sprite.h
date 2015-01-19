@@ -15,6 +15,8 @@
 #ifndef __SPRITE_H__
 #define __SPRITE_H__
 
+#include "renderFont.h"
+
 typedef struct
 {
     int spriteID;

@@ -21,16 +21,11 @@
 #include "game.h"
 #include "titlescreen.h"
 #include "playLoop.h"
-#include "actor.h"
 #include "localization.h"
-#include "world.h"
-#include "cmodel.h"
-#include "player.h"
-#include "sprite.h"
-#include "spriteAnim.h"
 
-static kexGame gameLocal;
-kexGame *kex::cGame = &gameLocal;
+static kexGameLocal gameLocal;
+kexGameLoop *kex::cGame = &gameLocal;
+kexGameLocal *kexGame::cLocal = &gameLocal;
 
 //
 // map
@@ -55,7 +50,7 @@ COMMAND(map)
 
 COMMAND(noclip)
 {
-    kexGame *game = kex::cGame;
+    kexGameLocal *game = kexGame::cLocal;
     kexPuppet *puppet;
 
     if(kex::cCommands->GetArgc() < 1)
@@ -90,7 +85,7 @@ COMMAND(noclip)
 
 COMMAND(fly)
 {
-    kexGame *game = kex::cGame;
+    kexGameLocal *game = kexGame::cLocal;
     kexPuppet *puppet;
 
     if(kex::cCommands->GetArgc() < 1)
@@ -119,10 +114,10 @@ COMMAND(fly)
 }
 
 //
-// kexGame::kexGame
+// kexGameLocal::kexGameLocal
 //
 
-kexGame::kexGame(void)
+kexGameLocal::kexGameLocal(void)
 {
     this->smallFont         = NULL;
     this->bigFont           = NULL;
@@ -140,13 +135,15 @@ kexGame::kexGame(void)
     this->cmodel            = new kexCModel;
     this->spriteManager     = new kexSpriteManager;
     this->spriteAnimManager = new kexSpriteAnimManager;
+
+    memset(weaponInfo, 0, sizeof(weaponInfo_t) * NUMPLAYERWEAPONS);
 }
 
 //
-// kexGame::~kexGame
+// kexGameLocal::~kexGameLocal
 //
 
-kexGame::~kexGame(void)
+kexGameLocal::~kexGameLocal(void)
 {
     delete titleScreen;
     delete playLoop;
@@ -160,10 +157,10 @@ kexGame::~kexGame(void)
 }
 
 //
-// kexGame::Init
+// kexGameLocal::Init
 //
 
-void kexGame::Init(void)
+void kexGameLocal::Init(void)
 {
     kex::cActions->AddAction(IA_ATTACK, "attack");
     kex::cActions->AddAction(IA_JUMP, "jump");
@@ -178,11 +175,13 @@ void kexGame::Init(void)
 }
 
 //
-// kexGame::Start
+// kexGameLocal::Start
 //
 
-void kexGame::Start(void)
+void kexGameLocal::Start(void)
 {
+    weaponInfo_t *weapon;
+
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");
 
@@ -191,25 +190,94 @@ void kexGame::Start(void)
     spriteManager->Init();
     spriteAnimManager->Init();
 
-    player->Reset();
     pendingGameState = GS_TITLE;
+
+    //
+    // setup weapon info
+    //
+
+    // machete
+    weapon = &weaponInfo[PW_MACHETE];
+    weapon->type = PW_MACHETE;
+    weapon->offsetX = 160;
+    weapon->offsetY = 230;
+    weapon->idle = spriteAnimManager->Get("weapons/machete_idle");
+    weapon->raise = spriteAnimManager->Get("weapons/machete_raise");
+    weapon->fire = spriteAnimManager->Get("weapons/machete_fire");
+
+    // pistol
+    weapon = &weaponInfo[PW_PISTOL];
+    weapon->type = PW_PISTOL;
+    weapon->offsetX = 160;
+    weapon->offsetY = 232;
+    weapon->idle = spriteAnimManager->Get("weapons/pistol_idle");
+    weapon->raise = spriteAnimManager->Get("weapons/pistol_raise");
+    weapon->lower = spriteAnimManager->Get("weapons/pistol_lower");
+    weapon->fire = spriteAnimManager->Get("weapons/pistol_fire");
+
+    // M60
+    weapon = &weaponInfo[PW_M60];
+    weapon->type = PW_M60;
+    weapon->offsetX = 160;
+    weapon->offsetY = 132;
+    weapon->idle = spriteAnimManager->Get("weapons/m60_idle");
+    weapon->raise = spriteAnimManager->Get("weapons/m60_raise_100");
+    weapon->lower = spriteAnimManager->Get("weapons/m60_lower");
+    weapon->fire = spriteAnimManager->Get("weapons/m60_fire");
+
+    // bomb
+    weapon = &weaponInfo[PW_BOMBS];
+    weapon->type = PW_BOMBS;
+    weapon->offsetX = 160;
+    weapon->offsetY = 196;
+    weapon->idle = spriteAnimManager->Get("weapons/bomb_idle");
+    weapon->raise = spriteAnimManager->Get("weapons/bomb_raise");
+    weapon->lower = spriteAnimManager->Get("weapons/bomb_lower");
+    weapon->fire = spriteAnimManager->Get("weapons/bomb_fire");
+
+    // flamethrower
+    weapon = &weaponInfo[PW_FLAMETHROWER];
+    weapon->type = PW_FLAMETHROWER;
+    weapon->offsetX = 160;
+    weapon->offsetY = 132;
+
+    // cobra staff
+    weapon = &weaponInfo[PW_COBRASTAFF];
+    weapon->type = PW_COBRASTAFF;
+    weapon->offsetX = 160;
+    weapon->offsetY = 210;
+
+    // ring of ra
+    weapon = &weaponInfo[PW_RINGOFRA];
+    weapon->type = PW_RINGOFRA;
+    weapon->offsetX = 160;
+    weapon->offsetY = 214;
+
+    // bracelet
+    weapon = &weaponInfo[PW_BRACELET];
+    weapon->type = PW_BRACELET;
+    weapon->offsetX = 160;
+    weapon->offsetY = 208;
+
+    player->Reset();
 }
 
 //
-// kexGame::Shutdown
+// kexGameLocal::Stop
 //
 
-void kexGame::Shutdown(void)
+void kexGameLocal::Stop(void)
 {
     world->UnloadMap();
+    spriteAnimManager->Shutdown();
     spriteManager->Shutdown();
 }
 
 //
-// kexGame::Tick
+// kexGameLocal::Tick
 //
 
-void kexGame::Tick(void)
+void kexGameLocal::Tick(void)
 {
     if(pendingGameState != GS_NONE)
     {
@@ -257,10 +325,10 @@ void kexGame::Tick(void)
 }
 
 //
-// kexGame::Draw
+// kexGameLocal::Draw
 //
 
-void kexGame::Draw(void)
+void kexGameLocal::Draw(void)
 {
     if(pendingGameState != GS_NONE)
     {
@@ -271,10 +339,10 @@ void kexGame::Draw(void)
 }
 
 //
-// kexGame::ProcessInput
+// kexGameLocal::ProcessInput
 //
 
-bool kexGame::ProcessInput(inputEvent_t *ev)
+bool kexGameLocal::ProcessInput(inputEvent_t *ev)
 {
     switch(ev->type)
     {
@@ -297,23 +365,23 @@ bool kexGame::ProcessInput(inputEvent_t *ev)
 }
 
 //
-// kexGame::ConstructObject
+// kexGameLocal::ConstructObject
 //
 
-kexObject *kexGame::ConstructObject(const char *className)
+kexObject *kexGameLocal::ConstructObject(const char *className)
 {
     kexObject *obj;
     kexRTTI *objType;
     
     if(!(objType = kexObject::Get(className)))
     {
-        kex::cSystem->Error("kexGame::ConstructObject: unknown class (\"%s\")\n", className);
+        kex::cSystem->Error("kexGameLocal::ConstructObject: unknown class (\"%s\")\n", className);
         return NULL;
     }
         
     if(!(obj = objType->Create()))
     {
-        kex::cSystem->Error("kexGame::ConstructObject: could not spawn (\"%s\")\n", className);
+        kex::cSystem->Error("kexGameLocal::ConstructObject: could not spawn (\"%s\")\n", className);
         return NULL;
     }
     
@@ -321,36 +389,36 @@ kexObject *kexGame::ConstructObject(const char *className)
 }
 
 //
-// kexGame::ChangeMap
+// kexGameLocal::ChangeMap
 //
 
-void kexGame::ChangeMap(const char *name)
+void kexGameLocal::ChangeMap(const char *name)
 {
     SetGameState(GS_CHANGELEVEL);
     pendingMap = name;
 }
 
 //
-// kexGame::LoadMap
+// kexGameLocal::LoadMap
 //
 
-void kexGame::LoadNewMap(void)
+void kexGameLocal::LoadNewMap(void)
 {
     if(!world->LoadMap(pendingMap.c_str()))
     {
-        kex::cGame->SetGameState(GS_TITLE);
+        SetGameState(GS_TITLE);
         return;
     }
     
-    kex::cGame->SetGameState(GS_LEVEL);
+    SetGameState(GS_LEVEL);
 }
 
 //
-// kexGame::DrawSmallString
+// kexGameLocal::DrawSmallString
 //
 
-void kexGame::DrawSmallString(const char *string, float x, float y, float scale, bool center,
-                              byte r, byte g, byte b)
+void kexGameLocal::DrawSmallString(const char *string, float x, float y, float scale, bool center,
+                                   byte r, byte g, byte b)
 {
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     smallFont->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
@@ -358,11 +426,11 @@ void kexGame::DrawSmallString(const char *string, float x, float y, float scale,
 }
 
 //
-// kexGame::DrawBigString
+// kexGameLocal::DrawBigString
 //
 
-void kexGame::DrawBigString(const char *string, float x, float y, float scale, bool center,
-                            byte r, byte g, byte b)
+void kexGameLocal::DrawBigString(const char *string, float x, float y, float scale, bool center,
+                                 byte r, byte g, byte b)
 {
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     bigFont->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
@@ -370,10 +438,10 @@ void kexGame::DrawBigString(const char *string, float x, float y, float scale, b
 }
 
 //
-// kexGame::UpdateActors
+// kexGameLocal::UpdateActors
 //
 
-void kexGame::UpdateActors(void)
+void kexGameLocal::UpdateActors(void)
 {
     kexActor *next = NULL;
     
@@ -390,10 +458,10 @@ void kexGame::UpdateActors(void)
 }
 
 //
-// kexGame::RemoveActor
+// kexGameLocal::RemoveActor
 //
 
-void kexGame::RemoveActor(kexActor *actor)
+void kexGameLocal::RemoveActor(kexActor *actor)
 {
     actor->SetTarget(NULL);
     actor->Link().Remove();
@@ -402,10 +470,10 @@ void kexGame::RemoveActor(kexActor *actor)
 }
 
 //
-// kexGame::RemoveAllActors
+// kexGameLocal::RemoveAllActors
 //
 
-void kexGame::RemoveAllActors(void)
+void kexGameLocal::RemoveAllActors(void)
 {
     kexActor *actor;
     kexActor *next;
@@ -421,10 +489,10 @@ void kexGame::RemoveAllActors(void)
 }
 
 //
-// kexGame::SpawnActor
+// kexGameLocal::SpawnActor
 //
 
-kexActor *kexGame::SpawnActor(const int type, const float x, const float y, const float z, const float yaw)
+kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y, const float z, const float yaw)
 {
     kexActor *actor;
     

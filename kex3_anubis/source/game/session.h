@@ -17,6 +17,17 @@
 
 class kexTexture;
 
+class kexGameLoop
+{
+public:
+    virtual void        Init(void) {};
+    virtual void        Start(void) {};
+    virtual void        Stop(void) {};
+    virtual void        Draw(void) {};
+    virtual void        Tick(void) {};
+    virtual bool        ProcessInput(inputEvent_t *ev) { return false; }
+};
+
 class kexSession
 {
 public:

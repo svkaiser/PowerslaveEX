@@ -154,7 +154,7 @@ void kexSession::InitCursor(void)
 
 void kexSession::Shutdown(void)
 {
-    kex::cGame->Shutdown();
+    kex::cGame->Stop();
 }
 
 //

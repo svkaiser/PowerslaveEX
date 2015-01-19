@@ -1,0 +1,2134 @@
+m60_raise
+{
+    // frames:   20
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##001    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##002    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##003    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##004   65    0
+        sprites
+        {
+            { "weapons/m60", 4,     -6,   68,    0 }
+            { "weapons/m60", 5,     58,   68,    0 }
+            { "weapons/m60", 6,     -6,  132,    0 }
+            { "weapons/m60", 7,     58,  132,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/m60", 4,      2,   59,    0 }
+            { "weapons/m60", 5,     66,   59,    0 }
+            { "weapons/m60", 6,      2,  123,    0 }
+            { "weapons/m60", 7,     66,  123,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     10,   51,    0 }
+            { "weapons/m60", 5,     74,   51,    0 }
+            { "weapons/m60", 6,     10,  115,    0 }
+            { "weapons/m60", 7,     74,  115,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     21,   41,    0 }
+            { "weapons/m60", 5,     85,   41,    0 }
+            { "weapons/m60", 6,     21,  105,    0 }
+            { "weapons/m60", 7,     85,  105,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     33,   32,    0 }
+            { "weapons/m60", 5,     97,   32,    0 }
+            { "weapons/m60", 6,     33,   96,    0 }
+            { "weapons/m60", 7,     97,   96,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     45,   23,    0 }
+            { "weapons/m60", 5,    109,   23,    0 }
+            { "weapons/m60", 6,     45,   87,    0 }
+            { "weapons/m60", 7,    109,   87,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     45,   23,    0 }
+            { "weapons/m60", 5,    109,   23,    0 }
+            { "weapons/m60", 6,     45,   87,    0 }
+            { "weapons/m60", 7,    109,   87,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     50,   17,    0 }
+            { "weapons/m60", 5,    114,   17,    0 }
+            { "weapons/m60", 6,     50,   81,    0 }
+            { "weapons/m60", 7,    114,   81,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,   12,    0 }
+            { "weapons/m60", 5,    116,   12,    0 }
+            { "weapons/m60", 6,     52,   76,    0 }
+            { "weapons/m60", 7,    116,   76,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    8,    0 }
+            { "weapons/m60", 5,    116,    8,    0 }
+            { "weapons/m60", 6,     52,   72,    0 }
+            { "weapons/m60", 7,    116,   72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    5,    0 }
+            { "weapons/m60", 5,    116,    5,    0 }
+            { "weapons/m60", 6,     52,   69,    0 }
+            { "weapons/m60", 7,    116,   69,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    1,    0 }
+            { "weapons/m60", 5,    116,    1,    0 }
+            { "weapons/m60", 6,     52,   65,    0 }
+            { "weapons/m60", 7,    116,   65,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        goto "weapons/m60_idle"
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+}
+
+m60_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+}
+
+m60_lower
+{
+    // frames:   25
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    2,    0 }
+            { "weapons/m60", 5,    116,    2,    0 }
+            { "weapons/m60", 6,     52,   66,    0 }
+            { "weapons/m60", 7,    116,   66,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002   64    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    5,    0 }
+            { "weapons/m60", 5,    116,    5,    0 }
+            { "weapons/m60", 6,     52,   69,    0 }
+            { "weapons/m60", 7,    116,   69,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    9,    0 }
+            { "weapons/m60", 5,    116,    9,    0 }
+            { "weapons/m60", 6,     52,   73,    0 }
+            { "weapons/m60", 7,    116,   73,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,   14,    0 }
+            { "weapons/m60", 5,    116,   14,    0 }
+            { "weapons/m60", 6,     52,   78,    0 }
+            { "weapons/m60", 7,    116,   78,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,   20,    0 }
+            { "weapons/m60", 5,    116,   20,    0 }
+            { "weapons/m60", 6,     52,   84,    0 }
+            { "weapons/m60", 7,    116,   84,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,   27,    0 }
+            { "weapons/m60", 5,    116,   27,    0 }
+            { "weapons/m60", 6,     52,   91,    0 }
+            { "weapons/m60", 7,    116,   91,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,   35,    0 }
+            { "weapons/m60", 5,    116,   35,    0 }
+            { "weapons/m60", 6,     52,   99,    0 }
+            { "weapons/m60", 7,    116,   99,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,   44,    0 }
+            { "weapons/m60", 5,    116,   44,    0 }
+            { "weapons/m60", 6,     52,  108,    0 }
+            { "weapons/m60", 7,    116,  108,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,   54,    0 }
+            { "weapons/m60", 5,    116,   54,    0 }
+            { "weapons/m60", 6,     52,  118,    0 }
+            { "weapons/m60", 7,    116,  118,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,   65,    0 }
+            { "weapons/m60", 5,    116,   65,    0 }
+            { "weapons/m60", 6,     52,  129,    0 }
+            { "weapons/m60", 7,    116,  129,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##012    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##013    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##014    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##015    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##016    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##017    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##018    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##019    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##020    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##021    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##022    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##023    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##024    0    0 (no groups)
+        delay 1
+
+    }
+
+}
+
+m60_fire
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002   63  128
+        sprites
+        {
+            { "weapons/m60", 0,     43,  -11,    0 }
+            { "weapons/m60", 1,    107,  -11,    0 }
+            { "weapons/m60", 2,     43,   53,    0 }
+            { "weapons/m60", 3,    107,   53,    0 }
+            { "weapons/m60", 8,     54,   -3,    0 }
+            { "weapons/m60", 9,    118,   -3,    0 }
+            { "weapons/m60", 10,     54,   61,    0 }
+            { "weapons/m60", 11,    118,   61,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/m60", 0,     40,  -14,    0 }
+            { "weapons/m60", 1,    104,  -14,    0 }
+            { "weapons/m60", 2,     40,   50,    0 }
+            { "weapons/m60", 3,    104,   50,    0 }
+            { "weapons/m60", 8,     54,   -3,    0 }
+            { "weapons/m60", 9,    118,   -3,    0 }
+            { "weapons/m60", 10,     54,   61,    0 }
+            { "weapons/m60", 11,    118,   61,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006   63  128
+        sprites
+        {
+            { "weapons/m60", 0,     38,  -12,    0 }
+            { "weapons/m60", 1,    102,  -12,    0 }
+            { "weapons/m60", 2,     38,   52,    0 }
+            { "weapons/m60", 3,    102,   52,    0 }
+            { "weapons/m60", 8,     54,   -2,    0 }
+            { "weapons/m60", 9,    118,   -2,    0 }
+            { "weapons/m60", 10,     54,   62,    0 }
+            { "weapons/m60", 11,    118,   62,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/m60", 0,     54,  -14,    1 }
+            { "weapons/m60", 1,     38,  -14,    1 }
+            { "weapons/m60", 2,     54,   50,    1 }
+            { "weapons/m60", 3,     38,   50,    1 }
+            { "weapons/m60", 8,     54,   -2,    0 }
+            { "weapons/m60", 9,    118,   -2,    0 }
+            { "weapons/m60", 10,     54,   62,    0 }
+            { "weapons/m60", 11,    118,   62,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010   63  128
+        sprites
+        {
+            { "weapons/m60", 0,     38,   -9,    0 }
+            { "weapons/m60", 1,    102,   -9,    0 }
+            { "weapons/m60", 2,     38,   55,    0 }
+            { "weapons/m60", 3,    102,   55,    0 }
+            { "weapons/m60", 8,     55,   -3,    0 }
+            { "weapons/m60", 9,    119,   -3,    0 }
+            { "weapons/m60", 10,     55,   61,    0 }
+            { "weapons/m60", 11,    119,   61,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        goto "weapons/m60_idle"
+        sprites
+        {
+            { "weapons/m60", 0,     54,  -11,    1 }
+            { "weapons/m60", 1,     38,  -11,    1 }
+            { "weapons/m60", 2,     54,   53,    1 }
+            { "weapons/m60", 3,     38,   53,    1 }
+            { "weapons/m60", 8,     55,   -3,    0 }
+            { "weapons/m60", 9,    119,   -3,    0 }
+            { "weapons/m60", 10,     55,   61,    0 }
+            { "weapons/m60", 11,    119,   61,    0 }
+        }
+
+    }
+
+}
+
+m60_rounds_fire_100
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     59,   74,    0 }
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     59,   74,    0 }
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     59,   74,    0 }
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     59,   74,    0 }
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     59,   74,    0 }
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     59,   74,    0 }
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+}
+
+m60_rounds_fire_50
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     59,   74,    0 }
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     59,   74,    0 }
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     63,   67,    0 }
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   60,    0 }
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+}
+
+m60_rounds_fire_0
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     73,   54,    0 }
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     82,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##009    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##010    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##011    0    0 (no groups)
+        delay 1
+
+    }
+
+}
+
+m60_rounds_idle_100
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+}
+
+m60_rounds_idle_50
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+}
+
+m60_rounds_lower_100
+{
+    // frames:   25
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   70,    0 }
+            { "weapons/m60", 12,     57,   63,    0 }
+            { "weapons/m60", 12,     61,   56,    0 }
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   73,    0 }
+            { "weapons/m60", 12,     57,   66,    0 }
+            { "weapons/m60", 12,     61,   59,    0 }
+            { "weapons/m60", 12,     67,   53,    0 }
+            { "weapons/m60", 12,     76,   49,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   77,    0 }
+            { "weapons/m60", 12,     57,   70,    0 }
+            { "weapons/m60", 12,     61,   63,    0 }
+            { "weapons/m60", 12,     67,   57,    0 }
+            { "weapons/m60", 12,     76,   53,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   83,    0 }
+            { "weapons/m60", 12,     57,   76,    0 }
+            { "weapons/m60", 12,     61,   69,    0 }
+            { "weapons/m60", 12,     67,   63,    0 }
+            { "weapons/m60", 12,     76,   59,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   90,    0 }
+            { "weapons/m60", 12,     57,   83,    0 }
+            { "weapons/m60", 12,     61,   76,    0 }
+            { "weapons/m60", 12,     67,   70,    0 }
+            { "weapons/m60", 12,     76,   66,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     53,   99,    0 }
+            { "weapons/m60", 12,     57,   92,    0 }
+            { "weapons/m60", 12,     61,   85,    0 }
+            { "weapons/m60", 12,     67,   79,    0 }
+            { "weapons/m60", 12,     76,   75,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##007    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##008    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##009    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##010    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##011    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##012    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##013    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##014    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##015    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##016    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##017    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##018    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##019    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##020    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##021    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##022    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##023    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##024    0    0 (no groups)
+        delay 1
+
+    }
+
+}
+
+m60_rounds_lower_50
+{
+    // frames:   25
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   50,    0 }
+            { "weapons/m60", 12,     76,   46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   53,    0 }
+            { "weapons/m60", 12,     76,   49,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   57,    0 }
+            { "weapons/m60", 12,     76,   53,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   62,    0 }
+            { "weapons/m60", 12,     76,   58,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   68,    0 }
+            { "weapons/m60", 12,     76,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/m60", 12,     67,   75,    0 }
+            { "weapons/m60", 12,     76,   71,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##007    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##008    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##009    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##010    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##011    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##012    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##013    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##014    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##015    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##016    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##017    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##018    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##019    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##020    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##021    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##022    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##023    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##024    0    0 (no groups)
+        delay 1
+
+    }
+
+}
+
+m60_raise_100
+{
+    // frames:   20
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##001    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##002    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##003    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##004    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##005    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     -1,   70,    0 }
+            { "weapons/m60", 5,     63,   70,    0 }
+            { "weapons/m60", 6,     -1,  134,    0 }
+            { "weapons/m60", 7,     63,  134,    0 }
+            { "weapons/m60", 12,      2,  142,    0 }
+            { "weapons/m60", 12,      6,  135,    0 }
+            { "weapons/m60", 12,     10,  128,    0 }
+            { "weapons/m60", 12,     16,  122,    0 }
+            { "weapons/m60", 12,     25,  118,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/m60", 4,      2,   59,    0 }
+            { "weapons/m60", 5,     66,   59,    0 }
+            { "weapons/m60", 6,      2,  123,    0 }
+            { "weapons/m60", 7,     66,  123,    0 }
+            { "weapons/m60", 12,      5,  131,    0 }
+            { "weapons/m60", 12,      9,  124,    0 }
+            { "weapons/m60", 12,     13,  117,    0 }
+            { "weapons/m60", 12,     19,  111,    0 }
+            { "weapons/m60", 12,     28,  107,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/m60", 4,      6,   50,    0 }
+            { "weapons/m60", 5,     70,   50,    0 }
+            { "weapons/m60", 6,      6,  114,    0 }
+            { "weapons/m60", 7,     70,  114,    0 }
+            { "weapons/m60", 12,      9,  122,    0 }
+            { "weapons/m60", 12,     13,  115,    0 }
+            { "weapons/m60", 12,     17,  108,    0 }
+            { "weapons/m60", 12,     23,  102,    0 }
+            { "weapons/m60", 12,     32,   98,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     14,   39,    0 }
+            { "weapons/m60", 5,     78,   39,    0 }
+            { "weapons/m60", 6,     14,  103,    0 }
+            { "weapons/m60", 7,     78,  103,    0 }
+            { "weapons/m60", 12,     17,  111,    0 }
+            { "weapons/m60", 12,     21,  104,    0 }
+            { "weapons/m60", 12,     25,   97,    0 }
+            { "weapons/m60", 12,     31,   91,    0 }
+            { "weapons/m60", 12,     40,   87,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     20,   32,    0 }
+            { "weapons/m60", 5,     84,   32,    0 }
+            { "weapons/m60", 6,     20,   96,    0 }
+            { "weapons/m60", 7,     84,   96,    0 }
+            { "weapons/m60", 12,     23,  104,    0 }
+            { "weapons/m60", 12,     27,   97,    0 }
+            { "weapons/m60", 12,     31,   90,    0 }
+            { "weapons/m60", 12,     37,   84,    0 }
+            { "weapons/m60", 12,     46,   80,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     26,   25,    0 }
+            { "weapons/m60", 5,     90,   25,    0 }
+            { "weapons/m60", 6,     26,   89,    0 }
+            { "weapons/m60", 7,     90,   89,    0 }
+            { "weapons/m60", 12,     29,   97,    0 }
+            { "weapons/m60", 12,     33,   90,    0 }
+            { "weapons/m60", 12,     37,   83,    0 }
+            { "weapons/m60", 12,     43,   77,    0 }
+            { "weapons/m60", 12,     52,   73,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     32,   20,    0 }
+            { "weapons/m60", 5,     96,   20,    0 }
+            { "weapons/m60", 6,     32,   84,    0 }
+            { "weapons/m60", 7,     96,   84,    0 }
+            { "weapons/m60", 12,     35,   92,    0 }
+            { "weapons/m60", 12,     39,   85,    0 }
+            { "weapons/m60", 12,     43,   78,    0 }
+            { "weapons/m60", 12,     49,   72,    0 }
+            { "weapons/m60", 12,     58,   68,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     40,   16,    0 }
+            { "weapons/m60", 5,    104,   16,    0 }
+            { "weapons/m60", 6,     40,   80,    0 }
+            { "weapons/m60", 7,    104,   80,    0 }
+            { "weapons/m60", 12,     43,   88,    0 }
+            { "weapons/m60", 12,     47,   81,    0 }
+            { "weapons/m60", 12,     51,   74,    0 }
+            { "weapons/m60", 12,     57,   68,    0 }
+            { "weapons/m60", 12,     66,   64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     49,   11,    0 }
+            { "weapons/m60", 5,    113,   11,    0 }
+            { "weapons/m60", 6,     49,   75,    0 }
+            { "weapons/m60", 7,    113,   75,    0 }
+            { "weapons/m60", 12,     52,   83,    0 }
+            { "weapons/m60", 12,     56,   76,    0 }
+            { "weapons/m60", 12,     60,   69,    0 }
+            { "weapons/m60", 12,     66,   63,    0 }
+            { "weapons/m60", 12,     75,   59,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     51,   10,    0 }
+            { "weapons/m60", 5,    115,   10,    0 }
+            { "weapons/m60", 6,     51,   74,    0 }
+            { "weapons/m60", 7,    115,   74,    0 }
+            { "weapons/m60", 12,     54,   82,    0 }
+            { "weapons/m60", 12,     58,   75,    0 }
+            { "weapons/m60", 12,     62,   68,    0 }
+            { "weapons/m60", 12,     68,   62,    0 }
+            { "weapons/m60", 12,     77,   58,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    6,    0 }
+            { "weapons/m60", 5,    116,    6,    0 }
+            { "weapons/m60", 6,     52,   70,    0 }
+            { "weapons/m60", 7,    116,   70,    0 }
+            { "weapons/m60", 12,     55,   78,    0 }
+            { "weapons/m60", 12,     59,   71,    0 }
+            { "weapons/m60", 12,     63,   64,    0 }
+            { "weapons/m60", 12,     69,   58,    0 }
+            { "weapons/m60", 12,     78,   54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    2,    0 }
+            { "weapons/m60", 5,    116,    2,    0 }
+            { "weapons/m60", 6,     52,   66,    0 }
+            { "weapons/m60", 7,    116,   66,    0 }
+            { "weapons/m60", 12,     55,   74,    0 }
+            { "weapons/m60", 12,     59,   67,    0 }
+            { "weapons/m60", 12,     63,   60,    0 }
+            { "weapons/m60", 12,     69,   54,    0 }
+            { "weapons/m60", 12,     78,   50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        goto "weapons/m60_idle"
+        sprites
+        {
+            { "weapons/m60", 4,     50,    0,    0 }
+            { "weapons/m60", 5,    114,    0,    0 }
+            { "weapons/m60", 6,     50,   64,    0 }
+            { "weapons/m60", 7,    114,   64,    0 }
+            { "weapons/m60", 12,     53,   72,    0 }
+            { "weapons/m60", 12,     57,   65,    0 }
+            { "weapons/m60", 12,     61,   58,    0 }
+            { "weapons/m60", 12,     67,   52,    0 }
+            { "weapons/m60", 12,     76,   48,    0 }
+        }
+
+    }
+
+}
+
+m60_raise_50
+{
+    // frames:   20
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##001    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##002    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##003    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##004    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##005    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##007    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/m60", 4,      3,   67,    0 }
+            { "weapons/m60", 5,     67,   67,    0 }
+            { "weapons/m60", 6,      3,  131,    0 }
+            { "weapons/m60", 7,     67,  131,    0 }
+            { "weapons/m60", 12,     20,  119,    0 }
+            { "weapons/m60", 12,     29,  115,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/m60", 4,      5,   57,    0 }
+            { "weapons/m60", 5,     69,   57,    0 }
+            { "weapons/m60", 6,      5,  121,    0 }
+            { "weapons/m60", 7,     69,  121,    0 }
+            { "weapons/m60", 12,     22,  109,    0 }
+            { "weapons/m60", 12,     31,  105,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/m60", 4,      9,   48,    0 }
+            { "weapons/m60", 5,     73,   48,    0 }
+            { "weapons/m60", 6,      9,  112,    0 }
+            { "weapons/m60", 7,     73,  112,    0 }
+            { "weapons/m60", 12,     26,  100,    0 }
+            { "weapons/m60", 12,     35,   96,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     13,   41,    0 }
+            { "weapons/m60", 5,     77,   41,    0 }
+            { "weapons/m60", 6,     13,  105,    0 }
+            { "weapons/m60", 7,     77,  105,    0 }
+            { "weapons/m60", 12,     30,   93,    0 }
+            { "weapons/m60", 12,     39,   89,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     20,   31,    0 }
+            { "weapons/m60", 5,     84,   31,    0 }
+            { "weapons/m60", 6,     20,   95,    0 }
+            { "weapons/m60", 7,     84,   95,    0 }
+            { "weapons/m60", 12,     37,   83,    0 }
+            { "weapons/m60", 12,     46,   79,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     28,   23,    0 }
+            { "weapons/m60", 5,     92,   23,    0 }
+            { "weapons/m60", 6,     28,   87,    0 }
+            { "weapons/m60", 7,     92,   87,    0 }
+            { "weapons/m60", 12,     45,   75,    0 }
+            { "weapons/m60", 12,     54,   71,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     36,   14,    0 }
+            { "weapons/m60", 5,    100,   14,    0 }
+            { "weapons/m60", 6,     36,   78,    0 }
+            { "weapons/m60", 7,    100,   78,    0 }
+            { "weapons/m60", 12,     53,   66,    0 }
+            { "weapons/m60", 12,     62,   62,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     44,    8,    0 }
+            { "weapons/m60", 5,    108,    8,    0 }
+            { "weapons/m60", 6,     44,   72,    0 }
+            { "weapons/m60", 7,    108,   72,    0 }
+            { "weapons/m60", 12,     61,   60,    0 }
+            { "weapons/m60", 12,     70,   56,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     56,    3,    0 }
+            { "weapons/m60", 5,    120,    3,    0 }
+            { "weapons/m60", 6,     56,   67,    0 }
+            { "weapons/m60", 7,    120,   67,    0 }
+            { "weapons/m60", 12,     73,   55,    0 }
+            { "weapons/m60", 12,     82,   51,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     54,    1,    0 }
+            { "weapons/m60", 5,    118,    1,    0 }
+            { "weapons/m60", 6,     54,   65,    0 }
+            { "weapons/m60", 7,    118,   65,    0 }
+            { "weapons/m60", 12,     71,   53,    0 }
+            { "weapons/m60", 12,     80,   49,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "weapons/m60", 4,     52,    0,    0 }
+            { "weapons/m60", 5,    116,    0,    0 }
+            { "weapons/m60", 6,     52,   64,    0 }
+            { "weapons/m60", 7,    116,   64,    0 }
+            { "weapons/m60", 12,     69,   52,    0 }
+            { "weapons/m60", 12,     78,   48,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        goto "weapons/m60_idle"
+        sprites
+        {
+            { "weapons/m60", 4,     50,    0,    0 }
+            { "weapons/m60", 5,    114,    0,    0 }
+            { "weapons/m60", 6,     50,   64,    0 }
+            { "weapons/m60", 7,    114,   64,    0 }
+            { "weapons/m60", 12,     67,   52,    0 }
+            { "weapons/m60", 12,     76,   48,    0 }
+        }
+
+    }
+
+}

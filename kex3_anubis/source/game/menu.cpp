@@ -16,6 +16,7 @@
 //
 
 #include "kexlib.h"
+#include "game.h"
 #include "renderMain.h"
 #include "menu.h"
 
@@ -126,8 +127,8 @@ void kexMenuItem::Move(void)
 
 bool kexMenuItem::OnCursor(void)
 {
-    float width = kex::cGame->BigFont()->StringWidth(label.c_str(), scale, 0) * 0.5f;
-    float height = kex::cGame->BigFont()->StringHeight(label.c_str(), scale, 0) * 0.5f;
+    float width = kexGame::cLocal->BigFont()->StringWidth(label.c_str(), scale, 0) * 0.5f;
+    float height = kexGame::cLocal->BigFont()->StringHeight(label.c_str(), scale, 0) * 0.5f;
     float sy = y + height;
     float mx = (float)kex::cInput->MouseX();
     float my = (float)kex::cInput->MouseY();
@@ -169,9 +170,9 @@ void kexMenuItem::Tick(void)
 void kexMenuItem::DrawSmallString(const char *string, float x, float y, float scale, bool center, bool flash)
 {
     byte c = (flash || bSelected || bDisabled) ? 255 : 224;
-    kexFont *font = kex::cGame->SmallFont();
+    kexFont *font = kexGame::cLocal->SmallFont();
 
-    kex::cGame->DrawSmallString(string, x, y, scale, center, c, c, c);
+    kexGame::cLocal->DrawSmallString(string, x, y, scale, center, c, c, c);
 
     if(flash)
     {
@@ -189,9 +190,9 @@ void kexMenuItem::DrawSmallString(const char *string, float x, float y, float sc
 void kexMenuItem::DrawBigString(const char *string, float x, float y, float scale, bool center, bool flash)
 {
     byte c = (flash || bSelected || bDisabled) ? 255 : 224;
-    kexFont *font = kex::cGame->BigFont();
+    kexFont *font = kexGame::cLocal->BigFont();
 
-    kex::cGame->DrawBigString(string, x, y, scale, center, c, c, c);
+    kexGame::cLocal->DrawBigString(string, x, y, scale, center, c, c, c);
 
     if(flash)
     {

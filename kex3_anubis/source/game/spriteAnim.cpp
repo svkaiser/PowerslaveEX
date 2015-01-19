@@ -18,8 +18,6 @@
 #include "kexlib.h"
 #include "game.h"
 #include "renderMain.h"
-#include "sprite.h"
-#include "spriteAnim.h"
 
 //
 // kexSpriteAnimManager::kexSpriteAnimManager
@@ -95,7 +93,7 @@ void kexSpriteAnimManager::ParseSpriteSet(kexLexer *lexer, spriteFrame_t *frame)
             sprSet.bFlipped = false;
 
             lexer->GetString();
-            sprSet.sprite = kex::cGame->SpriteManager()->Get(lexer->StringToken());
+            sprSet.sprite = kexGame::cLocal->SpriteManager()->Get(lexer->StringToken());
             lexer->ExpectNextToken(TK_COMMA);
 
             sprSet.index = lexer->GetNumber();
@@ -131,6 +129,11 @@ void kexSpriteAnimManager::ParseFrame(kexLexer *lexer, spriteFrame_t *frame)
         if(lexer->Matches("delay"))
         {
             frame->delay = lexer->GetNumber();
+        }
+        else if(lexer->Matches("goto"))
+        {
+            lexer->GetString();
+            frame->nextFrame = lexer->StringToken();
         }
         else if(lexer->Matches("sprites"))
         {
@@ -188,6 +191,7 @@ void kexSpriteAnimManager::Load(const char *name)
 
                     frame->delay = 1;
                     frame->flags = 0;
+                    frame->nextFrame = "-";
 
                     // enter frame block
                     ParseFrame(lexer, frame);

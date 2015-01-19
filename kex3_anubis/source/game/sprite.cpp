@@ -16,9 +16,8 @@
 //
 
 #include "kexlib.h"
-#include "game.h"
 #include "renderMain.h"
-#include "sprite.h"
+#include "game.h"
 
 //-----------------------------------------------------------------------------
 //
@@ -186,8 +185,8 @@ kexSprite *kexSpriteManager::Load(const char *name)
 
                     info.u[0] = (float)info.atlas.x / w;
                     info.v[0] = (float)info.atlas.y / h;
-                    info.u[1] = (float)info.atlas.w / w + info.u[0];
-                    info.v[1] = (float)info.atlas.h / h + info.v[0];
+                    info.u[1] = (float)(info.atlas.x + info.atlas.w) / w;
+                    info.v[1] = (float)(info.atlas.y + info.atlas.h) / h;
                 }
 
                 sprite->infoList.Push(info);

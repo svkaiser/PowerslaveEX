@@ -1,0 +1,17 @@
+texture "sprites/weapons/bomb.png"
+
+// working\weapon4\sprite0190.tga
+sprite 0 0 0 64 64
+
+// working\weapon4\sprite0191.tga
+sprite 1 64 0 36 64
+
+// working\weapon4\sprite0192.tga
+sprite 2 100 0 64 64
+
+// working\weapon4\sprite0193.tga
+sprite 3 164 0 20 64
+
+// working\weapon4\sprite0194.tga
+sprite 4 184 0 64 6
+

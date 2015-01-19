@@ -61,8 +61,8 @@ public:
     bool                Verify(const char *name);
 
 private:
-    const static int    CMD_MAX_ARGV    = 32;
-    const static int    CMD_BUFFER_LEN  = 256;
+    const static int    CMD_MAX_ARGV    = 64;
+    const static int    CMD_BUFFER_LEN  = 1024;
 
     void                ClearArgv(void);
     bool                Run(void);

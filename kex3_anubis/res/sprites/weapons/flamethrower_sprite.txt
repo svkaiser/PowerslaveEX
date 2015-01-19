@@ -1,0 +1,71 @@
+texture "sprites/weapons/flamethrower.png"
+
+// working\weapon5\sprite0195.tga
+sprite 0 0 0 64 64
+
+// working\weapon5\sprite0196.tga
+sprite 1 64 0 64 64
+
+// working\weapon5\sprite0197.tga
+sprite 2 128 0 36 64
+
+// working\weapon5\sprite0198.tga
+sprite 3 164 0 64 6
+
+// working\weapon5\sprite0199.tga
+sprite 4 228 0 64 6
+
+// working\weapon5\sprite0200.tga
+sprite 5 292 0 36 6
+
+// working\weapon5\sprite0201.tga
+sprite 6 328 0 8 29
+
+// working\weapon5\sprite0202.tga
+sprite 7 336 0 8 6
+
+// working\weapon5\sprite0203.tga
+sprite 8 344 0 4 26
+
+// working\weapon5\sprite0204.tga
+sprite 9 348 0 64 64
+
+// working\weapon5\sprite0205.tga
+sprite 10 412 0 64 64
+
+// working\weapon5\sprite0206.tga
+sprite 11 476 0 36 64
+
+// working\weapon5\sprite0207.tga
+sprite 12 512 0 64 6
+
+// working\weapon5\sprite0208.tga
+sprite 13 576 0 64 6
+
+// working\weapon5\sprite0209.tga
+sprite 14 640 0 36 6
+
+// working\weapon5\sprite0210.tga
+sprite 15 676 0 8 7
+
+// working\weapon5\sprite0211.tga
+sprite 16 684 0 8 29
+
+// working\weapon5\sprite0212.tga
+sprite 17 692 0 4 6
+
+// working\weapon5\sprite0213.tga
+sprite 18 696 0 8 28
+
+// working\weapon5\sprite0214.tga
+sprite 19 704 0 8 5
+
+// working\weapon5\sprite0215.tga
+sprite 20 712 0 8 9
+
+// working\weapon5\sprite0216.tga
+sprite 21 720 0 4 8
+
+// working\weapon5\sprite0217.tga
+sprite 22 724 0 4 4
+
