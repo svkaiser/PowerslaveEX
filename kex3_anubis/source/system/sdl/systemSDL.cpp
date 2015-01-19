@@ -91,8 +91,6 @@ kexSystemSDL::~kexSystemSDL(void)
 void kexSystemSDL::Shutdown(void)
 {
     bShuttingDown = true;
-
-    WriteConfigFile();
     
     kex::cSession->Shutdown();
     kexRender::cBackend->Shutdown();
@@ -536,10 +534,6 @@ void kexSystemSDL::Main(int argc, char **argv)
     kex::cInput->Init();
     kex::cPakFiles->Init();
     kex::cGame->Init();
-    
-    ReadConfigFile("config.cfg");
-
-    kex::cPakFiles->LoadZipFile("game.kpf");
     
     InitVideo();
 

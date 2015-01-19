@@ -172,6 +172,9 @@ void kexGameLocal::Init(void)
     kex::cActions->AddAction(IA_STRAFERIGHT, "straferight");
     kex::cActions->AddAction(IA_WEAPNEXT, "+weapnext");
     kex::cActions->AddAction(IA_WEAPPREV, "+weapprev");
+    
+    kex::cSystem->ReadConfigFile("config.cfg");
+    kex::cPakFiles->LoadZipFile("game.kpf");
 }
 
 //
@@ -269,6 +272,8 @@ void kexGameLocal::Start(void)
 
 void kexGameLocal::Stop(void)
 {
+    kex::cSystem->WriteConfigFile();
+    
     world->UnloadMap();
     spriteAnimManager->Shutdown();
     spriteManager->Shutdown();
