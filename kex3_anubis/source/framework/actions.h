@@ -53,7 +53,7 @@ public:
     void                    BindCommand(int key, const char *string);
     void                    ListBindings(void);
     
-    const int               GetAction(const int id) const { return heldActions[id]; }
+    const int               GetAction(const int id);
     keycmd_t                *KeyCommands(void) { return keycmds; }
 
 private:

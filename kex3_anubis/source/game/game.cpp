@@ -203,6 +203,7 @@ void kexGameLocal::Start(void)
     weapon->offsetY = 230;
     weapon->idle = spriteAnimManager->Get("weapons/machete_idle");
     weapon->raise = spriteAnimManager->Get("weapons/machete_raise");
+    weapon->lower = spriteAnimManager->Get("weapons/machete_lower");
     weapon->fire = spriteAnimManager->Get("weapons/machete_fire");
 
     // pistol

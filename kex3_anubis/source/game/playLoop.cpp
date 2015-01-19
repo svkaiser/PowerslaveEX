@@ -259,6 +259,7 @@ void kexPlayLoop::Draw(void)
                     float y = (float)spriteSet->y;
                     float w = (float)info->atlas.w;
                     float h = (float)info->atlas.h;
+                    byte c;
 
                     float u1, u2, v1, v2;
                     
@@ -271,10 +272,12 @@ void kexPlayLoop::Draw(void)
 
                     sprite->Texture()->Bind();
 
-                    x += p->WeaponBobX() + 160;
-                    y += p->WeaponBobY() + 132;
+                    x += p->WeaponBobX() + weaponInfo->offsetX;
+                    y += p->WeaponBobY() + weaponInfo->offsetY;
 
-                    vl->AddQuad(x, y + 8, 0, w, h, u1, v1, u2, v2, 255, 255, 255, 255);
+                    c = (byte)(p->Actor()->Sector()->lightLevel << 1);
+
+                    vl->AddQuad(x, y + 8, 0, w, h, u1, v1, u2, v2, c, c, c, 255);
                     vl->DrawElements();
                 }
             }

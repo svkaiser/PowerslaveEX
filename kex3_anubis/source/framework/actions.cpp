@@ -375,19 +375,9 @@ void kexInputAction::ExecuteCommand(int key, bool keyup, const int eventType)
     {
         if(cmd->action != NULL)
         {
-            if(cmd->command[0] == '+' || cmd->command[0] == '-')
+            if(cmd->command[0] == '+')
             {
-                if(keyup && cmd->command[0] == '+')
-                {
-                    cmd->command[0] = '-';
-                }
-
-                heldActions[cmd->action->keyid] = (cmd->command[0] != '-');
-
-                if(keyup && cmd->command[0] == '-')
-                {
-                    cmd->command[0] = '+';
-                }
+                heldActions[cmd->action->keyid] = !keyup ? -1 : 0;
             }
             else
             {
@@ -399,6 +389,23 @@ void kexInputAction::ExecuteCommand(int key, bool keyup, const int eventType)
             kex::cCommands->Execute(cmd->command);
         }
     }
+}
+
+//
+// kexInputAction::GetAction
+//
+
+const int kexInputAction::GetAction(const int id)
+{
+    int action = heldActions[id];
+
+    if(action < 0)
+    {
+        heldActions[id] = 0;
+        action = -action;
+    }
+
+    return action;
 }
 
 //
