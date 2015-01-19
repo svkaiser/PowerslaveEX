@@ -143,7 +143,10 @@ type *kexStack<type>::Get(void)
         
         // allocate new array
         newdata = new type[length];
-        memcpy(newdata, olddata, aidx * sizeof(type));
+        for(unsigned int i = 0; i < aidx; ++i)
+        {
+            newdata[i] = olddata[i];
+        }
         
         data = newdata;
         delete[] olddata;
@@ -176,7 +179,10 @@ void kexStack<type>::Set(type t)
         
         // allocate new array
         newdata = new type[length];
-        memcpy(newdata, olddata, aidx * sizeof(type));
+        for(unsigned int i = 0; i < aidx; ++i)
+        {
+            newdata[i] = olddata[i];
+        }
         
         data = newdata;
         delete[] olddata;
