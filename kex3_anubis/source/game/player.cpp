@@ -35,6 +35,8 @@ const int kexPlayer::maxAmmo[NUMPLAYERWEAPONS] =
 //
 // kexPuppet
 //
+// The actor in the world controlled by the client
+//
 //-----------------------------------------------------------------------------
 
 DECLARE_CLASS(kexPuppet, kexActor)
@@ -67,6 +69,7 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     kexVec3 forward, right;
     mapSector_t *oldSector;
     
+    // update angles
     yaw += cmd->Angles()[0];
     pitch += cmd->Angles()[1];
     roll -= (cmd->Angles()[0] * 0.25f);
@@ -76,18 +79,24 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     
     kexVec3::ToAxis(&forward, NULL, &right, yaw, 0, 0);
 
+    // apply friction
     velocity.x *= PMOVE_FRICTION;
     velocity.y *= PMOVE_FRICTION;
 
+    // handle jumping
     if(cmd->Buttons() & BC_JUMP)
     {
         if(!(playerFlags & PF_USERJUMPED))
         {
             if(!(playerFlags & PF_JUMPING))
             {
+                // let the actor object know that
+                // it is now jumping
                 playerFlags |= PF_JUMPING;
             }
 
+            // handle longer jumps if holding down
+            // the jump key/button
             if(jumpTicks < PMOVE_MAX_JUMPTICKS)
             {
                 velocity.z = PMOVE_SPEED_JUMP;
@@ -95,22 +104,29 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
             }
             else
             {
+                // let client know that we're jumping and
+                // no longer have control of vertical movement
                 playerFlags |= PF_USERJUMPED;
             }
         }
     }
     else
     {
+        // jump key/button was released, check if we're actually moving first
         if(kexMath::Fabs(velocity.z) >= PMOVE_MIN || playerFlags & PF_JUMPING)
         {
+            // once the jump key/button is released, we
+            // no longer have control of vertical movement
             playerFlags |= PF_USERJUMPED;
         }
         else if(playerFlags & PF_USERJUMPED)
         {
+            // allow jump inputs from the client
             playerFlags &= ~PF_USERJUMPED;
         }
     }
     
+    // check for drop-offs
     if(origin.z > floorHeight)
     {
         velocity.z -= PMOVE_SPEED_FALL;
@@ -150,12 +166,14 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         velocity.y += right.y * PMOVE_SPEED;
     }
 
+    // bump ceiling
     if((origin.z + height) + velocity.z >= ceilingHeight)
     {
         origin.z = ceilingHeight - height;
         velocity.z = -1;
     }
     
+    // bump floor
     if(origin.z + velocity.z <= floorHeight)
     {
         if(velocity.z < -3.5f)
@@ -176,6 +194,7 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         velocity.Clear();
     }
 
+    // handle smooth stepping when going down on slopes
     if(oldSector == sector && velocity.z <= 0 && sector->floorFace->plane.IsFacing(velocity.ToYaw()))
     {
         float diff = origin.z - floorHeight;
@@ -360,6 +379,18 @@ void kexPlayer::Reset(void)
 }
 
 //
+// kexPlayer::Ready
+//
+
+void kexPlayer::Ready(void)
+{
+    weaponAnim = kexGame::cLocal->WeaponInfo(currentWeapon)->raise;
+    weaponState = WS_RAISE;
+    weaponFrame = 0;
+    weaponTicks = 0;
+}
+
+//
 // kexPlayer::UpdateWeaponBob
 //
 
@@ -510,16 +541,20 @@ void kexPlayer::UpdateWeaponSprite(void)
     }
 
     frame = &weaponAnim->frames[weaponFrame];
-
     weaponTicks += (1.0f / (float)frame->delay) * 0.5f;
+    
+    // handle advancing to next frame
     if(weaponTicks >= 1)
     {
         weaponTicks = 0;
         
+        // reached the end of the frame?
         if(++weaponFrame >= (int16_t)weaponAnim->NumFrames())
         {
+            // loop back
             weaponFrame = 0;
 
+            // if lowering weapon, then switch to pending weapon
             if(weaponState == WS_LOWER)
             {
                 currentWeapon = pendingWeapon;
@@ -532,7 +567,15 @@ void kexPlayer::UpdateWeaponSprite(void)
 
     weaponInfo = kexGame::cLocal->WeaponInfo(currentWeapon);
 
-    if(frame->HasNextFrame())
+    // handle re-fire
+    if(frame->HasRefireFrame() && cmd.Buttons() & BC_ATTACK)
+    {
+        weaponAnim = kexGame::cLocal->SpriteAnimManager()->Get(frame->refireFrame);
+        weaponFrame = 0;
+        weaponTicks = 0;
+    }
+    // handle goto jumps
+    else if(frame->HasNextFrame())
     {
         weaponAnim = kexGame::cLocal->SpriteAnimManager()->Get(frame->nextFrame);
         weaponFrame = 0;

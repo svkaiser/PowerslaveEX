@@ -536,6 +536,7 @@ m60_fire
     frame
     {
         // ##002   63  128
+        fullbright
         sprites
         {
             { "weapons/m60", 0,     43,  -11,    0 }
@@ -596,6 +597,7 @@ m60_fire
     frame
     {
         // ##006   63  128
+        fullbright
         sprites
         {
             { "weapons/m60", 0,     38,  -12,    0 }
@@ -656,6 +658,7 @@ m60_fire
     frame
     {
         // ##010   63  128
+        fullbright
         sprites
         {
             { "weapons/m60", 0,     38,   -9,    0 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
+		41B817371A6D6EF500151622 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B817331A6D6EF500151622 /* sprite.cpp */; };
+		41B817381A6D6EF500151622 /* spriteAnim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B817351A6D6EF500151622 /* spriteAnim.cpp */; };
 		41B96A9F1A697996004397E6 /* spriteMake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B96A9D1A697996004397E6 /* spriteMake.cpp */; };
 		41BAB9121A5EF32100DD0D11 /* actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BAB90E1A5EF32100DD0D11 /* actor.cpp */; };
 		41BAB9131A5EF32100DD0D11 /* playLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BAB9101A5EF32100DD0D11 /* playLoop.cpp */; };
@@ -127,6 +129,10 @@
 		41B3A5481A5DEE84006DCCB9 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
 		41B3A54A1A5DEEBC006DCCB9 /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = console.cpp; sourceTree = "<group>"; };
 		41B3A54B1A5DEEBC006DCCB9 /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = console.h; sourceTree = "<group>"; };
+		41B817331A6D6EF500151622 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sprite.cpp; path = ../../source/game/sprite.cpp; sourceTree = "<group>"; };
+		41B817341A6D6EF500151622 /* sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sprite.h; path = ../../source/game/sprite.h; sourceTree = "<group>"; };
+		41B817351A6D6EF500151622 /* spriteAnim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spriteAnim.cpp; path = ../../source/game/spriteAnim.cpp; sourceTree = "<group>"; };
+		41B817361A6D6EF500151622 /* spriteAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spriteAnim.h; path = ../../source/game/spriteAnim.h; sourceTree = "<group>"; };
 		41B96A9D1A697996004397E6 /* spriteMake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spriteMake.cpp; path = ../../source/tools/spriteMake.cpp; sourceTree = "<group>"; };
 		41B96A9E1A697996004397E6 /* spriteMake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spriteMake.h; path = ../../source/tools/spriteMake.h; sourceTree = "<group>"; };
 		41BAB90B1A5EF30E00DD0D11 /* sdNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdNodes.h; sourceTree = "<group>"; };
@@ -295,6 +301,8 @@
 				41C7FC381A5AFB84003864CB /* playerCmd.cpp */,
 				41BAB9101A5EF32100DD0D11 /* playLoop.cpp */,
 				41C7FC3A1A5AFB84003864CB /* session.cpp */,
+				41B817331A6D6EF500151622 /* sprite.cpp */,
+				41B817351A6D6EF500151622 /* spriteAnim.cpp */,
 				41C7FC3C1A5AFB84003864CB /* titlescreen.cpp */,
 				41C7FC3E1A5AFB84003864CB /* world.cpp */,
 				41BAB90F1A5EF32100DD0D11 /* actor.h */,
@@ -307,6 +315,8 @@
 				41C7FC391A5AFB84003864CB /* playerCmd.h */,
 				41BAB9111A5EF32100DD0D11 /* playLoop.h */,
 				41C7FC3B1A5AFB84003864CB /* session.h */,
+				41B817341A6D6EF500151622 /* sprite.h */,
+				41B817361A6D6EF500151622 /* spriteAnim.h */,
 				41C7FC3D1A5AFB84003864CB /* titlescreen.h */,
 				41C7FC3F1A5AFB84003864CB /* world.h */,
 			);
@@ -656,6 +666,7 @@
 				41BAB9121A5EF32100DD0D11 /* actor.cpp in Sources */,
 				41DA07451A51FEFC00562B25 /* systemSDL.cpp in Sources */,
 				41C7FC441A5AFB84003864CB /* localization.cpp in Sources */,
+				41B817371A6D6EF500151622 /* sprite.cpp in Sources */,
 				41E2CE871A51D39B00FC28DC /* vector.cpp in Sources */,
 				41C7FC6C1A5AFB98003864CB /* renderUtils.cpp in Sources */,
 				41E2CE7F1A51D39B00FC28DC /* angle.cpp in Sources */,
@@ -688,6 +699,7 @@
 				41C7FC641A5AFB98003864CB /* cpuVertexList.cpp in Sources */,
 				41E2CE831A51D39B00FC28DC /* plane.cpp in Sources */,
 				41C7FC7F1A5AFBAB003864CB /* system.cpp in Sources */,
+				41B817381A6D6EF500151622 /* spriteAnim.cpp in Sources */,
 				41C7FC221A5AFB6E003864CB /* cvar.cpp in Sources */,
 				41DA07471A52014400562B25 /* inputSDL.cpp in Sources */,
 				41C7FC7D1A5AFBAB003864CB /* input.cpp in Sources */,

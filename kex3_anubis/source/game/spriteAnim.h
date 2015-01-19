@@ -26,14 +26,21 @@ typedef struct
     bool        bFlipped;
 } spriteSet_t;
 
+typedef enum
+{
+    SFF_FULLBRIGHT  = BIT(1)
+} frameFlags_t;
+
 typedef struct
 {
     uint16_t                    delay;
     uint16_t                    flags;
     kexStr                      nextFrame;
+    kexStr                      refireFrame;
     kexArray<spriteSet_t>       spriteSet;
 
     bool                        HasNextFrame(void) { return nextFrame[0] != '-'; }
+    bool                        HasRefireFrame(void) { return refireFrame[0] != '-'; }
     const unsigned int          NumSpriteSets(void) const { return spriteSet.Length(); }
 } spriteFrame_t;
 

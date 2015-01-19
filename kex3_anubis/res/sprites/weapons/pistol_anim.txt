@@ -222,6 +222,7 @@ pistol_fire
     frame
     {
         // ##000   62  128
+        fullbright
         sprites
         {
             { "weapons/pistol", 0,     -8,  -73,    0 }

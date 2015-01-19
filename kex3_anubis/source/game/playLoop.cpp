@@ -56,7 +56,10 @@ void kexPlayLoop::Start(void)
     {
         kex::cSystem->Warning("No player starts present\n");
         kexGame::cLocal->SetGameState(GS_TITLE);
+        return;
     }
+    
+    kexGame::cLocal->Player()->Ready();
 }
 
 //
@@ -259,7 +262,7 @@ void kexPlayLoop::Draw(void)
                     float y = (float)spriteSet->y;
                     float w = (float)info->atlas.w;
                     float h = (float)info->atlas.h;
-                    byte c;
+                    byte c = 0xff;
 
                     float u1, u2, v1, v2;
                     
@@ -275,7 +278,10 @@ void kexPlayLoop::Draw(void)
                     x += p->WeaponBobX() + weaponInfo->offsetX;
                     y += p->WeaponBobY() + weaponInfo->offsetY;
 
-                    c = (byte)(p->Actor()->Sector()->lightLevel << 1);
+                    if(!(frame->flags & SFF_FULLBRIGHT))
+                    {
+                        c = (byte)(p->Actor()->Sector()->lightLevel << 1);
+                    }
 
                     vl->AddQuad(x, y + 8, 0, w, h, u1, v1, u2, v2, c, c, c, 255);
                     vl->DrawElements();

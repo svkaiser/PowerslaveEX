@@ -68,6 +68,7 @@ public:
 
     void                        Reset(void);
     void                        Tick(void);
+    void                        Ready(void);
 
     kexPlayerCmd                &Cmd(void) { return cmd; }
     kexActor                    *Actor(void) { return actor; }

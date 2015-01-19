@@ -366,7 +366,7 @@ machete_fire
     {
         // ##005    0    0 (no groups)
         delay 1
-        goto "weapons/machete_swing_left_start"
+        goto "weapons/machete_swing_right_start"
     }
 }
 
@@ -568,7 +568,8 @@ machete_swing_left_finish
     {
         // ##003    0    0 (no groups)
         delay 1
-        goto "weapons/machete_swing_right_start"
+        goto "weapons/machete_fire_raise"
+        refire "weapons/machete_swing_right_start"
     }
 
 }
@@ -849,6 +850,7 @@ machete_swing_right_finish
         // ##005    0    0 (no groups)
         delay 1
         goto "weapons/machete_fire_raise"
+        refire "weapons/machete_swing_left_start"
     }
 }
 

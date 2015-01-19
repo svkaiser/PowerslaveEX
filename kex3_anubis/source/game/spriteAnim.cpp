@@ -130,10 +130,19 @@ void kexSpriteAnimManager::ParseFrame(kexLexer *lexer, spriteFrame_t *frame)
         {
             frame->delay = lexer->GetNumber();
         }
+        else if(lexer->Matches("fullbright"))
+        {
+            frame->flags |= SFF_FULLBRIGHT;
+        }
         else if(lexer->Matches("goto"))
         {
             lexer->GetString();
             frame->nextFrame = lexer->StringToken();
+        }
+        else if(lexer->Matches("refire"))
+        {
+            lexer->GetString();
+            frame->refireFrame = lexer->StringToken();
         }
         else if(lexer->Matches("sprites"))
         {
@@ -192,6 +201,7 @@ void kexSpriteAnimManager::Load(const char *name)
                     frame->delay = 1;
                     frame->flags = 0;
                     frame->nextFrame = "-";
+                    frame->refireFrame = "-";
 
                     // enter frame block
                     ParseFrame(lexer, frame);
