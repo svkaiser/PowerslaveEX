@@ -16,6 +16,7 @@
 #define __PLAYLOOP_H__
 
 #include "renderView.h"
+#include "renderScene.h"
 
 class kexPlayLoop : public kexGameLoop
 {
@@ -35,6 +36,7 @@ public:
 private:
     int                         ticks;
     kexRenderView               renderView;
+    kexRenderScene              renderScene;
 };
 
 #endif

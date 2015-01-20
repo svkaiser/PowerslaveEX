@@ -17,6 +17,7 @@
 		41BB267F1A547A9A00311383 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BB267E1A547A9A00311383 /* OpenAL.framework */; };
 		41BC0EA81A5C5F59007BD866 /* viewBounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BC0EA61A5C5F59007BD866 /* viewBounds.cpp */; };
 		41BCC0621A6EBACB00F8B3FA /* pWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC0601A6EBACB00F8B3FA /* pWeapon.cpp */; };
+		41BCC06C1A6ECCB800F8B3FA /* renderScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC06A1A6ECCB800F8B3FA /* renderScene.cpp */; };
 		41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC091A5AFB6E003864CB /* binFile.cpp */; };
 		41C7FC211A5AFB6E003864CB /* cmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0B1A5AFB6E003864CB /* cmd.cpp */; };
 		41C7FC221A5AFB6E003864CB /* cvar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0D1A5AFB6E003864CB /* cvar.cpp */; };
@@ -146,6 +147,8 @@
 		41BC0EA71A5C5F59007BD866 /* viewBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewBounds.h; sourceTree = "<group>"; };
 		41BCC0601A6EBACB00F8B3FA /* pWeapon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pWeapon.cpp; path = ../../source/game/pWeapon.cpp; sourceTree = "<group>"; };
 		41BCC0611A6EBACB00F8B3FA /* pWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pWeapon.h; path = ../../source/game/pWeapon.h; sourceTree = "<group>"; };
+		41BCC06A1A6ECCB800F8B3FA /* renderScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = renderScene.cpp; sourceTree = "<group>"; };
+		41BCC06B1A6ECCB800F8B3FA /* renderScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderScene.h; sourceTree = "<group>"; };
 		41C7FC081A5AFB6E003864CB /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
 		41C7FC091A5AFB6E003864CB /* binFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = binFile.cpp; sourceTree = "<group>"; };
 		41C7FC0A1A5AFB6E003864CB /* binFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binFile.h; sourceTree = "<group>"; };
@@ -497,6 +500,7 @@
 				41C7FC531A5AFB98003864CB /* image.cpp */,
 				41C7FC551A5AFB98003864CB /* renderBackend.cpp */,
 				41C7FC571A5AFB98003864CB /* renderFont.cpp */,
+				41BCC06A1A6ECCB800F8B3FA /* renderScene.cpp */,
 				41C7FC5A1A5AFB98003864CB /* renderScreen.cpp */,
 				41C7FC5C1A5AFB98003864CB /* renderUtils.cpp */,
 				41C7FC5E1A5AFB98003864CB /* renderView.cpp */,
@@ -511,6 +515,7 @@
 				41C7FC561A5AFB98003864CB /* renderBackend.h */,
 				41C7FC581A5AFB98003864CB /* renderFont.h */,
 				41C7FC591A5AFB98003864CB /* renderMain.h */,
+				41BCC06B1A6ECCB800F8B3FA /* renderScene.h */,
 				41C7FC5B1A5AFB98003864CB /* renderScreen.h */,
 				41C7FC5D1A5AFB98003864CB /* renderUtils.h */,
 				41C7FC5F1A5AFB98003864CB /* renderView.h */,
@@ -660,6 +665,7 @@
 				41C7FC6A1A5AFB98003864CB /* renderFont.cpp in Sources */,
 				41C7FC661A5AFB98003864CB /* fbo.cpp in Sources */,
 				41C7FC831A5AFBC0003864CB /* soundOAL.cpp in Sources */,
+				41BCC06C1A6ECCB800F8B3FA /* renderScene.cpp in Sources */,
 				41DA07431A51FDE000562B25 /* timerSDL.cpp in Sources */,
 				41BCC0621A6EBACB00F8B3FA /* pWeapon.cpp in Sources */,
 				41C7FC471A5AFB84003864CB /* playerCmd.cpp in Sources */,
