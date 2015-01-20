@@ -55,6 +55,11 @@ void kexPlayerWeapon::Update(void)
 
 void kexPlayerWeapon::ChangeAnim(spriteAnim_t *changeAnim)
 {
+    if(changeAnim == NULL)
+    {
+        return;
+    }
+    
     anim = changeAnim;
     frameID = 0;
     ticks = 0;
@@ -63,6 +68,15 @@ void kexPlayerWeapon::ChangeAnim(spriteAnim_t *changeAnim)
     {
         state = WS_IDLE;
     }
+}
+
+//
+// kexPlayerWeapon::ChangeAnim
+//
+
+void kexPlayerWeapon::ChangeAnim(const char *animName)
+{
+    ChangeAnim(kexGame::cLocal->SpriteAnimManager()->Get(animName));
 }
 
 //
@@ -176,21 +190,12 @@ void kexPlayerWeapon::UpdateSprite(void)
     // handle re-fire
     if(frame->HasRefireFrame() && owner->Cmd().Buttons() & BC_ATTACK)
     {
-        anim = kexGame::cLocal->SpriteAnimManager()->Get(frame->refireFrame);
-        frameID = 0;
-        ticks = 0;
+        ChangeAnim(frame->refireFrame);
     }
     // handle goto jumps
     else if(frame->HasNextFrame())
     {
-        anim = kexGame::cLocal->SpriteAnimManager()->Get(frame->nextFrame);
-        frameID = 0;
-        ticks = 0;
-
-        if(anim == weaponInfo->idle)
-        {
-            state = WS_IDLE;
-        }
+        ChangeAnim(frame->nextFrame);
     }
 
     switch(state)

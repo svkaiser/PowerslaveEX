@@ -26,6 +26,7 @@ public:
 
     void                        ChangeAnim(spriteAnim_t *changeAnim);
     void                        ChangeAnim(const weaponState_t changeState);
+    void                        ChangeAnim(const char *animName);
     void                        Update(void);
 
     spriteAnim_t                *Anim(void) { return anim; }

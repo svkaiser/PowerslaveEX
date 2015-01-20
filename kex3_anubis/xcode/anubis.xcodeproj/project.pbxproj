@@ -16,6 +16,7 @@
 		41BAB9131A5EF32100DD0D11 /* playLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BAB9101A5EF32100DD0D11 /* playLoop.cpp */; };
 		41BB267F1A547A9A00311383 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BB267E1A547A9A00311383 /* OpenAL.framework */; };
 		41BC0EA81A5C5F59007BD866 /* viewBounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BC0EA61A5C5F59007BD866 /* viewBounds.cpp */; };
+		41BCC0621A6EBACB00F8B3FA /* pWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC0601A6EBACB00F8B3FA /* pWeapon.cpp */; };
 		41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC091A5AFB6E003864CB /* binFile.cpp */; };
 		41C7FC211A5AFB6E003864CB /* cmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0B1A5AFB6E003864CB /* cmd.cpp */; };
 		41C7FC221A5AFB6E003864CB /* cvar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0D1A5AFB6E003864CB /* cvar.cpp */; };
@@ -143,6 +144,8 @@
 		41BB267E1A547A9A00311383 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		41BC0EA61A5C5F59007BD866 /* viewBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewBounds.cpp; sourceTree = "<group>"; };
 		41BC0EA71A5C5F59007BD866 /* viewBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewBounds.h; sourceTree = "<group>"; };
+		41BCC0601A6EBACB00F8B3FA /* pWeapon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pWeapon.cpp; path = ../../source/game/pWeapon.cpp; sourceTree = "<group>"; };
+		41BCC0611A6EBACB00F8B3FA /* pWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pWeapon.h; path = ../../source/game/pWeapon.h; sourceTree = "<group>"; };
 		41C7FC081A5AFB6E003864CB /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
 		41C7FC091A5AFB6E003864CB /* binFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = binFile.cpp; sourceTree = "<group>"; };
 		41C7FC0A1A5AFB6E003864CB /* binFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binFile.h; sourceTree = "<group>"; };
@@ -300,6 +303,7 @@
 				41C7FC361A5AFB84003864CB /* player.cpp */,
 				41C7FC381A5AFB84003864CB /* playerCmd.cpp */,
 				41BAB9101A5EF32100DD0D11 /* playLoop.cpp */,
+				41BCC0601A6EBACB00F8B3FA /* pWeapon.cpp */,
 				41C7FC3A1A5AFB84003864CB /* session.cpp */,
 				41B817331A6D6EF500151622 /* sprite.cpp */,
 				41B817351A6D6EF500151622 /* spriteAnim.cpp */,
@@ -314,6 +318,7 @@
 				41C7FC371A5AFB84003864CB /* player.h */,
 				41C7FC391A5AFB84003864CB /* playerCmd.h */,
 				41BAB9111A5EF32100DD0D11 /* playLoop.h */,
+				41BCC0611A6EBACB00F8B3FA /* pWeapon.h */,
 				41C7FC3B1A5AFB84003864CB /* session.h */,
 				41B817341A6D6EF500151622 /* sprite.h */,
 				41B817361A6D6EF500151622 /* spriteAnim.h */,
@@ -656,6 +661,7 @@
 				41C7FC661A5AFB98003864CB /* fbo.cpp in Sources */,
 				41C7FC831A5AFBC0003864CB /* soundOAL.cpp in Sources */,
 				41DA07431A51FDE000562B25 /* timerSDL.cpp in Sources */,
+				41BCC0621A6EBACB00F8B3FA /* pWeapon.cpp in Sources */,
 				41C7FC471A5AFB84003864CB /* playerCmd.cpp in Sources */,
 				41C7FC431A5AFB84003864CB /* gameObject.cpp in Sources */,
 				41C7FC6F1A5AFB98003864CB /* textureObject.cpp in Sources */,
