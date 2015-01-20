@@ -18,6 +18,7 @@
 #include "kexlib.h"
 #include "renderMain.h"
 #include "renderView.h"
+#include "viewBounds.h"
 #include "game.h"
 
 //
@@ -81,6 +82,7 @@ void kexPlayLoop::Draw(void)
     kexWorld *world = kexGame::cLocal->World();
     
     renderView.SetupFromPlayer(p);
+    //renderScene.Draw(&renderView);
 
     // TEMP
     kexRender::cBackend->LoadProjectionMatrix(renderView.ProjectionView());
@@ -99,17 +101,16 @@ void kexPlayLoop::Draw(void)
     
     if(world->MapLoaded())
     {
-        for(kexActor *actor = kexGame::cLocal->Actors().Next(); actor != NULL; actor = actor->Link().Next())
-        {
-            kexRender::cUtils->DrawOrigin(actor->Origin().x, actor->Origin().y, actor->Origin().z, 16);
-        }
-
         for(unsigned int i = 0; i < world->NumSectors(); ++i)
+        //for(unsigned int i = 0; i < renderScene.VisibleSectors().CurrentLength(); ++i)
         {
+            //mapSector_t *sector = renderScene.VisibleSectors()[i];
             mapSector_t *sector = &world->Sectors()[i];
             
             int start = sector->faceStart;
             int end = sector->faceEnd;
+            
+            sector->floodCount = 0;
 
             if(!renderView.Frustum().TestBoundingBox(sector->bounds))
             {
@@ -153,6 +154,11 @@ void kexPlayLoop::Draw(void)
                 {
                     kexRender::cUtils->DrawBoundingBox(face->bounds, 128, 64, 255);
                 }*/
+                
+                //kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
+                //kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
+                //kexRender::cUtils->DrawLine(*face->LeftEdge()->v1, *face->LeftEdge()->v2, 0, 255, 0);
+                //kexRender::cUtils->DrawLine(*face->RightEdge()->v1, *face->RightEdge()->v2, 0, 255, 0);
                 
                 for(int k = face->polyStart; k <= face->polyEnd; ++k)
                 {
@@ -292,6 +298,12 @@ void kexPlayLoop::Draw(void)
         vl->AddQuad(160, 216, 0, 96, 24, 0.25f, 0.375f, 0.625f, 0.75f, 255, 255, 255, 255);
         vl->AddQuad(256, 192, 0, 64, 64, 0.625f, 0, 0.875f, 1, 255, 255, 255, 255);
         vl->DrawElements();
+        
+        for(unsigned int i = 0; i < renderScene.VisiblePortals().CurrentLength(); ++i)
+        {
+            kexViewBounds viewBounds = renderScene.VisiblePortals()[i];
+            viewBounds.DebugDraw();
+        }
     }
 }
 

@@ -41,6 +41,7 @@ typedef struct
     word                flags;
     kexBBox             bounds;
     int                 validcount;
+    int                 floodCount;
     struct mapFace_s    *floorFace;
     struct mapFace_s    *ceilingFace;
 } mapSector_t;

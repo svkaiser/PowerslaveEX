@@ -29,7 +29,6 @@ kexViewBounds::kexViewBounds(void)
     Clear();
 }
 
-
 //
 // kexViewBounds::Clear
 //
@@ -122,7 +121,6 @@ void kexViewBounds::AddVector(kexRenderView *view, kexVec3 &vector)
     }
 
     AddPoint(pmin[0], pmin[1], pmin[2]);
-    vector = pmin;
 }
 
 //
@@ -148,22 +146,12 @@ void kexViewBounds::AddBox(kexRenderView *view, kexBBox &box)
 
 bool kexViewBounds::ViewBoundInside(const kexViewBounds &viewBounds)
 {
-    if(((viewBounds.min[0] < min[0] && viewBounds.max[0] < min[0]) ||
-        (viewBounds.min[0] > max[0] && viewBounds.max[0] > max[0])))
+    if((viewBounds.max[0] < min[0] || viewBounds.max[1] < min[1] ||
+        viewBounds.min[0] > max[0] || viewBounds.min[1] > max[1]))
     {
         return false;
     }
-    if(((viewBounds.min[1] < min[1] && viewBounds.max[1] < min[1]) ||
-        (viewBounds.min[1] > max[1] && viewBounds.max[1] > max[1])))
-    {
-        return false;
-    }
-
-    if(viewBounds.zfar < zfar)
-    {
-        return false;
-    }
-
+    
     return true;
 }
 
@@ -191,10 +179,7 @@ kexViewBounds &kexViewBounds::operator=(const kexViewBounds &viewBounds)
 void kexViewBounds::DebugDraw(void)
 {
     kexRender::cTextures->whiteTexture->Bind();
-    
-    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
 
-    kexRender::cBackend->DisableShaders();
     kexRender::cVertList->BindDrawPointers();
     kexRender::cVertList->AddLine(min[0], min[1], 0, min[0], max[1], 0, 255, 0, 255, 255);
     kexRender::cVertList->AddLine(min[0], max[1], 0, max[0], max[1], 0, 255, 0, 255, 255);

@@ -15,13 +15,34 @@
 #ifndef __RENDERSCENE_H__
 #define __RENDERSCENE_H__
 
+#include "world.h"
+
+class kexRenderView;
+class kexViewBounds;
+class kexWorld;
+
 class kexRenderScene
 {
 public:
     kexRenderScene(void);
     ~kexRenderScene(void);
+    
+    void                    Draw(kexRenderView *renderView);
+    void                    FindVisibleSectors(void);
+    
+    kexStack<mapSector_t*>  &VisibleSectors(void) { return visibleSectors; }
+    kexStack<kexViewBounds> &VisiblePortals(void) { return visiblePortals; }
 
 private:
+    void                    SetInitialScissorRect(void);
+    void                    RecursiveSectorPortals(mapSector_t *sector, kexViewBounds *vb);
+    
+    kexWorld                *world;
+    kexRenderView           *view;
+    kexStack<mapSector_t*>  visibleSectors;
+    kexStack<kexViewBounds> visiblePortals;
+    
+    int                     validcount;
 };
 
 #endif
