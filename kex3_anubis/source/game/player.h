@@ -78,6 +78,7 @@ public:
     const float                 Bob(void) const { return bob; }
     float                       &LandTime(void) { return landTime; }
     float                       &StepViewZ(void) { return stepViewZ; }
+    float                       &ViewZ(void) { return viewZ; }
 
     kexPlayerWeapon             &Weapon(void) { return weapon; }
     const playerWeapons_t       CurrentWeapon(void) const { return currentWeapon; }
@@ -100,6 +101,7 @@ private:
     float                       bobSpeed;
     float                       landTime;
     float                       stepViewZ;
+    float                       viewZ;
 
     kexPlayerWeapon             weapon;
     playerWeapons_t             currentWeapon;

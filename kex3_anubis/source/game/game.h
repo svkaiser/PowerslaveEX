@@ -177,7 +177,6 @@ public:
     kexPlayLoop             *PlayLoop(void) { return playLoop; }
     kexTranslation          *Translation(void) { return translation; }
     kexWorld                *World(void) { return world; }
-    kexRenderView           *RenderView(void) { return renderView; }
     kexFont                 *SmallFont(void) { return smallFont; }
     kexFont                 *BigFont(void) { return bigFont; }
     const int               GetTicks(void) const { return ticks; }
@@ -215,7 +214,6 @@ private:
     gameState_t             gameState;
     gameState_t             pendingGameState;
     kexPlayer               *player;
-    kexRenderView           *renderView;
     kexGameLoop             gameLoopStub;
     kexGameLoop             *gameLoop;
     kexActor                *actorRover;

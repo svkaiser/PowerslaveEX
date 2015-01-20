@@ -17,12 +17,11 @@
 
 #include "frustum.h"
 
+class kexPlayer;
+
 class kexRenderView
 {
 public:
-    kexRenderView(void);
-    ~kexRenderView(void);
-
     kexVec3             &Origin(void) { return origin; }
     kexAngle            &Yaw(void) { return yaw; }
     kexAngle            &Pitch(void) { return pitch; }
@@ -33,6 +32,7 @@ public:
     kexQuat             &Rotation(void) { return rotation; }
     float               &Fov(void) { return fov; }
 
+    void                SetupFromPlayer(kexPlayer *player);
     void                Setup(void);
     kexVec3             ProjectPoint(const kexVec3 &point);
 

@@ -16,28 +16,13 @@
 //
 
 #include "renderMain.h"
+#include "game.h"
 #include "frustum.h"
 #include "renderView.h"
 
 kexCvar cvarFOV("r_fov", CVF_FLOAT|CVF_CONFIG, "74.0", "Field of view");
 
 const float kexRenderView::Z_NEAR = 0.1f;
-
-//
-// kexRenderView::kexRenderView
-//
-
-kexRenderView::kexRenderView(void)
-{
-}
-
-//
-// kexRenderView::~kexRenderView
-//
-
-kexRenderView::~kexRenderView(void)
-{
-}
 
 //
 // kexRenderView::ProjectPoint
@@ -108,7 +93,27 @@ void kexRenderView::SetupMatrices(void)
 }
 
 //
+// kexRenderView::SetupFromPlayer
+//
+
+void kexRenderView::SetupFromPlayer(kexPlayer *player)
+{
+    kexActor *actor = player->Actor();
+    
+    yaw = actor->Yaw();
+    pitch = actor->Pitch();
+    roll = actor->Roll();
+    origin = actor->Origin();
+    origin.z += player->ViewZ() + player->Bob() + player->LandTime() + player->StepViewZ();
+    
+    SetupMatrices();
+    frustum.MakeClipPlanes(projectionView, modelView);
+}
+
+//
 // kexRenderView::Setup
+//
+// Generic routine for setting up the render view
 //
 
 void kexRenderView::Setup(void)

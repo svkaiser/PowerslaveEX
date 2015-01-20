@@ -78,24 +78,15 @@ void kexPlayLoop::Stop(void)
 void kexPlayLoop::Draw(void)
 {
     kexPlayer *p = kexGame::cLocal->Player();
+    kexWorld *world = kexGame::cLocal->World();
+    
+    renderView.SetupFromPlayer(p);
 
     // TEMP
-    kexGame::cLocal->RenderView()->Yaw() = p->Actor()->Yaw();
-    kexGame::cLocal->RenderView()->Pitch() = p->Actor()->Pitch();
-    kexGame::cLocal->RenderView()->Roll() = p->Actor()->Roll();
-    kexGame::cLocal->RenderView()->Origin() = p->Actor()->Origin();
-    
-    kexGame::cLocal->RenderView()->Origin().z += 64 + p->Bob() + p->LandTime() + p->StepViewZ();
-    
-    kexGame::cLocal->RenderView()->Setup();
-    kexRender::cBackend->LoadProjectionMatrix(kexGame::cLocal->RenderView()->ProjectionView());
-    kexRender::cBackend->LoadModelViewMatrix(kexGame::cLocal->RenderView()->ModelView());
-    kexRender::cUtils->DrawBoundingBox(kexBBox(
-        kexVec3(-64, -128, -32),
-        kexVec3(64, 128, 32)), 255, 0, 0);
+    kexRender::cBackend->LoadProjectionMatrix(renderView.ProjectionView());
+    kexRender::cBackend->LoadModelViewMatrix(renderView.ModelView());
     
     kexCpuVertList *vl = kexRender::cVertList;
-    kexWorld *world = kexGame::cLocal->World();
     
     //kexRender::cTextures->defaultTexture->Bind();
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
@@ -120,7 +111,7 @@ void kexPlayLoop::Draw(void)
             int start = sector->faceStart;
             int end = sector->faceEnd;
 
-            if(!kexGame::cLocal->RenderView()->Frustum().TestBoundingBox(sector->bounds))
+            if(!renderView.Frustum().TestBoundingBox(sector->bounds))
             {
                 continue;
             }
@@ -140,7 +131,7 @@ void kexPlayLoop::Draw(void)
                     continue;
                 }
                 
-                if(!kexGame::cLocal->RenderView()->Frustum().TestBoundingBox(face->bounds))
+                if(!renderView.Frustum().TestBoundingBox(face->bounds))
                 {
                     continue;
                 }

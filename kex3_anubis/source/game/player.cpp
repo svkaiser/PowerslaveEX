@@ -347,6 +347,7 @@ void kexPlayer::Reset(void)
     bobSpeed = 0;
     landTime = 0;
     stepViewZ = 0;
+    viewZ = 64.0f;
 
     currentWeapon = PW_MACHETE;
     pendingWeapon = currentWeapon;

@@ -131,7 +131,6 @@ kexGameLocal::kexGameLocal(void)
     this->translation       = new kexTranslation;
     this->world             = new kexWorld;
     this->player            = new kexPlayer;
-    this->renderView        = new kexRenderView;
     this->cmodel            = new kexCModel;
     this->spriteManager     = new kexSpriteManager;
     this->spriteAnimManager = new kexSpriteAnimManager;
@@ -150,7 +149,6 @@ kexGameLocal::~kexGameLocal(void)
     delete translation;
     delete world;
     delete player;
-    delete renderView;
     delete cmodel;
     delete spriteManager;
     delete spriteAnimManager;
