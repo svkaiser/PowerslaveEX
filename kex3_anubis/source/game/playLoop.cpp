@@ -237,6 +237,12 @@ void kexPlayLoop::Draw(void)
         {
             static spriteAnim_t *anim = p->WeaponAnim();
             const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(p->CurrentWeapon());
+            
+            kexRender::cScreen->SetOrtho();
+            kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+            kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+            
+            kexCpuVertList *vl = kexRender::cVertList;
 
             if(anim)
             {
@@ -245,11 +251,6 @@ void kexPlayLoop::Draw(void)
                 kexSprite *sprite;
                 spriteInfo_t *info;
 
-                kexRender::cScreen->SetOrtho();
-                kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-                kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-
-                kexCpuVertList *vl = kexRender::cVertList;
                 vl->BindDrawPointers();
 
                 for(unsigned int i = 0; i < frame->spriteSet.Length(); ++i)
@@ -288,9 +289,19 @@ void kexPlayLoop::Draw(void)
                 }
             }
         }
+        
+        kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+        vl->BindDrawPointers();
+        
+        kexTexture *gfx = kexRender::cTextures->Cache("gfx/hud.png", TC_CLAMP, TF_NEAREST);
+        gfx->Bind();
+        
+        vl->AddQuad(0, 192, 0, 64, 64, 0, 0, 0.25f, 1, 255, 255, 255, 255);
+        vl->AddQuad(64, 216, 0, 96, 24, 0.25f, 0, 0.625f, 0.375f, 255, 255, 255, 255);
+        vl->AddQuad(160, 216, 0, 96, 24, 0.25f, 0.375f, 0.625f, 0.75f, 255, 255, 255, 255);
+        vl->AddQuad(256, 192, 0, 64, 64, 0.625f, 0, 0.875f, 1, 255, 255, 255, 255);
+        vl->DrawElements();
     }
-
-    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
 }
 
 //
