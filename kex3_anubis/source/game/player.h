@@ -79,14 +79,9 @@ public:
     float                       &LandTime(void) { return landTime; }
     float                       &StepViewZ(void) { return stepViewZ; }
 
-    spriteAnim_t                *WeaponAnim(void) { return weaponAnim; }
-    spriteFrame_t               *WeaponFrame(void) { return &weaponAnim->frames[weaponFrame]; }
-    const int                   WeaponFrameID(void) const { return weaponFrame; }
-    weaponState_t               &WeaponState(void) { return weaponState; }
-    float                       &WeaponBobX(void) { return weaponBob_x; }
-    float                       &WeaponBobY(void) { return weaponBob_y; }
-    float                       &WeaponTicks(void) { return weaponTicks; }
+    kexPlayerWeapon             &Weapon(void) { return weapon; }
     const playerWeapons_t       CurrentWeapon(void) const { return currentWeapon; }
+    void                        ChangeWeapon(void) { currentWeapon = pendingWeapon; }
     playerWeapons_t             &PendingWeapon(void) { return pendingWeapon; }
 
 private:
@@ -106,15 +101,9 @@ private:
     float                       landTime;
     float                       stepViewZ;
 
-    float                       weaponBob_x;
-    float                       weaponBob_y;
-    int                         weaponBobTime;
-    spriteAnim_t                *weaponAnim;
+    kexPlayerWeapon             weapon;
     playerWeapons_t             currentWeapon;
     playerWeapons_t             pendingWeapon;
-    weaponState_t               weaponState;
-    int16_t                     weaponFrame;
-    float                       weaponTicks;
 
     bool                        weapons[NUMPLAYERWEAPONS];
     int16_t                     ammo[NUMPLAYERWEAPONS];

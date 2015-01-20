@@ -1,0 +1,516 @@
+ring_ra_raise
+{
+    // frames:    9
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,   -134,   -6,    1 }
+            { "weapons/ring_of_ra", 5,   -174,   -6,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   58,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   58,    1 }
+            { "weapons/ring_of_ra", 4,     60,   -6,    0 }
+            { "weapons/ring_of_ra", 5,    124,   -6,    0 }
+            { "weapons/ring_of_ra", 6,     60,   58,    0 }
+            { "weapons/ring_of_ra", 7,    124,   58,    0 }
+            { "weapons/ring_of_ra", 9,     99,    8,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -12,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -12,    0 }
+            { "weapons/ring_of_ra", 6,     60,   52,    0 }
+            { "weapons/ring_of_ra", 7,    124,   52,    0 }
+            { "weapons/ring_of_ra", 9,     99,    2,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -12,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -12,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   52,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   52,    1 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -25,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -25,    0 }
+            { "weapons/ring_of_ra", 6,     60,   39,    0 }
+            { "weapons/ring_of_ra", 7,    124,   39,    0 }
+            { "weapons/ring_of_ra", 9,     99,  -11,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -25,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -25,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   39,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   39,    1 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -37,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -37,    0 }
+            { "weapons/ring_of_ra", 6,     60,   27,    0 }
+            { "weapons/ring_of_ra", 7,    124,   27,    0 }
+            { "weapons/ring_of_ra", 9,     99,  -23,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -37,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -37,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   27,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   27,    1 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -50,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -50,    0 }
+            { "weapons/ring_of_ra", 6,     60,   14,    0 }
+            { "weapons/ring_of_ra", 7,    124,   14,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -50,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -50,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   14,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   14,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -36,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -59,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -59,    0 }
+            { "weapons/ring_of_ra", 6,     60,    5,    0 }
+            { "weapons/ring_of_ra", 7,    124,    5,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -59,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -59,    1 }
+            { "weapons/ring_of_ra", 6,   -134,    5,    1 }
+            { "weapons/ring_of_ra", 7,   -174,    5,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -45,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -69,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -69,    0 }
+            { "weapons/ring_of_ra", 6,     60,   -5,    0 }
+            { "weapons/ring_of_ra", 7,    124,   -5,    0 }
+            { "weapons/ring_of_ra", 9,     99,  -55,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -69,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -69,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   -5,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   -5,    1 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -75,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -75,    0 }
+            { "weapons/ring_of_ra", 6,     60,  -11,    0 }
+            { "weapons/ring_of_ra", 7,    124,  -11,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -75,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -75,    1 }
+            { "weapons/ring_of_ra", 6,   -134,  -11,    1 }
+            { "weapons/ring_of_ra", 7,   -174,  -11,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        goto "weapons/ring_ra_idle"
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -78,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -78,    0 }
+            { "weapons/ring_of_ra", 6,     60,  -14,    0 }
+            { "weapons/ring_of_ra", 7,    124,  -14,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -78,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -78,    1 }
+            { "weapons/ring_of_ra", 6,   -134,  -14,    1 }
+            { "weapons/ring_of_ra", 7,   -174,  -14,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -64,    0 }
+        }
+    }
+}
+
+ring_ra_idle
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,   -134,  -80,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -80,    1 }
+            { "weapons/ring_of_ra", 6,   -134,  -16,    1 }
+            { "weapons/ring_of_ra", 7,   -174,  -16,    1 }
+            { "weapons/ring_of_ra", 4,     60,  -80,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -80,    0 }
+            { "weapons/ring_of_ra", 6,     60,  -16,    0 }
+            { "weapons/ring_of_ra", 7,    124,  -16,    0 }
+            { "weapons/ring_of_ra", 9,     99,  -66,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -80,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -80,    0 }
+            { "weapons/ring_of_ra", 6,     60,  -16,    0 }
+            { "weapons/ring_of_ra", 7,    124,  -16,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -80,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -80,    1 }
+            { "weapons/ring_of_ra", 6,   -134,  -16,    1 }
+            { "weapons/ring_of_ra", 7,   -174,  -16,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -66,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,   -134,  -80,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -80,    1 }
+            { "weapons/ring_of_ra", 6,   -134,  -16,    1 }
+            { "weapons/ring_of_ra", 7,   -174,  -16,    1 }
+            { "weapons/ring_of_ra", 4,     60,  -80,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -80,    0 }
+            { "weapons/ring_of_ra", 6,     60,  -16,    0 }
+            { "weapons/ring_of_ra", 7,    124,  -16,    0 }
+            { "weapons/ring_of_ra", 9,     99,  -66,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -80,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -80,    0 }
+            { "weapons/ring_of_ra", 6,     60,  -16,    0 }
+            { "weapons/ring_of_ra", 7,    124,  -16,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -80,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -80,    1 }
+            { "weapons/ring_of_ra", 6,   -134,  -16,    1 }
+            { "weapons/ring_of_ra", 7,   -174,  -16,    1 }
+            { "weapons/ring_of_ra", 8,     99,  -66,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -80,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -80,    0 }
+            { "weapons/ring_of_ra", 6,     60,  -16,    0 }
+            { "weapons/ring_of_ra", 7,    124,  -16,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -80,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -80,    1 }
+            { "weapons/ring_of_ra", 6,   -134,  -16,    1 }
+            { "weapons/ring_of_ra", 7,   -174,  -16,    1 }
+            { "weapons/ring_of_ra", 8,     99,  -66,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -80,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -80,    0 }
+            { "weapons/ring_of_ra", 6,     60,  -16,    0 }
+            { "weapons/ring_of_ra", 7,    124,  -16,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -80,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -80,    1 }
+            { "weapons/ring_of_ra", 6,   -134,  -16,    1 }
+            { "weapons/ring_of_ra", 7,   -174,  -16,    1 }
+            { "weapons/ring_of_ra", 8,     99,  -66,    0 }
+        }
+    }
+}
+
+ring_ra_lower
+{
+    // frames:   20
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -75,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -75,    0 }
+            { "weapons/ring_of_ra", 6,     60,  -11,    0 }
+            { "weapons/ring_of_ra", 7,    124,  -11,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -75,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -75,    1 }
+            { "weapons/ring_of_ra", 6,   -134,  -11,    1 }
+            { "weapons/ring_of_ra", 7,   -174,  -11,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -69,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -69,    0 }
+            { "weapons/ring_of_ra", 6,     60,   -5,    0 }
+            { "weapons/ring_of_ra", 7,    124,   -5,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -69,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -69,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   -5,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   -5,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -55,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -59,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -59,    0 }
+            { "weapons/ring_of_ra", 6,     60,    5,    0 }
+            { "weapons/ring_of_ra", 7,    124,    5,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -59,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -59,    1 }
+            { "weapons/ring_of_ra", 6,   -134,    5,    1 }
+            { "weapons/ring_of_ra", 7,   -174,    5,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -45,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -50,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -50,    0 }
+            { "weapons/ring_of_ra", 6,     60,   14,    0 }
+            { "weapons/ring_of_ra", 7,    124,   14,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -50,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -50,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   14,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   14,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -36,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -37,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -37,    0 }
+            { "weapons/ring_of_ra", 6,     60,   27,    0 }
+            { "weapons/ring_of_ra", 7,    124,   27,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -37,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -37,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   27,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   27,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -23,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -25,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -25,    0 }
+            { "weapons/ring_of_ra", 6,     60,   39,    0 }
+            { "weapons/ring_of_ra", 7,    124,   39,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -25,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -25,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   39,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   39,    1 }
+            { "weapons/ring_of_ra", 9,     99,  -11,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,  -12,    0 }
+            { "weapons/ring_of_ra", 5,    124,  -12,    0 }
+            { "weapons/ring_of_ra", 6,     60,   52,    0 }
+            { "weapons/ring_of_ra", 7,    124,   52,    0 }
+            { "weapons/ring_of_ra", 4,   -134,  -12,    1 }
+            { "weapons/ring_of_ra", 5,   -174,  -12,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   52,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   52,    1 }
+            { "weapons/ring_of_ra", 9,     99,    2,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/ring_of_ra", 4,     60,   -6,    0 }
+            { "weapons/ring_of_ra", 5,    124,   -6,    0 }
+            { "weapons/ring_of_ra", 6,     60,   58,    0 }
+            { "weapons/ring_of_ra", 7,    124,   58,    0 }
+            { "weapons/ring_of_ra", 4,   -134,   -6,    1 }
+            { "weapons/ring_of_ra", 5,   -174,   -6,    1 }
+            { "weapons/ring_of_ra", 6,   -134,   58,    1 }
+            { "weapons/ring_of_ra", 7,   -174,   58,    1 }
+            { "weapons/ring_of_ra", 9,     99,    8,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##009    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##010    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##011    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##012    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##013    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##014    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##015    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##016    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##017    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##018    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##019    0    0 (no groups)
+        delay 1
+    }
+}
+
+ring_ra_fire
+{
+    // frames:    2
+    frame
+    {
+        // ##000    0  128
+        fullbright
+        sprites
+        {
+            { "weapons/ring_of_ra", 0,     52,  -81,    0 }
+            { "weapons/ring_of_ra", 1,    116,  -81,    0 }
+            { "weapons/ring_of_ra", 2,     52,  -17,    0 }
+            { "weapons/ring_of_ra", 3,    116,  -17,    0 }
+            { "weapons/ring_of_ra", 0,   -119,  -81,    1 }
+            { "weapons/ring_of_ra", 1,   -163,  -81,    1 }
+            { "weapons/ring_of_ra", 2,   -119,  -17,    1 }
+            { "weapons/ring_of_ra", 3,   -163,  -17,    1 }
+            { "weapons/ring_of_ra", 10,     95,  -60,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0  128
+        fullbright
+        goto "weapons/ring_ra_idle"
+        sprites
+        {
+            { "weapons/ring_of_ra", 0,     54,  -81,    0 }
+            { "weapons/ring_of_ra", 1,    118,  -81,    0 }
+            { "weapons/ring_of_ra", 2,     54,  -17,    0 }
+            { "weapons/ring_of_ra", 3,    118,  -17,    0 }
+            { "weapons/ring_of_ra", 0,   -117,  -81,    1 }
+            { "weapons/ring_of_ra", 1,   -161,  -81,    1 }
+            { "weapons/ring_of_ra", 2,   -117,  -17,    1 }
+            { "weapons/ring_of_ra", 3,   -161,  -17,    1 }
+            { "weapons/ring_of_ra", 8,     97,  -60,    0 }
+        }
+    }
+}

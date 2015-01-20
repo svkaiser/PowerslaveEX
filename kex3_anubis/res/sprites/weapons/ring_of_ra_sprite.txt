@@ -1,0 +1,35 @@
+texture "sprites/weapons/ring_of_ra.png"
+
+// working\weapon7\sprite0226.tga
+sprite 0 0 0 64 64
+
+// working\weapon7\sprite0227.tga
+sprite 1 64 0 44 64
+
+// working\weapon7\sprite0228.tga
+sprite 2 108 0 64 20
+
+// working\weapon7\sprite0229.tga
+sprite 3 172 0 44 20
+
+// working\weapon7\sprite0230.tga
+sprite 4 216 0 64 64
+
+// working\weapon7\sprite0231.tga
+sprite 5 280 0 40 64
+
+// working\weapon7\sprite0232.tga
+sprite 6 320 0 64 12
+
+// working\weapon7\sprite0233.tga
+sprite 7 384 0 40 12
+
+// working\weapon7\sprite0234.tga
+sprite 8 424 0 24 21
+
+// working\weapon7\sprite0235.tga
+sprite 9 448 0 24 21
+
+// working\weapon7\sprite0236.tga
+sprite 10 472 0 24 21
+

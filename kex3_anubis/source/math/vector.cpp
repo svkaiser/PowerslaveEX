@@ -207,6 +207,16 @@ kexVec2 &kexVec2::Normalize(void)
 }
 
 //
+// kexVec2::Project
+//
+
+kexVec2 &kexVec2::Project(const kexVec2 &normal, const float amount)
+{
+    *this -= (normal * (this->Dot(normal) * amount));
+    return *this;
+}
+
+//
 // kexVec2::Lerp
 //
 

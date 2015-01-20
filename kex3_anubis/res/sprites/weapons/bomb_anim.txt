@@ -325,7 +325,7 @@ bomb_lower
 
 }
 
-bomb_charge
+bomb_fire
 {
     // frames:   14
     frame
@@ -432,19 +432,18 @@ bomb_charge
     {
         // ##012    0    0 (no groups)
         delay 1
-
     }
 
     frame
     {
         // ##013    0    0 (no groups)
         delay 1
-
+        goto "weapons/bomb_throw"
     }
 
 }
 
-bomb_fire
+bomb_throw
 {
     // frames:   23
     frame

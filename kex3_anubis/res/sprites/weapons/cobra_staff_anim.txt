@@ -1,0 +1,462 @@
+cstaff_raise
+{
+    // frames:   18
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##001    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##002   69    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,   -9,    0 }
+            { "weapons/cobra_staff", 3,     33,   -9,    0 }
+            { "weapons/cobra_staff", 4,    -31,   55,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -15,    0 }
+            { "weapons/cobra_staff", 3,     33,  -15,    0 }
+            { "weapons/cobra_staff", 4,    -31,   49,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -23,    0 }
+            { "weapons/cobra_staff", 3,     33,  -23,    0 }
+            { "weapons/cobra_staff", 4,    -31,   41,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -31,    0 }
+            { "weapons/cobra_staff", 3,     33,  -31,    0 }
+            { "weapons/cobra_staff", 4,    -31,   33,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -38,    0 }
+            { "weapons/cobra_staff", 3,     33,  -38,    0 }
+            { "weapons/cobra_staff", 4,    -31,   26,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -44,    0 }
+            { "weapons/cobra_staff", 3,     33,  -44,    0 }
+            { "weapons/cobra_staff", 4,    -31,   20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -50,    0 }
+            { "weapons/cobra_staff", 3,     33,  -50,    0 }
+            { "weapons/cobra_staff", 4,    -31,   14,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -54,    0 }
+            { "weapons/cobra_staff", 3,     33,  -54,    0 }
+            { "weapons/cobra_staff", 4,    -31,   10,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -59,    0 }
+            { "weapons/cobra_staff", 3,     33,  -59,    0 }
+            { "weapons/cobra_staff", 4,    -31,    5,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -65,    0 }
+            { "weapons/cobra_staff", 3,     33,  -65,    0 }
+            { "weapons/cobra_staff", 4,    -31,   -1,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -72,    0 }
+            { "weapons/cobra_staff", 3,     33,  -72,    0 }
+            { "weapons/cobra_staff", 4,    -31,   -8,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -78,    0 }
+            { "weapons/cobra_staff", 3,     33,  -78,    0 }
+            { "weapons/cobra_staff", 4,    -31,  -14,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -79,    0 }
+            { "weapons/cobra_staff", 3,     33,  -79,    0 }
+            { "weapons/cobra_staff", 4,    -31,  -15,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -77,    0 }
+            { "weapons/cobra_staff", 3,     33,  -77,    0 }
+            { "weapons/cobra_staff", 4,    -31,  -13,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -74,    0 }
+            { "weapons/cobra_staff", 3,     33,  -74,    0 }
+            { "weapons/cobra_staff", 4,    -31,  -10,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##017    0    0
+        goto "weapons/cstaff_idle"
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -72,    0 }
+            { "weapons/cobra_staff", 3,     33,  -72,    0 }
+            { "weapons/cobra_staff", 4,    -31,   -8,    0 }
+        }
+    }
+}
+
+cstaff_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -71,    0 }
+            { "weapons/cobra_staff", 3,     33,  -71,    0 }
+            { "weapons/cobra_staff", 4,    -31,   -7,    0 }
+        }
+    }
+}
+
+cstaff_lower
+{
+    // frames:   13
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -68,    0 }
+            { "weapons/cobra_staff", 3,     33,  -68,    0 }
+            { "weapons/cobra_staff", 4,    -31,   -4,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001   69    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -67,    0 }
+            { "weapons/cobra_staff", 3,     33,  -67,    0 }
+            { "weapons/cobra_staff", 4,    -31,   -3,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -30,  -59,    0 }
+            { "weapons/cobra_staff", 3,     34,  -59,    0 }
+            { "weapons/cobra_staff", 4,    -30,    5,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -28,  -48,    0 }
+            { "weapons/cobra_staff", 3,     36,  -48,    0 }
+            { "weapons/cobra_staff", 4,    -28,   16,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -27,  -35,    0 }
+            { "weapons/cobra_staff", 3,     37,  -35,    0 }
+            { "weapons/cobra_staff", 4,    -27,   29,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -27,  -23,    0 }
+            { "weapons/cobra_staff", 3,     37,  -23,    0 }
+            { "weapons/cobra_staff", 4,    -27,   41,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -26,  -10,    0 }
+            { "weapons/cobra_staff", 3,     38,  -10,    0 }
+            { "weapons/cobra_staff", 4,    -26,   54,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##008    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##009    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##010    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##011    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##012    0    0 (no groups)
+        delay 1
+
+    }
+}
+
+cstaff_fire
+{
+    // frames:   11
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -69,    0 }
+            { "weapons/cobra_staff", 3,     33,  -69,    0 }
+            { "weapons/cobra_staff", 4,    -31,   -5,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -31,  -63,    0 }
+            { "weapons/cobra_staff", 3,     33,  -63,    0 }
+            { "weapons/cobra_staff", 4,    -31,    1,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -30,  -56,    0 }
+            { "weapons/cobra_staff", 3,     34,  -56,    0 }
+            { "weapons/cobra_staff", 4,    -30,    8,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 5,    -34,  -72,    0 }
+            { "weapons/cobra_staff", 6,     30,  -72,    0 }
+            { "weapons/cobra_staff", 7,    -34,   -8,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004   70  128
+        fullbright
+        sprites
+        {
+            { "weapons/cobra_staff", 5,    -34,  -71,    0 }
+            { "weapons/cobra_staff", 6,     30,  -71,    0 }
+            { "weapons/cobra_staff", 7,    -34,   -7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -30,  -41,    0 }
+            { "weapons/cobra_staff", 3,     34,  -41,    0 }
+            { "weapons/cobra_staff", 4,    -30,   23,    0 }
+            { "weapons/cobra_staff", 0,    -31,  -69,    0 }
+            { "weapons/cobra_staff", 1,     33,  -69,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 0,    -31,  -73,    0 }
+            { "weapons/cobra_staff", 1,     33,  -73,    0 }
+            { "weapons/cobra_staff", 2,    -30,  -39,    0 }
+            { "weapons/cobra_staff", 3,     34,  -39,    0 }
+            { "weapons/cobra_staff", 4,    -30,   25,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 0,    -32,  -88,    0 }
+            { "weapons/cobra_staff", 1,     32,  -88,    0 }
+            { "weapons/cobra_staff", 2,    -31,  -33,    0 }
+            { "weapons/cobra_staff", 3,     33,  -33,    0 }
+            { "weapons/cobra_staff", 4,    -31,   31,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 0,    -32,  -99,    0 }
+            { "weapons/cobra_staff", 1,     32,  -99,    0 }
+            { "weapons/cobra_staff", 2,    -31,  -38,    0 }
+            { "weapons/cobra_staff", 3,     33,  -38,    0 }
+            { "weapons/cobra_staff", 4,    -31,   26,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -32,  -47,    0 }
+            { "weapons/cobra_staff", 3,     32,  -47,    0 }
+            { "weapons/cobra_staff", 4,    -32,   17,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        goto "weapons/cstaff_idle"
+        sprites
+        {
+            { "weapons/cobra_staff", 2,    -32,  -58,    0 }
+            { "weapons/cobra_staff", 3,     32,  -58,    0 }
+            { "weapons/cobra_staff", 4,    -32,    6,    0 }
+        }
+    }
+}

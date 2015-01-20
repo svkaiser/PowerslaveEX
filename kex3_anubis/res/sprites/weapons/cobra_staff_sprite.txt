@@ -1,0 +1,26 @@
+texture "sprites/weapons/cobra_staff.png"
+
+// working\weapon6\sprite0218.tga
+sprite 0 0 0 64 55
+
+// working\weapon6\sprite0219.tga
+sprite 1 64 0 4 55
+
+// working\weapon6\sprite0220.tga
+sprite 2 68 0 64 64
+
+// working\weapon6\sprite0221.tga
+sprite 3 132 0 4 64
+
+// working\weapon6\sprite0222.tga
+sprite 4 136 0 64 20
+
+// working\weapon6\sprite0223.tga
+sprite 5 136 20 64 64
+
+// working\weapon6\sprite0224.tga
+sprite 6 200 0 8 64
+
+// working\weapon6\sprite0225.tga
+sprite 7 0 55 64 40
+

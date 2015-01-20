@@ -156,6 +156,7 @@ public:
     float                   DistanceSq(const kexVec2 &vec) const;
     float                   Distance(const kexVec2 &vec) const;
     kexVec2                 &Normalize(void);
+    kexVec2                 &Project(const kexVec2 &normal, const float amount);
     kexVec2                 Lerp(const kexVec2 &next, float movement) const;
     kexVec2                 &Lerp(const kexVec2 &next, const float movement);
     kexVec2                 &Lerp(const kexVec2 &start, const kexVec2 &next, float movement);

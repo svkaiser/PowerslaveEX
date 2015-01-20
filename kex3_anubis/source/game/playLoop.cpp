@@ -235,7 +235,7 @@ void kexPlayLoop::Draw(void)
         }
 
         {
-            static spriteAnim_t *anim = p->WeaponAnim();
+            static spriteAnim_t *anim = p->Weapon().Anim();
             const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(p->CurrentWeapon());
             
             kexRender::cScreen->SetOrtho();
@@ -246,7 +246,7 @@ void kexPlayLoop::Draw(void)
 
             if(anim)
             {
-                spriteFrame_t *frame = p->WeaponFrame();
+                spriteFrame_t *frame = p->Weapon().Frame();
                 spriteSet_t *spriteSet;
                 kexSprite *sprite;
                 spriteInfo_t *info;
@@ -276,8 +276,8 @@ void kexPlayLoop::Draw(void)
 
                     sprite->Texture()->Bind();
 
-                    x += p->WeaponBobX() + weaponInfo->offsetX;
-                    y += p->WeaponBobY() + weaponInfo->offsetY;
+                    x += p->Weapon().BobX() + weaponInfo->offsetX;
+                    y += p->Weapon().BobY() + weaponInfo->offsetY;
 
                     if(!(frame->flags & SFF_FULLBRIGHT))
                     {

@@ -1,0 +1,611 @@
+flamethrower_raise
+{
+    // frames:   19
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   48,    0 }
+            { "weapons/flamethrower", 1,    -51,   48,    0 }
+            { "weapons/flamethrower", 2,     13,   48,    0 }
+            { "weapons/flamethrower", 3,   -115,  112,    0 }
+            { "weapons/flamethrower", 4,    -51,  112,    0 }
+            { "weapons/flamethrower", 5,     13,  112,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   41,    0 }
+            { "weapons/flamethrower", 1,    -51,   41,    0 }
+            { "weapons/flamethrower", 2,     13,   41,    0 }
+            { "weapons/flamethrower", 3,   -115,  105,    0 }
+            { "weapons/flamethrower", 4,    -51,  105,    0 }
+            { "weapons/flamethrower", 5,     13,  105,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   35,    0 }
+            { "weapons/flamethrower", 1,    -51,   35,    0 }
+            { "weapons/flamethrower", 2,     13,   35,    0 }
+            { "weapons/flamethrower", 3,   -115,   99,    0 }
+            { "weapons/flamethrower", 4,    -51,   99,    0 }
+            { "weapons/flamethrower", 5,     13,   99,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   29,    0 }
+            { "weapons/flamethrower", 1,    -51,   29,    0 }
+            { "weapons/flamethrower", 2,     13,   29,    0 }
+            { "weapons/flamethrower", 3,   -115,   93,    0 }
+            { "weapons/flamethrower", 4,    -51,   93,    0 }
+            { "weapons/flamethrower", 5,     13,   93,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   25,    0 }
+            { "weapons/flamethrower", 1,    -51,   25,    0 }
+            { "weapons/flamethrower", 2,     13,   25,    0 }
+            { "weapons/flamethrower", 3,   -115,   89,    0 }
+            { "weapons/flamethrower", 4,    -51,   89,    0 }
+            { "weapons/flamethrower", 5,     13,   89,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   17,    0 }
+            { "weapons/flamethrower", 1,    -51,   17,    0 }
+            { "weapons/flamethrower", 2,     13,   17,    0 }
+            { "weapons/flamethrower", 3,   -115,   81,    0 }
+            { "weapons/flamethrower", 4,    -51,   81,    0 }
+            { "weapons/flamethrower", 5,     13,   81,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   10,    0 }
+            { "weapons/flamethrower", 1,    -51,   10,    0 }
+            { "weapons/flamethrower", 2,     13,   10,    0 }
+            { "weapons/flamethrower", 3,   -115,   74,    0 }
+            { "weapons/flamethrower", 4,    -51,   74,    0 }
+            { "weapons/flamethrower", 5,     13,   74,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008   67    0
+        sprites
+        {
+            { "weapons/flamethrower", 7,     -5,    7,    0 }
+            { "weapons/flamethrower", 0,   -115,   10,    0 }
+            { "weapons/flamethrower", 1,    -51,   10,    0 }
+            { "weapons/flamethrower", 2,     13,   10,    0 }
+            { "weapons/flamethrower", 3,   -115,   74,    0 }
+            { "weapons/flamethrower", 4,    -51,   74,    0 }
+            { "weapons/flamethrower", 5,     13,   74,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 15,     -4,    8,    0 }
+            { "weapons/flamethrower", 0,   -115,   11,    0 }
+            { "weapons/flamethrower", 1,    -51,   11,    0 }
+            { "weapons/flamethrower", 2,     13,   11,    0 }
+            { "weapons/flamethrower", 3,   -115,   75,    0 }
+            { "weapons/flamethrower", 4,    -51,   75,    0 }
+            { "weapons/flamethrower", 5,     13,   75,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 6,     -5,    4,    0 }
+            { "weapons/flamethrower", 0,   -115,   10,    0 }
+            { "weapons/flamethrower", 1,    -51,   10,    0 }
+            { "weapons/flamethrower", 2,     13,   10,    0 }
+            { "weapons/flamethrower", 3,   -115,   74,    0 }
+            { "weapons/flamethrower", 4,    -51,   74,    0 }
+            { "weapons/flamethrower", 5,     13,   74,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 19,     -4,    5,    0 }
+            { "weapons/flamethrower", 0,   -115,    8,    0 }
+            { "weapons/flamethrower", 1,    -51,    8,    0 }
+            { "weapons/flamethrower", 2,     13,    8,    0 }
+            { "weapons/flamethrower", 3,   -115,   72,    0 }
+            { "weapons/flamethrower", 4,    -51,   72,    0 }
+            { "weapons/flamethrower", 5,     13,   72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,    6,    0 }
+            { "weapons/flamethrower", 1,    -51,    6,    0 }
+            { "weapons/flamethrower", 2,     13,    6,    0 }
+            { "weapons/flamethrower", 3,   -115,   70,    0 }
+            { "weapons/flamethrower", 4,    -51,   70,    0 }
+            { "weapons/flamethrower", 5,     13,   70,    0 }
+            { "weapons/flamethrower", 17,     -4,    3,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 8,     -4,   -1,    0 }
+            { "weapons/flamethrower", 0,   -115,    6,    0 }
+            { "weapons/flamethrower", 1,    -51,    6,    0 }
+            { "weapons/flamethrower", 2,     13,    6,    0 }
+            { "weapons/flamethrower", 3,   -115,   70,    0 }
+            { "weapons/flamethrower", 4,    -51,   70,    0 }
+            { "weapons/flamethrower", 5,     13,   70,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,    6,    0 }
+            { "weapons/flamethrower", 1,    -51,    6,    0 }
+            { "weapons/flamethrower", 2,     13,    6,    0 }
+            { "weapons/flamethrower", 3,   -115,   70,    0 }
+            { "weapons/flamethrower", 4,    -51,   70,    0 }
+            { "weapons/flamethrower", 5,     13,   70,    0 }
+            { "weapons/flamethrower", 19,     -4,    3,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 20,     -4,   -2,    0 }
+            { "weapons/flamethrower", 0,   -115,    6,    0 }
+            { "weapons/flamethrower", 1,    -51,    6,    0 }
+            { "weapons/flamethrower", 2,     13,    6,    0 }
+            { "weapons/flamethrower", 3,   -115,   70,    0 }
+            { "weapons/flamethrower", 4,    -51,   70,    0 }
+            { "weapons/flamethrower", 5,     13,   70,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 21,     -3,   -1,    0 }
+            { "weapons/flamethrower", 0,   -115,    6,    0 }
+            { "weapons/flamethrower", 1,    -51,    6,    0 }
+            { "weapons/flamethrower", 2,     13,    6,    0 }
+            { "weapons/flamethrower", 3,   -115,   70,    0 }
+            { "weapons/flamethrower", 4,    -51,   70,    0 }
+            { "weapons/flamethrower", 5,     13,   70,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 22,     -3,    2,    0 }
+            { "weapons/flamethrower", 0,   -115,    6,    0 }
+            { "weapons/flamethrower", 1,    -51,    6,    0 }
+            { "weapons/flamethrower", 2,     13,    6,    0 }
+            { "weapons/flamethrower", 3,   -115,   70,    0 }
+            { "weapons/flamethrower", 4,    -51,   70,    0 }
+            { "weapons/flamethrower", 5,     13,   70,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        goto "weapons/flamethrower_idle"
+        sprites
+        {
+            { "weapons/flamethrower", 19,     -3,    3,    0 }
+            { "weapons/flamethrower", 0,   -115,    6,    0 }
+            { "weapons/flamethrower", 1,    -51,    6,    0 }
+            { "weapons/flamethrower", 2,     13,    6,    0 }
+            { "weapons/flamethrower", 3,   -115,   70,    0 }
+            { "weapons/flamethrower", 4,    -51,   70,    0 }
+            { "weapons/flamethrower", 5,     13,   70,    0 }
+        }
+
+    }
+
+}
+
+flamethrower_fire_idle
+{
+    // frames:    4
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 6,     -5,   -3,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 8,     -4,   -7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 16,     -5,   -6,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 18,     -4,   -5,    0 }
+        }
+
+    }
+
+}
+
+flamethrower_lower
+{
+    // frames:   13
+    frame
+    {
+        // ##000   68    0
+        sprites
+        {
+            { "weapons/flamethrower", 6,     -5,    0,    0 }
+            { "weapons/flamethrower", 0,   -115,    6,    0 }
+            { "weapons/flamethrower", 1,    -51,    6,    0 }
+            { "weapons/flamethrower", 2,     13,    6,    0 }
+            { "weapons/flamethrower", 3,   -115,   70,    0 }
+            { "weapons/flamethrower", 4,    -51,   70,    0 }
+            { "weapons/flamethrower", 5,     13,   70,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 16,     -5,    6,    0 }
+            { "weapons/flamethrower", 0,   -115,   18,    0 }
+            { "weapons/flamethrower", 1,    -51,   18,    0 }
+            { "weapons/flamethrower", 2,     13,   18,    0 }
+            { "weapons/flamethrower", 3,   -115,   82,    0 }
+            { "weapons/flamethrower", 4,    -51,   82,    0 }
+            { "weapons/flamethrower", 5,     13,   82,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 20,     -5,   11,    0 }
+            { "weapons/flamethrower", 0,   -115,   20,    0 }
+            { "weapons/flamethrower", 1,    -51,   20,    0 }
+            { "weapons/flamethrower", 2,     13,   20,    0 }
+            { "weapons/flamethrower", 3,   -115,   84,    0 }
+            { "weapons/flamethrower", 4,    -51,   84,    0 }
+            { "weapons/flamethrower", 5,     13,   84,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 22,     -4,   20,    0 }
+            { "weapons/flamethrower", 0,   -115,   24,    0 }
+            { "weapons/flamethrower", 1,    -51,   24,    0 }
+            { "weapons/flamethrower", 2,     13,   24,    0 }
+            { "weapons/flamethrower", 3,   -115,   88,    0 }
+            { "weapons/flamethrower", 4,    -51,   88,    0 }
+            { "weapons/flamethrower", 5,     13,   88,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 22,     -4,   27,    0 }
+            { "weapons/flamethrower", 0,   -115,   31,    0 }
+            { "weapons/flamethrower", 1,    -51,   31,    0 }
+            { "weapons/flamethrower", 2,     13,   31,    0 }
+            { "weapons/flamethrower", 3,   -115,   95,    0 }
+            { "weapons/flamethrower", 4,    -51,   95,    0 }
+            { "weapons/flamethrower", 5,     13,   95,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 22,     -4,   36,    0 }
+            { "weapons/flamethrower", 0,   -115,   38,    0 }
+            { "weapons/flamethrower", 1,    -51,   38,    0 }
+            { "weapons/flamethrower", 2,     13,   38,    0 }
+            { "weapons/flamethrower", 3,   -115,  102,    0 }
+            { "weapons/flamethrower", 4,    -51,  102,    0 }
+            { "weapons/flamethrower", 5,     13,  102,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   47,    0 }
+            { "weapons/flamethrower", 1,    -51,   47,    0 }
+            { "weapons/flamethrower", 2,     13,   47,    0 }
+            { "weapons/flamethrower", 3,   -115,  111,    0 }
+            { "weapons/flamethrower", 4,    -51,  111,    0 }
+            { "weapons/flamethrower", 5,     13,  111,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   57,    0 }
+            { "weapons/flamethrower", 1,    -51,   57,    0 }
+            { "weapons/flamethrower", 2,     13,   57,    0 }
+            { "weapons/flamethrower", 3,   -115,  121,    0 }
+            { "weapons/flamethrower", 4,    -51,  121,    0 }
+            { "weapons/flamethrower", 5,     13,  121,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   68,    0 }
+            { "weapons/flamethrower", 1,    -51,   68,    0 }
+            { "weapons/flamethrower", 2,     13,   68,    0 }
+            { "weapons/flamethrower", 3,   -115,  132,    0 }
+            { "weapons/flamethrower", 4,    -51,  132,    0 }
+            { "weapons/flamethrower", 5,     13,  132,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   70,    0 }
+            { "weapons/flamethrower", 1,    -51,   70,    0 }
+            { "weapons/flamethrower", 2,     13,   70,    0 }
+            { "weapons/flamethrower", 3,   -115,  134,    0 }
+            { "weapons/flamethrower", 4,    -51,  134,    0 }
+            { "weapons/flamethrower", 5,     13,  134,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##011    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        // ##012    0    0 (no groups)
+        delay 1
+
+    }
+
+}
+
+flamethrower_fire
+{
+    // frames:    4
+    frame
+    {
+        // ##000    0  128
+        fullbright
+        sprites
+        {
+            { "weapons/flamethrower", 9,   -115,   14,    0 }
+            { "weapons/flamethrower", 10,    -51,   14,    0 }
+            { "weapons/flamethrower", 11,     13,   14,    0 }
+            { "weapons/flamethrower", 12,   -115,   78,    0 }
+            { "weapons/flamethrower", 13,    -51,   78,    0 }
+            { "weapons/flamethrower", 14,     13,   78,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0  128
+        fullbright
+        sprites
+        {
+            { "weapons/flamethrower", 9,   -116,   14,    0 }
+            { "weapons/flamethrower", 10,    -52,   14,    0 }
+            { "weapons/flamethrower", 11,     12,   14,    0 }
+            { "weapons/flamethrower", 12,   -116,   78,    0 }
+            { "weapons/flamethrower", 13,    -52,   78,    0 }
+            { "weapons/flamethrower", 14,     12,   78,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0  128
+        fullbright
+        sprites
+        {
+            { "weapons/flamethrower", 9,   -115,   15,    0 }
+            { "weapons/flamethrower", 10,    -51,   15,    0 }
+            { "weapons/flamethrower", 11,     13,   15,    0 }
+            { "weapons/flamethrower", 12,   -115,   79,    0 }
+            { "weapons/flamethrower", 13,    -51,   79,    0 }
+            { "weapons/flamethrower", 14,     13,   79,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0  128
+        fullbright
+        goto "weapons/flamethrower_idle"
+        refire "weapons/flamethrower_fire"
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,   14,    0 }
+            { "weapons/flamethrower", 1,    -51,   14,    0 }
+            { "weapons/flamethrower", 2,     13,   14,    0 }
+            { "weapons/flamethrower", 3,   -115,   78,    0 }
+            { "weapons/flamethrower", 4,    -51,   78,    0 }
+            { "weapons/flamethrower", 5,     13,   78,    0 }
+        }
+
+    }
+
+}
+
+flamethrower_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/flamethrower", 0,   -115,    6,    0 }
+            { "weapons/flamethrower", 1,    -51,    6,    0 }
+            { "weapons/flamethrower", 2,     13,    6,    0 }
+            { "weapons/flamethrower", 3,   -115,   70,    0 }
+            { "weapons/flamethrower", 4,    -51,   70,    0 }
+            { "weapons/flamethrower", 5,     13,   70,    0 }
+        }
+
+    }
+
+}

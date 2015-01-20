@@ -66,8 +66,6 @@ typedef enum
     WS_RAISE,
     WS_LOWER,
     WS_FIRE,
-    WS_CHARGE,
-    WS_SPECIAL,
 
     NUMWEAPONSTATES
 } weaponState_t;
@@ -138,6 +136,7 @@ typedef enum
 #include "playLoop.h"
 #include "sprite.h"
 #include "spriteAnim.h"
+#include "pWeapon.h"
 #include "player.h"
 
 //-----------------------------------------------------------------------------
@@ -172,8 +171,6 @@ public:
         spriteAnim_t        *lower;
         spriteAnim_t        *idle;
         spriteAnim_t        *fire;
-        spriteAnim_t        *charge;
-        spriteAnim_t        *special;
     } weaponInfo_t;
     
     kexTitleScreen          *TitleScreen(void) { return titleScreen; }

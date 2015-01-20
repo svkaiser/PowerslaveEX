@@ -244,24 +244,40 @@ void kexGameLocal::Start(void)
     weapon->type = PW_FLAMETHROWER;
     weapon->offsetX = 160;
     weapon->offsetY = 132;
+    weapon->idle = spriteAnimManager->Get("weapons/flamethrower_idle");
+    weapon->raise = spriteAnimManager->Get("weapons/flamethrower_raise");
+    weapon->lower = spriteAnimManager->Get("weapons/flamethrower_lower");
+    weapon->fire = spriteAnimManager->Get("weapons/flamethrower_fire");
 
     // cobra staff
     weapon = &weaponInfo[PW_COBRASTAFF];
     weapon->type = PW_COBRASTAFF;
     weapon->offsetX = 160;
     weapon->offsetY = 210;
+    weapon->idle = spriteAnimManager->Get("weapons/cstaff_idle");
+    weapon->raise = spriteAnimManager->Get("weapons/cstaff_raise");
+    weapon->lower = spriteAnimManager->Get("weapons/cstaff_lower");
+    weapon->fire = spriteAnimManager->Get("weapons/cstaff_fire");
 
     // ring of ra
     weapon = &weaponInfo[PW_RINGOFRA];
     weapon->type = PW_RINGOFRA;
     weapon->offsetX = 160;
     weapon->offsetY = 214;
+    weapon->idle = spriteAnimManager->Get("weapons/ring_ra_idle");
+    weapon->raise = spriteAnimManager->Get("weapons/ring_ra_raise");
+    weapon->lower = spriteAnimManager->Get("weapons/ring_ra_lower");
+    weapon->fire = spriteAnimManager->Get("weapons/ring_ra_fire");
 
     // bracelet
     weapon = &weaponInfo[PW_BRACELET];
     weapon->type = PW_BRACELET;
     weapon->offsetX = 160;
     weapon->offsetY = 208;
+    weapon->idle = spriteAnimManager->Get("weapons/manacle_idle");
+    weapon->raise = spriteAnimManager->Get("weapons/manacle_raise");
+    weapon->lower = spriteAnimManager->Get("weapons/manacle_lower");
+    weapon->fire = spriteAnimManager->Get("weapons/manacle_fire");
 
     player->Reset();
 }

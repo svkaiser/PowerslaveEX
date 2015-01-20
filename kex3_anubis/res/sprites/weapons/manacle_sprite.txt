@@ -1,0 +1,41 @@
+texture "sprites/weapons/manacle.png"
+
+// working\weapon8\sprite0237.tga
+sprite 0 0 0 64 64
+
+// working\weapon8\sprite0238.tga
+sprite 1 64 0 56 64
+
+// working\weapon8\sprite0239.tga
+sprite 2 120 0 64 1
+
+// working\weapon8\sprite0240.tga
+sprite 3 184 0 56 1
+
+// working\weapon8\sprite0241.tga
+sprite 4 120 1 64 64
+
+// working\weapon8\sprite0242.tga
+sprite 5 184 1 64 64
+
+// working\weapon8\sprite0243.tga
+sprite 6 0 64 64 60
+
+// working\weapon8\sprite0244.tga
+sprite 7 64 65 64 60
+
+// working\weapon8\sprite0245.tga
+sprite 8 128 65 20 60
+
+// working\weapon8\sprite0246.tga
+sprite 9 148 65 64 64
+
+// working\weapon8\sprite0247.tga
+sprite 10 212 65 32 64
+
+// working\weapon8\sprite0248.tga
+sprite 11 0 124 64 4
+
+// working\weapon8\sprite0249.tga
+sprite 12 64 125 32 4
+

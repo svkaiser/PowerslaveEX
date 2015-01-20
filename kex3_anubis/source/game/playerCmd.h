@@ -25,8 +25,8 @@ typedef enum
     BC_RIGHT        = BIT(5),
     BC_STRAFELEFT   = BIT(6),
     BC_STRAFERIGHT  = BIT(7),
-    BC_WEAPONLEFT   = BIT(8),
-    BC_WEAPONRIGHT  = BIT(9)
+    BC_WEAPONRIGHT  = BIT(8),
+    BC_WEAPONLEFT   = BIT(9)
 } buttonCommand_t;
 
 class kexPlayerCmd

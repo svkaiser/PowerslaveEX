@@ -1,0 +1,996 @@
+manacle_raise
+{
+    // frames:   25
+    frame
+    {
+        // ##000    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##001    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##002    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##003    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##004   73    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##005    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##006    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     84,    1,    0 }
+            { "weapons/manacle", 1,    148,    1,    0 }
+            { "weapons/manacle", 2,     84,   65,    0 }
+            { "weapons/manacle", 3,    148,   65,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     81,   -6,    0 }
+            { "weapons/manacle", 1,    145,   -6,    0 }
+            { "weapons/manacle", 2,     81,   58,    0 }
+            { "weapons/manacle", 3,    145,   58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     77,  -15,    0 }
+            { "weapons/manacle", 1,    141,  -15,    0 }
+            { "weapons/manacle", 2,     77,   49,    0 }
+            { "weapons/manacle", 3,    141,   49,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     73,  -24,    0 }
+            { "weapons/manacle", 1,    137,  -24,    0 }
+            { "weapons/manacle", 2,     73,   40,    0 }
+            { "weapons/manacle", 3,    137,   40,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     70,  -33,    0 }
+            { "weapons/manacle", 1,    134,  -33,    0 }
+            { "weapons/manacle", 2,     70,   31,    0 }
+            { "weapons/manacle", 3,    134,   31,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     66,  -41,    0 }
+            { "weapons/manacle", 1,    130,  -41,    0 }
+            { "weapons/manacle", 2,     66,   23,    0 }
+            { "weapons/manacle", 3,    130,   23,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     64,  -44,    0 }
+            { "weapons/manacle", 1,    128,  -44,    0 }
+            { "weapons/manacle", 2,     64,   20,    0 }
+            { "weapons/manacle", 3,    128,   20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     61,  -48,    0 }
+            { "weapons/manacle", 1,    125,  -48,    0 }
+            { "weapons/manacle", 2,     61,   16,    0 }
+            { "weapons/manacle", 3,    125,   16,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     55,  -50,    0 }
+            { "weapons/manacle", 1,    119,  -50,    0 }
+            { "weapons/manacle", 2,     55,   14,    0 }
+            { "weapons/manacle", 3,    119,   14,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     48,  -51,    0 }
+            { "weapons/manacle", 1,    112,  -51,    0 }
+            { "weapons/manacle", 2,     48,   13,    0 }
+            { "weapons/manacle", 3,    112,   13,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     41,  -52,    0 }
+            { "weapons/manacle", 1,    105,  -52,    0 }
+            { "weapons/manacle", 2,     41,   12,    0 }
+            { "weapons/manacle", 3,    105,   12,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     30,  -54,    0 }
+            { "weapons/manacle", 1,     94,  -54,    0 }
+            { "weapons/manacle", 2,     30,   10,    0 }
+            { "weapons/manacle", 3,     94,   10,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##019    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     19,  -57,    0 }
+            { "weapons/manacle", 1,     83,  -57,    0 }
+            { "weapons/manacle", 2,     19,    7,    0 }
+            { "weapons/manacle", 3,     83,    7,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##020    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,      4,  -59,    0 }
+            { "weapons/manacle", 1,     68,  -59,    0 }
+            { "weapons/manacle", 2,      4,    5,    0 }
+            { "weapons/manacle", 3,     68,    5,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##021    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     -6,  -61,    0 }
+            { "weapons/manacle", 1,     58,  -61,    0 }
+            { "weapons/manacle", 2,     -6,    3,    0 }
+            { "weapons/manacle", 3,     58,    3,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##022    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,    -11,  -64,    0 }
+            { "weapons/manacle", 1,     53,  -64,    0 }
+            { "weapons/manacle", 2,    -11,    0,    0 }
+            { "weapons/manacle", 3,     53,    0,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##023    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,    -12,  -65,    0 }
+            { "weapons/manacle", 1,     52,  -65,    0 }
+            { "weapons/manacle", 2,    -12,   -1,    0 }
+            { "weapons/manacle", 3,     52,   -1,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##024    0    0
+        goto "weapons/manacle_idle"
+        sprites
+        {
+            { "weapons/manacle", 0,    -13,  -64,    0 }
+            { "weapons/manacle", 1,     51,  -64,    0 }
+            { "weapons/manacle", 2,    -13,    0,    0 }
+            { "weapons/manacle", 3,     51,    0,    0 }
+        }
+    }
+}
+
+manacle_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,    -13,  -64,    0 }
+            { "weapons/manacle", 1,     51,  -64,    0 }
+            { "weapons/manacle", 2,    -13,    0,    0 }
+            { "weapons/manacle", 3,     51,    0,    0 }
+        }
+    }
+}
+
+manacle_lower
+{
+    // frames:   22
+    frame
+    {
+        // ##000   72    0
+        sprites
+        {
+            { "weapons/manacle", 0,    -11,  -63,    0 }
+            { "weapons/manacle", 1,     53,  -63,    0 }
+            { "weapons/manacle", 2,    -11,    1,    0 }
+            { "weapons/manacle", 3,     53,    1,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,    -12,  -59,    0 }
+            { "weapons/manacle", 1,     52,  -59,    0 }
+            { "weapons/manacle", 2,    -12,    5,    0 }
+            { "weapons/manacle", 3,     52,    5,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,    -11,  -56,    0 }
+            { "weapons/manacle", 1,     53,  -56,    0 }
+            { "weapons/manacle", 2,    -11,    8,    0 }
+            { "weapons/manacle", 3,     53,    8,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     -7,  -52,    0 }
+            { "weapons/manacle", 1,     57,  -52,    0 }
+            { "weapons/manacle", 2,     -7,   12,    0 }
+            { "weapons/manacle", 3,     57,   12,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,      2,  -43,    0 }
+            { "weapons/manacle", 1,     66,  -43,    0 }
+            { "weapons/manacle", 2,      2,   21,    0 }
+            { "weapons/manacle", 3,     66,   21,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,      5,  -37,    0 }
+            { "weapons/manacle", 1,     69,  -37,    0 }
+            { "weapons/manacle", 2,      5,   27,    0 }
+            { "weapons/manacle", 3,     69,   27,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     13,  -25,    0 }
+            { "weapons/manacle", 1,     77,  -25,    0 }
+            { "weapons/manacle", 2,     13,   39,    0 }
+            { "weapons/manacle", 3,     77,   39,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     18,  -11,    0 }
+            { "weapons/manacle", 1,     82,  -11,    0 }
+            { "weapons/manacle", 2,     18,   53,    0 }
+            { "weapons/manacle", 3,     82,   53,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##009    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##010    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##011    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##012    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##013    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##014    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##015    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##016    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##017    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##018    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##019    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##020    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##021    0    0 (no groups)
+        delay 1
+    }
+}
+
+manacle_fire
+{
+    // frames:    4
+    frame
+    {
+        // ##000   74    0
+        sprites
+        {
+            { "weapons/manacle", 0,     -9,  -59,    0 }
+            { "weapons/manacle", 1,     55,  -59,    0 }
+            { "weapons/manacle", 2,     -9,    5,    0 }
+            { "weapons/manacle", 3,     55,    5,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,      6,  -49,    0 }
+            { "weapons/manacle", 1,     70,  -49,    0 }
+            { "weapons/manacle", 2,      6,   15,    0 }
+            { "weapons/manacle", 3,     70,   15,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/manacle", 0,     22,  -47,    0 }
+            { "weapons/manacle", 1,     86,  -47,    0 }
+            { "weapons/manacle", 2,     22,   17,    0 }
+            { "weapons/manacle", 3,     86,   17,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        goto "weapons/manacle_charge"
+        sprites
+        {
+            { "weapons/manacle", 0,     45,  -56,    0 }
+            { "weapons/manacle", 1,    109,  -56,    0 }
+            { "weapons/manacle", 2,     45,    8,    0 }
+            { "weapons/manacle", 3,    109,    8,    0 }
+        }
+    }
+}
+
+manacle_charge
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     58,  -45,    0 }
+            { "weapons/manacle", 10,    122,  -45,    0 }
+            { "weapons/manacle", 11,     58,   19,    0 }
+            { "weapons/manacle", 12,    122,   19,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     61,  -44,    0 }
+            { "weapons/manacle", 10,    125,  -44,    0 }
+            { "weapons/manacle", 11,     61,   20,    0 }
+            { "weapons/manacle", 12,    125,   20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     64,  -46,    0 }
+            { "weapons/manacle", 10,    128,  -46,    0 }
+            { "weapons/manacle", 11,     64,   18,    0 }
+            { "weapons/manacle", 12,    128,   18,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     60,  -44,    0 }
+            { "weapons/manacle", 10,    124,  -44,    0 }
+            { "weapons/manacle", 11,     60,   20,    0 }
+            { "weapons/manacle", 12,    124,   20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     61,  -42,    0 }
+            { "weapons/manacle", 10,    125,  -42,    0 }
+            { "weapons/manacle", 11,     61,   22,    0 }
+            { "weapons/manacle", 12,    125,   22,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     60,  -44,    0 }
+            { "weapons/manacle", 10,    124,  -44,    0 }
+            { "weapons/manacle", 11,     60,   20,    0 }
+            { "weapons/manacle", 12,    124,   20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     60,  -41,    0 }
+            { "weapons/manacle", 10,    124,  -41,    0 }
+            { "weapons/manacle", 11,     60,   23,    0 }
+            { "weapons/manacle", 12,    124,   23,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     63,  -43,    0 }
+            { "weapons/manacle", 10,    127,  -43,    0 }
+            { "weapons/manacle", 11,     63,   21,    0 }
+            { "weapons/manacle", 12,    127,   21,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     62,  -44,    0 }
+            { "weapons/manacle", 10,    126,  -44,    0 }
+            { "weapons/manacle", 11,     62,   20,    0 }
+            { "weapons/manacle", 12,    126,   20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     63,  -40,    0 }
+            { "weapons/manacle", 10,    127,  -40,    0 }
+            { "weapons/manacle", 11,     63,   24,    0 }
+            { "weapons/manacle", 12,    127,   24,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/manacle", 9,     62,  -39,    0 }
+            { "weapons/manacle", 10,    126,  -39,    0 }
+            { "weapons/manacle", 11,     62,   25,    0 }
+            { "weapons/manacle", 12,    126,   25,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        goto "weapons/manacle_release"
+        sprites
+        {
+            { "weapons/manacle", 9,     67,  -39,    0 }
+            { "weapons/manacle", 10,    131,  -39,    0 }
+            { "weapons/manacle", 11,     67,   25,    0 }
+            { "weapons/manacle", 12,    131,   25,    0 }
+        }
+    }
+}
+
+manacle_release
+{
+    // frames:   30
+    frame
+    {
+        // ##000   71  128
+        sprites
+        {
+            { "weapons/manacle", 4,     20, -109,    0 }
+            { "weapons/manacle", 5,     84, -109,    0 }
+            { "weapons/manacle", 6,     20,  -45,    0 }
+            { "weapons/manacle", 7,     84,  -45,    0 }
+            { "weapons/manacle", 8,    148,  -45,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     18, -116,    0 }
+            { "weapons/manacle", 5,     82, -116,    0 }
+            { "weapons/manacle", 6,     18,  -52,    0 }
+            { "weapons/manacle", 7,     82,  -52,    0 }
+            { "weapons/manacle", 8,    146,  -52,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     17, -121,    0 }
+            { "weapons/manacle", 5,     81, -121,    0 }
+            { "weapons/manacle", 6,     17,  -57,    0 }
+            { "weapons/manacle", 7,     81,  -57,    0 }
+            { "weapons/manacle", 8,    145,  -57,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     17, -119,    0 }
+            { "weapons/manacle", 5,     81, -119,    0 }
+            { "weapons/manacle", 6,     17,  -55,    0 }
+            { "weapons/manacle", 7,     81,  -55,    0 }
+            { "weapons/manacle", 8,    145,  -55,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     18, -121,    0 }
+            { "weapons/manacle", 5,     82, -121,    0 }
+            { "weapons/manacle", 6,     18,  -57,    0 }
+            { "weapons/manacle", 7,     82,  -57,    0 }
+            { "weapons/manacle", 8,    146,  -57,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     17, -121,    0 }
+            { "weapons/manacle", 5,     81, -121,    0 }
+            { "weapons/manacle", 6,     17,  -57,    0 }
+            { "weapons/manacle", 7,     81,  -57,    0 }
+            { "weapons/manacle", 8,    145,  -57,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     20, -121,    0 }
+            { "weapons/manacle", 5,     84, -121,    0 }
+            { "weapons/manacle", 6,     20,  -57,    0 }
+            { "weapons/manacle", 7,     84,  -57,    0 }
+            { "weapons/manacle", 8,    148,  -57,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     18, -121,    0 }
+            { "weapons/manacle", 5,     82, -121,    0 }
+            { "weapons/manacle", 6,     18,  -57,    0 }
+            { "weapons/manacle", 7,     82,  -57,    0 }
+            { "weapons/manacle", 8,    146,  -57,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     16, -121,    0 }
+            { "weapons/manacle", 5,     80, -121,    0 }
+            { "weapons/manacle", 6,     16,  -57,    0 }
+            { "weapons/manacle", 7,     80,  -57,    0 }
+            { "weapons/manacle", 8,    144,  -57,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     17, -120,    0 }
+            { "weapons/manacle", 5,     81, -120,    0 }
+            { "weapons/manacle", 6,     17,  -56,    0 }
+            { "weapons/manacle", 7,     81,  -56,    0 }
+            { "weapons/manacle", 8,    145,  -56,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     17, -121,    0 }
+            { "weapons/manacle", 5,     81, -121,    0 }
+            { "weapons/manacle", 6,     17,  -57,    0 }
+            { "weapons/manacle", 7,     81,  -57,    0 }
+            { "weapons/manacle", 8,    145,  -57,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     17, -119,    0 }
+            { "weapons/manacle", 5,     81, -119,    0 }
+            { "weapons/manacle", 6,     17,  -55,    0 }
+            { "weapons/manacle", 7,     81,  -55,    0 }
+            { "weapons/manacle", 8,    145,  -55,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     17, -121,    0 }
+            { "weapons/manacle", 5,     81, -121,    0 }
+            { "weapons/manacle", 6,     17,  -57,    0 }
+            { "weapons/manacle", 7,     81,  -57,    0 }
+            { "weapons/manacle", 8,    145,  -57,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     19, -117,    0 }
+            { "weapons/manacle", 5,     83, -117,    0 }
+            { "weapons/manacle", 6,     19,  -53,    0 }
+            { "weapons/manacle", 7,     83,  -53,    0 }
+            { "weapons/manacle", 8,    147,  -53,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     21, -113,    0 }
+            { "weapons/manacle", 5,     85, -113,    0 }
+            { "weapons/manacle", 6,     21,  -49,    0 }
+            { "weapons/manacle", 7,     85,  -49,    0 }
+            { "weapons/manacle", 8,    149,  -49,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     26, -105,    0 }
+            { "weapons/manacle", 5,     90, -105,    0 }
+            { "weapons/manacle", 6,     26,  -41,    0 }
+            { "weapons/manacle", 7,     90,  -41,    0 }
+            { "weapons/manacle", 8,    154,  -41,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     34,  -93,    0 }
+            { "weapons/manacle", 5,     98,  -93,    0 }
+            { "weapons/manacle", 6,     34,  -29,    0 }
+            { "weapons/manacle", 7,     98,  -29,    0 }
+            { "weapons/manacle", 8,    162,  -29,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     42,  -82,    0 }
+            { "weapons/manacle", 5,    106,  -82,    0 }
+            { "weapons/manacle", 6,     42,  -18,    0 }
+            { "weapons/manacle", 7,    106,  -18,    0 }
+            { "weapons/manacle", 8,    170,  -18,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     48,  -71,    0 }
+            { "weapons/manacle", 5,    112,  -71,    0 }
+            { "weapons/manacle", 6,     48,   -7,    0 }
+            { "weapons/manacle", 7,    112,   -7,    0 }
+            { "weapons/manacle", 8,    176,   -7,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##019    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     57,  -55,    0 }
+            { "weapons/manacle", 5,    121,  -55,    0 }
+            { "weapons/manacle", 6,     57,    9,    0 }
+            { "weapons/manacle", 7,    121,    9,    0 }
+            { "weapons/manacle", 8,    185,    9,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##020    0    0
+        sprites
+        {
+            { "weapons/manacle", 4,     66,  -37,    0 }
+            { "weapons/manacle", 5,    130,  -37,    0 }
+            { "weapons/manacle", 6,     66,   27,    0 }
+            { "weapons/manacle", 7,    130,   27,    0 }
+            { "weapons/manacle", 8,    194,   27,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##021    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##022    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##023    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##024    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##025    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##026    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##027    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##028    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##029    0    0 (no groups)
+        delay 1
+        goto "weapons/manacle_raise"
+    }
+}

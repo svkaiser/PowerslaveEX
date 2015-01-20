@@ -319,6 +319,7 @@ void kexPuppet::Spawn(void)
 
 kexPlayer::kexPlayer(void)
 {
+    this->weapon.owner = this;
 }
 
 //
@@ -338,24 +339,17 @@ void kexPlayer::Reset(void)
     health = maxHealth;
     ankahs = 0;
     actor = NULL;
-    weaponAnim = NULL;
 
     cmd.Reset();
 
     bob = 0;
     bobTime = 0;
     bobSpeed = 0;
-    weaponBob_x = 0;
-    weaponBob_y = 0;
-    weaponBobTime = 0;
     landTime = 0;
     stepViewZ = 0;
 
     currentWeapon = PW_MACHETE;
     pendingWeapon = currentWeapon;
-    weaponState = WS_RAISE;
-    weaponFrame = 0;
-    weaponTicks = 0;
 
     memset(weapons, 0, NUMPLAYERWEAPONS);
     weapons[PW_MACHETE] = true;
@@ -364,6 +358,10 @@ void kexPlayer::Reset(void)
     weapons[PW_PISTOL] = true;
     weapons[PW_M60] = true;
     weapons[PW_BOMBS] = true;
+    weapons[PW_FLAMETHROWER] = true;
+    weapons[PW_COBRASTAFF] = true;
+    weapons[PW_RINGOFRA] = true;
+    weapons[PW_BRACELET] = true;
 
     for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
     {
@@ -374,8 +372,6 @@ void kexPlayer::Reset(void)
     keys = 0;
     transmitter = 0;
     teamDolls = 0;
-
-    weaponAnim = kexGame::cLocal->WeaponInfo(currentWeapon)->raise;
 }
 
 //
@@ -384,42 +380,7 @@ void kexPlayer::Reset(void)
 
 void kexPlayer::Ready(void)
 {
-    weaponAnim = kexGame::cLocal->WeaponInfo(currentWeapon)->raise;
-    weaponState = WS_RAISE;
-    weaponFrame = 0;
-    weaponTicks = 0;
-}
-
-//
-// kexPlayer::UpdateWeaponBob
-//
-
-void kexPlayer::UpdateWeaponBob(void)
-{
-    float movement = actor->Velocity().ToVec2().Unit();
-
-    if((movement > 0 || landTime < 0) && actor->Origin().z <= actor->FloorHeight())
-    {
-        float t = (float)weaponBobTime;
-        float x, y;
-
-        movement = movement / 16.0f;
-        kexMath::Clamp(movement, 0, 1);
-
-        x = kexMath::Sin(t * 0.075f) * (16*movement);
-        y = kexMath::Fabs(kexMath::Sin(t * 0.075f) * (16*movement)) - landTime;
-
-        weaponBob_x = (x - weaponBob_x) * 0.25f + weaponBob_x;
-        weaponBob_y = (y - weaponBob_y) * 0.25f + weaponBob_y;
-
-        weaponBobTime++;
-    }
-    else
-    {
-        weaponBobTime = 0;
-        weaponBob_x = (0 - weaponBob_x) * 0.25f + weaponBob_x;
-        weaponBob_y = (0 - weaponBob_y) * 0.25f + weaponBob_y;
-    }
+    weapon.ChangeAnim(WS_RAISE);
 }
 
 //
@@ -518,19 +479,11 @@ void kexPlayer::CyclePrevWeapon(void)
 }
 
 //
-// kexPlayer::UpdateWeaponSprite
+// kexPlayer::Tick
 //
 
-void kexPlayer::UpdateWeaponSprite(void)
+void kexPlayer::Tick(void)
 {
-    spriteFrame_t *frame;
-    const kexGameLocal::weaponInfo_t *weaponInfo;
-
-    if(weaponAnim == NULL)
-    {
-        return;
-    }
-
     if(cmd.Buttons() & BC_WEAPONLEFT)
     {
         CyclePrevWeapon();
@@ -540,80 +493,7 @@ void kexPlayer::UpdateWeaponSprite(void)
         CycleNextWeapon();
     }
 
-    frame = &weaponAnim->frames[weaponFrame];
-    weaponTicks += (1.0f / (float)frame->delay) * 0.5f;
-    
-    // handle advancing to next frame
-    if(weaponTicks >= 1)
-    {
-        weaponTicks = 0;
-        
-        // reached the end of the frame?
-        if(++weaponFrame >= (int16_t)weaponAnim->NumFrames())
-        {
-            // loop back
-            weaponFrame = 0;
-
-            // if lowering weapon, then switch to pending weapon
-            if(weaponState == WS_LOWER)
-            {
-                currentWeapon = pendingWeapon;
-                weaponState = WS_RAISE;
-                weaponAnim = kexGame::cLocal->WeaponInfo(currentWeapon)->raise;
-                return;
-            }
-        }
-    }
-
-    weaponInfo = kexGame::cLocal->WeaponInfo(currentWeapon);
-
-    // handle re-fire
-    if(frame->HasRefireFrame() && cmd.Buttons() & BC_ATTACK)
-    {
-        weaponAnim = kexGame::cLocal->SpriteAnimManager()->Get(frame->refireFrame);
-        weaponFrame = 0;
-        weaponTicks = 0;
-    }
-    // handle goto jumps
-    else if(frame->HasNextFrame())
-    {
-        weaponAnim = kexGame::cLocal->SpriteAnimManager()->Get(frame->nextFrame);
-        weaponFrame = 0;
-        weaponTicks = 0;
-
-        if(weaponAnim == weaponInfo->idle)
-        {
-            weaponState = WS_IDLE;
-        }
-    }
-
-    switch(weaponState)
-    {
-    case WS_IDLE:
-        if(pendingWeapon != currentWeapon)
-        {
-            weaponState = WS_LOWER;
-            weaponAnim = weaponInfo->lower;
-        }
-        if(cmd.Buttons() & BC_ATTACK)
-        {
-            weaponState = WS_FIRE;
-            weaponAnim = weaponInfo->fire;
-        }
-        break;
-
-    default:
-        break;
-    }
-}
-
-//
-// kexPlayer::Tick
-//
-
-void kexPlayer::Tick(void)
-{
     UpdateViewBob();
-    UpdateWeaponBob();
-    UpdateWeaponSprite();
+
+    weapon.Update();
 }
