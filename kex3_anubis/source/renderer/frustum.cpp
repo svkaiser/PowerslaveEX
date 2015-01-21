@@ -42,8 +42,8 @@ void kexFrustum::MakeClipPlanes(kexMatrix &proj, kexMatrix &model)
     {
         p[FP_RIGHT][i]  = clip.vectors[i].w - clip.vectors[i].x;
         p[FP_LEFT][i]   = clip.vectors[i].w + clip.vectors[i].x;
-        p[FP_BOTTOM][i] = clip.vectors[i].w - clip.vectors[i].y;
-        p[FP_TOP][i]    = clip.vectors[i].w + clip.vectors[i].y;
+        p[FP_TOP][i]    = clip.vectors[i].w - clip.vectors[i].y;
+        p[FP_BOTTOM][i] = clip.vectors[i].w + clip.vectors[i].y;
         p[FP_FAR][i]    = clip.vectors[i].w - clip.vectors[i].z;
         p[FP_NEAR][i]   = clip.vectors[i].w + clip.vectors[i].z;
     }
