@@ -86,13 +86,22 @@ void kexRenderScene::RecursiveSectorPortals(mapSector_t *sector, kexViewBounds *
         {
             continue;
         }
+
+        if(world->Sectors()[face->sector].floodCount == 1)
+        {
+            continue;
+        }
+
+        if(!kexGame::cLocal->CModel()->PointOnFaceSide(view->Origin(), face))
+        {
+            continue;
+        }
         
         if(!view->Frustum().TestBoundingBox(face->bounds))
         {
             continue;
         }
         
-        viewBounds.Clear();
         viewBounds.AddVector(view, *face->TopEdge()->v1);
         viewBounds.AddVector(view, *face->RightEdge()->v1);
         viewBounds.AddVector(view, *face->BottomEdge()->v1);

@@ -28,7 +28,7 @@ const float kexRenderView::Z_NEAR = 0.1f;
 // kexRenderView::ProjectPoint
 //
 
-kexVec3 kexRenderView::ProjectPoint(const kexVec3 &point)
+kexVec3 kexRenderView::ProjectPoint(const kexVec3 &point, kexVec4 *projVector)
 {
     kexVec4 proj, model;
     float w, h;
@@ -49,8 +49,13 @@ kexVec3 kexRenderView::ProjectPoint(const kexVec3 &point)
     
     w = (float)kex::cSystem->VideoWidth();
     h = (float)kex::cSystem->VideoHeight();
+
+    if(projVector)
+    {
+        *projVector = proj;
+    }
     
-    return kexVec3( (proj.x * 0.5f + 0.5f) * w,
+    return kexVec3((proj.x * 0.5f + 0.5f) * w,
                    (-proj.y * 0.5f + 0.5f) * h,
                    (1.0f + proj.z) * 0.5f);
 }
@@ -99,15 +104,19 @@ void kexRenderView::SetupMatrices(void)
 void kexRenderView::SetupFromPlayer(kexPlayer *player)
 {
     kexActor *actor = player->Actor();
+    kexVec3 forward;
     
     yaw = actor->Yaw();
     pitch = actor->Pitch();
     roll = actor->Roll();
     origin = actor->Origin();
     origin.z += player->ViewZ() + player->Bob() + player->LandTime() + player->StepViewZ();
+
+    kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
     
     SetupMatrices();
     frustum.MakeClipPlanes(projectionView, modelView);
+    frustum.TransformPoints(origin, forward, fov, kex::cSystem->VideoRatio(), 0.1f, 8192);
 }
 
 //

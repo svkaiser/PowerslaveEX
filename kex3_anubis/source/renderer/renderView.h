@@ -34,7 +34,7 @@ public:
 
     void                SetupFromPlayer(kexPlayer *player);
     void                Setup(void);
-    kexVec3             ProjectPoint(const kexVec3 &point);
+    kexVec3             ProjectPoint(const kexVec3 &point, kexVec4 *projVector = NULL);
 
     static const float  Z_NEAR;
 

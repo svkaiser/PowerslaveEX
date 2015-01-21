@@ -112,12 +112,12 @@ void kexViewBounds::AddVector(kexRenderView *view, kexVec3 &vector)
 
     if(!(bits & BIT(FP_BOTTOM)))
     {
-        pmin[1] = 0;
+        pmin[1] = h;
     }
 
     if(!(bits & BIT(FP_TOP)))
     {
-        pmin[1] = h;
+        pmin[1] = 0;
     }
 
     AddPoint(pmin[0], pmin[1], pmin[2]);

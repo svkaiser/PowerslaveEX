@@ -325,6 +325,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\renderScene.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\renderScreen.cpp"
 					>
 				</File>
@@ -620,6 +624,10 @@
 				</File>
 				<File
 					RelativePath="..\source\renderer\renderMain.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\renderScene.h"
 					>
 				</File>
 				<File
