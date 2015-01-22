@@ -344,12 +344,16 @@ void kexRenderBackend::ClearBuffer(const glClearBit_t bit)
 
 void kexRenderBackend::SetScissorRect(const int x, const int y, const int w, const int h)
 {
+    int vh;
+    
     if(!(glState.glStateBits & (1 << GLSTATE_SCISSOR)))
     {
         return;
     }
+    
+    vh = kex::cSystem->VideoHeight();
 
-    dglScissor(x, y, w, h);
+    dglScissor(x, vh - h, w, vh - y);
 }
 
 //
