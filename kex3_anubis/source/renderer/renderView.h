@@ -28,6 +28,7 @@ public:
     kexAngle            &Roll(void) { return roll; }
     kexMatrix           &ProjectionView(void) { return projectionView; }
     kexMatrix           &ModelView(void) { return modelView; }
+    kexMatrix           &RotationMatrix(void) { return rotationMatrix; }
     kexFrustum          &Frustum(void) { return frustum; }
     kexQuat             &Rotation(void) { return rotation; }
     float               &Fov(void) { return fov; }
@@ -47,6 +48,7 @@ private:
     kexAngle            roll;
     kexMatrix           projectionView;
     kexMatrix           modelView;
+    kexMatrix           rotationMatrix;
     kexQuat             rotation;
     kexFrustum          frustum;
     float               fov;

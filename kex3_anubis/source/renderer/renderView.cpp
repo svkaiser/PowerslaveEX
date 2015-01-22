@@ -84,12 +84,14 @@ void kexRenderView::SetupMatrices(void)
     
     // setup model view matrix
     modelView = kexMatrix(rotation);
+    rotationMatrix = modelView;
     
     modelView = kexMatrix(roll * kexMath::Sin(yaw), 1) * modelView;
     modelView.RotateY(roll * kexMath::Cos(yaw));
 
     // scale to aspect ratio
     modelView.Scale(1, 1, 1.07142f);
+    rotationMatrix.Scale(1, 1, 1.07142f);
     modelView.AddTranslation(-origin * modelView);
 
     // re-adjust translation

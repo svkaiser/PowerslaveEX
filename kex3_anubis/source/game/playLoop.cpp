@@ -99,6 +99,26 @@ void GetEdgeProjectedPoints(kexRenderView &renderView, kexVec3 &proj1, kexVec3 &
     kexVec3 lp1, lp2;
     bool bn, bt, bb, bl, br;
     
+    d1 = near->Distance(p1) + near->d;
+    d2 = near->Distance(p2) + near->d;
+    dn1 = d1;
+    dn2 = d2;
+    nd = d1 / (d1 - d2);
+    
+    bn = (nd >= 0 && nd <= 1);
+    
+    if(bn)
+    {
+        if(dn1 > dn2)
+        {
+            p2.Lerp(p1, 1.0f - nd);
+        }
+        else
+        {
+            p1.Lerp(p2, nd);
+        }
+    }
+    
     d1 = top->Distance(p1) + top->d;
     d2 = top->Distance(p2) + top->d;
     td = d1 / (d1 - d2);
@@ -147,12 +167,78 @@ void GetEdgeProjectedPoints(kexRenderView &renderView, kexVec3 &proj1, kexVec3 &
     if(bl) p1.Lerp(p2, ld);
     if(br) p2.Lerp(p1, 1.0f - rd);
     
-    //kex::cSystem->Printf("%i %i %i %i %i\n", bn, bt, bb, bl, br);
+    d1 = near->Distance(p1) + near->d;
+    d2 = near->Distance(p2) + near->d;
+    dn1 = d1;
+    dn2 = d2;
+    nd = d1 / (d1 - d2);
     
-    //proj1 = renderView.ProjectPoint(lp1);
-    //proj2 = renderView.ProjectPoint(lp2);
+    bn = (nd >= 0 && nd <= 1);
+    
+    if(bn)
+    {
+        if(dn1 > dn2)
+        {
+            p2.Lerp(p1, 1.0f - nd);
+        }
+        else
+        {
+            p1.Lerp(p2, nd);
+        }
+    }
+    
+    d1 = near->Distance(p1) + near->d;
+    d2 = near->Distance(p2) + near->d;
+    dn1 = d1;
+    dn2 = d2;
+    nd = d1 / (d1 - d2);
+    
+    bn = (nd >= 0 && nd <= 1);
+    
+    kexVec3 forward;
+    kexVec3::ToAxis(&forward, 0, 0, renderView.Yaw(), renderView.Pitch(), 0);
+    float dist1 = p1.ToVec2().Distance(renderView.Origin().ToVec2());
+    float dist2 = p2.ToVec2().Distance(renderView.Origin().ToVec2());
+    
+    if(d1 < 0)
+    {
+        p1 += (forward * dist1);
+    }
+    if(d2 < 0)
+    {
+        p2 += (forward * dist2);
+    }
+    
     proj1 = p1;
     proj2 = p2;
+    
+    /*kexVec3 pp1 = *edge->v2 - renderView.Origin();
+    kexVec3 pp2 = *edge->v1 - renderView.Origin();
+    
+    pp1 *= renderView.RotationMatrix();
+    pp2 *= renderView.RotationMatrix();
+    
+    float sx1 = 320 - (((pp1.x / pp1.z) * 160) + 160);
+    float sx2 = 320 - (((pp2.x / pp2.z) * 160) + 160);
+    float sy1 = ((pp1.y / pp1.z) * 120) + 120;
+    float sy2 = ((pp2.y / pp2.z) * 120) + 120;
+    
+    if(pp1.z > 0)
+    {
+        sx1 = 0;
+    }
+    if(pp2.z > 0)
+    {
+        sx2 = 320;
+    }
+    
+    kexMath::Clamp(sx1, 0, 320);
+    kexMath::Clamp(sx2, 0, 320);
+    kexMath::Clamp(sy1, 0, 240);
+    kexMath::Clamp(sy2, 0, 240);
+    
+    kex::cSystem->Printf("%f %f\n", sx1, sx2);
+    kex::cSystem->Printf("%f %f\n\n", sy1, sy2);*/
 }
 
 //
@@ -180,21 +266,33 @@ void kexPlayLoop::Draw(void)
     kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
 
     int clipY = (int)((float)kex::cSystem->VideoHeight() / (240.0f / 24.0f));
-    kexRender::cBackend->SetScissorRect(0, clipY, kex::cSystem->VideoWidth(), kex::cSystem->VideoHeight());
+    kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), kex::cSystem->VideoHeight() - clipY);
     
     if(world->MapLoaded())
     {
         kexVec3 proj1, proj2, proj3, proj4;
-        kexViewBounds viewBounds;
+        //kexViewBounds viewBounds;
         
         {
             mapFace_t *face = &world->Faces()[1900];
+            GetEdgeProjectedPoints(renderView, proj1, proj2, face->BottomEdge(), false);
+            //GetEdgeProjectedPoints(renderView, proj3, proj4, face->LeftEdge(), true);
+            /*viewBounds.AddVector(&renderView, proj1);
+            viewBounds.AddVector(&renderView, proj2);
+            viewBounds.AddVector(&renderView, proj3);
+            viewBounds.AddVector(&renderView, proj4);
             GetEdgeProjectedPoints(renderView, proj1, proj2, face->TopEdge(), false);
             GetEdgeProjectedPoints(renderView, proj3, proj4, face->BottomEdge(), true);
             viewBounds.AddVector(&renderView, proj1);
             viewBounds.AddVector(&renderView, proj2);
             viewBounds.AddVector(&renderView, proj3);
-            viewBounds.AddVector(&renderView, proj4);
+            viewBounds.AddVector(&renderView, proj4);*/
+            
+            /*int h = kex::cSystem->VideoHeight();
+            kexRender::cBackend->SetScissorRect(viewBounds.Min()[0],
+                                                viewBounds.Min()[1] + (h - viewBounds.Max()[1]),
+                                                viewBounds.Max()[0] - viewBounds.Min()[0],
+                                                h - (h - viewBounds.Max()[1]));*/
         }
         
         for(unsigned int i = 0; i < world->NumSectors(); ++i)
@@ -403,9 +501,9 @@ void kexPlayLoop::Draw(void)
         vl->DrawElements();
         
         kexRender::cBackend->SetOrtho();
-        //kexRender::cUtils->DrawLine(renderView.ProjectPoint(proj1),
-        //                            renderView.ProjectPoint(proj2), 255, 0, 255);
-        viewBounds.DebugDraw();
+        kexRender::cUtils->DrawLine(renderView.ProjectPoint(proj1),
+                                    renderView.ProjectPoint(proj2), 255, 0, 255);
+        //viewBounds.DebugDraw();
         
         for(unsigned int i = 0; i < renderScene.VisiblePortals().CurrentLength(); ++i)
         {
