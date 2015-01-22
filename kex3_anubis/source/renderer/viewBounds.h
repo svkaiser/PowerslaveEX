@@ -25,6 +25,7 @@ public:
     void                Clear(void);
     const bool          IsClosed(void) const;
     void                Fill(void);
+    void                AddPoint(const float x, const float y, const float z);
     void                AddVector(kexRenderView *view, kexVec3 &vector);
     void                AddBox(kexRenderView *view, kexBBox &box);
     bool                ViewBoundInside(const kexViewBounds &viewBounds);
@@ -37,8 +38,6 @@ public:
     const float         ZFar(void) const { return zfar; }
 
 private:
-    void                AddPoint(const float x, const float y, const float z);
-    
     float               min[2];
     float               max[2];
     float               zmin;

@@ -72,6 +72,89 @@ void kexPlayLoop::Stop(void)
     kexGame::cLocal->World()->UnloadMap();
 }
 
+void GetEdgeProjectedPoints(kexRenderView &renderView, kexVec3 &proj1, kexVec3 &proj2, mapEdge_t *edge, bool bDir)
+{
+    kexVec3 p1, p2;
+    kexPlane *top, *bottom, *left, *right, *near;
+    float d1, d2, dn1, dn2;
+    float td, bd, nd, ld, rd;
+    
+    top = &renderView.Frustum().Top();
+    bottom = &renderView.Frustum().Bottom();
+    right = &renderView.Frustum().Right();
+    left = &renderView.Frustum().Left();
+    near = &renderView.Frustum().Near();
+    
+    if(bDir)
+    {
+        p1 = *edge->v2;
+        p2 = *edge->v1;
+    }
+    else
+    {
+        p1 = *edge->v1;
+        p2 = *edge->v2;
+    }
+    
+    kexVec3 lp1, lp2;
+    bool bn, bt, bb, bl, br;
+    
+    d1 = top->Distance(p1) + top->d;
+    d2 = top->Distance(p2) + top->d;
+    td = d1 / (d1 - d2);
+    
+    d1 = bottom->Distance(p1) + bottom->d;
+    d2 = bottom->Distance(p2) + bottom->d;
+    bd = d1 / (d1 - d2);
+    
+    bt = (td >= 0 && td <= 1) && (dn2 >= 0);
+    bb = (bd >= 0 && bd <= 1) && (dn1 >= 0);
+    
+    if(bt) p1.Lerp(p2, td);
+    if(bb) p2.Lerp(p1, 1.0f - bd);
+    
+    d1 = near->Distance(p1) + near->d;
+    d2 = near->Distance(p2) + near->d;
+    dn1 = d1;
+    dn2 = d2;
+    nd = d1 / (d1 - d2);
+    
+    bn = (nd >= 0 && nd <= 1);
+    
+    if(bn)
+    {
+        if(dn1 > dn2)
+        {
+            p2.Lerp(p1, 1.0f - nd);
+        }
+        else
+        {
+            p1.Lerp(p2, nd);
+        }
+    }
+    
+    d1 = left->Distance(p1) + left->d;
+    d2 = left->Distance(p2) + left->d;
+    ld = d1 / (d1 - d2);
+    
+    d1 = right->Distance(p1) + right->d;
+    d2 = right->Distance(p2) + right->d;
+    rd = d1 / (d1 - d2);
+    
+    bl = (ld >= 0 && ld <= 1) && (dn2 >= 0);
+    br = (rd >= 0 && rd <= 1) && (dn1 >= 0);
+    
+    if(bl) p1.Lerp(p2, ld);
+    if(br) p2.Lerp(p1, 1.0f - rd);
+    
+    //kex::cSystem->Printf("%i %i %i %i %i\n", bn, bt, bb, bl, br);
+    
+    //proj1 = renderView.ProjectPoint(lp1);
+    //proj2 = renderView.ProjectPoint(lp2);
+    proj1 = p1;
+    proj2 = p2;
+}
+
 //
 // kexPlayLoop::Draw
 //
@@ -101,6 +184,19 @@ void kexPlayLoop::Draw(void)
     
     if(world->MapLoaded())
     {
+        kexVec3 proj1, proj2, proj3, proj4;
+        kexViewBounds viewBounds;
+        
+        {
+            mapFace_t *face = &world->Faces()[1900];
+            GetEdgeProjectedPoints(renderView, proj1, proj2, face->TopEdge(), false);
+            GetEdgeProjectedPoints(renderView, proj3, proj4, face->BottomEdge(), true);
+            viewBounds.AddVector(&renderView, proj1);
+            viewBounds.AddVector(&renderView, proj2);
+            viewBounds.AddVector(&renderView, proj3);
+            viewBounds.AddVector(&renderView, proj4);
+        }
+        
         for(unsigned int i = 0; i < world->NumSectors(); ++i)
         //for(unsigned int i = 0; i < renderScene.VisibleSectors().CurrentLength(); ++i)
         {
@@ -109,6 +205,7 @@ void kexPlayLoop::Draw(void)
             
             int start = sector->faceStart;
             int end = sector->faceEnd;
+            bool inSector = false;
             
             sector->floodCount = 0;
 
@@ -121,11 +218,17 @@ void kexPlayLoop::Draw(void)
             {
                 kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 128, 0);
                 sector->flags &= ~SF_DEBUG;
+                inSector = true;
             }
             
             for(int j = start; j < end+3; ++j)
             {
                 mapFace_t *face = &world->Faces()[j];
+                
+                if(inSector && face->sector != -1)
+                {
+                    //kex::cSystem->Printf("%i\n", j);
+                }
                 
                 if(face->polyStart == -1 || face->polyEnd == -1)
                 {
@@ -298,6 +401,11 @@ void kexPlayLoop::Draw(void)
         vl->AddQuad(160, 216, 0, 96, 24, 0.25f, 0.375f, 0.625f, 0.75f, 255, 255, 255, 255);
         vl->AddQuad(256, 192, 0, 64, 64, 0.625f, 0, 0.875f, 1, 255, 255, 255, 255);
         vl->DrawElements();
+        
+        kexRender::cBackend->SetOrtho();
+        //kexRender::cUtils->DrawLine(renderView.ProjectPoint(proj1),
+        //                            renderView.ProjectPoint(proj2), 255, 0, 255);
+        viewBounds.DebugDraw();
         
         for(unsigned int i = 0; i < renderScene.VisiblePortals().CurrentLength(); ++i)
         {
