@@ -771,7 +771,7 @@ float kexVec3::ToPitch(void) const
         }
     }
 
-    return kexMath::ATan2(z, d);
+    return kexMath::ATan2(z, kexMath::Sqrt(d));
 }
 
 //

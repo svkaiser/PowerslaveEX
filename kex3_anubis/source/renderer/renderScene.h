@@ -27,9 +27,12 @@ public:
     kexRenderScene(void);
     ~kexRenderScene(void);
     
-    void                    Draw(kexRenderView *renderView);
+    void                    Draw(void);
     void                    FindVisibleSectors(void);
     
+    void                    SetWorld(kexWorld *wld) { world = wld; }
+    void                    SetView(kexRenderView *v) { view = v; }
+
     kexStack<mapSector_t*>  &VisibleSectors(void) { return visibleSectors; }
     kexStack<kexViewBounds> &VisiblePortals(void) { return visiblePortals; }
 

@@ -28,7 +28,7 @@
 
 kexRenderScene::kexRenderScene(void)
 {
-    this->world = kexGame::cLocal->World();
+    this->world = NULL;
     this->view = NULL;
 }
 
@@ -149,11 +149,8 @@ void kexRenderScene::FindVisibleSectors(void)
 // kexRenderScene::Draw
 //
 
-void kexRenderScene::Draw(kexRenderView *renderView)
+void kexRenderScene::Draw(void)
 {
-    view = renderView;
-    world = kexGame::cLocal->World();
-    
     kexRender::cBackend->LoadProjectionMatrix(view->ProjectionView());
     kexRender::cBackend->LoadModelViewMatrix(view->ModelView());
     

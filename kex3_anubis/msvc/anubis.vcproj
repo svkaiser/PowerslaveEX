@@ -297,6 +297,10 @@
 				Name="renderer"
 				>
 				<File
+					RelativePath="..\source\renderer\clipper.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\cpuVertexList.cpp"
 					>
 				</File>
@@ -594,6 +598,10 @@
 			<Filter
 				Name="renderer"
 				>
+				<File
+					RelativePath="..\source\renderer\clipper.h"
+					>
+				</File>
 				<File
 					RelativePath="..\source\renderer\cpuVertexList.h"
 					>
