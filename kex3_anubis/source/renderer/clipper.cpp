@@ -72,17 +72,12 @@ kexClipper::clipNode_t *kexClipper::GetNew(void)
 // kexClipper::AddNewRange
 //
 
-kexClipper::clipNode_t *kexClipper::AddNewRange(const float left, const float right/*,
-                                                const float up[2], const float down[2]*/)
+kexClipper::clipNode_t *kexClipper::AddNewRange(const float left, const float right)
 {
     kexClipper::clipNode_t *clip = GetNew();
 
     clip->left = left;
     clip->right = right;
-    //clip->up[0] = up[0];
-    //clip->up[1] = up[1];
-    //clip->down[0] = down[0];
-    //clip->down[1] = down[1];
     clip->next = clip->prev = NULL;
 
     return clip;

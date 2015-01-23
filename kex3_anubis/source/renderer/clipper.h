@@ -32,16 +32,13 @@ public:
     {
         float               left;
         float               right;
-        float               up[2];
-        float               down[2];
         struct clipNode_s   *prev;
         struct clipNode_s   *next;
     } clipNode_t;
 
 private:
     clipNode_t              *GetNew(void);
-    clipNode_t              *AddNewRange(const float left, const float right/*,
-                                         const float up[2], const float down[2]*/);
+    clipNode_t              *AddNewRange(const float left, const float right);
     void                    AddToClipList(const float left, const float right);
     void                    Free(clipNode_t *clipNode);
     void                    RemoveRange(clipNode_t *clipNode);

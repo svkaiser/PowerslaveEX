@@ -86,6 +86,7 @@ void kexPlayLoop::Draw(void)
     kexWorld *world = kexGame::cLocal->World();
 
     static kexClipper clipper;
+    static kexClipper clipper2;
     
     renderView.SetupFromPlayer(p);
     //renderScene.Draw(&renderView);
@@ -108,10 +109,11 @@ void kexPlayLoop::Draw(void)
     if(world->MapLoaded())
     {
         clipper.Clear();
+        clipper2.Clear();
 
         if(0)
         {
-            /*mapFace_t *face = &world->Faces()[1900];
+            /*mapFace_t *face = &world->Faces()[372];
             kexVec3 p1 = *face->BottomEdge()->v2;
             kexVec3 p2 = *face->BottomEdge()->v1;
 
@@ -122,18 +124,30 @@ void kexPlayLoop::Draw(void)
 
             kex::cSystem->Printf("%f %f\n", kexMath::Rad2Deg(an3), kexMath::Rad2Deg(an4));*/
 
-            kexVec3 p1(-7278, -8030, 1216);
-            kexVec3 p2(-7572, -8030, 1216);
-
-            float an1 = (renderView.Origin() - p1).ToYaw();
-            float an2 = (renderView.Origin() - p2).ToYaw();
-
-            clipper.AddRangeSpan(an1, an2);
-
-            kexRender::cUtils->DrawLine(p1, p2, 0, 255, 0);
-            kexRender::cUtils->DrawLine(p1+kexVec3(0, 0, 256), p2+kexVec3(0, 0, 256), 0, 255, 0);
-            kexRender::cUtils->DrawLine(p1+kexVec3(0, 0, 256), p1, 0, 255, 0);
-            kexRender::cUtils->DrawLine(p2+kexVec3(0, 0, 256), p2, 0, 255, 0);
+            mapFace_t *face = &world->Faces()[372];
+            
+            if(face->InFront(renderView.Origin()))
+            {
+                kexVec3 p1 = *face->BottomEdge()->v2;
+                kexVec3 p2 = *face->BottomEdge()->v1;
+                kexVec3 p3 = *face->BottomEdge()->v2;
+                kexVec3 p4 = *face->TopEdge()->v1;
+                
+                float an1 = (renderView.Origin() - p1).ToYaw();
+                float an2 = (renderView.Origin() - p2).ToYaw();
+                
+                kexVec3 rvO = renderView.Origin() + kexVec3(0, 0, 32);
+                float an3 = (p3 - rvO).ToPitch();
+                float an4 = (p4 - rvO).ToPitch();
+                
+                clipper.AddRangeSpan(an1, an2);
+                clipper2.AddRangeSpan(an3, an4);
+                
+                //kexRender::cUtils->DrawLine(p1, p2, 0, 255, 0);
+                //kexRender::cUtils->DrawLine(p1+kexVec3(0, 0, 256), p2+kexVec3(0, 0, 256), 0, 255, 0);
+                //kexRender::cUtils->DrawLine(p1+kexVec3(0, 0, 256), p1, 0, 255, 0);
+                //kexRender::cUtils->DrawLine(p2+kexVec3(0, 0, 256), p2, 0, 255, 0);
+            }
         }
 
         for(unsigned int i = 0; i < world->NumSectors(); ++i)
@@ -178,15 +192,35 @@ void kexPlayLoop::Draw(void)
                 {
                     continue;
                 }
-
-                if(j <= end)
+                
+                if(j <= end && !face->InFront(renderView.Origin()))
                 {
-                    float an1 = (renderView.Origin() - *face->BottomEdge()->v2).ToYaw();
-                    float an2 = (renderView.Origin() - *face->BottomEdge()->v1).ToYaw();
+                    continue;
+                }
 
-                    if(!clipper.CheckRange(an1, an2))
+                if(0)
+                {
+                    if(j <= end && j != 372)
                     {
-                        continue;
+                        kexVec3 rvO = renderView.Origin() + kexVec3(0, 0, 32);
+                        
+                        float an1 = (renderView.Origin() - *face->BottomEdge()->v2).ToYaw();
+                        float an2 = (renderView.Origin() - *face->BottomEdge()->v1).ToYaw();
+                        float an3 = (*face->BottomEdge()->v2 - rvO).ToPitch();
+                        float an4 = (*face->TopEdge()->v1 - rvO).ToPitch();
+                        
+                        if(!clipper.CheckRange(an1, an2) && !clipper2.CheckRange(an3, an4))
+                        {
+                            continue;
+                        }
+                    }
+                    
+                    if(j <= end)
+                    {
+                        kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
+                        kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
+                        kexRender::cUtils->DrawLine(*face->LeftEdge()->v1, *face->LeftEdge()->v2, 0, 255, 0);
+                        kexRender::cUtils->DrawLine(*face->RightEdge()->v1, *face->RightEdge()->v2, 0, 255, 0);
                     }
                 }
                 
@@ -207,11 +241,6 @@ void kexPlayLoop::Draw(void)
                 {
                     kexRender::cUtils->DrawBoundingBox(face->bounds, 128, 64, 255);
                 }*/
-                
-                //kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
-                //kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
-                //kexRender::cUtils->DrawLine(*face->LeftEdge()->v1, *face->LeftEdge()->v2, 0, 255, 0);
-                //kexRender::cUtils->DrawLine(*face->RightEdge()->v1, *face->RightEdge()->v2, 0, 255, 0);
                 
                 for(int k = face->polyStart; k <= face->polyEnd; ++k)
                 {

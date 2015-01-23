@@ -93,12 +93,18 @@ typedef struct mapFace_s
     kexBBox         bounds;
     int             validcount;
     int             sectorOwner;
+    float           leftSpan;
+    float           rightSpan;
+    float           topSpan;
+    float           bottomSpan;
     mapEdge_t       edges[4];
     
     mapEdge_t       *BottomEdge(void) { return &edges[2]; }
     mapEdge_t       *TopEdge(void) { return &edges[0]; }
     mapEdge_t       *RightEdge(void) { return &edges[1]; }
     mapEdge_t       *LeftEdge(void) { return &edges[3]; }
+    
+    bool            InFront(const kexVec3 &origin) { return (plane.Distance(origin) - plane.d) >= 0; };
     
     float           RightEdgeHeight(void) { return edges[1].v1->z - edges[1].v2->z; }
     float           LeftEdgeHeight(void) { return edges[3].v2->z - edges[3].v1->z; }

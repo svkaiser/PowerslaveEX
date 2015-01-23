@@ -11,6 +11,7 @@
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
 		41B817371A6D6EF500151622 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B817331A6D6EF500151622 /* sprite.cpp */; };
 		41B817381A6D6EF500151622 /* spriteAnim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B817351A6D6EF500151622 /* spriteAnim.cpp */; };
+		41B8F3DB1A72AFC30014CDAB /* clipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B8F3D91A72AFC30014CDAB /* clipper.cpp */; };
 		41B96A9F1A697996004397E6 /* spriteMake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B96A9D1A697996004397E6 /* spriteMake.cpp */; };
 		41BAB9121A5EF32100DD0D11 /* actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BAB90E1A5EF32100DD0D11 /* actor.cpp */; };
 		41BAB9131A5EF32100DD0D11 /* playLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BAB9101A5EF32100DD0D11 /* playLoop.cpp */; };
@@ -135,6 +136,8 @@
 		41B817341A6D6EF500151622 /* sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sprite.h; path = ../../source/game/sprite.h; sourceTree = "<group>"; };
 		41B817351A6D6EF500151622 /* spriteAnim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spriteAnim.cpp; path = ../../source/game/spriteAnim.cpp; sourceTree = "<group>"; };
 		41B817361A6D6EF500151622 /* spriteAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spriteAnim.h; path = ../../source/game/spriteAnim.h; sourceTree = "<group>"; };
+		41B8F3D91A72AFC30014CDAB /* clipper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clipper.cpp; sourceTree = "<group>"; };
+		41B8F3DA1A72AFC30014CDAB /* clipper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clipper.h; sourceTree = "<group>"; };
 		41B96A9D1A697996004397E6 /* spriteMake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spriteMake.cpp; path = ../../source/tools/spriteMake.cpp; sourceTree = "<group>"; };
 		41B96A9E1A697996004397E6 /* spriteMake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spriteMake.h; path = ../../source/tools/spriteMake.h; sourceTree = "<group>"; };
 		41BAB90B1A5EF30E00DD0D11 /* sdNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdNodes.h; sourceTree = "<group>"; };
@@ -493,6 +496,7 @@
 		41E2CE671A51D39B00FC28DC /* renderer */ = {
 			isa = PBXGroup;
 			children = (
+				41B8F3D91A72AFC30014CDAB /* clipper.cpp */,
 				41C7FC4B1A5AFB98003864CB /* cpuVertexList.cpp */,
 				41C7FC4D1A5AFB98003864CB /* drawLists.cpp */,
 				41C7FC4F1A5AFB98003864CB /* fbo.cpp */,
@@ -507,6 +511,7 @@
 				41C7FC601A5AFB98003864CB /* textureManager.cpp */,
 				41C7FC621A5AFB98003864CB /* textureObject.cpp */,
 				41BC0EA61A5C5F59007BD866 /* viewBounds.cpp */,
+				41B8F3DA1A72AFC30014CDAB /* clipper.h */,
 				41C7FC4C1A5AFB98003864CB /* cpuVertexList.h */,
 				41C7FC4E1A5AFB98003864CB /* drawLists.h */,
 				41C7FC501A5AFB98003864CB /* fbo.h */,
@@ -705,6 +710,7 @@
 				41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */,
 				41C7FC651A5AFB98003864CB /* drawLists.cpp in Sources */,
 				41C7FC251A5AFB6E003864CB /* kstring.cpp in Sources */,
+				41B8F3DB1A72AFC30014CDAB /* clipper.cpp in Sources */,
 				41C7FC451A5AFB84003864CB /* menu.cpp in Sources */,
 				41C7FC281A5AFB6E003864CB /* parser.cpp in Sources */,
 				41C7FC4A1A5AFB84003864CB /* world.cpp in Sources */,
