@@ -43,6 +43,7 @@ typedef enum
     GS_TITLE,
     GS_LEVEL,
     GS_CHANGELEVEL,
+    GS_MAPEDITOR,
     NUMGAMESTATES
 } gameState_t;
 

@@ -22,6 +22,7 @@
 #include "titlescreen.h"
 #include "playLoop.h"
 #include "localization.h"
+#include "mapEditor.h"
 
 static kexGameLocal gameLocal;
 kexGameLoop *kex::cGame = &gameLocal;
@@ -318,6 +319,11 @@ void kexGameLocal::Tick(void)
                 pendingGameState = GS_NONE;
                 LoadNewMap();
                 return;
+                
+            case GS_MAPEDITOR:
+                extern kexMapEditor mapEditorLocal;
+                gameLoop = &mapEditorLocal;
+                break;
                 
             default:
                 gameLoop = &gameLoopStub;

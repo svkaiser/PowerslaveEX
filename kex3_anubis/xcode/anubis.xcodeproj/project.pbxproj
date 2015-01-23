@@ -12,6 +12,7 @@
 		41B817371A6D6EF500151622 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B817331A6D6EF500151622 /* sprite.cpp */; };
 		41B817381A6D6EF500151622 /* spriteAnim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B817351A6D6EF500151622 /* spriteAnim.cpp */; };
 		41B8F3DB1A72AFC30014CDAB /* clipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B8F3D91A72AFC30014CDAB /* clipper.cpp */; };
+		41B8F3E51A72FEE10014CDAB /* mapEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B8F3E31A72FEE10014CDAB /* mapEditor.cpp */; };
 		41B96A9F1A697996004397E6 /* spriteMake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B96A9D1A697996004397E6 /* spriteMake.cpp */; };
 		41BAB9121A5EF32100DD0D11 /* actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BAB90E1A5EF32100DD0D11 /* actor.cpp */; };
 		41BAB9131A5EF32100DD0D11 /* playLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BAB9101A5EF32100DD0D11 /* playLoop.cpp */; };
@@ -138,6 +139,8 @@
 		41B817361A6D6EF500151622 /* spriteAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spriteAnim.h; path = ../../source/game/spriteAnim.h; sourceTree = "<group>"; };
 		41B8F3D91A72AFC30014CDAB /* clipper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clipper.cpp; sourceTree = "<group>"; };
 		41B8F3DA1A72AFC30014CDAB /* clipper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clipper.h; sourceTree = "<group>"; };
+		41B8F3E31A72FEE10014CDAB /* mapEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mapEditor.cpp; path = ../../source/tools/mapEditor/mapEditor.cpp; sourceTree = "<group>"; };
+		41B8F3E41A72FEE10014CDAB /* mapEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mapEditor.h; path = ../../source/tools/mapEditor/mapEditor.h; sourceTree = "<group>"; };
 		41B96A9D1A697996004397E6 /* spriteMake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spriteMake.cpp; path = ../../source/tools/spriteMake.cpp; sourceTree = "<group>"; };
 		41B96A9E1A697996004397E6 /* spriteMake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spriteMake.h; path = ../../source/tools/spriteMake.h; sourceTree = "<group>"; };
 		41BAB90B1A5EF30E00DD0D11 /* sdNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdNodes.h; sourceTree = "<group>"; };
@@ -288,9 +291,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41B8F3E01A72FED50014CDAB /* mapEditor */ = {
+			isa = PBXGroup;
+			children = (
+				41B8F3E31A72FEE10014CDAB /* mapEditor.cpp */,
+				41B8F3E41A72FEE10014CDAB /* mapEditor.h */,
+			);
+			name = mapEditor;
+			sourceTree = "<group>";
+		};
 		41B96A9A1A69798B004397E6 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				41B8F3E01A72FED50014CDAB /* mapEditor */,
 				41B96A9D1A697996004397E6 /* spriteMake.cpp */,
 				41B96A9E1A697996004397E6 /* spriteMake.h */,
 			);
@@ -715,6 +728,7 @@
 				41C7FC281A5AFB6E003864CB /* parser.cpp in Sources */,
 				41C7FC4A1A5AFB84003864CB /* world.cpp in Sources */,
 				41C7FC641A5AFB98003864CB /* cpuVertexList.cpp in Sources */,
+				41B8F3E51A72FEE10014CDAB /* mapEditor.cpp in Sources */,
 				41E2CE831A51D39B00FC28DC /* plane.cpp in Sources */,
 				41C7FC7F1A5AFBAB003864CB /* system.cpp in Sources */,
 				41B817381A6D6EF500151622 /* spriteAnim.cpp in Sources */,
