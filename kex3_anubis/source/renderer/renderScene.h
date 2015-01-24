@@ -18,7 +18,6 @@
 #include "world.h"
 
 class kexRenderView;
-class kexViewBounds;
 class kexWorld;
 
 class kexRenderScene
@@ -28,22 +27,19 @@ public:
     ~kexRenderScene(void);
     
     void                    Draw(void);
-    void                    FindVisibleSectors(void);
+    void                    FindVisibleSectors(mapSector_t *startSector);
     
     void                    SetWorld(kexWorld *wld) { world = wld; }
     void                    SetView(kexRenderView *v) { view = v; }
 
     kexStack<mapSector_t*>  &VisibleSectors(void) { return visibleSectors; }
-    kexStack<kexViewBounds> &VisiblePortals(void) { return visiblePortals; }
 
 private:
-    void                    SetInitialScissorRect(void);
-    void                    RecursiveSectorPortals(mapSector_t *sector, kexViewBounds *vb);
+    void                    RecursiveSectorPortals(mapSector_t *sector);
     
     kexWorld                *world;
     kexRenderView           *view;
     kexStack<mapSector_t*>  visibleSectors;
-    kexStack<kexViewBounds> visiblePortals;
     
     int                     validcount;
 };

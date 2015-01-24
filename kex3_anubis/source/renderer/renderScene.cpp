@@ -41,26 +41,13 @@ kexRenderScene::~kexRenderScene(void)
 }
 
 //
-// kexRenderScene::SetInitialScissorRect
-//
-
-void kexRenderScene::SetInitialScissorRect(void)
-{
-    int clipY = (int)((float)kex::cSystem->VideoHeight() / (240.0f / 24.0f));
-    
-    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
-    kexRender::cBackend->SetScissorRect(0, clipY, kex::cSystem->VideoWidth(), kex::cSystem->VideoHeight());
-}
-
-//
 // kexRenderScene::RecursiveSectorPortals
 //
 
-void kexRenderScene::RecursiveSectorPortals(mapSector_t *sector, kexViewBounds *vb)
+void kexRenderScene::RecursiveSectorPortals(mapSector_t *sector)
 {
     mapFace_t *face;
     mapSector_t *next;
-    kexViewBounds viewBounds;
     int start, end;
     
     if(!view->Frustum().TestBoundingBox(sector->bounds))
@@ -102,27 +89,11 @@ void kexRenderScene::RecursiveSectorPortals(mapSector_t *sector, kexViewBounds *
             continue;
         }
         
-        viewBounds.AddVector(view, *face->TopEdge()->v1);
-        viewBounds.AddVector(view, *face->RightEdge()->v1);
-        viewBounds.AddVector(view, *face->BottomEdge()->v1);
-        viewBounds.AddVector(view, *face->LeftEdge()->v1);
-        
-        if(viewBounds.IsClosed())
-        {
-            continue;
-        }
-        
-        if(!viewBounds.ViewBoundInside(*vb))
-        {
-            continue;
-        }
-        
         next = &world->Sectors()[face->sector];
         
         visibleSectors.Set(next);
-        visiblePortals.Set(viewBounds);
         
-        RecursiveSectorPortals(next, &viewBounds);
+        RecursiveSectorPortals(next);
     }
 }
 
@@ -130,18 +101,12 @@ void kexRenderScene::RecursiveSectorPortals(mapSector_t *sector, kexViewBounds *
 // kexRenderScene::FindVisibleSectors
 //
 
-void kexRenderScene::FindVisibleSectors(void)
+void kexRenderScene::FindVisibleSectors(mapSector_t *startSector)
 {
-    mapSector_t *startSector = kexGame::cLocal->Player()->Actor()->Sector();
-    kexViewBounds viewBounds;
-    
-    viewBounds.Fill();
-    
     visibleSectors.Reset();
-    visiblePortals.Reset();
     visibleSectors.Set(startSector);
     
-    RecursiveSectorPortals(startSector, &viewBounds);
+    RecursiveSectorPortals(startSector);
     validcount++;
 }
 
@@ -151,9 +116,4 @@ void kexRenderScene::FindVisibleSectors(void)
 
 void kexRenderScene::Draw(void)
 {
-    kexRender::cBackend->LoadProjectionMatrix(view->ProjectionView());
-    kexRender::cBackend->LoadModelViewMatrix(view->ModelView());
-    
-    SetInitialScissorRect();
-    FindVisibleSectors();
 }
