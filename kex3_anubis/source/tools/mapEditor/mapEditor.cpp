@@ -293,8 +293,12 @@ void kexMapEditor::DrawWorld(void)
             if(face->sector != -1 && !(face->flags & FF_SOLID))
             {
                 mapSector_t *s = &world->Sectors()[face->sector];
+                mapFace_t *f1a = &world->Faces()[s->faceEnd+1];
+                mapFace_t *f2a = &world->Faces()[s->faceEnd+2];
+                mapFace_t *f1b = &world->Faces()[sector->faceEnd+1];
+                mapFace_t *f2b = &world->Faces()[sector->faceEnd+2];
                 
-                if(s->floorHeight == sector->floorHeight && s->ceilingHeight == sector->ceilingHeight)
+                if(f1a->plane.d == f1b->plane.d && f2a->plane.d == f2b->plane.d)
                 {
                     continue;
                 }
@@ -302,7 +306,7 @@ void kexMapEditor::DrawWorld(void)
                 kexRender::cUtils->DrawLine(*face->LeftEdge()->v2, *face->RightEdge()->v1, 255, 32, 64);
                 continue;
             }
-            
+
             if(face->BottomEdge()->flags & EGF_TOPSTEP)
             {
                 continue;

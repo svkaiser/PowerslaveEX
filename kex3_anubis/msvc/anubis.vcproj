@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -480,6 +480,14 @@
 					RelativePath="..\source\tools\spriteMake.cpp"
 					>
 				</File>
+				<Filter
+					Name="mapEditor"
+					>
+					<File
+						RelativePath="..\source\tools\mapEditor\mapEditor.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -766,6 +774,14 @@
 					RelativePath="..\source\tools\spriteMake.h"
 					>
 				</File>
+				<Filter
+					Name="mapEditor"
+					>
+					<File
+						RelativePath="..\source\tools\mapEditor\mapEditor.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
