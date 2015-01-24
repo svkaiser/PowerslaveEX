@@ -380,13 +380,6 @@ void kexPlayLoop::Draw(void)
         vl->AddQuad(160, 216, 0, 96, 24, 0.25f, 0.375f, 0.625f, 0.75f, 255, 255, 255, 255);
         vl->AddQuad(256, 192, 0, 64, 64, 0.625f, 0, 0.875f, 1, 255, 255, 255, 255);
         vl->DrawElements();
-        
-        kexRender::cBackend->SetOrtho();
-        for(unsigned int i = 0; i < renderScene.VisiblePortals().CurrentLength(); ++i)
-        {
-            kexViewBounds viewBounds = renderScene.VisiblePortals()[i];
-            viewBounds.DebugDraw();
-        }
     }
 }
 

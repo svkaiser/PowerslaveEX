@@ -144,6 +144,8 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
 
 void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
 {
+    unsigned int numPortals = 0;
+
     if(count == 0)
     {
         kex::cSystem->Error("kexWorld::ReadFaces - No faces present\n");
@@ -167,6 +169,7 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
         f->vertStart    = mapfile.Read16();
         f->vertEnd      = mapfile.Read16();
         f->validcount   = -1;
+        f->portal       = NULL;
         
         f->bounds.Clear();
         kexAngle::Clamp(f->angle);
@@ -176,12 +179,18 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
             f->bounds.AddPoint(vertices[f->vertexStart+j].origin);
             f->edges[j].v1 = &vertices[f->vertexStart+j].origin;
             f->edges[j].v2 = &vertices[f->vertexStart+((j+1)&3)].origin;
-            f->edges[j].p.SetLine(*f->edges[j].v1, *f->edges[j].v2);
             f->edges[j].flags = 0;
         }
         
         f->plane.SetDistance(vertices[f->vertexStart].origin);
+
+        if(f->flags & FF_PORTAL && f->sector >= 0)
+        {
+            numPortals++;
+        }
     }
+
+    BuildPortals(numPortals);
 }
 
 //
@@ -276,6 +285,42 @@ void kexWorld::ReadActors(kexBinFile &mapfile, const unsigned int count)
         
         SpawnMapActor(&actors[i]);
     }
+}
+
+//
+// kexWorld::BuildPortals
+//
+
+void kexWorld::BuildPortals(unsigned int count)
+{
+    unsigned int idx = 0;
+
+    if(count == 0)
+    {
+        return;
+    }
+
+    numPortals = count;
+    portals = (portal_t*)Mem_Malloc(sizeof(portal_t) * numPortals, hb_world);
+
+    for(unsigned int i = 0; i < numFaces; ++i)
+    {
+        mapFace_t *f = &faces[i];
+        portal_t *p;
+
+        if(!(f->flags & FF_PORTAL) || f->sector == -1)
+        {
+            continue;
+        }
+
+        assert(idx < numPortals);
+
+        p = &portals[idx++];
+        p->face = f;
+        p->sector = &sectors[f->sectorOwner];
+    }
+
+    assert(idx == numPortals);
 }
 
 //

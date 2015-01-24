@@ -16,17 +16,22 @@
 #define __WORLD_H__
 
 #include "sdNodes.h"
+#include "clipper.h"
+
+class kexActor;
+class kexTexture;
+class kexCModel;
 
 typedef struct
 {
-    kexVec3         origin;
-    byte            rgba[4];
+    kexVec3             origin;
+    byte                rgba[4];
 } mapVertex_t;
 
 typedef enum
 {
-    SF_DEBUG    = BIT(0),
-    SF_WATER    = BIT(8)
+    SF_DEBUG            = BIT(0),
+    SF_WATER            = BIT(8)
 } sectorFlags_t;
 
 typedef struct
@@ -48,108 +53,110 @@ typedef struct
 
 typedef enum
 {
-    FF_SOLID        = BIT(0),
-    FF_UNKNOWN1     = BIT(1),
-    FF_SECRET       = BIT(2),
-    FF_UNKNOWN2     = BIT(3),
-    FF_INVISIBLE    = BIT(4),
-    FF_LAVA         = BIT(5),
-    FF_WATER        = BIT(6),
-    FF_SLIME        = BIT(7),
-    FF_TOGGLE       = BIT(8),
-    FF_FORCEFIELD   = BIT(9),
-    FF_FULLBRIGHT   = BIT(10),
-    FF_HIDDEN       = BIT(12),
-    FF_PORTAL       = BIT(13),
-    FF_UNDERWATER   = BIT(14),
+    FF_SOLID            = BIT(0),
+    FF_UNKNOWN1         = BIT(1),
+    FF_SECRET           = BIT(2),
+    FF_UNKNOWN2         = BIT(3),
+    FF_INVISIBLE        = BIT(4),
+    FF_LAVA             = BIT(5),
+    FF_WATER            = BIT(6),
+    FF_SLIME            = BIT(7),
+    FF_TOGGLE           = BIT(8),
+    FF_FORCEFIELD       = BIT(9),
+    FF_FULLBRIGHT       = BIT(10),
+    FF_HIDDEN           = BIT(12),
+    FF_PORTAL           = BIT(13),
+    FF_UNDERWATER       = BIT(14),
 } faceFlags_t;
 
 typedef enum
 {
-    EGF_TOPSTEP     = BIT(0),
-    EGF_BOTTOMSTEP  = BIT(1)
+    EGF_TOPSTEP         = BIT(0),
+    EGF_BOTTOMSTEP      = BIT(1)
 } edgeFlags_t;
 
 typedef struct
 {
-    kexVec3         *v1;
-    kexVec3         *v2;
-    kexPluecker     p;
-    unsigned int    flags;
+    kexVec3             *v1;
+    kexVec3             *v2;
+    unsigned int        flags;
 } mapEdge_t;
 
 typedef struct mapFace_s
 {
-    short           polyStart;
-    short           polyEnd;
-    word            vertexStart;
-    short           sector;
-    float           angle;
-    kexPlane        plane;
-    word            flags;
-    short           tag;
-    word            vertStart;
-    word            vertEnd;
-    kexBBox         bounds;
-    int             validcount;
-    int             sectorOwner;
-    float           leftSpan;
-    float           rightSpan;
-    float           topSpan;
-    float           bottomSpan;
-    mapEdge_t       edges[4];
+    short               polyStart;
+    short               polyEnd;
+    word                vertexStart;
+    short               sector;
+    float               angle;
+    kexPlane            plane;
+    word                flags;
+    short               tag;
+    word                vertStart;
+    word                vertEnd;
+    kexBBox             bounds;
+    int                 validcount;
+    int                 sectorOwner;
+    float               leftSpan;
+    float               rightSpan;
+    float               topSpan;
+    float               bottomSpan;
+    mapEdge_t           edges[4];
+    struct portal_s     *portal;
     
-    mapEdge_t       *BottomEdge(void) { return &edges[2]; }
-    mapEdge_t       *TopEdge(void) { return &edges[0]; }
-    mapEdge_t       *RightEdge(void) { return &edges[1]; }
-    mapEdge_t       *LeftEdge(void) { return &edges[3]; }
+    mapEdge_t           *BottomEdge(void) { return &edges[2]; }
+    mapEdge_t           *TopEdge(void) { return &edges[0]; }
+    mapEdge_t           *RightEdge(void) { return &edges[1]; }
+    mapEdge_t           *LeftEdge(void) { return &edges[3]; }
     
-    bool            InFront(const kexVec3 &origin) { return (plane.Distance(origin) - plane.d) >= 0; };
-    
-    float           RightEdgeHeight(void) { return edges[1].v1->z - edges[1].v2->z; }
-    float           LeftEdgeHeight(void) { return edges[3].v2->z - edges[3].v1->z; }
+    bool                InFront(const kexVec3 &origin) { return (plane.Distance(origin) - plane.d) >= 0; };
 } mapFace_t;
+
+typedef struct portal_s
+{
+    mapFace_t           *face;
+    mapSector_t         *sector;
+
+    kexClipper          hClipSpan;
+    kexClipper          vClipSpan;
+} portal_t;
 
 typedef struct
 {
-    byte            indices[4];
-    short           texture;
-    short           flipped;
-    word            tcoord;
+    byte                indices[4];
+    short               texture;
+    short               flipped;
+    word                tcoord;
 } mapPoly_t;
 
 typedef struct
 {
-    float           s;
-    float           t;
+    float               s;
+    float               t;
 } mapUV_t;
 
 typedef struct
 {
-    mapUV_t         uv[4];
+    mapUV_t             uv[4];
 } mapTexCoords_t;
 
 typedef struct
 {
-    short           type;
-    short           sector;
-    short           tag;
-    short           unknown;
+    short               type;
+    short               sector;
+    short               tag;
+    short               unknown;
 } mapEvent_t;
 
 typedef struct
 {
-    short           type;
-    short           sector;
-    short           x;
-    short           y;
-    short           z;
-    float           angle;
+    short               type;
+    short               sector;
+    short               x;
+    short               y;
+    short               z;
+    float               angle;
 } mapActor_t;
-
-class kexActor;
-class kexTexture;
-class kexCModel;
 
 class kexWorld
 {
@@ -169,6 +176,7 @@ public:
     const unsigned int      NumTexCoords(void) const { return numTCoords; }
     const unsigned int      NumEvents(void) const { return numEvents; }
     const unsigned int      NumActors(void) const { return numActors; }
+    const unsigned int      NumPortals(void) const { return numPortals; }
 
     kexTexture              **Textures(void) { return textures; }
     mapVertex_t             *Vertices(void) { return vertices; }
@@ -178,6 +186,7 @@ public:
     mapTexCoords_t          *TexCoords(void) { return texCoords; }
     mapEvent_t              *Events(void) { return events; }
     mapActor_t              *Actors(void) { return actors; }
+    portal_t                *Portals(void) { return portals; }
 
     kexSDNode<kexActor>     &AreaNodes(void) { return areaNodes; }
 
@@ -188,6 +197,7 @@ private:
     void                    BuildSectorBounds(void);
     void                    SetupEdges(void);
     void                    SpawnMapActor(mapActor_t *mapActor);
+    void                    BuildPortals(unsigned int count);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);
     void                    ReadVertices(kexBinFile &mapfile, const unsigned int count);
@@ -208,6 +218,7 @@ private:
     unsigned int            numTCoords;
     unsigned int            numEvents;
     unsigned int            numActors;
+    unsigned int            numPortals;
 
     kexTexture              **textures;
     mapVertex_t             *vertices;
@@ -217,6 +228,7 @@ private:
     mapTexCoords_t          *texCoords;
     mapEvent_t              *events;
     mapActor_t              *actors;
+    portal_t                *portals;
 
     kexSDNode<kexActor>     areaNodes;
 };
