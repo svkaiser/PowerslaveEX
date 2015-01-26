@@ -71,8 +71,8 @@ public:
     void                        Ready(void);
 
     kexPlayerCmd                &Cmd(void) { return cmd; }
-    kexActor                    *Actor(void) { return actor; }
-    void                        SetActor(kexActor *_actor) { actor = _actor; }
+    kexPuppet                   *Actor(void) { return actor; }
+    void                        SetActor(kexPuppet *_actor) { actor = _actor; }
     void                        ClearActor(void) { actor = NULL; }
 
     const float                 Bob(void) const { return bob; }
@@ -117,7 +117,7 @@ private:
     int16_t                     keys;
     int16_t                     transmitter;
     int                         teamDolls;
-    kexActor                    *actor;
+    kexPuppet                   *actor;
 };
 
 #endif

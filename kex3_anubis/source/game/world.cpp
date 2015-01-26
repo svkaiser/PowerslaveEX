@@ -301,7 +301,7 @@ void kexWorld::BuildPortals(unsigned int count)
     }
 
     numPortals = count;
-    portals = (portal_t*)Mem_Malloc(sizeof(portal_t) * numPortals, hb_world);
+    portals = (portal_t*)Mem_Calloc(sizeof(portal_t) * numPortals, hb_world);
 
     for(unsigned int i = 0; i < numFaces; ++i)
     {
@@ -318,6 +318,7 @@ void kexWorld::BuildPortals(unsigned int count)
         p = &portals[idx++];
         p->face = f;
         p->sector = &sectors[f->sectorOwner];
+        f->portal = p;
     }
 
     assert(idx == numPortals);

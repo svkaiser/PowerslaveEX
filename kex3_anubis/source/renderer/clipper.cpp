@@ -87,22 +87,19 @@ kexClipper::clipNode_t *kexClipper::AddNewRange(const float left, const float ri
 // kexClipper::AddRangeSpan
 //
 
-void kexClipper::AddRangeSpan(const float left, const float right)
+void kexClipper::AddRangeSpan(float &left, float &right)
 {
-    float an1 = left;
-    float an2 = right;
+    if(left < 0) left += maxClipSpan;
+    if(right < 0) right += maxClipSpan;
 
-    if(an1 < 0) an1 += maxClipSpan;
-    if(an2 < 0) an2 += maxClipSpan;
-
-    if(an1 > an2)
+    if(left > right)
     {
-        AddToClipList(an1, maxClipSpan);
-        AddToClipList(0, an2);
+        AddToClipList(left, maxClipSpan);
+        AddToClipList(0, right);
         return;
     }
 
-    AddToClipList(an1, an2);
+    AddToClipList(left, right);
 }
 
 //

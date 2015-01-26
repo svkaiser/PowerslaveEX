@@ -35,7 +35,9 @@ public:
     kexStack<mapSector_t*>  &VisibleSectors(void) { return visibleSectors; }
 
 private:
-    void                    RecursiveSectorPortals(mapSector_t *sector);
+    void                    RecursiveSectorPortals(portal_t *portal);
+    void                    FloodPortalView(portal_t *portal, portal_t *prevPortal);
+    bool                    FaceInPortalView(portal_t *portal, mapFace_t *face);
     
     kexWorld                *world;
     kexRenderView           *view;

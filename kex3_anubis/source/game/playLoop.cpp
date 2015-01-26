@@ -76,9 +76,88 @@ void kexPlayLoop::Stop(void)
     kexGame::cLocal->World()->UnloadMap();
 }
 
+void ProjectFacePoints(kexRenderView &view, mapFace_t *face)
+{
+    kexVec3 p1 = *face->BottomEdge()->v2;
+    kexVec3 p2 = *face->BottomEdge()->v1;
+    kexVec3 p3 = *face->BottomEdge()->v2;
+    kexVec3 p4 = *face->TopEdge()->v1;
+
+    face->h[0] = face->h[2] = 0;
+    face->h[1] = face->h[3] = 320;
+    face->v[0] = face->v[2] = 0;
+    face->v[1] = face->v[3] = 240;
+
+    p1 = *face->TopEdge()->v1 * view.ModelView();
+    p2 = *face->TopEdge()->v2 * view.ModelView();
+    p3 = *face->BottomEdge()->v2 * view.ModelView();
+    p4 = *face->BottomEdge()->v1 * view.ModelView();
+
+    float d = face->plane.Distance(view.Origin()) - face->plane.d;
+
+    if(d > 96.0f)
+    {
+        face->h[0] = 320 - (((p1.x / p1.z) * 160) + 160);
+        face->h[1] = 320 - (((p2.x / p2.z) * 160) + 160);
+        face->h[2] = 320 - (((p3.x / p3.z) * 160) + 160);
+        face->h[3] = 320 - (((p4.x / p4.z) * 160) + 160);
+
+        face->v[0] = ((p1.y / p1.z) * 120) + 120;
+        face->v[1] = ((p2.y / p2.z) * 120) + 120;
+        face->v[2] = ((p3.y / p3.z) * 120) + 120;
+        face->v[3] = ((p4.y / p4.z) * 120) + 120;
+
+        for(int i = 0; i < 4; i++)
+        {
+            kexMath::Clamp(face->h[i], 0, 320);
+            kexMath::Clamp(face->v[i], 0, 240);
+        }
+
+        if(!view.Frustum().TestSphere(*face->TopEdge()->v1, 0.1f))
+        {
+            face->h[0] = (p1.x >= 0) ? 320.0f : 0;
+        }
+        if(!view.Frustum().TestSphere(*face->TopEdge()->v2, 0.1f))
+        {
+            face->h[1] = (p2.x >= 0) ? 320.0f : 0;
+        }
+        if(!view.Frustum().TestSphere(*face->BottomEdge()->v2, 0.1f))
+        {
+            face->h[2] = (p3.x >= 0) ? 320.0f : 0;
+        }
+        if(!view.Frustum().TestSphere(*face->BottomEdge()->v1, 0.1f))
+        {
+            face->h[3] = (p4.x >= 0) ? 320.0f : 0;
+        }
+
+        if(face->v[0] >= face->v[2]) face->v[0] = 0;
+        if(face->v[1] >= face->v[3]) face->v[1] = 0;
+        if(face->v[2] <= face->v[0]) face->v[2] = 240;
+        if(face->v[3] <= face->v[1]) face->v[3] = 240;
+    }
+}
+
+bool TestProjectedFace(mapFace_t *src, mapFace_t *dst)
+{
+    bool bh = (dst->h[0] < src->h[0] && dst->h[2] < src->h[2] && dst->h[1] < src->h[0] && dst->h[3] < src->h[2]) ||
+              (dst->h[0] > src->h[1] && dst->h[2] > src->h[3] && dst->h[1] > src->h[1] && dst->h[3] > src->h[3]);
+
+    bool bv = (dst->v[0] < src->v[0] && dst->v[1] < src->v[1] && dst->v[2] < src->v[0] && dst->v[3] < src->v[2]) ||
+              (dst->v[0] > src->v[2] && dst->v[1] > src->v[3] && dst->v[2] > src->v[2] && dst->v[3] > src->v[3]);
+
+    if(bh || bv)
+    {
+        return false;
+    }
+
+    return true;
+}
+
 //
 // kexPlayLoop::Draw
 //
+
+kexCvar cvarTest("portaltest", CVF_INT, "0", " ");
 
 void kexPlayLoop::Draw(void)
 {
@@ -89,7 +168,7 @@ void kexPlayLoop::Draw(void)
     static kexClipper clipper2;
     
     renderView.SetupFromPlayer(p);
-    //renderScene.Draw(&renderView);
+    renderScene.FindVisibleSectors(p->Actor()->Sector());
 
     // TEMP
     kexRender::cBackend->LoadProjectionMatrix(renderView.ProjectionView());
@@ -110,6 +189,7 @@ void kexPlayLoop::Draw(void)
     {
         clipper.Clear();
         clipper2.Clear();
+        mapFace_t *testFace;
 
         if(0)
         {
@@ -124,24 +204,15 @@ void kexPlayLoop::Draw(void)
 
             kex::cSystem->Printf("%f %f\n", kexMath::Rad2Deg(an3), kexMath::Rad2Deg(an4));*/
 
-            mapFace_t *face = &world->Faces()[372];
+            testFace = &world->Faces()[372];
             
-            if(face->InFront(renderView.Origin()))
+            if(testFace->InFront(renderView.Origin()))
             {
-                kexVec3 p1 = *face->BottomEdge()->v2;
-                kexVec3 p2 = *face->BottomEdge()->v1;
-                kexVec3 p3 = *face->BottomEdge()->v2;
-                kexVec3 p4 = *face->TopEdge()->v1;
-                
-                float an1 = (renderView.Origin() - p1).ToYaw();
-                float an2 = (renderView.Origin() - p2).ToYaw();
-                
-                kexVec3 rvO = renderView.Origin() + kexVec3(0, 0, 32);
-                float an3 = (p3 - rvO).ToPitch();
-                float an4 = (p4 - rvO).ToPitch();
-                
-                clipper.AddRangeSpan(an1, an2);
-                clipper2.AddRangeSpan(an3, an4);
+                ProjectFacePoints(renderView, testFace);
+
+                kex::cSystem->Printf("%f %f %f %f\n", testFace->h[0], testFace->h[2], testFace->h[1], testFace->h[3]);
+                kex::cSystem->Printf("%f %f %f %f\n\n", testFace->v[0], testFace->v[2], testFace->v[1], testFace->v[3]);
+                //kex::cSystem->Printf("%f %f %f %f\n\n", cv[0], cv[1], cv[2], cv[3]);
                 
                 //kexRender::cUtils->DrawLine(p1, p2, 0, 255, 0);
                 //kexRender::cUtils->DrawLine(p1+kexVec3(0, 0, 256), p2+kexVec3(0, 0, 256), 0, 255, 0);
@@ -150,8 +221,15 @@ void kexPlayLoop::Draw(void)
             }
         }
 
+        unsigned int max = cvarTest.GetInt();
+
+        if(max == 0 || max > renderScene.VisibleSectors().CurrentLength())
+        {
+            max = renderScene.VisibleSectors().CurrentLength();
+        }
+
         for(unsigned int i = 0; i < world->NumSectors(); ++i)
-        //for(unsigned int i = 0; i < renderScene.VisibleSectors().CurrentLength(); ++i)
+        //for(unsigned int i = 0; i < max; ++i)
         {
             //mapSector_t *sector = renderScene.VisibleSectors()[i];
             mapSector_t *sector = &world->Sectors()[i];
@@ -177,9 +255,23 @@ void kexPlayLoop::Draw(void)
             for(int j = start; j < end+3; ++j)
             {
                 mapFace_t *face = &world->Faces()[j];
-                
-                if(inSector && face->sector != -1)
+
+                if(face->validcount != 1 && !(p->Actor()->PlayerFlags() & PF_NOCLIP))
                 {
+                    //if(j <= end)
+                    {
+                        continue;
+                    }
+                }
+
+                face->validcount = 0;
+                
+                if(0 && /*inSector && */face->sector != -1)
+                {
+                    kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 255, 0, 255);
+                    kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 255, 0, 255);
+                    kexRender::cUtils->DrawLine(*face->LeftEdge()->v1, *face->LeftEdge()->v2, 255, 0, 255);
+                    kexRender::cUtils->DrawLine(*face->RightEdge()->v1, *face->RightEdge()->v2, 255, 0, 255);
                     //kex::cSystem->Printf("%i\n", j);
                 }
                 
@@ -202,26 +294,38 @@ void kexPlayLoop::Draw(void)
                 {
                     if(j <= end && j != 372)
                     {
-                        kexVec3 rvO = renderView.Origin() + kexVec3(0, 0, 32);
-                        
-                        float an1 = (renderView.Origin() - *face->BottomEdge()->v2).ToYaw();
-                        float an2 = (renderView.Origin() - *face->BottomEdge()->v1).ToYaw();
-                        float an3 = (*face->BottomEdge()->v2 - rvO).ToPitch();
-                        float an4 = (*face->TopEdge()->v1 - rvO).ToPitch();
-                        
-                        if(!clipper.CheckRange(an1, an2) && !clipper2.CheckRange(an3, an4))
+                        ProjectFacePoints(renderView, face);
+
+#if 1
+                        bool bh = (face->h[0] < testFace->h[0] && face->h[2] < testFace->h[2] && face->h[1] < testFace->h[0] && face->h[3] < testFace->h[2]) ||
+                                  (face->h[0] > testFace->h[1] && face->h[2] > testFace->h[3] && face->h[1] > testFace->h[1] && face->h[3] > testFace->h[3]);
+
+                        bool bv = (face->v[0] < testFace->v[0] && face->v[1] < testFace->v[1] && face->v[2] < testFace->v[0] && face->v[3] < testFace->v[2]) ||
+                                  (face->v[0] > testFace->v[2] && face->v[1] > testFace->v[3] && face->v[2] > testFace->v[2] && face->v[3] > testFace->v[3]);
+
+                        if(bh || bv)
                         {
                             continue;
                         }
+
+#else
+                        bool bh = (face->h[0] >= testFace->h[0] && face->h[2] >= testFace->h[2] && face->h[1] <= testFace->h[1] && face->h[3] <= testFace->h[3]);
+                        bool bv = (face->v[0] >= testFace->v[0] && face->v[1] >= testFace->v[1] && face->v[2] <= testFace->v[2] && face->v[3] <= testFace->v[3]);
+
+                        if(bh && bv)
+                        {
+                            continue;
+                        }
+#endif
                     }
-                    
-                    if(j <= end)
-                    {
-                        kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
-                        kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
-                        kexRender::cUtils->DrawLine(*face->LeftEdge()->v1, *face->LeftEdge()->v2, 0, 255, 0);
-                        kexRender::cUtils->DrawLine(*face->RightEdge()->v1, *face->RightEdge()->v2, 0, 255, 0);
-                    }
+                }
+
+                if(j <= end)
+                {
+                    kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
+                    kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
+                    kexRender::cUtils->DrawLine(*face->LeftEdge()->v1, *face->LeftEdge()->v2, 0, 255, 0);
+                    kexRender::cUtils->DrawLine(*face->RightEdge()->v1, *face->RightEdge()->v2, 0, 255, 0);
                 }
                 
                 if(face->BottomEdge()->flags & EGF_TOPSTEP)

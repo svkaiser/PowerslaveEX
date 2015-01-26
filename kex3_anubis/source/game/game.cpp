@@ -64,7 +64,7 @@ COMMAND(noclip)
         return;
     }
 
-    puppet = static_cast<kexPuppet*>(game->Player()->Actor());
+    puppet = game->Player()->Actor();
 
     if(puppet->PlayerFlags() & PF_NOCLIP)
     {
@@ -99,7 +99,7 @@ COMMAND(fly)
         return;
     }
 
-    puppet = static_cast<kexPuppet*>(game->Player()->Actor());
+    puppet = game->Player()->Actor();
 
     if(puppet->PlayerFlags() & PF_FLY)
     {

@@ -23,7 +23,7 @@ public:
     kexClipper(void);
 
     void                    Clear(void);
-    void                    AddRangeSpan(const float left, const float right);
+    void                    AddRangeSpan(float &left, float &right);
     bool                    CheckRange(const float left, const float right);
 
     void                    SetRenderView(kexRenderView *v) { view = v; }
@@ -36,6 +36,10 @@ public:
         struct clipNode_s   *next;
     } clipNode_t;
 
+    clipNode_t              *ClipList(void) { return clipList; }
+
+    static const float      maxClipSpan;
+
 private:
     clipNode_t              *GetNew(void);
     clipNode_t              *AddNewRange(const float left, const float right);
@@ -43,8 +47,6 @@ private:
     void                    Free(clipNode_t *clipNode);
     void                    RemoveRange(clipNode_t *clipNode);
     bool                    RangeVisible(const float left, const float right);
-
-    static const float      maxClipSpan;
 
     clipNode_t              *freeClipList;
     clipNode_t              *clipList;

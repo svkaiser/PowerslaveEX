@@ -102,6 +102,8 @@ typedef struct mapFace_s
     float               topSpan;
     float               bottomSpan;
     mapEdge_t           edges[4];
+    float               h[4];
+    float               v[4];
     struct portal_s     *portal;
     
     mapEdge_t           *BottomEdge(void) { return &edges[2]; }

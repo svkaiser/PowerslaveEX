@@ -41,26 +41,88 @@ kexRenderScene::~kexRenderScene(void)
 }
 
 //
+// kexRenderScene::FloodPortalView
+//
+
+void kexRenderScene::FloodPortalView(portal_t *portal, portal_t *prevPortal)
+{
+    kexVec3 p1, p2, p3, p4, rvO;
+    float an1, an2, an3, an4;
+
+    portal->hClipSpan.Clear();
+    portal->vClipSpan.Clear();
+
+    p1 = *portal->face->BottomEdge()->v2;
+    p2 = *portal->face->BottomEdge()->v1;
+    p3 = *portal->face->BottomEdge()->v2;
+    p4 = *portal->face->TopEdge()->v1;
+                
+    an1 = (view->Origin() - p1).ToYaw();
+    an2 = (view->Origin() - p2).ToYaw();
+                
+    rvO = view->Origin() + kexVec3(0, 0, 32);
+    an3 = (p3 - rvO).ToPitch();
+    an4 = (p4 - rvO).ToPitch();
+
+    portal->hClipSpan.AddRangeSpan(an2, an1);
+    portal->vClipSpan.AddRangeSpan(an4, an3);
+
+    portal->face->leftSpan = an1;
+    portal->face->rightSpan = an2;
+    portal->face->bottomSpan = an3;
+    portal->face->topSpan = an4;
+
+    RecursiveSectorPortals(portal);
+}
+
+//
+// kexRenderScene::FaceInPortalView
+//
+
+bool kexRenderScene::FaceInPortalView(portal_t *portal, mapFace_t *face)
+{
+    kexVec3 rvO;
+    float an1, an2;
+    float an3, an4;
+
+    rvO = view->Origin() + kexVec3(0, 0, 32);
+
+    an1 = (view->Origin() - *face->BottomEdge()->v2).ToYaw();
+    an2 = (view->Origin() - *face->BottomEdge()->v1).ToYaw();
+    an3 = (*face->BottomEdge()->v2 - rvO).ToPitch();
+    an4 = (*face->TopEdge()->v1 - rvO).ToPitch();
+    
+    if(!portal->hClipSpan.CheckRange(an1, an2))
+    {
+        return false;
+    }
+
+    //if(!portal->vClipSpan.CheckRange(an3, an4))
+    //{
+    //    return false;
+    //}
+
+    return true;
+}
+
+//
 // kexRenderScene::RecursiveSectorPortals
 //
 
-void kexRenderScene::RecursiveSectorPortals(mapSector_t *sector)
+void kexRenderScene::RecursiveSectorPortals(portal_t *portal)
 {
     mapFace_t *face;
-    mapSector_t *next;
     int start, end;
+    mapSector_t *sector;
+
+    sector = &world->Sectors()[portal->face->sector];
     
-    if(!view->Frustum().TestBoundingBox(sector->bounds))
+    if(sector->floodCount == validcount)
     {
         return;
     }
     
-    if(sector->floodCount == 1)
-    {
-        return;
-    }
-    
-    sector->floodCount = 1;
+    sector->floodCount = validcount;
     
     start = sector->faceStart;
     end = sector->faceEnd;
@@ -68,18 +130,13 @@ void kexRenderScene::RecursiveSectorPortals(mapSector_t *sector)
     for(int i = start; i < end+3; ++i)
     {
         face = &world->Faces()[i];
+
+        if(face->validcount == 1)
+        {
+            continue;
+        }
         
-        if(!(face->flags & FF_PORTAL) || face->sector <= -1)
-        {
-            continue;
-        }
-
-        if(world->Sectors()[face->sector].floodCount == 1)
-        {
-            continue;
-        }
-
-        if(!kexGame::cLocal->CModel()->PointOnFaceSide(view->Origin(), face))
+        if(i <= end && !face->InFront(view->Origin()))
         {
             continue;
         }
@@ -88,13 +145,33 @@ void kexRenderScene::RecursiveSectorPortals(mapSector_t *sector)
         {
             continue;
         }
+
+        if(i <= end && face->portal && !FaceInPortalView(portal, face))
+        {
+            continue;
+        }
+
+        face->validcount = 1;
         
-        next = &world->Sectors()[face->sector];
+        if(i >= end+1)
+        {
+            continue;
+        }
+
+        if(!(face->flags & FF_PORTAL) || face->sector <= -1)
+        {
+            continue;
+        }
+
+        if(face->portal == NULL)
+        {
+            continue;
+        }
         
-        visibleSectors.Set(next);
-        
-        RecursiveSectorPortals(next);
+        FloodPortalView(face->portal, portal);
     }
+
+    sector->floodCount = 0;
 }
 
 //
@@ -103,10 +180,49 @@ void kexRenderScene::RecursiveSectorPortals(mapSector_t *sector)
 
 void kexRenderScene::FindVisibleSectors(mapSector_t *startSector)
 {
+    mapFace_t *face;
+    int start, end;
+
     visibleSectors.Reset();
     visibleSectors.Set(startSector);
-    
-    RecursiveSectorPortals(startSector);
+
+    start = startSector->faceStart;
+    end = startSector->faceEnd;
+
+    for(int i = start; i < end+3; ++i)
+    {
+        face = &world->Faces()[i];
+
+        if(i <= end && !face->InFront(view->Origin()))
+        {
+            continue;
+        }
+        
+        if(!view->Frustum().TestBoundingBox(face->bounds))
+        {
+            continue;
+        }
+
+        face->validcount = 1;
+        
+        if(i >= end+1)
+        {
+            continue;
+        }
+
+        if(!(face->flags & FF_PORTAL) || face->sector <= -1)
+        {
+            continue;
+        }
+
+        if(face->portal == NULL)
+        {
+            continue;
+        }
+        
+        FloodPortalView(face->portal, NULL);
+    }
+
     validcount++;
 }
 
