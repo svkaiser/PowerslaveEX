@@ -46,26 +46,30 @@ kexRenderScene::~kexRenderScene(void)
 
 void kexRenderScene::FloodPortalView(portal_t *portal, portal_t *prevPortal)
 {
-    kexVec3 p1, p2, p3, p4, rvO;
-    float an1, an2, an3, an4;
+    kexVec3 p1, p2;
+    kexVec3 rvO;
+    float an1, an2;
+    float an3, an4, an5, an6;
 
     portal->hClipSpan.Clear();
-    portal->vClipSpan.Clear();
+    portal->vClipSpan[0].Clear();
+    portal->vClipSpan[1].Clear();
 
     p1 = *portal->face->BottomEdge()->v2;
     p2 = *portal->face->BottomEdge()->v1;
-    p3 = *portal->face->BottomEdge()->v2;
-    p4 = *portal->face->TopEdge()->v1;
                 
     an1 = (view->Origin() - p1).ToYaw();
     an2 = (view->Origin() - p2).ToYaw();
                 
     rvO = view->Origin() + kexVec3(0, 0, 32);
-    an3 = (p3 - rvO).ToPitch();
-    an4 = (p4 - rvO).ToPitch();
+    an3 = (*portal->face->LeftEdge()->v1 - rvO).ToPitch();
+    an4 = (*portal->face->LeftEdge()->v2 - rvO).ToPitch();
+    an5 = (*portal->face->RightEdge()->v2 - rvO).ToPitch();
+    an6 = (*portal->face->RightEdge()->v1 - rvO).ToPitch();
 
     portal->hClipSpan.AddRangeSpan(an2, an1);
-    portal->vClipSpan.AddRangeSpan(an4, an3);
+    portal->vClipSpan[0].AddRangeSpan(an4, an3);
+    portal->vClipSpan[1].AddRangeSpan(an6, an5);
 
     portal->face->leftSpan = an1;
     portal->face->rightSpan = an2;
@@ -84,23 +88,30 @@ bool kexRenderScene::FaceInPortalView(portal_t *portal, mapFace_t *face)
     kexVec3 rvO;
     float an1, an2;
     float an3, an4;
+    float an5, an6;
 
     rvO = view->Origin() + kexVec3(0, 0, 32);
 
     an1 = (view->Origin() - *face->BottomEdge()->v2).ToYaw();
     an2 = (view->Origin() - *face->BottomEdge()->v1).ToYaw();
-    an3 = (*face->BottomEdge()->v2 - rvO).ToPitch();
-    an4 = (*face->TopEdge()->v1 - rvO).ToPitch();
+    an3 = (*face->LeftEdge()->v1 - rvO).ToPitch();
+    an4 = (*face->LeftEdge()->v2 - rvO).ToPitch();
+    an5 = (*face->RightEdge()->v2 - rvO).ToPitch();
+    an6 = (*face->RightEdge()->v1 - rvO).ToPitch();
     
     if(!portal->hClipSpan.CheckRange(an1, an2))
     {
         return false;
     }
 
-    //if(!portal->vClipSpan.CheckRange(an3, an4))
-    //{
-    //    return false;
-    //}
+    /*if(!portal->face->plane.IsFacing(view->Yaw()))
+    {
+        if(!portal->vClipSpan[0].CheckRange(an3, an4) &&
+           !portal->vClipSpan[1].CheckRange(an5, an6))
+        {
+            return false;
+        }
+    }*/
 
     return true;
 }
@@ -123,9 +134,35 @@ void kexRenderScene::RecursiveSectorPortals(portal_t *portal)
     }
     
     sector->floodCount = validcount;
+
+    if(sector->validcount != validcount)
+    {
+        visibleSectors.Set(sector);
+        sector->validcount = validcount;
+    }
     
     start = sector->faceStart;
     end = sector->faceEnd;
+
+    for(int i = start; i < end+1; ++i)
+    {
+        mapSector_t *s;
+
+        face = &world->Faces()[i];
+
+        if(!face->portal)
+        {
+            continue;
+        }
+
+        s = &world->Sectors()[face->sector];
+
+        if(s->validcount != validcount)
+        {
+            visibleSectors.Set(s);
+            s->validcount = validcount;
+        }
+    }
     
     for(int i = start; i < end+3; ++i)
     {
@@ -146,8 +183,12 @@ void kexRenderScene::RecursiveSectorPortals(portal_t *portal)
             continue;
         }
 
-        if(i <= end && face->portal && !FaceInPortalView(portal, face))
+        if(i <= end && !FaceInPortalView(portal, face))
         {
+            if(sector->validcount == validcount)
+            {
+                sector->floodCount = 0;
+            }
             continue;
         }
 
@@ -171,7 +212,7 @@ void kexRenderScene::RecursiveSectorPortals(portal_t *portal)
         FloodPortalView(face->portal, portal);
     }
 
-    sector->floodCount = 0;
+    
 }
 
 //
@@ -188,6 +229,26 @@ void kexRenderScene::FindVisibleSectors(mapSector_t *startSector)
 
     start = startSector->faceStart;
     end = startSector->faceEnd;
+
+    for(int i = start; i < end+1; ++i)
+    {
+        mapSector_t *s;
+
+        face = &world->Faces()[i];
+
+        if(!face->portal)
+        {
+            continue;
+        }
+
+        s = &world->Sectors()[face->sector];
+
+        if(s->validcount != validcount)
+        {
+            visibleSectors.Set(s);
+            s->validcount = validcount;
+        }
+    }
 
     for(int i = start; i < end+3; ++i)
     {

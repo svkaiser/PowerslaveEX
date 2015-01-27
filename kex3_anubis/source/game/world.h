@@ -120,7 +120,7 @@ typedef struct portal_s
     mapSector_t         *sector;
 
     kexClipper          hClipSpan;
-    kexClipper          vClipSpan;
+    kexClipper          vClipSpan[2];
 } portal_t;
 
 typedef struct

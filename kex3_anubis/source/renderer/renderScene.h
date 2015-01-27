@@ -42,6 +42,7 @@ private:
     kexWorld                *world;
     kexRenderView           *view;
     kexStack<mapSector_t*>  visibleSectors;
+    kexStack<portal_t*>     visiblePortals;
     
     int                     validcount;
 };

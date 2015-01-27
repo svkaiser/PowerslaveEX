@@ -158,6 +158,7 @@ bool TestProjectedFace(mapFace_t *src, mapFace_t *dst)
 //
 
 kexCvar cvarTest("portaltest", CVF_INT, "0", " ");
+kexCvar cvarTest2("testvar", CVF_INT, "0", " ");
 
 void kexPlayLoop::Draw(void)
 {
@@ -190,8 +191,9 @@ void kexPlayLoop::Draw(void)
         clipper.Clear();
         clipper2.Clear();
         mapFace_t *testFace;
+        kexViewBounds viewBound;
 
-        if(0)
+        if(1)
         {
             /*mapFace_t *face = &world->Faces()[372];
             kexVec3 p1 = *face->BottomEdge()->v2;
@@ -204,7 +206,7 @@ void kexPlayLoop::Draw(void)
 
             kex::cSystem->Printf("%f %f\n", kexMath::Rad2Deg(an3), kexMath::Rad2Deg(an4));*/
 
-            testFace = &world->Faces()[372];
+            testFace = &world->Faces()[cvarTest2.GetInt()];
             
             if(testFace->InFront(renderView.Origin()))
             {
@@ -228,11 +230,11 @@ void kexPlayLoop::Draw(void)
             max = renderScene.VisibleSectors().CurrentLength();
         }
 
-        for(unsigned int i = 0; i < world->NumSectors(); ++i)
-        //for(unsigned int i = 0; i < max; ++i)
+        //for(unsigned int i = 0; i < world->NumSectors(); ++i)
+        for(unsigned int i = 0; i < max; ++i)
         {
-            //mapSector_t *sector = renderScene.VisibleSectors()[i];
-            mapSector_t *sector = &world->Sectors()[i];
+            mapSector_t *sector = renderScene.VisibleSectors()[i];
+            //mapSector_t *sector = &world->Sectors()[i];
             
             int start = sector->faceStart;
             int end = sector->faceEnd;
@@ -320,7 +322,7 @@ void kexPlayLoop::Draw(void)
                     }
                 }
 
-                if(j <= end)
+                if(0 && j <= end)
                 {
                     kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
                     kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
@@ -485,16 +487,75 @@ void kexPlayLoop::Draw(void)
         vl->AddQuad(256, 192, 0, 64, 64, 0.625f, 0, 0.875f, 1, 255, 255, 255, 255);
         vl->DrawElements();
         
-        /*kexRender::cBackend->SetOrtho();
-        kexVec3 proj1 = renderView.ProjectPoint(*testFace->BottomEdge()->v2);
-        kexVec3 proj2 = renderView.ProjectPoint(*testFace->BottomEdge()->v1);
-        kexVec3 proj3 = renderView.ProjectPoint(*testFace->TopEdge()->v1);
-        kexVec3 proj4 = renderView.ProjectPoint(*testFace->TopEdge()->v2);
-        kexRender::cUtils->DrawLine(proj1, proj2, 255, 0, 0);
-        kexRender::cUtils->DrawLine(proj3, proj4, 255, 0, 0);
-        
-        kex::cSystem->Printf("%s\n", proj1.ToString().c_str());
-        kex::cSystem->Printf("%s\n\n", proj2.ToString().c_str());*/
+        if(0)
+        {
+            kexRender::cBackend->SetOrtho();
+            //kexRender::cUtils->DrawLine(kexVec3(testFace->h[0], testFace->v[0], 0), kexVec3(testFace->h[1], testFace->v[1], 0), 255, 0, 0);
+            //kexRender::cUtils->DrawLine(kexVec3(testFace->h[2], testFace->v[2], 0), kexVec3(testFace->h[3], testFace->v[3], 0), 255, 0, 0);
+            //kexRender::cUtils->DrawLine(kexVec3(testFace->h[0], testFace->v[0], 0), kexVec3(testFace->h[2], testFace->v[2], 0), 255, 0, 0);
+            //kexRender::cUtils->DrawLine(kexVec3(testFace->h[1], testFace->v[1], 0), kexVec3(testFace->h[3], testFace->v[3], 0), 255, 0, 0);
+
+            kexVec4 t1, t2, t3, t4;
+            kexVec3 proj1 = renderView.ProjectPoint(*testFace->BottomEdge()->v2, &t1);
+            kexVec3 proj2 = renderView.ProjectPoint(*testFace->BottomEdge()->v1, &t2);
+            kexVec3 proj3 = renderView.ProjectPoint(*testFace->TopEdge()->v1, &t3);
+            kexVec3 proj4 = renderView.ProjectPoint(*testFace->TopEdge()->v2, &t4);
+
+            if(testFace->plane.Distance(renderView.Origin()) - testFace->plane.d <= 128.0f ||
+                testFace->plane.IsFacing(renderView.Yaw()))
+            {
+                proj1.x = proj3.x = (float)kex::cSystem->VideoWidth();
+                proj1.y = proj2.y = (float)kex::cSystem->VideoHeight();
+                proj2.x = proj4.x = 0;
+                proj3.y = proj4.y = 0;
+            }
+            else
+            {
+                if(proj2.x <= proj1.x)
+                {
+                    proj2.x = (float)kex::cSystem->VideoWidth();
+                }
+                if(proj4.x <= proj3.x)
+                {
+                    proj4.x = (float)kex::cSystem->VideoWidth();
+                }
+                if(proj2.y <= proj3.y || proj2.y <= proj4.y)
+                {
+                    proj2.y = (float)kex::cSystem->VideoHeight();
+                }
+                if(proj1.y <= proj3.y || proj1.y <= proj4.y)
+                {
+                    proj1.y = (float)kex::cSystem->VideoHeight();
+                }
+
+                if(t1.x <= -1) proj1.x = 0;
+                if(t1.x >=  1) proj1.x = (float)kex::cSystem->VideoWidth();
+                if(t2.x <= -1) proj2.x = 0;
+                if(t2.x >=  1) proj2.x = (float)kex::cSystem->VideoWidth();
+                if(t3.x <= -1) proj3.x = 0;
+                if(t3.x >=  1) proj3.x = (float)kex::cSystem->VideoWidth();
+                if(t4.x <= -1) proj4.x = 0;
+                if(t4.x >=  1) proj4.x = (float)kex::cSystem->VideoWidth();
+                if(t1.y >=  1) proj1.y = 0;
+                if(t1.y <= -1) proj1.y = (float)kex::cSystem->VideoHeight();
+                if(t2.y >=  1) proj2.y = 0;
+                if(t2.y <= -1) proj2.y = (float)kex::cSystem->VideoHeight();
+                if(t3.y >=  1) proj3.y = 0;
+                if(t3.y <= -1) proj3.y = (float)kex::cSystem->VideoHeight();
+                if(t4.y >=  1) proj4.y = 0;
+                if(t4.y <= -1) proj4.y = (float)kex::cSystem->VideoHeight();
+            }
+
+            kexRender::cUtils->DrawLine(proj1, proj2, 255, 0, 0);
+            kexRender::cUtils->DrawLine(proj2, proj4, 255, 0, 0);
+            kexRender::cUtils->DrawLine(proj1, proj3, 255, 0, 0);
+            kexRender::cUtils->DrawLine(proj3, proj4, 255, 0, 0);
+            
+            //kex::cSystem->Printf("%s\n", proj1.ToString().c_str());
+            //kex::cSystem->Printf("%s\n", proj2.ToString().c_str());
+            //kex::cSystem->Printf("%s\n", proj3.ToString().c_str());
+            //kex::cSystem->Printf("%s\n\n", proj4.ToString().c_str());
+        }
     }
 }
 
