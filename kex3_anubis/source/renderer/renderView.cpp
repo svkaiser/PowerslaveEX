@@ -32,6 +32,7 @@ kexVec3 kexRenderView::ProjectPoint(const kexVec3 &point, kexVec4 *projVector)
 {
     kexVec4 proj, model;
     float w, h;
+    float x, y, z;
     
     model.Set(point.x, point.y, point.z, 0);
     model *= modelView;
@@ -40,6 +41,11 @@ kexVec3 kexRenderView::ProjectPoint(const kexVec3 &point, kexVec4 *projVector)
     proj *= projectionView;
     
     proj.ToVec3() *= model.w;
+    
+    if(proj.w < 0.1f)
+    {
+        proj.w = 0.1f;
+    }
     
     if(proj.w != 0)
     {
@@ -55,9 +61,15 @@ kexVec3 kexRenderView::ProjectPoint(const kexVec3 &point, kexVec4 *projVector)
         *projVector = proj;
     }
     
-    return kexVec3((proj.x * 0.5f + 0.5f) * w,
-                   (-proj.y * 0.5f + 0.5f) * h,
-                   (1.0f + proj.z) * 0.5f);
+    x = (proj.x * 0.5f + 0.5f) * w;
+    y = (-proj.y * 0.5f + 0.5f) * h;
+    z = (1.0f + proj.z) * 0.5f;
+    
+    kexMath::Clamp(x, 0, w);
+    kexMath::Clamp(y, 0, h);
+    kexMath::Clamp(z, 0, 1);
+    
+    return kexVec3(x, y, z);
 }
 
 //

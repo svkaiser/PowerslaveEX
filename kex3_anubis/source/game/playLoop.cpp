@@ -210,8 +210,8 @@ void kexPlayLoop::Draw(void)
             {
                 ProjectFacePoints(renderView, testFace);
 
-                kex::cSystem->Printf("%f %f %f %f\n", testFace->h[0], testFace->h[2], testFace->h[1], testFace->h[3]);
-                kex::cSystem->Printf("%f %f %f %f\n\n", testFace->v[0], testFace->v[2], testFace->v[1], testFace->v[3]);
+                //kex::cSystem->Printf("%f %f %f %f\n", testFace->h[0], testFace->h[2], testFace->h[1], testFace->h[3]);
+                //kex::cSystem->Printf("%f %f %f %f\n\n", testFace->v[0], testFace->v[2], testFace->v[1], testFace->v[3]);
                 //kex::cSystem->Printf("%f %f %f %f\n\n", cv[0], cv[1], cv[2], cv[3]);
                 
                 //kexRender::cUtils->DrawLine(p1, p2, 0, 255, 0);
@@ -484,6 +484,17 @@ void kexPlayLoop::Draw(void)
         vl->AddQuad(160, 216, 0, 96, 24, 0.25f, 0.375f, 0.625f, 0.75f, 255, 255, 255, 255);
         vl->AddQuad(256, 192, 0, 64, 64, 0.625f, 0, 0.875f, 1, 255, 255, 255, 255);
         vl->DrawElements();
+        
+        /*kexRender::cBackend->SetOrtho();
+        kexVec3 proj1 = renderView.ProjectPoint(*testFace->BottomEdge()->v2);
+        kexVec3 proj2 = renderView.ProjectPoint(*testFace->BottomEdge()->v1);
+        kexVec3 proj3 = renderView.ProjectPoint(*testFace->TopEdge()->v1);
+        kexVec3 proj4 = renderView.ProjectPoint(*testFace->TopEdge()->v2);
+        kexRender::cUtils->DrawLine(proj1, proj2, 255, 0, 0);
+        kexRender::cUtils->DrawLine(proj3, proj4, 255, 0, 0);
+        
+        kex::cSystem->Printf("%s\n", proj1.ToString().c_str());
+        kex::cSystem->Printf("%s\n\n", proj2.ToString().c_str());*/
     }
 }
 
