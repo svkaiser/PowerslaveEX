@@ -90,13 +90,18 @@ void kexRenderView::SetupMatrices(void)
 
     // setup rotation quaternion
     kexQuat qyaw(yaw, kexVec3::vecUp);
-    kexQuat qpitch(-kexMath::Deg2Rad(90) + pitch, kexVec3::vecRight);
+    kexQuat qpitch(pitch, kexVec3::vecRight);
     
     rotation = qyaw * qpitch;
     
     // setup model view matrix
     modelView = kexMatrix(rotation);
     rotationMatrix = modelView;
+    
+    // pitch of 0 is treated in-game as being centered but
+    // the renderer sees it as looking straight down so rotate
+    // the modelview matrix relative to that
+    modelView.RotateX(-kexMath::Deg2Rad(90));
     
     modelView = kexMatrix(roll * kexMath::Sin(yaw), 1) * modelView;
     modelView.RotateY(roll * kexMath::Cos(yaw));

@@ -562,34 +562,42 @@ bool kexWorld::SectorInPVS(const int secnum)
 
 void kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
 {
-    kexVec3 p1 = *face->BottomEdge()->v1 - view.Origin();
-    kexVec3 p2 = *face->BottomEdge()->v2 - view.Origin();
+    kexMatrix mtx = view.RotationMatrix();
+    mtx.AddTranslation(-view.Origin() * mtx);
+    
+    kexVec3 p1 = *face->BottomEdge()->v1 * mtx;
+    kexVec3 p2 = *face->BottomEdge()->v2 * mtx;
+    kexVec3 p3 = *face->TopEdge()->v2 * mtx;
+    kexVec3 p4 = *face->TopEdge()->v1 * mtx;
+    
+    float p1x = p1.x;
+    float p1y = p1.y;
+    float p2x = p2.x;
+    float p2y = p2.y;
+    float p3x = p3.x;
+    float p3y = p3.y;
+    float p4x = p4.x;
+    float p4y = p4.y;
 
-    float s = kexMath::Sin(view.Yaw());
-    float c = kexMath::Cos(view.Yaw());
+    face->leftSpan[0] = face->leftSpan[1] = 0;
+    face->rightSpan[0] = face->rightSpan[1] = 320;
 
-    float p1x = (p1.y * s) - (p1.x * c);
-    float p1y = (p1.x * s) + (p1.y * c);         
-    float p2x = (p2.y * s) - (p2.x * c);
-    float p2y = (p2.x * s) + (p2.y * c);
-
-    face->leftSpan = 0;
-    face->rightSpan = 320;
-
-    if(p1x*p2y < p2x*p1y)
+    if(-(p1x*p2y) < -(p2x*p1y))
     {
-        if(p1y >= 0.999f)
-        {
-            face->rightSpan = 320 - (p1x * 160 / p1y + 160);
-        }
+        if(p1y >= 0.999f) face->rightSpan[0] = (p1x * 160 / p1y + 160);
+        if(p2y >= 0.999f) face->leftSpan[0] = (p2x * 160 / p2y + 160);
 
-        if(p2y >= 0.999f)
-        {
-            face->leftSpan = 320 - (p2x * 160 / p2y + 160);
-        }
-
-        kexMath::Clamp(face->leftSpan, 0, 320);
-        kexMath::Clamp(face->rightSpan, 0, 320);
+        kexMath::Clamp(face->leftSpan[0], 0, 320);
+        kexMath::Clamp(face->rightSpan[0], 0, 320);
+    }
+    
+    if(-(p3x*p4y) < -(p4x*p3y))
+    {
+        if(p3y >= 0.999f) face->rightSpan[1] = (p3x * 160 / p3y + 160);
+        if(p4y >= 0.999f) face->leftSpan[1] = (p4x * 160 / p4y + 160);
+        
+        kexMath::Clamp(face->leftSpan[1], 0, 320);
+        kexMath::Clamp(face->rightSpan[1], 0, 320);
     }
 }
 
@@ -599,14 +607,23 @@ void kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
 
 bool kexWorld::FaceInPortalView(kexRenderView &view, portal_t *portal, mapFace_t *face)
 {
-    if((face->leftSpan >= portal->face->leftSpan && face->leftSpan <= portal->face->rightSpan) ||
-       (face->rightSpan >= portal->face->leftSpan && face->rightSpan <= portal->face->rightSpan) ||
-       (face->leftSpan <= portal->face->leftSpan && face->rightSpan >= portal->face->rightSpan))
-    {
-        return true;
-    }
+    float pls1 = portal->face->leftSpan[0];
+    float pls2 = portal->face->leftSpan[1];
+    float prs1 = portal->face->rightSpan[0];
+    float prs2 = portal->face->rightSpan[1];
+    float ls1 = face->leftSpan[0];
+    float ls2 = face->leftSpan[1];
+    float rs1 = face->rightSpan[0];
+    float rs2 = face->rightSpan[1];
     
-    return false;
+    bool bs1 = ((ls1 >= pls1 && ls1 <= prs1) ||
+                (rs1 >= pls1 && rs1 <= prs1) ||
+                (ls1 <= pls1 && rs1 >= prs1));
+    bool bs2 = ((ls2 >= pls2 && ls2 <= prs2) ||
+                (rs2 >= pls2 && rs2 <= prs2) ||
+                (ls2 <= pls2 && rs2 >= prs2));
+    
+    return (bs1 || bs2);
 }
 
 //

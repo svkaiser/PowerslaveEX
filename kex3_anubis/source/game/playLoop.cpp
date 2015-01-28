@@ -219,20 +219,24 @@ void kexPlayLoop::Draw(void)
 
                 float s = kexMath::Sin(renderView.Yaw());
                 float c = kexMath::Cos(renderView.Yaw());
-                float u = kexMath::Sin(renderView.Pitch());
-                float d = kexMath::Cos(renderView.Pitch());
 
                 float p1x = (p1.y * s) - (p1.x * c);
                 float p1y = (p1.x * s) + (p1.y * c);         
                 float p2x = (p2.y * s) - (p2.x * c);
                 float p2y = (p2.x * s) + (p2.y * c);
-                float p1z = (p1.y * u);
-                float p2z = (p1.z * u) + (p1.y * d);
+                
+                kexMatrix mtx = renderView.RotationMatrix();
+                mtx.AddTranslation(-renderView.Origin() * mtx);
+                
+                kexVec3 p3 = *testFace->BottomEdge()->v1 * mtx;
+                kexVec3 p4 = *testFace->BottomEdge()->v2 * mtx;
+                
+                //kex::cSystem->Printf("%f %f\n", p1x*p2y, p2x*p1y);
+                //kex::cSystem->Printf("%f %f\n\n", p3.x*p4.y, p4.x*p3.y);
 
                 if(p1x*p2y < p2x*p1y)
                 {
                     float dxb1, dxb2;
-                    float dyb1;
 
                     if(p1y >= 0.999f)
                     {
@@ -250,16 +254,9 @@ void kexPlayLoop::Draw(void)
                     {
                         dxb2 = kexMath::infinity;
                     }
-                    if(p2z <= -0.999f)
-                    {
-                        dyb1 = (p1z*120/p1y+120);
-                    }
-                    else
-                    {
-                        dyb1 = kexMath::infinity;
-                    }
 
-                    kex::cSystem->Printf("%f %f %f\n", dyb1 - p1.z, dxb1, dxb2);
+                    kex::cSystem->Printf("%f %f\n", dxb1, dxb2);
+                    kex::cSystem->Printf("%f %f\n\n", (p3.x*160/p3.y+160), (p4.x*160/p4.y+160));
                 }
 
                 //kex::cSystem->Printf("%f %f %f %f\n", testFace->h[0], testFace->h[2], testFace->h[1], testFace->h[3]);

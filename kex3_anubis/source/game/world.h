@@ -97,10 +97,10 @@ typedef struct mapFace_s
     kexBBox             bounds;
     int                 validcount;
     int                 sectorOwner;
-    float               leftSpan;
-    float               rightSpan;
-    float               topSpan;
-    float               bottomSpan;
+    float               leftSpan[2];
+    float               rightSpan[2];
+    float               topSpan[2];
+    float               bottomSpan[2];
     mapEdge_t           edges[4];
     float               h[4];
     float               v[4];

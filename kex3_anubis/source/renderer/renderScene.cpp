@@ -71,10 +71,10 @@ void kexRenderScene::FloodPortalView(portal_t *portal, portal_t *prevPortal)
     portal->vClipSpan[0].AddRangeSpan(an4, an3);
     portal->vClipSpan[1].AddRangeSpan(an6, an5);
 
-    portal->face->leftSpan = an1;
-    portal->face->rightSpan = an2;
-    portal->face->bottomSpan = an3;
-    portal->face->topSpan = an4;
+    //portal->face->leftSpan = an1;
+    //portal->face->rightSpan = an2;
+    //portal->face->bottomSpan = an3;
+    //portal->face->topSpan = an4;
 
     RecursiveSectorPortals(portal);
 }
