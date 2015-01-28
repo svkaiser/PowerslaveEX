@@ -300,6 +300,9 @@ void kexWorld::BuildPortals(unsigned int count)
         return;
     }
 
+    pvsSize = ((numSectors + 63) & ~63) >> 3;
+    pvsMask = (byte*)Mem_Calloc(pvsSize, hb_world);
+
     numPortals = count;
     portals = (portal_t*)Mem_Calloc(sizeof(portal_t) * numPortals, hb_world);
 
@@ -523,4 +526,252 @@ void kexWorld::UnloadMap(void)
     
     kexGame::cLocal->CModel()->Reset();
     Mem_Purge(hb_world);
+}
+
+//
+// kexWorld::MarkSectorInPVS
+//
+
+void kexWorld::MarkSectorInPVS(const int secnum)
+{
+    if(secnum <= -1)
+    {
+        return;
+    }
+
+    pvsMask[secnum >> 3] |= (1 << (secnum & 7));
+}
+
+//
+// kexWorld::SectorInPVS
+//
+
+bool kexWorld::SectorInPVS(const int secnum)
+{
+    if(secnum <= -1)
+    {
+        return false;
+    }
+
+    return (pvsMask[secnum >> 3] & (1 << (secnum & 7))) != 0;
+}
+
+//
+// kexWorld::SetFaceSpans
+//
+
+void kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
+{
+    kexVec3 p1 = *face->BottomEdge()->v1 - view.Origin();
+    kexVec3 p2 = *face->BottomEdge()->v2 - view.Origin();
+
+    float s = kexMath::Sin(view.Yaw());
+    float c = kexMath::Cos(view.Yaw());
+
+    float p1x = (p1.y * s) - (p1.x * c);
+    float p1y = (p1.x * s) + (p1.y * c);         
+    float p2x = (p2.y * s) - (p2.x * c);
+    float p2y = (p2.x * s) + (p2.y * c);
+
+    face->leftSpan = 0;
+    face->rightSpan = 320;
+
+    if(p1x*p2y < p2x*p1y)
+    {
+        if(p1y >= 0.999f)
+        {
+            face->rightSpan = 320 - (p1x * 160 / p1y + 160);
+        }
+
+        if(p2y >= 0.999f)
+        {
+            face->leftSpan = 320 - (p2x * 160 / p2y + 160);
+        }
+
+        kexMath::Clamp(face->leftSpan, 0, 320);
+        kexMath::Clamp(face->rightSpan, 0, 320);
+    }
+}
+
+//
+// kexWorld::FaceInPortalView
+//
+
+bool kexWorld::FaceInPortalView(kexRenderView &view, portal_t *portal, mapFace_t *face)
+{
+    if((face->leftSpan >= portal->face->leftSpan && face->leftSpan <= portal->face->rightSpan) ||
+       (face->rightSpan >= portal->face->leftSpan && face->rightSpan <= portal->face->rightSpan) ||
+       (face->leftSpan <= portal->face->leftSpan && face->rightSpan >= portal->face->rightSpan))
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+//
+// kexWorld::RecursiveSectorPortals
+//
+
+void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
+{
+    mapFace_t *face;
+    int start, end;
+    mapSector_t *sector;
+    
+    sector = &sectors[portal->face->sector];
+
+    if(sector->floodCount == 1)
+    {
+        return;
+    }
+    
+    if(!SectorInPVS(portal->face->sector))
+    {
+        MarkSectorInPVS(portal->face->sector);
+        visibleSectors.Set(portal->face->sector);
+    }
+
+    start = sector->faceStart;
+    end = sector->faceEnd;
+
+    for(int i = start; i < end+1; ++i)
+    {
+        face = &faces[i];
+
+        SetFaceSpans(view, face);
+
+        if(face->sector <= -1 || !face->portal)
+        {
+            continue;
+        }
+
+        if(SectorInPVS(face->sector))
+        {
+            continue;
+        }
+
+        if(!face->InFront(view.Origin()))
+        {
+            continue;
+        }
+
+        visibleSectors.Set(face->sector);
+        MarkSectorInPVS(face->sector);
+    }
+    
+    for(int i = start; i < end+1; ++i)
+    {
+        face = &faces[i];
+
+        if(face->validcount == 1)
+        {
+            continue;
+        }
+        
+        if(!face->InFront(view.Origin()))
+        {
+            continue;
+        }
+        
+        if(!view.Frustum().TestBoundingBox(face->bounds))
+        {
+            continue;
+        }
+
+        if(!FaceInPortalView(view, portal, face))
+        {
+            if(SectorInPVS(face->sector))
+            {
+                sector->floodCount = 0;
+            }
+            continue;
+        }
+
+        face->validcount = 1;
+
+        if(!(face->flags & FF_PORTAL) || face->sector <= -1)
+        {
+            continue;
+        }
+
+        if(face->portal == NULL)
+        {
+            continue;
+        }
+        
+        RecursiveSectorPortals(view, face->portal);
+    }   
+}
+
+//
+// kexWorld::FindVisibleSectors
+//
+
+void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
+{
+    int secnum = sector - sectors;
+    int start, end;
+    kexVec3 origin;
+
+    memset(pvsMask, 0, pvsSize);
+
+    visibleSectors.Reset();
+    visibleSectors.Set(secnum);
+
+    MarkSectorInPVS(secnum);
+
+    start = sector->faceStart;
+    end = sector->faceEnd;
+
+    origin = view.Origin();
+
+    for(int i = start; i < end+1; ++i)
+    {
+        mapFace_t *face = &faces[i];
+
+        SetFaceSpans(view, face);
+
+        if(face->sector <= -1 || !face->portal)
+        {
+            continue;
+        }
+
+        if(SectorInPVS(face->sector))
+        {
+            continue;
+        }
+
+        if(!face->InFront(origin))
+        {
+            continue;
+        }
+
+        visibleSectors.Set(face->sector);
+        MarkSectorInPVS(face->sector);
+    }
+
+    for(int i = start; i < end+1; ++i)
+    {
+        mapFace_t *face = &faces[i];
+
+        face->validcount = 1;
+
+        if(!(face->flags & FF_PORTAL) || face->sector <= -1)
+        {
+            continue;
+        }
+
+        if(face->portal == NULL)
+        {
+            continue;
+        }
+
+        if(!view.Frustum().TestBoundingBox(face->bounds))
+        {
+            continue;
+        }
+
+        RecursiveSectorPortals(view, face->portal);
+    }
 }

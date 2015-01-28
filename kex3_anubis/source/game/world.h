@@ -168,6 +168,7 @@ public:
 
     bool                    LoadMap(const char *mapname);
     void                    UnloadMap(void);
+    void                    FindVisibleSectors(kexRenderView &view, mapSector_t *sector);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
@@ -190,6 +191,7 @@ public:
     mapActor_t              *Actors(void) { return actors; }
     portal_t                *Portals(void) { return portals; }
 
+    kexStack<int>           &VisibleSectors(void) { return visibleSectors; }
     kexSDNode<kexActor>     &AreaNodes(void) { return areaNodes; }
 
     static kexHeapBlock     hb_world;
@@ -200,6 +202,11 @@ private:
     void                    SetupEdges(void);
     void                    SpawnMapActor(mapActor_t *mapActor);
     void                    BuildPortals(unsigned int count);
+    void                    MarkSectorInPVS(const int secnum);
+    bool                    SectorInPVS(const int secnum);
+    void                    SetFaceSpans(kexRenderView &view, mapFace_t *face);
+    void                    RecursiveSectorPortals(kexRenderView &view, portal_t *portal);
+    bool                    FaceInPortalView(kexRenderView &view, portal_t *portal, mapFace_t *face);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);
     void                    ReadVertices(kexBinFile &mapfile, const unsigned int count);
@@ -222,6 +229,9 @@ private:
     unsigned int            numActors;
     unsigned int            numPortals;
 
+    unsigned int            pvsSize;
+    byte                    *pvsMask;
+
     kexTexture              **textures;
     mapVertex_t             *vertices;
     mapSector_t             *sectors;
@@ -232,6 +242,7 @@ private:
     mapActor_t              *actors;
     portal_t                *portals;
 
+    kexStack<int>           visibleSectors;
     kexSDNode<kexActor>     areaNodes;
 };
 

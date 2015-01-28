@@ -169,7 +169,8 @@ void kexPlayLoop::Draw(void)
     static kexClipper clipper2;
     
     renderView.SetupFromPlayer(p);
-    renderScene.FindVisibleSectors(p->Actor()->Sector());
+    world->FindVisibleSectors(renderView, p->Actor()->Sector());
+    //renderScene.FindVisibleSectors(p->Actor()->Sector());
 
     // TEMP
     kexRender::cBackend->LoadProjectionMatrix(renderView.ProjectionView());
@@ -210,7 +211,56 @@ void kexPlayLoop::Draw(void)
             
             if(testFace->InFront(renderView.Origin()))
             {
-                ProjectFacePoints(renderView, testFace);
+                //ProjectFacePoints(renderView, testFace);
+
+                kexVec3 org = renderView.Origin();
+                kexVec3 p1 = *testFace->BottomEdge()->v1 - org;
+                kexVec3 p2 = *testFace->BottomEdge()->v2 - org;
+
+                float s = kexMath::Sin(renderView.Yaw());
+                float c = kexMath::Cos(renderView.Yaw());
+                float u = kexMath::Sin(renderView.Pitch());
+                float d = kexMath::Cos(renderView.Pitch());
+
+                float p1x = (p1.y * s) - (p1.x * c);
+                float p1y = (p1.x * s) + (p1.y * c);         
+                float p2x = (p2.y * s) - (p2.x * c);
+                float p2y = (p2.x * s) + (p2.y * c);
+                float p1z = (p1.y * u);
+                float p2z = (p1.z * u) + (p1.y * d);
+
+                if(p1x*p2y < p2x*p1y)
+                {
+                    float dxb1, dxb2;
+                    float dyb1;
+
+                    if(p1y >= 0.999f)
+                    {
+                        dxb1 = 320 - (p1x*160/p1y+160);
+                    }
+                    else
+                    {
+                        dxb1 = -kexMath::infinity;
+                    }
+                    if(p2y >= 0.999f)
+                    {
+                        dxb2 = 320 - (p2x*160/p2y+160);
+                    }
+                    else
+                    {
+                        dxb2 = kexMath::infinity;
+                    }
+                    if(p2z <= -0.999f)
+                    {
+                        dyb1 = (p1z*120/p1y+120);
+                    }
+                    else
+                    {
+                        dyb1 = kexMath::infinity;
+                    }
+
+                    kex::cSystem->Printf("%f %f %f\n", dyb1 - p1.z, dxb1, dxb2);
+                }
 
                 //kex::cSystem->Printf("%f %f %f %f\n", testFace->h[0], testFace->h[2], testFace->h[1], testFace->h[3]);
                 //kex::cSystem->Printf("%f %f %f %f\n\n", testFace->v[0], testFace->v[2], testFace->v[1], testFace->v[3]);
@@ -225,15 +275,15 @@ void kexPlayLoop::Draw(void)
 
         unsigned int max = cvarTest.GetInt();
 
-        if(max == 0 || max > renderScene.VisibleSectors().CurrentLength())
+        if(max == 0 || max > world->VisibleSectors().CurrentLength())
         {
-            max = renderScene.VisibleSectors().CurrentLength();
+            max = world->VisibleSectors().CurrentLength();
         }
 
         //for(unsigned int i = 0; i < world->NumSectors(); ++i)
         for(unsigned int i = 0; i < max; ++i)
         {
-            mapSector_t *sector = renderScene.VisibleSectors()[i];
+            mapSector_t *sector = &world->Sectors()[world->VisibleSectors()[i]];
             //mapSector_t *sector = &world->Sectors()[i];
             
             int start = sector->faceStart;
@@ -260,7 +310,7 @@ void kexPlayLoop::Draw(void)
 
                 if(face->validcount != 1 && !(p->Actor()->PlayerFlags() & PF_NOCLIP))
                 {
-                    //if(j <= end)
+                    if(j <= end)
                     {
                         continue;
                     }
@@ -322,7 +372,7 @@ void kexPlayLoop::Draw(void)
                     }
                 }
 
-                if(0 && j <= end)
+                if(1 && j <= end)
                 {
                     kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
                     kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
