@@ -62,10 +62,10 @@ void kexRenderScene::FloodPortalView(portal_t *portal, portal_t *prevPortal)
     an2 = (view->Origin() - p2).ToYaw();
                 
     rvO = view->Origin() + kexVec3(0, 0, 32);
-    an3 = (*portal->face->LeftEdge()->v1 - rvO).ToPitch();
-    an4 = (*portal->face->LeftEdge()->v2 - rvO).ToPitch();
-    an5 = (*portal->face->RightEdge()->v2 - rvO).ToPitch();
-    an6 = (*portal->face->RightEdge()->v1 - rvO).ToPitch();
+    an3 = (rvO - *portal->face->LeftEdge()->v2).ToPitch() + kexMath::pi;
+    an4 = (rvO - *portal->face->LeftEdge()->v1).ToPitch() + kexMath::pi;
+    an5 = (rvO - *portal->face->RightEdge()->v1).ToPitch() + kexMath::pi;
+    an6 = (rvO - *portal->face->RightEdge()->v2).ToPitch() + kexMath::pi;
 
     portal->hClipSpan.AddRangeSpan(an2, an1);
     portal->vClipSpan[0].AddRangeSpan(an4, an3);
@@ -94,17 +94,17 @@ bool kexRenderScene::FaceInPortalView(portal_t *portal, mapFace_t *face)
 
     an1 = (view->Origin() - *face->BottomEdge()->v2).ToYaw();
     an2 = (view->Origin() - *face->BottomEdge()->v1).ToYaw();
-    an3 = (*face->LeftEdge()->v1 - rvO).ToPitch();
-    an4 = (*face->LeftEdge()->v2 - rvO).ToPitch();
-    an5 = (*face->RightEdge()->v2 - rvO).ToPitch();
-    an6 = (*face->RightEdge()->v1 - rvO).ToPitch();
+    an3 = (rvO - *face->LeftEdge()->v2).ToPitch() + kexMath::pi;
+    an4 = (rvO - *face->LeftEdge()->v1).ToPitch() + kexMath::pi;
+    an5 = (rvO - *face->RightEdge()->v1).ToPitch() + kexMath::pi;
+    an6 = (rvO - *face->RightEdge()->v2).ToPitch() + kexMath::pi;
     
     if(!portal->hClipSpan.CheckRange(an1, an2))
     {
         return false;
     }
 
-    /*if(!portal->face->plane.IsFacing(view->Yaw()))
+    /*if(face->portal && !portal->face->plane.IsFacing(view->Yaw()))
     {
         if(!portal->vClipSpan[0].CheckRange(an3, an4) &&
            !portal->vClipSpan[1].CheckRange(an5, an6))

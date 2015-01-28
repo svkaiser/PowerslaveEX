@@ -193,7 +193,7 @@ void kexPlayLoop::Draw(void)
         mapFace_t *testFace;
         kexViewBounds viewBound;
 
-        if(1)
+        if(0)
         {
             /*mapFace_t *face = &world->Faces()[372];
             kexVec3 p1 = *face->BottomEdge()->v2;
