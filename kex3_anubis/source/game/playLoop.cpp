@@ -315,7 +315,7 @@ void kexPlayLoop::Draw(void)
 
                 face->validcount = 0;
                 
-                if(0 && /*inSector && */face->sector != -1)
+                if(1 && /*inSector && */face->sector != -1)
                 {
                     kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 255, 0, 255);
                     kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 255, 0, 255);

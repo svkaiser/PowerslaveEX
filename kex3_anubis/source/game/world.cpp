@@ -572,15 +572,21 @@ void kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
     
     float p1x = p1.x;
     float p1y = p1.y;
+    float p1z = p1.z;
     float p2x = p2.x;
     float p2y = p2.y;
+    float p2z = p2.z;
     float p3x = p3.x;
     float p3y = p3.y;
+    float p3z = p3.z;
     float p4x = p4.x;
     float p4y = p4.y;
+    float p4z = p4.z;
 
     face->leftSpan[0] = face->leftSpan[1] = 0;
+    face->topSpan[0] = face->topSpan[1] = 0;
     face->rightSpan[0] = face->rightSpan[1] = 320;
+    face->bottomSpan[0] = face->bottomSpan[1] = 240;
 
     if(-(p1x*p2y) < -(p2x*p1y))
     {
@@ -598,6 +604,24 @@ void kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
         
         kexMath::Clamp(face->leftSpan[1], 0, 320);
         kexMath::Clamp(face->rightSpan[1], 0, 320);
+    }
+
+    if(-(p2z*p4y) > -(p4z*p2y))
+    {
+        if(p4y >= 0.999f) face->topSpan[0] = 240 - (p4z * 120 / p4y + 120);
+        if(p2y >= 0.999f) face->bottomSpan[0] = 240 - (p2z * 120 / p2y + 120);
+
+        kexMath::Clamp(face->topSpan[0], 0, 240);
+        kexMath::Clamp(face->bottomSpan[0], 0, 240);
+    }
+
+    if(-(p1z*p3y) > -(p3z*p1y))
+    {
+        if(p3y >= 0.999f) face->topSpan[1] = 240 - (p3z * 120 / p3y + 120);
+        if(p1y >= 0.999f) face->bottomSpan[1] = 240 - (p1z * 120 / p1y + 120);
+
+        kexMath::Clamp(face->topSpan[1], 0, 240);
+        kexMath::Clamp(face->bottomSpan[1], 0, 240);
     }
 }
 
@@ -656,6 +680,11 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
     {
         face = &faces[i];
 
+        if(!face->InFront(view.Origin()))
+        {
+            continue;
+        }
+
         SetFaceSpans(view, face);
 
         if(face->sector <= -1 || !face->portal)
@@ -664,11 +693,6 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
         }
 
         if(SectorInPVS(face->sector))
-        {
-            continue;
-        }
-
-        if(!face->InFront(view.Origin()))
         {
             continue;
         }
@@ -747,6 +771,11 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
     {
         mapFace_t *face = &faces[i];
 
+        if(!face->InFront(origin))
+        {
+            continue;
+        }
+
         SetFaceSpans(view, face);
 
         if(face->sector <= -1 || !face->portal)
@@ -759,7 +788,7 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
             continue;
         }
 
-        if(!face->InFront(origin))
+        if(!view.Frustum().TestBoundingBox(face->bounds))
         {
             continue;
         }
@@ -780,11 +809,6 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
         }
 
         if(face->portal == NULL)
-        {
-            continue;
-        }
-
-        if(!view.Frustum().TestBoundingBox(face->bounds))
         {
             continue;
         }
