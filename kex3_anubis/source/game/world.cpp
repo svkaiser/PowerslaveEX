@@ -128,6 +128,7 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].floorSlope       = mapfile.ReadFloat();
         sectors[i].flags            = mapfile.Read16();
         sectors[i].validcount       = -1;
+        sectors[i].floodCount       = 0;
         sectors[i].ceilingFace      = &faces[sectors[i].faceEnd+1];
         sectors[i].floorFace        = &faces[sectors[i].faceEnd+2];
         
@@ -563,62 +564,57 @@ bool kexWorld::SectorInPVS(const int secnum)
 void kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
 {
     kexMatrix mtx = view.RotationMatrix();
-    mtx.AddTranslation(-view.Origin() * mtx);
     
     kexVec3 p1 = *face->BottomEdge()->v1 * mtx;
     kexVec3 p2 = *face->BottomEdge()->v2 * mtx;
     kexVec3 p3 = *face->TopEdge()->v2 * mtx;
     kexVec3 p4 = *face->TopEdge()->v1 * mtx;
     
-    float p1x = p1.x;
-    float p1y = p1.y;
-    float p1z = p1.z;
-    float p2x = p2.x;
-    float p2y = p2.y;
-    float p2z = p2.z;
-    float p3x = p3.x;
-    float p3y = p3.y;
-    float p3z = p3.z;
-    float p4x = p4.x;
-    float p4y = p4.y;
-    float p4z = p4.z;
+    kexVec2 c1p(p1.x, p1.y);
+    kexVec2 c2p(p2.x, p2.y);
+    kexVec2 c3p(p3.x, p3.y);
+    kexVec2 c4p(p4.x, p4.y);
+    kexVec2 c5p(p2.z, p2.y);
+    kexVec2 c6p(p4.z, p4.y);
+    kexVec2 c7p(p1.z, p1.y);
+    kexVec2 c8p(p3.z, p3.y);
 
     face->leftSpan[0] = face->leftSpan[1] = 0;
     face->topSpan[0] = face->topSpan[1] = 0;
     face->rightSpan[0] = face->rightSpan[1] = 320;
     face->bottomSpan[0] = face->bottomSpan[1] = 240;
 
-    if(-(p1x*p2y) < -(p2x*p1y))
+    if(c2p.CrossScalar(c1p) >= 0)
     {
-        if(p1y >= 0.999f) face->rightSpan[0] = (p1x * 160 / p1y + 160);
-        if(p2y >= 0.999f) face->leftSpan[0] = (p2x * 160 / p2y + 160);
+        if(p1.y >= 0.999f) face->rightSpan[0] = (p1.x * 160 / p1.y + 160);
+        if(p2.y >= 0.999f) face->leftSpan[0] = (p2.x * 160 / p2.y + 160);
 
         kexMath::Clamp(face->leftSpan[0], 0, 320);
         kexMath::Clamp(face->rightSpan[0], 0, 320);
     }
     
-    if(-(p3x*p4y) < -(p4x*p3y))
+    if(c4p.CrossScalar(c3p) >= 0)
     {
-        if(p3y >= 0.999f) face->rightSpan[1] = (p3x * 160 / p3y + 160);
-        if(p4y >= 0.999f) face->leftSpan[1] = (p4x * 160 / p4y + 160);
+        if(p3.y >= 0.999f) face->rightSpan[1] = (p3.x * 160 / p3.y + 160);
+        if(p4.y >= 0.999f) face->leftSpan[1] = (p4.x * 160 / p4.y + 160);
         
         kexMath::Clamp(face->leftSpan[1], 0, 320);
         kexMath::Clamp(face->rightSpan[1], 0, 320);
     }
 
-    if(-(p2z*p4y) > -(p4z*p2y))
+    if(c5p.CrossScalar(c6p) >= 0)
     {
-        if(p4y >= 0.999f) face->topSpan[0] = 240 - (p4z * 120 / p4y + 120);
-        if(p2y >= 0.999f) face->bottomSpan[0] = 240 - (p2z * 120 / p2y + 120);
+        if(p4.y >= 0.999f) face->topSpan[0] = 240 - (p4.z * 120 / p4.y + 120);
+        if(p2.y >= 0.999f) face->bottomSpan[0] = 240 - (p2.z * 120 / p2.y + 120);
 
         kexMath::Clamp(face->topSpan[0], 0, 240);
         kexMath::Clamp(face->bottomSpan[0], 0, 240);
     }
 
-    if(-(p1z*p3y) > -(p3z*p1y))
+    if(c7p.CrossScalar(c8p) >= 0)
     {
-        if(p3y >= 0.999f) face->topSpan[1] = 240 - (p3z * 120 / p3y + 120);
-        if(p1y >= 0.999f) face->bottomSpan[1] = 240 - (p1z * 120 / p1y + 120);
+        if(p3.y >= 0.999f) face->topSpan[1] = 240 - (p3.z * 120 / p3.y + 120);
+        if(p1.y >= 0.999f) face->bottomSpan[1] = 240 - (p1.z * 120 / p1.y + 120);
 
         kexMath::Clamp(face->topSpan[1], 0, 240);
         kexMath::Clamp(face->bottomSpan[1], 0, 240);
@@ -628,26 +624,78 @@ void kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
 //
 // kexWorld::FaceInPortalView
 //
-
+static float left[2];
+static float right[2];
+static float top[2];
+static float bottom[2];
 bool kexWorld::FaceInPortalView(kexRenderView &view, portal_t *portal, mapFace_t *face)
 {
-    float pls1 = portal->face->leftSpan[0];
-    float pls2 = portal->face->leftSpan[1];
-    float prs1 = portal->face->rightSpan[0];
-    float prs2 = portal->face->rightSpan[1];
+    float pls1 = left[0];
+    float pls2 = left[1];
+    float prs1 = right[0];
+    float prs2 = right[1];
+    float pts1 = top[0];
+    float pts2 = top[1];
+    float pbs1 = bottom[0];
+    float pbs2 = bottom[1];
     float ls1 = face->leftSpan[0];
     float ls2 = face->leftSpan[1];
     float rs1 = face->rightSpan[0];
     float rs2 = face->rightSpan[1];
+    float ts1 = face->topSpan[0];
+    float ts2 = face->topSpan[1];
+    float bs1 = face->bottomSpan[0];
+    float bs2 = face->bottomSpan[1];
     
-    bool bs1 = ((ls1 >= pls1 && ls1 <= prs1) ||
-                (rs1 >= pls1 && rs1 <= prs1) ||
-                (ls1 <= pls1 && rs1 >= prs1));
-    bool bs2 = ((ls2 >= pls2 && ls2 <= prs2) ||
-                (rs2 >= pls2 && rs2 <= prs2) ||
-                (ls2 <= pls2 && rs2 >= prs2));
+    int sidebit1 = 0;
+    int sidebit2 = 0;
+    int sidebit3 = 0;
+    int sidebit4 = 0;
     
-    return (bs1 || bs2);
+    float t;
+    
+    t = ls1-pls1; sidebit1 |= (FLOATSIGNBIT(t) << 0);
+    t = ls1-pls2; sidebit1 |= (FLOATSIGNBIT(t) << 1);
+    t = ls2-pls2; sidebit1 |= (FLOATSIGNBIT(t) << 2);
+    t = ls2-pls1; sidebit1 |= (FLOATSIGNBIT(t) << 3);
+    t = rs1-pls1; sidebit1 |= (FLOATSIGNBIT(t) << 4);
+    t = rs1-pls2; sidebit1 |= (FLOATSIGNBIT(t) << 5);
+    t = rs2-pls2; sidebit1 |= (FLOATSIGNBIT(t) << 6);
+    t = rs2-pls1; sidebit1 |= (FLOATSIGNBIT(t) << 7);
+    
+    t = prs1-rs1; sidebit2 |= (FLOATSIGNBIT(t) << 0);
+    t = prs2-rs2; sidebit2 |= (FLOATSIGNBIT(t) << 1);
+    t = prs1-rs2; sidebit2 |= (FLOATSIGNBIT(t) << 2);
+    t = prs2-rs1; sidebit2 |= (FLOATSIGNBIT(t) << 3);
+    t = prs1-ls1; sidebit2 |= (FLOATSIGNBIT(t) << 4);
+    t = prs2-ls2; sidebit2 |= (FLOATSIGNBIT(t) << 5);
+    t = prs1-ls2; sidebit2 |= (FLOATSIGNBIT(t) << 6);
+    t = prs2-ls1; sidebit2 |= (FLOATSIGNBIT(t) << 7);
+    
+    t = ts1-pts1; sidebit3 |= (FLOATSIGNBIT(t) << 0);
+    t = ts1-pts2; sidebit3 |= (FLOATSIGNBIT(t) << 1);
+    t = ts2-pts1; sidebit3 |= (FLOATSIGNBIT(t) << 2);
+    t = ts2-pts2; sidebit3 |= (FLOATSIGNBIT(t) << 3);
+    t = bs1-pts1; sidebit3 |= (FLOATSIGNBIT(t) << 4);
+    t = bs1-pts2; sidebit3 |= (FLOATSIGNBIT(t) << 5);
+    t = bs2-pts1; sidebit3 |= (FLOATSIGNBIT(t) << 6);
+    t = bs2-pts2; sidebit3 |= (FLOATSIGNBIT(t) << 7);
+    
+    t = pbs1-bs1; sidebit4 |= (FLOATSIGNBIT(t) << 0);
+    t = pbs2-bs1; sidebit4 |= (FLOATSIGNBIT(t) << 1);
+    t = pbs1-bs2; sidebit4 |= (FLOATSIGNBIT(t) << 2);
+    t = pbs2-bs2; sidebit4 |= (FLOATSIGNBIT(t) << 3);
+    t = pbs1-ts1; sidebit4 |= (FLOATSIGNBIT(t) << 4);
+    t = pbs1-ts2; sidebit4 |= (FLOATSIGNBIT(t) << 5);
+    t = pbs2-ts1; sidebit4 |= (FLOATSIGNBIT(t) << 6);
+    t = pbs2-ts2; sidebit4 |= (FLOATSIGNBIT(t) << 7);
+    
+    if(!(sidebit3 == 0xff || sidebit4 == 0xff))
+    {
+        return !(sidebit1 == 0xff || sidebit2 == 0xff);
+    }
+    
+    return false;
 }
 
 //
@@ -659,13 +707,19 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
     mapFace_t *face;
     int start, end;
     mapSector_t *sector;
+    float pleft[2];
+    float pright[2];
+    float ptop[2];
+    float pbottom[2];
     
     sector = &sectors[portal->face->sector];
 
-    if(sector->floodCount == 1)
+    if(sector->floodCount > 0)
     {
         return;
     }
+    
+    sector->floodCount++;
     
     if(!SectorInPVS(portal->face->sector))
     {
@@ -707,7 +761,7 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
 
         if(face->validcount == 1)
         {
-            continue;
+            //continue;
         }
         
         if(!face->InFront(view.Origin()))
@@ -722,10 +776,6 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
 
         if(!FaceInPortalView(view, portal, face))
         {
-            if(SectorInPVS(face->sector))
-            {
-                sector->floodCount = 0;
-            }
             continue;
         }
 
@@ -741,8 +791,40 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
             continue;
         }
         
+        pleft[0] = left[0];
+        pleft[1] = left[1];
+        pright[0] = right[0];
+        pright[1] = right[1];
+        ptop[0] = top[0];
+        ptop[1] = top[1];
+        pbottom[0] = bottom[0];
+        pbottom[1] = bottom[1];
+        
+        if(face->leftSpan[0] > left[0]) left[0] = face->leftSpan[0];
+        if(face->leftSpan[1] > left[1]) left[1] = face->leftSpan[1];
+        if(face->rightSpan[0] < right[0]) right[0] = face->rightSpan[0];
+        if(face->rightSpan[1] < right[1])right[1] = face->rightSpan[1];
+        if(face->topSpan[0] > top[0]) top[0] = face->topSpan[0];
+        if(face->topSpan[1] > top[1]) top[1] = face->topSpan[1];
+        if(face->bottomSpan[0] < bottom[0]) bottom[0] = face->bottomSpan[0];
+        if(face->bottomSpan[1] < bottom[1]) bottom[1] = face->bottomSpan[1];
+        
         RecursiveSectorPortals(view, face->portal);
-    }   
+        
+        left[0] = pleft[0];
+        left[1] = pleft[1];
+        right[0] = pright[0];
+        right[1] = pright[1];
+        top[0] = ptop[0];
+        top[1] = ptop[1];
+        bottom[0] = pbottom[0];
+        bottom[1] = pbottom[1];
+    }
+    
+    if(sector->floodCount > 0)
+    {
+        sector->floodCount--;
+    }
 }
 
 //
@@ -756,6 +838,11 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
     kexVec3 origin;
 
     memset(pvsMask, 0, pvsSize);
+    
+    left[0] = left[1] = 0;
+    top[0] = top[1] = 0;
+    right[0] = right[1] = 320;
+    bottom[0] = bottom[1] = 240;
 
     visibleSectors.Reset();
     visibleSectors.Set(secnum);
@@ -812,6 +899,15 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
         {
             continue;
         }
+        
+        left[0] = face->leftSpan[0];
+        left[1] = face->leftSpan[1];
+        right[0] = face->rightSpan[0];
+        right[1] = face->rightSpan[1];
+        top[0] = face->topSpan[0];
+        top[1] = face->topSpan[1];
+        bottom[0] = face->bottomSpan[0];
+        bottom[1] = face->bottomSpan[1];
 
         RecursiveSectorPortals(view, face->portal);
     }

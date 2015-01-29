@@ -96,7 +96,7 @@ void kexRenderView::SetupMatrices(void)
     
     // setup model view matrix
     modelView = kexMatrix(rotation);
-    rotationMatrix = modelView;
+    rotationMatrix = kexMatrix(qyaw);
     
     // pitch of 0 is treated in-game as being centered but
     // the renderer sees it as looking straight down so rotate
@@ -110,10 +110,12 @@ void kexRenderView::SetupMatrices(void)
     modelView.Scale(1, 1, 1.07142f);
     rotationMatrix.Scale(1, 1, 1.07142f);
     modelView.AddTranslation(-origin * modelView);
+    rotationMatrix.AddTranslation(-origin * rotationMatrix);
 
     // re-adjust translation
     transform.SetTranslation(0, 0, -32);
     modelView = (transform * modelView);
+    rotationMatrix = (transform * rotationMatrix);
 }
 
 //
