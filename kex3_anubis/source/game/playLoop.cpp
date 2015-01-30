@@ -151,10 +151,8 @@ void kexPlayLoop::Draw(void)
                         continue;
                     }
                 }
-
-                face->validcount = 0;
                 
-                if(0 && /*inSector && */face->sector != -1)
+                if(face->validcount >= 1 && /*inSector && */face->sector != -1)
                 {
                     kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 255, 0, 255);
                     kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 255, 0, 255);
@@ -162,6 +160,8 @@ void kexPlayLoop::Draw(void)
                     kexRender::cUtils->DrawLine(*face->RightEdge()->v1, *face->RightEdge()->v2, 255, 0, 255);
                     //kex::cSystem->Printf("%i\n", j);
                 }
+                
+                face->validcount = 0;
                 
                 if(face->polyStart == -1 || face->polyEnd == -1)
                 {

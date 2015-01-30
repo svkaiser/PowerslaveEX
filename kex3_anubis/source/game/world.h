@@ -51,6 +51,7 @@ typedef struct
     float               rightSpan[2];
     float               topSpan[2];
     float               bottomSpan[2];
+    int                 closestFace;
     struct mapFace_s    *floorFace;
     struct mapFace_s    *ceilingFace;
 } mapSector_t;

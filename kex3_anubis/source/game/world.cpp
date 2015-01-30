@@ -616,6 +616,7 @@ static float left[2];
 static float right[2];
 static float top[2];
 static float bottom[2];
+static int portalsPassed = 0;
 bool kexWorld::FaceInPortalView(kexRenderView &view, mapSector_t *sector, mapFace_t *face)
 {
     float pls1 = left[0];
@@ -712,6 +713,8 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
         return;
     }
     
+    portalsPassed++;
+    
     sector->floodCount++;
     
     if(!SectorInPVS(portal->face->sector))
@@ -803,11 +806,17 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
 
 void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
 {
+    //static mapSector_t *scanSectors[500];
+    //static int numScanSectors;
     int secnum = sector - sectors;
     int start, end;
     kexVec3 origin;
+    //int s0;
 
+    //numScanSectors = 1;
+    //scanSectors[0] = sector;
     memset(pvsMask, 0, pvsSize);
+    portalsPassed = 0;
     
     left[0] = left[1] = -kexMath::infinity;
     top[0] = top[1] = -kexMath::infinity;
@@ -822,9 +831,187 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
         sectors[i].bottomSpan[0] = sectors[i].bottomSpan[1] = 240;
 
         sectors[i].floodCount = 0;
+        sectors[i].closestFace = -1;
     }
 
     visibleSectors.Reset();
+    
+    visibleSectors.Set(secnum);
+    MarkSectorInPVS(secnum);
+
+    sector->floodCount = 1;
+    /*s0 = 0;
+    
+    do
+    {
+        mapSector_t *s = scanSectors[s0++];
+        
+        if(s->floodCount == 0)
+        {
+            continue;
+        }
+        
+        s->floodCount = 0;
+        
+        start = s->faceStart;
+        end = s->faceEnd;
+        
+        kex::cSystem->Printf("\n");
+        for(int i = start; i < end+1; ++i)
+        {
+            if(faces[i].sector >= 0)
+            kex::cSystem->Printf("%i is linked to %i\n", s-sectors, faces[i].sector);
+            
+            SetFaceSpans(view, &faces[i]);
+        }
+        kex::cSystem->Printf("\n");
+        
+        for(int i = start; i < end+1; ++i)
+        {
+            mapFace_t *face = &faces[i];
+            
+            if(!faces[i].InFront(view.Origin()))
+            {
+                continue;
+            }
+            
+            if(face->sector >= 0)
+            {
+                mapSector_t *next = &sectors[face->sector];
+                mapFace_t *best = face;
+                
+                if(!view.Frustum().TestBoundingBox(face->bounds))
+                {
+                    continue;
+                }
+                
+                //kex::cSystem->Printf("%i is looking for %i\n", s-sectors, face->sector);
+                
+                left[0] = s->leftSpan[0];
+                left[1] = s->leftSpan[1];
+                right[0] = s->rightSpan[0];
+                right[1] = s->rightSpan[1];
+                top[0] = s->topSpan[0];
+                top[1] = s->topSpan[1];
+                bottom[0] = s->bottomSpan[0];
+                bottom[1] = s->bottomSpan[1];
+                
+                if(!FaceInPortalView(view, s, face))
+                {
+                    bool bCulled = true;
+                    
+                    face->validcount = 1;
+                    kex::cSystem->Printf("%i couldn't see %i from %i\n", s-sectors, face->sector, s->closestFace);
+                    
+                    for(int j = s->faceStart; j < s->faceEnd+1; ++j)
+                    {
+                        mapFace_t *f = &faces[j];
+                        
+                        if(j == i)
+                        {
+                            continue;
+                        }
+                        
+                        if(f->sector == (s-sectors))
+                        {
+                            continue;
+                        }
+                        
+                        if(f->sector >= 0 && SectorInPVS(f->sector))
+                        {
+                            mapSector_t *other;
+                            
+                            //kex::cSystem->Printf("%i can see into %i\n", f->sector, s-sectors);
+                            
+                            if(!faces[i].InFront(view.Origin()))
+                            {
+                                continue;
+                            }
+                            
+                            other = &sectors[f->sector];
+                            
+                            for(int k = other->faceStart; k < other->faceEnd+1; ++k)
+                            {
+                                mapFace_t *ff = &faces[k];
+                                
+                                if(ff->sector != (s-sectors) || !(ff->flags & FF_PORTAL))
+                                {
+                                    continue;
+                                }
+                                
+                                left[0] = ff->leftSpan[0];
+                                left[1] = ff->leftSpan[1];
+                                right[0] = ff->rightSpan[0];
+                                right[1] = ff->rightSpan[1];
+                                top[0] = ff->topSpan[0];
+                                top[1] = ff->topSpan[1];
+                                bottom[0] = ff->bottomSpan[0];
+                                bottom[1] = ff->bottomSpan[1];
+                                
+                                if(FaceInPortalView(view, other, face))
+                                {
+                                    bCulled = false;
+                                    best = f;
+                                    break;
+                                }
+                            }
+                            
+                            if(!bCulled)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                
+                    if(bCulled)
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    kex::cSystem->Printf("%i sees %i from %i\n", s-sectors, face->sector, s->closestFace);
+                }
+                
+                portalsPassed++;
+                
+                if(!SectorInPVS(face->sector))
+                {
+                    MarkSectorInPVS(face->sector);
+                    visibleSectors.Set(face->sector);
+                    scanSectors[numScanSectors++] = next;
+                    kex::cSystem->Printf("*%i %i\n", s-sectors, face->sector);
+                    
+                    next->leftSpan[0] = best->leftSpan[0];
+                    next->leftSpan[1] = best->leftSpan[1];
+                    next->rightSpan[0] = best->rightSpan[0];
+                    next->rightSpan[1] = best->rightSpan[1];
+                    next->topSpan[0] = best->topSpan[0];
+                    next->topSpan[1] = best->topSpan[1];
+                    next->bottomSpan[0] = best->bottomSpan[0];
+                    next->bottomSpan[1] = best->bottomSpan[1];
+                    next->closestFace = s-sectors;
+                }
+                
+                next->floodCount = 1;
+            }
+            else
+            {
+                face->validcount = 1;
+            }
+        }
+        
+    } while(s0 < numScanSectors);
+    
+    */
+    
+    
+    
+    
+    
+    
+    
+    
     visibleSectors.Set(secnum);
 
     MarkSectorInPVS(secnum);
@@ -861,6 +1048,9 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
         bottom[0] = face->bottomSpan[0];
         bottom[1] = face->bottomSpan[1];
 
+        portalsPassed++;
         RecursiveSectorPortals(view, face->portal);
     }
+    
+    //kex::cSystem->Printf("%i %i\n", portalsPassed, numScanSectors);
 }
