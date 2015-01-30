@@ -47,6 +47,10 @@ typedef struct
     kexBBox             bounds;
     int                 validcount;
     int                 floodCount;
+    float               leftSpan[2];
+    float               rightSpan[2];
+    float               topSpan[2];
+    float               bottomSpan[2];
     struct mapFace_s    *floorFace;
     struct mapFace_s    *ceilingFace;
 } mapSector_t;
@@ -102,8 +106,6 @@ typedef struct mapFace_s
     float               topSpan[2];
     float               bottomSpan[2];
     mapEdge_t           edges[4];
-    float               h[4];
-    float               v[4];
     struct portal_s     *portal;
     
     mapEdge_t           *BottomEdge(void) { return &edges[2]; }
@@ -206,7 +208,7 @@ private:
     bool                    SectorInPVS(const int secnum);
     void                    SetFaceSpans(kexRenderView &view, mapFace_t *face);
     void                    RecursiveSectorPortals(kexRenderView &view, portal_t *portal);
-    bool                    FaceInPortalView(kexRenderView &view, portal_t *portal, mapFace_t *face);
+    bool                    FaceInPortalView(kexRenderView &view, mapSector_t *sector, mapFace_t *face);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);
     void                    ReadVertices(kexBinFile &mapfile, const unsigned int count);

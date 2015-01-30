@@ -217,6 +217,7 @@ void kexPuppet::FlyMove(kexPlayerCmd *cmd)
     yaw += cmd->Angles()[0];
     pitch += cmd->Angles()[1];
 
+    kexMath::Clamp(pitch.an, kexMath::Deg2Rad(-90), kexMath::Deg2Rad(90));
     kexVec3::ToAxis(&forward, NULL, &right, yaw, pitch, 0);
 
     velocity *= PMOVE_FRICTION;

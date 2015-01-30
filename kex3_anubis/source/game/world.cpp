@@ -579,45 +579,33 @@ void kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
     kexVec2 c7p(p1.z, p1.y);
     kexVec2 c8p(p3.z, p3.y);
 
-    face->leftSpan[0] = face->leftSpan[1] = 0;
-    face->topSpan[0] = face->topSpan[1] = 0;
-    face->rightSpan[0] = face->rightSpan[1] = 320;
-    face->bottomSpan[0] = face->bottomSpan[1] = 240;
+    face->leftSpan[0] = face->leftSpan[1] = -kexMath::infinity;
+    face->topSpan[0] = face->topSpan[1] = -kexMath::infinity;
+    face->rightSpan[0] = face->rightSpan[1] = kexMath::infinity;
+    face->bottomSpan[0] = face->bottomSpan[1] = kexMath::infinity;
 
     if(c2p.CrossScalar(c1p) >= 0)
     {
         if(p1.y >= 0.999f) face->rightSpan[0] = (p1.x * 160 / p1.y + 160);
         if(p2.y >= 0.999f) face->leftSpan[0] = (p2.x * 160 / p2.y + 160);
-
-        kexMath::Clamp(face->leftSpan[0], 0, 320);
-        kexMath::Clamp(face->rightSpan[0], 0, 320);
     }
     
     if(c4p.CrossScalar(c3p) >= 0)
     {
         if(p3.y >= 0.999f) face->rightSpan[1] = (p3.x * 160 / p3.y + 160);
         if(p4.y >= 0.999f) face->leftSpan[1] = (p4.x * 160 / p4.y + 160);
-        
-        kexMath::Clamp(face->leftSpan[1], 0, 320);
-        kexMath::Clamp(face->rightSpan[1], 0, 320);
     }
 
     if(c5p.CrossScalar(c6p) >= 0)
     {
         if(p4.y >= 0.999f) face->topSpan[0] = 240 - (p4.z * 120 / p4.y + 120);
         if(p2.y >= 0.999f) face->bottomSpan[0] = 240 - (p2.z * 120 / p2.y + 120);
-
-        kexMath::Clamp(face->topSpan[0], 0, 240);
-        kexMath::Clamp(face->bottomSpan[0], 0, 240);
     }
 
     if(c7p.CrossScalar(c8p) >= 0)
     {
         if(p3.y >= 0.999f) face->topSpan[1] = 240 - (p3.z * 120 / p3.y + 120);
         if(p1.y >= 0.999f) face->bottomSpan[1] = 240 - (p1.z * 120 / p1.y + 120);
-
-        kexMath::Clamp(face->topSpan[1], 0, 240);
-        kexMath::Clamp(face->bottomSpan[1], 0, 240);
     }
 }
 
@@ -628,7 +616,7 @@ static float left[2];
 static float right[2];
 static float top[2];
 static float bottom[2];
-bool kexWorld::FaceInPortalView(kexRenderView &view, portal_t *portal, mapFace_t *face)
+bool kexWorld::FaceInPortalView(kexRenderView &view, mapSector_t *sector, mapFace_t *face)
 {
     float pls1 = left[0];
     float pls2 = left[1];
@@ -714,7 +702,12 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
     
     sector = &sectors[portal->face->sector];
 
-    if(sector->floodCount > 0)
+    if(sector->floodCount > 1)
+    {
+        return;
+    }
+
+    if(!view.Frustum().TestBoundingBox(sector->bounds))
     {
         return;
     }
@@ -729,31 +722,6 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
 
     start = sector->faceStart;
     end = sector->faceEnd;
-
-    for(int i = start; i < end+1; ++i)
-    {
-        face = &faces[i];
-
-        if(!face->InFront(view.Origin()))
-        {
-            continue;
-        }
-
-        SetFaceSpans(view, face);
-
-        if(face->sector <= -1 || !face->portal)
-        {
-            continue;
-        }
-
-        if(SectorInPVS(face->sector))
-        {
-            continue;
-        }
-
-        visibleSectors.Set(face->sector);
-        MarkSectorInPVS(face->sector);
-    }
     
     for(int i = start; i < end+1; ++i)
     {
@@ -768,13 +736,15 @@ void kexWorld::RecursiveSectorPortals(kexRenderView &view, portal_t *portal)
         {
             continue;
         }
+
+        SetFaceSpans(view, face);
         
         if(!view.Frustum().TestBoundingBox(face->bounds))
         {
             continue;
         }
 
-        if(!FaceInPortalView(view, portal, face))
+        if(!FaceInPortalView(view, sector, face))
         {
             continue;
         }
@@ -839,10 +809,20 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
 
     memset(pvsMask, 0, pvsSize);
     
-    left[0] = left[1] = 0;
-    top[0] = top[1] = 0;
-    right[0] = right[1] = 320;
-    bottom[0] = bottom[1] = 240;
+    left[0] = left[1] = -kexMath::infinity;
+    top[0] = top[1] = -kexMath::infinity;
+    right[0] = right[1] = kexMath::infinity;
+    bottom[0] = bottom[1] = kexMath::infinity;
+
+    for(unsigned int i = 0; i < numSectors; ++i)
+    {
+        sectors[i].leftSpan[0] = sectors[i].leftSpan[1] = 0;
+        sectors[i].rightSpan[0] = sectors[i].rightSpan[1] = 320;
+        sectors[i].topSpan[0] = sectors[i].topSpan[1] = 0;
+        sectors[i].bottomSpan[0] = sectors[i].bottomSpan[1] = 240;
+
+        sectors[i].floodCount = 0;
+    }
 
     visibleSectors.Reset();
     visibleSectors.Set(secnum);
@@ -853,36 +833,6 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
     end = sector->faceEnd;
 
     origin = view.Origin();
-
-    for(int i = start; i < end+1; ++i)
-    {
-        mapFace_t *face = &faces[i];
-
-        if(!face->InFront(origin))
-        {
-            continue;
-        }
-
-        SetFaceSpans(view, face);
-
-        if(face->sector <= -1 || !face->portal)
-        {
-            continue;
-        }
-
-        if(SectorInPVS(face->sector))
-        {
-            continue;
-        }
-
-        if(!view.Frustum().TestBoundingBox(face->bounds))
-        {
-            continue;
-        }
-
-        visibleSectors.Set(face->sector);
-        MarkSectorInPVS(face->sector);
-    }
 
     for(int i = start; i < end+1; ++i)
     {
@@ -899,6 +849,8 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
         {
             continue;
         }
+
+        SetFaceSpans(view, face);
         
         left[0] = face->leftSpan[0];
         left[1] = face->leftSpan[1];
