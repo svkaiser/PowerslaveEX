@@ -16,7 +16,7 @@
 #define __WORLD_H__
 
 #include "sdNodes.h"
-#include "clipper.h"
+#include "renderView.h"
 
 class kexActor;
 class kexTexture;
@@ -47,11 +47,11 @@ typedef struct
     kexBBox             bounds;
     int                 validcount;
     int                 floodCount;
-    float               leftSpan[2];
-    float               rightSpan[2];
-    float               topSpan[2];
-    float               bottomSpan[2];
-    int                 closestFace;
+    int                 clipCount;
+    float               x1;
+    float               x2;
+    float               y1;
+    float               y2;
     struct mapFace_s    *floorFace;
     struct mapFace_s    *ceilingFace;
 } mapSector_t;
@@ -69,6 +69,7 @@ typedef enum
     FF_TOGGLE           = BIT(8),
     FF_FORCEFIELD       = BIT(9),
     FF_FULLBRIGHT       = BIT(10),
+    FF_OCCLUDED         = BIT(11),
     FF_HIDDEN           = BIT(12),
     FF_PORTAL           = BIT(13),
     FF_UNDERWATER       = BIT(14),
@@ -102,12 +103,11 @@ typedef struct mapFace_s
     kexBBox             bounds;
     int                 validcount;
     int                 sectorOwner;
-    float               leftSpan[2];
-    float               rightSpan[2];
-    float               topSpan[2];
-    float               bottomSpan[2];
+    float               x1;
+    float               y1;
+    float               x2;
+    float               y2;
     mapEdge_t           edges[4];
-    struct portal_s     *portal;
     
     mapEdge_t           *BottomEdge(void) { return &edges[2]; }
     mapEdge_t           *TopEdge(void) { return &edges[0]; }
@@ -116,15 +116,6 @@ typedef struct mapFace_s
     
     bool                InFront(const kexVec3 &origin) { return (plane.Distance(origin) - plane.d) >= 0; };
 } mapFace_t;
-
-typedef struct portal_s
-{
-    mapFace_t           *face;
-    mapSector_t         *sector;
-
-    kexClipper          hClipSpan;
-    kexClipper          vClipSpan[2];
-} portal_t;
 
 typedef struct
 {
@@ -182,7 +173,6 @@ public:
     const unsigned int      NumTexCoords(void) const { return numTCoords; }
     const unsigned int      NumEvents(void) const { return numEvents; }
     const unsigned int      NumActors(void) const { return numActors; }
-    const unsigned int      NumPortals(void) const { return numPortals; }
 
     kexTexture              **Textures(void) { return textures; }
     mapVertex_t             *Vertices(void) { return vertices; }
@@ -192,7 +182,6 @@ public:
     mapTexCoords_t          *TexCoords(void) { return texCoords; }
     mapEvent_t              *Events(void) { return events; }
     mapActor_t              *Actors(void) { return actors; }
-    portal_t                *Portals(void) { return portals; }
 
     kexStack<int>           &VisibleSectors(void) { return visibleSectors; }
     kexSDNode<kexActor>     &AreaNodes(void) { return areaNodes; }
@@ -207,9 +196,9 @@ private:
     void                    BuildPortals(unsigned int count);
     void                    MarkSectorInPVS(const int secnum);
     bool                    SectorInPVS(const int secnum);
-    void                    SetFaceSpans(kexRenderView &view, mapFace_t *face);
-    void                    RecursiveSectorPortals(kexRenderView &view, portal_t *portal);
-    bool                    FaceInPortalView(kexRenderView &view, mapSector_t *sector, mapFace_t *face);
+    void                    ProjectLeftRightSpans(const kexVec3 &p1, const kexVec3 &p2, float &s1, float &s2);
+    void                    ProjectTopBottomSpans(const kexVec3 &p1, const kexVec3 &p2, float &s1, float &s2);
+    bool                    SetFaceSpans(kexRenderView &view, mapFace_t *face);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);
     void                    ReadVertices(kexBinFile &mapfile, const unsigned int count);
@@ -230,10 +219,11 @@ private:
     unsigned int            numTCoords;
     unsigned int            numEvents;
     unsigned int            numActors;
-    unsigned int            numPortals;
 
     unsigned int            pvsSize;
     byte                    *pvsMask;
+
+    unsigned int            portalsPassed;
 
     kexTexture              **textures;
     mapVertex_t             *vertices;
@@ -243,9 +233,9 @@ private:
     mapTexCoords_t          *texCoords;
     mapEvent_t              *events;
     mapActor_t              *actors;
-    portal_t                *portals;
 
     kexStack<int>           visibleSectors;
+    kexStack<mapSector_t*>  scanSectors;
     kexSDNode<kexActor>     areaNodes;
 };
 

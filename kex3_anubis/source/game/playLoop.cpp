@@ -18,9 +18,7 @@
 #include "kexlib.h"
 #include "renderMain.h"
 #include "renderView.h"
-#include "viewBounds.h"
 #include "game.h"
-#include "clipper.h"
 
 //
 // kexPlayLoop::kexPlayLoop
@@ -144,15 +142,16 @@ void kexPlayLoop::Draw(void)
             {
                 mapFace_t *face = &world->Faces()[j];
 
-                if(face->validcount != 1 && !(p->Actor()->PlayerFlags() & PF_NOCLIP))
+                if(face->flags & FF_OCCLUDED && face->sector <= -1)
                 {
                     if(j <= end)
                     {
+                        face->flags &= ~FF_OCCLUDED;
                         continue;
                     }
                 }
                 
-                if(face->validcount >= 1 && /*inSector && */face->sector != -1)
+                if(/*inSector && */face->sector != -1 && cvarTest2.GetInt() == j)
                 {
                     kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 255, 0, 255);
                     kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 255, 0, 255);
@@ -342,6 +341,26 @@ void kexPlayLoop::Draw(void)
         vl->AddQuad(160, 216, 0, 96, 24, 0.25f, 0.375f, 0.625f, 0.75f, 255, 255, 255, 255);
         vl->AddQuad(256, 192, 0, 64, 64, 0.625f, 0, 0.875f, 1, 255, 255, 255, 255);
         vl->DrawElements();
+
+        kexRender::cBackend->SetOrtho(320, 240);
+        kexRender::cTextures->whiteTexture->Bind();
+        vl->BindDrawPointers();
+
+        for(unsigned int i = 0; i < world->NumSectors(); ++i)
+        {
+            mapSector_t *f = &world->Sectors()[i];
+
+            if(!renderView.Frustum().TestBoundingBox(f->bounds))
+            {
+                continue;
+            }
+
+            vl->AddLine(f->x1, f->y1, 0, f->x2, f->y1, 0, 255, 0, 0, 255);
+            vl->AddLine(f->x1, f->y2, 0, f->x2, f->y2, 0, 255, 0, 0, 255);
+            vl->AddLine(f->x1, f->y1, 0, f->x1, f->y2, 0, 255, 0, 0, 255);
+            vl->AddLine(f->x2, f->y1, 0, f->x2, f->y2, 0, 255, 0, 0, 255);
+            vl->DrawLineElements();
+        }
     }
 }
 

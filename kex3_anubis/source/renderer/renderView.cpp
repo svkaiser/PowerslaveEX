@@ -96,7 +96,7 @@ void kexRenderView::SetupMatrices(void)
     
     // setup model view matrix
     modelView = kexMatrix(rotation);
-    rotationMatrix = kexMatrix(qyaw);
+    rotationMatrix = kexMatrix(rotation);
     
     // pitch of 0 is treated in-game as being centered but
     // the renderer sees it as looking straight down so rotate

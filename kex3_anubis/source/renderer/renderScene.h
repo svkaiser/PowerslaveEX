@@ -27,24 +27,13 @@ public:
     ~kexRenderScene(void);
     
     void                    Draw(void);
-    void                    FindVisibleSectors(mapSector_t *startSector);
-    
+
     void                    SetWorld(kexWorld *wld) { world = wld; }
     void                    SetView(kexRenderView *v) { view = v; }
 
-    kexStack<mapSector_t*>  &VisibleSectors(void) { return visibleSectors; }
-
 private:
-    void                    RecursiveSectorPortals(portal_t *portal);
-    void                    FloodPortalView(portal_t *portal, portal_t *prevPortal);
-    bool                    FaceInPortalView(portal_t *portal, mapFace_t *face);
-    
     kexWorld                *world;
     kexRenderView           *view;
-    kexStack<mapSector_t*>  visibleSectors;
-    kexStack<portal_t*>     visiblePortals;
-    
-    int                     validcount;
 };
 
 #endif
