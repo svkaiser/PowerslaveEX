@@ -295,7 +295,7 @@ bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
     
     cp      = dir.Dot(org);
     cDist   = (org - (dir * cp));
-    r       = actorRadius + 8.192f;
+    r       = actorRadius + 1.024f;
     rd      = r * r - cDist.UnitSq();
     
     if(rd < 0)
