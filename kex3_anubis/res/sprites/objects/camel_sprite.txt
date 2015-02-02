@@ -1,0 +1,26 @@
+texture "sprites/objects/camel.png"
+
+// working\camel\sprite0616.tga
+sprite 0 0 0 20 13
+
+// working\camel\sprite0617.tga
+sprite 1 20 0 16 13
+
+// working\camel\sprite0618.tga
+sprite 2 36 0 20 13
+
+// working\camel\sprite0619.tga
+sprite 3 56 0 20 13
+
+// working\camel\sprite0620.tga
+sprite 4 76 0 64 64
+
+// working\camel\sprite0621.tga
+sprite 5 140 0 44 64
+
+// working\camel\sprite0622.tga
+sprite 6 184 0 64 60
+
+// working\camel\sprite0623.tga
+sprite 7 248 0 44 60
+

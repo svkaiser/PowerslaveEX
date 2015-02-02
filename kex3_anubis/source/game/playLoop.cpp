@@ -180,7 +180,7 @@ void kexPlayLoop::Draw(void)
                     continue;
                 }
 
-                if(1 && j <= end)
+                if(0 && j <= end)
                 {
                     kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
                     kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
@@ -275,6 +275,94 @@ void kexPlayLoop::Draw(void)
                     vl->DrawElements();
                 }
             }
+        }
+
+        if(0)
+        {
+            static spriteAnim_t *sprTest = NULL;
+
+            if(sprTest == NULL)
+            {
+                sprTest = kexGame::cLocal->SpriteAnimManager()->Get("objects/camel_idle");
+            }
+
+            if(sprTest)
+            {
+                kexCpuVertList *vl = kexRender::cVertList;
+                mapActor_t *a = p->Actor()->MapActor();
+                kexVec3 org(a->x, a->y, a->z);
+                kexMatrix mtx(renderView.Yaw(), 2);
+                kexMatrix mtx2(-renderView.Pitch(), 1);
+                kexMatrix mtx3 = mtx2 * mtx;
+                kexMatrix scale(1.25f, 1.25f, 1.25f);
+                spriteFrame_t *frame;
+                spriteSet_t *spriteSet;
+                kexSprite *sprite;
+                spriteInfo_t *info;
+
+                frame = &sprTest->frames[0];
+                org += kexVec3(0, -512, 0);
+
+                mtx3.RotateX(kexMath::pi);
+
+                kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+                vl->BindDrawPointers();
+
+                for(unsigned int i = 0; i < frame->spriteSet.Length(); ++i)
+                {
+                    spriteSet = &frame->spriteSet[i];
+                    sprite = spriteSet->sprite;
+                    info = &sprite->InfoList()[spriteSet->index];
+
+                    float x = (float)spriteSet->x;
+                    float y = (float)spriteSet->y;
+                    float w = (float)info->atlas.w;
+                    float h = (float)info->atlas.h;
+
+                    float u1, u2, v1, v2;
+                    
+                    u1 = info->u[0 ^ spriteSet->bFlipped];
+                    u2 = info->u[1 ^ spriteSet->bFlipped];
+                    v1 = info->v[0];
+                    v2 = info->v[1];
+
+                    kexRender::cScreen->SetAspectDimentions(x, y, w, h);
+
+                    sprite->Texture()->Bind();
+
+                    kexVec3 p1 = kexVec3(x, 0, y);
+                    kexVec3 p2 = kexVec3(x+w, 0, y);
+                    kexVec3 p3 = kexVec3(x, 0, y+h);
+                    kexVec3 p4 = kexVec3(x+w, 0, y+h);
+
+                    p1 *= mtx3;
+                    p2 *= mtx3;
+                    p3 *= mtx3;
+                    p4 *= mtx3;
+
+                    p1 *= scale;
+                    p2 *= scale;
+                    p3 *= scale;
+                    p4 *= scale;
+
+                    p1 += org;
+                    p2 += org;
+                    p3 += org;
+                    p4 += org;
+
+                    vl->AddVertex(p1, u1, v1, 255, 255, 255, 255);
+                    vl->AddVertex(p2, u2, v1, 255, 255, 255, 255);
+                    vl->AddVertex(p3, u1, v2, 255, 255, 255, 255);
+                    vl->AddVertex(p4, u2, v2, 255, 255, 255, 255);
+
+                    vl->AddTriangle(0, 2, 1);
+                    vl->AddTriangle(1, 2, 3);
+
+                    vl->DrawElements();
+                }
+            }
+
+            kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
         }
 
         {

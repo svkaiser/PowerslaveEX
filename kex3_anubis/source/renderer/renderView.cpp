@@ -102,14 +102,11 @@ void kexRenderView::SetupMatrices(void)
 
     // scale to aspect ratio
     modelView.Scale(1, 1, 1.07142f);
-    rotationMatrix.Scale(1, 1, 1.07142f);
     modelView.AddTranslation(-origin * modelView);
-    rotationMatrix.AddTranslation(-origin * rotationMatrix);
 
     // re-adjust translation
     transform.SetTranslation(0, 0, -32);
     modelView = (transform * modelView);
-    rotationMatrix = (transform * rotationMatrix);
 
     clipMatrix = modelView * projectionView;
 }
