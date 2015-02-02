@@ -37,6 +37,7 @@ public:
     virtual void            *GetProcAddress(const char *proc);
     virtual int             CheckParam(const char *check);
     virtual const char      *GetBaseDirectory(void);
+    virtual const char      *GetClipboardText(void);
     virtual void            Log(const char *fmt, ...);
     virtual void            Printf(const char *string, ...);
     virtual void            CPrintf(rcolor color, const char *string, ...);
@@ -512,6 +513,15 @@ const char *kexSystemSDL::GetBaseDirectory(void)
     
     return basePath;
 #endif
+}
+
+//
+// kexSystemSDL::GetClipboardText
+//
+
+const char *kexSystemSDL::GetClipboardText(void)
+{
+    return SDL_GetClipboardText();
 }
 
 //

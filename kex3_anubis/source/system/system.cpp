@@ -153,6 +153,15 @@ void kexSystem::WriteConfigFile(void)
 }
 
 //
+// kexSystem::GetClipboardText
+//
+
+const char *kexSystem::GetClipboardText(void)
+{
+    return NULL;
+}
+
+//
 // kexSystem::Printf
 //
 

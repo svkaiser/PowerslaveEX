@@ -40,6 +40,7 @@ public:
     virtual void            Error(const char *string, ...);
     virtual void            ReadConfigFile(const char *file);
     virtual void            WriteConfigFile(void);
+    virtual const char      *GetClipboardText(void);
 
     int                     VideoWidth(void) { return videoWidth; }
     int                     VideoHeight(void) { return videoHeight; }

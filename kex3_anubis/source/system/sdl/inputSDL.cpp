@@ -35,6 +35,9 @@ public:
     virtual int         TranslateKeyboard(const int val);
     virtual int         TranslateMouse(const int val);
     virtual bool        CapslockOn(void);
+    virtual bool        IsShiftDown(int c) const;
+    virtual bool        IsCtrlDown(int c) const;
+    virtual bool        IsAltDown(int c) const;
     
 private:
     void                ReadMouse(void);
@@ -236,6 +239,33 @@ int kexInputSDL::TranslateMouse(const int val)
 bool kexInputSDL::CapslockOn(void)
 {
     return (SDL_GetModState() & KMOD_CAPS) != 0;
+}
+
+//
+// kexInputSDL::IsShiftDown
+//
+
+bool kexInputSDL::IsShiftDown(int c) const
+{
+    return (SDL_GetModState() & (KMOD_LSHIFT|KMOD_RSHIFT)) != 0;
+}
+
+//
+// kexInputSDL::IsCtrlDown
+//
+
+bool kexInputSDL::IsCtrlDown(int c) const
+{
+    return (SDL_GetModState() & (KMOD_LCTRL|KMOD_RCTRL|KMOD_LGUI|KMOD_RGUI)) != 0;
+}
+
+//
+// kexInputSDL::IsAltDown
+//
+
+bool kexInputSDL::IsAltDown(int c) const
+{
+    return (SDL_GetModState() & (KMOD_LALT|KMOD_RALT)) != 0;
 }
 
 //
