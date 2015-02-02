@@ -88,7 +88,7 @@ bool kexRTTI::InstanceOf(const kexRTTI *objInfo) const
     return type_id == objInfo->type_id;
 }
 
-DECLARE_ABSTRACT_CLASS(kexObject, NULL)
+DECLARE_ABSTRACT_KEX_CLASS(kexObject, NULL)
 
 kexRTTI *kexObject::root = NULL;
 bool kexObject::bInitialized = false;

@@ -213,7 +213,7 @@ typedef enum
 //
 //-----------------------------------------------------------------------------
 
-BEGIN_EXTENDED_CLASS(kexActor, kexGameObject);
+BEGIN_EXTENDED_KEX_CLASS(kexActor, kexGameObject);
 public:
     kexActor(void);
     ~kexActor(void);
@@ -264,6 +264,6 @@ protected:
     unsigned int                    flags;
     float                           floorHeight;
     float                           ceilingHeight;
-END_CLASS();
+END_KEX_CLASS();
 
 #endif

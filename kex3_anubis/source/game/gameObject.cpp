@@ -18,7 +18,7 @@
 #include "kexlib.h"
 #include "gameObject.h"
 
-DECLARE_ABSTRACT_CLASS(kexGameObject, kexObject)
+DECLARE_ABSTRACT_KEX_CLASS(kexGameObject, kexObject)
 
 unsigned int kexGameObject::id = 0;
 

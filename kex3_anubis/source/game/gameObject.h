@@ -21,7 +21,7 @@
 //
 //-----------------------------------------------------------------------------
 
-BEGIN_EXTENDED_CLASS(kexGameObject, kexObject);
+BEGIN_EXTENDED_KEX_CLASS(kexGameObject, kexObject);
 public:
     kexGameObject(void);
     ~kexGameObject(void);
@@ -62,6 +62,6 @@ private:
     int                         refCount;
     unsigned int                objID;
     bool                        bStale;         // freed on next game tick
-END_CLASS();
+END_KEX_CLASS();
 
 #endif

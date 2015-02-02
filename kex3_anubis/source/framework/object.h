@@ -15,23 +15,23 @@
 #ifndef __OBJECT_H__
 #define __OBJECT_H__
 
-#define BEGIN_CLASS(classname)                          \
+#define BEGIN_KEX_CLASS(classname)                      \
 class classname {                                       \
 public:                                                 \
     static kexRTTI          info;                       \
     static kexObject        *Create(void);              \
     virtual kexRTTI         *GetInfo(void) const
 
-#define BEGIN_EXTENDED_CLASS(classname, supername)      \
+#define BEGIN_EXTENDED_KEX_CLASS(classname, supername)  \
 class classname : public supername {                    \
 public:                                                 \
     static kexRTTI          info;                       \
     static kexObject        *Create(void);              \
     virtual kexRTTI         *GetInfo(void) const
 
-#define END_CLASS() }
+#define END_KEX_CLASS() }
 
-#define DEFINE_CLASS(classname, supername)                      \
+#define DEFINE_KEX_CLASS(classname, supername)                  \
     kexRTTI classname::info(#classname, #supername,             \
         classname::Create,                                      \
         (void(kexObject::*)(void))&classname::Spawn);           \
@@ -39,28 +39,16 @@ public:                                                 \
         return &(classname::info);                              \
     }
 
-#ifdef EDITOR
-#ifdef DECLARE_CLASS
-#undef DECLARE_CLASS
-#endif
-#endif
-
-#define DECLARE_CLASS(classname, supername)             \
-    DEFINE_CLASS(classname, supername)                  \
-    kexObject *classname::Create(void) {                \
-        return new classname;                           \
+#define DECLARE_KEX_CLASS(classname, supername)             \
+    DEFINE_KEX_CLASS(classname, supername)                  \
+    kexObject *classname::Create(void) {                    \
+        return new classname;                               \
     }
 
-#ifdef EDITOR
-#ifdef DECLARE_ABSTRACT_CLASS
-#undef DECLARE_ABSTRACT_CLASS
-#endif
-#endif
-
-#define DECLARE_ABSTRACT_CLASS(classname, supername)    \
-    DEFINE_CLASS(classname, supername)                  \
-    kexObject *classname::Create(void) {                \
-        return NULL;                                    \
+#define DECLARE_ABSTRACT_KEX_CLASS(classname, supername)    \
+    DEFINE_KEX_CLASS(classname, supername)                  \
+    kexObject *classname::Create(void) {                    \
+        return NULL;                                        \
     }
 
 class kexBinFile;
@@ -90,7 +78,7 @@ public:
     kexRTTI                 *super;
 };
 
-BEGIN_CLASS(kexObject);
+BEGIN_KEX_CLASS(kexObject);
     ~kexObject(void);
 
     const char              *ClassName(void) const;
@@ -117,6 +105,6 @@ BEGIN_CLASS(kexObject);
     private:
     static bool             bInitialized;
     static int              numObjects;
-END_CLASS();
+END_KEX_CLASS();
 
 #endif

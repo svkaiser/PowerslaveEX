@@ -34,7 +34,7 @@ class kexPlayer;
 //
 //-----------------------------------------------------------------------------
 
-BEGIN_EXTENDED_CLASS(kexPuppet, kexActor);
+BEGIN_EXTENDED_KEX_CLASS(kexPuppet, kexActor);
 public:
     kexPuppet(void);
     ~kexPuppet(void);
@@ -52,7 +52,7 @@ private:
     kexPlayer                       *owner;
     unsigned int                    playerFlags;
     byte                            jumpTicks;
-END_CLASS();
+END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------
 //

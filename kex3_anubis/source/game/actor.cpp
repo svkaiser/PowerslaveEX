@@ -18,7 +18,7 @@
 #include "kexlib.h"
 #include "game.h"
 
-DECLARE_CLASS(kexActor, kexGameObject)
+DECLARE_KEX_CLASS(kexActor, kexGameObject)
 
 //
 // kexActor::kexActor

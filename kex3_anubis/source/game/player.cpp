@@ -39,7 +39,7 @@ const int kexPlayer::maxAmmo[NUMPLAYERWEAPONS] =
 //
 //-----------------------------------------------------------------------------
 
-DECLARE_CLASS(kexPuppet, kexActor)
+DECLARE_KEX_CLASS(kexPuppet, kexActor)
 
 //
 // kexPuppet::kexPuppet

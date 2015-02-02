@@ -102,8 +102,8 @@ void kexPlayLoop::Draw(void)
     kexRender::cBackend->SetState(GLSTATE_BLEND, true);
     kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
 
-    int clipY = (int)((float)kex::cSystem->VideoHeight() / (240.0f / 24.0f));
-    kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), kex::cSystem->VideoHeight() - clipY);
+    int clipY = kex::cSystem->VideoHeight() - (int)((float)kex::cSystem->VideoHeight() / (240.0f / 24.0f));
+    kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
     
     if(world->MapLoaded())
     {
@@ -122,6 +122,7 @@ void kexPlayLoop::Draw(void)
             
             int start = sector->faceStart;
             int end = sector->faceEnd;
+            int rectY;
             bool inSector = false;
             
             sector->floodCount = 0;
@@ -130,9 +131,16 @@ void kexPlayLoop::Draw(void)
             {
                 continue;
             }
+            
+            rectY = (int)sector->y2;
+            
+            if(rectY > clipY)
+            {
+                rectY = clipY;
+            }
 
             kexRender::cBackend->SetScissorRect((int)sector->x1, (int)sector->y1,
-                (int)sector->x2, (int)sector->y2);
+                (int)sector->x2, rectY);
 
             if(sector->flags & SF_DEBUG)
             {
@@ -180,7 +188,7 @@ void kexPlayLoop::Draw(void)
                     continue;
                 }
 
-                if(0 && j <= end)
+                if(1 && j <= end)
                 {
                     kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
                     kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
@@ -301,7 +309,7 @@ void kexPlayLoop::Draw(void)
                 spriteInfo_t *info;
 
                 frame = &sprTest->frames[0];
-                org += kexVec3(0, -512, 0);
+                org += kexVec3(0, 0, 0);
 
                 mtx3.RotateX(kexMath::pi);
 
@@ -373,7 +381,7 @@ void kexPlayLoop::Draw(void)
             kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
             kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
             
-            kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), kex::cSystem->VideoHeight() - clipY);
+            kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
 
             kexCpuVertList *vl = kexRender::cVertList;
 
