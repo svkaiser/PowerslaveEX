@@ -118,12 +118,21 @@ kexStr::kexStr(const kexStr &string)
 
 kexStr::~kexStr(void)
 {
+    Clear();
+}
+
+//
+// kexStr::Clear
+//
+
+void kexStr::Clear(void)
+{
     if(charPtr != defaultBuffer)
     {
         delete[] charPtr;
         charPtr = defaultBuffer;
     }
-
+    
     charPtr[0] = '\0';
     length = 0;
 }
@@ -622,6 +631,61 @@ kexStr kexStr::Substr(int start, int len) const
     }
 
     return str.Concat((const char*)&charPtr[start], len);
+}
+
+//
+// kexStr::Insert
+//
+
+void kexStr::Insert(const char *string, const int start)
+{
+    int len;
+    kexStr str;
+    
+    if(string == NULL || start < 0 || (length > 0 && start > length))
+    {
+        return;
+    }
+    
+    len = strlen(string);
+    str = Substr(start, length);
+    
+    charPtr[start] = '\0';
+    length = start;
+    CheckSize(length, true);
+    
+    Concat(string, len);
+    Concat(str);
+}
+
+//
+// kexStr::Remove
+//
+
+void kexStr::Remove(const int start, const int end)
+{
+    int e = end;
+    
+    if(end > length)
+    {
+        e = length;
+    }
+    
+    if((start < 0 || end < 0) || (e <= start || start >= e))
+    {
+        Clear();
+        return;
+    }
+    
+    for(int s = start; s < length; ++s)
+    {
+        charPtr[s] = charPtr[(e-start)+s];
+    }
+    
+    length -= (e-start);
+    
+    CheckSize(length, true);
+    charPtr[length] = '\0';
 }
 
 //

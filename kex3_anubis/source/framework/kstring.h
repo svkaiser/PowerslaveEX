@@ -32,6 +32,7 @@ public:
     kexStr(const kexStr &string);
     ~kexStr(void);
 
+    void                Clear(void);
     void                CheckSize(int size, bool bKeepString);
     int                 IndexOf(const char *pattern) const;
     int                 IndexOf(const kexStr &pattern) const;
@@ -48,6 +49,8 @@ public:
     kexStr              &ToLower(void);
     int                 Hash(void);
     kexStr              Substr(int start, int len) const;
+    void                Insert(const char *string, const int start);
+    void                Remove(const int start, const int end);
     void                Split(kexStrList &list, const char seperator);
     int                 Atoi(void);
     float               Atof(void);

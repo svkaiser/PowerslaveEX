@@ -32,12 +32,20 @@ public:
     ~kexConsole(void);
 
     void                Init(void);
-    void                ClearOutput(void);
     void                Clear(void);
+    void                Print(rcolor color, const char *text);
+    bool                ProcessInput(const inputEvent_t *ev);
+    void                Tick(void);
+    void                Draw(void);
+
+    const bool          IsActive(void) const { return (state == CON_STATE_DOWN); }
+    kexFont             *Font(void) { return font; }
+
+private:
+    void                ClearOutput(void);
     void                OutputTextLine(rcolor color, const char *text);
     void                AddToHistory(void);
     void                GetHistory(bool bPrev);
-    void                Print(rcolor color, const char *text);
     void                LineScroll(bool dir);
     void                MoveTypePos(bool dir);
     void                BackSpace(void);
@@ -48,16 +56,11 @@ public:
     void                UpdateBlink(void);
     void                ParseKey(int c);
     void                ParseInput(void);
-    bool                ProcessInput(const inputEvent_t *ev);
-    void                Tick(void);
-    void                Draw(void);
-
-    void                SetInputText(const char *string) { strcpy(typeStr, string); }
-    void                ResetInputText(void) { typeStr[0] = '\0'; typeStrPos = 0; }
-    const bool          IsActive(void) const { return (state == CON_STATE_DOWN); }
-    kexFont             *Font(void) { return font; }
-
-private:
+    void                HandlePaste(void);
+    
+    void                SetInputText(const char *string) { textBuffer = string; }
+    void                ResetInputText(void) { typeStrPos = 0; textBuffer.Clear(); }
+    
     char                scrollBackStr[CON_BUFFER_SIZE][CON_LINE_LENGTH];
     unsigned int        scrollBackPos;
     unsigned int        scrollBackLines;
@@ -65,7 +68,7 @@ private:
     int                 historyTop;
     int                 historyCur;
     char                history[CON_MAX_HISTORY][CON_INPUT_LENGTH];
-    char                typeStr[CON_INPUT_LENGTH];
+    kexStr              textBuffer;
     int                 typeStrPos;
     bool                bShiftDown;
     bool                bCapsDown;

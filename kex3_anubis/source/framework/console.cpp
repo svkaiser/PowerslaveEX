@@ -169,7 +169,7 @@ void kexConsole::OutputTextLine(rcolor color, const char *text)
 
 void kexConsole::AddToHistory(void)
 {
-    strcpy(history[historyTop], typeStr);
+    strncpy(history[historyTop], textBuffer, CON_INPUT_LENGTH);
     historyTop = (historyTop+1) % CON_MAX_HISTORY;
 }
 
@@ -181,7 +181,7 @@ void kexConsole::GetHistory(bool bPrev)
 {
     const char *hist;
 
-    if(bPrev)
+    if(!bPrev)
     {
         historyCur--;
         if(historyCur < 0)
@@ -201,7 +201,7 @@ void kexConsole::GetHistory(bool bPrev)
     ResetInputText();
     hist = history[historyCur];
 
-    strcpy(typeStr, hist);
+    textBuffer = hist;
     typeStrPos = strlen(hist);
 }
 
@@ -261,26 +261,18 @@ void kexConsole::LineScroll(bool dir)
 
 void kexConsole::BackSpace(void)
 {
-    if(strlen(typeStr) <= 0)
+    if(textBuffer.Length() <= 0 || typeStrPos <= 0)
     {
         return;
     }
 
-    char *trim = typeStr;
-    int len = strlen(trim);
-
-    typeStr[typeStrPos-1] = '\0';
-    if(typeStrPos < len)
-    {
-        strncat(typeStr, &trim[typeStrPos], len-typeStrPos);
-    }
-
     typeStrPos--;
-
     if(typeStrPos < 0)
     {
         typeStrPos = 0;
     }
+    
+    textBuffer.Remove(typeStrPos, typeStrPos+1);
 }
 
 //
@@ -289,16 +281,12 @@ void kexConsole::BackSpace(void)
 
 void kexConsole::DeleteChar(void)
 {
-    int tsLen = strlen(typeStr);
-
-    if(tsLen > 0 && typeStrPos < tsLen)
+    if(textBuffer.Length() <= 0 || typeStrPos >= textBuffer.Length())
     {
-        char *trim = typeStr;
-        int len = strlen(trim);
-
-        typeStr[typeStrPos] = '\0';
-        strncat(typeStr, &trim[typeStrPos+1], len-typeStrPos);
+        return;
     }
+    
+    textBuffer.Remove(typeStrPos, typeStrPos+1);
 }
 
 //
@@ -309,9 +297,9 @@ void kexConsole::MoveTypePos(bool dir)
 {
     if(dir)
     {
-        int len = strlen(typeStr);
+        int len = textBuffer.Length();
         typeStrPos++;
-        if(typeStrPos > len)
+        if(typeStrPos >= len)
         {
             typeStrPos = len;
         }
@@ -319,7 +307,7 @@ void kexConsole::MoveTypePos(bool dir)
     else
     {
         typeStrPos--;
-        if(typeStrPos < 0)
+        if(typeStrPos <= 0)
         {
             typeStrPos = 0;
         }
@@ -332,22 +320,7 @@ void kexConsole::MoveTypePos(bool dir)
 
 void kexConsole::CheckShift(const inputEvent_t *ev)
 {
-    if(!kex::cInput->IsShiftDown(ev->data1))
-    {
-        return;
-    }
-
-    switch(ev->type)
-    {
-    case ev_keydown:
-        bShiftDown = true;
-        break;
-    case ev_keyup:
-        bShiftDown = false;
-        break;
-    default:
-        break;
-    }
+    bShiftDown = kex::cInput->IsShiftDown(0);
 }
 
 //
@@ -385,6 +358,17 @@ void kexConsole::CheckStickyKeys(const inputEvent_t *ev)
 }
 
 //
+// kexConsole::HandlePaste
+//
+
+void kexConsole::HandlePaste(void)
+{
+    const char *buf = kex::cSystem->GetClipboardText();
+    textBuffer.Insert(buf, typeStrPos);
+    typeStrPos = textBuffer.Length();
+}
+
+//
 // kexConsole::ParseKey
 //
 
@@ -410,16 +394,29 @@ void kexConsole::ParseKey(int c)
     case KKEY_PAGEDOWN:
         LineScroll(0);
         return;
+    case KKEY_END:
+        typeStrPos = textBuffer.Length();
+        return;
+    case KKEY_HOME:
+        typeStrPos = 0;
+        return;
+    case KKEY_v:
+        if(kex::cInput->IsCtrlDown(0))
+        {
+            HandlePaste();
+            return;
+        }
+        break;
+    }
+    
+    if(typeStrPos+1 >= CON_INPUT_LENGTH)
+    {
+        return;
     }
 
     if(c >= KKEY_SPACE && c <= KKEY_z)
     {
         bool bCaps;
-
-        if(typeStrPos >= CON_INPUT_LENGTH)
-        {
-            return;
-        }
 
         bCaps = (bCapsDown && (c >= KKEY_a && c <= KKEY_z));
 
@@ -427,9 +424,9 @@ void kexConsole::ParseKey(int c)
         {
             c = shiftcode[c];
         }
-
-        typeStr[typeStrPos++] = c;
-        typeStr[typeStrPos] = '\0';
+        
+        textBuffer.Insert((const char*)&c, typeStrPos);
+        typeStrPos++;
     }
 }
 
@@ -479,17 +476,17 @@ void kexConsole::UpdateBlink(void)
 
 void kexConsole::ParseInput(void)
 {
-    if(typeStrPos <= 0 || strlen(typeStr) <= 0)
+    if(typeStrPos <= 0 || textBuffer.Length() <= 0)
     {
         return;
     }
 
-    OutputTextLine(RGBA(192, 192, 192, 255), typeStr);
-    kex::cCommands->Execute(typeStr);
+    OutputTextLine(RGBA(192, 192, 192, 255), textBuffer);
+    kex::cCommands->Execute(textBuffer);
     AddToHistory();
     ResetInputText();
 
-    historyCur = (historyTop - 1);
+    historyCur = 0;
 }
 
 //
@@ -547,8 +544,8 @@ bool kexConsole::ProcessInput(const inputEvent_t *ev)
                 GetHistory(true);
                 return true;
             case KKEY_TAB:
-                kex::cCvars->AutoComplete(typeStr);
-                kex::cCommands->AutoComplete(typeStr);
+                kex::cCvars->AutoComplete(textBuffer);
+                kex::cCommands->AutoComplete(textBuffer);
                 return true;
             default:
                 ParseKey(c);
@@ -565,6 +562,7 @@ bool kexConsole::ProcessInput(const inputEvent_t *ev)
             {
             case KKEY_BACKQUOTE:
                 state = CON_STATE_DOWN;
+                historyCur = 0;
                 return true;
             default:
                 break;
@@ -647,12 +645,17 @@ void kexConsole::Draw(void)
 
         if(bShowPrompt)
         {
-            font->DrawString("_", 16 + font->StringWidth(typeStr, 1.0f, typeStrPos), h-15, 1, false);
+            float pos = 16;
+            if(typeStrPos > 0)
+            {
+                pos += font->StringWidth(textBuffer, 1.0f, typeStrPos);
+            }
+            font->DrawString("_", pos, h-15, 1, false);
         }
 
-        if(strlen(typeStr) > 0)
+        if(textBuffer.Length() > 0)
         {
-            font->DrawString(typeStr, 16, h-15, 1, false);
+            font->DrawString(textBuffer, 16, h-15, 1, false);
         }
     }
 

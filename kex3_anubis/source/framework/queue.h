@@ -24,9 +24,16 @@ public:
     kexQueue(void);
     ~kexQueue(void);
     
-    void            Init(const unsigned int size);
-    void            Push(type *t);
-    type            *Pop(void);
+    void                Init(const unsigned int size);
+    void                Push(type *t);
+    type                *Pop(void);
+    
+    const unsigned int  Head(void) { return head; }
+    const unsigned int  Tail(void) { return tail; }
+    const unsigned int  Length(void) { return length; }
+    
+    type                &operator[](unsigned int index);
+    const type          &operator[](unsigned int index) const;
 
 protected:
     unsigned int    length;
@@ -110,6 +117,26 @@ type *kexQueue<type>::Pop(void)
     tail = (tail + 1) % length;
     
     return ret;
+}
+
+//
+// kexQueue::operator[]
+//
+template <class type>
+type &kexQueue<type>::operator[](unsigned int index)
+{
+    assert(index < length);
+    return data[index];
+}
+
+//
+// kexQueue::operator[]
+//
+template <class type>
+const type &kexQueue<type>::operator[](unsigned int index) const
+{
+    assert(index < length);
+    return data[index];
 }
 
 #endif
