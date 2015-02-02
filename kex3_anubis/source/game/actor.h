@@ -226,6 +226,7 @@ public:
     void                            UnlinkArea(void);
 
     kexVec3                         &Velocity(void) { return velocity; }
+    kexVec3                         &Movement(void) { return movement; }
     mapSector_t                     *Sector(void) { return sector; }
     void                            SetSector(mapSector_t *s) { sector = s; }
     mapActor_t                      *MapActor(void) { return mapActor; }
@@ -254,6 +255,7 @@ protected:
     float                           gravity;
     int16_t                         health;
     kexVec3                         velocity;
+    kexVec3                         movement;
     kexLinklist<kexActor>           link;
     kexBBox                         bounds;
     mapSector_t                     *sector;

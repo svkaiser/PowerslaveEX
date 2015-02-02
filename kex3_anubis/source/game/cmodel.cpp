@@ -418,7 +418,7 @@ bool kexCModel::CollideFace(mapFace_t *face)
                 return false;
             }
             
-            PushFromRadialBounds(P);
+            TraceFaceVertex(face, P);
             return false;
         }
         
@@ -434,7 +434,7 @@ bool kexCModel::CollideFace(mapFace_t *face)
                 return false;
             }
             
-            PushFromRadialBounds(P);
+            TraceFaceVertex(face, P);
             return false;
         }
     }
@@ -679,7 +679,7 @@ void kexCModel::CheckSurroundingSectors(void)
                 // determine the closest floor that can be stepped on
                 if(diff <= 0 && diff >= -moveActor->StepHeight())
                 {
-                    if(floorz > maxfloorz && moveActor->Velocity().z <= 0)
+                    if(floorz > maxfloorz && moveActor->Movement().z <= 0)
                     {
                         best = s;
                         maxfloorz = floorz;
@@ -805,7 +805,7 @@ void kexCModel::CollideActorWithWorld(void)
                 continue;
             }
             
-            moveDir.Project(contactNormals[j], 1.01f);
+            moveDir.Project(contactNormals[j], 1.0f);
             
             // try bumping against another plane
             for(int k = 0; k < moves; ++k)
@@ -816,7 +816,7 @@ void kexCModel::CollideActorWithWorld(void)
                 }
                 
                 // bump into second plane
-                moveDir.Project(contactNormals[k], 1.01f);
+                moveDir.Project(contactNormals[k], 1.0f);
                 
                 if(moveDir.Dot(contactNormals[j]) >= 0)
                 {
@@ -890,7 +890,7 @@ bool kexCModel::MoveActor(kexActor *actor)
     moveActor = actor;
     actorRadius = actor->Radius();
     actorHeight = actor->Height();
-    moveDir = actor->Velocity();
+    moveDir = actor->Movement();
     start = actor->Origin();
 
     // interact with world
@@ -904,7 +904,7 @@ bool kexCModel::MoveActor(kexActor *actor)
     CheckSurroundingSectors();
     
     actor->Origin() = end;
-    actor->Velocity() = moveDir;
+    actor->Movement() = moveDir;
     actor->LinkArea();
     return true;
 }

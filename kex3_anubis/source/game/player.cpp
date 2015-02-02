@@ -188,10 +188,12 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     }
 
     oldSector = sector;
+    movement = velocity;
     
     if(!kexGame::cLocal->CModel()->MoveActor(this))
     {
         velocity.Clear();
+        movement.Clear();
     }
 
     // handle smooth stepping when going down on slopes
@@ -258,17 +260,20 @@ void kexPuppet::FlyMove(kexPlayerCmd *cmd)
         velocity.x += right.x * PMOVE_SPEED;
         velocity.y += right.y * PMOVE_SPEED;
     }
+
+    movement = velocity;
     
     if(!(playerFlags & PF_NOCLIP))
     {
         if(!kexGame::cLocal->CModel()->MoveActor(this))
         {
             velocity.Clear();
+            movement.Clear();
         }
     }
     else
     {
-        origin += velocity;
+        origin += movement;
         LinkArea();
     }
 }
