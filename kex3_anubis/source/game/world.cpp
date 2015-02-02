@@ -537,110 +537,31 @@ bool kexWorld::SectorInPVS(const int secnum)
 }
 
 //
-// kexWorld::ProjectLeftRightSpans
-//
-
-void kexWorld::ProjectLeftRightSpans(const kexVec3 &p1, const kexVec3 &p2, float &s1, float &s2)
-{
-    kexVec2 c1p(p1.x, p1.y);
-    kexVec2 c2p(p2.x, p2.y);
-
-    if(c2p.CrossScalar(c1p) >= 0)
-    {
-        if(p1.y >= 0.999f)
-        {
-            s2 = (p1.x * 160 / p1.y + 160);
-        }
-
-        if(p2.y >= 0.999f)
-        {
-            s1 = (p2.x * 160 / p2.y + 160);
-        }
-    }
-    else
-    {
-        if(p1.y >= 0.999f)
-        {
-            s1 = (p1.x * 160 / p1.y + 160);
-        }
-
-        if(p2.y >= 0.999f)
-        {
-            s2 = (p2.x * 160 / p2.y + 160);
-        }
-    }
-}
-
-//
-// kexWorld::ProjectTopBottomSpans
-//
-
-void kexWorld::ProjectTopBottomSpans(const kexVec3 &p1, const kexVec3 &p2, float &s1, float &s2)
-{
-    kexVec2 c1p(p1.z, p1.y);
-    kexVec2 c2p(p2.z, p2.y);
-
-    if(c1p.CrossScalar(c2p) >= 0)
-    {
-        if(p2.y >= 0.999f)
-        {
-            s1 = 240 - (p2.z * 120 / p2.y + 120);
-        }
-
-        if(p1.y >= 0.999f)
-        {
-            s2 = 240 - (p1.z * 120 / p1.y + 120);
-        }
-    }
-    else
-    {
-        if(p2.y >= 0.999f)
-        {
-            s2 = 240 - (p2.z * 120 / p2.y + 120);
-        }
-
-        if(p1.y >= 0.999f)
-        {
-            s1 = 240 - (p1.z * 120 / p1.y + 120);
-        }
-    }
-}
-
-//
 // kexWorld::SetFaceSpans
 //
 
 bool kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
 {
-    kexMatrix mtx = view.RotationMatrix();
     float x1, x2, x3, x4, y1, y2, y3, y4;
     float fx1, fx2, fy1, fy2;
+    float w, h;
     
-    kexVec3 p1 = *face->BottomEdge()->v1 * mtx;
-    kexVec3 p2 = *face->BottomEdge()->v2 * mtx;
-    kexVec3 p3 = *face->TopEdge()->v2 * mtx;
-    kexVec3 p4 = *face->TopEdge()->v1 * mtx;
+    kexVec3 p1 = view.ProjectPoint(vertices[face->vertexStart+2].origin);
+    kexVec3 p2 = view.ProjectPoint(vertices[face->vertexStart+3].origin);
+    kexVec3 p3 = view.ProjectPoint(vertices[face->vertexStart+1].origin);
+    kexVec3 p4 = view.ProjectPoint(vertices[face->vertexStart+0].origin);
 
-    float ls[2], rs[2], ts[2], bs[2];
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
 
-    ls[0] = ls[1] = -kexMath::infinity;
-    ts[0] = ts[1] = -kexMath::infinity;
-    rs[0] = rs[1] = kexMath::infinity;
-    bs[0] = bs[1] = kexMath::infinity;
-
-    ProjectLeftRightSpans(p1, p2, ls[0], rs[0]);
-    ProjectLeftRightSpans(p3, p4, ls[1], rs[1]);
-    ProjectTopBottomSpans(p2, p4, ts[0], bs[0]);
-    ProjectTopBottomSpans(p1, p3, ts[1], bs[1]);
-
-    x1 = ls[0];
-    x2 = ls[1];
-    x3 = rs[1];
-    x4 = rs[0];
-    y1 = ts[0];
-    y2 = bs[0];
-    y3 = bs[1];
-    y4 = ts[1];
+    x1 = p4.x;
+    x2 = p2.x;
+    x3 = p1.x;
+    x4 = p3.x;
+    y1 = p2.y;
+    y2 = p4.y;
+    y3 = p3.y;
+    y4 = p1.y;
 
     fx1 = (x2 < x1) ? x2 : x1;
     if(x3 < fx1) fx1 = x3;
@@ -659,14 +580,29 @@ bool kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
     if(fy2 < y4) fy2 = y4;
 
     if(fx1 < 0) fx1 = 0;
-    if(fx2 > 320) fx2 = 320;
+    if(fx2 > w) fx2 = w;
     if(fy1 < 0) fy1 = 0;
-    if(fy2 > 240) fy2 = 240;
+    if(fy2 > h) fy2 = h;
 
     face->x1 = fx1;
     face->x2 = fx2;
     face->y1 = fy1;
     face->y2 = fy2;
+
+    if(p2.z <= 0 || p4.z <= 0)
+    {
+        face->x1 = 0;
+        face->y1 = 0;
+        face->y2 = h;
+    }
+
+    if(p1.z <= 0 || p3.z <= 0)
+    {
+        face->x2 = w;
+        face->y1 = 0;
+        face->y2 = h;
+    }
+
     return true;
 }
 
@@ -681,18 +617,23 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
     int start, end;
     kexVec3 origin;
     unsigned int scanCount;
+    float w, h;
 
     portalsPassed = 0;
     clipCount++;
 
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+
     for(unsigned int i = 0; i < numSectors; ++i)
     {
-        sectors[i].x1 = 320;
+        sectors[i].x1 = w;
         sectors[i].x2 = 0;
-        sectors[i].y1 = 240;
+        sectors[i].y1 = h;
         sectors[i].y2 = 0;
 
         sectors[i].floodCount = 0;
+        sectors[i].flags &= ~SF_CLIPPED;
     }
 
     origin = view.Origin();
@@ -708,9 +649,9 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
 
     sector->floodCount = 1;
     sector->x1 = 0;
-    sector->x2 = 320;
+    sector->x2 = w;
     sector->y1 = 0;
-    sector->y2 = 240;
+    sector->y2 = h;
 
     scanCount = 0;
     
@@ -734,7 +675,7 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
 
             s->clipCount = clipCount;
 
-            for(int i = start; i < end+1; ++i)
+            for(int i = start; i < end+3; ++i)
             {
                 if(faces[i].flags & FF_PORTAL)
                 {
@@ -750,9 +691,9 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
                     if(dist <= 96)
                     {
                         faces[i].x1 = 0;
-                        faces[i].x2 = 320;
+                        faces[i].x2 = w;
                         faces[i].y1 = 0;
-                        faces[i].y2 = 240;
+                        faces[i].y2 = h;
                     }
                 }
                 else
@@ -761,12 +702,17 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
                 }
             }
         }
+
+        if(!view.TestBoundingBox(s->bounds))
+        {
+            continue;
+        }
         
-        for(int i = start; i < end+1; ++i)
+        for(int i = start; i < end+3; ++i)
         {
             mapFace_t *face = &faces[i];
 
-            if(!view.Frustum().TestBoundingBox(face->bounds))
+            if(!view.TestBoundingBox(face->bounds))
             {
                 continue;
             }
@@ -781,23 +727,24 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
                 if(face->y2 < s->y1) continue;
                 if(face->y1 > s->y2) continue;
 
-                float a1 = face->x1;
-                float a3 = face->x2;
-                float t0 = face->y1;
-                float t1 = face->y2;
+                float tx1 = face->x1;
+                float tx2 = face->x2;
+                float ty1 = face->y1;
+                float ty2 = face->y2;
                 
-                if(a1 < s->x1) a1 = s->x1;
-                if(a3 > s->x2) a3 = s->x2;
-                if(t0 < s->y1) t0 = s->y1;
-                if(t1 > s->y2) t1 = s->y2;
+                if(tx1 < s->x1) tx1 = s->x1;
+                if(tx2 > s->x2) tx2 = s->x2;
+                if(ty1 < s->y1) ty1 = s->y1;
+                if(ty2 > s->y2) ty2 = s->y2;
 
-                if(a1 < next->x1) { next->x1 = a1; bInside = true; }
-                if(a3 > next->x2) { next->x2 = a3; bInside = true; }
-                if(t0 < next->y1) { next->y1 = t0; bInside = true; }
-                if(t1 > next->y2) { next->y2 = t1; bInside = true; }
+                if(tx1 < next->x1) { next->x1 = tx1; bInside = true; }
+                if(tx2 > next->x2) { next->x2 = tx2; bInside = true; }
+                if(ty1 < next->y1) { next->y1 = ty1; bInside = true; }
+                if(ty2 > next->y2) { next->y2 = ty2; bInside = true; }
 
                 if(!bInside)
                 {
+                    next->flags |= SF_CLIPPED;
                     continue;
                 }
                 

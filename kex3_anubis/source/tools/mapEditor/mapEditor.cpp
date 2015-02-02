@@ -239,7 +239,6 @@ void kexMapEditor::DrawXYGrid(const float spacing, const byte c)
     }
     
     kexVec3 pt1, pt2, pt3, pt4;
-    kexFrustum frustum = renderView.Frustum();
     
     kexRender::cBackend->SetDepthMask(0);
     kexRender::cTextures->whiteTexture->Bind();

@@ -17,7 +17,6 @@
 
 #include "renderMain.h"
 #include "game.h"
-#include "frustum.h"
 #include "renderView.h"
 
 kexCvar cvarFOV("r_fov", CVF_FLOAT|CVF_CONFIG, "74.0", "Field of view");
@@ -30,17 +29,12 @@ const float kexRenderView::Z_NEAR = 0.1f;
 
 kexVec3 kexRenderView::ProjectPoint(const kexVec3 &point, kexVec4 *projVector)
 {
-    kexVec4 proj, model;
+    kexVec4 proj;
     float w, h;
     float x, y, z;
     
-    model.Set(point.x, point.y, point.z, 0);
-    model *= modelView;
-    
-    proj = model;
-    proj *= projectionView;
-    
-    proj.ToVec3() *= model.w;
+    proj.Set(point.x, point.y, point.z, 0);
+    proj *= clipMatrix;
     
     if(proj.w < 0.1f)
     {
@@ -116,6 +110,8 @@ void kexRenderView::SetupMatrices(void)
     transform.SetTranslation(0, 0, -32);
     modelView = (transform * modelView);
     rotationMatrix = (transform * rotationMatrix);
+
+    clipMatrix = modelView * projectionView;
 }
 
 //
@@ -136,8 +132,8 @@ void kexRenderView::SetupFromPlayer(kexPlayer *player)
     kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
     
     SetupMatrices();
-    frustum.MakeClipPlanes(projectionView, modelView);
-    frustum.TransformPoints(origin, forward, fov, kex::cSystem->VideoRatio(), 0.1f, 8192);
+    MakeClipPlanes();
+    TransformPoints(origin, forward, fov, kex::cSystem->VideoRatio(), 0.1f, 8192);
 }
 
 //
@@ -149,5 +145,163 @@ void kexRenderView::SetupFromPlayer(kexPlayer *player)
 void kexRenderView::Setup(void)
 {
     SetupMatrices();
-    frustum.MakeClipPlanes(projectionView, modelView);
+    MakeClipPlanes();
+}
+
+//
+// kexRenderView::MakeClipPlanes
+//
+
+void kexRenderView::MakeClipPlanes(void)
+{
+    for(int i = 0; i < 4; i++)
+    {
+        p[FP_RIGHT][i]  = clipMatrix.vectors[i].w - clipMatrix.vectors[i].x;
+        p[FP_LEFT][i]   = clipMatrix.vectors[i].w + clipMatrix.vectors[i].x;
+        p[FP_TOP][i]    = clipMatrix.vectors[i].w - clipMatrix.vectors[i].y;
+        p[FP_BOTTOM][i] = clipMatrix.vectors[i].w + clipMatrix.vectors[i].y;
+        p[FP_FAR][i]    = clipMatrix.vectors[i].w - clipMatrix.vectors[i].z;
+        p[FP_NEAR][i]   = clipMatrix.vectors[i].w + clipMatrix.vectors[i].z;
+    }
+}
+
+//
+// kexRenderView::TransformPoints
+//
+// Transforms the corner points of the frustum
+//
+
+void kexRenderView::TransformPoints(const kexVec3 &center, const kexVec3 &dir,
+                                 const float fov, const float aspect,
+                                 const float _near, const float _far)
+{
+    kexVec3 right = dir.Cross(kexVec3::vecUp);
+    right.Normalize();
+
+    kexVec3 up = right.Cross(dir);
+    up.Normalize();
+
+    const float fovAngle    = kexMath::Deg2Rad(fov) + 0.2f;
+
+    const kexVec3 vFar      = center + dir * _far;
+    const kexVec3 vNear     = center + dir * _near;
+
+    const float nearHeight  = kexMath::Tan(fovAngle / 2.0f) * _near;
+    const float nearWidth   = nearHeight * aspect;
+    const float farHeight   = kexMath::Tan(fovAngle / 2.0f) * _far;
+    const float farWidth    = farHeight * aspect;
+
+    points[0] = vNear - up * nearHeight - right * nearWidth;
+    points[1] = vNear + up * nearHeight - right * nearWidth;
+    points[2] = vNear + up * nearHeight + right * nearWidth;
+    points[3] = vNear - up * nearHeight + right * nearWidth;
+
+    points[4] = vFar - up * farHeight - right * farWidth;
+    points[5] = vFar + up * farHeight - right * farWidth;
+    points[6] = vFar + up * farHeight + right * farWidth;
+    points[7] = vFar - up * farHeight + right * farWidth;
+}
+
+//
+// kexRenderView::TestBoundingBox
+//
+
+bool kexRenderView::TestBoundingBox(const kexBBox &bbox)
+{
+    float d;
+    for(int i = 0; i < NUMFRUSTUMPLANES; i++)
+    {
+        d = p[i].a * bbox.min.x + p[i].b * bbox.min.y + p[i].c * bbox.min.z + p[i].d;
+        if(!FLOATSIGNBIT(d))
+        {
+            continue;
+        }
+        d = p[i].a * bbox.max.x + p[i].b * bbox.min.y + p[i].c * bbox.min.z + p[i].d;
+        if(!FLOATSIGNBIT(d))
+        {
+            continue;
+        }
+        d = p[i].a * bbox.min.x + p[i].b * bbox.max.y + p[i].c * bbox.min.z + p[i].d;
+        if(!FLOATSIGNBIT(d))
+        {
+            continue;
+        }
+        d = p[i].a * bbox.max.x + p[i].b * bbox.max.y + p[i].c * bbox.min.z + p[i].d;
+        if(!FLOATSIGNBIT(d))
+        {
+            continue;
+        }
+        d = p[i].a * bbox.min.x + p[i].b * bbox.min.y + p[i].c * bbox.max.z + p[i].d;
+        if(!FLOATSIGNBIT(d))
+        {
+            continue;
+        }
+        d = p[i].a * bbox.max.x + p[i].b * bbox.min.y + p[i].c * bbox.max.z + p[i].d;
+        if(!FLOATSIGNBIT(d))
+        {
+            continue;
+        }
+        d = p[i].a * bbox.min.x + p[i].b * bbox.max.y + p[i].c * bbox.max.z + p[i].d;
+        if(!FLOATSIGNBIT(d))
+        {
+            continue;
+        }
+        d = p[i].a * bbox.max.x + p[i].b * bbox.max.y + p[i].c * bbox.max.z + p[i].d;
+        if(!FLOATSIGNBIT(d))
+        {
+            continue;
+        }
+
+        return false;
+    }
+
+    return true;
+}
+
+//
+// kexRenderView::TestSphere
+//
+
+bool kexRenderView::TestSphere(const kexVec3 &org, const float radius)
+{
+    for(int i = 0; i < NUMFRUSTUMPLANES; i++)
+    {
+        if(p[i].Distance(org) + p[i].d <= -radius)
+        {
+            return false;
+        }
+
+    }
+    return true;
+}
+
+//
+// kexRenderView::SphereBits
+//
+
+byte kexRenderView::SphereBits(const kexVec3 &org, const float radius)
+{
+    byte bits = 0x3f;
+    
+    for(int i = 0; i < NUMFRUSTUMPLANES; i++)
+    {
+        if(p[i].Distance(org) + p[i].d <= -radius)
+        {
+            bits &= ~(1 << i);
+        }
+        
+    }
+    
+    return bits;
+}
+
+//
+// kexRenderView::BoxDistance
+//
+
+bool kexRenderView::BoxDistance(const kexBBox &box, const float distance)
+{
+    kexPlane nearPlane = NearPlane();
+
+    return (nearPlane.Distance(box.Center()) + nearPlane.d) > distance;
 }

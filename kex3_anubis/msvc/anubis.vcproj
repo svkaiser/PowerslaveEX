@@ -309,10 +309,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\source\renderer\frustum.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\source\renderer\image.cpp"
 					>
 				</File>
@@ -608,10 +604,6 @@
 				</File>
 				<File
 					RelativePath="..\source\renderer\fbo.h"
-					>
-				</File>
-				<File
-					RelativePath="..\source\renderer\frustum.h"
 					>
 				</File>
 				<File

@@ -126,10 +126,13 @@ void kexPlayLoop::Draw(void)
             
             sector->floodCount = 0;
 
-            if(!renderView.Frustum().TestBoundingBox(sector->bounds))
+            if(!renderView.TestBoundingBox(sector->bounds))
             {
                 continue;
             }
+
+            kexRender::cBackend->SetScissorRect((int)sector->x1, (int)sector->y1,
+                (int)sector->x2, (int)sector->y2);
 
             if(sector->flags & SF_DEBUG)
             {
@@ -167,7 +170,7 @@ void kexPlayLoop::Draw(void)
                     continue;
                 }
                 
-                if(!renderView.Frustum().TestBoundingBox(face->bounds))
+                if(!renderView.TestBoundingBox(face->bounds))
                 {
                     continue;
                 }
@@ -282,6 +285,8 @@ void kexPlayLoop::Draw(void)
             kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
             kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
             
+            kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), kex::cSystem->VideoHeight() - clipY);
+
             kexCpuVertList *vl = kexRender::cVertList;
 
             if(anim)
@@ -341,8 +346,8 @@ void kexPlayLoop::Draw(void)
         vl->AddQuad(160, 216, 0, 96, 24, 0.25f, 0.375f, 0.625f, 0.75f, 255, 255, 255, 255);
         vl->AddQuad(256, 192, 0, 64, 64, 0.625f, 0, 0.875f, 1, 255, 255, 255, 255);
         vl->DrawElements();
-
-        kexRender::cBackend->SetOrtho(320, 240);
+#if 0
+        kexRender::cBackend->SetOrtho();
         kexRender::cTextures->whiteTexture->Bind();
         vl->BindDrawPointers();
 
@@ -350,17 +355,28 @@ void kexPlayLoop::Draw(void)
         {
             mapSector_t *f = &world->Sectors()[i];
 
-            if(!renderView.Frustum().TestBoundingBox(f->bounds))
+            if(!renderView.TestBoundingBox(f->bounds))
             {
                 continue;
             }
 
-            vl->AddLine(f->x1, f->y1, 0, f->x2, f->y1, 0, 255, 0, 0, 255);
-            vl->AddLine(f->x1, f->y2, 0, f->x2, f->y2, 0, 255, 0, 0, 255);
-            vl->AddLine(f->x1, f->y1, 0, f->x1, f->y2, 0, 255, 0, 0, 255);
-            vl->AddLine(f->x2, f->y1, 0, f->x2, f->y2, 0, 255, 0, 0, 255);
+            if(f->flags & SF_CLIPPED)
+            {
+                vl->AddLine(f->x1, f->y1, 0, f->x2, f->y1, 0, 255, 0, 255, 255);
+                vl->AddLine(f->x1, f->y2, 0, f->x2, f->y2, 0, 255, 0, 255, 255);
+                vl->AddLine(f->x1, f->y1, 0, f->x1, f->y2, 0, 255, 0, 255, 255);
+                vl->AddLine(f->x2, f->y1, 0, f->x2, f->y2, 0, 255, 0, 255, 255);
+            }
+            else
+            {
+                vl->AddLine(f->x1, f->y1, 0, f->x2, f->y1, 0, 255, 0, 0, 255);
+                vl->AddLine(f->x1, f->y2, 0, f->x2, f->y2, 0, 255, 0, 0, 255);
+                vl->AddLine(f->x1, f->y1, 0, f->x1, f->y2, 0, 255, 0, 0, 255);
+                vl->AddLine(f->x2, f->y1, 0, f->x2, f->y2, 0, 255, 0, 0, 255);
+            }
             vl->DrawLineElements();
         }
+#endif
     }
 }
 

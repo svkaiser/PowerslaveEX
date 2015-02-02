@@ -31,6 +31,7 @@ typedef struct
 typedef enum
 {
     SF_DEBUG            = BIT(0),
+    SF_CLIPPED          = BIT(1),
     SF_WATER            = BIT(8)
 } sectorFlags_t;
 
@@ -196,8 +197,6 @@ private:
     void                    BuildPortals(unsigned int count);
     void                    MarkSectorInPVS(const int secnum);
     bool                    SectorInPVS(const int secnum);
-    void                    ProjectLeftRightSpans(const kexVec3 &p1, const kexVec3 &p2, float &s1, float &s2);
-    void                    ProjectTopBottomSpans(const kexVec3 &p1, const kexVec3 &p2, float &s1, float &s2);
     bool                    SetFaceSpans(kexRenderView &view, mapFace_t *face);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);
