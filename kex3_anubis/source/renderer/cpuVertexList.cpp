@@ -103,6 +103,15 @@ void kexCpuVertList::AddVertex(float x, float y, float z, float s, float t,
 // kexCpuVertList::AddVertex
 //
 
+void kexCpuVertList::AddVertex(float x, float y, float z, float s, float t)
+{
+    AddVertex(x, y, z, s, t, 255, 255, 255, 255);
+}
+
+//
+// kexCpuVertList::AddVertex
+//
+
 void kexCpuVertList::AddVertex(float x, float y, float z, float s, float t, byte *rgba)
 {
     AddVertex(x, y, z, s, t, rgba[0], rgba[1], rgba[2], rgba[3]);
