@@ -285,7 +285,7 @@ void kexPlayLoop::Draw(void)
             }
         }
 
-        if(0)
+        if(1)
         {
             static spriteAnim_t *sprTest = NULL;
 
