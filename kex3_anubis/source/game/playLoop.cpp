@@ -105,6 +105,150 @@ void kexPlayLoop::Draw(void)
     int clipY = kex::cSystem->VideoHeight() - (int)((float)kex::cSystem->VideoHeight() / (240.0f / 24.0f));
     kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
     
+    kexTexture *skyTexture = kexRender::cTextures->Cache("textures/skies/sky_sunny.png",
+                                                         TC_REPEAT, TF_NEAREST);
+    skyTexture->Bind();
+    //kexRender::cBackend->SetPolyMode(GLPOLY_LINE);
+    vl->BindDrawPointers();
+    {
+        float s, c;
+        float x = renderView.Origin().x;
+        float y = renderView.Origin().y;
+        float z = renderView.Origin().z;
+        int t = 0;
+        int u = 0;
+        float radius = 5120;
+        float height = 4096;
+        float px[10], py[10], pz[10];
+        float lx[10], ly[10], lz[10];
+        int tris = 0;
+        float ang = 0;
+        
+        for(int i = 0; i < 17; i++)
+        {
+            float z1;
+            float ang2;
+            
+            s = kexMath::Sin(kexMath::Deg2Rad(ang));
+            c = kexMath::Cos(kexMath::Deg2Rad(ang));
+            
+            z1 = z + height * c;
+            ang += 22.5f;
+            
+            if(!(i % 8))
+            {
+                px[0] = x;
+                py[0] = y + radius * s;
+                pz[0] = z1;
+                
+                if(i != 0)
+                {
+                    for(int j = 0; j < 8; j++)
+                    {
+                        vl->AddVertex(px[0], py[0], pz[0], 0, 0);
+                        vl->AddVertex(lx[j], ly[j], lz[j], 0, 0);
+                        vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], 0, 0);
+                        if(i == 8)
+                        {
+                            vl->AddTriangle(tris+2, tris+1, tris+0);
+                            tris += 3;
+                        }
+                        else
+                        {
+                            vl->AddTriangle(tris+0, tris+1, tris+2);
+                            tris += 3;
+                        }
+                    }
+                }
+                
+                continue;
+            }
+            
+            ang2 = 45 + cvarTest2.GetFloat();
+            
+            for(int j = 0; j < 9; j++)
+            {
+                float x2, y2, z2;
+                
+                x2 = x + kexMath::Sin(kexMath::Deg2Rad(ang2)) * radius * s;
+                y2 = y + kexMath::Cos(kexMath::Deg2Rad(ang2)) * radius * s;
+                z2 = z1;
+                
+                ang2 += 22.5f;
+                
+                px[1+j] = x2;
+                py[1+j] = y2;
+                pz[1+j] = z2;
+            }
+            
+            if(i == 1 || i == 9)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    vl->AddVertex(px[0], py[0], pz[0], 0, 1);
+                    vl->AddVertex(px[1+j], py[1+j], pz[1+j], 0, 1);
+                    vl->AddVertex(px[2+j], py[2+j], pz[2+j], 0, 1);
+                    
+                    if(i >= 9)
+                    {
+                        vl->AddTriangle(tris+2, tris+1, tris+0);
+                        tris += 3;
+                    }
+                    else
+                    {
+                        vl->AddTriangle(tris+0, tris+1, tris+2);
+                        tris += 3;
+                    }
+                }
+            }
+            else
+            {
+                float tv1 = 0.16666666666667f * (float)t;
+                float tv2 = 0.16666666666667f * ((float)t+1);
+                
+                for(int j = 0; j < 8; j++)
+                {
+                    float tu1 = 0.25f * (float)u;
+                    float tu2 = 0.25f * ((float)u+1);
+                    
+                    if(i >= 9)
+                    {
+                        vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], tu2, 1.0f - tv1);
+                        vl->AddVertex(lx[j], ly[j], lz[j], tu1, 1.0f - tv1);
+                        vl->AddVertex(px[2+j], py[2+j], pz[2+j], tu2, 1.0f - tv2);
+                        vl->AddVertex(px[1+j], py[1+j], pz[1+j], tu1, 1.0f - tv2);
+                    }
+                    else
+                    {
+                        vl->AddVertex(lx[j], ly[j], lz[j], tu1, tv1);
+                        vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], tu2, tv1);
+                        vl->AddVertex(px[1+j], py[1+j], pz[1+j], tu1, tv2);
+                        vl->AddVertex(px[2+j], py[2+j], pz[2+j], tu2, tv2);
+                    }
+                    
+                    vl->AddTriangle(tris+0, tris+2, tris+1);
+                    vl->AddTriangle(tris+1, tris+2, tris+3);
+                    tris += 4;
+                    
+                    u++;
+                }
+                
+                t = (t + 1) % 6;
+            }
+            
+            for(int j = 0; j < 9; j++)
+            {
+                lx[j] = px[1+j];
+                ly[j] = py[1+j];
+                lz[j] = pz[1+j];
+            }
+        }
+        
+        vl->DrawElements();
+    }
+    //kexRender::cBackend->SetPolyMode(GLPOLY_FILL);
+    kexRender::cBackend->ClearBuffer(GLCB_DEPTH);
+    
     if(world->MapLoaded())
     {
         unsigned int max = cvarTest.GetInt();
@@ -188,7 +332,7 @@ void kexPlayLoop::Draw(void)
                     continue;
                 }
 
-                if(1 && j <= end)
+                if(0 && j <= end)
                 {
                     kexRender::cUtils->DrawLine(*face->BottomEdge()->v1, *face->BottomEdge()->v2, 0, 255, 0);
                     kexRender::cUtils->DrawLine(*face->TopEdge()->v1, *face->TopEdge()->v2, 0, 255, 0);
