@@ -114,11 +114,11 @@ void kexPlayLoop::Draw(void)
         float s, c;
         float x = renderView.Origin().x;
         float y = renderView.Origin().y;
-        float z = renderView.Origin().z;
+        float z = renderView.Origin().z + 1280;
         int t = 0;
         int u = 0;
-        float radius = 5120;
-        float height = 4096;
+        float radius = 8192;
+        float height = 6144;
         float px[10], py[10], pz[10];
         float lx[10], ly[10], lz[10];
         int tris = 0;
@@ -164,7 +164,7 @@ void kexPlayLoop::Draw(void)
                 continue;
             }
             
-            ang2 = 45 + cvarTest2.GetFloat();
+            ang2 = 45;
             
             for(int j = 0; j < 9; j++)
             {
@@ -185,9 +185,9 @@ void kexPlayLoop::Draw(void)
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    vl->AddVertex(px[0], py[0], pz[0], 0, 1);
-                    vl->AddVertex(px[1+j], py[1+j], pz[1+j], 0, 1);
-                    vl->AddVertex(px[2+j], py[2+j], pz[2+j], 0, 1);
+                    vl->AddVertex(px[0], py[0], pz[0], 0, 0);
+                    vl->AddVertex(px[1+j], py[1+j], pz[1+j], 0, 0);
+                    vl->AddVertex(px[2+j], py[2+j], pz[2+j], 0, 0);
                     
                     if(i >= 9)
                     {
@@ -213,17 +213,17 @@ void kexPlayLoop::Draw(void)
                     
                     if(i >= 9)
                     {
-                        vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], tu2, 1.0f - tv1);
-                        vl->AddVertex(lx[j], ly[j], lz[j], tu1, 1.0f - tv1);
-                        vl->AddVertex(px[2+j], py[2+j], pz[2+j], tu2, 1.0f - tv2);
-                        vl->AddVertex(px[1+j], py[1+j], pz[1+j], tu1, 1.0f - tv2);
+                        vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], 1.0f - tu2, 1.0f - tv1);
+                        vl->AddVertex(lx[j], ly[j], lz[j], 1.0f - tu1, 1.0f - tv1);
+                        vl->AddVertex(px[2+j], py[2+j], pz[2+j], 1.0f - tu2, 1.0f - tv2);
+                        vl->AddVertex(px[1+j], py[1+j], pz[1+j], 1.0f - tu1, 1.0f - tv2);
                     }
                     else
                     {
-                        vl->AddVertex(lx[j], ly[j], lz[j], tu1, tv1);
-                        vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], tu2, tv1);
-                        vl->AddVertex(px[1+j], py[1+j], pz[1+j], tu1, tv2);
-                        vl->AddVertex(px[2+j], py[2+j], pz[2+j], tu2, tv2);
+                        vl->AddVertex(lx[j], ly[j], lz[j], 1.0f - tu1, tv1);
+                        vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], 1.0f - tu2, tv1);
+                        vl->AddVertex(px[1+j], py[1+j], pz[1+j], 1.0f - tu1, tv2);
+                        vl->AddVertex(px[2+j], py[2+j], pz[2+j], 1.0f - tu2, tv2);
                     }
                     
                     vl->AddTriangle(tris+0, tris+2, tris+1);
@@ -288,7 +288,7 @@ void kexPlayLoop::Draw(void)
 
             if(sector->flags & SF_DEBUG)
             {
-                kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 128, 0);
+                //kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 128, 0);
                 sector->flags &= ~SF_DEBUG;
                 inSector = true;
             }
@@ -548,7 +548,7 @@ void kexPlayLoop::Draw(void)
                     float y = (float)spriteSet->y;
                     float w = (float)info->atlas.w;
                     float h = (float)info->atlas.h;
-                    byte c = 0xff;
+                    word c = 0xff;
 
                     float u1, u2, v1, v2;
                     
@@ -566,10 +566,15 @@ void kexPlayLoop::Draw(void)
 
                     if(!(frame->flags & SFF_FULLBRIGHT))
                     {
-                        c = (byte)(p->Actor()->Sector()->lightLevel << 1);
+                        c = (p->Actor()->Sector()->lightLevel << 1);
+
+                        if(c > 255)
+                        {
+                            c = 255;
+                        }
                     }
 
-                    vl->AddQuad(x, y + 8, 0, w, h, u1, v1, u2, v2, c, c, c, 255);
+                    vl->AddQuad(x, y + 8, 0, w, h, u1, v1, u2, v2, (byte)c, (byte)c, (byte)c, 255);
                     vl->DrawElements();
                 }
             }

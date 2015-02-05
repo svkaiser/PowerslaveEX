@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\lua\src\;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\lua\src\;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -460,142 +460,6 @@
 					RelativePath="..\source\game\world.cpp"
 					>
 				</File>
-				<Filter
-					Name="lua"
-					>
-					<File
-						RelativePath="..\lua\src\lapi.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lauxlib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lbaselib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lbitlib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lcode.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lcorolib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lctype.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ldblib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ldebug.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ldo.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ldump.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lfunc.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lgc.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\linit.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\liolib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\llex.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lmathlib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lmem.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\loadlib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lobject.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lopcodes.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\loslib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lparser.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lstate.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lstring.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lstrlib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ltable.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ltablib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ltm.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lundump.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lutf8lib.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lvm.c"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lzio.c"
-						>
-					</File>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="tools"
@@ -878,110 +742,6 @@
 					RelativePath="..\source\game\world.h"
 					>
 				</File>
-				<Filter
-					Name="lua"
-					>
-					<File
-						RelativePath="..\lua\src\lapi.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lauxlib.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lcode.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lctype.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ldebug.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ldo.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lfunc.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lgc.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\llex.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\llimits.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lmem.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lobject.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lopcodes.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lparser.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lprefix.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lstate.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lstring.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ltable.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\ltm.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lua.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\luaconf.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lualib.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lundump.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lvm.h"
-						>
-					</File>
-					<File
-						RelativePath="..\lua\src\lzio.h"
-						>
-					</File>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="tools"
