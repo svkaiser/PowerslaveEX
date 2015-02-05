@@ -30,10 +30,21 @@ public:
 
     void                    SetWorld(kexWorld *wld) { world = wld; }
     void                    SetView(kexRenderView *v) { view = v; }
+    
+    static bool             bPrintStats;
 
 private:
+    void                    DrawSky(void);
+    void                    DrawSector(mapSector_t *sector);
+    void                    DrawFace(mapSector_t *sector, int faceID);
+    void                    DrawPolygon(mapFace_t *face, mapPoly_t *poly);
+    void                    PrintStats(void);
+    
     kexWorld                *world;
     kexRenderView           *view;
+    float                   clipY;
+    int                     vertCount;
+    int                     triCount;
 };
 
 #endif

@@ -152,6 +152,7 @@ public:
     void                            SetReadBuffer(const GLenum state);
     void                            LoadProjectionMatrix(kexMatrix &matrix);
     void                            LoadModelViewMatrix(kexMatrix &matrix);
+    void                            PrintStats(void);
 
     const int                       MaxTextureUnits(void) const { return maxTextureUnits; }
     const int                       MaxTextureSize(void) const { return maxTextureSize; }

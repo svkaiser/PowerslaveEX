@@ -295,6 +295,9 @@ void kexRenderBackend::LoadModelViewMatrix(kexMatrix &matrix)
 
 void kexRenderBackend::SwapBuffers(void)
 {
+    PrintStats();
+    kexRender::cUtils->ClearDebugLine();
+    
     if(cvarRenderFinish.GetBool())
     {
         dglFinish();
@@ -932,4 +935,20 @@ void kexRenderBackend::ScreenShot(void)
     file.Close();
 
     kex::cSystem->Printf("Saved Screenshot %s\n", filePath.c_str());
+}
+
+//
+// kexRenderBackend::PrintStats
+//
+
+void kexRenderBackend::PrintStats(void)
+{
+    if(!bPrintStats)
+    {
+        return;
+    }
+    
+    kexRenderUtils::PrintStatsText("state changes", ": %i", glState.numStateChanges);
+    kexRenderUtils::PrintStatsText("texture binds", ": %i", glState.numTextureBinds);
+    kexRenderUtils::AddDebugLineSpacing();
 }

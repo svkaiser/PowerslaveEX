@@ -394,6 +394,13 @@ void kexRenderUtils::PrintStatsText(const char *title, const char *s, ...)
     byte *cb;
 
     cb = (byte*)&c;
+    
+    dglMatrixMode(GL_PROJECTION);
+    dglPushMatrix();
+    dglMatrixMode(GL_MODELVIEW);
+    dglPushMatrix();
+    
+    kexRender::cBackend->SetOrtho();
 
     if(title != NULL)
     {
@@ -410,6 +417,11 @@ void kexRenderUtils::PrintStatsText(const char *title, const char *s, ...)
         c = RGBA(255, 255, 0, 255);
         kex::cConsole->Font()->DrawString(vastr, 192, debugLineNum, 1, false, cb, cb);
     }
+    
+    dglMatrixMode(GL_PROJECTION);
+    dglPopMatrix();
+    dglMatrixMode(GL_MODELVIEW);
+    dglPopMatrix();
 
     debugLineNum += 16.0f;
 }

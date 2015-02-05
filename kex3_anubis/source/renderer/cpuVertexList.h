@@ -54,6 +54,9 @@ public:
     void                    AddQuad(float x, float y, float w, float h);
     void                    DrawElements(const bool bClearCount = true);
     void                    DrawLineElements(void);
+    
+    const int               VertexCount(void) const { return vertexCount; }
+    const int               IndiceCount(void) const { return indiceCount; }
 
 private:
     word                    indiceCount;
