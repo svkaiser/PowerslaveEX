@@ -174,6 +174,8 @@ void kexGameLocal::Init(void)
     
     kex::cSystem->ReadConfigFile("config.cfg");
     kex::cPakFiles->LoadZipFile("game.kpf");
+    
+    kexGame::cScriptManager->Init();
 }
 
 //

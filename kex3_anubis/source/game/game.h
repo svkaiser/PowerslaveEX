@@ -229,10 +229,13 @@ private:
 //
 //-----------------------------------------------------------------------------
 
+#include "scriptSystem.h"
+
 class kexGame
 {
 public:
-    static kexGameLocal     *cLocal;
+    static kexGameLocal         *cLocal;
+    static kexScriptManager     *cScriptManager;
 };
 
 #endif

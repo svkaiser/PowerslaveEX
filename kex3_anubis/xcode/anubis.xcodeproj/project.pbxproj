@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
+		41B776571A83E850008C8F23 /* scriptSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B776551A83E850008C8F23 /* scriptSystem.cpp */; };
+		41B776581A83E8D3008C8F23 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41B7764D1A83E81C008C8F23 /* libangelscript.a */; };
+		41B7765C1A83EA5E008C8F23 /* systemObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B7765A1A83EA5E008C8F23 /* systemObject.cpp */; };
+		41B7765F1A83EB0A008C8F23 /* refObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B7765D1A83EB0A008C8F23 /* refObject.cpp */; };
+		41B776621A83EB74008C8F23 /* stringObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B776601A83EB74008C8F23 /* stringObject.cpp */; };
+		41B776691A83EF3D008C8F23 /* mathObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B776631A83EF3D008C8F23 /* mathObject.cpp */; };
 		41B817371A6D6EF500151622 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B817331A6D6EF500151622 /* sprite.cpp */; };
 		41B817381A6D6EF500151622 /* spriteAnim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B817351A6D6EF500151622 /* spriteAnim.cpp */; };
 		41B8F3E51A72FEE10014CDAB /* mapEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B8F3E31A72FEE10014CDAB /* mapEditor.cpp */; };
@@ -82,6 +88,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		41B7764C1A83E81C008C8F23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41B776471A83E81C008C8F23 /* angelscript.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = "angelscript OSX";
+		};
+		41B7764E1A83E81C008C8F23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41B776471A83E81C008C8F23 /* angelscript.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E91FFE31823DA0D00D59009;
+			remoteInfo = "angelscript iOS";
+		};
+		41B776521A83E828008C8F23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41B776471A83E81C008C8F23 /* angelscript.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = "angelscript OSX";
+		};
 		41E2CE941A51D3E300FC28DC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 41E2CE8E1A51D3E300FC28DC /* libpng.xcodeproj */;
@@ -130,6 +157,17 @@
 		41B3A5481A5DEE84006DCCB9 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
 		41B3A54A1A5DEEBC006DCCB9 /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = console.cpp; sourceTree = "<group>"; };
 		41B3A54B1A5DEEBC006DCCB9 /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = console.h; sourceTree = "<group>"; };
+		41B776471A83E81C008C8F23 /* angelscript.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = angelscript.xcodeproj; path = ../angelscript/angelscript/projects/xcode/angelscript.xcodeproj; sourceTree = "<group>"; };
+		41B776551A83E850008C8F23 /* scriptSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptSystem.cpp; path = ../../source/script/scriptSystem.cpp; sourceTree = "<group>"; };
+		41B776561A83E850008C8F23 /* scriptSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scriptSystem.h; path = ../../source/script/scriptSystem.h; sourceTree = "<group>"; };
+		41B7765A1A83EA5E008C8F23 /* systemObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = systemObject.cpp; path = ../../source/script/objects/systemObject.cpp; sourceTree = "<group>"; };
+		41B7765B1A83EA5E008C8F23 /* systemObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = systemObject.h; path = ../../source/script/objects/systemObject.h; sourceTree = "<group>"; };
+		41B7765D1A83EB0A008C8F23 /* refObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = refObject.cpp; path = ../../source/script/objects/refObject.cpp; sourceTree = "<group>"; };
+		41B7765E1A83EB0A008C8F23 /* refObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = refObject.h; path = ../../source/script/objects/refObject.h; sourceTree = "<group>"; };
+		41B776601A83EB74008C8F23 /* stringObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stringObject.cpp; path = ../../source/script/objects/stringObject.cpp; sourceTree = "<group>"; };
+		41B776611A83EB74008C8F23 /* stringObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringObject.h; path = ../../source/script/objects/stringObject.h; sourceTree = "<group>"; };
+		41B776631A83EF3D008C8F23 /* mathObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mathObject.cpp; path = ../../source/script/objects/mathObject.cpp; sourceTree = "<group>"; };
+		41B776641A83EF3D008C8F23 /* mathObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mathObject.h; path = ../../source/script/objects/mathObject.h; sourceTree = "<group>"; };
 		41B817331A6D6EF500151622 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sprite.cpp; path = ../../source/game/sprite.cpp; sourceTree = "<group>"; };
 		41B817341A6D6EF500151622 /* sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sprite.h; path = ../../source/game/sprite.h; sourceTree = "<group>"; };
 		41B817351A6D6EF500151622 /* spriteAnim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spriteAnim.cpp; path = ../../source/game/spriteAnim.cpp; sourceTree = "<group>"; };
@@ -270,6 +308,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41B776581A83E8D3008C8F23 /* libangelscript.a in Frameworks */,
 				41BB267F1A547A9A00311383 /* OpenAL.framework in Frameworks */,
 				41E2CEA11A51D5CC00FC28DC /* libpng.a in Frameworks */,
 				41E2CE9F1A51D57700FC28DC /* OpenGL.framework in Frameworks */,
@@ -282,11 +321,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		415BF2161A813456009E698A /* script */ = {
+		41B776481A83E81C008C8F23 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				41B7764D1A83E81C008C8F23 /* libangelscript.a */,
+				41B7764F1A83E81C008C8F23 /* libangelscript.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		41B776541A83E83C008C8F23 /* script */ = {
+			isa = PBXGroup;
+			children = (
+				41B776551A83E850008C8F23 /* scriptSystem.cpp */,
+				41B776561A83E850008C8F23 /* scriptSystem.h */,
+				41B776591A83EA4E008C8F23 /* objects */,
 			);
 			name = script;
+			sourceTree = "<group>";
+		};
+		41B776591A83EA4E008C8F23 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				41B776631A83EF3D008C8F23 /* mathObject.cpp */,
+				41B7765D1A83EB0A008C8F23 /* refObject.cpp */,
+				41B776601A83EB74008C8F23 /* stringObject.cpp */,
+				41B7765A1A83EA5E008C8F23 /* systemObject.cpp */,
+				41B776641A83EF3D008C8F23 /* mathObject.h */,
+				41B7765E1A83EB0A008C8F23 /* refObject.h */,
+				41B776611A83EB74008C8F23 /* stringObject.h */,
+				41B7765B1A83EA5E008C8F23 /* systemObject.h */,
+			);
+			name = objects;
 			sourceTree = "<group>";
 		};
 		41B8F3E01A72FED50014CDAB /* mapEditor */ = {
@@ -430,7 +496,7 @@
 				41E2CE581A51D39B00FC28DC /* math */,
 				41E2CE631A51D39B00FC28DC /* opengl */,
 				41E2CE671A51D39B00FC28DC /* renderer */,
-				415BF2161A813456009E698A /* script */,
+				41B776541A83E83C008C8F23 /* script */,
 				41E2CEA41A51D8D400FC28DC /* system */,
 				41B96A9A1A69798B004397E6 /* tools */,
 			);
@@ -551,6 +617,7 @@
 		41E2CEA01A51D59000FC28DC /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				41B776471A83E81C008C8F23 /* angelscript.xcodeproj */,
 				41E2CE8E1A51D3E300FC28DC /* libpng.xcodeproj */,
 			);
 			name = Dependencies;
@@ -592,6 +659,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				41B776531A83E828008C8F23 /* PBXTargetDependency */,
 				41E2CE9B1A51D3FB00FC28DC /* PBXTargetDependency */,
 			);
 			name = anubis;
@@ -620,6 +688,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 41B776481A83E81C008C8F23 /* Products */;
+					ProjectRef = 41B776471A83E81C008C8F23 /* angelscript.xcodeproj */;
+				},
+				{
 					ProductGroup = 41E2CE8F1A51D3E300FC28DC /* Products */;
 					ProjectRef = 41E2CE8E1A51D3E300FC28DC /* libpng.xcodeproj */;
 				},
@@ -632,6 +704,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		41B7764D1A83E81C008C8F23 /* libangelscript.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libangelscript.a;
+			remoteRef = 41B7764C1A83E81C008C8F23 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41B7764F1A83E81C008C8F23 /* libangelscript.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libangelscript.a;
+			remoteRef = 41B7764E1A83E81C008C8F23 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		41E2CE951A51D3E300FC28DC /* libpng.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -683,6 +769,7 @@
 				41C7FC431A5AFB84003864CB /* gameObject.cpp in Sources */,
 				41C7FC6F1A5AFB98003864CB /* textureObject.cpp in Sources */,
 				41C7FC6E1A5AFB98003864CB /* textureManager.cpp in Sources */,
+				41B776571A83E850008C8F23 /* scriptSystem.cpp in Sources */,
 				41C7FC461A5AFB84003864CB /* player.cpp in Sources */,
 				41C7FC421A5AFB84003864CB /* game.cpp in Sources */,
 				41E2CE861A51D39B00FC28DC /* random.cpp in Sources */,
@@ -691,6 +778,7 @@
 				41C7FC441A5AFB84003864CB /* localization.cpp in Sources */,
 				41B817371A6D6EF500151622 /* sprite.cpp in Sources */,
 				41E2CE871A51D39B00FC28DC /* vector.cpp in Sources */,
+				41B776621A83EB74008C8F23 /* stringObject.cpp in Sources */,
 				41C7FC6C1A5AFB98003864CB /* renderUtils.cpp in Sources */,
 				41E2CE7F1A51D39B00FC28DC /* angle.cpp in Sources */,
 				41C7FC211A5AFB6E003864CB /* cmd.cpp in Sources */,
@@ -704,6 +792,7 @@
 				41C7FC481A5AFB84003864CB /* session.cpp in Sources */,
 				41C979F91A642CCA00E9C798 /* cmodel.cpp in Sources */,
 				41C7FC241A5AFB6E003864CB /* kpf.cpp in Sources */,
+				41B7765F1A83EB0A008C8F23 /* refObject.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,
 				41C7FC6D1A5AFB98003864CB /* renderView.cpp in Sources */,
 				41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */,
@@ -733,14 +822,21 @@
 				41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */,
 				41C7FC271A5AFB6E003864CB /* object.cpp in Sources */,
 				41B96A9F1A697996004397E6 /* spriteMake.cpp in Sources */,
+				41B7765C1A83EA5E008C8F23 /* systemObject.cpp in Sources */,
 				41E2CE881A51D39B00FC28DC /* glcontext.cpp in Sources */,
 				41E2CE801A51D39B00FC28DC /* bounds.cpp in Sources */,
+				41B776691A83EF3D008C8F23 /* mathObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		41B776531A83E828008C8F23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "angelscript OSX";
+			targetProxy = 41B776521A83E828008C8F23 /* PBXContainerItemProxy */;
+		};
 		41E2CE9B1A51D3FB00FC28DC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "mac-static-libpng";
@@ -859,6 +955,7 @@
 					"$(PROJECT_DIR)/SDL2.framework/Headers",
 					"$(PROJECT_DIR)/../lpng1612",
 					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenAL.framework/Versions/A/Headers/,
+					"$(PROJECT_DIR)/../angelscript/angelscript/include",
 				);
 				INFOPLIST_FILE = "anubis/anubis-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @executable_path/../Frameworks/";
@@ -889,6 +986,7 @@
 					"$(PROJECT_DIR)/SDL2.framework/Headers",
 					"$(PROJECT_DIR)/../lpng1612",
 					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenAL.framework/Versions/A/Headers/,
+					"$(PROJECT_DIR)/../angelscript/angelscript/include",
 				);
 				INFOPLIST_FILE = "anubis/anubis-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @executable_path/../Frameworks/";
