@@ -174,6 +174,8 @@ void kexGameLocal::Init(void)
     
     kex::cSystem->ReadConfigFile("config.cfg");
     kex::cPakFiles->LoadZipFile("game.kpf");
+
+    actorDefs.Init("defs/actors/");
     
     kexGame::cScriptManager->Init();
 }

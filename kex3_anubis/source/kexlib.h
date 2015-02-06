@@ -187,6 +187,7 @@ typedef union
 #include "parser.h"
 #include "glcontext.h"
 #include "sound.h"
+#include "defs.h"
 
 class kex
 {

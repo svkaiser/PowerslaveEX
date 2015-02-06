@@ -1,0 +1,11 @@
+Obj_Camel
+{
+    classname               "kexActor"
+    actorType               58
+    radius                  48
+    height                  192
+    stepHeight              48
+    scale                   1.25
+    spriteAnim              "objects/camel_idle"
+    component               "Camel"
+}

@@ -217,6 +217,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\defs.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\dict.cpp"
 					>
 				</File>
@@ -548,6 +552,10 @@
 				</File>
 				<File
 					RelativePath="..\source\framework\cvar.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\defs.h"
 					>
 				</File>
 				<File

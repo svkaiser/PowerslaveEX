@@ -1,0 +1,17 @@
+texture "sprites/objects/fire_pot.png"
+
+// working\fire_pot\sprite0624.tga
+sprite 0 0 0 28 10
+
+// working\fire_pot\sprite0625.tga
+sprite 1 28 0 24 57
+
+// working\fire_pot\sprite0626.tga
+sprite 2 52 0 24 57
+
+// working\fire_pot\sprite0627.tga
+sprite 3 76 0 24 57
+
+// working\fire_pot\sprite0628.tga
+sprite 4 100 0 24 57
+

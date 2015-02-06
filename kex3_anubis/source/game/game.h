@@ -189,6 +189,7 @@ public:
     kexSpriteManager        *SpriteManager(void) { return spriteManager; }
     kexSpriteAnimManager    *SpriteAnimManager(void) { return spriteAnimManager; }
     const weaponInfo_t      *WeaponInfo(const playerWeapons_t id) const { return &weaponInfo[id]; }
+    kexDefManager           &ActorDefs(void) { return actorDefs; }
 
     kexObject               *ConstructObject(const char *className);
     kexActor                *SpawnActor(const int type, const float x, const float y, const float z,
@@ -219,6 +220,7 @@ private:
     kexGameLoop             *gameLoop;
     kexActor                *actorRover;
     kexLinklist<kexActor>   actors;
+    kexDefManager           actorDefs;
     kexStr                  pendingMap;
     weaponInfo_t            weaponInfo[NUMPLAYERWEAPONS];
 };
