@@ -1,7 +1,7 @@
 Obj_Camel 58
 {
     classname               "kexActor"
-    radius                  48
+    radius                  192
     height                  192
     stepHeight              48
     scale                   1.25
@@ -12,7 +12,7 @@ Obj_Camel 58
 Obj_Fire_Pot 83
 {
     classname               "kexActor"
-    radius                  48
+    radius                  64
     height                  128
     stepHeight              48
     scale                   2.0
