@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -59,9 +59,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
+				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib .\..\angelscript\angelscript\lib\angelscriptd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
 				LinkIncremental="2"
-				IgnoreDefaultLibraryNames="LIBCMT;MSVCRT;LIBCMTD"
+				IgnoreDefaultLibraryNames="MSVCRT"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -477,6 +477,34 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="script"
+				>
+				<File
+					RelativePath="..\source\script\scriptSystem.cpp"
+					>
+				</File>
+				<Filter
+					Name="objects"
+					>
+					<File
+						RelativePath="..\source\script\objects\mathObject.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\source\script\objects\refObject.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\source\script\objects\stringObject.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\source\script\objects\systemObject.cpp"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -755,6 +783,34 @@
 					>
 					<File
 						RelativePath="..\source\tools\mapEditor\mapEditor.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="script"
+				>
+				<File
+					RelativePath="..\source\script\scriptSystem.h"
+					>
+				</File>
+				<Filter
+					Name="objects"
+					>
+					<File
+						RelativePath="..\source\script\objects\mathObject.h"
+						>
+					</File>
+					<File
+						RelativePath="..\source\script\objects\refObject.h"
+						>
+					</File>
+					<File
+						RelativePath="..\source\script\objects\stringObject.h"
+						>
+					</File>
+					<File
+						RelativePath="..\source\script\objects\systemObject.h"
 						>
 					</File>
 				</Filter>
