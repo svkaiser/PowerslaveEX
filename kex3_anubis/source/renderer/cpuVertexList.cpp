@@ -129,6 +129,16 @@ void kexCpuVertList::AddVertex(const kexVec3 &vec, float s, float t,
 }
 
 //
+// kexCpuVertList::AddVertex
+//
+
+
+void kexCpuVertList::AddVertex(const kexVec3 &vec, float s, float t)
+{
+    AddVertex(vec, s, t, 255, 255, 255, 255);
+}
+
+//
 // kexCpuVertList::AddLine
 //
 

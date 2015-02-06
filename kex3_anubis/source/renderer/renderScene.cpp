@@ -76,10 +76,53 @@ void kexRenderScene::DrawSky(void)
     int tris = 0;
     float ang = 0;
     
+    kexRender::cTextures->whiteTexture->Bind();
+    
+    for(unsigned int i = 0; i < world->VisibleSectors().CurrentLength(); ++i)
+    {
+        mapSector_t *sector = &world->Sectors()[world->VisibleSectors()[i]];
+        int start = sector->faceStart;
+        int end = sector->faceEnd;
+        
+        for(int j = start; j < end+3; ++j)
+        {
+            mapFace_t *face = &world->Faces()[j];
+            
+            if(face->polyStart == -1 || face->polyEnd == -1)
+            {
+                if(j > sector->faceEnd || face->sector <= -1)
+                {
+                    mapVertex_t *v = &world->Vertices()[face->vertexStart];
+                    
+                    vl->AddVertex(v[0].origin, 0, 0);
+                    vl->AddVertex(v[1].origin, 0, 0);
+                    vl->AddVertex(v[2].origin, 0, 0);
+                    vl->AddVertex(v[3].origin, 0, 0);
+                    
+                    vl->AddTriangle(tris+0, tris+2, tris+1);
+                    vl->AddTriangle(tris+0, tris+3, tris+2);
+                    tris += 4;
+                }
+            }
+        }
+    }
+    
+    if(tris == 0)
+    {
+        return;
+    }
+    
+    kexRender::cBackend->SetColorMask(0);
+    vl->DrawElements();
+    
     // TEMP
     kexTexture *skyTexture = kexRender::cTextures->Cache("textures/skies/sky_sunny.png",
                                                          TC_REPEAT, TF_NEAREST);
     skyTexture->Bind();
+    tris = 0;
+    
+    kexRender::cBackend->SetColorMask(1);
+    kexRender::cBackend->SetDepth(GLFUNC_GEQUAL);
     
     for(int i = 0; i < 17; i++)
     {
@@ -206,6 +249,7 @@ void kexRenderScene::DrawSky(void)
     
     vl->DrawElements();
     kexRender::cBackend->ClearBuffer(GLCB_DEPTH);
+    kexRender::cBackend->SetDepth(GLFUNC_LEQUAL);
 }
 
 //
