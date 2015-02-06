@@ -42,7 +42,7 @@ private:
     
     kexWorld                *world;
     kexRenderView           *view;
-    float                   clipY;
+    int                     clipY;
     int                     vertCount;
     int                     triCount;
 };

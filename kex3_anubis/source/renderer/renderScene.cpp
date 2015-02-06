@@ -292,7 +292,7 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 {
     int tris = 0;
     kexCpuVertList *vl = kexRender::cVertList;
-    mapTexCoords_t *tcoord = &world->TexCoords()[poly->tcoord];
+    mapTexCoords_t *tcoord = world->TexCoords();
     mapVertex_t *vertex;
     
     int indices[4] = { 0, 0, 0, 0 };
@@ -306,43 +306,31 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
     
     for(int idx = 0; idx < 4; idx++)
     {
-        if(poly->indices[idx] == poly->indices[(idx+1)&3])
+        if(poly->indices[idx] == 0xff || poly->tcoords[idx] == -1)
         {
             continue;
         }
         
         indices[curIdx] = poly->indices[idx];
-        tcoords[curIdx] = idx;
+        tcoords[curIdx] = poly->tcoords[idx];
         curIdx++;
     }
-    
-    if(poly->flipped == 0)
+
+    if(curIdx <= 2)
     {
-        for(int idx = 0; idx < curIdx; idx++)
-        {
-            vertex = &world->Vertices()[face->vertStart + indices[idx]];
-            
-            vl->AddVertex(vertex->origin,
-                          tcoord->uv[tcoords[idx]].s, 1.0f - tcoord->uv[tcoords[idx]].t,
-                          vertex->rgba[0],
-                          vertex->rgba[1],
-                          vertex->rgba[2],
-                          255);
-        }
+        return;
     }
-    else
+    
+    for(int idx = (curIdx-1); idx >= 0; idx--)
     {
-        for(int idx = (curIdx-1); idx >= 0; idx--)
-        {
-            vertex = &world->Vertices()[face->vertStart + indices[idx]];
-            
-            vl->AddVertex(vertex->origin,
-                          tcoord->uv[tcoords[idx]].s, 1.0f - tcoord->uv[tcoords[idx]].t,
-                          vertex->rgba[0],
-                          vertex->rgba[1],
-                          vertex->rgba[2],
-                          255);
-        }
+        vertex = &world->Vertices()[face->vertStart + indices[idx]];
+        
+        vl->AddVertex(vertex->origin,
+                      tcoord->uv[tcoords[idx]].s, 1.0f - tcoord->uv[tcoords[idx]].t,
+                      vertex->rgba[0],
+                      vertex->rgba[1],
+                      vertex->rgba[2],
+                      255);
     }
     
     vl->AddTriangle(tris+0, tris+2, tris+1);

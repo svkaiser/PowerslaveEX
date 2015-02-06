@@ -121,9 +121,9 @@ typedef struct mapFace_s
 typedef struct
 {
     byte                indices[4];
+    short               tcoords[4];
     short               texture;
     short               flipped;
-    word                tcoord;
 } mapPoly_t;
 
 typedef struct

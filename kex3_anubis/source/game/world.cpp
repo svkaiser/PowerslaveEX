@@ -216,9 +216,12 @@ void kexWorld::ReadPolys(kexBinFile &mapfile, const unsigned int count)
         polys[i].indices[1] = mapfile.Read8();
         polys[i].indices[2] = mapfile.Read8();
         polys[i].indices[3] = mapfile.Read8();
+        polys[i].tcoords[0] = mapfile.Read16();
+        polys[i].tcoords[1] = mapfile.Read16();
+        polys[i].tcoords[2] = mapfile.Read16();
+        polys[i].tcoords[3] = mapfile.Read16();
         polys[i].texture    = mapfile.Read16();
         polys[i].flipped    = mapfile.Read16();
-        polys[i].tcoord     = mapfile.Read32();
     }
 }
 
