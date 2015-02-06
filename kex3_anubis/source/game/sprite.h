@@ -55,6 +55,8 @@ public:
     void                            Shutdown(void);
 
     kexSprite                       *Get(const char *name) { return spriteList.Find(name); }
+    
+    kexSprite                       defaultSprite;
 
 private:
     kexHashList<kexSprite>          spriteList;

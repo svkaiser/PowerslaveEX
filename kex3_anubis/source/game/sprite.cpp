@@ -87,6 +87,7 @@ kexSpriteManager::~kexSpriteManager(void)
 void kexSpriteManager::Init(void)
 {
     kexStrList list;
+    spriteInfo_t *info;
 
     kex::cPakFiles->GetMatchingFiles(list, "sprites/");
 
@@ -99,6 +100,16 @@ void kexSpriteManager::Init(void)
         
         Load(list[i].c_str());
     }
+    
+    defaultSprite.texture = kexRender::cTextures->defaultTexture;
+    
+    info = defaultSprite.InfoList().Grow();
+    info->u[0] = 0; info->u[1] = 1;
+    info->v[0] = 0; info->v[1] = 1;
+    info->atlas.x = 0;
+    info->atlas.y = 0;
+    info->atlas.w = defaultSprite.texture->OriginalWidth();
+    info->atlas.h = defaultSprite.texture->OriginalHeight();
 }
 
 //

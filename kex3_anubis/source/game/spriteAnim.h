@@ -62,6 +62,8 @@ public:
     void                        Shutdown(void);
 
     spriteAnim_t                *Get(const char *name) { return spriteAnimList.Find(name); }
+    
+    spriteAnim_t                defaultAnim;
 
 private:
     kexHashList<spriteAnim_t>   spriteAnimList;

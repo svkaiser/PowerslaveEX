@@ -526,20 +526,53 @@ void kexGameLocal::RemoveAllActors(void)
 kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y, const float z, const float yaw)
 {
     kexActor *actor;
+    kexStr className;
+    kexDict *def;
     
-    switch(type)
+    if((def = actorDefs.GetEntry(type)))
     {
-    case AT_PLAYER:
-        actor = static_cast<kexActor*>(ConstructObject("kexPuppet"));
-        break;
-            
-    default:
-        actor = static_cast<kexActor*>(ConstructObject("kexActor"));
-        break;
+        if(!def->GetString("classname", className))
+        {
+            className = "kexActor";
+        }
+    }
+    else
+    {
+        switch(type)
+        {
+        case AT_PLAYER:
+            className = "kexPuppet";
+            break;
+        
+        default:
+            className = "kexActor";
+            break;
+        }
+    }
+    
+    if(!(actor = static_cast<kexActor*>(ConstructObject(className))))
+    {
+        return NULL;
+    }
+    
+    if(def)
+    {
+        kexStr animName;
+        
+        def->GetFloat("scale", actor->Scale(), 1);
+        def->GetFloat("radius", actor->Radius(), 16);
+        def->GetFloat("height", actor->Height(), 32);
+        def->GetFloat("stepHeight", actor->StepHeight(), 16);
+        
+        if(def->GetString("spriteAnim", animName))
+        {
+            actor->ChangeAnim(animName);
+        }
     }
     
     actor->Origin().Set(x, y, z);
     actor->Yaw() = yaw;
+    actor->Type() = static_cast<actorType_t>(type);
     
     actor->Link().Add(actors);
     actor->LinkArea();

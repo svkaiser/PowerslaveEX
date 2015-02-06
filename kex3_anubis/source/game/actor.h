@@ -18,6 +18,7 @@
 #include "gameObject.h"
 #include "sdNodes.h"
 #include "world.h"
+#include "spriteAnim.h"
 
 typedef enum
 {
@@ -225,6 +226,8 @@ public:
     bool                            FindSector(const kexVec3 &pos);
     void                            LinkArea(void);
     void                            UnlinkArea(void);
+    void                            ChangeAnim(spriteAnim_t *changeAnim);
+    void                            ChangeAnim(const char *animName);
 
     kexVec3                         &Velocity(void) { return velocity; }
     kexVec3                         &Movement(void) { return movement; }
@@ -233,22 +236,28 @@ public:
     mapActor_t                      *MapActor(void) { return mapActor; }
     kexLinklist<kexActor>           &Link(void) { return link; }
     kexBBox                         &Bounds(void) { return bounds; }
-    const actorType_t               Type(void) const { return type; }
+    actorType_t                     &Type(void) { return type; }
     int16_t                         &Health(void) { return health; }
     void                            SetMapActor(mapActor_t *ma) { mapActor = ma; }
-    const float                     Radius(void) const { return radius; }
-    const float                     Height(void) const { return height; }
-    const float                     StepHeight(void) const { return stepHeight; }
-    const float                     Gravity(void) const { return gravity; }
+    float                           &Radius(void) { return radius; }
+    float                           &Height(void) { return height; }
+    float                           &StepHeight(void) { return stepHeight; }
+    float                           &Gravity(void) { return gravity; }
+    float                           &Scale(void) { return scale; }
     unsigned int                    &Flags(void) { return flags; }
     float                           &FloorHeight(void) { return floorHeight; }
     float                           &CeilingHeight(void) { return ceilingHeight; }
+    spriteAnim_t                    *Anim(void) { return anim; }
+    spriteFrame_t                   *Frame(void) { return &anim->frames[frameID]; }
+    const int                       FrameID(void) const { return frameID; }
+    float                           &Ticks(void) { return ticks; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
 protected:
-    kexSDNodeRef<kexActor>          areaLink;
+    void                            UpdateSprite(void);
 
+    kexSDNodeRef<kexActor>          areaLink;
     float                           radius;
     float                           height;
     float                           scale;
@@ -261,6 +270,9 @@ protected:
     kexBBox                         bounds;
     mapSector_t                     *sector;
     mapActor_t                      *mapActor;
+    spriteAnim_t                    *anim;
+    int16_t                         frameID;
+    float                           ticks;
     actorType_t                     type;
     unsigned int                    flags;
     float                           floorHeight;

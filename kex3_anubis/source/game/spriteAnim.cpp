@@ -42,6 +42,8 @@ kexSpriteAnimManager::~kexSpriteAnimManager(void)
 void kexSpriteAnimManager::Init(void)
 {
     kexStrList list;
+    spriteFrame_t *frame;
+    spriteSet_t *spriteSet;
 
     kex::cPakFiles->GetMatchingFiles(list, "sprites/");
 
@@ -54,6 +56,21 @@ void kexSpriteAnimManager::Init(void)
         
         Load(list[i].c_str());
     }
+    
+    defaultAnim.name = "_default";
+    
+    frame = defaultAnim.frames.Grow();
+    frame->delay = 0;
+    frame->flags = 0;
+    frame->nextFrame = "-";
+    frame->refireFrame = "-";
+    
+    spriteSet = frame->spriteSet.Grow();
+    spriteSet->x = -32;
+    spriteSet->y = -64;
+    spriteSet->bFlipped = false;
+    spriteSet->index = 0;
+    spriteSet->sprite = &kexGame::cLocal->SpriteManager()->defaultSprite;
 }
 
 //

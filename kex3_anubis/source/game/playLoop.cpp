@@ -95,33 +95,28 @@ void kexPlayLoop::Draw(void)
         
         if(1)
         {
-            static spriteAnim_t *sprTest = NULL;
-
-            if(sprTest == NULL)
+            kexMatrix mtx(renderView.Yaw(), 2);
+            kexMatrix mtx2(-renderView.Pitch(), 1);
+            kexMatrix mtx3 = mtx2 * mtx;
+            
+            mtx3.RotateX(kexMath::pi);
+            
+            for(kexActor *actor = kexGame::cLocal->Actors().Next(); actor != NULL; actor = actor->Link().Next())
             {
-                sprTest = kexGame::cLocal->SpriteAnimManager()->Get("objects/camel_idle");
-            }
-
-            if(sprTest)
-            {
-                kexCpuVertList *vl = kexRender::cVertList;
-                mapActor_t *a = p->Actor()->MapActor();
-                kexVec3 org(a->x, a->y, a->z);
-                kexMatrix mtx(renderView.Yaw(), 2);
-                kexMatrix mtx2(-renderView.Pitch(), 1);
-                kexMatrix mtx3 = mtx2 * mtx;
-                kexMatrix scale(1.25f, 1.25f, 1.25f);
+                if(actor->Anim() == NULL || actor == p->Actor())
+                {
+                    continue;
+                }
+                
+                kexVec3 org = actor->Origin();
+                kexMatrix scale(actor->Scale(), actor->Scale(), actor->Scale());
                 spriteFrame_t *frame;
                 spriteSet_t *spriteSet;
                 kexSprite *sprite;
                 spriteInfo_t *info;
 
-                frame = &sprTest->frames[0];
-                org += kexVec3(0, 0, 0);
+                frame = actor->Frame();
 
-                mtx3.RotateX(kexMath::pi);
-
-                kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
                 vl->BindDrawPointers();
 
                 for(unsigned int i = 0; i < frame->spriteSet.Length(); ++i)

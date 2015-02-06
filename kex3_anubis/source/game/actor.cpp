@@ -33,8 +33,12 @@ kexActor::kexActor(void)
     this->health = 100;
     this->radius = 16;
     this->height = 32;
+    this->scale = 1;
     this->stepHeight = 16;
     this->flags = 0;
+    this->anim = NULL;
+    this->frameID = 0;
+    this->ticks = 0;
     this->areaLink.link.SetData(this);
     this->areaLink.node = NULL;
 }
@@ -53,6 +57,7 @@ kexActor::~kexActor(void)
 
 void kexActor::Tick(void)
 {
+    UpdateSprite();
 }
 
 //
@@ -61,6 +66,10 @@ void kexActor::Tick(void)
 
 void kexActor::Spawn(void)
 {
+    if(anim == NULL)
+    {
+        anim = &kexGame::cLocal->SpriteAnimManager()->defaultAnim;
+    }
 }
 
 //
@@ -83,6 +92,61 @@ bool kexActor::FindSector(const kexVec3 &pos)
     }
     
     return false;
+}
+
+//
+// kexActor::ChangeAnim
+//
+
+void kexActor::ChangeAnim(spriteAnim_t *changeAnim)
+{
+    if(changeAnim == NULL)
+    {
+        return;
+    }
+    
+    anim = changeAnim;
+    frameID = 0;
+    ticks = 0;
+}
+
+//
+// kexActor::ChangeAnim
+//
+
+void kexActor::ChangeAnim(const char *animName)
+{
+    ChangeAnim(kexGame::cLocal->SpriteAnimManager()->Get(animName));
+}
+
+//
+// kexActor::UpdateSprite
+//
+
+void kexActor::UpdateSprite(void)
+{
+    spriteFrame_t *frame;
+    
+    if(anim == NULL)
+    {
+        return;
+    }
+    
+    frame = &anim->frames[frameID];
+    ticks += (1.0f / (float)frame->delay) * 0.5f;
+    
+    // handle advancing to next frame
+    if(ticks >= 1)
+    {
+        ticks = 0;
+        
+        // reached the end of the frame?
+        if(++frameID >= (int16_t)anim->NumFrames())
+        {
+            // loop back
+            frameID = 0;
+        }
+    }
 }
 
 //
