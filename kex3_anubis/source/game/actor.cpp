@@ -66,10 +66,18 @@ void kexActor::Tick(void)
 
 void kexActor::Spawn(void)
 {
+    float r, h;
+    
     if(anim == NULL)
     {
         anim = &kexGame::cLocal->SpriteAnimManager()->defaultAnim;
     }
+    
+    r = (radius * scale) * 0.5f;
+    h = (height * scale) * 0.5f;
+    
+    bounds.min.Set(-r, -r, -h);
+    bounds.max.Set(r, r, h);
 }
 
 //

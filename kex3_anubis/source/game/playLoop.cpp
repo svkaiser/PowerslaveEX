@@ -108,6 +108,11 @@ void kexPlayLoop::Draw(void)
                     continue;
                 }
                 
+                if(!renderView.TestSphere(actor->Origin(), actor->Radius()))
+                {
+                    continue;
+                }
+                
                 kexVec3 org = actor->Origin();
                 kexMatrix scale(actor->Scale(), actor->Scale(), actor->Scale());
                 spriteFrame_t *frame;
