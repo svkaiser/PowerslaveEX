@@ -17,6 +17,12 @@
 
 #include "kexlib.h"
 
+//-----------------------------------------------------------------------------
+//
+// kexDefManager
+//
+//-----------------------------------------------------------------------------
+
 //
 // kexDefManager::~kexDefManager
 //
@@ -113,4 +119,80 @@ void kexDefManager::Init(const char *directory)
 kexDict *kexDefManager::GetEntry(const char *name)
 {
     return defs.Find(name);
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexIndexDefManager
+//
+//-----------------------------------------------------------------------------
+
+//
+// kexIndexDefManager::~kexIndexDefManager
+//
+
+kexIndexDefManager::~kexIndexDefManager(void)
+{
+}
+
+//
+// kexIndexDefManager::Parse
+//
+
+void kexIndexDefManager::Parse(kexLexer *lexer)
+{
+    kexDict *defEntry;
+    kexStr key;
+    kexStr val;
+    kexStr defName;
+    int defIndex;
+    
+    while(lexer->CheckState())
+    {
+        lexer->Find();
+        
+        switch(lexer->TokenType())
+        {
+            case TK_EOF:
+                return;
+            case TK_IDENIFIER:
+                defName = lexer->Token();
+                defIndex = lexer->GetNumber();
+                defEntry = defs.Add(defName, defIndex);
+                
+                lexer->ExpectNextToken(TK_LBRACK);
+                while(1)
+                {
+                    lexer->Find();
+                    if(lexer->TokenType() == TK_RBRACK || lexer->TokenType() == TK_EOF)
+                    {
+                        break;
+                    }
+                    
+                    key = lexer->Token();
+                    
+                    lexer->Find();
+                    if(lexer->TokenType() == TK_RBRACK || lexer->TokenType() == TK_EOF)
+                    {
+                        break;
+                    }
+                    
+                    val = lexer->Token();
+                    
+                    defEntry->Add(key.c_str(), val.c_str());
+                }
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+//
+// kexIndexDefManager::GetEntry
+//
+
+kexDict *kexIndexDefManager::GetEntry(const int index)
+{
+    return defs.Find(index);
 }

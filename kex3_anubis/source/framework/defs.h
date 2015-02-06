@@ -26,7 +26,18 @@ public:
     kexHashList<kexDict>            defs;
 
 private:
-    void                            Parse(kexLexer *lexer);
+    virtual void                    Parse(kexLexer *lexer);
+};
+
+class kexIndexDefManager : public kexDefManager
+{
+public:
+    ~kexIndexDefManager(void);
+    
+    kexDict                         *GetEntry(const int index);
+    
+private:
+    virtual void                    Parse(kexLexer *lexer);
 };
 
 #endif

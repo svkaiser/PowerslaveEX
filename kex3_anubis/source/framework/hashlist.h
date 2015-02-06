@@ -22,7 +22,9 @@ public:
     kexHashList(void);
 
     type                *Add(const char *tname, kexHeapBlock &hb = hb_static);
+    type                *Add(const char *tname, const int index, kexHeapBlock &hb = hb_static);
     type                *Find(const char *tname) const;
+    type                *Find(const int index) const;
     type                *GetData(const int index);
     type                *Next(void);
     char                *GetName(const int index);
@@ -67,6 +69,25 @@ type *kexHashList<type>::Add(const char *tname, kexHeapBlock &hb)
 }
 
 //
+// kexHashList::Add
+//
+template<class type>
+type *kexHashList<type>::Add(const char *tname, const int index, kexHeapBlock &hb)
+{
+    unsigned int hash;
+    
+    hashKey_t *o = (hashKey_t*)Mem_Calloc(sizeof(hashKey_t), hb);
+    strncpy(o->name, tname, MAX_FILEPATH);
+    
+    // add to hash for future reference
+    hash = index & (MAX_HASH-1);
+    o->next = hashlist[hash];
+    hashlist[hash] = o;
+    
+    return &o->data;
+}
+
+//
 // kexHashList::Find
 //
 template<class type>
@@ -86,6 +107,18 @@ type *kexHashList<type>::Find(const char *tname) const
     }
 
     return NULL;
+}
+
+//
+// kexHashList::Find
+//
+template<class type>
+type *kexHashList<type>::Find(const int index) const
+{
+    unsigned int hash;
+    
+    hash = index & (MAX_HASH-1);
+    return &hashlist[hash]->data;
 }
 
 //

@@ -24,6 +24,7 @@
 		41BB267F1A547A9A00311383 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BB267E1A547A9A00311383 /* OpenAL.framework */; };
 		41BCC0621A6EBACB00F8B3FA /* pWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC0601A6EBACB00F8B3FA /* pWeapon.cpp */; };
 		41BCC06C1A6ECCB800F8B3FA /* renderScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC06A1A6ECCB800F8B3FA /* renderScene.cpp */; };
+		41BE76CD1A851A4700DD893E /* defs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BE76CB1A851A4700DD893E /* defs.cpp */; };
 		41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC091A5AFB6E003864CB /* binFile.cpp */; };
 		41C7FC211A5AFB6E003864CB /* cmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0B1A5AFB6E003864CB /* cmd.cpp */; };
 		41C7FC221A5AFB6E003864CB /* cvar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0D1A5AFB6E003864CB /* cvar.cpp */; };
@@ -186,6 +187,8 @@
 		41BCC0611A6EBACB00F8B3FA /* pWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pWeapon.h; path = ../../source/game/pWeapon.h; sourceTree = "<group>"; };
 		41BCC06A1A6ECCB800F8B3FA /* renderScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = renderScene.cpp; sourceTree = "<group>"; };
 		41BCC06B1A6ECCB800F8B3FA /* renderScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderScene.h; sourceTree = "<group>"; };
+		41BE76CB1A851A4700DD893E /* defs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = defs.cpp; sourceTree = "<group>"; };
+		41BE76CC1A851A4700DD893E /* defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
 		41C7FC081A5AFB6E003864CB /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
 		41C7FC091A5AFB6E003864CB /* binFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = binFile.cpp; sourceTree = "<group>"; };
 		41C7FC0A1A5AFB6E003864CB /* binFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binFile.h; sourceTree = "<group>"; };
@@ -512,6 +515,7 @@
 				41C7FC0B1A5AFB6E003864CB /* cmd.cpp */,
 				41B3A54A1A5DEEBC006DCCB9 /* console.cpp */,
 				41C7FC0D1A5AFB6E003864CB /* cvar.cpp */,
+				41BE76CB1A851A4700DD893E /* defs.cpp */,
 				41C7FC0F1A5AFB6E003864CB /* dict.cpp */,
 				41C7FC121A5AFB6E003864CB /* kpf.cpp */,
 				41C7FC141A5AFB6E003864CB /* kstring.cpp */,
@@ -525,6 +529,7 @@
 				41C7FC0C1A5AFB6E003864CB /* cmd.h */,
 				41B3A54B1A5DEEBC006DCCB9 /* console.h */,
 				41C7FC0E1A5AFB6E003864CB /* cvar.h */,
+				41BE76CC1A851A4700DD893E /* defs.h */,
 				41C7FC101A5AFB6E003864CB /* dict.h */,
 				41C7FC111A5AFB6E003864CB /* hashlist.h */,
 				41C7FC131A5AFB6E003864CB /* kpf.h */,
@@ -822,6 +827,7 @@
 				41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */,
 				41C7FC271A5AFB6E003864CB /* object.cpp in Sources */,
 				41B96A9F1A697996004397E6 /* spriteMake.cpp in Sources */,
+				41BE76CD1A851A4700DD893E /* defs.cpp in Sources */,
 				41B7765C1A83EA5E008C8F23 /* systemObject.cpp in Sources */,
 				41E2CE881A51D39B00FC28DC /* glcontext.cpp in Sources */,
 				41E2CE801A51D39B00FC28DC /* bounds.cpp in Sources */,

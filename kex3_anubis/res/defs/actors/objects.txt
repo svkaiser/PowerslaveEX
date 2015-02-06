@@ -1,7 +1,6 @@
-Obj_Camel
+Obj_Camel 58
 {
     classname               "kexActor"
-    actorType               58
     radius                  48
     height                  192
     stepHeight              48
