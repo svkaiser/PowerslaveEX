@@ -81,10 +81,10 @@ void kexDefManager::Parse(kexLexer *lexer)
 }
 
 //
-// kexDefManager::Init
+// kexDefManager::LoadFilesInDirectory
 //
 
-void kexDefManager::Init(const char *directory)
+void kexDefManager::LoadFilesInDirectory(const char *directory)
 {
     kexStrList list;
 
@@ -110,6 +110,25 @@ void kexDefManager::Init(const char *directory)
         // we're done with the file
         kex::cParser->Close();
     }
+}
+
+//
+// kexDefManager::LoadFile
+//
+
+void kexDefManager::LoadFile(const char *defFile)
+{
+    kexLexer *lexer;
+    
+    if(!(lexer = kex::cParser->Open(defFile)))
+    {
+        return;
+    }
+    
+    Parse(lexer);
+    
+    // we're done with the file
+    kex::cParser->Close();
 }
 
 //

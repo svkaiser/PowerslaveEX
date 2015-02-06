@@ -221,6 +221,7 @@ private:
     kexActor                *actorRover;
     kexLinklist<kexActor>   actors;
     kexIndexDefManager      actorDefs;
+    kexDefManager           weaponDef;
     kexStr                  pendingMap;
     weaponInfo_t            weaponInfo[NUMPLAYERWEAPONS];
 };

@@ -20,7 +20,8 @@ class kexDefManager
 public:
     ~kexDefManager(void);
 
-    void                            Init(const char *directory);
+    void                            LoadFilesInDirectory(const char *directory);
+    void                            LoadFile(const char *defFile);
     kexDict                         *GetEntry(const char *name);
 
     kexHashList<kexDict>            defs;

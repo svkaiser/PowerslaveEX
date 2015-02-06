@@ -1,0 +1,88 @@
+Wep_Machete
+{
+    persistant              1
+    maxAmmo                 0
+    offsetX                 160
+    offsetY                 230
+    idleAnim                "weapons/machete_idle"
+    raiseAnim               "weapons/machete_raise"
+    lowerAnim               "weapons/machete_lower"
+    fireAnim                "weapons/machete_fire"
+}
+
+Wep_Pistol
+{
+    maxAmmo                 60
+    offsetX                 160
+    offsetY                 232
+    idleAnim                "weapons/pistol_idle"
+    raiseAnim               "weapons/pistol_raise"
+    lowerAnim               "weapons/pistol_lower"
+    fireAnim                "weapons/pistol_fire"
+}
+
+Wep_M60
+{
+    maxAmmo                 50
+    offsetX                 160
+    offsetY                 132
+    idleAnim                "weapons/m60_idle"
+    raiseAnim               "weapons/m60_raise"
+    lowerAnim               "weapons/m60_lower"
+    fireAnim                "weapons/m60_fire"
+}
+
+Wep_Bombs
+{
+    maxAmmo                 20
+    offsetX                 160
+    offsetY                 196
+    idleAnim                "weapons/bomb_idle"
+    raiseAnim               "weapons/bomb_raise"
+    lowerAnim               "weapons/bomb_lower"
+    fireAnim                "weapons/bomb_fire"
+}
+
+Wep_FlameThrower
+{
+    maxAmmo                 60
+    offsetX                 160
+    offsetY                 132
+    idleAnim                "weapons/flamethrower_idle"
+    raiseAnim               "weapons/flamethrower_raise"
+    lowerAnim               "weapons/flamethrower_lower"
+    fireAnim                "weapons/flamethrower_fire"
+}
+
+Wep_CobraStaff
+{
+    maxAmmo                 20
+    offsetX                 160
+    offsetY                 210
+    idleAnim                "weapons/cstaff_idle"
+    raiseAnim               "weapons/cstaff_raise"
+    lowerAnim               "weapons/cstaff_lower"
+    fireAnim                "weapons/cstaff_fire"
+}
+
+Wep_RingOfRa
+{
+    maxAmmo                 250
+    offsetX                 160
+    offsetY                 214
+    idleAnim                "weapons/ring_ra_idle"
+    raiseAnim               "weapons/ring_ra_raise"
+    lowerAnim               "weapons/ring_ra_lower"
+    fireAnim                "weapons/ring_ra_fire"
+}
+
+Wep_Manacle
+{
+    maxAmmo                 15
+    offsetX                 160
+    offsetY                 208
+    idleAnim                "weapons/manacle_idle"
+    raiseAnim               "weapons/manacle_raise"
+    lowerAnim               "weapons/manacle_lower"
+    fireAnim                "weapons/manacle_fire"
+}
