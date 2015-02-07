@@ -1,0 +1,20 @@
+texture "sprites/objects/torch_tall01.png"
+
+// working\torch_tall01\sprite0629.tga
+sprite 0 0 0 24 64
+
+// working\torch_tall01\sprite0630.tga
+sprite 1 24 0 24 21
+
+// working\torch_tall01\sprite0631.tga
+sprite 2 48 0 16 44
+
+// working\torch_tall01\sprite0632.tga
+sprite 3 64 0 16 44
+
+// working\torch_tall01\sprite0633.tga
+sprite 4 80 0 16 44
+
+// working\torch_tall01\sprite0634.tga
+sprite 5 96 0 16 44
+

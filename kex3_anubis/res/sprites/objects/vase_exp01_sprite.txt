@@ -1,0 +1,32 @@
+texture "sprites/objects/vase_exp01.png"
+
+// working\vase_exp01\sprite0606.tga
+sprite 0 0 0 24 10
+
+// working\vase_exp01\sprite0607.tga
+sprite 1 24 0 24 18
+
+// working\vase_exp01\sprite0608.tga
+sprite 2 48 0 24 21
+
+// working\vase_exp01\sprite0609.tga
+sprite 3 72 0 28 21
+
+// working\vase_exp01\sprite0610.tga
+sprite 4 100 0 48 41
+
+// working\vase_exp01\sprite0611.tga
+sprite 5 148 0 48 41
+
+// working\vase_exp01\sprite0612.tga
+sprite 6 196 0 44 41
+
+// working\vase_exp01\sprite0613.tga
+sprite 7 0 18 48 41
+
+// working\vase_exp01\sprite0614.tga
+sprite 8 48 41 60 54
+
+// working\vase_exp01\sprite0615.tga
+sprite 9 108 41 28 14
+

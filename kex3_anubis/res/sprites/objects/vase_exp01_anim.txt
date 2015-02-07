@@ -1,0 +1,233 @@
+vase01_exp_idle
+{
+    // frames:   16
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 7,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 7,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 7,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 7,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 6,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 6,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 6,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 6,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 5,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 5,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 5,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 5,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 4,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 4,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 4,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 4,    -24,  -80,    0 }
+            { "objects/vase_exp01", 8,    -29,  -54,    0 }
+        }
+
+    }
+
+}
+
+vase01_exp_shards
+{
+    // frames:    5
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 9,    -13,   -9,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 0,    -13,   -9,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 1,    -13,   -9,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 2,    -13,   -9,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/vase_exp01", 3,    -13,   -9,    0 }
+        }
+    }
+}

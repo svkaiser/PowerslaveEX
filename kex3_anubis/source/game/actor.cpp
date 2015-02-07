@@ -155,6 +155,12 @@ void kexActor::UpdateSprite(void)
             frameID = 0;
         }
     }
+
+    // handle goto jumps
+    if(frame->HasNextFrame())
+    {
+        ChangeAnim(frame->nextFrame);
+    }
 }
 
 //

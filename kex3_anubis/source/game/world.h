@@ -185,6 +185,7 @@ public:
     mapActor_t              *Actors(void) { return actors; }
 
     kexStack<int>           &VisibleSectors(void) { return visibleSectors; }
+    kexStack<int>           &VisibleSkyFaces(void) { return visibleSkyFaces; }
     kexSDNode<kexActor>     &AreaNodes(void) { return areaNodes; }
 
     static kexHeapBlock     hb_world;
@@ -234,6 +235,7 @@ private:
     mapActor_t              *actors;
 
     kexStack<int>           visibleSectors;
+    kexStack<int>           visibleSkyFaces;
     kexStack<mapSector_t*>  scanSectors;
     kexSDNode<kexActor>     areaNodes;
 };

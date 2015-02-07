@@ -644,6 +644,7 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
     scanSectors.Reset();
     scanSectors.Set(sector);
 
+    visibleSkyFaces.Reset();
     visibleSectors.Reset();
     visibleSectors.Set(secnum);
 
@@ -772,6 +773,11 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
                 if(face->y1 > s->y2) continue;
 
                 face->flags &= ~FF_OCCLUDED;
+
+                if((face->polyStart == -1 || face->polyEnd == -1))
+                {
+                    visibleSkyFaces.Set(i);
+                }
             }
         }
         

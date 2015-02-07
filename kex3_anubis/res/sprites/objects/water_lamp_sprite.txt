@@ -1,0 +1,5 @@
+texture "sprites/objects/water_lamp.png"
+
+// working\water_lamp\sprite0564.tga
+sprite 0 0 0 28 30
+

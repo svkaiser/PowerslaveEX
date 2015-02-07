@@ -78,33 +78,19 @@ void kexRenderScene::DrawSky(void)
     
     kexRender::cTextures->whiteTexture->Bind();
     
-    for(unsigned int i = 0; i < world->VisibleSectors().CurrentLength(); ++i)
+    for(unsigned int i = 0; i < world->VisibleSkyFaces().CurrentLength(); ++i)
     {
-        mapSector_t *sector = &world->Sectors()[world->VisibleSectors()[i]];
-        int start = sector->faceStart;
-        int end = sector->faceEnd;
+        mapFace_t *face = &world->Faces()[world->VisibleSkyFaces()[i]];
+        mapVertex_t *v = &world->Vertices()[face->vertexStart];
+
+        vl->AddVertex(v[0].origin, 0, 0);
+        vl->AddVertex(v[1].origin, 0, 0);
+        vl->AddVertex(v[2].origin, 0, 0);
+        vl->AddVertex(v[3].origin, 0, 0);
         
-        for(int j = start; j < end+3; ++j)
-        {
-            mapFace_t *face = &world->Faces()[j];
-            
-            if(face->polyStart == -1 || face->polyEnd == -1)
-            {
-                if(j > sector->faceEnd || face->sector <= -1)
-                {
-                    mapVertex_t *v = &world->Vertices()[face->vertexStart];
-                    
-                    vl->AddVertex(v[0].origin, 0, 0);
-                    vl->AddVertex(v[1].origin, 0, 0);
-                    vl->AddVertex(v[2].origin, 0, 0);
-                    vl->AddVertex(v[3].origin, 0, 0);
-                    
-                    vl->AddTriangle(tris+0, tris+2, tris+1);
-                    vl->AddTriangle(tris+0, tris+3, tris+2);
-                    tris += 4;
-                }
-            }
-        }
+        vl->AddTriangle(tris+0, tris+2, tris+1);
+        vl->AddTriangle(tris+0, tris+3, tris+2);
+        tris += 4;
     }
     
     if(tris == 0)

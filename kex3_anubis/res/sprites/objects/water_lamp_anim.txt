@@ -1,0 +1,12 @@
+water_lamp_base
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/water_lamp", 0,    -12,  -16,    0 }
+        }
+    }
+}

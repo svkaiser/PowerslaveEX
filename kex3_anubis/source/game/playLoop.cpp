@@ -112,6 +112,11 @@ void kexPlayLoop::Draw(void)
                 {
                     continue;
                 }
+
+                if(actor->Origin().Distance(renderView.Origin()) <= 100)
+                {
+                    kex::cSystem->Printf("%i\n", actor->Type());
+                }
                 
                 kexVec3 org = actor->Origin();
                 kexMatrix scale(actor->Scale(), actor->Scale(), actor->Scale());
