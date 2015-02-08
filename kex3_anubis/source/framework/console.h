@@ -59,7 +59,7 @@ private:
     void                HandlePaste(void);
     
     void                SetInputText(const char *string) { textBuffer = string; }
-    void                ResetInputText(void) { typeStrPos = 0; textBuffer.Clear(); }
+    void                ResetInputText(void) { typeStrPos = 0; scrollBackPos = 0; textBuffer.Clear(); }
     
     char                scrollBackStr[CON_BUFFER_SIZE][CON_LINE_LENGTH];
     unsigned int        scrollBackPos;
