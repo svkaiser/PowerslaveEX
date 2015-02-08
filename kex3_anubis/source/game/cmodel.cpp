@@ -123,17 +123,20 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
     points[2] = vertices[vstart+1].origin; // top
     points[3] = vertices[vstart+0].origin; // top
     
-    // could potentially slip through solid walls so extend the top and bottom edges of
-    // the wall to prevent this
-    if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
+    if(moveActor)
     {
-        points[0].z -= moveActor->StepHeight();
-        points[1].z -= moveActor->StepHeight();
-    }
-    if(!(face->TopEdge()->flags & EGF_BOTTOMSTEP))
-    {
-        points[2].z += moveActor->StepHeight();
-        points[3].z += moveActor->StepHeight();
+        // could potentially slip through solid walls so extend the top and bottom edges of
+        // the wall to prevent this
+        if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
+        {
+            points[0].z -= moveActor->StepHeight();
+            points[1].z -= moveActor->StepHeight();
+        }
+        if(!(face->TopEdge()->flags & EGF_BOTTOMSTEP))
+        {
+            points[2].z += moveActor->StepHeight();
+            points[3].z += moveActor->StepHeight();
+        }
     }
 
     // adjust origin so it lies exactly on the plane
@@ -200,7 +203,7 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
 // Performs a simple intersection test on the face polygon
 //
 
-bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float extent2)
+bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float extent2, const bool bTestOnly)
 {
     float d1, d2;
     kexVec3 hit;
@@ -232,6 +235,11 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
 
     if(!PointInsideFace(hit, face, extent2))
     {
+        if(!moveActor)
+        {
+            return false;
+        }
+
         if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
         {
             // intersect point not on the face
@@ -255,10 +263,16 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
         }
     }
 
+    if(bTestOnly)
+    {
+        return true;
+    }
+
     fraction = frac;
     interceptVector = hit;
     contactNormal = face->plane.Normal();
     contactFace = face;
+    contactSector = &sectors[face->sectorOwner];
     return true;
 }
 
@@ -444,6 +458,34 @@ bool kexCModel::CollideFace(mapFace_t *face)
 }
 
 //
+// kexCModel::TraceActorsInSector
+//
+
+void kexCModel::TraceActorsInSector(mapSector_t *sector)
+{
+    for(kexActor *actor = sector->actorList.Next();
+        actor != NULL;
+        actor = actor->SectorLink().Next())
+    {
+        if(actor == sourceActor || start.z > actor->Origin().z + actor->Height())
+        {
+            continue;
+        }
+
+        if(!(actor->Flags() & AF_SOLID))
+        {
+            continue;
+        }
+
+        if(TraceSphere(actor->Radius(), actor->Origin().ToVec2()))
+        {
+            contactActor = actor;
+            contactSector = actor->Sector();
+        }
+    }
+}
+
+//
 // kexCModel::SlideAgainstFaces
 //
 
@@ -598,25 +640,7 @@ void kexCModel::RecursiveFindSectors(mapSector_t *sector)
         return;
     }
 
-    for(kexActor *actor = sector->actorList.Next();
-        actor != NULL;
-        actor = actor->SectorLink().Next())
-    {
-        if(actor == moveActor || start.z > actor->Origin().z + actor->Height())
-        {
-            continue;
-        }
-
-        if(!(actor->Flags() & AF_SOLID))
-        {
-            continue;
-        }
-
-        if(TraceSphere(actor->Radius(), actor->Origin().ToVec2()))
-        {
-            contactActor = actor;
-        }
-    }
+    TraceActorsInSector(sector);
 
     sector->validcount = validcount;
     sectorList.Set(sector);
@@ -781,6 +805,7 @@ void kexCModel::CollideActorWithWorld(void)
         contactNormal.Clear();
         contactFace = NULL;
         contactActor = NULL;
+        contactSector = NULL;
         
         actorBounds.min.Set(-r, -r, -h);
         actorBounds.max.Set( r,  r,  h);
@@ -909,6 +934,7 @@ bool kexCModel::MoveActor(kexActor *actor)
     }
 
     moveActor = actor;
+    sourceActor = actor;
     actorRadius = actor->Radius();
     actorHeight = actor->Height();
     moveDir = actor->Movement();
@@ -928,4 +954,71 @@ bool kexCModel::MoveActor(kexActor *actor)
     actor->Movement() = moveDir;
     actor->LinkArea();
     return true;
+}
+
+//
+// kexCModel::Trace
+//
+
+bool kexCModel::Trace(kexActor *actor, mapSector_t *sector, const kexVec3 &start_pos, const kexVec3 &end_pos)
+{
+    unsigned int sectorCount;
+
+    if(sector == NULL)
+    {
+        return false;
+    }
+
+    sectorList.Reset();
+
+    moveActor = NULL;
+    sourceActor = actor;
+    actorRadius = 0;
+    actorHeight = 0;
+    start = start_pos;
+    end = end_pos;
+    moveDir = end - start;
+    fraction = 1;
+    interceptVector = end;
+    contactNormal.Clear();
+    contactSector = NULL;
+    contactFace = NULL;
+    contactActor = NULL;
+
+    sectorList.Set(sector);
+    sectorCount = 0;
+
+    TraceActorsInSector(sector);
+
+    do
+    {
+        mapSector_t *s = sectorList[sectorCount++];
+
+        for(int i = s->faceStart; i < s->faceEnd+3; ++i)
+        {
+            mapFace_t *face = &faces[i];
+
+            if(face->plane.Distance(moveDir) > 0)
+            {
+                continue;
+            }
+
+            if(face->flags & FF_PORTAL && face->sector >= 0)
+            {
+                TraceActorsInSector(&sectors[face->sector]);
+
+                if(TraceFacePlane(face, 0, 0, true))
+                {
+                    sectorList.Set(&sectors[face->sector]);
+                }
+            }
+            else if(face->flags & FF_SOLID)
+            {
+                TraceFacePlane(face);
+            }
+        }
+
+    } while(sectorCount < sectorList.CurrentLength());
+
+    return (fraction != 1);
 }

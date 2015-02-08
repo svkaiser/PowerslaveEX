@@ -115,6 +115,32 @@ COMMAND(fly)
 }
 
 //
+// summon
+//
+
+COMMAND(summon)
+{
+    int argc = kex::cCommands->GetArgc();
+    kexVec3 forward;
+    kexActor *a;
+    float x, y, z;
+
+    if(argc != 2)
+    {
+        kex::cSystem->Printf("summon <name>\n");
+        return;
+    }
+
+    a = gameLocal.Player()->Actor();
+    kexVec3::ToAxis(&forward, 0, 0, a->Yaw(), 0, 0);
+    x = a->Origin().x + (forward.x * a->Radius());
+    y = a->Origin().y + (forward.y * a->Radius());
+    z = a->Origin().z + (forward.z * a->Radius());
+
+    gameLocal.SpawnActor(kex::cCommands->GetArgv(1), x, y, z, a->Yaw());
+}
+
+//
 // kexGameLocal::kexGameLocal
 //
 
@@ -522,14 +548,70 @@ void kexGameLocal::RemoveAllActors(void)
 }
 
 //
+// kexGameLocal::ConstructActor
+//
+
+kexActor *kexGameLocal::ConstructActor(const char *className, kexDict *def, const int type,
+                                       const float x, const float y, const float z, const float yaw)
+{
+    kexActor *actor;
+
+    if(!(actor = static_cast<kexActor*>(ConstructObject(className))))
+    {
+        return NULL;
+    }
+    
+    if(def)
+    {
+        kexStr animName;
+        
+        def->GetFloat("scale", actor->Scale(), 1);
+        def->GetFloat("radius", actor->Radius(), 16);
+        def->GetFloat("height", actor->Height(), 32);
+        def->GetFloat("stepHeight", actor->StepHeight(), 16);
+
+        if(def->GetBool("noAdvanceFrames"))
+        {
+            actor->Flags() |= AF_NOADVANCEFRAMES;
+        }
+
+        if(def->GetBool("randomizeFrames"))
+        {
+            actor->Flags() |= AF_RANDOMIZATION;
+        }
+
+        if(def->GetBool("solid"))
+        {
+            actor->Flags() |= AF_SOLID;
+        }
+        
+        if(def->GetString("spriteAnim", animName))
+        {
+            actor->ChangeAnim(animName);
+        }
+    }
+    
+    actor->Origin().Set(x, y, z);
+    actor->Yaw() = yaw;
+    actor->Type() = static_cast<actorType_t>(type);
+    
+    actor->Link().Add(actors);
+    actor->LinkArea();
+    actor->CallSpawn();
+    
+    return actor;
+}
+
+//
 // kexGameLocal::SpawnActor
 //
 
-kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y, const float z, const float yaw)
+kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y, const float z,
+                                   const float yaw, const int sector)
 {
-    kexActor *actor;
     kexStr className;
     kexDict *def;
+    kexActor *actor;
     
     if((def = actorDefs.GetEntry(type)))
     {
@@ -552,43 +634,53 @@ kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y,
         }
     }
     
-    if(!(actor = static_cast<kexActor*>(ConstructObject(className))))
+    actor = ConstructActor(className, def, type, x, y, z, yaw);
+
+    if(sector <= -1)
     {
-        return NULL;
+        actor->FindSector(actor->Origin());
+    }
+    else
+    {
+        actor->SetSector(&world->Sectors()[sector]);
+    }
+
+    return actor;
+}
+
+//
+// kexGameLocal::SpawnActor
+//
+
+kexActor *kexGameLocal::SpawnActor(const char *name, const float x, const float y, const float z,
+                                   const float yaw, const int sector)
+{
+    kexStr className;
+    kexDict *def;
+    kexActor *actor;
+    
+    if((def = actorDefs.defs.Find(name)))
+    {
+        if(!def->GetString("classname", className))
+        {
+            className = "kexActor";
+        }
+    }
+    else
+    {
+        className = "kexActor";
     }
     
-    if(def)
+    actor = ConstructActor(className, def, -1, x, y, z, yaw);
+
+    if(sector <= -1)
     {
-        kexStr animName;
-        
-        def->GetFloat("scale", actor->Scale(), 1);
-        def->GetFloat("radius", actor->Radius(), 16);
-        def->GetFloat("height", actor->Height(), 32);
-        def->GetFloat("stepHeight", actor->StepHeight(), 16);
-
-        if(def->GetBool("noAdvanceFrames"))
-        {
-            actor->Flags() |= AF_NOADVANCEFRAMES;
-        }
-
-        if(def->GetBool("solid"))
-        {
-            actor->Flags() |= AF_SOLID;
-        }
-        
-        if(def->GetString("spriteAnim", animName))
-        {
-            actor->ChangeAnim(animName);
-        }
+        actor->FindSector(actor->Origin());
     }
-    
-    actor->Origin().Set(x, y, z);
-    actor->Yaw() = yaw;
-    actor->Type() = static_cast<actorType_t>(type);
-    
-    actor->Link().Add(actors);
-    actor->LinkArea();
-    actor->CallSpawn();
-    
+    else
+    {
+        actor->SetSector(&world->Sectors()[sector]);
+    }
+
     return actor;
 }

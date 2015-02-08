@@ -62,6 +62,18 @@ void kexActor::Tick(void)
 }
 
 //
+// kexActor::Remove
+//
+
+void kexActor::Remove(void)
+{
+    UnlinkArea();
+    UnlinkSector();
+
+    kexGameObject::Remove();
+}
+
+//
 // kexActor::Spawn
 //
 
@@ -80,9 +92,12 @@ void kexActor::Spawn(void)
     bounds.min.Set(-r, -r, -h);
     bounds.max.Set(r, r, h);
 
-    if(anim->NumFrames() > 0 && !(flags & AF_NOADVANCEFRAMES))
+    if(flags & AF_RANDOMIZATION)
     {
-        frameID = kexRand::Max(anim->NumFrames());
+        if(anim->NumFrames() > 0 && !(flags & AF_NOADVANCEFRAMES))
+        {
+            frameID = kexRand::Max(anim->NumFrames());
+        }
     }
 }
 
@@ -150,6 +165,11 @@ void kexActor::ChangeAnim(const char *animName)
 void kexActor::UpdateSprite(void)
 {
     spriteFrame_t *frame;
+
+    if(Removing())
+    {
+        return;
+    }
     
     if(anim == NULL || flags & AF_NOADVANCEFRAMES)
     {
@@ -163,6 +183,12 @@ void kexActor::UpdateSprite(void)
     if(ticks >= 1)
     {
         ticks = 0;
+
+        if(frame->flags & SFF_REMOVESELF)
+        {
+            Remove();
+            return;
+        }
         
         // reached the end of the frame?
         if(++frameID >= (int16_t)anim->NumFrames())

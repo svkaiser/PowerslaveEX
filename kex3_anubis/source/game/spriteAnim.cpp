@@ -156,6 +156,10 @@ void kexSpriteAnimManager::ParseFrame(kexLexer *lexer, spriteFrame_t *frame)
         {
             frame->flags |= SFF_FULLBRIGHT;
         }
+        else if(lexer->Matches("removeSelf"))
+        {
+            frame->flags |= SFF_REMOVESELF;
+        }
         else if(lexer->Matches("goto"))
         {
             lexer->GetString();

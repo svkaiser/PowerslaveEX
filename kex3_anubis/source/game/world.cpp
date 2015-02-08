@@ -441,9 +441,8 @@ void kexWorld::SpawnMapActor(mapActor_t *mapActor)
     z   = (float)mapActor->z;
     an  = kexMath::Deg2Rad((360 - (float)mapActor->angle) + 90);
     
-    actor = kexGame::cLocal->SpawnActor(mapActor->type, x, y, z, an);
+    actor = kexGame::cLocal->SpawnActor(mapActor->type, x, y, z, an, mapActor->sector);
     actor->SetMapActor(mapActor);
-    actor->SetSector(&sectors[mapActor->sector]);
 }
 
 //

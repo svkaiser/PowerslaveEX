@@ -33,6 +33,7 @@ public:
     {
         type            data;
         filepath_t      name;
+        int             refIndex;
         hashKey_s       *next;
     } hashKey_t;
 
@@ -59,6 +60,7 @@ type *kexHashList<type>::Add(const char *tname, kexHeapBlock &hb)
 
     hashKey_t *o = (hashKey_t*)Mem_Calloc(sizeof(hashKey_t), hb);
     strncpy(o->name, tname, MAX_FILEPATH);
+    o->refIndex = -1;
 
     // add to hash for future reference
     hash = kexStr::Hash(o->name);
@@ -78,12 +80,13 @@ type *kexHashList<type>::Add(const char *tname, const int index, kexHeapBlock &h
     
     hashKey_t *o = (hashKey_t*)Mem_Calloc(sizeof(hashKey_t), hb);
     strncpy(o->name, tname, MAX_FILEPATH);
+    o->refIndex = index;
     
     // add to hash for future reference
     hash = index & (MAX_HASH-1);
     o->next = hashlist[hash];
     hashlist[hash] = o;
-    
+
     return &o->data;
 }
 
@@ -116,9 +119,24 @@ template<class type>
 type *kexHashList<type>::Find(const int index) const
 {
     unsigned int hash;
+    hashKey_t *t;
     
     hash = index & (MAX_HASH-1);
-    return &hashlist[hash]->data;
+
+    for(t = hashlist[hash]; t; t = t->next)
+    {
+        if(t->refIndex == -1)
+        {
+            continue;
+        }
+
+        if(t->refIndex == index)
+        {
+            return &t->data;
+        }
+    }
+
+    return NULL;
 }
 
 //

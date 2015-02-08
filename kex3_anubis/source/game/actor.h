@@ -207,7 +207,8 @@ typedef enum
     AF_FLOORFRICTION    = BIT(0),
     AF_CEILINGFRICTION  = BIT(1),
     AF_SOLID            = BIT(2),
-    AF_NOADVANCEFRAMES  = BIT(3)
+    AF_NOADVANCEFRAMES  = BIT(3),
+    AF_RANDOMIZATION    = BIT(4)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -222,6 +223,7 @@ public:
     ~kexActor(void);
 
     virtual void                    Tick(void);
+    virtual void                    Remove(void);
 
     void                            Spawn(void);
     bool                            FindSector(const kexVec3 &pos);

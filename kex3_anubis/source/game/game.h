@@ -192,8 +192,12 @@ public:
     kexIndexDefManager      &ActorDefs(void) { return actorDefs; }
 
     kexObject               *ConstructObject(const char *className);
+    kexActor                *ConstructActor(const char *className, kexDict *def, const int type,
+                                            const float x, const float y, const float z, const float yaw);
     kexActor                *SpawnActor(const int type, const float x, const float y, const float z,
-                                        const float yaw);
+                                        const float yaw, const int sector = -1);
+    kexActor                *SpawnActor(const char *name, const float x, const float y, const float z,
+                                        const float yaw, const int sector = -1);
     void                    DrawSmallString(const char *string, float x, float y, float scale, bool center,
                                             byte r = 0xff, byte g = 0xff, byte b = 0xff);
     void                    DrawBigString(const char *string, float x, float y, float scale, bool center,

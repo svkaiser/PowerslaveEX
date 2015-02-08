@@ -38,19 +38,29 @@ public:
                                             const float extent = 0);
 
     bool                    MoveActor(kexActor *actor);
+    bool                    Trace(kexActor *actor, mapSector_t *sector,
+                                  const kexVec3 &start_pos, const kexVec3 &end_pos);
     bool                    CheckActorPosition(kexActor *actor);
     void                    Reset(void);
 
     const int               ValidCount(void) const { return validcount; }
+    mapFace_t               *ContactFace(void) { return contactFace; }
+    kexActor                *ContactActor(void) { return contactActor; }
+    mapSector_t             *ContactSector(void) { return contactSector; }
+    kexVec3                 &InterceptVector(void) { return interceptVector; }
+    kexVec3                 &ContactNormal(void) { return contactNormal; }
+    const float             &Fraction(void) { return fraction; }
 
 private:
+    void                    TraceActorsInSector(mapSector_t *sector);
     void                    CollideActorWithWorld(void);
     void                    AdvanceActorToSector(void);
     void                    SlideAgainstFaces(mapSector_t *sector);
     bool                    CheckEdgeSide(mapEdge_t *edge, mapFace_t *face,
                                           const float heightAdjust, const float extent = 0);
     void                    CheckSurroundingSectors(void);
-    bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0);
+    bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0,
+                                           const bool bTestOnly = false);
     bool                    CollideFace(mapFace_t *face);
     bool                    TraceSphere(const float radius, const kexVec2 &point);
     void                    PushFromRadialBounds(const kexVec2 &point, const float radius = 0);
@@ -65,6 +75,8 @@ private:
 
     kexStack<mapSector_t*>  sectorList;
     kexActor                *moveActor;
+    kexActor                *sourceActor;
+    mapSector_t             *contactSector;
     mapFace_t               *contactFace;
     kexActor                *contactActor;
     kexVec3                 interceptVector;

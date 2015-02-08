@@ -161,6 +161,7 @@ kexIndexDefManager::~kexIndexDefManager(void)
 void kexIndexDefManager::Parse(kexLexer *lexer)
 {
     kexDict *defEntry;
+    kexDict *defNameEntry;
     kexStr key;
     kexStr val;
     kexStr defName;
@@ -178,6 +179,7 @@ void kexIndexDefManager::Parse(kexLexer *lexer)
                 defName = lexer->Token();
                 defIndex = lexer->GetNumber();
                 defEntry = defs.Add(defName, defIndex);
+                defNameEntry = defs.Add(defName);
                 
                 lexer->ExpectNextToken(TK_LBRACK);
                 while(1)
@@ -199,6 +201,7 @@ void kexIndexDefManager::Parse(kexLexer *lexer)
                     val = lexer->Token();
                     
                     defEntry->Add(key.c_str(), val.c_str());
+                    defNameEntry->Add(key.c_str(), val.c_str());
                 }
                 break;
             default:
