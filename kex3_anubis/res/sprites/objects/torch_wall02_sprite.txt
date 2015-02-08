@@ -1,0 +1,17 @@
+texture "sprites/objects/torch_wall02.png"
+
+// working\torch\sprite0523.tga
+sprite 0 0 0 20 64
+
+// working\torch\sprite0524.tga
+sprite 1 20 0 16 44
+
+// working\torch\sprite0525.tga
+sprite 2 36 0 16 44
+
+// working\torch\sprite0526.tga
+sprite 3 52 0 16 44
+
+// working\torch\sprite0527.tga
+sprite 4 68 0 16 44
+

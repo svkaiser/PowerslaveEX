@@ -1,0 +1,35 @@
+texture "sprites/objects/vase02_exp.png"
+
+// working\pot_exp02\sprite0478.tga
+sprite 0 0 0 64 47
+
+// working\pot_exp02\sprite0479.tga
+sprite 1 64 0 8 47
+
+// working\pot_exp02\sprite0480.tga
+sprite 2 72 0 20 9
+
+// working\pot_exp02\sprite0481.tga
+sprite 3 92 0 28 30
+
+// working\pot_exp02\sprite0482.tga
+sprite 4 120 0 20 26
+
+// working\pot_exp02\sprite0483.tga
+sprite 5 140 0 20 22
+
+// working\pot_exp02\sprite0484.tga
+sprite 6 160 0 32 21
+
+// working\pot_exp02\sprite0485.tga
+sprite 7 192 0 16 44
+
+// working\pot_exp02\sprite0486.tga
+sprite 8 208 0 16 44
+
+// working\pot_exp02\sprite0487.tga
+sprite 9 224 0 16 44
+
+// working\pot_exp02\sprite0488.tga
+sprite 10 240 0 16 44
+

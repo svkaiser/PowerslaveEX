@@ -9,6 +9,17 @@ Obj_Vase_Explode01 49
     spriteAnim              "objects/vase01_exp_idle"
 }
 
+Obj_Vase_Explode02 50
+{
+    classname               "kexActor"
+    radius                  96
+    height                  96
+    stepHeight              32
+    scale                   1.5
+    health                  45
+    spriteAnim              "objects/vase02_exp_idle"
+}
+
 Obj_Camel 58
 {
     classname               "kexActor"
@@ -20,6 +31,18 @@ Obj_Camel 58
     component               "Camel"
 }
 
+Obj_Vase03 71
+{
+    classname               "kexActor"
+    radius                  96
+    height                  128
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase03_idle"
+    noAdvanceFrames         1
+}
+
 Obj_Vase01 76
 {
     classname               "kexActor"
@@ -29,6 +52,31 @@ Obj_Vase01 76
     health                  30
     scale                   1.5
     spriteAnim              "objects/vase01_idle"
+    noAdvanceFrames         1
+}
+
+Obj_Vase02 77
+{
+    classname               "kexActor"
+    radius                  96
+    height                  96
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase02_idle"
+    noAdvanceFrames         1
+}
+
+Obj_Vase04 80
+{
+    classname               "kexActor"
+    radius                  96
+    height                  96
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase04_idle"
+    noAdvanceFrames         1
 }
 
 Obj_Fire_Pot 83
@@ -39,6 +87,47 @@ Obj_Fire_Pot 83
     stepHeight              48
     scale                   2.0
     spriteAnim              "objects/fire_pot_idle"
+}
+
+Obj_Fire_Stone 84
+{
+    classname               "kexActor"
+    radius                  64
+    height                  128
+    stepHeight              48
+    scale                   2.0
+    spriteAnim              "objects/fire_stone_idle"
+}
+
+Obj_Fire_Pot_Candles 85
+{
+    classname               "kexActor"
+    radius                  96
+    height                  96
+    stepHeight              32
+    scale                   1.5
+    health                  45
+    spriteAnim              "objects/fire_pot_candles_idle"
+}
+
+Obj_Fire_Pot_Large01 98
+{
+    classname               "kexActor"
+    radius                  64
+    height                  128
+    stepHeight              48
+    scale                   2.0
+    spriteAnim              "objects/fire_pot_large01_idle"
+}
+
+Obj_Torch_Wall02 117
+{
+    classname               "kexActor"
+    radius                  64
+    height                  128
+    stepHeight              48
+    scale                   2.0
+    spriteAnim              "objects/torch_wall02_idle"
 }
 
 Obj_Torch_Wall01 118

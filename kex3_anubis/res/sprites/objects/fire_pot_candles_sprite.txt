@@ -1,0 +1,17 @@
+texture "sprites/objects/fire_pot_candles.png"
+
+// working\candles\sprite0517.tga
+sprite 0 0 0 8 16
+
+// working\candles\sprite0518.tga
+sprite 1 8 0 8 16
+
+// working\candles\sprite0519.tga
+sprite 2 16 0 8 16
+
+// working\candles\sprite0520.tga
+sprite 3 24 0 8 16
+
+// working\candles\sprite0521.tga
+sprite 4 32 0 32 37
+

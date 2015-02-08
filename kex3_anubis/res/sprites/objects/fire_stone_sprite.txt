@@ -1,0 +1,17 @@
+texture "sprites/objects/fire_stone.png"
+
+// working\fire_stone\sprite0401.tga
+sprite 0 0 0 48 41
+
+// working\fire_stone\sprite0402.tga
+sprite 1 48 0 48 41
+
+// working\fire_stone\sprite0403.tga
+sprite 2 0 41 64 16
+
+// working\fire_stone\sprite0404.tga
+sprite 3 64 41 44 41
+
+// working\fire_stone\sprite0405.tga
+sprite 4 0 57 48 41
+
