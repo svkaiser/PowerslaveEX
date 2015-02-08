@@ -57,6 +57,7 @@ public:
     bool                        GetInt(const kexStr &key, int &out, const int defaultValue = 0);
     bool                        GetBool(const char *key, bool &out, const bool defaultValue = false);
     bool                        GetBool(const kexStr &key, bool &out, const bool defaultValue = false);
+    bool                        GetBool(const char *key);
     bool                        GetString(const char *key, kexStr &out);
     bool                        GetString(const kexStr &key, kexStr &out);
     bool                        GetVector(const char *key, kexVec3 &out);

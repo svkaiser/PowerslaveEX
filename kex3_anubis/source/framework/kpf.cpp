@@ -290,7 +290,7 @@ void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
                     continue;
                 }
 
-                list.Push(kexStr(search) + file->name);
+                list.Push(file->name);
             }
         }
     }

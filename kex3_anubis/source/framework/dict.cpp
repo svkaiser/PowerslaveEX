@@ -263,6 +263,22 @@ bool kexDict::GetBool(const kexStr &key, bool &out, const bool defaultValue)
 }
 
 //
+// kexDict::GetBool
+//
+
+bool kexDict::GetBool(const char *key)
+{
+    kexHashKey *k;
+
+    if(!(k = Find(key)))
+    {
+        return false;
+    }
+
+    return (atoi(k->GetString()) != 0);
+}
+
+//
 // kexDict::GetString
 //
 

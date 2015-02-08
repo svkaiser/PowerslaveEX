@@ -206,7 +206,8 @@ typedef enum
 {
     AF_FLOORFRICTION    = BIT(0),
     AF_CEILINGFRICTION  = BIT(1),
-    AF_SOLID            = BIT(2)
+    AF_SOLID            = BIT(2),
+    AF_NOADVANCEFRAMES  = BIT(3)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -228,13 +229,16 @@ public:
     void                            UnlinkArea(void);
     void                            ChangeAnim(spriteAnim_t *changeAnim);
     void                            ChangeAnim(const char *animName);
+    void                            LinkSector(void);
+    void                            UnlinkSector(void);
 
     kexVec3                         &Velocity(void) { return velocity; }
     kexVec3                         &Movement(void) { return movement; }
     mapSector_t                     *Sector(void) { return sector; }
-    void                            SetSector(mapSector_t *s) { sector = s; }
+    void                            SetSector(mapSector_t *s);
     mapActor_t                      *MapActor(void) { return mapActor; }
     kexLinklist<kexActor>           &Link(void) { return link; }
+    kexLinklist<kexActor>           &SectorLink(void) { return sectorLink; }
     kexBBox                         &Bounds(void) { return bounds; }
     actorType_t                     &Type(void) { return type; }
     int16_t                         &Health(void) { return health; }
@@ -267,6 +271,7 @@ protected:
     kexVec3                         velocity;
     kexVec3                         movement;
     kexLinklist<kexActor>           link;
+    kexLinklist<kexActor>           sectorLink;
     kexBBox                         bounds;
     mapSector_t                     *sector;
     mapActor_t                      *mapActor;

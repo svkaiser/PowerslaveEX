@@ -132,6 +132,8 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].floodCount       = 0;
         sectors[i].ceilingFace      = &faces[sectors[i].faceEnd+1];
         sectors[i].floorFace        = &faces[sectors[i].faceEnd+2];
+
+        sectors[i].actorList.Reset();
         
         for(int j = sectors[i].faceStart; j < sectors[i].faceEnd+3; ++j)
         {
@@ -291,7 +293,10 @@ void kexWorld::ReadActors(kexBinFile &mapfile, const unsigned int count)
         actors[i].z         = mapfile.Read16();
         actors[i].angle     = mapfile.ReadFloat();
         
-        SpawnMapActor(&actors[i]);
+        if(actors[i].sector >= 0)
+        {
+            SpawnMapActor(&actors[i]);
+        }
     }
 }
 

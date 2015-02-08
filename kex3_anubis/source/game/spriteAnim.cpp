@@ -125,6 +125,11 @@ void kexSpriteAnimManager::ParseSpriteSet(kexLexer *lexer, spriteFrame_t *frame)
             sprSet.bFlipped = (lexer->GetNumber() != 0);
             lexer->ExpectNextToken(TK_RBRACK);
 
+            if(sprSet.sprite == NULL)
+            {
+                sprSet.sprite = &kexGame::cLocal->SpriteManager()->defaultSprite;
+            }
+
             frame->spriteSet.Push(sprSet);
         }
 

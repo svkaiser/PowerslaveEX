@@ -37,24 +37,25 @@ typedef enum
 
 typedef struct
 {
-    word                faceStart;
-    word                faceEnd;
-    word                lightLevel;
-    short               ceilingHeight;
-    short               floorHeight;
-    float               ceilingSlope;
-    float               floorSlope;
-    word                flags;
-    kexBBox             bounds;
-    int                 validcount;
-    int                 floodCount;
-    int                 clipCount;
-    float               x1;
-    float               x2;
-    float               y1;
-    float               y2;
-    struct mapFace_s    *floorFace;
-    struct mapFace_s    *ceilingFace;
+    word                    faceStart;
+    word                    faceEnd;
+    word                    lightLevel;
+    short                   ceilingHeight;
+    short                   floorHeight;
+    float                   ceilingSlope;
+    float                   floorSlope;
+    word                    flags;
+    kexBBox                 bounds;
+    int                     validcount;
+    int                     floodCount;
+    int                     clipCount;
+    float                   x1;
+    float                   x2;
+    float                   y1;
+    float                   y2;
+    struct mapFace_s        *floorFace;
+    struct mapFace_s        *ceilingFace;
+    kexLinklist<kexActor>   actorList;
 } mapSector_t;
 
 typedef enum

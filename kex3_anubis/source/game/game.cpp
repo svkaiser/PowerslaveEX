@@ -563,6 +563,16 @@ kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y,
         def->GetFloat("radius", actor->Radius(), 16);
         def->GetFloat("height", actor->Height(), 32);
         def->GetFloat("stepHeight", actor->StepHeight(), 16);
+
+        if(def->GetBool("noAdvanceFrames"))
+        {
+            actor->Flags() |= AF_NOADVANCEFRAMES;
+        }
+
+        if(def->GetBool("solid"))
+        {
+            actor->Flags() |= AF_SOLID;
+        }
         
         if(def->GetString("spriteAnim", animName))
         {

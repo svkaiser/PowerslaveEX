@@ -39,6 +39,7 @@ kexActor::kexActor(void)
     this->anim = NULL;
     this->frameID = 0;
     this->ticks = 0;
+    this->sectorLink.SetData(this);
     this->areaLink.link.SetData(this);
     this->areaLink.node = NULL;
 }
@@ -103,6 +104,16 @@ bool kexActor::FindSector(const kexVec3 &pos)
 }
 
 //
+// kexActor::SetSector
+//
+
+void kexActor::SetSector(mapSector_t *s)
+{
+    sector = s;
+    LinkSector();
+}
+
+//
 // kexActor::ChangeAnim
 //
 
@@ -135,7 +146,7 @@ void kexActor::UpdateSprite(void)
 {
     spriteFrame_t *frame;
     
-    if(anim == NULL)
+    if(anim == NULL || flags & AF_NOADVANCEFRAMES)
     {
         return;
     }
@@ -191,4 +202,23 @@ void kexActor::LinkArea(void)
 void kexActor::UnlinkArea(void)
 {
     areaLink.UnLink();
+}
+
+//
+// kexActor::LinkSector
+//
+
+void kexActor::LinkSector(void)
+{
+    UnlinkSector();
+    sectorLink.AddBefore(sector->actorList);
+}
+
+//
+// kexActor::UnlinkSector
+//
+
+void kexActor::UnlinkSector(void)
+{
+    sectorLink.Remove();
 }

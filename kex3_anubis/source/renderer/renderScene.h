@@ -38,8 +38,10 @@ private:
     void                    DrawSector(mapSector_t *sector);
     void                    DrawFace(mapSector_t *sector, int faceID);
     void                    DrawPolygon(mapFace_t *face, mapPoly_t *poly);
+    void                    DrawActors(mapSector_t *sector);
     void                    PrintStats(void);
     
+    kexMatrix               spriteMatrix;
     kexWorld                *world;
     kexRenderView           *view;
     int                     clipY;

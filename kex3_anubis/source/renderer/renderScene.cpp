@@ -378,6 +378,90 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 }
 
 //
+// kexRenderScene::DrawActors
+//
+
+void kexRenderScene::DrawActors(mapSector_t *sector)
+{
+    kexCpuVertList *vl = kexRender::cVertList;
+
+    for(kexActor *actor = sector->actorList.Next();
+        actor != NULL;
+        actor = actor->SectorLink().Next())
+    {
+        if(actor->Anim() == NULL || actor == kexGame::cLocal->Player()->Actor())
+        {
+            continue;
+        }
+        
+        if(!view->TestBoundingBox(actor->Bounds() + actor->Origin()))
+        {
+            continue;
+        }
+        
+        kexVec3 org = actor->Origin();
+        kexMatrix scale(actor->Scale(), actor->Scale(), actor->Scale());
+        spriteFrame_t *frame;
+        spriteSet_t *spriteSet;
+        kexSprite *sprite;
+        spriteInfo_t *info;
+
+        frame = actor->Frame();
+
+        for(unsigned int i = 0; i < frame->spriteSet.Length(); ++i)
+        {
+            spriteSet = &frame->spriteSet[i];
+            sprite = spriteSet->sprite;
+            info = &sprite->InfoList()[spriteSet->index];
+
+            float x = (float)spriteSet->x;
+            float y = (float)spriteSet->y;
+            float w = (float)info->atlas.w;
+            float h = (float)info->atlas.h;
+
+            float u1, u2, v1, v2;
+            
+            u1 = info->u[0 ^ spriteSet->bFlipped];
+            u2 = info->u[1 ^ spriteSet->bFlipped];
+            v1 = info->v[0];
+            v2 = info->v[1];
+
+            sprite->Texture()->Bind();
+
+            kexVec3 p1 = kexVec3(x, 0, y);
+            kexVec3 p2 = kexVec3(x+w, 0, y);
+            kexVec3 p3 = kexVec3(x, 0, y+h);
+            kexVec3 p4 = kexVec3(x+w, 0, y+h);
+
+            p1 *= spriteMatrix;
+            p2 *= spriteMatrix;
+            p3 *= spriteMatrix;
+            p4 *= spriteMatrix;
+
+            p1 *= scale;
+            p2 *= scale;
+            p3 *= scale;
+            p4 *= scale;
+
+            p1 += org;
+            p2 += org;
+            p3 += org;
+            p4 += org;
+
+            vl->AddVertex(p1, u1, v1, 255, 255, 255, 255);
+            vl->AddVertex(p2, u2, v1, 255, 255, 255, 255);
+            vl->AddVertex(p3, u1, v2, 255, 255, 255, 255);
+            vl->AddVertex(p4, u2, v2, 255, 255, 255, 255);
+
+            vl->AddTriangle(0, 2, 1);
+            vl->AddTriangle(1, 2, 3);
+
+            vl->DrawElements();
+        }
+    }
+}
+
+//
 // kexRenderScene::PrintStats
 //
 
@@ -424,13 +508,21 @@ void kexRenderScene::Draw(void)
     kexRender::cVertList->BindDrawPointers();
     
     DrawSky();
+
+    spriteMatrix = kexMatrix(-view->Pitch(), 1) * kexMatrix(view->Yaw(), 2);
+    spriteMatrix.RotateX(kexMath::pi);
     
     for(unsigned int i = 0; i < world->VisibleSectors().CurrentLength(); ++i)
     {
         DrawSector(&world->Sectors()[world->VisibleSectors()[i]]);
     }
-    
+
     kexRender::cBackend->SetScissorRect(0, 0, w, clipY);
+
+    for(unsigned int i = 0; i < world->VisibleSectors().CurrentLength(); ++i)
+    {
+        DrawActors(&world->Sectors()[world->VisibleSectors()[i]]);
+    }
     
     PrintStats();
 }
