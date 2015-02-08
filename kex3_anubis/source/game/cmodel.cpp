@@ -263,12 +263,12 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
 }
 
 //
-// kexCModel::TraceFaceVertex
+// kexCModel::TraceSphere
 //
 // Performs a intersection test on a 2D-circle
 //
 
-bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
+bool kexCModel::TraceSphere(const float radius, const kexVec2 &point)
 {
     kexVec2 org;
     kexVec2 dir;
@@ -295,7 +295,7 @@ bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
     
     cp      = dir.Dot(org);
     cDist   = (org - (dir * cp));
-    r       = actorRadius + 1.024f;
+    r       = radius + 1.024f;
     rd      = r * r - cDist.UnitSq();
     
     if(rd < 0)
@@ -307,11 +307,6 @@ bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
     
     if(frac <= 1 && frac < fraction)
     {
-        if(frac < 0)
-        {
-            frac = 0;
-        }
-        
         fraction = frac;
         interceptVector = start;
         interceptVector.Lerp(end, frac);
@@ -320,7 +315,7 @@ bool kexCModel::TraceFaceVertex(mapFace_t *face, const kexVec2 &point)
         contactNormal.y = interceptVector.y - point.y;
         contactNormal.z = 0;
         contactNormal.Normalize();
-        contactFace = face;
+        contactFace = NULL;
         return true;
     }
     
@@ -339,16 +334,15 @@ void kexCModel::PushFromRadialBounds(const kexVec2 &point, const float radius)
     
     org = end;
     dist = org.DistanceSq(point);
-    r = actorRadius + 1.024f;
+    r = radius + 1.024f;
 
     if(dist <= (r * r))
     {
         kexVec2 dir = (org - point).Normalize();
         dist = (r - kexMath::Sqrt(dist)) + 0.1f;
 
-        pushDir.x = dir.x * dist;
-        pushDir.y = dir.y * dist;
-        pushDir.z = 0;
+        moveDir.x += dir.x * dist;
+        moveDir.y += dir.y * dist;
     }
 }
 
@@ -418,7 +412,10 @@ bool kexCModel::CollideFace(mapFace_t *face)
                 return false;
             }
             
-            TraceFaceVertex(face, P);
+            if(TraceSphere(actorRadius, P))
+            {
+                contactFace = face;
+            }
             return false;
         }
         
@@ -434,7 +431,10 @@ bool kexCModel::CollideFace(mapFace_t *face)
                 return false;
             }
             
-            TraceFaceVertex(face, P);
+            if(TraceSphere(actorRadius, P))
+            {
+                contactFace = face;
+            }
             return false;
         }
     }
@@ -598,6 +598,26 @@ void kexCModel::RecursiveFindSectors(mapSector_t *sector)
         return;
     }
 
+    for(kexActor *actor = sector->actorList.Next();
+        actor != NULL;
+        actor = actor->SectorLink().Next())
+    {
+        if(actor == moveActor || start.z > actor->Origin().z + actor->Height())
+        {
+            continue;
+        }
+
+        if(!(actor->Flags() & AF_SOLID))
+        {
+            continue;
+        }
+
+        if(TraceSphere(actor->Radius(), actor->Origin().ToVec2()))
+        {
+            contactActor = actor;
+        }
+    }
+
     sector->validcount = validcount;
     sectorList.Set(sector);
 
@@ -745,22 +765,22 @@ void kexCModel::CollideActorWithWorld(void)
     kexVec3 contactNormals[CONTACT_COUNT];
     
     moves = 0;
-    pushDir.Clear();
     r = actorRadius*2;
     h = actorHeight*2;
     
     for(int i = 0; i < CONTACT_COUNT; ++i)
     {
+        float projAmt;
+
         kexVec3::ToAxis(&forwardDir, NULL, NULL, moveDir.ToYaw(), 0, 0);
         
         fraction = 1;
         end = start + moveDir;
-        end += pushDir;
-        pushDir.Clear();
         interceptVector = end;
         
         contactNormal.Clear();
         contactFace = NULL;
+        contactActor = NULL;
         
         actorBounds.min.Set(-r, -r, -h);
         actorBounds.max.Set( r,  r,  h);
@@ -781,11 +801,6 @@ void kexCModel::CollideActorWithWorld(void)
         
         if(fraction >= 1)
         {
-            if(pushDir.UnitSq() > 0)
-            {
-                continue;
-            }
-
             // went the entire distance
             break;
         }
@@ -794,8 +809,14 @@ void kexCModel::CollideActorWithWorld(void)
         {
             break;
         }
+
+        if(contactActor)
+        {
+            PushFromRadialBounds(contactActor->Origin().ToVec2(), contactActor->Radius());
+        }
         
         contactNormals[moves++] = contactNormal;
+        projAmt = 1.0f - fraction + 0.001f;
         
         // try all interacted normals
         for(int j = 0; j < moves; ++j)
@@ -805,7 +826,7 @@ void kexCModel::CollideActorWithWorld(void)
                 continue;
             }
             
-            moveDir.Project(contactNormals[j], 1.0f);
+            moveDir.Project(contactNormals[j], projAmt);
             
             // try bumping against another plane
             for(int k = 0; k < moves; ++k)
@@ -816,7 +837,7 @@ void kexCModel::CollideActorWithWorld(void)
                 }
                 
                 // bump into second plane
-                moveDir.Project(contactNormals[k], 1.0f);
+                moveDir.Project(contactNormals[k], projAmt);
                 
                 if(moveDir.Dot(contactNormals[j]) >= 0)
                 {
