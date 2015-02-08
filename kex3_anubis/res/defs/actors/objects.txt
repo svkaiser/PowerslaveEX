@@ -1,123 +1,275 @@
+//-----------------------------------------------------------------------------
+//
+// exploding objects
+//
+//-----------------------------------------------------------------------------
+
 Obj_Vase_Explode01 49
 {
     classname               "kexActor"
-    radius                  96
+    radius                  64
     height                  96
     stepHeight              32
     scale                   1.5
     health                  45
     spriteAnim              "objects/vase01_exp_idle"
+    solid                   1
 }
 
 Obj_Vase_Explode02 50
 {
     classname               "kexActor"
-    radius                  96
+    radius                  64
     height                  96
     stepHeight              32
     scale                   1.5
     health                  45
     spriteAnim              "objects/vase02_exp_idle"
+    solid                   1
 }
+
+//-----------------------------------------------------------------------------
+//
+// special objects
+//
+//-----------------------------------------------------------------------------
 
 Obj_Camel 58
 {
     classname               "kexActor"
-    radius                  192
+    radius                  96
     height                  192
     stepHeight              48
     scale                   1.25
     spriteAnim              "objects/camel_idle"
     component               "Camel"
+    solid                   1
+}
+
+//-----------------------------------------------------------------------------
+//
+// destructibles
+//
+//-----------------------------------------------------------------------------
+
+Obj_Vase08 66
+{
+    classname               "kexActor"
+    radius                  64
+    height                  128
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase08_idle"
+    noAdvanceFrames         1
+    solid                   1
+}
+
+Obj_Vase11 68
+{
+    classname               "kexActor"
+    radius                  64
+    height                  128
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase11_idle"
+    noAdvanceFrames         1
+    solid                   1
+}
+
+Obj_Vase09 69
+{
+    classname               "kexActor"
+    radius                  64
+    height                  128
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase09_idle"
+    noAdvanceFrames         1
+    solid                   1
+}
+
+Obj_Barrel 70
+{
+    classname               "kexActor"
+    radius                  64
+    height                  128
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/barrel_idle"
+    noAdvanceFrames         1
+    solid                   1
 }
 
 Obj_Vase03 71
 {
     classname               "kexActor"
-    radius                  96
+    radius                  64
     height                  128
     stepHeight              32
     health                  30
     scale                   1.5
     spriteAnim              "objects/vase03_idle"
     noAdvanceFrames         1
+    solid                   1
+}
+
+Obj_Vase10 74
+{
+    classname               "kexActor"
+    radius                  64
+    height                  128
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase10_idle"
+    noAdvanceFrames         1
+    solid                   1
 }
 
 Obj_Vase01 76
 {
     classname               "kexActor"
-    radius                  96
+    radius                  64
     height                  96
     stepHeight              32
     health                  30
     scale                   1.5
     spriteAnim              "objects/vase01_idle"
     noAdvanceFrames         1
+    solid                   1
 }
 
 Obj_Vase02 77
 {
     classname               "kexActor"
-    radius                  96
+    radius                  64
     height                  96
     stepHeight              32
     health                  30
     scale                   1.5
     spriteAnim              "objects/vase02_idle"
     noAdvanceFrames         1
+    solid                   1
+}
+
+Obj_Vase06 78
+{
+    classname               "kexActor"
+    radius                  64
+    height                  96
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase06_idle"
+    noAdvanceFrames         1
+    solid                   1
+}
+
+Obj_Vase07 79
+{
+    classname               "kexActor"
+    radius                  64
+    height                  96
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase07_idle"
+    noAdvanceFrames         1
+    solid                   1
 }
 
 Obj_Vase04 80
 {
     classname               "kexActor"
-    radius                  96
+    radius                  64
     height                  96
     stepHeight              32
     health                  30
     scale                   1.5
     spriteAnim              "objects/vase04_idle"
     noAdvanceFrames         1
+    solid                   1
 }
+
+Obj_Vase12 81
+{
+    classname               "kexActor"
+    radius                  64
+    height                  96
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase12_idle"
+    noAdvanceFrames         1
+    solid                   1
+}
+
+Obj_Vase05 82
+{
+    classname               "kexActor"
+    radius                  64
+    height                  96
+    stepHeight              32
+    health                  30
+    scale                   1.5
+    spriteAnim              "objects/vase05_idle"
+    noAdvanceFrames         1
+    solid                   1
+}
+
+//-----------------------------------------------------------------------------
+//
+// light sources
+//
+//-----------------------------------------------------------------------------
 
 Obj_Fire_Pot 83
 {
     classname               "kexActor"
-    radius                  64
-    height                  128
+    radius                  32
+    height                  64
     stepHeight              48
     scale                   2.0
     spriteAnim              "objects/fire_pot_idle"
+    solid                   1
 }
 
 Obj_Fire_Stone 84
 {
     classname               "kexActor"
-    radius                  64
-    height                  128
+    radius                  32
+    height                  64
     stepHeight              48
     scale                   2.0
     spriteAnim              "objects/fire_stone_idle"
+    solid                   1
 }
 
 Obj_Fire_Pot_Candles 85
 {
     classname               "kexActor"
-    radius                  96
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     scale                   1.5
     health                  45
     spriteAnim              "objects/fire_pot_candles_idle"
+    solid                   1
 }
 
 Obj_Fire_Pot_Large01 98
 {
     classname               "kexActor"
-    radius                  64
-    height                  128
+    radius                  32
+    height                  64
     stepHeight              48
     scale                   2.0
     spriteAnim              "objects/fire_pot_large01_idle"
+    solid                   1
 }
 
 Obj_Torch_Wall02 117
@@ -133,7 +285,7 @@ Obj_Torch_Wall02 117
 Obj_Torch_Wall01 118
 {
     classname               "kexActor"
-    radius                  64
+    radius                  32
     height                  128
     stepHeight              48
     scale                   2.0
@@ -143,18 +295,19 @@ Obj_Torch_Wall01 118
 Obj_Torch_Tall01 119
 {
     classname               "kexActor"
-    radius                  64
+    radius                  32
     height                  128
     stepHeight              48
     scale                   2.0
     spriteAnim              "objects/torch_tall01_idle"
+    solid                   1
 }
 
 Obj_Water_Lamp 120
 {
     classname               "kexActor"
-    radius                  64
-    height                  128
+    radius                  32
+    height                  64
     stepHeight              48
     scale                   2.0
     spriteAnim              "objects/water_lamp_base"

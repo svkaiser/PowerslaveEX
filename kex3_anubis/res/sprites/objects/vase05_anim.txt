@@ -1,0 +1,58 @@
+vase05_idle
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/vase05", 0,    -15,  -67,    0 }
+            { "objects/vase05", 1,    -15,   -3,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/vase05", 2,     -9,  -12,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/vase05", 3,    -10,  -16,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/vase05", 4,     -6,  -17,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/vase05", 5,     -4,   -4,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "objects/vase05", 6,     -6,   -8,    0 }
+        }
+    }
+}

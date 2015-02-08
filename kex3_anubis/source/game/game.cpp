@@ -197,6 +197,8 @@ void kexGameLocal::Start(void)
     spriteManager->Init();
     spriteAnimManager->Init();
 
+    kexRand::SetSeed(0x10101010);
+
     pendingGameState = GS_TITLE;
 
     //

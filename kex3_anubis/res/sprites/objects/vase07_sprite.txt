@@ -1,0 +1,23 @@
+texture "sprites/objects/vase07.png"
+
+// working\vase07\sprite0527.tga
+sprite 0 0 0 12 32
+
+// working\vase07\sprite0528.tga
+sprite 1 12 0 12 10
+
+// working\vase07\sprite0529.tga
+sprite 2 24 0 16 10
+
+// working\vase07\sprite0530.tga
+sprite 3 40 0 20 7
+
+// working\vase07\sprite0531.tga
+sprite 4 60 0 8 16
+
+// working\vase07\sprite0532.tga
+sprite 5 68 0 20 14
+
+// working\vase07\sprite0533.tga
+sprite 6 88 0 64 64
+

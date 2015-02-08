@@ -1,0 +1,17 @@
+texture "sprites/objects/barrel.png"
+
+// working\barrel\sprite0482.tga
+sprite 0 0 0 32 13
+
+// working\barrel\sprite0483.tga
+sprite 1 32 0 32 21
+
+// working\barrel\sprite0484.tga
+sprite 2 64 0 48 60
+
+// working\barrel\sprite0485.tga
+sprite 3 112 0 32 31
+
+// working\barrel\sprite0486.tga
+sprite 4 144 0 32 16
+

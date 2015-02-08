@@ -79,6 +79,11 @@ void kexActor::Spawn(void)
     
     bounds.min.Set(-r, -r, -h);
     bounds.max.Set(r, r, h);
+
+    if(anim->NumFrames() > 0 && !(flags & AF_NOADVANCEFRAMES))
+    {
+        frameID = kexRand::Max(anim->NumFrames());
+    }
 }
 
 //

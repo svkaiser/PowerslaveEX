@@ -1,0 +1,48 @@
+barrel_idle
+{
+    // frames:    5
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/barrel", 2,    -23,  -59,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/barrel", 3,    -16,  -17,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/barrel", 4,    -15,   -9,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/barrel", 0,    -16,   -7,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/barrel", 1,    -16,  -11,    0 }
+        }
+    }
+}

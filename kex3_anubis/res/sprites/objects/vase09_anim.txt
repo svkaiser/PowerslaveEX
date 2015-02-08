@@ -1,0 +1,48 @@
+vase09_idle
+{
+    // frames:    5
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/vase09", 0,    -22,  -52,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/vase09", 1,     -7,   -5,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/vase09", 2,     -9,   -9,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/vase09", 3,     -5,   -4,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/vase09", 4,     -5,   -3,    0 }
+        }
+    }
+}

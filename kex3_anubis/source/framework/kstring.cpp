@@ -133,7 +133,8 @@ void kexStr::Clear(void)
         charPtr = defaultBuffer;
     }
     
-    charPtr[0] = '\0';
+    bufferLength = STRING_DEFAULT_SIZE;
+    memset(charPtr, 0, STRING_DEFAULT_SIZE);
     length = 0;
 }
 

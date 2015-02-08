@@ -1,0 +1,49 @@
+vase08_idle
+{
+    // frames:    5
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/vase08", 0,    -23, -111,    0 }
+            { "objects/vase08", 1,    -23,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/vase08", 2,    -12,  -14,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/vase08", 3,     -6,  -22,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/vase08", 4,    -10,  -14,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/vase08", 5,     -3,   -3,    0 }
+        }
+    }
+}
