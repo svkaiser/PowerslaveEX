@@ -356,6 +356,67 @@ bool kexCModel::TraceSphere(const float radius, const kexVec2 &point,
 }
 
 //
+// kexCModel::TraceSphere
+//
+// Performs a intersection test on a 3D-circle
+//
+
+bool kexCModel::TraceSphere(const float radius, const kexVec3 &point)
+{
+    kexVec3 org;
+    kexVec3 dir;
+    kexVec3 cDist;
+    float cp;
+    float rd;
+    float r;
+    
+    org = (point - start);
+    dir = moveDir;
+    dir.Normalize();
+    
+    if(dir.Dot(org) < 0)
+    {
+        return false;
+    }
+    
+    float len = (end - start).Unit();
+    
+    if(len == 0)
+    {
+        return false;
+    }
+    
+    cp      = dir.Dot(org);
+    cDist   = (org - (dir * cp));
+    r       = radius + 1.024f;
+    rd      = r * r - cDist.UnitSq();
+    
+    if(rd < 0)
+    {
+        return false;
+    }
+    
+    float frac = (cp - kexMath::Sqrt(rd)) * (1.0f / len);
+    
+    if(frac >= -1 && frac <= 1 && frac < fraction)
+    {
+        kexVec3 hit;
+        
+        hit = start;
+        hit.Lerp(end, frac);
+        
+        fraction = frac;
+        interceptVector = hit;
+        contactNormal = interceptVector - point;
+        contactNormal.Normalize();
+        contactFace = NULL;
+        return true;
+    }
+    
+    return false;
+}
+
+//
 // kexCModel::PushFromRadialBounds
 //
 
@@ -490,6 +551,7 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         
         if(actor == sourceActor)
         {
+            // don't check self
             continue;
         }
 
@@ -498,19 +560,29 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
             continue;
         }
         
+        // if we're doing movement collision tests then perform a 2D-intersection
+        // test with the actor's radial bounds, otherwise do 3D-intersection when
+        // performing ray-trace tests.
         if(moveActor)
         {
             r = (actor->Radius() + moveActor->Radius()) * 0.5f;
+            
+            if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height()))
+            {
+                contactActor = actor;
+                contactSector = actor->Sector();
+            }
         }
         else
         {
             r = actor->Radius();
-        }
-
-        if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height()))
-        {
-            contactActor = actor;
-            contactSector = actor->Sector();
+            
+            if(TraceSphere(r, actor->Origin()) ||
+               TraceSphere(r, actor->Origin() + kexVec3(0, 0, actor->Height())))
+            {
+                contactActor = actor;
+                contactSector = actor->Sector();
+            }
         }
     }
 }
@@ -1018,6 +1090,7 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector, const kexVec3 &start
     sectorList.Set(sector);
     sectorCount = 0;
 
+    // check for actors in initial sector
     TraceActorsInSector(sector);
 
     do
@@ -1030,20 +1103,24 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector, const kexVec3 &start
 
             if(face->plane.Distance(moveDir) > 0)
             {
+                // ray isn't facing the plane
                 continue;
             }
 
             if(face->flags & FF_PORTAL && face->sector >= 0)
             {
+                // test actors in next sector
                 TraceActorsInSector(&sectors[face->sector]);
 
                 if(TraceFacePlane(face, 0, 0, true))
                 {
+                    // add to list if the ray passes through the portal
                     sectorList.Set(&sectors[face->sector]);
                 }
             }
             else if(face->flags & FF_SOLID)
             {
+                // test solid wall
                 TraceFacePlane(face);
             }
         }
