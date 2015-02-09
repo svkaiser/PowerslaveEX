@@ -177,10 +177,15 @@ void kexSpriteAnimManager::ParseFrame(kexLexer *lexer, spriteFrame_t *frame)
         }
         else if(lexer->Matches("action"))
         {
+            kexActionDef *ad;
+            
             lexer->ExpectNextToken(TK_IDENIFIER);
-            if((frame->action = kexGame::cActionDefManager->CreateInstance(lexer->Token())))
+            ad = kexGame::cActionDefManager->CreateInstance(lexer->Token());
+            
+            if(ad != NULL)
             {
-                frame->action->Parse(lexer);
+                frame->actions.Push(ad);
+                ad->Parse(lexer);
             }
         }
 
@@ -236,7 +241,7 @@ void kexSpriteAnimManager::Load(const char *name)
                     frame->flags = 0;
                     frame->nextFrame = "-";
                     frame->refireFrame = "-";
-                    frame->action = NULL;
+                    frame->actions.Empty();
 
                     // enter frame block
                     ParseFrame(lexer, frame);

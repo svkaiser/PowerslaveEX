@@ -69,9 +69,9 @@ void kexPlayerWeapon::ChangeAnim(spriteAnim_t *changeAnim)
         state = WS_IDLE;
     }
 
-    if(anim->frames[0].action)
+    for(unsigned int i = 0; i < anim->frames[0].actions.Length(); ++i)
     {
-        anim->frames[0].action->Execute(owner->Actor());
+        anim->frames[0].actions[i]->Execute(owner->Actor());
     }
 }
 
@@ -189,9 +189,9 @@ void kexPlayerWeapon::UpdateSprite(void)
             }
         }
 
-        if(anim->frames[frameID].action)
+        for(unsigned int i = 0; i < anim->frames[frameID].actions.Length(); ++i)
         {
-            anim->frames[frameID].action->Execute(owner->Actor());
+            anim->frames[frameID].actions[i]->Execute(owner->Actor());
         }
     }
 

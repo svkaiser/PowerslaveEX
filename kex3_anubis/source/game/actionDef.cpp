@@ -137,10 +137,9 @@ void kexActionHitScan::Execute(kexActor *actor)
     kexVec3 forward;
     kexVec3 start, end;
 
-    // ugh
-    if(actor == game->Player()->Actor())
+    if(actor->InstanceOf(&kexPuppet::info))
     {
-        height += game->Player()->Bob();
+        height += static_cast<kexPuppet*>(actor)->Owner()->Bob();
     }
 
     an1 = kexRand::Range(-hSpan, hSpan);
@@ -202,21 +201,22 @@ kexActionPlayerMelee::~kexActionPlayerMelee(void)
 
 void kexActionPlayerMelee::Execute(kexActor *actor)
 {
-    kexGameLocal *game      = kexGame::cLocal;
     kexCModel *cm           = kexGame::cLocal->CModel();
     float dist              = this->args[0].f;
     float height            = this->args[2].f;
     char *gotoFrameNoObj    = this->args[3].s;
     char *gotoFrameObj      = this->args[4].s;
+    kexPlayer *player;
     kexVec3 forward;
     kexVec3 start, end;
 
-    if(actor != game->Player()->Actor())
+    if(!actor->InstanceOf(&kexPuppet::info))
     {
         return;
     }
-
-    height += game->Player()->Bob();
+    
+    player = static_cast<kexPuppet*>(actor)->Owner();
+    height += player->Bob();
 
     kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), actor->Pitch(), 0);
     start = actor->Origin() + kexVec3(0, 0, height);
@@ -226,11 +226,11 @@ void kexActionPlayerMelee::Execute(kexActor *actor)
     {
         if(cm->ContactActor())
         {
-            game->Player()->Weapon().ChangeAnim(gotoFrameObj);
+            player->Weapon().ChangeAnim(gotoFrameObj);
         }
         else
         {
-            game->Player()->Weapon().ChangeAnim(gotoFrameNoObj);
+            player->Weapon().ChangeAnim(gotoFrameNoObj);
         }
     }
 }

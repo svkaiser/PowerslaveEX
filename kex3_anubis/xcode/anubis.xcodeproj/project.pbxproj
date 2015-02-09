@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419C3BB21A89100400C19D68 /* actionDef.cpp */; };
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
 		41B776571A83E850008C8F23 /* scriptSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B776551A83E850008C8F23 /* scriptSystem.cpp */; };
@@ -154,6 +155,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		419C3BB21A89100400C19D68 /* actionDef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actionDef.cpp; path = ../../source/game/actionDef.cpp; sourceTree = "<group>"; };
+		419C3BB31A89100400C19D68 /* actionDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actionDef.h; path = ../../source/game/actionDef.h; sourceTree = "<group>"; };
 		41B3A5471A5DEE84006DCCB9 /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actions.cpp; sourceTree = "<group>"; };
 		41B3A5481A5DEE84006DCCB9 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
 		41B3A54A1A5DEEBC006DCCB9 /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = console.cpp; sourceTree = "<group>"; };
@@ -380,6 +383,7 @@
 		41BACC671A5311EA0054A04A /* game */ = {
 			isa = PBXGroup;
 			children = (
+				419C3BB21A89100400C19D68 /* actionDef.cpp */,
 				41BAB90E1A5EF32100DD0D11 /* actor.cpp */,
 				41C979F71A642CCA00E9C798 /* cmodel.cpp */,
 				41C7FC2E1A5AFB84003864CB /* game.cpp */,
@@ -395,6 +399,7 @@
 				41B817351A6D6EF500151622 /* spriteAnim.cpp */,
 				41C7FC3C1A5AFB84003864CB /* titlescreen.cpp */,
 				41C7FC3E1A5AFB84003864CB /* world.cpp */,
+				419C3BB31A89100400C19D68 /* actionDef.h */,
 				41BAB90F1A5EF32100DD0D11 /* actor.h */,
 				41C979F81A642CCA00E9C798 /* cmodel.h */,
 				41C7FC2F1A5AFB84003864CB /* game.h */,
@@ -774,6 +779,7 @@
 				41C7FC431A5AFB84003864CB /* gameObject.cpp in Sources */,
 				41C7FC6F1A5AFB98003864CB /* textureObject.cpp in Sources */,
 				41C7FC6E1A5AFB98003864CB /* textureManager.cpp in Sources */,
+				419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */,
 				41B776571A83E850008C8F23 /* scriptSystem.cpp in Sources */,
 				41C7FC461A5AFB84003864CB /* player.cpp in Sources */,
 				41C7FC421A5AFB84003864CB /* game.cpp in Sources */,

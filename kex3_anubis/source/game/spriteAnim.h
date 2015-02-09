@@ -37,7 +37,7 @@ typedef struct
 {
     uint16_t                    delay;
     uint16_t                    flags;
-    kexActionDef                *action;
+    kexArray<kexActionDef*>     actions;
     kexStr                      nextFrame;
     kexStr                      refireFrame;
     kexArray<spriteSet_t>       spriteSet;
