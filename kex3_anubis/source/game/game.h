@@ -139,6 +139,7 @@ typedef enum
 #include "spriteAnim.h"
 #include "pWeapon.h"
 #include "player.h"
+#include "actionDef.h"
 
 //-----------------------------------------------------------------------------
 //
@@ -243,6 +244,7 @@ class kexGame
 public:
     static kexGameLocal         *cLocal;
     static kexScriptManager     *cScriptManager;
+    static kexActionDefManager  *cActionDefManager;
 };
 
 #endif

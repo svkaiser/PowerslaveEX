@@ -205,6 +205,7 @@ void kexGameLocal::Init(void)
     weaponDef.LoadFile("defs/weaponInfo.txt");
     
     kexGame::cScriptManager->Init();
+    kexGame::cActionDefManager->RegisterActions();
 }
 
 //

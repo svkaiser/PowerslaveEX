@@ -68,6 +68,11 @@ void kexPlayerWeapon::ChangeAnim(spriteAnim_t *changeAnim)
     {
         state = WS_IDLE;
     }
+
+    if(anim->frames[0].action)
+    {
+        anim->frames[0].action->Execute(owner->Actor());
+    }
 }
 
 //
@@ -182,6 +187,11 @@ void kexPlayerWeapon::UpdateSprite(void)
                 ChangeAnim(WS_RAISE);
                 return;
             }
+        }
+
+        if(anim->frames[frameID].action)
+        {
+            anim->frames[frameID].action->Execute(owner->Actor());
         }
     }
 

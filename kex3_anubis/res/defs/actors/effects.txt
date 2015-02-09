@@ -1,0 +1,9 @@
+Fx_BulletPuff 59
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   2.0
+    spriteAnim              "effects/bulletPuff"
+}

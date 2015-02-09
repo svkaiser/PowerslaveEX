@@ -14,6 +14,7 @@ Obj_Vase_Explode01 49
     health                  45
     spriteAnim              "objects/vase01_exp_idle"
     solid                   1
+    randomizeFrames         1
 }
 
 Obj_Vase_Explode02 50
@@ -26,6 +27,7 @@ Obj_Vase_Explode02 50
     health                  45
     spriteAnim              "objects/vase02_exp_idle"
     solid                   1
+    randomizeFrames         1
 }
 
 //-----------------------------------------------------------------------------
@@ -236,6 +238,7 @@ Obj_Fire_Pot 83
     scale                   2.0
     spriteAnim              "objects/fire_pot_idle"
     solid                   1
+    randomizeFrames         1
 }
 
 Obj_Fire_Stone 84
@@ -247,6 +250,7 @@ Obj_Fire_Stone 84
     scale                   2.0
     spriteAnim              "objects/fire_stone_idle"
     solid                   1
+    randomizeFrames         1
 }
 
 Obj_Fire_Pot_Candles 85
@@ -259,6 +263,7 @@ Obj_Fire_Pot_Candles 85
     health                  45
     spriteAnim              "objects/fire_pot_candles_idle"
     solid                   1
+    randomizeFrames         1
 }
 
 Obj_Fire_Pot_Large01 98
@@ -270,6 +275,7 @@ Obj_Fire_Pot_Large01 98
     scale                   2.0
     spriteAnim              "objects/fire_pot_large01_idle"
     solid                   1
+    randomizeFrames         1
 }
 
 Obj_Torch_Wall02 117
@@ -280,6 +286,7 @@ Obj_Torch_Wall02 117
     stepHeight              48
     scale                   2.0
     spriteAnim              "objects/torch_wall02_idle"
+    randomizeFrames         1
 }
 
 Obj_Torch_Wall01 118
@@ -290,6 +297,7 @@ Obj_Torch_Wall01 118
     stepHeight              48
     scale                   2.0
     spriteAnim              "objects/torch_wall01_idle"
+    randomizeFrames         1
 }
 
 Obj_Torch_Tall01 119
@@ -301,6 +309,7 @@ Obj_Torch_Tall01 119
     scale                   2.0
     spriteAnim              "objects/torch_tall01_idle"
     solid                   1
+    randomizeFrames         1
 }
 
 Obj_Water_Lamp 120

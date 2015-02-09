@@ -1,4 +1,4 @@
-effects_splash
+splash
 {
     // frames:   23
     frame
@@ -8,7 +8,6 @@ effects_splash
         {
             { "effects/splash", 1,    -10,   -5,    0 }
         }
-
     }
 
     frame
@@ -18,7 +17,6 @@ effects_splash
         {
             { "effects/splash", 1,    -10,   -5,    0 }
         }
-
     }
 
     frame
@@ -29,7 +27,6 @@ effects_splash
             { "effects/splash", 0,    -25,  -31,    0 }
             { "effects/splash", 3,    -19,   -7,    0 }
         }
-
     }
 
     frame
@@ -40,7 +37,6 @@ effects_splash
             { "effects/splash", 2,    -25,  -47,    0 }
             { "effects/splash", 3,    -19,   -7,    0 }
         }
-
     }
 
     frame
@@ -51,7 +47,6 @@ effects_splash
             { "effects/splash", 5,    -25,  -63,    0 }
             { "effects/splash", 3,    -19,   -7,    0 }
         }
-
     }
 
     frame
@@ -62,7 +57,6 @@ effects_splash
             { "effects/splash", 7,    -28,  -70,    0 }
             { "effects/splash", 3,    -19,   -7,    0 }
         }
-
     }
 
     frame
@@ -74,7 +68,6 @@ effects_splash
             { "effects/splash", 10,    -32,  -13,    0 }
             { "effects/splash", 4,    -14,   -6,    0 }
         }
-
     }
 
     frame
@@ -86,7 +79,6 @@ effects_splash
             { "effects/splash", 10,    -32,  -17,    0 }
             { "effects/splash", 6,    -10,  -26,    0 }
         }
-
     }
 
     frame
@@ -99,7 +91,6 @@ effects_splash
             { "effects/splash", 14,    -35,  -25,    0 }
             { "effects/splash", 6,    -10,  -26,    0 }
         }
-
     }
 
     frame
@@ -113,7 +104,6 @@ effects_splash
             { "effects/splash", 11,     -3,  -29,    0 }
             { "effects/splash", 8,     -8,   -5,    0 }
         }
-
     }
 
     frame
@@ -127,7 +117,6 @@ effects_splash
             { "effects/splash", 11,     -3,  -39,    0 }
             { "effects/splash", 8,     -8,   -5,    0 }
         }
-
     }
 
     frame
@@ -140,7 +129,6 @@ effects_splash
             { "effects/splash", 17,      0,  -56,    0 }
             { "effects/splash", 15,     -3,  -48,    0 }
         }
-
     }
 
     frame
@@ -153,7 +141,6 @@ effects_splash
             { "effects/splash", 17,      0,  -68,    0 }
             { "effects/splash", 15,     -3,  -54,    0 }
         }
-
     }
 
     frame
@@ -166,7 +153,6 @@ effects_splash
             { "effects/splash", 18,      0,  -72,    0 }
             { "effects/splash", 15,     -4,  -59,    0 }
         }
-
     }
 
     frame
@@ -179,7 +165,6 @@ effects_splash
             { "effects/splash", 18,      0,  -73,    0 }
             { "effects/splash", 15,     -5,  -61,    0 }
         }
-
     }
 
     frame
@@ -192,7 +177,6 @@ effects_splash
             { "effects/splash", 19,      1,  -75,    0 }
             { "effects/splash", 15,     -5,  -62,    0 }
         }
-
     }
 
     frame
@@ -205,7 +189,6 @@ effects_splash
             { "effects/splash", 19,      1,  -76,    0 }
             { "effects/splash", 16,     -5,  -61,    0 }
         }
-
     }
 
     frame
@@ -218,7 +201,6 @@ effects_splash
             { "effects/splash", 19,      1,  -76,    0 }
             { "effects/splash", 16,     -6,  -60,    0 }
         }
-
     }
 
     frame
@@ -230,7 +212,6 @@ effects_splash
             { "effects/splash", 19,      1,  -75,    0 }
             { "effects/splash", 17,     -8,  -57,    0 }
         }
-
     }
 
     frame
@@ -242,7 +223,6 @@ effects_splash
             { "effects/splash", 19,      1,  -71,    0 }
             { "effects/splash", 17,    -10,  -50,    0 }
         }
-
     }
 
     frame
@@ -253,7 +233,6 @@ effects_splash
             { "effects/splash", 19,      1,  -64,    0 }
             { "effects/splash", 18,    -11,  -37,    0 }
         }
-
     }
 
     frame
@@ -264,7 +243,6 @@ effects_splash
             { "effects/splash", 19,      1,  -52,    0 }
             { "effects/splash", 19,    -11,  -24,    0 }
         }
-
     }
 
     frame
@@ -274,11 +252,10 @@ effects_splash
         {
             { "effects/splash", 19,    -12,   -5,    0 }
         }
-
     }
 }
 
-effects_gib_death
+gib_death
 {
     // frames:   19
     frame
@@ -484,7 +461,7 @@ effects_gib_death
     }
 }
 
-effects_orb_spawn
+orb_spawn
 {
     // frames:   23
     frame
@@ -499,7 +476,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 14,    -20,   21,    0 }
             { "effects/orb_spawn", 15,     44,   21,    0 }
         }
-
     }
 
     frame
@@ -514,7 +490,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 14,    -20,   21,    0 }
             { "effects/orb_spawn", 15,     44,   21,    0 }
         }
-
     }
 
     frame
@@ -529,7 +504,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 14,    -20,   21,    0 }
             { "effects/orb_spawn", 15,     44,   21,    0 }
         }
-
     }
 
     frame
@@ -544,7 +518,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 20,    -24,   21,    0 }
             { "effects/orb_spawn", 21,     40,   21,    0 }
         }
-
     }
 
     frame
@@ -559,7 +532,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 20,    -24,   21,    0 }
             { "effects/orb_spawn", 21,     40,   21,    0 }
         }
-
     }
 
     frame
@@ -574,7 +546,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 20,    -24,   21,    0 }
             { "effects/orb_spawn", 21,     40,   21,    0 }
         }
-
     }
 
     frame
@@ -589,7 +560,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 26,    -35,   22,    0 }
             { "effects/orb_spawn", 27,     29,   22,    0 }
         }
-
     }
 
     frame
@@ -604,7 +574,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 26,    -35,   22,    0 }
             { "effects/orb_spawn", 27,     29,   22,    0 }
         }
-
     }
 
     frame
@@ -619,7 +588,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 26,    -35,   22,    0 }
             { "effects/orb_spawn", 27,     29,   22,    0 }
         }
-
     }
 
     frame
@@ -634,7 +602,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 32,    -22,   15,    0 }
             { "effects/orb_spawn", 33,     42,   15,    0 }
         }
-
     }
 
     frame
@@ -649,7 +616,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 32,    -22,   15,    0 }
             { "effects/orb_spawn", 33,     42,   15,    0 }
         }
-
     }
 
     frame
@@ -664,7 +630,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 32,    -22,   15,    0 }
             { "effects/orb_spawn", 33,     42,   15,    0 }
         }
-
     }
 
     frame
@@ -679,7 +644,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 38,    -31,   22,    0 }
             { "effects/orb_spawn", 39,     33,   22,    0 }
         }
-
     }
 
     frame
@@ -694,7 +658,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 38,    -31,   22,    0 }
             { "effects/orb_spawn", 39,     33,   22,    0 }
         }
-
     }
 
     frame
@@ -709,7 +672,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 38,    -31,   22,    0 }
             { "effects/orb_spawn", 39,     33,   22,    0 }
         }
-
     }
 
     frame
@@ -724,7 +686,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 4,    -17,   23,    0 }
             { "effects/orb_spawn", 5,     47,   23,    0 }
         }
-
     }
 
     frame
@@ -739,7 +700,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 4,    -17,   23,    0 }
             { "effects/orb_spawn", 5,     47,   23,    0 }
         }
-
     }
 
     frame
@@ -751,7 +711,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 7,     12,  -28,    0 }
             { "effects/orb_spawn", 8,     12,   36,    0 }
         }
-
     }
 
     frame
@@ -763,7 +722,6 @@ effects_orb_spawn
             { "effects/orb_spawn", 7,     12,  -28,    0 }
             { "effects/orb_spawn", 8,     12,   36,    0 }
         }
-
     }
 
     frame
@@ -773,7 +731,6 @@ effects_orb_spawn
         {
             { "effects/orb_spawn", 9,    -12,  -12,    0 }
         }
-
     }
 
     frame
@@ -783,7 +740,6 @@ effects_orb_spawn
         {
             { "effects/orb_spawn", 9,    -12,  -12,    0 }
         }
-
     }
 
     frame
@@ -803,6 +759,164 @@ effects_orb_spawn
         {
             { "effects/orb_spawn", 9,    -12,  -12,    0 }
         }
+    }
+}
 
+bulletPuff
+{
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 0,     -1,   -1,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 1,     -8,   -5,    0 }
+            { "effects/impacts", 0,     -1,   -1,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 1,     -8,   -6,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 2,    -10,   -9,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 3,    -17,  -16,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 4,    -23,  -23,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 5,    -23,  -24,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 6,    -23,  -25,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 6,    -23,  -25,    0 }
+        }
+    }
+
+    frame
+    {
+        removeSelf
+        delay 1
+    }
+}
+
+magicPuff
+{
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 7,    -19,  -14,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 8,    -20,  -23,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 9,    -23,  -34,    0 }
+            { "effects/impacts", 10,    -23,   30,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 11,    -24,  -24,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 12,    -27,  -23,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 13,    -29,  -26,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 14,    -29,  -28,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 15,    -30,  -30,    0 }
+        }
+    }
+
+    frame
+    {
+        sprites
+        {
+            { "effects/impacts", 16,    -31,  -32,    0 }
+        }
+        removeSelf
     }
 }

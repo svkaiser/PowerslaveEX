@@ -534,6 +534,7 @@ machete_swing_left_finish
     frame
     {
         // ##000   57    0
+        action A_PlayerMelee(160, 20, 64, "weapons/machete_hit_solid_left", "weapons/machete_hit_object_left")
         sprites
         {
             { "weapons/machete", 0,     -3,  -99,    0 }
@@ -574,7 +575,7 @@ machete_swing_left_finish
 
 }
 
-machete_hit_solid_left
+machete_hit_object_left
 {
     // frames:    8
     frame
@@ -661,10 +662,11 @@ machete_hit_solid_left
         // ##007    0    0 (no groups)
         delay 1
         goto "weapons/machete_fire_raise"
+        refire "weapons/machete_swing_right_start"
     }
 }
 
-machete_hit_object_left
+machete_hit_solid_left
 {
     // frames:    8
     frame
@@ -739,6 +741,7 @@ machete_hit_object_left
         // ##007    0    0 (no groups)
         delay 1
         goto "weapons/machete_fire_raise"
+        refire "weapons/machete_swing_right_start"
     }
 }
 
@@ -799,6 +802,7 @@ machete_swing_right_finish
     frame
     {
         // ##000   57    0
+        action A_PlayerMelee(160, 20, 64, "weapons/machete_hit_solid_right", "weapons/machete_hit_object_right")
         sprites
         {
             { "weapons/machete", 0,    -35, -116,    1 }
@@ -854,7 +858,7 @@ machete_swing_right_finish
     }
 }
 
-machete_hit_solid_right
+machete_hit_object_right
 {
     // frames:    8
     frame
@@ -953,10 +957,11 @@ machete_hit_solid_right
         // ##007    0    0 (no groups)
         delay 1
         goto "weapons/machete_fire_raise"
+        refire "weapons/machete_swing_left_start"
     }
 }
 
-machete_hit_object_right
+machete_hit_solid_right
 {
     // frames:    8
     frame
@@ -1055,5 +1060,6 @@ machete_hit_object_right
         // ##007    0    0 (no groups)
         delay 1
         goto "weapons/machete_fire_raise"
+        refire "weapons/machete_swing_left_start"
     }
 }

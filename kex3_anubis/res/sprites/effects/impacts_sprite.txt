@@ -1,0 +1,53 @@
+texture "sprites/effects/impacts.png"
+
+// working\impact\sprite0036.tga
+sprite 0 0 0 4 3
+
+// working\impact\sprite0037.tga
+sprite 1 4 0 16 10
+
+// working\impact\sprite0038.tga
+sprite 2 20 0 20 17
+
+// working\impact\sprite0039.tga
+sprite 3 40 0 36 26
+
+// working\impact\sprite0040.tga
+sprite 4 76 0 48 34
+
+// working\impact\sprite0041.tga
+sprite 5 124 0 48 34
+
+// working\impact\sprite0042.tga
+sprite 6 172 0 44 31
+
+// working\impact\sprite0043.tga
+sprite 7 216 0 40 28
+
+// working\impact\sprite0044.tga
+sprite 8 256 0 40 47
+
+// working\impact\sprite0045.tga
+sprite 9 296 0 44 64
+
+// working\impact\sprite0046.tga
+sprite 10 340 0 44 2
+
+// working\impact\sprite0047.tga
+sprite 11 384 0 44 44
+
+// working\impact\sprite0048.tga
+sprite 12 428 0 52 44
+
+// working\impact\sprite0049.tga
+sprite 13 0 26 60 47
+
+// working\impact\sprite0050.tga
+sprite 14 172 31 60 49
+
+// working\impact\sprite0051.tga
+sprite 15 60 34 64 53
+
+// working\impact\sprite0052.tga
+sprite 16 340 44 64 56
+

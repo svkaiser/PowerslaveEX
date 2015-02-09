@@ -16,6 +16,7 @@
 #define __SPRITEANIM_H__
 
 class kexSprite;
+class kexActionDef;
 
 typedef struct
 {
@@ -36,6 +37,7 @@ typedef struct
 {
     uint16_t                    delay;
     uint16_t                    flags;
+    kexActionDef                *action;
     kexStr                      nextFrame;
     kexStr                      refireFrame;
     kexArray<spriteSet_t>       spriteSet;
