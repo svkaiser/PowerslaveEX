@@ -575,10 +575,25 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         }
         else
         {
+            float z = actor->Origin().z + actor->Height();
+            float d;
+            
+            if((start.z < actor->Origin().z && end.z < actor->Origin().z) ||
+               (start.z > z && end.z > z))
+            {
+                // ray is completely over or under this actor
+                continue;
+            }
+            
+            // adjust z-height of the testing sphere. this will closely mimic
+            // doing a trace against a capsule
+            d = kexMath::Sqrt(actor->Origin().DistanceSq(start) / end.DistanceSq(start));
+            z = ((end.z - start.z) * d + start.z) - actor->Origin().z;
+            
+            kexMath::Clamp(z, 0, actor->Height());
             r = actor->Radius();
             
-            if(TraceSphere(r, actor->Origin()) ||
-               TraceSphere(r, actor->Origin() + kexVec3(0, 0, actor->Height())))
+            if(TraceSphere(r, actor->Origin() + kexVec3(0, 0, z)))
             {
                 contactActor = actor;
                 contactSector = actor->Sector();
