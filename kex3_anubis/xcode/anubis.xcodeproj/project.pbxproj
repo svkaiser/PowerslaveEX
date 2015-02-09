@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413DD5BD1A89674B00767E49 /* actorObject.cpp */; };
 		419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419C3BB21A89100400C19D68 /* actionDef.cpp */; };
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
@@ -155,6 +156,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		413DD5BD1A89674B00767E49 /* actorObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorObject.cpp; path = ../../source/script/objects/actorObject.cpp; sourceTree = "<group>"; };
+		413DD5BE1A89674B00767E49 /* actorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actorObject.h; path = ../../source/script/objects/actorObject.h; sourceTree = "<group>"; };
 		419C3BB21A89100400C19D68 /* actionDef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actionDef.cpp; path = ../../source/game/actionDef.cpp; sourceTree = "<group>"; };
 		419C3BB31A89100400C19D68 /* actionDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actionDef.h; path = ../../source/game/actionDef.h; sourceTree = "<group>"; };
 		41B3A5471A5DEE84006DCCB9 /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actions.cpp; sourceTree = "<group>"; };
@@ -349,10 +352,12 @@
 		41B776591A83EA4E008C8F23 /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				413DD5BD1A89674B00767E49 /* actorObject.cpp */,
 				41B776631A83EF3D008C8F23 /* mathObject.cpp */,
 				41B7765D1A83EB0A008C8F23 /* refObject.cpp */,
 				41B776601A83EB74008C8F23 /* stringObject.cpp */,
 				41B7765A1A83EA5E008C8F23 /* systemObject.cpp */,
+				413DD5BE1A89674B00767E49 /* actorObject.h */,
 				41B776641A83EF3D008C8F23 /* mathObject.h */,
 				41B7765E1A83EB0A008C8F23 /* refObject.h */,
 				41B776611A83EB74008C8F23 /* stringObject.h */,
@@ -799,6 +804,7 @@
 				41C7FC681A5AFB98003864CB /* image.cpp in Sources */,
 				41C7FC691A5AFB98003864CB /* renderBackend.cpp in Sources */,
 				41C7FC491A5AFB84003864CB /* titlescreen.cpp in Sources */,
+				413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */,
 				41E2CE841A51D39B00FC28DC /* pluecker.cpp in Sources */,
 				41C7FC481A5AFB84003864CB /* session.cpp in Sources */,
 				41C979F91A642CCA00E9C798 /* cmodel.cpp in Sources */,

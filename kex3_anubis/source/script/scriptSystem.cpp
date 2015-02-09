@@ -24,6 +24,7 @@
 #include "objects/mathObject.h"
 #include "objects/stringObject.h"
 #include "objects/systemObject.h"
+#include "objects/actorObject.h"
 
 static kexScriptManager scriptManagerLocal;
 kexScriptManager *kexGame::cScriptManager = &scriptManagerLocal;
@@ -170,6 +171,7 @@ void kexScriptManager::Init(void)
     kexScriptObjMath::Init();
     kexScriptObjVec3::Init();
     kexScriptObjQuat::Init();
+    kexScriptObjActor::Init();
     
     module = engine->GetModule("core", asGM_CREATE_IF_NOT_EXISTS);
     

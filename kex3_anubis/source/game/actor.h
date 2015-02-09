@@ -248,7 +248,6 @@ public:
     float                           &Radius(void) { return radius; }
     float                           &Height(void) { return height; }
     float                           &StepHeight(void) { return stepHeight; }
-    float                           &Gravity(void) { return gravity; }
     float                           &Scale(void) { return scale; }
     unsigned int                    &Flags(void) { return flags; }
     float                           &FloorHeight(void) { return floorHeight; }
@@ -268,7 +267,6 @@ protected:
     float                           height;
     float                           scale;
     float                           stepHeight;
-    float                           gravity;
     int16_t                         health;
     kexVec3                         velocity;
     kexVec3                         movement;

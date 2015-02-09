@@ -39,16 +39,6 @@ void kexScriptObjSystem::Init(void)
     e->RegisterObjectMethod("kSys", "int Mouse_Y(void)", asMETHODPR(kexScriptObjSystem, Mouse_Y, (void), int), asCALL_THISCALL);
 
     e->RegisterGlobalProperty("kSys Sys", &systemObjectLocal);
-
-    e->RegisterEnum("CvarFlags");
-    e->RegisterEnumValue("CvarFlags", "CVF_BOOL", CVF_BOOL);
-    e->RegisterEnumValue("CvarFlags", "CVF_INT", CVF_INT);
-    e->RegisterEnumValue("CvarFlags", "CVF_FLOAT", CVF_FLOAT);
-    e->RegisterEnumValue("CvarFlags", "CVF_STRING", CVF_STRING);
-    e->RegisterEnumValue("CvarFlags", "CVF_NETWORK", CVF_NETWORK);
-    e->RegisterEnumValue("CvarFlags", "CVF_CHEAT", CVF_CHEAT);
-    e->RegisterEnumValue("CvarFlags", "CVF_CONFIG", CVF_CONFIG);
-    e->RegisterEnumValue("CvarFlags", "CVF_ALLOCATED", CVF_ALLOCATED);
 }
 
 //
