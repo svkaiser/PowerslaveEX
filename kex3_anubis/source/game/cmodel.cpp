@@ -282,7 +282,8 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
 // Performs a intersection test on a 2D-circle
 //
 
-bool kexCModel::TraceSphere(const float radius, const kexVec2 &point)
+bool kexCModel::TraceSphere(const float radius, const kexVec2 &point,
+                            const float heightMax, const float heightMin)
 {
     kexVec2 org;
     kexVec2 dir;
@@ -321,10 +322,28 @@ bool kexCModel::TraceSphere(const float radius, const kexVec2 &point)
     
     if(frac <= 1 && frac < fraction)
     {
-        fraction = frac;
-        interceptVector = start;
-        interceptVector.Lerp(end, frac);
+        kexVec3 hit;
         
+        hit = start;
+        hit.Lerp(end, frac);
+        
+        if(heightMax != 0)
+        {
+            if(hit.z > heightMax)
+            {
+                return false;
+            }
+        }
+        if(heightMin != 0)
+        {
+            if(hit.z < heightMin)
+            {
+                return false;
+            }
+        }
+        
+        fraction = frac;
+        interceptVector = hit;
         contactNormal.x = interceptVector.x - point.x;
         contactNormal.y = interceptVector.y - point.y;
         contactNormal.z = 0;
@@ -467,7 +486,9 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         actor != NULL;
         actor = actor->SectorLink().Next())
     {
-        if(actor == sourceActor || start.z > actor->Origin().z + actor->Height())
+        float r;
+        
+        if(actor == sourceActor)
         {
             continue;
         }
@@ -476,8 +497,17 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         {
             continue;
         }
+        
+        if(moveActor)
+        {
+            r = (actor->Radius() + moveActor->Radius()) * 0.5f;
+        }
+        else
+        {
+            r = actor->Radius();
+        }
 
-        if(TraceSphere(actor->Radius(), actor->Origin().ToVec2()))
+        if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height()))
         {
             contactActor = actor;
             contactSector = actor->Sector();

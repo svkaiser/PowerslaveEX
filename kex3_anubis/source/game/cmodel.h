@@ -62,7 +62,8 @@ private:
     bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0,
                                            const bool bTestOnly = false);
     bool                    CollideFace(mapFace_t *face);
-    bool                    TraceSphere(const float radius, const kexVec2 &point);
+    bool                    TraceSphere(const float radius, const kexVec2 &point,
+                                        const float heightMax = 0, const float heightMin = 0);
     void                    PushFromRadialBounds(const kexVec2 &point, const float radius = 0);
     void                    RecursiveFindSectors(mapSector_t *sector);
 
