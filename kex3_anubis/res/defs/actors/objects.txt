@@ -7,8 +7,8 @@
 Obj_Vase_Explode01 49
 {
     classname               "kexActor"
-    radius                  64
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     scale                   1.5
     health                  45
@@ -20,8 +20,8 @@ Obj_Vase_Explode01 49
 Obj_Vase_Explode02 50
 {
     classname               "kexActor"
-    radius                  64
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     scale                   1.5
     health                  45
@@ -39,8 +39,8 @@ Obj_Vase_Explode02 50
 Obj_Camel 58
 {
     classname               "kexActor"
-    radius                  96
-    height                  192
+    radius                  48
+    height                  96
     stepHeight              48
     scale                   1.25
     spriteAnim              "objects/camel_idle"
@@ -57,7 +57,7 @@ Obj_Camel 58
 Obj_Vase08 66
 {
     classname               "kexActor"
-    radius                  64
+    radius                  32
     height                  128
     stepHeight              32
     health                  30
@@ -70,7 +70,7 @@ Obj_Vase08 66
 Obj_Vase11 68
 {
     classname               "kexActor"
-    radius                  64
+    radius                  32
     height                  128
     stepHeight              32
     health                  30
@@ -83,7 +83,7 @@ Obj_Vase11 68
 Obj_Vase09 69
 {
     classname               "kexActor"
-    radius                  64
+    radius                  32
     height                  128
     stepHeight              32
     health                  30
@@ -96,7 +96,7 @@ Obj_Vase09 69
 Obj_Barrel 70
 {
     classname               "kexActor"
-    radius                  64
+    radius                  32
     height                  128
     stepHeight              32
     health                  30
@@ -109,7 +109,7 @@ Obj_Barrel 70
 Obj_Vase03 71
 {
     classname               "kexActor"
-    radius                  64
+    radius                  32
     height                  128
     stepHeight              32
     health                  30
@@ -122,7 +122,7 @@ Obj_Vase03 71
 Obj_Vase10 74
 {
     classname               "kexActor"
-    radius                  64
+    radius                  32
     height                  128
     stepHeight              32
     health                  30
@@ -135,8 +135,8 @@ Obj_Vase10 74
 Obj_Vase01 76
 {
     classname               "kexActor"
-    radius                  64
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     health                  30
     scale                   1.5
@@ -148,8 +148,8 @@ Obj_Vase01 76
 Obj_Vase02 77
 {
     classname               "kexActor"
-    radius                  64
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     health                  30
     scale                   1.5
@@ -161,8 +161,8 @@ Obj_Vase02 77
 Obj_Vase06 78
 {
     classname               "kexActor"
-    radius                  64
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     health                  30
     scale                   1.5
@@ -174,8 +174,8 @@ Obj_Vase06 78
 Obj_Vase07 79
 {
     classname               "kexActor"
-    radius                  64
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     health                  30
     scale                   1.5
@@ -187,8 +187,8 @@ Obj_Vase07 79
 Obj_Vase04 80
 {
     classname               "kexActor"
-    radius                  64
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     health                  30
     scale                   1.5
@@ -200,8 +200,8 @@ Obj_Vase04 80
 Obj_Vase12 81
 {
     classname               "kexActor"
-    radius                  64
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     health                  30
     scale                   1.5
@@ -213,8 +213,8 @@ Obj_Vase12 81
 Obj_Vase05 82
 {
     classname               "kexActor"
-    radius                  64
-    height                  96
+    radius                  32
+    height                  64
     stepHeight              32
     health                  30
     scale                   1.5
@@ -232,7 +232,7 @@ Obj_Vase05 82
 Obj_Fire_Pot 83
 {
     classname               "kexActor"
-    radius                  32
+    radius                  16
     height                  64
     stepHeight              48
     scale                   2.0
@@ -244,7 +244,7 @@ Obj_Fire_Pot 83
 Obj_Fire_Stone 84
 {
     classname               "kexActor"
-    radius                  32
+    radius                  16
     height                  64
     stepHeight              48
     scale                   2.0
@@ -256,7 +256,7 @@ Obj_Fire_Stone 84
 Obj_Fire_Pot_Candles 85
 {
     classname               "kexActor"
-    radius                  32
+    radius                  16
     height                  64
     stepHeight              32
     scale                   1.5
@@ -269,7 +269,7 @@ Obj_Fire_Pot_Candles 85
 Obj_Fire_Pot_Large01 98
 {
     classname               "kexActor"
-    radius                  32
+    radius                  16
     height                  64
     stepHeight              48
     scale                   2.0
@@ -281,7 +281,7 @@ Obj_Fire_Pot_Large01 98
 Obj_Torch_Wall02 117
 {
     classname               "kexActor"
-    radius                  64
+    radius                  16
     height                  128
     stepHeight              48
     scale                   2.0
@@ -292,7 +292,7 @@ Obj_Torch_Wall02 117
 Obj_Torch_Wall01 118
 {
     classname               "kexActor"
-    radius                  32
+    radius                  16
     height                  128
     stepHeight              48
     scale                   2.0
@@ -303,7 +303,7 @@ Obj_Torch_Wall01 118
 Obj_Torch_Tall01 119
 {
     classname               "kexActor"
-    radius                  32
+    radius                  16
     height                  128
     stepHeight              48
     scale                   2.0
@@ -315,7 +315,7 @@ Obj_Torch_Tall01 119
 Obj_Water_Lamp 120
 {
     classname               "kexActor"
-    radius                  32
+    radius                  16
     height                  64
     stepHeight              48
     scale                   2.0
