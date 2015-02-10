@@ -210,6 +210,23 @@ void kexScriptManager::Shutdown(void)
 }
 
 //
+// kexScriptManager::GetArgTypesFromFunction
+//
+
+void kexScriptManager::GetArgTypesFromFunction(kexStrList &list, asIScriptFunction *function)
+{
+    kexStr strTemp;
+    
+    for(int i = 0; i < function->GetVarCount(); ++i)
+    {
+        strTemp = function->GetVarDecl(i);
+        strTemp.Remove(strTemp.IndexOf(" "), strTemp.Length());
+        
+        list.Push(kexStr(strTemp));
+    }
+}
+
+//
 // kexScriptManager::InitActions
 //
 
@@ -234,6 +251,24 @@ void kexScriptManager::InitActions(void)
             lexer->GetString();
             if((func = module->GetFunctionByDecl(lexer->StringToken())) != 0)
             {
+                kexStrList argNameTypes;
+                
+                if(func->GetVarCount() == 0)
+                {
+                    kex::cSystem->Warning("%s must have at least kActor@ declared as the first argument\n",
+                                          actionName.c_str());
+                    continue;
+                }
+                
+                GetArgTypesFromFunction(argNameTypes, func);
+                
+                if(argNameTypes[0] != "kActor@")
+                {
+                    kex::cSystem->Warning("%s must have kActor@ declared as the first argument\n",
+                                          actionName.c_str());
+                    continue;
+                }
+                
                 asIScriptFunction ***f = actionList.Add(actionName);
                 *f = &func;
             }

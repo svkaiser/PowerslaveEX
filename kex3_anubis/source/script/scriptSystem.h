@@ -45,6 +45,7 @@ public:
 
 private:
     void                                InitActions(void);
+    void                                GetArgTypesFromFunction(kexStrList &list, asIScriptFunction *function);
     void                                ProcessScript(const char *file);
     bool                                HasScriptFile(const char *file);
 
