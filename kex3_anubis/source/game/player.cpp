@@ -311,6 +311,7 @@ void kexPuppet::Spawn(void)
     height      = 160;
     stepHeight  = 48;
     health      = 200;
+    flags       = AF_SOLID;
 }
 
 //-----------------------------------------------------------------------------

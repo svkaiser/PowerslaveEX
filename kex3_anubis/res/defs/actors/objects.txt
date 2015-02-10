@@ -54,7 +54,7 @@ Obj_Camel 58
 
 //-----------------------------------------------------------------------------
 //
-// destructibles
+// vase destructibles
 //
 //-----------------------------------------------------------------------------
 
@@ -161,6 +161,84 @@ Obj_Vase01 76
     noAdvanceFrames         1
     solid                   1
     shootable               1
+}
+
+Obj_Vase01_Shard01 -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.5
+    spawnAnim               "objects/vase01_idle"
+    noAdvanceFrames         1
+    moveable                1
+    initialFrame            1
+}
+
+Obj_Vase01_Shard02 -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.5
+    spawnAnim               "objects/vase01_idle"
+    noAdvanceFrames         1
+    moveable                1
+    initialFrame            2
+}
+
+Obj_Vase01_Shard03 -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.5
+    spawnAnim               "objects/vase01_idle"
+    noAdvanceFrames         1
+    moveable                1
+    initialFrame            3
+}
+
+Obj_Vase01_Shard04 -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.5
+    spawnAnim               "objects/vase01_idle"
+    noAdvanceFrames         1
+    moveable                1
+    initialFrame            4
+}
+
+Obj_Vase01_Shard05 -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.5
+    spawnAnim               "objects/vase01_idle"
+    noAdvanceFrames         1
+    moveable                1
+    initialFrame            5
+}
+
+Obj_Vase01_Shard06 -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.5
+    spawnAnim               "objects/vase01_idle"
+    noAdvanceFrames         1
+    moveable                1
+    initialFrame            6
 }
 
 Obj_Vase02 77

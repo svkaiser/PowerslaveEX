@@ -211,7 +211,8 @@ typedef enum
     AF_RANDOMIZATION    = BIT(4),
     AF_FLASH            = BIT(5),
     AF_SHOOTABLE        = BIT(6),
-    AF_FULLBRIGHT       = BIT(7)
+    AF_FULLBRIGHT       = BIT(7),
+    AF_MOVEABLE         = BIT(8)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -226,7 +227,6 @@ public:
     ~kexActor(void);
 
     virtual void                    Tick(void);
-    virtual void                    Remove(void);
 
     void                            Spawn(void);
     bool                            FindSector(const kexVec3 &pos);
@@ -267,6 +267,7 @@ public:
 
 protected:
     void                            UpdateSprite(void);
+    void                            UpdateMovement(void);
 
     kexDict                         *definition;
     kexSDNodeRef<kexActor>          areaLink;

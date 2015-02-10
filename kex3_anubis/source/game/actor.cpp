@@ -18,6 +18,10 @@
 #include "kexlib.h"
 #include "game.h"
 
+#define AMOVE_FRICTION          0.9375f
+#define AMOVE_MIN               0.125f
+#define AMOVE_SPEED_FALL        0.75f
+
 DECLARE_KEX_CLASS(kexActor, kexGameObject)
 
 //
@@ -64,6 +68,11 @@ void kexActor::Tick(void)
 {
     UpdateSprite();
     
+    if(flags & AF_MOVEABLE)
+    {
+        UpdateMovement();
+    }
+    
     if(flags & AF_FLASH)
     {
         if(flashTicks-- <= 0)
@@ -72,18 +81,6 @@ void kexActor::Tick(void)
             flags &= ~AF_FLASH;
         }
     }
-}
-
-//
-// kexActor::Remove
-//
-
-void kexActor::Remove(void)
-{
-    UnlinkArea();
-    UnlinkSector();
-
-    kexGameObject::Remove();
 }
 
 //
@@ -105,11 +102,12 @@ void kexActor::Spawn(void)
         definition->GetFloat("animSpeed", animSpeed, 0.5f);
         definition->GetInt("health", health, 100);
 
-        if(definition->GetBool("noAdvanceFrames")) flags |= AF_NOADVANCEFRAMES;
-        if(definition->GetBool("randomizeFrames")) flags |= AF_RANDOMIZATION;
-        if(definition->GetBool("solid"))           flags |= AF_SOLID;
-        if(definition->GetBool("shootable"))       flags |= AF_SHOOTABLE;
-        if(definition->GetBool("fullbright"))      flags |= AF_FULLBRIGHT;
+        if(definition->GetBool("noAdvanceFrames"))  flags |= AF_NOADVANCEFRAMES;
+        if(definition->GetBool("randomizeFrames"))  flags |= AF_RANDOMIZATION;
+        if(definition->GetBool("solid"))            flags |= AF_SOLID;
+        if(definition->GetBool("shootable"))        flags |= AF_SHOOTABLE;
+        if(definition->GetBool("fullbright"))       flags |= AF_FULLBRIGHT;
+        if(definition->GetBool("moveable"))         flags |= AF_MOVEABLE;
         
         if(definition->GetString("spawnAnim", animName))
         {
@@ -120,6 +118,8 @@ void kexActor::Spawn(void)
         {
             deathAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
         }
+        
+        definition->GetInt("initialFrame", frameID, 0);
     }
     
     if(anim == NULL)
@@ -140,6 +140,15 @@ void kexActor::Spawn(void)
             frameID = kexRand::Max(anim->NumFrames());
         }
     }
+    
+    if(sector)
+    {
+        floorHeight = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector);
+        ceilingHeight = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector);
+    }
+    
+    link.Add(kexGame::cLocal->Actors());
+    LinkArea();
 }
 
 //
@@ -157,6 +166,8 @@ bool kexActor::FindSector(const kexVec3 &pos)
         if(kexGame::cLocal->CModel()->PointWithinSectorEdges(pos, sector))
         {
             SetSector(sector);
+            floorHeight = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector);
+            ceilingHeight = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector);
             return true;
         }
     }
@@ -217,7 +228,7 @@ void kexActor::UpdateSprite(void)
         return;
     }
     
-    if(anim == NULL || flags & AF_NOADVANCEFRAMES)
+    if(anim == NULL)
     {
         return;
     }
@@ -230,11 +241,14 @@ void kexActor::UpdateSprite(void)
     {
         ticks = 0;
         
-        // reached the end of the frame?
-        if(++frameID >= (int16_t)anim->NumFrames())
+        if(!(flags & AF_NOADVANCEFRAMES))
         {
-            // loop back
-            frameID = 0;
+            // reached the end of the frame?
+            if(++frameID >= (int16_t)anim->NumFrames())
+            {
+                // loop back
+                frameID = 0;
+            }
         }
 
         for(unsigned int i = 0; i < anim->frames[frameID].actions.Length(); ++i)
@@ -266,6 +280,57 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
         if(health <= 0)
         {
             ChangeAnim(deathAnim);
+        }
+    }
+}
+
+//
+// kexActor::UpdateMovement
+//
+
+void kexActor::UpdateMovement(void)
+{
+    // check for drop-offs
+    if(origin.z > floorHeight)
+    {
+        velocity.z -= AMOVE_SPEED_FALL;
+    }
+    else
+    {
+        // apply friction
+        velocity.x *= AMOVE_FRICTION;
+        velocity.y *= AMOVE_FRICTION;
+    }
+    
+    if(kexMath::Fabs(velocity.x) < AMOVE_MIN)
+    {
+        velocity.x = 0;
+    }
+    
+    if(kexMath::Fabs(velocity.y) < AMOVE_MIN)
+    {
+        velocity.y = 0;
+    }
+    
+    // bump floor
+    if(origin.z + velocity.z <= floorHeight)
+    {
+        origin.z = floorHeight;
+        velocity.z = 0;
+    }
+    
+    movement = velocity;
+    
+    if(movement.UnitSq() > 0)
+    {
+        if(!kexGame::cLocal->CModel()->MoveActor(this))
+        {
+            velocity.Clear();
+            movement.Clear();
+        }
+        else
+        {
+            velocity = movement;
         }
     }
 }

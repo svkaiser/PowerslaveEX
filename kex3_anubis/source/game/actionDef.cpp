@@ -108,6 +108,18 @@ void kexActionDef::Parse(kexLexer *lexer)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionPrintf
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionPrintf)
+{
+    char *string = this->args[0].s;
+    kex::cSystem->Printf(string);
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionHitScan
 //
 //-----------------------------------------------------------------------------
@@ -225,14 +237,29 @@ DECLARE_KEX_ACTION(kexActionSpawn)
 
 //-----------------------------------------------------------------------------
 //
-// kexActionPrintf
+// kexActionTossActor
 //
 //-----------------------------------------------------------------------------
 
-DECLARE_KEX_ACTION(kexActionPrintf)
+DECLARE_KEX_ACTION(kexActionTossActor)
 {
-    char *string = this->args[0].s;
-    kex::cSystem->Printf(string);
+    kexGameLocal *game  = kexGame::cLocal;
+    kexActor *toss;
+    char *defName       = this->args[0].s;
+    float x             = this->args[1].f + actor->Origin().x;
+    float y             = this->args[2].f + actor->Origin().y;
+    float z             = this->args[3].f + actor->Origin().z;
+    float xSpread       = this->args[4].f;
+    float ySpread       = this->args[5].f;
+    float zSpreadMin    = this->args[6].f;
+    float zSpreadMax    = this->args[7].f;
+    
+    toss = game->SpawnActor(defName, x, y, z, actor->Yaw(),
+                            actor->Sector() - game->World()->Sectors());
+    
+    toss->Velocity().x += kexRand::Range(-xSpread, xSpread);
+    toss->Velocity().y += kexRand::Range(-ySpread, ySpread);
+    toss->Velocity().z += kexRand::Range(zSpreadMin, zSpreadMax);
 }
 
 //-----------------------------------------------------------------------------
@@ -243,6 +270,24 @@ DECLARE_KEX_ACTION(kexActionPrintf)
 
 DECLARE_KEX_ACTION(kexActionDestroy)
 {
+    actor->Remove();
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionDestroyAtRest
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionDestroyAtRest)
+{
+    float min = this->args[0].f;
+    
+    if(actor->Velocity().UnitSq() > min)
+    {
+        return;
+    }
+    
     actor->Remove();
 }
 
@@ -288,6 +333,8 @@ void kexActionDefManager::RegisterAction(const char *name, kexObject *(*Create)(
     info->argTypes[6] = t7;
     info->argTypes[7] = t8;
 
+    info->numArgs = MAX_ACTION_DEF_ARGS;
+    
     for(int i = 0; i < MAX_ACTION_DEF_ARGS; ++i)
     {
         if(info->argTypes[i] == AAT_INVALID)
@@ -336,4 +383,7 @@ void kexActionDefManager::RegisterActions(void)
                     AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
     RegisterAction("A_Printf", kexActionPrintf::info.Create, AAT_STRING);
     RegisterAction("A_Destroy", kexActionDestroy::info.Create);
+    RegisterAction("A_TossActor", kexActionTossActor::info.Create,
+                   AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
+    RegisterAction("A_DestroyAtRest", kexActionDestroyAtRest::info.Create, AAT_FLOAT);
 }

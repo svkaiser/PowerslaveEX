@@ -194,7 +194,8 @@ public:
 
     kexObject               *ConstructObject(const char *className);
     kexActor                *ConstructActor(const char *className, kexDict *def, const int type,
-                                            const float x, const float y, const float z, const float yaw);
+                                            const float x, const float y, const float z,
+                                            const float yaw, const int sector = -1);
     kexActor                *SpawnActor(const int type, const float x, const float y, const float z,
                                         const float yaw, const int sector = -1);
     kexActor                *SpawnActor(const char *name, const float x, const float y, const float z,

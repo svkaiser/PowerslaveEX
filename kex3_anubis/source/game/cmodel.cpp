@@ -543,6 +543,11 @@ bool kexCModel::CollideFace(mapFace_t *face)
 
 void kexCModel::TraceActorsInSector(mapSector_t *sector)
 {
+    if(moveActor && !(moveActor->Flags() & AF_SOLID))
+    {
+        return;
+    }
+    
     for(kexActor *actor = sector->actorList.Next();
         actor != NULL;
         actor = actor->SectorLink().Next())

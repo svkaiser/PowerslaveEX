@@ -526,6 +526,7 @@ void kexGameLocal::RemoveActor(kexActor *actor)
     actor->SetTarget(NULL);
     actor->Link().Remove();
     actor->UnlinkArea();
+    actor->UnlinkSector();
     delete actor;
 }
 
@@ -553,7 +554,8 @@ void kexGameLocal::RemoveAllActors(void)
 //
 
 kexActor *kexGameLocal::ConstructActor(const char *className, kexDict *def, const int type,
-                                       const float x, const float y, const float z, const float yaw)
+                                       const float x, const float y, const float z,
+                                       const float yaw, const int sector)
 {
     kexActor *actor;
 
@@ -568,10 +570,16 @@ kexActor *kexGameLocal::ConstructActor(const char *className, kexDict *def, cons
     actor->Yaw() = yaw;
     actor->Type() = static_cast<actorType_t>(type);
     
-    actor->Link().Add(actors);
-    actor->LinkArea();
-    actor->CallSpawn();
+    if(sector <= -1)
+    {
+        actor->FindSector(actor->Origin());
+    }
+    else
+    {
+        actor->SetSector(&world->Sectors()[sector]);
+    }
     
+    actor->CallSpawn();
     return actor;
 }
 
@@ -607,17 +615,7 @@ kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y,
         }
     }
     
-    actor = ConstructActor(className, def, type, x, y, z, yaw);
-
-    if(sector <= -1)
-    {
-        actor->FindSector(actor->Origin());
-    }
-    else
-    {
-        actor->SetSector(&world->Sectors()[sector]);
-    }
-
+    actor = ConstructActor(className, def, type, x, y, z, yaw, sector);
     return actor;
 }
 
@@ -644,16 +642,6 @@ kexActor *kexGameLocal::SpawnActor(const char *name, const float x, const float 
         className = "kexActor";
     }
     
-    actor = ConstructActor(className, def, -1, x, y, z, yaw);
-
-    if(sector <= -1)
-    {
-        actor->FindSector(actor->Origin());
-    }
-    else
-    {
-        actor->SetSector(&world->Sectors()[sector]);
-    }
-
+    actor = ConstructActor(className, def, -1, x, y, z, yaw, sector);
     return actor;
 }

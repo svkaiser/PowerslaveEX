@@ -490,9 +490,9 @@ bool kexWorld::LoadMap(const char *mapname)
     BuildAreaNodes();
     BuildSectorBounds();
     SetupEdges();
+    kexGame::cLocal->CModel()->Setup(this);
     
     ReadActors(mapfile, numActors);
-    kexGame::cLocal->CModel()->Setup(this);
 
     bMapLoaded = true;
     return true;
