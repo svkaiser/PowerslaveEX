@@ -108,6 +108,48 @@ void kexActionDef::Parse(kexLexer *lexer)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionScriptDef
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexActionScriptDef, kexActionDef);
+public:
+    kexActionScriptDef(void);
+    ~kexActionScriptDef(void);
+
+    virtual void            Execute(kexActor *actor);
+
+    asIScriptFunction       ***function;
+END_KEX_CLASS();
+
+DECLARE_KEX_CLASS(kexActionScriptDef, kexActionDef)
+
+//
+// kexActionScriptDef::kexActionScriptDef
+//
+
+kexActionScriptDef::kexActionScriptDef(void)
+{
+}
+
+//
+// kexActionScriptDef::~kexActionScriptDef
+//
+
+kexActionScriptDef::~kexActionScriptDef(void)
+{
+}
+
+//
+// kexActionScriptDef::Execute
+//
+
+void kexActionScriptDef::Execute(kexActor *actor)
+{
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionPrintf
 //
 //-----------------------------------------------------------------------------
@@ -323,6 +365,7 @@ void kexActionDefManager::RegisterAction(const char *name, kexObject *(*Create)(
 {
     actionDefInfo_t *info = actionDefInfos.Add(name);
 
+    info->name = name;
     info->Create = Create;
     info->argTypes[0] = t1;
     info->argTypes[1] = t2;
@@ -356,13 +399,29 @@ kexActionDef *kexActionDefManager::CreateInstance(const char *name)
 
     if(!info)
     {
-        return NULL;
+        // if it doesn't exist then it could be a custom script function
+        asIScriptFunction ***f;
+        kexActionScriptDef *asd;
+        
+        if(!(f = kexGame::cScriptManager->ActionList().Find(name)))
+        {
+            // no match, abort
+            return NULL;
+        }
+        
+        asd = static_cast<kexActionScriptDef*>(info->Create());
+        asd->function = f;
+        
+        ad = static_cast<kexActionDef*>(asd);
     }
-
-    ad = static_cast<kexActionDef*>(info->Create());
+    else
+    {
+        ad = static_cast<kexActionDef*>(info->Create());
+    }
 
     ad->argTypes = info->argTypes;
     ad->numArgs = info->numArgs;
+    ad->defInfo = info;
 
     ad->args = new actionDefArgs_t[ad->numArgs];
 

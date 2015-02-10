@@ -70,6 +70,7 @@ public:
     virtual void            Execute(kexActor *actor) = 0;
     virtual void            Parse(kexLexer *lexer);
 
+    actionDefInfo_t         *defInfo;
     actionDefArgs_t         *args;
     int                     *argTypes;
     int                     numArgs;

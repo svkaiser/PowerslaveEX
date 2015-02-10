@@ -36,6 +36,8 @@ public:
 
     template<class derived, class base>
     static derived                      *RefCast(base *c) { return static_cast<derived*>(c); }
+    
+    kexHashList<asIScriptFunction**>    &ActionList(void) { return actionList; }
 
     asIScriptEngine                     *Engine(void) { return engine; }
     asIScriptContext                    *Context(void) { return ctx; }
