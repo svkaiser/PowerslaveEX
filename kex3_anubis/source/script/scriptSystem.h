@@ -23,38 +23,41 @@ public:
     kexScriptManager(void);
     ~kexScriptManager(void);
 
-    void                    Init(void);
-    void                    Shutdown(void);
-    void                    CallExternalScript(const char *file, const char *function);
-    void                    CallCommand(const char *decl);
-    void                    DrawGCStats(void);
-    void                    RegisterMethod(const char *name, const char *decl,
-                                           const asSFuncPtr &funcPointer);
+    void                                Init(void);
+    void                                Shutdown(void);
+    void                                CallExternalScript(const char *file, const char *function);
+    void                                CallCommand(const char *decl);
+    void                                DrawGCStats(void);
+    void                                RegisterMethod(const char *name, const char *decl,
+                                                       const asSFuncPtr &funcPointer);
 
-    static void             *MemAlloc(size_t size);
-    static void             MemFree(void *ptr);
+    static void                         *MemAlloc(size_t size);
+    static void                         MemFree(void *ptr);
 
     template<class derived, class base>
-    static derived          *RefCast(base *c) { return static_cast<derived*>(c); }
+    static derived                      *RefCast(base *c) { return static_cast<derived*>(c); }
 
-    asIScriptEngine         *Engine(void) { return engine; }
-    asIScriptContext        *Context(void) { return ctx; }
-    asIScriptModule         *Module(void) { return module; }
+    asIScriptEngine                     *Engine(void) { return engine; }
+    asIScriptContext                    *Context(void) { return ctx; }
+    asIScriptModule                     *Module(void) { return module; }
 
-    bool                    bDrawGCStats;
+    bool                                bDrawGCStats;
 
 private:
-    void                    ProcessScript(const char *file);
-    bool                    HasScriptFile(const char *file);
+    void                                InitActions(void);
+    void                                ProcessScript(const char *file);
+    bool                                HasScriptFile(const char *file);
 
-    static void             MessageCallback(const asSMessageInfo *msg, void *param);
+    static void                         MessageCallback(const asSMessageInfo *msg, void *param);
 
-    kexStrList              scriptFiles;
-    kexStr                  scriptBuffer;
+    kexStrList                          scriptFiles;
+    kexStr                              scriptBuffer;
+    
+    kexHashList<asIScriptFunction**>    actionList;
 
-    asIScriptEngine         *engine;
-    asIScriptContext        *ctx;
-    asIScriptModule         *module;
+    asIScriptEngine                     *engine;
+    asIScriptContext                    *ctx;
+    asIScriptModule                     *module;
 };
 
 #endif

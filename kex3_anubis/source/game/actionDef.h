@@ -30,10 +30,6 @@ typedef enum
     AAT_STRING
 } actionArgType_t;
 
-class kexActionDef;
-
-typedef kexActionDef *(kexActionDef::*createActionFunc_t)(void*);
-
 #define MAX_ACTION_DEF_ARGS     8
 
 typedef struct

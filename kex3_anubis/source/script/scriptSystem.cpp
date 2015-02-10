@@ -190,7 +190,8 @@ void kexScriptManager::Init(void)
             kex::cSystem->Error("%s", ctx->GetExceptionString());
         }
     }
-
+    
+    InitActions();
     kex::cSystem->Printf("Script System Initialized\n");
 }
 
@@ -206,6 +207,40 @@ void kexScriptManager::Shutdown(void)
     engine->Release();
 
     Mem_Purge(hb_script);
+}
+
+//
+// kexScriptManager::InitActions
+//
+
+void kexScriptManager::InitActions(void)
+{
+    kexLexer *lexer;
+    kexStr actionName;
+    asIScriptFunction *func;
+    
+    if(!(lexer = kex::cParser->Open("scripts/actions.txt")))
+    {
+        return;
+    }
+    
+    while(lexer->CheckState())
+    {
+        lexer->Find();
+        if(lexer->TokenType() == TK_IDENIFIER)
+        {
+            actionName = lexer->Token();
+            
+            lexer->GetString();
+            if((func = module->GetFunctionByDecl(lexer->StringToken())) != 0)
+            {
+                asIScriptFunction ***f = actionList.Add(actionName);
+                *f = &func;
+            }
+        }
+    }
+    
+    kex::cParser->Close();
 }
 
 //
