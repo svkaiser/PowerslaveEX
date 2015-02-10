@@ -29,8 +29,7 @@ typedef struct
 
 typedef enum
 {
-    SFF_FULLBRIGHT  = BIT(1),
-    SFF_REMOVESELF  = BIT(2)
+    SFF_FULLBRIGHT  = BIT(1)
 } frameFlags_t;
 
 typedef struct

@@ -5,5 +5,18 @@ Fx_BulletPuff 59
     height                  32
     stepHeight              32
     scale                   2.0
-    spriteAnim              "effects/bulletPuff"
+    spawnAnim               "effects/bulletPuff"
+    fullbright              1
+}
+
+Fx_VaseExplodePuff 62
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   2.0
+    animSpeed               0.25
+    spawnAnim               "effects/magicPuff"
+    fullbright              1
 }

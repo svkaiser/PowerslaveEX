@@ -410,6 +410,8 @@ void kexRenderScene::DrawActors(mapSector_t *sector)
 
         for(unsigned int i = 0; i < frame->spriteSet.Length(); ++i)
         {
+            int c = 0xff;
+
             spriteSet = &frame->spriteSet[i];
             sprite = spriteSet->sprite;
             info = &sprite->InfoList()[spriteSet->index];
@@ -448,10 +450,20 @@ void kexRenderScene::DrawActors(mapSector_t *sector)
             p3 += org;
             p4 += org;
 
-            vl->AddVertex(p1, u1, v1, 255, 255, 255, 255);
-            vl->AddVertex(p2, u2, v1, 255, 255, 255, 255);
-            vl->AddVertex(p3, u1, v2, 255, 255, 255, 255);
-            vl->AddVertex(p4, u2, v2, 255, 255, 255, 255);
+            if(!(actor->Flags() & AF_FULLBRIGHT))
+            {
+                c = (sector->lightLevel << 1);
+
+                if(c > 255)
+                {
+                    c = 255;
+                }
+            }
+
+            vl->AddVertex(p1, u1, v1, c, c, c, 255);
+            vl->AddVertex(p2, u2, v1, c, c, c, 255);
+            vl->AddVertex(p3, u1, v2, c, c, c, 255);
+            vl->AddVertex(p4, u2, v2, c, c, c, 255);
 
             vl->AddTriangle(0, 2, 1);
             vl->AddTriangle(1, 2, 3);
@@ -460,7 +472,6 @@ void kexRenderScene::DrawActors(mapSector_t *sector)
             {
                 vl->DrawElements(false);
                 
-                kexRender::cTextures->whiteTexture->Bind();
                 kexRender::cBackend->SetDepth(GLFUNC_EQUAL);
                 kexRender::cBackend->SetBlend(GLSRC_ONE, GLDST_ONE);
                 

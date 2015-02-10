@@ -496,6 +496,10 @@
 					Name="objects"
 					>
 					<File
+						RelativePath="..\source\script\objects\actorObject.cpp"
+						>
+					</File>
+					<File
 						RelativePath="..\source\script\objects\mathObject.cpp"
 						>
 					</File>
@@ -813,6 +817,10 @@
 				<Filter
 					Name="objects"
 					>
+					<File
+						RelativePath="..\source\script\objects\actorObject.h"
+						>
+					</File>
 					<File
 						RelativePath="..\source\script\objects\mathObject.h"
 						>

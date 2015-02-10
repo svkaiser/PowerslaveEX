@@ -37,8 +37,11 @@ kexActor::kexActor(void)
     this->stepHeight = 16;
     this->flags = 0;
     this->anim = NULL;
+    this->spawnAnim = NULL;
+    this->deathAnim = NULL;
     this->frameID = 0;
     this->ticks = 0;
+    this->animSpeed = 0.5f;
     this->flashTicks = 0;
     this->sectorLink.SetData(this);
     this->areaLink.link.SetData(this);
@@ -90,6 +93,34 @@ void kexActor::Remove(void)
 void kexActor::Spawn(void)
 {
     float r, h;
+
+    if(definition)
+    {
+        kexStr animName;
+        
+        definition->GetFloat("scale", scale, 1);
+        definition->GetFloat("radius", radius, 16);
+        definition->GetFloat("height", height, 32);
+        definition->GetFloat("stepHeight", stepHeight, 16);
+        definition->GetFloat("animSpeed", animSpeed, 0.5f);
+        definition->GetInt("health", health, 100);
+
+        if(definition->GetBool("noAdvanceFrames")) flags |= AF_NOADVANCEFRAMES;
+        if(definition->GetBool("randomizeFrames")) flags |= AF_RANDOMIZATION;
+        if(definition->GetBool("solid"))           flags |= AF_SOLID;
+        if(definition->GetBool("shootable"))       flags |= AF_SHOOTABLE;
+        if(definition->GetBool("fullbright"))      flags |= AF_FULLBRIGHT;
+        
+        if(definition->GetString("spawnAnim", animName))
+        {
+            spawnAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
+            ChangeAnim(spawnAnim);
+        }
+        if(definition->GetString("deathAnim", animName))
+        {
+            deathAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
+        }
+    }
     
     if(anim == NULL)
     {
@@ -157,6 +188,11 @@ void kexActor::ChangeAnim(spriteAnim_t *changeAnim)
     anim = changeAnim;
     frameID = 0;
     ticks = 0;
+
+    for(unsigned int i = 0; i < anim->frames[0].actions.Length(); ++i)
+    {
+        anim->frames[0].actions[i]->Execute(this);
+    }
 }
 
 //
@@ -187,24 +223,23 @@ void kexActor::UpdateSprite(void)
     }
     
     frame = &anim->frames[frameID];
-    ticks += (1.0f / (float)frame->delay) * 0.5f;
+    ticks += (1.0f / (float)frame->delay) * animSpeed;
     
     // handle advancing to next frame
     if(ticks >= 1)
     {
         ticks = 0;
-
-        if(frame->flags & SFF_REMOVESELF)
-        {
-            Remove();
-            return;
-        }
         
         // reached the end of the frame?
         if(++frameID >= (int16_t)anim->NumFrames())
         {
             // loop back
             frameID = 0;
+        }
+
+        for(unsigned int i = 0; i < anim->frames[frameID].actions.Length(); ++i)
+        {
+            anim->frames[frameID].actions[i]->Execute(this);
         }
     }
 
@@ -223,6 +258,16 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
 {
     flags |= AF_FLASH;
     flashTicks = 1;
+
+    if(health > 0)
+    {
+        health -= amount;
+
+        if(health <= 0)
+        {
+            ChangeAnim(deathAnim);
+        }
+    }
 }
 
 //

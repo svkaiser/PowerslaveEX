@@ -64,3 +64,13 @@ vase04_idle
         }
     }
 }
+
+vase04_death
+{
+    frame
+    {
+        action A_Spawn("Fx_VaseExplodePuff", 0, 0, 32)
+        action A_Destroy()
+        delay 1
+    }
+}

@@ -210,7 +210,8 @@ typedef enum
     AF_NOADVANCEFRAMES  = BIT(3),
     AF_RANDOMIZATION    = BIT(4),
     AF_FLASH            = BIT(5),
-    AF_SHOOTABLE        = BIT(6)
+    AF_SHOOTABLE        = BIT(6),
+    AF_FULLBRIGHT       = BIT(7)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -259,12 +260,15 @@ public:
     spriteFrame_t                   *Frame(void) { return &anim->frames[frameID]; }
     const int                       FrameID(void) const { return frameID; }
     float                           &Ticks(void) { return ticks; }
+    void                            SetDefinition(kexDict *dict) { definition = dict; }
+    float                           &AnimSpeed(void) { return animSpeed; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
 protected:
     void                            UpdateSprite(void);
 
+    kexDict                         *definition;
     kexSDNodeRef<kexActor>          areaLink;
     float                           radius;
     float                           height;
@@ -279,8 +283,11 @@ protected:
     mapSector_t                     *sector;
     mapActor_t                      *mapActor;
     spriteAnim_t                    *anim;
+    spriteAnim_t                    *spawnAnim;
+    spriteAnim_t                    *deathAnim;
     int16_t                         frameID;
     float                           ticks;
+    float                           animSpeed;
     int                             flashTicks;
     actorType_t                     type;
     unsigned int                    flags;

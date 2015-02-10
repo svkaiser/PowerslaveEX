@@ -55,6 +55,8 @@ public:
     bool                        GetFloat(const kexStr &key, float &out, const float defaultValue = 0);
     bool                        GetInt(const char *key, int &out, const int defaultValue = 0);
     bool                        GetInt(const kexStr &key, int &out, const int defaultValue = 0);
+    bool                        GetInt(const char *key, int16_t &out, const int defaultValue = 0);
+    bool                        GetInt(const kexStr &key, int16_t &out, const int defaultValue = 0);
     bool                        GetBool(const char *key, bool &out, const bool defaultValue = false);
     bool                        GetBool(const kexStr &key, bool &out, const bool defaultValue = false);
     bool                        GetBool(const char *key);

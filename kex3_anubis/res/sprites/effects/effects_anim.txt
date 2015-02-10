@@ -839,7 +839,7 @@ bulletPuff
 
     frame
     {
-        removeSelf
+        action A_Destroy()
         delay 1
     }
 }
@@ -917,6 +917,6 @@ magicPuff
         {
             { "effects/impacts", 16,    -31,  -32,    0 }
         }
-        removeSelf
+        action A_Destroy()
     }
 }

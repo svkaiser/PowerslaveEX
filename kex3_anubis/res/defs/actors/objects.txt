@@ -12,9 +12,11 @@ Obj_Vase_Explode01 49
     stepHeight              32
     scale                   1.5
     health                  45
-    spriteAnim              "objects/vase01_exp_idle"
+    spawnAnim               "objects/vase01_exp_idle"
     solid                   1
     randomizeFrames         1
+    shootable               1
+    fullbright              1
 }
 
 Obj_Vase_Explode02 50
@@ -25,9 +27,11 @@ Obj_Vase_Explode02 50
     stepHeight              32
     scale                   1.5
     health                  45
-    spriteAnim              "objects/vase02_exp_idle"
+    spawnAnim               "objects/vase02_exp_idle"
     solid                   1
     randomizeFrames         1
+    shootable               1
+    fullbright              1
 }
 
 //-----------------------------------------------------------------------------
@@ -43,7 +47,7 @@ Obj_Camel 58
     height                  96
     stepHeight              48
     scale                   1.25
-    spriteAnim              "objects/camel_idle"
+    spawnAnim               "objects/camel_idle"
     component               "Camel"
     solid                   1
 }
@@ -62,9 +66,11 @@ Obj_Vase08 66
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase08_idle"
+    spawnAnim               "objects/vase08_idle"
+    deathAnim               "objects/vase08_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase11 68
@@ -75,9 +81,11 @@ Obj_Vase11 68
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase11_idle"
+    spawnAnim               "objects/vase11_idle"
+    deathAnim               "objects/vase11_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase09 69
@@ -88,9 +96,11 @@ Obj_Vase09 69
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase09_idle"
+    spawnAnim               "objects/vase09_idle"
+    deathAnim               "objects/vase09_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Barrel 70
@@ -101,9 +111,11 @@ Obj_Barrel 70
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/barrel_idle"
+    spawnAnim               "objects/barrel_idle"
+    deathAnim               "objects/barrel_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase03 71
@@ -114,9 +126,11 @@ Obj_Vase03 71
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase03_idle"
+    spawnAnim               "objects/vase03_idle"
+    deathAnim               "objects/vase03_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase10 74
@@ -127,9 +141,11 @@ Obj_Vase10 74
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase10_idle"
+    spawnAnim               "objects/vase10_idle"
+    deathAnim               "objects/vase10_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase01 76
@@ -140,9 +156,11 @@ Obj_Vase01 76
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase01_idle"
+    spawnAnim               "objects/vase01_idle"
+    deathAnim               "objects/vase01_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase02 77
@@ -153,9 +171,11 @@ Obj_Vase02 77
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase02_idle"
+    spawnAnim               "objects/vase02_idle"
+    deathAnim               "objects/vase02_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase06 78
@@ -166,9 +186,11 @@ Obj_Vase06 78
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase06_idle"
+    spawnAnim               "objects/vase06_idle"
+    deathAnim               "objects/vase06_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase07 79
@@ -179,9 +201,11 @@ Obj_Vase07 79
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase07_idle"
+    spawnAnim               "objects/vase07_idle"
+    deathAnim               "objects/vase07_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase04 80
@@ -192,9 +216,11 @@ Obj_Vase04 80
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase04_idle"
+    spawnAnim               "objects/vase04_idle"
+    deathAnim               "objects/vase04_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase12 81
@@ -205,9 +231,11 @@ Obj_Vase12 81
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase12_idle"
+    spawnAnim               "objects/vase12_idle"
+    deathAnim               "objects/vase12_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 Obj_Vase05 82
@@ -218,9 +246,11 @@ Obj_Vase05 82
     stepHeight              32
     health                  30
     scale                   1.5
-    spriteAnim              "objects/vase05_idle"
+    spawnAnim               "objects/vase05_idle"
+    deathAnim               "objects/vase05_death"
     noAdvanceFrames         1
     solid                   1
+    shootable               1
 }
 
 //-----------------------------------------------------------------------------
@@ -236,9 +266,10 @@ Obj_Fire_Pot 83
     height                  64
     stepHeight              48
     scale                   2.0
-    spriteAnim              "objects/fire_pot_idle"
+    spawnAnim               "objects/fire_pot_idle"
     solid                   1
     randomizeFrames         1
+    fullbright              1
 }
 
 Obj_Fire_Stone 84
@@ -248,9 +279,10 @@ Obj_Fire_Stone 84
     height                  64
     stepHeight              48
     scale                   2.0
-    spriteAnim              "objects/fire_stone_idle"
+    spawnAnim               "objects/fire_stone_idle"
     solid                   1
     randomizeFrames         1
+    fullbright              1
 }
 
 Obj_Fire_Pot_Candles 85
@@ -261,9 +293,10 @@ Obj_Fire_Pot_Candles 85
     stepHeight              32
     scale                   1.5
     health                  45
-    spriteAnim              "objects/fire_pot_candles_idle"
+    spawnAnim               "objects/fire_pot_candles_idle"
     solid                   1
     randomizeFrames         1
+    fullbright              1
 }
 
 Obj_Fire_Pot_Large01 98
@@ -273,9 +306,10 @@ Obj_Fire_Pot_Large01 98
     height                  64
     stepHeight              48
     scale                   2.0
-    spriteAnim              "objects/fire_pot_large01_idle"
+    spawnAnim               "objects/fire_pot_large01_idle"
     solid                   1
     randomizeFrames         1
+    fullbright              1
 }
 
 Obj_Torch_Wall02 117
@@ -285,8 +319,9 @@ Obj_Torch_Wall02 117
     height                  128
     stepHeight              48
     scale                   2.0
-    spriteAnim              "objects/torch_wall02_idle"
+    spawnAnim               "objects/torch_wall02_idle"
     randomizeFrames         1
+    fullbright              1
 }
 
 Obj_Torch_Wall01 118
@@ -296,8 +331,9 @@ Obj_Torch_Wall01 118
     height                  128
     stepHeight              48
     scale                   2.0
-    spriteAnim              "objects/torch_wall01_idle"
+    spawnAnim               "objects/torch_wall01_idle"
     randomizeFrames         1
+    fullbright              1
 }
 
 Obj_Torch_Tall01 119
@@ -307,9 +343,10 @@ Obj_Torch_Tall01 119
     height                  128
     stepHeight              48
     scale                   2.0
-    spriteAnim              "objects/torch_tall01_idle"
+    spawnAnim               "objects/torch_tall01_idle"
     solid                   1
     randomizeFrames         1
+    fullbright              1
 }
 
 Obj_Water_Lamp 120
@@ -319,5 +356,6 @@ Obj_Water_Lamp 120
     height                  64
     stepHeight              48
     scale                   2.0
-    spriteAnim              "objects/water_lamp_base"
+    spawnAnim               "objects/water_lamp_base"
+    fullbright              1
 }

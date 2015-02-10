@@ -21,6 +21,25 @@
 static kexActionDefManager actionDefManagerLocal;
 kexActionDefManager *kexGame::cActionDefManager = &actionDefManagerLocal;
 
+#define DECLARE_KEX_ACTION(cls) \
+BEGIN_EXTENDED_KEX_CLASS(cls, kexActionDef);    \
+public: \
+    cls(void); \
+    ~cls(void);    \
+    virtual void            Execute(kexActor *actor);   \
+END_KEX_CLASS();    \
+DECLARE_KEX_CLASS(cls, kexActionDef)    \
+    \
+cls::cls(void) \
+{   \
+}   \
+    \
+cls::~cls(void) \
+{   \
+}   \
+    \
+void cls::Execute(kexActor *actor)
+
 //-----------------------------------------------------------------------------
 //
 // kexActionDef
@@ -93,38 +112,7 @@ void kexActionDef::Parse(kexLexer *lexer)
 //
 //-----------------------------------------------------------------------------
 
-BEGIN_EXTENDED_KEX_CLASS(kexActionHitScan, kexActionDef);
-public:
-    kexActionHitScan(void);
-    ~kexActionHitScan(void);
-
-    virtual void            Execute(kexActor *actor);
-
-END_KEX_CLASS();
-
-DECLARE_KEX_CLASS(kexActionHitScan, kexActionDef)
-
-//
-// kexActionHitScan::kexActionHitScan
-//
-
-kexActionHitScan::kexActionHitScan(void)
-{
-}
-
-//
-// kexActionHitScan::~kexActionHitScan
-//
-
-kexActionHitScan::~kexActionHitScan(void)
-{
-}
-
-//
-// kexActionHitScan::Execute
-//
-
-void kexActionHitScan::Execute(kexActor *actor)
+DECLARE_KEX_ACTION(kexActionHitScan)
 {
     kexGameLocal *game  = kexGame::cLocal;
     kexCModel *cm       = kexGame::cLocal->CModel();
@@ -176,38 +164,7 @@ void kexActionHitScan::Execute(kexActor *actor)
 //
 //-----------------------------------------------------------------------------
 
-BEGIN_EXTENDED_KEX_CLASS(kexActionPlayerMelee, kexActionDef);
-public:
-    kexActionPlayerMelee(void);
-    ~kexActionPlayerMelee(void);
-
-    virtual void            Execute(kexActor *actor);
-
-END_KEX_CLASS();
-
-DECLARE_KEX_CLASS(kexActionPlayerMelee, kexActionDef)
-
-//
-// kexActionPlayerMelee::kexActionPlayerMelee
-//
-
-kexActionPlayerMelee::kexActionPlayerMelee(void)
-{
-}
-
-//
-// kexActionPlayerMelee::~kexActionPlayerMelee
-//
-
-kexActionPlayerMelee::~kexActionPlayerMelee(void)
-{
-}
-
-//
-// kexActionPlayerMelee::Execute
-//
-
-void kexActionPlayerMelee::Execute(kexActor *actor)
+DECLARE_KEX_ACTION(kexActionPlayerMelee)
 {
     kexCModel *cm           = kexGame::cLocal->CModel();
     float dist              = this->args[0].f;
@@ -246,6 +203,47 @@ void kexActionPlayerMelee::Execute(kexActor *actor)
             player->Weapon().ChangeAnim(gotoFrameNoObj);
         }
     }
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionSpawn
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionSpawn)
+{
+    kexGameLocal *game  = kexGame::cLocal;
+    char *defName       = this->args[0].s;
+    float x             = this->args[1].f + actor->Origin().x;
+    float y             = this->args[2].f + actor->Origin().y;
+    float z             = this->args[3].f + actor->Origin().z;
+
+    game->SpawnActor(defName, x, y, z, actor->Yaw(),
+                     actor->Sector() - game->World()->Sectors());
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionPrintf
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionPrintf)
+{
+    char *string = this->args[0].s;
+    kex::cSystem->Printf(string);
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionDestroy
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionDestroy)
+{
+    actor->Remove();
 }
 
 //-----------------------------------------------------------------------------
@@ -334,4 +332,8 @@ void kexActionDefManager::RegisterActions(void)
                     AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_INTEGER, AAT_INTEGER, AAT_FLOAT, AAT_STRING);
     RegisterAction("A_PlayerMelee", kexActionPlayerMelee::info.Create,
                     AAT_FLOAT, AAT_INTEGER, AAT_FLOAT, AAT_STRING, AAT_STRING);
+    RegisterAction("A_Spawn", kexActionSpawn::info.Create,
+                    AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
+    RegisterAction("A_Printf", kexActionPrintf::info.Create, AAT_STRING);
+    RegisterAction("A_Destroy", kexActionDestroy::info.Create);
 }
