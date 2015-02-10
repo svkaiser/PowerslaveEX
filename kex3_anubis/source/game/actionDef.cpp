@@ -158,7 +158,15 @@ void kexActionHitScan::Execute(kexActor *actor)
         y = pos.y;
         z = pos.z;
 
-        game->SpawnActor(name, x, y, z, actor->Yaw(), cm->ContactSector() - game->World()->Sectors());
+        if(cm->ContactActor() && cm->ContactActor()->Flags() & AF_SHOOTABLE)
+        {
+            cm->ContactActor()->InflictDamage(actor, this->args[3].i);
+        }
+        else
+        {
+            game->SpawnActor(name, x, y, z, actor->Yaw(),
+                             cm->ContactSector() - game->World()->Sectors());
+        }
     }
 }
 
@@ -227,6 +235,11 @@ void kexActionPlayerMelee::Execute(kexActor *actor)
         if(cm->ContactActor())
         {
             player->Weapon().ChangeAnim(gotoFrameObj);
+            
+            if(cm->ContactActor()->Flags() & AF_SHOOTABLE)
+            {
+                cm->ContactActor()->InflictDamage(actor, this->args[1].i);
+            }
         }
         else
         {

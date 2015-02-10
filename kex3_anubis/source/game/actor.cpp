@@ -39,6 +39,7 @@ kexActor::kexActor(void)
     this->anim = NULL;
     this->frameID = 0;
     this->ticks = 0;
+    this->flashTicks = 0;
     this->sectorLink.SetData(this);
     this->areaLink.link.SetData(this);
     this->areaLink.node = NULL;
@@ -59,6 +60,15 @@ kexActor::~kexActor(void)
 void kexActor::Tick(void)
 {
     UpdateSprite();
+    
+    if(flags & AF_FLASH)
+    {
+        if(flashTicks-- <= 0)
+        {
+            flashTicks = 0;
+            flags &= ~AF_FLASH;
+        }
+    }
 }
 
 //
@@ -203,6 +213,16 @@ void kexActor::UpdateSprite(void)
     {
         ChangeAnim(frame->nextFrame);
     }
+}
+
+//
+// kexActor::InflictDamage
+//
+
+void kexActor::InflictDamage(kexActor *inflictor, const int amount)
+{
+    flags |= AF_FLASH;
+    flashTicks = 1;
 }
 
 //

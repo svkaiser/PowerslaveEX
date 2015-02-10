@@ -456,7 +456,23 @@ void kexRenderScene::DrawActors(mapSector_t *sector)
             vl->AddTriangle(0, 2, 1);
             vl->AddTriangle(1, 2, 3);
 
-            vl->DrawElements();
+            if(actor->Flags() & AF_FLASH)
+            {
+                vl->DrawElements(false);
+                
+                kexRender::cTextures->whiteTexture->Bind();
+                kexRender::cBackend->SetDepth(GLFUNC_EQUAL);
+                kexRender::cBackend->SetBlend(GLSRC_ONE, GLDST_ONE);
+                
+                vl->DrawElements();
+                
+                kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+                kexRender::cBackend->SetDepth(GLFUNC_LEQUAL);
+            }
+            else
+            {
+                vl->DrawElements();
+            }
         }
     }
 }

@@ -208,7 +208,9 @@ typedef enum
     AF_CEILINGFRICTION  = BIT(1),
     AF_SOLID            = BIT(2),
     AF_NOADVANCEFRAMES  = BIT(3),
-    AF_RANDOMIZATION    = BIT(4)
+    AF_RANDOMIZATION    = BIT(4),
+    AF_FLASH            = BIT(5),
+    AF_SHOOTABLE        = BIT(6)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -233,6 +235,7 @@ public:
     void                            ChangeAnim(const char *animName);
     void                            LinkSector(void);
     void                            UnlinkSector(void);
+    void                            InflictDamage(kexActor *inflictor, const int amount);
 
     kexVec3                         &Velocity(void) { return velocity; }
     kexVec3                         &Movement(void) { return movement; }
@@ -278,6 +281,7 @@ protected:
     spriteAnim_t                    *anim;
     int16_t                         frameID;
     float                           ticks;
+    int                             flashTicks;
     actorType_t                     type;
     unsigned int                    flags;
     float                           floorHeight;
