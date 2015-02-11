@@ -18,7 +18,7 @@
 #include "kexlib.h"
 #include "game.h"
 
-#define CONTACT_COUNT   64
+#define CONTACT_COUNT   5
 
 int kexCModel::validcount = 1;
 
@@ -963,7 +963,7 @@ void kexCModel::CollideActorWithWorld(void)
         }
         
         contactNormals[moves++] = contactNormal;
-        projAmt = 1.0f - fraction + 0.001f;
+        projAmt = 1.0f - fraction + 0.1f;
         
         // try all interacted normals
         for(int j = 0; j < moves; ++j)
