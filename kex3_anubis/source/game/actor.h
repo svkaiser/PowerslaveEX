@@ -213,7 +213,8 @@ typedef enum
     AF_SHOOTABLE        = BIT(6),
     AF_FULLBRIGHT       = BIT(7),
     AF_MOVEABLE         = BIT(8),
-    AF_TOUCHABLE        = BIT(9)
+    AF_TOUCHABLE        = BIT(9),
+    AF_BOUNCY           = BIT(10)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------

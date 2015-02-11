@@ -117,6 +117,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("fullbright"))       flags |= AF_FULLBRIGHT;
         if(definition->GetBool("moveable"))         flags |= AF_MOVEABLE;
         if(definition->GetBool("touchable"))        flags |= AF_TOUCHABLE;
+        if(definition->GetBool("bouncy"))           flags |= AF_BOUNCY;
         
         if(definition->GetString("spawnAnim", animName))
         {
@@ -334,7 +335,17 @@ void kexActor::UpdateMovement(void)
     if(origin.z + velocity.z <= floorHeight)
     {
         origin.z = floorHeight;
-        velocity.z = 0;
+        
+        if(flags & AF_BOUNCY && kexMath::Fabs(velocity.z) > 1)
+        {
+            velocity.z = (floorHeight - (origin.z + velocity.z)) * 0.5f;
+            velocity.x *= AMOVE_FRICTION;
+            velocity.y *= AMOVE_FRICTION;
+        }
+        else
+        {
+            velocity.z = 0;
+        }
     }
     
     movement = velocity;
