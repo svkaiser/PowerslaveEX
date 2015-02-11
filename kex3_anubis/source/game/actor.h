@@ -241,12 +241,13 @@ public:
     kexVec3                         &Velocity(void) { return velocity; }
     kexVec3                         &Movement(void) { return movement; }
     mapSector_t                     *Sector(void) { return sector; }
+    const int                       SectorIndex(void);
     void                            SetSector(mapSector_t *s);
     mapActor_t                      *MapActor(void) { return mapActor; }
     kexLinklist<kexActor>           &Link(void) { return link; }
     kexLinklist<kexActor>           &SectorLink(void) { return sectorLink; }
     kexBBox                         &Bounds(void) { return bounds; }
-    actorType_t                     &Type(void) { return type; }
+    int                             &Type(void) { return type; }
     int16_t                         &Health(void) { return health; }
     void                            SetMapActor(mapActor_t *ma) { mapActor = ma; }
     float                           &Radius(void) { return radius; }
@@ -290,7 +291,7 @@ protected:
     float                           ticks;
     float                           animSpeed;
     int                             flashTicks;
-    actorType_t                     type;
+    int                             type;
     unsigned int                    flags;
     float                           floorHeight;
     float                           ceilingHeight;

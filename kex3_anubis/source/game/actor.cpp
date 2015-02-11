@@ -18,7 +18,7 @@
 #include "kexlib.h"
 #include "game.h"
 
-#define AMOVE_FRICTION          0.9375f
+#define AMOVE_FRICTION          0.5f
 #define AMOVE_MIN               0.125f
 #define AMOVE_SPEED_FALL        0.75f
 
@@ -183,6 +183,15 @@ void kexActor::SetSector(mapSector_t *s)
 {
     sector = s;
     LinkSector();
+}
+
+//
+// kexActor::SectorIndex
+//
+
+const int kexActor::SectorIndex(void)
+{
+    return (sector - kexGame::cLocal->World()->Sectors());
 }
 
 //

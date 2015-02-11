@@ -119,7 +119,7 @@ public:
 
     virtual void            Execute(kexActor *actor);
 
-    asIScriptFunction       ***function;
+    asIScriptFunction       *function;
 END_KEX_CLASS();
 
 DECLARE_KEX_CLASS(kexActionScriptDef, kexActionDef)
@@ -146,6 +146,45 @@ kexActionScriptDef::~kexActionScriptDef(void)
 
 void kexActionScriptDef::Execute(kexActor *actor)
 {
+    if(this->function == NULL)
+    {
+        kex::cSystem->Warning("%s contains null function pointer\n", defInfo->name);
+        return;
+    }
+
+    if(!kexGame::cScriptManager->PrepareFunction(this->function))
+    {
+        return;
+    }
+
+    kexGame::cScriptManager->Context()->SetArgObject(0, actor);
+
+    for(int i = 0; i < this->numArgs; ++i)
+    {
+        switch(this->argTypes[i])
+        {
+        case AAT_INTEGER:
+            kexGame::cScriptManager->Context()->SetArgDWord(i+1, this->args[i].i);
+            break;
+
+        case AAT_FLOAT:
+            kexGame::cScriptManager->Context()->SetArgFloat(i+1, this->args[i].f);
+            break;
+
+        case AAT_STRING:
+            // UH......
+            break;
+
+        default:
+            kexGame::cScriptManager->PopState();
+            return;
+        }
+    }
+
+    if(!kexGame::cScriptManager->Execute())
+    {
+        return;
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -389,28 +428,61 @@ void kexActionDefManager::RegisterAction(const char *name, kexObject *(*Create)(
 }
 
 //
+// kexActionDefManager::RegisterScriptAction
+//
+
+void kexActionDefManager::RegisterScriptAction(const char *name, kexStrList &argTypes, unsigned int numArgs)
+{
+    actionDefInfo_t *info;
+    int args[MAX_ACTION_DEF_ARGS] = { AAT_INVALID, AAT_INVALID,
+                                      AAT_INVALID, AAT_INVALID,
+                                      AAT_INVALID, AAT_INVALID,
+                                      AAT_INVALID, AAT_INVALID };
+
+    // first arg should always be kActor@ so ignore it
+    for(unsigned int i = 1; i < numArgs; ++i)
+    {
+             if(argTypes[i] == "float")   args[i-1] = AAT_FLOAT;
+        else if(argTypes[i] == "int")     args[i-1] = AAT_INTEGER;
+        else if(argTypes[i] == "kStr&")   args[i-1] = AAT_STRING;
+        else if(argTypes[i] == "kStr")    args[i-1] = AAT_STRING;
+        else
+        {
+            kex::cSystem->Warning("%s has unknown argument type (arg %i)\n", name, i);
+            return;
+        }
+    }
+
+    info = actionDefInfos.Add(name);
+    info->name = name;
+    info->numArgs = numArgs-1;
+    info->Create = kexActionScriptDef::info.Create;
+
+    for(int i = 0; i < MAX_ACTION_DEF_ARGS; ++i)
+    {
+        info->argTypes[i] = args[i];
+    }
+}
+
+//
 // kexActionDefManager::CreateInstance
 //
 
 kexActionDef *kexActionDefManager::CreateInstance(const char *name)
 {
     actionDefInfo_t *info = actionDefInfos.Find(name);
+    asIScriptFunction **f;
     kexActionDef *ad;
 
     if(!info)
     {
-        // if it doesn't exist then it could be a custom script function
-        asIScriptFunction ***f;
-        kexActionScriptDef *asd;
-        
-        if(!(f = kexGame::cScriptManager->ActionList().Find(name)))
-        {
-            // no match, abort
-            return NULL;
-        }
-        
-        asd = static_cast<kexActionScriptDef*>(info->Create());
-        asd->function = f;
+        return NULL;
+    }
+
+    if((f = kexGame::cScriptManager->ActionList().Find(name)))
+    {
+        kexActionScriptDef *asd = static_cast<kexActionScriptDef*>(info->Create());
+        asd->function = *f;
         
         ad = static_cast<kexActionDef*>(asd);
     }

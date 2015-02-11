@@ -47,16 +47,13 @@ public:
     ~kexActionDefManager(void);
 
     void                            RegisterActions(void);
-    void                            RegisterAction(const char *name,
-                                                   kexObject *(*Create)(void),
-                                                   const int t1 = AAT_INVALID,
-                                                   const int t2 = AAT_INVALID,
-                                                   const int t3 = AAT_INVALID,
-                                                   const int t4 = AAT_INVALID,
-                                                   const int t5 = AAT_INVALID,
-                                                   const int t6 = AAT_INVALID,
-                                                   const int t7 = AAT_INVALID,
-                                                   const int t8 = AAT_INVALID);
+    void                            RegisterAction(const char *name, kexObject *(*Create)(void),
+                                                   const int t1 = AAT_INVALID, const int t2 = AAT_INVALID,
+                                                   const int t3 = AAT_INVALID, const int t4 = AAT_INVALID,
+                                                   const int t5 = AAT_INVALID, const int t6 = AAT_INVALID,
+                                                   const int t7 = AAT_INVALID, const int t8 = AAT_INVALID);
+    void                            RegisterScriptAction(const char *name, kexStrList &argTypes,
+                                                         unsigned int numArgs);
     kexActionDef                    *CreateInstance(const char *name);
 
     kexHashList<actionDefInfo_t>    actionDefInfos;

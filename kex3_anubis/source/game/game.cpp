@@ -568,7 +568,7 @@ kexActor *kexGameLocal::ConstructActor(const char *className, kexDict *def, cons
     
     actor->Origin().Set(x, y, z);
     actor->Yaw() = yaw;
-    actor->Type() = static_cast<actorType_t>(type);
+    actor->Type() = type;
     
     if(sector <= -1)
     {
@@ -644,4 +644,14 @@ kexActor *kexGameLocal::SpawnActor(const char *name, const float x, const float 
     
     actor = ConstructActor(className, def, -1, x, y, z, yaw, sector);
     return actor;
+}
+
+//
+// kexGameLocal::SpawnActor
+//
+
+kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const float y, const float z,
+                                   const float yaw, const int sector)
+{
+    return SpawnActor(name.c_str(), x, y, z, yaw, sector);
 }

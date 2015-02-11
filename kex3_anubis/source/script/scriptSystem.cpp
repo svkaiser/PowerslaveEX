@@ -25,6 +25,7 @@
 #include "objects/stringObject.h"
 #include "objects/systemObject.h"
 #include "objects/actorObject.h"
+#include "objects/gameSysObject.h"
 
 static kexScriptManager scriptManagerLocal;
 kexScriptManager *kexGame::cScriptManager = &scriptManagerLocal;
@@ -172,6 +173,7 @@ void kexScriptManager::Init(void)
     kexScriptObjVec3::Init();
     kexScriptObjQuat::Init();
     kexScriptObjActor::Init();
+    kexScriptObjGame::Init();
     
     module = engine->GetModule("core", asGM_CREATE_IF_NOT_EXISTS);
     
@@ -179,16 +181,10 @@ void kexScriptManager::Init(void)
     scriptBuffer += "\0";
     
     module->Build();
-    
-    asIScriptFunction *func = module->GetFunctionByDecl("void main(void)");
-    
-    if(func != 0)
+
+    if(PrepareFunction("void main(void)"))
     {
-        ctx->Prepare(func);
-        if(ctx->Execute() == asEXECUTION_EXCEPTION)
-        {
-            kex::cSystem->Error("%s", ctx->GetExceptionString());
-        }
+        Execute();
     }
     
     InitActions();
@@ -210,6 +206,80 @@ void kexScriptManager::Shutdown(void)
 }
 
 //
+// kexScriptManager::PushState
+//
+
+void kexScriptManager::PushState(void)
+{
+    state = ctx->GetState();
+
+    if(state == asEXECUTION_ACTIVE)
+    {
+        ctx->PushState();
+    }
+}
+
+//
+// kexScriptManager::PopState
+//
+
+void kexScriptManager::PopState(void)
+{
+    if(state == asEXECUTION_ACTIVE)
+    {
+        ctx->PopState();
+    }
+}
+
+//
+// kexScriptManager::PrepareFunction
+//
+
+bool kexScriptManager::PrepareFunction(asIScriptFunction *function)
+{
+    if(function == NULL)
+    {
+        return false;
+    }
+
+    PushState();
+
+    if(ctx->Prepare(function) != 0)
+    {
+        PopState();
+        return false;
+    }
+
+    return true;
+}
+
+//
+// kexScriptManager::PrepareFunction
+//
+
+bool kexScriptManager::PrepareFunction(const char *function)
+{
+    return PrepareFunction(module->GetFunctionByDecl(function));
+}
+
+//
+// kexScriptManager::ExecuteFunction
+//
+
+bool kexScriptManager::Execute(void)
+{
+    if(ctx->Execute() == asEXECUTION_EXCEPTION)
+    {
+        PopState();
+        kex::cSystem->Error("%s", ctx->GetExceptionString());
+        return false;
+    }
+
+    PopState();
+    return true;
+}
+
+//
 // kexScriptManager::GetArgTypesFromFunction
 //
 
@@ -217,7 +287,7 @@ void kexScriptManager::GetArgTypesFromFunction(kexStrList &list, asIScriptFuncti
 {
     kexStr strTemp;
     
-    for(int i = 0; i < function->GetVarCount(); ++i)
+    for(unsigned int i = 0; i < function->GetParamCount(); ++i)
     {
         strTemp = function->GetVarDecl(i);
         strTemp.Remove(strTemp.IndexOf(" "), strTemp.Length());
@@ -253,7 +323,7 @@ void kexScriptManager::InitActions(void)
             {
                 kexStrList argNameTypes;
                 
-                if(func->GetVarCount() == 0)
+                if(func->GetParamCount() == 0)
                 {
                     kex::cSystem->Warning("%s must have at least kActor@ declared as the first argument\n",
                                           actionName.c_str());
@@ -269,8 +339,14 @@ void kexScriptManager::InitActions(void)
                     continue;
                 }
                 
-                asIScriptFunction ***f = actionList.Add(actionName);
-                *f = &func;
+                asIScriptFunction **f = actionList.Add(actionName);
+                *f = func;
+
+                kexGame::cActionDefManager->RegisterScriptAction(actionName, argNameTypes, func->GetParamCount());
+            }
+            else
+            {
+                kex::cSystem->Warning("%s is not declared in the script\n", lexer->StringToken());
             }
         }
     }

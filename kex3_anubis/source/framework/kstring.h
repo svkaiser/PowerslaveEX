@@ -123,17 +123,17 @@ d_inline bool operator==(const kexStr &a, const char *b)
 
 d_inline bool operator!=(const kexStr &a, const kexStr &b)
 {
-    return (strcmp(a.charPtr, b.charPtr));
+    return (strcmp(a.charPtr, b.charPtr) == 1);
 }
 
 d_inline bool operator!=(const char *a, const kexStr &b)
 {
-    return (strcmp(a, b.charPtr));
+    return (strcmp(a, b.charPtr) == 1);
 }
 
 d_inline bool operator!=(const kexStr &a, const char *b)
 {
-    return (strcmp(a.charPtr, b));
+    return (strcmp(a.charPtr, b) == 1);
 }
 
 #endif

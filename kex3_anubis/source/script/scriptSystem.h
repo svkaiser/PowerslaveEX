@@ -28,6 +28,11 @@ public:
     void                                CallExternalScript(const char *file, const char *function);
     void                                CallCommand(const char *decl);
     void                                DrawGCStats(void);
+    void                                PushState(void);
+    void                                PopState(void);
+    bool                                PrepareFunction(const char *function);
+    bool                                PrepareFunction(asIScriptFunction *function);
+    bool                                Execute(void);
     void                                RegisterMethod(const char *name, const char *decl,
                                                        const asSFuncPtr &funcPointer);
 
@@ -37,7 +42,7 @@ public:
     template<class derived, class base>
     static derived                      *RefCast(base *c) { return static_cast<derived*>(c); }
     
-    kexHashList<asIScriptFunction**>    &ActionList(void) { return actionList; }
+    kexHashList<asIScriptFunction*>     &ActionList(void) { return actionList; }
 
     asIScriptEngine                     *Engine(void) { return engine; }
     asIScriptContext                    *Context(void) { return ctx; }
@@ -56,11 +61,13 @@ private:
     kexStrList                          scriptFiles;
     kexStr                              scriptBuffer;
     
-    kexHashList<asIScriptFunction**>    actionList;
+    kexHashList<asIScriptFunction*>     actionList;
 
     asIScriptEngine                     *engine;
     asIScriptContext                    *ctx;
     asIScriptModule                     *module;
+
+    int                                 state;
 };
 
 #endif
