@@ -1,4 +1,4 @@
-Wep_Machete
+Wep_Machete 0
 {
     persistant              1
     maxAmmo                 0
@@ -10,7 +10,7 @@ Wep_Machete
     fireAnim                "weapons/machete_fire"
 }
 
-Wep_Pistol
+Wep_Pistol 1
 {
     maxAmmo                 60
     offsetX                 160
@@ -21,7 +21,7 @@ Wep_Pistol
     fireAnim                "weapons/pistol_fire"
 }
 
-Wep_M60
+Wep_M60 2
 {
     maxAmmo                 50
     offsetX                 160
@@ -32,7 +32,7 @@ Wep_M60
     fireAnim                "weapons/m60_fire"
 }
 
-Wep_Bombs
+Wep_Bombs 3
 {
     maxAmmo                 20
     offsetX                 160
@@ -43,7 +43,7 @@ Wep_Bombs
     fireAnim                "weapons/bomb_fire"
 }
 
-Wep_FlameThrower
+Wep_FlameThrower 4
 {
     maxAmmo                 60
     offsetX                 160
@@ -54,7 +54,7 @@ Wep_FlameThrower
     fireAnim                "weapons/flamethrower_fire"
 }
 
-Wep_CobraStaff
+Wep_CobraStaff 5
 {
     maxAmmo                 20
     offsetX                 160
@@ -65,7 +65,7 @@ Wep_CobraStaff
     fireAnim                "weapons/cstaff_fire"
 }
 
-Wep_RingOfRa
+Wep_RingOfRa 6
 {
     maxAmmo                 250
     offsetX                 160
@@ -76,7 +76,7 @@ Wep_RingOfRa
     fireAnim                "weapons/ring_ra_fire"
 }
 
-Wep_Manacle
+Wep_Manacle 7
 {
     maxAmmo                 15
     offsetX                 160
