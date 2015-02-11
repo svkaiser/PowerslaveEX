@@ -172,7 +172,7 @@ void kexActionScriptDef::Execute(kexActor *actor)
             break;
 
         case AAT_STRING:
-            // UH......
+            kexGame::cScriptManager->Context()->SetArgAddress(i+1, &this->args[i].s);
             break;
 
         default:

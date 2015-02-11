@@ -84,6 +84,14 @@ void kexActor::Tick(void)
 }
 
 //
+// kexActor::OnTouch
+//
+
+void kexActor::OnTouch(kexActor *instigator)
+{
+}
+
+//
 // kexActor::Spawn
 //
 
@@ -108,6 +116,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("shootable"))        flags |= AF_SHOOTABLE;
         if(definition->GetBool("fullbright"))       flags |= AF_FULLBRIGHT;
         if(definition->GetBool("moveable"))         flags |= AF_MOVEABLE;
+        if(definition->GetBool("touchable"))        flags |= AF_TOUCHABLE;
         
         if(definition->GetString("spawnAnim", animName))
         {

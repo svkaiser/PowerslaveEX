@@ -283,7 +283,8 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
 //
 
 bool kexCModel::TraceSphere(const float radius, const kexVec2 &point,
-                            const float heightMax, const float heightMin)
+                            const float heightMax, const float heightMin,
+                            const bool bTestOnly)
 {
     kexVec2 org;
     kexVec2 dir;
@@ -322,6 +323,11 @@ bool kexCModel::TraceSphere(const float radius, const kexVec2 &point,
     
     if(frac <= 1 && frac < fraction)
     {
+        if(bTestOnly)
+        {
+            return true;
+        }
+        
         kexVec3 hit;
         
         hit = start;
@@ -560,7 +566,7 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
             continue;
         }
 
-        if(!(actor->Flags() & AF_SOLID))
+        if(!(actor->Flags() & AF_SOLID) && !(actor->Flags() & AF_TOUCHABLE))
         {
             continue;
         }
@@ -572,13 +578,23 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         {
             r = (actor->Radius() + moveActor->Radius()) * 0.5f;
             
-            if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height()))
+            if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height(),
+                           (actor->Flags() & AF_SOLID) == 0))
             {
                 contactActor = actor;
-                contactSector = actor->Sector();
+                
+                if(actor->Flags() & AF_TOUCHABLE)
+                {
+                    actor->OnTouch(moveActor);
+                }
+                
+                if(actor->Flags() & AF_SOLID)
+                {
+                    contactSector = actor->Sector();
+                }
             }
         }
-        else
+        else if(actor->Flags() & AF_SOLID)
         {
             float z = actor->Origin().z + actor->Height();
             float d;
