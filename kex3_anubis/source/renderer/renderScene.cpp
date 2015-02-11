@@ -22,6 +22,7 @@
 #include "renderScene.h"
 
 bool kexRenderScene::bPrintStats = false;
+bool kexRenderScene::bShowPortals = false;
 
 //
 // statscene
@@ -35,6 +36,20 @@ COMMAND(statscene)
     }
     
     kexRenderScene::bPrintStats ^= 1;
+}
+
+//
+// showportals
+//
+
+COMMAND(showportals)
+{
+    if(kex::cCommands->GetArgc() < 1)
+    {
+        return;
+    }
+    
+    kexRenderScene::bShowPortals ^= 1;
 }
 
 //
@@ -275,6 +290,20 @@ void kexRenderScene::DrawSector(mapSector_t *sector)
 }
 
 //
+// kexRenderScene::DrawPortal
+//
+
+void kexRenderScene::DrawPortal(mapFace_t *face)
+{
+    mapVertex_t *v = &world->Vertices()[face->vertexStart];
+    
+    kexRender::cUtils->DrawLine(v[0].origin, v[1].origin, 255, 0, 255);
+    kexRender::cUtils->DrawLine(v[1].origin, v[2].origin, 255, 0, 255);
+    kexRender::cUtils->DrawLine(v[2].origin, v[3].origin, 255, 0, 255);
+    kexRender::cUtils->DrawLine(v[3].origin, v[0].origin, 255, 0, 255);
+}
+
+//
 // kexRenderScene::DrawFace
 //
 
@@ -292,6 +321,11 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
     }
     
     face->validcount = 0;
+    
+    if(face->flags & FF_PORTAL && bShowPortals)
+    {
+        DrawPortal(face);
+    }
     
     if(face->polyStart == -1 || face->polyEnd == -1)
     {

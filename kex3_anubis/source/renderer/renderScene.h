@@ -32,11 +32,13 @@ public:
     void                    SetView(kexRenderView *v) { view = v; }
     
     static bool             bPrintStats;
+    static bool             bShowPortals;
 
 private:
     void                    DrawSky(void);
     void                    DrawSector(mapSector_t *sector);
     void                    DrawFace(mapSector_t *sector, int faceID);
+    void                    DrawPortal(mapFace_t *face);
     void                    DrawPolygon(mapFace_t *face, mapPoly_t *poly);
     void                    DrawActors(mapSector_t *sector);
     void                    PrintStats(void);
