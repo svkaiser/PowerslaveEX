@@ -26,10 +26,6 @@
 #define PMOVE_MAX_JUMPTICKS     13
 
 const int16_t kexPlayer::maxHealth = 200;
-const int kexPlayer::maxAmmo[NUMPLAYERWEAPONS] =
-{
-    0, 60, 50, 20, 60, 20, 250, 15
-};
 
 //-----------------------------------------------------------------------------
 //
@@ -373,7 +369,12 @@ void kexPlayer::Reset(void)
 
     for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
     {
-        ammo[i] = maxAmmo[i];
+        if(kexGame::cLocal->WeaponInfo(i)->bPersistent)
+        {
+            weapons[i] = true;
+        }
+        
+        ammo[i] = kexGame::cLocal->WeaponInfo(i)->maxAmmo;
     }
 
     artifacts = 0;

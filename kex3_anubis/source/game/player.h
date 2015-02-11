@@ -110,7 +110,6 @@ private:
     bool                        weapons[NUMPLAYERWEAPONS];
     int16_t                     ammo[NUMPLAYERWEAPONS];
 
-    static const int            maxAmmo[NUMPLAYERWEAPONS];
     static const int16_t        maxHealth;
 
     int16_t                     artifacts;

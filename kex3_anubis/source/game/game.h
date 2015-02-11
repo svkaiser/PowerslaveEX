@@ -166,7 +166,8 @@ public:
 
     typedef struct
     {
-        playerWeapons_t     type;
+        int                 maxAmmo;
+        bool                bPersistent;
         float               offsetX;
         float               offsetY;
         spriteAnim_t        *raise;
@@ -189,7 +190,7 @@ public:
     kexCModel               *CModel(void) { return cmodel; }
     kexSpriteManager        *SpriteManager(void) { return spriteManager; }
     kexSpriteAnimManager    *SpriteAnimManager(void) { return spriteAnimManager; }
-    const weaponInfo_t      *WeaponInfo(const playerWeapons_t id) const { return &weaponInfo[id]; }
+    const weaponInfo_t      *WeaponInfo(const int id) const { return &weaponInfo[id]; }
     kexIndexDefManager      &ActorDefs(void) { return actorDefs; }
 
     kexObject               *ConstructObject(const char *className);
@@ -209,6 +210,7 @@ public:
 
 private:
     void                    LoadNewMap(void);
+    void                    InitWeaponDefs(void);
     
     kexFont                 *smallFont;
     kexFont                 *bigFont;
@@ -229,7 +231,7 @@ private:
     kexActor                *actorRover;
     kexLinklist<kexActor>   actors;
     kexIndexDefManager      actorDefs;
-    kexDefManager           weaponDef;
+    kexIndexDefManager      weaponDef;
     kexStr                  pendingMap;
     weaponInfo_t            weaponInfo[NUMPLAYERWEAPONS];
 };

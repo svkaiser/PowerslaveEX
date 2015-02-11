@@ -214,8 +214,6 @@ void kexGameLocal::Init(void)
 
 void kexGameLocal::Start(void)
 {
-    weaponInfo_t *weapon;
-
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");
 
@@ -227,92 +225,42 @@ void kexGameLocal::Start(void)
     kexRand::SetSeed(0x10101010);
 
     pendingGameState = GS_TITLE;
-
-    //
-    // setup weapon info
-    //
-
-    // machete
-    weapon = &weaponInfo[PW_MACHETE];
-    weapon->type = PW_MACHETE;
-    weapon->offsetX = 160;
-    weapon->offsetY = 230;
-    weapon->idle = spriteAnimManager->Get("weapons/machete_idle");
-    weapon->raise = spriteAnimManager->Get("weapons/machete_raise");
-    weapon->lower = spriteAnimManager->Get("weapons/machete_lower");
-    weapon->fire = spriteAnimManager->Get("weapons/machete_fire");
-
-    // pistol
-    weapon = &weaponInfo[PW_PISTOL];
-    weapon->type = PW_PISTOL;
-    weapon->offsetX = 160;
-    weapon->offsetY = 232;
-    weapon->idle = spriteAnimManager->Get("weapons/pistol_idle");
-    weapon->raise = spriteAnimManager->Get("weapons/pistol_raise");
-    weapon->lower = spriteAnimManager->Get("weapons/pistol_lower");
-    weapon->fire = spriteAnimManager->Get("weapons/pistol_fire");
-
-    // M60
-    weapon = &weaponInfo[PW_M60];
-    weapon->type = PW_M60;
-    weapon->offsetX = 160;
-    weapon->offsetY = 132;
-    weapon->idle = spriteAnimManager->Get("weapons/m60_idle");
-    weapon->raise = spriteAnimManager->Get("weapons/m60_raise_100");
-    weapon->lower = spriteAnimManager->Get("weapons/m60_lower");
-    weapon->fire = spriteAnimManager->Get("weapons/m60_fire");
-
-    // bomb
-    weapon = &weaponInfo[PW_BOMBS];
-    weapon->type = PW_BOMBS;
-    weapon->offsetX = 160;
-    weapon->offsetY = 196;
-    weapon->idle = spriteAnimManager->Get("weapons/bomb_idle");
-    weapon->raise = spriteAnimManager->Get("weapons/bomb_raise");
-    weapon->lower = spriteAnimManager->Get("weapons/bomb_lower");
-    weapon->fire = spriteAnimManager->Get("weapons/bomb_fire");
-
-    // flamethrower
-    weapon = &weaponInfo[PW_FLAMETHROWER];
-    weapon->type = PW_FLAMETHROWER;
-    weapon->offsetX = 160;
-    weapon->offsetY = 132;
-    weapon->idle = spriteAnimManager->Get("weapons/flamethrower_idle");
-    weapon->raise = spriteAnimManager->Get("weapons/flamethrower_raise");
-    weapon->lower = spriteAnimManager->Get("weapons/flamethrower_lower");
-    weapon->fire = spriteAnimManager->Get("weapons/flamethrower_fire");
-
-    // cobra staff
-    weapon = &weaponInfo[PW_COBRASTAFF];
-    weapon->type = PW_COBRASTAFF;
-    weapon->offsetX = 160;
-    weapon->offsetY = 210;
-    weapon->idle = spriteAnimManager->Get("weapons/cstaff_idle");
-    weapon->raise = spriteAnimManager->Get("weapons/cstaff_raise");
-    weapon->lower = spriteAnimManager->Get("weapons/cstaff_lower");
-    weapon->fire = spriteAnimManager->Get("weapons/cstaff_fire");
-
-    // ring of ra
-    weapon = &weaponInfo[PW_RINGOFRA];
-    weapon->type = PW_RINGOFRA;
-    weapon->offsetX = 160;
-    weapon->offsetY = 214;
-    weapon->idle = spriteAnimManager->Get("weapons/ring_ra_idle");
-    weapon->raise = spriteAnimManager->Get("weapons/ring_ra_raise");
-    weapon->lower = spriteAnimManager->Get("weapons/ring_ra_lower");
-    weapon->fire = spriteAnimManager->Get("weapons/ring_ra_fire");
-
-    // bracelet
-    weapon = &weaponInfo[PW_BRACELET];
-    weapon->type = PW_BRACELET;
-    weapon->offsetX = 160;
-    weapon->offsetY = 208;
-    weapon->idle = spriteAnimManager->Get("weapons/manacle_idle");
-    weapon->raise = spriteAnimManager->Get("weapons/manacle_raise");
-    weapon->lower = spriteAnimManager->Get("weapons/manacle_lower");
-    weapon->fire = spriteAnimManager->Get("weapons/manacle_fire");
+    InitWeaponDefs();
 
     player->Reset();
+}
+
+//
+// kexGameLocal::InitWeaponDefs
+//
+
+void kexGameLocal::InitWeaponDefs(void)
+{
+    weaponInfo_t *weapon;
+    kexStr animName;
+    
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        kexDict *dict = weaponDef.GetEntry(i);
+        weapon = &weaponInfo[i];
+        
+        memset(weapon, 0, sizeof(weaponInfo_t));
+        
+        if(!dict)
+        {
+            continue;
+        }
+        
+        dict->GetBool("persistant", weapon->bPersistent, false);
+        dict->GetInt("maxAmmo", weapon->maxAmmo, 1);
+        dict->GetFloat("offsetX", weapon->offsetX, 0);
+        dict->GetFloat("offsetY", weapon->offsetY, 0);
+        
+        if(dict->GetString("idleAnim", animName))   weapon->idle = spriteAnimManager->Get(animName);
+        if(dict->GetString("raiseAnim", animName))  weapon->raise = spriteAnimManager->Get(animName);
+        if(dict->GetString("lowerAnim", animName))  weapon->lower = spriteAnimManager->Get(animName);
+        if(dict->GetString("fireAnim", animName))   weapon->fire = spriteAnimManager->Get(animName);
+    }
 }
 
 //
