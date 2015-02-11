@@ -405,14 +405,6 @@ public:
     float                   &operator[](int index);
     kexPlane                &operator=(const kexPlane &p);
 
-    static void             ObjectConstruct(kexPlane *p);
-    static void             ObjectConstruct(const float a, const float b, const float c, const float d,
-                                            kexPlane *p);
-    static void             ObjectConstruct(const kexVec3 &pt1, const kexVec3 &pt2, const kexVec3 &pt3,
-                                            kexPlane *p);
-    static void             ObjectConstruct(const kexVec3 &normal, const kexVec3 &point, kexPlane *p);
-    static void             ObjectConstructCopy(const kexPlane &in, kexPlane *p);
-
     float                   a;
     float                   b;
     float                   c;
