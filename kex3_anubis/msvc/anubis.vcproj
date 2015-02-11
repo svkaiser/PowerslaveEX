@@ -500,6 +500,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\source\script\objects\gameSysObject.cpp"
+						>
+					</File>
+					<File
 						RelativePath="..\source\script\objects\mathObject.cpp"
 						>
 					</File>
@@ -819,6 +823,10 @@
 					>
 					<File
 						RelativePath="..\source\script\objects\actorObject.h"
+						>
+					</File>
+					<File
+						RelativePath="..\source\script\objects\gameSysObject.h"
 						>
 					</File>
 					<File

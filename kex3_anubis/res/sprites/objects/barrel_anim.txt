@@ -13,6 +13,7 @@ barrel_idle
     frame
     {
         // ##001    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/barrel", 3,    -16,  -17,    0 }
@@ -22,6 +23,7 @@ barrel_idle
     frame
     {
         // ##002    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/barrel", 4,    -15,   -9,    0 }
@@ -31,6 +33,7 @@ barrel_idle
     frame
     {
         // ##003    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/barrel", 0,    -16,   -7,    0 }
@@ -40,6 +43,7 @@ barrel_idle
     frame
     {
         // ##004    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/barrel", 1,    -16,  -11,    0 }
@@ -52,6 +56,10 @@ barrel_death
     frame
     {
         action A_Spawn("Fx_VaseExplodePuff", 0, 0, 32)
+        action A_TossActor("Obj_Barrel_Shard01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Barrel_Shard02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Barrel_Shard03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Barrel_Shard04", 0, 0, 32, 8, 8, 4, 16)
         action A_Destroy()
         delay 1
     }
