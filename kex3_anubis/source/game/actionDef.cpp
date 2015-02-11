@@ -148,7 +148,7 @@ void kexActionScriptDef::Execute(kexActor *actor)
 {
     if(this->function == NULL)
     {
-        kex::cSystem->Warning("%s contains null function pointer\n", defInfo->name);
+        kex::cSystem->Warning("%s contains null function pointer\n", defInfo->name.c_str());
         return;
     }
 

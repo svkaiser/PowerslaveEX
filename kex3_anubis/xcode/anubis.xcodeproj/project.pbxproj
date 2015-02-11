@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413DD5BD1A89674B00767E49 /* actorObject.cpp */; };
+		419342261A8BB38B002C7F8E /* gameSysObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419342251A8BB38B002C7F8E /* gameSysObject.cpp */; };
 		419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419C3BB21A89100400C19D68 /* actionDef.cpp */; };
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
@@ -158,6 +159,8 @@
 /* Begin PBXFileReference section */
 		413DD5BD1A89674B00767E49 /* actorObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorObject.cpp; path = ../../source/script/objects/actorObject.cpp; sourceTree = "<group>"; };
 		413DD5BE1A89674B00767E49 /* actorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actorObject.h; path = ../../source/script/objects/actorObject.h; sourceTree = "<group>"; };
+		419342241A8BB38B002C7F8E /* gameSysObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gameSysObject.h; path = ../../source/script/objects/gameSysObject.h; sourceTree = "<group>"; };
+		419342251A8BB38B002C7F8E /* gameSysObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gameSysObject.cpp; path = ../../source/script/objects/gameSysObject.cpp; sourceTree = "<group>"; };
 		419C3BB21A89100400C19D68 /* actionDef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actionDef.cpp; path = ../../source/game/actionDef.cpp; sourceTree = "<group>"; };
 		419C3BB31A89100400C19D68 /* actionDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actionDef.h; path = ../../source/game/actionDef.h; sourceTree = "<group>"; };
 		41B3A5471A5DEE84006DCCB9 /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actions.cpp; sourceTree = "<group>"; };
@@ -353,11 +356,13 @@
 			isa = PBXGroup;
 			children = (
 				413DD5BD1A89674B00767E49 /* actorObject.cpp */,
+				419342251A8BB38B002C7F8E /* gameSysObject.cpp */,
 				41B776631A83EF3D008C8F23 /* mathObject.cpp */,
 				41B7765D1A83EB0A008C8F23 /* refObject.cpp */,
 				41B776601A83EB74008C8F23 /* stringObject.cpp */,
 				41B7765A1A83EA5E008C8F23 /* systemObject.cpp */,
 				413DD5BE1A89674B00767E49 /* actorObject.h */,
+				419342241A8BB38B002C7F8E /* gameSysObject.h */,
 				41B776641A83EF3D008C8F23 /* mathObject.h */,
 				41B7765E1A83EB0A008C8F23 /* refObject.h */,
 				41B776611A83EB74008C8F23 /* stringObject.h */,
@@ -821,6 +826,7 @@
 				41C7FC651A5AFB98003864CB /* drawLists.cpp in Sources */,
 				41C7FC251A5AFB6E003864CB /* kstring.cpp in Sources */,
 				41C7FC451A5AFB84003864CB /* menu.cpp in Sources */,
+				419342261A8BB38B002C7F8E /* gameSysObject.cpp in Sources */,
 				41C7FC281A5AFB6E003864CB /* parser.cpp in Sources */,
 				41C7FC4A1A5AFB84003864CB /* world.cpp in Sources */,
 				41C7FC641A5AFB98003864CB /* cpuVertexList.cpp in Sources */,
