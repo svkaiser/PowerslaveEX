@@ -29,6 +29,9 @@ void kexScriptObjActor::Init(void)
     asIScriptEngine *e = kexGame::cScriptManager->Engine();
     
     e->RegisterObjectType("kActor", sizeof(kexActor), asOBJ_REF | asOBJ_NOCOUNT);
+    e->RegisterObjectMethod("kActor", "kAngle &Yaw(void)", asMETHODPR(kexActor, Yaw, (void), kexAngle&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "kAngle &Pitch(void)", asMETHODPR(kexActor, Pitch, (void), kexAngle&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "kAngle &Roll(void)", asMETHODPR(kexActor, Roll, (void), kexAngle&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kVec3 &Origin(void)", asMETHODPR(kexActor, Origin, (void), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "void SetTarget(kActor@)", asMETHODPR(kexActor, SetTarget, (kexGameObject*), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kActor @GetTarget(void)", asMETHODPR(kexActor, Target, (void), kexGameObject*), asCALL_THISCALL);

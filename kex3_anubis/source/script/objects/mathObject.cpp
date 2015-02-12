@@ -183,3 +183,58 @@ void kexScriptObjQuat::ObjectConstructCopy(const kexQuat &in, kexQuat *thisq)
 {
     new(thisq)kexQuat(in);
 }
+
+//
+// kexScriptObjAngle::Init
+//
+
+void kexScriptObjAngle::Init(void)
+{
+    asIScriptEngine *e = kexGame::cScriptManager->Engine();
+    
+    e->RegisterObjectType("kAngle", sizeof(kexAngle), asOBJ_VALUE | asOBJ_POD | asOBJ_APP_CLASS_CA | asOBJ_APP_CLASS_ALLFLOATS);
+    e->RegisterObjectBehaviour("kAngle", asBEHAVE_CONSTRUCT, "void f()", asFUNCTION(ObjectConstruct1), asCALL_CDECL_OBJLAST);
+    e->RegisterObjectBehaviour("kAngle", asBEHAVE_CONSTRUCT, "void f(float)", asFUNCTION(ObjectConstruct2), asCALL_CDECL_OBJLAST);
+    e->RegisterObjectBehaviour("kAngle", asBEHAVE_CONSTRUCT, "void f(const kAngle &in)", asFUNCTION(ObjectConstructCopy), asCALL_CDECL_OBJLAST);
+    e->RegisterObjectMethod("kAngle", "float Diff(const float)", asMETHODPR(kexAngle, Diff, (const float), float), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "float Diff(const kAngle &in)", asMETHODPR(kexAngle, Diff, (const kexAngle&), float), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle opAdd(const float) const", asMETHODPR(kexAngle, operator+, (const float) const, kexAngle), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle &opAddAssign(const float)", asMETHODPR(kexAngle, operator+=, (const float), kexAngle&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle opSub(const float) const", asMETHODPR(kexAngle, operator-, (const float) const, kexAngle), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle &opSubAssign(const float)", asMETHODPR(kexAngle, operator-=, (const float), kexAngle&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle opAdd(const kAngle &in) const", asMETHODPR(kexAngle, operator+, (const kexAngle&) const, kexAngle), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle &opAddAssign(const kAngle &in)", asMETHODPR(kexAngle, operator+=, (const kexAngle&), kexAngle&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle opSub(const kAngle &in) const", asMETHODPR(kexAngle, operator-, (const kexAngle&) const, kexAngle), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle &opSubAssign(kAngle &in)", asMETHODPR(kexAngle, operator-=, (const kexAngle&), kexAngle&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle &opAssign(const float)", asMETHODPR(kexAngle, operator=, (const float), kexAngle&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle &opAssign(const kAngle &in)", asMETHODPR(kexAngle, operator=, (const kexAngle&), kexAngle&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "kAngle opNeg(void) const", asMETHODPR(kexAngle, operator-, (void) const, kexAngle), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAngle", "float opImplConv(void)", asMETHODPR(kexAngle, operator float, (void), float), asCALL_THISCALL);
+}
+
+//
+// kexScriptObjAngle::ObjectConstruct1
+//
+
+void kexScriptObjAngle::ObjectConstruct1(kexAngle *thisang)
+{
+    new(thisang)kexAngle();
+}
+
+//
+// kexScriptObjAngle::ObjectConstruct2
+//
+
+void kexScriptObjAngle::ObjectConstruct2(float an, kexAngle *thisang)
+{
+    new(thisang)kexAngle(an);
+}
+
+//
+// kexScriptObjAngle::ObjectConstructCopy
+//
+
+void kexScriptObjAngle::ObjectConstructCopy(const kexAngle &in, kexAngle *thisang)
+{
+    new(thisang)kexAngle(in);
+}

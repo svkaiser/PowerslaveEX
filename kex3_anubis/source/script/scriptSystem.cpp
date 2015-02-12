@@ -172,6 +172,7 @@ void kexScriptManager::Init(void)
     kexScriptObjMath::Init();
     kexScriptObjVec3::Init();
     kexScriptObjQuat::Init();
+    kexScriptObjAngle::Init();
     kexScriptObjActor::Init();
     kexScriptObjGame::Init();
     

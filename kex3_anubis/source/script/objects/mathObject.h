@@ -40,4 +40,13 @@ public:
     static void         ObjectConstructCopy(const kexQuat &in, kexQuat *thisq);
 };
 
+class kexScriptObjAngle
+{
+public:
+    static void         Init(void);
+    static void         ObjectConstruct1(kexAngle *thisang);
+    static void         ObjectConstruct2(float an, kexAngle *thisang);
+    static void         ObjectConstructCopy(const kexAngle &in, kexAngle *thisang);
+};
+
 #endif
