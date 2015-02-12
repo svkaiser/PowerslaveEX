@@ -127,6 +127,7 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].ceilingSlope     = mapfile.ReadFloat();
         sectors[i].floorSlope       = mapfile.ReadFloat();
         sectors[i].flags            = mapfile.Read16();
+        sectors[i].event            = -1;
         sectors[i].validcount       = -1;
         sectors[i].clipCount        = -1;
         sectors[i].floodCount       = 0;
@@ -269,6 +270,11 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
         events[i].sector    = mapfile.Read16();
         events[i].tag       = mapfile.Read16();
         events[i].unknown   = mapfile.Read16();
+        
+        if(events[i].sector >= 0)
+        {
+            sectors[events[i].sector].event = i;
+        }
     }
 }
 

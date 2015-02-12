@@ -365,7 +365,7 @@ DECLARE_KEX_ACTION(kexActionDestroyAtRest)
     float min = this->args[0].f;
 
     if(actor->Origin().z > actor->FloorHeight() ||
-       actor->FloorHeight() - actor->Origin().z > 64)
+       actor->FloorHeight() - actor->Origin().z > actor->Height())
     {
         return;
     }
@@ -387,8 +387,8 @@ DECLARE_KEX_ACTION(kexActionDestroyAtRest)
 DECLARE_KEX_ACTION(kexActionRadialBlast)
 {
     kexGameLocal *game  = kexGame::cLocal;
-    float radius = this->args[0].f;
-    int damage = this->args[1].i;
+    float radius        = this->args[0].f;
+    int damage          = this->args[1].i;
     
     game->World()->RadialDamage(actor, radius, damage);
 }

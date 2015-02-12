@@ -46,6 +46,7 @@ typedef struct
     float                   floorSlope;
     word                    flags;
     kexBBox                 bounds;
+    int                     event;
     int                     validcount;
     int                     floodCount;
     int                     clipCount;
