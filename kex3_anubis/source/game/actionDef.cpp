@@ -363,6 +363,12 @@ DECLARE_KEX_ACTION(kexActionDestroy)
 DECLARE_KEX_ACTION(kexActionDestroyAtRest)
 {
     float min = this->args[0].f;
+
+    if(actor->Origin().z > actor->FloorHeight() ||
+       actor->FloorHeight() - actor->Origin().z > 64)
+    {
+        return;
+    }
     
     if(actor->Velocity().UnitSq() > min)
     {
@@ -370,6 +376,21 @@ DECLARE_KEX_ACTION(kexActionDestroyAtRest)
     }
     
     actor->Remove();
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionRadialBlast
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionRadialBlast)
+{
+    kexGameLocal *game  = kexGame::cLocal;
+    float radius = this->args[0].f;
+    int damage = this->args[1].i;
+    
+    game->World()->RadialDamage(actor, radius, damage);
 }
 
 //-----------------------------------------------------------------------------
@@ -517,4 +538,5 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_TossActor", kexActionTossActor::info.Create,
                    AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
     RegisterAction("A_DestroyAtRest", kexActionDestroyAtRest::info.Create, AAT_FLOAT);
+    RegisterAction("A_RadialBlast", kexActionRadialBlast::info.Create, AAT_FLOAT, AAT_INTEGER);
 }

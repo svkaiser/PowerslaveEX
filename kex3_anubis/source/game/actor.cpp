@@ -132,6 +132,12 @@ void kexActor::Spawn(void)
         definition->GetInt("initialFrame", frameID, 0);
     }
     
+    if(sector)
+    {
+        floorHeight = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector);
+        ceilingHeight = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector);
+    }
+    
     if(anim == NULL)
     {
         anim = &kexGame::cLocal->SpriteAnimManager()->defaultAnim;
@@ -149,12 +155,6 @@ void kexActor::Spawn(void)
         {
             frameID = kexRand::Max(anim->NumFrames());
         }
-    }
-    
-    if(sector)
-    {
-        floorHeight = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector);
-        ceilingHeight = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector);
     }
     
     link.Add(kexGame::cLocal->Actors());

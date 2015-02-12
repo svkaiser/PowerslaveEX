@@ -222,6 +222,7 @@ public:
     explicit kexVec3(const kexVec2 &vec, const float z);
 
     void                    Set(const float x, const float y, const float z);
+    void                    Set(const float val);
     void                    Clear(void);
     float                   Dot(const kexVec3 &vec) const;
     static float            Dot(const kexVec3 &vec1, const kexVec3 &vec2);

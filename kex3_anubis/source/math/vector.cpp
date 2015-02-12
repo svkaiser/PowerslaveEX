@@ -584,6 +584,17 @@ void kexVec3::Set(const float x, const float y, const float z)
 }
 
 //
+// kexVec3::Set
+//
+
+void kexVec3::Set(const float val)
+{
+    this->x = val;
+    this->y = val;
+    this->z = val;
+}
+
+//
 // kexVec3::Clear
 //
 
