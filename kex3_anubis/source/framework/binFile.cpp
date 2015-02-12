@@ -66,6 +66,7 @@ bool kexBinFile::OpenStream(const char *file)
     if((handle = fopen(file, "rb")))
     {
         bOpened = true;
+        bufferOffset = 0;
         return true;
     }
 

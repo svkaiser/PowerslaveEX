@@ -303,30 +303,27 @@ void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
 int kexPakFile::OpenExternalFile(const char *name, byte **buffer) const
 {
     kexStr fPath;
-    FILE *fp;
+    kexBinFile fp;
 
     fPath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), name);
     fPath.NormalizeSlashes();
 
-    if((fp = fopen(fPath.c_str(), "rb")))
+    // must call OpenStream here and not Open, otherwise it'll recurse infinitely
+    if(fp.OpenStream(fPath.c_str()))
     {
-        size_t length;
-
-        fseek(fp, 0, SEEK_END);
-        length = ftell(fp);
-        fseek(fp, 0, SEEK_SET);
+        size_t length = fp.Length();
 
         *buffer = (byte*)Mem_Calloc(length+1, hb_file);
 
-        if(fread(*buffer, 1, length, fp) == length)
+        if(fp.ReadStream(0, *buffer, length) == length)
         {
-            fclose(fp);
+            fp.Close();
             return length;
         }
 
         Mem_Free(*buffer);
         *buffer = NULL;
-        fclose(fp);
+        fp.Close();
     }
 
     return -1;
