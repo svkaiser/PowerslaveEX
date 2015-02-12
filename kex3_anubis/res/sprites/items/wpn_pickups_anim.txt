@@ -1,0 +1,57 @@
+weapon_pickup_pistol
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/wpn_pistol", 0,    -29,  -63,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/wpn_pistol", 0,    -29,  -62,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/wpn_pistol", 0,    -29,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/wpn_pistol", 0,    -29,  -60,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/wpn_pistol", 0,    -29,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/wpn_pistol", 0,    -29,  -62,    0 }
+        }
+    }
+}

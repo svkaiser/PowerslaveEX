@@ -1,6 +1,5 @@
 enum actorTypes
 {
-    AT_INVALID  = -1,
     AT_PLAYER   = 0,
     AT_ANUBIS,
     AT_BASTET,
@@ -240,7 +239,7 @@ void A_SpawnOrbPickup(kActor @actor)
         return;
     }
     
-    if(((Math::Rand() & 255) & 3) == 0)
+    if((Math::Rand() & 2) == 0)
     {
         orb.Scale() = 2.0f;
     }

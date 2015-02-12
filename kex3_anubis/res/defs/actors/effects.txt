@@ -42,3 +42,14 @@ Fx_AmmoSpawn 64
     spawnAnim               "effects/orb_spawn"
     fullbright              1
 }
+
+Fx_Explosion01 65
+{
+    classname               "kexActor"
+    radius                  128
+    height                  128
+    stepHeight              32
+    scale                   4.0
+    spawnAnim               "effects/explosion01"
+    fullbright              1
+}

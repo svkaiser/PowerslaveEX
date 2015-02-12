@@ -1,0 +1,59 @@
+texture "sprites/effects/explosion01.png"
+
+// working\explosion\sprite0125.tga
+sprite 0 0 0 36 28
+
+// working\explosion\sprite0126.tga
+sprite 1 36 0 64 64
+
+// working\explosion\sprite0127.tga
+sprite 2 100 0 64 64
+
+// working\explosion\sprite0128.tga
+sprite 3 164 0 8 64
+
+// working\explosion\sprite0129.tga
+sprite 4 172 0 64 58
+
+// working\explosion\sprite0130.tga
+sprite 5 172 58 64 58
+
+// working\explosion\sprite0131.tga
+sprite 6 236 0 8 58
+
+// working\explosion\sprite0132.tga
+sprite 7 0 64 64 64
+
+// working\explosion\sprite0133.tga
+sprite 8 64 64 36 64
+
+// working\explosion\sprite0134.tga
+sprite 9 100 64 64 28
+
+// working\explosion\sprite0135.tga
+sprite 10 100 92 36 28
+
+// working\explosion\sprite0136.tga
+sprite 11 136 116 64 64
+
+// working\explosion\sprite0137.tga
+sprite 12 200 116 24 64
+
+// working\explosion\sprite0138.tga
+sprite 13 0 128 64 17
+
+// working\explosion\sprite0139.tga
+sprite 14 224 116 24 17
+
+// working\explosion\sprite0140.tga
+sprite 15 64 128 64 54
+
+// working\explosion\sprite0141.tga
+sprite 16 224 133 28 54
+
+// working\explosion\sprite0142.tga
+sprite 17 0 145 64 41
+
+// working\explosion\sprite0143.tga
+sprite 18 128 180 24 41
+

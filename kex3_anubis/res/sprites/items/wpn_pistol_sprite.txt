@@ -1,0 +1,5 @@
+texture "sprites/items/wpn_pistol.png"
+
+// working\items\sprite0635.tga
+sprite 0 0 0 64 33
+

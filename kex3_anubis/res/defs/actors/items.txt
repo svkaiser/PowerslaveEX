@@ -21,3 +21,15 @@ Item_Ammo 41
     fullbright              1
     touchable               1
 }
+
+Item_Weapon_Pistol 42
+{
+    classname               "kexActor"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/weapon_pickup_pistol"
+    fullbright              1
+    touchable               1
+}
