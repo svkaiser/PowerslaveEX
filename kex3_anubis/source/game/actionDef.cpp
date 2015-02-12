@@ -395,6 +395,26 @@ DECLARE_KEX_ACTION(kexActionRadialBlast)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionConsumeAmmo
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionConsumeAmmo)
+{
+    int amount          = this->args[0].i;
+    kexPlayer *player;
+    
+    if(!actor->InstanceOf(&kexPuppet::info))
+    {
+        return;
+    }
+    
+    player = static_cast<kexPuppet*>(actor)->Owner();
+    player->ConsumeAmmo((int16_t)amount);
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionDefManager
 //
 //-----------------------------------------------------------------------------
@@ -539,4 +559,5 @@ void kexActionDefManager::RegisterActions(void)
                    AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
     RegisterAction("A_DestroyAtRest", kexActionDestroyAtRest::info.Create, AAT_FLOAT);
     RegisterAction("A_RadialBlast", kexActionRadialBlast::info.Create, AAT_FLOAT, AAT_INTEGER);
+    RegisterAction("A_ConsumeAmmo", kexActionConsumeAmmo::info.Create, AAT_INTEGER);
 }

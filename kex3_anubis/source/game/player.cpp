@@ -468,6 +468,34 @@ bool kexPlayer::WeaponOwned(const int weaponID)
 }
 
 //
+// kexPlayer::ConsumeAmmo
+//
+
+void kexPlayer::ConsumeAmmo(const int16_t amount)
+{
+    if(amount < 0)
+    {
+        return;
+    }
+    
+    ammo[currentWeapon] -= amount;
+    
+    if(ammo[currentWeapon] < 0)
+    {
+        ammo[currentWeapon] = 0;
+    }
+}
+
+//
+// kexPlayer::GetAmmo
+//
+
+const int16_t kexPlayer::GetAmmo(void)
+{
+    return ammo[currentWeapon];
+}
+
+//
 // kexPlayer::CycleNextWeapon
 //
 

@@ -156,6 +156,18 @@ void kexPlayLoop::Draw(void)
         kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
         vl->BindDrawPointers();
         
+        float max = (float)kexGame::cLocal->WeaponInfo(p->CurrentWeapon())->maxAmmo;
+        float width = 0;
+        
+        if(max > 0)
+        {
+            width = (float)p->GetAmmo() / max;
+        }
+        
+        kexRender::cTextures->whiteTexture->Bind();
+        vl->AddQuad(52, 220, 0, 90 * width, 16, 0, 0, 255, 255);
+        vl->DrawElements();
+        
         kexTexture *gfx = kexRender::cTextures->Cache("gfx/hud.png", TC_CLAMP, TF_NEAREST);
         gfx->Bind();
 
