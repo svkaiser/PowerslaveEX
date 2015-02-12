@@ -193,11 +193,21 @@ kexSprite *kexSpriteManager::Load(const char *name)
 
                     assert(w != 0);
                     assert(h != 0);
-
-                    info.u[0] = (float)info.atlas.x / w;
-                    info.v[0] = (float)info.atlas.y / h;
-                    info.u[1] = (float)(info.atlas.x + info.atlas.w) / w;
-                    info.v[1] = (float)(info.atlas.y + info.atlas.h) / h;
+                    
+                    if(w == 0 || h == 0)
+                    {
+                        sprite->texture = kexRender::cTextures->defaultTexture;
+                        w = (float)sprite->texture->Width();
+                        h = (float)sprite->texture->Height();
+                        memcpy(&info, &defaultSprite, sizeof(spriteInfo_t));
+                    }
+                    else
+                    {
+                        info.u[0] = (float)info.atlas.x / w;
+                        info.v[0] = (float)info.atlas.y / h;
+                        info.u[1] = (float)(info.atlas.x + info.atlas.w) / w;
+                        info.v[1] = (float)(info.atlas.y + info.atlas.h) / h;
+                    }
                 }
 
                 sprite->infoList.Push(info);
