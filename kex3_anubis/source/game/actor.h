@@ -300,4 +300,6 @@ protected:
     float                           ceilingHeight;
 END_KEX_CLASS();
 
+#include "pickup.h"
+
 #endif

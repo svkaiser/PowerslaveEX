@@ -352,26 +352,15 @@ void kexPlayer::Reset(void)
     stepViewZ = 0;
     viewZ = 64.0f;
 
-    currentWeapon = PW_MACHETE;
-    pendingWeapon = currentWeapon;
-
     memset(weapons, 0, NUMPLAYERWEAPONS);
-    weapons[PW_MACHETE] = true;
-
-    // TEMP
-    weapons[PW_PISTOL] = true;
-    weapons[PW_M60] = true;
-    weapons[PW_BOMBS] = true;
-    weapons[PW_FLAMETHROWER] = true;
-    weapons[PW_COBRASTAFF] = true;
-    weapons[PW_RINGOFRA] = true;
-    weapons[PW_BRACELET] = true;
 
     for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
     {
         if(kexGame::cLocal->WeaponInfo(i)->bPersistent)
         {
             weapons[i] = true;
+            currentWeapon = static_cast<playerWeapons_t>(i);
+            pendingWeapon = currentWeapon;
         }
         
         ammo[i] = kexGame::cLocal->WeaponInfo(i)->maxAmmo;
@@ -437,6 +426,45 @@ void kexPlayer::UpdateViewBob(void)
             stepViewZ = 0;
         }
     }
+}
+
+//
+// kexPlayer::GiveWeapon
+//
+
+bool kexPlayer::GiveWeapon(const int weaponID, const bool bAutoSwitch)
+{
+    if(weaponID <= -1 || weaponID >= NUMPLAYERWEAPONS)
+    {
+        return false;
+    }
+    
+    if(weapons[weaponID])
+    {
+        return false;
+    }
+    
+    weapons[weaponID] = true;
+    
+    if(bAutoSwitch)
+    {
+        pendingWeapon = static_cast<playerWeapons_t>(weaponID);
+    }
+    return true;
+}
+
+//
+// kexPlayer::WeaponOwned
+//
+
+bool kexPlayer::WeaponOwned(const int weaponID)
+{
+    if(weaponID <= -1 || weaponID >= NUMPLAYERWEAPONS)
+    {
+        return false;
+    }
+    
+    return weapons[weaponID];
 }
 
 //

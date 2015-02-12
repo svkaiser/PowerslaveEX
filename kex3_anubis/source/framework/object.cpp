@@ -244,6 +244,22 @@ bool kexObject::InstanceOf(const kexRTTI *objInfo) const
 }
 
 //
+// kexObject::InstanceOf
+//
+
+bool kexObject::InstanceOf(const kexStr &className) const
+{
+    const kexRTTI *objInfo = Get(className);
+    
+    if(!objInfo)
+    {
+        return false;
+    }
+    
+    return InstanceOf(objInfo);
+}
+
+//
 // kexObject::ClassName
 //
 

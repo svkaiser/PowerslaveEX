@@ -69,6 +69,8 @@ public:
     void                        Reset(void);
     void                        Tick(void);
     void                        Ready(void);
+    bool                        GiveWeapon(const int weaponID, const bool bAutoSwitch = true);
+    bool                        WeaponOwned(const int weaponID);
 
     kexPlayerCmd                &Cmd(void) { return cmd; }
     kexPuppet                   *Actor(void) { return actor; }

@@ -124,6 +124,11 @@ COMMAND(summon)
     kexVec3 forward;
     kexActor *a;
     float x, y, z;
+    
+    if(gameLocal.GameState() != GS_LEVEL || gameLocal.Player()->Actor() == NULL)
+    {
+        return;
+    }
 
     if(argc != 2)
     {
@@ -138,6 +143,61 @@ COMMAND(summon)
     z = a->Origin().z + (forward.z * a->Radius());
 
     gameLocal.SpawnActor(kex::cCommands->GetArgv(1), x, y, z, a->Yaw());
+}
+
+//
+// give
+//
+
+COMMAND(give)
+{
+    int argc = kex::cCommands->GetArgc();
+    
+    if(gameLocal.GameState() != GS_LEVEL || gameLocal.Player()->Actor() == NULL)
+    {
+        return;
+    }
+    
+    if(argc < 2)
+    {
+        kex::cSystem->Printf("give <weapon#, weapons>\n");
+        return;
+    }
+    
+    if(!kexStr::Compare(kex::cCommands->GetArgv(1), "weapons"))
+    {
+        for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+        {
+            gameLocal.Player()->GiveWeapon(i, false);
+        }
+        
+        kex::cSystem->Printf("Got all weapons!\n");
+    }
+    else if(!kexStr::Compare(kex::cCommands->GetArgv(1), "weapon"))
+    {
+        if(argc != 3)
+        {
+            kex::cSystem->Printf("give weapon <0 - 8>\n");
+            return;
+        }
+        else
+        {
+            int weap = atoi(kex::cCommands->GetArgv(2));
+            
+            if(weap <= -1 || weap >= NUMPLAYERWEAPONS)
+            {
+                kex::cSystem->Printf("give weapon <0 - 8>\n");
+                return;
+            }
+            
+            gameLocal.Player()->GiveWeapon(weap);
+            kex::cSystem->Printf("Got weapon ## %i!\n", weap);
+        }
+    }
+    else
+    {
+        kex::cSystem->Printf("give <weapon#, weapons>\n");
+    }
 }
 
 //

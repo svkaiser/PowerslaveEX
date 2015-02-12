@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4111E0821A8D4B19000D5B22 /* pickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4111E0801A8D4B19000D5B22 /* pickup.cpp */; };
 		413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413DD5BD1A89674B00767E49 /* actorObject.cpp */; };
 		419342261A8BB38B002C7F8E /* gameSysObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419342251A8BB38B002C7F8E /* gameSysObject.cpp */; };
 		419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419C3BB21A89100400C19D68 /* actionDef.cpp */; };
@@ -157,6 +158,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4111E0801A8D4B19000D5B22 /* pickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pickup.cpp; path = ../../source/game/pickup.cpp; sourceTree = "<group>"; };
+		4111E0811A8D4B19000D5B22 /* pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pickup.h; path = ../../source/game/pickup.h; sourceTree = "<group>"; };
 		413DD5BD1A89674B00767E49 /* actorObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorObject.cpp; path = ../../source/script/objects/actorObject.cpp; sourceTree = "<group>"; };
 		413DD5BE1A89674B00767E49 /* actorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actorObject.h; path = ../../source/script/objects/actorObject.h; sourceTree = "<group>"; };
 		419342241A8BB38B002C7F8E /* gameSysObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gameSysObject.h; path = ../../source/script/objects/gameSysObject.h; sourceTree = "<group>"; };
@@ -400,6 +403,7 @@
 				41C7FC301A5AFB84003864CB /* gameObject.cpp */,
 				41C7FC321A5AFB84003864CB /* localization.cpp */,
 				41C7FC341A5AFB84003864CB /* menu.cpp */,
+				4111E0801A8D4B19000D5B22 /* pickup.cpp */,
 				41C7FC361A5AFB84003864CB /* player.cpp */,
 				41C7FC381A5AFB84003864CB /* playerCmd.cpp */,
 				41BAB9101A5EF32100DD0D11 /* playLoop.cpp */,
@@ -416,6 +420,7 @@
 				41C7FC311A5AFB84003864CB /* gameObject.h */,
 				41C7FC331A5AFB84003864CB /* localization.h */,
 				41C7FC351A5AFB84003864CB /* menu.h */,
+				4111E0811A8D4B19000D5B22 /* pickup.h */,
 				41C7FC371A5AFB84003864CB /* player.h */,
 				41C7FC391A5AFB84003864CB /* playerCmd.h */,
 				41BAB9111A5EF32100DD0D11 /* playLoop.h */,
@@ -794,6 +799,7 @@
 				41C7FC461A5AFB84003864CB /* player.cpp in Sources */,
 				41C7FC421A5AFB84003864CB /* game.cpp in Sources */,
 				41E2CE861A51D39B00FC28DC /* random.cpp in Sources */,
+				4111E0821A8D4B19000D5B22 /* pickup.cpp in Sources */,
 				41BAB9121A5EF32100DD0D11 /* actor.cpp in Sources */,
 				41DA07451A51FEFC00562B25 /* systemSDL.cpp in Sources */,
 				41C7FC441A5AFB84003864CB /* localization.cpp in Sources */,

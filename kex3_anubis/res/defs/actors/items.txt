@@ -24,7 +24,7 @@ Item_Ammo 41
 
 Item_Weapon_Pistol 42
 {
-    classname               "kexActor"
+    classname               "kexWeaponPickup"
     radius                  64
     height                  64
     stepHeight              32
@@ -32,4 +32,6 @@ Item_Weapon_Pistol 42
     spawnAnim               "items/weapon_pickup_pistol"
     fullbright              1
     touchable               1
+    weaponSlotToGive        1
+    removeIfOwned           1
 }

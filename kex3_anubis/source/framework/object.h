@@ -86,6 +86,7 @@ BEGIN_KEX_CLASS(kexObject);
     const char              *SuperName(void) const;
     const kexStr            SuperString(void) const;
     bool                    InstanceOf(const kexRTTI *objInfo) const;
+    bool                    InstanceOf(const kexStr &className) const;
     void                    CallSpawn(void);
     void                    Spawn(void);
     spawnObjFunc_t          ExecSpawnFunction(kexRTTI *objInfo);
