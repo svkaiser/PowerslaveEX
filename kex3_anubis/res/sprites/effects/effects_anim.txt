@@ -463,7 +463,12 @@ gib_death
 
 orb_spawn
 {
-    // frames:   23
+    frame
+    {
+        delay 20
+
+    }
+    
     frame
     {
         // ##000   54    0
@@ -480,7 +485,6 @@ orb_spawn
 
     frame
     {
-        // ##001    0    0
         sprites
         {
             { "effects/orb_spawn", 10,    -84,  -43,    0 }
@@ -494,7 +498,6 @@ orb_spawn
 
     frame
     {
-        // ##002    0    0
         sprites
         {
             { "effects/orb_spawn", 10,    -84,  -43,    0 }
@@ -508,7 +511,6 @@ orb_spawn
 
     frame
     {
-        // ##003    0    0
         sprites
         {
             { "effects/orb_spawn", 16,    -88,  -43,    0 }
@@ -522,7 +524,6 @@ orb_spawn
 
     frame
     {
-        // ##004    0    0
         sprites
         {
             { "effects/orb_spawn", 16,    -88,  -43,    0 }
@@ -536,7 +537,6 @@ orb_spawn
 
     frame
     {
-        // ##005    0    0
         sprites
         {
             { "effects/orb_spawn", 16,    -88,  -43,    0 }
@@ -550,7 +550,6 @@ orb_spawn
 
     frame
     {
-        // ##006    0    0
         sprites
         {
             { "effects/orb_spawn", 22,    -99,  -42,    0 }
@@ -564,7 +563,6 @@ orb_spawn
 
     frame
     {
-        // ##007    0    0
         sprites
         {
             { "effects/orb_spawn", 22,    -99,  -42,    0 }
@@ -578,7 +576,6 @@ orb_spawn
 
     frame
     {
-        // ##008    0    0
         sprites
         {
             { "effects/orb_spawn", 22,    -99,  -42,    0 }
@@ -592,7 +589,6 @@ orb_spawn
 
     frame
     {
-        // ##009    0    0
         sprites
         {
             { "effects/orb_spawn", 28,    -86,  -49,    0 }
@@ -606,7 +602,6 @@ orb_spawn
 
     frame
     {
-        // ##010    0    0
         sprites
         {
             { "effects/orb_spawn", 28,    -86,  -49,    0 }
@@ -620,7 +615,6 @@ orb_spawn
 
     frame
     {
-        // ##011    0    0
         sprites
         {
             { "effects/orb_spawn", 28,    -86,  -49,    0 }
@@ -634,7 +628,6 @@ orb_spawn
 
     frame
     {
-        // ##012    0    0
         sprites
         {
             { "effects/orb_spawn", 34,    -95,  -42,    0 }
@@ -648,7 +641,6 @@ orb_spawn
 
     frame
     {
-        // ##013    0    0
         sprites
         {
             { "effects/orb_spawn", 34,    -95,  -42,    0 }
@@ -662,7 +654,6 @@ orb_spawn
 
     frame
     {
-        // ##014    0    0
         sprites
         {
             { "effects/orb_spawn", 34,    -95,  -42,    0 }
@@ -676,7 +667,6 @@ orb_spawn
 
     frame
     {
-        // ##015    0    0
         sprites
         {
             { "effects/orb_spawn", 0,    -81,  -41,    0 }
@@ -690,7 +680,6 @@ orb_spawn
 
     frame
     {
-        // ##016    0    0
         sprites
         {
             { "effects/orb_spawn", 0,    -81,  -41,    0 }
@@ -704,7 +693,6 @@ orb_spawn
 
     frame
     {
-        // ##017    0    0
         sprites
         {
             { "effects/orb_spawn", 6,    -52,  -28,    0 }
@@ -715,7 +703,6 @@ orb_spawn
 
     frame
     {
-        // ##018    0    0
         sprites
         {
             { "effects/orb_spawn", 6,    -52,  -28,    0 }
@@ -726,7 +713,6 @@ orb_spawn
 
     frame
     {
-        // ##019    0    0
         sprites
         {
             { "effects/orb_spawn", 9,    -12,  -12,    0 }
@@ -735,7 +721,6 @@ orb_spawn
 
     frame
     {
-        // ##020    0    0
         sprites
         {
             { "effects/orb_spawn", 9,    -12,  -12,    0 }
@@ -744,7 +729,6 @@ orb_spawn
 
     frame
     {
-        // ##021    0    0
         sprites
         {
             { "effects/orb_spawn", 9,    -12,  -12,    0 }
@@ -754,11 +738,17 @@ orb_spawn
 
     frame
     {
-        // ##022    0    0
+        action A_SpawnOrbPickup()
         sprites
         {
             { "effects/orb_spawn", 9,    -12,  -12,    0 }
         }
+    }
+    
+    frame
+    {
+        action A_Destroy()
+        delay 1
     }
 }
 
@@ -848,6 +838,7 @@ magicPuff
 {
     frame
     {
+        action A_RandomVaseItem()
         sprites
         {
             { "effects/impacts", 7,    -19,  -14,    0 }

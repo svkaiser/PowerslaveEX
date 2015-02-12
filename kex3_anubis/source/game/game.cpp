@@ -222,8 +222,6 @@ void kexGameLocal::Start(void)
     spriteManager->Init();
     spriteAnimManager->Init();
 
-    kexRand::SetSeed(0x10101010);
-
     pendingGameState = GS_TITLE;
     InitWeaponDefs();
 
@@ -282,6 +280,8 @@ void kexGameLocal::Stop(void)
 
 void kexGameLocal::Tick(void)
 {
+    kexRand::SetSeed(-470403613 + kex::cTimer->GetMS());
+
     if(pendingGameState != GS_NONE)
     {
         gameLoop->Stop();
@@ -574,23 +574,29 @@ kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y,
 kexActor *kexGameLocal::SpawnActor(const char *name, const float x, const float y, const float z,
                                    const float yaw, const int sector)
 {
-    kexStr className;
-    kexDict *def;
+    kexStr className = "kexActor";
+    kexDict *def = NULL;
     kexActor *actor;
+    int type = -1;
+    kexHashList<kexDict>::hashKey_t *hashKey = actorDefs.defs.GetHashKey(name);
     
-    if((def = actorDefs.defs.Find(name)))
+    // when looking up the name from the hash, we have no way of knowing what
+    // the type index is, so we need to pull the actual hash key and look
+    // up the reference index
+    if(hashKey)
     {
-        if(!def->GetString("classname", className))
+        if((def = &hashKey->data))
         {
-            className = "kexActor";
+            def->GetString("classname", className);
         }
     }
-    else
+
+    if(hashKey)
     {
-        className = "kexActor";
+        type = hashKey->refIndex;
     }
     
-    actor = ConstructActor(className, def, -1, x, y, z, yaw, sector);
+    actor = ConstructActor(className, def, type, x, y, z, yaw, sector);
     return actor;
 }
 

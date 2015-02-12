@@ -1,0 +1,129 @@
+pickup_orb_health_idle
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/pickupOrb", 0,    -14,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/pickupOrb", 0,    -14,  -15,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/pickupOrb", 0,    -14,  -14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/pickupOrb", 0,    -14,  -13,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/pickupOrb", 0,    -14,  -14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/pickupOrb", 0,    -14,  -15,    0 }
+        }
+
+    }
+
+}
+
+pickup_orb_ammo_idle
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/pickupOrb", 1,    -15,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/pickupOrb", 1,    -15,  -15,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/pickupOrb", 1,    -15,  -14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/pickupOrb", 1,    -15,  -13,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/pickupOrb", 1,    -15,  -14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/pickupOrb", 1,    -15,  -15,    0 }
+        }
+
+    }
+
+}

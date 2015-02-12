@@ -1,0 +1,2 @@
+A_RandomVaseItem "void A_RandomVaseItem(kActor@)"
+A_SpawnOrbPickup "void A_SpawnOrbPickup(kActor@)"

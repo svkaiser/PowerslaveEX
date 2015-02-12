@@ -336,9 +336,9 @@ void kexActor::UpdateMovement(void)
     {
         origin.z = floorHeight;
         
-        if(flags & AF_BOUNCY && kexMath::Fabs(velocity.z) > 1)
+        if(flags & AF_BOUNCY && (kexMath::Fabs(velocity.z) * 0.75f) > AMOVE_SPEED_FALL)
         {
-            velocity.z = (floorHeight - (origin.z + velocity.z)) * 0.5f;
+            velocity.z = (floorHeight - (origin.z + velocity.z)) * (1.2f - AMOVE_SPEED_FALL);
             velocity.x *= AMOVE_FRICTION;
             velocity.y *= AMOVE_FRICTION;
         }

@@ -576,13 +576,11 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         // performing ray-trace tests.
         if(moveActor)
         {
-            r = (actor->Radius() + moveActor->Radius()) * 0.5f;
+            r = actor->Radius() + (moveActor->Radius() * 0.5f);
             
             if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height(),
-                           (actor->Flags() & AF_SOLID) == 0))
-            {
-                contactActor = actor;
-                
+                           0, (actor->Flags() & AF_SOLID) == 0))
+            {   
                 if(actor->Flags() & AF_TOUCHABLE)
                 {
                     actor->OnTouch(moveActor);
@@ -590,6 +588,7 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
                 
                 if(actor->Flags() & AF_SOLID)
                 {
+                    contactActor = actor;
                     contactSector = actor->Sector();
                 }
             }

@@ -36,6 +36,7 @@ void kexScriptObjActor::Init(void)
     e->RegisterObjectMethod("kActor", "kVec3 &Velocity(void)", asMETHODPR(kexActor, Velocity, (void), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kVec3 &Movement(void)", asMETHODPR(kexActor, Movement, (void), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "int16 &Health(void)", asMETHODPR(kexActor, Health, (void), int16_t&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "int &Type(void)", asMETHODPR(kexActor, Type, (void), int&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "float &Radius(void)", asMETHODPR(kexActor, Radius, (void), float&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "float &Height(void)", asMETHODPR(kexActor, Height, (void), float&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "float &StepHeight(void)", asMETHODPR(kexActor, StepHeight, (void), float&), asCALL_THISCALL);

@@ -486,7 +486,7 @@ void kexRenderScene::DrawActors(mapSector_t *sector)
 
             if(!(actor->Flags() & AF_FULLBRIGHT))
             {
-                c = (sector->lightLevel << 1);
+                c = (sector->lightLevel << 2);
 
                 if(c > 255)
                 {

@@ -20,3 +20,25 @@ Fx_VaseExplodePuff 62
     spawnAnim               "effects/magicPuff"
     fullbright              1
 }
+
+Fx_HealthSpawn 63
+{
+    classname               "kexActor"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   2.0
+    spawnAnim               "effects/orb_spawn"
+    fullbright              1
+}
+
+Fx_AmmoSpawn 64
+{
+    classname               "kexActor"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   2.0
+    spawnAnim               "effects/orb_spawn"
+    fullbright              1
+}

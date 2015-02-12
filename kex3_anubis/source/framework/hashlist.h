@@ -37,6 +37,9 @@ public:
         hashKey_s       *next;
     } hashKey_t;
 
+    hashKey_t           *GetHashKey(const char *tname);
+    hashKey_t           *AddAndReturnHashKey(const char *tname, kexHeapBlock &hb = hb_static);
+
     hashKey_t           *hashlist[MAX_HASH];
     hashKey_t           *rover;
 };
@@ -91,6 +94,27 @@ type *kexHashList<type>::Add(const char *tname, const int index, kexHeapBlock &h
 }
 
 //
+// kexHashList::AddAndReturnHashKey
+//
+template<class type>
+typename kexHashList<type>::hashKey_t *
+kexHashList<type>::AddAndReturnHashKey(const char *tname, kexHeapBlock &hb)
+{
+    unsigned int hash;
+
+    hashKey_t *o = (hashKey_t*)Mem_Calloc(sizeof(hashKey_t), hb);
+    strncpy(o->name, tname, MAX_FILEPATH);
+    o->refIndex = -1;
+
+    // add to hash for future reference
+    hash = kexStr::Hash(o->name);
+    o->next = hashlist[hash];
+    hashlist[hash] = o;
+
+    return o;
+}
+
+//
 // kexHashList::Find
 //
 template<class type>
@@ -106,6 +130,28 @@ type *kexHashList<type>::Find(const char *tname) const
         if(!strcmp(tname, t->name))
         {
             return &t->data;
+        }
+    }
+
+    return NULL;
+}
+
+//
+// kexHashList::GetHashKey
+//
+template<class type>
+typename kexHashList<type>::hashKey_t *kexHashList<type>::GetHashKey(const char *tname)
+{
+    hashKey_t *t;
+    unsigned int hash;
+
+    hash = kexStr::Hash(tname);
+
+    for(t = hashlist[hash]; t; t = t->next)
+    {
+        if(!strcmp(tname, t->name))
+        {
+            return t;
         }
     }
 

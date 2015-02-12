@@ -1,0 +1,247 @@
+enum actorTypes
+{
+    AT_INVALID  = -1,
+    AT_PLAYER   = 0,
+    AT_ANUBIS,
+    AT_BASTET,
+    AT_CROW,
+    AT_QUEEN,
+    AT_MANTIS,
+    AT_MUMMY,
+    AT_MOSQUITO,
+    AT_FISH,
+    AT_SELKIS,
+    AT_SENTRY,
+    AT_SET,
+    AT_SPIDER,
+    AT_MAGIC8BALL,
+    AT_MISC1,
+    AT_MISC2,
+    AT_MISC3,
+    AT_MISC4,
+    AT_MISC5,
+    AT_MISC6,
+    AT_MISC7,
+    AT_MISC8,
+    AT_MISC9,
+    AT_MISC10,
+    AT_MISC11,
+    AT_MISC12,
+    AT_MISC13,
+    AT_MISC14,
+    AT_MISC15,
+    AT_BUGKEY,
+    AT_TIMEKEY,
+    AT_XKEY,
+    AT_PLANTKEY,
+    AT_PYRAMID,
+    AT_SANDALS,
+    AT_MASK,
+    AT_SHAWL,
+    AT_ANKLETS,
+    AT_SCEPTER,
+    AT_FEATHER,
+    AT_HEALTH,
+    AT_AMMO,
+    AT_PISTOL,
+    AT_M60,
+    AT_ANUSBOMB,
+    AT_FLAMER,
+    AT_STAFF,
+    AT_RING,
+    AT_MANACLE,
+    AT_FLAMEPOT,
+    AT_SNAKEPOT,
+    AT_FULLAMMO,
+    AT_FULLHEALTH,
+    AT_VESSEL1,
+    AT_VESSEL2,
+    AT_VESSEL3,
+    AT_VESSEL4,
+    AT_VESSEL5,
+    AT_CAMEL,
+    AT_MISC16,
+    AT_MISC17,
+    AT_MISC18,
+    AT_MISC19,
+    AT_MISC20,
+    AT_MISC21,
+    AT_MISC22,
+    AT_BLOW1,
+    AT_BLOW2,
+    AT_BLOW3,
+    AT_BLOW4,
+    AT_BLOW5,
+    AT_BLOW6,
+    AT_BLOW7,
+    AT_BLOW8,
+    AT_CBANG,
+    AT_DOG,
+    AT_KBANG,
+    AT_MBANG,
+    AT_PBANG,
+    AT_SBANG,
+    AT_TBANG,
+    AT_TOMB1,
+    AT_VAS,
+    AT_BOWL,
+    AT_CAMP1,
+    AT_CAMP2,
+    AT_CAMP3,
+    AT_CHAOS1,
+    AT_CHAOS2,
+    AT_COL1,
+    AT_COL2,
+    AT_COL3,
+    AT_FLAME,
+    AT_GLOW,
+    AT_HANT1,
+    AT_HANT2,
+    AT_HANT3,
+    AT_HANT4,
+    AT_MAGMA1,
+    AT_MAGMA2,
+    AT_MARSH1,
+    AT_MUMY1,
+    AT_PERIL1,
+    AT_QUAR1,
+    AT_SELKIS1,
+    AT_SELKIS2,
+    AT_SET1,
+    AT_SET2,
+    AT_SET3,
+    AT_SET4,
+    AT_THOTH1,
+    AT_THOTH2,
+    AT_THOTH3,
+    AT_TOM1,
+    AT_TOM2,
+    AT_OOOPS,
+    AT_TOWN1,
+    AT_WALLTORCH,
+    AT_WALLTORCH1,
+    AT_WALLTORCH2,
+    AT_WTRLITE,
+    AT_PLANT1,
+    AT_PLANT2,
+    AT_PLANT3,
+    AT_PLANT4,
+    AT_BUBBLE1,
+    AT_FISH2,
+    AT_FALS,
+    AT_WTRBUBS,
+    AT_BRANCH1,
+    AT_GLOW1,
+    AT_CHOPPER,
+    AT_TRANS1,
+    AT_TRANS2,
+    AT_TRANS3,
+    AT_TRANS4,
+    AT_TRANS5,
+    AT_TRANS6,
+    AT_TRANS7,
+    AT_TRANS8,
+    AT_MISC23,
+    AT_MISC24,
+    AT_MISC25,
+    AT_MISC26,
+    AT_MISC27,
+    AT_MISC28,
+    AT_MISC29,
+    AT_TEAMDOLL1,
+    AT_TEAMDOLL2,
+    AT_TEAMDOLL3,
+    AT_TEAMDOLL4,
+    AT_TEAMDOLL5,
+    AT_TEAMDOLL6,
+    AT_TEAMDOLL7,
+    AT_TEAMDOLL8,
+    AT_TEAMDOLL9,
+    AT_TEAMDOLL10,
+    AT_TEAMDOLL11,
+    AT_TEAMDOLL12,
+    AT_TEAMDOLL13,
+    AT_TEAMDOLL14,
+    AT_TEAMDOLL15,
+    AT_TEAMDOLL16,
+    AT_TEAMDOLL17,
+    AT_TEAMDOLL18,
+    AT_TEAMDOLL19,
+    AT_TEAMDOLL20,
+    AT_TEAMDOLL21,
+    AT_TEAMDOLL22,
+    AT_TEAMDOLL23,
+    AT_R1,
+    AT_R2,
+    AT_R3,
+    AT_R4,
+    AT_R5,
+    AT_R6,
+    NUMACTORTYPES
+}
+
+void main(void)
+{
+}
+
+//
+// A_RandomVaseItem
+//
+
+void A_RandomVaseItem(kActor @actor)
+{
+    int r = Math::Rand() & 7;
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z + actor.Height() * 0.5f;
+    
+    switch(r)
+    {
+    case 1:
+    case 3:
+    case 6:
+        Game.SpawnActor("Fx_AmmoSpawn", x, y, z, 0, actor.SectorIndex());
+        break;
+        
+    case 4:
+    case 5:
+        Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
+        break;
+    }
+}
+
+//
+// A_SpawnOrbPickup
+//
+
+void A_SpawnOrbPickup(kActor @actor)
+{
+    kActor @orb;
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z;
+    
+    switch(actor.Type())
+    {
+    case AT_MISC20: // Fx_HealthSpawn
+        @orb = Game.SpawnActor("Item_Health", x, y, z, 0, actor.SectorIndex());
+        break;
+        
+    case AT_MISC21: // Fx_AmmoSpawn
+        @orb = Game.SpawnActor("Item_Ammo", x, y, z, 0, actor.SectorIndex());
+        break;
+        
+    default:
+        return;
+    }
+    
+    if(orb is null)
+    {
+        return;
+    }
+    
+    if(((Math::Rand() & 255) & 3) == 0)
+    {
+        orb.Scale() = 2.0f;
+    }
+}

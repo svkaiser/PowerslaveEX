@@ -161,7 +161,7 @@ kexIndexDefManager::~kexIndexDefManager(void)
 void kexIndexDefManager::Parse(kexLexer *lexer)
 {
     kexDict *defEntry;
-    kexDict *defNameEntry;
+    kexHashList<kexDict>::hashKey_t *hashKey;
     kexStr key;
     kexStr val;
     kexStr defName;
@@ -178,8 +178,13 @@ void kexIndexDefManager::Parse(kexLexer *lexer)
             case TK_IDENIFIER:
                 defName = lexer->Token();
                 defIndex = lexer->GetNumber();
+
+                // we need to add two entries, one with a hash to the index
+                // and another with a hash to the name. we also need to store
+                // a reference to that index for the hashed name entry
                 defEntry = defs.Add(defName, defIndex);
-                defNameEntry = defs.Add(defName);
+                hashKey = defs.AddAndReturnHashKey(defName);
+                hashKey->refIndex = defIndex;
                 
                 lexer->ExpectNextToken(TK_LBRACK);
                 while(1)
@@ -201,7 +206,7 @@ void kexIndexDefManager::Parse(kexLexer *lexer)
                     val = lexer->Token();
                     
                     defEntry->Add(key.c_str(), val.c_str());
-                    defNameEntry->Add(key.c_str(), val.c_str());
+                    hashKey->data.Add(key.c_str(), val.c_str());
                 }
                 break;
             default:

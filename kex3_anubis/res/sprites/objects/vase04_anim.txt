@@ -12,7 +12,7 @@ vase04_idle
 
     frame
     {
-        // ##001    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase04", 1,    -11,   -5,    0 }
@@ -21,7 +21,7 @@ vase04_idle
 
     frame
     {
-        // ##002    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase04", 2,     -6,   -7,    0 }
@@ -30,7 +30,7 @@ vase04_idle
 
     frame
     {
-        // ##003    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase04", 3,     -4,   -2,    0 }
@@ -39,7 +39,7 @@ vase04_idle
 
     frame
     {
-        // ##004    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase04", 4,     -7,   -5,    0 }
@@ -48,7 +48,7 @@ vase04_idle
 
     frame
     {
-        // ##005    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase04", 5,     -5,   -2,    0 }
@@ -57,7 +57,7 @@ vase04_idle
 
     frame
     {
-        // ##006    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase04", 6,     -6,  -18,    0 }
@@ -70,6 +70,12 @@ vase04_death
     frame
     {
         action A_Spawn("Fx_VaseExplodePuff", 0, 0, 32)
+        action A_TossActor("Obj_Vase04_Shard01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Vase04_Shard02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Vase04_Shard03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Vase04_Shard04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Vase04_Shard05", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Vase04_Shard06", 0, 0, 32, 8, 8, 4, 16)
         action A_Destroy()
         delay 1
     }

@@ -1,0 +1,8 @@
+texture "sprites/items/pickupOrb.png"
+
+// working\items\sprite0166.tga
+sprite 0 0 0 32 32
+
+// working\items\sprite0167.tga
+sprite 1 32 0 32 32
+

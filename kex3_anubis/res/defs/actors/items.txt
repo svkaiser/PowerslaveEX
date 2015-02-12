@@ -1,0 +1,23 @@
+Item_Health 40
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "items/pickup_orb_health_idle"
+    fullbright              1
+    touchable               1
+}
+
+Item_Ammo 41
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "items/pickup_orb_ammo_idle"
+    fullbright              1
+    touchable               1
+}
