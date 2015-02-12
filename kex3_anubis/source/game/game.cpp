@@ -404,6 +404,7 @@ void kexGameLocal::Draw(void)
     }
     
     gameLoop->Draw();
+    kexGame::cScriptManager->DrawGCStats();
 }
 
 //
