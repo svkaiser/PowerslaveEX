@@ -257,6 +257,7 @@ void kexGameLocal::Init(void)
     kex::cActions->AddAction(IA_STRAFERIGHT, "straferight");
     kex::cActions->AddAction(IA_WEAPNEXT, "+weapnext");
     kex::cActions->AddAction(IA_WEAPPREV, "+weapprev");
+    kex::cActions->AddAction(IA_USE, "+use");
     
     kex::cSystem->ReadConfigFile("config.cfg");
     kex::cPakFiles->LoadZipFile("game.kpf");

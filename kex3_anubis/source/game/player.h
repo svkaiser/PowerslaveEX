@@ -91,6 +91,7 @@ public:
     playerWeapons_t             &PendingWeapon(void) { return pendingWeapon; }
 
 private:
+    void                        TryUse(void);
     void                        UpdateWeaponBob(void);
     void                        UpdateViewBob(void);
     void                        UpdateWeaponSprite(void);

@@ -33,6 +33,7 @@ typedef enum
     IA_STRAFERIGHT,
     IA_WEAPNEXT,
     IA_WEAPPREV,
+    IA_USE,
     
     NUMINPUTACTIONS
 } inputActions_t;

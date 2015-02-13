@@ -429,6 +429,14 @@ void kexPlayer::UpdateViewBob(void)
 }
 
 //
+// kexPlayer::TryUse
+//
+
+void kexPlayer::TryUse(void)
+{
+}
+
+//
 // kexPlayer::GiveWeapon
 //
 
@@ -569,6 +577,10 @@ void kexPlayer::Tick(void)
     if(cmd.Buttons() & BC_WEAPONRIGHT)
     {
         CycleNextWeapon();
+    }
+    if(cmd.Buttons() & BC_USE)
+    {
+        TryUse();
     }
 
     UpdateViewBob();
