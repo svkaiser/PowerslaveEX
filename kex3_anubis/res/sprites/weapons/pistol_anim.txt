@@ -203,6 +203,7 @@ pistol_fire
     frame
     {
         action A_HitScan(3000, 0, 0, 15, 15, 64, "Fx_BulletPuff")
+        action A_ConsumeAmmo(1)
         sprites
         {
             { "weapons/pistol", 0,     -6,  -63,    0 }

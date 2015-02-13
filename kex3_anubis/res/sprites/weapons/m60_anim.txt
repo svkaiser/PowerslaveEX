@@ -555,6 +555,7 @@ m60_fire
     {
         // ##003    0    0
         action A_HitScan(4000, 0.0416, 0.0416, 20, 20, 64, "Fx_BulletPuff")
+        action A_ConsumeAmmo(1)
         sprites
         {
             { "weapons/m60", 0,     40,  -14,    0 }

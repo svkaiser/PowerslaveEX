@@ -157,15 +157,16 @@ void kexPlayLoop::Draw(void)
         vl->BindDrawPointers();
         
         float max = (float)kexGame::cLocal->WeaponInfo(p->CurrentWeapon())->maxAmmo;
-        float width = 0;
+        float width = 1;
         
         if(max > 0)
         {
-            width = (float)p->GetAmmo() / max;
+            width = (float)p->GetAmmo(p->CurrentWeapon()) / max;
         }
         
         kexRender::cTextures->whiteTexture->Bind();
-        vl->AddQuad(52, 220, 0, 90 * width, 16, 0, 0, 255, 255);
+        vl->AddQuad(52, 222, 0, 88 * width, 8, 32, 32, 255, 255);
+        vl->AddQuad(52, 222, 0, 88 * width, 1, 8, 8, 64, 255);
         vl->DrawElements();
         
         kexTexture *gfx = kexRender::cTextures->Cache("gfx/hud.png", TC_CLAMP, TF_NEAREST);

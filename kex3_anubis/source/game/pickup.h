@@ -53,4 +53,26 @@ private:
     bool                            bRemoveIfOwned;
 END_KEX_CLASS();
 
+//-----------------------------------------------------------------------------
+//
+// kexAmmoPickup
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexAmmoPickup, kexPickup);
+public:
+    kexAmmoPickup(void);
+    ~kexAmmoPickup(void);
+
+    virtual void                    Tick(void);
+    virtual void                    OnTouch(kexActor *instigator);
+
+    void                            Spawn(void);
+
+private:
+    int                             weaponSlotToGive;
+    int                             divisor;
+    int                             multiplier;
+END_KEX_CLASS();
+
 #endif

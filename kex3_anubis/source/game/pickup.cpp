@@ -136,3 +136,107 @@ void kexWeaponPickup::Spawn(void)
         Remove();
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// kexAmmoPickup
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexAmmoPickup, kexPickup)
+
+//
+// kexAmmoPickup::kexAmmoPickup
+//
+
+kexAmmoPickup::kexAmmoPickup(void)
+{
+    this->weaponSlotToGive = -1;
+    this->divisor = 1;
+    this->multiplier = 1;
+}
+
+//
+// kexAmmoPickup::~kexAmmoPickup
+//
+
+kexAmmoPickup::~kexAmmoPickup(void)
+{
+}
+
+//
+// kexAmmoPickup::Tick
+//
+
+void kexAmmoPickup::Tick(void)
+{
+    kexPickup::Tick();
+}
+
+//
+// kexAmmoPickup::OnTouch
+//
+
+void kexAmmoPickup::OnTouch(kexActor *instigator)
+{
+    kexPuppet *puppet;
+    kexPlayer *player;
+    int weapon, give;
+    
+    if(!instigator->InstanceOf(&kexPuppet::info))
+    {
+        return;
+    }
+    
+    puppet = static_cast<kexPuppet*>(instigator);
+    player = puppet->Owner();
+
+    if(weaponSlotToGive <= -1)
+    {
+        weapon = player->CurrentWeapon();
+    }
+    else
+    {
+        weapon = weaponSlotToGive;
+    }
+
+    const kexGameLocal::weaponInfo_t *wpInfo = kexGame::cLocal->WeaponInfo(weapon);
+    int ammo = player->GetAmmo(weapon);
+
+    if(ammo >= wpInfo->maxAmmo)
+    {
+        return;
+    }
+
+    give = divisor;
+
+    if(scale > 1)
+    {
+        give /= multiplier;
+    }
+
+    if(give <= 0)
+    {
+        return;
+    }
+
+    player->GiveAmmo(weapon, (int16_t)(wpInfo->maxAmmo / give));
+    kexPickup::OnTouch(instigator);
+}
+
+//
+// kexAmmoPickup::Spawn
+//
+
+void kexAmmoPickup::Spawn(void)
+{
+    if(definition)
+    {
+        definition->GetInt("weaponSlotToGive", weaponSlotToGive, -1);
+        definition->GetInt("divisor", divisor, 1);
+        definition->GetInt("multiplier", multiplier, 1);
+
+        if(divisor <= 0) divisor = 1;
+        if(multiplier <= 0) multiplier = 1;
+    }
+}

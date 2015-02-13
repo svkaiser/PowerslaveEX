@@ -490,9 +490,22 @@ void kexPlayer::ConsumeAmmo(const int16_t amount)
 // kexPlayer::GetAmmo
 //
 
-const int16_t kexPlayer::GetAmmo(void)
+const int16_t kexPlayer::GetAmmo(const int weaponID)
 {
-    return ammo[currentWeapon];
+    return ammo[weaponID];
+}
+
+//
+// kexPlayer::GiveAmmo
+//
+
+void kexPlayer::GiveAmmo(const int weaponID, int16_t amount)
+{
+    ammo[weaponID] += amount;
+    if(ammo[weaponID] > kexGame::cLocal->WeaponInfo(weaponID)->maxAmmo)
+    {
+        ammo[weaponID] = kexGame::cLocal->WeaponInfo(weaponID)->maxAmmo;
+    }
 }
 
 //
