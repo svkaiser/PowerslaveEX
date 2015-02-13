@@ -512,7 +512,7 @@ void kexWorld::UnloadMap(void)
 {
     if(bMapLoaded)
     {
-        kexGame::cLocal->RemoveAllActors();
+        kexGame::cLocal->RemoveAllGameObjects();
         kexGame::cLocal->Player()->ClearActor();
         areaNodes.Destroy();
     }

@@ -263,6 +263,7 @@ void kexGameLocal::Init(void)
     kex::cPakFiles->LoadZipFile("game.kpf");
 
     actorDefs.LoadFilesInDirectory("defs/actors/");
+    moverDefs.LoadFilesInDirectory("defs/movers/");
     weaponDef.LoadFile("defs/weaponInfo.txt");
     
     kexGame::cScriptManager->Init();
@@ -508,21 +509,21 @@ void kexGameLocal::DrawBigString(const char *string, float x, float y, float sca
 }
 
 //
-// kexGameLocal::UpdateActors
+// kexGameLocal::UpdateGameObjects
 //
 
-void kexGameLocal::UpdateActors(void)
+void kexGameLocal::UpdateGameObjects(void)
 {
-    kexActor *next = NULL;
+    kexGameObject *next = NULL;
     
-    for(actorRover = actors.Next(); actorRover != NULL; actorRover = next)
+    for(goRover = gameObjects.Next(); goRover != NULL; goRover = next)
     {
-        next = actorRover->Link().Next();
-        actorRover->Tick();
+        next = goRover->Link().Next();
+        goRover->Tick();
         
-        if(actorRover->Removing())
+        if(goRover->Removing())
         {
-            RemoveActor(actorRover);
+            RemoveGameObject(goRover);
         }
     }
 }
@@ -531,32 +532,29 @@ void kexGameLocal::UpdateActors(void)
 // kexGameLocal::RemoveActor
 //
 
-void kexGameLocal::RemoveActor(kexActor *actor)
+void kexGameLocal::RemoveGameObject(kexGameObject *go)
 {
-    actor->SetTarget(NULL);
-    actor->Link().Remove();
-    actor->UnlinkArea();
-    actor->UnlinkSector();
-    delete actor;
+    go->OnRemove();
+    delete go;
 }
 
 //
-// kexGameLocal::RemoveAllActors
+// kexGameLocal::RemoveAllGameObjects
 //
 
-void kexGameLocal::RemoveAllActors(void)
+void kexGameLocal::RemoveAllGameObjects(void)
 {
-    kexActor *actor;
-    kexActor *next;
+    kexGameObject *go;
+    kexGameObject *next;
     
-    // remove all actors
-    for(actor = actors.Next(); actor != NULL; actor = next)
+    // remove all game objects
+    for(go = gameObjects.Next(); go != NULL; go = next)
     {
-        next = actor->Link().Next();
-        RemoveActor(actor);
+        next = go->Link().Next();
+        RemoveGameObject(go);
     }
     
-    actors.Clear();
+    gameObjects.Clear();
 }
 
 //

@@ -434,6 +434,20 @@ void kexPlayer::UpdateViewBob(void)
 
 void kexPlayer::TryUse(void)
 {
+    kexVec3 start = actor->Origin() + kexVec3(0, 0, viewZ);
+    kexVec3 end, forward;
+    
+    kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), actor->Pitch(), 0);
+    end = start + (forward * (actor->Radius() + 16));
+    
+    if(kexGame::cLocal->CModel()->Trace(actor, actor->Sector(), start, end))
+    {
+        mapFace_t *useFace = kexGame::cLocal->CModel()->ContactFace();
+        
+        if(useFace)
+        {
+        }
+    }
 }
 
 //

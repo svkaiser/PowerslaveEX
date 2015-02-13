@@ -30,7 +30,6 @@ DECLARE_KEX_CLASS(kexActor, kexGameObject)
 
 kexActor::kexActor(void)
 {
-    this->link.SetData(this);
     this->bounds.min.Set(-32, -32, -32);
     this->bounds.max.Set(32, 32, 32);
     this->type = AT_INVALID;
@@ -89,6 +88,18 @@ void kexActor::Tick(void)
 
 void kexActor::OnTouch(kexActor *instigator)
 {
+}
+
+//
+// kexActor::OnRemove
+//
+
+void kexActor::OnRemove(void)
+{
+    UnlinkArea();
+    UnlinkSector();
+    
+    kexGameObject::OnRemove();
 }
 
 //
@@ -157,7 +168,6 @@ void kexActor::Spawn(void)
         }
     }
     
-    link.Add(kexGame::cLocal->Actors());
     LinkArea();
 }
 

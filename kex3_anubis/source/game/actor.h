@@ -229,6 +229,7 @@ public:
     ~kexActor(void);
 
     virtual void                    Tick(void);
+    virtual void                    OnRemove(void);
     virtual void                    OnTouch(kexActor *instigator);
 
     void                            Spawn(void);
@@ -247,7 +248,6 @@ public:
     const int                       SectorIndex(void);
     void                            SetSector(mapSector_t *s);
     mapActor_t                      *MapActor(void) { return mapActor; }
-    kexLinklist<kexActor>           &Link(void) { return link; }
     kexLinklist<kexActor>           &SectorLink(void) { return sectorLink; }
     kexBBox                         &Bounds(void) { return bounds; }
     int                             &Type(void) { return type; }
@@ -282,7 +282,6 @@ protected:
     int16_t                         health;
     kexVec3                         velocity;
     kexVec3                         movement;
-    kexLinklist<kexActor>           link;
     kexLinklist<kexActor>           sectorLink;
     kexBBox                         bounds;
     mapSector_t                     *sector;

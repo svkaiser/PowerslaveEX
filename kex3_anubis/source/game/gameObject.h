@@ -24,9 +24,10 @@
 BEGIN_EXTENDED_KEX_CLASS(kexGameObject, kexObject);
 public:
     kexGameObject(void);
-    ~kexGameObject(void);
+    virtual ~kexGameObject(void);
 
     virtual void                Tick(void) = 0;
+    virtual void                OnRemove(void);
     virtual void                Remove(void);
 
     void                        Spawn(void);
@@ -36,6 +37,7 @@ public:
     void                        SetTarget(kexGameObject *targ);
     const bool                  Removing(void) const;
 
+    kexLinklist<kexGameObject>  &Link(void) { return link; }
     kexVec3                     &Origin(void) { return origin; }
     kexAngle                    &Yaw(void) { return yaw; }
     kexAngle                    &Pitch(void) { return pitch; }
@@ -50,7 +52,7 @@ public:
     const bool                  IsStale(void) const { return bStale; }
 
 protected:
-
+    kexLinklist<kexGameObject>  link;
     kexVec3                     origin;
     kexAngle                    yaw;
     kexAngle                    pitch;

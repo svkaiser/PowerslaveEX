@@ -188,7 +188,7 @@ void kexPlayLoop::Tick(void)
 {
     if(ticks > 4)
     {
-        kexGame::cLocal->UpdateActors();
+        kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
     }
     

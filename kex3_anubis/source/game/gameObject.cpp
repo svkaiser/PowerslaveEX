@@ -16,6 +16,7 @@
 //
 
 #include "kexlib.h"
+#include "game.h"
 #include "gameObject.h"
 
 DECLARE_ABSTRACT_KEX_CLASS(kexGameObject, kexObject)
@@ -28,6 +29,8 @@ unsigned int kexGameObject::id = 0;
 
 kexGameObject::kexGameObject(void)
 {
+    this->link.SetData(this);
+    
     this->refCount      = 0;
     this->target        = NULL;
     this->bStale        = false;
@@ -72,6 +75,16 @@ void kexGameObject::Remove(void)
 }
 
 //
+// kexGameObject::OnRemove
+//
+
+void kexGameObject::OnRemove(void)
+{
+    link.Remove();
+    SetTarget(NULL);
+}
+
+//
 // kexGameObject::Removing
 //
 
@@ -107,4 +120,6 @@ void kexGameObject::Spawn(void)
 {
     timeStamp = kex::cSession->GetTime();
     objID = ++kexGameObject::id;
+    
+    link.Add(kexGame::cLocal->GameObjects());
 }
