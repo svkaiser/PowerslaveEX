@@ -839,6 +839,11 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
                 mapSector_t *next = &sectors[face->sector];
                 bool bInside = false;
 
+                if(next->bounds.max.z <= next->bounds.min.z)
+                {
+                    continue;
+                }
+
                 if(face->x2 < s->x1) continue;
                 if(face->x1 > s->x2) continue;
                 if(face->y2 < s->y1) continue;

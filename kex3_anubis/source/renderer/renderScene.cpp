@@ -276,7 +276,7 @@ void kexRenderScene::DrawSector(mapSector_t *sector)
     }
     
     kexRender::cBackend->SetScissorRect((int)sector->x1, (int)sector->y1,
-                                        (int)sector->x2, rectY);
+                                        (int)sector->x2 - (int)sector->x1, rectY);
     
     if(sector->flags & SF_DEBUG)
     {
