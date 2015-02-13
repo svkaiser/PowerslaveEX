@@ -446,6 +446,11 @@ void kexPlayer::TryUse(void)
         
         if(useFace)
         {
+            if(useFace->tag != -1)
+            {
+                mapEvent_t *ev = &kexGame::cLocal->World()->Events()[useFace->tag];
+                kexGame::cLocal->SpawnMover(ev->type, ev->sector);
+            }
         }
     }
 }

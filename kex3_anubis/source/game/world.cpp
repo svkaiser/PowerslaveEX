@@ -179,18 +179,16 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
         f->y1           = 0;
         f->y2           = 0;
         
-        f->bounds.Clear();
         kexAngle::Clamp(f->angle);
         
         for(int j = 0; j < 4; ++j)
         {
-            f->bounds.AddPoint(vertices[f->vertexStart+j].origin);
             f->edges[j].v1 = &vertices[f->vertexStart+j].origin;
             f->edges[j].v2 = &vertices[f->vertexStart+((j+1)&3)].origin;
             f->edges[j].flags = 0;
         }
         
-        f->plane.SetDistance(vertices[f->vertexStart].origin);
+        UpdateFacePlaneAndBounds(f);
 
         if(f->flags & FF_PORTAL && f->sector >= 0)
         {
@@ -343,6 +341,48 @@ void kexWorld::BuildAreaNodes(void)
 }
 
 //
+// kexWorld::UpdateSectorBounds
+//
+
+void kexWorld::UpdateSectorBounds(mapSector_t *sector)
+{
+    int end = sector->faceEnd;
+    
+    mapFace_t *f1 = &faces[end+1];
+    mapFace_t *f2 = &faces[end+2];
+    
+    int vs1 = f1->vertexStart;
+    int vs2 = f2->vertexStart;
+    
+    sector->bounds.Clear();
+    
+    sector->bounds.AddPoint(vertices[vs1+0].origin);
+    sector->bounds.AddPoint(vertices[vs1+1].origin);
+    sector->bounds.AddPoint(vertices[vs1+2].origin);
+    sector->bounds.AddPoint(vertices[vs1+3].origin);
+    sector->bounds.AddPoint(vertices[vs2+0].origin);
+    sector->bounds.AddPoint(vertices[vs2+1].origin);
+    sector->bounds.AddPoint(vertices[vs2+2].origin);
+    sector->bounds.AddPoint(vertices[vs2+3].origin);
+}
+
+//
+// kexWorld::UpdateFacePlaneAndBounds
+//
+
+void kexWorld::UpdateFacePlaneAndBounds(mapFace_t *face)
+{
+    face->bounds.Clear();
+    
+    for(int j = 0; j < 4; ++j)
+    {
+        face->bounds.AddPoint(vertices[face->vertexStart+j].origin);
+    }
+    
+    face->plane.SetDistance(vertices[face->vertexStart].origin);
+}
+
+//
 // kexWorld::BuildSectorBounds
 //
 
@@ -351,24 +391,7 @@ void kexWorld::BuildSectorBounds(void)
     for(unsigned int i = 0; i < numSectors; ++i)
     {
         mapSector_t *sector = &sectors[i];
-        int end = sector->faceEnd;
-
-        mapFace_t *f1 = &faces[end+1];
-        mapFace_t *f2 = &faces[end+2];
-
-        int vs1 = f1->vertexStart;
-        int vs2 = f2->vertexStart;
-
-        sector->bounds.Clear();
-
-        sector->bounds.AddPoint(vertices[vs1+0].origin);
-        sector->bounds.AddPoint(vertices[vs1+1].origin);
-        sector->bounds.AddPoint(vertices[vs1+2].origin);
-        sector->bounds.AddPoint(vertices[vs1+3].origin);
-        sector->bounds.AddPoint(vertices[vs2+0].origin);
-        sector->bounds.AddPoint(vertices[vs2+1].origin);
-        sector->bounds.AddPoint(vertices[vs2+2].origin);
-        sector->bounds.AddPoint(vertices[vs2+3].origin);
+        UpdateSectorBounds(sector);
     }
 }
 

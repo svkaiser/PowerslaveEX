@@ -30,8 +30,15 @@ public:
 
     virtual void            Tick(void);
 
+    void                    SetDefinition(kexDict *dict) { definition = dict; }
+    int                     &Type(void) { return type; }
+    mapSector_t             *Sector(void) { return sector; }
+    void                    SetSector(mapSector_t *s);
+
 protected:
     kexDict                 *definition;
+    int                     type;
+    mapSector_t             *sector;
 END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------
@@ -53,6 +60,9 @@ private:
     float                   moveSpeed;
     float                   lip;
     bool                    bDirection;
+    float                   destHeight;
+    float                   moveAmount;
+    float                   moveTime;
 END_KEX_CLASS();
 
 #endif

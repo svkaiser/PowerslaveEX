@@ -167,6 +167,8 @@ public:
     void                    UnloadMap(void);
     void                    RadialDamage(kexActor *source, const float radius, const int damage);
     void                    FindVisibleSectors(kexRenderView &view, mapSector_t *sector);
+    void                    UpdateSectorBounds(mapSector_t *sector);
+    void                    UpdateFacePlaneAndBounds(mapFace_t *face);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 

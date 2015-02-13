@@ -19,6 +19,7 @@
 #include "renderMain.h"
 #include "renderView.h"
 #include "game.h"
+#include "mover.h"
 #include "titlescreen.h"
 #include "playLoop.h"
 #include "localization.h"
@@ -668,4 +669,39 @@ kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const floa
                                    const float yaw, const int sector)
 {
     return SpawnActor(name.c_str(), x, y, z, yaw, sector);
+}
+
+//
+// kexGameLocal::SpawnMover
+//
+
+void kexGameLocal::SpawnMover(const int type, const int sector)
+{
+    kexStr className;
+    kexMover *mover;
+    kexDict *def;
+    
+    if(sector <= -1 || sector >= world->NumSectors())
+    {
+        return;
+    }
+    
+    if(!(def = moverDefs.GetEntry(type)))
+    {
+        return;
+    }
+    
+    if(!def->GetString("classname", className))
+    {
+        return;
+    }
+    
+    if(!(mover = static_cast<kexMover*>(ConstructObject(className))))
+    {
+        return;
+    }
+    
+    mover->SetDefinition(def);
+    mover->SetSector(&world->Sectors()[sector]);
+    mover->CallSpawn();
 }

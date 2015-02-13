@@ -205,6 +205,7 @@ public:
                                             const float yaw, const int sector = -1);
     kexActor                    *SpawnActor(const kexStr &name, const float x, const float y, const float z,
                                             const float yaw, const int sector = -1);
+    void                        SpawnMover(const int type, const int sector);
     void                        DrawSmallString(const char *string, float x, float y, float scale, bool center,
                                                 byte r = 0xff, byte g = 0xff, byte b = 0xff);
     void                        DrawBigString(const char *string, float x, float y, float scale, bool center,
