@@ -46,6 +46,16 @@ kexMover::~kexMover(void)
 }
 
 //
+// kexMover::Remove
+//
+
+void kexMover::Remove(void)
+{
+    sector->flags &= ~SF_SPECIAL;
+    kexGameObject::Remove();
+}
+
+//
 // kexMover::Tick
 //
 
@@ -93,16 +103,6 @@ kexDoor::~kexDoor(void)
 }
 
 //
-// kexDoor::Remove
-//
-
-void kexDoor::Remove(void)
-{
-    sector->flags &= ~SF_SPECIAL;
-    kexGameObject::Remove();
-}
-
-//
 // kexDoor::Tick
 //
 
@@ -110,7 +110,6 @@ void kexDoor::Tick(void)
 {
     mapVertex_t *vertices = kexGame::cLocal->World()->Vertices();
     float lastHeight = currentHeight;
-    float moveAmount;
 
     switch(state)
     {
@@ -163,66 +162,8 @@ void kexDoor::Tick(void)
     default:
         return;
     }
-
-    moveAmount = currentHeight - lastHeight;
     
-    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
-    {
-        mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
-        
-        if(face->flags & FF_PORTAL && face->sector >= 0)
-        {
-            mapSector_t *s = &kexGame::cLocal->World()->Sectors()[face->sector];
-            
-            for(int j = s->faceStart; j < s->faceEnd+3; ++j)
-            {
-                mapFace_t *f = &kexGame::cLocal->World()->Faces()[j];
-                
-                if(f->tag != sector->event)
-                {
-                    continue;
-                }
-                
-                if(f->flags & FF_PORTAL)
-                {
-                    continue;
-                }
-                
-                for(int k = f->vertStart; k <= f->vertEnd; ++k)
-                {
-                    mapVertex_t *v = &vertices[k];
-                    v->origin.z += moveAmount;
-                }
-                
-                vertices[f->vertexStart+0].origin.z += moveAmount;
-                vertices[f->vertexStart+1].origin.z += moveAmount;
-                vertices[f->vertexStart+2].origin.z += moveAmount;
-                vertices[f->vertexStart+3].origin.z += moveAmount;
-            }
-            
-            continue;
-        }
-        
-        if(i != sector->faceEnd+1)
-        {
-            continue;
-        }
-        
-        for(int j = face->vertStart; j <= face->vertEnd; ++j)
-        {
-            mapVertex_t *v = &vertices[j];
-            v->origin.z += moveAmount;
-        }
-        
-        vertices[face->vertexStart+0].origin.z += moveAmount;
-        vertices[face->vertexStart+1].origin.z += moveAmount;
-        vertices[face->vertexStart+2].origin.z += moveAmount;
-        vertices[face->vertexStart+3].origin.z += moveAmount;
-        
-        kexGame::cLocal->World()->UpdateFacePlaneAndBounds(face);
-    }
-    
-    kexGame::cLocal->World()->UpdateSectorBounds(sector);
+    kexGame::cLocal->World()->MoveSector(sector, true, currentHeight - lastHeight);
 }
 
 //
@@ -240,6 +181,7 @@ void kexDoor::Spawn(void)
         lip = 0;
         moveSpeed = 4;
         bDirection = true;
+        destHeight = (float)sector->ceilingHeight - lip;
         break;
 
     case 7:
@@ -247,6 +189,15 @@ void kexDoor::Spawn(void)
         lip = 0;
         moveSpeed = 4;
         bDirection = true;
+        destHeight = (float)sector->ceilingHeight - lip;
+        break;
+
+    case 8:
+        bDirection = false;
+        waitDelay = -1;
+        lip = 0;
+        moveSpeed = 4;
+        destHeight = (float)sector->floorHeight;
         break;
 
     default:
@@ -255,9 +206,305 @@ void kexDoor::Spawn(void)
 
     sector->flags |= SF_SPECIAL;
     
-    state = DS_UP;
+    state = (bDirection ? DS_UP : DS_DOWN);
     currentTime = 0;
-    baseHeight = (float)sector->floorHeight;
+    baseHeight = -kexGame::cLocal->World()->Faces()[sector->faceEnd+1].plane.d;
     currentHeight = baseHeight;
-    destHeight = (float)sector->ceilingHeight - lip;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexFloor
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexFloor, kexMover)
+
+//
+// kexFloor::kexFloor
+//
+
+kexFloor::kexFloor(void)
+{
+    this->lip = 0;
+    this->moveSpeed = 4;
+    this->destHeight = 0;
+}
+
+//
+// kexFloor::~kexFloor
+//
+
+kexFloor::~kexFloor(void)
+{
+}
+
+//
+// kexFloor::Tick
+//
+
+void kexFloor::Tick(void)
+{
+    mapVertex_t *vertices = kexGame::cLocal->World()->Vertices();
+    float lastHeight = currentHeight;
+
+    if(currentHeight <= destHeight)
+    {
+        Remove();
+        return;
+    }
+
+    currentHeight -= moveSpeed;
+
+    if(currentHeight < destHeight)
+    {
+        currentHeight = destHeight;
+    }
+    
+    kexGame::cLocal->World()->MoveSector(sector, false, currentHeight - lastHeight);
+}
+
+//
+// kexFloor::Spawn
+//
+
+void kexFloor::Spawn(void)
+{
+    assert(sector != NULL);
+
+    switch(type)
+    {
+    case 22:
+        lip = 0;
+        moveSpeed = 4;
+        break;
+
+    default:
+        break;
+    }
+
+    sector->flags |= SF_SPECIAL;
+    
+    baseHeight = kexGame::cLocal->World()->Faces()[sector->faceEnd+2].plane.d;
+    currentHeight = baseHeight;
+    destHeight = (float)sector->floorHeight - lip;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexLift
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexLift, kexMover)
+
+//
+// kexLift::kexLift
+//
+
+kexLift::kexLift(void)
+{
+    this->waitDelay = 90;
+    this->triggerDelay = 60;
+    this->lip = 0;
+    this->moveSpeed = 4;
+    this->bDirection = true;
+    this->destHeight = 0;
+    this->state = LS_IDLE;
+}
+
+//
+// kexLift::~kexLift
+//
+
+kexLift::~kexLift(void)
+{
+}
+
+//
+// kexLift::PlayerInside
+//
+
+bool kexLift::PlayerInside(void)
+{
+    for(kexActor *actor = sector->actorList.Next();
+        actor != NULL;
+        actor = actor->SectorLink().Next())
+    {
+        if(actor->InstanceOf(&kexPuppet::info))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//
+// kexLift::Tick
+//
+
+void kexLift::Tick(void)
+{
+    mapVertex_t *vertices = kexGame::cLocal->World()->Vertices();
+    float lastHeight = currentHeight;
+    float moveAmount;
+
+    switch(state)
+    {
+    case LS_IDLE:
+        if(PlayerInside())
+        {
+            currentDelay += 0.5f;
+            if(currentDelay >= triggerDelay)
+            {
+                state = (!bDirection ? LS_DOWN : LS_UP);
+                currentDelay = 0;
+            }
+        }
+        return;
+
+    case LS_UP:
+        if(currentHeight >= destHeight)
+        {
+            if(!bDirection)
+            {
+                Remove();
+                return;
+            }
+
+            state = LS_WAIT;
+            currentTime = waitDelay;
+        }
+
+        currentHeight += moveSpeed;
+
+        if(currentHeight > destHeight)
+        {
+            currentHeight = destHeight;
+        }
+        break;
+
+    case LS_DOWN:
+        if(currentHeight <= destHeight)
+        {
+            if(bDirection)
+            {
+                Remove();
+                return;
+            }
+
+            state = LS_WAIT;
+            currentTime = waitDelay;
+        }
+
+        currentHeight -= moveSpeed;
+
+        if(currentHeight < destHeight)
+        {
+            currentHeight = destHeight;
+        }
+        break;
+
+    case LS_WAIT:
+        currentTime -= 0.5f;
+        if(currentTime <= 0)
+        {
+            state = (bDirection ? LS_DOWN : LS_UP);
+            destHeight = baseHeight;
+        }
+        return;
+
+    default:
+        return;
+    }
+    
+    moveAmount = currentHeight - lastHeight;
+    kexGame::cLocal->World()->MoveSector(sector, false, moveAmount);
+
+    if(state == LS_DOWN)
+    {
+        for(kexActor *actor = sector->actorList.Next();
+            actor != NULL;
+            actor = actor->SectorLink().Next())
+        {
+            if(actor->Origin().z <= actor->FloorHeight() || kexMath::Fabs(actor->Velocity().z) <= 0.001f)
+            {
+                float d = kexGame::cLocal->CModel()->GetFloorHeight(actor->Origin(), sector);
+
+                if(actor->Origin().z - d <= -(moveAmount*1.024f))
+                {
+                    actor->FloorHeight() = d;
+                    actor->Origin().z = actor->FloorHeight();
+                }
+            }
+        }
+    }
+}
+
+//
+// kexLift::Spawn
+//
+
+void kexLift::Spawn(void)
+{
+    assert(sector != NULL);
+
+    switch(type)
+    {
+    case 21:
+    case 22:
+        waitDelay = 90;
+        triggerDelay = 60;
+        lip = 0;
+        moveSpeed = 4;
+        bDirection = false;
+        baseHeight = kexGame::cLocal->World()->Faces()[sector->faceEnd+2].plane.d;
+        destHeight = (float)sector->floorHeight - lip;
+        break;
+
+    case 24:
+        waitDelay = 90;
+        triggerDelay = 60;
+        lip = 0;
+        moveSpeed = 4;
+        bDirection = true;
+        baseHeight = (float)sector->floorHeight;
+        destHeight = kexGame::cLocal->World()->GetHighestSurroundingFloor(sector);
+        break;
+
+    default:
+        break;
+    }
+
+    sector->flags |= SF_SPECIAL;
+    
+    state = InstanceOf(&kexLiftImmediate::info) ? (!bDirection ? LS_DOWN : LS_UP) : LS_IDLE;
+    currentTime = 0;
+    currentDelay = 0;
+    currentHeight = baseHeight;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexLiftImmediate
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexLiftImmediate, kexLift)
+
+//
+// kexLiftImmediate::kexLiftImmediate
+//
+
+kexLiftImmediate::kexLiftImmediate(void)
+{
+}
+
+//
+// kexLiftImmediate::~kexLiftImmediate
+//
+
+kexLiftImmediate::~kexLiftImmediate(void)
+{
 }

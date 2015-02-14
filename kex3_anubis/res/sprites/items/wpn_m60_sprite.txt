@@ -1,0 +1,8 @@
+texture "sprites/items/wpn_m60.png"
+
+// working\wpn\sprite0565.tga
+sprite 0 0 0 64 32
+
+// working\wpn\sprite0566.tga
+sprite 1 64 0 36 32
+

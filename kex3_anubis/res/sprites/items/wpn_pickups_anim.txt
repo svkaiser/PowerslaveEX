@@ -55,3 +55,19 @@ weapon_pickup_pistol
         }
     }
 }
+
+weapon_pickup_m60
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/wpn_m60", 0,    -50,  -64,    0 }
+            { "items/wpn_m60", 1,     14,  -64,    0 }
+        }
+
+    }
+
+}

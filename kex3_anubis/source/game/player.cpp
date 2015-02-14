@@ -310,7 +310,7 @@ void kexPuppet::Spawn(void)
     owner = kexGame::cLocal->Player();
     kexGame::cLocal->Player()->SetActor(this);
 
-    radius      = 96;
+    radius      = 95.25f;
     height      = 160;
     stepHeight  = 48;
     health      = 200;
@@ -445,7 +445,7 @@ void kexPlayer::TryUse(void)
     kexVec3 end, forward;
     
     kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), actor->Pitch(), 0);
-    end = start + (forward * (actor->Radius() + 16));
+    end = start + (forward * (actor->Radius() + 64));
     
     if(kexGame::cLocal->CModel()->Trace(actor, actor->Sector(), start, end))
     {

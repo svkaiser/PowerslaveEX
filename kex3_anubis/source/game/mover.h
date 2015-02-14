@@ -29,6 +29,7 @@ public:
     ~kexMover(void);
 
     virtual void            Tick(void);
+    virtual void            Remove();
 
     int                     &Type(void) { return type; }
     mapSector_t             *Sector(void) { return sector; }
@@ -51,7 +52,6 @@ public:
     ~kexDoor(void);
 
     virtual void            Tick(void);
-    virtual void            Remove(void);
     void                    Spawn(void);
 
 private:
@@ -72,6 +72,72 @@ private:
     float                   currentHeight;
     float                   currentTime;
     doorState_t             state;
+END_KEX_CLASS();
+
+//-----------------------------------------------------------------------------
+//
+// kexFloor
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexFloor, kexMover);
+public:
+    kexFloor(void);
+    ~kexFloor(void);
+
+    virtual void            Tick(void);
+    void                    Spawn(void);
+
+private:
+    float                   moveSpeed;
+    float                   lip;
+    float                   baseHeight;
+    float                   destHeight;
+    float                   currentHeight;
+END_KEX_CLASS();
+
+//-----------------------------------------------------------------------------
+//
+// kexLift
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexLift, kexMover);
+public:
+    kexLift(void);
+    ~kexLift(void);
+
+    virtual void            Tick(void);
+    void                    Spawn(void);
+
+private:
+    typedef enum
+    {
+        LS_IDLE     = 0,
+        LS_UP,
+        LS_DOWN,
+        LS_WAIT
+    } liftState_t;
+
+    bool                    PlayerInside(void);
+
+    float                   waitDelay;
+    float                   triggerDelay;
+    float                   moveSpeed;
+    float                   lip;
+    bool                    bDirection;
+    float                   baseHeight;
+    float                   destHeight;
+    float                   currentHeight;
+    float                   currentTime;
+    float                   currentDelay;
+    liftState_t             state;
+END_KEX_CLASS();
+
+BEGIN_EXTENDED_KEX_CLASS(kexLiftImmediate, kexLift);
+public:
+    kexLiftImmediate(void);
+    ~kexLiftImmediate(void);
 END_KEX_CLASS();
 
 #endif

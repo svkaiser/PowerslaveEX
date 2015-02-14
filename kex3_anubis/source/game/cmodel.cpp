@@ -240,24 +240,19 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
             return false;
         }
 
-        if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
+        // check to see if there's enough headroom to go under this face
+        if(CheckEdgeSide(face->BottomEdge(), face, actorHeight) ||
+           CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
         {
-            // intersect point not on the face
+            // didn't contact the face
             return false;
         }
-        else
+
+        if(face->BottomEdge()->flags & EGF_TOPSTEP)
         {
             if(CheckEdgeSide(face->LeftEdge(), face, 0, extent1) ||
                CheckEdgeSide(face->RightEdge(), face, 0, extent1))
             {
-                return false;
-            }
-
-            // check to see if there's enough headroom to go under this face
-            if(CheckEdgeSide(face->BottomEdge(), face, actorHeight) ||
-               CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
-            {
-                // didn't contact the face
                 return false;
             }
         }
@@ -456,8 +451,12 @@ void kexCModel::PushFromRadialBounds(const kexVec2 &point, const float radius)
 
 bool kexCModel::CollideFace(mapFace_t *face)
 {
+    mapSector_t *sec = &sectors[face->sectorOwner];
+
     // if this face can be stepped over, then ignore it
-    if(face->TopEdge()->flags & EGF_BOTTOMSTEP)
+    if(face->TopEdge()->flags & EGF_BOTTOMSTEP ||
+       (face->TopEdge()->v1->z - (float)sec->floorHeight <= moveActor->StepHeight() &&
+        face->TopEdge()->v2->z - (float)sec->floorHeight <= moveActor->StepHeight()))
     {
         if(CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
         {
@@ -576,6 +575,14 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         // performing ray-trace tests.
         if(moveActor)
         {
+            r = actor->Radius() + moveActor->Radius();
+
+            // make sure that we are within range
+            if(start.DistanceSq(actor->Origin()) > (r*r) && end.DistanceSq(actor->Origin()) > (r*r))
+            {
+                continue;
+            }
+
             r = actor->Radius() + (moveActor->Radius() * 0.5f);
             
             if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height(),
@@ -917,12 +924,11 @@ void kexCModel::CheckSurroundingSectors(void)
     if(bChangeCeilingHeight)
     {
         // bump into the ceiling
-        if(maxceilingz - (maxceilingz - actorHeight) > actorHeight)
+        if(maxceilingz > maxfloorz && (maxceilingz - maxfloorz) > actorHeight)
         {
             end.z = maxceilingz - actorHeight;
+            moveActor->CeilingHeight() = maxceilingz;
         }
-
-        moveActor->CeilingHeight() = maxceilingz;
     }
 }
 

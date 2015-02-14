@@ -674,21 +674,23 @@ kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const floa
 // kexGameLocal::SpawnMover
 //
 
-void kexGameLocal::SpawnMover(const char *className, const int type, const int sector)
+kexMover *kexGameLocal::SpawnMover(const char *className, const int type, const int sector)
 {
     kexMover *mover;
     
     if(sector <= -1 || sector >= (int)world->NumSectors())
     {
-        return;
+        return NULL;
     }
     
     if(!(mover = static_cast<kexMover*>(ConstructObject(className))))
     {
-        return;
+        return NULL;
     }
     
     mover->Type() = type;
     mover->SetSector(&world->Sectors()[sector]);
     mover->CallSpawn();
+
+    return mover;
 }

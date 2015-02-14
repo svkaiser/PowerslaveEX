@@ -18,6 +18,7 @@
 #include "kexlib.h"
 #include "game.h"
 #include "renderMain.h"
+#include "mover.h"
 
 kexHeapBlock kexWorld::hb_world("world", false, NULL, NULL);
 
@@ -271,7 +272,36 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
         
         if(events[i].sector >= 0)
         {
-            sectors[events[i].sector].event = i;
+            float height;
+            mapSector_t *s = &sectors[events[i].sector];
+
+            s->event = i;
+
+            switch(events[i].type)
+            {
+            case 8:
+                MoveSector(s, true, (float)(s->ceilingHeight - s->floorHeight));
+                break;
+
+            case 21:
+            case 22:
+                height = GetHighestSurroundingFloor(s);
+                MoveSector(s, false, -(faces[s->faceEnd+2].plane.d - height));
+                break;
+
+            case 23:
+                height = (float)s->floorHeight + 24;
+                MoveSector(s, false, -(faces[s->faceEnd+2].plane.d - height));
+                break;
+
+            case 24:
+                height = GetLowestSurroundingFloor(s);
+                MoveSector(s, false, -(faces[s->faceEnd+2].plane.d - height));
+                break;
+
+            default:
+                break;
+            }
         }
     }
 }
@@ -410,6 +440,11 @@ void kexWorld::SetupEdges(void)
         for(int j = start; j < end+1; ++j)
         {
             mapFace_t *face = &faces[j];
+
+            if(face->flags & FF_SOLID)
+            {
+                continue;
+            }
             
             if(face->polyStart == -1 || face->polyEnd == -1)
             {
@@ -545,6 +580,133 @@ void kexWorld::UnloadMap(void)
 }
 
 //
+// kexWorld::MoveSector
+//
+
+void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount)
+{
+    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
+    {
+        mapFace_t *face = &faces[i];
+        
+        if(face->flags & FF_PORTAL && face->sector >= 0)
+        {
+            mapSector_t *s = &sectors[face->sector];
+            
+            for(int j = s->faceStart; j < s->faceEnd+3; ++j)
+            {
+                mapFace_t *f = &faces[j];
+                
+                if(f->tag != sector->event)
+                {
+                    continue;
+                }
+                
+                if(f->flags & FF_PORTAL)
+                {
+                    continue;
+                }
+                
+                for(int k = f->vertStart; k <= f->vertEnd; ++k)
+                {
+                    mapVertex_t *v = &vertices[k];
+                    v->origin.z += moveAmount;
+                }
+                
+                vertices[f->vertexStart+0].origin.z += moveAmount;
+                vertices[f->vertexStart+1].origin.z += moveAmount;
+                vertices[f->vertexStart+2].origin.z += moveAmount;
+                vertices[f->vertexStart+3].origin.z += moveAmount;
+            }
+            
+            continue;
+        }
+        
+        if(i != sector->faceEnd + (bCeiling ? 1 : 2))
+        {
+            continue;
+        }
+        
+        for(int j = face->vertStart; j <= face->vertEnd; ++j)
+        {
+            mapVertex_t *v = &vertices[j];
+            v->origin.z += moveAmount;
+        }
+        
+        vertices[face->vertexStart+0].origin.z += moveAmount;
+        vertices[face->vertexStart+1].origin.z += moveAmount;
+        vertices[face->vertexStart+2].origin.z += moveAmount;
+        vertices[face->vertexStart+3].origin.z += moveAmount;
+        
+        UpdateFacePlaneAndBounds(face);
+    }
+
+    UpdateSectorBounds(sector);
+}
+
+//
+// kexWorld::GetHighestSurroundingFloor
+//
+
+float kexWorld::GetHighestSurroundingFloor(mapSector_t *sector)
+{
+    float height = (float)sector->floorHeight;
+
+    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
+    {
+        mapFace_t *face = &faces[i];
+        
+        if(face->flags & FF_PORTAL && face->sector >= 0)
+        {
+            mapSector_t *s = &sectors[face->sector];
+
+            if((float)s->floorHeight > height)
+            {
+                height = (float)s->floorHeight;
+            }
+        }
+    }
+
+    if(kexMath::FCmp(height, (float)sector->floorHeight))
+    {
+        height = faces[sector->faceEnd+2].plane.d;
+    }
+
+    return height;
+}
+
+//
+// kexWorld::GetLowestSurroundingFloor
+//
+
+float kexWorld::GetLowestSurroundingFloor(mapSector_t *sector)
+{
+    float height = faces[sector->faceEnd+2].plane.d;
+
+    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
+    {
+        mapFace_t *face = &faces[i];
+        
+        if(face->flags & FF_PORTAL && face->sector >= 0)
+        {
+            mapSector_t *s = &sectors[face->sector];
+
+            if((float)s->floorHeight < height)
+            {
+                height = (float)s->floorHeight;
+            }
+        }
+    }
+
+    if(kexMath::FCmp(height, faces[sector->faceEnd+2].plane.d))
+    {
+        height = (float)sector->floorHeight;
+    }
+
+    return height;
+}
+
+//
 // kexWorld::UseSectorSpecial
 //
 
@@ -572,8 +734,17 @@ void kexWorld::UseWallSpecial(mapFace_t *face)
     case 1:
         kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
         break;
-
     case 7:
+        break;
+    case 8:
+        kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+        break;
+    case 21:
+        kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
+        break;
+    case 22:
+        kexGame::cLocal->SpawnMover("kexFloor", ev->type, ev->sector);
+        face->tag = -1;
         break;
 
     default:
@@ -603,6 +774,16 @@ void kexWorld::EnterSectorSpecial(mapSector_t *sector)
 
     switch(ev->type)
     {
+    case 21:
+        kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
+        break;
+    case 22:
+        kexGame::cLocal->SpawnMover("kexFloor", ev->type, ev->sector);
+        sector->event = -1;
+        break;
+    case 24:
+        kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
+        break;
     case 50:
         SendRemoteTrigger(ev);
         sector->event = -1;
@@ -648,6 +829,18 @@ void kexWorld::SendRemoteTrigger(mapEvent_t *event)
             {
             case 7:
                 kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+                break;
+            case 8:
+                kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+                break;
+            case 21:
+                kexGame::cLocal->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
+                break;
+            case 22:
+                kexGame::cLocal->SpawnMover("kexFloor", ev->type, ev->sector);
+                break;
+            case 24:
+                kexGame::cLocal->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
                 break;
 
             default:

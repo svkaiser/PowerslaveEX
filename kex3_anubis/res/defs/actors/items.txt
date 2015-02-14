@@ -37,3 +37,17 @@ Item_Weapon_Pistol 42
     weaponSlotToGive        1
     removeIfOwned           1
 }
+
+Item_Weapon_M60 43
+{
+    classname               "kexWeaponPickup"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/weapon_pickup_m60"
+    fullbright              1
+    touchable               1
+    weaponSlotToGive        2
+    removeIfOwned           1
+}

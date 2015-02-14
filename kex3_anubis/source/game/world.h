@@ -172,6 +172,9 @@ public:
     void                    UpdateFacePlaneAndBounds(mapFace_t *face);
     void                    EnterSectorSpecial(mapSector_t *sector);
     void                    UseWallSpecial(mapFace_t *face);
+    float                   GetHighestSurroundingFloor(mapSector_t *sector);
+    float                   GetLowestSurroundingFloor(mapSector_t *sector);
+    void                    MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
