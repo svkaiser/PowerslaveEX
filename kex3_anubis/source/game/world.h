@@ -32,6 +32,7 @@ typedef enum
 {
     SF_DEBUG            = BIT(0),
     SF_CLIPPED          = BIT(1),
+    SF_SPECIAL          = BIT(2),
     SF_WATER            = BIT(8)
 } sectorFlags_t;
 
@@ -169,6 +170,8 @@ public:
     void                    FindVisibleSectors(kexRenderView &view, mapSector_t *sector);
     void                    UpdateSectorBounds(mapSector_t *sector);
     void                    UpdateFacePlaneAndBounds(mapFace_t *face);
+    void                    EnterSectorSpecial(mapSector_t *sector);
+    void                    UseWallSpecial(mapFace_t *face);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
@@ -196,6 +199,7 @@ public:
     static kexHeapBlock     hb_world;
 
 private:
+    void                    SendRemoteTrigger(mapEvent_t *event);
     void                    BuildAreaNodes(void);
     void                    BuildSectorBounds(void);
     void                    SetupEdges(void);

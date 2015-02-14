@@ -632,6 +632,18 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
     {
         mapFace_t *face = &faces[i];
 
+        if(face->flags & FF_PORTAL && face->sector >= 0)
+        {
+            mapSector_t *s = &sectors[face->sector];
+            float ceilingz = GetCeilingHeight(end, s);
+            float floorz = GetFloorHeight(end, s);
+
+            if(ceilingz - floorz < actorHeight)
+            {
+                CollideFace(face);
+            }
+        }
+
         if(!(face->flags & FF_SOLID) || face->flags & FF_WATER)
         {
             continue;
@@ -905,7 +917,11 @@ void kexCModel::CheckSurroundingSectors(void)
     if(bChangeCeilingHeight)
     {
         // bump into the ceiling
-        end.z = maxceilingz - actorHeight;
+        if(maxceilingz - (maxceilingz - actorHeight) > actorHeight)
+        {
+            end.z = maxceilingz - actorHeight;
+        }
+
         moveActor->CeilingHeight() = maxceilingz;
     }
 }

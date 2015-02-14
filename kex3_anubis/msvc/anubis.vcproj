@@ -433,6 +433,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\mover.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\pickup.cpp"
 					>
 				</File>
@@ -760,6 +764,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\menu.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\mover.h"
 					>
 				</File>
 				<File

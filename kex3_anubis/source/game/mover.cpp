@@ -33,7 +33,6 @@ DECLARE_ABSTRACT_KEX_CLASS(kexMover, kexGameObject)
 
 kexMover::kexMover(void)
 {
-    this->definition = NULL;
     this->type = -1;
     this->sector = NULL;
 }
@@ -79,10 +78,10 @@ kexDoor::kexDoor(void)
 {
     this->waitDelay = 90;
     this->lip = 0;
-    this->moveSpeed = 200;
+    this->moveSpeed = 4;
     this->bDirection = true;
     this->destHeight = 0;
-    this->moveAmount = 0;
+    this->state = DS_IDLE;
 }
 
 //
@@ -94,12 +93,78 @@ kexDoor::~kexDoor(void)
 }
 
 //
+// kexDoor::Remove
+//
+
+void kexDoor::Remove(void)
+{
+    sector->flags &= ~SF_SPECIAL;
+    kexGameObject::Remove();
+}
+
+//
 // kexDoor::Tick
 //
 
 void kexDoor::Tick(void)
 {
     mapVertex_t *vertices = kexGame::cLocal->World()->Vertices();
+    float lastHeight = currentHeight;
+    float moveAmount;
+
+    switch(state)
+    {
+    case DS_UP:
+        if(currentHeight >= destHeight)
+        {
+            if(waitDelay <= -1)
+            {
+                Remove();
+                return;
+            }
+
+            state = DS_WAIT;
+            currentTime = waitDelay;
+            return;
+        }
+
+        currentHeight += moveSpeed;
+
+        if(currentHeight > destHeight)
+        {
+            currentHeight = destHeight;
+        }
+        break;
+
+    case DS_DOWN:
+        if(currentHeight <= destHeight)
+        {
+            Remove();
+            return;
+        }
+
+        currentHeight -= moveSpeed;
+
+        if(currentHeight < destHeight)
+        {
+            currentHeight = destHeight;
+        }
+        break;
+
+    case DS_WAIT:
+        currentTime -= 0.5f;
+        if(currentTime <= 0)
+        {
+            state = DS_DOWN;
+            destHeight = baseHeight;
+        }
+        return;
+
+    default:
+        return;
+    }
+
+    moveAmount = currentHeight - lastHeight;
     
     for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
     {
@@ -158,12 +223,6 @@ void kexDoor::Tick(void)
     }
     
     kexGame::cLocal->World()->UpdateSectorBounds(sector);
-    moveTime -= 1;
-    
-    if(moveTime <= 0)
-    {
-        Remove();
-    }
 }
 
 //
@@ -173,21 +232,32 @@ void kexDoor::Tick(void)
 void kexDoor::Spawn(void)
 {
     assert(sector != NULL);
-    
-    if(definition)
+
+    switch(type)
     {
-        definition->GetFloat("waitDelay", waitDelay, 90);
-        definition->GetFloat("lip", lip, 0);
-        definition->GetFloat("moveSpeed", moveSpeed, 200);
-        definition->GetBool("direction", bDirection, true);
+    case 1:
+        waitDelay = 90;
+        lip = 0;
+        moveSpeed = 4;
+        bDirection = true;
+        break;
+
+    case 7:
+        waitDelay = -1;
+        lip = 0;
+        moveSpeed = 4;
+        bDirection = true;
+        break;
+
+    default:
+        break;
     }
+
+    sector->flags |= SF_SPECIAL;
     
-    if(moveSpeed <= 0)
-    {
-        moveSpeed = 1;
-    }
-    
+    state = DS_UP;
+    currentTime = 0;
+    baseHeight = (float)sector->floorHeight;
+    currentHeight = baseHeight;
     destHeight = (float)sector->ceilingHeight - lip;
-    moveAmount = (destHeight - (float)sector->floorHeight) / moveSpeed;
-    moveTime = moveSpeed;
 }

@@ -545,6 +545,119 @@ void kexWorld::UnloadMap(void)
 }
 
 //
+// kexWorld::UseSectorSpecial
+//
+
+void kexWorld::UseWallSpecial(mapFace_t *face)
+{
+    mapEvent_t *ev;
+
+    if(face->tag <= -1)
+    {
+        return;
+    }
+
+    ev = &events[face->tag];
+
+    if(ev->sector >= 0)
+    {
+        if(sectors[ev->sector].flags & SF_SPECIAL)
+        {
+            return;
+        }
+    }
+
+    switch(ev->type)
+    {
+    case 1:
+        kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+        break;
+
+    case 7:
+        break;
+
+    default:
+        break;
+    }
+}
+
+//
+// kexWorld::EnterSectorSpecial
+//
+
+void kexWorld::EnterSectorSpecial(mapSector_t *sector)
+{
+    mapEvent_t *ev;
+
+    if(sector->event <= -1)
+    {
+        return;
+    }
+
+    if(sector->flags & SF_SPECIAL)
+    {
+        return;
+    }
+
+    ev = &events[sector->event];
+
+    switch(ev->type)
+    {
+    case 50:
+        SendRemoteTrigger(ev);
+        sector->event = -1;
+        break;
+
+    default:
+        break;
+    }
+}
+
+//
+// kexWorld::SendRemoteTrigger
+//
+
+void kexWorld::SendRemoteTrigger(mapEvent_t *event)
+{
+    for(unsigned int i = 0; i < numEvents; ++i)
+    {
+        mapEvent_t *ev = &events[i];
+
+        if(ev == event)
+        {
+            continue;
+        }
+
+        if(ev->tag == event->tag)
+        {
+            if(ev->sector >= 0)
+            {
+                if(sectors[ev->sector].flags & SF_SPECIAL)
+                {
+                    continue;
+                }
+            }
+
+            if(ev->type == event->type)
+            {
+                ev->tag = -1;
+                continue;
+            }
+
+            switch(ev->type)
+            {
+            case 7:
+                kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+                break;
+
+            default:
+                break;
+            }
+        }
+    }
+}
+
+//
 // kexWorld::RadialDamage
 //
 

@@ -30,13 +30,11 @@ public:
 
     virtual void            Tick(void);
 
-    void                    SetDefinition(kexDict *dict) { definition = dict; }
     int                     &Type(void) { return type; }
     mapSector_t             *Sector(void) { return sector; }
     void                    SetSector(mapSector_t *s);
 
 protected:
-    kexDict                 *definition;
     int                     type;
     mapSector_t             *sector;
 END_KEX_CLASS();
@@ -53,16 +51,27 @@ public:
     ~kexDoor(void);
 
     virtual void            Tick(void);
+    virtual void            Remove(void);
     void                    Spawn(void);
 
 private:
+    typedef enum
+    {
+        DS_IDLE     = 0,
+        DS_UP,
+        DS_DOWN,
+        DS_WAIT
+    } doorState_t;
+
     float                   waitDelay;
     float                   moveSpeed;
     float                   lip;
     bool                    bDirection;
+    float                   baseHeight;
     float                   destHeight;
-    float                   moveAmount;
-    float                   moveTime;
+    float                   currentHeight;
+    float                   currentTime;
+    doorState_t             state;
 END_KEX_CLASS();
 
 #endif

@@ -193,7 +193,6 @@ public:
     kexSpriteAnimManager        *SpriteAnimManager(void) { return spriteAnimManager; }
     const weaponInfo_t          *WeaponInfo(const int id) const { return &weaponInfo[id]; }
     kexIndexDefManager          &ActorDefs(void) { return actorDefs; }
-    kexIndexDefManager          &MoverDefs(void) { return moverDefs; }
 
     kexObject                   *ConstructObject(const char *className);
     kexActor                    *ConstructActor(const char *className, kexDict *def, const int type,
@@ -205,7 +204,7 @@ public:
                                             const float yaw, const int sector = -1);
     kexActor                    *SpawnActor(const kexStr &name, const float x, const float y, const float z,
                                             const float yaw, const int sector = -1);
-    void                        SpawnMover(const int type, const int sector);
+    void                        SpawnMover(const char *className, const int type, const int sector);
     void                        DrawSmallString(const char *string, float x, float y, float scale, bool center,
                                                 byte r = 0xff, byte g = 0xff, byte b = 0xff);
     void                        DrawBigString(const char *string, float x, float y, float scale, bool center,
@@ -234,7 +233,6 @@ private:
     kexGameObject               *goRover;
     kexLinklist<kexGameObject>  gameObjects;
     kexIndexDefManager          actorDefs;
-    kexIndexDefManager          moverDefs;
     kexIndexDefManager          weaponDef;
     kexStr                      pendingMap;
     weaponInfo_t                weaponInfo[NUMPLAYERWEAPONS];

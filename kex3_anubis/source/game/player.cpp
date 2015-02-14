@@ -167,6 +167,8 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     {
         origin.z = ceilingHeight - height;
         velocity.z = -1;
+        playerFlags |= PF_USERJUMPED;
+        playerFlags &= ~PF_JUMPING;
     }
     
     // bump floor
@@ -201,6 +203,11 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         {
             origin.z = floorHeight;
         }
+    }
+
+    if(oldSector != sector)
+    {
+        kexGame::cLocal->World()->EnterSectorSpecial(sector);
     }
 }
 
@@ -446,11 +453,7 @@ void kexPlayer::TryUse(void)
         
         if(useFace)
         {
-            if(useFace->tag != -1)
-            {
-                mapEvent_t *ev = &kexGame::cLocal->World()->Events()[useFace->tag];
-                kexGame::cLocal->SpawnMover(ev->type, ev->sector);
-            }
+            kexGame::cLocal->World()->UseWallSpecial(useFace);
         }
     }
 }

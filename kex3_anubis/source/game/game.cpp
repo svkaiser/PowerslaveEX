@@ -264,7 +264,6 @@ void kexGameLocal::Init(void)
     kex::cPakFiles->LoadZipFile("game.kpf");
 
     actorDefs.LoadFilesInDirectory("defs/actors/");
-    moverDefs.LoadFilesInDirectory("defs/movers/");
     weaponDef.LoadFile("defs/weaponInfo.txt");
     
     kexGame::cScriptManager->Init();
@@ -675,23 +674,11 @@ kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const floa
 // kexGameLocal::SpawnMover
 //
 
-void kexGameLocal::SpawnMover(const int type, const int sector)
+void kexGameLocal::SpawnMover(const char *className, const int type, const int sector)
 {
-    kexStr className;
     kexMover *mover;
-    kexDict *def;
     
-    if(sector <= -1 || sector >= world->NumSectors())
-    {
-        return;
-    }
-    
-    if(!(def = moverDefs.GetEntry(type)))
-    {
-        return;
-    }
-    
-    if(!def->GetString("classname", className))
+    if(sector <= -1 || sector >= (int)world->NumSectors())
     {
         return;
     }
@@ -701,7 +688,7 @@ void kexGameLocal::SpawnMover(const int type, const int sector)
         return;
     }
     
-    mover->SetDefinition(def);
+    mover->Type() = type;
     mover->SetSector(&world->Sectors()[sector]);
     mover->CallSpawn();
 }
