@@ -25,6 +25,7 @@ machete_raise
     frame
     {
         delay 1
+        action A_PlayLocalSound("sounds/machup.wav")
         sprites
         {
             { "weapons/machete", 0, -257, -113, 0 }
@@ -243,6 +244,7 @@ machete_lower
     frame
     {
         // ##000   60    0
+        action A_PlayLocalSound("sounds/machdown.wav")
         sprites
         {
             { "weapons/machete", 0,    -10,  -77,    0 }
@@ -548,6 +550,7 @@ machete_swing_left_finish
     frame
     {
         // ##001    0    0
+        action A_PlayLocalSound("sounds/machfire.wav")
         sprites
         {
             { "weapons/machete", 0,     87,  -73,    0 }
@@ -581,6 +584,7 @@ machete_hit_object_left
     frame
     {
         // ##000   61    0
+        action A_PlayLocalSound("sounds/machflesh.wav")
         sprites
         {
             { "weapons/machete", 0,    -20, -101,    0 }
@@ -672,6 +676,7 @@ machete_hit_solid_left
     frame
     {
         // ##000   58    0
+        action A_PlayLocalSound("sounds/machhit.wav")
         sprites
         {
             { "weapons/machete", 0,    -19, -103,    0 }
@@ -817,6 +822,7 @@ machete_swing_right_finish
     frame
     {
         // ##001    0    0
+        action A_PlayLocalSound("sounds/machfire.wav")
         sprites
         {
             { "weapons/machete", 0,   -132,  -85,    1 }
@@ -864,6 +870,7 @@ machete_hit_object_right
     frame
     {
         // ##000   61    0
+        action A_PlayLocalSound("sounds/machflesh.wav")
         sprites
         {
             { "weapons/machete", 0,      5, -125,    1 }
@@ -967,6 +974,7 @@ machete_hit_solid_right
     frame
     {
         // ##000   58    0
+        action A_PlayLocalSound("sounds/machhit.wav")
         sprites
         {
             { "weapons/machete", 0,      7, -125,    1 }

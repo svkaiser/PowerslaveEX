@@ -69,6 +69,7 @@ vase04_death
 {
     frame
     {
+        action A_PlayLocalSound("sounds/glassbreak.wav")
         action A_Spawn("Fx_VaseExplodePuff", 0, 0, 32)
         action A_TossActor("Obj_Vase04_Shard01", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Vase04_Shard02", 0, 0, 32, 8, 8, 4, 16)

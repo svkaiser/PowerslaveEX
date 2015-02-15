@@ -192,6 +192,7 @@ pistol_fire
     frame
     {
         // ##000   62  128
+        action A_PlayLocalSound("sounds/pistolfire.wav")
         fullbright
         sprites
         {

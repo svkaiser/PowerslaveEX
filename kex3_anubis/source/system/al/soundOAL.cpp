@@ -104,8 +104,9 @@ public:
     virtual void                    Init(void);
     virtual void                    Shutdown(void);
     virtual bool                    Playing(const int handle);
-    virtual void                    Play(void *data, const int handle, const int volume, const int sep);
+    virtual void                    Play(void *data, const int volume, const int sep);
     virtual void                    UpdateSource(const int handle, const int volume, const int sep);
+    virtual void                    Update(void);
 
     char                            *GetDeviceName(void);
     const int                       GetNumActiveSources(void) const { return activeSources; }
@@ -576,7 +577,7 @@ kexSoundSource *kexSoundOAL::GetAvailableSource(void)
 // kexSoundOAL::Play
 //
 
-void kexSoundOAL::Play(void *data, const int handle, const int volume, const int sep)
+void kexSoundOAL::Play(void *data, const int volume, const int sep)
 {
     kexSoundSource *src;
     kexWavFile *wavFile = NULL;
@@ -637,4 +638,16 @@ void kexSoundOAL::UpdateSource(const int handle, const int volume, const int sep
 
     kexMath::Clamp(left, 0, 255);
     kexMath::Clamp(right, 0, 255);
+}
+
+//
+// kexSoundOAL::Update
+//
+
+void kexSoundOAL::Update(void)
+{
+    for(int i = 0; i < activeSources; i++)
+    {
+        sources[i].Update();
+    }
 }

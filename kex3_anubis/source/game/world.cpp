@@ -777,10 +777,6 @@ void kexWorld::EnterSectorSpecial(mapSector_t *sector)
     case 21:
         kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
         break;
-    case 22:
-        kexGame::cLocal->SpawnMover("kexFloor", ev->type, ev->sector);
-        sector->event = -1;
-        break;
     case 24:
         kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
         break;

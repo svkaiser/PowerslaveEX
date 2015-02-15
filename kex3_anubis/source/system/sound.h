@@ -24,7 +24,7 @@ public:
     virtual void            Shutdown(void);
     virtual void            Update(void);
     virtual void            UpdateSource(const int handle, const int volume, const int sep);
-    virtual void            Play(void *data, const int handle, const int volume, const int sep);
+    virtual void            Play(void *data, const int volume, const int sep);
     virtual void            Stop(const int handle);
     virtual bool            Playing(const int handle);
 

@@ -94,6 +94,15 @@ const bool kexGameObject::Removing(void) const
 }
 
 //
+// kexGameObject::PlaySound
+//
+
+void kexGameObject::PlaySound(const char *snd)
+{
+    kex::cSound->Play((void*)snd, 127, 127);
+}
+
+//
 // kexGameObject::SetTarget
 //
 

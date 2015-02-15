@@ -472,6 +472,7 @@ orb_spawn
     frame
     {
         // ##000   54    0
+        action A_PlayLocalSound("sounds/spawn.wav")
         sprites
         {
             { "effects/orb_spawn", 10,    -84,  -43,    0 }
@@ -918,6 +919,7 @@ explosion01
     frame
     {
         // ##000   55    0
+        action A_PlayLocalSound("sounds/explode01.wav")
         sprites
         {
             { "effects/explosion01", 0,    -17,  -14,    0 }

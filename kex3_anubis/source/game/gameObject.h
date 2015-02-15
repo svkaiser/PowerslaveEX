@@ -29,6 +29,7 @@ public:
     virtual void                Tick(void) = 0;
     virtual void                OnRemove(void);
     virtual void                Remove(void);
+    virtual void                PlaySound(const char *snd);
 
     void                        Spawn(void);
 

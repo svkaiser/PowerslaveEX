@@ -57,29 +57,11 @@ kexPuppet::~kexPuppet(void)
 }
 
 //
-// kexPuppet::GroundMove
+// kexPuppet::Jump
 //
 
-void kexPuppet::GroundMove(kexPlayerCmd *cmd)
+void kexPuppet::Jump(kexPlayerCmd *cmd)
 {
-    kexVec3 forward, right;
-    mapSector_t *oldSector;
-    
-    // update angles
-    yaw += cmd->Angles()[0];
-    pitch += cmd->Angles()[1];
-    roll -= (cmd->Angles()[0] * 0.25f);
-    
-    kexMath::Clamp(pitch.an, kexMath::Deg2Rad(-90), kexMath::Deg2Rad(90));
-    kexMath::Clamp(roll.an, -0.1f, 0.1f);
-    
-    kexVec3::ToAxis(&forward, NULL, &right, yaw, 0, 0);
-
-    // apply friction
-    velocity.x *= PMOVE_FRICTION;
-    velocity.y *= PMOVE_FRICTION;
-
-    // handle jumping
     if(cmd->Buttons() & BC_JUMP)
     {
         if(!(playerFlags & PF_USERJUMPED))
@@ -89,6 +71,25 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
                 // let the actor object know that
                 // it is now jumping
                 playerFlags |= PF_JUMPING;
+
+                switch(kexRand::Max(5))
+                {
+                case 0:
+                    PlaySound("sounds/pjump01.wav");
+                    break;
+                case 1:
+                    PlaySound("sounds/pjump02.wav");
+                    break;
+                case 2:
+                    PlaySound("sounds/pjump03.wav");
+                    break;
+                case 3:
+                    PlaySound("sounds/pjump04.wav");
+                    break;
+                case 4:
+                    PlaySound("sounds/pjump05.wav");
+                    break;
+                }
             }
 
             // handle longer jumps if holding down
@@ -121,6 +122,33 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
             playerFlags &= ~PF_USERJUMPED;
         }
     }
+}
+
+//
+// kexPuppet::GroundMove
+//
+
+void kexPuppet::GroundMove(kexPlayerCmd *cmd)
+{
+    kexVec3 forward, right;
+    mapSector_t *oldSector;
+    
+    // update angles
+    yaw += cmd->Angles()[0];
+    pitch += cmd->Angles()[1];
+    roll -= (cmd->Angles()[0] * 0.25f);
+    
+    kexMath::Clamp(pitch.an, kexMath::Deg2Rad(-90), kexMath::Deg2Rad(90));
+    kexMath::Clamp(roll.an, -0.1f, 0.1f);
+    
+    kexVec3::ToAxis(&forward, NULL, &right, yaw, 0, 0);
+
+    // apply friction
+    velocity.x *= PMOVE_FRICTION;
+    velocity.y *= PMOVE_FRICTION;
+
+    // handle jumping
+    Jump(cmd);
     
     // check for drop-offs
     if(origin.z > floorHeight)

@@ -76,7 +76,7 @@ void kexSound::UpdateSource(const int handle, const int volume, const int sep)
 // kexSound::Play
 //
 
-void kexSound::Play(void *data, const int handle, const int volume, const int sep)
+void kexSound::Play(void *data, const int volume, const int sep)
 {
 }
 

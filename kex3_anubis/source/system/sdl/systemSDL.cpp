@@ -93,11 +93,11 @@ void kexSystemSDL::Shutdown(void)
 {
     bShuttingDown = true;
     
+    kex::cSound->Shutdown();
     kex::cSession->Shutdown();
     kexRender::cBackend->Shutdown();
     kex::cPakFiles->Shutdown();
     kex::cCvars->Shutdown();
-    kex::cSound->Shutdown();
     
     Mem_Purge(hb_static);
     Mem_Purge(hb_object);

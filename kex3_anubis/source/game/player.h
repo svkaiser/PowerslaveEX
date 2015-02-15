@@ -46,6 +46,7 @@ public:
     unsigned int                    &PlayerFlags(void) { return playerFlags; }
 
 private:
+    void                            Jump(kexPlayerCmd *cmd);
     void                            GroundMove(kexPlayerCmd *cmd);
     void                            FlyMove(kexPlayerCmd *cmd);
 

@@ -265,6 +265,8 @@ void kexSession::RunGame(void)
 
             // handle garbage collection
             Mem_GC();
+
+            kex::cSound->Update();
         }
 
         prevmsec = nextmsec;

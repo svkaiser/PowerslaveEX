@@ -415,6 +415,17 @@ DECLARE_KEX_ACTION(kexActionConsumeAmmo)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionPlaySound
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionPlaySound)
+{
+    actor->PlaySound(this->args[0].s);
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionDefManager
 //
 //-----------------------------------------------------------------------------
@@ -560,4 +571,5 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_DestroyAtRest", kexActionDestroyAtRest::info.Create, AAT_FLOAT);
     RegisterAction("A_RadialBlast", kexActionRadialBlast::info.Create, AAT_FLOAT, AAT_INTEGER);
     RegisterAction("A_ConsumeAmmo", kexActionConsumeAmmo::info.Create, AAT_INTEGER);
+    RegisterAction("A_PlayLocalSound", kexActionPlaySound::info.Create, AAT_STRING);
 }
