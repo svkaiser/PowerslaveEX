@@ -1,0 +1,17 @@
+texture "sprites/objects/fire_pot_large02.png"
+
+// working\pot\sprite0487.tga
+sprite 0 0 0 64 15
+
+// working\pot\sprite0488.tga
+sprite 1 0 15 48 41
+
+// working\pot\sprite0489.tga
+sprite 2 0 56 48 41
+
+// working\pot\sprite0490.tga
+sprite 3 0 97 44 41
+
+// working\pot\sprite0491.tga
+sprite 4 0 138 48 41
+
