@@ -21,6 +21,7 @@
 #define PMOVE_FRICTION          0.9375f
 #define PMOVE_MIN               0.125f
 #define PMOVE_SPEED             0.976f
+#define PMOVE_WATER_SPEED       0.48828125f
 #define PMOVE_SPEED_JUMP        10.25f
 #define PMOVE_SPEED_FALL        0.75f
 #define PMOVE_MAX_JUMPTICKS     13
@@ -233,6 +234,100 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         }
     }
 
+    if(!(oldSector->flags & SF_WATER) && sector->flags & SF_WATER)
+    {
+        this->PlaySound("sounds/splash02.wav");
+        this->flags |= AF_INWATER;
+    }
+    else if(!(sector->flags & SF_WATER))
+    {
+        this->flags &= ~AF_INWATER;
+    }
+
+    if(oldSector != sector)
+    {
+        kexGame::cLocal->World()->EnterSectorSpecial(sector);
+    }
+}
+
+//
+// kexPuppet::WaterMove
+//
+
+void kexPuppet::WaterMove(kexPlayerCmd *cmd)
+{
+    kexVec3 forward, right;
+    mapSector_t *oldSector;
+    
+    yaw += cmd->Angles()[0];
+    pitch += cmd->Angles()[1];
+    roll -= (cmd->Angles()[0] * 0.25f);
+    
+    kexMath::Clamp(pitch.an, kexMath::Deg2Rad(-90), kexMath::Deg2Rad(90));
+    kexMath::Clamp(roll.an, -0.1f, 0.1f);
+
+    kexVec3::ToAxis(&forward, NULL, &right, yaw, pitch, 0);
+
+    velocity *= PMOVE_FRICTION;
+
+    if(kexMath::Fabs(velocity.x) < PMOVE_MIN)
+    {
+        velocity.x = 0;
+    }
+
+    if(kexMath::Fabs(velocity.y) < PMOVE_MIN)
+    {
+        velocity.y = 0;
+    }
+
+    if(kexMath::Fabs(velocity.z) < PMOVE_MIN)
+    {
+        velocity.z = 0;
+    }
+
+    if(cmd->Buttons() & BC_FORWARD)
+    {
+        velocity += (forward * PMOVE_WATER_SPEED);
+    }
+
+    if(sector->ceilingFace->flags & FF_WATER)
+    {
+        float waterZ = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector);
+        float waterheight = waterZ - origin.z;
+
+        if(waterheight < ((height + (owner->ViewZ() * 0.5f)) * 0.5f))
+        {
+            float t = (waterheight < owner->ViewZ()) ? 0.035f : 0.075f;
+            origin.z = ((waterZ - owner->ViewZ()) - origin.z) * t + origin.z;
+        }
+    }
+
+    // bump ceiling
+    if((origin.z + height) + velocity.z >= ceilingHeight)
+    {
+        origin.z = ceilingHeight - height;
+    }
+    
+    // bump floor
+    if(origin.z + velocity.z <= floorHeight)
+    {
+        origin.z = floorHeight;
+    }
+
+    oldSector = sector;
+    movement = velocity;
+    
+    if(!kexGame::cLocal->CModel()->MoveActor(this))
+    {
+        velocity.Clear();
+        movement.Clear();
+    }
+
+    if(!(sector->flags & SF_WATER))
+    {
+        this->flags &= ~AF_INWATER;
+    }
+
     if(oldSector != sector)
     {
         kexGame::cLocal->World()->EnterSectorSpecial(sector);
@@ -305,6 +400,7 @@ void kexPuppet::FlyMove(kexPlayerCmd *cmd)
     else
     {
         origin += movement;
+        FindSector(origin);
         LinkArea();
     }
 }
@@ -322,6 +418,10 @@ void kexPuppet::Tick(void)
     if(playerFlags & (PF_NOCLIP|PF_FLY))
     {
         FlyMove(cmd);
+    }
+    else if(flags & AF_INWATER)
+    {
+        WaterMove(cmd);
     }
     else
     {

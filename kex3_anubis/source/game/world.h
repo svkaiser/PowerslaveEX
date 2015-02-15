@@ -186,6 +186,7 @@ public:
     const unsigned int      NumEvents(void) const { return numEvents; }
     const unsigned int      NumActors(void) const { return numActors; }
 
+    kexTexture              *SkyTexture(void) { return skyTexture; }
     kexTexture              **Textures(void) { return textures; }
     mapVertex_t             *Vertices(void) { return vertices; }
     mapSector_t             *Sectors(void) { return sectors; }
@@ -237,6 +238,7 @@ private:
 
     unsigned int            portalsPassed;
 
+    kexTexture              *skyTexture;
     kexTexture              **textures;
     mapVertex_t             *vertices;
     mapSector_t             *sectors;

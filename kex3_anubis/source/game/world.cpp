@@ -54,6 +54,26 @@ void kexWorld::ReadTextures(kexBinFile &mapfile, const unsigned int count)
 {
     int len;
 
+    len = mapfile.Read16();
+
+    if(len > 0)
+    {
+        kexStr str;
+
+        for(int j = 0; j < len; ++j)
+        {
+            char c = (char)mapfile.Read8();
+            str += c;
+        }
+
+        skyTexture = kexRender::cTextures->Cache(str.c_str(), TC_REPEAT, TF_NEAREST);
+    }
+    else
+    {
+        mapfile.Read16();
+        skyTexture = NULL;
+    }
+
     if(count == 0)
     {
         return;
@@ -62,6 +82,7 @@ void kexWorld::ReadTextures(kexBinFile &mapfile, const unsigned int count)
     for(unsigned int i = 0; i < count; ++i)
     {
         kexStr str;
+
         len = mapfile.Read16();
 
         if(len > 0)
@@ -1123,7 +1144,7 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
                 {
                     dist = faces[i].plane.Distance(origin) - faces[i].plane.d;
 
-                    if(dist <= 0)
+                    if(i < end+1 && dist <= 0)
                     {
                         continue;
                     }
@@ -1144,17 +1165,12 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
                 }
             }
         }
-
-        if(!view.TestBoundingBox(s->bounds))
-        {
-            continue;
-        }
         
         for(int i = start; i < end+3; ++i)
         {
             mapFace_t *face = &faces[i];
 
-            if(!view.TestBoundingBox(face->bounds))
+            if(i < end+1 && !view.TestBoundingBox(face->bounds))
             {
                 continue;
             }

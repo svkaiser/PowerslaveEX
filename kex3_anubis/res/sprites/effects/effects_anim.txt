@@ -248,6 +248,7 @@ splash
     frame
     {
         // ##022    0    0
+        action A_Destroy()
         sprites
         {
             { "effects/splash", 19,    -12,   -5,    0 }

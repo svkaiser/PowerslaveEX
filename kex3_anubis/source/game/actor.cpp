@@ -319,6 +319,8 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
 
 void kexActor::UpdateMovement(void)
 {
+    mapSector_t *oldSector;
+
     // check for drop-offs
     if(origin.z > floorHeight)
     {
@@ -358,6 +360,7 @@ void kexActor::UpdateMovement(void)
         }
     }
     
+    oldSector = sector;
     movement = velocity;
     
     if(movement.UnitSq() > 0)
@@ -370,6 +373,21 @@ void kexActor::UpdateMovement(void)
         else
         {
             velocity = movement;
+        }
+
+        if(!(oldSector->flags & SF_WATER) && sector->flags & SF_WATER)
+        {
+            PlaySound("sounds/splash01.wav");
+            kexGame::cLocal->SpawnActor(AT_WATERSPLASH,
+                origin.x,
+                origin.y,
+                kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector), 0, SectorIndex());
+
+            flags |= AF_INWATER;
+        }
+        else if(!(sector->flags & SF_WATER))
+        {
+            flags &= ~AF_INWATER;
         }
     }
 }

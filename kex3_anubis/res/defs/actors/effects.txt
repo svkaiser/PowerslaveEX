@@ -53,3 +53,14 @@ Fx_Explosion01 65
     spawnAnim               "effects/explosion01"
     fullbright              1
 }
+
+Fx_WaterSplash 124
+{
+    classname               "kexActor"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "effects/splash"
+    fullbright              1
+}

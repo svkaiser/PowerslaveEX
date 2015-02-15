@@ -122,22 +122,6 @@ bool kexCModel::PointInsideFace(const kexVec3 &origin, mapFace_t *face, const fl
     points[1] = vertices[vstart+2].origin; // bottom
     points[2] = vertices[vstart+1].origin; // top
     points[3] = vertices[vstart+0].origin; // top
-    
-    if(moveActor)
-    {
-        // could potentially slip through solid walls so extend the top and bottom edges of
-        // the wall to prevent this
-        if(!(face->BottomEdge()->flags & EGF_TOPSTEP))
-        {
-            points[0].z -= moveActor->StepHeight();
-            points[1].z -= moveActor->StepHeight();
-        }
-        if(!(face->TopEdge()->flags & EGF_BOTTOMSTEP))
-        {
-            points[2].z += moveActor->StepHeight();
-            points[3].z += moveActor->StepHeight();
-        }
-    }
 
     // adjust origin so it lies exactly on the plane
     org = origin - (face->plane.Normal() * PointOnFaceSide(origin, face));
@@ -248,13 +232,10 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
             return false;
         }
 
-        if(face->BottomEdge()->flags & EGF_TOPSTEP)
+        if(CheckEdgeSide(face->LeftEdge(), face, 0, extent1) ||
+           CheckEdgeSide(face->RightEdge(), face, 0, extent1))
         {
-            if(CheckEdgeSide(face->LeftEdge(), face, 0, extent1) ||
-               CheckEdgeSide(face->RightEdge(), face, 0, extent1))
-            {
-                return false;
-            }
+            return false;
         }
     }
 
@@ -451,18 +432,10 @@ void kexCModel::PushFromRadialBounds(const kexVec2 &point, const float radius)
 
 bool kexCModel::CollideFace(mapFace_t *face)
 {
-    mapSector_t *sec = &sectors[face->sectorOwner];
-
-    // if this face can be stepped over, then ignore it
-    if(face->TopEdge()->flags & EGF_BOTTOMSTEP ||
-       (face->TopEdge()->v1->z - (float)sec->floorHeight <= moveActor->StepHeight() &&
-        face->TopEdge()->v2->z - (float)sec->floorHeight <= moveActor->StepHeight()))
+    if(CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
     {
-        if(CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
-        {
-            // walk over this face
-            return false;
-        }
+        // walk over this face
+        return false;
     }
     
     // check to see if there's enough headroom to go under this face
@@ -639,6 +612,11 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
     {
         mapFace_t *face = &faces[i];
 
+        if(face->flags & FF_WATER)
+        {
+            continue;
+        }
+
         if(face->flags & FF_PORTAL && face->sector >= 0)
         {
             mapSector_t *s = &sectors[face->sector];
@@ -745,13 +723,23 @@ bool kexCModel::PointInsideSector(const kexVec3 &origin, mapSector_t *sector,
 // kexCModel::GetFloorHeight
 //
 
-float kexCModel::GetFloorHeight(const kexVec3 &origin, mapSector_t *sector)
+float kexCModel::GetFloorHeight(const kexVec3 &origin, mapSector_t *sector, bool bTestWater)
 {
     mapVertex_t *v;
     mapFace_t *face;
     float dist;
 
     face = &faces[sector->faceEnd+2];
+
+    if(bTestWater && face->flags & FF_WATER && face->flags & FF_PORTAL)
+    {
+        while(face->flags & FF_WATER && face->flags & FF_PORTAL)
+        {
+            mapSector_t *s = &sectors[face->sector];
+            face = &faces[s->faceEnd+2];
+        }
+    }
+
     v = &vertices[face->vertexStart];
 
     dist = kexVec3::Dot(kexVec3(v->origin.x - origin.x,
@@ -765,13 +753,23 @@ float kexCModel::GetFloorHeight(const kexVec3 &origin, mapSector_t *sector)
 // kexCModel::GetCeilingHeight
 //
 
-float kexCModel::GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector)
+float kexCModel::GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector, bool bTestWater)
 {
     mapVertex_t *v;
     mapFace_t *face;
     float dist;
 
     face = &faces[sector->faceEnd+1];
+
+    if(bTestWater && face->flags & FF_WATER && face->flags & FF_PORTAL)
+    {
+        while(face->flags & FF_WATER && face->flags & FF_PORTAL)
+        {
+            mapSector_t *s = &sectors[face->sector];
+            face = &faces[s->faceEnd+1];
+        }
+    }
+
     v = &vertices[face->vertexStart];
 
     dist = kexVec3::Dot(kexVec3(v->origin.x - origin.x,
@@ -871,8 +869,8 @@ void kexCModel::CheckSurroundingSectors(void)
             // is the actor crossing this portal face?
             if(PointOnFaceSide(end, face, actorRadius) < 0)
             {
-                ceilingz = GetCeilingHeight(end, s);
-                floorz = GetFloorHeight(end, s);
+                ceilingz = GetCeilingHeight(end, s, true);
+                floorz = GetFloorHeight(end, s, true);
                 
                 diff = end.z - floorz;
                 
@@ -1047,28 +1045,60 @@ void kexCModel::CollideActorWithWorld(void)
 void kexCModel::AdvanceActorToSector(void)
 {
     mapSector_t *sector = moveActor->Sector();
+    bool bWater1 = (sector->flags & SF_WATER) != 0;
+    bool bWater2;
     
     for(unsigned int i = 0; i < sectorList.CurrentLength(); ++i)
     {
-        if(PointInsideSector(end, sectorList[i], 0, moveActor->StepHeight()))
+        float offset = 0;
+
+        if(!(sectorList[i]->floorFace->flags & FF_WATER))
         {
+            offset = moveActor->StepHeight();
+        }
+
+        if(PointInsideSector(end, sectorList[i], 0, offset))
+        {
+            // handle special cases for flat/thin, see-through floors
+            if(sectorList[i]->ceilingFace->flags & FF_SOLID && sectorList[i]->ceilingFace->flags & FF_PORTAL)
+            {
+                float d1 = PointOnFaceSide(end, sectorList[i]->ceilingFace);
+                float d2 = PointOnFaceSide(end, sector->floorFace);
+
+                // test if the two faces are tangent to each other
+                if(kexMath::FCmp(d1, d2))
+                {
+                    // if we're standing above that sector then don't enter it
+                    if(PointOnFaceSide(end, moveActor->Sector()->floorFace) >= d1)
+                    {
+                        continue;
+                    }
+                }
+            }
+
             sector = sectorList[i];
         }
     }
     
     // clamp z-axis to floor and ceiling
-    float floorz = GetFloorHeight(end, sector);
-    float ceilingz = GetCeilingHeight(end, sector);
+    float floorz = GetFloorHeight(end, sector, true);
+    float ceilingz = GetCeilingHeight(end, sector, true);
     
-    if(end.z - floorz < 0)
+    bWater2 = (sector->flags & SF_WATER) != 0;
+
+    // don't clip z axis if we're entering water
+    if(!(bWater1 ^ bWater2))
     {
-        end.z = floorz;
-        moveDir.z = 0;
-    }
-    
-    if(ceilingz - end.z < actorHeight)
-    {
-        end.z = ceilingz - actorHeight;
+        if(end.z - floorz < 0)
+        {
+            end.z = floorz;
+            moveDir.z = 0;
+        }
+        
+        if(ceilingz - end.z < actorHeight)
+        {
+            end.z = ceilingz - actorHeight;
+        }
     }
     
     sector->flags |= SF_DEBUG;

@@ -127,17 +127,20 @@ void kexPlayerWeapon::UpdateBob(void)
     float movement = actor->Velocity().ToVec2().Unit();
 
     if((movement > 0 || owner->LandTime() < 0) &&
-        actor->Origin().z <= actor->FloorHeight() &&
+        (actor->Origin().z <= actor->FloorHeight() || actor->Flags() & AF_INWATER) &&
         state != WS_FIRE)
     {
         float t = (float)bobTime;
+        float speed;
         float x, y;
 
         movement = movement / 16.0f;
         kexMath::Clamp(movement, 0, 1);
 
-        x = kexMath::Sin(t * 0.075f) * (16*movement);
-        y = kexMath::Fabs(kexMath::Sin(t * 0.075f) * (16*movement)) - owner->LandTime();
+        speed = (actor->Flags() & AF_INWATER) ? 0.025f : 0.075f;
+
+        x = kexMath::Sin(t * speed) * (16*movement);
+        y = kexMath::Fabs(kexMath::Sin(t * speed) * (16*movement)) - owner->LandTime();
 
         bob_x = (x - bob_x) * 0.25f + bob_x;
         bob_y = (y - bob_y) * 0.25f + bob_y;

@@ -23,6 +23,7 @@
 
 bool kexRenderScene::bPrintStats = false;
 bool kexRenderScene::bShowPortals = false;
+bool kexRenderScene::bShowWaterPortals = false;
 
 //
 // statscene
@@ -50,6 +51,20 @@ COMMAND(showportals)
     }
     
     kexRenderScene::bShowPortals ^= 1;
+}
+
+//
+// showwaterportals
+//
+
+COMMAND(showwaterportals)
+{
+    if(kex::cCommands->GetArgc() < 1)
+    {
+        return;
+    }
+    
+    kexRenderScene::bShowWaterPortals ^= 1;
 }
 
 //
@@ -116,9 +131,17 @@ void kexRenderScene::DrawSky(void)
     kexRender::cBackend->SetColorMask(0);
     vl->DrawElements();
     
-    // TEMP
-    kexTexture *skyTexture = kexRender::cTextures->Cache("textures/skies/sky_sunny.png",
-                                                         TC_REPEAT, TF_NEAREST);
+    kexTexture *skyTexture;
+
+    if(world->SkyTexture() == NULL)
+    {
+        skyTexture = kexRender::cTextures->defaultTexture;
+    }
+    else
+    {
+        skyTexture = world->SkyTexture();
+    }
+
     skyTexture->Bind();
     tris = 0;
     
@@ -293,14 +316,14 @@ void kexRenderScene::DrawSector(mapSector_t *sector)
 // kexRenderScene::DrawPortal
 //
 
-void kexRenderScene::DrawPortal(mapFace_t *face)
+void kexRenderScene::DrawPortal(mapFace_t *face, byte r, byte g, byte b)
 {
     mapVertex_t *v = &world->Vertices()[face->vertexStart];
     
-    kexRender::cUtils->DrawLine(v[0].origin, v[1].origin, 255, 0, 255);
-    kexRender::cUtils->DrawLine(v[1].origin, v[2].origin, 255, 0, 255);
-    kexRender::cUtils->DrawLine(v[2].origin, v[3].origin, 255, 0, 255);
-    kexRender::cUtils->DrawLine(v[3].origin, v[0].origin, 255, 0, 255);
+    kexRender::cUtils->DrawLine(v[0].origin, v[1].origin, r, g, b);
+    kexRender::cUtils->DrawLine(v[1].origin, v[2].origin, r, g, b);
+    kexRender::cUtils->DrawLine(v[2].origin, v[3].origin, r, g, b);
+    kexRender::cUtils->DrawLine(v[3].origin, v[0].origin, r, g, b);
 }
 
 //
@@ -321,10 +344,15 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
     }
     
     face->validcount = 0;
+
+    if(face->flags & FF_WATER && bShowWaterPortals)
+    {
+        DrawPortal(face, 0, 0, 255);
+    }
     
     if(face->flags & FF_PORTAL && bShowPortals)
     {
-        DrawPortal(face);
+        DrawPortal(face, 255, 0, 255);
     }
     
     if(face->polyStart == -1 || face->polyEnd == -1)
