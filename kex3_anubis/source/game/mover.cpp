@@ -108,7 +108,6 @@ kexDoor::~kexDoor(void)
 
 void kexDoor::Tick(void)
 {
-    mapVertex_t *vertices = kexGame::cLocal->World()->Vertices();
     float lastHeight = currentHeight;
 
     switch(state)
@@ -245,7 +244,6 @@ kexFloor::~kexFloor(void)
 
 void kexFloor::Tick(void)
 {
-    mapVertex_t *vertices = kexGame::cLocal->World()->Vertices();
     float lastHeight = currentHeight;
 
     if(currentHeight <= destHeight)
@@ -346,7 +344,6 @@ bool kexLift::PlayerInside(void)
 
 void kexLift::Tick(void)
 {
-    mapVertex_t *vertices = kexGame::cLocal->World()->Vertices();
     float lastHeight = currentHeight;
     float moveAmount;
 
