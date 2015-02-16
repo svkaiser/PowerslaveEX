@@ -844,71 +844,87 @@ void kexCModel::GetContactSectors(mapSector_t *initial)
 
 void kexCModel::CheckSurroundingSectors(void)
 {
-    mapSector_t *sec, *s, *best = NULL;
+    mapSector_t *sec, *best = NULL;
     float maxfloorz, maxceilingz;
     float floorz, ceilingz, diff;
     bool bChangeFloorHeight, bChangeCeilingHeight;
+    unsigned int sectorCount = 0;
     
-    sec = moveActor->Sector();
     maxfloorz = moveActor->FloorHeight();
     maxceilingz = end.z;
     
     bChangeFloorHeight = false;
     bChangeCeilingHeight = false;
     
-    for(int i = sec->faceStart; i < sec->faceEnd+3; ++i)
+    sectorList.Reset();
+    sectorList.Set(moveActor->Sector());
+    moveActor->Sector()->validcount = validcount;
+    
+    do
     {
-        mapFace_t *face = &faces[i];
+        sec = sectorList[sectorCount++];
         
-        if(face->sector <= -1)
+        for(int i = sec->faceStart; i < sec->faceEnd+1; ++i)
         {
-            // doesn't link another sector
-            continue;
-        }
-        
-        s = &sectors[face->sector];
-        
-        if(s == sec)
-        {
-            // skip the sector that we're already in
-            continue;
-        }
-        
-        if(!CheckEdgeSide(face->LeftEdge(), face, 0, actorRadius) &&
-           !CheckEdgeSide(face->RightEdge(), face, 0, actorRadius))
-        {
-            // is the actor crossing this portal face?
-            if(PointOnFaceSide(end, face, actorRadius) < 0)
+            mapFace_t *face = &faces[i];
+            mapSector_t *s;
+            
+            if(!(face->flags & FF_PORTAL) || face->sector <= -1)
             {
-                ceilingz = GetCeilingHeight(end, s, true);
-                floorz = GetFloorHeight(end, s, true);
-                
-                diff = end.z - floorz;
-                
-                // determine the closest floor that can be stepped on
-                if(diff <= 0 && diff >= -moveActor->StepHeight())
+                // could be a solid wall or something
+                continue;
+            }
+            
+            s = &sectors[face->sector];
+            
+            if(s->validcount == validcount)
+            {
+                // we already checked this sector
+                continue;
+            }
+            
+            sectorList.Set(s);
+            s->validcount = validcount;
+            
+            if(!CheckEdgeSide(face->LeftEdge(), face, 0, actorRadius) &&
+               !CheckEdgeSide(face->RightEdge(), face, 0, actorRadius) &&
+               !CheckEdgeSide(face->BottomEdge(), face, actorRadius) &&
+               !CheckEdgeSide(face->TopEdge(), face, actorRadius))
+            {
+                // is the actor crossing this portal face?
+                if(PointOnFaceSide(end, face, actorRadius) < 0)
                 {
-                    if(floorz > maxfloorz && moveActor->Movement().z <= 0)
+                    ceilingz = GetCeilingHeight(end, s, true);
+                    floorz = GetFloorHeight(end, s, true);
+                    
+                    diff = end.z - floorz;
+                    
+                    // determine the closest floor that can be stepped on
+                    if(diff <= 0 && diff >= -moveActor->StepHeight())
                     {
-                        best = s;
-                        maxfloorz = floorz;
-                        bChangeFloorHeight = true;
+                        if(floorz > maxfloorz && moveActor->Movement().z <= 0)
+                        {
+                            best = s;
+                            maxfloorz = floorz;
+                            bChangeFloorHeight = true;
+                        }
                     }
-                }
-                
-                // determine the ceiling closest to the actor
-                if(ceilingz > floorz && ceilingz - end.z < actorHeight)
-                {
-                    if(ceilingz > maxceilingz)
+                    
+                    // determine the ceiling closest to the actor
+                    if(ceilingz > floorz && ceilingz - end.z < actorHeight)
                     {
-                        best = s;
-                        maxceilingz = ceilingz;
-                        bChangeCeilingHeight = true;
+                        if(ceilingz > maxceilingz)
+                        {
+                            best = s;
+                            maxceilingz = ceilingz;
+                            bChangeCeilingHeight = true;
+                        }
                     }
                 }
             }
         }
-    }
+        
+    } while(sectorCount < sectorList.CurrentLength());
     
     if(bChangeFloorHeight && best)
     {
@@ -939,6 +955,8 @@ void kexCModel::CheckSurroundingSectors(void)
             moveActor->CeilingHeight() = maxceilingz;
         }
     }
+    
+    validcount++;
 }
 
 //
