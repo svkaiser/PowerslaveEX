@@ -77,10 +77,12 @@ void kexHud::DrawAmmoBar(void)
 void kexHud::DrawCompass(void)
 {
     kexCpuVertList *vl = kexRender::cVertList;
-    float u1 = 225.0f / (float)backImage->OriginalWidth();
+    float tw = (float)backImage->OriginalWidth();
+    float th = (float)backImage->OriginalHeight();
+    float u1 = 225.0f / tw;
     float u2 = 1;
     float v1 = 0;
-    float v2 = 22.0f / (float)backImage->OriginalHeight();
+    float v2 = 22.0f / th;
     float angle = kexMath::Rad2Deg(player->Actor()->Yaw());
     float x = 146;
     float y = 217;
@@ -89,30 +91,30 @@ void kexHud::DrawCompass(void)
     
     if(angle >= 22.5f && angle < 67.5f)
     {
-        v1 = 21.0f / (float)backImage->OriginalHeight();
-        v2 = 43.0f / (float)backImage->OriginalHeight();
+        v1 = 21.0f / th;
+        v2 = 43.0f / th;
     }
     else if(angle >= 67.5f && angle < 112.5f)
     {
-        v1 = 42.0f / (float)backImage->OriginalHeight();
-        v2 = 64.0f / (float)backImage->OriginalHeight();
+        v1 = 42.0f / th;
+        v2 = 64.0f / th;
     }
     else if(angle >= 112.5f && angle < 157.5f)
     {
-        v2 = 21.0f / (float)backImage->OriginalHeight();
-        v1 = 43.0f / (float)backImage->OriginalHeight();
+        v2 = 21.0f / th;
+        v1 = 43.0f / th;
     }
     else if((angle >= 157.5f && angle <= 180) || (angle >= -180 && angle <= -157.5f))
     {
         v2 = 0;
-        v1 = 22.0f / (float)backImage->OriginalHeight();
+        v1 = 22.0f / th;
     }
     else if(angle >= -157.5f && angle < -112.5f)
     {
         float tmp = u1;
         
-        v2 = 21.0f / (float)backImage->OriginalHeight();
-        v1 = 43.0f / (float)backImage->OriginalHeight();
+        v2 = 21.0f / th;
+        v1 = 43.0f / th;
         
         x -= 4;
         
@@ -123,8 +125,8 @@ void kexHud::DrawCompass(void)
     {
         float tmp = u1;
         
-        v2 = 42.0f / (float)backImage->OriginalHeight();
-        v1 = 64.0f / (float)backImage->OriginalHeight();
+        v2 = 42.0f / th;
+        v1 = 64.0f / th;
         
         x -= 4;
         
@@ -135,8 +137,8 @@ void kexHud::DrawCompass(void)
     {
         float tmp = u1;
         
-        v1 = 21.0f / (float)backImage->OriginalHeight();
-        v2 = 43.0f / (float)backImage->OriginalHeight();
+        v1 = 21.0f / th;
+        v2 = 43.0f / th;
         
         x -= 4;
         
