@@ -36,14 +36,19 @@ public:
     static bool             bShowWaterPortals;
 
 private:
+    void                    Prepare(void);
     void                    DrawSky(void);
+    void                    DrawSectors(void);
+    void                    DrawActors(void);
     void                    DrawSector(mapSector_t *sector);
     void                    DrawFace(mapSector_t *sector, int faceID);
     void                    DrawPortal(mapFace_t *face, byte r, byte g, byte b);
     void                    DrawPolygon(mapFace_t *face, mapPoly_t *poly);
-    void                    DrawActors(mapSector_t *sector);
+    void                    DrawActorList(mapSector_t *sector);
+    void                    DrawWater(void);
     void                    PrintStats(void);
     
+    kexStack<int>           waterFaces;
     kexMatrix               spriteMatrix;
     kexWorld                *world;
     kexRenderView           *view;

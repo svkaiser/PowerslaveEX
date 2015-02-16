@@ -370,6 +370,12 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
         return;
     }
     
+    if(face->flags & FF_WATER)
+    {
+        waterFaces.Set(faceID);
+        return;
+    }
+    
     for(int k = face->polyStart; k <= face->polyEnd; ++k)
     {
         DrawPolygon(face, &world->Polys()[k]);
@@ -422,7 +428,7 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
                       vertex->rgba[0],
                       vertex->rgba[1],
                       vertex->rgba[2],
-                      255);
+                      (face->flags & FF_WATER) ? 128 : 255);
     }
     
     vl->AddTriangle(tris+0, tris+2, tris+1);
@@ -440,10 +446,32 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 }
 
 //
-// kexRenderScene::DrawActors
+// kexRenderScene::DrawWater
 //
 
-void kexRenderScene::DrawActors(mapSector_t *sector)
+void kexRenderScene::DrawWater(void)
+{
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+    kexRender::cBackend->SetDepthMask(0);
+    
+    for(unsigned int i = 0; i < waterFaces.CurrentLength(); ++i)
+    {
+        mapFace_t *face = &world->Faces()[waterFaces[i]];
+        
+        for(int k = face->polyStart; k <= face->polyEnd; ++k)
+        {
+            DrawPolygon(face, &world->Polys()[k]);
+        }
+    }
+    
+    kexRender::cBackend->SetDepthMask(1);
+}
+
+//
+// kexRenderScene::DrawActorList
+//
+
+void kexRenderScene::DrawActorList(mapSector_t *sector)
 {
     kexCpuVertList *vl = kexRender::cVertList;
 #if 0
@@ -614,6 +642,64 @@ void kexRenderScene::DrawActors(mapSector_t *sector)
 }
 
 //
+// kexRenderScene::DrawSectors
+//
+
+void kexRenderScene::DrawSectors(void)
+{
+    for(unsigned int i = 0; i < world->VisibleSectors().CurrentLength(); ++i)
+    {
+        DrawSector(&world->Sectors()[world->VisibleSectors()[i]]);
+    }
+}
+
+//
+// kexRenderScene::DrawActors
+//
+
+void kexRenderScene::DrawActors(void)
+{
+    spriteMatrix = kexMatrix(-view->Pitch(), 1) * kexMatrix(view->Yaw(), 2);
+    spriteMatrix.RotateX(kexMath::pi);
+    
+    kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
+    
+    for(int i = (int)world->VisibleSectors().CurrentLength()-1; i >= 0; i--)
+    {
+        DrawActorList(&world->Sectors()[world->VisibleSectors()[i]]);
+    }
+}
+
+//
+// kexRenderScene::Prepare
+//
+
+void kexRenderScene::Prepare(void)
+{
+    int h;
+    
+    vertCount = 0;
+    triCount = 0;
+    
+    kexRender::cBackend->LoadProjectionMatrix(view->ProjectionView());
+    kexRender::cBackend->LoadModelViewMatrix(view->ModelView());
+    
+    kexRender::cBackend->ClearBuffer(GLCB_STENCIL);
+    
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
+    
+    h = kex::cSystem->VideoHeight();
+    
+    clipY = h - (int)((float)h / (240.0f / 24.0f));
+    
+    kexRender::cVertList->BindDrawPointers();
+    waterFaces.Reset();
+}
+
+//
 // kexRenderScene::PrintStats
 //
 
@@ -634,49 +720,20 @@ void kexRenderScene::PrintStats(void)
 
 void kexRenderScene::Draw(void)
 {
-    int w, h;
-    
-    vertCount = 0;
-    triCount = 0;
-    
-    kexRender::cBackend->LoadProjectionMatrix(view->ProjectionView());
-    kexRender::cBackend->LoadModelViewMatrix(view->ModelView());
-    
-    kexRender::cBackend->ClearBuffer(GLCB_STENCIL);
-    
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
-    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
-    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
-    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
-    
-    w = kex::cSystem->VideoWidth();
-    h = kex::cSystem->VideoHeight();
-    
-    clipY = h - (int)((float)h / (240.0f / 24.0f));
-    
     if(!world->MapLoaded())
     {
         return;
     }
     
-    kexRender::cVertList->BindDrawPointers();
+    Prepare();
     
     DrawSky();
-
-    spriteMatrix = kexMatrix(-view->Pitch(), 1) * kexMatrix(view->Yaw(), 2);
-    spriteMatrix.RotateX(kexMath::pi);
     
-    for(unsigned int i = 0; i < world->VisibleSectors().CurrentLength(); ++i)
-    {
-        DrawSector(&world->Sectors()[world->VisibleSectors()[i]]);
-    }
+    DrawSectors();
     
-    kexRender::cBackend->SetScissorRect(0, 0, w, clipY);
-
-    for(int i = (int)world->VisibleSectors().CurrentLength()-1; i >= 0; i--)
-    {
-        DrawActors(&world->Sectors()[world->VisibleSectors()[i]]);
-    }
+    DrawActors();
+    
+    DrawWater();
     
     PrintStats();
 }
