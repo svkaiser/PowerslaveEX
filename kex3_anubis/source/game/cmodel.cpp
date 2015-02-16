@@ -780,46 +780,57 @@ float kexCModel::GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector, bo
 }
 
 //
-// kexCModel::RecursiveFindSectors
+// kexCModel::GetContactSectors
 //
 // Creates a list of all sectors that were contacted
-// by the actor's bounding box. Recursively checks
-// sectors linked by a face portal as well
+// by the actor's bounding box. Also test collision
+// against all actors for every sector that's tested
 //
 
-void kexCModel::RecursiveFindSectors(mapSector_t *sector)
+void kexCModel::GetContactSectors(mapSector_t *initial)
 {
-    if(sector->validcount == validcount)
+    unsigned int sectorCount = 0;
+    
+    sectorList.Reset();
+    sectorList.Set(initial);
+    initial->validcount = validcount;
+    
+    do
     {
-        return;
-    }
-
-    TraceActorsInSector(sector);
-
-    sector->validcount = validcount;
-    sectorList.Set(sector);
-
-    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
-    {
-        mapSector_t *s;
-        mapFace_t *face;
-
-        face = &faces[i];
-
-        if(!(face->flags & FF_PORTAL) || face->sector <= -1)
+        mapSector_t *sec = sectorList[sectorCount++];
+        
+        TraceActorsInSector(sec);
+        
+        for(int i = sec->faceStart; i < sec->faceEnd+3; ++i)
         {
-            // could be a solid wall or something
-            continue;
+            mapFace_t *face = &faces[i];
+            mapSector_t *s;
+            
+            if(!(face->flags & FF_PORTAL) || face->sector <= -1)
+            {
+                // could be a solid wall or something
+                continue;
+            }
+            
+            s = &sectors[face->sector];
+            
+            if(s->validcount == validcount)
+            {
+                // we already checked this sector
+                continue;
+            }
+            
+            // is this linked sector reachable?
+            if(actorBounds.IntersectingBox(s->bounds))
+            {
+                sectorList.Set(s);
+                s->validcount = validcount;
+            }
         }
-
-        s = &sectors[face->sector];
-
-        // is this linked sector reachable?
-        if(actorBounds.IntersectingBox(s->bounds))
-        {
-            RecursiveFindSectors(s);
-        }
-    }
+        
+    } while(sectorCount < sectorList.CurrentLength());
+    
+    validcount++;
 }
 
 //
@@ -971,9 +982,7 @@ void kexCModel::CollideActorWithWorld(void)
         actorBounds.max += end;
         actorBounds *= moveDir;
         
-        sectorList.Reset();
-        RecursiveFindSectors(sector);
-        validcount++;
+        GetContactSectors(sector);
         
         // start tracing against all faces per contacted sector
         for(unsigned int j = 0; j < sectorList.CurrentLength(); ++j)
