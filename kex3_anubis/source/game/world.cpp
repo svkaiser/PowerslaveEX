@@ -305,7 +305,6 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
                 break;
 
             case 21:
-            case 22:
                 height = GetHighestSurroundingFloor(s);
                 MoveSector(s, false, -(faces[s->faceEnd+2].plane.d - height));
                 break;

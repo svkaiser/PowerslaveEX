@@ -877,6 +877,11 @@ void kexCModel::CheckSurroundingSectors(void)
             
             s = &sectors[face->sector];
             
+            if(!PointWithinSectorEdges(end, s, -actorRadius))
+            {
+                continue;
+            }
+            
             if(s->validcount == validcount)
             {
                 // we already checked this sector
