@@ -438,9 +438,22 @@ bomb_fire
     {
         // ##013    0    0 (no groups)
         delay 1
+        refire "weapons/bomb_charge"
         goto "weapons/bomb_throw"
     }
+}
 
+bomb_charge
+{
+
+    frame
+    {
+        // ##013    0    0 (no groups)
+        delay 1
+        action A_ChargeBombThrow()
+        refire "weapons/bomb_charge"
+        goto "weapons/bomb_throw"
+    }
 }
 
 bomb_throw
@@ -456,6 +469,8 @@ bomb_throw
     frame
     {
         // ##001    0    0
+        action A_ThrowAmunBomb()
+        action A_ConsumeAmmo(1)
         sprites
         {
             { "weapons/bomb", 2,    -35,   10,    0 }
@@ -480,6 +495,7 @@ bomb_throw
     frame
     {
         // ##003   66  128
+        action A_PlayLocalSound("sounds/bombthrow.wav")
         sprites
         {
             { "weapons/bomb", 2,    -36,  -23,    0 }

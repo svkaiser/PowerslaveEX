@@ -1,0 +1,5 @@
+texture "sprites/projectiles/amun_bomb.png"
+
+// working\bomb\sprite0122.tga
+sprite 0 0 0 52 43
+

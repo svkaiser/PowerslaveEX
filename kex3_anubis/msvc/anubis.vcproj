@@ -453,6 +453,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\projectile.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\pWeapon.cpp"
 					>
 				</File>
@@ -784,6 +788,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\playLoop.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\projectile.h"
 					>
 				</File>
 				<File

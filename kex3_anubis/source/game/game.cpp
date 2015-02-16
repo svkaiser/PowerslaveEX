@@ -342,7 +342,7 @@ void kexGameLocal::Stop(void)
 
 void kexGameLocal::Tick(void)
 {
-    kexRand::SetSeed(-470403613 + kex::cTimer->GetMS());
+    kexRand::SetSeed(kex::cTimer->GetTicks());
 
     if(pendingGameState != GS_NONE)
     {

@@ -1,0 +1,23 @@
+amun_bomb_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "projectiles/amun_bomb", 0,    -21,  -39,    0 }
+        }
+    }
+}
+
+amun_bomb_death
+{
+    frame
+    {
+        action A_Spawn("Fx_Explosion01", 0, 0, 32)
+        action A_RadialBlast(512, 128)
+        action A_Destroy()
+        delay 1
+    }
+}

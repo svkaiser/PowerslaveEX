@@ -522,7 +522,7 @@ void kexPlayer::Ready(void)
 
 void kexPlayer::UpdateViewBob(void)
 {
-    if(actor->Origin().z > actor->FloorHeight())
+    if(actor->Origin().z > actor->FloorHeight() && !(actor->Flags() & AF_INWATER))
     {
         bob = 0;
         bobTime = 0;
@@ -530,10 +530,13 @@ void kexPlayer::UpdateViewBob(void)
     }
     else
     {
-        if(cmd.Buttons() & (BC_FORWARD|BC_BACKWARD|BC_STRAFELEFT|BC_STRAFERIGHT))
+        if( cmd.Buttons() & (BC_FORWARD|BC_BACKWARD|BC_STRAFELEFT|BC_STRAFERIGHT) ||
+            actor->Flags() & AF_INWATER)
         {
+            float speed = (actor->Flags() & AF_INWATER) ? 0.25f : 1;
+
             bobSpeed = (0.148f - bobSpeed) * 0.35f + bobSpeed;
-            bob = kexMath::Sin(bobTime) * 7.0f;
+            bob = kexMath::Sin(bobTime * speed) * 7.0f;
             bobTime += bobSpeed;
         }
         else

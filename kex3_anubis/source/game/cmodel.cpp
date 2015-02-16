@@ -996,6 +996,11 @@ void kexCModel::CollideActorWithWorld(void)
         {
             PushFromRadialBounds(contactActor->Origin().ToVec2(), contactActor->Radius());
         }
+
+        if(moveActor->InstanceOf(&kexProjectile::info))
+        {
+            return;
+        }
         
         contactNormals[moves++] = contactNormal;
         projAmt = 1.0f - fraction + 0.1f;
@@ -1062,17 +1067,10 @@ void kexCModel::AdvanceActorToSector(void)
             // handle special cases for flat/thin, see-through floors
             if(sectorList[i]->ceilingFace->flags & FF_SOLID && sectorList[i]->ceilingFace->flags & FF_PORTAL)
             {
-                float d1 = PointOnFaceSide(end, sectorList[i]->ceilingFace);
-                float d2 = PointOnFaceSide(end, sector->floorFace);
-
-                // test if the two faces are tangent to each other
-                if(kexMath::FCmp(d1, d2))
+                // if we're standing above that sector then don't enter it
+                if(&sectors[sectorList[i]->ceilingFace->sector] == sector)
                 {
-                    // if we're standing above that sector then don't enter it
-                    if(PointOnFaceSide(end, moveActor->Sector()->floorFace) >= d1)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
             }
 

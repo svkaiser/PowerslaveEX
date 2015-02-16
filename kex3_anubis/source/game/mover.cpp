@@ -432,7 +432,7 @@ void kexLift::Tick(void)
             {
                 float d = kexGame::cLocal->CModel()->GetFloorHeight(actor->Origin(), sector);
 
-                if(actor->Origin().z - d <= -(moveAmount*1.024f))
+                if(actor->Origin().z - d <= -(moveAmount*2))
                 {
                     actor->FloorHeight() = d;
                     actor->Origin().z = actor->FloorHeight();

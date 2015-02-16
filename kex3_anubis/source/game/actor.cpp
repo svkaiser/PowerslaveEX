@@ -65,6 +65,11 @@ kexActor::~kexActor(void)
 
 void kexActor::Tick(void)
 {
+    if(Removing())
+    {
+        return;
+    }
+
     UpdateSprite();
     
     if(flags & AF_MOVEABLE)
@@ -129,6 +134,13 @@ void kexActor::Spawn(void)
         if(definition->GetBool("moveable"))         flags |= AF_MOVEABLE;
         if(definition->GetBool("touchable"))        flags |= AF_TOUCHABLE;
         if(definition->GetBool("bouncy"))           flags |= AF_BOUNCY;
+
+        if(flags & AF_BOUNCY)
+        {
+            definition->GetString("bounceSound_1", bounceSounds[0]);
+            definition->GetString("bounceSound_2", bounceSounds[1]);
+            definition->GetString("bounceSound_3", bounceSounds[2]);
+        }
         
         if(definition->GetString("spawnAnim", animName))
         {
@@ -342,6 +354,17 @@ void kexActor::UpdateMovement(void)
     {
         velocity.y = 0;
     }
+
+    // bump ceiling
+    if((origin.z + height) + velocity.z >= ceilingHeight)
+    {
+        if(InstanceOf(&kexProjectile::info))
+        {
+            kexProjectile *proj = static_cast<kexProjectile*>(this);
+            proj->OnImpact(NULL);
+            return;
+        }
+    }
     
     // bump floor
     if(origin.z + velocity.z <= floorHeight)
@@ -350,13 +373,27 @@ void kexActor::UpdateMovement(void)
         
         if(flags & AF_BOUNCY && (kexMath::Fabs(velocity.z) * 0.75f) > AMOVE_SPEED_FALL)
         {
+            int r = kex::cSession->GetTime() % 3;
+
             velocity.z = (floorHeight - (origin.z + velocity.z)) * (1.2f - AMOVE_SPEED_FALL);
             velocity.x *= AMOVE_FRICTION;
             velocity.y *= AMOVE_FRICTION;
+
+            if(bounceSounds[r].Length() > 0)
+            {
+                PlaySound(bounceSounds[r].c_str());
+            }
         }
         else
         {
             velocity.z = 0;
+        }
+
+        if(InstanceOf(&kexProjectile::info))
+        {
+            kexProjectile *proj = static_cast<kexProjectile*>(this);
+            proj->OnImpact(NULL);
+            return;
         }
     }
     
@@ -373,6 +410,15 @@ void kexActor::UpdateMovement(void)
         else
         {
             velocity = movement;
+            if(kexGame::cLocal->CModel()->Fraction() != 1)
+            {
+                if(InstanceOf(&kexProjectile::info))
+                {
+                    kexProjectile *proj = static_cast<kexProjectile*>(this);
+                    proj->OnImpact(kexGame::cLocal->CModel()->ContactActor());
+                    return;
+                }
+            }
         }
 
         if(!(oldSector->flags & SF_WATER) && sector->flags & SF_WATER)

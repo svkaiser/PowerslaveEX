@@ -1,0 +1,12 @@
+Proj_AmunBomb 40
+{
+    classname               "kexProjectile"
+    radius                  9
+    height                  16
+    stepHeight              16
+    scale                   0.5
+    spawnAnim               "projectiles/amun_bomb_idle"
+    deathAnim               "projectiles/amun_bomb_death"
+    fullbright              1
+    moveable                1
+}

@@ -124,8 +124,10 @@ protected:
     unsigned int                    flags;
     float                           floorHeight;
     float                           ceilingHeight;
+    kexStr                          bounceSounds[3];
 END_KEX_CLASS();
 
 #include "pickup.h"
+#include "projectile.h"
 
 #endif
