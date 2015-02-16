@@ -663,6 +663,25 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
     }
 
     UpdateSectorBounds(sector);
+    
+    if(moveAmount < 0)
+    {
+        for(kexActor *actor = sector->actorList.Next();
+            actor != NULL;
+            actor = actor->SectorLink().Next())
+        {
+            if(actor->Origin().z <= actor->FloorHeight() || kexMath::Fabs(actor->Velocity().z) <= 0.001f)
+            {
+                float d = kexGame::cLocal->CModel()->GetFloorHeight(actor->Origin(), sector);
+                
+                if(actor->Origin().z - d <= -(moveAmount*2))
+                {
+                    actor->FloorHeight() = d;
+                    actor->Origin().z = actor->FloorHeight();
+                }
+            }
+        }
+    }
 }
 
 //
