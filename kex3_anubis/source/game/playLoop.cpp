@@ -42,6 +42,7 @@ kexPlayLoop::~kexPlayLoop(void)
 
 void kexPlayLoop::Init(void)
 {
+    hud.Init();
 }
 
 //
@@ -59,6 +60,7 @@ void kexPlayLoop::Start(void)
         return;
     }
     
+    hud.SetPlayer(kexGame::cLocal->Player());
     renderScene.SetView(&renderView);
     renderScene.SetWorld(kexGame::cLocal->World());
 
@@ -154,29 +156,7 @@ void kexPlayLoop::Draw(void)
         }
         
         kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
-        vl->BindDrawPointers();
-        
-        float max = (float)kexGame::cLocal->WeaponInfo(p->CurrentWeapon())->maxAmmo;
-        float width = 1;
-        
-        if(max > 0)
-        {
-            width = (float)p->GetAmmo(p->CurrentWeapon()) / max;
-        }
-        
-        kexRender::cTextures->whiteTexture->Bind();
-        vl->AddQuad(52, 222, 0, 88 * width, 8, 32, 32, 255, 255);
-        vl->AddQuad(52, 222, 0, 88 * width, 1, 8, 8, 64, 255);
-        vl->DrawElements();
-        
-        kexTexture *gfx = kexRender::cTextures->Cache("gfx/hud.png", TC_CLAMP, TF_NEAREST);
-        gfx->Bind();
-
-        vl->AddQuad(0, 192, 0, 64, 64, 0, 0, 0.25f, 1, 255, 255, 255, 255);
-        vl->AddQuad(64, 216, 0, 96, 24, 0.25f, 0, 0.625f, 0.375f, 255, 255, 255, 255);
-        vl->AddQuad(160, 216, 0, 96, 24, 0.25f, 0.375f, 0.625f, 0.75f, 255, 255, 255, 255);
-        vl->AddQuad(256, 192, 0, 64, 64, 0.625f, 0, 0.875f, 1, 255, 255, 255, 255);
-        vl->DrawElements();
+        hud.Display();
     }
 }
 

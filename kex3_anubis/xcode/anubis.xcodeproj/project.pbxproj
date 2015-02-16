@@ -15,6 +15,7 @@
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
 		41B5F1881A9251C80016327B /* projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1861A9251C80016327B /* projectile.cpp */; };
+		41B5F1901A926BC00016327B /* hud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F18E1A926BC00016327B /* hud.cpp */; };
 		41B776571A83E850008C8F23 /* scriptSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B776551A83E850008C8F23 /* scriptSystem.cpp */; };
 		41B776581A83E8D3008C8F23 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41B7764D1A83E81C008C8F23 /* libangelscript.a */; };
 		41B7765C1A83EA5E008C8F23 /* systemObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B7765A1A83EA5E008C8F23 /* systemObject.cpp */; };
@@ -176,6 +177,8 @@
 		41B3A54B1A5DEEBC006DCCB9 /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = console.h; sourceTree = "<group>"; };
 		41B5F1861A9251C80016327B /* projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = projectile.cpp; path = ../../source/game/projectile.cpp; sourceTree = "<group>"; };
 		41B5F1871A9251C80016327B /* projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = projectile.h; path = ../../source/game/projectile.h; sourceTree = "<group>"; };
+		41B5F18E1A926BC00016327B /* hud.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hud.cpp; path = ../../source/game/hud.cpp; sourceTree = "<group>"; };
+		41B5F18F1A926BC00016327B /* hud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hud.h; path = ../../source/game/hud.h; sourceTree = "<group>"; };
 		41B776471A83E81C008C8F23 /* angelscript.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = angelscript.xcodeproj; path = ../angelscript/angelscript/projects/xcode/angelscript.xcodeproj; sourceTree = "<group>"; };
 		41B776551A83E850008C8F23 /* scriptSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptSystem.cpp; path = ../../source/script/scriptSystem.cpp; sourceTree = "<group>"; };
 		41B776561A83E850008C8F23 /* scriptSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scriptSystem.h; path = ../../source/script/scriptSystem.h; sourceTree = "<group>"; };
@@ -407,6 +410,7 @@
 				41C979F71A642CCA00E9C798 /* cmodel.cpp */,
 				41C7FC2E1A5AFB84003864CB /* game.cpp */,
 				41C7FC301A5AFB84003864CB /* gameObject.cpp */,
+				41B5F18E1A926BC00016327B /* hud.cpp */,
 				41C7FC321A5AFB84003864CB /* localization.cpp */,
 				41C7FC341A5AFB84003864CB /* menu.cpp */,
 				4178638D1A8E6B2C00329895 /* mover.cpp */,
@@ -426,6 +430,7 @@
 				41C979F81A642CCA00E9C798 /* cmodel.h */,
 				41C7FC2F1A5AFB84003864CB /* game.h */,
 				41C7FC311A5AFB84003864CB /* gameObject.h */,
+				41B5F18F1A926BC00016327B /* hud.h */,
 				41C7FC331A5AFB84003864CB /* localization.h */,
 				41C7FC351A5AFB84003864CB /* menu.h */,
 				4178638E1A8E6B2C00329895 /* mover.h */,
@@ -824,6 +829,7 @@
 				41C7FC7C1A5AFBAB003864CB /* endian.cpp in Sources */,
 				41C7FC681A5AFB98003864CB /* image.cpp in Sources */,
 				41C7FC691A5AFB98003864CB /* renderBackend.cpp in Sources */,
+				41B5F1901A926BC00016327B /* hud.cpp in Sources */,
 				41C7FC491A5AFB84003864CB /* titlescreen.cpp in Sources */,
 				413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */,
 				41E2CE841A51D39B00FC28DC /* pluecker.cpp in Sources */,

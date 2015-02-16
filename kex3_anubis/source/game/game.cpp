@@ -280,6 +280,7 @@ void kexGameLocal::Start(void)
     bigFont     = kexFont::Alloc("bigfont");
 
     titleScreen->Init();
+    playLoop->Init();
     translation->Init();
     spriteManager->Init();
     spriteAnimManager->Init();
