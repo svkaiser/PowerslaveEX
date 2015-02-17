@@ -246,7 +246,7 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
 
     if(oldSector != sector)
     {
-        kexGame::cLocal->World()->EnterSectorSpecial(sector);
+        kexGame::cLocal->World()->EnterSectorSpecial(this, sector);
     }
 }
 
@@ -330,7 +330,7 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
 
     if(oldSector != sector)
     {
-        kexGame::cLocal->World()->EnterSectorSpecial(sector);
+        kexGame::cLocal->World()->EnterSectorSpecial(this, sector);
     }
 }
 
@@ -584,7 +584,7 @@ void kexPlayer::TryUse(void)
         
         if(useFace)
         {
-            kexGame::cLocal->World()->UseWallSpecial(useFace);
+            kexGame::cLocal->World()->UseWallSpecial(this, useFace);
         }
     }
 }
@@ -667,6 +667,23 @@ void kexPlayer::GiveAmmo(const int weaponID, int16_t amount)
     {
         ammo[weaponID] = kexGame::cLocal->WeaponInfo(weaponID)->maxAmmo;
     }
+}
+
+//
+// kexPlayer::GiveKey
+//
+
+bool kexPlayer::GiveKey(const int key)
+{
+    int keyFlag = BIT(key);
+
+    if(this->keys & keyFlag)
+    {
+        return false;
+    }
+
+    this->keys |= keyFlag;
+    return true;
 }
 
 //

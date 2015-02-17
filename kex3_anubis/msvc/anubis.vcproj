@@ -425,6 +425,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\hud.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\localization.cpp"
 					>
 				</File>
@@ -760,6 +764,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\gameObject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\hud.h"
 					>
 				</File>
 				<File

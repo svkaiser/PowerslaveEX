@@ -76,6 +76,8 @@ public:
     void                        ConsumeAmmo(const int16_t amount);
     const int16_t               GetAmmo(const int weaponID);
     void                        GiveAmmo(const int weaponID, int16_t amount);
+    bool                        GiveKey(const int key);
+    bool                        CheckKey(const int key) { return (keys & BIT(key)) != 0; }
 
     kexPlayerCmd                &Cmd(void) { return cmd; }
     kexPuppet                   *Actor(void) { return actor; }

@@ -57,8 +57,27 @@ void kexPickup::Tick(void)
 
 void kexPickup::OnTouch(kexActor *instigator)
 {
+    if(pickupSound.Length() > 0)
+    {
+        instigator->PlaySound(pickupSound);
+    }
+
     kexActor::OnTouch(instigator);
+
+    flags &= ~(AF_SOLID|AF_TOUCHABLE);
     Remove();
+}
+
+//
+// kexPickup::Spawn
+//
+
+void kexPickup::Spawn(void)
+{
+    if(definition)
+    {
+        definition->GetString("pickupSound", pickupSound);
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -104,6 +123,11 @@ void kexWeaponPickup::OnTouch(kexActor *instigator)
 {
     kexPuppet *puppet;
     kexPlayer *player;
+
+    if(Removing())
+    {
+        return;
+    }
     
     if(!instigator->InstanceOf(&kexPuppet::info))
     {
@@ -182,6 +206,11 @@ void kexAmmoPickup::OnTouch(kexActor *instigator)
     kexPuppet *puppet;
     kexPlayer *player;
     int weapon, give;
+
+    if(Removing())
+    {
+        return;
+    }
     
     if(!instigator->InstanceOf(&kexPuppet::info))
     {
@@ -238,5 +267,73 @@ void kexAmmoPickup::Spawn(void)
 
         if(divisor <= 0) divisor = 1;
         if(multiplier <= 0) multiplier = 1;
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexKeyPickup
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexKeyPickup, kexPickup)
+
+//
+// kexKeyPickup::kexKeyPickup
+//
+
+kexKeyPickup::kexKeyPickup(void)
+{
+    this->bits = 0;
+}
+
+//
+// kexKeyPickup::~kexKeyPickup
+//
+
+kexKeyPickup::~kexKeyPickup(void)
+{
+}
+
+//
+// kexKeyPickup::Tick
+//
+
+void kexKeyPickup::Tick(void)
+{
+    kexPickup::Tick();
+}
+
+//
+// kexKeyPickup::OnTouch
+//
+
+void kexKeyPickup::OnTouch(kexActor *instigator)
+{
+    if(Removing())
+    {
+        return;
+    }
+
+    if(!instigator->InstanceOf(&kexPuppet::info) || bits < 0)
+    {
+        return;
+    }
+
+    if(static_cast<kexPuppet*>(instigator)->Owner()->GiveKey(bits))
+    {
+        kexPickup::OnTouch(instigator);
+    }
+}
+
+//
+// kexKeyPickup::Spawn
+//
+
+void kexKeyPickup::Spawn(void)
+{
+    if(definition)
+    {
+        definition->GetInt("keyType", bits, 0);
     }
 }

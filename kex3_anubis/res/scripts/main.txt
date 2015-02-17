@@ -244,3 +244,56 @@ void A_SpawnOrbPickup(kActor @actor)
         orb.Scale() = 2.0f;
     }
 }
+
+//
+// A_ThrowAmunBomb
+//
+
+float bombChargeThrow = 16.0f;
+
+void A_ThrowAmunBomb(kActor @actor)
+{
+    float cp = Math::Cos(actor.Pitch());
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z + 64.0f;
+    kVec3 dir;
+    kActor @bomb;
+    
+    dir.x = Math::Sin(actor.Yaw()) * cp;
+    dir.y = Math::Cos(actor.Yaw()) * cp;
+    dir.z = -Math::Sin(actor.Pitch());
+    
+    x += dir.x * actor.Radius();
+    y += dir.y * actor.Radius();
+    z += dir.z * actor.Radius();
+    
+    @bomb = Game.SpawnActor("Proj_AmunBomb", x, y, z, actor.Yaw(), actor.SectorIndex());
+    
+    if(bomb is null)
+    {
+        return;
+    }
+    
+    bomb.Velocity().x = dir.x * bombChargeThrow;
+    bomb.Velocity().y = dir.y * bombChargeThrow;
+    bomb.Velocity().z = dir.z * bombChargeThrow;
+    
+    bomb.Velocity().z = 8.0f + ((bombChargeThrow + 8.0f) * dir.z);
+    
+    bombChargeThrow = 16.0f;
+}
+
+//
+// A_ChargeBombThrow
+//
+
+void A_ChargeBombThrow(kActor @actor)
+{
+    bombChargeThrow += 0.2f;
+    
+    if(bombChargeThrow > 40.0f)
+    {
+        bombChargeThrow = 40.0f;
+    }
+}

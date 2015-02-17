@@ -176,6 +176,10 @@ void kexDoor::Spawn(void)
     switch(type)
     {
     case 1:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
         waitDelay = 90;
         lip = 0;
         moveSpeed = 4;
@@ -200,7 +204,9 @@ void kexDoor::Spawn(void)
         break;
 
     default:
-        break;
+        kex::cSystem->Warning("kexDoor::Spawn: Unknown type (%i)\n", type);
+        Remove();
+        return;
     }
 
     sector->flags |= SF_SPECIAL;
@@ -276,9 +282,15 @@ void kexFloor::Spawn(void)
         lip = 0;
         moveSpeed = 4;
         break;
+    case 23:
+        lip = 0;
+        moveSpeed = 2;
+        break;
 
     default:
-        break;
+        kex::cSystem->Warning("kexFloor::Spawn: Unknown type (%i)\n", type);
+        Remove();
+        return;
     }
 
     sector->flags |= SF_SPECIAL;
@@ -452,7 +464,9 @@ void kexLift::Spawn(void)
         break;
 
     default:
-        break;
+        kex::cSystem->Warning("kexLift::Spawn: Unknown type (%i)\n", type);
+        Remove();
+        return;
     }
 
     sector->flags |= SF_SPECIAL;

@@ -1,3 +1,59 @@
+Key_Power 29
+{
+    classname               "kexKeyPickup"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "items/symbol_power_idle"
+    pickupSound             "sounds/keypickup.wav"
+    fullbright              1
+    touchable               1
+    keyType                 0
+}
+
+Key_Time 30
+{
+    classname               "kexKeyPickup"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "items/symbol_time_idle"
+    pickupSound             "sounds/keypickup.wav"
+    fullbright              1
+    touchable               1
+    keyType                 1
+}
+
+Key_War 31
+{
+    classname               "kexKeyPickup"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "items/symbol_war_idle"
+    pickupSound             "sounds/keypickup.wav"
+    fullbright              1
+    touchable               1
+    keyType                 2
+}
+
+Key_Earth 32
+{
+    classname               "kexKeyPickup"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "items/symbol_earth_idle"
+    pickupSound             "sounds/keypickup.wav"
+    fullbright              1
+    touchable               1
+    keyType                 3
+}
+
 Item_Health 40
 {
     classname               "kexActor"
@@ -18,6 +74,7 @@ Item_Ammo 41
     stepHeight              32
     scale                   1.0
     spawnAnim               "items/pickup_orb_ammo_idle"
+    pickupSound             "sounds/ammo.wav"
     fullbright              1
     touchable               1
     divisor                 20
@@ -32,6 +89,7 @@ Item_Weapon_Pistol 42
     stepHeight              32
     scale                   1.25
     spawnAnim               "items/weapon_pickup_pistol"
+    pickupSound             "sounds/fammo.wav"
     fullbright              1
     touchable               1
     weaponSlotToGive        1
@@ -46,6 +104,7 @@ Item_Weapon_M60 43
     stepHeight              32
     scale                   1.25
     spawnAnim               "items/weapon_pickup_m60"
+    pickupSound             "sounds/fammo.wav"
     fullbright              1
     touchable               1
     weaponSlotToGive        2

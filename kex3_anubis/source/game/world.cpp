@@ -305,6 +305,7 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
                 break;
 
             case 21:
+            case 22:
                 height = GetHighestSurroundingFloor(s);
                 MoveSector(s, false, -(faces[s->faceEnd+2].plane.d - height));
                 break;
@@ -345,6 +346,8 @@ void kexWorld::ReadActors(kexBinFile &mapfile, const unsigned int count)
         actors[i].x         = mapfile.Read16();
         actors[i].y         = mapfile.Read16();
         actors[i].z         = mapfile.Read16();
+        actors[i].tag       = mapfile.Read16();
+        actors[i].params    = mapfile.Read16();
         actors[i].angle     = mapfile.ReadFloat();
         
         if(actors[i].sector >= 0)
@@ -749,7 +752,7 @@ float kexWorld::GetLowestSurroundingFloor(mapSector_t *sector)
 // kexWorld::UseSectorSpecial
 //
 
-void kexWorld::UseWallSpecial(mapFace_t *face)
+void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
 {
     mapEvent_t *ev;
 
@@ -773,6 +776,12 @@ void kexWorld::UseWallSpecial(mapFace_t *face)
     case 1:
         kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
         break;
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+        UseLockedDoor(player, ev);
+        break;
     case 7:
         break;
     case 8:
@@ -785,6 +794,11 @@ void kexWorld::UseWallSpecial(mapFace_t *face)
         kexGame::cLocal->SpawnMover("kexFloor", ev->type, ev->sector);
         face->tag = -1;
         break;
+    case 200:
+    case 202:
+        UseWallSwitch(player, face, ev);
+        face->tag = -1;
+        break;
 
     default:
         break;
@@ -792,10 +806,36 @@ void kexWorld::UseWallSpecial(mapFace_t *face)
 }
 
 //
+// kexWorld::UseLockedDoor
+//
+
+void kexWorld::UseLockedDoor(kexPlayer *player, mapEvent_t *ev)
+{
+    if(!player->CheckKey(ev->type - 3))
+    {
+        // TODO: print message
+        return;
+    }
+
+    kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+}
+
+//
+// kexWorld::UseWallSwitch
+//
+
+void kexWorld::UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev)
+{
+    // TODO
+    player->Actor()->PlaySound("sounds/switch.wav");
+    SendRemoteTrigger(ev);
+}
+
+//
 // kexWorld::EnterSectorSpecial
 //
 
-void kexWorld::EnterSectorSpecial(mapSector_t *sector)
+void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
 {
     mapEvent_t *ev;
 
@@ -815,6 +855,11 @@ void kexWorld::EnterSectorSpecial(mapSector_t *sector)
     {
     case 21:
         kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
+        break;
+    case 23:
+        actor->PlaySound("sounds/switch.wav");
+        SendRemoteTrigger(ev);
+        sector->event = -1;
         break;
     case 24:
         kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);

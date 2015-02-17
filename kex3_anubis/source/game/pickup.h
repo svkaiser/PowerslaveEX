@@ -30,6 +30,11 @@ public:
 
     virtual void                    Tick(void);
     virtual void                    OnTouch(kexActor *instigator);
+
+    void                            Spawn(void);
+
+protected:
+    kexStr                          pickupSound;
 END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------
@@ -73,6 +78,26 @@ private:
     int                             weaponSlotToGive;
     int                             divisor;
     int                             multiplier;
+END_KEX_CLASS();
+
+//-----------------------------------------------------------------------------
+//
+// kexKeyPickup
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexKeyPickup, kexPickup);
+public:
+    kexKeyPickup(void);
+    ~kexKeyPickup(void);
+
+    virtual void                    Tick(void);
+    virtual void                    OnTouch(kexActor *instigator);
+
+    void                            Spawn(void);
+
+private:
+    int                             bits;
 END_KEX_CLASS();
 
 #endif

@@ -155,6 +155,8 @@ typedef struct
     short               x;
     short               y;
     short               z;
+    short               tag;
+    short               params;
     float               angle;
 } mapActor_t;
 
@@ -170,8 +172,8 @@ public:
     void                    FindVisibleSectors(kexRenderView &view, mapSector_t *sector);
     void                    UpdateSectorBounds(mapSector_t *sector);
     void                    UpdateFacePlaneAndBounds(mapFace_t *face);
-    void                    EnterSectorSpecial(mapSector_t *sector);
-    void                    UseWallSpecial(mapFace_t *face);
+    void                    EnterSectorSpecial(kexActor *actor, mapSector_t *sector);
+    void                    UseWallSpecial(kexPlayer *player, mapFace_t *face);
     float                   GetHighestSurroundingFloor(mapSector_t *sector);
     float                   GetLowestSurroundingFloor(mapSector_t *sector);
     void                    MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount);
@@ -203,6 +205,8 @@ public:
     static kexHeapBlock     hb_world;
 
 private:
+    void                    UseLockedDoor(kexPlayer *player, mapEvent_t *ev);
+    void                    UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev);
     void                    SendRemoteTrigger(mapEvent_t *event);
     void                    BuildAreaNodes(void);
     void                    BuildSectorBounds(void);
