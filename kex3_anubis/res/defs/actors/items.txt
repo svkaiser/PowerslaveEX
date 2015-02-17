@@ -4,7 +4,7 @@ Key_Power 29
     radius                  32
     height                  32
     stepHeight              32
-    scale                   1.0
+    scale                   1.25
     spawnAnim               "items/symbol_power_idle"
     pickupSound             "sounds/keypickup.wav"
     fullbright              1
@@ -18,7 +18,7 @@ Key_Time 30
     radius                  32
     height                  32
     stepHeight              32
-    scale                   1.0
+    scale                   1.25
     spawnAnim               "items/symbol_time_idle"
     pickupSound             "sounds/keypickup.wav"
     fullbright              1
@@ -32,7 +32,7 @@ Key_War 31
     radius                  32
     height                  32
     stepHeight              32
-    scale                   1.0
+    scale                   1.25
     spawnAnim               "items/symbol_war_idle"
     pickupSound             "sounds/keypickup.wav"
     fullbright              1
@@ -46,7 +46,7 @@ Key_Earth 32
     radius                  32
     height                  32
     stepHeight              32
-    scale                   1.0
+    scale                   1.25
     spawnAnim               "items/symbol_earth_idle"
     pickupSound             "sounds/keypickup.wav"
     fullbright              1

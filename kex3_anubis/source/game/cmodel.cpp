@@ -891,9 +891,7 @@ void kexCModel::CheckSurroundingSectors(void)
             sectorList.Set(s);
             s->validcount = validcount;
             
-            if(!CheckEdgeSide(face->LeftEdge(), face, 0, actorRadius) &&
-               !CheckEdgeSide(face->RightEdge(), face, 0, actorRadius) &&
-               !CheckEdgeSide(face->BottomEdge(), face, actorRadius) &&
+            if(!CheckEdgeSide(face->BottomEdge(), face, actorRadius) &&
                !CheckEdgeSide(face->TopEdge(), face, actorRadius))
             {
                 // is the actor crossing this portal face?
