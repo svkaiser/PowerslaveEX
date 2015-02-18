@@ -337,13 +337,11 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
 }
 
 //
-// kexActor::UpdateMovement
+// kexActor::UpdateVelocity
 //
 
-void kexActor::UpdateMovement(void)
+void kexActor::UpdateVelocity(void)
 {
-    mapSector_t *oldSector;
-
     // check for drop-offs
     if(origin.z > floorHeight)
     {
@@ -365,7 +363,14 @@ void kexActor::UpdateMovement(void)
     {
         velocity.y = 0;
     }
+}
 
+//
+// kexActor::CheckFloorAndCeilings
+//
+
+void kexActor::CheckFloorAndCeilings(void)
+{
     // bump ceiling
     if((origin.z + height) + velocity.z >= ceilingHeight)
     {
@@ -385,11 +390,11 @@ void kexActor::UpdateMovement(void)
         if(flags & AF_BOUNCY && (kexMath::Fabs(velocity.z) * 0.75f) > AMOVE_SPEED_FALL)
         {
             int r = kex::cSession->GetTime() % 3;
-
+            
             velocity.z = (floorHeight - (origin.z + velocity.z)) * (1.2f - AMOVE_SPEED_FALL);
             velocity.x *= AMOVE_FRICTION;
             velocity.y *= AMOVE_FRICTION;
-
+            
             if(bounceSounds[r].Length() > 0)
             {
                 PlaySound(bounceSounds[r].c_str());
@@ -399,7 +404,7 @@ void kexActor::UpdateMovement(void)
         {
             velocity.z = 0;
         }
-
+        
         if(InstanceOf(&kexProjectile::info))
         {
             kexProjectile *proj = static_cast<kexProjectile*>(this);
@@ -407,6 +412,18 @@ void kexActor::UpdateMovement(void)
             return;
         }
     }
+}
+
+//
+// kexActor::UpdateMovement
+//
+
+void kexActor::UpdateMovement(void)
+{
+    mapSector_t *oldSector;
+
+    UpdateVelocity();
+    CheckFloorAndCeilings();
     
     oldSector = sector;
     movement = velocity;

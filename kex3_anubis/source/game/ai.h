@@ -17,6 +17,12 @@
 
 #include "actor.h"
 
+typedef enum
+{
+    AIS_IDLE    = 0,
+    AIS_CHASE
+} aiState_t;
+
 //-----------------------------------------------------------------------------
 //
 // kexAI
@@ -34,10 +40,14 @@ public:
     void                            Spawn(void);
 
 private:
+    void                            LookForTarget(void);
+    bool                            CheckTargetSight(kexActor *actor);
+
     spriteAnim_t                    *chaseAnim;
     spriteAnim_t                    *painAnim;
     spriteAnim_t                    *meleeAnim;
     spriteAnim_t                    *attackAnim;
+    aiState_t                       state;
 END_KEX_CLASS();
 
 #endif

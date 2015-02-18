@@ -100,6 +100,8 @@ public:
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
 protected:
+    virtual void                    UpdateVelocity(void);
+    virtual void                    CheckFloorAndCeilings(void);
     virtual void                    UpdateMovement(void);
     void                            UpdateSprite(void);
 

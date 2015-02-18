@@ -36,6 +36,7 @@ kexAI::kexAI(void)
     this->painAnim = NULL;
     this->meleeAnim = NULL;
     this->attackAnim = NULL;
+    this->state = AIS_IDLE;
 }
 
 //
@@ -52,6 +53,21 @@ kexAI::~kexAI(void)
 
 void kexAI::Tick(void)
 {
+    if(Removing())
+    {
+        return;
+    }
+    
+    switch(state)
+    {
+    case AIS_IDLE:
+        LookForTarget();
+        break;
+        
+    case AIS_CHASE:
+        break;
+    }
+    
     kexActor::Tick();
 }
 
@@ -68,11 +84,58 @@ void kexAI::OnDamage(kexActor *instigator)
 }
 
 //
+// kexAI::CheckTargetSight
+//
+
+bool kexAI::CheckTargetSight(kexActor *actor)
+{
+    kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
+    kexVec3 end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
+    
+    return !kexGame::cLocal->CModel()->Trace(this, sector, start, end, false);
+}
+
+//
+// kexAI::LookForTarget
+//
+
+void kexAI::LookForTarget(void)
+{
+    if(target != NULL)
+    {
+        return;
+    }
+    
+    kexActor *targ = kexGame::cLocal->Player()->Actor();
+    
+    if(CheckTargetSight(targ))
+    {
+        ChangeAnim(chaseAnim);
+        SetTarget(targ);
+        state = AIS_CHASE;
+    }
+}
+
+//
 // kexAI::UpdateMovement
 //
 
 void kexAI::UpdateMovement(void)
 {
+    UpdateVelocity();
+    CheckFloorAndCeilings();
+    
+    movement += velocity;
+    
+    if(movement.UnitSq() > 0)
+    {
+        if(!kexGame::cLocal->CModel()->MoveActor(this))
+        {
+            velocity.Clear();
+        }
+        
+        movement.Clear();
+    }
 }
 
 //
@@ -84,6 +147,11 @@ void kexAI::Spawn(void)
     if(definition)
     {
         kexStr animName;
+        
+        if(definition->GetString("chaseAnim", animName))
+        {
+            chaseAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
+        }
         
         if(definition->GetString("painAnim", animName))
         {
