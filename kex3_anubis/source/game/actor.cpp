@@ -166,6 +166,8 @@ void kexActor::Spawn(void)
         anim = &kexGame::cLocal->SpriteAnimManager()->defaultAnim;
     }
     
+    velocity.Clear();
+
     r = (radius * scale) * 0.5f;
     h = (height * scale) * 0.5f;
     
@@ -174,9 +176,9 @@ void kexActor::Spawn(void)
 
     if(flags & AF_RANDOMIZATION)
     {
-        if(anim->NumFrames() > 0 && !(flags & AF_NOADVANCEFRAMES))
+        if(anim->NumFrames() > 0)
         {
-            frameID = kexRand::Max(anim->NumFrames());
+            frameID = kexRand::SysRand() % anim->NumFrames();
         }
     }
     

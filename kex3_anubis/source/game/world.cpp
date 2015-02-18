@@ -289,7 +289,7 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
         events[i].type      = mapfile.Read16();
         events[i].sector    = mapfile.Read16();
         events[i].tag       = mapfile.Read16();
-        events[i].unknown   = mapfile.Read16();
+        events[i].params    = mapfile.Read16();
         
         if(events[i].sector >= 0)
         {
@@ -307,17 +307,17 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
             case 21:
             case 22:
                 height = GetHighestSurroundingFloor(s);
-                MoveSector(s, false, -(faces[s->faceEnd+2].plane.d - height));
+                MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
 
             case 23:
-                height = (float)s->floorHeight + 24;
-                MoveSector(s, false, -(faces[s->faceEnd+2].plane.d - height));
+                height = (float)s->floorHeight + 16;
+                MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
 
             case 24:
                 height = GetLowestSurroundingFloor(s);
-                MoveSector(s, false, -(faces[s->faceEnd+2].plane.d - height));
+                MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
 
             default:
@@ -518,7 +518,7 @@ void kexWorld::SpawnMapActor(mapActor_t *mapActor)
     float an;
     kexActor *actor;
     
-    if(mapActor->type <= -1 || mapActor->type >= NUMACTORTYPES)
+    if(mapActor->type <= -1)
     {
         return;
     }
@@ -795,9 +795,12 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
         face->tag = -1;
         break;
     case 200:
-    case 202:
         UseWallSwitch(player, face, ev);
         face->tag = -1;
+        break;
+    case 201:
+    case 202:
+        UseWallSwitch(player, face, ev);
         break;
 
     default:
@@ -826,7 +829,25 @@ void kexWorld::UseLockedDoor(kexPlayer *player, mapEvent_t *ev)
 
 void kexWorld::UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev)
 {
-    // TODO
+    int switchTex = (ev->params >> 8) & 0xff;
+    bool bFound = false;
+
+    for(int i = face->polyStart; i <= face->polyEnd; ++i)
+    {
+        mapPoly_t *poly = &polys[i];
+
+        if(poly->texture == switchTex)
+        {
+            poly->texture = (ev->params & 0xff);
+            bFound = true;
+        }
+    }
+
+    if(!bFound)
+    {
+        return;
+    }
+
     player->Actor()->PlaySound("sounds/switch.wav");
     SendRemoteTrigger(ev);
 }
@@ -858,6 +879,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         break;
     case 23:
         actor->PlaySound("sounds/switch.wav");
+        MoveSector(sector, false, -(sector->floorFace->plane.d - (float)sector->floorHeight));
         SendRemoteTrigger(ev);
         sector->event = -1;
         break;
@@ -902,6 +924,12 @@ void kexWorld::SendRemoteTrigger(mapEvent_t *event)
             if(ev->type == event->type)
             {
                 ev->tag = -1;
+
+                if(event->type == 66)
+                {
+                    ExplodeWallEvent(&sectors[ev->sector]);
+                }
+
                 continue;
             }
 
@@ -931,6 +959,93 @@ void kexWorld::SendRemoteTrigger(mapEvent_t *event)
 }
 
 //
+// kexWorld::ExplodeWall
+//
+
+void kexWorld::ExplodeWall(mapFace_t *face)
+{
+    kexGameLocal *gLocal = kexGame::cLocal;
+    kexVec3 org;
+
+    face->flags &= ~(FF_SOLID|FF_TOGGLE);
+    face->flags |= FF_PORTAL;
+
+    for(int j = face->polyStart; j <= face->polyEnd; ++j)
+    {
+        mapPoly_t *poly = &polys[j];
+
+        org = (vertices[face->vertStart + poly->indices[0]].origin +
+               vertices[face->vertStart + poly->indices[1]].origin +
+               vertices[face->vertStart + poly->indices[2]].origin) / 3;
+
+        if(!(kexRand::Max(0xff) & 0x1))
+        {
+            org.x += 128.0f * kexRand::CFloat();
+            org.y += 128.0f * kexRand::CFloat();
+            org.z += 128.0f * kexRand::CFloat();
+
+            gLocal->SpawnActor(AT_EXPLODEPUFF, org.x, org.y, org.z, 0, face->sectorOwner);
+        }
+        else
+        {
+            kexActor *debris = gLocal->SpawnActor(AT_DEBRIS, org.x, org.y, org.z, 0, face->sectorOwner);
+
+            if(debris == NULL)
+            {
+                continue;
+            }
+
+            debris->Velocity() = (face->plane.Normal() * (16 * kexRand::Float()));
+            debris->Velocity().z += (16 * kexRand::Float());
+        }
+    }
+
+    face->polyStart = face->polyEnd = -1;
+}
+
+//
+// kexWorld::ExplodeWallEvent
+//
+
+void kexWorld::ExplodeWallEvent(mapSector_t *sector)
+{
+    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
+    {
+        mapFace_t *face = &faces[i];
+
+        if(!(face->flags & FF_TOGGLE))
+        {
+            continue;
+        }
+
+        ExplodeWall(face);
+
+        if(face->sector <= -1)
+        {
+            continue;
+        }
+
+        for(int j = sectors[face->sector].faceStart; j < sectors[face->sector].faceEnd+3; ++j)
+        {
+            mapFace_t *f = &faces[j];
+
+            if(f->sector != face->sectorOwner)
+            {
+                continue;
+            }
+
+            ExplodeWall(f);
+        }
+    }
+
+    if(sector->event >= 0 && events[sector->event].type == 66)
+    {
+        SendRemoteTrigger(&events[sector->event]);
+        sector->event = -1;
+    }
+}
+
+//
 // kexWorld::RadialDamage
 //
 
@@ -948,8 +1063,8 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
     float dist;
     float dmgAmount;
     
-    bounds.min.Set(-radius);
-    bounds.max.Set( radius);
+    bounds.min.Set(-(radius*0.5f));
+    bounds.max.Set( (radius*0.5f));
     bounds.min += start;
     bounds.max += start;
     
@@ -970,12 +1085,17 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
         }
         
         sector->floodCount = 0;
-        
+
         for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
         {
             mapFace_t *face = &faces[i];
+
+            if(face->flags & (FF_SOLID|FF_TOGGLE))
+            {
+                continue;
+            }
             
-            if(face->flags & FF_PORTAL && face->sector >= 0)
+            if(face->sector >= 0)
             {
                 mapSector_t *next = &sectors[face->sector];
                 
@@ -992,6 +1112,8 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
                 }
             }
         }
+
+        ExplodeWallEvent(sector);
         
         for(kexActor *actor = sector->actorList.Next();
             actor != NULL;

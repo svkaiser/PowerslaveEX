@@ -65,7 +65,7 @@ void kexSpriteAnimManager::Init(void)
     frame->nextFrame = "-";
     frame->refireFrame = "-";
     
-    spriteSet = frame->spriteSet.Grow();
+    spriteSet = frame->spriteSet[0].Grow();
     spriteSet->x = -32;
     spriteSet->y = -64;
     spriteSet->bFlipped = false;
@@ -92,7 +92,7 @@ void kexSpriteAnimManager::Shutdown(void)
 // kexSpriteAnimManager::ParseSpriteSet
 //
 
-void kexSpriteAnimManager::ParseSpriteSet(kexLexer *lexer, spriteFrame_t *frame)
+void kexSpriteAnimManager::ParseSpriteSet(kexLexer *lexer, spriteFrame_t *frame, const int rotation)
 {
     lexer->ExpectNextToken(TK_LBRACK);
     lexer->Find();
@@ -130,7 +130,71 @@ void kexSpriteAnimManager::ParseSpriteSet(kexLexer *lexer, spriteFrame_t *frame)
                 sprSet.sprite = &kexGame::cLocal->SpriteManager()->defaultSprite;
             }
 
-            frame->spriteSet.Push(sprSet);
+            frame->spriteSet[rotation].Push(sprSet);
+        }
+
+        lexer->Find();
+    }
+}
+
+//
+// kexSpriteAnimManager::ParseRotation
+//
+
+void kexSpriteAnimManager::ParseRotation(kexLexer *lexer, spriteFrame_t *frame)
+{
+    const char *dir = lexer->Token() + 9;
+    int rotation = -1;
+
+    if(!kexStr::Compare(dir, "N"))
+    {
+        rotation = 0;
+    }
+    else if(!kexStr::Compare(dir, "NE"))
+    {
+        rotation = 1;
+    }
+    else if(!kexStr::Compare(dir, "E"))
+    {
+        rotation = 2;
+    }
+    else if(!kexStr::Compare(dir, "ES"))
+    {
+        rotation = 3;
+    }
+    else if(!kexStr::Compare(dir, "S"))
+    {
+        rotation = 4;
+    }
+    else if(!kexStr::Compare(dir, "SW"))
+    {
+        rotation = 5;
+    }
+    else if(!kexStr::Compare(dir, "W"))
+    {
+        rotation = 6;
+    }
+    else if(!kexStr::Compare(dir, "WN"))
+    {
+        rotation = 7;
+    }
+
+    if(rotation == -1)
+    {
+        return;
+    }
+
+    frame->flags |= SFF_HASROTATIONS;
+
+    lexer->ExpectNextToken(TK_LBRACK);
+    lexer->Find();
+
+    while(lexer->TokenType() != TK_RBRACK)
+    {
+        if(lexer->Matches("sprites"))
+        {
+            // enter sprites block
+            ParseSpriteSet(lexer, frame, rotation);
         }
 
         lexer->Find();
@@ -169,7 +233,7 @@ void kexSpriteAnimManager::ParseFrame(kexLexer *lexer, spriteFrame_t *frame)
         else if(lexer->Matches("sprites"))
         {
             // enter sprites block
-            ParseSpriteSet(lexer, frame);
+            ParseSpriteSet(lexer, frame, 0);
         }
         else if(lexer->Matches("action"))
         {
@@ -183,6 +247,10 @@ void kexSpriteAnimManager::ParseFrame(kexLexer *lexer, spriteFrame_t *frame)
                 frame->actions.Push(ad);
                 ad->Parse(lexer);
             }
+        }
+        else if(kexStr::IndexOf(lexer->Token(), "rotation_") == 0)
+        {
+            ParseRotation(lexer, frame);
         }
 
         lexer->Find();

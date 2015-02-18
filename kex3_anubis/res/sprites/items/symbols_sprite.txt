@@ -1,0 +1,98 @@
+texture "sprites/items/symbols.png"
+
+// working\keys\sprite0304.tga
+sprite 0 0 0 32 32
+
+// working\keys\sprite0305.tga
+sprite 1 32 0 32 32
+
+// working\keys\sprite0306.tga
+sprite 2 64 0 32 32
+
+// working\keys\sprite0307.tga
+sprite 3 96 0 32 32
+
+// working\keys\sprite0308.tga
+sprite 4 128 0 32 32
+
+// working\keys\sprite0309.tga
+sprite 5 160 0 32 32
+
+// working\keys\sprite0310.tga
+sprite 6 192 0 32 32
+
+// working\keys\sprite0311.tga
+sprite 7 224 0 32 32
+
+// working\keys\sprite0312.tga
+sprite 8 256 0 32 32
+
+// working\keys\sprite0313.tga
+sprite 9 288 0 32 32
+
+// working\keys\sprite0314.tga
+sprite 10 320 0 32 32
+
+// working\keys\sprite0315.tga
+sprite 11 352 0 32 32
+
+// working\keys\sprite0316.tga
+sprite 12 384 0 32 32
+
+// working\keys\sprite0317.tga
+sprite 13 416 0 32 32
+
+// working\keys\sprite0318.tga
+sprite 14 448 0 32 32
+
+// working\keys\sprite0319.tga
+sprite 15 480 0 32 32
+
+// working\keys\sprite0320.tga
+sprite 16 0 32 32 32
+
+// working\keys\sprite0321.tga
+sprite 17 32 32 32 32
+
+// working\keys\sprite0322.tga
+sprite 18 64 32 32 32
+
+// working\keys\sprite0323.tga
+sprite 19 96 32 32 32
+
+// working\keys\sprite0324.tga
+sprite 20 128 32 32 32
+
+// working\keys\sprite0325.tga
+sprite 21 160 32 32 32
+
+// working\keys\sprite0326.tga
+sprite 22 192 32 32 32
+
+// working\keys\sprite0327.tga
+sprite 23 224 32 32 32
+
+// working\keys\sprite0328.tga
+sprite 24 256 32 32 32
+
+// working\keys\sprite0329.tga
+sprite 25 288 32 32 32
+
+// working\keys\sprite0330.tga
+sprite 26 320 32 32 32
+
+// working\keys\sprite0331.tga
+sprite 27 352 32 32 32
+
+// working\keys\sprite0332.tga
+sprite 28 384 32 32 32
+
+// working\keys\sprite0333.tga
+sprite 29 416 32 32 32
+
+// working\keys\sprite0334.tga
+sprite 30 448 32 32 32
+
+// working\keys\sprite0335.tga
+sprite 31 480 32 32 32
+

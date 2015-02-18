@@ -24,6 +24,8 @@ typedef enum
 {
     AT_INVALID      = -1,
     AT_PLAYER       = 0,
+    AT_EXPLODEPUFF  = 62,
+    AT_DEBRIS       = 123,
     AT_WATERSPLASH  = 124,
     NUMACTORTYPES
 } actorType_t;

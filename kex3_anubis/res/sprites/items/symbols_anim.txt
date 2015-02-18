@@ -1,0 +1,303 @@
+symbol_war_idle
+{
+    // frames:    8
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/symbols", 0,    -16,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/symbols", 1,    -16,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/symbols", 2,    -16,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/symbols", 3,    -16,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/symbols", 4,    -16,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/symbols", 5,    -16,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "items/symbols", 6,    -16,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "items/symbols", 7,    -16,  -44,    0 }
+        }
+    }
+}
+
+symbol_earth_idle
+{
+    // frames:    8
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/symbols", 8,    -16,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/symbols", 9,    -16,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/symbols", 10,    -16,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/symbols", 11,    -16,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/symbols", 12,    -16,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/symbols", 13,    -16,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "items/symbols", 14,    -16,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "items/symbols", 15,    -16,  -47,    0 }
+        }
+    }
+}
+
+symbol_power_idle
+{
+    // frames:    8
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/symbols", 16,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/symbols", 17,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/symbols", 18,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/symbols", 19,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/symbols", 20,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/symbols", 21,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "items/symbols", 22,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "items/symbols", 23,    -15,  -44,    0 }
+        }
+    }
+}
+
+symbol_time_idle
+{
+    // frames:    8
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/symbols", 24,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/symbols", 25,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/symbols", 26,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/symbols", 27,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/symbols", 28,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/symbols", 29,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "items/symbols", 30,    -15,  -44,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "items/symbols", 31,    -15,  -44,    0 }
+        }
+    }
+}

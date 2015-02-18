@@ -1,0 +1,612 @@
+anubis_fireball_loop
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 16,    -12,  -20,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 23,    -10,  -18,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 0,    -10,  -18,    0 }
+                { "projectiles/anubis_fireball", 1,     54,  -18,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 23,    -10,  -18,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 16,    -11,  -20,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 23,    -33,  -18,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 0,    -51,  -18,    1 }
+                { "projectiles/anubis_fireball", 1,    -59,  -18,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 23,    -33,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 16,    -12,  -20,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 23,    -10,  -18,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 0,    -10,  -18,    0 }
+                { "projectiles/anubis_fireball", 1,     54,  -18,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 23,    -10,  -18,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 16,    -11,  -20,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 23,    -33,  -18,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 0,    -51,  -18,    1 }
+                { "projectiles/anubis_fireball", 1,    -59,  -18,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 23,    -33,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 21,    -11,  -21,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 24,     -9,  -18,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 2,    -10,  -19,    0 }
+                { "projectiles/anubis_fireball", 3,     54,  -19,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 24,    -10,  -19,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 21,    -10,  -21,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 24,    -34,  -19,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 2,    -51,  -19,    1 }
+                { "projectiles/anubis_fireball", 3,    -59,  -19,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 24,    -34,  -19,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 21,    -11,  -21,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 24,     -9,  -18,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 2,    -10,  -19,    0 }
+                { "projectiles/anubis_fireball", 3,     54,  -19,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 24,    -10,  -19,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 21,    -10,  -21,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 24,    -34,  -19,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 2,    -51,  -19,    1 }
+                { "projectiles/anubis_fireball", 3,    -59,  -19,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 24,    -34,  -19,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 22,    -11,  -23,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 25,     -9,  -18,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 4,    -11,  -19,    0 }
+                { "projectiles/anubis_fireball", 5,     53,  -19,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 25,     -9,  -18,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 22,    -10,  -22,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 25,    -37,  -18,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 4,    -51,  -18,    1 }
+                { "projectiles/anubis_fireball", 5,    -55,  -18,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 25,    -37,  -19,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 22,    -11,  -23,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 25,     -9,  -18,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 4,    -11,  -19,    0 }
+                { "projectiles/anubis_fireball", 5,     53,  -19,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 25,     -9,  -18,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 22,    -10,  -22,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 25,    -37,  -18,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 4,    -51,  -18,    1 }
+                { "projectiles/anubis_fireball", 5,    -55,  -18,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "projectiles/anubis_fireball", 25,    -37,  -19,    1 }
+            }
+        }
+
+    }
+
+}
+
+anubis_fireball_explode
+{
+    // frames:   14
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 6,    -36,  -45,    0 }
+            { "projectiles/anubis_fireball", 7,     28,  -45,    0 }
+            { "projectiles/anubis_fireball", 8,    -36,   19,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 6,    -36,  -45,    0 }
+            { "projectiles/anubis_fireball", 7,     28,  -45,    0 }
+            { "projectiles/anubis_fireball", 8,    -36,   19,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 6,    -36,  -45,    0 }
+            { "projectiles/anubis_fireball", 7,     28,  -45,    0 }
+            { "projectiles/anubis_fireball", 8,    -36,   19,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 9,    -35,  -48,    0 }
+            { "projectiles/anubis_fireball", 10,     29,  -48,    0 }
+            { "projectiles/anubis_fireball", 11,    -35,   16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 9,    -35,  -48,    0 }
+            { "projectiles/anubis_fireball", 10,     29,  -48,    0 }
+            { "projectiles/anubis_fireball", 11,    -35,   16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 12,    -44,  -55,    0 }
+            { "projectiles/anubis_fireball", 13,     20,  -55,    0 }
+            { "projectiles/anubis_fireball", 14,    -44,    9,    0 }
+            { "projectiles/anubis_fireball", 15,     20,    9,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 12,    -44,  -55,    0 }
+            { "projectiles/anubis_fireball", 13,     20,  -55,    0 }
+            { "projectiles/anubis_fireball", 14,    -44,    9,    0 }
+            { "projectiles/anubis_fireball", 15,     20,    9,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 12,    -44,  -55,    0 }
+            { "projectiles/anubis_fireball", 13,     20,  -55,    0 }
+            { "projectiles/anubis_fireball", 14,    -44,    9,    0 }
+            { "projectiles/anubis_fireball", 15,     20,    9,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 12,    -44,  -55,    0 }
+            { "projectiles/anubis_fireball", 13,     20,  -55,    0 }
+            { "projectiles/anubis_fireball", 14,    -44,    9,    0 }
+            { "projectiles/anubis_fireball", 15,     20,    9,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 17,    -44,  -57,    0 }
+            { "projectiles/anubis_fireball", 18,     20,  -57,    0 }
+            { "projectiles/anubis_fireball", 19,    -44,    7,    0 }
+            { "projectiles/anubis_fireball", 20,     20,    7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 17,    -44,  -57,    0 }
+            { "projectiles/anubis_fireball", 18,     20,  -57,    0 }
+            { "projectiles/anubis_fireball", 19,    -44,    7,    0 }
+            { "projectiles/anubis_fireball", 20,     20,    7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 17,    -44,  -57,    0 }
+            { "projectiles/anubis_fireball", 18,     20,  -57,    0 }
+            { "projectiles/anubis_fireball", 19,    -44,    7,    0 }
+            { "projectiles/anubis_fireball", 20,     20,    7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 17,    -44,  -57,    0 }
+            { "projectiles/anubis_fireball", 18,     20,  -57,    0 }
+            { "projectiles/anubis_fireball", 19,    -44,    7,    0 }
+            { "projectiles/anubis_fireball", 20,     20,    7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "projectiles/anubis_fireball", 17,    -44,  -57,    0 }
+            { "projectiles/anubis_fireball", 18,     20,  -57,    0 }
+            { "projectiles/anubis_fireball", 19,    -44,    7,    0 }
+            { "projectiles/anubis_fireball", 20,     20,    7,    0 }
+        }
+
+    }
+
+}

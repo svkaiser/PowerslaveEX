@@ -178,12 +178,161 @@ vase02_exp_idle
     }
 }
 
+vase02_exp_death
+{
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 7,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 7,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 7,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 7,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 8,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 8,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 8,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 8,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 9,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 9,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 9,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 9,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+    
+    frame
+    {
+        action A_Spawn("Fx_Explosion01", 0, 0, 32)
+        action A_RadialBlast(512, 128)
+        action A_TossActor("Obj_Vase_Explode02_Shard01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Vase_Explode02_Shard02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Vase_Explode02_Shard03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Vase_Explode02_Shard04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Vase_Explode02_Shard05", 0, 0, 32, 8, 8, 4, 16)
+        action A_Destroy()
+        delay 1
+    }
+}
+
 vase02_exp_shards
 {
     // frames:    5
     frame
     {
         // ##000    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase02_exp", 2,     -7,   -5,    0 }
@@ -193,6 +342,7 @@ vase02_exp_shards
     frame
     {
         // ##001    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase02_exp", 3,     -7,   -5,    0 }
@@ -202,6 +352,7 @@ vase02_exp_shards
     frame
     {
         // ##002    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase02_exp", 4,     -7,   -5,    0 }
@@ -211,6 +362,7 @@ vase02_exp_shards
     frame
     {
         // ##003    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase02_exp", 5,     -7,   -5,    0 }
@@ -220,6 +372,7 @@ vase02_exp_shards
     frame
     {
         // ##004    0    0
+        action A_DestroyAtRest(0.01)
         sprites
         {
             { "objects/vase02_exp", 6,     -7,   -5,    0 }

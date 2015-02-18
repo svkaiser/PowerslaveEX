@@ -1,0 +1,80 @@
+texture "sprites/projectiles/anubis_fireball.png"
+
+// working\anubisproj\sprite0406.tga
+sprite 0 0 0 64 18
+
+// working\anubisproj\sprite0407.tga
+sprite 1 64 0 8 18
+
+// working\anubisproj\sprite0408.tga
+sprite 2 72 0 64 20
+
+// working\anubisproj\sprite0409.tga
+sprite 3 136 0 8 20
+
+// working\anubisproj\sprite0410.tga
+sprite 4 144 0 64 20
+
+// working\anubisproj\sprite0411.tga
+sprite 5 208 0 4 20
+
+// working\anubisproj\sprite0412.tga
+sprite 6 0 18 64 64
+
+// working\anubisproj\sprite0413.tga
+sprite 7 212 0 16 64
+
+// working\anubisproj\sprite0414.tga
+sprite 8 64 20 64 3
+
+// working\anubisproj\sprite0415.tga
+sprite 9 128 20 64 64
+
+// working\anubisproj\sprite0416.tga
+sprite 10 228 0 16 64
+
+// working\anubisproj\sprite0417.tga
+sprite 11 64 23 64 11
+
+// working\anubisproj\sprite0418.tga
+sprite 12 64 34 64 64
+
+// working\anubisproj\sprite0419.tga
+sprite 13 192 64 40 64
+
+// working\anubisproj\sprite0420.tga
+sprite 14 0 82 64 34
+
+// working\anubisproj\sprite0421.tga
+sprite 15 128 84 40 34
+
+// working\anubisproj\sprite0422.tga
+sprite 16 232 64 24 20
+
+// working\anubisproj\sprite0423.tga
+sprite 17 64 98 64 64
+
+// working\anubisproj\sprite0424.tga
+sprite 18 0 116 44 64
+
+// working\anubisproj\sprite0425.tga
+sprite 19 128 118 64 37
+
+// working\anubisproj\sprite0426.tga
+sprite 20 192 128 44 37
+
+// working\anubisproj\sprite0427.tga
+sprite 21 128 155 24 21
+
+// working\anubisproj\sprite0428.tga
+sprite 22 152 155 24 23
+
+// working\anubisproj\sprite0429.tga
+sprite 23 44 162 44 18
+
+// working\anubisproj\sprite0430.tga
+sprite 24 176 165 44 18
+
+// working\anubisproj\sprite0431.tga
+sprite 25 88 176 48 18
+

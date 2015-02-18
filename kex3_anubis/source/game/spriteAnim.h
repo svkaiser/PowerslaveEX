@@ -29,7 +29,8 @@ typedef struct
 
 typedef enum
 {
-    SFF_FULLBRIGHT  = BIT(1)
+    SFF_FULLBRIGHT      = BIT(1),
+    SFF_HASROTATIONS    = BIT(2)
 } frameFlags_t;
 
 typedef struct
@@ -39,11 +40,10 @@ typedef struct
     kexArray<kexActionDef*>     actions;
     kexStr                      nextFrame;
     kexStr                      refireFrame;
-    kexArray<spriteSet_t>       spriteSet;
+    kexArray<spriteSet_t>       spriteSet[8];
 
     bool                        HasNextFrame(void) { return nextFrame[0] != '-'; }
     bool                        HasRefireFrame(void) { return refireFrame[0] != '-'; }
-    const unsigned int          NumSpriteSets(void) const { return spriteSet.Length(); }
 } spriteFrame_t;
 
 typedef struct
@@ -72,7 +72,8 @@ private:
 
     void                        Load(const char *name);
     void                        ParseFrame(kexLexer *lexer, spriteFrame_t *frame);
-    void                        ParseSpriteSet(kexLexer *lexer, spriteFrame_t *frame);
+    void                        ParseRotation(kexLexer *lexer, spriteFrame_t *frame);
+    void                        ParseSpriteSet(kexLexer *lexer, spriteFrame_t *frame, const int rotation);
 };
 
 #endif

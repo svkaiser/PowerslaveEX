@@ -145,7 +145,7 @@ typedef struct
     short               type;
     short               sector;
     short               tag;
-    short               unknown;
+    short               params;
 } mapEvent_t;
 
 typedef struct
@@ -208,6 +208,8 @@ private:
     void                    UseLockedDoor(kexPlayer *player, mapEvent_t *ev);
     void                    UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev);
     void                    SendRemoteTrigger(mapEvent_t *event);
+    void                    ExplodeWallEvent(mapSector_t *sector);
+    void                    ExplodeWall(mapFace_t *face);
     void                    BuildAreaNodes(void);
     void                    BuildSectorBounds(void);
     void                    SetupEdges(void);

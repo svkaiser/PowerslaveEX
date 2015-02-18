@@ -295,7 +295,7 @@ void kexFloor::Spawn(void)
 
     sector->flags |= SF_SPECIAL;
     
-    baseHeight = kexGame::cLocal->World()->Faces()[sector->faceEnd+2].plane.d;
+    baseHeight = sector->floorFace->plane.d;
     currentHeight = baseHeight;
     destHeight = (float)sector->floorHeight - lip;
 }

@@ -113,9 +113,9 @@ void kexPlayLoop::Draw(void)
 
                 vl->BindDrawPointers();
 
-                for(unsigned int i = 0; i < frame->spriteSet.Length(); ++i)
+                for(unsigned int i = 0; i < frame->spriteSet[0].Length(); ++i)
                 {
-                    spriteSet = &frame->spriteSet[i];
+                    spriteSet = &frame->spriteSet[0][i];
                     sprite = spriteSet->sprite;
                     info = &sprite->InfoList()[spriteSet->index];
 

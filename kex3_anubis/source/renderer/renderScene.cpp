@@ -473,7 +473,15 @@ void kexRenderScene::DrawWater(void)
 
 void kexRenderScene::DrawActorList(mapSector_t *sector)
 {
-    kexCpuVertList *vl = kexRender::cVertList;
+    kexCpuVertList      *vl = kexRender::cVertList;
+    kexVec3             org;
+    kexMatrix           scale;
+    spriteFrame_t       *frame;
+    spriteSet_t         *spriteSet;
+    kexSprite           *sprite;
+    spriteInfo_t        *info;
+    int                 rotation = 0;
+
 #if 0
     int start = sector->faceStart;
     int end = sector->faceEnd;
@@ -549,20 +557,29 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
             continue;
         }
         
-        kexVec3 org = actor->Origin();
-        kexMatrix scale(actor->Scale(), actor->Scale(), actor->Scale());
-        spriteFrame_t *frame;
-        spriteSet_t *spriteSet;
-        kexSprite *sprite;
-        spriteInfo_t *info;
+        org = actor->Origin();
+        scale.Identity(actor->Scale(), actor->Scale(), actor->Scale());
 
         frame = actor->Frame();
+        rotation = 0;
 
-        for(unsigned int i = 0; i < frame->spriteSet.Length(); ++i)
+        if(frame->flags & SFF_HASROTATIONS)
+        {
+            float an2 = actor->Yaw();
+            float an1 = kexMath::ATan2(actor->Origin().x - view->Origin().x,
+                                       actor->Origin().y - view->Origin().y);
+
+            rotation = (int)((an2 - an1 + kexMath::Deg2Rad(22.5f * 9)) / kexMath::Deg2Rad(45));
+
+            if(rotation >= 8) rotation -= 8;
+            if(rotation <  0) rotation += 8;
+        }
+
+        for(unsigned int i = 0; i < frame->spriteSet[rotation].Length(); ++i)
         {
             int c = 0xff;
 
-            spriteSet = &frame->spriteSet[i];
+            spriteSet = &frame->spriteSet[rotation][i];
             sprite = spriteSet->sprite;
             info = &sprite->InfoList()[spriteSet->index];
 

@@ -111,7 +111,7 @@ void kexPuppet::Jump(kexPlayerCmd *cmd)
     else
     {
         // jump key/button was released, check if we're actually moving first
-        if(kexMath::Fabs(velocity.z) >= PMOVE_MIN || playerFlags & PF_JUMPING)
+        if((velocity.z >= PMOVE_MIN || velocity.z <= -(PMOVE_MIN * 48)) || playerFlags & PF_JUMPING)
         {
             // once the jump key/button is released, we
             // no longer have control of vertical movement

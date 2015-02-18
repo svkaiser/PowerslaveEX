@@ -1,0 +1,14 @@
+texture "sprites/objects/debris.png"
+
+// working\debris\sprite0032.tga
+sprite 0 0 0 44 27
+
+// working\debris\sprite0033.tga
+sprite 1 44 0 36 29
+
+// working\debris\sprite0034.tga
+sprite 2 80 0 20 8
+
+// working\debris\sprite0035.tga
+sprite 3 100 0 40 34
+

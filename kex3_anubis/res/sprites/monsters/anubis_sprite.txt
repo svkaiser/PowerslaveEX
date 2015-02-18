@@ -1,0 +1,251 @@
+texture "sprites/monsters/anubis.png"
+
+// working\anubis\sprite0323.tga
+sprite 0 0 0 56 64
+
+// working\anubis\sprite0324.tga
+sprite 1 56 0 56 42
+
+// working\anubis\sprite0325.tga
+sprite 2 112 0 56 64
+
+// working\anubis\sprite0326.tga
+sprite 3 168 0 56 32
+
+// working\anubis\sprite0327.tga
+sprite 4 224 0 28 25
+
+// working\anubis\sprite0328.tga
+sprite 5 252 0 56 64
+
+// working\anubis\sprite0329.tga
+sprite 6 308 0 56 54
+
+// working\anubis\sprite0330.tga
+sprite 7 364 0 24 23
+
+// working\anubis\sprite0331.tga
+sprite 8 388 0 56 64
+
+// working\anubis\sprite0332.tga
+sprite 9 444 0 56 45
+
+// working\anubis\sprite0333.tga
+sprite 10 500 0 64 64
+
+// working\anubis\sprite0334.tga
+sprite 11 564 0 64 26
+
+// working\anubis\sprite0335.tga
+sprite 12 628 0 20 29
+
+// working\anubis\sprite0336.tga
+sprite 13 648 0 64 64
+
+// working\anubis\sprite0337.tga
+sprite 14 712 0 4 64
+
+// working\anubis\sprite0338.tga
+sprite 15 716 0 64 33
+
+// working\anubis\sprite0339.tga
+sprite 16 780 0 52 64
+
+// working\anubis\sprite0340.tga
+sprite 17 832 0 52 36
+
+// working\anubis\sprite0341.tga
+sprite 18 884 0 56 64
+
+// working\anubis\sprite0342.tga
+sprite 19 940 0 56 46
+
+// working\anubis\sprite0343.tga
+sprite 20 564 26 40 64
+
+// working\anubis\sprite0344.tga
+sprite 21 604 29 40 52
+
+// working\anubis\sprite0345.tga
+sprite 22 168 32 56 64
+
+// working\anubis\sprite0346.tga
+sprite 23 716 33 56 32
+
+// working\anubis\sprite0347.tga
+sprite 24 940 46 64 64
+
+// working\anubis\sprite0348.tga
+sprite 25 308 54 64 43
+
+// working\anubis\sprite0349.tga
+sprite 26 832 36 48 64
+
+// working\anubis\sprite0350.tga
+sprite 27 56 42 48 52
+
+// working\anubis\sprite0351.tga
+sprite 28 104 64 64 64
+
+// working\anubis\sprite0352.tga
+sprite 29 224 64 64 23
+
+// working\anubis\sprite0353.tga
+sprite 30 372 64 64 64
+
+// working\anubis\sprite0354.tga
+sprite 31 436 64 64 35
+
+// working\anubis\sprite0355.tga
+sprite 32 0 64 44 64
+
+// working\anubis\sprite0356.tga
+sprite 33 500 64 44 48
+
+// working\anubis\sprite0357.tga
+sprite 34 644 64 48 64
+
+// working\anubis\sprite0358.tga
+sprite 35 772 64 48 32
+
+// working\anubis\sprite0359.tga
+sprite 36 692 65 64 64
+
+// working\anubis\sprite0360.tga
+sprite 37 224 87 64 52
+
+// working\anubis\sprite0361.tga
+sprite 38 880 64 56 64
+
+// working\anubis\sprite0362.tga
+sprite 39 544 90 56 33
+
+// working\anubis\sprite0363.tga
+sprite 40 44 94 56 64
+
+// working\anubis\sprite0364.tga
+sprite 41 168 96 56 41
+
+// working\anubis\sprite0365.tga
+sprite 42 756 96 52 64
+
+// working\anubis\sprite0366.tga
+sprite 43 288 97 52 45
+
+// working\anubis\sprite0367.tga
+sprite 44 436 99 64 64
+
+// working\anubis\sprite0368.tga
+sprite 45 808 100 64 40
+
+// working\anubis\sprite0369.tga
+sprite 46 936 110 64 64
+
+// working\anubis\sprite0370.tga
+sprite 47 1004 0 8 64
+
+// working\anubis\sprite0371.tga
+sprite 48 500 123 64 45
+
+// working\anubis\sprite0372.tga
+sprite 49 564 123 48 64
+
+// working\anubis\sprite0373.tga
+sprite 50 100 128 48 43
+
+// working\anubis\sprite0374.tga
+sprite 51 340 128 56 64
+
+// working\anubis\sprite0375.tga
+sprite 52 612 128 56 45
+
+// working\anubis\sprite0376.tga
+sprite 53 872 128 48 64
+
+// working\anubis\sprite0377.tga
+sprite 54 668 129 48 46
+
+// working\anubis\sprite0378.tga
+sprite 55 148 137 64 64
+
+// working\anubis\sprite0379.tga
+sprite 56 212 139 64 34
+
+// working\anubis\sprite0380.tga
+sprite 57 808 140 48 64
+
+// working\anubis\sprite0381.tga
+sprite 58 276 142 48 36
+
+// working\anubis\sprite0382.tga
+sprite 59 0 158 64 64
+
+// working\anubis\sprite0383.tga
+sprite 60 1012 0 4 64
+
+// working\anubis\sprite0384.tga
+sprite 61 716 160 64 41
+
+// working\anubis\sprite0385.tga
+sprite 62 396 163 44 64
+
+// working\anubis\sprite0386.tga
+sprite 63 440 163 44 46
+
+// working\anubis\sprite0387.tga
+sprite 64 64 158 28 64
+
+// working\anubis\sprite0388.tga
+sprite 65 780 160 28 48
+
+// working\anubis\sprite0389.tga
+sprite 66 484 168 64 64
+
+// working\anubis\sprite0390.tga
+sprite 67 1004 64 16 64
+
+// working\anubis\sprite0391.tga
+sprite 68 212 173 64 43
+
+// working\anubis\sprite0392.tga
+sprite 69 92 171 48 64
+
+// working\anubis\sprite0393.tga
+sprite 70 612 173 48 53
+
+// working\anubis\sprite0394.tga
+sprite 71 920 174 64 64
+
+// working\anubis\sprite0395.tga
+sprite 72 276 178 64 43
+
+// working\anubis\sprite0396.tga
+sprite 73 548 187 60 64
+
+// working\anubis\sprite0397.tga
+sprite 74 856 192 60 45
+
+// working\anubis\sprite0398.tga
+sprite 75 140 201 64 64
+
+// working\anubis\sprite0399.tga
+sprite 76 1020 0 4 64
+
+// working\anubis\sprite0400.tga
+sprite 77 660 201 64 39
+
+// working\anubis\sprite0401.tga
+sprite 78 724 208 60 64
+
+// working\anubis\sprite0402.tga
+sprite 79 784 208 60 40
+
+// working\anubis\sprite0403.tga
+sprite 80 340 192 52 64
+
+// working\anubis\sprite0404.tga
+sprite 81 204 216 52 40
+
+// working\anubis\sprite0405.tga
+sprite 82 1000 128 16 25
+

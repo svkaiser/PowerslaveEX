@@ -10,3 +10,17 @@ Proj_AmunBomb 40
     fullbright              1
     moveable                1
 }
+
+Proj_Anubis 18
+{
+    classname               "kexProjectile"
+    radius                  36
+    height                  32
+    stepHeight              36
+    scale                   1.0
+    spawnAnim               "projectiles/anubis_fireball_loop"
+    deathAnim               "projectiles/anubis_fireball_explode"
+    fullbright              1
+    moveable                1
+    damage                  20
+}

@@ -1,0 +1,39 @@
+debris
+{
+    // frames:    4
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/debris", 3,    -17,  -13,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/debris", 0,    -17,  -13,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/debris", 1,    -17,  -13,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/debris", 2,    -17,  -13,    0 }
+        }
+    }
+}

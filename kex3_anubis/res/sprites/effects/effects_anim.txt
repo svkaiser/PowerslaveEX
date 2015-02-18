@@ -840,7 +840,6 @@ magicPuff
 {
     frame
     {
-        action A_RandomVaseItem()
         sprites
         {
             { "effects/impacts", 7,    -19,  -14,    0 }
