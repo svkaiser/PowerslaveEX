@@ -565,11 +565,11 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
 
         if(frame->flags & SFF_HASROTATIONS)
         {
-            float an2 = actor->Yaw();
-            float an1 = kexMath::ATan2(actor->Origin().x - view->Origin().x,
-                                       actor->Origin().y - view->Origin().y);
-
-            rotation = (int)((an2 - an1 + kexMath::Deg2Rad(22.5f * 9)) / kexMath::Deg2Rad(45));
+            float an = actor->Yaw() - kexMath::ATan2(actor->Origin().x - view->Origin().x,
+                                                     actor->Origin().y - view->Origin().y);
+            
+            kexAngle::Clamp360(an);
+            rotation = (int)((an + ((45 / 2) * 9)) / 45);
 
             if(rotation >= 8) rotation -= 8;
             if(rotation <  0) rotation += 8;

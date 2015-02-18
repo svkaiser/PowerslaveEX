@@ -59,6 +59,16 @@ void kexAngle::Clamp(float &f)
 }
 
 //
+// kexAngle::Clamp360
+//
+
+void kexAngle::Clamp360(float &f)
+{
+    Clamp(f);
+    f = (f > 0 ? f : (FULLCIRCLE + f)) * 360 / FULLCIRCLE;
+}
+
+//
 // kexAngle::operator+
 //
 

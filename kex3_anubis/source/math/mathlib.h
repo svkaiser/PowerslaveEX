@@ -420,6 +420,7 @@ public:
 
     void                    Clamp(void);
     static void             Clamp(float &f);
+    static void             Clamp360(float &f);
     float                   Diff(const float f);
     float                   Diff(const kexAngle &ang);
 
