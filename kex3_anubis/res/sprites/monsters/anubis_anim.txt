@@ -6140,7 +6140,7 @@ anubis_pain
                 { "monsters/anubis", 41,    -27,  -42,    0 }
             }
         }
-
+        
+        goto "monsters/anubis_chase"
     }
-
 }

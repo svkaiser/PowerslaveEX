@@ -1177,7 +1177,8 @@ bool kexCModel::MoveActor(kexActor *actor)
 // kexCModel::Trace
 //
 
-bool kexCModel::Trace(kexActor *actor, mapSector_t *sector, const kexVec3 &start_pos, const kexVec3 &end_pos)
+bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
+                      const kexVec3 &start_pos, const kexVec3 &end_pos, bool bTestActors)
 {
     unsigned int sectorCount;
 
@@ -1205,8 +1206,11 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector, const kexVec3 &start
     sectorList.Set(sector);
     sectorCount = 0;
 
-    // check for actors in initial sector
-    TraceActorsInSector(sector);
+    if(bTestActors)
+    {
+        // check for actors in initial sector
+        TraceActorsInSector(sector);
+    }
 
     do
     {
@@ -1224,8 +1228,11 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector, const kexVec3 &start
 
             if(face->flags & FF_PORTAL && face->sector >= 0)
             {
-                // test actors in next sector
-                TraceActorsInSector(&sectors[face->sector]);
+                if(bTestActors)
+                {
+                    // test actors in next sector
+                    TraceActorsInSector(&sectors[face->sector]);
+                }
 
                 if(TraceFacePlane(face, 0, 0, true))
                 {

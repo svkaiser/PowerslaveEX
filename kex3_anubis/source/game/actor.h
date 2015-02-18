@@ -60,6 +60,7 @@ public:
     virtual void                    Tick(void);
     virtual void                    OnRemove(void);
     virtual void                    OnTouch(kexActor *instigator);
+    virtual void                    OnDamage(kexActor *instigator);
 
     void                            Spawn(void);
     bool                            FindSector(const kexVec3 &pos);
@@ -99,8 +100,8 @@ public:
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
 protected:
+    virtual void                    UpdateMovement(void);
     void                            UpdateSprite(void);
-    void                            UpdateMovement(void);
 
     kexDict                         *definition;
     kexSDNodeRef<kexActor>          areaLink;
@@ -131,5 +132,6 @@ END_KEX_CLASS();
 
 #include "pickup.h"
 #include "projectile.h"
+#include "ai.h"
 
 #endif

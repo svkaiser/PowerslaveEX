@@ -1,12 +1,13 @@
 AI_Anubis 1
 {
-    classname               "kexActor"
+    classname               "kexAI"
     radius                  48
     height                  192
     stepHeight              24
     scale                   1.5
     health                  100
     spawnAnim               "monsters/anubis_idle"
+    painAnim                "monsters/anubis_pain"
     solid                   1
     shootable               1
 }

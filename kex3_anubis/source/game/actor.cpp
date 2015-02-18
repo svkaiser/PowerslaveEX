@@ -308,6 +308,14 @@ void kexActor::UpdateSprite(void)
 }
 
 //
+// kexActor::OnDamage
+//
+
+void kexActor::OnDamage(kexActor *instigator)
+{
+}
+
+//
 // kexActor::InflictDamage
 //
 
@@ -319,6 +327,7 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
     if(health > 0)
     {
         health -= amount;
+        OnDamage(inflictor);
 
         if(health <= 0)
         {
