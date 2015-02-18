@@ -7,7 +7,9 @@ AI_Anubis 1
     scale                   1.5
     health                  100
     spawnAnim               "monsters/anubis_idle"
+    chaseAnim               "monsters/anubis_chase"
     painAnim                "monsters/anubis_pain"
     solid                   1
     shootable               1
+    moveable                1
 }
