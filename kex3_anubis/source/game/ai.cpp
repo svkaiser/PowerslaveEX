@@ -225,8 +225,9 @@ void kexAI::ChaseTarget(void)
     {
         if(kexGame::cLocal->CModel()->Trace(this, sector, start, start + (forward * (radius * 1.25f))))
         {
-            yaw += (kexMath::Deg2Rad(135) + (kexRand::Float() * kexMath::Deg2Rad(90)));
-            timeBeforeTurning = 8 + kexRand::Max(16);
+            aiFlags |= AIF_TURNING;
+            desiredYaw = yaw + (kexMath::Deg2Rad(135) + (kexRand::Float() * kexMath::Deg2Rad(90)));
+            turnAmount = desiredYaw.Diff(yaw) / 8;
         }
     }
 }
