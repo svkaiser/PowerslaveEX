@@ -209,7 +209,7 @@ void kexAI::ChaseTarget(void)
     else
     {
         yaw += turnAmount;
-        if(kexMath::Fabs(yaw.Diff(desiredYaw)) < 0.001f)
+        if(kexMath::Fabs(yaw.Diff(desiredYaw)) < kexMath::Deg2Rad(10.0f))
         {
             aiFlags &= ~AIF_TURNING;
             timeBeforeTurning = 8 + kexRand::Max(8);
@@ -218,6 +218,17 @@ void kexAI::ChaseTarget(void)
     
     kexVec3::ToAxis(&forward, 0, 0, yaw, 0, 0);
     movement = forward * 8;
+    
+    kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
+    
+    if(!(aiFlags & AIF_TURNING))
+    {
+        if(kexGame::cLocal->CModel()->Trace(this, sector, start, start + (forward * (radius * 1.25f))))
+        {
+            yaw += (kexMath::Deg2Rad(135) + (kexRand::Float() * kexMath::Deg2Rad(90)));
+            timeBeforeTurning = 8 + kexRand::Max(16);
+        }
+    }
 }
 
 //
