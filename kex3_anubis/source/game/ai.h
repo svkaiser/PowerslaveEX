@@ -20,8 +20,14 @@
 typedef enum
 {
     AIS_IDLE    = 0,
-    AIS_CHASE
+    AIS_CHASE,
+    AIS_PAIN
 } aiState_t;
+
+typedef enum
+{
+    AIF_TURNING = BIT(0)
+} aiFlags_t;
 
 //-----------------------------------------------------------------------------
 //
@@ -40,7 +46,11 @@ public:
     void                            Spawn(void);
 
 private:
+    void                            StartChasing(void);
+    void                            StartPain(void);
+    void                            InPain(void);
     void                            LookForTarget(void);
+    void                            ChaseTarget(void);
     bool                            CheckTargetSight(kexActor *actor);
 
     spriteAnim_t                    *chaseAnim;
@@ -48,6 +58,12 @@ private:
     spriteAnim_t                    *meleeAnim;
     spriteAnim_t                    *attackAnim;
     aiState_t                       state;
+    unsigned int                    aiFlags;
+    float                           thinkTime;
+    float                           curThinkTime;
+    int                             timeBeforeTurning;
+    kexAngle                        desiredYaw;
+    float                           turnAmount;
 END_KEX_CLASS();
 
 #endif
