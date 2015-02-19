@@ -18,12 +18,10 @@
 #include "kexlib.h"
 #include "game.h"
 
-#define PMOVE_FRICTION          0.9375f
 #define PMOVE_MIN               0.125f
 #define PMOVE_SPEED             0.976f
 #define PMOVE_WATER_SPEED       0.48828125f
 #define PMOVE_SPEED_JUMP        10.25f
-#define PMOVE_SPEED_FALL        0.75f
 #define PMOVE_MAX_JUMPTICKS     13
 
 const int16_t kexPlayer::maxHealth = 200;
@@ -145,8 +143,8 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     kexVec3::ToAxis(&forward, NULL, &right, yaw, 0, 0);
 
     // apply friction
-    velocity.x *= PMOVE_FRICTION;
-    velocity.y *= PMOVE_FRICTION;
+    velocity.x *= friction;
+    velocity.y *= friction;
 
     // handle jumping
     Jump(cmd);
@@ -154,7 +152,7 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     // check for drop-offs
     if(origin.z > floorHeight)
     {
-        velocity.z -= PMOVE_SPEED_FALL;
+        velocity.z -= gravity;
     }
 
     if(kexMath::Fabs(velocity.x) < PMOVE_MIN)
@@ -268,7 +266,7 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
 
     kexVec3::ToAxis(&forward, NULL, &right, yaw, pitch, 0);
 
-    velocity *= PMOVE_FRICTION;
+    velocity *= friction;
 
     if(kexMath::Fabs(velocity.x) < PMOVE_MIN)
     {
@@ -348,7 +346,7 @@ void kexPuppet::FlyMove(kexPlayerCmd *cmd)
     kexMath::Clamp(pitch.an, kexMath::Deg2Rad(-90), kexMath::Deg2Rad(90));
     kexVec3::ToAxis(&forward, NULL, &right, yaw, pitch, 0);
 
-    velocity *= PMOVE_FRICTION;
+    velocity *= friction;
 
     if(kexMath::Fabs(velocity.x) < PMOVE_MIN)
     {
@@ -442,6 +440,7 @@ void kexPuppet::Spawn(void)
     height      = 160;
     stepHeight  = 48;
     health      = 200;
+    friction    = 0.9375f;
     flags       = AF_SOLID;
 }
 

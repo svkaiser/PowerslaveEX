@@ -18,9 +18,7 @@
 #include "kexlib.h"
 #include "game.h"
 
-#define AMOVE_FRICTION          0.5f
-#define AMOVE_MIN               0.125f
-#define AMOVE_SPEED_FALL        0.75f
+#define AMOVE_MIN   0.125f
 
 DECLARE_KEX_CLASS(kexActor, kexGameObject)
 
@@ -49,6 +47,9 @@ kexActor::kexActor(void)
     this->sectorLink.SetData(this);
     this->areaLink.link.SetData(this);
     this->areaLink.node = NULL;
+    this->friction = 0.5f;
+    this->gravity = 0.75f;
+    this->floorOffset = 0;
 }
 
 //
@@ -124,6 +125,9 @@ void kexActor::Spawn(void)
         definition->GetFloat("height", height, 32);
         definition->GetFloat("stepHeight", stepHeight, 16);
         definition->GetFloat("animSpeed", animSpeed, 0.5f);
+        definition->GetFloat("friction", friction, 0.5f);
+        definition->GetFloat("gravity", gravity, 0.75f);
+        definition->GetFloat("floorOffset", floorOffset, 0);
         definition->GetInt("health", health, 100);
 
         if(definition->GetBool("noAdvanceFrames"))  flags |= AF_NOADVANCEFRAMES;
@@ -353,13 +357,13 @@ void kexActor::UpdateVelocity(void)
     // check for drop-offs
     if(origin.z > floorHeight)
     {
-        velocity.z -= AMOVE_SPEED_FALL;
+        velocity.z -= gravity;
     }
     else
     {
         // apply friction
-        velocity.x *= AMOVE_FRICTION;
-        velocity.y *= AMOVE_FRICTION;
+        velocity.x *= friction;
+        velocity.y *= friction;
     }
     
     if(kexMath::Fabs(velocity.x) < AMOVE_MIN)
@@ -379,6 +383,8 @@ void kexActor::UpdateVelocity(void)
 
 void kexActor::CheckFloorAndCeilings(void)
 {
+    float floorz = floorHeight + floorOffset;
+    
     // bump ceiling
     if((origin.z + height) + velocity.z >= ceilingHeight)
     {
@@ -391,17 +397,17 @@ void kexActor::CheckFloorAndCeilings(void)
     }
     
     // bump floor
-    if(origin.z + velocity.z <= floorHeight)
+    if(origin.z + velocity.z <= floorz)
     {
-        origin.z = floorHeight;
+        origin.z = floorz;
         
-        if(flags & AF_BOUNCY && (kexMath::Fabs(velocity.z) * 0.75f) > AMOVE_SPEED_FALL)
+        if(flags & AF_BOUNCY && (kexMath::Fabs(velocity.z) * 0.75f) > gravity)
         {
             int r = kex::cSession->GetTime() % 3;
             
-            velocity.z = (floorHeight - (origin.z + velocity.z)) * (1.2f - AMOVE_SPEED_FALL);
-            velocity.x *= AMOVE_FRICTION;
-            velocity.y *= AMOVE_FRICTION;
+            velocity.z = (floorz - (origin.z + velocity.z)) * (1.2f - gravity);
+            velocity.x *= friction;
+            velocity.y *= friction;
             
             if(bounceSounds[r].Length() > 0)
             {

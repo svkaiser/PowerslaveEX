@@ -64,6 +64,9 @@ Item_Health 40
     spawnAnim               "items/pickup_orb_health_idle"
     fullbright              1
     touchable               1
+    moveable                1
+    gravity                 0.25
+    floorOffset             48
 }
 
 Item_Ammo 41
@@ -76,9 +79,12 @@ Item_Ammo 41
     spawnAnim               "items/pickup_orb_ammo_idle"
     pickupSound             "sounds/ammo.wav"
     fullbright              1
+    moveable                1
+    gravity                 0.25
     touchable               1
     divisor                 20
     multiplier              4
+    floorOffset             48
 }
 
 Item_Weapon_Pistol 42

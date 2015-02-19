@@ -87,7 +87,10 @@ public:
     float                           &Height(void) { return height; }
     float                           &StepHeight(void) { return stepHeight; }
     float                           &Scale(void) { return scale; }
+    float                           &Friction(void) { return friction; }
+    float                           &Gravity(void) { return gravity; }
     unsigned int                    &Flags(void) { return flags; }
+    float                           &FloorOffset(void) { return floorOffset; }
     float                           &FloorHeight(void) { return floorHeight; }
     float                           &CeilingHeight(void) { return ceilingHeight; }
     spriteAnim_t                    *Anim(void) { return anim; }
@@ -111,6 +114,8 @@ protected:
     float                           height;
     float                           scale;
     float                           stepHeight;
+    float                           friction;
+    float                           gravity;
     int16_t                         health;
     kexVec3                         velocity;
     kexVec3                         movement;
@@ -127,6 +132,7 @@ protected:
     int                             flashTicks;
     int                             type;
     unsigned int                    flags;
+    float                           floorOffset;
     float                           floorHeight;
     float                           ceilingHeight;
     kexStr                          bounceSounds[3];
