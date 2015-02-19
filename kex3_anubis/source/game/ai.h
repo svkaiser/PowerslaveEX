@@ -22,7 +22,8 @@ typedef enum
     AIS_IDLE    = 0,
     AIS_CHASE,
     AIS_PAIN,
-    AIS_MELEE
+    AIS_MELEE,
+    AIS_RANGE
 } aiState_t;
 
 typedef enum
@@ -45,12 +46,14 @@ public:
     virtual void                    OnDamage(kexActor *instigator);
     virtual void                    UpdateMovement(void);
     void                            Spawn(void);
+    void                            FaceTarget(kexActor *targ = NULL);
 
 private:
+    void                            ChangeStateFromAnim(void);
     bool                            CheckMeleeRange(void);
+    bool                            CheckRangeAttack(void);
     bool                            CheckDirection(const kexVec3 &dir);
     void                            ChangeDirection(void);
-    void                            DoMelee(void);
     void                            StartChasing(void);
     void                            StartPain(void);
     void                            InPain(void);

@@ -255,7 +255,15 @@ void kexActor::ChangeAnim(spriteAnim_t *changeAnim)
 
 void kexActor::ChangeAnim(const char *animName)
 {
-    ChangeAnim(kexGame::cLocal->SpriteAnimManager()->Get(animName));
+    spriteAnim_t *sprAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
+    
+    if(sprAnim == NULL)
+    {
+        kex::cSystem->Warning("kexActor::ChangeAnim - %s not found\n", animName);
+        return;
+    }
+    
+    ChangeAnim(sprAnim);
 }
 
 //

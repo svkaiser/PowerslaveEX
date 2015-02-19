@@ -1862,6 +1862,7 @@ anubis_melee
     frame
     {
         // ##004    0    0
+        action A_CheckMelee("monsters/anubis_melee_miss", 0)
         rotation_N
         {
             sprites
@@ -2874,6 +2875,7 @@ anubis_melee
     frame
     {
         // ##017    0    0
+        action A_CheckMelee("monsters/anubis_melee_miss", 0)
         rotation_N
         {
             sprites
@@ -5280,6 +5282,7 @@ anubis_attack_range
     frame
     {
         // ##024    0    0
+        goto "monsters/anubis_chase"
         rotation_N
         {
             sprites
@@ -6139,6 +6142,173 @@ anubis_pain
         }
         
         goto "monsters/anubis_chase"
+    }
+}
+
+anubis_melee_miss
+{   
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/anubis", 32,    -24, -113,    1 }
+                { "monsters/anubis", 33,    -24,  -49,    1 }
+            }
+        }
+        
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/anubis", 59,    -34, -106,    1 }
+                { "monsters/anubis", 60,    -38, -106,    1 }
+                { "monsters/anubis", 61,    -34,  -42,    1 }
+            }
+        }
+        
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/anubis", 75,    -25, -104,    1 }
+                { "monsters/anubis", 76,    -29, -104,    1 }
+                { "monsters/anubis", 77,    -25,  -40,    1 }
+            }
+        }
+        
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/anubis", 13,    -25,  -98,    1 }
+                { "monsters/anubis", 14,    -29,  -98,    1 }
+                { "monsters/anubis", 15,    -25,  -34,    1 }
+            }
+        }
+        
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/anubis", 42,    -27, -110,    0 }
+                { "monsters/anubis", 43,    -27,  -46,    0 }
+            }
+        }
+        
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/anubis", 13,    -34,  -98,    0 }
+                { "monsters/anubis", 14,     30,  -98,    0 }
+                { "monsters/anubis", 15,    -34,  -34,    0 }
+            }
+        }
+        
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/anubis", 75,    -33, -104,    0 }
+                { "monsters/anubis", 76,     31, -104,    0 }
+                { "monsters/anubis", 77,    -33,  -40,    0 }
+            }
+        }
+        
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/anubis", 44,    -31, -105,    0 }
+                { "monsters/anubis", 45,    -31,  -41,    0 }
+            }
+        }
+    }
+    
+    frame
+    {
+        delay 8
+        goto "monsters/anubis_chase"
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/anubis", 32,    -24, -113,    1 }
+                { "monsters/anubis", 33,    -24,  -49,    1 }
+            }
+        }
+        
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/anubis", 59,    -34, -106,    1 }
+                { "monsters/anubis", 60,    -38, -106,    1 }
+                { "monsters/anubis", 61,    -34,  -42,    1 }
+            }
+        }
+        
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/anubis", 75,    -25, -104,    1 }
+                { "monsters/anubis", 76,    -29, -104,    1 }
+                { "monsters/anubis", 77,    -25,  -40,    1 }
+            }
+        }
+        
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/anubis", 13,    -25,  -98,    1 }
+                { "monsters/anubis", 14,    -29,  -98,    1 }
+                { "monsters/anubis", 15,    -25,  -34,    1 }
+            }
+        }
+        
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/anubis", 42,    -27, -110,    0 }
+                { "monsters/anubis", 43,    -27,  -46,    0 }
+            }
+        }
+        
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/anubis", 13,    -34,  -98,    0 }
+                { "monsters/anubis", 14,     30,  -98,    0 }
+                { "monsters/anubis", 15,    -34,  -34,    0 }
+            }
+        }
+        
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/anubis", 75,    -33, -104,    0 }
+                { "monsters/anubis", 76,     31, -104,    0 }
+                { "monsters/anubis", 77,    -33,  -40,    0 }
+            }
+        }
+        
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/anubis", 44,    -31, -105,    0 }
+                { "monsters/anubis", 45,    -31,  -41,    0 }
+            }
+        }
     }
 }
 

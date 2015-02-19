@@ -10,6 +10,7 @@ AI_Anubis 1
     chaseAnim               "monsters/anubis_chase"
     painAnim                "monsters/anubis_pain"
     meleeAnim               "monsters/anubis_melee"
+    rangeAttackAnim         "monsters/anubis_attack_range"
     deathAnim               "monsters/anubis_death"
     solid                   1
     shootable               1

@@ -63,6 +63,7 @@ void kexAI::Tick(void)
         return;
     }
     
+    ChangeStateFromAnim();
     curThinkTime -= thinkTime;
     
     if(curThinkTime <= 0)
@@ -82,7 +83,10 @@ void kexAI::Tick(void)
             break;
 
         case AIS_MELEE:
-            DoMelee();
+            FaceTarget();
+            break;
+                
+        default:
             break;
         }
         
@@ -117,6 +121,18 @@ bool kexAI::CheckTargetSight(kexActor *actor)
 }
 
 //
+// kexAI::ChangeStateFromAnim
+//
+
+void kexAI::ChangeStateFromAnim(void)
+{
+         if(anim == chaseAnim && state != AIS_CHASE)    state = AIS_CHASE;
+    else if(anim == spawnAnim && state != AIS_IDLE)     state = AIS_IDLE;
+    else if(anim == meleeAnim && state != AIS_MELEE)    state = AIS_MELEE;
+    else if(anim == painAnim  && state != AIS_PAIN)     state = AIS_PAIN;
+}
+
+//
 // kexAI::StartChasing
 //
 
@@ -137,7 +153,7 @@ void kexAI::StartChasing(void)
 
 void kexAI::StartPain(void)
 {
-    if(painAnim)
+    if(painAnim && anim != painAnim)
     {
         ChangeAnim(painAnim);
     }
@@ -158,21 +174,28 @@ void kexAI::InPain(void)
 }
 
 //
-// kexAI::DoMelee
+// kexAI::FaceTarget
 //
 
-void kexAI::DoMelee(void)
+void kexAI::FaceTarget(kexActor *targ)
 {
-    if(frameID >= (int)anim->NumFrames()-1)
+    kexVec3 org;
+    
+    if(!targ)
     {
-        if(!CheckMeleeRange())
+        if(!target)
         {
-            StartChasing();
             return;
         }
+        
+        org = target->Origin();
     }
-
-    yaw = kexMath::ATan2(target->Origin().x - origin.x, target->Origin().y - origin.y);
+    else
+    {
+        org = targ->Origin();
+    }
+    
+    yaw = kexMath::ATan2(org.x - origin.x, org.y - origin.y);
 }
 
 //
@@ -204,7 +227,7 @@ bool kexAI::CheckMeleeRange(void)
     float r;
     kexActor *targ;
 
-    if(!target)
+    if(!target || !meleeAnim)
     {
         return false;
     }
@@ -221,6 +244,26 @@ bool kexAI::CheckMeleeRange(void)
 }
 
 //
+// kexAI::CheckRangeAttack
+//
+
+bool kexAI::CheckRangeAttack(void)
+{
+    kexActor *targ = static_cast<kexActor*>(target);
+    int dist;
+    
+    if(!CheckTargetSight(targ) || timeBeforeTurning > 1)
+    {
+        return false;
+    }
+    
+    dist = (int)((origin.Distance(targ->Origin()) / 1500) * 256);
+    kexMath::Clamp(dist, 100 + kexRand::Max(50), 200);
+
+    return (kexRand::Max(50 + kexRand::Max(200)) > dist);
+}
+
+//
 // kexAI::CheckDirection
 //
 
@@ -230,7 +273,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
 
     start = origin + kexVec3(0, 0, stepHeight);
     
-    if(kexGame::cLocal->CModel()->Trace(this, sector, start, start + (dir * (radius * 1.5f))))
+    if(kexGame::cLocal->CModel()->Trace(this, sector, start, start + (dir * (radius * 2.0f))))
     {
         return (kexGame::cLocal->CModel()->ContactActor() == target);
     }
@@ -307,12 +350,22 @@ void kexAI::ChaseTarget(void)
         }
     }
 
-    if(CheckMeleeRange() && meleeAnim)
+    if(CheckMeleeRange())
     {
         aiFlags &= ~AIF_TURNING;
-        yaw = kexMath::ATan2(target->Origin().x - origin.x, target->Origin().y - origin.y);
+        FaceTarget();
         ChangeAnim(meleeAnim);
         state = AIS_MELEE;
+        return;
+    }
+    
+    if(CheckRangeAttack())
+    {
+        aiFlags &= ~AIF_TURNING;
+        FaceTarget();
+        ChangeAnim(attackAnim);
+        state = AIS_RANGE;
+        timeBeforeTurning = kexRand::Max(8) + kexRand::Max(8);
         return;
     }
     
@@ -366,6 +419,11 @@ void kexAI::Spawn(void)
         if(definition->GetString("meleeAnim", animName))
         {
             meleeAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
+        }
+        
+        if(definition->GetString("rangeAttackAnim", animName))
+        {
+            attackAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
         }
     }
 }

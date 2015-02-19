@@ -426,6 +426,36 @@ DECLARE_KEX_ACTION(kexActionPlaySound)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionCheckMelee
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionCheckMelee)
+{
+    char *gotoFrame = this->args[0].s;
+    float extra     = this->args[1].f;
+    float r;
+    kexActor *targ;
+    kexAI *ai;
+    
+    if(!actor->InstanceOf(&kexAI::info))
+    {
+        return;
+    }
+    
+    ai = static_cast<kexAI*>(actor);
+    
+    targ = static_cast<kexActor*>(ai->Target());
+    r = ((ai->Radius() * 0.6f) + targ->Radius()) + extra;
+    
+    if(ai->Origin().DistanceSq(targ->Origin()) > (r * r))
+    {
+        ai->ChangeAnim(gotoFrame);
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionDefManager
 //
 //-----------------------------------------------------------------------------
@@ -572,4 +602,5 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_RadialBlast", kexActionRadialBlast::info.Create, AAT_FLOAT, AAT_INTEGER);
     RegisterAction("A_ConsumeAmmo", kexActionConsumeAmmo::info.Create, AAT_INTEGER);
     RegisterAction("A_PlayLocalSound", kexActionPlaySound::info.Create, AAT_STRING);
+    RegisterAction("A_CheckMelee", kexActionCheckMelee::info.Create, AAT_STRING, AAT_FLOAT);
 }
