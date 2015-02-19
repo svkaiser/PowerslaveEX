@@ -599,6 +599,7 @@ anubis_fireball_explode
     frame
     {
         // ##013    0    0
+        action A_Destroy()
         sprites
         {
             { "projectiles/anubis_fireball", 17,    -44,  -57,    0 }

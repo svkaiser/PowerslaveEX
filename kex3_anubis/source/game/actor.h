@@ -58,6 +58,7 @@ public:
     ~kexActor(void);
 
     virtual void                    Tick(void);
+    virtual void                    Remove(void);
     virtual void                    OnRemove(void);
     virtual void                    OnTouch(kexActor *instigator);
     virtual void                    OnDamage(kexActor *instigator);

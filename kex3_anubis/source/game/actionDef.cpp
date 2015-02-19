@@ -351,6 +351,12 @@ DECLARE_KEX_ACTION(kexActionTossActor)
 
 DECLARE_KEX_ACTION(kexActionDestroy)
 {
+    if(actor->Removing())
+    {
+        kex::cSystem->Warning("A_Destroy: Actor is already being removed\n");
+        return;
+    }
+    
     actor->Remove();
 }
 
@@ -426,6 +432,30 @@ DECLARE_KEX_ACTION(kexActionPlaySound)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionFaceTarget
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionFaceTarget)
+{
+    kexActor *targ;
+    float x, y;
+    
+    if(!actor->Target())
+    {
+        return;
+    }
+    
+    targ = static_cast<kexActor*>(actor->Target());
+    
+    x = targ->Origin().x - actor->Origin().x;
+    y = targ->Origin().y - actor->Origin().y;
+    
+    actor->Yaw() = kexMath::ATan2(x, y);
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionCheckMelee
 //
 //-----------------------------------------------------------------------------
@@ -452,6 +482,60 @@ DECLARE_KEX_ACTION(kexActionCheckMelee)
     {
         ai->ChangeAnim(gotoFrame);
     }
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionSpawnProjectile
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionSpawnProjectile)
+{
+    kexGameLocal *game  = kexGame::cLocal;
+    char *defName       = this->args[0].s;
+    float yaw           = this->args[1].f + actor->Yaw();
+    float pitch         = this->args[2].f + actor->Pitch();
+    float dist          = this->args[3].f + actor->Radius();
+    float offset        = this->args[4].f;
+    float speed         = this->args[5].f;
+    kexVec3 forward;
+    kexActor *proj, *targ;
+    float x, y, z;
+    
+    kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
+    
+    x = actor->Origin().x + (forward.x * dist);
+    y = actor->Origin().y + (forward.y * dist);
+    z = actor->Origin().z + (forward.z * dist);
+    
+    proj = game->SpawnActor(defName, x, y, z + offset, actor->Yaw(),
+                            actor->Sector() - game->World()->Sectors());
+    
+    kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), 0, 0);
+    
+    proj->Velocity() = (forward * speed);
+    proj->SetTarget(actor);
+    
+    if(!actor->Target() || speed == 0)
+    {
+        return;
+    }
+    
+    targ = static_cast<kexActor*>(actor->Target());
+    
+    x = targ->Origin().x - proj->Origin().x;
+    y = targ->Origin().y - proj->Origin().y;
+    
+    dist = kexMath::Sqrt(x * x + y * y) / speed;
+    
+    if(dist < 1)
+    {
+        dist = 1;
+    }
+    
+    offset = (targ->Origin().z + (targ->Height() * 0.5f));
+    proj->Velocity().z = (offset - proj->Origin().z) / dist;
 }
 
 //-----------------------------------------------------------------------------
@@ -602,5 +686,8 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_RadialBlast", kexActionRadialBlast::info.Create, AAT_FLOAT, AAT_INTEGER);
     RegisterAction("A_ConsumeAmmo", kexActionConsumeAmmo::info.Create, AAT_INTEGER);
     RegisterAction("A_PlayLocalSound", kexActionPlaySound::info.Create, AAT_STRING);
+    RegisterAction("A_FaceTarget", kexActionFaceTarget::info.Create);
     RegisterAction("A_CheckMelee", kexActionCheckMelee::info.Create, AAT_STRING, AAT_FLOAT);
+    RegisterAction("A_FireProjectile", kexActionSpawnProjectile::info.Create,
+                   AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
 }

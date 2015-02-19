@@ -64,6 +64,7 @@ void kexProjectile::OnImpact(kexActor *contactActor)
     }
 
     ChangeAnim(this->deathAnim);
+    flags &= ~(AF_MOVEABLE|AF_SOLID);
 }
 
 //

@@ -22,5 +22,6 @@ Proj_Anubis 18
     deathAnim               "projectiles/anubis_fireball_explode"
     fullbright              1
     moveable                1
+    gravity                 0
     damage                  20
 }

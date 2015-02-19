@@ -97,6 +97,19 @@ void kexActor::OnTouch(kexActor *instigator)
 }
 
 //
+// kexActor::Remove
+//
+
+void kexActor::Remove(void)
+{
+    animSpeed = 0;
+    flags &= ~(AF_SOLID|AF_SHOOTABLE|AF_MOVEABLE|AF_TOUCHABLE|AF_BOUNCY);
+    flags |= AF_NOADVANCEFRAMES;
+    
+    kexGameObject::Remove();
+}
+
+//
 // kexActor::OnRemove
 //
 
@@ -243,6 +256,11 @@ void kexActor::ChangeAnim(spriteAnim_t *changeAnim)
         return;
     }
     
+    if(anim == changeAnim)
+    {
+        return;
+    }
+    
     anim = changeAnim;
     frameID = 0;
     ticks = 0;
@@ -335,14 +353,20 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
 {
     flags |= AF_FLASH;
     flashTicks = 1;
+    
+    if(anim == deathAnim)
+        return;
 
     if(health > 0)
     {
+        int oldHealth = health;
+        
         health -= amount;
         OnDamage(inflictor);
 
-        if(health <= 0)
+        if(health <= 0 && oldHealth > 0)
         {
+            flags &= AF_SHOOTABLE;
             ChangeAnim(deathAnim);
         }
     }

@@ -23,7 +23,8 @@ typedef enum
     AIS_CHASE,
     AIS_PAIN,
     AIS_MELEE,
-    AIS_RANGE
+    AIS_RANGE,
+    AIS_DEAD
 } aiState_t;
 
 typedef enum
@@ -47,6 +48,8 @@ public:
     virtual void                    UpdateMovement(void);
     void                            Spawn(void);
     void                            FaceTarget(kexActor *targ = NULL);
+
+    aiState_t                       &State(void) { return state; }
 
 private:
     void                            ChangeStateFromAnim(void);

@@ -3426,6 +3426,7 @@ anubis_attack_range
     frame
     {
         // ##000    0    0
+        action A_FaceTarget()
         rotation_N
         {
             sprites
@@ -3656,6 +3657,7 @@ anubis_attack_range
 
     frame
     {
+        action A_FaceTarget()
         action A_PlayLocalSound("sounds/anubisproj.wav")
         // ##003    0    0
         rotation_N
@@ -4046,6 +4048,8 @@ anubis_attack_range
     frame
     {
         // ##008    0    0
+        action A_FaceTarget()
+        action A_FireProjectile("Proj_Anubis", 0, 0, 4, 96, 16)
         rotation_N
         {
             sprites

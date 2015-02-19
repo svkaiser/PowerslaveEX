@@ -521,7 +521,8 @@ bool kexCModel::CollideFace(mapFace_t *face)
 
 void kexCModel::TraceActorsInSector(mapSector_t *sector)
 {
-    if(moveActor && !(moveActor->Flags() & AF_SOLID))
+    if(moveActor && !(moveActor->Flags() & AF_SOLID) &&
+       !moveActor->InstanceOf(&kexProjectile::info))
     {
         return;
     }

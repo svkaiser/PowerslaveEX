@@ -102,6 +102,12 @@ void kexAI::Tick(void)
 
 void kexAI::OnDamage(kexActor *instigator)
 {
+    if(health <= 0)
+    {
+        state = AIS_DEAD;
+        return;
+    }
+    
     if(kexRand::Max(255) < painChance)
     {
         StartPain();
@@ -126,6 +132,11 @@ bool kexAI::CheckTargetSight(kexActor *actor)
 
 void kexAI::ChangeStateFromAnim(void)
 {
+    if(state == AIS_DEAD)
+    {
+        return;
+    }
+    
          if(anim == chaseAnim && state != AIS_CHASE)    state = AIS_CHASE;
     else if(anim == spawnAnim && state != AIS_IDLE)     state = AIS_IDLE;
     else if(anim == meleeAnim && state != AIS_MELEE)    state = AIS_MELEE;
