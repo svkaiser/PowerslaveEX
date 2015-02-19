@@ -152,6 +152,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("touchable"))        flags |= AF_TOUCHABLE;
         if(definition->GetBool("bouncy"))           flags |= AF_BOUNCY;
         if(definition->GetBool("noDropOff"))        flags |= AF_NODROPOFF;
+        if(definition->GetBool("expires"))          flags |= AF_EXPIRES;
 
         if(flags & AF_BOUNCY)
         {
@@ -501,6 +502,23 @@ void kexActor::UpdateMovement(void)
         else if(!(sector->flags & SF_WATER))
         {
             flags &= ~AF_INWATER;
+        }
+    }
+    else if(flags & AF_EXPIRES)
+    {
+        if(--health <= 0)
+        {
+            if(health == 0)
+            {
+                expireAmount = scale / 32;
+            }
+            
+            scale -= expireAmount;
+            
+            if(scale <= 0)
+            {
+                Remove();
+            }
         }
     }
 }

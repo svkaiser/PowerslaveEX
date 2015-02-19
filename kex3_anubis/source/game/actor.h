@@ -44,7 +44,8 @@ typedef enum
     AF_TOUCHABLE        = BIT(9),
     AF_BOUNCY           = BIT(10),
     AF_INWATER          = BIT(11),
-    AF_NODROPOFF        = BIT(12)
+    AF_NODROPOFF        = BIT(12),
+    AF_EXPIRES          = BIT(13)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -131,6 +132,7 @@ protected:
     int16_t                         frameID;
     float                           ticks;
     float                           animSpeed;
+    float                           expireAmount;
     int                             flashTicks;
     int                             type;
     unsigned int                    flags;

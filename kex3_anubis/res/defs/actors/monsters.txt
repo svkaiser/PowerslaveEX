@@ -26,8 +26,10 @@ Obj_Anubis_Gib01 -1
     height                  56
     stepHeight              32
     scale                   1.5
+    health                  100
     spawnAnim               "monsters/anubis_gib1"
     moveable                1
+    expires                 1
 }
 
 Obj_Anubis_Gib02 -1
@@ -37,8 +39,10 @@ Obj_Anubis_Gib02 -1
     height                  56
     stepHeight              32
     scale                   1.5
+    health                  100
     spawnAnim               "monsters/anubis_gib2"
     moveable                1
+    expires                 1
 }
 
 Obj_Anubis_Gib03 -1
@@ -48,8 +52,10 @@ Obj_Anubis_Gib03 -1
     height                  56
     stepHeight              32
     scale                   1.5
+    health                  100
     spawnAnim               "monsters/anubis_gib3"
     moveable                1
+    expires                 1
 }
 
 Obj_Anubis_Gib04 -1
@@ -59,7 +65,9 @@ Obj_Anubis_Gib04 -1
     height                  56
     stepHeight              32
     scale                   1.5
+    health                  100
     spawnAnim               "monsters/anubis_gib4"
     moveable                1
+    expires                 1
 }
 
