@@ -263,7 +263,7 @@ bool kexAI::CheckRangeAttack(void)
     kexActor *targ = static_cast<kexActor*>(target);
     int dist;
     
-    if(!CheckTargetSight(targ) || timeBeforeTurning > 1)
+    if(!CheckTargetSight(targ) || (kexRand::Int() & 1) == 0)
     {
         return false;
     }
@@ -288,6 +288,32 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
     {
         return (kexGame::cLocal->CModel()->ContactActor() == target);
     }
+    
+    if(flags & AF_NODROPOFF)
+    {
+        for(int i = sector->faceStart; i <= sector->faceEnd; ++i)
+        {
+            mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
+            mapSector_t *s;
+            
+            if(face->sector <= -1)
+            {
+                continue;
+            }
+            
+            if(kexGame::cLocal->CModel()->PointOnFaceSide(origin, face, radius) > 0)
+            {
+                continue;
+            }
+            
+            s = &kexGame::cLocal->World()->Sectors()[face->sector];
+            if(sector->floorHeight - s->floorHeight > stepHeight ||
+               (!(flags & AF_INWATER) && s->flags & SF_WATER))
+            {
+                return false;
+            }
+        }
+    }
 
     return true;
 }
@@ -301,35 +327,68 @@ void kexAI::ChangeDirection(void)
     float yawAmount;
     float yawAmountFabs;
     kexVec3 forward;
+    bool bAdjust;
+    kexAngle newYaw;
     
     aiFlags |= AIF_TURNING;
-    desiredYaw = kexMath::ATan2(target->Origin().x - origin.x, target->Origin().y - origin.y);
-    yawAmount = desiredYaw.Diff(yaw);
-    yawAmountFabs = kexMath::Fabs(yawAmount);
+    bAdjust = (timeBeforeTurning > 0);
     
-    if((kexRand::Int() & 1) && yawAmountFabs < kexMath::Deg2Rad(22.5f))
+    if(timeBeforeTurning <= 0)
     {
-        desiredYaw += kexMath::Deg2Rad(kexRand::Range(-45.0f, 45.0f));
+        desiredYaw = kexMath::ATan2(target->Origin().x - origin.x, target->Origin().y - origin.y);
         yawAmount = desiredYaw.Diff(yaw);
         yawAmountFabs = kexMath::Fabs(yawAmount);
+        
+        if((kexRand::Int() & 1) && yawAmountFabs < kexMath::Deg2Rad(22.5f))
+        {
+            desiredYaw += kexMath::Deg2Rad(kexRand::Range(-45.0f, 45.0f));
+            yawAmount = desiredYaw.Diff(yaw);
+            yawAmountFabs = kexMath::Fabs(yawAmount);
+        }
+        
+        if(yawAmountFabs < kexMath::Deg2Rad(22.5f))
+        {
+            turnAmount = yawAmount / 16.0f;
+        }
+        else
+        {
+            turnAmount = yawAmount / 8.0f;
+        }
+
+        kexVec3::ToAxis(&forward, 0, 0, desiredYaw, 0, 0);
+        bAdjust = !CheckDirection(forward);
     }
     
-    if(yawAmountFabs < kexMath::Deg2Rad(22.5f))
+    if(!bAdjust)
     {
-        turnAmount = yawAmount / 16.0f;
-    }
-    else
-    {
-        turnAmount = yawAmount / 8.0f;
+        return;
     }
 
-    kexVec3::ToAxis(&forward, 0, 0, desiredYaw, 0, 0);
-
-    if(!CheckDirection(forward))
+    for(int i = 1; i < 4; ++i)
     {
-        desiredYaw = yaw + (kexMath::Deg2Rad(80) + (kexRand::Float() * kexMath::Deg2Rad(200)));
-        turnAmount = desiredYaw.Diff(yaw) / 8;
+        newYaw = yaw + kexMath::Deg2Rad(60 * i);
+        kexVec3::ToAxis(&forward, 0, 0, newYaw, 0, 0);
+        
+        if(CheckDirection(forward))
+        {
+            desiredYaw = newYaw;
+            turnAmount = desiredYaw.Diff(yaw) / 8;
+            return;
+        }
+        
+        newYaw = yaw - kexMath::Deg2Rad(60 * i);
+        kexVec3::ToAxis(&forward, 0, 0, newYaw, 0, 0);
+        
+        if(CheckDirection(forward))
+        {
+            desiredYaw = newYaw;
+            turnAmount = desiredYaw.Diff(yaw) / 8;
+            return;
+        }
     }
+    
+    desiredYaw += (kexMath::Deg2Rad(80) + (kexRand::Float() * kexMath::Deg2Rad(200)));
+    turnAmount = desiredYaw.Diff(yaw) / 8;
 }
 
 //
@@ -357,7 +416,7 @@ void kexAI::ChaseTarget(void)
         if(kexMath::Fabs(yaw.Diff(desiredYaw)) < kexMath::Deg2Rad(10.0f))
         {
             aiFlags &= ~AIF_TURNING;
-            timeBeforeTurning = 8 + kexRand::Max(8);
+            timeBeforeTurning = 8 + kexRand::Max(16);
         }
     }
 

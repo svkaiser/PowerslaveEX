@@ -151,6 +151,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("moveable"))         flags |= AF_MOVEABLE;
         if(definition->GetBool("touchable"))        flags |= AF_TOUCHABLE;
         if(definition->GetBool("bouncy"))           flags |= AF_BOUNCY;
+        if(definition->GetBool("noDropOff"))        flags |= AF_NODROPOFF;
 
         if(flags & AF_BOUNCY)
         {

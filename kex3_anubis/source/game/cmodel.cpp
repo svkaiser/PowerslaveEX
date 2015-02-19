@@ -628,6 +628,13 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
             {
                 CollideFace(face);
             }
+            else if(moveActor->Flags() & AF_NODROPOFF)
+            {
+                if((float)moveActor->Sector()->floorHeight - floorz > moveActor->StepHeight())
+                {
+                    CollideFace(face);
+                }
+            }
         }
 
         if(!(face->flags & FF_SOLID) || face->flags & FF_WATER)

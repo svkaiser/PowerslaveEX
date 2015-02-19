@@ -43,7 +43,8 @@ typedef enum
     AF_MOVEABLE         = BIT(8),
     AF_TOUCHABLE        = BIT(9),
     AF_BOUNCY           = BIT(10),
-    AF_INWATER          = BIT(11)
+    AF_INWATER          = BIT(11),
+    AF_NODROPOFF        = BIT(12)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
