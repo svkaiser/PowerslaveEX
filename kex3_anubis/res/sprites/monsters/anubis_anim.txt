@@ -1630,7 +1630,6 @@ anubis_melee
 
     frame
     {
-        action A_PlayLocalSound("sounds/anubismelee.wav")
         // ##001    0    0
         rotation_N
         {
@@ -1785,7 +1784,7 @@ anubis_melee
 
     frame
     {
-        // ##003   81    0
+        action A_PlayLocalSound("sounds/anubismelee.wav")
         rotation_N
         {
             sprites
@@ -1940,7 +1939,6 @@ anubis_melee
 
     frame
     {
-        action A_PlayLocalSound("sounds/anubisslap.wav")
         // ##005    0    0
         rotation_N
         {
@@ -2020,7 +2018,7 @@ anubis_melee
 
     frame
     {
-        // ##006   78    0
+        action A_PlayLocalSound("sounds/anubisslap.wav")
         rotation_N
         {
             sprites
@@ -2485,7 +2483,6 @@ anubis_melee
 
     frame
     {
-        action A_PlayLocalSound("sounds/anubismelee.wav")
         // ##012    0    0
         rotation_N
         {
@@ -2797,7 +2794,7 @@ anubis_melee
 
     frame
     {
-        action A_PlayLocalSound("sounds/anubisslap.wav")
+        action A_PlayLocalSound("sounds/anubismelee.wav")
         // ##016   81    0
         rotation_N
         {
@@ -3031,7 +3028,7 @@ anubis_melee
 
     frame
     {
-        // ##019   78    0
+        action A_PlayLocalSound("sounds/anubisslap.wav")
         rotation_N
         {
             sprites
@@ -6142,5 +6139,24 @@ anubis_pain
         }
         
         goto "monsters/anubis_chase"
+    }
+}
+
+anubis_death
+{
+    frame
+    {
+        action A_AnubisDeath()
+        action A_TossActor("Obj_Anubis_Gib01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Anubis_Gib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Anubis_Gib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Anubis_Gib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Anubis_Gib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Anubis_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Anubis_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Anubis_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Anubis_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_Destroy()
+        delay 1
     }
 }

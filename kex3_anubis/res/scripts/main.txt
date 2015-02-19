@@ -297,3 +297,29 @@ void A_ChargeBombThrow(kActor @actor)
         bombChargeThrow = 40.0f;
     }
 }
+
+//
+// A_AnubisDeath
+//
+
+void A_AnubisDeath(kActor @actor)
+{
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z + 64.0f;
+    kActor @gib = Game.SpawnActor("Fx_Gibs01", x, y, z, actor.Yaw(), actor.SectorIndex());
+    
+    if(!(gib is null))
+    {
+        gib.Scale() = actor.Scale();
+    }
+    
+    if((Math::Rand() & 1) == 0)
+    {
+        actor.PlaySound("sounds/anubisdeath01.wav");
+    }
+    else
+    {
+        actor.PlaySound("sounds/anubisdeath02.wav");
+    }
+}

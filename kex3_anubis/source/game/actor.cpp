@@ -283,6 +283,12 @@ void kexActor::UpdateSprite(void)
     if(ticks >= 1)
     {
         ticks = 0;
+
+        // handle goto jumps
+        if(frame->HasNextFrame())
+        {
+            ChangeAnim(frame->nextFrame);
+        }
         
         if(!(flags & AF_NOADVANCEFRAMES))
         {
@@ -298,12 +304,6 @@ void kexActor::UpdateSprite(void)
         {
             anim->frames[frameID].actions[i]->Execute(this);
         }
-    }
-
-    // handle goto jumps
-    if(frame->HasNextFrame())
-    {
-        ChangeAnim(frame->nextFrame);
     }
 }
 

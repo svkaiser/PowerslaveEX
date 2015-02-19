@@ -29,7 +29,6 @@ public:
     virtual void                Tick(void) = 0;
     virtual void                OnRemove(void);
     virtual void                Remove(void);
-    virtual void                PlaySound(const char *snd);
 
     void                        Spawn(void);
 
@@ -37,6 +36,8 @@ public:
     int                         RemoveRef(void);
     void                        SetTarget(kexGameObject *targ);
     const bool                  Removing(void) const;
+    void                        PlaySound(const char *snd);
+    void                        PlaySound(const kexStr &snd) { PlaySound(snd.c_str()); }
 
     kexLinklist<kexGameObject>  &Link(void) { return link; }
     kexVec3                     &Origin(void) { return origin; }

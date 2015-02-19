@@ -21,7 +21,8 @@ typedef enum
 {
     AIS_IDLE    = 0,
     AIS_CHASE,
-    AIS_PAIN
+    AIS_PAIN,
+    AIS_MELEE
 } aiState_t;
 
 typedef enum
@@ -46,6 +47,10 @@ public:
     void                            Spawn(void);
 
 private:
+    bool                            CheckMeleeRange(void);
+    bool                            CheckDirection(const kexVec3 &dir);
+    void                            ChangeDirection(void);
+    void                            DoMelee(void);
     void                            StartChasing(void);
     void                            StartPain(void);
     void                            InPain(void);
@@ -64,6 +69,7 @@ private:
     int                             timeBeforeTurning;
     kexAngle                        desiredYaw;
     float                           turnAmount;
+    int                             painChance;
 END_KEX_CLASS();
 
 #endif

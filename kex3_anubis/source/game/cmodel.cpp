@@ -556,7 +556,7 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
                 continue;
             }
 
-            r = actor->Radius() + (moveActor->Radius() * 0.5f);
+            r = (actor->Radius() * 0.5f) + moveActor->Radius();
             
             if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height(),
                            0, (actor->Flags() & AF_SOLID) == 0))

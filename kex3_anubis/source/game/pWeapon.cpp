@@ -162,7 +162,6 @@ void kexPlayerWeapon::UpdateBob(void)
 void kexPlayerWeapon::UpdateSprite(void)
 {
     spriteFrame_t *frame;
-    const kexGameLocal::weaponInfo_t *weaponInfo;
 
     if(anim == NULL)
     {
@@ -176,6 +175,19 @@ void kexPlayerWeapon::UpdateSprite(void)
     if(ticks >= 1)
     {
         ticks = 0;
+
+        // handle re-fire
+        if(frame->HasRefireFrame() && owner->Cmd().Buttons() & BC_ATTACK)
+        {
+            ChangeAnim(frame->refireFrame);
+            return;
+        }
+        // handle goto jumps
+        else if(frame->HasNextFrame())
+        {
+            ChangeAnim(frame->nextFrame);
+            return;
+        }
         
         // reached the end of the frame?
         if(++frameID >= (int16_t)anim->NumFrames())
@@ -196,19 +208,6 @@ void kexPlayerWeapon::UpdateSprite(void)
         {
             anim->frames[frameID].actions[i]->Execute(owner->Actor());
         }
-    }
-
-    weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
-
-    // handle re-fire
-    if(frame->HasRefireFrame() && owner->Cmd().Buttons() & BC_ATTACK)
-    {
-        ChangeAnim(frame->refireFrame);
-    }
-    // handle goto jumps
-    else if(frame->HasNextFrame())
-    {
-        ChangeAnim(frame->nextFrame);
     }
 
     switch(state)

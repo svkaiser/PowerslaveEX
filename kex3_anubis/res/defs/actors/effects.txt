@@ -9,6 +9,17 @@ Fx_BulletPuff 59
     fullbright              1
 }
 
+Fx_Gibs01 60
+{
+    classname               "kexActor"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "effects/gib_death"
+    fullbright              1
+}
+
 Fx_VaseExplodePuff 62
 {
     classname               "kexActor"

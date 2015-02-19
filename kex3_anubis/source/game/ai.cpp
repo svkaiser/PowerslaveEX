@@ -41,6 +41,7 @@ kexAI::kexAI(void)
     this->curThinkTime = 1;
     this->timeBeforeTurning = 0;
     this->aiFlags = 0;
+    this->painChance = 0xff;
 }
 
 //
@@ -79,6 +80,10 @@ void kexAI::Tick(void)
         case AIS_PAIN:
             InPain();
             break;
+
+        case AIS_MELEE:
+            DoMelee();
+            break;
         }
         
         curThinkTime = 1;
@@ -93,7 +98,10 @@ void kexAI::Tick(void)
 
 void kexAI::OnDamage(kexActor *instigator)
 {
-    StartPain();
+    if(kexRand::Max(255) < painChance)
+    {
+        StartPain();
+    }
 }
 
 //
@@ -150,6 +158,24 @@ void kexAI::InPain(void)
 }
 
 //
+// kexAI::DoMelee
+//
+
+void kexAI::DoMelee(void)
+{
+    if(frameID >= (int)anim->NumFrames()-1)
+    {
+        if(!CheckMeleeRange())
+        {
+            StartChasing();
+            return;
+        }
+    }
+
+    yaw = kexMath::ATan2(target->Origin().x - origin.x, target->Origin().y - origin.y);
+}
+
+//
 // kexAI::LookForTarget
 //
 
@@ -170,66 +196,127 @@ void kexAI::LookForTarget(void)
 }
 
 //
+// CheckMeleeRange
+//
+
+bool kexAI::CheckMeleeRange(void)
+{
+    float r;
+    kexActor *targ;
+
+    if(!target)
+    {
+        return false;
+    }
+
+    targ = static_cast<kexActor*>(target);
+    r = (radius * 0.6f) + targ->Radius();
+
+    if(origin.DistanceSq(target->Origin()) > (r * r))
+    {
+        return false;
+    }
+
+    return CheckTargetSight(targ);
+}
+
+//
+// kexAI::CheckDirection
+//
+
+bool kexAI::CheckDirection(const kexVec3 &dir)
+{
+    kexVec3 start;
+
+    start = origin + kexVec3(0, 0, stepHeight);
+    
+    if(kexGame::cLocal->CModel()->Trace(this, sector, start, start + (dir * (radius * 1.5f))))
+    {
+        return (kexGame::cLocal->CModel()->ContactActor() == target);
+    }
+
+    return true;
+}
+
+//
+// kexAI::ChangeDirection
+//
+
+void kexAI::ChangeDirection(void)
+{
+    float yawAmount;
+    float yawAmountFabs;
+    kexVec3 forward;
+    
+    aiFlags |= AIF_TURNING;
+    desiredYaw = kexMath::ATan2(target->Origin().x - origin.x, target->Origin().y - origin.y);
+    yawAmount = desiredYaw.Diff(yaw);
+    yawAmountFabs = kexMath::Fabs(yawAmount);
+    
+    if((kexRand::Int() & 1) && yawAmountFabs < kexMath::Deg2Rad(22.5f))
+    {
+        desiredYaw += kexMath::Deg2Rad(kexRand::Range(-45.0f, 45.0f));
+        yawAmount = desiredYaw.Diff(yaw);
+        yawAmountFabs = kexMath::Fabs(yawAmount);
+    }
+    
+    if(yawAmountFabs < kexMath::Deg2Rad(22.5f))
+    {
+        turnAmount = yawAmount / 16.0f;
+    }
+    else
+    {
+        turnAmount = yawAmount / 8.0f;
+    }
+
+    kexVec3::ToAxis(&forward, 0, 0, desiredYaw, 0, 0);
+
+    if(!CheckDirection(forward))
+    {
+        desiredYaw = yaw + (kexMath::Deg2Rad(80) + (kexRand::Float() * kexMath::Deg2Rad(200)));
+        turnAmount = desiredYaw.Diff(yaw) / 8;
+    }
+}
+
+//
 // kexAI::ChaseTarget
 //
 
 void kexAI::ChaseTarget(void)
 {
     kexVec3 forward;
-    
+
     if(!(aiFlags & AIF_TURNING))
     {
-        if(--timeBeforeTurning <= 0)
+        kexVec3::ToAxis(&forward, 0, 0, yaw, 0, 0);
+
+        if(--timeBeforeTurning <= 0 || !CheckDirection(forward))
         {
-            float yawAmount;
-            float yawAmountFabs;
-            
-            aiFlags |= AIF_TURNING;
-            desiredYaw = kexMath::ATan2(target->Origin().x - origin.x, target->Origin().y - origin.y);
-            yawAmount = desiredYaw.Diff(yaw);
-            yawAmountFabs = kexMath::Fabs(yawAmount);
-            
-            if((kexRand::Int() & 1) && yawAmountFabs < kexMath::Deg2Rad(22.5f))
-            {
-                desiredYaw += kexMath::Deg2Rad(kexRand::Range(-45.0f, 45.0f));
-                yawAmount = desiredYaw.Diff(yaw);
-                yawAmountFabs = kexMath::Fabs(yawAmount);
-            }
-            
-            if(yawAmountFabs < kexMath::Deg2Rad(22.5f))
-            {
-                turnAmount = yawAmount / 16.0f;
-            }
-            else
-            {
-                turnAmount = yawAmount / 8.0f;
-            }
+            ChangeDirection();
         }
     }
     else
     {
         yaw += turnAmount;
+        kexVec3::ToAxis(&forward, 0, 0, yaw, 0, 0);
+
         if(kexMath::Fabs(yaw.Diff(desiredYaw)) < kexMath::Deg2Rad(10.0f))
         {
             aiFlags &= ~AIF_TURNING;
             timeBeforeTurning = 8 + kexRand::Max(8);
         }
     }
-    
-    kexVec3::ToAxis(&forward, 0, 0, yaw, 0, 0);
-    movement = forward * 8;
-    
-    kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
-    
-    if(!(aiFlags & AIF_TURNING))
+
+    if(CheckMeleeRange() && meleeAnim)
     {
-        if(kexGame::cLocal->CModel()->Trace(this, sector, start, start + (forward * (radius * 1.25f))))
-        {
-            aiFlags |= AIF_TURNING;
-            desiredYaw = yaw + (kexMath::Deg2Rad(135) + (kexRand::Float() * kexMath::Deg2Rad(90)));
-            turnAmount = desiredYaw.Diff(yaw) / 8;
-        }
+        aiFlags &= ~AIF_TURNING;
+        yaw = kexMath::ATan2(target->Origin().x - origin.x, target->Origin().y - origin.y);
+        ChangeAnim(meleeAnim);
+        state = AIS_MELEE;
+        return;
     }
+    
+    movement = forward * 8;
 }
 
 //
@@ -263,6 +350,8 @@ void kexAI::Spawn(void)
     if(definition)
     {
         kexStr animName;
+
+        definition->GetInt("painChance", painChance, 0xff);
         
         if(definition->GetString("chaseAnim", animName))
         {
@@ -272,6 +361,11 @@ void kexAI::Spawn(void)
         if(definition->GetString("painAnim", animName))
         {
             painAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
+        }
+
+        if(definition->GetString("meleeAnim", animName))
+        {
+            meleeAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
         }
     }
 }

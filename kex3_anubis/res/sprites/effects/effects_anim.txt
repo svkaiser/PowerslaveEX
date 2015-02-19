@@ -458,7 +458,8 @@ gib_death
     {
         // ##018    0    0 (no groups)
         delay 1
-
+        action A_RandomVaseItem()
+        action A_Destroy()
     }
 }
 

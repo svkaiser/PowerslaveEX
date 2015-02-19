@@ -50,4 +50,5 @@ void kexScriptObjActor::Init(void)
     e->RegisterObjectMethod("kActor", "const int FrameID(void) const", asMETHODPR(kexActor, FrameID, (void) const, const int), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "const int SectorIndex(void)", asMETHODPR(kexActor, SectorIndex, (void), const int), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "bool InstanceOf(const kStr &in) const", asMETHODPR(kexActor, InstanceOf, (const kexStr&) const, bool), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "void PlaySound(const kStr &in)", asMETHODPR(kexActor, PlaySound, (const kexStr&), void), asCALL_THISCALL);
 }
