@@ -709,7 +709,7 @@ float kexWorld::GetHighestSurroundingFloor(mapSector_t *sector)
         }
     }
 
-    if(kexMath::FCmp(height, (float)sector->floorHeight))
+    if((int)height == sector->floorHeight)
     {
         height = faces[sector->faceEnd+2].plane.d;
     }

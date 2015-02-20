@@ -269,7 +269,7 @@ bool kexAI::CheckRangeAttack(void)
     }
     
     dist = (int)((origin.Distance(targ->Origin()) / 1500) * 256);
-    kexMath::Clamp(dist, 100 + kexRand::Max(50), 200);
+    kexMath::Clamp(dist, 120 + kexRand::Max(50), 200);
 
     return (kexRand::Max(50 + kexRand::Max(200)) > dist);
 }
@@ -301,7 +301,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
                 continue;
             }
             
-            if(kexGame::cLocal->CModel()->PointOnFaceSide(origin, face, radius) > 0)
+            if(kexGame::cLocal->CModel()->PointOnFaceSide(origin, face, radius * 2.0f) > 0)
             {
                 continue;
             }
