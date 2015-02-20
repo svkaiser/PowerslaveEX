@@ -549,10 +549,11 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         // performing ray-trace tests.
         if(moveActor)
         {
-            r = actor->Radius() + moveActor->Radius();
+            r = (actor->Radius() + moveActor->Radius()) * 2;
 
             // make sure that we are within range
-            if(start.DistanceSq(actor->Origin()) > (r*r) && end.DistanceSq(actor->Origin()) > (r*r))
+            if(start.DistanceSq(actor->Origin()) > (r*r) &&
+               end.DistanceSq(actor->Origin()) > (r*r))
             {
                 continue;
             }

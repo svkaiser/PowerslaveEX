@@ -66,6 +66,8 @@ public:
 
     aiState_t                       &State(void) { return state; }
 
+    static bool                     bNoTargetEnemy;
+
 private:
     bool                            SetDesiredDirection(const int dir);
     void                            ChangeStateFromAnim(void);

@@ -18,6 +18,8 @@
 #include "kexlib.h"
 #include "game.h"
 
+bool kexAI::bNoTargetEnemy = false;
+
 const float kexAI::directionAngles[NUMAIDIRTYPES] =
 {
     0,
@@ -41,6 +43,24 @@ const kexVec3 kexAI::directionVectors[NUMAIDIRTYPES] =
     kexVec3(-1, 0, 0),
     kexVec3(-0.5f, 0.5f, 0)
 };
+
+//
+// noaitarget
+//
+
+COMMAND(noaitarget)
+{
+    kexAI::bNoTargetEnemy ^= 1;
+    
+    if(kexAI::bNoTargetEnemy)
+    {
+        kex::cSystem->DPrintf("AI targeting disabled\n");
+    }
+    else
+    {
+        kex::cSystem->DPrintf("AI targeting enabled\n");
+    }
+}
 
 //-----------------------------------------------------------------------------
 //
@@ -149,6 +169,11 @@ void kexAI::OnDamage(kexActor *instigator)
 
 bool kexAI::CheckTargetSight(kexActor *actor)
 {
+    if(bNoTargetEnemy)
+    {
+        return false;
+    }
+    
     if(kexMath::Fabs(origin.x - actor->Origin().x) >= 3000) return false;
     if(kexMath::Fabs(origin.y - actor->Origin().y) >= 3000) return false;
 
