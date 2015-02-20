@@ -1028,12 +1028,17 @@ void kexWorld::ExplodeWallEvent(mapSector_t *sector)
         for(int j = sectors[face->sector].faceStart; j < sectors[face->sector].faceEnd+3; ++j)
         {
             mapFace_t *f = &faces[j];
-
+            
+            if(!(f->flags & FF_TOGGLE))
+            {
+                continue;
+            }
+            
             if(f->sector != face->sectorOwner)
             {
                 continue;
             }
-
+            
             ExplodeWall(f);
         }
     }
@@ -1042,6 +1047,58 @@ void kexWorld::ExplodeWallEvent(mapSector_t *sector)
     {
         SendRemoteTrigger(&events[sector->event]);
         sector->event = -1;
+    }
+}
+
+//
+// kexWorld::CheckActorsForRadialBlast
+//
+
+void kexWorld::CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source, const kexVec3 &origin,
+                                         const float radius, const int damage)
+{
+    kexVec3 end;
+    float dist;
+    float dmgAmount;
+    
+    for(kexActor *actor = sector->actorList.Next();
+        actor != NULL;
+        actor = actor->SectorLink().Next())
+    {
+        if(actor == source)
+        {
+            // don't check self
+            continue;
+        }
+        
+        if(!(actor->Flags() & AF_SOLID) || !(actor->Flags() & AF_SHOOTABLE))
+        {
+            continue;
+        }
+        
+        end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
+        dist = origin.DistanceSq(end);
+        
+        if(dist > (radius * radius))
+        {
+            continue;
+        }
+        
+        if(source->Sector() != sector)
+        {
+            if(!kexGame::cLocal->CModel()->Trace(source, source->Sector(), origin, end))
+            {
+                continue;
+            }
+            
+            if(kexGame::cLocal->CModel()->ContactActor() != actor)
+            {
+                continue;
+            }
+        }
+        
+        dmgAmount = (1.0f - (dist / (radius * radius))) * (float)damage;
+        actor->InflictDamage(source, (int)dmgAmount);
     }
 }
 
@@ -1058,10 +1115,7 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
     
     unsigned int scanCount = 0;
     kexVec3 start = source->Origin() + kexVec3(0, 0, source->Height() * 0.5f);
-    kexVec3 end;
     kexBBox bounds;
-    float dist;
-    float dmgAmount;
     
     bounds.min.Set(-(radius*0.5f));
     bounds.max.Set( (radius*0.5f));
@@ -1074,6 +1128,8 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
     
     memset(pvsMask, 0, pvsSize);
     MarkSectorInPVS(source->Sector() - sectors);
+    
+    CheckActorsForRadialBlast(source->Sector(), source, start, radius, damage);
     
     do
     {
@@ -1090,8 +1146,17 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
         {
             mapFace_t *face = &faces[i];
 
-            if(face->flags & (FF_SOLID|FF_TOGGLE))
+            if(face->flags & FF_SOLID)
             {
+                if(!(face->flags & FF_PORTAL))
+                {
+                    if(bounds.max.x > face->bounds.max.x) bounds.max.x = face->bounds.max.x;
+                    if(bounds.max.y > face->bounds.max.y) bounds.max.y = face->bounds.max.y;
+                    if(bounds.max.z > face->bounds.max.z) bounds.max.z = face->bounds.max.z;
+                    if(bounds.min.x < face->bounds.min.x) bounds.min.x = face->bounds.min.x;
+                    if(bounds.min.y < face->bounds.min.y) bounds.min.y = face->bounds.min.y;
+                    if(bounds.min.z < face->bounds.min.z) bounds.min.z = face->bounds.min.z;
+                }
                 continue;
             }
             
@@ -1104,53 +1169,18 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
                     continue;
                 }
                 
+                CheckActorsForRadialBlast(next, source, start, radius, damage);
+                MarkSectorInPVS(face->sector);
+                
                 if(bounds.IntersectingBox(next->bounds))
                 {
                     next->floodCount = 1;
                     scanSectors.Set(next);
-                    MarkSectorInPVS(face->sector);
                 }
             }
         }
 
         ExplodeWallEvent(sector);
-        
-        for(kexActor *actor = sector->actorList.Next();
-            actor != NULL;
-            actor = actor->SectorLink().Next())
-        {
-            if(actor == source)
-            {
-                // don't check self
-                continue;
-            }
-            
-            if(!(actor->Flags() & AF_SOLID) || !(actor->Flags() & AF_SHOOTABLE))
-            {
-                continue;
-            }
-            
-            end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
-            dist = start.DistanceSq(end);
-            
-            if(dist > (radius * radius))
-            {
-                continue;
-            }
-            
-            if(!kexGame::cLocal->CModel()->Trace(source, source->Sector(), start, end))
-            {
-                continue;
-            }
-            
-            if(kexGame::cLocal->CModel()->ContactActor() != actor)
-            {
-                continue;
-            }
-            
-            dmgAmount = (1.0f - (dist / (radius * radius))) * (float)damage;
-            actor->InflictDamage(source, (int)dmgAmount);
-        }
         
     } while(scanCount < scanSectors.CurrentLength());
 }

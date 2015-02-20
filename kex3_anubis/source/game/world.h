@@ -205,6 +205,9 @@ public:
     static kexHeapBlock     hb_world;
 
 private:
+    void                    CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source,
+                                                      const kexVec3 &origin,
+                                                      const float radius, const int damage);
     void                    UseLockedDoor(kexPlayer *player, mapEvent_t *ev);
     void                    UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev);
     void                    SendRemoteTrigger(mapEvent_t *event);
