@@ -18,6 +18,30 @@
 #include "kexlib.h"
 #include "game.h"
 
+const float kexAI::directionAngles[NUMAIDIRTYPES] =
+{
+    0,
+    kexMath::Deg2Rad(45),
+    kexMath::Deg2Rad(90),
+    kexMath::Deg2Rad(135),
+    kexMath::Deg2Rad(180),
+    kexMath::Deg2Rad(-135),
+    kexMath::Deg2Rad(-90),
+    kexMath::Deg2Rad(-45)
+};
+
+const kexVec3 kexAI::directionVectors[NUMAIDIRTYPES] =
+{
+    kexVec3(0, 1, 0),
+    kexVec3(0.5f, 0.5f, 0),
+    kexVec3(1, 0, 0),
+    kexVec3(0.5f, -0.5f, 0),
+    kexVec3(0, -1, 0),
+    kexVec3(-0.5f, -0.5f, 0),
+    kexVec3(-1, 0, 0),
+    kexVec3(-0.5f, 0.5f, 0)
+};
+
 //-----------------------------------------------------------------------------
 //
 // kexAI
@@ -107,6 +131,11 @@ void kexAI::OnDamage(kexActor *instigator)
         state = AIS_DEAD;
         return;
     }
+
+    if(!target && instigator != this)
+    {
+        SetTarget(instigator);
+    }
     
     if(kexRand::Max(255) < painChance)
     {
@@ -120,6 +149,15 @@ void kexAI::OnDamage(kexActor *instigator)
 
 bool kexAI::CheckTargetSight(kexActor *actor)
 {
+    if(kexMath::Fabs(origin.x - actor->Origin().x) >= 3000) return false;
+    if(kexMath::Fabs(origin.y - actor->Origin().y) >= 3000) return false;
+
+    if(kexMath::Fabs(yaw.Diff(kexMath::ATan2(actor->Origin().x - origin.x,
+                                             actor->Origin().y - origin.y))) > 0.785f)
+    {
+        return false;
+    }
+
     kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
     kexVec3 end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
     
@@ -261,17 +299,14 @@ bool kexAI::CheckMeleeRange(void)
 bool kexAI::CheckRangeAttack(void)
 {
     kexActor *targ = static_cast<kexActor*>(target);
-    int dist;
     
-    if(!CheckTargetSight(targ) || (kexRand::Int() & 1) == 0)
+    if(!attackAnim || !CheckTargetSight(targ) ||
+        (kexRand::Int() & 30) != (kexGame::cLocal->PlayLoop()->Ticks() & 30))
     {
         return false;
     }
-    
-    dist = (int)((origin.Distance(targ->Origin()) / 1500) * 256);
-    kexMath::Clamp(dist, 120 + kexRand::Max(50), 200);
 
-    return (kexRand::Max(50 + kexRand::Max(200)) > dist);
+    return !((kexRand::Int() & 7) < 4);
 }
 
 //
@@ -284,7 +319,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
 
     start = origin + kexVec3(0, 0, stepHeight);
     
-    if(kexGame::cLocal->CModel()->Trace(this, sector, start, start + (dir * (radius * 2.0f))))
+    if(kexGame::cLocal->CModel()->Trace(this, sector, start, start + (dir * (radius * 1.5f))))
     {
         return (kexGame::cLocal->CModel()->ContactActor() == target);
     }
@@ -301,7 +336,12 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
                 continue;
             }
             
-            if(kexGame::cLocal->CModel()->PointOnFaceSide(origin, face, radius * 2.0f) > 0)
+            if(kexGame::cLocal->CModel()->PointOnFaceSide(origin, face, radius * 1.125f) > 0)
+            {
+                continue;
+            }
+
+            if(face->plane.IsFacing(yaw))
             {
                 continue;
             }
@@ -319,44 +359,131 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
 }
 
 //
+// kexAI::SetDesiredDirection
+//
+
+bool kexAI::SetDesiredDirection(const int dir)
+{
+    if(dir != ADT_NONE)
+    {
+        if(CheckDirection(directionVectors[dir]))
+        {
+            desiredYaw = directionAngles[dir];
+            turnAmount = desiredYaw.Diff(yaw) / 8;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//
 // kexAI::ChangeDirection
 //
 
 void kexAI::ChangeDirection(void)
 {
-    float yawAmount;
-    float yawAmountFabs;
     kexVec3 forward;
     bool bAdjust;
     kexAngle newYaw;
+    float dx, dy;
+    float fx, fy;
+    aiDirTypes_t moveDir = ADT_NONE;
     
     aiFlags |= AIF_TURNING;
     bAdjust = (timeBeforeTurning > 0);
     
     if(timeBeforeTurning <= 0)
     {
-        desiredYaw = kexMath::ATan2(target->Origin().x - origin.x, target->Origin().y - origin.y);
-        yawAmount = desiredYaw.Diff(yaw);
-        yawAmountFabs = kexMath::Fabs(yawAmount);
-        
-        if((kexRand::Int() & 1) && yawAmountFabs < kexMath::Deg2Rad(22.5f))
+        dx = target->Origin().x - origin.x;
+        dy = target->Origin().y - origin.y;
+
+        fx = kexMath::Fabs(dx);
+        fy = kexMath::Fabs(dy);
+
+        if(fx > fy)
         {
-            desiredYaw += kexMath::Deg2Rad(kexRand::Range(-45.0f, 45.0f));
-            yawAmount = desiredYaw.Diff(yaw);
-            yawAmountFabs = kexMath::Fabs(yawAmount);
+            if(dx > radius)
+            {
+                if(kexRand::Int() & 1 && (fx + fy) * 0.5f > radius-1)
+                {
+                    if(dy >= 0)
+                    {
+                        moveDir = ADT_NORTHEAST;
+                    }
+                    else
+                    {
+                        moveDir = ADT_SOUTHEAST;
+                    }
+                }
+                else
+                {
+                    moveDir = ADT_EAST;
+                }
+            }
+            else if(dx < -radius)
+            {
+                if(kexRand::Int() & 1 && (fx + fy) * 0.5f > radius-1)
+                {
+                    if(dy >= 0)
+                    {
+                        moveDir = ADT_NORTHWEST;
+                    }
+                    else
+                    {
+                        moveDir = ADT_SOUTHWEST;
+                    }
+                }
+                else
+                {
+                    moveDir = ADT_WEST;
+                }
+            }
         }
-        
-        if(yawAmountFabs < kexMath::Deg2Rad(22.5f))
+        else if(fy > fx)
         {
-            turnAmount = yawAmount / 16.0f;
-        }
-        else
-        {
-            turnAmount = yawAmount / 8.0f;
+            if(dy > radius)
+            {
+                if(kexRand::Int() & 1 && (fx + fy) * 0.5f > radius-1)
+                {
+                    if(dx >= 0)
+                    {
+                        moveDir = ADT_NORTHEAST;
+                    }
+                    else
+                    {
+                        moveDir = ADT_NORTHWEST;
+                    }
+                }
+                else
+                {
+                    moveDir = ADT_NORTH;
+                }
+            }
+            else if(dy < -radius)
+            {
+                if(kexRand::Int() & 1 && (fx + fy) * 0.5f > radius-1)
+                {
+                    if(dx >= 0)
+                    {
+                        moveDir = ADT_SOUTHEAST;
+                    }
+                    else
+                    {
+                        moveDir = ADT_SOUTHWEST;
+                    }
+                }
+                else
+                {
+                    moveDir = ADT_SOUTH;
+                }
+            }
         }
 
-        kexVec3::ToAxis(&forward, 0, 0, desiredYaw, 0, 0);
-        bAdjust = !CheckDirection(forward);
+        if(SetDesiredDirection(moveDir))
+        {
+            bAdjust = false;
+        }
     }
     
     if(!bAdjust)
@@ -364,9 +491,9 @@ void kexAI::ChangeDirection(void)
         return;
     }
 
-    for(int i = 1; i < 4; ++i)
+    for(int i = 1; i < 8; ++i)
     {
-        newYaw = yaw + kexMath::Deg2Rad(60 * i);
+        newYaw = yaw + kexMath::Deg2Rad(25.71f * (float)i);
         kexVec3::ToAxis(&forward, 0, 0, newYaw, 0, 0);
         
         if(CheckDirection(forward))
@@ -376,7 +503,7 @@ void kexAI::ChangeDirection(void)
             return;
         }
         
-        newYaw = yaw - kexMath::Deg2Rad(60 * i);
+        newYaw = yaw - kexMath::Deg2Rad(25.71f * (float)i);
         kexVec3::ToAxis(&forward, 0, 0, newYaw, 0, 0);
         
         if(CheckDirection(forward))
@@ -386,8 +513,8 @@ void kexAI::ChangeDirection(void)
             return;
         }
     }
-    
-    desiredYaw += (kexMath::Deg2Rad(80) + (kexRand::Float() * kexMath::Deg2Rad(200)));
+
+    desiredYaw = yaw + (kexMath::Deg2Rad(135) + (kexRand::Float() * kexMath::Deg2Rad(90)));
     turnAmount = desiredYaw.Diff(yaw) / 8;
 }
 

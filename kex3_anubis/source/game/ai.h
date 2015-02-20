@@ -29,6 +29,21 @@ typedef enum
 
 typedef enum
 {
+    ADT_NONE        = -1,
+    ADT_NORTH       = 0,
+    ADT_NORTHEAST,
+    ADT_EAST,
+    ADT_SOUTHEAST,
+    ADT_SOUTH,
+    ADT_SOUTHWEST,
+    ADT_WEST,
+    ADT_NORTHWEST,
+
+    NUMAIDIRTYPES
+} aiDirTypes_t;
+
+typedef enum
+{
     AIF_TURNING = BIT(0)
 } aiFlags_t;
 
@@ -52,6 +67,7 @@ public:
     aiState_t                       &State(void) { return state; }
 
 private:
+    bool                            SetDesiredDirection(const int dir);
     void                            ChangeStateFromAnim(void);
     bool                            CheckMeleeRange(void);
     bool                            CheckRangeAttack(void);
@@ -63,6 +79,9 @@ private:
     void                            LookForTarget(void);
     void                            ChaseTarget(void);
     bool                            CheckTargetSight(kexActor *actor);
+
+    static const float              directionAngles[NUMAIDIRTYPES];
+    static const kexVec3            directionVectors[NUMAIDIRTYPES];
 
     spriteAnim_t                    *chaseAnim;
     spriteAnim_t                    *painAnim;
