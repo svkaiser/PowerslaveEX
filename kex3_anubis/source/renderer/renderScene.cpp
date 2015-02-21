@@ -421,13 +421,42 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
     
     for(int idx = (curIdx-1); idx >= 0; idx--)
     {
+        kexVec3 vPoint;
+        int r, g, b;
         vertex = &world->Vertices()[face->vertStart + indices[idx]];
+
+        vPoint = vertex->origin;
+        r = vertex->rgba[0];
+        g = vertex->rgba[1];
+        b = vertex->rgba[2];
+
+        if(world->Sectors()[face->sectorOwner].flags & SF_WATER)
+        {
+            int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(face->vertStart + indices[idx]);
+            float max = (((float)r + (float)g + (float)b) / 3) / 3;
+            float c = ((float)v / (float)kexGame::cLocal->PlayLoop()->MaxWaterMagnitude()) * max;
+
+            kexMath::Clamp(c, -max, max);
+
+            r += (int)c;
+            g += (int)c;
+            b += (int)c;
+
+            kexMath::Clamp(r, 0, 255);
+            kexMath::Clamp(g, 0, 255);
+            kexMath::Clamp(b, 0, 255);
+        }
+
+        if(face->flags & FF_WATER && face->sector >= 0)
+        {
+            int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(face->vertStart + indices[idx]);
+            vPoint.z += (float)v / 32768.0f;
+            
+        }
         
-        vl->AddVertex(vertex->origin,
+        vl->AddVertex(vPoint,
                       tcoord->uv[tcoords[idx]].s, 1.0f - tcoord->uv[tcoords[idx]].t,
-                      vertex->rgba[0],
-                      vertex->rgba[1],
-                      vertex->rgba[2],
+                      r, g, b,
                       (face->flags & FF_WATER) ? 128 : 255);
     }
     

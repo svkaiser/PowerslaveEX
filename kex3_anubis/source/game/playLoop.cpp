@@ -65,6 +65,7 @@ void kexPlayLoop::Start(void)
     renderScene.SetWorld(kexGame::cLocal->World());
 
     kexGame::cLocal->Player()->Ready();
+    InitWater();
 }
 
 //
@@ -170,6 +171,7 @@ void kexPlayLoop::Tick(void)
     {
         kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
+        UpdateWater();
     }
     
     ticks++;
@@ -182,4 +184,70 @@ void kexPlayLoop::Tick(void)
 bool kexPlayLoop::ProcessInput(inputEvent_t *ev)
 {
     return false;
+}
+
+//
+// kexPlayLoop::InitWater
+//
+
+void kexPlayLoop::InitWater(void)
+{
+    waterMaxMagnitude = 0;
+    
+    for(int i = 0; i < 16; i++)
+    {
+        for(int j = 0; j < 16; j++)
+        {
+            int r = (kexRand::Max(255) - 128) << 12;
+
+            waterAccelPoints[i][j] = 0;
+            waterVelocityPoints[i][j] = r;
+            
+            if(waterMaxMagnitude < kexMath::Abs(r))
+            {
+                waterMaxMagnitude = kexMath::Abs(r);
+            }
+        }
+    }
+}
+
+//
+// kexPlayLoop::UpdateWater
+//
+
+void kexPlayLoop::UpdateWater(void)
+{
+    for(int i = 0; i < 16; i++)
+    {
+        for(int j = 0; j < 16; j++)
+        {
+            int v1 = waterVelocityPoints[(i + 1) & 15][j];
+            
+            v1 += waterVelocityPoints[(i - 1) & 15][j];
+            v1 += waterVelocityPoints[i][(j + 1) & 15];
+            v1 += waterVelocityPoints[i][(j - 1) & 15];
+            v1 -= (waterVelocityPoints[i][j] << 2);
+            v1 +=  waterAccelPoints[i][j];
+            
+            waterAccelPoints[i][j] = v1;
+        }
+    }
+    
+    for(int i = 0; i < 16; i++)
+    {
+        for(int j = 0; j < 16; j++)
+        {
+            waterVelocityPoints[i][j] += (waterAccelPoints[i][j] >> 9);
+        }
+    }
+}
+
+//
+// kexPlayLoop::GetWaterVelocityPoint
+//
+
+const int kexPlayLoop::GetWaterVelocityPoint(const int index)
+{
+    int *vel = (int*)waterVelocityPoints;
+    return vel[index & 0xff];
 }

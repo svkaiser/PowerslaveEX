@@ -31,14 +31,22 @@ public:
     void                        Draw(void);
     void                        Tick(void);
     bool                        ProcessInput(inputEvent_t *ev);
+    const int                   GetWaterVelocityPoint(const int index);
     
     const int                   Ticks(void) const { return ticks; }
+    const int                   MaxWaterMagnitude(void) { return waterMaxMagnitude; }
     
 private:
+    void                        InitWater(void);
+    void                        UpdateWater(void);
+
     int                         ticks;
     kexHud                      hud;
     kexRenderView               renderView;
     kexRenderScene              renderScene;
+    int                         waterAccelPoints[16][16];
+    int                         waterVelocityPoints[16][16];
+    int                         waterMaxMagnitude;
 };
 
 #endif
