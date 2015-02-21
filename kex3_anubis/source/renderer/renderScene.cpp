@@ -432,7 +432,7 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 
         if(world->Sectors()[face->sectorOwner].flags & SF_WATER)
         {
-            int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(face->vertStart + indices[idx]);
+            int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(vPoint.x + vPoint.z, vPoint.y + vPoint.z);
             float max = (((float)r + (float)g + (float)b) / 3) / 3;
             float c = ((float)v / (float)kexGame::cLocal->PlayLoop()->MaxWaterMagnitude()) * max;
 
@@ -449,7 +449,7 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 
         if(face->flags & FF_WATER && face->sector >= 0)
         {
-            int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(face->vertStart + indices[idx]);
+            int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(vPoint.x, vPoint.y);
             vPoint.z += (float)v / 32768.0f;
             
         }

@@ -31,7 +31,7 @@ public:
     void                        Draw(void);
     void                        Tick(void);
     bool                        ProcessInput(inputEvent_t *ev);
-    const int                   GetWaterVelocityPoint(const int index);
+    const int                   GetWaterVelocityPoint(const float x, const float y);
     
     const int                   Ticks(void) const { return ticks; }
     const int                   MaxWaterMagnitude(void) { return waterMaxMagnitude; }
