@@ -1025,22 +1025,7 @@ void kexWorld::ExplodeWallEvent(mapSector_t *sector)
             continue;
         }
 
-        for(int j = sectors[face->sector].faceStart; j < sectors[face->sector].faceEnd+3; ++j)
-        {
-            mapFace_t *f = &faces[j];
-            
-            if(!(f->flags & FF_TOGGLE))
-            {
-                continue;
-            }
-            
-            if(f->sector != face->sectorOwner)
-            {
-                continue;
-            }
-            
-            ExplodeWall(f);
-        }
+        ExplodeWallEvent(&sectors[face->sector]);
     }
 
     if(sector->event >= 0 && events[sector->event].type == 66)
