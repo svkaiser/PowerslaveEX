@@ -56,6 +56,28 @@ kexPuppet::~kexPuppet(void)
 }
 
 //
+// kexPuppet::OnDamage
+//
+
+void kexPuppet::OnDamage(kexActor *instigator)
+{
+    kexGame::cLocal->PlayLoop()->DamageFlash();
+
+    switch(kexRand::Max(3))
+    {
+    case 0:
+        PlaySound("sounds/ppain01.wav");
+        break;
+    case 1:
+        PlaySound("sounds/ppain02.wav");
+        break;
+    case 2:
+        PlaySound("sounds/ppain03.wav");
+        break;
+    }
+}
+
+//
 // kexPuppet::Jump
 //
 
@@ -512,6 +534,13 @@ void kexPlayer::Reset(void)
 
 void kexPlayer::Ready(void)
 {
+    bob = 0;
+    bobTime = 0;
+    bobSpeed = 0;
+    landTime = 0;
+    stepViewZ = 0;
+    keys = 0;
+
     weapon.ChangeAnim(WS_RAISE);
 }
 
@@ -666,6 +695,27 @@ void kexPlayer::GiveAmmo(const int weaponID, int16_t amount)
     {
         ammo[weaponID] = kexGame::cLocal->WeaponInfo(weaponID)->maxAmmo;
     }
+}
+
+//
+// kexPlayer::GiveHealth
+//
+
+bool kexPlayer::GiveHealth(const int amount)
+{
+    if(actor->Health() >= maxHealth)
+    {
+        return false;
+    }
+
+    actor->Health() += amount;
+
+    if(actor->Health() > maxHealth)
+    {
+        actor->Health() = maxHealth;
+    }
+
+    return true;
 }
 
 //

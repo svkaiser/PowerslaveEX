@@ -17,6 +17,7 @@
 
 #include "kexlib.h"
 #include "game.h"
+#include "renderMain.h"
 
 //
 // kexPlayerWeapon::kexPlayerWeapon
@@ -225,5 +226,71 @@ void kexPlayerWeapon::UpdateSprite(void)
 
     default:
         break;
+    }
+}
+
+//
+// kexPlayerWeapon::Draw
+//
+
+void kexPlayerWeapon::Draw(void)
+{
+    if(!anim)
+    {
+        return;
+    }
+
+    kexCpuVertList  *vl = kexRender::cVertList;
+    spriteFrame_t   *frame = &anim->frames[frameID];
+    spriteSet_t     *spriteSet;
+    kexSprite       *sprite;
+    spriteInfo_t    *info;
+    
+    kexRender::cScreen->SetOrtho();
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+
+    vl->BindDrawPointers();
+    const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
+
+    for(unsigned int i = 0; i < frame->spriteSet[0].Length(); ++i)
+    {
+        spriteSet = &frame->spriteSet[0][i];
+        sprite = spriteSet->sprite;
+        info = &sprite->InfoList()[spriteSet->index];
+
+        float x = (float)spriteSet->x;
+        float y = (float)spriteSet->y;
+        float w = (float)info->atlas.w;
+        float h = (float)info->atlas.h;
+        word c = 0xff;
+
+        float u1, u2, v1, v2;
+        
+        u1 = info->u[0 ^ spriteSet->bFlipped];
+        u2 = info->u[1 ^ spriteSet->bFlipped];
+        v1 = info->v[0];
+        v2 = info->v[1];
+
+        kexRender::cScreen->SetAspectDimentions(x, y, w, h);
+
+        sprite->Texture()->Bind();
+
+        x += bob_x + weaponInfo->offsetX;
+        y += bob_y + weaponInfo->offsetY;
+
+        if(!(frame->flags & SFF_FULLBRIGHT))
+        {
+            c = (owner->Actor()->Sector()->lightLevel << 1);
+
+            if(c > 255)
+            {
+                c = 255;
+            }
+        }
+
+        vl->AddQuad(x, y + 8, 0, w, h, u1, v1, u2, v2, (byte)c, (byte)c, (byte)c, 255);
+        vl->DrawElements();
     }
 }

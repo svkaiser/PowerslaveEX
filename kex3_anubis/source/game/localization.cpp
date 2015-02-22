@@ -25,6 +25,7 @@
 
 kexTranslation::kexTranslation(void)
 {
+    this->language = LNG_ENGLISH;
 }
 
 //
@@ -33,6 +34,20 @@ kexTranslation::kexTranslation(void)
 
 kexTranslation::~kexTranslation(void)
 {
+}
+
+//
+// kexTranslation::GetString
+//
+
+const char *kexTranslation::GetString(const int index)
+{
+    if(index < 0 || index > (int)strings[language].Length())
+    {
+        return NULL;
+    }
+
+    return strings[language][index].c_str();
 }
 
 //

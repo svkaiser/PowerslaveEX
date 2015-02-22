@@ -19,6 +19,24 @@
 #include "renderMain.h"
 #include "renderView.h"
 #include "game.h"
+#include "localization.h"
+
+//
+// gprint
+//
+
+COMMAND(gprint)
+{
+    int argc = kex::cCommands->GetArgc();
+
+    if(argc != 2)
+    {
+        kex::cSystem->Printf("gprint <message>\n");
+        return;
+    }
+
+    kexGame::cLocal->PlayLoop()->Print(kex::cCommands->GetArgv(1));
+}
 
 //
 // kexPlayLoop::kexPlayLoop
@@ -65,6 +83,7 @@ void kexPlayLoop::Start(void)
     renderScene.SetWorld(kexGame::cLocal->World());
 
     kexGame::cLocal->Player()->Ready();
+    hud.Reset();
     InitWater();
 }
 
@@ -91,74 +110,11 @@ void kexPlayLoop::Draw(void)
     world->FindVisibleSectors(renderView, p->Actor()->Sector());
     
     renderScene.Draw();
+
+    p->Weapon().Draw();
     
-    if(world->MapLoaded())
-    {
-        kexCpuVertList *vl = kexRender::cVertList;
-
-        {
-            static spriteAnim_t *anim = p->Weapon().Anim();
-            const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(p->CurrentWeapon());
-            
-            kexRender::cScreen->SetOrtho();
-            kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-            kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
-            kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-
-            if(anim)
-            {
-                spriteFrame_t *frame = p->Weapon().Frame();
-                spriteSet_t *spriteSet;
-                kexSprite *sprite;
-                spriteInfo_t *info;
-
-                vl->BindDrawPointers();
-
-                for(unsigned int i = 0; i < frame->spriteSet[0].Length(); ++i)
-                {
-                    spriteSet = &frame->spriteSet[0][i];
-                    sprite = spriteSet->sprite;
-                    info = &sprite->InfoList()[spriteSet->index];
-
-                    float x = (float)spriteSet->x;
-                    float y = (float)spriteSet->y;
-                    float w = (float)info->atlas.w;
-                    float h = (float)info->atlas.h;
-                    word c = 0xff;
-
-                    float u1, u2, v1, v2;
-                    
-                    u1 = info->u[0 ^ spriteSet->bFlipped];
-                    u2 = info->u[1 ^ spriteSet->bFlipped];
-                    v1 = info->v[0];
-                    v2 = info->v[1];
-
-                    kexRender::cScreen->SetAspectDimentions(x, y, w, h);
-
-                    sprite->Texture()->Bind();
-
-                    x += p->Weapon().BobX() + weaponInfo->offsetX;
-                    y += p->Weapon().BobY() + weaponInfo->offsetY;
-
-                    if(!(frame->flags & SFF_FULLBRIGHT))
-                    {
-                        c = (p->Actor()->Sector()->lightLevel << 1);
-
-                        if(c > 255)
-                        {
-                            c = 255;
-                        }
-                    }
-
-                    vl->AddQuad(x, y + 8, 0, w, h, u1, v1, u2, v2, (byte)c, (byte)c, (byte)c, 255);
-                    vl->DrawElements();
-                }
-            }
-        }
-        
-        kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
-        hud.Display();
-    }
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+    hud.Display();
 }
 
 //
@@ -171,6 +127,7 @@ void kexPlayLoop::Tick(void)
     {
         kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
+        hud.Update();
         UpdateWater();
     }
     
@@ -184,6 +141,23 @@ void kexPlayLoop::Tick(void)
 bool kexPlayLoop::ProcessInput(inputEvent_t *ev)
 {
     return false;
+}
+
+//
+// kexPlayLoop::Print
+//
+
+void kexPlayLoop::Print(const char *string)
+{
+    if(kexStr::IndexOf(string, "$str_") == 0)
+    {
+        int index = atoi(string + 5);
+
+        hud.AddMessage(kexGame::cLocal->Translation()->GetString(index));
+        return;
+    }
+
+    hud.AddMessage(string);
 }
 
 //

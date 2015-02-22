@@ -23,16 +23,39 @@ public:
     
     void                Init(void);
     void                Display(void);
+    void                Reset(void);
+    void                Update(void);
+    void                AddMessage(const char *msg);
+    void                SetDamageFlash(void) { damageFlashTicks = 192; }
+    void                SetPickupFlash(void) { pickupFlashTicks = 192; }
     
     void                SetPlayer(kexPlayer *p) { player = p; }
     
 private:
+
+    typedef struct
+    {
+        const char *msg;
+        int ticks;
+    } hudMessage_t;
+
+#define MAXMESSAGES     4
+
+    void                DrawHealthBar(void);
     void                DrawAmmoBar(void);
     void                DrawBackPic(void);
     void                DrawCompass(void);
+    void                DrawFlash(void);
+    void                DrawMessages(void);
+    void                DrawMessage(const char *msg, const float x, const float y);
     
     kexTexture          *backImage;
     kexPlayer           *player;
+    float               currentHealth;
+    hudMessage_t        messages[MAXMESSAGES];
+    int                 currentMessage;
+    int                 damageFlashTicks;
+    int                 pickupFlashTicks;
 };
 
 #endif

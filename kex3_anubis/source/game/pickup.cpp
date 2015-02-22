@@ -62,10 +62,17 @@ void kexPickup::OnTouch(kexActor *instigator)
         instigator->PlaySound(pickupSound);
     }
 
+    if(pickupMessage.Length() > 0)
+    {
+        kexGame::cLocal->PlayLoop()->Print(pickupMessage.c_str());
+    }
+
     kexActor::OnTouch(instigator);
 
     flags &= ~(AF_SOLID|AF_TOUCHABLE);
     Remove();
+
+    kexGame::cLocal->PlayLoop()->PickupFlash();
 }
 
 //
@@ -77,6 +84,7 @@ void kexPickup::Spawn(void)
     if(definition)
     {
         definition->GetString("pickupSound", pickupSound);
+        definition->GetString("pickupMessage", pickupMessage);
     }
 }
 
@@ -267,6 +275,92 @@ void kexAmmoPickup::Spawn(void)
 
         if(divisor <= 0) divisor = 1;
         if(multiplier <= 0) multiplier = 1;
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexHealthPickup
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexHealthPickup, kexPickup)
+
+//
+// kexHealthPickup::kexHealthPickup
+//
+
+kexHealthPickup::kexHealthPickup(void)
+{
+    this->giveAmount = 20;
+    this->multiplier = 1;
+}
+
+//
+// kexHealthPickup::~kexHealthPickup
+//
+
+kexHealthPickup::~kexHealthPickup(void)
+{
+}
+
+//
+// kexHealthPickup::Tick
+//
+
+void kexHealthPickup::Tick(void)
+{
+    kexPickup::Tick();
+}
+
+//
+// kexHealthPickup::OnTouch
+//
+
+void kexHealthPickup::OnTouch(kexActor *instigator)
+{
+    kexPuppet *puppet;
+    kexPlayer *player;
+    int giveHealth;
+
+    if(Removing())
+    {
+        return;
+    }
+    
+    if(!instigator->InstanceOf(&kexPuppet::info))
+    {
+        return;
+    }
+    
+    puppet = static_cast<kexPuppet*>(instigator);
+    player = puppet->Owner();
+
+    giveHealth = giveAmount;
+
+    if(scale > 1)
+    {
+        giveHealth = (int)((float)giveHealth * multiplier);
+    }
+
+    if(!player->GiveHealth(giveHealth))
+    {
+        return;
+    }
+
+    kexPickup::OnTouch(instigator);
+}
+
+//
+// kexHealthPickup::Spawn
+//
+
+void kexHealthPickup::Spawn(void)
+{
+    if(definition)
+    {
+        definition->GetInt("giveAmount", giveAmount, 20);
+        definition->GetFloat("multiplier", multiplier, 1);
     }
 }
 

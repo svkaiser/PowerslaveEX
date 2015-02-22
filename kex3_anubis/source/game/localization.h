@@ -32,9 +32,13 @@ public:
     ~kexTranslation(void);
 
     void                Init(void);
+    const char          *GetString(const int index);
+
+    void                SetLanguage(const languages_t lang) { language = lang; }
 
 private:
     kexStrList          strings[NUMLANGUAGES];
+    languages_t         language;
 };
 
 #endif

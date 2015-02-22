@@ -41,6 +41,7 @@ public:
 
     virtual void                    Tick(void);
     void                            Spawn(void);
+    virtual void                    OnDamage(kexActor *instigator);
 
     kexPlayer                       *Owner(void) { return owner; }
     unsigned int                    &PlayerFlags(void) { return playerFlags; }
@@ -76,6 +77,7 @@ public:
     void                        ConsumeAmmo(const int16_t amount);
     const int16_t               GetAmmo(const int weaponID);
     void                        GiveAmmo(const int weaponID, int16_t amount);
+    bool                        GiveHealth(const int amount);
     bool                        GiveKey(const int key);
     bool                        CheckKey(const int key) { return (keys & BIT(key)) != 0; }
 
@@ -93,6 +95,8 @@ public:
     const playerWeapons_t       CurrentWeapon(void) const { return currentWeapon; }
     void                        ChangeWeapon(void) { currentWeapon = pendingWeapon; }
     playerWeapons_t             &PendingWeapon(void) { return pendingWeapon; }
+
+    static const int16_t        maxHealth;
 
 private:
     void                        TryUse(void);
@@ -119,8 +123,6 @@ private:
 
     bool                        weapons[NUMPLAYERWEAPONS];
     int16_t                     ammo[NUMPLAYERWEAPONS];
-
-    static const int16_t        maxHealth;
 
     int16_t                     artifacts;
     int16_t                     keys;

@@ -10,6 +10,7 @@ Key_Power 29
     fullbright              1
     touchable               1
     keyType                 0
+    pickupMessage           "$str_112"
 }
 
 Key_Time 30
@@ -24,6 +25,7 @@ Key_Time 30
     fullbright              1
     touchable               1
     keyType                 1
+    pickupMessage           "$str_113"
 }
 
 Key_War 31
@@ -38,6 +40,7 @@ Key_War 31
     fullbright              1
     touchable               1
     keyType                 2
+    pickupMessage           "$str_114"
 }
 
 Key_Earth 32
@@ -52,21 +55,26 @@ Key_Earth 32
     fullbright              1
     touchable               1
     keyType                 3
+    pickupMessage           "$str_115"
 }
 
 Item_Health 40
 {
-    classname               "kexActor"
+    classname               "kexHealthPickup"
     radius                  32
     height                  32
     stepHeight              32
     scale                   1.0
     spawnAnim               "items/pickup_orb_health_idle"
+    pickupSound             "sounds/health.wav"
     fullbright              1
     touchable               1
     moveable                1
     gravity                 0.25
     floorOffset             48
+    giveAmount              20
+    multiplier              2.5
+    pickupMessage           "$str_106"
 }
 
 Item_Ammo 41
@@ -85,6 +93,7 @@ Item_Ammo 41
     divisor                 20
     multiplier              4
     floorOffset             48
+    pickupMessage           "$str_109"
 }
 
 Item_Weapon_Pistol 42
@@ -100,6 +109,7 @@ Item_Weapon_Pistol 42
     touchable               1
     weaponSlotToGive        1
     removeIfOwned           1
+    pickupMessage           "$str_93"
 }
 
 Item_Weapon_M60 43
@@ -115,4 +125,5 @@ Item_Weapon_M60 43
     touchable               1
     weaponSlotToGive        2
     removeIfOwned           1
+    pickupMessage           "$str_94"
 }

@@ -35,6 +35,7 @@ public:
 
 protected:
     kexStr                          pickupSound;
+    kexStr                          pickupMessage;
 END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------
@@ -78,6 +79,28 @@ private:
     int                             weaponSlotToGive;
     int                             divisor;
     int                             multiplier;
+END_KEX_CLASS();
+
+//-----------------------------------------------------------------------------
+//
+// kexHealthPickup
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexHealthPickup, kexPickup);
+public:
+    kexHealthPickup(void);
+    ~kexHealthPickup(void);
+
+    virtual void                    Tick(void);
+    virtual void                    OnTouch(kexActor *instigator);
+
+    void                            Spawn(void);
+
+private:
+    int                             giveAmount;
+    float                           multiplier;
+
 END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------

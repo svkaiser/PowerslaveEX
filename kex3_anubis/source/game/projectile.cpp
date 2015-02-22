@@ -73,4 +73,8 @@ void kexProjectile::OnImpact(kexActor *contactActor)
 
 void kexProjectile::Spawn(void)
 {
+    if(definition)
+    {
+        definition->GetInt("damage", damage, 0);
+    }
 }

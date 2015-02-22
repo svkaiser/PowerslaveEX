@@ -783,6 +783,7 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
         UseLockedDoor(player, ev);
         break;
     case 7:
+        kexGame::cLocal->PlayLoop()->Print("$str_92");
         break;
     case 8:
         kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
@@ -816,7 +817,7 @@ void kexWorld::UseLockedDoor(kexPlayer *player, mapEvent_t *ev)
 {
     if(!player->CheckKey(ev->type - 3))
     {
-        // TODO: print message
+        kexGame::cLocal->PlayLoop()->Print(kexStr::Format("$str_%03d", 116 + (ev->type - 3)));
         return;
     }
 

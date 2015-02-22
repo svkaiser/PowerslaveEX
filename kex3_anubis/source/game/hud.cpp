@@ -28,6 +28,8 @@ kexHud::kexHud(void)
 {
     this->backImage = NULL;
     this->player = NULL;
+    this->currentHealth = 0;
+    this->currentMessage = 0;
 }
 
 //
@@ -45,6 +47,22 @@ kexHud::~kexHud(void)
 void kexHud::Init(void)
 {
     backImage = kexRender::cTextures->Cache("gfx/hud.png", TC_CLAMP, TF_NEAREST);
+}
+
+//
+// kexHud::Reset
+//
+
+void kexHud::Reset(void)
+{
+    currentHealth = 0;
+    currentMessage = 0;
+
+    for(int i = 0; i < MAXMESSAGES; ++i)
+    {
+        messages[i].msg = NULL;
+        messages[i].ticks = 0;
+    }
 }
 
 //
@@ -68,6 +86,98 @@ void kexHud::DrawAmmoBar(void)
     vl->AddQuad(52, 222, 0, 88 * width, 8, 32, 32, 255, 255);
     vl->AddQuad(52, 222, 0, 88 * width, 1, 8, 8, 64, 255);
     vl->DrawElements();
+}
+
+//
+// kexHud::DrawHealthBar
+//
+
+void kexHud::DrawHealthBar(void)
+{
+    kexCpuVertList *vl = kexRender::cVertList;
+
+    currentHealth = ((float)player->Actor()->Health() - currentHealth) * 0.125f + currentHealth;
+    float width = currentHealth / (float)kexPlayer::maxHealth;
+
+    kexRender::cTextures->whiteTexture->Bind();
+    vl->AddQuad(193, 222, 0, 88 * width, 8, 255, 32, 32, 255);
+    vl->AddQuad(193, 222, 0, 88 * width, 1, 64, 8, 8, 255);
+    vl->DrawElements();
+}
+
+//
+// kexHud::DrawFlash
+//
+
+void kexHud::DrawFlash(void)
+{
+    kexCpuVertList *vl = kexRender::cVertList;
+
+    if(damageFlashTicks <= 0 && pickupFlashTicks <= 0)
+    {
+        return;
+    }
+
+    kexRender::cTextures->whiteTexture->Bind();
+
+    if(damageFlashTicks > 0)
+    {
+        vl->AddQuad(0, 0, 320, 240, 255, 32, 32, damageFlashTicks);
+    }
+
+    if(pickupFlashTicks > 0)
+    {
+        vl->AddQuad(0, 0, 320, 240, 32, 32, 255, pickupFlashTicks);
+    }
+
+    vl->DrawElements();
+}
+
+//
+// kexHud::DrawMessage
+//
+
+void kexHud::DrawMessage(const char *msg, const float x, const float y)
+{
+    kexFont *font = kexGame::cLocal->SmallFont();
+    float flash = (float)kexGame::cLocal->PlayLoop()->Ticks();
+    byte pulse = (byte)(kexMath::Sin(flash * 0.1f) * 64.0f) + 191;
+
+    kexGame::cLocal->DrawSmallString(msg, x, y, 1, true, pulse, pulse, pulse);
+}
+
+//
+// kexHud::DrawMessages
+//
+
+void kexHud::DrawMessages(void)
+{
+    float y = 24;
+
+    for(int i = 0; i < MAXMESSAGES; ++i)
+    {
+        int msg = ((currentMessage-1)-i)&3;
+
+        if(messages[msg].ticks <= 0)
+        {
+            break;
+        }
+
+        DrawMessage(messages[msg].msg, 160, y);
+        y += 10;
+    }
+}
+
+//
+// kexHud::AddMessage
+//
+
+void kexHud::AddMessage(const char *msg)
+{
+    messages[currentMessage].msg = msg;
+    messages[currentMessage].ticks = 300;
+
+    currentMessage = (currentMessage + 1) % MAXMESSAGES;
 }
 
 //
@@ -168,6 +278,24 @@ void kexHud::DrawBackPic(void)
 }
 
 //
+// kexHud::Update
+//
+
+void kexHud::Update(void)
+{
+    for(int i = 0; i < MAXMESSAGES; ++i)
+    {
+        if(messages[i].ticks > 0)
+        {
+            messages[i].ticks--;
+        }
+    }
+
+    if(damageFlashTicks > 0) damageFlashTicks -= 8;
+    if(pickupFlashTicks > 0) pickupFlashTicks -= 8;
+}
+
+//
 // kexHud::Display
 //
 
@@ -176,6 +304,9 @@ void kexHud::Display(void)
     kexRender::cVertList->BindDrawPointers();
     
     DrawAmmoBar();
+    DrawHealthBar();
     DrawBackPic();
     DrawCompass();
+    DrawFlash();
+    DrawMessages();
 }

@@ -30,11 +30,14 @@ public:
     void                        Stop(void);
     void                        Draw(void);
     void                        Tick(void);
+    void                        Print(const char *string);
     bool                        ProcessInput(inputEvent_t *ev);
     const int                   GetWaterVelocityPoint(const float x, const float y);
     
     const int                   Ticks(void) const { return ticks; }
     const int                   MaxWaterMagnitude(void) { return waterMaxMagnitude; }
+    void                        PickupFlash(void) { hud.SetPickupFlash(); }
+    void                        DamageFlash(void) { hud.SetDamageFlash(); }
     
 private:
     void                        InitWater(void);
