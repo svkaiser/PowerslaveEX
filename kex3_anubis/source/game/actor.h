@@ -71,6 +71,7 @@ public:
     void                            UnlinkArea(void);
     void                            ChangeAnim(spriteAnim_t *changeAnim);
     void                            ChangeAnim(const char *animName);
+    void                            ChangeAnim(const kexStr &str);
     void                            LinkSector(void);
     void                            UnlinkSector(void);
     void                            InflictDamage(kexActor *inflictor, const int amount);

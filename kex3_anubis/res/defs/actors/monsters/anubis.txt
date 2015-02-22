@@ -1,0 +1,75 @@
+AI_Anubis 1
+{
+    classname               "kexAI"
+    radius                  48
+    height                  192
+    stepHeight              48
+    scale                   1.5
+    health                  100
+    moveSpeed               8
+    spawnAnim               "monsters/anubis_idle"
+    chaseAnim               "monsters/anubis_chase"
+    painAnim                "monsters/anubis_pain"
+    meleeAnim               "monsters/anubis_melee"
+    rangeAttackAnim         "monsters/anubis_attack_range"
+    deathAnim               "monsters/anubis_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    noDropOff               1
+    painChance              128
+    sightSound              "sounds/anubisact.wav"
+}
+
+Obj_Anubis_Gib01 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/anubis_gib1"
+    moveable                1
+    expires                 1
+}
+
+Obj_Anubis_Gib02 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/anubis_gib2"
+    moveable                1
+    expires                 1
+}
+
+Obj_Anubis_Gib03 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/anubis_gib3"
+    moveable                1
+    expires                 1
+}
+
+Obj_Anubis_Gib04 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/anubis_gib4"
+    moveable                1
+    expires                 1
+}
+

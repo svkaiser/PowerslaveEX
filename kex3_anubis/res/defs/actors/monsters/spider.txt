@@ -1,73 +1,74 @@
-AI_Anubis 1
+AI_Spider 12
 {
     classname               "kexAI"
-    radius                  48
-    height                  192
+    radius                  16
+    height                  64
     stepHeight              48
-    scale                   1.5
-    health                  100
-    spawnAnim               "monsters/anubis_idle"
-    chaseAnim               "monsters/anubis_chase"
-    painAnim                "monsters/anubis_pain"
-    meleeAnim               "monsters/anubis_melee"
-    rangeAttackAnim         "monsters/anubis_attack_range"
-    deathAnim               "monsters/anubis_death"
+    scale                   1.0
+    health                  20
+    moveSpeed               4
+    painSound               "sounds/spidpain.wav"
+    spawnAnim               "monsters/spider_base"
+    chaseAnim               "monsters/spider_base"
+    meleeAnim               "monsters/spider_attack"
+    rangeAttackAnim         "monsters/spider_leap"
+    deathAnim               "monsters/spider_death"
     solid                   1
     shootable               1
     moveable                1
-    noDropOff               1
-    painChance              128
+    painChance              255
+    lookAllAround           1
+    alwaysRangeAttack       1
 }
 
-Obj_Anubis_Gib01 -1
+Obj_Spider_Gib01 -1
 {
     classname               "kexActor"
     radius                  28
     height                  56
     stepHeight              32
-    scale                   1.5
+    scale                   1.0
     health                  100
-    spawnAnim               "monsters/anubis_gib1"
+    spawnAnim               "monsters/spider_gib01"
     moveable                1
     expires                 1
 }
 
-Obj_Anubis_Gib02 -1
+Obj_Spider_Gib02 -1
 {
     classname               "kexActor"
     radius                  28
     height                  56
     stepHeight              32
-    scale                   1.5
+    scale                   1.0
     health                  100
-    spawnAnim               "monsters/anubis_gib2"
+    spawnAnim               "monsters/spider_gib02"
     moveable                1
     expires                 1
 }
 
-Obj_Anubis_Gib03 -1
+Obj_Spider_Gib03 -1
 {
     classname               "kexActor"
     radius                  28
     height                  56
     stepHeight              32
-    scale                   1.5
+    scale                   1.0
     health                  100
-    spawnAnim               "monsters/anubis_gib3"
+    spawnAnim               "monsters/spider_gib03"
     moveable                1
     expires                 1
 }
 
-Obj_Anubis_Gib04 -1
+Obj_Spider_Gib04 -1
 {
     classname               "kexActor"
     radius                  28
     height                  56
     stepHeight              32
-    scale                   1.5
+    scale                   1.0
     health                  100
-    spawnAnim               "monsters/anubis_gib4"
+    spawnAnim               "monsters/spider_gib04"
     moveable                1
     expires                 1
 }
-

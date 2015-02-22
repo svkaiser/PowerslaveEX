@@ -1,0 +1,1984 @@
+spider_base
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -26,  -48,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -30,  -44,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -28,  -41,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -33,  -38,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -28,  -38,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -30,  -41,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -30,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -26,  -48,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -29,  -45,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -27,  -41,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -32,  -38,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -29,  -38,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -31,  -41,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -31,  -44,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -26,  -48,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -28,  -45,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -26,  -41,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -31,  -38,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -30,  -38,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -32,  -41,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -32,  -44,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -24,  -48,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -29,  -44,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -27,  -41,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -32,  -38,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -32,  -38,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -33,  -41,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -29,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -24,  -48,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -30,  -44,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -28,  -41,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -33,  -38,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -31,  -38,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -32,  -41,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -28,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -24,  -48,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -30,  -44,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -29,  -41,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -33,  -38,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -31,  -38,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -30,  -41,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -28,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -23,  -47,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -28,  -41,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -33,  -38,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -26,  -41,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -30,  -41,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -30,  -43,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 18,    -25,  -46,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -23,  -47,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -27,  -41,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -32,  -38,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -26,  -41,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -31,  -41,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -31,  -44,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 0,    -27,  -46,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -23,  -47,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -26,  -41,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -31,  -38,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -26,  -41,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -32,  -41,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -32,  -44,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 3,    -21,  -46,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -24,  -47,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -27,  -41,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -32,  -38,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -23,  -42,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -33,  -41,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -29,  -43,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 6,    -22,  -44,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -24,  -47,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -28,  -41,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -33,  -38,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -23,  -42,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -32,  -41,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -28,  -43,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 9,    -25,  -48,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -24,  -47,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -29,  -41,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -33,  -38,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -23,  -42,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -30,  -41,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -28,  -43,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 6,    -23,  -44,    1 }
+            }
+        }
+    }
+}
+
+spider_attack
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -26,  -48,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -30,  -44,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -28,  -41,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -33,  -38,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -28,  -38,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -30,  -41,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -30,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -26,  -48,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -29,  -45,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -27,  -41,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -32,  -38,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -29,  -38,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -31,  -41,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -31,  -44,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -26,  -48,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -28,  -45,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -26,  -41,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -31,  -38,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -30,  -38,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -32,  -41,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -32,  -44,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -24,  -48,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -29,  -44,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -27,  -41,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -32,  -38,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -32,  -38,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -33,  -41,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -29,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -24,  -48,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -30,  -44,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -28,  -41,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -33,  -38,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -31,  -38,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -32,  -41,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -28,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -24,  -48,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -30,  -44,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -29,  -41,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -33,  -38,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -31,  -38,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -30,  -41,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -28,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -23,  -47,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -28,  -41,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -33,  -38,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -26,  -41,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -30,  -41,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -30,  -43,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 18,    -25,  -46,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -23,  -47,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -27,  -41,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -32,  -38,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -26,  -41,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -31,  -41,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -31,  -44,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 0,    -27,  -46,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 7,    -23,  -47,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -26,  -41,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 15,    -31,  -38,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -27,  -42,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -26,  -41,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 16,    -32,  -41,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 1,    -32,  -44,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 3,    -21,  -46,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -24,  -47,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -27,  -41,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -32,  -38,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -23,  -42,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -33,  -41,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -29,  -43,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 6,    -22,  -44,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -24,  -47,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -28,  -41,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -33,  -38,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -23,  -42,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -32,  -41,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -28,  -43,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 9,    -25,  -48,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        action A_CheckMelee("monsters/spider_base", 0)
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -24,  -47,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -29,  -41,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -33,  -38,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -23,  -42,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -30,  -41,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -28,  -43,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 6,    -23,  -44,    1 }
+            }
+        }
+    }
+    
+    frame
+    {
+        // ##011    0    0
+        action A_PlayLocalSound("sounds/spidchomp.wav")
+        delay 4
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 4,    -24,  -47,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -29,  -41,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 17,    -33,  -38,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 14,    -27,  -41,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 13,    -23,  -42,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 2,    -30,  -41,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 5,    -28,  -43,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 6,    -23,  -44,    1 }
+            }
+        }
+    }
+}
+
+spider_death
+{
+    frame
+    {
+        // ##000    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/spider", 18,    -25,  -46,    0 }
+        }
+    }
+    
+    frame
+    {
+        // ##000    0    0
+        delay 2
+        sprites
+        {
+            { "monsters/spider", 18,    -25,  -46,    0 }
+        }
+    }
+    
+    frame
+    {
+        // ##000    0    0
+        action A_Destroy()
+        action A_SpiderDeath()
+        action A_TossActor("Obj_Spider_Gib01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Spider_Gib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Spider_Gib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Spider_Gib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Spider_Gib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Spider_Gib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Spider_Gib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Spider_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Spider_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        sprites
+        {
+            { "monsters/spider", 18,    -25,  -46,    0 }
+        }
+    }
+}
+
+spider_leap
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        action A_SpiderLeap()
+        goto "monsters/spider_check_ground"
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 18,    -25,  -46,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 0,    -27,  -46,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 3,    -21,  -46,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 6,    -22,  -44,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 9,    -25,  -48,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 6,    -23,  -44,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 3,    -23,  -46,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 0,    -28,  -46,    1 }
+            }
+        }
+
+    }
+}
+
+spider_check_ground
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        action A_SpiderCheckGround()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/spider", 18,    -25,  -46,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/spider", 0,    -27,  -46,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/spider", 3,    -21,  -46,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/spider", 6,    -22,  -44,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/spider", 9,    -25,  -48,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/spider", 6,    -23,  -44,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/spider", 3,    -23,  -46,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/spider", 0,    -28,  -46,    1 }
+            }
+        }
+
+    }
+}
+
+spider_gib01
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+          sprites
+          {
+              { "monsters/spider", 8,     -5,   -4,    0 }
+        }
+
+    }
+
+}
+
+spider_gib02
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+          sprites
+          {
+              { "monsters/spider", 10,     -4,   -7,    0 }
+        }
+
+    }
+
+}
+
+spider_gib03
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+          sprites
+          {
+              { "monsters/spider", 11,     -4,   -5,    0 }
+        }
+
+    }
+
+}
+
+spider_gib04
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+          sprites
+          {
+              { "monsters/spider", 12,     -1,   -3,    0 }
+        }
+
+    }
+
+}

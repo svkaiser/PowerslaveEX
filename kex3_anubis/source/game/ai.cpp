@@ -86,6 +86,7 @@ kexAI::kexAI(void)
     this->timeBeforeTurning = 0;
     this->aiFlags = 0;
     this->painChance = 0xff;
+    this->moveSpeed = 8;
 }
 
 //
@@ -152,9 +153,14 @@ void kexAI::OnDamage(kexActor *instigator)
         return;
     }
 
-    if(!target && instigator != this)
+    if(!target && instigator != this && instigator->Flags() & AF_SHOOTABLE)
     {
         SetTarget(instigator);
+
+        if(state == AIS_IDLE && anim != chaseAnim)
+        {
+            StartChasing();
+        }
     }
     
     if(kexRand::Max(255) < painChance)
@@ -177,10 +183,13 @@ bool kexAI::CheckTargetSight(kexActor *actor)
     if(kexMath::Fabs(origin.x - actor->Origin().x) >= 3000) return false;
     if(kexMath::Fabs(origin.y - actor->Origin().y) >= 3000) return false;
 
-    if(kexMath::Fabs(yaw.Diff(kexMath::ATan2(actor->Origin().x - origin.x,
-                                             actor->Origin().y - origin.y))) > 0.785f)
+    if(!(aiFlags & AIF_LOOKALLAROUND))
     {
-        return false;
+        if(kexMath::Fabs(yaw.Diff(kexMath::ATan2(actor->Origin().x - origin.x,
+                                                 actor->Origin().y - origin.y))) > 0.785f)
+        {
+            return false;
+        }
     }
 
     kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
@@ -230,9 +239,13 @@ void kexAI::StartPain(void)
     if(painAnim && anim != painAnim)
     {
         ChangeAnim(painAnim);
+        state = AIS_PAIN;
     }
-    
-    state = AIS_PAIN;
+
+    if(painSound.Length() > 0)
+    {
+        PlaySound(painSound);
+    }
 }
 
 //
@@ -287,6 +300,11 @@ void kexAI::LookForTarget(void)
     
     if(CheckTargetSight(targ))
     {
+        if(sightSound.Length() > 0)
+        {
+            PlaySound(sightSound);
+        }
+
         SetTarget(targ);
         StartChasing();
     }
@@ -325,7 +343,7 @@ bool kexAI::CheckRangeAttack(void)
 {
     kexActor *targ = static_cast<kexActor*>(target);
     
-    if(!attackAnim || !CheckTargetSight(targ) ||
+    if(!attackAnim || (!CheckTargetSight(targ) && !(aiFlags & AIF_ALWAYSRANGEATTACK)) ||
         (kexRand::Int() & 30) != (kexGame::cLocal->PlayLoop()->Ticks() & 30))
     {
         return false;
@@ -591,7 +609,7 @@ void kexAI::ChaseTarget(void)
         return;
     }
     
-    movement = forward * 8;
+    movement = forward * moveSpeed;
 }
 
 //
@@ -627,6 +645,12 @@ void kexAI::Spawn(void)
         kexStr animName;
 
         definition->GetInt("painChance", painChance, 0xff);
+        definition->GetFloat("moveSpeed", moveSpeed, 8);
+        definition->GetString("painSound", painSound);
+        definition->GetString("sightSound", sightSound);
+
+        if(definition->GetBool("lookAllAround"))        aiFlags |= AIF_LOOKALLAROUND;
+        if(definition->GetBool("alwaysRangeAttack"))    aiFlags |= AIF_ALWAYSRANGEATTACK;
         
         if(definition->GetString("chaseAnim", animName))
         {

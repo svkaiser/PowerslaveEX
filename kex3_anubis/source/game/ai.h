@@ -44,7 +44,9 @@ typedef enum
 
 typedef enum
 {
-    AIF_TURNING = BIT(0)
+    AIF_TURNING             = BIT(0),
+    AIF_LOOKALLAROUND       = BIT(1),
+    AIF_ALWAYSRANGEATTACK   = BIT(2)
 } aiFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -89,6 +91,8 @@ private:
     spriteAnim_t                    *painAnim;
     spriteAnim_t                    *meleeAnim;
     spriteAnim_t                    *attackAnim;
+    kexStr                          painSound;
+    kexStr                          sightSound;
     aiState_t                       state;
     unsigned int                    aiFlags;
     float                           thinkTime;
@@ -97,6 +101,7 @@ private:
     kexAngle                        desiredYaw;
     float                           turnAmount;
     int                             painChance;
+    float                           moveSpeed;
 END_KEX_CLASS();
 
 #endif

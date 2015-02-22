@@ -258,11 +258,6 @@ void kexActor::ChangeAnim(spriteAnim_t *changeAnim)
         return;
     }
     
-    if(anim == changeAnim)
-    {
-        return;
-    }
-    
     anim = changeAnim;
     frameID = 0;
     ticks = 0;
@@ -284,6 +279,23 @@ void kexActor::ChangeAnim(const char *animName)
     if(sprAnim == NULL)
     {
         kex::cSystem->Warning("kexActor::ChangeAnim - %s not found\n", animName);
+        return;
+    }
+    
+    ChangeAnim(sprAnim);
+}
+
+//
+// kexActor::ChangeAnim
+//
+
+void kexActor::ChangeAnim(const kexStr &str)
+{
+    spriteAnim_t *sprAnim = kexGame::cLocal->SpriteAnimManager()->Get(str.c_str());
+    
+    if(sprAnim == NULL)
+    {
+        kex::cSystem->Warning("kexActor::ChangeAnim - %s not found\n", str.c_str());
         return;
     }
     

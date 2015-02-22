@@ -441,7 +441,7 @@ void kexPuppet::Spawn(void)
     stepHeight  = 48;
     health      = 200;
     friction    = 0.9375f;
-    flags       = AF_SOLID;
+    flags       = (AF_SOLID|AF_SHOOTABLE);
 }
 
 //-----------------------------------------------------------------------------

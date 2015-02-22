@@ -1,0 +1,59 @@
+texture "sprites/monsters/spider.png"
+
+// working\spider\sprite0580.tga
+sprite 0 0 0 56 46
+
+// working\spider\sprite0581.tga
+sprite 1 56 0 60 44
+
+// working\spider\sprite0582.tga
+sprite 2 116 0 60 39
+
+// working\spider\sprite0583.tga
+sprite 3 176 0 44 46
+
+// working\spider\sprite0584.tga
+sprite 4 116 39 52 47
+
+// working\spider\sprite0585.tga
+sprite 5 56 44 60 43
+
+// working\spider\sprite0586.tga
+sprite 6 0 46 48 44
+
+// working\spider\sprite0587.tga
+sprite 7 168 46 52 47
+
+// working\spider\sprite0588.tga
+sprite 8 220 0 8 4
+
+// working\spider\sprite0589.tga
+sprite 9 116 86 48 48
+
+// working\spider\sprite0590.tga
+sprite 10 228 0 8 7
+
+// working\spider\sprite0591.tga
+sprite 11 236 0 16 5
+
+// working\spider\sprite0592.tga
+sprite 12 236 5 12 9
+
+// working\spider\sprite0593.tga
+sprite 13 48 87 52 42
+
+// working\spider\sprite0594.tga
+sprite 14 164 93 52 41
+
+// working\spider\sprite0595.tga
+sprite 15 0 129 60 37
+
+// working\spider\sprite0596.tga
+sprite 16 60 134 60 41
+
+// working\spider\sprite0597.tga
+sprite 17 120 134 64 38
+
+// working\spider\sprite0598.tga
+sprite 18 184 134 52 46
+

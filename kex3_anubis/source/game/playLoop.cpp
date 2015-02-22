@@ -251,7 +251,7 @@ const int kexPlayLoop::GetWaterVelocityPoint(const float x, const float y)
     int *vel = (int*)waterVelocityPoints;
     int ix = (int)x;
     int iy = (int)y;
-    int index = ((((ix + iy) >> 4) & 60) + (ix & 960)) / 4;
+    int index = ((((ix + iy) >> 4) & 60) + (ix & 960)) >> 2;
 
     return vel[index & 0xff];
 }
