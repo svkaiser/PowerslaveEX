@@ -24,6 +24,7 @@ typedef enum
 {
     AT_INVALID      = -1,
     AT_PLAYER       = 0,
+    AT_IGNITEFLAME  = 24,
     AT_EXPLODEPUFF  = 62,
     AT_DEBRIS       = 123,
     AT_WATERSPLASH  = 124,
@@ -64,6 +65,7 @@ public:
     virtual void                    OnRemove(void);
     virtual void                    OnTouch(kexActor *instigator);
     virtual void                    OnDamage(kexActor *instigator);
+    virtual void                    OnDeath(kexActor *instigator);
 
     void                            Spawn(void);
     bool                            FindSector(const kexVec3 &pos);

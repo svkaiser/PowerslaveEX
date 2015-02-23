@@ -78,3 +78,84 @@ void kexProjectile::Spawn(void)
         definition->GetInt("damage", damage, 0);
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// kexProjectileFlame
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexProjectileFlame, kexProjectile)
+
+//
+// kexProjectileFlame::kexProjectileFlame
+//
+
+kexProjectileFlame::kexProjectileFlame(void)
+{
+    this->fizzleTime = 0;
+    this->lifeTime = 50;
+}
+
+//
+// kexProjectileFlame::~kexProjectileFlame
+//
+
+kexProjectileFlame::~kexProjectileFlame(void)
+{
+}
+
+//
+// kexProjectileFlame::Tick
+//
+
+void kexProjectileFlame::Tick(void)
+{
+    if(Removing())
+    {
+        return;
+    }
+
+    kexActor::Tick();
+
+    if(anim == deathAnim)
+    {
+        return;
+    }
+
+    fizzleTime += 0.5f;
+    scale += ((5000 - ((fizzleTime * 65536) / 512)) / 128) / 512;
+
+    if(fizzleTime >= (float)lifeTime)
+    {
+        Remove();
+    }
+}
+
+//
+// kexProjectileFlame::OnImpact
+//
+
+void kexProjectileFlame::OnImpact(kexActor *contactActor)
+{
+    if(contactActor && contactActor->InstanceOf(&kexAI::info))
+    {
+        static_cast<kexAI*>(contactActor)->Ignite(this);
+    }
+
+    kexProjectile::OnImpact(contactActor);
+}
+
+//
+// kexProjectileFlame::Spawn
+//
+
+void kexProjectileFlame::Spawn(void)
+{
+    if(definition)
+    {
+        definition->GetInt("lifeTime", lifeTime, 50);
+    }
+
+    fizzleTime = 0;
+}

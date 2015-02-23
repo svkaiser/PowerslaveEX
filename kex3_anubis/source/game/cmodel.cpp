@@ -549,6 +549,12 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         // performing ray-trace tests.
         if(moveActor)
         {
+            if(moveActor->InstanceOf(&kexProjectile::info) && actor == moveActor->Target())
+            {
+                // don't let projectiles collide with its source/owner
+                continue;
+            }
+
             r = (actor->Radius() + moveActor->Radius()) * 2;
 
             // make sure that we are within range

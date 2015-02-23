@@ -87,6 +87,12 @@ kexAI::kexAI(void)
     this->aiFlags = 0;
     this->painChance = 0xff;
     this->moveSpeed = 8;
+
+    for(int i = 0; i < 4; ++i)
+    {
+        this->igniteFlames[i] = NULL;
+        this->igniteTicks[i] = -1;
+    }
 }
 
 //
@@ -134,11 +140,40 @@ void kexAI::Tick(void)
         default:
             break;
         }
-        
+
+        UpdateBurn();
         curThinkTime = 1;
     }
     
     kexActor::Tick();
+}
+
+//
+// kexAI::OnRemove
+//
+
+void kexAI::OnRemove(void)
+{
+    kexActor::OnRemove();
+}
+
+//
+// kexActor::OnDeath
+//
+
+void kexAI::OnDeath(kexActor *instigator)
+{
+    for(int i = 0; i < 4; ++i)
+    {
+        if(igniteFlames[i] == NULL)
+        {
+            continue;
+        }
+
+        igniteFlames[i]->Remove();
+        igniteFlames[i] = NULL;
+        igniteTicks[i] = -1;
+    }
 }
 
 //
@@ -166,6 +201,48 @@ void kexAI::OnDamage(kexActor *instigator)
     if(kexRand::Max(255) < painChance)
     {
         StartPain();
+    }
+}
+
+//
+// kexAI::UpdateBurn
+//
+
+void kexAI::UpdateBurn(void)
+{
+    int cnt = 0;
+
+    if(!(aiFlags & AIF_ONFIRE) || state == AIS_PAIN)
+    {
+        return;
+    }
+
+    for(int i = 0; i < 4; ++i)
+    {
+        if(igniteTicks[i] <= -1 || igniteFlames[i] == NULL)
+        {
+            continue;
+        }
+
+        if(--igniteTicks[i] < 0)
+        {
+            igniteFlames[i]->Remove();
+            igniteFlames[i] = NULL;
+            igniteTicks[i] = -1;
+            continue;
+        }
+
+        cnt++;
+
+        if(!(kexRand::Int() & 7))
+        {
+            InflictDamage(static_cast<kexActor*>(igniteFlames[i]->Target()), 9);
+        }
+    }
+
+    if(cnt == 0)
+    {
+        aiFlags &= ~AIF_ONFIRE;
     }
 }
 
@@ -562,6 +639,48 @@ void kexAI::ChangeDirection(void)
 }
 
 //
+// kexAI::Ignite
+//
+
+void kexAI::Ignite(kexProjectileFlame *instigator)
+{
+    int i;
+
+    if(!(kexRand::Int() & 1))
+    {
+        return;
+    }
+
+    aiFlags |= AIF_ONFIRE;
+
+    if(!target)
+    {
+        SetTarget(instigator->Target());
+    }
+
+    for(i = 0; i < 4; ++i)
+    {
+        if(igniteTicks[i] <= -1 && igniteFlames[i] == NULL)
+        {
+            float x, y, z;
+            kexActor *ignite;
+
+            igniteTicks[i] = kexRand::Max(64) + 8;
+
+            x = origin.x + (kexRand::Float() * (radius*0.5f));
+            y = origin.y + (kexRand::Float() * (radius*0.5f));
+            z = origin.z + stepHeight + (kexRand::Float() * (height*0.35f));
+
+            ignite = kexGame::cLocal->SpawnActor(AT_IGNITEFLAME, x, y, z, 0, SectorIndex());
+            ignite->SetTarget(instigator->Target());
+
+            igniteFlames[i] = ignite;
+            break;
+        }
+    }
+}
+
+//
 // kexAI::ChaseTarget
 //
 
@@ -630,6 +749,20 @@ void kexAI::UpdateMovement(void)
             velocity.Clear();
         }
         
+        if(aiFlags & AIF_ONFIRE)
+        {
+            for(int i = 0; i < 4; ++i)
+            {
+                if(igniteFlames[i] == NULL)
+                {
+                    continue;
+                }
+
+                igniteFlames[i]->Origin() += movement;
+                igniteFlames[i]->SetSector(sector);
+            }
+        }
+
         movement.Clear();
     }
 }

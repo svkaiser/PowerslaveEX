@@ -512,10 +512,15 @@ DECLARE_KEX_ACTION(kexActionSpawnProjectile)
     proj = game->SpawnActor(defName, x, y, z + offset, actor->Yaw(),
                             actor->Sector() - game->World()->Sectors());
     
-    kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), 0, 0);
+    kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), actor->Pitch(), 0);
     
     proj->Velocity() = (forward * speed);
     proj->SetTarget(actor);
+
+    if(actor->InstanceOf(&kexPuppet::info))
+    {
+        return;
+    }
     
     if(!actor->Target() || speed == 0)
     {

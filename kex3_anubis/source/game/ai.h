@@ -46,7 +46,8 @@ typedef enum
 {
     AIF_TURNING             = BIT(0),
     AIF_LOOKALLAROUND       = BIT(1),
-    AIF_ALWAYSRANGEATTACK   = BIT(2)
+    AIF_ALWAYSRANGEATTACK   = BIT(2),
+    AIF_ONFIRE              = BIT(3)
 } aiFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -62,15 +63,22 @@ public:
 
     virtual void                    Tick(void);
     virtual void                    OnDamage(kexActor *instigator);
+    virtual void                    OnRemove(void);
+    virtual void                    OnDeath(kexActor *instigator);
     virtual void                    UpdateMovement(void);
+
     void                            Spawn(void);
+
     void                            FaceTarget(kexActor *targ = NULL);
+    void                            Ignite(kexProjectileFlame *instigator);
 
     aiState_t                       &State(void) { return state; }
+    unsigned int                    &AIFlags(void) { return aiFlags; }
 
     static bool                     bNoTargetEnemy;
 
 private:
+    void                            UpdateBurn(void);
     bool                            SetDesiredDirection(const int dir);
     void                            ChangeStateFromAnim(void);
     bool                            CheckMeleeRange(void);
@@ -102,6 +110,8 @@ private:
     float                           turnAmount;
     int                             painChance;
     float                           moveSpeed;
+    int                             igniteTicks[4];
+    kexActor                        *igniteFlames[4];
 END_KEX_CLASS();
 
 #endif

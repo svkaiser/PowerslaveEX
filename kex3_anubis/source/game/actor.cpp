@@ -360,6 +360,14 @@ void kexActor::OnDamage(kexActor *instigator)
 }
 
 //
+// kexActor::OnDeath
+//
+
+void kexActor::OnDeath(kexActor *instigator)
+{
+}
+
+//
 // kexActor::InflictDamage
 //
 
@@ -382,6 +390,7 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
         {
             flags &= AF_SHOOTABLE;
             ChangeAnim(deathAnim);
+            OnDeath(inflictor);
         }
     }
 }

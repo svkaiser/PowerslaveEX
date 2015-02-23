@@ -19,7 +19,7 @@
 
 //-----------------------------------------------------------------------------
 //
-// kexPickup
+// kexProjectile
 //
 //-----------------------------------------------------------------------------
 
@@ -37,6 +37,27 @@ public:
 
 private:
     int                             damage;
+END_KEX_CLASS();
+
+//-----------------------------------------------------------------------------
+//
+// kexProjectileFlame
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexProjectileFlame, kexProjectile);
+public:
+    kexProjectileFlame(void);
+    ~kexProjectileFlame(void);
+
+    virtual void                    Tick(void);
+    virtual void                    OnImpact(kexActor *contactActor);
+
+    void                            Spawn(void);
+
+private:
+    float                           fizzleTime;
+    int                             lifeTime;
 END_KEX_CLASS();
 
 #endif

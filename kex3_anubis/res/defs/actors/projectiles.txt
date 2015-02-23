@@ -25,3 +25,20 @@ Proj_Anubis 18
     gravity                 0
     damage                  20
 }
+
+Proj_Flame 21
+{
+    classname               "kexProjectileFlame"
+    radius                  36
+    height                  36
+    stepHeight              36
+    scale                   0.25
+    spawnAnim               "projectiles/flameproj_loop"
+    deathAnim               "projectiles/flameproj_sizzle"
+    fullbright              1
+    moveable                1
+    randomizeFrames         1
+    gravity                 0
+    damage                  5
+    lifeTime                30
+}

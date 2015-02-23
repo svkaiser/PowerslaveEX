@@ -116,6 +116,7 @@ flamethrower_raise
     frame
     {
         // ##008   67    0
+        action A_PlayLocalSound("sounds/fthrowup.wav")
         sprites
         {
             { "weapons/flamethrower", 7,     -5,    7,    0 }
@@ -343,6 +344,7 @@ flamethrower_lower
     frame
     {
         // ##000   68    0
+        action A_PlayLocalSound("sounds/fthrowdown.wav")
         sprites
         {
             { "weapons/flamethrower", 6,     -5,    0,    0 }
@@ -525,6 +527,8 @@ flamethrower_fire
     frame
     {
         // ##000    0  128
+        action A_FireProjectile("Proj_Flame", 0, 0, -48, 80, 16)
+        action A_ConsumeAmmo(1)
         fullbright
         sprites
         {
@@ -541,6 +545,7 @@ flamethrower_fire
     frame
     {
         // ##001    0  128
+        action A_FireProjectile("Proj_Flame", 0, 0, -48, 80, 16)
         fullbright
         sprites
         {
@@ -557,6 +562,7 @@ flamethrower_fire
     frame
     {
         // ##002    0  128
+        action A_FireProjectile("Proj_Flame", 0, 0, -48, 80, 16)
         fullbright
         sprites
         {
@@ -574,6 +580,8 @@ flamethrower_fire
     {
         // ##003    0  128
         fullbright
+        action A_FireProjectile("Proj_Flame", 0, 0, -48, 80, 16)
+        
         goto "weapons/flamethrower_idle"
         refire "weapons/flamethrower_fire"
         sprites

@@ -1,3 +1,14 @@
+Fx_Sizzle 24
+{
+    classname               "kexActor"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "effects/flame_burn"
+    fullbright              1
+}
+
 Fx_BulletPuff 59
 {
     classname               "kexActor"
