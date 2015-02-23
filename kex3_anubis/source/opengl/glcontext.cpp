@@ -35,9 +35,6 @@ GL_ARB_vertex_buffer_object_Define();
 GL_ARB_shader_objects_Define();
 GL_ARB_framebuffer_object_Define();
 
-PFNGLBLENDCOLORPROC _glBlendColor = NULL;
-PFNGLBLENDEQUATIONPROC _glBlendEquation = NULL;
-
 static kexGLContext glcontext;
 kexGLContext *kex::cGLContext = &glcontext;
 
@@ -64,9 +61,6 @@ void kexGLContext::Init(void)
     GL_ARB_vertex_buffer_object_Init();
     GL_ARB_shader_objects_Init();
     GL_ARB_framebuffer_object_Init();
-
-    _glBlendColor = (PFNGLBLENDCOLORPROC)RegisterProc("glBlendColor");
-    _glBlendEquation = (PFNGLBLENDEQUATIONPROC)RegisterProc("glBlendEquation");
 
     kex::cSystem->Printf("OpenGL Initialized\n");
 }

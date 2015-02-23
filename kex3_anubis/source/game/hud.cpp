@@ -139,7 +139,6 @@ void kexHud::DrawFlash(void)
 
 void kexHud::DrawMessage(const char *msg, const float x, const float y)
 {
-    kexFont *font = kexGame::cLocal->SmallFont();
     float flash = (float)kexGame::cLocal->PlayLoop()->Ticks();
     byte pulse = (byte)(kexMath::Sin(flash * 0.1f) * 64.0f) + 191;
 
