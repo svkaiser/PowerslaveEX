@@ -14,6 +14,7 @@
 		419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419C3BB21A89100400C19D68 /* actionDef.cpp */; };
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
+		41B5F0FE1A9BA76600698014 /* spring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F0FC1A9BA76600698014 /* spring.cpp */; };
 		41B5F1881A9251C80016327B /* projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1861A9251C80016327B /* projectile.cpp */; };
 		41B5F1901A926BC00016327B /* hud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F18E1A926BC00016327B /* hud.cpp */; };
 		41B776571A83E850008C8F23 /* scriptSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B776551A83E850008C8F23 /* scriptSystem.cpp */; };
@@ -176,6 +177,8 @@
 		41B3A5481A5DEE84006DCCB9 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
 		41B3A54A1A5DEEBC006DCCB9 /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = console.cpp; sourceTree = "<group>"; };
 		41B3A54B1A5DEEBC006DCCB9 /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = console.h; sourceTree = "<group>"; };
+		41B5F0FC1A9BA76600698014 /* spring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spring.cpp; path = ../../source/game/spring.cpp; sourceTree = "<group>"; };
+		41B5F0FD1A9BA76600698014 /* spring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spring.h; path = ../../source/game/spring.h; sourceTree = "<group>"; };
 		41B5F1861A9251C80016327B /* projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = projectile.cpp; path = ../../source/game/projectile.cpp; sourceTree = "<group>"; };
 		41B5F1871A9251C80016327B /* projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = projectile.h; path = ../../source/game/projectile.h; sourceTree = "<group>"; };
 		41B5F18E1A926BC00016327B /* hud.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hud.cpp; path = ../../source/game/hud.cpp; sourceTree = "<group>"; };
@@ -425,6 +428,7 @@
 				41B5F1861A9251C80016327B /* projectile.cpp */,
 				41BCC0601A6EBACB00F8B3FA /* pWeapon.cpp */,
 				41C7FC3A1A5AFB84003864CB /* session.cpp */,
+				41B5F0FC1A9BA76600698014 /* spring.cpp */,
 				41B817331A6D6EF500151622 /* sprite.cpp */,
 				41B817351A6D6EF500151622 /* spriteAnim.cpp */,
 				41C7FC3C1A5AFB84003864CB /* titlescreen.cpp */,
@@ -446,6 +450,7 @@
 				41B5F1871A9251C80016327B /* projectile.h */,
 				41BCC0611A6EBACB00F8B3FA /* pWeapon.h */,
 				41C7FC3B1A5AFB84003864CB /* session.h */,
+				41B5F0FD1A9BA76600698014 /* spring.h */,
 				41B817341A6D6EF500151622 /* sprite.h */,
 				41B817361A6D6EF500151622 /* spriteAnim.h */,
 				41C7FC3D1A5AFB84003864CB /* titlescreen.h */,
@@ -842,6 +847,7 @@
 				41C979F91A642CCA00E9C798 /* cmodel.cpp in Sources */,
 				41C7FC241A5AFB6E003864CB /* kpf.cpp in Sources */,
 				41B7765F1A83EB0A008C8F23 /* refObject.cpp in Sources */,
+				41B5F0FE1A9BA76600698014 /* spring.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,
 				41C7FC6D1A5AFB98003864CB /* renderView.cpp in Sources */,
 				41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */,
