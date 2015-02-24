@@ -176,6 +176,11 @@ public:
         spriteAnim_t            *lower;
         spriteAnim_t            *idle;
         spriteAnim_t            *fire;
+        spriteAnim_t            *flame;
+        spriteAnim_t            *ammoIdle[3];
+        spriteAnim_t            *ammoRaise[3];
+        spriteAnim_t            *ammoLower[3];
+        spriteAnim_t            *ammoFire[3];
     } weaponInfo_t;
     
     kexTitleScreen              *TitleScreen(void) { return titleScreen; }

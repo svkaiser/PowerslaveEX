@@ -59,6 +59,8 @@ public:
     const int               VertexCount(void) const { return vertexCount; }
     const int               IndiceCount(void) const { return indiceCount; }
 
+    float                   *DrawVertices(void) { return drawVertices; }
+
 private:
     word                    indiceCount;
     word                    vertexCount;

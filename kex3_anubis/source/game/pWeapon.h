@@ -40,6 +40,7 @@ public:
     kexPlayer                   *Owner(void) { return owner; }
 
 private:
+    void                        DrawAnimFrame(spriteAnim_t *sprAnim);
     void                        UpdateBob(void);
     void                        UpdateSprite(void);
 

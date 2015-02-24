@@ -30,6 +30,15 @@ Wep_M60 2
     raiseAnim               "weapons/m60_raise"
     lowerAnim               "weapons/m60_lower"
     fireAnim                "weapons/m60_fire"
+    ammoIdle_Full           "weapons/m60_rounds_idle_100"
+    ammoLower_Full          "weapons/m60_rounds_lower_100"
+    ammoRaise_Full          "weapons/m60_raise_100"
+    ammoFire_Full           "weapons/m60_rounds_fire_100"
+    ammoIdle_Half           "weapons/m60_rounds_idle_50"
+    ammoLower_Half          "weapons/m60_rounds_lower_50"
+    ammoRaise_Half          "weapons/m60_raise_50"
+    ammoFire_Half           "weapons/m60_rounds_fire_50"
+    ammoFire_Zero           "weapons/m60_rounds_fire_0"
 }
 
 Wep_Bombs 3
@@ -52,6 +61,7 @@ Wep_FlameThrower 4
     raiseAnim               "weapons/flamethrower_raise"
     lowerAnim               "weapons/flamethrower_lower"
     fireAnim                "weapons/flamethrower_fire"
+    flameAnim               "weapons/flamethrower_fire_idle"
 }
 
 Wep_CobraStaff 5

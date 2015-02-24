@@ -91,25 +91,27 @@ void kexPlayerWeapon::ChangeAnim(const char *animName)
 
 void kexPlayerWeapon::ChangeAnim(const weaponState_t changeState)
 {
+    const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
+
     switch(changeState)
     {
     case WS_IDLE:
-        ChangeAnim(kexGame::cLocal->WeaponInfo(owner->CurrentWeapon())->idle);
+        ChangeAnim(weaponInfo->idle);
         state = WS_IDLE;
         break;
 
     case WS_RAISE:
-        ChangeAnim(kexGame::cLocal->WeaponInfo(owner->CurrentWeapon())->raise);
+        ChangeAnim(weaponInfo->raise);
         state = WS_RAISE;
         break;
 
     case WS_LOWER:
-        ChangeAnim(kexGame::cLocal->WeaponInfo(owner->CurrentWeapon())->lower);
+        ChangeAnim(weaponInfo->lower);
         state = WS_LOWER;
         break;
 
     case WS_FIRE:
-        ChangeAnim(kexGame::cLocal->WeaponInfo(owner->CurrentWeapon())->fire);
+        ChangeAnim(weaponInfo->fire);
         state = WS_FIRE;
         break;
 
@@ -230,29 +232,30 @@ void kexPlayerWeapon::UpdateSprite(void)
 }
 
 //
-// kexPlayerWeapon::Draw
+// kexPlayerWeapon::DrawAnimFrame
 //
 
-void kexPlayerWeapon::Draw(void)
+void kexPlayerWeapon::DrawAnimFrame(spriteAnim_t *sprAnim)
 {
-    if(!anim)
+    int frm = frameID;
+
+    if(!sprAnim)
     {
         return;
     }
 
+    const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
+
+    if(sprAnim == weaponInfo->flame && sprAnim->NumFrames() > 0)
+    {
+        frm = (kex::cSession->GetTicks() >> 1) % sprAnim->NumFrames();
+    }
+
     kexCpuVertList  *vl = kexRender::cVertList;
-    spriteFrame_t   *frame = &anim->frames[frameID];
+    spriteFrame_t   *frame = &sprAnim->frames[frm];
     spriteSet_t     *spriteSet;
     kexSprite       *sprite;
     spriteInfo_t    *info;
-    
-    kexRender::cScreen->SetOrtho();
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
-    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-
-    vl->BindDrawPointers();
-    const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
 
     for(unsigned int i = 0; i < frame->spriteSet[0].Length(); ++i)
     {
@@ -292,5 +295,69 @@ void kexPlayerWeapon::Draw(void)
 
         vl->AddQuad(x, y + 8, 0, w, h, u1, v1, u2, v2, (byte)c, (byte)c, (byte)c, 255);
         vl->DrawElements();
+    }
+}
+
+//
+// kexPlayerWeapon::Draw
+//
+
+void kexPlayerWeapon::Draw(void)
+{
+    const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
+    int which, ammo;
+    
+    kexRender::cScreen->SetOrtho();
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+
+    kexRender::cVertList->BindDrawPointers();
+    ammo = owner->GetAmmo(owner->CurrentWeapon());
+
+    if(state == WS_IDLE)
+    {
+        DrawAnimFrame(weaponInfo->flame);
+    }
+
+    if(ammo <= 0)
+    {
+        which = 2;
+    }
+    else if(ammo == 1)
+    {
+        which = 1;
+    }
+    else
+    {
+        which = 0;
+    }
+
+    if(state == WS_RAISE && weaponInfo->ammoRaise[which] && which != 2)
+    {
+        // nothing
+    }
+    else
+    {
+        DrawAnimFrame(anim);
+    }
+
+    switch(state)
+    {
+    case WS_IDLE:
+        DrawAnimFrame(weaponInfo->ammoIdle[which]);
+        break;
+
+    case WS_RAISE:
+        DrawAnimFrame(weaponInfo->ammoRaise[which]);
+        break;
+
+    case WS_LOWER:
+        DrawAnimFrame(weaponInfo->ammoLower[which]);
+        break;
+
+    case WS_FIRE:
+        DrawAnimFrame(weaponInfo->ammoFire[which]);
+        break;
     }
 }

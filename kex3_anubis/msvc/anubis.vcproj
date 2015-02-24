@@ -473,6 +473,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\spring.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\sprite.cpp"
 					>
 				</File>
@@ -816,6 +820,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\session.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\spring.h"
 					>
 				</File>
 				<File

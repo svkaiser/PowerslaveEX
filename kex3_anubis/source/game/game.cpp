@@ -317,10 +317,23 @@ void kexGameLocal::InitWeaponDefs(void)
         dict->GetFloat("offsetX", weapon->offsetX, 0);
         dict->GetFloat("offsetY", weapon->offsetY, 0);
         
-        if(dict->GetString("idleAnim", animName))   weapon->idle = spriteAnimManager->Get(animName);
-        if(dict->GetString("raiseAnim", animName))  weapon->raise = spriteAnimManager->Get(animName);
-        if(dict->GetString("lowerAnim", animName))  weapon->lower = spriteAnimManager->Get(animName);
-        if(dict->GetString("fireAnim", animName))   weapon->fire = spriteAnimManager->Get(animName);
+        if(dict->GetString("idleAnim", animName))       weapon->idle         = spriteAnimManager->Get(animName);
+        if(dict->GetString("raiseAnim", animName))      weapon->raise        = spriteAnimManager->Get(animName);
+        if(dict->GetString("lowerAnim", animName))      weapon->lower        = spriteAnimManager->Get(animName);
+        if(dict->GetString("fireAnim", animName))       weapon->fire         = spriteAnimManager->Get(animName);
+        if(dict->GetString("flameAnim", animName))      weapon->flame        = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoIdle_Full", animName))  weapon->ammoIdle[0]  = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoLower_Full", animName)) weapon->ammoLower[0] = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoRaise_Full", animName)) weapon->ammoRaise[0] = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoFire_Full", animName))  weapon->ammoFire[0]  = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoIdle_Half", animName))  weapon->ammoIdle[1]  = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoLower_Half", animName)) weapon->ammoLower[1] = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoRaise_Half", animName)) weapon->ammoRaise[1] = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoFire_Half", animName))  weapon->ammoFire[1]  = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoIdle_Zero", animName))  weapon->ammoIdle[2]  = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoLower_Zero", animName)) weapon->ammoLower[2] = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoRaise_Zero", animName)) weapon->ammoRaise[2] = spriteAnimManager->Get(animName);
+        if(dict->GetString("ammoFire_Zero", animName))  weapon->ammoFire[2]  = spriteAnimManager->Get(animName);
     }
 }
 
