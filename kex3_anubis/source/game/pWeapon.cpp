@@ -359,5 +359,8 @@ void kexPlayerWeapon::Draw(void)
     case WS_FIRE:
         DrawAnimFrame(weaponInfo->ammoFire[which]);
         break;
+            
+    default:
+        break;
     }
 }
