@@ -140,4 +140,37 @@ public:
     ~kexLiftImmediate(void);
 END_KEX_CLASS();
 
+//-----------------------------------------------------------------------------
+//
+// kexDropPad
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexDropPad, kexMover);
+public:
+    kexDropPad(void);
+    ~kexDropPad(void);
+
+    virtual void            Tick(void);
+    void                    Spawn(void);
+
+private:
+    typedef enum
+    {
+        DPS_IDLE    = 0,
+        DPS_FALLING,
+        DPS_DOWN,
+        DPS_RAISE
+    } dropPadState_t;
+
+    float                   triggerDelay;
+    float                   moveSpeed;
+    float                   baseHeight;
+    float                   destHeight;
+    float                   currentHeight;
+    float                   currentDelay;
+    dropPadState_t          state;
+    mapSector_t             *linkedSector;
+END_KEX_CLASS();
+
 #endif

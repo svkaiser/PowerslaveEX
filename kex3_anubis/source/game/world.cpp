@@ -152,6 +152,7 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].event            = -1;
         sectors[i].validcount       = -1;
         sectors[i].clipCount        = -1;
+        sectors[i].linkedSector     = -1;
         sectors[i].floodCount       = 0;
         sectors[i].ceilingFace      = &faces[sectors[i].faceEnd+1];
         sectors[i].floorFace        = &faces[sectors[i].faceEnd+2];
@@ -318,6 +319,14 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
             case 24:
                 height = GetLowestSurroundingFloor(s);
                 MoveSector(s, false, -(s->floorFace->plane.d - height));
+                break;
+
+            case 48:
+                sectors[events[i].params].event = i;
+                events[i].sector = events[i].params;
+                events[i].params = s - sectors;
+                sectors[events[i].sector].linkedSector = events[i].params;
+                s->event = -1;
                 break;
 
             default:

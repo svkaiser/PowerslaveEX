@@ -500,3 +500,105 @@ kexLiftImmediate::kexLiftImmediate(void)
 kexLiftImmediate::~kexLiftImmediate(void)
 {
 }
+
+//-----------------------------------------------------------------------------
+//
+// kexDropPad
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexDropPad, kexMover)
+
+//
+// kexDropPad::kexDropPad
+//
+
+kexDropPad::kexDropPad(void)
+{
+    this->moveSpeed = 4;
+    this->destHeight = 0;
+    this->triggerDelay = 30;
+    this->state = DPS_IDLE;
+}
+
+//
+// kexDropPad::~kexDropPad
+//
+
+kexDropPad::~kexDropPad(void)
+{
+}
+
+//
+// kexDropPad::Tick
+//
+
+void kexDropPad::Tick(void)
+{
+    float lastHeight = currentHeight;
+    float moveAmount;
+    kexWorld *world = kexGame::cLocal->World();
+
+    switch(state)
+    {
+    case DPS_IDLE:
+        currentDelay += 0.5f;
+        if(currentDelay >= triggerDelay)
+        {
+            state = DPS_FALLING;
+            currentDelay = 0;
+        }
+        return;
+
+    case DPS_FALLING:
+        if(currentHeight <= destHeight)
+        {
+            Remove();
+            return;
+        }
+
+        currentHeight -= moveSpeed;
+
+        if(currentHeight < destHeight)
+        {
+            currentHeight = destHeight;
+        }
+        break;
+    }
+
+    moveAmount = currentHeight - lastHeight;
+    world->MoveSector(linkedSector, true, moveAmount);
+    world->MoveSector(sector, false, moveAmount);
+}
+
+//
+// kexDropPad::Spawn
+//
+
+void kexDropPad::Spawn(void)
+{
+    assert(sector != NULL);
+
+    switch(type)
+    {
+    case 48:
+        moveSpeed = 4;
+        triggerDelay = 30;
+        break;
+
+    default:
+        kex::cSystem->Warning("kexDropPad::Spawn: Unknown type (%i)\n", type);
+        Remove();
+        return;
+    }
+
+    sector->flags |= SF_SPECIAL;
+
+    linkedSector = &kexGame::cLocal->World()->Sectors()[sector->linkedSector];
+    
+    baseHeight = -linkedSector->ceilingFace->plane.d;
+    destHeight = (float)linkedSector->floorHeight;
+    currentDelay = 0;
+    currentHeight = baseHeight;
+}
+

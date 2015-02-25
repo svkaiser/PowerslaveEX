@@ -55,6 +55,7 @@ typedef struct
     float                   x2;
     float                   y1;
     float                   y2;
+    int                     linkedSector;
     struct mapFace_s        *floorFace;
     struct mapFace_s        *ceilingFace;
     kexLinklist<kexActor>   actorList;
