@@ -154,6 +154,7 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].clipCount        = -1;
         sectors[i].linkedSector     = -1;
         sectors[i].floodCount       = 0;
+        sectors[i].mover            = NULL;
         sectors[i].ceilingFace      = &faces[sectors[i].faceEnd+1];
         sectors[i].floorFace        = &faces[sectors[i].faceEnd+2];
 
@@ -322,11 +323,13 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
                 break;
 
             case 48:
+                s->event = -1;
                 sectors[events[i].params].event = i;
                 events[i].sector = events[i].params;
                 events[i].params = s - sectors;
-                sectors[events[i].sector].linkedSector = events[i].params;
-                s->event = -1;
+                s = &sectors[events[i].sector];
+                s->linkedSector = events[i].params;
+                s->mover = kexGame::cLocal->SpawnMover("kexDropPad", events[i].type, events[i].sector);
                 break;
 
             default:
@@ -933,7 +936,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
         break;
     case 48:
-        kexGame::cLocal->SpawnMover("kexDropPad", ev->type, ev->sector);
+        static_cast<kexDropPad*>(sector->mover)->Start();
         break;
     case 50:
         SendRemoteTrigger(ev);
@@ -998,6 +1001,9 @@ void kexWorld::SendRemoteTrigger(mapEvent_t *event)
                 break;
             case 24:
                 kexGame::cLocal->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
+                break;
+            case 48:
+                static_cast<kexDropPad*>(sectors[ev->sector].mover)->Reset();
                 break;
 
             default:

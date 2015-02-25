@@ -155,6 +155,8 @@ public:
 
     virtual void            Tick(void);
     void                    Spawn(void);
+    void                    Start(void);
+    void                    Reset(void);
 
 private:
     typedef enum
@@ -162,7 +164,8 @@ private:
         DPS_IDLE    = 0,
         DPS_FALLING,
         DPS_DOWN,
-        DPS_RAISE
+        DPS_RAISE,
+        DPS_COUNTDOWN
     } dropPadState_t;
 
     float                   triggerDelay;
@@ -171,6 +174,7 @@ private:
     float                   destHeight;
     float                   currentHeight;
     float                   currentDelay;
+    float                   speedAccel;
     dropPadState_t          state;
     mapSector_t             *linkedSector;
 END_KEX_CLASS();

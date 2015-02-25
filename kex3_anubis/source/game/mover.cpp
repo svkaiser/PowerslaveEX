@@ -550,6 +550,7 @@ kexDropPad::kexDropPad(void)
     this->moveSpeed = 4;
     this->destHeight = 0;
     this->triggerDelay = 30;
+    this->speedAccel = 0;
     this->state = DPS_IDLE;
 }
 
@@ -573,7 +574,7 @@ void kexDropPad::Tick(void)
 
     switch(state)
     {
-    case DPS_IDLE:
+    case DPS_COUNTDOWN:
         currentDelay += 0.5f;
         if(currentDelay >= triggerDelay)
         {
@@ -586,14 +587,31 @@ void kexDropPad::Tick(void)
         if(currentHeight <= destHeight)
         {
             PlaySound("sounds/platfall.wav");
-            Remove();
+            state = DPS_DOWN;
+            sector->flags &= ~SF_SPECIAL;
             return;
         }
 
-        currentHeight -= moveSpeed;
-        moveSpeed += 1;
+        currentHeight -= (moveSpeed + speedAccel);
+        speedAccel += 1;
 
         if(currentHeight < destHeight)
+        {
+            currentHeight = destHeight;
+        }
+        break;
+            
+    case DPS_RAISE:
+        if(currentHeight >= destHeight)
+        {
+            state = DPS_IDLE;
+            sector->flags &= ~SF_SPECIAL;
+            return;
+        }
+        
+        currentHeight += moveSpeed;
+        
+        if(currentHeight > destHeight)
         {
             currentHeight = destHeight;
         }
@@ -609,6 +627,48 @@ void kexDropPad::Tick(void)
     world->MoveSector(sector, false, moveAmount);
     
     UpdateFloorOrigin();
+}
+
+//
+// kexDropPad::Start
+//
+
+void kexDropPad::Start(void)
+{
+    if(state != DPS_IDLE)
+    {
+        return;
+    }
+    
+    baseHeight = -linkedSector->ceilingFace->plane.d;
+    destHeight = (float)linkedSector->floorHeight;
+    currentDelay = 0;
+    speedAccel = 0;
+    currentHeight = baseHeight;
+    
+    state = DPS_COUNTDOWN;
+    sector->flags |= SF_SPECIAL;
+}
+
+//
+// kexDropPad::Reset
+//
+
+void kexDropPad::Reset(void)
+{
+    if(state != DPS_DOWN)
+    {
+        return;
+    }
+    
+    baseHeight = -linkedSector->ceilingFace->plane.d;
+    destHeight = (float)linkedSector->ceilingHeight;
+    currentDelay = 0;
+    speedAccel = 0;
+    currentHeight = baseHeight;
+    
+    state = DPS_RAISE;
+    sector->flags |= SF_SPECIAL;
 }
 
 //
@@ -632,13 +692,14 @@ void kexDropPad::Spawn(void)
         return;
     }
 
-    sector->flags |= SF_SPECIAL;
+    state = DPS_IDLE;
 
     linkedSector = &kexGame::cLocal->World()->Sectors()[sector->linkedSector];
     
     baseHeight = -linkedSector->ceilingFace->plane.d;
     destHeight = (float)linkedSector->floorHeight;
     currentDelay = 0;
+    speedAccel = 0;
     currentHeight = baseHeight;
 }
 

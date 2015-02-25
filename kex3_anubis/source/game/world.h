@@ -21,6 +21,7 @@
 class kexActor;
 class kexTexture;
 class kexCModel;
+class kexMover;
 
 typedef struct
 {
@@ -56,6 +57,7 @@ typedef struct
     float                   y1;
     float                   y2;
     int                     linkedSector;
+    kexMover                *mover;
     struct mapFace_s        *floorFace;
     struct mapFace_s        *ceilingFace;
     kexLinklist<kexActor>   actorList;
