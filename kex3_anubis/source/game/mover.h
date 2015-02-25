@@ -34,6 +34,8 @@ public:
     int                     &Type(void) { return type; }
     mapSector_t             *Sector(void) { return sector; }
     void                    SetSector(mapSector_t *s);
+    void                    UpdateFloorOrigin(void);
+    void                    UpdateCeilingOrigin(void);
 
 protected:
     int                     type;

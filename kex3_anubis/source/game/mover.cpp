@@ -72,6 +72,34 @@ void kexMover::SetSector(mapSector_t *s)
     sector = s;
 }
 
+//
+// kexMover::UpdateFloorOrigin
+//
+
+void kexMover::UpdateFloorOrigin(void)
+{
+    mapVertex_t *v = kexGame::cLocal->World()->Vertices();
+    
+    origin = (v[sector->floorFace->vertexStart+0].origin +
+              v[sector->floorFace->vertexStart+1].origin +
+              v[sector->floorFace->vertexStart+2].origin +
+              v[sector->floorFace->vertexStart+3].origin) / 4;
+}
+
+//
+// kexMover::UpdateCeilingOrigin
+//
+
+void kexMover::UpdateCeilingOrigin(void)
+{
+    mapVertex_t *v = kexGame::cLocal->World()->Vertices();
+    
+    origin = (v[sector->ceilingFace->vertexStart+0].origin +
+              v[sector->ceilingFace->vertexStart+1].origin +
+              v[sector->ceilingFace->vertexStart+2].origin +
+              v[sector->ceilingFace->vertexStart+3].origin) / 4;
+}
+
 //-----------------------------------------------------------------------------
 //
 // kexDoor
@@ -163,6 +191,7 @@ void kexDoor::Tick(void)
     }
     
     kexGame::cLocal->World()->MoveSector(sector, true, currentHeight - lastHeight);
+    UpdateCeilingOrigin();
 }
 
 //
@@ -266,6 +295,7 @@ void kexFloor::Tick(void)
     }
     
     kexGame::cLocal->World()->MoveSector(sector, false, currentHeight - lastHeight);
+    UpdateFloorOrigin();
 }
 
 //
@@ -429,7 +459,9 @@ void kexLift::Tick(void)
     }
     
     moveAmount = currentHeight - lastHeight;
+    
     kexGame::cLocal->World()->MoveSector(sector, false, moveAmount);
+    UpdateFloorOrigin();
 }
 
 //
@@ -553,6 +585,7 @@ void kexDropPad::Tick(void)
     case DPS_FALLING:
         if(currentHeight <= destHeight)
         {
+            PlaySound("sounds/platfall.wav");
             Remove();
             return;
         }
@@ -571,8 +604,11 @@ void kexDropPad::Tick(void)
     }
 
     moveAmount = currentHeight - lastHeight;
+    
     world->MoveSector(linkedSector, true, moveAmount);
     world->MoveSector(sector, false, moveAmount);
+    
+    UpdateFloorOrigin();
 }
 
 //
