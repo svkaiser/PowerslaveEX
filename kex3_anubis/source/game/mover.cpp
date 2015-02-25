@@ -564,6 +564,9 @@ void kexDropPad::Tick(void)
             currentHeight = destHeight;
         }
         break;
+            
+    default:
+        break;
     }
 
     moveAmount = currentHeight - lastHeight;
