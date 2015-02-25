@@ -624,17 +624,35 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
         if(face->flags & FF_PORTAL && face->sector >= 0)
         {
             mapSector_t *s = &sectors[face->sector];
+            mapVertex_t *fv[4];
+            
+            fv[0] = &vertices[face->vertexStart+0];
+            fv[1] = &vertices[face->vertexStart+1];
+            fv[2] = &vertices[face->vertexStart+2];
+            fv[3] = &vertices[face->vertexStart+3];
             
             for(int j = s->faceStart; j < s->faceEnd+3; ++j)
             {
                 mapFace_t *f = &faces[j];
                 
-                if(f->tag != sector->event)
+                if(f->flags & FF_PORTAL && f->sector == face->sectorOwner)
                 {
+                    if(bCeiling)
+                    {
+                        vertices[f->vertexStart+0].origin.z += moveAmount;
+                        vertices[f->vertexStart+1].origin.z += moveAmount;
+                    }
+                    else
+                    {
+                        vertices[f->vertexStart+2].origin.z += moveAmount;
+                        vertices[f->vertexStart+3].origin.z += moveAmount;
+                    }
+                    
+                    UpdateFacePlaneAndBounds(f);
                     continue;
                 }
                 
-                if(f->flags & FF_PORTAL)
+                if(f->tag == -1 || f->tag != sector->event || f->flags & FF_PORTAL)
                 {
                     continue;
                 }
@@ -649,9 +667,27 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                 vertices[f->vertexStart+1].origin.z += moveAmount;
                 vertices[f->vertexStart+2].origin.z += moveAmount;
                 vertices[f->vertexStart+3].origin.z += moveAmount;
+                
+                UpdateFacePlaneAndBounds(f);
             }
             
-            continue;
+            if(i <= sector->faceEnd)
+            {
+                if(bCeiling)
+                {
+                    fv[0]->origin.z += moveAmount;
+                    fv[1]->origin.z += moveAmount;
+                }
+                else
+                {
+                    fv[2]->origin.z += moveAmount;
+                    fv[3]->origin.z += moveAmount;
+                }
+                
+                UpdateFacePlaneAndBounds(face);
+            }
+            
+            UpdateSectorBounds(s);
         }
         
         if(i != sector->faceEnd + (bCeiling ? 1 : 2))
@@ -672,7 +708,7 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
         
         UpdateFacePlaneAndBounds(face);
     }
-
+    
     UpdateSectorBounds(sector);
     
     if(moveAmount < 0)
@@ -895,6 +931,9 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         break;
     case 24:
         kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
+        break;
+    case 48:
+        kexGame::cLocal->SpawnMover("kexDropPad", ev->type, ev->sector);
         break;
     case 50:
         SendRemoteTrigger(ev);

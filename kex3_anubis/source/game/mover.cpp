@@ -558,6 +558,7 @@ void kexDropPad::Tick(void)
         }
 
         currentHeight -= moveSpeed;
+        moveSpeed += 1;
 
         if(currentHeight < destHeight)
         {
