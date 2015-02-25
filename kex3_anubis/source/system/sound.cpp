@@ -19,6 +19,7 @@
 
 kexCvar kexSound::cvarSampleRate("snd_samplerate", CVF_INT|CVF_CONFIG, "22050", "Sound sample rate to use for digital output (Hz)");
 kexCvar kexSound::cvarSliceTime("snd_maxslicetime_ms", CVF_INT|CVF_CONFIG, "16", "Sound buffer size passed per tick");
+kexCvar kexSound::cvarVolume("snd_volume", CVF_FLOAT|CVF_CONFIG, "1", "Sound volume");
 
 //
 // kexSound::kexSound
@@ -76,7 +77,7 @@ void kexSound::UpdateSource(const int handle, const int volume, const int sep)
 // kexSound::Play
 //
 
-void kexSound::Play(void *data, const int volume, const int sep)
+void kexSound::Play(void *data, const int volume, const int sep, kexObject *ref)
 {
 }
 
@@ -95,4 +96,22 @@ void kexSound::Stop(const int handle)
 bool kexSound::Playing(const int handle)
 {
     return false;
+}
+
+//
+// kexSound::NumSources
+//
+
+const int kexSound::NumSources(void) const
+{
+    return -1;
+}
+
+//
+// kexSound::GetRefObject
+//
+
+kexObject *kexSound::GetRefObject(const int handle)
+{
+    return NULL;
 }

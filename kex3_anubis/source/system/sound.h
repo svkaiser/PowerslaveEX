@@ -24,17 +24,20 @@ public:
     virtual void            Shutdown(void);
     virtual void            Update(void);
     virtual void            UpdateSource(const int handle, const int volume, const int sep);
-    virtual void            Play(void *data, const int volume, const int sep);
+    virtual void            Play(void *data, const int volume, const int sep, kexObject *ref = NULL);
     virtual void            Stop(const int handle);
     virtual bool            Playing(const int handle);
+    virtual const int       NumSources(void) const;
+    virtual kexObject       *GetRefObject(const int handle);
+
+    static kexCvar          cvarSampleRate;
+    static kexCvar          cvarSliceTime;
+    static kexCvar          cvarVolume;
 
 protected:
     int                     GetSliceBufferSize(void);
 
     bool                    bInitialized;
-
-    static kexCvar          cvarSampleRate;
-    static kexCvar          cvarSliceTime;
 };
 
 #endif

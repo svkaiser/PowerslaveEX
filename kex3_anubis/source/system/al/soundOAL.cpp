@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Sound System (SDL)
+//      Sound System (OpenAL)
 //
 
 #include "al.h"
@@ -84,9 +84,10 @@ private:
     bool                                bPlaying;
     bool                                bLooping;
     float                               volume;
+    float                               pan;
     float                               pitch;
     kexWavFile                          *wave;
-    //kexGameObject                       *obj;
+    kexObject                           *refObject;
 };
 
 //-----------------------------------------------------------------------------
@@ -104,9 +105,11 @@ public:
     virtual void                    Init(void);
     virtual void                    Shutdown(void);
     virtual bool                    Playing(const int handle);
-    virtual void                    Play(void *data, const int volume, const int sep);
+    virtual void                    Play(void *data, const int volume, const int sep, kexObject *ref = NULL);
     virtual void                    UpdateSource(const int handle, const int volume, const int sep);
     virtual void                    Update(void);
+    virtual const int               NumSources(void) const;
+    virtual kexObject               *GetRefObject(const int handle);
 
     char                            *GetDeviceName(void);
     const int                       GetNumActiveSources(void) const { return activeSources; }
@@ -316,8 +319,9 @@ bool kexSoundSource::Generate(void)
     bLooping    = false;
     bPlaying    = false;
     wave        = NULL;
-    //obj         = NULL;
     volume      = 1.0f;
+    pan         = 0;
+    refObject   = NULL;
 
     alSourcei(handle, AL_LOOPING, AL_FALSE);
     alSourcei(handle, AL_SOURCE_RELATIVE, AL_TRUE);
@@ -349,15 +353,11 @@ void kexSoundSource::Free(void)
     bInUse      = false;
     bPlaying    = false;
     wave        = NULL;
+    pan         = 0;
     volume      = 1.0f;
     pitch       = 1.0f;
     startTime   = 0;
-
-    //if(obj)
-    //{
-    //    obj->RemoveRef();
-    //    obj = NULL;
-    //}
+    refObject   = NULL;
 
     alSource3f(handle, AL_POSITION, 0, 0, 0);
 }
@@ -390,6 +390,7 @@ void kexSoundSource::Reset(void)
     bInUse      = true;
     bPlaying    = false;
     volume      = 1.0f;
+    pan         = 0;
     pitch       = 1.0f;
 }
 
@@ -399,9 +400,14 @@ void kexSoundSource::Reset(void)
 
 void kexSoundSource::Play(void)
 {
+    kexVec3 dir;
+
     alSourceQueueBuffers(handle, 1, wave->GetBuffer());
     alSourcei(handle, AL_SOURCE_RELATIVE, AL_TRUE);
 
+    kexVec3::ToAxis(&dir, 0, 0, kexMath::Deg2Rad(pan * 1.40625f), 0, 0);
+
+    alSourcefv(handle, AL_POSITION, dir.ToFloatPtr());
     alSourcef(handle, AL_GAIN, volume);
     alSourcePlay(handle);
 
@@ -494,6 +500,12 @@ void kexSoundOAL::Init(void)
         activeSources++;
     }
 
+    if(activeSources <= 0)
+    {
+        kex::cSystem->Warning("No sources available for sound system\n");
+        return;
+    }
+
     alListener3f(AL_POSITION, 0, 0, 0);
     bInitialized = true;
 
@@ -577,7 +589,7 @@ kexSoundSource *kexSoundOAL::GetAvailableSource(void)
 // kexSoundOAL::Play
 //
 
-void kexSoundOAL::Play(void *data, const int volume, const int sep)
+void kexSoundOAL::Play(void *data, const int volume, const int sep, kexObject *ref)
 {
     kexSoundSource *src;
     kexWavFile *wavFile = NULL;
@@ -609,8 +621,10 @@ void kexSoundOAL::Play(void *data, const int volume, const int sep)
     }
 
     src->wave = wavFile;
-    src->volume = (float)volume / 127.0f;
+    src->volume = (float)volume / 128.0f;
+    src->pan = (float)sep;
     src->pitch = 1;
+    src->refObject = ref;
 
     src->Play();
 }
@@ -650,4 +664,27 @@ void kexSoundOAL::Update(void)
     {
         sources[i].Update();
     }
+}
+
+//
+// kexSoundOAL::NumSources
+//
+
+const int kexSoundOAL::NumSources(void) const
+{
+    return activeSources;
+}
+
+//
+// kexSoundOAL::GetRefObject
+//
+
+kexObject *kexSoundOAL::GetRefObject(const int handle)
+{
+    if(handle < 0 || handle >= activeSources)
+    {
+        return NULL;
+    }
+
+    return sources[handle].refObject;
 }

@@ -19,6 +19,8 @@
 #include "game.h"
 #include "gameObject.h"
 
+#define SOUND_DISTANCE  4194304
+
 DECLARE_ABSTRACT_KEX_CLASS(kexGameObject, kexObject)
 
 unsigned int kexGameObject::id = 0;
@@ -99,7 +101,40 @@ const bool kexGameObject::Removing(void) const
 
 void kexGameObject::PlaySound(const char *snd)
 {
-    kex::cSound->Play((void*)snd, 127, 127);
+    float volume;
+    float pan;
+
+    if(this == kexGame::cLocal->Player()->Actor())
+    {
+        volume = 128;
+        pan = 0;
+    }
+    else
+    {
+        kexAngle ang;
+        kexRenderView *listener;
+        kexVec3 listenOrg;
+        float dist;
+
+        listener = &kexGame::cLocal->PlayLoop()->View();
+        listenOrg = listener->Origin();
+
+        dist = listenOrg.DistanceSq(origin);
+        if(dist > SOUND_DISTANCE)
+        {
+            return;
+        }
+
+        volume = 128 - ((dist / SOUND_DISTANCE) * 128);
+        ang = (origin - listenOrg).Normalize().ToYaw();
+        pan = kexMath::Rad2Deg(ang.Diff(listener->Yaw())) / 1.40625f;
+    }
+
+    volume *= kexSound::cvarVolume.GetFloat();
+    kexMath::Clamp(volume, 0, 128);
+    kexMath::Clamp(pan, -128, 128);
+
+    kex::cSound->Play((void*)snd, (int)volume, (int)pan, this);
 }
 
 //

@@ -34,6 +34,7 @@ public:
     bool                        ProcessInput(inputEvent_t *ev);
     const int                   GetWaterVelocityPoint(const float x, const float y);
     
+    kexRenderView               &View(void) { return renderView; }
     const int                   Ticks(void) const { return ticks; }
     const int                   MaxWaterMagnitude(void) { return waterMaxMagnitude; }
     void                        PickupFlash(void) { hud.SetPickupFlash(); }

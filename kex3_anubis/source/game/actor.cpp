@@ -377,7 +377,9 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
     flashTicks = 1;
     
     if(anim == deathAnim)
+    {
         return;
+    }
 
     if(health > 0)
     {
@@ -386,7 +388,7 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
         health -= amount;
         OnDamage(inflictor);
 
-        if(health <= 0 && oldHealth > 0)
+        if(health <= 0 && oldHealth > 0 && anim != deathAnim)
         {
             flags &= AF_SHOOTABLE;
             ChangeAnim(deathAnim);
