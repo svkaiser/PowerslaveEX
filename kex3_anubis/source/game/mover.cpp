@@ -100,6 +100,25 @@ void kexMover::UpdateCeilingOrigin(void)
               v[sector->ceilingFace->vertexStart+3].origin) / 4;
 }
 
+//
+// kexMover::PlayerInside
+//
+
+bool kexMover::PlayerInside(void)
+{
+    for(kexActor *actor = sector->actorList.Next();
+        actor != NULL;
+        actor = actor->SectorLink().Next())
+    {
+        if(actor->InstanceOf(&kexPuppet::info))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 //-----------------------------------------------------------------------------
 //
 // kexDoor
@@ -362,25 +381,6 @@ kexLift::~kexLift(void)
 }
 
 //
-// kexLift::PlayerInside
-//
-
-bool kexLift::PlayerInside(void)
-{
-    for(kexActor *actor = sector->actorList.Next();
-        actor != NULL;
-        actor = actor->SectorLink().Next())
-    {
-        if(actor->InstanceOf(&kexPuppet::info))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-//
 // kexLift::Tick
 //
 
@@ -589,6 +589,7 @@ void kexDropPad::Tick(void)
             PlaySound("sounds/platfall.wav");
             state = DPS_DOWN;
             sector->flags &= ~SF_SPECIAL;
+            world->ResetWallSwitchFromTag(world->Events()[sector->event].tag);
             return;
         }
 
@@ -616,9 +617,16 @@ void kexDropPad::Tick(void)
             currentHeight = destHeight;
         }
         break;
+
+    case DPS_IDLE:
+        if(PlayerInside())
+        {
+            Start();
+        }
+        return;
             
     default:
-        break;
+        return;
     }
 
     moveAmount = currentHeight - lastHeight;
@@ -703,3 +711,88 @@ void kexDropPad::Spawn(void)
     currentHeight = baseHeight;
 }
 
+//-----------------------------------------------------------------------------
+//
+// kexFloatingPlatform
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexFloatingPlatform, kexMover)
+
+//
+// kexFloatingPlatform::kexFloatingPlatform
+//
+
+kexFloatingPlatform::kexFloatingPlatform(void)
+{
+    this->moveSpeed = 2;
+    this->moveHeight = 128;
+}
+
+//
+// kexFloatingPlatform::~kexFloatingPlatform
+//
+
+kexFloatingPlatform::~kexFloatingPlatform(void)
+{
+}
+
+//
+// kexFloatingPlatform::Tick
+//
+
+void kexFloatingPlatform::Tick(void)
+{
+    kexWorld *world = kexGame::cLocal->World();
+    float a = (float)kexGame::cLocal->PlayLoop()->Ticks() * (moveSpeed * kexMath::Deg2Rad(1));
+    float move = kexMath::Cos(a) * (((moveHeight * 0.5f) * moveSpeed) * kexMath::Deg2Rad(1));
+    
+    world->MoveSector(linkedSector, true, move);
+    world->MoveSector(sector, false, move);
+    
+    UpdateFloorOrigin();
+}
+
+//
+// kexFloatingPlatform::Spawn
+//
+
+void kexFloatingPlatform::Spawn(void)
+{
+    assert(sector != NULL);
+    assert(sector->linkedSector >= 0);
+
+    linkedSector = &kexGame::cLocal->World()->Sectors()[sector->linkedSector];
+
+    switch(type)
+    {
+    case 41:
+        moveSpeed = 2;
+        moveHeight = 128;
+        break;
+
+    case 44:
+        moveSpeed = 1.5f;
+        moveHeight = 128;
+        break;
+
+    case 45:
+        moveSpeed = 2.5f;
+        moveHeight = 128;
+        break;
+
+    case 68:
+        moveSpeed = 2;
+        moveHeight = 512;
+        kexGame::cLocal->World()->MoveSector(linkedSector, true, 48);
+        kexGame::cLocal->World()->MoveSector(sector, false, 48);
+        break;
+
+    default:
+        kex::cSystem->Warning("kexFloatingPlatform::Spawn: Unknown type (%i)\n", type);
+        Remove();
+        return;
+    }
+
+    baseHeight = -linkedSector->ceilingFace->plane.d;
+}

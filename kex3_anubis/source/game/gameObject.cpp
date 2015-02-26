@@ -134,7 +134,7 @@ void kexGameObject::PlaySound(const char *snd)
     kexMath::Clamp(volume, 0, 128);
     kexMath::Clamp(pan, -128, 128);
 
-    kex::cSound->Play((void*)snd, (int)volume, (int)pan, this);
+    kex::cSound->Play((void*)snd, (int)volume, (int)pan);
 }
 
 //

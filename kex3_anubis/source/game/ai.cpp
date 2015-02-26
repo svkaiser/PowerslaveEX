@@ -694,6 +694,12 @@ void kexAI::ChaseTarget(void)
 
         if(--timeBeforeTurning <= 0 || !CheckDirection(forward))
         {
+            if(!target)
+            {
+                kex::cSystem->Warning("kexAI::ChaseTarget - Called without a target\n");
+                SetTarget(kexGame::cLocal->Player()->Actor());
+            }
+
             ChangeDirection();
         }
     }

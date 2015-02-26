@@ -180,6 +180,7 @@ public:
     float                   GetHighestSurroundingFloor(mapSector_t *sector);
     float                   GetLowestSurroundingFloor(mapSector_t *sector);
     void                    MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount);
+    void                    ResetWallSwitchFromTag(const int tag);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
@@ -213,7 +214,7 @@ private:
                                                       const float radius, const int damage);
     void                    UseLockedDoor(kexPlayer *player, mapEvent_t *ev);
     void                    UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev);
-    void                    SendRemoteTrigger(mapEvent_t *event);
+    void                    SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event);
     void                    ExplodeWallEvent(mapSector_t *sector);
     void                    ExplodeWall(mapFace_t *face);
     void                    BuildAreaNodes(void);
@@ -224,6 +225,7 @@ private:
     void                    MarkSectorInPVS(const int secnum);
     bool                    SectorInPVS(const int secnum);
     bool                    SetFaceSpans(kexRenderView &view, mapFace_t *face);
+    void                    SetupFloatingPlatforms(mapEvent_t *ev, mapSector_t *sector, const char *className);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);
     void                    ReadVertices(kexBinFile &mapfile, const unsigned int count);

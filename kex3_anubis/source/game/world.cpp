@@ -322,14 +322,15 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
                 MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
 
+            case 41:
+            case 44:
+            case 45:
+            case 68:
+                SetupFloatingPlatforms(&events[i], s, "kexFloatingPlatform");
+                break;
+
             case 48:
-                s->event = -1;
-                sectors[events[i].params].event = i;
-                events[i].sector = events[i].params;
-                events[i].params = s - sectors;
-                s = &sectors[events[i].sector];
-                s->linkedSector = events[i].params;
-                s->mover = kexGame::cLocal->SpawnMover("kexDropPad", events[i].type, events[i].sector);
+                SetupFloatingPlatforms(&events[i], s, "kexDropPad");
                 break;
 
             default:
@@ -615,6 +616,24 @@ void kexWorld::UnloadMap(void)
 }
 
 //
+// kexWorld::SetupFloatingPlatforms
+//
+
+void kexWorld::SetupFloatingPlatforms(mapEvent_t *ev, mapSector_t *sector, const char *className)
+{
+    mapSector_t *s;
+
+    sector->event = -1;
+    sectors[ev->params].event = ev - events;
+    ev->sector = ev->params;
+    ev->params = sector - sectors;
+
+    s = &sectors[ev->sector];
+    s->linkedSector = ev->params;
+    s->mover = kexGame::cLocal->SpawnMover(className, ev->type, ev->sector);
+}
+
+//
 // kexWorld::MoveSector
 //
 
@@ -845,7 +864,6 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
         break;
     case 200:
         UseWallSwitch(player, face, ev);
-        face->tag = -1;
         break;
     case 201:
     case 202:
@@ -898,7 +916,53 @@ void kexWorld::UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev)
     }
 
     player->Actor()->PlaySound("sounds/switch.wav");
-    SendRemoteTrigger(ev);
+    SendRemoteTrigger(NULL, ev);
+}
+
+//
+// kexWorld::ResetWallSwitchFromTag
+//
+
+void kexWorld::ResetWallSwitchFromTag(const int tag)
+{
+    for(unsigned int i = 0; i < numEvents; ++i)
+    {
+        mapSector_t *sector;
+        int switchTex;
+
+        if(events[i].tag != tag)
+        {
+            continue;
+        }
+
+        if(events[i].type != 200)
+        {
+            continue;
+        }
+
+        sector = &sectors[events[i].sector];
+        switchTex = (events[i].params & 0xff);
+
+        for(int j = sector->faceStart; j < sector->faceEnd+3; ++j)
+        {
+            mapFace_t *face = &faces[j];
+
+            if(face->tag != i)
+            {
+                continue;
+            }
+
+            for(int k = face->polyStart; k <= face->polyEnd; ++k)
+            {
+                mapPoly_t *poly = &polys[k];
+
+                if(poly->texture == switchTex)
+                {
+                    poly->texture = (events[i].params >> 8) & 0xff;
+                }
+            }
+        }
+    }
 }
 
 //
@@ -929,8 +993,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
     case 23:
         actor->PlaySound("sounds/switch.wav");
         MoveSector(sector, false, -(sector->floorFace->plane.d - (float)sector->floorHeight));
-        SendRemoteTrigger(ev);
-        sector->event = -1;
+        SendRemoteTrigger(sector, ev);
         break;
     case 24:
         kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
@@ -939,8 +1002,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         static_cast<kexDropPad*>(sector->mover)->Start();
         break;
     case 50:
-        SendRemoteTrigger(ev);
-        sector->event = -1;
+        SendRemoteTrigger(sector, ev);
         break;
 
     default:
@@ -952,8 +1014,10 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
 // kexWorld::SendRemoteTrigger
 //
 
-void kexWorld::SendRemoteTrigger(mapEvent_t *event)
+void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
 {
+    bool bClearEventRef = false;
+
     for(unsigned int i = 0; i < numEvents; ++i)
     {
         mapEvent_t *ev = &events[i];
@@ -980,6 +1044,7 @@ void kexWorld::SendRemoteTrigger(mapEvent_t *event)
                 if(event->type == 66)
                 {
                     ExplodeWallEvent(&sectors[ev->sector]);
+                    bClearEventRef = true;
                 }
 
                 continue;
@@ -989,18 +1054,23 @@ void kexWorld::SendRemoteTrigger(mapEvent_t *event)
             {
             case 7:
                 kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+                bClearEventRef = true;
                 break;
             case 8:
                 kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+                bClearEventRef = true;
                 break;
             case 21:
                 kexGame::cLocal->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
+                bClearEventRef = true;
                 break;
             case 22:
                 kexGame::cLocal->SpawnMover("kexFloor", ev->type, ev->sector);
+                bClearEventRef = true;
                 break;
             case 24:
                 kexGame::cLocal->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
+                bClearEventRef = true;
                 break;
             case 48:
                 static_cast<kexDropPad*>(sectors[ev->sector].mover)->Reset();
@@ -1010,6 +1080,11 @@ void kexWorld::SendRemoteTrigger(mapEvent_t *event)
                 break;
             }
         }
+    }
+
+    if(bClearEventRef && sector)
+    {
+        sector->event = -1;
     }
 }
 
@@ -1085,8 +1160,7 @@ void kexWorld::ExplodeWallEvent(mapSector_t *sector)
 
     if(sector->event >= 0 && events[sector->event].type == 66)
     {
-        SendRemoteTrigger(&events[sector->event]);
-        sector->event = -1;
+        SendRemoteTrigger(sector, &events[sector->event]);
     }
 }
 

@@ -37,6 +37,8 @@ public:
     void                    UpdateFloorOrigin(void);
     void                    UpdateCeilingOrigin(void);
 
+    bool                    PlayerInside(void);
+
 protected:
     int                     type;
     mapSector_t             *sector;
@@ -121,8 +123,6 @@ private:
         LS_WAIT
     } liftState_t;
 
-    bool                    PlayerInside(void);
-
     float                   waitDelay;
     float                   triggerDelay;
     float                   moveSpeed;
@@ -176,6 +176,28 @@ private:
     float                   currentDelay;
     float                   speedAccel;
     dropPadState_t          state;
+    mapSector_t             *linkedSector;
+END_KEX_CLASS();
+
+//-----------------------------------------------------------------------------
+//
+// kexFloatingPlatform
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexFloatingPlatform, kexMover);
+public:
+    kexFloatingPlatform(void);
+    ~kexFloatingPlatform(void);
+
+    virtual void            Tick(void);
+    void                    Spawn(void);
+
+private:
+    float                   moveSpeed;
+    float                   moveHeight;
+    float                   baseHeight;
+    float                   currentHeight;
     mapSector_t             *linkedSector;
 END_KEX_CLASS();
 
