@@ -642,6 +642,49 @@ void kexAI::ChangeDirection(void)
 // kexAI::Ignite
 //
 
+void kexAI::Ignite(void)
+{
+    if(aiFlags & AIF_ONFIRE)
+    {
+        if((kexRand::Int() & 3) != 0)
+        {
+            return;
+        }
+    }
+
+    if(!target)
+    {
+        SetTarget(kexGame::cLocal->Player()->Actor());
+    }
+
+    aiFlags |= AIF_ONFIRE;
+
+    for(int i = 0; i < 4; ++i)
+    {
+        if(igniteTicks[i] <= -1 && igniteFlames[i] == NULL)
+        {
+            float x, y, z;
+            kexActor *ignite;
+
+            igniteTicks[i] = kexRand::Max(64) + 8;
+
+            x = origin.x + (kexRand::Float() * (radius*0.5f));
+            y = origin.y + (kexRand::Float() * (radius*0.5f));
+            z = origin.z + stepHeight + (kexRand::Float() * (height*0.35f));
+
+            ignite = kexGame::cLocal->SpawnActor(AT_IGNITEFLAME, x, y, z, 0, SectorIndex());
+            ignite->SetTarget(target);
+
+            igniteFlames[i] = ignite;
+            break;
+        }
+    }
+}
+
+//
+// kexAI::Ignite
+//
+
 void kexAI::Ignite(kexProjectileFlame *instigator)
 {
     int i;
@@ -651,12 +694,12 @@ void kexAI::Ignite(kexProjectileFlame *instigator)
         return;
     }
 
-    aiFlags |= AIF_ONFIRE;
-
     if(!target)
     {
         SetTarget(instigator->Target());
     }
+
+    aiFlags |= AIF_ONFIRE;
 
     for(i = 0; i < 4; ++i)
     {
@@ -747,6 +790,12 @@ void kexAI::UpdateMovement(void)
     CheckFloorAndCeilings();
     
     movement += velocity;
+
+    if(sector->floorFace->flags & FF_LAVA &&
+        kexGame::cLocal->CModel()->PointOnFaceSide(origin, sector->floorFace) <= 0.1f)
+    {
+        Ignite();
+    }
     
     if(movement.UnitSq() > 0)
     {

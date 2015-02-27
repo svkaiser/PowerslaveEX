@@ -71,6 +71,7 @@ public:
 
     void                            FaceTarget(kexActor *targ = NULL);
     void                            Ignite(kexProjectileFlame *instigator);
+    void                            Ignite(void);
 
     aiState_t                       &State(void) { return state; }
     unsigned int                    &AIFlags(void) { return aiFlags; }
