@@ -1,3 +1,4 @@
+A_RandomItem        "void A_RandomItem(kActor @actor)"
 A_RandomVaseItem    "void A_RandomVaseItem(kActor@)"
 A_SpawnOrbPickup    "void A_SpawnOrbPickup(kActor@)"
 A_ThrowAmunBomb     "void A_ThrowAmunBomb(kActor@)"

@@ -5,6 +5,38 @@ void main(void)
 }
 
 //
+// A_RandomItem
+//
+
+void A_RandomItem(kActor @actor)
+{
+    int r = Math::Rand() & 2;
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z + actor.Height();
+    kActor @obj;
+    
+    if(r != 0)
+    {
+        return;
+    }
+    
+    if((Math::Rand() & 255) >= 128)
+    {
+        @obj = Game.SpawnActor("Fx_AmmoSpawn", x, y, z, 0, actor.SectorIndex());
+    }
+    else
+    {
+        @obj = Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
+    }
+    
+    if(!(obj is null) && (Math::Rand() & 255) >= 128)
+    {
+        obj.Scale() = 1.0f;
+    }
+}
+
+//
 // A_RandomVaseItem
 //
 
@@ -14,19 +46,30 @@ void A_RandomVaseItem(kActor @actor)
     float x = actor.Origin().x;
     float y = actor.Origin().y;
     float z = actor.Origin().z + actor.Height();
+    kActor @obj;
     
     switch(r)
     {
+    case 0:
+        Game.SpawnActor("AI_Spider", x, y, z, actor.SectorIndex());
+        return;
     case 1:
     case 3:
-    case 6:
-        Game.SpawnActor("Fx_AmmoSpawn", x, y, z, 0, actor.SectorIndex());
+        @obj = Game.SpawnActor("Fx_AmmoSpawn", x, y, z, 0, actor.SectorIndex());
         break;
         
     case 4:
     case 5:
-        Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
+        @obj = Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
         break;
+        
+    default:
+        return;
+    }
+    
+    if(!(obj is null) && (Math::Rand() & 1) != 0)
+    {
+        obj.Scale() = 1.0f;
     }
 }
 
@@ -60,10 +103,7 @@ void A_SpawnOrbPickup(kActor @actor)
         return;
     }
     
-    if((Math::Rand() & 2) == 0)
-    {
-        orb.Scale() = 2.0f;
-    }
+    orb.Scale() = actor.Scale();
 }
 
 //
