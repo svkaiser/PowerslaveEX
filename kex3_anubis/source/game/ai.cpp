@@ -184,10 +184,12 @@ void kexAI::OnDamage(kexActor *instigator)
 {
     if(health <= 0)
     {
+        // health is depleted, we're dead now
         state = AIS_DEAD;
         return;
     }
 
+    // we took damage but we're not active yet. target whoever damaged us
     if(!target && instigator != this && instigator->Flags() & AF_SHOOTABLE)
     {
         SetTarget(instigator);
@@ -207,6 +209,9 @@ void kexAI::OnDamage(kexActor *instigator)
 //
 // kexAI::UpdateBurn
 //
+// Slowly take damage over time. The more flames
+// attached, the more damage it will take
+//
 
 void kexAI::UpdateBurn(void)
 {
@@ -224,6 +229,7 @@ void kexAI::UpdateBurn(void)
             continue;
         }
 
+        // flame expired?
         if(--igniteTicks[i] < 0)
         {
             igniteFlames[i]->Remove();
@@ -242,6 +248,7 @@ void kexAI::UpdateBurn(void)
 
     if(cnt == 0)
     {
+        // all flames have expired
         aiFlags &= ~AIF_ONFIRE;
     }
 }
@@ -265,6 +272,7 @@ bool kexAI::CheckTargetSight(kexActor *actor)
         if(kexMath::Fabs(yaw.Diff(kexMath::ATan2(actor->Origin().x - origin.x,
                                                  actor->Origin().y - origin.y))) > 0.785f)
         {
+            // not within FOV
             return false;
         }
     }
@@ -277,6 +285,11 @@ bool kexAI::CheckTargetSight(kexActor *actor)
 
 //
 // kexAI::ChangeStateFromAnim
+//
+// Unlike DOOM, there is no A_Chase codepointer and
+// instead, the various states of the AI is based on
+// what animation the AI is playing. Should probably
+// revisit this...
 //
 
 void kexAI::ChangeStateFromAnim(void)
@@ -432,6 +445,9 @@ bool kexAI::CheckRangeAttack(void)
 //
 // kexAI::CheckDirection
 //
+// Traces a path to the direction that it wants to
+// change to. Returns false if that direction is blocked
+//
 
 bool kexAI::CheckDirection(const kexVec3 &dir)
 {
@@ -444,6 +460,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
         return (kexGame::cLocal->CModel()->ContactActor() == target);
     }
     
+    // check for ledges
     if(flags & AF_NODROPOFF)
     {
         for(int i = sector->faceStart; i <= sector->faceEnd; ++i)
@@ -470,6 +487,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
             if(sector->floorHeight - s->floorHeight > stepHeight ||
                (!(flags & AF_INWATER) && s->flags & SF_WATER))
             {
+                // sector the ai is on is too high, so avoid this edge
                 return false;
             }
         }
@@ -500,6 +518,8 @@ bool kexAI::SetDesiredDirection(const int dir)
 //
 // kexAI::ChangeDirection
 //
+// Picks a new direction to move to
+//
 
 void kexAI::ChangeDirection(void)
 {
@@ -513,6 +533,7 @@ void kexAI::ChangeDirection(void)
     aiFlags |= AIF_TURNING;
     bAdjust = (timeBeforeTurning > 0);
     
+    // determine direction to change towards the target
     if(timeBeforeTurning <= 0)
     {
         dx = target->Origin().x - origin.x;
@@ -611,6 +632,7 @@ void kexAI::ChangeDirection(void)
         return;
     }
 
+    // direction was blocked, so pick another direction
     for(int i = 1; i < 8; ++i)
     {
         newYaw = yaw + kexMath::Deg2Rad(25.71f * (float)i);
@@ -634,12 +656,51 @@ void kexAI::ChangeDirection(void)
         }
     }
 
+    // no idea what to do now. randomly pick a direction and hope for the best
     desiredYaw = yaw + (kexMath::Deg2Rad(135) + (kexRand::Float() * kexMath::Deg2Rad(90)));
     turnAmount = desiredYaw.Diff(yaw) / 8;
 }
 
 //
 // kexAI::Ignite
+//
+// Actor is on fire and will start taking damage
+// from the attached flames. IgniteTarget is
+// whatever that caused the ai to ignite
+//
+
+void kexAI::Ignite(kexGameObject *igniteTarget)
+{
+    aiFlags |= AIF_ONFIRE;
+    
+    // spawn flames
+    for(int i = 0; i < 4; ++i)
+    {
+        if(igniteTicks[i] <= -1 && igniteFlames[i] == NULL)
+        {
+            float x, y, z;
+            kexActor *ignite;
+            
+            igniteTicks[i] = kexRand::Max(64) + 8;
+            
+            x = origin.x + (kexRand::Float() * (radius*0.5f));
+            y = origin.y + (kexRand::Float() * (radius*0.5f));
+            z = origin.z + stepHeight + (kexRand::Float() * (height*0.35f));
+            
+            ignite = kexGame::cLocal->SpawnActor(AT_IGNITEFLAME, x, y, z, 0, SectorIndex());
+            ignite->SetTarget(igniteTarget);
+            
+            igniteFlames[i] = ignite;
+            break;
+        }
+    }
+}
+
+//
+// kexAI::Ignite
+//
+// AI has ignited from an unknown source,
+// most likely from lava
 //
 
 void kexAI::Ignite(void)
@@ -654,41 +715,21 @@ void kexAI::Ignite(void)
 
     if(!target)
     {
+        // caught fire from lava? whatever, its the player's fault
         SetTarget(kexGame::cLocal->Player()->Actor());
     }
-
-    aiFlags |= AIF_ONFIRE;
-
-    for(int i = 0; i < 4; ++i)
-    {
-        if(igniteTicks[i] <= -1 && igniteFlames[i] == NULL)
-        {
-            float x, y, z;
-            kexActor *ignite;
-
-            igniteTicks[i] = kexRand::Max(64) + 8;
-
-            x = origin.x + (kexRand::Float() * (radius*0.5f));
-            y = origin.y + (kexRand::Float() * (radius*0.5f));
-            z = origin.z + stepHeight + (kexRand::Float() * (height*0.35f));
-
-            ignite = kexGame::cLocal->SpawnActor(AT_IGNITEFLAME, x, y, z, 0, SectorIndex());
-            ignite->SetTarget(target);
-
-            igniteFlames[i] = ignite;
-            break;
-        }
-    }
+    
+    Ignite(target);
 }
 
 //
 // kexAI::Ignite
 //
+// AI has ignited from an flame-based projectile
+//
 
 void kexAI::Ignite(kexProjectileFlame *instigator)
 {
-    int i;
-
     if(!(kexRand::Int() & 1))
     {
         return;
@@ -696,31 +737,11 @@ void kexAI::Ignite(kexProjectileFlame *instigator)
 
     if(!target)
     {
+        // target whoever fired that projectile
         SetTarget(instigator->Target());
     }
-
-    aiFlags |= AIF_ONFIRE;
-
-    for(i = 0; i < 4; ++i)
-    {
-        if(igniteTicks[i] <= -1 && igniteFlames[i] == NULL)
-        {
-            float x, y, z;
-            kexActor *ignite;
-
-            igniteTicks[i] = kexRand::Max(64) + 8;
-
-            x = origin.x + (kexRand::Float() * (radius*0.5f));
-            y = origin.y + (kexRand::Float() * (radius*0.5f));
-            z = origin.z + stepHeight + (kexRand::Float() * (height*0.35f));
-
-            ignite = kexGame::cLocal->SpawnActor(AT_IGNITEFLAME, x, y, z, 0, SectorIndex());
-            ignite->SetTarget(instigator->Target());
-
-            igniteFlames[i] = ignite;
-            break;
-        }
-    }
+    
+    Ignite(instigator->Target());
 }
 
 //
@@ -731,10 +752,12 @@ void kexAI::ChaseTarget(void)
 {
     kexVec3 forward;
 
+    // not currently turning?
     if(!(aiFlags & AIF_TURNING))
     {
         kexVec3::ToAxis(&forward, 0, 0, yaw, 0, 0);
 
+        // ready to change direction?
         if(--timeBeforeTurning <= 0 || !CheckDirection(forward))
         {
             if(!target)
@@ -748,6 +771,7 @@ void kexAI::ChaseTarget(void)
     }
     else
     {
+        // turn towards new direction
         yaw += turnAmount;
         kexVec3::ToAxis(&forward, 0, 0, yaw, 0, 0);
 
@@ -794,6 +818,7 @@ void kexAI::UpdateMovement(void)
     if(sector->floorFace->flags & FF_LAVA &&
         kexGame::cLocal->CModel()->PointOnFaceSide(origin, sector->floorFace) <= 0.1f)
     {
+        // dumbass feel into lava
         Ignite();
     }
     
@@ -804,6 +829,7 @@ void kexAI::UpdateMovement(void)
             velocity.Clear();
         }
         
+        // update attached flame positions
         if(aiFlags & AIF_ONFIRE)
         {
             for(int i = 0; i < 4; ++i)

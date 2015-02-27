@@ -70,6 +70,7 @@ public:
     void                            Spawn(void);
 
     void                            FaceTarget(kexActor *targ = NULL);
+    void                            Ignite(kexGameObject *igniteTarget);
     void                            Ignite(kexProjectileFlame *instigator);
     void                            Ignite(void);
 
