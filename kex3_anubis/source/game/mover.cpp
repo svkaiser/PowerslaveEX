@@ -156,6 +156,7 @@ kexDoor::~kexDoor(void)
 void kexDoor::Tick(void)
 {
     float lastHeight = currentHeight;
+    kexWorld *world = kexGame::cLocal->World();
 
     switch(state)
     {
@@ -184,6 +185,12 @@ void kexDoor::Tick(void)
     case DS_DOWN:
         if(currentHeight <= destHeight)
         {
+            if(type == 2)
+            {
+                world->ResetWallSwitchFromTag(world->Events()[sector->event].tag);
+                sector->mover = NULL;
+            }
+
             Remove();
             return;
         }
@@ -209,7 +216,7 @@ void kexDoor::Tick(void)
         return;
     }
     
-    kexGame::cLocal->World()->MoveSector(sector, true, currentHeight - lastHeight);
+    world->MoveSector(sector, true, currentHeight - lastHeight);
     UpdateCeilingOrigin();
 }
 
@@ -233,6 +240,15 @@ void kexDoor::Spawn(void)
         moveSpeed = 4;
         bDirection = true;
         destHeight = (float)sector->ceilingHeight - lip;
+        break;
+
+    case 2:
+        waitDelay = 90;
+        lip = 0;
+        moveSpeed = 4;
+        bDirection = true;
+        destHeight = (float)sector->ceilingHeight - lip;
+        sector->mover = this;
         break;
 
     case 7:

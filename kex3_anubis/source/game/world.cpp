@@ -935,7 +935,8 @@ void kexWorld::ResetWallSwitchFromTag(const int tag)
             continue;
         }
 
-        if(events[i].type != 200)
+        if(events[i].type != 200 &&
+           events[i].type != 201)
         {
             continue;
         }
@@ -994,6 +995,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         actor->PlaySound("sounds/switch.wav");
         MoveSector(sector, false, -(sector->floorFace->plane.d - (float)sector->floorHeight));
         SendRemoteTrigger(sector, ev);
+        sector->event = -1;
         break;
     case 24:
         kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
@@ -1052,6 +1054,9 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
 
             switch(ev->type)
             {
+            case 2:
+                kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+                break;
             case 7:
                 kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
                 bClearEventRef = true;
@@ -1161,6 +1166,7 @@ void kexWorld::ExplodeWallEvent(mapSector_t *sector)
     if(sector->event >= 0 && events[sector->event].type == 66)
     {
         SendRemoteTrigger(sector, &events[sector->event]);
+        sector->event = -1;
     }
 }
 
@@ -1264,12 +1270,23 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
             {
                 if(!(face->flags & FF_PORTAL))
                 {
-                    if(bounds.max.x > face->bounds.max.x) bounds.max.x = face->bounds.max.x;
-                    if(bounds.max.y > face->bounds.max.y) bounds.max.y = face->bounds.max.y;
-                    if(bounds.max.z > face->bounds.max.z) bounds.max.z = face->bounds.max.z;
-                    if(bounds.min.x < face->bounds.min.x) bounds.min.x = face->bounds.min.x;
-                    if(bounds.min.y < face->bounds.min.y) bounds.min.y = face->bounds.min.y;
-                    if(bounds.min.z < face->bounds.min.z) bounds.min.z = face->bounds.min.z;
+                    kexBBox bounds;
+
+                    if(face->sector >= 0 && face->flags & FF_TOGGLE)
+                    {
+                        bounds = sectors[face->sector].bounds;
+                    }
+                    else
+                    {
+                        bounds = face->bounds;
+                    }
+
+                    if(bounds.max.x > bounds.max.x) bounds.max.x = bounds.max.x;
+                    if(bounds.max.y > bounds.max.y) bounds.max.y = bounds.max.y;
+                    if(bounds.max.z > bounds.max.z) bounds.max.z = bounds.max.z;
+                    if(bounds.min.x < bounds.min.x) bounds.min.x = bounds.min.x;
+                    if(bounds.min.y < bounds.min.y) bounds.min.y = bounds.min.y;
+                    if(bounds.min.z < bounds.min.z) bounds.min.z = bounds.min.z;
                 }
                 continue;
             }
