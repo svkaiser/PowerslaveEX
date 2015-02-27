@@ -48,7 +48,7 @@ int kexRand::SysRand(void)
 
 int kexRand::Int(void)
 {
-    seed = 1479838765 - 1471521965 * seed;
+    seed = 1479838765 * seed + 470403613;
     return seed & RANDOM_MAX;
 }
 
