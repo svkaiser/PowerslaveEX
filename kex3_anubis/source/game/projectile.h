@@ -17,6 +17,12 @@
 
 #include "actor.h"
 
+typedef enum
+{
+    PF_IMPACTWALLSONLY  = BIT(0),
+    PF_HOMING           = BIT(1)
+} projectileFlags_t;
+
 //-----------------------------------------------------------------------------
 //
 // kexProjectile
@@ -34,9 +40,19 @@ public:
     void                            Spawn(void);
 
     int                             &Damage(void) { return damage; }
+    unsigned int                    &ProjectileFlags(void) { return projectileFlags; }
+    void                            SetHomingTarget(kexActor *actor);
 
 private:
+    virtual void                    CheckFloorAndCeilings(void);
+    virtual void                    UpdateMovement(void);
+
+    void                            AdjustAlongFace(mapFace_t *face);
+    void                            SeekTargets(void);
+
     int                             damage;
+    unsigned int                    projectileFlags;
+    kexActor                        *homingActor;
 END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------

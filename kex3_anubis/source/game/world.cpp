@@ -1317,6 +1317,77 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
 }
 
 //
+// kexWorld::FloodFill
+//
+
+kexStack<mapSector_t*> *kexWorld::FloodFill(const kexVec3 &start, mapSector_t *sector, const float maxDistance)
+{
+    unsigned int scanCount = 0;
+
+    if(sector == NULL)
+    {
+        return NULL;
+    }
+
+    scanSectors.Reset();
+    scanSectors.Set(sector);
+    sector->floodCount = 1;
+
+    memset(pvsMask, 0, pvsSize);
+    MarkSectorInPVS(sector - sectors);
+
+    do
+    {
+        mapSector_t *sec = scanSectors[scanCount++];
+        
+        if(sec->floodCount == 0)
+        {
+            continue;
+        }
+        
+        sec->floodCount = 0;
+
+        for(int i = sec->faceStart; i < sec->faceEnd+3; ++i)
+        {
+            mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
+            float d;
+
+            if(!(face->flags & FF_PORTAL) || face->sector <= -1)
+            {
+                continue;
+            }
+
+            d = kexGame::cLocal->CModel()->PointOnFaceSide(start, face);
+
+            if(d <= 0)
+            {
+                continue;
+            }
+
+            if(d >= maxDistance)
+            {
+                break;
+            }
+
+            mapSector_t *next = &sectors[face->sector];
+                
+            if(SectorInPVS(face->sector))
+            {
+                continue;
+            }
+            
+            MarkSectorInPVS(face->sector);
+            
+            next->floodCount = 1;
+            scanSectors.Set(next);
+        }
+
+    } while(scanCount < scanSectors.CurrentLength());
+
+    return &scanSectors;
+}
+
+//
 // kexWorld::MarkSectorInPVS
 //
 

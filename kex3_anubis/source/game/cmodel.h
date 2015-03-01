@@ -39,7 +39,8 @@ public:
 
     bool                    MoveActor(kexActor *actor);
     bool                    Trace(kexActor *actor, mapSector_t *sector,
-                                  const kexVec3 &start_pos, const kexVec3 &end_pos, bool bTestActors = true);
+                                  const kexVec3 &start_pos, const kexVec3 &end_pos,
+                                  const float radius = 0, bool bTestActors = true);
     bool                    CheckActorPosition(kexActor *actor);
     void                    Reset(void);
 

@@ -35,6 +35,9 @@ void kexScriptObjActor::Init(void)
     e->RegisterObjectMethod("kActor", "kVec3 &Origin(void)", asMETHODPR(kexActor, Origin, (void), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "void SetTarget(kActor@)", asMETHODPR(kexActor, SetTarget, (kexGameObject*), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kActor @GetTarget(void)", asMETHODPR(kexActor, Target, (void), kexGameObject*), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "void SetTaggedActor(kActor@)", asMETHODPR(kexActor, SetTaggedActor, (kexActor*), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "kActor @GetTaggedActor(void)", asMETHODPR(kexActor, GetTaggedActor, (void), kexActor*), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "void SetSector(const uint)", asMETHODPR(kexActor, SetSector, (const unsigned int), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "void Remove(void)", asMETHODPR(kexActor, Remove, (void), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kVec3 &Velocity(void)", asMETHODPR(kexActor, Velocity, (void), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kVec3 &Movement(void)", asMETHODPR(kexActor, Movement, (void), kexVec3&), asCALL_THISCALL);
@@ -52,4 +55,5 @@ void kexScriptObjActor::Init(void)
     e->RegisterObjectMethod("kActor", "bool InstanceOf(const kStr &in) const", asMETHODPR(kexActor, InstanceOf, (const kexStr&) const, bool), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "void PlaySound(const kStr &in)", asMETHODPR(kexActor, PlaySound, (const kexStr&), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "void ChangeAnim(const kStr &in)", asMETHODPR(kexActor, ChangeAnim, (const kexStr&), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "const int GameTicks(void) const", asMETHODPR(kexActor, GameTicks, (void) const, const int), asCALL_THISCALL);
 }

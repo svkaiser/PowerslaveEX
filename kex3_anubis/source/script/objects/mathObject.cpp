@@ -78,12 +78,17 @@ void kexScriptObjVec3::Init(void)
     e->RegisterObjectMethod("kVec3", "kVec3 Lerp(const kVec3 &in, const float) const", asMETHODPR(kexVec3, Lerp, (const kexVec3 &next, const float movement) const, kexVec3), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "kVec3 &Lerp(const kVec3 &in, const float)", asMETHODPR(kexVec3, Lerp, (const kexVec3 &next, const float movement), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "kVec3 opAdd(const kVec3 &in)", asMETHODPR(kexVec3, operator+, (const kexVec3&), kexVec3), asCALL_THISCALL);
+    e->RegisterObjectMethod("kVec3", "kVec3 &opAddAssign(const kVec3 &in)", asMETHODPR(kexVec3, operator+=, (const kexVec3&), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "kVec3 opNeg(void)", asMETHODPR(kexVec3, operator-, (void)const, kexVec3), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "kVec3 opSub(const kVec3 &in)", asMETHODPR(kexVec3, operator-, (const kexVec3&)const, kexVec3), asCALL_THISCALL);
+    e->RegisterObjectMethod("kVec3", "kVec3 &opSubAssign(const kVec3 &in)", asMETHODPR(kexVec3, operator-=, (const kexVec3&), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "kVec3 opMul(const kVec3 &in)", asMETHODPR(kexVec3, operator*, (const kexVec3&), kexVec3), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "kVec3 opMul(const float val)", asMETHODPR(kexVec3, operator*, (const float), kexVec3), asCALL_THISCALL);
+    e->RegisterObjectMethod("kVec3", "kVec3 &opMulAssign(const kVec3 &in)", asMETHODPR(kexVec3, operator*=, (const kexVec3&), kexVec3&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kVec3", "kVec3 &opMulAssign(const float)", asMETHODPR(kexVec3, operator*=, (const float), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "kVec3 opDiv(const kVec3 &in)", asMETHODPR(kexVec3, operator/, (const kexVec3&), kexVec3), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "kVec3 opDiv(const float val)", asMETHODPR(kexVec3, operator/, (const float), kexVec3), asCALL_THISCALL);
+    e->RegisterObjectMethod("kVec3", "kVec3 &opDivAssign(const kVec3 &in)", asMETHODPR(kexVec3, operator/=, (const kexVec3&), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "kVec3 &opAssign(const kVec3 &in)", asMETHODPR(kexVec3, operator=, (const kexVec3&), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "float opIndex(uint)const", asMETHODPR(kexVec3, operator[], (int index)const, float), asCALL_THISCALL);
     e->RegisterObjectMethod("kVec3", "float opIndex(uint)", asMETHODPR(kexVec3, operator[], (int index), float&), asCALL_THISCALL);

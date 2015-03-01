@@ -29,7 +29,12 @@ void kexScriptObjGame::Init(void)
     asIScriptEngine *e = kexGame::cScriptManager->Engine();
 
     e->RegisterObjectType("kGame", sizeof(kexGameLocal), asOBJ_VALUE | asOBJ_POD | asOBJ_APP_CLASS);
+    e->RegisterObjectType("kPlayLoop", sizeof(kexPlayLoop), asOBJ_VALUE | asOBJ_POD | asOBJ_APP_CLASS);
+
     e->RegisterGlobalProperty("kGame Game", kexGame::cLocal);
     e->RegisterObjectMethod("kGame", "kActor @SpawnActor(const int, const float, const float, const float, const float, const int sector = -1)", asMETHODPR(kexGameLocal, SpawnActor, (const int, const float, const float, const float, const float, const int), kexActor*), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "kActor @SpawnActor(const kStr &in, const float, const float, const float, const float, const int sector = -1)", asMETHODPR(kexGameLocal, SpawnActor, (const kexStr&, const float, const float, const float, const float, const int), kexActor*), asCALL_THISCALL);
+
+    e->RegisterGlobalProperty("kPlayLoop PlayLoop", kexGame::cLocal->PlayLoop());
+    e->RegisterObjectMethod("kPlayLoop", "const int Ticks(void) const", asMETHODPR(kexPlayLoop, Ticks, (void) const, const int), asCALL_THISCALL);
 }

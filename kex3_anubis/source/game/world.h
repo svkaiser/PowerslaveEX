@@ -172,6 +172,7 @@ public:
     bool                    LoadMap(const char *mapname);
     void                    UnloadMap(void);
     void                    RadialDamage(kexActor *source, const float radius, const int damage);
+    kexStack<mapSector_t*>  *FloodFill(const kexVec3 &start, mapSector_t *sector, const float maxDistance);
     void                    FindVisibleSectors(kexRenderView &view, mapSector_t *sector);
     void                    UpdateSectorBounds(mapSector_t *sector);
     void                    UpdateFacePlaneAndBounds(mapFace_t *face);

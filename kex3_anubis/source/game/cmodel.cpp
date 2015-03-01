@@ -721,12 +721,14 @@ bool kexCModel::PointWithinSectorEdges(const kexVec3 &origin, mapSector_t *secto
 bool kexCModel::PointInsideSector(const kexVec3 &origin, mapSector_t *sector,
                                   const float extent, const float floorOffset)
 {
-    if(origin.z > GetCeilingHeight(origin, sector))
+    if(origin.z > GetCeilingHeight(origin, sector) &&
+       origin.z > (float)sector->ceilingHeight)
     {
         return false;
     }
 
-    if((origin.z + floorOffset) < GetFloorHeight(origin, sector))
+    if((origin.z + floorOffset) < GetFloorHeight(origin, sector) &&
+       (origin.z + floorOffset) < (float)sector->floorHeight)
     {
         return false;
     }
@@ -1193,7 +1195,8 @@ bool kexCModel::MoveActor(kexActor *actor)
 //
 
 bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
-                      const kexVec3 &start_pos, const kexVec3 &end_pos, bool bTestActors)
+                      const kexVec3 &start_pos, const kexVec3 &end_pos,
+                      const float radius, bool bTestActors)
 {
     unsigned int sectorCount;
 
@@ -1249,7 +1252,7 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
                     TraceActorsInSector(&sectors[face->sector]);
                 }
 
-                if(TraceFacePlane(face, 0, 0, true))
+                if(TraceFacePlane(face, 0, radius, true))
                 {
                     // add to list if the ray passes through the portal
                     sectorList.Set(&sectors[face->sector]);
@@ -1258,7 +1261,7 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
             else if(face->flags & FF_SOLID)
             {
                 // test solid wall
-                TraceFacePlane(face);
+                TraceFacePlane(face, 0, radius);
             }
         }
 

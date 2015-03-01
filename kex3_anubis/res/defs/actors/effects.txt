@@ -43,6 +43,18 @@ Fx_VaseExplodePuff 62
     fullbright              1
 }
 
+Fx_GreenCobraExplode -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   2.0
+    animSpeed               0.25
+    spawnAnim               "effects/magicPuff"
+    fullbright              1
+}
+
 Fx_HealthSpawn 63
 {
     classname               "kexActor"
@@ -84,5 +96,16 @@ Fx_WaterSplash 124
     stepHeight              32
     scale                   1.0
     spawnAnim               "effects/splash"
+    fullbright              1
+}
+
+Fx_GreenCobraJoint -1
+{
+    classname               "kexActor"
+    radius                  16
+    height                  32
+    stepHeight              0
+    scale                   1.0
+    spawnAnim               "projectiles/cobra_green_joint"
     fullbright              1
 }

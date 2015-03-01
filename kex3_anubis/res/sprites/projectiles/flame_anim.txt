@@ -1,0 +1,207 @@
+flameproj_loop
+{
+    // frames:    3
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "projectiles/flame", 4,    -26,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "projectiles/flame", 4,    -30,  -25,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "projectiles/flame", 4,    -30,  -26,    1 }
+        }
+    }
+}
+
+flameproj_sizzle
+{
+    // frames:   17
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "projectiles/flame", 5,    -19,  -39,    0 }
+            { "projectiles/flame", 6,    -19,   25,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "projectiles/flame", 5,    -19,  -39,    0 }
+            { "projectiles/flame", 6,    -19,   25,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "projectiles/flame", 7,    -22,  -48,    0 }
+            { "projectiles/flame", 8,    -22,   16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "projectiles/flame", 7,    -22,  -48,    0 }
+            { "projectiles/flame", 8,    -22,   16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "projectiles/flame", 9,    -24,  -52,    0 }
+            { "projectiles/flame", 10,    -24,   12,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "projectiles/flame", 9,    -24,  -52,    0 }
+            { "projectiles/flame", 10,    -24,   12,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "projectiles/flame", 0,    -22,  -61,    0 }
+            { "projectiles/flame", 1,    -22,    3,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "projectiles/flame", 0,    -22,  -62,    0 }
+            { "projectiles/flame", 1,    -22,    2,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "projectiles/flame", 2,    -17,  -64,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "projectiles/flame", 2,    -17,  -66,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "projectiles/flame", 2,    -19,  -69,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "projectiles/flame", 3,    -14,  -44,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "projectiles/flame", 3,    -18,  -38,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "projectiles/flame", 3,    -14,  -31,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "projectiles/flame", 3,    -14,  -25,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0 (no groups)
+        delay 1
+
+    }
+
+    frame
+    {
+        action A_Destroy()
+        delay 1
+    }
+}

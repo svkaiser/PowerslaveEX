@@ -1,0 +1,35 @@
+texture "sprites/projectiles/flame.png"
+
+// working\flame\sprite0105.tga
+sprite 0 0 0 48 64
+
+// working\flame\sprite0106.tga
+sprite 1 48 0 48 10
+
+// working\flame\sprite0107.tga
+sprite 2 96 0 36 64
+
+// working\flame\sprite0108.tga
+sprite 3 132 0 36 63
+
+// working\flame\sprite0109.tga
+sprite 4 168 0 60 52
+
+// working\flame\sprite0110.tga
+sprite 5 48 10 40 64
+
+// working\flame\sprite0111.tga
+sprite 6 168 52 40 6
+
+// working\flame\sprite0112.tga
+sprite 7 208 52 48 64
+
+// working\flame\sprite0113.tga
+sprite 8 132 63 48 16
+
+// working\flame\sprite0114.tga
+sprite 9 0 74 52 64
+
+// working\flame\sprite0115.tga
+sprite 10 52 74 52 35
+

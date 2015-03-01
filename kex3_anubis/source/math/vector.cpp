@@ -671,11 +671,9 @@ float kexVec3::Unit(void) const
 
 float kexVec3::DistanceSq(const kexVec3 &vec) const
 {
-    return (
-               (x - vec.x) * (x - vec.x) +
-               (y - vec.y) * (y - vec.y) +
-               (z - vec.z) * (z - vec.z)
-           );
+    return ((x - vec.x) * (x - vec.x) +
+            (y - vec.y) * (y - vec.y) +
+            (z - vec.z) * (z - vec.z));
 }
 
 //

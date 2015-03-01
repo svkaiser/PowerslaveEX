@@ -16,6 +16,7 @@ cstaff_raise
     frame
     {
         // ##002   69    0
+        action A_PlayLocalSound("sounds/cstaffup.wav")
         sprites
         {
             { "weapons/cobra_staff", 2,    -31,   -9,    0 }
@@ -223,6 +224,7 @@ cstaff_lower
     frame
     {
         // ##001   69    0
+        action A_PlayLocalSound("sounds/cstaffup.wav")
         sprites
         {
             { "weapons/cobra_staff", 2,    -31,  -67,    0 }
@@ -375,6 +377,9 @@ cstaff_fire
     frame
     {
         // ##004   70  128
+        action A_PlayLocalSound("sounds/cstafffire.wav")
+        action A_FireProjectile("Proj_Cobra_Green", 0, 0, -32, 80, 8)
+        action A_ConsumeAmmo(1)
         fullbright
         sprites
         {

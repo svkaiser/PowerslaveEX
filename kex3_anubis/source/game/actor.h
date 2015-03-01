@@ -83,6 +83,7 @@ public:
     mapSector_t                     *Sector(void) { return sector; }
     const int                       SectorIndex(void);
     void                            SetSector(mapSector_t *s);
+    void                            SetSector(const unsigned int s);
     mapActor_t                      *MapActor(void) { return mapActor; }
     kexLinklist<kexActor>           &SectorLink(void) { return sectorLink; }
     kexBBox                         &Bounds(void) { return bounds; }
@@ -103,8 +104,11 @@ public:
     spriteFrame_t                   *Frame(void) { return &anim->frames[frameID]; }
     const int                       FrameID(void) const { return frameID; }
     float                           &Ticks(void) { return ticks; }
+    const int                       GameTicks(void) const { return gameTicks; }
     void                            SetDefinition(kexDict *dict) { definition = dict; }
     float                           &AnimSpeed(void) { return animSpeed; }
+    kexActor                        *GetTaggedActor(void) { return taggedActor; }
+    void                            SetTaggedActor(kexActor *actor) { taggedActor = actor; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
@@ -134,6 +138,7 @@ protected:
     spriteAnim_t                    *deathAnim;
     int16_t                         frameID;
     float                           ticks;
+    int                             gameTicks;
     float                           animSpeed;
     float                           expireAmount;
     int                             flashTicks;
@@ -143,6 +148,7 @@ protected:
     float                           floorHeight;
     float                           ceilingHeight;
     kexStr                          bounceSounds[3];
+    kexActor                        *taggedActor;
 END_KEX_CLASS();
 
 #include "pickup.h"

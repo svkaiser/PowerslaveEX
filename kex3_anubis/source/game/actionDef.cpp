@@ -516,6 +516,7 @@ DECLARE_KEX_ACTION(kexActionSpawnProjectile)
     
     proj->Velocity() = (forward * speed);
     proj->SetTarget(actor);
+    proj->Pitch() = actor->Pitch();
 
     if(actor->InstanceOf(&kexPuppet::info))
     {

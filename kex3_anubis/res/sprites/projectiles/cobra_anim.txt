@@ -1,0 +1,131 @@
+cobra_green_spawn
+{
+    frame
+    {
+        action A_SetupCobraJoints()
+        goto "projectiles/cobra_green_loop"
+    }
+}
+
+cobra_green_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        action A_CobraSlither()
+        rotation_N
+        {
+            sprites
+            {
+                { "projectiles/cobra", 0,    -15,  -17,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "projectiles/cobra", 1,    -17,  -17,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "projectiles/cobra", 2,    -21,  -17,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "projectiles/cobra", 3,    -13,  -21,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "projectiles/cobra", 4,    -16,  -17,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "projectiles/cobra", 3,    -17,  -21,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "projectiles/cobra", 2,     -8,  -17,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "projectiles/cobra", 1,    -12,  -17,    1 }
+            }
+        }
+    }
+}
+
+cobra_green_joint
+{
+    // frames:    1
+    frame
+    {
+        action A_UpdateCobraJoints()
+        delay 0
+        
+        sprites
+        {
+            { "projectiles/cobra", 5,     -9,  -13,    0 }
+        }
+    }
+}
+
+cobra_green_death
+{
+    frame
+    {
+        action A_DestroyCobraJoints()
+        action A_CStaffExplode()
+        action A_RadialBlast(256, 100)
+        delay 3
+    }
+    
+    frame
+    {
+        action A_CStaffExplode()
+        delay 3
+    }
+    
+    frame
+    {
+        action A_CStaffExplode()
+        delay 3
+    }
+    
+    frame
+    {
+        action A_CStaffExplode()
+        delay 3
+    }
+    
+    frame
+    {
+        action A_Destroy()
+        delay 1
+    }
+}

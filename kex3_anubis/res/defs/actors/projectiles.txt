@@ -26,6 +26,24 @@ Proj_Anubis 18
     damage                  20
 }
 
+Proj_Cobra_Green 20
+{
+    classname               "kexProjectile"
+    radius                  16
+    height                  64
+    stepHeight              0
+    scale                   1.0
+    stepHeight              64
+    spawnAnim               "projectiles/cobra_green_spawn"
+    deathAnim               "projectiles/cobra_green_death"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    damage                  0
+    impactWallsOnly         1
+    homing                  1
+}
+
 Proj_Flame 21
 {
     classname               "kexProjectileFlame"

@@ -280,7 +280,7 @@ bool kexAI::CheckTargetSight(kexActor *actor)
     kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
     kexVec3 end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
     
-    return !kexGame::cLocal->CModel()->Trace(this, sector, start, end, false);
+    return !kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0, false);
 }
 
 //
@@ -818,7 +818,7 @@ void kexAI::UpdateMovement(void)
     if(sector->floorFace->flags & FF_LAVA &&
         kexGame::cLocal->CModel()->PointOnFaceSide(origin, sector->floorFace) <= 0.1f)
     {
-        // dumbass feel into lava
+        // dumbass fell into lava
         Ignite();
     }
     

@@ -50,6 +50,7 @@ kexActor::kexActor(void)
     this->friction = 0.5f;
     this->gravity = 0.75f;
     this->floorOffset = 0;
+    this->taggedActor = NULL;
 }
 
 //
@@ -86,6 +87,8 @@ void kexActor::Tick(void)
             flags &= ~AF_FLASH;
         }
     }
+
+    gameTicks++;
 }
 
 //
@@ -128,6 +131,8 @@ void kexActor::OnRemove(void)
 void kexActor::Spawn(void)
 {
     float r, h;
+
+    gameTicks = 0;
 
     if(definition)
     {
@@ -235,6 +240,21 @@ bool kexActor::FindSector(const kexVec3 &pos)
 void kexActor::SetSector(mapSector_t *s)
 {
     sector = s;
+    LinkSector();
+}
+
+//
+// kexActor::SetSector
+//
+
+void kexActor::SetSector(const unsigned int s)
+{
+    if(s >= kexGame::cLocal->World()->NumSectors())
+    {
+        return;
+    }
+
+    sector = &kexGame::cLocal->World()->Sectors()[s];
     LinkSector();
 }
 
@@ -437,11 +457,9 @@ void kexActor::CheckFloorAndCeilings(void)
     // bump ceiling
     if((origin.z + height) + velocity.z >= ceilingHeight)
     {
-        if(InstanceOf(&kexProjectile::info))
+        if(gravity != 0)
         {
-            kexProjectile *proj = static_cast<kexProjectile*>(this);
-            proj->OnImpact(NULL);
-            return;
+            velocity.z = -velocity.z;
         }
     }
     
@@ -465,14 +483,10 @@ void kexActor::CheckFloorAndCeilings(void)
         }
         else
         {
-            velocity.z = 0;
-        }
-        
-        if(InstanceOf(&kexProjectile::info))
-        {
-            kexProjectile *proj = static_cast<kexProjectile*>(this);
-            proj->OnImpact(NULL);
-            return;
+            if(gravity != 0)
+            {
+                velocity.z = 0;
+            }
         }
     }
 }
@@ -501,15 +515,6 @@ void kexActor::UpdateMovement(void)
         else
         {
             velocity = movement;
-            if(kexGame::cLocal->CModel()->Fraction() != 1)
-            {
-                if(InstanceOf(&kexProjectile::info))
-                {
-                    kexProjectile *proj = static_cast<kexProjectile*>(this);
-                    proj->OnImpact(kexGame::cLocal->CModel()->ContactActor());
-                    return;
-                }
-            }
         }
 
         if(!(oldSector->flags & SF_WATER) && sector->flags & SF_WATER)
