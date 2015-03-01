@@ -64,7 +64,8 @@ void kexProjectile::Tick(void)
                 return;
             }
 
-            kexVec3 dir = (homingActor->Origin() - origin).Normalize();
+            kexVec3 vOrigin = homingActor->Origin() + kexVec3(0, 0, homingActor->Height() * 0.5f);
+            kexVec3 dir = (vOrigin - origin).Normalize();
             
             yaw = dir.ToYaw();
             pitch = -dir.ToPitch();
@@ -173,7 +174,6 @@ void kexProjectile::SeekTargets(void)
 void kexProjectile::CheckFloorAndCeilings(void)
 {
     kexVec3 position = (origin + velocity);
-    position.z += floorOffset;
 
     // bump ceiling
     if(!sector->ceilingFace->InFront(position + kexVec3(0, 0, height)))

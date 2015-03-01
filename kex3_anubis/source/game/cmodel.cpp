@@ -721,14 +721,12 @@ bool kexCModel::PointWithinSectorEdges(const kexVec3 &origin, mapSector_t *secto
 bool kexCModel::PointInsideSector(const kexVec3 &origin, mapSector_t *sector,
                                   const float extent, const float floorOffset)
 {
-    if(origin.z > GetCeilingHeight(origin, sector) &&
-       origin.z > (float)sector->ceilingHeight)
+    if(origin.z > GetCeilingHeight(origin, sector))
     {
         return false;
     }
 
-    if((origin.z + floorOffset) < GetFloorHeight(origin, sector) &&
-       (origin.z + floorOffset) < (float)sector->floorHeight)
+    if((origin.z + floorOffset) < GetFloorHeight(origin, sector))
     {
         return false;
     }

@@ -34,6 +34,7 @@ Proj_Cobra_Green 20
     stepHeight              0
     scale                   1.0
     stepHeight              64
+    floorOffset             8
     spawnAnim               "projectiles/cobra_green_spawn"
     deathAnim               "projectiles/cobra_green_death"
     fullbright              1
