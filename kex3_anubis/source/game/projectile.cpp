@@ -289,6 +289,8 @@ kexProjectileFlame::~kexProjectileFlame(void)
 
 void kexProjectileFlame::Tick(void)
 {
+    float lt = (float)lifeTime;
+
     if(Removing())
     {
         return;
@@ -304,7 +306,16 @@ void kexProjectileFlame::Tick(void)
     fizzleTime += 0.5f;
     scale += ((5000 - ((fizzleTime * 65536) / 512)) / 128) / 512;
 
-    if(fizzleTime >= (float)lifeTime)
+    if(fizzleTime < lt * 0.5f)
+    {
+        color.Lerp(kexVec3(1.0f, 1.0f, 0.25f), 1.0f / (lt * 0.5f));
+    }
+    else
+    {
+        color.Lerp(kexVec3(1.0f, 0.25f, 0.0625f), 1.0f / (lt * 0.5f));
+    }
+
+    if(fizzleTime >= lt)
     {
         Remove();
     }

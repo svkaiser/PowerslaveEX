@@ -41,6 +41,7 @@ Fx_VaseExplodePuff 62
     animSpeed               0.25
     spawnAnim               "effects/magicPuff"
     fullbright              1
+    color                   "0.5 0.5 0.25"
 }
 
 Fx_GreenCobraExplode -1
@@ -53,6 +54,7 @@ Fx_GreenCobraExplode -1
     animSpeed               0.25
     spawnAnim               "effects/magicPuff"
     fullbright              1
+    color                   "0.375 0.75 0.375"
 }
 
 Fx_HealthSpawn 63
@@ -64,6 +66,7 @@ Fx_HealthSpawn 63
     scale                   2.0
     spawnAnim               "effects/orb_spawn"
     fullbright              1
+    color                   "1.0 0.285 0.285"
 }
 
 Fx_AmmoSpawn 64
@@ -75,6 +78,7 @@ Fx_AmmoSpawn 64
     scale                   2.0
     spawnAnim               "effects/orb_spawn"
     fullbright              1
+    color                   "0.285 0.285 1.0"
 }
 
 Fx_Explosion01 65

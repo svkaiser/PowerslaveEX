@@ -607,6 +607,7 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
         for(unsigned int i = 0; i < frame->spriteSet[rotation].Length(); ++i)
         {
             int c = 0xff;
+            int r, g, b;
 
             spriteSet = &frame->spriteSet[rotation][i];
             sprite = spriteSet->sprite;
@@ -656,10 +657,18 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
                 }
             }
 
-            vl->AddVertex(p1, u1, v1, c, c, c, 255);
-            vl->AddVertex(p2, u2, v1, c, c, c, 255);
-            vl->AddVertex(p3, u1, v2, c, c, c, 255);
-            vl->AddVertex(p4, u2, v2, c, c, c, 255);
+            r = (int)((float)c * actor->Color().x * 2);
+            g = (int)((float)c * actor->Color().y * 2);
+            b = (int)((float)c * actor->Color().z * 2);
+
+            kexMath::Clamp(r, 0, 255);
+            kexMath::Clamp(g, 0, 255);
+            kexMath::Clamp(b, 0, 255);
+
+            vl->AddVertex(p1, u1, v1, r, g, b, 255);
+            vl->AddVertex(p2, u2, v1, r, g, b, 255);
+            vl->AddVertex(p3, u1, v2, r, g, b, 255);
+            vl->AddVertex(p4, u2, v2, r, g, b, 255);
 
             vl->AddTriangle(0, 2, 1);
             vl->AddTriangle(1, 2, 3);

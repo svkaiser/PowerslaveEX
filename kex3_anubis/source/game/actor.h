@@ -109,6 +109,7 @@ public:
     float                           &AnimSpeed(void) { return animSpeed; }
     kexActor                        *GetTaggedActor(void) { return taggedActor; }
     void                            SetTaggedActor(kexActor *actor) { taggedActor = actor; }
+    kexVec3                         &Color(void) { return color; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
@@ -149,6 +150,7 @@ protected:
     float                           ceilingHeight;
     kexStr                          bounceSounds[3];
     kexActor                        *taggedActor;
+    kexVec3                         color;
 END_KEX_CLASS();
 
 #include "pickup.h"

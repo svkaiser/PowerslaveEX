@@ -51,6 +51,7 @@ kexActor::kexActor(void)
     this->gravity = 0.75f;
     this->floorOffset = 0;
     this->taggedActor = NULL;
+    this->color.Set(1, 1, 1);
 }
 
 //
@@ -137,6 +138,7 @@ void kexActor::Spawn(void)
     if(definition)
     {
         kexStr animName;
+        kexVec3 clr;
         
         definition->GetFloat("scale", scale, 1);
         definition->GetFloat("radius", radius, 16);
@@ -147,6 +149,11 @@ void kexActor::Spawn(void)
         definition->GetFloat("gravity", gravity, 0.75f);
         definition->GetFloat("floorOffset", floorOffset, 0);
         definition->GetInt("health", health, 100);
+
+        if(definition->GetVector("color", clr))
+        {
+            color = clr;
+        }
 
         if(definition->GetBool("noAdvanceFrames"))  flags |= AF_NOADVANCEFRAMES;
         if(definition->GetBool("randomizeFrames"))  flags |= AF_RANDOMIZATION;
