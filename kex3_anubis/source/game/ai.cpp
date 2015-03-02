@@ -351,15 +351,6 @@ void kexAI::InPain(void)
 }
 
 //
-// kexAI::RandomDecision
-//
-
-bool kexAI::RandomDecision(const int rnd)
-{
-    return (kexRand::Int() & rnd) != (gameTicks & rnd);
-}
-
-//
 // kexAI::FaceTarget
 //
 

@@ -70,7 +70,7 @@ void kexProjectile::Tick(void)
             yaw = dir.ToYaw();
             pitch = -dir.ToPitch();
         }
-        else if((kexRand::Int() & 14) == (kexGame::cLocal->PlayLoop()->Ticks() & 14))
+        else if(!RandomDecision(14))
         {
             SeekTargets();
         }
@@ -456,15 +456,21 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
     mapVertex_t *v = kexGame::cLocal->World()->Vertices();
     int secID;
     kexVec3 vOrigin;
-    kexVec3 vOrg;
+    kexVec3 vFaceOrg;
     kexActor *proj;
 
     secID = sector - kexGame::cLocal->World()->Sectors();
 
+    vFaceOrg = (v[face->vertexStart+0].origin +
+                v[face->vertexStart+1].origin +
+                v[face->vertexStart+2].origin +
+                v[face->vertexStart+3].origin) / 4;
+    
     vOrigin = (v[face->vertStart + poly->indices[0]].origin +
                v[face->vertStart + poly->indices[1]].origin +
                v[face->vertStart + poly->indices[2]].origin) / 3;
 
+    vOrigin.Lerp(vFaceOrg, 0.5f);
     vOrigin += (face->plane.Normal() * 32);
 
     kexGame::cLocal->SpawnActor(AT_FIREBALLPUFF, vOrigin.x, vOrigin.y, vOrigin.z, 0, secID);

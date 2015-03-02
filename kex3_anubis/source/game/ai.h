@@ -83,7 +83,6 @@ public:
     static bool                     bNoTargetEnemy;
 
 private:
-    bool                            RandomDecision(const int rnd);
     float                           GetTargetHeightDifference(void);
     void                            UpdateBurn(void);
     bool                            SetDesiredDirection(const int dir);

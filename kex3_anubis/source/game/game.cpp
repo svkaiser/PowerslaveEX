@@ -717,11 +717,11 @@ kexMover *kexGameLocal::SpawnMover(const char *className, const int type, const 
 // kexGameLocal::SpawnFireballFactory
 //
 
-kexFireballFactory *kexGameLocal::SpawnFireballFactory(const int type, const int sector)
+kexFireballFactory *kexGameLocal::SpawnFireballFactory(mapActor_t *mapActor)
 {
     kexFireballFactory *fbf;
 
-    if(sector <= -1 || sector >= (int)world->NumSectors())
+    if(mapActor->sector <= -1 || mapActor->sector >= (int)world->NumSectors())
     {
         return NULL;
     }
@@ -731,8 +731,8 @@ kexFireballFactory *kexGameLocal::SpawnFireballFactory(const int type, const int
         return NULL;
     }
 
-    fbf->FireballType() = type;
-    fbf->SetSector(&world->Sectors()[sector]);
+    fbf->FireballType() = mapActor->type;
+    fbf->SetSector(&world->Sectors()[mapActor->sector]);
     fbf->CallSpawn();
 
     return fbf;

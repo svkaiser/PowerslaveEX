@@ -864,8 +864,6 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
         face->tag = -1;
         break;
     case 200:
-        UseWallSwitch(player, face, ev);
-        break;
     case 201:
     case 202:
         UseWallSwitch(player, face, ev);
@@ -937,7 +935,8 @@ void kexWorld::ResetWallSwitchFromTag(const int tag)
         }
 
         if(events[i].type != 200 &&
-           events[i].type != 201)
+           events[i].type != 201 &&
+           events[i].type != 202)
         {
             continue;
         }
@@ -1046,7 +1045,7 @@ void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
             switch(actors[j].type)
             {
             case AT_FIREBALLSPAWNER:
-                fbFactory = kexGame::cLocal->SpawnFireballFactory(AT_FIREBALLSPAWNER, actors[j].sector);
+                fbFactory = kexGame::cLocal->SpawnFireballFactory(&actors[j]);
                 fbFactory->ExtraDelay() = extraDelay;
                 extraDelay += 8;
                 break;

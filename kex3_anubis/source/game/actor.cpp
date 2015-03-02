@@ -441,6 +441,15 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
 }
 
 //
+// kexActor::RandomDecision
+//
+
+bool kexActor::RandomDecision(const int rnd)
+{
+    return (kexRand::Int() & rnd) != (gameTicks & rnd);
+}
+
+//
 // kexActor::UpdateVelocity
 //
 

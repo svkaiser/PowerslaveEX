@@ -211,7 +211,7 @@ public:
     kexActor                    *SpawnActor(const kexStr &name, const float x, const float y, const float z,
                                             const float yaw, const int sector = -1);
     kexMover*                   SpawnMover(const char *className, const int type, const int sector);
-    kexFireballFactory          *SpawnFireballFactory(const int type, const int sector);
+    kexFireballFactory          *SpawnFireballFactory(mapActor_t *mapActor);
     void                        DrawSmallString(const char *string, float x, float y, float scale, bool center,
                                                 byte r = 0xff, byte g = 0xff, byte b = 0xff);
     void                        DrawBigString(const char *string, float x, float y, float scale, bool center,
