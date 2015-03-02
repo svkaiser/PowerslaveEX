@@ -110,6 +110,7 @@ public:
     kexActor                        *GetTaggedActor(void) { return taggedActor; }
     void                            SetTaggedActor(kexActor *actor) { taggedActor = actor; }
     kexVec3                         &Color(void) { return color; }
+    kexVec3                         &PrevOrigin(void) { return prevOrigin; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
@@ -151,6 +152,7 @@ protected:
     kexStr                          bounceSounds[3];
     kexActor                        *taggedActor;
     kexVec3                         color;
+    kexVec3                         prevOrigin;
 END_KEX_CLASS();
 
 #include "pickup.h"

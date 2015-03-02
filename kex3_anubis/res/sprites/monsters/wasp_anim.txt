@@ -1,0 +1,1196 @@
+wasp_base
+{
+    // frames:    4
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 6,    -30,  -47,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -31,  -64,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -27,  -48,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -36,  -50,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 1,    -32,  -58,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -23,  -50,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -26,  -48,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -26,  -63,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 6,    -30,  -47,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -31,  -64,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -27,  -48,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -36,  -50,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 1,    -32,  -58,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -23,  -50,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -26,  -48,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -26,  -63,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 8,    -29,  -60,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -31,  -50,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -29,  -58,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -31,  -61,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 2,    -30,  -54,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -24,  -61,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -24,  -58,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -27,  -49,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 8,    -29,  -60,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -31,  -50,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -29,  -58,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -31,  -61,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 2,    -30,  -54,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -24,  -61,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -24,  -58,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -27,  -49,    1 }
+            }
+        }
+    }
+}
+
+wasp_chase
+{
+    // frames:    4
+    frame
+    {
+        // ##000    0    0
+        action A_PlayLocalSound("sounds/waspact.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 6,    -30,  -47,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -31,  -64,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -27,  -48,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -36,  -50,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 1,    -32,  -58,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -23,  -50,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -26,  -48,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -26,  -63,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 6,    -30,  -47,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -31,  -64,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -27,  -48,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -36,  -50,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 1,    -32,  -58,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -23,  -50,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -26,  -48,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -26,  -63,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 8,    -29,  -60,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -31,  -50,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -29,  -58,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -31,  -61,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 2,    -30,  -54,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -24,  -61,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -24,  -58,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -27,  -49,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 8,    -29,  -60,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -31,  -50,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -29,  -58,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -31,  -61,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 2,    -30,  -54,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -24,  -61,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -24,  -58,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -27,  -49,    1 }
+            }
+        }
+    }
+}
+
+wasp_attack
+{
+    // frames:    8
+    frame
+    {
+        // ##000   89    0
+        action A_PlayLocalSound("sounds/waspatk.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 6,    -30,  -50,    0 }
+            }
+        }
+        // ##000   89    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -30,  -62,    0 }
+            }
+        }
+        // ##000   89    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -24,  -46,    0 }
+            }
+        }
+        // ##000   89    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -33,  -49,    0 }
+            }
+        }
+        // ##000   89    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 1,    -32,  -58,    0 }
+            }
+        }
+        // ##000   89    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -26,  -48,    1 }
+            }
+        }
+        // ##000   89    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -28,  -45,    1 }
+            }
+        }
+        // ##000   89    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -25,  -63,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 6,    -30,  -49,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -30,  -62,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -25,  -59,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -33,  -49,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 1,    -32,  -58,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 12,    -26,  -48,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 3,    -28,  -45,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 15,    -25,  -63,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 8,    -28,  -61,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -31,  -49,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -25,  -61,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -30,  -62,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 2,    -30,  -55,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -25,  -61,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -26,  -58,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -25,  -50,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        action A_PlayLocalSound("sounds/wasphit.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 8,    -28,  -61,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -31,  -50,    0 }
+            }
+        }
+        // ##003   90    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 7,    -18,  -56,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -30,  -62,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 2,    -30,  -55,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 14,    -25,  -61,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 5,    -26,  -58,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 17,    -25,  -50,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##004   90    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 9,    -31,  -54,    0 }
+            }
+        }
+        // ##004   90    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 18,    -25,  -53,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 7,    -18,  -56,    0 }
+            }
+        }
+        // ##004   90    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 16,    -19,  -57,    0 }
+            }
+        }
+        // ##004   90    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 4,    -31,  -57,    0 }
+            }
+        }
+        // ##004   90    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 16,    -32,  -57,    1 }
+            }
+        }
+        // ##004   90    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 7,    -21,  -58,    1 }
+            }
+        }
+        // ##004   90    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 18,    -37,  -53,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 9,    -31,  -54,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 18,    -25,  -53,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 7,    -18,  -56,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 16,    -19,  -57,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 4,    -31,  -57,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 16,    -32,  -57,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 7,    -21,  -58,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 18,    -37,  -53,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 9,    -31,  -54,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 18,    -25,  -53,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 7,    -18,  -56,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 16,    -19,  -57,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 4,    -31,  -57,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 16,    -32,  -57,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 7,    -21,  -58,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 18,    -37,  -53,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        goto "monsters/wasp_chase"
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/wasp", 9,    -31,  -54,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/wasp", 18,    -25,  -53,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/wasp", 7,    -18,  -56,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/wasp", 16,    -19,  -57,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/wasp", 4,    -31,  -57,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/wasp", 16,    -32,  -57,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/wasp", 7,    -21,  -58,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/wasp", 18,    -37,  -53,    1 }
+            }
+        }
+    }
+}
+
+wasp_death
+{
+    frame
+    {
+        // ##000    0    0
+        action A_FaceTarget()
+        action A_Destroy()
+        action A_WaspDeath()
+        action A_TossActor("Obj_Wasp_Gib01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Wasp_Gib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Wasp_Gib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Wasp_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Wasp_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Wasp_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Wasp_Gib05", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Wasp_Gib05", 0, 0, 32, 8, 8, 4, 16)
+    }
+}
+
+wasp_gib01
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/wasp", 10,     -6,  -16,    0 }
+        }
+
+    }
+
+}
+
+wasp_gib02
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/wasp", 11,    -15,  -28,    0 }
+        }
+
+    }
+
+}
+
+wasp_gib03
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/wasp", 0,    -11,  -15,    0 }
+        }
+
+    }
+
+}
+
+wasp_gib04
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/wasp", 13,     -8,  -18,    0 }
+        }
+
+    }
+
+}
+
+wasp_gib05
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/wasp", 19,     -8,  -12,    0 }
+        }
+
+    }
+}

@@ -365,7 +365,7 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
         return;
     }
     
-    if(faceID <= sector->faceEnd && !face->InFront(view->Origin()))
+    if(faceID <= sector->faceEnd && face->plane.PointOnSide(view->Origin()) == kexPlane::PSIDE_BACK)
     {
         return;
     }

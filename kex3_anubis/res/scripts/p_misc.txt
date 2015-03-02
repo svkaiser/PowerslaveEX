@@ -1,0 +1,118 @@
+//
+// Copyright(C) 2014-2015 Samuel Villarreal
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// DESCRIPTION:
+//      Misc actions
+//
+
+//
+// A_RandomItem
+//
+
+void A_RandomItem(kActor @actor)
+{
+    int r = Math::Rand() & 2;
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z + actor.Height();
+    kActor @obj;
+    
+    if(r != 0)
+    {
+        return;
+    }
+    
+    if((Math::Rand() & 255) >= 128)
+    {
+        @obj = Game.SpawnActor("Fx_AmmoSpawn", x, y, z, 0, actor.SectorIndex());
+    }
+    else
+    {
+        @obj = Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
+    }
+    
+    if(!(obj is null) && (Math::Rand() & 255) >= 128)
+    {
+        obj.Scale() = 1.0f;
+    }
+}
+
+//
+// A_RandomVaseItem
+//
+
+void A_RandomVaseItem(kActor @actor)
+{
+    int r = Math::Rand() & 7;
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z + actor.Height();
+    kActor @obj;
+    
+    switch(r)
+    {
+    case 0:
+        Game.SpawnActor("AI_Spider", x, y, z, actor.SectorIndex());
+        return;
+    case 1:
+    case 3:
+        @obj = Game.SpawnActor("Fx_AmmoSpawn", x, y, z, 0, actor.SectorIndex());
+        break;
+        
+    case 4:
+    case 5:
+        @obj = Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
+        break;
+        
+    default:
+        return;
+    }
+    
+    if(!(obj is null) && (Math::Rand() & 1) != 0)
+    {
+        obj.Scale() = 1.0f;
+    }
+}
+
+//
+// A_SpawnOrbPickup
+//
+
+void A_SpawnOrbPickup(kActor @actor)
+{
+    kActor @orb;
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z;
+    
+    switch(actor.Type())
+    {
+    case AT_MISC20: // Fx_HealthSpawn
+        @orb = Game.SpawnActor("Item_Health", x, y, z, 0, actor.SectorIndex());
+        break;
+        
+    case AT_MISC21: // Fx_AmmoSpawn
+        @orb = Game.SpawnActor("Item_Ammo", x, y, z, 0, actor.SectorIndex());
+        break;
+        
+    default:
+        return;
+    }
+    
+    if(orb is null)
+    {
+        return;
+    }
+    
+    orb.Scale() = actor.Scale();
+}

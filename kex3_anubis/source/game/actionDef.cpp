@@ -476,7 +476,7 @@ DECLARE_KEX_ACTION(kexActionCheckMelee)
     ai = static_cast<kexAI*>(actor);
     
     targ = static_cast<kexActor*>(ai->Target());
-    r = ((ai->Radius() * 0.6f) + targ->Radius()) + extra;
+    r = (ai->Radius() + targ->Radius()) + extra;
     
     if(ai->Origin().DistanceSq(targ->Origin()) > (r * r))
     {

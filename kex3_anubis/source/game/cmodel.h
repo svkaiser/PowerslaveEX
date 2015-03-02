@@ -41,7 +41,7 @@ public:
     bool                    Trace(kexActor *actor, mapSector_t *sector,
                                   const kexVec3 &start_pos, const kexVec3 &end_pos,
                                   const float radius = 0, bool bTestActors = true);
-    bool                    CheckActorPosition(kexActor *actor);
+    bool                    CheckActorPosition(kexActor *actor, mapSector_t *initialSector);
     void                    Reset(void);
 
     const int               ValidCount(void) const { return validcount; }

@@ -1,0 +1,119 @@
+//
+// Copyright(C) 2014-2015 Samuel Villarreal
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// DESCRIPTION:
+//      AI/Monster Actions
+//
+
+//
+// A_AnubisDeath
+//
+
+void A_AnubisDeath(kActor @actor)
+{
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z + 64.0f;
+    kActor @gib = Game.SpawnActor("Fx_Gibs01", x, y, z, actor.Yaw(), actor.SectorIndex());
+    
+    if(!(gib is null))
+    {
+        gib.Scale() = actor.Scale();
+    }
+    
+    if((Math::Rand() & 1) == 0)
+    {
+        actor.PlaySound("sounds/anubisdeath01.wav");
+    }
+    else
+    {
+        actor.PlaySound("sounds/anubisdeath02.wav");
+    }
+}
+
+//
+// A_SpiderLeap
+//
+
+void A_SpiderLeap(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    kVec3 dir = (actor.GetTarget().Origin() - actor.Origin()).Normalize();
+    
+    actor.PlaySound("sounds/spidjump.wav");
+    
+    actor.Velocity().x = dir.x * 4;
+    actor.Velocity().y = dir.y * 4;
+    actor.Velocity().z = 15.0f;
+}
+
+//
+// A_SpiderCheckGround
+//
+
+void A_SpiderCheckGround(kActor @actor)
+{
+    if((actor.Origin().z + actor.Velocity().z) <= actor.FloorHeight())
+    {
+        actor.ChangeAnim("monsters/spider_base");
+    }
+}
+
+//
+// A_SpiderDeath
+//
+
+void A_SpiderDeath(kActor @actor)
+{
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z;
+    kActor @gib = Game.SpawnActor("Fx_Gibs01", x, y, z, actor.Yaw(), actor.SectorIndex());
+    
+    if(!(gib is null))
+    {
+        gib.Scale() = actor.Scale();
+    }
+    
+    actor.PlaySound("sounds/spiddeath.wav");
+}
+
+//
+// A_WaspDeath
+//
+
+void A_WaspDeath(kActor @actor)
+{
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z;
+    kActor @gib = Game.SpawnActor("Fx_Gibs01", x, y, z, actor.Yaw(), actor.SectorIndex());
+    
+    if(!(gib is null))
+    {
+        gib.Scale() = actor.Scale();
+    }
+    
+    if((Math::Rand() & 1) == 0)
+    {
+        actor.PlaySound("sounds/waspdeath01.wav");
+    }
+    else
+    {
+        actor.PlaySound("sounds/waspdeath02.wav");
+    }
+}

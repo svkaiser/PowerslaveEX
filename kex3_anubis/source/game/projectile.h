@@ -20,7 +20,8 @@
 typedef enum
 {
     PF_IMPACTWALLSONLY  = BIT(0),
-    PF_HOMING           = BIT(1)
+    PF_HOMING           = BIT(1),
+    PF_IMPACTED         = BIT(2)
 } projectileFlags_t;
 
 //-----------------------------------------------------------------------------

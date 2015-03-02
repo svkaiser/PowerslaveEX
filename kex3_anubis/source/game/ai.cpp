@@ -351,6 +351,15 @@ void kexAI::InPain(void)
 }
 
 //
+// kexAI::RandomDecision
+//
+
+bool kexAI::RandomDecision(const int rnd)
+{
+    return (kexRand::Int() & rnd) != (gameTicks & rnd);
+}
+
+//
 // kexAI::FaceTarget
 //
 
@@ -407,17 +416,24 @@ void kexAI::LookForTarget(void)
 bool kexAI::CheckMeleeRange(void)
 {
     float r;
+    kexVec3 org;
     kexActor *targ;
 
-    if(!target || !meleeAnim)
+    if(!target || !meleeAnim || RandomDecision(30))
     {
         return false;
     }
 
     targ = static_cast<kexActor*>(target);
-    r = (radius * 0.6f) + targ->Radius();
+    r = radius + targ->Radius();
+    org = target->Origin();
 
-    if(origin.DistanceSq(target->Origin()) > (r * r))
+    if(aiFlags & AIF_FLYING)
+    {
+        org.z += stepHeight;
+    }
+
+    if(origin.DistanceSq(org) > (r * r))
     {
         return false;
     }
@@ -434,7 +450,7 @@ bool kexAI::CheckRangeAttack(void)
     kexActor *targ = static_cast<kexActor*>(target);
     
     if(!attackAnim || (!CheckTargetSight(targ) && !(aiFlags & AIF_ALWAYSRANGEATTACK)) ||
-        (kexRand::Int() & 30) != (kexGame::cLocal->PlayLoop()->Ticks() & 30))
+        RandomDecision(30))
     {
         return false;
     }
@@ -513,6 +529,21 @@ bool kexAI::SetDesiredDirection(const int dir)
     }
 
     return false;
+}
+
+//
+// kexAI::GetTargetHeightDifference
+//
+
+float kexAI::GetTargetHeightDifference(void)
+{
+    if(target == NULL || !target->InstanceOf(&kexActor::info))
+    {
+        return 0;
+    }
+
+    float targHeight = static_cast<kexActor*>(target)->Height();
+    return ((origin.z + height) - target->Origin().z) - targHeight;
 }
 
 //
@@ -752,6 +783,30 @@ void kexAI::ChaseTarget(void)
 {
     kexVec3 forward;
 
+    if(!target)
+    {
+        kex::cSystem->Warning("kexAI::ChaseTarget - Called without a target\n");
+        SetTarget(kexGame::cLocal->Player()->Actor());
+    }
+
+    if(aiFlags & AIF_RETREATTURN)
+    {
+        velocity.z = 0;
+        yaw += turnAmount;
+
+        if(!RandomDecision(30))
+        {
+            if((kexRand::Int() & 0xff) <= 64)
+            {
+                aiFlags &= ~AIF_RETREATTURN;
+            }
+        }
+
+        kexVec3::ToAxis(&forward, 0, 0, yaw, 0, 0);
+        movement = forward * moveSpeed;
+        return;
+    }
+
     // not currently turning?
     if(!(aiFlags & AIF_TURNING))
     {
@@ -760,12 +815,6 @@ void kexAI::ChaseTarget(void)
         // ready to change direction?
         if(--timeBeforeTurning <= 0 || !CheckDirection(forward))
         {
-            if(!target)
-            {
-                kex::cSystem->Warning("kexAI::ChaseTarget - Called without a target\n");
-                SetTarget(kexGame::cLocal->Player()->Actor());
-            }
-
             ChangeDirection();
         }
     }
@@ -782,12 +831,38 @@ void kexAI::ChaseTarget(void)
         }
     }
 
+    if(aiFlags & AIF_FLYING)
+    {
+        float viewZ = GetTargetHeightDifference();
+
+             if(viewZ < 0) velocity.z =  3;
+        else if(viewZ > 0) velocity.z = -3;
+        else velocity.z = 0;
+    }
+
     if(CheckMeleeRange())
     {
         aiFlags &= ~AIF_TURNING;
         FaceTarget();
         ChangeAnim(meleeAnim);
         state = AIS_MELEE;
+        if(aiFlags & AIF_FLYING && GetTargetHeightDifference() <= 0)
+        {
+            velocity.z = 0;
+        }
+        if(aiFlags & AIF_RETREATAFTERMELEE)
+        {
+            aiFlags |= AIF_RETREATTURN;
+
+            if((kexRand::Int() & 0xff) <= 128)
+            {
+                turnAmount = kexMath::Deg2Rad(1);
+            }
+            else
+            {
+                turnAmount = kexMath::Deg2Rad(-1);
+            }
+        }
         return;
     }
     
@@ -865,6 +940,8 @@ void kexAI::Spawn(void)
 
         if(definition->GetBool("lookAllAround"))        aiFlags |= AIF_LOOKALLAROUND;
         if(definition->GetBool("alwaysRangeAttack"))    aiFlags |= AIF_ALWAYSRANGEATTACK;
+        if(definition->GetBool("flying"))               aiFlags |= AIF_FLYING;
+        if(definition->GetBool("retreatAfterMelee"))    aiFlags |= AIF_RETREATAFTERMELEE;
         
         if(definition->GetString("chaseAnim", animName))
         {

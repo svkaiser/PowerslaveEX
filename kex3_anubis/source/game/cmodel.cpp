@@ -671,8 +671,15 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
 // kexCModel::CheckActorPosition
 //
 
-bool kexCModel::CheckActorPosition(kexActor *actor)
+bool kexCModel::CheckActorPosition(kexActor *actor, mapSector_t *initialSector)
 {
+    if(!PointWithinSectorEdges(actor->Origin(), actor->Sector()))
+    {
+        actor->Origin() = actor->PrevOrigin();
+        actor->SetSector(initialSector);
+        return false;
+    }
+
     return true;
 }
 
@@ -1171,6 +1178,7 @@ bool kexCModel::MoveActor(kexActor *actor)
     actorHeight = actor->Height();
     moveDir = actor->Movement();
     start = actor->Origin();
+    actor->PrevOrigin() = start;
 
     // interact with world
     CollideActorWithWorld();
@@ -1184,6 +1192,8 @@ bool kexCModel::MoveActor(kexActor *actor)
     
     actor->Origin() = end;
     actor->Movement() = moveDir;
+
+    CheckActorPosition(actor, sector);
     actor->LinkArea();
     return true;
 }

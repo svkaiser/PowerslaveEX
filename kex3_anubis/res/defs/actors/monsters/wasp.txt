@@ -1,0 +1,87 @@
+AI_Wasp 7
+{
+    classname               "kexAI"
+    radius                  18
+    height                  64
+    stepHeight              48
+    scale                   1.0
+    health                  60
+    moveSpeed               8
+    spawnAnim               "monsters/wasp_base"
+    chaseAnim               "monsters/wasp_chase"
+    meleeAnim               "monsters/wasp_attack"
+    deathAnim               "monsters/wasp_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    painChance              0
+    lookAllAround           1
+    flying                  1
+    gravity                 0.0
+    retreatAfterMelee       1
+}
+
+Obj_Wasp_Gib01 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    health                  100
+    spawnAnim               "monsters/wasp_gib01"
+    moveable                1
+    expires                 1
+}
+
+Obj_Wasp_Gib02 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    health                  100
+    spawnAnim               "monsters/wasp_gib02"
+    moveable                1
+    expires                 1
+}
+
+Obj_Wasp_Gib03 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    health                  100
+    spawnAnim               "monsters/wasp_gib03"
+    moveable                1
+    expires                 1
+}
+
+Obj_Wasp_Gib04 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    health                  100
+    spawnAnim               "monsters/wasp_gib04"
+    moveable                1
+    expires                 1
+}
+
+Obj_Wasp_Gib05 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    health                  100
+    spawnAnim               "monsters/wasp_gib05"
+    moveable                1
+    expires                 1
+}

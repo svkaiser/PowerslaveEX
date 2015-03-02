@@ -120,8 +120,6 @@ typedef struct mapFace_s
     mapEdge_t           *TopEdge(void) { return &edges[0]; }
     mapEdge_t           *RightEdge(void) { return &edges[1]; }
     mapEdge_t           *LeftEdge(void) { return &edges[3]; }
-    
-    bool                InFront(const kexVec3 &origin) { return (plane.Distance(origin) - plane.d) >= 0; };
 } mapFace_t;
 
 typedef struct

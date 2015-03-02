@@ -1,0 +1,62 @@
+texture "sprites/monsters/wasp.png"
+
+// working\wasp\sprite0415.tga
+sprite 0 0 0 24 23
+
+// working\wasp\sprite0416.tga
+sprite 1 24 0 64 61
+
+// working\wasp\sprite0417.tga
+sprite 2 88 0 64 48
+
+// working\wasp\sprite0418.tga
+sprite 3 152 0 56 49
+
+// working\wasp\sprite0419.tga
+sprite 4 208 0 64 52
+
+// working\wasp\sprite0420.tga
+sprite 5 272 0 56 64
+
+// working\wasp\sprite0421.tga
+sprite 6 328 0 64 48
+
+// working\wasp\sprite0422.tga
+sprite 7 392 0 44 58
+
+// working\wasp\sprite0423.tga
+sprite 8 436 0 64 62
+
+// working\wasp\sprite0424.tga
+sprite 9 88 48 64 56
+
+// working\wasp\sprite0425.tga
+sprite 10 500 0 12 16
+
+// working\wasp\sprite0426.tga
+sprite 11 328 48 28 31
+
+// working\wasp\sprite0427.tga
+sprite 12 152 52 60 51
+
+// working\wasp\sprite0428.tga
+sprite 13 0 23 24 18
+
+// working\wasp\sprite0429.tga
+sprite 14 212 52 56 63
+
+// working\wasp\sprite0430.tga
+sprite 15 356 58 56 64
+
+// working\wasp\sprite0431.tga
+sprite 16 0 61 60 58
+
+// working\wasp\sprite0432.tga
+sprite 17 412 62 60 49
+
+// working\wasp\sprite0433.tga
+sprite 18 268 79 64 55
+
+// working\wasp\sprite0434.tga
+sprite 19 60 61 20 12
+

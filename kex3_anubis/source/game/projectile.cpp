@@ -102,6 +102,18 @@ void kexProjectile::SetHomingTarget(kexActor *actor)
 
 void kexProjectile::AdjustAlongFace(mapFace_t *face)
 {
+    if(face->flags & FF_WATER)
+    {
+        return;
+    }
+
+    if(kexMath::Fabs(face->plane.c) <= 0.5f)
+    {
+        // explode on steep slopes
+        OnImpact(NULL);
+        return;
+    }
+
     float len = velocity.Unit();
 
     kexVec3 forward;
@@ -174,9 +186,14 @@ void kexProjectile::SeekTargets(void)
 void kexProjectile::CheckFloorAndCeilings(void)
 {
     kexVec3 position = (origin + velocity);
+    kexPlane::planeSide_t ceilingSide;
+    kexPlane::planeSide_t floorSide;
+
+    ceilingSide = sector->ceilingFace->plane.PointOnSide(position + kexVec3(0, 0, height));
+    floorSide = sector->floorFace->plane.PointOnSide(position);
 
     // bump ceiling
-    if(!sector->ceilingFace->InFront(position + kexVec3(0, 0, height)))
+    if(ceilingSide == kexPlane::PSIDE_BACK || ceilingSide == kexPlane::PSIDE_ON)
     {
         if(projectileFlags & PF_IMPACTWALLSONLY)
         {
@@ -190,7 +207,7 @@ void kexProjectile::CheckFloorAndCeilings(void)
     }
     
     // bump floor
-    if(!sector->floorFace->InFront(position))
+    if(floorSide == kexPlane::PSIDE_BACK || floorSide == kexPlane::PSIDE_ON)
     {
         if(projectileFlags & PF_IMPACTWALLSONLY)
         {
@@ -232,6 +249,11 @@ void kexProjectile::UpdateMovement(void)
 
 void kexProjectile::OnImpact(kexActor *contactActor)
 {
+    if(projectileFlags & PF_IMPACTED)
+    {
+        return;
+    }
+
     if(contactActor && damage > 0)
     {
         contactActor->InflictDamage(this, damage);
@@ -241,6 +263,7 @@ void kexProjectile::OnImpact(kexActor *contactActor)
     SetHomingTarget(NULL);
 
     flags &= ~(AF_MOVEABLE|AF_SOLID);
+    projectileFlags |= PF_IMPACTED;
 }
 
 //

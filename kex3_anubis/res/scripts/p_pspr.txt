@@ -1,0 +1,177 @@
+//
+// Copyright(C) 2014-2015 Samuel Villarreal
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// DESCRIPTION:
+//      Player Weapon Actions
+//
+
+//
+// A_ThrowAmunBomb
+//
+
+float bombChargeThrow = 16.0f;
+
+void A_ThrowAmunBomb(kActor @actor)
+{
+    float cp = Math::Cos(actor.Pitch());
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z + 64.0f;
+    kVec3 dir;
+    kActor @bomb;
+    
+    dir.x = Math::Sin(actor.Yaw()) * cp;
+    dir.y = Math::Cos(actor.Yaw()) * cp;
+    dir.z = -Math::Sin(actor.Pitch());
+    
+    x += dir.x * actor.Radius();
+    y += dir.y * actor.Radius();
+    z += dir.z * actor.Radius();
+    
+    @bomb = Game.SpawnActor("Proj_AmunBomb", x, y, z, actor.Yaw(), actor.SectorIndex());
+    
+    if(bomb is null)
+    {
+        return;
+    }
+    
+    bomb.SetTarget(actor);
+    bomb.Velocity() = (dir * bombChargeThrow);
+    bomb.Velocity().z = 8.0f + ((bombChargeThrow + 8.0f) * dir.z);
+    
+    bombChargeThrow = 16.0f;
+}
+
+//
+// A_ChargeBombThrow
+//
+
+void A_ChargeBombThrow(kActor @actor)
+{
+    bombChargeThrow += 0.2f;
+    
+    if(bombChargeThrow > 40.0f)
+    {
+        bombChargeThrow = 40.0f;
+    }
+}
+
+//
+// A_CStaffExplode
+//
+
+void A_CStaffExplode(kActor @actor)
+{
+    float x = actor.Origin().x + (Math::RandCFloat() * 32.0f);
+    float y = actor.Origin().y + (Math::RandCFloat() * 32.0f);
+    float z = actor.Origin().z + (Math::RandCFloat() * 32.0f);
+    kActor @puff;
+    
+    @puff = Game.SpawnActor("Fx_GreenCobraExplode", x, y, z, 0, actor.SectorIndex());
+    
+    if(puff is null)
+    {
+        return;
+    }
+    
+    puff.PlaySound("sounds/pbexplode.wav");
+}
+
+//
+// A_SetupCobraJoints
+//
+
+void A_SetupCobraJoints(kActor @actor)
+{
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z;
+    kActor @j1;
+    kActor @j2;
+    kActor @j3;
+    kActor @j4;
+    kActor @j5;
+    
+    @j1 = Game.SpawnActor("Fx_GreenCobraJoint", x, y, z, 0, actor.SectorIndex());
+    @j2 = Game.SpawnActor("Fx_GreenCobraJoint", x, y, z, 0, actor.SectorIndex());
+    @j3 = Game.SpawnActor("Fx_GreenCobraJoint", x, y, z, 0, actor.SectorIndex());
+    @j4 = Game.SpawnActor("Fx_GreenCobraJoint", x, y, z, 0, actor.SectorIndex());
+    @j5 = Game.SpawnActor("Fx_GreenCobraJoint", x, y, z, 0, actor.SectorIndex());
+    
+    j1.SetTarget(actor);
+    j2.SetTarget(j1);
+    j3.SetTarget(j2);
+    j4.SetTarget(j3);
+    j5.SetTarget(j4);
+    
+    j2.Scale() = 0.875f;
+    j3.Scale() = 0.75f;
+    j4.Scale() = 0.625f;
+    j5.Scale() = 0.5f;
+    
+    actor.SetTaggedActor(j5);
+}
+
+//
+// A_UpdateCobraJoints
+//
+
+void A_UpdateCobraJoints(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    actor.Origin().Lerp(actor.GetTarget().Origin(), 0.5f);
+    actor.SetSector(actor.GetTarget().SectorIndex());
+}
+
+//
+// A_DestroyCobraJoints
+//
+
+void A_DestroyCobraJoints(kActor @actor)
+{
+    kActor @j1;
+    kActor @j2;
+    kActor @j3;
+    kActor @j4;
+    kActor @j5;
+    
+    @j5 = actor.GetTaggedActor();
+    @j4 = j5.GetTarget();
+    @j3 = j4.GetTarget();
+    @j2 = j3.GetTarget();
+    @j1 = j2.GetTarget();
+    
+    j1.Remove();
+    j2.Remove();
+    j3.Remove();
+    j4.Remove();
+    j5.Remove();
+}
+
+//
+// A_CobraSlither
+//
+
+void A_CobraSlither(kActor @actor)
+{
+    float t = actor.GameTicks();
+    
+    kQuat rotation = kQuat(actor.Pitch(), -1, 0, 0) * kQuat(actor.Yaw(), 0, 0, -1);
+    
+    actor.Velocity() = (kVec3(0, 8, 0) * rotation);
+    actor.Velocity() -= (kVec3(4 * Math::Cos(t * 0.25f), 0, 0) * rotation);
+}

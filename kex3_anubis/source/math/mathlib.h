@@ -387,6 +387,13 @@ public:
         AXIS_XY
     } planeAxis_t;
 
+    typedef enum
+    {
+        PSIDE_FRONT         = 0,
+        PSIDE_BACK,
+        PSIDE_ON
+    } planeSide_t;
+
     const kexVec3           &Normal(void) const;
     kexVec3                 &Normal(void);
     kexPlane                &SetNormal(const kexVec3 &normal);
@@ -395,12 +402,12 @@ public:
     kexPlane                &SetDistance(const kexVec3 &point);
     bool                    IsFacing(const float yaw);
     const planeAxis_t       BestAxis(void) const;
+    const planeSide_t       PointOnSide(const kexVec3 &point);
     float                   ToYaw(void);
     float                   ToPitch(void);
     kexQuat                 ToQuat(void);
     const kexVec4           &ToVec4(void) const;
     kexVec4                 &ToVec4(void);
-    kexVec3                 GetInclination(void);
 
     float                   operator[](int index) const;
     float                   &operator[](int index);

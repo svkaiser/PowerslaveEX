@@ -47,7 +47,10 @@ typedef enum
     AIF_TURNING             = BIT(0),
     AIF_LOOKALLAROUND       = BIT(1),
     AIF_ALWAYSRANGEATTACK   = BIT(2),
-    AIF_ONFIRE              = BIT(3)
+    AIF_ONFIRE              = BIT(3),
+    AIF_FLYING              = BIT(4),
+    AIF_RETREATAFTERMELEE   = BIT(5),
+    AIF_RETREATTURN         = BIT(6)
 } aiFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -80,6 +83,8 @@ public:
     static bool                     bNoTargetEnemy;
 
 private:
+    bool                            RandomDecision(const int rnd);
+    float                           GetTargetHeightDifference(void);
     void                            UpdateBurn(void);
     bool                            SetDesiredDirection(const int dir);
     void                            ChangeStateFromAnim(void);
