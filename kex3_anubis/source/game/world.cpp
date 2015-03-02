@@ -154,7 +154,7 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].clipCount        = -1;
         sectors[i].linkedSector     = -1;
         sectors[i].floodCount       = 0;
-        sectors[i].mover            = NULL;
+        sectors[i].objectThinker    = NULL;
         sectors[i].ceilingFace      = &faces[sectors[i].faceEnd+1];
         sectors[i].floorFace        = &faces[sectors[i].faceEnd+2];
 
@@ -360,7 +360,8 @@ void kexWorld::ReadActors(kexBinFile &mapfile, const unsigned int count)
         actors[i].y         = mapfile.Read16();
         actors[i].z         = mapfile.Read16();
         actors[i].tag       = mapfile.Read16();
-        actors[i].params    = mapfile.Read16();
+        actors[i].params1   = mapfile.Read16();
+        actors[i].params2   = mapfile.Read16();
         actors[i].angle     = mapfile.ReadFloat();
         
         if(actors[i].sector >= 0)
@@ -630,7 +631,7 @@ void kexWorld::SetupFloatingPlatforms(mapEvent_t *ev, mapSector_t *sector, const
 
     s = &sectors[ev->sector];
     s->linkedSector = ev->params;
-    s->mover = kexGame::cLocal->SpawnMover(className, ev->type, ev->sector);
+    s->objectThinker = kexGame::cLocal->SpawnMover(className, ev->type, ev->sector);
 }
 
 //
@@ -1001,7 +1002,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
         break;
     case 48:
-        static_cast<kexDropPad*>(sector->mover)->Start();
+        static_cast<kexDropPad*>(sector->objectThinker)->Start();
         break;
     case 50:
         SendRemoteTrigger(sector, ev);
@@ -1009,6 +1010,63 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
 
     default:
         break;
+    }
+}
+
+//
+// kexWorld::SendMapActorEvent
+//
+
+void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
+{
+    kexFireballFactory *fbFactory;
+    float extraDelay = 0;
+
+    if(ev->sector < 0 || &sectors[ev->sector] != sector)
+    {
+        return;
+    }
+
+    for(unsigned int j = 0; j < numActors; ++j)
+    {
+        if(actors[j].sector < 0)
+        {
+            continue;
+        }
+
+        if(actors[j].tag == ev->tag)
+        {
+            mapSector_t *sec = &sectors[actors[j].sector];
+
+            if(sec->flags & SF_SPECIAL)
+            {
+                continue;
+            }
+
+            switch(actors[j].type)
+            {
+            case AT_FIREBALLSPAWNER:
+                fbFactory = kexGame::cLocal->SpawnFireballFactory(AT_FIREBALLSPAWNER, actors[j].sector);
+                fbFactory->ExtraDelay() = extraDelay;
+                extraDelay += 8;
+                break;
+
+            default:
+                break;
+            }
+        }
+
+        if(actors[j].tag+1 == ev->tag)
+        {
+            mapSector_t *sec = &sectors[actors[j].sector];
+
+            if(!(sec->flags & SF_SPECIAL) || sec->objectThinker == NULL)
+            {
+                continue;
+            }
+
+            sec->objectThinker->Remove();
+        }
     }
 }
 
@@ -1023,6 +1081,8 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
     for(unsigned int i = 0; i < numEvents; ++i)
     {
         mapEvent_t *ev = &events[i];
+
+        SendMapActorEvent(sector, ev);
 
         if(ev == event)
         {
@@ -1078,7 +1138,7 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
                 bClearEventRef = true;
                 break;
             case 48:
-                static_cast<kexDropPad*>(sectors[ev->sector].mover)->Reset();
+                static_cast<kexDropPad*>(sectors[ev->sector].objectThinker)->Reset();
                 break;
 
             default:

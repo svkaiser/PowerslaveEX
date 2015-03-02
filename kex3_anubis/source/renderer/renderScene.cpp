@@ -430,7 +430,7 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
         g = vertex->rgba[1];
         b = vertex->rgba[2];
 
-        if(world->Sectors()[face->sectorOwner].flags & SF_WATER)
+        if(world->Sectors()[face->sectorOwner].flags & SF_WATER || face->flags & FF_WATER)
         {
             int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(vPoint.x + vPoint.z, vPoint.y + vPoint.z);
             float max = (((float)r + (float)g + (float)b) / 3) / 3;
@@ -577,6 +577,11 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
         actor = actor->SectorLink().Next())
     {
         if(actor->Anim() == NULL || actor == kexGame::cLocal->Player()->Actor())
+        {
+            continue;
+        }
+
+        if(actor->Flags() & AF_HIDDEN)
         {
             continue;
         }

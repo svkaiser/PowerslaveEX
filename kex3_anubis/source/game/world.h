@@ -21,7 +21,7 @@
 class kexActor;
 class kexTexture;
 class kexCModel;
-class kexMover;
+class kexGameObject;
 
 typedef struct
 {
@@ -57,7 +57,7 @@ typedef struct
     float                   y1;
     float                   y2;
     int                     linkedSector;
-    kexMover                *mover;
+    kexGameObject           *objectThinker;
     struct mapFace_s        *floorFace;
     struct mapFace_s        *ceilingFace;
     kexLinklist<kexActor>   actorList;
@@ -157,7 +157,8 @@ typedef struct
     short               y;
     short               z;
     short               tag;
-    short               params;
+    short               params1;
+    short               params2;
     float               angle;
 } mapActor_t;
 
@@ -214,6 +215,7 @@ private:
     void                    UseLockedDoor(kexPlayer *player, mapEvent_t *ev);
     void                    UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev);
     void                    SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event);
+    void                    SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev);
     void                    ExplodeWallEvent(mapSector_t *sector);
     void                    ExplodeWall(mapFace_t *face);
     void                    BuildAreaNodes(void);

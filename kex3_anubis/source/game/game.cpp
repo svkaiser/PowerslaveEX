@@ -630,6 +630,10 @@ kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y,
         case AT_PLAYER:
             className = "kexPuppet";
             break;
+
+        case AT_FIREBALLSPAWNER:
+            className = "kexFireballSpawner";
+            break;
         
         default:
             className = "kexActor";
@@ -707,4 +711,29 @@ kexMover *kexGameLocal::SpawnMover(const char *className, const int type, const 
     mover->CallSpawn();
 
     return mover;
+}
+
+//
+// kexGameLocal::SpawnFireballFactory
+//
+
+kexFireballFactory *kexGameLocal::SpawnFireballFactory(const int type, const int sector)
+{
+    kexFireballFactory *fbf;
+
+    if(sector <= -1 || sector >= (int)world->NumSectors())
+    {
+        return NULL;
+    }
+
+    if(!(fbf = static_cast<kexFireballFactory*>(ConstructObject("kexFireballFactory"))))
+    {
+        return NULL;
+    }
+
+    fbf->FireballType() = type;
+    fbf->SetSector(&world->Sectors()[sector]);
+    fbf->CallSpawn();
+
+    return fbf;
 }

@@ -61,3 +61,18 @@ Proj_Flame 21
     damage                  5
     lifeTime                30
 }
+
+Proj_Fireball 26
+{
+    classname               "kexProjectile"
+    radius                  25
+    height                  32
+    stepHeight              36
+    scale                   1.0
+    spawnAnim               "projectiles/fireball_loop"
+    deathAnim               "projectiles/fireball_death"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    damage                  0
+}

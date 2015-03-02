@@ -1,0 +1,5 @@
+texture "sprites/projectiles/fireball.png"
+
+// working\fireball\sprite0173.tga
+sprite 0 0 0 32 28
+

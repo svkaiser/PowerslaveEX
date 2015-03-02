@@ -45,6 +45,7 @@ public:
     void                            SetHomingTarget(kexActor *actor);
 
 private:
+    virtual void                    UpdateVelocity(void);
     virtual void                    CheckFloorAndCeilings(void);
     virtual void                    UpdateMovement(void);
 
@@ -75,6 +76,60 @@ public:
 private:
     float                           fizzleTime;
     int                             lifeTime;
+END_KEX_CLASS();
+
+//-----------------------------------------------------------------------------
+//
+// kexFireballSpawner
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexFireballSpawner, kexActor);
+friend class kexFireballFactory;
+public:
+    kexFireballSpawner(void);
+    ~kexFireballSpawner(void);
+
+    virtual void                    Tick(void);
+    virtual void                    OnActivate(kexActor *instigator);
+    virtual void                    OnDeactivate(kexActor *instigator);
+
+    void                            Spawn(void);
+
+    void                            SpawnFireball(mapFace_t *face, mapPoly_t *poly);
+
+private:
+    float                           fireDelay;
+    bool                            bEnabled;
+END_KEX_CLASS();
+
+//-----------------------------------------------------------------------------
+//
+// kexFireballFactory
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexFireballFactory, kexGameObject);
+public:
+    kexFireballFactory(void);
+    ~kexFireballFactory(void);
+
+    virtual void                    Tick(void);
+    virtual void                    Remove();
+    void                            Spawn(void);
+
+    mapSector_t                     *Sector(void) { return sector; }
+    void                            SetSector(mapSector_t *s);
+    float                           &Intervals(void) { return intervals; }
+    int                             &FireballType(void) { return fireballType; }
+    float                           &ExtraDelay(void) { return extraDelay; }
+
+private:
+    float                           intervals;
+    float                           currentTime;
+    float                           extraDelay;
+    mapSector_t                     *sector;
+    int                             fireballType;
 END_KEX_CLASS();
 
 #endif

@@ -180,6 +180,19 @@ void kexProjectile::SeekTargets(void)
 }
 
 //
+// kexProjectile::UpdateVelocity
+//
+
+void kexProjectile::UpdateVelocity(void)
+{
+    // check for drop-offs
+    if(origin.z > floorHeight)
+    {
+        velocity.z -= gravity;
+    }
+}
+
+//
 // kexProjectile::CheckFloorAndCeilings
 //
 
@@ -370,4 +383,260 @@ void kexProjectileFlame::Spawn(void)
     }
 
     fizzleTime = 0;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexFireballSpawner
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexFireballSpawner, kexActor)
+
+//
+// kexProjectile::kexProjectile
+//
+
+kexFireballSpawner::kexFireballSpawner(void)
+{
+    this->fireDelay = 50;
+    this->bEnabled = false;
+}
+
+//
+// kexFireballSpawner::~kexFireballSpawner
+//
+
+kexFireballSpawner::~kexFireballSpawner(void)
+{
+}
+
+//
+// kexFireballSpawner::Tick
+//
+
+void kexFireballSpawner::Tick(void)
+{
+    if(Removing())
+    {
+        return;
+    }
+
+    if(mapActor == NULL)
+    {
+        Remove();
+        return;
+    }
+
+    kexActor::Tick();
+
+    if(!bEnabled)
+    {
+        return;
+    }
+
+    fireDelay -= 0.5f;
+
+    if(fireDelay <= 0)
+    {
+        bEnabled = false;
+
+        mapFace_t *face = &kexGame::cLocal->World()->Faces()[mapActor->params2];
+        mapPoly_t *poly = &kexGame::cLocal->World()->Polys()[mapActor->params1];
+        SpawnFireball(face, poly);
+    }
+}
+
+//
+// kexFireballSpawner::SpawnFireball
+//
+
+void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
+{
+    mapVertex_t *v = kexGame::cLocal->World()->Vertices();
+    int secID;
+    kexVec3 vOrigin;
+    kexVec3 vOrg;
+    kexActor *proj;
+
+    secID = sector - kexGame::cLocal->World()->Sectors();
+
+    vOrigin = (v[face->vertStart + poly->indices[0]].origin +
+               v[face->vertStart + poly->indices[1]].origin +
+               v[face->vertStart + poly->indices[2]].origin) / 3;
+
+    vOrigin += (face->plane.Normal() * 32);
+
+    kexGame::cLocal->SpawnActor(AT_FIREBALLPUFF, vOrigin.x, vOrigin.y, vOrigin.z, 0, secID);
+
+    proj = kexGame::cLocal->SpawnActor(AT_FIREBALL,
+                                       vOrigin.x, vOrigin.y, vOrigin.z,
+                                       face->plane.Normal().ToYaw(),
+                                       secID);
+
+    if(proj == NULL)
+    {
+        return;
+    }
+
+    proj->SetTarget(this);
+    proj->Velocity() = (face->plane.Normal() * 8);
+    proj->PlaySound("sounds/fballshoot.wav");
+}
+
+//
+// kexFireballSpawner::OnActivate
+//
+
+void kexFireballSpawner::OnActivate(kexActor *instigator)
+{
+    bEnabled = true;
+}
+
+//
+// kexFireballSpawner::OnDeactivate
+//
+
+void kexFireballSpawner::OnDeactivate(kexActor *instigator)
+{
+    bEnabled = false;
+}
+
+//
+// kexFireballSpawner::Spawn
+//
+
+void kexFireballSpawner::Spawn(void)
+{
+    flags |= AF_HIDDEN;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexFireballFactory
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexFireballFactory, kexGameObject)
+
+//
+// kexProjectile::kexProjectile
+//
+
+kexFireballFactory::kexFireballFactory(void)
+{
+    this->intervals = 60;
+    this->currentTime = 0;
+    this->fireballType = -1;
+    this->extraDelay = 0;
+    this->sector = NULL;
+}
+
+//
+// kexFireballFactory::~kexFireballFactory
+//
+
+kexFireballFactory::~kexFireballFactory(void)
+{
+}
+
+//
+// kexFireballFactory::Remove
+//
+
+void kexFireballFactory::Remove(void)
+{
+    for(kexActor *actor = sector->actorList.Next();
+        actor != NULL;
+        actor = actor->SectorLink().Next())
+    {
+        if(actor->MapActor() == NULL)
+        {
+            continue;
+        }
+
+        if(actor->MapActor()->type != fireballType)
+        {
+            continue;
+        }
+
+        actor->OnDeactivate(NULL);
+    }
+
+    sector->flags &= ~SF_SPECIAL;
+    sector->objectThinker = NULL;
+    kexGameObject::Remove();
+}
+
+//
+// kexFireballFactory::Tick
+//
+
+void kexFireballFactory::Tick(void)
+{
+    float fireDelay = extraDelay;
+
+    if(sector == NULL)
+    {
+        Remove();
+        return;
+    }
+
+    currentTime += 0.5f;
+
+    if(currentTime >= intervals)
+    {
+        currentTime = 0;
+
+        for(kexActor *actor = sector->actorList.Next();
+            actor != NULL;
+            actor = actor->SectorLink().Next())
+        {
+            if(actor->MapActor() == NULL)
+            {
+                continue;
+            }
+
+            if(actor->MapActor()->type != fireballType)
+            {
+                continue;
+            }
+
+            actor->OnActivate(NULL);
+            if(actor->InstanceOf(&kexFireballSpawner::info))
+            {
+                static_cast<kexFireballSpawner*>(actor)->fireDelay = fireDelay;
+                fireDelay += 8;
+            }
+        }
+    }
+}
+
+//
+// kexFireballFactory::Spawn
+//
+
+void kexFireballFactory::Spawn(void)
+{
+    switch(fireballType)
+    {
+    case AT_FIREBALLSPAWNER:
+        intervals = 60;
+        currentTime = intervals;
+        break;
+
+    default:
+        break;
+    }
+}
+
+//
+// kexFireballFactory::SetSector
+//
+
+void kexFireballFactory::SetSector(mapSector_t *s)
+{
+    sector = s;
+    sector->flags |= SF_SPECIAL;
+    sector->objectThinker = this;
 }

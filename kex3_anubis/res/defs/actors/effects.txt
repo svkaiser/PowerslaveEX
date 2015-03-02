@@ -57,6 +57,19 @@ Fx_GreenCobraExplode -1
     color                   "0.375 0.75 0.375"
 }
 
+Fx_FireballExplode -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   2.0
+    animSpeed               0.25
+    spawnAnim               "effects/magicPuff"
+    fullbright              1
+    color                   "0.75 0.375 0.25"
+}
+
 Fx_HealthSpawn 63
 {
     classname               "kexActor"
@@ -90,6 +103,19 @@ Fx_Explosion01 65
     scale                   4.0
     spawnAnim               "effects/explosion01"
     fullbright              1
+}
+
+Fx_FireballShootPuff 200
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   2.0
+    animSpeed               0.25
+    spawnAnim               "effects/magicPuff"
+    fullbright              1
+    color                   "0.75 0.25 0.25"
 }
 
 Fx_WaterSplash 124

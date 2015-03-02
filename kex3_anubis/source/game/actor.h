@@ -22,12 +22,15 @@
 
 typedef enum
 {
-    AT_INVALID      = -1,
-    AT_PLAYER       = 0,
-    AT_IGNITEFLAME  = 24,
-    AT_EXPLODEPUFF  = 62,
-    AT_DEBRIS       = 123,
-    AT_WATERSPLASH  = 124,
+    AT_INVALID          = -1,
+    AT_PLAYER           = 0,
+    AT_IGNITEFLAME      = 24,
+    AT_FIREBALLSPAWNER  = 25,
+    AT_FIREBALL         = 26,
+    AT_EXPLODEPUFF      = 62,
+    AT_DEBRIS           = 123,
+    AT_WATERSPLASH      = 124,
+    AT_FIREBALLPUFF     = 200,
     NUMACTORTYPES
 } actorType_t;
 
@@ -46,7 +49,8 @@ typedef enum
     AF_BOUNCY           = BIT(10),
     AF_INWATER          = BIT(11),
     AF_NODROPOFF        = BIT(12),
-    AF_EXPIRES          = BIT(13)
+    AF_EXPIRES          = BIT(13),
+    AF_HIDDEN           = BIT(14)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -66,6 +70,8 @@ public:
     virtual void                    OnTouch(kexActor *instigator);
     virtual void                    OnDamage(kexActor *instigator);
     virtual void                    OnDeath(kexActor *instigator);
+    virtual void                    OnActivate(kexActor *instigator);
+    virtual void                    OnDeactivate(kexActor *instigator);
 
     void                            Spawn(void);
     bool                            FindSector(const kexVec3 &pos);

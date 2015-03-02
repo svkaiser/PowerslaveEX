@@ -188,7 +188,7 @@ void kexDoor::Tick(void)
             if(type == 2)
             {
                 world->ResetWallSwitchFromTag(world->Events()[sector->event].tag);
-                sector->mover = NULL;
+                sector->objectThinker = NULL;
             }
 
             Remove();
@@ -248,7 +248,7 @@ void kexDoor::Spawn(void)
         moveSpeed = 4;
         bDirection = true;
         destHeight = (float)sector->ceilingHeight - lip;
-        sector->mover = this;
+        sector->objectThinker = this;
         break;
 
     case 7:

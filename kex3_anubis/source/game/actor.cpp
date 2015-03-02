@@ -395,6 +395,22 @@ void kexActor::OnDeath(kexActor *instigator)
 }
 
 //
+// kexActor::OnActivate
+//
+
+void kexActor::OnActivate(kexActor *instigator)
+{
+}
+
+//
+// kexActor::OnDeactivate
+//
+
+void kexActor::OnDeactivate(kexActor *instigator)
+{
+}
+
+//
 // kexActor::InflictDamage
 //
 
