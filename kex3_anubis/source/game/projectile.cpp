@@ -331,6 +331,12 @@ void kexProjectileFlame::Tick(void)
     {
         return;
     }
+    
+    if(flags & AF_INWATER)
+    {
+        Remove();
+        return;
+    }
 
     kexProjectile::Tick();
 
