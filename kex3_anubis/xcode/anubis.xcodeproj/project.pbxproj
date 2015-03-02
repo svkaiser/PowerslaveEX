@@ -33,6 +33,7 @@
 		41BCC0621A6EBACB00F8B3FA /* pWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC0601A6EBACB00F8B3FA /* pWeapon.cpp */; };
 		41BCC06C1A6ECCB800F8B3FA /* renderScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC06A1A6ECCB800F8B3FA /* renderScene.cpp */; };
 		41BE76CD1A851A4700DD893E /* defs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BE76CB1A851A4700DD893E /* defs.cpp */; };
+		41C181AF1AA4E4390088C7E2 /* session.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C181AD1AA4E4390088C7E2 /* session.cpp */; };
 		41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC091A5AFB6E003864CB /* binFile.cpp */; };
 		41C7FC211A5AFB6E003864CB /* cmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0B1A5AFB6E003864CB /* cmd.cpp */; };
 		41C7FC221A5AFB6E003864CB /* cvar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC0D1A5AFB6E003864CB /* cvar.cpp */; };
@@ -49,7 +50,6 @@
 		41C7FC451A5AFB84003864CB /* menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC341A5AFB84003864CB /* menu.cpp */; };
 		41C7FC461A5AFB84003864CB /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC361A5AFB84003864CB /* player.cpp */; };
 		41C7FC471A5AFB84003864CB /* playerCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC381A5AFB84003864CB /* playerCmd.cpp */; };
-		41C7FC481A5AFB84003864CB /* session.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC3A1A5AFB84003864CB /* session.cpp */; };
 		41C7FC491A5AFB84003864CB /* titlescreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC3C1A5AFB84003864CB /* titlescreen.cpp */; };
 		41C7FC4A1A5AFB84003864CB /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC3E1A5AFB84003864CB /* world.cpp */; };
 		41C7FC641A5AFB98003864CB /* cpuVertexList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC4B1A5AFB98003864CB /* cpuVertexList.cpp */; };
@@ -214,6 +214,8 @@
 		41BCC06B1A6ECCB800F8B3FA /* renderScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderScene.h; sourceTree = "<group>"; };
 		41BE76CB1A851A4700DD893E /* defs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = defs.cpp; sourceTree = "<group>"; };
 		41BE76CC1A851A4700DD893E /* defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
+		41C181AD1AA4E4390088C7E2 /* session.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = session.cpp; sourceTree = "<group>"; };
+		41C181AE1AA4E4390088C7E2 /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = session.h; sourceTree = "<group>"; };
 		41C7FC081A5AFB6E003864CB /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
 		41C7FC091A5AFB6E003864CB /* binFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = binFile.cpp; sourceTree = "<group>"; };
 		41C7FC0A1A5AFB6E003864CB /* binFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binFile.h; sourceTree = "<group>"; };
@@ -250,8 +252,6 @@
 		41C7FC371A5AFB84003864CB /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = player.h; path = ../../source/game/player.h; sourceTree = "<group>"; };
 		41C7FC381A5AFB84003864CB /* playerCmd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = playerCmd.cpp; path = ../../source/game/playerCmd.cpp; sourceTree = "<group>"; };
 		41C7FC391A5AFB84003864CB /* playerCmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = playerCmd.h; path = ../../source/game/playerCmd.h; sourceTree = "<group>"; };
-		41C7FC3A1A5AFB84003864CB /* session.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = session.cpp; path = ../../source/game/session.cpp; sourceTree = "<group>"; };
-		41C7FC3B1A5AFB84003864CB /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = session.h; path = ../../source/game/session.h; sourceTree = "<group>"; };
 		41C7FC3C1A5AFB84003864CB /* titlescreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = titlescreen.cpp; path = ../../source/game/titlescreen.cpp; sourceTree = "<group>"; };
 		41C7FC3D1A5AFB84003864CB /* titlescreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = titlescreen.h; path = ../../source/game/titlescreen.h; sourceTree = "<group>"; };
 		41C7FC3E1A5AFB84003864CB /* world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = world.cpp; path = ../../source/game/world.cpp; sourceTree = "<group>"; };
@@ -427,7 +427,6 @@
 				41BAB9101A5EF32100DD0D11 /* playLoop.cpp */,
 				41B5F1861A9251C80016327B /* projectile.cpp */,
 				41BCC0601A6EBACB00F8B3FA /* pWeapon.cpp */,
-				41C7FC3A1A5AFB84003864CB /* session.cpp */,
 				41B5F0FC1A9BA76600698014 /* spring.cpp */,
 				41B817331A6D6EF500151622 /* sprite.cpp */,
 				41B817351A6D6EF500151622 /* spriteAnim.cpp */,
@@ -449,7 +448,6 @@
 				41BAB9111A5EF32100DD0D11 /* playLoop.h */,
 				41B5F1871A9251C80016327B /* projectile.h */,
 				41BCC0611A6EBACB00F8B3FA /* pWeapon.h */,
-				41C7FC3B1A5AFB84003864CB /* session.h */,
 				41B5F0FD1A9BA76600698014 /* spring.h */,
 				41B817341A6D6EF500151622 /* sprite.h */,
 				41B817361A6D6EF500151622 /* spriteAnim.h */,
@@ -567,6 +565,7 @@
 				41C7FC171A5AFB6E003864CB /* memHeap.cpp */,
 				41C7FC191A5AFB6E003864CB /* object.cpp */,
 				41C7FC1B1A5AFB6E003864CB /* parser.cpp */,
+				41C181AD1AA4E4390088C7E2 /* session.cpp */,
 				41C7FC1E1A5AFB6E003864CB /* unzip.cpp */,
 				41B3A5481A5DEE84006DCCB9 /* actions.h */,
 				41C7FC081A5AFB6E003864CB /* array.h */,
@@ -585,6 +584,7 @@
 				41C7FC1C1A5AFB6E003864CB /* parser.h */,
 				41C7FC1D1A5AFB6E003864CB /* queue.h */,
 				41BAB90B1A5EF30E00DD0D11 /* sdNodes.h */,
+				41C181AE1AA4E4390088C7E2 /* session.h */,
 				41C979FF1A645A2000E9C798 /* stack.h */,
 				41C7FC1F1A5AFB6E003864CB /* unzip.h */,
 			);
@@ -843,7 +843,6 @@
 				41C7FC491A5AFB84003864CB /* titlescreen.cpp in Sources */,
 				413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */,
 				41E2CE841A51D39B00FC28DC /* pluecker.cpp in Sources */,
-				41C7FC481A5AFB84003864CB /* session.cpp in Sources */,
 				41C979F91A642CCA00E9C798 /* cmodel.cpp in Sources */,
 				41C7FC241A5AFB6E003864CB /* kpf.cpp in Sources */,
 				41B7765F1A83EB0A008C8F23 /* refObject.cpp in Sources */,
@@ -872,6 +871,7 @@
 				41C7FC221A5AFB6E003864CB /* cvar.cpp in Sources */,
 				41DA07471A52014400562B25 /* inputSDL.cpp in Sources */,
 				41C7FC7D1A5AFBAB003864CB /* input.cpp in Sources */,
+				41C181AF1AA4E4390088C7E2 /* session.cpp in Sources */,
 				41BAB9131A5EF32100DD0D11 /* playLoop.cpp in Sources */,
 				41C7FC261A5AFB6E003864CB /* memHeap.cpp in Sources */,
 				41E2CE811A51D39B00FC28DC /* mathlib.cpp in Sources */,
