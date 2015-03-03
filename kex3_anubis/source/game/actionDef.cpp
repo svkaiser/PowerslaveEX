@@ -546,6 +546,22 @@ DECLARE_KEX_ACTION(kexActionSpawnProjectile)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionGotoIfUnderwater
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionGotoIfUnderwater)
+{
+    char *gotoFrame = this->args[0].s;
+    
+    if(actor->Flags() & AF_INWATER)
+    {
+        actor->ChangeAnim(gotoFrame);
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionDefManager
 //
 //-----------------------------------------------------------------------------
@@ -696,4 +712,5 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_CheckMelee", kexActionCheckMelee::info.Create, AAT_STRING, AAT_FLOAT);
     RegisterAction("A_FireProjectile", kexActionSpawnProjectile::info.Create,
                    AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
+    RegisterAction("A_GotoIfUnderwater", kexActionGotoIfUnderwater::info.Create, AAT_STRING);
 }
