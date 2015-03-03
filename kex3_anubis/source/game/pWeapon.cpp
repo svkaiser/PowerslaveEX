@@ -299,6 +299,110 @@ void kexPlayerWeapon::DrawAnimFrame(spriteAnim_t *sprAnim)
 }
 
 //
+// kexPlayerWeapon::DrawFlame
+//
+
+void kexPlayerWeapon::DrawFlame(void)
+{
+    const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
+    spriteAnim_t *sprAnim;
+    int frm = 0;
+    byte clr[4];
+    
+    if(weaponInfo->flame == NULL)
+    {
+        return;
+    }
+    
+    sprAnim = weaponInfo->flame;
+    
+    if(sprAnim->NumFrames() > 0)
+    {
+        frm = (kex::cSession->GetTicks() >> 1) % sprAnim->NumFrames();
+    }
+    
+    kexCpuVertList  *vl = kexRender::cVertList;
+    spriteFrame_t   *frame = &sprAnim->frames[frm];
+    spriteSet_t     *spriteSet;
+    kexSprite       *sprite;
+    spriteInfo_t    *info;
+    
+    clr[3] = 255;
+    
+    for(unsigned int i = 0; i < frame->spriteSet[0].Length(); ++i)
+    {
+        spriteSet = &frame->spriteSet[0][i];
+        sprite = spriteSet->sprite;
+        info = &sprite->InfoList()[spriteSet->index];
+        
+        float x = (float)spriteSet->x;
+        float y = (float)spriteSet->y;
+        float w = (float)info->atlas.w;
+        float h = (float)info->atlas.h;
+        word c = 0xff;
+        
+        float u1, u2, v1, v2;
+        
+        u1 = info->u[0 ^ spriteSet->bFlipped];
+        u2 = info->u[1 ^ spriteSet->bFlipped];
+        v1 = info->v[0];
+        v2 = info->v[1];
+        
+        kexRender::cScreen->SetAspectDimentions(x, y, w, h);
+        
+        sprite->Texture()->Bind();
+        
+        x += bob_x + weaponInfo->offsetX;
+        y += bob_y + weaponInfo->offsetY;
+        y += 8;
+        
+        if(!(frame->flags & SFF_FULLBRIGHT))
+        {
+            c = (owner->Actor()->Sector()->lightLevel << 1);
+            
+            if(c > 255)
+            {
+                c = 255;
+            }
+        }
+        
+        clr[0] = (byte)c;
+        clr[1] = (byte)c;
+        clr[2] = (byte)c;
+        
+        kexVec3 start(x, y + h, 0);
+        kexVec3 end(x + (owner->Actor()->Roll()*128), y, 0);
+        kexVec3 mid(x, y + h - (h * 0.5f), 0);
+        kexVec3 vw = kexVec3(w, 0, 0);
+        kexVec3 pt = start;
+        
+        float fv1 = v1;
+        int cnt = 0;
+        
+        for(int i = 0; i < 16; ++i)
+        {
+            float fv2 = (v2 / 16) * (float)i;
+            
+            start = pt;
+            kexMath::CubicCurve(start, end, (1.0f / 16) * (float)i, mid, &pt);
+            
+            vl->AddVertex(start, u1, fv1, clr);
+            vl->AddVertex(start + vw, u2, fv1, clr);
+            vl->AddVertex(pt, u1, fv2, clr);
+            vl->AddVertex(pt + vw, u2, fv2, clr);
+            
+            fv1 = fv2;
+            
+            vl->AddTriangle(cnt+1, cnt+2, cnt+0);
+            vl->AddTriangle(cnt+3, cnt+2, cnt+1);
+            cnt += 4;
+        }
+        
+        vl->DrawElements();
+    }
+}
+
+//
 // kexPlayerWeapon::Draw
 //
 
@@ -317,7 +421,7 @@ void kexPlayerWeapon::Draw(void)
 
     if(state == WS_IDLE)
     {
-        DrawAnimFrame(weaponInfo->flame);
+        DrawFlame();
     }
 
     if(ammo <= 0)

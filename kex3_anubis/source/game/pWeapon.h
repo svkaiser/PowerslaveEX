@@ -41,6 +41,7 @@ public:
 
 private:
     void                        DrawAnimFrame(spriteAnim_t *sprAnim);
+    void                        DrawFlame(void);
     void                        UpdateBob(void);
     void                        UpdateSprite(void);
 
