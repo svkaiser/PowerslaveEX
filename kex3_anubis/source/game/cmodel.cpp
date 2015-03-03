@@ -198,9 +198,11 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
     if(d1 <= d2 || d1 < 0 || d2 > 0)
     {
         // inside wall?
-        if(d1 < 0 && d1 > -extent1)
+        if(moveActor && !bTestOnly && d1 < 0 && d1 > -extent1)
         {
-            if(PointInsideFace(start, face, extent2))
+            if(PointInsideFace(start, face, extent2) ||
+               (!CheckEdgeSide(face->BottomEdge(), face, actorHeight) &&
+                !CheckEdgeSide(face->TopEdge(), face, 0)))
             {
                 // eject out
                 fraction = (d1 / (d1 - d2));
