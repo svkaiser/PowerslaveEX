@@ -199,38 +199,43 @@ void kexProjectile::UpdateVelocity(void)
 void kexProjectile::CheckFloorAndCeilings(void)
 {
     kexVec3 position = (origin + velocity);
-    kexPlane::planeSide_t ceilingSide;
-    kexPlane::planeSide_t floorSide;
 
-    ceilingSide = sector->ceilingFace->plane.PointOnSide(position + kexVec3(0, 0, height));
-    floorSide = sector->floorFace->plane.PointOnSide(position);
-
-    // bump ceiling
-    if(ceilingSide == kexPlane::PSIDE_BACK || ceilingSide == kexPlane::PSIDE_ON)
+    if(sector->ceilingFace->flags & FF_SOLID)
     {
-        if(projectileFlags & PF_IMPACTWALLSONLY)
+        kexPlane::planeSide_t ceilingSide;
+        ceilingSide = sector->ceilingFace->plane.PointOnSide(position + kexVec3(0, 0, height));
+        // bump ceiling
+        if(ceilingSide == kexPlane::PSIDE_BACK || ceilingSide == kexPlane::PSIDE_ON)
         {
-            AdjustAlongFace(sector->ceilingFace);
+            if(projectileFlags & PF_IMPACTWALLSONLY)
+            {
+                AdjustAlongFace(sector->ceilingFace);
+            }
+            else
+            {
+                OnImpact(NULL);
+            }
+            return;
         }
-        else
-        {
-            OnImpact(NULL);
-        }
-        return;
     }
     
-    // bump floor
-    if(floorSide == kexPlane::PSIDE_BACK || floorSide == kexPlane::PSIDE_ON)
+    if(sector->floorFace->flags & FF_SOLID)
     {
-        if(projectileFlags & PF_IMPACTWALLSONLY)
+        kexPlane::planeSide_t floorSide;
+        floorSide = sector->floorFace->plane.PointOnSide(position);
+        // bump floor
+        if(floorSide == kexPlane::PSIDE_BACK || floorSide == kexPlane::PSIDE_ON)
         {
-            AdjustAlongFace(sector->floorFace);
+            if(projectileFlags & PF_IMPACTWALLSONLY)
+            {
+                AdjustAlongFace(sector->floorFace);
+            }
+            else
+            {
+                OnImpact(NULL);
+            }
+            return;
         }
-        else
-        {
-            OnImpact(NULL);
-        }
-        return;
     }
 
     kexActor::CheckFloorAndCeilings();
@@ -460,7 +465,8 @@ void kexFireballSpawner::Tick(void)
 void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
 {
     mapVertex_t *v = kexGame::cLocal->World()->Vertices();
-    int secID;
+    int secID, projType;
+    float speed;
     kexVec3 vOrigin;
     kexVec3 vFaceOrg;
     kexActor *proj;
@@ -479,9 +485,24 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
     vOrigin.Lerp(vFaceOrg, 0.5f);
     vOrigin += (face->plane.Normal() * 32);
 
-    kexGame::cLocal->SpawnActor(AT_FIREBALLPUFF, vOrigin.x, vOrigin.y, vOrigin.z, 0, secID);
+    switch(type)
+    {
+    case AT_FIREBALLSPAWNER:
+        kexGame::cLocal->SpawnActor(AT_FIREBALLPUFF, vOrigin.x, vOrigin.y, vOrigin.z, 0, secID);
+        projType = AT_FIREBALL;
+        speed = 8;
+        break;
 
-    proj = kexGame::cLocal->SpawnActor(AT_FIREBALL,
+    case AT_LASERSPAWNER:
+        projType = AT_LASER;
+        speed = 16;
+        break;
+
+    default:
+        return;
+    }
+
+    proj = kexGame::cLocal->SpawnActor(projType,
                                        vOrigin.x, vOrigin.y, vOrigin.z,
                                        face->plane.Normal().ToYaw(),
                                        secID);
@@ -492,7 +513,7 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
     }
 
     proj->SetTarget(this);
-    proj->Velocity() = (face->plane.Normal() * 8);
+    proj->Velocity() = (face->plane.Normal() * speed);
     proj->PlaySound("sounds/fballshoot.wav");
 }
 
@@ -634,12 +655,17 @@ void kexFireballFactory::Spawn(void)
     {
     case AT_FIREBALLSPAWNER:
         intervals = 60;
-        currentTime = intervals;
+        break;
+
+    case AT_LASERSPAWNER:
+        intervals = 10;
         break;
 
     default:
         break;
     }
+
+    currentTime = intervals;
 }
 
 //

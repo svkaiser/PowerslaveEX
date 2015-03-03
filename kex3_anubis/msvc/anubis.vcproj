@@ -245,6 +245,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\session.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\unzip.cpp"
 					>
 				</File>
@@ -469,10 +473,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\source\game\session.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\source\game\spring.cpp"
 					>
 				</File>
@@ -632,6 +632,10 @@
 				</File>
 				<File
 					RelativePath="..\source\framework\sdNodes.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\framework\session.h"
 					>
 				</File>
 				<File
@@ -816,10 +820,6 @@
 				</File>
 				<File
 					RelativePath="..\source\game\pWeapon.h"
-					>
-				</File>
-				<File
-					RelativePath="..\source\game\session.h"
 					>
 				</File>
 				<File

@@ -1,0 +1,151 @@
+fullhealth_base
+{
+    // frames:    8
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/fullcharge", 0,    -16,  -64,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/fullcharge", 0,    -16,  -64,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/fullcharge", 1,    -15,  -64,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/fullcharge", 1,    -15,  -64,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/fullcharge", 2,    -12,  -64,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/fullcharge", 2,    -12,  -64,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "items/fullcharge", 3,    -15,  -64,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "items/fullcharge", 3,    -15,  -64,    0 }
+        }
+    }
+}
+
+fullammo_base
+{
+    // frames:    8
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/fullcharge", 6,    -16,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/fullcharge", 6,    -16,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/fullcharge", 7,    -15,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/fullcharge", 7,    -15,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/fullcharge", 4,    -12,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/fullcharge", 4,    -12,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "items/fullcharge", 5,    -15,  -61,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "items/fullcharge", 5,    -15,  -61,    0 }
+        }
+    }
+}

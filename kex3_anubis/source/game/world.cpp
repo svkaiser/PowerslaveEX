@@ -915,7 +915,7 @@ void kexWorld::UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev)
     }
 
     player->Actor()->PlaySound("sounds/switch.wav");
-    SendRemoteTrigger(NULL, ev);
+    SendRemoteTrigger(&sectors[ev->sector], ev);
 }
 
 //
@@ -1021,7 +1021,7 @@ void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
     kexFireballFactory *fbFactory;
     float extraDelay = 0;
 
-    if(ev->sector < 0 || &sectors[ev->sector] != sector)
+    if(sector != NULL && (ev->sector < 0 || &sectors[ev->sector] != sector))
     {
         return;
     }
@@ -1045,6 +1045,7 @@ void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
             switch(actors[j].type)
             {
             case AT_FIREBALLSPAWNER:
+            case AT_LASERSPAWNER:
                 fbFactory = kexGame::cLocal->SpawnFireballFactory(&actors[j]);
                 fbFactory->ExtraDelay() = extraDelay;
                 extraDelay += 8;
@@ -1100,10 +1101,9 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
 
             if(ev->type == event->type)
             {
-                ev->tag = -1;
-
                 if(event->type == 66)
                 {
+                    ev->tag = -1;
                     ExplodeWallEvent(&sectors[ev->sector]);
                     bClearEventRef = true;
                 }

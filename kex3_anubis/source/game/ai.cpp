@@ -240,7 +240,7 @@ void kexAI::UpdateBurn(void)
 
         cnt++;
 
-        if(!(kexRand::Int() & 7))
+        if((kexRand::Int() & 0xff) <= 7)
         {
             InflictDamage(static_cast<kexActor*>(igniteFlames[i]->Target()), 9);
         }
@@ -703,11 +703,16 @@ void kexAI::Ignite(kexGameObject *igniteTarget)
             float x, y, z;
             kexActor *ignite;
             
-            igniteTicks[i] = kexRand::Max(64) + 8;
+            igniteTicks[i] = kexRand::Max(64) + 64;
             
             x = origin.x + (kexRand::Float() * (radius*0.5f));
             y = origin.y + (kexRand::Float() * (radius*0.5f));
-            z = origin.z + stepHeight + (kexRand::Float() * (height*0.35f));
+            z = origin.z + (kexRand::Float() * (height*0.8f));
+
+            if(z < origin.z + stepHeight && stepHeight < height)
+            {
+                z = origin.z + stepHeight;
+            }
             
             ignite = kexGame::cLocal->SpawnActor(AT_IGNITEFLAME, x, y, z, 0, SectorIndex());
             ignite->SetTarget(igniteTarget);

@@ -127,3 +127,40 @@ Item_Weapon_M60 43
     removeIfOwned           1
     pickupMessage           "$str_94"
 }
+
+Item_Ammo_Full 51
+{
+    classname               "kexAmmoPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/fullammo_base"
+    pickupSound             "sounds/fammo.wav"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    touchable               1
+    floorOffset             48
+    fullAmmo                1
+    pickupMessage           "$str_110"
+}
+
+Item_Health_Full 52
+{
+    classname               "kexHealthPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/fullhealth_base"
+    pickupSound             "sounds/fhealth.wav"
+    fullbright              1
+    touchable               1
+    moveable                1
+    gravity                 0
+    floorOffset             48
+    giveAmount              1000
+    multiplier              1.0
+    pickupMessage           "$str_107"
+}

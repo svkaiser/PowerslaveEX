@@ -186,6 +186,7 @@ kexAmmoPickup::kexAmmoPickup(void)
     this->weaponSlotToGive = -1;
     this->divisor = 1;
     this->multiplier = 1;
+    this->bFullAmmo = false;
 }
 
 //
@@ -227,6 +228,17 @@ void kexAmmoPickup::OnTouch(kexActor *instigator)
     
     puppet = static_cast<kexPuppet*>(instigator);
     player = puppet->Owner();
+
+    if(bFullAmmo == true)
+    {
+        for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+        {
+            player->GiveAmmo(i, kexGame::cLocal->WeaponInfo(i)->maxAmmo);
+        }
+
+        kexPickup::OnTouch(instigator);
+        return;
+    }
 
     if(weaponSlotToGive <= -1)
     {
@@ -272,6 +284,7 @@ void kexAmmoPickup::Spawn(void)
         definition->GetInt("weaponSlotToGive", weaponSlotToGive, -1);
         definition->GetInt("divisor", divisor, 1);
         definition->GetInt("multiplier", multiplier, 1);
+        definition->GetBool("fullAmmo", bFullAmmo);
 
         if(divisor <= 0) divisor = 1;
         if(multiplier <= 0) multiplier = 1;

@@ -76,3 +76,18 @@ Proj_Fireball 26
     gravity                 0
     damage                  0
 }
+
+Proj_Laser 201
+{
+    classname               "kexProjectile"
+    radius                  42
+    height                  32
+    stepHeight              0
+    scale                   1.0
+    spawnAnim               "projectiles/anubis_fireball_loop"
+    deathAnim               "projectiles/anubis_fireball_explode"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    damage                  9999
+}

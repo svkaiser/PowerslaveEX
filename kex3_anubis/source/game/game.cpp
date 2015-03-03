@@ -195,9 +195,18 @@ COMMAND(give)
             kex::cSystem->Printf("Got weapon ## %i!\n", weap);
         }
     }
+    else if(!kexStr::Compare(kex::cCommands->GetArgv(1), "keys"))
+    {
+        gameLocal.Player()->GiveKey(0);
+        gameLocal.Player()->GiveKey(1);
+        gameLocal.Player()->GiveKey(2);
+        gameLocal.Player()->GiveKey(3);
+
+        kex::cSystem->Printf("Got all keys!\n");
+    }
     else
     {
-        kex::cSystem->Printf("give <weapon#, weapons>\n");
+        kex::cSystem->Printf("give <weapon#, weapons, keys>\n");
     }
 }
 
@@ -632,6 +641,7 @@ kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y,
             break;
 
         case AT_FIREBALLSPAWNER:
+        case AT_LASERSPAWNER:
             className = "kexFireballSpawner";
             break;
         

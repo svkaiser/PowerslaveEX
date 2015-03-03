@@ -30,7 +30,9 @@ typedef enum
     AT_EXPLODEPUFF      = 62,
     AT_DEBRIS           = 123,
     AT_WATERSPLASH      = 124,
+    AT_LASERSPAWNER     = 126,
     AT_FIREBALLPUFF     = 200,
+    AT_LASER            = 201,
     NUMACTORTYPES
 } actorType_t;
 

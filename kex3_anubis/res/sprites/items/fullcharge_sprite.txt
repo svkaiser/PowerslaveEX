@@ -1,0 +1,26 @@
+texture "sprites/items/fullcharge.png"
+
+// working\full\sprite0294.tga
+sprite 0 0 0 36 29
+
+// working\full\sprite0295.tga
+sprite 1 36 0 32 29
+
+// working\full\sprite0296.tga
+sprite 2 68 0 28 29
+
+// working\full\sprite0297.tga
+sprite 3 96 0 32 29
+
+// working\full\sprite0298.tga
+sprite 4 128 0 28 29
+
+// working\full\sprite0299.tga
+sprite 5 156 0 32 29
+
+// working\full\sprite0300.tga
+sprite 6 188 0 36 29
+
+// working\full\sprite0301.tga
+sprite 7 224 0 32 29
+
