@@ -205,19 +205,18 @@ void kexSystemSDL::InitVideo(void)
         cvarVidBuffSize.Set(32);
     }
 
-    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 0);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 0);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 0);
-    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 0);
-    SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 0);
-    SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 0);
-    SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE, 0);
-    SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, cvarVidBuffSize.GetInt());
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, cvarVidDepthSize.GetInt());
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, cvarVidStencilSize.GetInt());
-    SDL_GL_SetSwapInterval(cvarVidVSync.GetBool());
     
     flags |= SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_MOUSE_FOCUS;
     
@@ -241,7 +240,7 @@ void kexSystemSDL::InitVideo(void)
     }
 
     SDL_GL_MakeCurrent(window, glContext);
-    SDL_GL_SetSwapInterval(1);
+    SDL_GL_SetSwapInterval(cvarVidVSync.GetBool());
 
     kex::cSystem->Printf("Video Initialized\n");
 }
