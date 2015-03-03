@@ -197,6 +197,21 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
 
     if(d1 <= d2 || d1 < 0 || d2 > 0)
     {
+        // inside wall?
+        if(d1 < 0 && d1 > -extent1)
+        {
+            if(PointInsideFace(start, face, extent2))
+            {
+                // eject out
+                fraction = (d1 / (d1 - d2));
+                interceptVector = start - (face->plane.Normal() * PointOnFaceSide(start, face));
+                contactNormal = face->plane.Normal();
+                contactFace = face;
+                contactSector = &sectors[face->sectorOwner];
+                return true;
+            }
+        }
+        
         // no intersection
         return false;
     }
@@ -631,7 +646,8 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
             float ceilingz = (float)s->ceilingHeight;
             float floorz = (float)s->floorHeight;
 
-            if(ceilingz - floorz < actorHeight)
+            if((s->ceilingFace->flags & FF_SOLID && s->floorFace->flags & FF_SOLID) &&
+               ceilingz - floorz < actorHeight)
             {
                 CollideFace(face);
             }
@@ -940,9 +956,13 @@ void kexCModel::CheckSurroundingSectors(void)
                     {
                         if(ceilingz > maxceilingz)
                         {
-                            best = s;
-                            maxceilingz = ceilingz;
-                            bChangeCeilingHeight = true;
+                            // check non-steep ceiling slopes only
+                            if(kexMath::Fabs(s->ceilingFace->plane.c) > 0.5f)
+                            {
+                                best = s;
+                                maxceilingz = ceilingz;
+                                bChangeCeilingHeight = true;
+                            }
                         }
                     }
                 }
