@@ -658,7 +658,7 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
             {
                 mapFace_t *f = &faces[j];
                 
-                if(f->flags & FF_PORTAL && f->sector == face->sectorOwner)
+                if(f->flags & FF_PORTAL && f->sector == face->sectorOwner && j <= s->faceEnd)
                 {
                     if(bCeiling)
                     {
