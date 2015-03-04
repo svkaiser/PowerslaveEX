@@ -237,8 +237,6 @@ void kexPlayerWeapon::UpdateSprite(void)
 
 void kexPlayerWeapon::DrawAnimFrame(spriteAnim_t *sprAnim)
 {
-    int frm = frameID;
-
     if(!sprAnim)
     {
         return;
@@ -246,13 +244,8 @@ void kexPlayerWeapon::DrawAnimFrame(spriteAnim_t *sprAnim)
 
     const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
 
-    if(sprAnim == weaponInfo->flame && sprAnim->NumFrames() > 0)
-    {
-        frm = (kex::cSession->GetTicks() >> 1) % sprAnim->NumFrames();
-    }
-
     kexCpuVertList  *vl = kexRender::cVertList;
-    spriteFrame_t   *frame = &sprAnim->frames[frm];
+    spriteFrame_t   *frame = &sprAnim->frames[frameID];
     spriteSet_t     *spriteSet;
     kexSprite       *sprite;
     spriteInfo_t    *info;

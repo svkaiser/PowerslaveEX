@@ -76,7 +76,7 @@ Fx_HealthSpawn 63
     radius                  64
     height                  64
     stepHeight              32
-    scale                   2.0
+    scale                   1.0
     spawnAnim               "effects/orb_spawn"
     fullbright              1
     color                   "1.0 0.285 0.285"
@@ -88,7 +88,7 @@ Fx_AmmoSpawn 64
     radius                  64
     height                  64
     stepHeight              32
-    scale                   2.0
+    scale                   1.0
     spawnAnim               "effects/orb_spawn"
     fullbright              1
     color                   "0.285 0.285 1.0"

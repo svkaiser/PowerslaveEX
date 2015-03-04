@@ -49,11 +49,15 @@ private:
     virtual void                    CheckFloorAndCeilings(void);
     virtual void                    UpdateMovement(void);
 
+    void                            HomingThink(void);
     void                            AdjustAlongFace(mapFace_t *face);
     void                            SeekTargets(void);
 
     int                             damage;
     unsigned int                    projectileFlags;
+    float                           homingTurnAngles;
+    float                           homingMaxPitch;
+    float                           homingMaxSightDistance;
     kexActor                        *homingActor;
 END_KEX_CLASS();
 

@@ -83,7 +83,7 @@ void kexPuppet::OnDamage(kexActor *instigator)
 
 void kexPuppet::Jump(kexPlayerCmd *cmd)
 {
-    if(cmd->Buttons() & BC_JUMP)
+    if(cmd->Buttons() & BC_JUMP && !(sector->floorFace->flags & FF_WATER))
     {
         if(!(playerFlags & PF_USERJUMPED))
         {

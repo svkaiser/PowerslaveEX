@@ -67,7 +67,7 @@ void A_SpiderLeap(kActor @actor)
 
 void A_SpiderCheckGround(kActor @actor)
 {
-    if((actor.Origin().z + actor.Velocity().z) <= actor.FloorHeight())
+    if((actor.Origin().z + actor.Velocity().z) <= actor.FloorHeight()+1.024f)
     {
         actor.ChangeAnim("monsters/spider_base");
     }

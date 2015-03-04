@@ -41,9 +41,9 @@ void A_RandomItem(kActor @actor)
         @obj = Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
     }
     
-    if(!(obj is null) && (Math::Rand() & 255) >= 128)
+    if(!(obj is null) && (Math::Rand() & 255) >= 160)
     {
-        obj.Scale() = 1.0f;
+        obj.Scale() = 2.0f;
     }
 }
 
@@ -62,9 +62,11 @@ void A_RandomVaseItem(kActor @actor)
     switch(r)
     {
     case 0:
-        Game.SpawnActor("AI_Spider", x, y, z, actor.SectorIndex());
+        Game.SpawnActor("AI_Spider", x, y, z, 0, actor.SectorIndex());
         return;
     case 1:
+        Game.SpawnActor("AI_Wasp", x, y, z, 0, actor.SectorIndex());
+        return;
     case 3:
         @obj = Game.SpawnActor("Fx_AmmoSpawn", x, y, z, 0, actor.SectorIndex());
         break;
@@ -78,9 +80,9 @@ void A_RandomVaseItem(kActor @actor)
         return;
     }
     
-    if(!(obj is null) && (Math::Rand() & 1) != 0)
+    if(!(obj is null) && (Math::Rand() & 255) >= 160)
     {
-        obj.Scale() = 1.0f;
+        obj.Scale() = 2.0f;
     }
 }
 

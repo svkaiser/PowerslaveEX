@@ -34,6 +34,9 @@ kexProjectile::kexProjectile(void)
 {
     this->damage = 0;
     this->projectileFlags = 0;
+    this->homingTurnAngles = 0.03125f;
+    this->homingMaxPitch = 0.25f;
+    this->homingMaxSightDistance = 2000;
     this->homingActor = NULL;
 }
 
@@ -56,24 +59,7 @@ void kexProjectile::Tick(void)
 
     if(projectileFlags & PF_HOMING)
     {
-        if(homingActor != NULL)
-        {
-            if(homingActor->Removing() || homingActor->Health() <= 0)
-            {
-                SetHomingTarget(NULL);
-                return;
-            }
-
-            kexVec3 vOrigin = homingActor->Origin() + kexVec3(0, 0, homingActor->Height() * 0.5f);
-            kexVec3 dir = (vOrigin - origin).Normalize();
-            
-            yaw = dir.ToYaw();
-            pitch = -dir.ToPitch();
-        }
-        else if(!RandomDecision(14))
-        {
-            SeekTargets();
-        }
+        HomingThink();
     }
 }
 
@@ -93,6 +79,39 @@ void kexProjectile::SetHomingTarget(kexActor *actor)
     if((homingActor = actor))
     {
         homingActor->AddRef();
+    }
+}
+
+//
+// kexProjectile::HomingThink
+//
+
+void kexProjectile::HomingThink(void)
+{
+    if(homingActor != NULL)
+    {
+        if(homingActor->Removing() || homingActor->Health() <= 0)
+        {
+            SetHomingTarget(NULL);
+            return;
+        }
+
+        kexVec3 vOrigin = homingActor->Origin() + kexVec3(0, 0, homingActor->Height() * 0.5f);
+        kexVec3 dir = (vOrigin - origin).Normalize();
+        kexAngle an1 = dir.ToYaw();
+
+        kexAngle diff = an1 - yaw;
+
+             if(diff.an >  homingTurnAngles) yaw += homingTurnAngles;
+        else if(diff.an < -homingTurnAngles) yaw -= homingTurnAngles;
+        else yaw = an1;
+        
+        pitch = -dir.ToPitch();
+        kexMath::Clamp(pitch.an, -homingMaxPitch, homingMaxPitch);
+    }
+    else if(!RandomDecision(14))
+    {
+        SeekTargets();
     }
 }
 
@@ -143,7 +162,7 @@ void kexProjectile::SeekTargets(void)
     kexVec3 end;
     kexStack<mapSector_t*> *sectorList;
 
-    sectorList = kexGame::cLocal->World()->FloodFill(start, sector, 2000);
+    sectorList = kexGame::cLocal->World()->FloodFill(start, sector, homingMaxSightDistance);
 
     for(unsigned int i = 0; i < sectorList->CurrentLength(); ++i)
     {
@@ -158,8 +177,8 @@ void kexProjectile::SeekTargets(void)
                 continue;
             }
 
-            if(kexMath::Fabs(origin.x - actor->Origin().x) >= 2000) continue;
-            if(kexMath::Fabs(origin.y - actor->Origin().y) >= 2000) continue;
+            if(kexMath::Fabs(origin.x - actor->Origin().x) >= homingMaxSightDistance) continue;
+            if(kexMath::Fabs(origin.y - actor->Origin().y) >= homingMaxSightDistance) continue;
 
            
             end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
@@ -254,8 +273,15 @@ void kexProjectile::UpdateMovement(void)
         OnImpact(kexGame::cLocal->CModel()->ContactActor());
     }
 
+    if(velocity.UnitSq() <= 0.05f)
+    {
+        OnImpact(NULL);
+        return;
+    }
+
     if(!kexGame::cLocal->CModel()->PointWithinSectorEdges(origin, sector))
     {
+        kex::cSystem->Warning("Projectile (type %i) out of sector bounds\n", type);
         OnImpact(NULL);
     }
 
@@ -293,6 +319,10 @@ void kexProjectile::Spawn(void)
     if(definition)
     {
         definition->GetInt("damage", damage, 0);
+        definition->GetFloat("homingTurnAngles", homingTurnAngles, 0.03125f);
+        definition->GetFloat("homingMaxPitch", homingMaxPitch, 0.25f);
+        definition->GetFloat("homingMaxSightDistance", homingMaxSightDistance, 2000);
+
         if(definition->GetBool("impactWallsOnly"))  projectileFlags |= PF_IMPACTWALLSONLY;
         if(definition->GetBool("homing"))           projectileFlags |= PF_HOMING;
     }
@@ -467,22 +497,39 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
     mapVertex_t *v = kexGame::cLocal->World()->Vertices();
     int secID, projType;
     float speed;
+    int avg = 0;
     kexVec3 vOrigin;
     kexVec3 vFaceOrg;
     kexActor *proj;
 
     secID = sector - kexGame::cLocal->World()->Sectors();
 
-    vFaceOrg = (v[face->vertexStart+0].origin +
-                v[face->vertexStart+1].origin +
-                v[face->vertexStart+2].origin +
-                v[face->vertexStart+3].origin) / 4;
+    for(int i = face->polyStart; i <= face->polyEnd; ++i)
+    {
+        mapPoly_t *p = &kexGame::cLocal->World()->Polys()[i];
+
+        if(p->texture != poly->texture)
+        {
+            continue;
+        }
+
+        vFaceOrg += v[face->vertStart + p->indices[0]].origin;
+        vFaceOrg += v[face->vertStart + p->indices[1]].origin;
+        vFaceOrg += v[face->vertStart + p->indices[2]].origin;
+
+        avg += 3;
+    }
     
     vOrigin = (v[face->vertStart + poly->indices[0]].origin +
                v[face->vertStart + poly->indices[1]].origin +
                v[face->vertStart + poly->indices[2]].origin) / 3;
 
-    vOrigin.Lerp(vFaceOrg, 0.5f);
+    if(avg > 0)
+    {
+        vFaceOrg /= (float)avg;
+        vOrigin.Lerp(vFaceOrg, 0.5f);
+    }
+
     vOrigin += (face->plane.Normal() * 32);
 
     switch(type)

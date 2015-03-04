@@ -376,7 +376,7 @@ DECLARE_KEX_ACTION(kexActionDestroyAtRest)
         return;
     }
     
-    if(actor->Velocity().UnitSq() > min)
+    if(actor->Velocity().UnitSq() > (min * 2))
     {
         return;
     }
