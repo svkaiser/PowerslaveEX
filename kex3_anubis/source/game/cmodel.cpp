@@ -198,12 +198,12 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
     if(d1 <= d2 || d1 < 0 || d2 > 0)
     {
         // inside wall?
-        if(moveActor && !bTestOnly && d1 < 0 && d1 > -extent1)
+        /*if(moveActor && !bTestOnly && d1 < 0 && d1 > -extent1)
         {
             if(!CheckEdgeSide(face->BottomEdge(), face, actorHeight) &&
                !CheckEdgeSide(face->TopEdge(), face, 0) &&
-               !CheckEdgeSide(face->LeftEdge(), face, 0, extent1) &&
-               !CheckEdgeSide(face->RightEdge(), face, 0, extent1))
+               !CheckEdgeSide(face->LeftEdge(), face, 0) &&
+               !CheckEdgeSide(face->RightEdge(), face, 0))
             {
                 // eject out
                 fraction = (d1 / (d1 - d2));
@@ -213,7 +213,7 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
                 contactSector = &sectors[face->sectorOwner];
                 return true;
             }
-        }
+        }*/
         
         // no intersection
         return false;
@@ -946,7 +946,8 @@ void kexCModel::CheckSurroundingSectors(void)
                     // determine the closest floor that can be stepped on
                     if(diff <= 0 && diff >= -moveActor->StepHeight())
                     {
-                        if(floorz > maxfloorz && moveActor->Movement().z <= 0)
+                        if(kexMath::Fabs(s->floorFace->plane.c) > 0.5f &&
+                            floorz > maxfloorz && moveActor->Movement().z <= 0)
                         {
                             best = s;
                             maxfloorz = floorz;
