@@ -197,24 +197,6 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
 
     if(d1 <= d2 || d1 < 0 || d2 > 0)
     {
-        // inside wall?
-        /*if(moveActor && !bTestOnly && d1 < 0 && d1 > -extent1)
-        {
-            if(!CheckEdgeSide(face->BottomEdge(), face, actorHeight) &&
-               !CheckEdgeSide(face->TopEdge(), face, 0) &&
-               !CheckEdgeSide(face->LeftEdge(), face, 0) &&
-               !CheckEdgeSide(face->RightEdge(), face, 0))
-            {
-                // eject out
-                fraction = (d1 / (d1 - d2));
-                interceptVector = start - (face->plane.Normal() * PointOnFaceSide(start, face));
-                contactNormal = face->plane.Normal();
-                contactFace = face;
-                contactSector = &sectors[face->sectorOwner];
-                return true;
-            }
-        }*/
-        
         // no intersection
         return false;
     }
@@ -697,6 +679,34 @@ bool kexCModel::CheckActorPosition(kexActor *actor, mapSector_t *initialSector)
         actor->Origin() = actor->PrevOrigin();
         actor->SetSector(initialSector);
         return false;
+    }
+    else
+    {
+        for(int i = actor->Sector()->faceStart; i <= actor->Sector()->faceEnd; ++i)
+        {
+            mapFace_t *face = &faces[i];
+            
+            if(!(face->flags & FF_SOLID) || face->sector >= 0)
+            {
+                continue;
+            }
+            
+            float d = PointOnFaceSide(actor->Origin(), face, actorRadius);
+            
+            // inside wall?
+            if(d < 0 && d > -actorRadius)
+            {
+                if(!CheckEdgeSide(face->BottomEdge(), face, actorHeight*0.95f) &&
+                   !CheckEdgeSide(face->TopEdge(), face, actor->StepHeight()) &&
+                   !CheckEdgeSide(face->LeftEdge(), face, 0) &&
+                   !CheckEdgeSide(face->RightEdge(), face, 0))
+                {
+                    // eject out
+                    actor->Origin() -= (face->plane.Normal() * d);
+                    return false;
+                }
+            }
+        }
     }
 
     return true;
