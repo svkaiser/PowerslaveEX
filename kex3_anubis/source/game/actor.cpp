@@ -500,7 +500,7 @@ void kexActor::CheckFloorAndCeilings(void)
     {
         origin.z = floorz;
         
-        if(flags & AF_BOUNCY && (kexMath::Fabs(kexMath::Floor(velocity.z)) * 0.75f) > gravity)
+        if(flags & AF_BOUNCY && kexMath::Fabs(kexMath::Floor(velocity.z)) > (gravity*4))
         {
             int r = kex::cSession->GetTime() % 3;
             
