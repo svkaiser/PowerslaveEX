@@ -33,6 +33,7 @@ public:
     static kexCvar          cvarSampleRate;
     static kexCvar          cvarSliceTime;
     static kexCvar          cvarVolume;
+    static kexCvar          cvarMusicVolume;
 
 protected:
     int                     GetSliceBufferSize(void);

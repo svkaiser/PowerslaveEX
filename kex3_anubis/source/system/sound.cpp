@@ -19,7 +19,8 @@
 
 kexCvar kexSound::cvarSampleRate("snd_samplerate", CVF_INT|CVF_CONFIG, "22050", "Sound sample rate to use for digital output (Hz)");
 kexCvar kexSound::cvarSliceTime("snd_maxslicetime_ms", CVF_INT|CVF_CONFIG, "16", "Sound buffer size passed per tick");
-kexCvar kexSound::cvarVolume("snd_volume", CVF_FLOAT|CVF_CONFIG, "1", "Sound volume");
+kexCvar kexSound::cvarVolume("snd_volume", CVF_FLOAT|CVF_CONFIG, "1", 0, 1, "Sound volume");
+kexCvar kexSound::cvarMusicVolume("snd_musicvolume", CVF_FLOAT|CVF_CONFIG, "1", 0, 1, "Music Volume");
 
 //
 // kexSound::kexSound

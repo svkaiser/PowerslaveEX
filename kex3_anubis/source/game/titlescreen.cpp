@@ -29,13 +29,13 @@ typedef enum
     TSI_OPTIONS,
     TSI_QUIT,
     TSI_GAMEPLAY,
-    TSI_KEYBOARD,
-    TSI_MOUSE,
-    TSI_GAMEPAD,
+    TSI_INPUT,
     TSI_GRAPHICS,
     TSI_AUDIO,
     TSI_SFXVOLUME,
+    TSI_SFXSLIDER,
     TSI_MUSICVOLUME,
+    TSI_MUSICSLIDER,
     TSI_EXIT_AUDIO,
     TSI_EXIT_OPTIONS,
 
@@ -52,7 +52,7 @@ typedef enum
 
 typedef struct
 {
-    kexMenuItem         item;
+    kexMenuItem         *item;
     menuItemSelect_t    callback;
 } menuGroup_t;
 
@@ -61,11 +61,17 @@ static menuGroup_t *titleMenu[NUMTITLESCREENITEMS];
 #define MENUITEM(name, label, x, y, center, lerpblock, block)   \
     static void LerpCallback_ ## name(kexMenuItem *item);   \
     static void Callback_ ## name(kexMenuItem *item);   \
-    static menuGroup_t menuGroup_ ## name = { kexMenuItem(label, x, y, center, LerpCallback_ ## name), Callback_ ## name };   \
+    static menuGroup_t menuGroup_ ## name = { new kexMenuItem(label, x, y, center, LerpCallback_ ## name), Callback_ ## name };   \
     static void LerpCallback_ ## name(kexMenuItem *item)    \
     lerpblock   \
     static void Callback_ ## name(kexMenuItem *item)    \
     block
+
+#define MENUITEM_LABEL(name, label, x, y, center)   \
+    static menuGroup_t menuGroup_ ## name = { new kexMenuItemLabel(label, x, y, center), NULL }
+
+#define MENUITEM_SLIDER(name, x, y, cvar, center)   \
+    static menuGroup_t menuGroup_ ## name = { new kexMenuItemSlider(x, y, center, cvar), NULL }
 
 //-----------------------------------------------------------------------------
 //
@@ -83,10 +89,10 @@ MENUITEM(NewGame, "New Game", -100, 128, 1,
     kexGame::cLocal->TitleScreen()->FadeOut(TSS_NEWGAME);
 },
 {
-    titleMenu[TSI_NEWGAME]->item.LerpTo(-100);
-    titleMenu[TSI_LOADGAME]->item.LerpTo(420);
-    titleMenu[TSI_OPTIONS]->item.LerpTo(-100);
-    titleMenu[TSI_QUIT]->item.LerpTo(420);
+    titleMenu[TSI_NEWGAME]->item->LerpTo(-100);
+    titleMenu[TSI_LOADGAME]->item->LerpTo(420);
+    titleMenu[TSI_OPTIONS]->item->LerpTo(-100);
+    titleMenu[TSI_QUIT]->item->LerpTo(420);
 });
 
 //-----------------------------------------------------------------------------
@@ -115,20 +121,18 @@ MENUITEM(Options, "Options", 420, 164, 1,
         return;
     }
     
-    titleMenu[TSI_GAMEPLAY]->item.LerpTo(160);
-    titleMenu[TSI_KEYBOARD]->item.LerpTo(160);
-    titleMenu[TSI_MOUSE]->item.LerpTo(160);
-    titleMenu[TSI_GAMEPAD]->item.LerpTo(160);
-    titleMenu[TSI_GRAPHICS]->item.LerpTo(160);
-    titleMenu[TSI_AUDIO]->item.LerpTo(160);
-    titleMenu[TSI_EXIT_OPTIONS]->item.LerpTo(160);
+    titleMenu[TSI_GAMEPLAY]->item->LerpTo(160);
+    titleMenu[TSI_INPUT]->item->LerpTo(160);
+    titleMenu[TSI_GRAPHICS]->item->LerpTo(160);
+    titleMenu[TSI_AUDIO]->item->LerpTo(160);
+    titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(160);
 },
 {
-    titleMenu[TSI_NEWGAME]->item.LerpTo(-100);
-    titleMenu[TSI_LOADGAME]->item.LerpTo(420);
-    titleMenu[TSI_OPTIONS]->item.LerpTo(160, 64);
-    titleMenu[TSI_OPTIONS]->item.Toggle(false);
-    titleMenu[TSI_QUIT]->item.LerpTo(-100);
+    titleMenu[TSI_NEWGAME]->item->LerpTo(-100);
+    titleMenu[TSI_LOADGAME]->item->LerpTo(420);
+    titleMenu[TSI_OPTIONS]->item->LerpTo(160, 64);
+    titleMenu[TSI_OPTIONS]->item->Toggle(false);
+    titleMenu[TSI_QUIT]->item->LerpTo(-100);
 });
 
 //-----------------------------------------------------------------------------
@@ -150,7 +154,7 @@ MENUITEM(Quit, "Quit", 420, 182, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(Gameplay, "Gameplay", -100, 96, 1,
+MENUITEM(Gameplay, "Gameplay", -100, 114, 1,
 {
 },
 {
@@ -159,37 +163,11 @@ MENUITEM(Gameplay, "Gameplay", -100, 96, 1,
 
 //-----------------------------------------------------------------------------
 //
-// Options: Keyboard
+// Options: Input
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(Keyboard, "Keyboard", 420, 114, 1,
-{
-},
-{
-    kexGame::cLocal->TitleScreen()->DeselectAllItems();
-});
-
-//-----------------------------------------------------------------------------
-//
-// Options: Mouse
-//
-//-----------------------------------------------------------------------------
-
-MENUITEM(Mouse, "Mouse", -100, 132, 1,
-{
-},
-{
-    kexGame::cLocal->TitleScreen()->DeselectAllItems();
-});
-
-//-----------------------------------------------------------------------------
-//
-// Options: Gamepad
-//
-//-----------------------------------------------------------------------------
-
-MENUITEM(Gamepad, "Gamepad", 420, 150, 1,
+MENUITEM(Input, "Input", 420, 132, 1,
 {
 },
 {
@@ -202,7 +180,7 @@ MENUITEM(Gamepad, "Gamepad", 420, 150, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(Graphics, "Graphics", -100, 168, 1,
+MENUITEM(Graphics, "Graphics", -100, 150, 1,
 {
 },
 {
@@ -215,27 +193,27 @@ MENUITEM(Graphics, "Graphics", -100, 168, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(Audio, "Audio", 420, 186, 1,
+MENUITEM(Audio, "Audio", 420, 168, 1,
 {
     if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_AUDIO)
     {
         return;
     }
     
-    titleMenu[TSI_SFXVOLUME]->item.LerpTo(160);
-    titleMenu[TSI_MUSICVOLUME]->item.LerpTo(160);
-    titleMenu[TSI_EXIT_AUDIO]->item.LerpTo(160);
+    titleMenu[TSI_SFXVOLUME]->item->LerpTo(160);
+    titleMenu[TSI_SFXSLIDER]->item->LerpTo(160);
+    titleMenu[TSI_MUSICVOLUME]->item->LerpTo(160);
+    titleMenu[TSI_MUSICSLIDER]->item->LerpTo(160);
+    titleMenu[TSI_EXIT_AUDIO]->item->LerpTo(160);
 },
 {
-    titleMenu[TSI_OPTIONS]->item.LerpTo(-100, 64);
-    titleMenu[TSI_GAMEPLAY]->item.LerpTo(-100);
-    titleMenu[TSI_KEYBOARD]->item.LerpTo(420);
-    titleMenu[TSI_MOUSE]->item.LerpTo(-100);
-    titleMenu[TSI_GAMEPAD]->item.LerpTo(420);
-    titleMenu[TSI_GRAPHICS]->item.LerpTo(-100);
-    titleMenu[TSI_AUDIO]->item.LerpTo(160, 64);
-    titleMenu[TSI_AUDIO]->item.Toggle(false);
-    titleMenu[TSI_EXIT_OPTIONS]->item.LerpTo(-100);
+    titleMenu[TSI_OPTIONS]->item->LerpTo(-100, 64);
+    titleMenu[TSI_GAMEPLAY]->item->LerpTo(-100);
+    titleMenu[TSI_INPUT]->item->LerpTo(420);
+    titleMenu[TSI_GRAPHICS]->item->LerpTo(-100);
+    titleMenu[TSI_AUDIO]->item->LerpTo(160, 64);
+    titleMenu[TSI_AUDIO]->item->Toggle(false);
+    titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(-100);
 });
 
 //-----------------------------------------------------------------------------
@@ -244,28 +222,26 @@ MENUITEM(Audio, "Audio", 420, 186, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(OptionExit, "Exit", -100, 204, 1,
+MENUITEM(OptionExit, "Exit", -100, 186, 1,
 {
     if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_EXIT_OPTIONS)
     {
         return;
     }
     
-    titleMenu[TSI_NEWGAME]->item.LerpTo(160);
-    titleMenu[TSI_LOADGAME]->item.LerpTo(160);
-    titleMenu[TSI_OPTIONS]->item.LerpTo(160, 164);
-    titleMenu[TSI_OPTIONS]->item.Toggle(true);
-    titleMenu[TSI_QUIT]->item.LerpTo(160);
+    titleMenu[TSI_NEWGAME]->item->LerpTo(160);
+    titleMenu[TSI_LOADGAME]->item->LerpTo(160);
+    titleMenu[TSI_OPTIONS]->item->LerpTo(160, 164);
+    titleMenu[TSI_OPTIONS]->item->Toggle(true);
+    titleMenu[TSI_QUIT]->item->LerpTo(160);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 },
 {
-    titleMenu[TSI_GAMEPLAY]->item.LerpTo(-100);
-    titleMenu[TSI_KEYBOARD]->item.LerpTo(420);
-    titleMenu[TSI_MOUSE]->item.LerpTo(-100);
-    titleMenu[TSI_GAMEPAD]->item.LerpTo(420);
-    titleMenu[TSI_GRAPHICS]->item.LerpTo(-100);
-    titleMenu[TSI_AUDIO]->item.LerpTo(420);
-    titleMenu[TSI_EXIT_OPTIONS]->item.LerpTo(-100);
+    titleMenu[TSI_GAMEPLAY]->item->LerpTo(-100);
+    titleMenu[TSI_INPUT]->item->LerpTo(420);
+    titleMenu[TSI_GRAPHICS]->item->LerpTo(-100);
+    titleMenu[TSI_AUDIO]->item->LerpTo(420);
+    titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(-100);
 });
 
 //-----------------------------------------------------------------------------
@@ -274,12 +250,8 @@ MENUITEM(OptionExit, "Exit", -100, 204, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(SoundVolume, "Sound FX Volume", -100, 146, 1,
-{
-},
-{
-    kexGame::cLocal->TitleScreen()->DeselectAllItems();
-});
+MENUITEM_LABEL(SoundVolume, "Sound FX Volume", -100, 110, 1);
+MENUITEM_SLIDER(SoundVolSlider, -100, 128, kexSound::cvarVolume, 1);
 
 //-----------------------------------------------------------------------------
 //
@@ -287,12 +259,8 @@ MENUITEM(SoundVolume, "Sound FX Volume", -100, 146, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(MusicVolume, "Music Volume", 420, 164, 1,
-{
-},
-{
-    kexGame::cLocal->TitleScreen()->DeselectAllItems();
-});
+MENUITEM_LABEL(MusicVolume, "Music Volume", 420, 146, 1);
+MENUITEM_SLIDER(MusicVolSlider, -100, 164, kexSound::cvarMusicVolume, 1);
 
 //-----------------------------------------------------------------------------
 //
@@ -307,21 +275,21 @@ MENUITEM(AudioExit, "Exit", 420, 182, 1,
         return;
     }
     
-    titleMenu[TSI_OPTIONS]->item.LerpTo(160, 64);
-    titleMenu[TSI_GAMEPLAY]->item.LerpTo(160);
-    titleMenu[TSI_KEYBOARD]->item.LerpTo(160);
-    titleMenu[TSI_MOUSE]->item.LerpTo(160);
-    titleMenu[TSI_GAMEPAD]->item.LerpTo(160);
-    titleMenu[TSI_GRAPHICS]->item.LerpTo(160);
-    titleMenu[TSI_AUDIO]->item.LerpTo(160, 186);
-    titleMenu[TSI_AUDIO]->item.Toggle(true);
-    titleMenu[TSI_EXIT_OPTIONS]->item.LerpTo(160);
+    titleMenu[TSI_OPTIONS]->item->LerpTo(160, 64);
+    titleMenu[TSI_GAMEPLAY]->item->LerpTo(160);
+    titleMenu[TSI_INPUT]->item->LerpTo(160);
+    titleMenu[TSI_GRAPHICS]->item->LerpTo(160);
+    titleMenu[TSI_AUDIO]->item->LerpTo(160, 168);
+    titleMenu[TSI_AUDIO]->item->Toggle(true);
+    titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(160);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 },
 {
-    titleMenu[TSI_SFXVOLUME]->item.LerpTo(-100);
-    titleMenu[TSI_MUSICVOLUME]->item.LerpTo(420);
-    titleMenu[TSI_EXIT_AUDIO]->item.LerpTo(420);
+    titleMenu[TSI_SFXVOLUME]->item->LerpTo(-100);
+    titleMenu[TSI_SFXSLIDER]->item->LerpTo(420);
+    titleMenu[TSI_MUSICVOLUME]->item->LerpTo(-100);
+    titleMenu[TSI_MUSICSLIDER]->item->LerpTo(420);
+    titleMenu[TSI_EXIT_AUDIO]->item->LerpTo(-100);
 });
 
 //
@@ -341,13 +309,13 @@ kexTitleScreen::kexTitleScreen(void)
     titleMenu[TSI_OPTIONS] = &menuGroup_Options;
     titleMenu[TSI_QUIT] = &menuGroup_Quit;
     titleMenu[TSI_GAMEPLAY] = &menuGroup_Gameplay;
-    titleMenu[TSI_KEYBOARD] = &menuGroup_Keyboard;
-    titleMenu[TSI_MOUSE] = &menuGroup_Mouse;
-    titleMenu[TSI_GAMEPAD] = &menuGroup_Gamepad;
+    titleMenu[TSI_INPUT] = &menuGroup_Input;
     titleMenu[TSI_GRAPHICS] = &menuGroup_Graphics;
     titleMenu[TSI_AUDIO] = &menuGroup_Audio;
     titleMenu[TSI_SFXVOLUME] = &menuGroup_SoundVolume;
+    titleMenu[TSI_SFXSLIDER] = &menuGroup_SoundVolSlider;
     titleMenu[TSI_MUSICVOLUME] = &menuGroup_MusicVolume;
+    titleMenu[TSI_MUSICSLIDER] = &menuGroup_MusicVolSlider;
     titleMenu[TSI_EXIT_AUDIO] = &menuGroup_AudioExit;
     titleMenu[TSI_EXIT_OPTIONS] = &menuGroup_OptionExit;
 }
@@ -419,7 +387,7 @@ void kexTitleScreen::DeselectAllItems(void)
 {
     for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
     {
-        kexMenuItem *item = &titleMenu[i]->item;
+        kexMenuItem *item = titleMenu[i]->item;
         item->Select(false);
     }
 }
@@ -433,10 +401,10 @@ void kexTitleScreen::FadeDone(void)
     switch(state)
     {
     case TSS_IDLE:
-        titleMenu[TSI_NEWGAME]->item.LerpTo(160);
-        titleMenu[TSI_LOADGAME]->item.LerpTo(160);
-        titleMenu[TSI_OPTIONS]->item.LerpTo(160);
-        titleMenu[TSI_QUIT]->item.LerpTo(160);
+        titleMenu[TSI_NEWGAME]->item->LerpTo(160);
+        titleMenu[TSI_LOADGAME]->item->LerpTo(160);
+        titleMenu[TSI_OPTIONS]->item->LerpTo(160);
+        titleMenu[TSI_QUIT]->item->LerpTo(160);
         break;
     case TSS_NEWGAME:
         //kexGame::cLocal->SetGameState(GS_LEVEL);
@@ -487,7 +455,7 @@ void kexTitleScreen::Draw(void)
 
     for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
     {
-        kexMenuItem *item = &titleMenu[i]->item;
+        kexMenuItem *item = titleMenu[i]->item;
         item->Draw();
     }
 }
@@ -506,7 +474,7 @@ void kexTitleScreen::Tick(void)
     {
         for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
         {
-            kexMenuItem *item = &titleMenu[i]->item;
+            kexMenuItem *item = titleMenu[i]->item;
             item->Tick();
         }
     }
@@ -524,16 +492,33 @@ bool kexTitleScreen::ProcessInput(inputEvent_t *ev)
         {
             for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
             {
-                if(titleMenu[i]->item.IsHighlighted())
+                if(titleMenu[i]->item->IsHighlighted())
                 {
                     if(titleMenu[i]->callback)
                     {
                         selectedItem = i;
-                        titleMenu[i]->item.Select(true);
-                        titleMenu[i]->callback(&titleMenu[i]->item);
+                        titleMenu[i]->item->Select(true);
+                        titleMenu[i]->callback(titleMenu[i]->item);
+                        return true;
+                    }
+                    else
+                    {
+                        selectedItem = i;
+                        titleMenu[i]->item->Select(true);
                         return true;
                     }
                 }
+            }
+        }
+    }
+    else if(ev->type == ev_mouseup)
+    {
+        if(ev->data1 == KMSB_LEFT)
+        {
+            if(selectedItem >= 0 && !titleMenu[selectedItem]->callback)
+            {
+                titleMenu[selectedItem]->item->Select(false);
+                selectedItem = -1;
             }
         }
     }

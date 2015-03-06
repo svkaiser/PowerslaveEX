@@ -20,6 +20,14 @@
 #include "renderMain.h"
 #include "menu.h"
 
+//-----------------------------------------------------------------------------
+//
+// kexMenuItem
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexMenuItem, kexObject)
+
 //
 // kexMenuItem::kexMenuItem
 //
@@ -226,4 +234,217 @@ kexMenuItem &kexMenuItem::operator=(const kexMenuItem &item)
     this->bLerping      = item.bLerping;
 
     return *this;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuItemLabel
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexMenuItemLabel, kexMenuItem)
+
+//
+// kexMenuItemLabel::kexMenuItemLabel
+//
+
+kexMenuItemLabel::kexMenuItemLabel(void)
+{
+    this->x             = 0;
+    this->y             = 0;
+    this->scale         = 1;
+    this->bLerping      = false;
+    this->bHighLighted  = false;
+    this->bInteract     = false;
+    this->bDisabled     = false;
+    this->destX         = 0;
+    this->destY         = 0;
+    this->time          = 0;
+    this->highlightTime = 0;
+    this->lerpCallback  = NULL;
+}
+
+//
+// kexMenuItemLabel::kexMenuItemLabel
+//
+
+kexMenuItemLabel::kexMenuItemLabel(const char *label, const float x, const float y, const float scale)
+{
+    this->x             = x;
+    this->y             = y;
+    this->scale         = scale;
+    this->bLerping      = false;
+    this->bInteract     = false;
+    this->destX         = 0;
+    this->destY         = 0;
+    this->time          = 0;
+    this->label         = label;
+    this->highlightTime = 0;
+    this->lerpCallback  = NULL;
+}
+
+//
+// kexMenuItemLabel::~kexMenuItemLabel
+//
+
+kexMenuItemLabel::~kexMenuItemLabel(void)
+{
+}
+
+//
+// kexMenuItemLabel::Tick
+//
+
+void kexMenuItemLabel::Tick(void)
+{
+    if(bLerping)
+    {
+        Move();
+    }
+}
+
+//
+// kexMenuItemLabel::Draw
+//
+
+void kexMenuItemLabel::Draw(void)
+{
+    DrawBigString(label.c_str(), x, y, scale, true, false);
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuItemSlider
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexMenuItemSlider, kexMenuItem)
+#define MAX_MENU_SLIDER_BARS    24
+
+//
+// kexMenuItemSlider::kexMenuItemSlider
+//
+
+kexMenuItemSlider::kexMenuItemSlider(void)
+{
+    this->x             = 0;
+    this->y             = 0;
+    this->scale         = 1;
+    this->bLerping      = false;
+    this->bHighLighted  = false;
+    this->bInteract     = true;
+    this->bDisabled     = false;
+    this->destX         = 0;
+    this->destY         = 0;
+    this->time          = 0;
+    this->highlightTime = 0;
+    this->lerpCallback  = NULL;
+}
+
+//
+// kexMenuItemSlider::kexMenuItemSlider
+//
+
+kexMenuItemSlider::kexMenuItemSlider(const float x, const float y, const float scale, kexCvar &cvar)
+{
+    this->x             = x;
+    this->y             = y;
+    this->scale         = scale;
+    this->bLerping      = false;
+    this->bInteract     = true;
+    this->destX         = 0;
+    this->destY         = 0;
+    this->time          = 0;
+    this->label         = "";
+    this->highlightTime = 0;
+    this->lerpCallback  = NULL;
+    this->cvar          = &cvar;
+}
+
+//
+// kexMenuItemSlider::~kexMenuItemSlider
+//
+
+kexMenuItemSlider::~kexMenuItemSlider(void)
+{
+}
+
+//
+// kexMenuItemSlider::Select
+//
+
+void kexMenuItemSlider::Select(const bool b)
+{
+    kexMenuItem::Select(b);
+}
+
+//
+// kexMenuItemSlider::OnCursor
+//
+
+bool kexMenuItemSlider::OnCursor(void)
+{
+    float width = 2.5f * MAX_MENU_SLIDER_BARS;
+    float height = kexGame::cLocal->BigFont()->StringHeight(label.c_str(), scale, 0) * 0.5f;
+    float sy = y + height;
+    float mx = (float)kex::cInput->MouseX();
+    float my = (float)kex::cInput->MouseY();
+    
+    kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+    
+    return !(mx < (x - width) || my < (sy - height) ||
+             mx > (x + width) || my > (sy + height));
+}
+
+//
+// kexMenuItemSlider::Tick
+//
+
+void kexMenuItemSlider::Tick(void)
+{
+    int bars = 0;
+    
+    kexMenuItem::Tick();
+    
+    if(bSelected)
+    {
+        float width = (kexGame::cLocal->BigFont()->StringWidth(label.c_str(), scale, 0) * 0.5f) * 1.25f;
+        float mx = (float)kex::cInput->MouseX();
+        float my = (float)kex::cInput->MouseY();
+        float val;
+        
+        kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+        
+        val = ((mx-x)/width) * 0.5f + 0.5f;
+        kexMath::Clamp(val, 0, 1);
+        
+        cvar->Set(cvar->GetMax() * val);
+        
+        bars = (int)kexMath::Floor(MAX_MENU_SLIDER_BARS * val);
+        kexMath::Clamp(bars, 0, MAX_MENU_SLIDER_BARS);
+    }
+    else
+    {
+        bars = (int)kexMath::Floor(MAX_MENU_SLIDER_BARS * (cvar->GetFloat() / cvar->GetMax()));
+    }
+    
+    label.Clear();
+    
+    for(int i = 0; i < bars; ++i)
+    {
+        label += "/";
+    }
+    for(int i = bars; i < MAX_MENU_SLIDER_BARS; ++i)
+    {
+        label += ".";
+    }
+}
+
+//
+// kexMenuItemSlider::Draw
+//
+
+void kexMenuItemSlider::Draw(void)
+{
+    DrawBigString(label, x-8, y, scale, true, bHighLighted);
 }
