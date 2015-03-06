@@ -31,6 +31,8 @@ public:
     virtual void            Tick(void);
     virtual void            Remove();
 
+    bool                    CheckActorHeight(const float height);
+
     int                     &Type(void) { return type; }
     mapSector_t             *Sector(void) { return sector; }
     void                    SetSector(mapSector_t *s);
@@ -73,6 +75,7 @@ private:
     bool                    bDirection;
     float                   baseHeight;
     float                   destHeight;
+    float                   raiseHeight;
     float                   currentHeight;
     float                   currentTime;
     doorState_t             state;

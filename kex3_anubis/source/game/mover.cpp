@@ -119,6 +119,30 @@ bool kexMover::PlayerInside(void)
     return false;
 }
 
+//
+// kexMover::CheckActorHeight
+//
+
+bool kexMover::CheckActorHeight(const float height)
+{
+    for(kexActor *actor = sector->actorList.Next();
+        actor != NULL;
+        actor = actor->SectorLink().Next())
+    {
+        if(!(actor->Flags() & AF_SOLID))
+        {
+            continue;
+        }
+        
+        if(actor->Height() > height)
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
 //-----------------------------------------------------------------------------
 //
 // kexDoor
@@ -218,6 +242,13 @@ void kexDoor::Tick(void)
     
     world->MoveSector(sector, true, currentHeight - lastHeight);
     UpdateCeilingOrigin();
+    
+    if(bDirection && state == DS_DOWN &&
+       !CheckActorHeight(currentHeight - destHeight))
+    {
+        state = DS_UP;
+        destHeight = raiseHeight;
+    }
 }
 
 //
@@ -240,6 +271,7 @@ void kexDoor::Spawn(void)
         moveSpeed = 4;
         bDirection = true;
         destHeight = (float)sector->ceilingHeight - lip;
+        raiseHeight = destHeight;
         break;
 
     case 2:
@@ -249,6 +281,7 @@ void kexDoor::Spawn(void)
         bDirection = true;
         destHeight = (float)sector->ceilingHeight - lip;
         sector->objectThinker = this;
+        raiseHeight = destHeight;
         break;
 
     case 7:
@@ -257,6 +290,7 @@ void kexDoor::Spawn(void)
         moveSpeed = 4;
         bDirection = true;
         destHeight = (float)sector->ceilingHeight - lip;
+        raiseHeight = destHeight;
         break;
 
     case 8:
@@ -265,6 +299,7 @@ void kexDoor::Spawn(void)
         lip = 0;
         moveSpeed = 4;
         destHeight = (float)sector->floorHeight;
+        raiseHeight = destHeight;
         break;
 
     default:
