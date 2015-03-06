@@ -55,6 +55,7 @@ private:
     kexPlayer                       *owner;
     unsigned int                    playerFlags;
     byte                            jumpTicks;
+    kexVec3                         oldMovement;
 END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------

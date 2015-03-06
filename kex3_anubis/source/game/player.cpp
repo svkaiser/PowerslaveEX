@@ -243,6 +243,14 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         movement.Clear();
     }
 
+    if(oldMovement.ToVec2().Dot(movement.ToVec2()) < 0)
+    {
+        movement.x = movement.y = 0;
+        velocity.x = velocity.y = 0;
+    }
+
+    oldMovement = movement;
+
     // handle smooth stepping when going down on slopes
     if(oldSector == sector && velocity.z <= 0 && sector->floorFace->plane.IsFacing(velocity.ToYaw()))
     {
