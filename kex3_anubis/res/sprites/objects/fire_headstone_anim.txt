@@ -1,0 +1,124 @@
+fire_headstone_idle
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+            { "objects/fire_headstone", 4,    -13, -115,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 4,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 4,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 3,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 3,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 3,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 2,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 2,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 2,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 0,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 0,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "objects/fire_headstone", 0,    -13, -115,    0 }
+            { "objects/fire_headstone", 1,    -20,  -58,    0 }
+        }
+    }
+}

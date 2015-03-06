@@ -1,0 +1,110 @@
+texture "sprites/monsters/bird.png"
+
+// working\bird\sprite0353.tga
+sprite 0 0 0 60 33
+
+// working\bird\sprite0354.tga
+sprite 1 60 0 32 44
+
+// working\bird\sprite0355.tga
+sprite 2 92 0 64 36
+
+// working\bird\sprite0356.tga
+sprite 3 156 0 64 16
+
+// working\bird\sprite0357.tga
+sprite 4 220 0 32 38
+
+// working\bird\sprite0358.tga
+sprite 5 156 16 64 19
+
+// working\bird\sprite0359.tga
+sprite 6 0 33 32 20
+
+// working\bird\sprite0360.tga
+sprite 7 156 35 64 16
+
+// working\bird\sprite0361.tga
+sprite 8 92 36 36 19
+
+// working\bird\sprite0362.tga
+sprite 9 128 51 64 21
+
+// working\bird\sprite0363.tga
+sprite 10 220 38 32 15
+
+// working\bird\sprite0364.tga
+sprite 11 32 44 32 42
+
+// working\bird\sprite0365.tga
+sprite 12 0 53 32 20
+
+// working\bird\sprite0366.tga
+sprite 13 192 53 48 35
+
+// working\bird\sprite0367.tga
+sprite 14 64 55 36 41
+
+// working\bird\sprite0368.tga
+sprite 15 100 72 56 20
+
+// working\bird\sprite0369.tga
+sprite 16 0 86 48 34
+
+// working\bird\sprite0370.tga
+sprite 17 156 88 48 38
+
+// working\bird\sprite0371.tga
+sprite 18 204 88 48 18
+
+// working\bird\sprite0372.tga
+sprite 19 48 96 60 21
+
+// working\bird\sprite0373.tga
+sprite 20 204 106 52 17
+
+// working\bird\sprite0374.tga
+sprite 21 108 92 24 38
+
+// working\bird\sprite0375.tga
+sprite 22 48 117 44 16
+
+// working\bird\sprite0376.tga
+sprite 23 132 126 60 16
+
+// working\bird\sprite0377.tga
+sprite 24 0 120 44 39
+
+// working\bird\sprite0378.tga
+sprite 25 204 123 44 41
+
+// working\bird\sprite0379.tga
+sprite 26 44 133 56 19
+
+// working\bird\sprite0380.tga
+sprite 27 100 142 64 38
+
+// working\bird\sprite0381.tga
+sprite 28 44 152 44 41
+
+// working\bird\sprite0382.tga
+sprite 29 164 164 60 35
+
+// working\bird\sprite0383.tga
+sprite 30 88 180 64 16
+
+// working\bird\sprite0384.tga
+sprite 31 0 193 64 16
+
+// working\bird\sprite0385.tga
+sprite 32 224 164 20 3
+
+// working\bird\sprite0386.tga
+sprite 33 64 196 60 13
+
+// working\bird\sprite0387.tga
+sprite 34 124 199 52 21
+
+// working\bird\sprite0388.tga
+sprite 35 176 199 60 20
+

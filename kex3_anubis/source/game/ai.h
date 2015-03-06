@@ -24,7 +24,8 @@ typedef enum
     AIS_PAIN,
     AIS_MELEE,
     AIS_RANGE,
-    AIS_DEAD
+    AIS_DEAD,
+    AIS_CUSTOM
 } aiState_t;
 
 typedef enum

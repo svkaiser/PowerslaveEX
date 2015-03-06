@@ -1,0 +1,2401 @@
+bird_fly_retreat
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        action A_ThrustZVelocity(3.0)
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 25,    -21,  -40,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 11,    -15,  -42,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 1,    -14,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 14,    -18,  -41,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 28,    -21,  -41,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 14,    -18,  -41,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 1,    -16,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 11,    -15,  -43,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 25,    -21,  -40,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 11,    -15,  -42,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 1,    -14,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 14,    -18,  -41,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 28,    -21,  -41,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 14,    -18,  -41,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 1,    -16,  -43,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 11,    -15,  -43,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 0,    -29,  -34,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 13,    -23,  -35,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 4,    -15,  -39,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 16,    -25,  -36,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 29,    -31,  -37,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 16,    -21,  -36,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 4,    -16,  -39,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 13,    -20,  -38,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 0,    -29,  -34,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 13,    -23,  -35,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 4,    -15,  -39,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 16,    -25,  -36,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 29,    -31,  -37,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 16,    -21,  -36,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 4,    -16,  -39,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 13,    -20,  -38,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 3,    -32,  -19,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -28,  -22,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -15,  -24,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -35,  -25,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 30,    -32,  -23,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -23,  -25,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -16,  -23,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -23,  -25,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 3,    -32,  -19,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -28,  -22,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -15,  -24,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -35,  -25,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 30,    -32,  -23,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -23,  -25,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -16,  -23,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -23,  -25,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 5,    -31,  -13,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 18,    -28,  -12,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 8,    -16,  -15,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 20,    -34,  -14,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 31,    -34,  -15,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 20,    -18,  -14,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 8,    -17,  -14,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 18,    -16,  -15,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 5,    -31,  -13,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 18,    -28,  -12,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 8,    -16,  -15,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 20,    -34,  -14,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 31,    -34,  -15,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 20,    -18,  -14,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 8,    -17,  -14,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 18,    -16,  -15,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 7,    -31,  -17,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 22,    -27,  -15,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 10,    -14,  -16,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 23,    -34,  -15,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 33,    -29,  -17,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 23,    -24,  -15,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 10,    -17,  -15,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 22,    -14,  -17,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 7,    -31,  -17,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 22,    -27,  -15,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 10,    -14,  -16,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 23,    -34,  -15,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 33,    -29,  -17,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 23,    -24,  -15,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 10,    -17,  -15,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 22,    -14,  -17,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 9,    -31,  -26,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 34,    -28,  -23,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 12,    -14,  -24,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 26,    -30,  -21,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 35,    -30,  -25,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 26,    -22,  -22,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 12,    -16,  -24,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 34,    -20,  -25,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        action A_BirdRetreat()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 9,    -31,  -26,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 34,    -28,  -23,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 12,    -14,  -24,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 26,    -30,  -21,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 35,    -30,  -25,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 26,    -22,  -22,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 12,    -16,  -24,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 34,    -20,  -25,    1 }
+            }
+        }
+    }
+}
+
+bird_fly_calm
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        action A_BirdWander()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 3,    -32,  -17,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -26,  -21,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -13,  -20,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -32,  -22,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 30,    -31,  -16,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -25,  -22,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -18,  -20,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -27,  -21,    1 }
+            }
+        }
+
+    }
+
+}
+
+bird_attack
+{
+    // frames:    7
+    frame
+    {
+        // ##000    0    0
+        delay 8
+        goto "monsters/bird_fly_retreat"
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 2,    -31,  -45,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -15,  -44,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -10,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -18,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 27,    -32,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -25,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -11,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -30,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 2,    -31,  -45,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -15,  -44,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -10,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -18,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 27,    -32,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -25,  -43,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -11,  -43,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -30,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 2,    -31,  -45,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -15,  -44,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -10,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -18,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 27,    -32,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -25,  -43,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -11,  -43,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -30,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 2,    -31,  -45,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -15,  -44,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -10,  -43,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -18,  -43,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 27,    -32,  -43,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -25,  -43,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -11,  -43,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -30,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 2,    -31,  -45,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -15,  -44,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -10,  -43,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -18,  -43,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 27,    -32,  -43,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -25,  -43,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -11,  -43,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -30,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 2,    -31,  -45,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -15,  -44,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -10,  -43,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -18,  -43,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 27,    -32,  -43,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -25,  -43,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -11,  -43,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -30,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 2,    -31,  -45,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -15,  -44,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -10,  -43,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -18,  -43,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 27,    -32,  -43,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 24,    -25,  -43,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 21,    -11,  -43,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 17,    -30,  -43,    1 }
+            }
+        }
+
+    }
+
+}
+
+bird_fly_chase
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 25,    -21,  -41,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 11,    -14,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 1,    -13,  -44,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 14,    -17,  -42,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 28,    -21,  -41,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 14,    -19,  -42,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 1,    -17,  -44,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 11,    -17,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001   68    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 0,    -29,  -35,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 13,    -22,  -38,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 4,    -13,  -40,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 16,    -24,  -36,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 29,    -31,  -37,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 16,    -22,  -36,    1 }
+            }
+        }
+        // ##001   68    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 4,    -17,  -39,    1 }
+            }
+        }
+        // ##001   68    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 13,    -22,  -37,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 3,    -31,  -20,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -28,  -25,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -13,  -25,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -36,  -26,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 30,    -31,  -20,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -25,  -25,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -18,  -23,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -25,  -24,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 5,    -31,  -14,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 18,    -26,  -15,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 8,    -15,  -15,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 20,    -34,  -15,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 31,    -33,  -14,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 20,    -19,  -14,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 8,    -19,  -14,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 18,    -18,  -14,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004   67    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 7,    -31,  -18,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 22,    -26,  -18,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 10,    -14,  -17,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 23,    -35,  -16,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 33,    -29,  -16,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 23,    -26,  -15,    1 }
+            }
+        }
+        // ##004   67    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 10,    -19,  -16,    1 }
+            }
+        }
+        // ##004   67    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 22,    -16,  -16,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 9,    -31,  -26,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 34,    -27,  -25,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 12,    -14,  -26,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 26,    -32,  -23,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 35,    -30,  -24,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 26,    -24,  -22,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 12,    -18,  -24,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 34,    -22,  -24,    1 }
+            }
+        }
+
+    }
+
+}
+
+bird_feather
+{
+    // frames:   15
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/bird", 32,    -29,  -35,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "monsters/bird", 32,    -27,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "monsters/bird", 32,    -25,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "monsters/bird", 32,    -23,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "monsters/bird", 32,    -21,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "monsters/bird", 32,    -18,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "monsters/bird", 32,    -14,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "monsters/bird", 32,     -9,  -34,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        action A_ThrustZVelocity(-0.5)
+        action A_FeatherDrop()
+        sprites
+        {
+            { "monsters/bird", 32,      1,  -34,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "monsters/bird", 32,     -1,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "monsters/bird", 32,     -4,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "monsters/bird", 32,     -7,  -31,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "monsters/bird", 32,    -13,  -31,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "monsters/bird", 32,    -21,  -31,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        action A_ThrustZVelocity(-0.5)
+        action A_FeatherDrop()
+        sprites
+        {
+            { "monsters/bird", 32,    -25,  -32,    0 }
+        }
+
+    }
+
+}
+
+bird_death
+{
+    frame
+    {
+        // ##000    0    0
+        delay 2
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 25,    -21,  -41,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 11,    -14,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 1,    -13,  -44,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 14,    -17,  -42,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 28,    -21,  -41,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 14,    -19,  -42,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 1,    -17,  -44,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 11,    -17,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001   68    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 0,    -29,  -35,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 13,    -22,  -38,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 4,    -13,  -40,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 16,    -24,  -36,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 29,    -31,  -37,    0 }
+            }
+        }
+        // ##001   68    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 16,    -22,  -36,    1 }
+            }
+        }
+        // ##001   68    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 4,    -17,  -39,    1 }
+            }
+        }
+        // ##001   68    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 13,    -22,  -37,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 3,    -31,  -20,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -28,  -25,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -13,  -25,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -36,  -26,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 30,    -31,  -20,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 19,    -25,  -25,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 6,    -18,  -23,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 15,    -25,  -24,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 5,    -31,  -14,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 18,    -26,  -15,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 8,    -15,  -15,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 20,    -34,  -15,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 31,    -33,  -14,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 20,    -19,  -14,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 8,    -19,  -14,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 18,    -18,  -14,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004   67    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 7,    -31,  -18,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 22,    -26,  -18,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 10,    -14,  -17,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 23,    -35,  -16,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 33,    -29,  -16,    0 }
+            }
+        }
+        // ##004   67    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 23,    -26,  -15,    1 }
+            }
+        }
+        // ##004   67    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 10,    -19,  -16,    1 }
+            }
+        }
+        // ##004   67    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 22,    -16,  -16,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bird", 9,    -31,  -26,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bird", 34,    -27,  -25,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bird", 12,    -14,  -26,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bird", 26,    -32,  -23,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bird", 35,    -30,  -24,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bird", 26,    -24,  -22,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bird", 12,    -18,  -24,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bird", 34,    -22,  -24,    1 }
+            }
+        }
+
+    }
+    
+    frame
+    {
+        // ##000    0    0
+        action A_PlayLocalSound("sounds/birddeath.wav")
+        action A_BirdDeath()
+        action A_Destroy()
+    }
+}

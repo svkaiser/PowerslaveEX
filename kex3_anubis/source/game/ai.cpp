@@ -303,6 +303,11 @@ void kexAI::ChangeStateFromAnim(void)
     else if(anim == spawnAnim && state != AIS_IDLE)     state = AIS_IDLE;
     else if(anim == meleeAnim && state != AIS_MELEE)    state = AIS_MELEE;
     else if(anim == painAnim  && state != AIS_PAIN)     state = AIS_PAIN;
+    else if(anim != chaseAnim && anim != spawnAnim &&
+            anim != meleeAnim && anim != painAnim)
+    {
+        state = AIS_CUSTOM;
+    }
 }
 
 //
@@ -318,6 +323,7 @@ void kexAI::StartChasing(void)
     
     state = AIS_CHASE;
     timeBeforeTurning = kexRand::Max(8);
+    velocity.Clear();
 }
 
 //
@@ -410,7 +416,7 @@ bool kexAI::CheckMeleeRange(void)
     kexVec3 org;
     kexActor *targ;
 
-    if(!target || !meleeAnim || RandomDecision(30))
+    if(!target || !meleeAnim)
     {
         return false;
     }
@@ -528,13 +534,22 @@ bool kexAI::SetDesiredDirection(const int dir)
 
 float kexAI::GetTargetHeightDifference(void)
 {
+    float h;
+
     if(target == NULL || !target->InstanceOf(&kexActor::info))
     {
         return 0;
     }
 
+    h = height;
+
+    if(h > 64)
+    {
+        h *= 0.5f;
+    }
+
     float targHeight = static_cast<kexActor*>(target)->Height();
-    return ((origin.z + height) - target->Origin().z) - targHeight;
+    return ((origin.z + h) - target->Origin().z) - targHeight;
 }
 
 //

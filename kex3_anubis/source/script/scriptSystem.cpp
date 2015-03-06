@@ -290,9 +290,17 @@ void kexScriptManager::GetArgTypesFromFunction(kexStrList &list, asIScriptFuncti
     
     for(unsigned int i = 0; i < function->GetParamCount(); ++i)
     {
+        int idx;
+
         strTemp = function->GetVarDecl(i);
-        strTemp.Remove(strTemp.IndexOf(" "), strTemp.Length());
+        idx = strTemp.IndexOf("const");
+
+        if(idx != -1)
+        {
+            strTemp.Remove(idx, strTemp.IndexOf(" ")+1);
+        }
         
+        strTemp.Remove(strTemp.IndexOf(" "), strTemp.Length());
         list.Push(kexStr(strTemp));
     }
 }

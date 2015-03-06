@@ -1,0 +1,34 @@
+AI_Bird 3
+{
+    classname               "kexAI"
+    radius                  16
+    height                  128
+    stepHeight              48
+    scale                   1.0
+    health                  10
+    moveSpeed               8
+    spawnAnim               "monsters/bird_fly_calm"
+    chaseAnim               "monsters/bird_fly_chase"
+    meleeAnim               "monsters/bird_attack"
+    deathAnim               "monsters/bird_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    painChance              0
+    flying                  1
+    gravity                 0.0
+    sightSound              "sounds/birdact.wav"
+}
+
+Obj_Bird_Feathers -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "monsters/bird_feather"
+    moveable                1
+    gravity                 0
+    randomizeFrames         1
+}

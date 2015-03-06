@@ -16,6 +16,15 @@
 //
 
 //
+// A_ThrustZVelocity
+//
+
+void A_ThrustZVelocity(kActor @actor, const float speed)
+{
+    actor.Velocity().z = speed;
+}
+
+//
 // A_AnubisDeath
 //
 
@@ -115,5 +124,85 @@ void A_WaspDeath(kActor @actor)
     else
     {
         actor.PlaySound("sounds/waspdeath02.wav");
+    }
+}
+
+//
+// A_BirdDeath
+//
+
+void A_BirdDeath(kActor @actor)
+{
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z;
+    kActor @gib = Game.SpawnActor("Fx_Gibs01", x, y, z, actor.Yaw(), actor.SectorIndex());
+    
+    if(!(gib is null))
+    {
+        gib.Scale() = actor.Scale();
+    }
+    
+    for(int i = 0; i < 7; ++i)
+    {
+        float ix = x + (Math::RandCFloat() * 64);
+        float iy = y + (Math::RandCFloat() * 64);
+        float iz = z + (Math::RandCFloat() * 16);
+        
+        Game.SpawnActor("Obj_Bird_Feathers", ix, iy, iz, 0, actor.SectorIndex());
+    }
+}
+
+//
+// A_FeatherDrop
+//
+
+void A_FeatherDrop(kActor @actor)
+{
+    if((actor.Origin().z + actor.Velocity().z) <= actor.FloorHeight()+1.024f)
+    {
+        actor.Remove();
+    }
+}
+
+//
+// A_BirdWander
+//
+
+void A_BirdWander(kActor @actor)
+{
+    if((actor.GameTicks() & 512) != 0)
+    {
+        actor.Yaw() += Math::Deg2Rad(1.5f);
+    }
+    else
+    {
+        actor.Yaw() -= Math::Deg2Rad(1.5f);
+    }
+    
+    actor.Velocity().x = Math::Sin(actor.Yaw()) * 2.0f;
+    actor.Velocity().y = Math::Cos(actor.Yaw()) * 2.0f;
+}
+
+//
+// A_BirdRetreat
+//
+
+void A_BirdRetreat(kActor @actor)
+{
+    float minHeight;
+    
+    actor.Yaw() += Math::Deg2Rad(4.0f);
+    
+    actor.Velocity().x = Math::Sin(actor.Yaw()) * 4.0f;
+    actor.Velocity().y = Math::Cos(actor.Yaw()) * 4.0f;
+    
+    minHeight = (actor.CeilingHeight() - actor.Height()) - 1.024f;
+    
+    if(actor.Velocity().z < 3.0f || (actor.Origin().z + actor.Velocity().z) >= minHeight)
+    {
+        actor.ChangeAnim("monsters/bird_fly_calm");
+        actor.Velocity().Clear();
+        actor.SetTarget(null);
     }
 }
