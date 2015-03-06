@@ -24,6 +24,7 @@
 bool kexRenderScene::bPrintStats = false;
 bool kexRenderScene::bShowPortals = false;
 bool kexRenderScene::bShowWaterPortals = false;
+bool kexRenderScene::bShowCollision = false;
 
 //
 // statscene
@@ -65,6 +66,20 @@ COMMAND(showwaterportals)
     }
     
     kexRenderScene::bShowWaterPortals ^= 1;
+}
+
+//
+// showcollision
+//
+
+COMMAND(showcollision)
+{
+    if(kex::cCommands->GetArgc() < 1)
+    {
+        return;
+    }
+    
+    kexRenderScene::bShowCollision ^= 1;
 }
 
 //
@@ -694,6 +709,14 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
             {
                 vl->DrawElements();
             }
+        }
+        
+        if(bShowCollision && actor->Flags() & AF_SOLID)
+        {
+            kexRender::cUtils->DrawRadius(org.x, org.y, org.z - (actor->Height()*0.5f),
+                                          actor->Radius(), actor->Height(), 255, 128, 64);
+            kexRender::cUtils->DrawSphere(org.x, org.y, org.z + actor->StepHeight(),
+                                          actor->Radius(), 255, 32, 32);
         }
     }
     

@@ -34,6 +34,7 @@ public:
     static bool             bPrintStats;
     static bool             bShowPortals;
     static bool             bShowWaterPortals;
+    static bool             bShowCollision;
 
 private:
     void                    Prepare(void);
