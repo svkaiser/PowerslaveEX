@@ -25,21 +25,28 @@ void A_ThrustZVelocity(kActor @actor, const float speed)
 }
 
 //
-// A_AnubisDeath
+// A_GibDeath
 //
 
-void A_AnubisDeath(kActor @actor)
+void A_GibDeath(kActor @actor, const float offset)
 {
     float x = actor.Origin().x;
     float y = actor.Origin().y;
-    float z = actor.Origin().z + 64.0f;
+    float z = actor.Origin().z + offset;
     kActor @gib = Game.SpawnActor("Fx_Gibs01", x, y, z, actor.Yaw(), actor.SectorIndex());
     
     if(!(gib is null))
     {
         gib.Scale() = actor.Scale();
     }
-    
+}
+
+//
+// A_AnubisDeath
+//
+
+void A_AnubisDeath(kActor @actor)
+{
     if((Math::Rand() & 1) == 0)
     {
         actor.PlaySound("sounds/anubisdeath01.wav");
@@ -83,40 +90,11 @@ void A_SpiderCheckGround(kActor @actor)
 }
 
 //
-// A_SpiderDeath
-//
-
-void A_SpiderDeath(kActor @actor)
-{
-    float x = actor.Origin().x;
-    float y = actor.Origin().y;
-    float z = actor.Origin().z;
-    kActor @gib = Game.SpawnActor("Fx_Gibs01", x, y, z, actor.Yaw(), actor.SectorIndex());
-    
-    if(!(gib is null))
-    {
-        gib.Scale() = actor.Scale();
-    }
-    
-    actor.PlaySound("sounds/spiddeath.wav");
-}
-
-//
 // A_WaspDeath
 //
 
 void A_WaspDeath(kActor @actor)
 {
-    float x = actor.Origin().x;
-    float y = actor.Origin().y;
-    float z = actor.Origin().z;
-    kActor @gib = Game.SpawnActor("Fx_Gibs01", x, y, z, actor.Yaw(), actor.SectorIndex());
-    
-    if(!(gib is null))
-    {
-        gib.Scale() = actor.Scale();
-    }
-    
     if((Math::Rand() & 1) == 0)
     {
         actor.PlaySound("sounds/waspdeath01.wav");
@@ -136,12 +114,6 @@ void A_BirdDeath(kActor @actor)
     float x = actor.Origin().x;
     float y = actor.Origin().y;
     float z = actor.Origin().z;
-    kActor @gib = Game.SpawnActor("Fx_Gibs01", x, y, z, actor.Yaw(), actor.SectorIndex());
-    
-    if(!(gib is null))
-    {
-        gib.Scale() = actor.Scale();
-    }
     
     for(int i = 0; i < 7; ++i)
     {

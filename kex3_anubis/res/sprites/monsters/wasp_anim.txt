@@ -1108,7 +1108,7 @@ wasp_death
     {
         // ##000    0    0
         action A_FaceTarget()
-        action A_Destroy()
+        action A_GibDeath(0.0)
         action A_WaspDeath()
         action A_TossActor("Obj_Wasp_Gib01", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Wasp_Gib02", 0, 0, 32, 8, 8, 4, 16)
@@ -1118,6 +1118,7 @@ wasp_death
         action A_TossActor("Obj_Wasp_Gib04", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Wasp_Gib05", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Wasp_Gib05", 0, 0, 32, 8, 8, 4, 16)
+        action A_Destroy()
     }
 }
 

@@ -130,7 +130,6 @@ void kexGameObject::PlaySound(const char *snd)
         pan = kexMath::Rad2Deg(ang.Diff(listener->Yaw())) / 1.40625f;
     }
 
-    volume *= kexSound::cvarVolume.GetFloat();
     kexMath::Clamp(volume, 0, 128);
     kexMath::Clamp(pan, -128, 128);
 

@@ -303,7 +303,15 @@ void kexProjectile::OnImpact(kexActor *contactActor)
         contactActor->InflictDamage(this, damage);
     }
 
-    ChangeAnim(this->deathAnim);
+    if(flags & AF_INWATER && deathWaterAnim)
+    {
+        ChangeAnim(deathWaterAnim);
+    }
+    else
+    {
+        ChangeAnim(deathAnim);
+    }
+
     SetHomingTarget(NULL);
 
     flags &= ~(AF_MOVEABLE|AF_SOLID);

@@ -459,6 +459,15 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
 }
 
 //
+// kexGameLocal::PlaySound
+//
+
+void kexGameLocal::PlaySound(const char *name)
+{
+    kex::cSound->Play((void*)name, 128, 0);
+}
+
+//
 // kexGameLocal::ConstructObject
 //
 

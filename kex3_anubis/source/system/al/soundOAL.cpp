@@ -621,7 +621,7 @@ void kexSoundOAL::Play(void *data, const int volume, const int sep, kexObject *r
     }
 
     src->wave = wavFile;
-    src->volume = (float)volume / 128.0f;
+    src->volume = ((float)volume / 128.0f) * cvarVolume.GetFloat();
     src->pan = (float)sep;
     src->pitch = 1;
     src->refObject = ref;

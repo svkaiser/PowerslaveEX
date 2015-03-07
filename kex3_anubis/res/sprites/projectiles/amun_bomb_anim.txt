@@ -21,3 +21,14 @@ amun_bomb_death
         delay 1
     }
 }
+
+amun_bomb_death_water
+{
+    frame
+    {
+        action A_Spawn("Fx_Explosion01_Water", 0, 0, 32)
+        action A_RadialBlast(512, 128)
+        action A_Destroy()
+        delay 1
+    }
+}

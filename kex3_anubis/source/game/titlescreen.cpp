@@ -499,6 +499,7 @@ bool kexTitleScreen::ProcessInput(inputEvent_t *ev)
                         selectedItem = i;
                         titleMenu[i]->item->Select(true);
                         titleMenu[i]->callback(titleMenu[i]->item);
+                        kexGame::cLocal->PlaySound("sounds/switch.wav");
                         return true;
                     }
                     else

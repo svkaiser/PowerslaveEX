@@ -87,6 +87,7 @@ kexAI::kexAI(void)
     this->aiFlags = 0;
     this->painChance = 0xff;
     this->moveSpeed = 8;
+    this->meleeExtraDist = 0;
 
     for(int i = 0; i < 4; ++i)
     {
@@ -422,7 +423,7 @@ bool kexAI::CheckMeleeRange(void)
     }
 
     targ = static_cast<kexActor*>(target);
-    r = radius + targ->Radius();
+    r = (radius + targ->Radius()) + meleeExtraDist;
     org = target->Origin();
 
     if(aiFlags & AIF_FLYING)
@@ -534,22 +535,22 @@ bool kexAI::SetDesiredDirection(const int dir)
 
 float kexAI::GetTargetHeightDifference(void)
 {
-    float h;
+    float heightLevel;
 
     if(target == NULL || !target->InstanceOf(&kexActor::info))
     {
         return 0;
     }
 
-    h = height;
+    float targHeight = static_cast<kexActor*>(target)->Height();
+    heightLevel = ((origin.z + height) - target->Origin().z);
 
-    if(h > 64)
+    if(aiFlags & AIF_FLYADJUSTVIEWLEVEL)
     {
-        h *= 0.5f;
+        return heightLevel - ((targHeight * 0.5f) + stepHeight);
     }
 
-    float targHeight = static_cast<kexActor*>(target)->Height();
-    return ((origin.z + h) - target->Origin().z) - targHeight;
+    return heightLevel - targHeight;
 }
 
 //
@@ -946,6 +947,7 @@ void kexAI::Spawn(void)
 
         definition->GetInt("painChance", painChance, 0xff);
         definition->GetFloat("moveSpeed", moveSpeed, 8);
+        definition->GetFloat("meleeExtraDist", meleeExtraDist);
         definition->GetString("painSound", painSound);
         definition->GetString("sightSound", sightSound);
 
@@ -953,6 +955,7 @@ void kexAI::Spawn(void)
         if(definition->GetBool("alwaysRangeAttack"))    aiFlags |= AIF_ALWAYSRANGEATTACK;
         if(definition->GetBool("flying"))               aiFlags |= AIF_FLYING;
         if(definition->GetBool("retreatAfterMelee"))    aiFlags |= AIF_RETREATAFTERMELEE;
+        if(definition->GetBool("flyAdjustViewLevel"))   aiFlags |= AIF_FLYADJUSTVIEWLEVEL;
         
         if(definition->GetString("chaseAnim", animName))
         {

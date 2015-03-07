@@ -7,6 +7,7 @@ Proj_AmunBomb 40
     scale                   0.5
     spawnAnim               "projectiles/amun_bomb_idle"
     deathAnim               "projectiles/amun_bomb_death"
+    deathWaterAnim          "projectiles/amun_bomb_death_water"
     fullbright              1
     moveable                1
 }

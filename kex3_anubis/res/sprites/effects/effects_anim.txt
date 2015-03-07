@@ -916,7 +916,6 @@ magicPuff
 
 explosion01
 {
-    // frames:   22
     frame
     {
         // ##000   55    0
@@ -1146,6 +1145,235 @@ explosion01
             { "effects/explosion01", 17,    -40,  -80,    0 }
             { "effects/explosion01", 18,     24,  -80,    0 }
         }
+    }
+
+    frame
+    {
+        // ##021    0    0 (no groups)
+        delay 1
+        action A_Destroy()
+    }
+}
+
+explosion01_water
+{
+    // frames:   22
+    frame
+    {
+        // ##000   57    0 (no groups)
+        action A_PlayLocalSound("sounds/explode02.wav")
+        delay 1
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "effects/explosion01", 34,    -16,  -14,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "effects/explosion01", 19,    -41,  -33,    0 }
+            { "effects/explosion01", 20,     23,  -33,    0 }
+            { "effects/explosion01", 21,    -41,   31,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "effects/explosion01", 19,    -41,  -33,    0 }
+            { "effects/explosion01", 20,     23,  -33,    0 }
+            { "effects/explosion01", 21,    -41,   31,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "effects/explosion01", 22,    -58,  -46,    0 }
+            { "effects/explosion01", 23,      6,  -46,    0 }
+            { "effects/explosion01", 24,    -58,   18,    0 }
+            { "effects/explosion01", 25,      6,   18,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "effects/explosion01", 22,    -58,  -46,    0 }
+            { "effects/explosion01", 23,      6,  -46,    0 }
+            { "effects/explosion01", 24,    -58,   18,    0 }
+            { "effects/explosion01", 25,      6,   18,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "effects/explosion01", 26,    -57,  -56,    0 }
+            { "effects/explosion01", 27,      7,  -56,    0 }
+            { "effects/explosion01", 28,    -57,    8,    0 }
+            { "effects/explosion01", 29,      7,    8,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "effects/explosion01", 26,    -57,  -56,    0 }
+            { "effects/explosion01", 27,      7,  -56,    0 }
+            { "effects/explosion01", 28,    -57,    8,    0 }
+            { "effects/explosion01", 29,      7,    8,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "effects/explosion01", 26,    -57,  -57,    0 }
+            { "effects/explosion01", 27,      7,  -57,    0 }
+            { "effects/explosion01", 28,    -57,    7,    0 }
+            { "effects/explosion01", 29,      7,    7,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "effects/explosion01", 30,    -49,  -62,    0 }
+            { "effects/explosion01", 31,     15,  -62,    0 }
+            { "effects/explosion01", 32,    -49,    2,    0 }
+            { "effects/explosion01", 33,     15,    2,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "effects/explosion01", 30,    -49,  -62,    0 }
+            { "effects/explosion01", 31,     15,  -62,    0 }
+            { "effects/explosion01", 32,    -49,    2,    0 }
+            { "effects/explosion01", 33,     15,    2,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "effects/explosion01", 35,    -42,  -78,    0 }
+            { "effects/explosion01", 36,     22,  -78,    0 }
+            { "effects/explosion01", 37,    -42,  -14,    0 }
+            { "effects/explosion01", 38,     22,  -14,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "effects/explosion01", 35,    -42,  -79,    0 }
+            { "effects/explosion01", 36,     22,  -79,    0 }
+            { "effects/explosion01", 37,    -42,  -15,    0 }
+            { "effects/explosion01", 38,     22,  -15,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "effects/explosion01", 39,    -16,  -72,    0 }
+            { "effects/explosion01", 40,    -16,   -8,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "effects/explosion01", 39,    -16,  -75,    0 }
+            { "effects/explosion01", 40,    -16,  -11,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "effects/explosion01", 39,    -16,  -79,    0 }
+            { "effects/explosion01", 40,    -16,  -15,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "effects/explosion01", 39,    -16,  -84,    0 }
+            { "effects/explosion01", 40,    -16,  -20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "effects/explosion01", 39,    -16,  -89,    0 }
+            { "effects/explosion01", 40,    -16,  -25,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "effects/explosion01", 39,    -16,  -89,    0 }
+            { "effects/explosion01", 40,    -16,  -25,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##019    0    0 (no groups)
+        delay 1
+    }
+
+    frame
+    {
+        // ##020    0    0 (no groups)
+        delay 1
     }
 
     frame

@@ -1161,7 +1161,7 @@ void kexCModel::AdvanceActorToSector(void)
     
     // clamp z-axis to floor and ceiling
     float floorz = GetFloorHeight(end, sector, true);
-    float ceilingz = GetCeilingHeight(end, sector, true);
+    float ceilingz = GetCeilingHeight(end, sector, !(moveActor->Flags() & AF_NOEXITWATER));
     
     bWater2 = (sector->flags & SF_WATER) != 0;
 
@@ -1173,7 +1173,10 @@ void kexCModel::AdvanceActorToSector(void)
             end.z = floorz;
             moveDir.z = 0;
         }
-        
+    }
+
+    if(!(bWater1 ^ bWater2) || moveActor->Flags() & AF_NOEXITWATER)
+    {
         if(ceilingz - end.z < actorHeight)
         {
             end.z = ceilingz - actorHeight;

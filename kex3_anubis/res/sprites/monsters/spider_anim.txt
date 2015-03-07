@@ -1756,8 +1756,8 @@ spider_death
     frame
     {
         // ##000    0    0
-        action A_Destroy()
-        action A_SpiderDeath()
+        action A_GibDeath(0.0)
+        action A_PlayLocalSound("sounds/spiddeath.wav")
         action A_TossActor("Obj_Spider_Gib01", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Spider_Gib02", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Spider_Gib02", 0, 0, 32, 8, 8, 4, 16)
@@ -1767,6 +1767,7 @@ spider_death
         action A_TossActor("Obj_Spider_Gib03", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Spider_Gib04", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Spider_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_Destroy()
         sprites
         {
             { "monsters/spider", 18,    -25,  -46,    0 }

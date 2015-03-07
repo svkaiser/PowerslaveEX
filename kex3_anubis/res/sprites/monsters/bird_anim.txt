@@ -2394,6 +2394,7 @@ bird_death
     frame
     {
         // ##000    0    0
+        action A_GibDeath(0.0)
         action A_PlayLocalSound("sounds/birddeath.wav")
         action A_BirdDeath()
         action A_Destroy()

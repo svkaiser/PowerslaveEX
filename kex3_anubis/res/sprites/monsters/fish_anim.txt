@@ -1,0 +1,1646 @@
+fish_gibs1
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/fish", 8,    -18,  -29,    0 }
+        }
+
+    }
+
+}
+
+fish_gibs2
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/fish", 9,    -24,  -40,    0 }
+        }
+
+    }
+
+}
+
+fish_gibs3
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/fish", 11,    -23,  -37,    0 }
+        }
+
+    }
+
+}
+
+fish_chase
+{
+    // frames:    8
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 1,    -16,  -58,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -19,  -57,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 15,    -27,  -61,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -25,  -60,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -14,  -62,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -31,  -59,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 15,    -29,  -61,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -18,  -57,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 1,    -15,  -58,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -19,  -57,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 15,    -27,  -61,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -25,  -60,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -15,  -62,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -31,  -59,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 15,    -29,  -61,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -18,  -57,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 1,    -14,  -58,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -19,  -57,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -27,  -60,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -25,  -60,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -16,  -62,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -31,  -59,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -32,  -60,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -18,  -57,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 4,    -14,  -58,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -19,  -57,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -27,  -60,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -19,  -59,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -18,  -62,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -23,  -59,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -32,  -60,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -18,  -57,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 7,    -13,  -58,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -24,  -59,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -25,  -60,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -19,  -59,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -21,  -62,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -23,  -59,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -30,  -60,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -29,  -59,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 7,    -14,  -58,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -24,  -59,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -25,  -60,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -19,  -59,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -20,  -62,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -23,  -59,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 18,    -30,  -60,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -29,  -59,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 4,    -17,  -58,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -24,  -59,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -28,  -60,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -19,  -59,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -19,  -62,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -23,  -59,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -32,  -60,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -29,  -59,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 7,    -19,  -57,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -24,  -59,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -28,  -60,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -19,  -59,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -18,  -62,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -23,  -59,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -32,  -60,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -29,  -59,    1 }
+            }
+        }
+    }
+}
+
+fish_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 4,    -16,  -58,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -19,  -57,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -29,  -59,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -22,  -60,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -16,  -61,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -22,  -60,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -35,  -60,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 10,    -17,  -59,    1 }
+            }
+        }
+    }
+}
+
+fish_attack
+{
+    // frames:   14
+    frame
+    {
+        // ##000    0    0
+        action A_ThrustZVelocity(0.0)
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 4,    -17,  -59,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -26,  -59,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -30,  -59,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -19,  -60,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -15,  -61,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -22,  -60,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -33,  -61,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -26,  -59,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 4,    -16,  -59,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 17,    -24,  -59,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -30,  -59,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -19,  -60,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -16,  -61,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -22,  -60,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -33,  -61,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -26,  -59,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##002   92    0
+        action A_PlayLocalSound("sounds/fishatk.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 5,    -15,  -58,    0 }
+            }
+        }
+        // ##002   92    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 17,    -24,  -59,    0 }
+            }
+        }
+        // ##002   92    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 21,    -28,  -60,    0 }
+            }
+        }
+        // ##002   92    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 3,    -18,  -60,    0 }
+            }
+        }
+        // ##002   92    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -15,  -62,    0 }
+            }
+        }
+        // ##002   92    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 3,    -21,  -59,    1 }
+            }
+        }
+        // ##002   92    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 21,    -33,  -61,    1 }
+            }
+        }
+        // ##002   92    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 17,    -27,  -61,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 5,    -14,  -58,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 19,    -23,  -61,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 21,    -28,  -60,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 3,    -19,  -60,    0 }
+            }
+        }
+        // ##003    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -18,  -62,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 3,    -21,  -59,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 21,    -33,  -61,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 17,    -27,  -60,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##004    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 14,    -16,  -59,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 19,    -24,  -62,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 0,    -28,  -61,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 6,    -20,  -62,    0 }
+            }
+        }
+        // ##004    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -17,  -61,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 6,    -22,  -61,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 0,    -34,  -62,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 19,    -27,  -62,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##005    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 14,    -15,  -59,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -26,  -61,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 0,    -28,  -61,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 6,    -21,  -62,    0 }
+            }
+        }
+        // ##005    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -16,  -61,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 6,    -21,  -61,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 0,    -33,  -63,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 19,    -27,  -62,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 7,     -7,  -56,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -27,  -60,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -29,  -61,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -20,  -62,    0 }
+            }
+        }
+        // ##006    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -16,  -61,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -22,  -60,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -33,  -62,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -25,  -59,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 7,     -8,  -56,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 17,    -26,  -58,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -28,  -61,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -20,  -62,    0 }
+            }
+        }
+        // ##007    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -16,  -61,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -21,  -60,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 16,    -33,  -61,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -25,  -59,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##008   92    0
+        action A_PlayLocalSound("sounds/fishatk.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 12,    -11,  -57,    0 }
+            }
+        }
+        // ##008   92    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 17,    -26,  -58,    0 }
+            }
+        }
+        // ##008   92    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 21,    -26,  -62,    0 }
+            }
+        }
+        // ##008   92    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 3,    -20,  -61,    0 }
+            }
+        }
+        // ##008    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -18,  -61,    1 }
+            }
+        }
+        // ##008   92    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 3,    -19,  -59,    1 }
+            }
+        }
+        // ##008   92    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 21,    -33,  -62,    1 }
+            }
+        }
+        // ##008   92    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 17,    -27,  -60,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 12,    -13,  -57,    0 }
+            }
+        }
+        // ##009    0  128
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 19,    -25,  -59,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 21,    -27,  -62,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 3,    -20,  -61,    0 }
+            }
+        }
+        // ##009   92  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -14,  -61,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 3,    -19,  -59,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 21,    -35,  -62,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 17,    -27,  -60,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##010    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 14,    -14,  -59,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 19,    -25,  -59,    0 }
+            }
+        }
+        // ##010    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 0,    -27,  -60,    0 }
+            }
+        }
+        // ##010    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 6,    -21,  -62,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -14,  -61,    0 }
+            }
+        }
+        // ##010    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 6,    -19,  -61,    1 }
+            }
+        }
+        // ##010    0  128
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 0,    -37,  -60,    1 }
+            }
+        }
+        // ##010    0  128
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 19,    -25,  -60,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##011    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 14,    -15,  -59,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -25,  -58,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 0,    -27,  -60,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 6,    -21,  -62,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -14,  -61,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 6,    -21,  -61,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 0,    -37,  -60,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 19,    -25,  -60,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##012    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 1,    -21,  -56,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -25,  -57,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 15,    -29,  -62,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -20,  -61,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -15,  -58,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -21,  -59,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 15,    -32,  -62,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -25,  -59,    1 }
+            }
+        }
+    }
+
+    frame
+    {
+        // ##013    0    0
+        action A_CheckMelee("monsters/fish_chase", 16.0)
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/fish", 1,    -19,  -56,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -24,  -56,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/fish", 15,    -29,  -62,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -20,  -61,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/fish", 2,    -15,  -61,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/fish", 20,    -21,  -59,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/fish", 15,    -32,  -62,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/fish", 13,    -25,  -59,    1 }
+            }
+        }
+    }
+}
+
+fish_death
+{
+    frame
+    {
+        action A_GibDeath(0.0)
+        action A_PlayLocalSound("sounds/fishdeath.wav")
+        action A_TossActor("Obj_Fish_Gibs01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Fish_Gibs01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Fish_Gibs01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Fish_Gibs02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Fish_Gibs02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Fish_Gibs03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Fish_Gibs03", 0, 0, 32, 8, 8, 4, 16)
+        action A_Destroy()
+        delay 1
+    }
+}

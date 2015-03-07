@@ -51,7 +51,8 @@ typedef enum
     AIF_ONFIRE              = BIT(3),
     AIF_FLYING              = BIT(4),
     AIF_RETREATAFTERMELEE   = BIT(5),
-    AIF_RETREATTURN         = BIT(6)
+    AIF_RETREATTURN         = BIT(6),
+    AIF_FLYADJUSTVIEWLEVEL  = BIT(7)
 } aiFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -117,6 +118,7 @@ private:
     float                           turnAmount;
     int                             painChance;
     float                           moveSpeed;
+    float                           meleeExtraDist;
     int                             igniteTicks[4];
     kexActor                        *igniteFlames[4];
 END_KEX_CLASS();

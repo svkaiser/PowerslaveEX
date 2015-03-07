@@ -40,6 +40,7 @@ kexActor::kexActor(void)
     this->anim = NULL;
     this->spawnAnim = NULL;
     this->deathAnim = NULL;
+    this->deathWaterAnim = NULL;
     this->frameID = 0;
     this->ticks = 0;
     this->animSpeed = 0.5f;
@@ -165,6 +166,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("bouncy"))           flags |= AF_BOUNCY;
         if(definition->GetBool("noDropOff"))        flags |= AF_NODROPOFF;
         if(definition->GetBool("expires"))          flags |= AF_EXPIRES;
+        if(definition->GetBool("noExitWater"))      flags |= AF_NOEXITWATER;
 
         if(flags & AF_BOUNCY)
         {
@@ -181,6 +183,10 @@ void kexActor::Spawn(void)
         if(definition->GetString("deathAnim", animName))
         {
             deathAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
+        }
+        if(definition->GetString("deathWaterAnim", animName))
+        {
+            deathWaterAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
         }
         
         definition->GetInt("initialFrame", frameID, 0);
@@ -419,7 +425,7 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
     flags |= AF_FLASH;
     flashTicks = 1;
     
-    if(anim == deathAnim)
+    if(anim == deathAnim || anim == deathWaterAnim)
     {
         return;
     }
@@ -431,10 +437,20 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
         health -= amount;
         OnDamage(inflictor);
 
-        if(health <= 0 && oldHealth > 0 && anim != deathAnim)
+        if(health <= 0 && oldHealth > 0 &&
+            (anim != deathAnim && anim != deathWaterAnim))
         {
             flags &= AF_SHOOTABLE;
-            ChangeAnim(deathAnim);
+
+            if(flags & AF_INWATER && deathWaterAnim)
+            {
+                ChangeAnim(deathWaterAnim);
+            }
+            else
+            {
+                ChangeAnim(deathAnim);
+            }
+
             OnDeath(inflictor);
         }
     }
@@ -621,6 +637,15 @@ void kexActor::LinkSector(void)
 {
     UnlinkSector();
     sectorLink.AddBefore(sector->actorList);
+
+    if(sector->flags & SF_WATER)
+    {
+        flags |= AF_INWATER;
+    }
+    else
+    {
+        flags &= ~AF_INWATER;
+    }
 }
 
 //

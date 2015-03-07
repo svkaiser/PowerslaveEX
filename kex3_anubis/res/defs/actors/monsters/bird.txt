@@ -16,6 +16,7 @@ AI_Bird 3
     moveable                1
     painChance              0
     flying                  1
+    flyAdjustViewLevel      1
     gravity                 0.0
     sightSound              "sounds/birdact.wav"
 }

@@ -6320,6 +6320,7 @@ anubis_death
 {
     frame
     {
+        action A_GibDeath(64.0)
         action A_AnubisDeath()
         action A_TossActor("Obj_Anubis_Gib01", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Anubis_Gib02", 0, 0, 32, 8, 8, 4, 16)

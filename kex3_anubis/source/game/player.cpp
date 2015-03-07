@@ -63,17 +63,41 @@ void kexPuppet::OnDamage(kexActor *instigator)
 {
     kexGame::cLocal->PlayLoop()->DamageFlash();
 
-    switch(kexRand::Max(3))
+    if(flags & AF_INWATER)
     {
-    case 0:
-        PlaySound("sounds/ppain01.wav");
-        break;
-    case 1:
-        PlaySound("sounds/ppain02.wav");
-        break;
-    case 2:
-        PlaySound("sounds/ppain03.wav");
-        break;
+        switch(kexRand::Max(5))
+        {
+        case 0:
+            PlaySound("sounds/pwpain01.wav");
+            break;
+        case 1:
+            PlaySound("sounds/pwpain02.wav");
+            break;
+        case 2:
+            PlaySound("sounds/pwpain03.wav");
+            break;
+        case 3:
+            PlaySound("sounds/pwpain04.wav");
+            break;
+        case 4:
+            PlaySound("sounds/pwpain05.wav");
+            break;
+        }
+    }
+    else
+    {
+        switch(kexRand::Max(3))
+        {
+        case 0:
+            PlaySound("sounds/ppain01.wav");
+            break;
+        case 1:
+            PlaySound("sounds/ppain02.wav");
+            break;
+        case 2:
+            PlaySound("sounds/ppain03.wav");
+            break;
+        }
     }
 }
 

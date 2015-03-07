@@ -1,0 +1,63 @@
+AI_Fish 8
+{
+    classname               "kexAI"
+    radius                  16
+    height                  64
+    stepHeight              48
+    scale                   1.0
+    health                  40
+    moveSpeed               8
+    spawnAnim               "monsters/fish_idle"
+    chaseAnim               "monsters/fish_chase"
+    meleeAnim               "monsters/fish_attack"
+    deathAnim               "monsters/fish_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    noExitWater             1
+    painChance              0
+    flying                  1
+    flyAdjustViewLevel      1
+    meleeExtraDist          16.0
+    gravity                 0.0
+    sightSound              "sounds/fishact.wav"
+}
+
+Obj_Fish_Gibs01 -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  64
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/fish_gibs1"
+    moveable                1
+    expires                 1
+}
+
+Obj_Fish_Gibs02 -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  64
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/fish_gibs2"
+    moveable                1
+    expires                 1
+}
+
+Obj_Fish_Gibs03 -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  64
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/fish_gibs3"
+    moveable                1
+    expires                 1
+}

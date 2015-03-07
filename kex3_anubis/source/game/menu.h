@@ -107,6 +107,7 @@ private:
     virtual bool                    OnCursor(void);
 
     kexCvar                         *cvar;
+    int                             numBars;
 END_KEX_CLASS();
 
 #endif

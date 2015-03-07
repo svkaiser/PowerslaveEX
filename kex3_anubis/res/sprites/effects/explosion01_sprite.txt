@@ -1,59 +1,125 @@
 texture "sprites/effects/explosion01.png"
 
-// working\explosion\sprite0125.tga
+// working\explosion\sprite0124.tga
 sprite 0 0 0 36 28
 
-// working\explosion\sprite0126.tga
+// working\explosion\sprite0125.tga
 sprite 1 36 0 64 64
 
-// working\explosion\sprite0127.tga
+// working\explosion\sprite0126.tga
 sprite 2 100 0 64 64
 
-// working\explosion\sprite0128.tga
+// working\explosion\sprite0127.tga
 sprite 3 164 0 8 64
 
-// working\explosion\sprite0129.tga
+// working\explosion\sprite0128.tga
 sprite 4 172 0 64 58
 
+// working\explosion\sprite0129.tga
+sprite 5 236 0 64 58
+
 // working\explosion\sprite0130.tga
-sprite 5 172 58 64 58
+sprite 6 300 0 8 58
 
 // working\explosion\sprite0131.tga
-sprite 6 236 0 8 58
+sprite 7 308 0 64 64
 
 // working\explosion\sprite0132.tga
-sprite 7 0 64 64 64
+sprite 8 372 0 36 64
 
 // working\explosion\sprite0133.tga
-sprite 8 64 64 36 64
+sprite 9 408 0 64 28
 
 // working\explosion\sprite0134.tga
-sprite 9 100 64 64 28
+sprite 10 472 0 36 28
 
 // working\explosion\sprite0135.tga
-sprite 10 100 92 36 28
+sprite 11 408 28 64 64
 
 // working\explosion\sprite0136.tga
-sprite 11 136 116 64 64
+sprite 12 0 28 24 64
 
 // working\explosion\sprite0137.tga
-sprite 12 200 116 24 64
+sprite 13 172 58 64 17
 
 // working\explosion\sprite0138.tga
-sprite 13 0 128 64 17
+sprite 14 472 28 24 17
 
 // working\explosion\sprite0139.tga
-sprite 14 224 116 24 17
+sprite 15 236 58 64 54
 
 // working\explosion\sprite0140.tga
-sprite 15 64 128 64 54
+sprite 16 472 45 28 54
 
 // working\explosion\sprite0141.tga
-sprite 16 224 133 28 54
+sprite 17 24 64 64 41
 
 // working\explosion\sprite0142.tga
-sprite 17 0 145 64 41
+sprite 18 88 64 24 41
 
 // working\explosion\sprite0143.tga
-sprite 18 128 180 24 41
+sprite 19 300 64 64 64
+
+// working\explosion\sprite0144.tga
+sprite 20 112 64 20 64
+
+// working\explosion\sprite0145.tga
+sprite 21 132 75 64 1
+
+// working\explosion\sprite0146.tga
+sprite 22 132 76 64 64
+
+// working\explosion\sprite0147.tga
+sprite 23 364 92 52 64
+
+// working\explosion\sprite0148.tga
+sprite 24 416 99 64 34
+
+// working\explosion\sprite0149.tga
+sprite 25 0 105 52 34
+
+// working\explosion\sprite0150.tga
+sprite 26 196 112 64 64
+
+// working\explosion\sprite0151.tga
+sprite 27 52 105 52 64
+
+// working\explosion\sprite0152.tga
+sprite 28 260 128 64 40
+
+// working\explosion\sprite0153.tga
+sprite 29 416 133 52 40
+
+// working\explosion\sprite0154.tga
+sprite 30 104 140 64 64
+
+// working\explosion\sprite0155.tga
+sprite 31 324 128 40 64
+
+// working\explosion\sprite0156.tga
+sprite 32 260 168 64 37
+
+// working\explosion\sprite0157.tga
+sprite 33 468 133 40 37
+
+// working\explosion\sprite0158.tga
+sprite 34 0 139 36 28
+
+// working\explosion\sprite0159.tga
+sprite 35 0 169 64 64
+
+// working\explosion\sprite0160.tga
+sprite 36 168 140 20 64
+
+// working\explosion\sprite0161.tga
+sprite 37 364 173 64 46
+
+// working\explosion\sprite0162.tga
+sprite 38 64 169 20 46
+
+// working\explosion\sprite0163.tga
+sprite 39 468 170 44 64
+
+// working\explosion\sprite0164.tga
+sprite 40 188 176 44 37
 

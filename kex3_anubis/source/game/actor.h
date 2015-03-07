@@ -52,7 +52,8 @@ typedef enum
     AF_INWATER          = BIT(11),
     AF_NODROPOFF        = BIT(12),
     AF_EXPIRES          = BIT(13),
-    AF_HIDDEN           = BIT(14)
+    AF_HIDDEN           = BIT(14),
+    AF_NOEXITWATER      = BIT(15)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -147,6 +148,7 @@ protected:
     spriteAnim_t                    *anim;
     spriteAnim_t                    *spawnAnim;
     spriteAnim_t                    *deathAnim;
+    spriteAnim_t                    *deathWaterAnim;
     int16_t                         frameID;
     float                           ticks;
     int                             gameTicks;

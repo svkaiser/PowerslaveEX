@@ -105,6 +105,17 @@ Fx_Explosion01 65
     fullbright              1
 }
 
+Fx_Explosion01_Water -1
+{
+    classname               "kexActor"
+    radius                  128
+    height                  128
+    stepHeight              32
+    scale                   2.0
+    spawnAnim               "effects/explosion01_water"
+    fullbright              1
+}
+
 Fx_FireballShootPuff 200
 {
     classname               "kexActor"

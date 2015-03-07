@@ -357,6 +357,7 @@ kexMenuItemSlider::kexMenuItemSlider(const float x, const float y, const float s
     this->time          = 0;
     this->label         = "";
     this->highlightTime = 0;
+    this->numBars       = 0;
     this->lerpCallback  = NULL;
     this->cvar          = &cvar;
 }
@@ -422,6 +423,13 @@ void kexMenuItemSlider::Tick(void)
         
         bars = (int)kexMath::Floor(MAX_MENU_SLIDER_BARS * val);
         kexMath::Clamp(bars, 0, MAX_MENU_SLIDER_BARS);
+
+        if(numBars != bars)
+        {
+            kexGame::cLocal->PlaySound("sounds/select.wav");
+        }
+
+        numBars = bars;
     }
     else
     {

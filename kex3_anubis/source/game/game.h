@@ -165,6 +165,7 @@ public:
     void                        RemoveGameObject(kexGameObject *go);
     void                        RemoveAllGameObjects(void);
     void                        ChangeMap(const char *name);
+    void                        PlaySound(const char *name);
 
     typedef struct
     {
