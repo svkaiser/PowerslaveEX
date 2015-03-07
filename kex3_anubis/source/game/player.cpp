@@ -56,14 +56,51 @@ kexPuppet::~kexPuppet(void)
 }
 
 //
+// kexPuppet::OnCollide
+//
+
+bool kexPuppet::OnCollide(kexCModel *cmodel)
+{
+    if(cmodel->ContactFace())
+    {
+        mapFace_t *face = cmodel->ContactFace();
+
+        if(face->flags & FF_FORCEFIELD)
+        {
+            owner->LockTime() = 60;
+            InflictDamage(NULL, 50);
+            velocity.Clear();
+            movement.Clear();
+        }
+        if(face->flags & FF_LAVA)
+        {
+            // TODO
+        }
+        if(face->flags & FF_SLIME)
+        {
+            // TODO
+        }
+    }
+
+    return true;
+}
+
+//
 // kexPuppet::OnDamage
 //
 
 void kexPuppet::OnDamage(kexActor *instigator)
 {
+    if(owner->LockTime() > 0)
+    {
+        kexGame::cLocal->PlayLoop()->ElectrocuteFlash();
+        PlaySound("sounds/pelectrocute.wav");
+        return;
+    }
+
     kexGame::cLocal->PlayLoop()->DamageFlash();
 
-    if(flags & AF_INWATER)
+    if(flags & AF_INWATER && !(playerFlags & PF_INWATERSURFACE))
     {
         switch(kexRand::Max(5))
         {
@@ -351,6 +388,11 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
         {
             float t = (waterheight < owner->ViewZ()) ? 0.035f : 0.075f;
             origin.z = ((waterZ - owner->ViewZ()) - origin.z) * t + origin.z;
+            playerFlags |= PF_INWATERSURFACE;
+        }
+        else
+        {
+            playerFlags &= ~PF_INWATERSURFACE;
         }
     }
 
@@ -466,6 +508,11 @@ void kexPuppet::Tick(void)
     kexPlayerCmd *cmd = &owner->Cmd();
     
     roll = (0 - roll) * 0.35f + roll;
+
+    if(owner->LockTime() > 0)
+    {
+        return;
+    }
     
     if(playerFlags & (PF_NOCLIP|PF_FLY))
     {
@@ -832,6 +879,12 @@ void kexPlayer::Tick(void)
     if(cmd.Buttons() & BC_USE)
     {
         TryUse();
+    }
+
+    if(lockTime > 0)
+    {
+        lockTime--;
+        return;
     }
 
     UpdateViewBob();

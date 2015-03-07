@@ -37,6 +37,7 @@ public:
 
     virtual void                    Tick(void);
     virtual void                    OnImpact(kexActor *contactActor);
+    virtual bool                    OnCollide(kexCModel *cmodel);
 
     void                            Spawn(void);
 

@@ -19,10 +19,11 @@
 
 typedef enum
 {
-    PF_JUMPING      = BIT(0),
-    PF_USERJUMPED   = BIT(1),
-    PF_NOCLIP       = BIT(2),
-    PF_FLY          = BIT(3)
+    PF_JUMPING          = BIT(0),
+    PF_USERJUMPED       = BIT(1),
+    PF_NOCLIP           = BIT(2),
+    PF_FLY              = BIT(3),
+    PF_INWATERSURFACE   = BIT(4)
 } playerFlags_t;
 
 class kexActor;
@@ -42,6 +43,7 @@ public:
     virtual void                    Tick(void);
     void                            Spawn(void);
     virtual void                    OnDamage(kexActor *instigator);
+    virtual bool                    OnCollide(kexCModel *cmodel);
 
     kexPlayer                       *Owner(void) { return owner; }
     unsigned int                    &PlayerFlags(void) { return playerFlags; }
@@ -91,6 +93,7 @@ public:
     float                       &LandTime(void) { return landTime; }
     float                       &StepViewZ(void) { return stepViewZ; }
     float                       &ViewZ(void) { return viewZ; }
+    int                         &LockTime(void) { return lockTime; }
 
     kexPlayerWeapon             &Weapon(void) { return weapon; }
     const playerWeapons_t       CurrentWeapon(void) const { return currentWeapon; }
@@ -129,6 +132,7 @@ private:
     int16_t                     keys;
     int16_t                     transmitter;
     int                         teamDolls;
+    int                         lockTime;
     kexPuppet                   *actor;
 };
 

@@ -303,6 +303,7 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
             switch(events[i].type)
             {
             case 8:
+            case 9:
                 MoveSector(s, true, (float)(s->ceilingHeight - s->floorHeight));
                 break;
 
@@ -325,6 +326,7 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
             case 41:
             case 44:
             case 45:
+            case 60:
             case 68:
                 SetupFloatingPlatforms(&events[i], s, "kexFloatingPlatform");
                 break;
@@ -854,6 +856,7 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
         kexGame::cLocal->PlayLoop()->Print("$str_92");
         break;
     case 8:
+    case 9:
         kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
         break;
     case 21:
@@ -866,6 +869,7 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
     case 200:
     case 201:
     case 202:
+    case 203:
         UseWallSwitch(player, face, ev);
         break;
 
@@ -936,7 +940,8 @@ void kexWorld::ResetWallSwitchFromTag(const int tag)
 
         if(events[i].type != 200 &&
            events[i].type != 201 &&
-           events[i].type != 202)
+           events[i].type != 202 &&
+           events[i].type != 203)
         {
             continue;
         }
@@ -1121,6 +1126,7 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
                 bClearEventRef = true;
                 break;
             case 8:
+            case 9:
                 kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
                 bClearEventRef = true;
                 break;

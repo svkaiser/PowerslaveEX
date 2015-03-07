@@ -28,6 +28,7 @@ public:
     void                AddMessage(const char *msg);
     void                SetDamageFlash(void) { damageFlashTicks = 192; }
     void                SetPickupFlash(void) { pickupFlashTicks = 192; }
+    void                SetElectrocuteFlash(void) { electrocuteFlashTicks = 192; }
     
     void                SetPlayer(kexPlayer *p) { player = p; }
     
@@ -56,6 +57,7 @@ private:
     int                 currentMessage;
     int                 damageFlashTicks;
     int                 pickupFlashTicks;
+    int                 electrocuteFlashTicks;
 };
 
 #endif

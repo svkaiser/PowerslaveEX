@@ -75,6 +75,7 @@ public:
     virtual void                    OnDeath(kexActor *instigator);
     virtual void                    OnActivate(kexActor *instigator);
     virtual void                    OnDeactivate(kexActor *instigator);
+    virtual bool                    OnCollide(kexCModel *cmodel);
 
     void                            Spawn(void);
     bool                            FindSector(const kexVec3 &pos);

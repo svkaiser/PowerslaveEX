@@ -1078,7 +1078,7 @@ void kexCModel::CollideActorWithWorld(void)
             PushFromRadialBounds(contactActor->Origin().ToVec2(), contactActor->Radius());
         }
 
-        if(moveActor->InstanceOf(&kexProjectile::info))
+        if(!moveActor->OnCollide(this))
         {
             return;
         }

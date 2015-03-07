@@ -294,6 +294,7 @@ void kexDoor::Spawn(void)
         break;
 
     case 8:
+    case 9:
         bDirection = false;
         waitDelay = -1;
         lip = 0;
@@ -312,7 +313,7 @@ void kexDoor::Spawn(void)
     
     state = (bDirection ? DS_UP : DS_DOWN);
     currentTime = 0;
-    baseHeight = -kexGame::cLocal->World()->Faces()[sector->faceEnd+1].plane.d;
+    baseHeight = -sector->ceilingFace->plane.d;
     currentHeight = baseHeight;
 }
 
@@ -532,7 +533,7 @@ void kexLift::Spawn(void)
         lip = 0;
         moveSpeed = 4;
         bDirection = false;
-        baseHeight = kexGame::cLocal->World()->Faces()[sector->faceEnd+2].plane.d;
+        baseHeight = sector->floorFace->plane.d;
         destHeight = (float)sector->floorHeight - lip;
         break;
 
@@ -829,6 +830,11 @@ void kexFloatingPlatform::Spawn(void)
 
     case 45:
         moveSpeed = 2.5f;
+        moveHeight = 128;
+        break;
+
+    case 60:
+        moveSpeed = 1;
         moveHeight = 128;
         break;
 

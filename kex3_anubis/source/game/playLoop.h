@@ -39,6 +39,7 @@ public:
     const int                   MaxWaterMagnitude(void) { return waterMaxMagnitude; }
     void                        PickupFlash(void) { hud.SetPickupFlash(); }
     void                        DamageFlash(void) { hud.SetDamageFlash(); }
+    void                        ElectrocuteFlash(void) { hud.SetElectrocuteFlash(); }
     
 private:
     void                        InitWater(void);

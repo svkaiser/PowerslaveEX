@@ -127,6 +127,15 @@ void kexActor::OnRemove(void)
 }
 
 //
+// kexActor::OnCollide
+//
+
+bool kexActor::OnCollide(kexCModel *cmodel)
+{
+    return true;
+}
+
+//
 // kexActor::Spawn
 //
 

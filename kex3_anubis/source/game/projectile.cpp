@@ -64,6 +64,16 @@ void kexProjectile::Tick(void)
 }
 
 //
+// kexProjectile::OnCollide
+//
+
+bool kexProjectile::OnCollide(kexCModel *cmodel)
+{
+    // exit out of collision immediately
+    return false;
+}
+
+//
 // kexProjectile::SetHomingTarget
 //
 
