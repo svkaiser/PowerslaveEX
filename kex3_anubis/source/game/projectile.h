@@ -53,6 +53,7 @@ private:
     void                            HomingThink(void);
     void                            AdjustAlongFace(mapFace_t *face);
     void                            SeekTargets(void);
+    bool                            CheckSeekTarget(kexVec3 &start, kexActor *actor);
 
     int                             damage;
     unsigned int                    projectileFlags;

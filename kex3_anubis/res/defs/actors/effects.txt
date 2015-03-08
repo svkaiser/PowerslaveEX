@@ -150,3 +150,14 @@ Fx_GreenCobraJoint -1
     spawnAnim               "projectiles/cobra_green_joint"
     fullbright              1
 }
+
+Fx_RedCobraJoint -1
+{
+    classname               "kexActor"
+    radius                  16
+    height                  32
+    stepHeight              0
+    scale                   1.0
+    spawnAnim               "projectiles/cobra_red_joint"
+    fullbright              1
+}

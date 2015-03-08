@@ -178,3 +178,58 @@ void A_BirdRetreat(kActor @actor)
         actor.SetTarget(null);
     }
 }
+
+//
+// A_MummyDeath
+//
+
+void A_MummyDeath(kActor @actor)
+{
+    switch(Math::RandMax(3))
+    {
+    case 0:
+        actor.PlaySound("sounds/mumdeath01.wav");
+        break;
+    case 1:
+        actor.PlaySound("sounds/mumdeath02.wav");
+        break;
+    case 2:
+        actor.PlaySound("sounds/mumdeath03.wav");
+        break;
+    }
+}
+
+//
+// A_SetupRedCobraJoints
+//
+
+void A_SetupRedCobraJoints(kActor @actor)
+{
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z;
+    kActor @j1;
+    kActor @j2;
+    kActor @j3;
+    kActor @j4;
+    kActor @j5;
+    
+    @j1 = Game.SpawnActor("Fx_RedCobraJoint", x, y, z, 0, actor.SectorIndex());
+    @j2 = Game.SpawnActor("Fx_RedCobraJoint", x, y, z, 0, actor.SectorIndex());
+    @j3 = Game.SpawnActor("Fx_RedCobraJoint", x, y, z, 0, actor.SectorIndex());
+    @j4 = Game.SpawnActor("Fx_RedCobraJoint", x, y, z, 0, actor.SectorIndex());
+    @j5 = Game.SpawnActor("Fx_RedCobraJoint", x, y, z, 0, actor.SectorIndex());
+    
+    j1.SetTarget(actor);
+    j2.SetTarget(j1);
+    j3.SetTarget(j2);
+    j4.SetTarget(j3);
+    j5.SetTarget(j4);
+    
+    j2.Scale() = 0.875f;
+    j3.Scale() = 0.75f;
+    j4.Scale() = 0.625f;
+    j5.Scale() = 0.5f;
+    
+    actor.SetTaggedActor(j5);
+}

@@ -1,0 +1,302 @@
+texture "sprites/monsters/mummy.png"
+
+// working\mummy\sprite0309.tga
+sprite 0 0 0 40 64
+
+// working\mummy\sprite0310.tga
+sprite 1 40 0 40 26
+
+// working\mummy\sprite0311.tga
+sprite 2 80 0 36 64
+
+// working\mummy\sprite0312.tga
+sprite 3 116 0 36 33
+
+// working\mummy\sprite0313.tga
+sprite 4 152 0 36 64
+
+// working\mummy\sprite0314.tga
+sprite 5 188 0 36 29
+
+// working\mummy\sprite0315.tga
+sprite 6 224 0 56 64
+
+// working\mummy\sprite0316.tga
+sprite 7 280 0 56 31
+
+// working\mummy\sprite0317.tga
+sprite 8 336 0 36 64
+
+// working\mummy\sprite0318.tga
+sprite 9 372 0 36 30
+
+// working\mummy\sprite0319.tga
+sprite 10 408 0 44 64
+
+// working\mummy\sprite0320.tga
+sprite 11 452 0 44 28
+
+// working\mummy\sprite0321.tga
+sprite 12 496 0 64 64
+
+// working\mummy\sprite0322.tga
+sprite 13 560 0 64 28
+
+// working\mummy\sprite0323.tga
+sprite 14 624 0 44 64
+
+// working\mummy\sprite0324.tga
+sprite 15 668 0 44 42
+
+// working\mummy\sprite0325.tga
+sprite 16 712 0 52 64
+
+// working\mummy\sprite0326.tga
+sprite 17 764 0 52 25
+
+// working\mummy\sprite0327.tga
+sprite 18 816 0 52 64
+
+// working\mummy\sprite0328.tga
+sprite 19 868 0 52 23
+
+// working\mummy\sprite0329.tga
+sprite 20 920 0 44 64
+
+// working\mummy\sprite0330.tga
+sprite 21 964 0 44 34
+
+// working\mummy\sprite0331.tga
+sprite 22 868 23 40 64
+
+// working\mummy\sprite0332.tga
+sprite 23 764 25 40 46
+
+// working\mummy\sprite0333.tga
+sprite 24 560 28 64 64
+
+// working\mummy\sprite0334.tga
+sprite 25 0 64 64 52
+
+// working\mummy\sprite0335.tga
+sprite 26 452 28 40 64
+
+// working\mummy\sprite0336.tga
+sprite 27 280 31 40 23
+
+// working\mummy\sprite0337.tga
+sprite 28 188 29 36 64
+
+// working\mummy\sprite0338.tga
+sprite 29 372 30 36 30
+
+// working\mummy\sprite0339.tga
+sprite 30 964 34 40 64
+
+// working\mummy\sprite0340.tga
+sprite 31 668 42 40 32
+
+// working\mummy\sprite0341.tga
+sprite 32 116 33 36 64
+
+// working\mummy\sprite0342.tga
+sprite 33 280 54 36 23
+
+// working\mummy\sprite0343.tga
+sprite 34 64 64 52 64
+
+// working\mummy\sprite0344.tga
+sprite 35 224 64 52 27
+
+// working\mummy\sprite0345.tga
+sprite 36 316 64 44 64
+
+// working\mummy\sprite0346.tga
+sprite 37 360 64 44 44
+
+// working\mummy\sprite0347.tga
+sprite 38 404 64 44 64
+
+// working\mummy\sprite0348.tga
+sprite 39 492 64 44 30
+
+// working\mummy\sprite0349.tga
+sprite 40 708 64 48 64
+
+// working\mummy\sprite0350.tga
+sprite 41 804 64 48 43
+
+// working\mummy\sprite0351.tga
+sprite 42 908 64 52 64
+
+// working\mummy\sprite0352.tga
+sprite 43 624 74 52 33
+
+// working\mummy\sprite0353.tga
+sprite 44 152 64 32 64
+
+// working\mummy\sprite0354.tga
+sprite 45 756 71 32 25
+
+// working\mummy\sprite0355.tga
+sprite 46 276 77 40 64
+
+// working\mummy\sprite0356.tga
+sprite 47 852 87 40 25
+
+// working\mummy\sprite0357.tga
+sprite 48 224 91 44 64
+
+// working\mummy\sprite0358.tga
+sprite 49 448 92 44 27
+
+// working\mummy\sprite0359.tga
+sprite 50 536 92 64 64
+
+// working\mummy\sprite0360.tga
+sprite 51 960 98 64 37
+
+// working\mummy\sprite0361.tga
+sprite 52 184 93 36 64
+
+// working\mummy\sprite0362.tga
+sprite 53 492 94 36 26
+
+// working\mummy\sprite0363.tga
+sprite 54 756 96 44 64
+
+// working\mummy\sprite0364.tga
+sprite 55 600 107 44 33
+
+// working\mummy\sprite0365.tga
+sprite 56 644 107 64 64
+
+// working\mummy\sprite0366.tga
+sprite 57 800 112 64 38
+
+// working\mummy\sprite0367.tga
+sprite 58 116 97 36 64
+
+// working\mummy\sprite0368.tga
+sprite 59 360 108 36 47
+
+// working\mummy\sprite0369.tga
+sprite 60 864 112 44 64
+
+// working\mummy\sprite0370.tga
+sprite 61 0 116 44 42
+
+// working\mummy\sprite0371.tga
+sprite 62 44 116 12 16
+
+// working\mummy\sprite0372.tga
+sprite 63 448 119 44 64
+
+// working\mummy\sprite0373.tga
+sprite 64 492 120 44 33
+
+// working\mummy\sprite0374.tga
+sprite 65 56 128 40 64
+
+// working\mummy\sprite0375.tga
+sprite 66 316 128 40 48
+
+// working\mummy\sprite0376.tga
+sprite 67 152 128 24 29
+
+// working\mummy\sprite0377.tga
+sprite 68 908 135 64 64
+
+// working\mummy\sprite0378.tga
+sprite 69 800 150 64 34
+
+// working\mummy\sprite0379.tga
+sprite 70 396 128 40 64
+
+// working\mummy\sprite0380.tga
+sprite 71 708 128 40 43
+
+// working\mummy\sprite0381.tga
+sprite 72 972 135 36 64
+
+// working\mummy\sprite0382.tga
+sprite 73 600 140 36 24
+
+// working\mummy\sprite0383.tga
+sprite 74 220 155 64 64
+
+// working\mummy\sprite0384.tga
+sprite 75 492 156 64 42
+
+// working\mummy\sprite0385.tga
+sprite 76 152 157 56 64
+
+// working\mummy\sprite0386.tga
+sprite 77 0 158 56 28
+
+// working\mummy\sprite0387.tga
+sprite 78 96 128 12 19
+
+// working\mummy\sprite0388.tga
+sprite 79 556 164 64 64
+
+// working\mummy\sprite0389.tga
+sprite 80 620 171 64 34
+
+// working\mummy\sprite0390.tga
+sprite 81 356 155 40 64
+
+// working\mummy\sprite0391.tga
+sprite 82 748 160 40 31
+
+// working\mummy\sprite0392.tga
+sprite 83 684 171 64 64
+
+// working\mummy\sprite0393.tga
+sprite 84 284 176 64 49
+
+// working\mummy\sprite0394.tga
+sprite 85 96 161 36 64
+
+// working\mummy\sprite0395.tga
+sprite 86 864 176 36 25
+
+// working\mummy\sprite0396.tga
+sprite 87 436 183 52 64
+
+// working\mummy\sprite0397.tga
+sprite 88 788 184 52 30
+
+// working\mummy\sprite0398.tga
+sprite 89 1008 135 16 17
+
+// working\mummy\sprite0399.tga
+sprite 90 0 192 64 64
+
+// working\mummy\sprite0400.tga
+sprite 91 488 198 64 27
+
+// working\mummy\sprite0401.tga
+sprite 92 900 199 56 64
+
+// working\mummy\sprite0402.tga
+sprite 93 956 199 56 26
+
+// working\mummy\sprite0403.tga
+sprite 94 748 191 36 64
+
+// working\mummy\sprite0404.tga
+sprite 95 396 192 36 23
+
+// working\mummy\sprite0405.tga
+sprite 96 620 205 64 64
+
+// working\mummy\sprite0406.tga
+sprite 97 784 214 64 41
+
+// working\mummy\sprite0407.tga
+sprite 98 208 219 64 64
+
+// working\mummy\sprite0408.tga
+sprite 99 348 219 64 45
+

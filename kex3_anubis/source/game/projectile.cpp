@@ -106,7 +106,7 @@ void kexProjectile::HomingThink(void)
             return;
         }
 
-        kexVec3 vOrigin = homingActor->Origin() + kexVec3(0, 0, homingActor->Height() * 0.5f);
+        kexVec3 vOrigin = homingActor->Origin() + kexVec3(0, 0, homingActor->StepHeight());
         kexVec3 dir = (vOrigin - origin).Normalize();
         kexAngle an1 = dir.ToYaw();
 
@@ -163,46 +163,69 @@ void kexProjectile::AdjustAlongFace(mapFace_t *face)
 }
 
 //
+// kexProjectile::CheckSeekTarget
+//
+
+bool kexProjectile::CheckSeekTarget(kexVec3 &start, kexActor *actor)
+{
+    if(actor == NULL)
+    {
+        return false;
+    }
+
+    if(kexMath::Fabs(origin.x - actor->Origin().x) >= homingMaxSightDistance) return false;
+    if(kexMath::Fabs(origin.y - actor->Origin().y) >= homingMaxSightDistance) return false;
+
+    kexVec3 end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
+
+    if(kexGame::cLocal->CModel()->Trace(this, sector, start, end, radius*2, false))
+    {
+        return false;
+    }
+
+    SetHomingTarget(actor);
+    return true;
+}
+
+//
 // kexProjectile::SeekTargets
 //
 
 void kexProjectile::SeekTargets(void)
 {
     kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
-    kexVec3 end;
-    kexStack<mapSector_t*> *sectorList;
 
-    sectorList = kexGame::cLocal->World()->FloodFill(start, sector, homingMaxSightDistance);
-
-    for(unsigned int i = 0; i < sectorList->CurrentLength(); ++i)
+    if(target && target->InstanceOf(&kexAI::info))
     {
-        for(kexActor *actor = (*sectorList)[i]->actorList.Next();
-            actor != NULL;
-            actor = actor->SectorLink().Next())
+        CheckSeekTarget(start, static_cast<kexActor*>(target->Target()));
+    }
+    else
+    {
+        kexStack<mapSector_t*> *sectorList;
+        sectorList = kexGame::cLocal->World()->FloodFill(start, sector, homingMaxSightDistance);
+
+        for(unsigned int i = 0; i < sectorList->CurrentLength(); ++i)
         {
-            if(actor == this || actor == target ||
-                actor->Health() <= 0 || !(actor->Flags() & AF_SHOOTABLE) ||
-                !actor->InstanceOf(&kexAI::info))
+            for(kexActor *actor = (*sectorList)[i]->actorList.Next();
+                actor != NULL;
+                actor = actor->SectorLink().Next())
             {
-                continue;
-            }
+                if(actor == this || actor == target ||
+                    actor->Health() <= 0 || !(actor->Flags() & AF_SHOOTABLE) ||
+                    !actor->InstanceOf(&kexAI::info))
+                {
+                    continue;
+                }
 
-            if(kexMath::Fabs(origin.x - actor->Origin().x) >= homingMaxSightDistance) continue;
-            if(kexMath::Fabs(origin.y - actor->Origin().y) >= homingMaxSightDistance) continue;
+                if(!CheckSeekTarget(start, actor))
+                {
+                    continue;
+                }
 
-           
-            end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
-
-            if(kexGame::cLocal->CModel()->Trace(this, sector, start, end, radius*2, false))
-            {
-                continue;
-            }
-
-            SetHomingTarget(actor);
-
-            if((kexRand::Int() & 7) == 3)
-            {
-                return;
+                if((kexRand::Int() & 7) == 3)
+                {
+                    return;
+                }
             }
         }
     }

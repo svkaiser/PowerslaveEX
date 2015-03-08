@@ -1,0 +1,74 @@
+AI_Mummy 6
+{
+    classname               "kexAI"
+    radius                  24
+    height                  192
+    stepHeight              48
+    scale                   1.5
+    health                  130
+    moveSpeed               4
+    spawnAnim               "monsters/mummy_idle"
+    chaseAnim               "monsters/mummy_chase"
+    meleeAnim               "monsters/mummy_melee"
+    rangeAttackAnim         "monsters/mummy_range_attack"
+    deathAnim               "monsters/mummy_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    noDropOff               1
+    painChance              0
+    meleeExtraDist          48
+    sightSound              "sounds/mumact02.wav"
+}
+
+Obj_Mummy_Gib01 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    health                  100
+    spawnAnim               "monsters/mummy_gibs01"
+    moveable                1
+    expires                 1
+}
+
+Obj_Mummy_Gib02 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    health                  100
+    spawnAnim               "monsters/mummy_gibs02"
+    moveable                1
+    expires                 1
+}
+
+Obj_Mummy_Gib03 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    health                  100
+    spawnAnim               "monsters/mummy_gibs03"
+    moveable                1
+    expires                 1
+}
+
+Obj_Mummy_Gib04 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.0
+    health                  100
+    spawnAnim               "monsters/mummy_gibs04"
+    moveable                1
+    expires                 1
+}

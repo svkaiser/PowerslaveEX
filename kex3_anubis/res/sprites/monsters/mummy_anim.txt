@@ -1,0 +1,4731 @@
+mummy_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 0,    -22,  -90,    1 }
+                { "monsters/mummy", 1,    -22,  -26,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -24,  -97,    1 }
+                { "monsters/mummy", 31,    -24,  -33,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,    -24,  -97,    1 }
+                { "monsters/mummy", 3,    -24,  -33,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -14,  -89,    1 }
+                { "monsters/mummy", 45,    -14,  -25,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 4,    -12,  -94,    0 }
+                { "monsters/mummy", 5,    -12,  -30,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -15,  -88,    0 }
+                { "monsters/mummy", 45,    -15,  -24,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,    -11,  -96,    0 }
+                { "monsters/mummy", 3,    -11,  -32,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -10,  -96,    0 }
+                { "monsters/mummy", 31,    -10,  -32,    0 }
+            }
+        }
+    }
+}
+
+mummy_chase
+{
+    // frames:   16
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 48,    -15,  -91,    0 }
+                { "monsters/mummy", 49,    -15,  -27,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -23,  -97,    1 }
+                { "monsters/mummy", 31,    -23,  -33,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 76,    -23,  -91,    1 }
+                { "monsters/mummy", 77,    -23,  -27,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 26,    -19,  -87,    1 }
+                { "monsters/mummy", 27,    -19,  -23,    1 }
+            }
+        }
+        // ##000    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 94,    -11,  -87,    0 }
+                { "monsters/mummy", 95,    -11,  -23,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 26,    -18,  -87,    0 }
+                { "monsters/mummy", 27,    -18,  -23,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 76,    -27,  -92,    0 }
+                { "monsters/mummy", 77,    -27,  -28,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -11,  -96,    0 }
+                { "monsters/mummy", 31,    -11,  -32,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 48,    -15,  -91,    0 }
+                { "monsters/mummy", 49,    -15,  -27,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -23,  -97,    1 }
+                { "monsters/mummy", 31,    -23,  -33,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 76,    -23,  -91,    1 }
+                { "monsters/mummy", 77,    -23,  -27,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 26,    -19,  -87,    1 }
+                { "monsters/mummy", 27,    -19,  -23,    1 }
+            }
+        }
+        // ##001    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 94,    -11,  -87,    0 }
+                { "monsters/mummy", 95,    -11,  -23,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 26,    -18,  -87,    0 }
+                { "monsters/mummy", 27,    -18,  -23,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 76,    -27,  -92,    0 }
+                { "monsters/mummy", 77,    -27,  -28,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -11,  -96,    0 }
+                { "monsters/mummy", 31,    -11,  -32,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 48,    -15,  -91,    0 }
+                { "monsters/mummy", 49,    -15,  -27,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -23,  -97,    1 }
+                { "monsters/mummy", 31,    -23,  -33,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 76,    -23,  -91,    1 }
+                { "monsters/mummy", 77,    -23,  -27,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 26,    -19,  -87,    1 }
+                { "monsters/mummy", 27,    -19,  -23,    1 }
+            }
+        }
+        // ##002    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 94,    -11,  -87,    0 }
+                { "monsters/mummy", 95,    -11,  -23,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 26,    -18,  -87,    0 }
+                { "monsters/mummy", 27,    -18,  -23,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 76,    -27,  -92,    0 }
+                { "monsters/mummy", 77,    -27,  -28,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -11,  -96,    0 }
+                { "monsters/mummy", 31,    -11,  -32,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 48,    -15,  -91,    0 }
+                { "monsters/mummy", 49,    -15,  -27,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -23,  -97,    1 }
+                { "monsters/mummy", 31,    -23,  -33,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 76,    -23,  -91,    1 }
+                { "monsters/mummy", 77,    -23,  -27,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 26,    -19,  -87,    1 }
+                { "monsters/mummy", 27,    -19,  -23,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 4,    -11,  -94,    0 }
+                { "monsters/mummy", 5,    -11,  -30,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 26,    -18,  -87,    0 }
+                { "monsters/mummy", 27,    -18,  -23,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 76,    -27,  -92,    0 }
+                { "monsters/mummy", 77,    -27,  -28,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 30,    -11,  -96,    0 }
+                { "monsters/mummy", 31,    -11,  -32,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0  128
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 52,    -13,  -91,    0 }
+                { "monsters/mummy", 53,    -13,  -27,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -25,  -96,    1 }
+                { "monsters/mummy", 39,    -25,  -32,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 87,    -27,  -92,    1 }
+                { "monsters/mummy", 88,    -27,  -28,    1 }
+            }
+        }
+        // ##004    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 32,    -21,  -87,    1 }
+                { "monsters/mummy", 33,    -21,  -23,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 4,    -11,  -94,    0 }
+                { "monsters/mummy", 5,    -11,  -30,    0 }
+            }
+        }
+        // ##004    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 32,    -11,  -87,    0 }
+                { "monsters/mummy", 33,    -11,  -23,    0 }
+            }
+        }
+        // ##004    0  128
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 87,    -21,  -93,    0 }
+                { "monsters/mummy", 88,    -21,  -29,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -14,  -95,    0 }
+                { "monsters/mummy", 39,    -14,  -31,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0  128
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 52,    -13,  -91,    0 }
+                { "monsters/mummy", 53,    -13,  -27,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -25,  -96,    1 }
+                { "monsters/mummy", 39,    -25,  -32,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 87,    -27,  -92,    1 }
+                { "monsters/mummy", 88,    -27,  -28,    1 }
+            }
+        }
+        // ##005    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 32,    -21,  -87,    1 }
+                { "monsters/mummy", 33,    -21,  -23,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 4,    -11,  -94,    0 }
+                { "monsters/mummy", 5,    -11,  -30,    0 }
+            }
+        }
+        // ##005    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 32,    -11,  -87,    0 }
+                { "monsters/mummy", 33,    -11,  -23,    0 }
+            }
+        }
+        // ##005    0  128
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 87,    -21,  -93,    0 }
+                { "monsters/mummy", 88,    -21,  -29,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -14,  -95,    0 }
+                { "monsters/mummy", 39,    -14,  -31,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0  128
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 52,    -13,  -91,    0 }
+                { "monsters/mummy", 53,    -13,  -27,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -25,  -96,    1 }
+                { "monsters/mummy", 39,    -25,  -32,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 87,    -27,  -92,    1 }
+                { "monsters/mummy", 88,    -27,  -28,    1 }
+            }
+        }
+        // ##006    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 32,    -21,  -87,    1 }
+                { "monsters/mummy", 33,    -21,  -23,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 4,    -11,  -94,    0 }
+                { "monsters/mummy", 5,    -11,  -30,    0 }
+            }
+        }
+        // ##006    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 32,    -11,  -87,    0 }
+                { "monsters/mummy", 33,    -11,  -23,    0 }
+            }
+        }
+        // ##006    0  128
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 87,    -21,  -93,    0 }
+                { "monsters/mummy", 88,    -21,  -29,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -14,  -95,    0 }
+                { "monsters/mummy", 39,    -14,  -31,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0  128
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 52,    -13,  -91,    0 }
+                { "monsters/mummy", 53,    -13,  -27,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -25,  -96,    1 }
+                { "monsters/mummy", 39,    -25,  -32,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 87,    -27,  -92,    1 }
+                { "monsters/mummy", 88,    -27,  -28,    1 }
+            }
+        }
+        // ##007    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 32,    -21,  -87,    1 }
+                { "monsters/mummy", 33,    -21,  -23,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 10,    -24,  -93,    0 }
+                { "monsters/mummy", 11,    -24,  -29,    0 }
+            }
+        }
+        // ##007    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 32,    -11,  -87,    0 }
+                { "monsters/mummy", 33,    -11,  -23,    0 }
+            }
+        }
+        // ##007    0  128
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 87,    -21,  -93,    0 }
+                { "monsters/mummy", 88,    -21,  -29,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -14,  -95,    0 }
+                { "monsters/mummy", 39,    -14,  -31,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 85,    -18,  -89,    0 }
+                { "monsters/mummy", 86,    -18,  -25,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 42,    -29,  -96,    1 }
+                { "monsters/mummy", 43,    -29,  -32,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,    -25,  -95,    1 }
+                { "monsters/mummy", 3,    -25,  -31,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -15,  -89,    1 }
+                { "monsters/mummy", 45,    -15,  -25,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 10,    -24,  -93,    0 }
+                { "monsters/mummy", 11,    -24,  -29,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -12,  -88,    0 }
+                { "monsters/mummy", 45,    -12,  -24,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,     -6,  -93,    0 }
+                { "monsters/mummy", 3,     -6,  -29,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 42,    -21,  -95,    0 }
+                { "monsters/mummy", 43,    -21,  -31,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 85,    -18,  -89,    0 }
+                { "monsters/mummy", 86,    -18,  -25,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 42,    -29,  -96,    1 }
+                { "monsters/mummy", 43,    -29,  -32,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,    -25,  -96,    1 }
+                { "monsters/mummy", 3,    -25,  -32,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -15,  -89,    1 }
+                { "monsters/mummy", 45,    -15,  -25,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 10,    -24,  -93,    0 }
+                { "monsters/mummy", 11,    -24,  -29,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -12,  -88,    0 }
+                { "monsters/mummy", 45,    -12,  -24,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,     -6,  -93,    0 }
+                { "monsters/mummy", 3,     -6,  -29,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 42,    -21,  -95,    0 }
+                { "monsters/mummy", 43,    -21,  -31,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 85,    -18,  -89,    0 }
+                { "monsters/mummy", 86,    -18,  -25,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 42,    -29,  -96,    1 }
+                { "monsters/mummy", 43,    -29,  -32,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,    -25,  -95,    1 }
+                { "monsters/mummy", 3,    -25,  -31,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -15,  -89,    1 }
+                { "monsters/mummy", 45,    -15,  -25,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 10,    -24,  -93,    0 }
+                { "monsters/mummy", 11,    -24,  -29,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -12,  -88,    0 }
+                { "monsters/mummy", 45,    -12,  -24,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,     -6,  -93,    0 }
+                { "monsters/mummy", 3,     -6,  -29,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 42,    -21,  -95,    0 }
+                { "monsters/mummy", 43,    -21,  -31,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 85,    -18,  -89,    0 }
+                { "monsters/mummy", 86,    -18,  -25,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 42,    -29,  -96,    1 }
+                { "monsters/mummy", 43,    -29,  -32,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,    -25,  -94,    1 }
+                { "monsters/mummy", 3,    -25,  -30,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -15,  -89,    1 }
+                { "monsters/mummy", 45,    -15,  -25,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 18,    -31,  -88,    0 }
+                { "monsters/mummy", 19,    -31,  -24,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 44,    -12,  -88,    0 }
+                { "monsters/mummy", 45,    -12,  -24,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 2,     -6,  -93,    0 }
+                { "monsters/mummy", 3,     -6,  -29,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 42,    -21,  -95,    0 }
+                { "monsters/mummy", 43,    -21,  -31,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 0,    -15,  -90,    0 }
+                { "monsters/mummy", 1,    -15,  -26,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 42,    -29,  -96,    1 }
+                { "monsters/mummy", 43,    -29,  -32,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 8,    -22,  -92,    1 }
+                { "monsters/mummy", 9,    -22,  -28,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 72,    -18,  -87,    1 }
+                { "monsters/mummy", 73,    -18,  -23,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 18,    -31,  -88,    0 }
+                { "monsters/mummy", 19,    -31,  -24,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 72,    -12,  -87,    0 }
+                { "monsters/mummy", 73,    -12,  -23,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 8,    -10,  -92,    0 }
+                { "monsters/mummy", 9,    -10,  -28,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -14,  -93,    0 }
+                { "monsters/mummy", 39,    -14,  -29,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 0,    -15,  -90,    0 }
+                { "monsters/mummy", 1,    -15,  -26,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -25,  -97,    1 }
+                { "monsters/mummy", 39,    -25,  -33,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 8,    -22,  -92,    1 }
+                { "monsters/mummy", 9,    -22,  -28,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 72,    -18,  -87,    1 }
+                { "monsters/mummy", 73,    -18,  -23,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 18,    -31,  -88,    0 }
+                { "monsters/mummy", 19,    -31,  -24,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 72,    -12,  -87,    0 }
+                { "monsters/mummy", 73,    -12,  -23,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 8,    -10,  -92,    0 }
+                { "monsters/mummy", 9,    -10,  -28,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -14,  -93,    0 }
+                { "monsters/mummy", 39,    -14,  -29,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 0,    -15,  -90,    0 }
+                { "monsters/mummy", 1,    -15,  -26,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -25,  -97,    1 }
+                { "monsters/mummy", 39,    -25,  -33,    1 }
+            }
+        }
+        // ##014    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 8,    -22,  -92,    1 }
+                { "monsters/mummy", 9,    -22,  -28,    1 }
+            }
+        }
+        // ##014    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 72,    -18,  -87,    1 }
+                { "monsters/mummy", 73,    -18,  -23,    1 }
+            }
+        }
+        // ##014    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 18,    -31,  -88,    0 }
+                { "monsters/mummy", 19,    -31,  -24,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 72,    -12,  -87,    0 }
+                { "monsters/mummy", 73,    -12,  -23,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 8,    -10,  -92,    0 }
+                { "monsters/mummy", 9,    -10,  -28,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -14,  -93,    0 }
+                { "monsters/mummy", 39,    -14,  -29,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 0,    -15,  -90,    0 }
+                { "monsters/mummy", 1,    -15,  -26,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -25,  -97,    1 }
+                { "monsters/mummy", 39,    -25,  -33,    1 }
+            }
+        }
+        // ##015    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 8,    -22,  -92,    1 }
+                { "monsters/mummy", 9,    -22,  -28,    1 }
+            }
+        }
+        // ##015    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 72,    -18,  -87,    1 }
+                { "monsters/mummy", 73,    -18,  -23,    1 }
+            }
+        }
+        // ##015    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 18,    -31,  -88,    0 }
+                { "monsters/mummy", 19,    -31,  -24,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 72,    -12,  -87,    0 }
+                { "monsters/mummy", 73,    -12,  -23,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 8,    -10,  -92,    0 }
+                { "monsters/mummy", 9,    -10,  -28,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 38,    -14,  -93,    0 }
+                { "monsters/mummy", 39,    -14,  -29,    0 }
+            }
+        }
+    }
+}
+
+mummy_melee
+{
+    // frames:   13
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 20,    -21,  -98,    0 }
+                { "monsters/mummy", 21,    -21,  -34,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 63,    -26,  -96,    1 }
+                { "monsters/mummy", 64,    -26,  -32,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -47,  -97,    1 }
+                { "monsters/mummy", 80,    -47,  -33,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -24,  -93,    1 }
+                { "monsters/mummy", 7,    -24,  -29,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 54,    -22,  -97,    0 }
+                { "monsters/mummy", 55,    -22,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -21,  -93,    0 }
+                { "monsters/mummy", 7,    -21,  -29,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -15,  -97,    0 }
+                { "monsters/mummy", 80,    -15,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 63,    -17,  -96,    0 }
+                { "monsters/mummy", 64,    -17,  -32,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 20,    -21,  -98,    0 }
+                { "monsters/mummy", 21,    -21,  -34,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 63,    -26,  -96,    1 }
+                { "monsters/mummy", 64,    -26,  -32,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -47,  -97,    1 }
+                { "monsters/mummy", 80,    -47,  -33,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -24,  -93,    1 }
+                { "monsters/mummy", 7,    -24,  -29,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 54,    -22,  -97,    0 }
+                { "monsters/mummy", 55,    -22,  -33,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -21,  -93,    0 }
+                { "monsters/mummy", 7,    -21,  -29,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -15,  -97,    0 }
+                { "monsters/mummy", 80,    -15,  -33,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 63,    -17,  -96,    0 }
+                { "monsters/mummy", 64,    -17,  -32,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 20,    -21,  -98,    0 }
+                { "monsters/mummy", 21,    -21,  -34,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 63,    -26,  -96,    1 }
+                { "monsters/mummy", 64,    -26,  -32,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -47,  -97,    1 }
+                { "monsters/mummy", 80,    -47,  -33,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -24,  -93,    1 }
+                { "monsters/mummy", 7,    -24,  -29,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 54,    -22,  -97,    0 }
+                { "monsters/mummy", 55,    -22,  -33,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -21,  -93,    0 }
+                { "monsters/mummy", 7,    -21,  -29,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -15,  -97,    0 }
+                { "monsters/mummy", 80,    -15,  -33,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 68,    -15,  -97,    0 }
+                { "monsters/mummy", 69,    -15,  -33,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003   82    0
+        action A_PlayLocalSound("sounds/mumatk02.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 28,    -12,  -94,    0 }
+                { "monsters/mummy", 29,    -12,  -30,    0 }
+            }
+        }
+        // ##003   82    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 68,    -49,  -97,    1 }
+                { "monsters/mummy", 69,    -49,  -33,    1 }
+            }
+        }
+        // ##003   82    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 90,    -46,  -89,    1 }
+                { "monsters/mummy", 91,    -46,  -25,    1 }
+            }
+        }
+        // ##003   82    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 12,    -33,  -91,    1 }
+                { "monsters/mummy", 13,    -33,  -27,    1 }
+            }
+        }
+        // ##003   82    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 54,    -22,  -97,    0 }
+                { "monsters/mummy", 55,    -22,  -33,    0 }
+            }
+        }
+        // ##003   82    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 12,    -19,  -91,    0 }
+                { "monsters/mummy", 13,    -19,  -27,    0 }
+            }
+        }
+        // ##003   82    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 90,    -18,  -90,    0 }
+                { "monsters/mummy", 91,    -18,  -26,    0 }
+            }
+        }
+        // ##003   82    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 68,    -15,  -97,    0 }
+                { "monsters/mummy", 69,    -15,  -33,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 28,    -12,  -94,    0 }
+                { "monsters/mummy", 29,    -12,  -30,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 68,    -49,  -97,    1 }
+                { "monsters/mummy", 69,    -49,  -33,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 90,    -46,  -89,    1 }
+                { "monsters/mummy", 91,    -46,  -25,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 12,    -33,  -91,    1 }
+                { "monsters/mummy", 13,    -33,  -27,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 54,    -22,  -97,    0 }
+                { "monsters/mummy", 55,    -22,  -33,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 12,    -19,  -91,    0 }
+                { "monsters/mummy", 13,    -19,  -27,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 90,    -18,  -90,    0 }
+                { "monsters/mummy", 91,    -18,  -26,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 68,    -15,  -97,    0 }
+                { "monsters/mummy", 69,    -15,  -33,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 28,    -12,  -94,    0 }
+                { "monsters/mummy", 29,    -12,  -30,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 68,    -49,  -97,    1 }
+                { "monsters/mummy", 69,    -49,  -33,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 90,    -46,  -89,    1 }
+                { "monsters/mummy", 91,    -46,  -25,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 12,    -33,  -91,    1 }
+                { "monsters/mummy", 13,    -33,  -27,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 60,    -21, -104,    0 }
+                { "monsters/mummy", 61,    -21,  -40,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 12,    -19,  -91,    0 }
+                { "monsters/mummy", 13,    -19,  -27,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 90,    -18,  -90,    0 }
+                { "monsters/mummy", 91,    -18,  -26,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 74,    -25, -105,    0 }
+                { "monsters/mummy", 75,    -25,  -41,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 58,    -14, -112,    0 }
+                { "monsters/mummy", 59,    -14,  -48,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 74,    -38, -105,    1 }
+                { "monsters/mummy", 75,    -38,  -41,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 96,    -37, -105,    1 }
+                { "monsters/mummy", 97,    -37,  -41,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 22,    -15, -107,    1 }
+                { "monsters/mummy", 23,    -15,  -43,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 60,    -21, -104,    0 }
+                { "monsters/mummy", 61,    -21,  -40,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 22,    -17, -108,    0 }
+                { "monsters/mummy", 23,    -17,  -44,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 96,    -28, -105,    0 }
+                { "monsters/mummy", 97,    -28,  -41,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 74,    -25, -105,    0 }
+                { "monsters/mummy", 75,    -25,  -41,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 58,    -14, -112,    0 }
+                { "monsters/mummy", 59,    -14,  -48,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 74,    -38, -105,    1 }
+                { "monsters/mummy", 75,    -38,  -41,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 96,    -37, -105,    1 }
+                { "monsters/mummy", 97,    -37,  -41,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 22,    -15, -107,    1 }
+                { "monsters/mummy", 23,    -15,  -43,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 60,    -21, -104,    0 }
+                { "monsters/mummy", 61,    -21,  -40,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 22,    -17, -108,    0 }
+                { "monsters/mummy", 23,    -17,  -44,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 96,    -28, -105,    0 }
+                { "monsters/mummy", 97,    -28,  -41,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 74,    -25, -105,    0 }
+                { "monsters/mummy", 75,    -25,  -41,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 58,    -14, -112,    0 }
+                { "monsters/mummy", 59,    -14,  -48,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 74,    -38, -105,    1 }
+                { "monsters/mummy", 75,    -38,  -41,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 96,    -37, -105,    1 }
+                { "monsters/mummy", 97,    -37,  -41,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 22,    -15, -107,    1 }
+                { "monsters/mummy", 23,    -15,  -43,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 60,    -21, -104,    0 }
+                { "monsters/mummy", 61,    -21,  -40,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 22,    -17, -108,    0 }
+                { "monsters/mummy", 23,    -17,  -44,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 96,    -28, -105,    0 }
+                { "monsters/mummy", 97,    -28,  -41,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 74,    -25, -105,    0 }
+                { "monsters/mummy", 75,    -25,  -41,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 58,    -14, -112,    0 }
+                { "monsters/mummy", 59,    -14,  -48,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 74,    -38, -105,    1 }
+                { "monsters/mummy", 75,    -38,  -41,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 96,    -37, -105,    1 }
+                { "monsters/mummy", 97,    -37,  -41,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 22,    -15, -107,    1 }
+                { "monsters/mummy", 23,    -15,  -43,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 60,    -21, -104,    0 }
+                { "monsters/mummy", 61,    -21,  -40,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 22,    -17, -108,    0 }
+                { "monsters/mummy", 23,    -17,  -44,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 96,    -28, -105,    0 }
+                { "monsters/mummy", 97,    -28,  -41,    0 }
+            }
+        }
+        // ##009    0  128
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 68,    -15,  -97,    0 }
+                { "monsters/mummy", 69,    -15,  -33,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0  128
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 28,    -12,  -94,    0 }
+                { "monsters/mummy", 29,    -12,  -30,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 68,    -49,  -97,    1 }
+                { "monsters/mummy", 69,    -49,  -33,    1 }
+            }
+        }
+        // ##010    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 90,    -47,  -89,    1 }
+                { "monsters/mummy", 91,    -47,  -25,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 12,    -33,  -90,    1 }
+                { "monsters/mummy", 13,    -33,  -26,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 54,    -22,  -97,    0 }
+                { "monsters/mummy", 55,    -22,  -33,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 12,    -18,  -92,    0 }
+                { "monsters/mummy", 13,    -18,  -28,    0 }
+            }
+        }
+        // ##010    0  128
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 90,    -18,  -90,    0 }
+                { "monsters/mummy", 91,    -18,  -26,    0 }
+            }
+        }
+        // ##010    0  128
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 68,    -15,  -97,    0 }
+                { "monsters/mummy", 69,    -15,  -33,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 20,    -21,  -99,    0 }
+                { "monsters/mummy", 21,    -21,  -35,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 63,    -26,  -96,    1 }
+                { "monsters/mummy", 64,    -26,  -32,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -47,  -97,    1 }
+                { "monsters/mummy", 80,    -47,  -33,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -24,  -93,    1 }
+                { "monsters/mummy", 7,    -24,  -29,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 54,    -22,  -97,    0 }
+                { "monsters/mummy", 55,    -22,  -33,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -20,  -94,    0 }
+                { "monsters/mummy", 7,    -20,  -30,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -15,  -98,    0 }
+                { "monsters/mummy", 80,    -15,  -34,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 63,    -17,  -96,    0 }
+                { "monsters/mummy", 64,    -17,  -32,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        action A_CheckMelee("monsters/mummy_chase", 48)
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 20,    -21,  -98,    0 }
+                { "monsters/mummy", 21,    -21,  -34,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 63,    -26,  -96,    1 }
+                { "monsters/mummy", 64,    -26,  -32,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -47,  -97,    1 }
+                { "monsters/mummy", 80,    -47,  -33,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -24,  -94,    1 }
+                { "monsters/mummy", 7,    -24,  -30,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 54,    -22,  -97,    0 }
+                { "monsters/mummy", 55,    -22,  -33,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 6,    -21,  -94,    0 }
+                { "monsters/mummy", 7,    -21,  -30,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 79,    -15,  -98,    0 }
+                { "monsters/mummy", 80,    -15,  -34,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 63,    -17,  -96,    0 }
+                { "monsters/mummy", 64,    -17,  -32,    0 }
+            }
+        }
+    }
+}
+
+mummy_range_attack
+{
+    // frames:   30
+    frame
+    {
+        // ##000   81    0
+        action A_PlayLocalSound("sounds/mumatk01.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 65,    -16, -113,    0 }
+                { "monsters/mummy", 66,    -16,  -49,    0 }
+            }
+        }
+        // ##000   81    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 14,    -28, -106,    1 }
+                { "monsters/mummy", 15,    -28,  -42,    1 }
+            }
+        }
+        // ##000   81    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 56,    -39, -102,    1 }
+                { "monsters/mummy", 57,    -39,  -38,    1 }
+            }
+        }
+        // ##000   81    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 83,    -31, -112,    1 }
+                { "monsters/mummy", 84,    -31,  -48,    1 }
+            }
+        }
+        // ##000   81    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 36,    -28, -107,    0 }
+                { "monsters/mummy", 37,    -28,  -43,    0 }
+            }
+        }
+        // ##000   81    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 83,    -27, -111,    0 }
+                { "monsters/mummy", 84,    -27,  -47,    0 }
+            }
+        }
+        // ##000   81    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 56,    -19, -103,    0 }
+                { "monsters/mummy", 57,    -19,  -39,    0 }
+            }
+        }
+        // ##000   81    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 14,    -10, -104,    0 }
+                { "monsters/mummy", 15,    -10,  -40,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 65,    -16, -113,    0 }
+                { "monsters/mummy", 66,    -16,  -49,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 14,    -28, -106,    1 }
+                { "monsters/mummy", 15,    -28,  -42,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 56,    -39, -102,    1 }
+                { "monsters/mummy", 57,    -39,  -38,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 83,    -31, -112,    1 }
+                { "monsters/mummy", 84,    -31,  -48,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 36,    -28, -107,    0 }
+                { "monsters/mummy", 37,    -28,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 83,    -27, -111,    0 }
+                { "monsters/mummy", 84,    -27,  -47,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 56,    -19, -103,    0 }
+                { "monsters/mummy", 57,    -19,  -39,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 14,    -10, -104,    0 }
+                { "monsters/mummy", 15,    -10,  -40,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 65,    -16, -113,    0 }
+                { "monsters/mummy", 66,    -16,  -49,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 14,    -28, -106,    1 }
+                { "monsters/mummy", 15,    -28,  -42,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 56,    -39, -102,    1 }
+                { "monsters/mummy", 57,    -39,  -38,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 83,    -31, -112,    1 }
+                { "monsters/mummy", 84,    -31,  -48,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 36,    -28, -107,    0 }
+                { "monsters/mummy", 37,    -28,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 83,    -27, -111,    0 }
+                { "monsters/mummy", 84,    -27,  -47,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 56,    -19, -103,    0 }
+                { "monsters/mummy", 57,    -19,  -39,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 14,    -10, -104,    0 }
+                { "monsters/mummy", 15,    -10,  -40,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 70,    -17, -108,    0 }
+                { "monsters/mummy", 71,    -17,  -44,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 24,    -41, -116,    1 }
+                { "monsters/mummy", 25,    -41,  -52,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 98,    -32, -109,    1 }
+                { "monsters/mummy", 99,    -32,  -45,    1 }
+            }
+        }
+        // ##003    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 50,    -26,  -99,    1 }
+                { "monsters/mummy", 51,    -26,  -35,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 40,    -30, -105,    0 }
+                { "monsters/mummy", 41,    -30,  -41,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 50,    -31,  -99,    0 }
+                { "monsters/mummy", 51,    -31,  -35,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 98,    -30, -109,    0 }
+                { "monsters/mummy", 99,    -30,  -45,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 24,    -19, -116,    0 }
+                { "monsters/mummy", 25,    -19,  -52,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 70,    -17, -108,    0 }
+                { "monsters/mummy", 71,    -17,  -44,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 24,    -41, -116,    1 }
+                { "monsters/mummy", 25,    -41,  -52,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 98,    -32, -109,    1 }
+                { "monsters/mummy", 99,    -32,  -45,    1 }
+            }
+        }
+        // ##004    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 50,    -26,  -99,    1 }
+                { "monsters/mummy", 51,    -26,  -35,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 40,    -30, -105,    0 }
+                { "monsters/mummy", 41,    -30,  -41,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 50,    -31,  -99,    0 }
+                { "monsters/mummy", 51,    -31,  -35,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 98,    -29, -109,    0 }
+                { "monsters/mummy", 99,    -29,  -45,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 24,    -19, -116,    0 }
+                { "monsters/mummy", 25,    -19,  -52,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 70,    -17, -108,    0 }
+                { "monsters/mummy", 71,    -17,  -44,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 24,    -41, -116,    1 }
+                { "monsters/mummy", 25,    -41,  -52,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 98,    -32, -109,    1 }
+                { "monsters/mummy", 99,    -32,  -45,    1 }
+            }
+        }
+        // ##005    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 50,    -26,  -99,    1 }
+                { "monsters/mummy", 51,    -26,  -35,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 40,    -30, -105,    0 }
+                { "monsters/mummy", 41,    -30,  -41,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 50,    -31,  -99,    0 }
+                { "monsters/mummy", 51,    -31,  -35,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 98,    -30, -109,    0 }
+                { "monsters/mummy", 99,    -30,  -45,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 24,    -19, -116,    0 }
+                { "monsters/mummy", 25,    -19,  -52,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006   80  128
+        action A_PlayLocalSound("sounds/mumact02.wav")
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##006   80    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##006   80  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##006   80  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##006   80  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##006   80    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 83,    -27, -112,    0 }
+                { "monsters/mummy", 84,    -27,  -48,    0 }
+            }
+        }
+        // ##006   80    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##006   80    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##007    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##007    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##007    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 83,    -27, -112,    0 }
+                { "monsters/mummy", 84,    -27,  -48,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##008    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##008    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##008    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##008    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##009    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##009    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##009    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##009    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##010    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##010    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##010    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##010    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##011    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##011    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##011    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##011    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##012    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##012    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##012    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##012    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##013    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##013    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##013    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##013    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##014    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##014    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##014    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##014    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##015    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##015    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##015    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##015    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##016    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##016    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##016    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##016    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##017    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##017    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##017    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##017    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##017    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##017    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##017    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##018    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##018    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##018    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##018    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##018    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##018    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##018    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##019    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##019    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##019    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##019    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##019    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##019    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##019    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##020    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##020    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##020    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##020    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##020    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##020    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##020    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##020    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##021    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##021    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##021    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##021    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##021    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##021    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##021    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##021    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##022    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##022    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##022    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##022    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##022    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##022    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##022    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##022    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##023    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##023    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##023    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##023    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##023    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##023    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##023    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##023    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##024    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##024    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##024    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##024    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##024    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##024    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##024    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##024    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##025    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##025    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##025    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##025    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##025    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##025    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##025    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##025    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##026    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##026    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##026    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##026    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##026    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##026    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##026    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##026    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##027    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##027    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##027    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##027    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##027    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##027    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##027    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##027    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##028    0  128
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##028    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##028    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##028    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##028    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##028    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##028    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##028    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##029    0  128
+        fullbright
+        goto "monsters/mummy_chase"
+        action A_FireProjectile("Proj_Cobra_Red", 0, 0, 2, 96, 8)
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mummy", 81,    -17,  -95,    0 }
+                { "monsters/mummy", 82,    -17,  -31,    0 }
+            }
+        }
+        // ##029    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -32,  -90,    1 }
+                { "monsters/mummy", 35,    -32,  -26,    1 }
+            }
+        }
+        // ##029    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,    -37,  -89,    1 }
+                { "monsters/mummy", 17,    -37,  -25,    1 }
+            }
+        }
+        // ##029    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -26,  -90,    1 }
+                { "monsters/mummy", 93,    -26,  -26,    1 }
+            }
+        }
+        // ##029    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mummy", 46,    -24,  -88,    0 }
+                { "monsters/mummy", 47,    -24,  -24,    0 }
+            }
+        }
+        // ##029    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mummy", 92,    -24,  -89,    0 }
+                { "monsters/mummy", 93,    -24,  -25,    0 }
+            }
+        }
+        // ##029    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mummy", 16,     -8,  -88,    0 }
+                { "monsters/mummy", 17,     -8,  -24,    0 }
+            }
+        }
+        // ##029    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mummy", 34,    -15,  -91,    0 }
+                { "monsters/mummy", 35,    -15,  -27,    0 }
+            }
+        }
+    }
+}
+
+mummy_gibs01
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/mummy", 62,     -5,  -17,    0 }
+        }
+    }
+}
+
+mummy_gibs02
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/mummy", 67,     -7,  -28,    0 }
+        }
+    }
+}
+
+mummy_gibs03
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/mummy", 78,     -7,  -18,    0 }
+        }
+    }
+}
+
+mummy_gibs04
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/mummy", 89,     -6,  -17,    0 }
+        }
+
+    }
+}
+
+mummy_death
+{
+    frame
+    {
+        action A_GibDeath(0.0)
+        action A_MummyDeath()
+        action A_TossActor("Obj_Mummy_Gib01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Mummy_Gib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Mummy_Gib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Mummy_Gib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Mummy_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Mummy_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_Destroy()
+        delay 1
+    }
+}
