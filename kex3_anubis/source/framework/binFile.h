@@ -63,6 +63,7 @@ public:
     byte                *BufferAt(void) const { return &buffer[bufferOffset]; }
     const bool          IsOpened(void) const { return bOpened; }
     const unsigned int  BufferOffset(void) const { return bufferOffset; }
+    void                SetPosition(const int pos) { bufferOffset = pos; }
 
 private:
     FILE                *handle;

@@ -497,6 +497,10 @@
 				Name="tools"
 				>
 				<File
+					RelativePath="..\source\tools\dataConvert.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\tools\spriteMake.cpp"
 					>
 				</File>
