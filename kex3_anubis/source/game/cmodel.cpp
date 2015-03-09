@@ -767,9 +767,9 @@ float kexCModel::GetFloorHeight(const kexVec3 &origin, mapSector_t *sector, bool
 
     face = &faces[sector->faceEnd+2];
 
-    if(bTestWater && face->flags & FF_WATER && face->flags & FF_PORTAL)
+    if(bTestWater && !(face->flags & FF_SOLID) && face->flags & FF_PORTAL)
     {
-        while(face->flags & FF_WATER && face->flags & FF_PORTAL)
+        while(!(face->flags & FF_SOLID) && face->flags & FF_PORTAL)
         {
             mapSector_t *s = &sectors[face->sector];
             face = &faces[s->faceEnd+2];
@@ -797,9 +797,9 @@ float kexCModel::GetCeilingHeight(const kexVec3 &origin, mapSector_t *sector, bo
 
     face = &faces[sector->faceEnd+1];
 
-    if(bTestWater && face->flags & FF_WATER && face->flags & FF_PORTAL)
+    if(bTestWater && !(face->flags & FF_SOLID) && face->flags & FF_PORTAL)
     {
-        while(face->flags & FF_WATER && face->flags & FF_PORTAL)
+        while(!(face->flags & FF_SOLID) && face->flags & FF_PORTAL)
         {
             mapSector_t *s = &sectors[face->sector];
             face = &faces[s->faceEnd+1];
@@ -970,7 +970,7 @@ void kexCModel::CheckSurroundingSectors(void)
         
     } while(sectorCount < sectorList.CurrentLength());
     
-    if(bChangeFloorHeight && best)
+    if(bChangeFloorHeight && best && best->floorFace->flags & FF_SOLID)
     {
         if(PointInsideSector(end, best, -actorRadius, moveActor->StepHeight()))
         {
@@ -1136,7 +1136,8 @@ void kexCModel::AdvanceActorToSector(void)
         if(PointInsideSector(end, sectorList[i], 0, offset))
         {
             // handle special cases for flat/thin, see-through floors
-            if(sectorList[i]->ceilingFace->flags & FF_SOLID && sectorList[i]->ceilingFace->flags & FF_PORTAL)
+            if(sectorList[i]->ceilingFace->flags & FF_SOLID &&
+               sectorList[i]->ceilingFace->flags & FF_PORTAL)
             {
                 // if we're standing above that sector then don't enter it
                 if(&sectors[sectorList[i]->ceilingFace->sector] == sector)
@@ -1156,7 +1157,7 @@ void kexCModel::AdvanceActorToSector(void)
     bWater2 = (sector->flags & SF_WATER) != 0;
 
     // don't clip z axis if we're entering water
-    if(!(bWater1 ^ bWater2))
+    if(!(bWater1 ^ bWater2) && sector->floorFace->flags & FF_SOLID)
     {
         if(end.z - floorz < 0)
         {
@@ -1165,7 +1166,8 @@ void kexCModel::AdvanceActorToSector(void)
         }
     }
 
-    if(!(bWater1 ^ bWater2) || moveActor->Flags() & AF_NOEXITWATER)
+    if((!(bWater1 ^ bWater2) && sector->ceilingFace->flags & FF_SOLID) ||
+       moveActor->Flags() & AF_NOEXITWATER)
     {
         if(ceilingz - end.z < actorHeight)
         {
