@@ -1,0 +1,3965 @@
+bastet_chase
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        action A_FaceTarget()
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 11,    -19,  -77,    0 }
+                { "monsters/bastet", 12,    -19,  -13,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 41,    -20,  -78,    0 }
+                { "monsters/bastet", 42,    -20,  -14,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 93,    -24,  -76,    0 }
+                { "monsters/bastet", 94,    -24,  -12,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 13,    -21,  -76,    0 }
+                { "monsters/bastet", 14,    -21,  -12,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 54,    -16,  -78,    0 }
+                { "monsters/bastet", 55,    -16,  -14,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 13,    -38,  -74,    1 }
+                { "monsters/bastet", 14,    -38,  -10,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 93,    -21,  -76,    1 }
+                { "monsters/bastet", 94,    -21,  -12,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 41,    -16,  -78,    1 }
+                { "monsters/bastet", 42,    -16,  -14,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 11,    -19,  -77,    0 }
+                { "monsters/bastet", 12,    -19,  -13,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 41,    -20,  -78,    0 }
+                { "monsters/bastet", 42,    -20,  -14,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 93,    -24,  -76,    0 }
+                { "monsters/bastet", 94,    -24,  -12,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 13,    -21,  -76,    0 }
+                { "monsters/bastet", 14,    -21,  -12,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 54,    -16,  -78,    0 }
+                { "monsters/bastet", 55,    -16,  -14,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 13,    -38,  -74,    1 }
+                { "monsters/bastet", 14,    -38,  -10,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 93,    -21,  -76,    1 }
+                { "monsters/bastet", 94,    -21,  -12,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 41,    -16,  -78,    1 }
+                { "monsters/bastet", 42,    -16,  -14,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 23,    -18,  -79,    0 }
+                { "monsters/bastet", 24,    -18,  -15,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 41,    -20,  -78,    0 }
+                { "monsters/bastet", 42,    -20,  -14,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 93,    -24,  -76,    0 }
+                { "monsters/bastet", 94,    -24,  -12,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 13,    -21,  -76,    0 }
+                { "monsters/bastet", 14,    -21,  -12,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 66,    -18,  -76,    0 }
+                { "monsters/bastet", 67,    -18,  -12,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 13,    -38,  -74,    1 }
+                { "monsters/bastet", 14,    -38,  -10,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 93,    -21,  -76,    1 }
+                { "monsters/bastet", 94,    -21,  -12,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 41,    -16,  -78,    1 }
+                { "monsters/bastet", 42,    -16,  -14,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 23,    -18,  -79,    0 }
+                { "monsters/bastet", 24,    -18,  -15,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 62,    -21,  -77,    0 }
+                { "monsters/bastet", 63,    -21,  -13,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 0,    -29,  -75,    0 }
+                { "monsters/bastet", 1,    -29,  -11,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 25,    -24,  -78,    0 }
+                { "monsters/bastet", 26,    -24,  -14,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 66,    -18,  -76,    0 }
+                { "monsters/bastet", 67,    -18,  -12,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 25,    -16,  -77,    1 }
+                { "monsters/bastet", 26,    -16,  -13,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 0,    -22,  -76,    1 }
+                { "monsters/bastet", 1,    -22,  -12,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 62,    -22,  -76,    1 }
+                { "monsters/bastet", 63,    -22,  -12,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 33,    -16,  -79,    0 }
+                { "monsters/bastet", 34,    -16,  -15,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 62,    -21,  -77,    0 }
+                { "monsters/bastet", 63,    -21,  -13,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 0,    -29,  -76,    0 }
+                { "monsters/bastet", 1,    -29,  -12,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 25,    -24,  -78,    0 }
+                { "monsters/bastet", 26,    -24,  -14,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 85,    -15,  -74,    0 }
+                { "monsters/bastet", 86,    -15,  -10,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 25,    -16,  -77,    1 }
+                { "monsters/bastet", 26,    -16,  -13,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 0,    -22,  -76,    1 }
+                { "monsters/bastet", 1,    -22,  -12,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 62,    -22,  -76,    1 }
+                { "monsters/bastet", 63,    -22,  -12,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 33,    -16,  -79,    0 }
+                { "monsters/bastet", 34,    -16,  -15,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 62,    -21,  -77,    0 }
+                { "monsters/bastet", 63,    -21,  -13,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 0,    -29,  -75,    0 }
+                { "monsters/bastet", 1,    -29,  -11,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 25,    -24,  -78,    0 }
+                { "monsters/bastet", 26,    -24,  -14,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 85,    -15,  -74,    0 }
+                { "monsters/bastet", 86,    -15,  -10,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 25,    -16,  -77,    1 }
+                { "monsters/bastet", 26,    -16,  -13,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 0,    -22,  -76,    1 }
+                { "monsters/bastet", 1,    -22,  -12,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 62,    -22,  -76,    1 }
+                { "monsters/bastet", 63,    -22,  -12,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 11,    -18,  -77,    1 }
+                { "monsters/bastet", 12,    -18,  -13,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 79,    -20,  -79,    0 }
+                { "monsters/bastet", 80,    -20,  -15,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 64,    -22,  -78,    0 }
+                { "monsters/bastet", 65,    -22,  -14,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 35,    -28,  -75,    0 }
+                { "monsters/bastet", 36,    -28,  -11,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 54,    -17,  -77,    1 }
+                { "monsters/bastet", 55,    -17,  -13,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 35,    -18,  -74,    1 }
+                { "monsters/bastet", 36,    -18,  -10,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 64,    -17,  -79,    1 }
+                { "monsters/bastet", 65,    -17,  -15,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 79,    -13,  -78,    1 }
+                { "monsters/bastet", 80,    -13,  -14,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 11,    -18,  -77,    1 }
+                { "monsters/bastet", 12,    -18,  -13,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 79,    -20,  -79,    0 }
+                { "monsters/bastet", 80,    -20,  -15,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 64,    -22,  -78,    0 }
+                { "monsters/bastet", 65,    -22,  -14,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 35,    -28,  -75,    0 }
+                { "monsters/bastet", 36,    -28,  -11,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 54,    -17,  -77,    1 }
+                { "monsters/bastet", 55,    -17,  -13,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 35,    -18,  -74,    1 }
+                { "monsters/bastet", 36,    -18,  -10,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 64,    -17,  -79,    1 }
+                { "monsters/bastet", 65,    -17,  -15,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 79,    -13,  -78,    1 }
+                { "monsters/bastet", 80,    -13,  -14,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 23,    -24,  -79,    1 }
+                { "monsters/bastet", 24,    -24,  -15,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 79,    -20,  -79,    0 }
+                { "monsters/bastet", 80,    -20,  -15,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 64,    -22,  -78,    0 }
+                { "monsters/bastet", 65,    -22,  -14,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 35,    -28,  -75,    0 }
+                { "monsters/bastet", 36,    -28,  -11,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 66,    -15,  -76,    1 }
+                { "monsters/bastet", 67,    -15,  -12,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 35,    -18,  -74,    1 }
+                { "monsters/bastet", 36,    -18,  -10,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 64,    -17,  -79,    1 }
+                { "monsters/bastet", 65,    -17,  -15,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 79,    -13,  -78,    1 }
+                { "monsters/bastet", 80,    -13,  -14,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 23,    -24,  -79,    1 }
+                { "monsters/bastet", 24,    -24,  -15,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 126,    -20,  -76,    0 }
+                { "monsters/bastet", 127,    -20,  -12,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 81,    -28,  -76,    0 }
+                { "monsters/bastet", 82,     36,  -76,    0 }
+                { "monsters/bastet", 83,    -28,  -12,    0 }
+                { "monsters/bastet", 84,     36,  -12,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 43,    -21,  -76,    0 }
+                { "monsters/bastet", 44,    -21,  -12,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 66,    -15,  -76,    1 }
+                { "monsters/bastet", 67,    -15,  -12,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 43,    -17,  -75,    1 }
+                { "monsters/bastet", 44,    -17,  -11,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 81,    -29,  -76,    1 }
+                { "monsters/bastet", 82,    -41,  -76,    1 }
+                { "monsters/bastet", 83,    -29,  -12,    1 }
+                { "monsters/bastet", 84,    -41,  -12,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 126,    -27,  -75,    1 }
+                { "monsters/bastet", 127,    -27,  -11,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 33,    -23,  -79,    1 }
+                { "monsters/bastet", 34,    -23,  -15,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 126,    -20,  -76,    0 }
+                { "monsters/bastet", 127,    -20,  -12,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 81,    -28,  -76,    0 }
+                { "monsters/bastet", 82,     36,  -76,    0 }
+                { "monsters/bastet", 83,    -28,  -12,    0 }
+                { "monsters/bastet", 84,     36,  -12,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 43,    -21,  -75,    0 }
+                { "monsters/bastet", 44,    -21,  -11,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 85,    -14,  -74,    1 }
+                { "monsters/bastet", 86,    -14,  -10,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 43,    -17,  -75,    1 }
+                { "monsters/bastet", 44,    -17,  -11,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 81,    -29,  -76,    1 }
+                { "monsters/bastet", 82,    -41,  -76,    1 }
+                { "monsters/bastet", 83,    -29,  -12,    1 }
+                { "monsters/bastet", 84,    -41,  -12,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 126,    -27,  -75,    1 }
+                { "monsters/bastet", 127,    -27,  -11,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        action A_BastetTryTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 33,    -23,  -79,    1 }
+                { "monsters/bastet", 34,    -23,  -15,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 126,    -20,  -76,    0 }
+                { "monsters/bastet", 127,    -20,  -12,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 81,    -28,  -76,    0 }
+                { "monsters/bastet", 82,     36,  -76,    0 }
+                { "monsters/bastet", 83,    -28,  -12,    0 }
+                { "monsters/bastet", 84,     36,  -12,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 43,    -21,  -75,    0 }
+                { "monsters/bastet", 44,    -21,  -11,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 85,    -14,  -74,    1 }
+                { "monsters/bastet", 86,    -14,  -10,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 43,    -17,  -75,    1 }
+                { "monsters/bastet", 44,    -17,  -11,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 81,    -29,  -76,    1 }
+                { "monsters/bastet", 82,    -41,  -76,    1 }
+                { "monsters/bastet", 83,    -29,  -12,    1 }
+                { "monsters/bastet", 84,    -41,  -12,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 126,    -27,  -75,    1 }
+                { "monsters/bastet", 127,    -27,  -11,    1 }
+            }
+        }
+    }
+}
+
+bastet_attack
+{
+    // frames:   11
+    frame
+    {
+        // ##000    0    0
+        action A_BastetCheckTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 4,    -17,  -76,    0 }
+                { "monsters/bastet", 5,    -17,  -12,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 143,    -26,  -73,    0 }
+                { "monsters/bastet", 144,    -26,   -9,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 6,    -32,  -71,    0 }
+                { "monsters/bastet", 7,    -32,   -7,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 50,    -23,  -66,    0 }
+                { "monsters/bastet", 51,    -23,   -2,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 105,    -21,  -71,    0 }
+                { "monsters/bastet", 106,    -21,   -7,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 50,    -36,  -66,    1 }
+                { "monsters/bastet", 51,    -36,   -2,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 6,    -15,  -70,    1 }
+                { "monsters/bastet", 7,    -15,   -6,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 143,    -24,  -72,    1 }
+                { "monsters/bastet", 144,    -24,   -8,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001   85    0
+        action A_PlayLocalSound("sounds/bastetact01.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 17,    -11,  -78,    0 }
+                { "monsters/bastet", 18,    -11,  -14,    0 }
+            }
+        }
+        // ##001   85    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 68,    -30,  -81,    0 }
+                { "monsters/bastet", 69,    -30,  -17,    0 }
+            }
+        }
+        // ##001   85    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 19,    -44,  -71,    0 }
+                { "monsters/bastet", 20,     20,  -71,    0 }
+                { "monsters/bastet", 21,    -44,   -7,    0 }
+                { "monsters/bastet", 22,     20,   -7,    0 }
+            }
+        }
+        // ##001   85    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 56,    -23,  -70,    0 }
+                { "monsters/bastet", 57,    -23,   -6,    0 }
+            }
+        }
+        // ##001   85    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 105,    -21,  -71,    0 }
+                { "monsters/bastet", 106,    -21,   -7,    0 }
+            }
+        }
+        // ##001   85    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 56,    -36,  -70,    1 }
+                { "monsters/bastet", 57,    -36,   -6,    1 }
+            }
+        }
+        // ##001   85    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 19,    -15,  -71,    1 }
+                { "monsters/bastet", 20,    -31,  -71,    1 }
+                { "monsters/bastet", 21,    -15,   -7,    1 }
+                { "monsters/bastet", 22,    -31,   -7,    1 }
+            }
+        }
+        // ##001   85    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 68,     -9,  -80,    1 }
+                { "monsters/bastet", 69,     -9,  -16,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002   90    0
+        action A_PlayLocalSound("sounds/bastetatk01.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 29,    -16,  -85,    0 }
+                { "monsters/bastet", 30,    -16,  -21,    0 }
+            }
+        }
+        // ##002   90    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 131,    -47,  -86,    0 }
+                { "monsters/bastet", 132,     17,  -86,    0 }
+                { "monsters/bastet", 133,    -47,  -22,    0 }
+            }
+        }
+        // ##002   90    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 19,    -44,  -71,    0 }
+                { "monsters/bastet", 20,     20,  -71,    0 }
+                { "monsters/bastet", 21,    -44,   -7,    0 }
+                { "monsters/bastet", 22,     20,   -7,    0 }
+            }
+        }
+        // ##002   90    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 70,    -34,  -72,    0 }
+                { "monsters/bastet", 71,     30,  -72,    0 }
+                { "monsters/bastet", 72,    -34,   -8,    0 }
+                { "monsters/bastet", 73,     30,   -8,    0 }
+            }
+        }
+        // ##002   90    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 115,    -17,  -76,    0 }
+                { "monsters/bastet", 116,    -17,  -12,    0 }
+            }
+        }
+        // ##002   90    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 70,    -26,  -73,    1 }
+                { "monsters/bastet", 71,    -38,  -73,    1 }
+                { "monsters/bastet", 72,    -26,   -9,    1 }
+                { "monsters/bastet", 73,    -38,   -9,    1 }
+            }
+        }
+        // ##002   90    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 19,    -15,  -71,    1 }
+                { "monsters/bastet", 20,    -31,  -71,    1 }
+                { "monsters/bastet", 21,    -15,   -7,    1 }
+                { "monsters/bastet", 22,    -31,   -7,    1 }
+            }
+        }
+        // ##002   90    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 131,     -9,  -86,    1 }
+                { "monsters/bastet", 132,    -13,  -86,    1 }
+                { "monsters/bastet", 133,     -9,  -22,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 29,    -16,  -85,    0 }
+                { "monsters/bastet", 30,    -16,  -21,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 136,    -37,  -78,    0 }
+                { "monsters/bastet", 137,    -37,  -14,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 31,    -29,  -75,    0 }
+                { "monsters/bastet", 32,    -29,  -11,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 70,    -35,  -73,    0 }
+                { "monsters/bastet", 71,     29,  -73,    0 }
+                { "monsters/bastet", 72,    -35,   -9,    0 }
+                { "monsters/bastet", 73,     29,   -9,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 115,    -17,  -76,    0 }
+                { "monsters/bastet", 116,    -17,  -12,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 98,    -17,  -69,    1 }
+                { "monsters/bastet", 99,    -17,   -5,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 31,    -22,  -74,    1 }
+                { "monsters/bastet", 32,    -22,  -10,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 136,    -24,  -79,    1 }
+                { "monsters/bastet", 137,    -24,  -15,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 47,    -35,  -78,    0 }
+                { "monsters/bastet", 48,     29,  -78,    0 }
+                { "monsters/bastet", 49,    -35,  -14,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 143,    -27,  -71,    0 }
+                { "monsters/bastet", 144,    -27,   -7,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 39,    -24,  -65,    0 }
+                { "monsters/bastet", 40,    -24,   -1,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 98,    -28,  -70,    0 }
+                { "monsters/bastet", 99,    -28,   -6,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 121,    -27,  -76,    0 }
+                { "monsters/bastet", 122,    -27,  -12,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 98,    -17,  -69,    1 }
+                { "monsters/bastet", 99,    -17,   -5,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 39,    -20,  -68,    1 }
+                { "monsters/bastet", 40,    -20,   -4,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 143,    -23,  -73,    1 }
+                { "monsters/bastet", 144,    -23,   -9,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 47,    -35,  -78,    0 }
+                { "monsters/bastet", 48,     29,  -78,    0 }
+                { "monsters/bastet", 49,    -35,  -14,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 143,    -27,  -71,    0 }
+                { "monsters/bastet", 144,    -27,   -7,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 6,    -32,  -70,    0 }
+                { "monsters/bastet", 7,    -32,   -6,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 50,    -24,  -66,    0 }
+                { "monsters/bastet", 51,    -24,   -2,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 121,    -27,  -76,    0 }
+                { "monsters/bastet", 122,    -27,  -12,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 50,    -36,  -68,    1 }
+                { "monsters/bastet", 51,    -36,   -4,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 39,    -19,  -67,    1 }
+                { "monsters/bastet", 40,    -19,   -3,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 143,    -22,  -73,    1 }
+                { "monsters/bastet", 144,    -22,   -9,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        action A_PlayLocalSound("sounds/bastetact01.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 4,    -18,  -77,    1 }
+                { "monsters/bastet", 5,    -18,  -13,    1 }
+            }
+        }
+        // ##006   85    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 68,    -30,  -81,    0 }
+                { "monsters/bastet", 69,    -30,  -17,    0 }
+            }
+        }
+        // ##006   85    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 19,    -45,  -70,    0 }
+                { "monsters/bastet", 20,     19,  -70,    0 }
+                { "monsters/bastet", 21,    -45,   -6,    0 }
+                { "monsters/bastet", 22,     19,   -6,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 56,    -24,  -70,    0 }
+                { "monsters/bastet", 57,    -24,   -6,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 128,    -23,  -69,    0 }
+                { "monsters/bastet", 129,    -23,   -5,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 56,    -36,  -72,    1 }
+                { "monsters/bastet", 57,    -36,   -8,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 6,    -14,  -70,    1 }
+                { "monsters/bastet", 7,    -14,   -6,    1 }
+            }
+        }
+        // ##006   85    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 68,    -11,  -82,    1 }
+                { "monsters/bastet", 69,    -11,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007   85    0
+        action A_PlayLocalSound("sounds/bastetatk01.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 17,    -16,  -81,    1 }
+                { "monsters/bastet", 18,    -16,  -17,    1 }
+            }
+        }
+        // ##007   90    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 68,    -30,  -81,    0 }
+                { "monsters/bastet", 69,    -30,  -17,    0 }
+            }
+        }
+        // ##007   90    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 31,    -30,  -75,    0 }
+                { "monsters/bastet", 32,    -30,  -11,    0 }
+            }
+        }
+        // ##007   85    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 56,    -24,  -70,    0 }
+                { "monsters/bastet", 57,    -24,   -6,    0 }
+            }
+        }
+        // ##007   85    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 105,    -16,  -71,    1 }
+                { "monsters/bastet", 106,    -16,   -7,    1 }
+            }
+        }
+        // ##007   85    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 56,    -36,  -72,    1 }
+                { "monsters/bastet", 57,    -36,   -8,    1 }
+            }
+        }
+        // ##007   85    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 19,    -14,  -70,    1 }
+                { "monsters/bastet", 20,    -30,  -70,    1 }
+                { "monsters/bastet", 21,    -14,   -6,    1 }
+                { "monsters/bastet", 22,    -30,   -6,    1 }
+            }
+        }
+        // ##007   90    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 68,    -11,  -82,    1 }
+                { "monsters/bastet", 69,    -11,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008   90    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 29,    -23,  -88,    1 }
+                { "monsters/bastet", 30,    -23,  -24,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 136,    -36,  -78,    0 }
+                { "monsters/bastet", 137,    -36,  -14,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 39,    -25,  -69,    0 }
+                { "monsters/bastet", 40,    -25,   -5,    0 }
+            }
+        }
+        // ##008   90    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 70,    -35,  -72,    0 }
+                { "monsters/bastet", 71,     29,  -72,    0 }
+                { "monsters/bastet", 72,    -35,   -8,    0 }
+                { "monsters/bastet", 73,     29,   -8,    0 }
+            }
+        }
+        // ##008   90    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 115,    -16,  -77,    1 }
+                { "monsters/bastet", 116,    -16,  -13,    1 }
+            }
+        }
+        // ##008   90    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 70,    -26,  -75,    1 }
+                { "monsters/bastet", 71,    -38,  -75,    1 }
+                { "monsters/bastet", 72,    -26,  -11,    1 }
+                { "monsters/bastet", 73,    -38,  -11,    1 }
+            }
+        }
+        // ##008   90    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 19,    -14,  -70,    1 }
+                { "monsters/bastet", 20,    -30,  -70,    1 }
+                { "monsters/bastet", 21,    -14,   -6,    1 }
+                { "monsters/bastet", 22,    -30,   -6,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 131,     -9,  -86,    1 }
+                { "monsters/bastet", 132,    -13,  -86,    1 }
+                { "monsters/bastet", 133,     -9,  -22,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 47,    -21,  -78,    1 }
+                { "monsters/bastet", 48,    -33,  -78,    1 }
+                { "monsters/bastet", 49,    -21,  -14,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 136,    -36,  -78,    0 }
+                { "monsters/bastet", 137,    -36,  -14,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 39,    -25,  -67,    0 }
+                { "monsters/bastet", 40,    -25,   -3,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 98,    -28,  -69,    0 }
+                { "monsters/bastet", 99,    -28,   -5,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 121,    -22,  -77,    1 }
+                { "monsters/bastet", 122,    -22,  -13,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 70,    -26,  -75,    1 }
+                { "monsters/bastet", 71,    -38,  -75,    1 }
+                { "monsters/bastet", 72,    -26,  -11,    1 }
+                { "monsters/bastet", 73,    -38,  -11,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 31,    -21,  -74,    1 }
+                { "monsters/bastet", 32,    -21,  -10,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 136,    -21,  -78,    1 }
+                { "monsters/bastet", 137,    -21,  -14,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        action A_CheckMelee("monsters/bastet_chase", 48)
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 47,    -21,  -78,    1 }
+                { "monsters/bastet", 48,    -33,  -78,    1 }
+                { "monsters/bastet", 49,    -21,  -14,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 136,    -36,  -78,    0 }
+                { "monsters/bastet", 137,    -36,  -14,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 6,    -33,  -70,    0 }
+                { "monsters/bastet", 7,    -33,   -6,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 98,    -28,  -69,    0 }
+                { "monsters/bastet", 99,    -28,   -5,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 128,    -17,  -69,    1 }
+                { "monsters/bastet", 129,    -17,   -5,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 98,    -17,  -69,    1 }
+                { "monsters/bastet", 99,    -17,   -5,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 39,    -18,  -66,    1 }
+                { "monsters/bastet", 40,    -18,   -2,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 136,    -21,  -78,    1 }
+                { "monsters/bastet", 137,    -21,  -14,    1 }
+            }
+        }
+    }
+}
+
+bastet_pain
+{
+    // frames:   17
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 134,    -15,  -80,    0 }
+                { "monsters/bastet", 135,    -15,  -16,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -27,  -82,    0 }
+                { "monsters/bastet", 146,    -27,  -18,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -21,  -72,    0 }
+                { "monsters/bastet", 75,    -21,   -8,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -23,  -74,    0 }
+                { "monsters/bastet", 101,    -23,  -10,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 117,    -28,  -79,    0 }
+                { "monsters/bastet", 118,    -28,  -15,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -28,  -73,    1 }
+                { "monsters/bastet", 101,    -28,   -9,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -26,  -71,    1 }
+                { "monsters/bastet", 75,    -26,   -7,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -20,  -82,    1 }
+                { "monsters/bastet", 146,    -20,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 134,    -15,  -80,    0 }
+                { "monsters/bastet", 135,    -15,  -16,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -27,  -82,    0 }
+                { "monsters/bastet", 146,    -27,  -18,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -21,  -72,    0 }
+                { "monsters/bastet", 75,    -21,   -8,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -23,  -74,    0 }
+                { "monsters/bastet", 101,    -23,  -10,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 117,    -28,  -79,    0 }
+                { "monsters/bastet", 118,    -28,  -15,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -28,  -73,    1 }
+                { "monsters/bastet", 101,    -28,   -9,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -26,  -71,    1 }
+                { "monsters/bastet", 75,    -26,   -7,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -20,  -82,    1 }
+                { "monsters/bastet", 146,    -20,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 134,    -15,  -80,    0 }
+                { "monsters/bastet", 135,    -15,  -16,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -27,  -82,    0 }
+                { "monsters/bastet", 146,    -27,  -18,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -21,  -72,    0 }
+                { "monsters/bastet", 75,    -21,   -8,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -23,  -74,    0 }
+                { "monsters/bastet", 101,    -23,  -10,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 117,    -28,  -79,    0 }
+                { "monsters/bastet", 118,    -28,  -15,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -28,  -73,    1 }
+                { "monsters/bastet", 101,    -28,   -9,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -26,  -71,    1 }
+                { "monsters/bastet", 75,    -26,   -7,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -20,  -82,    1 }
+                { "monsters/bastet", 146,    -20,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 134,    -15,  -80,    0 }
+                { "monsters/bastet", 135,    -15,  -16,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -27,  -82,    0 }
+                { "monsters/bastet", 146,    -27,  -18,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -21,  -72,    0 }
+                { "monsters/bastet", 75,    -21,   -8,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -23,  -74,    0 }
+                { "monsters/bastet", 101,    -23,  -10,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 117,    -28,  -79,    0 }
+                { "monsters/bastet", 118,    -28,  -15,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -28,  -73,    1 }
+                { "monsters/bastet", 101,    -28,   -9,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -26,  -71,    1 }
+                { "monsters/bastet", 75,    -26,   -7,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -20,  -82,    1 }
+                { "monsters/bastet", 146,    -20,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 134,    -15,  -80,    0 }
+                { "monsters/bastet", 135,    -15,  -16,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -27,  -82,    0 }
+                { "monsters/bastet", 146,    -27,  -18,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -21,  -72,    0 }
+                { "monsters/bastet", 75,    -21,   -8,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -23,  -74,    0 }
+                { "monsters/bastet", 101,    -23,  -10,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 117,    -28,  -79,    0 }
+                { "monsters/bastet", 118,    -28,  -15,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -28,  -73,    1 }
+                { "monsters/bastet", 101,    -28,   -9,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -26,  -71,    1 }
+                { "monsters/bastet", 75,    -26,   -7,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -20,  -82,    1 }
+                { "monsters/bastet", 146,    -20,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 134,    -15,  -80,    0 }
+                { "monsters/bastet", 135,    -15,  -16,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -27,  -82,    0 }
+                { "monsters/bastet", 146,    -27,  -18,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -21,  -72,    0 }
+                { "monsters/bastet", 75,    -21,   -8,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -23,  -74,    0 }
+                { "monsters/bastet", 101,    -23,  -10,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 117,    -28,  -79,    0 }
+                { "monsters/bastet", 118,    -28,  -15,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -28,  -73,    1 }
+                { "monsters/bastet", 101,    -28,   -9,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -26,  -71,    1 }
+                { "monsters/bastet", 75,    -26,   -7,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -20,  -82,    1 }
+                { "monsters/bastet", 146,    -20,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006   86    0
+        action A_BastetScream()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##006   86    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##006   86    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##006   86    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##006   86    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 100,    -28,  -73,    1 }
+                { "monsters/bastet", 101,    -28,   -9,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 74,    -26,  -71,    1 }
+                { "monsters/bastet", 75,    -26,   -7,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 145,    -20,  -82,    1 }
+                { "monsters/bastet", 146,    -20,  -18,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##007   86    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##007   86    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##007   86    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##014    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##014    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        action A_BastetPainTeleport()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##015    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##015    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        goto "monsters/bastet_chase"
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/bastet", 138,    -16,  -82,    0 }
+                { "monsters/bastet", 139,    -16,  -18,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -14,  -90,    0 }
+                { "monsters/bastet", 59,    -14,  -26,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -10,  -87,    0 }
+                { "monsters/bastet", 89,    -10,  -23,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -16,  -82,    0 }
+                { "monsters/bastet", 108,    -16,  -18,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/bastet", 123,    -22,  -81,    0 }
+                { "monsters/bastet", 124,    -22,  -17,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/bastet", 107,    -28,  -82,    1 }
+                { "monsters/bastet", 108,    -28,  -18,    1 }
+            }
+        }
+        // ##016    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/bastet", 88,    -31,  -86,    1 }
+                { "monsters/bastet", 89,    -31,  -22,    1 }
+            }
+        }
+        // ##016    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/bastet", 58,    -23,  -90,    1 }
+                { "monsters/bastet", 59,    -23,  -26,    1 }
+            }
+        }
+    }
+}
+
+bastet_teleport_out
+{
+    // frames:   41
+    frame
+    {
+        // ##000    0    0
+            sprites
+            {
+                { "monsters/bastet", 95,    -19,  -91,    0 }
+                { "monsters/bastet", 96,    -19,  -27,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+            sprites
+            {
+                { "monsters/bastet", 95,    -19,  -91,    0 }
+                { "monsters/bastet", 96,    -19,  -27,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+            sprites
+            {
+                { "monsters/bastet", 95,    -19,  -91,    0 }
+                { "monsters/bastet", 96,    -19,  -27,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+            sprites
+            {
+                { "monsters/bastet", 95,    -19,  -91,    0 }
+                { "monsters/bastet", 96,    -19,  -27,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+            sprites
+            {
+                { "monsters/bastet", 95,    -19,  -91,    0 }
+                { "monsters/bastet", 96,    -19,  -27,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+            sprites
+            {
+                { "monsters/bastet", 141,    -15,  -91,    0 }
+                { "monsters/bastet", 142,    -15,  -27,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+            sprites
+            {
+                { "monsters/bastet", 141,    -15,  -91,    0 }
+                { "monsters/bastet", 142,    -15,  -27,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+            sprites
+            {
+                { "monsters/bastet", 2,    -13,  -94,    0 }
+                { "monsters/bastet", 3,    -13,  -30,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+            sprites
+            {
+                { "monsters/bastet", 2,    -13,  -94,    0 }
+                { "monsters/bastet", 3,    -13,  -30,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+            sprites
+            {
+                { "monsters/bastet", 2,    -13,  -94,    0 }
+                { "monsters/bastet", 3,    -13,  -30,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##010   88    0
+        action A_PlayLocalSound("sounds/bastetteleout.wav")
+            sprites
+            {
+                { "monsters/bastet", 2,    -13,  -94,    0 }
+                { "monsters/bastet", 3,    -13,  -30,    0 }
+                { "monsters/bastet", 104,    -26,  -58,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+            sprites
+            {
+                { "monsters/bastet", 2,    -13,  -94,    0 }
+                { "monsters/bastet", 3,    -13,  -30,    0 }
+                { "monsters/bastet", 113,    -27,  -76,    0 }
+                { "monsters/bastet", 114,    -27,  -12,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -21,   -3,    0 }
+                { "monsters/bastet", 8,    -13,  -94,    0 }
+                { "monsters/bastet", 9,    -13,  -30,    0 }
+                { "monsters/bastet", 113,    -25,  -88,    0 }
+                { "monsters/bastet", 114,    -25,  -24,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+            sprites
+            {
+                { "monsters/bastet", 8,    -13,  -94,    0 }
+                { "monsters/bastet", 9,    -13,  -30,    0 }
+                { "monsters/bastet", 87,     -7,   -4,    0 }
+                { "monsters/bastet", 87,    -34,   -4,    0 }
+                { "monsters/bastet", 113,    -25,  -88,    0 }
+                { "monsters/bastet", 114,    -25,  -24,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+            sprites
+            {
+                { "monsters/bastet", 8,    -13,  -94,    0 }
+                { "monsters/bastet", 9,    -13,  -30,    0 }
+                { "monsters/bastet", 87,     -2,   -4,    0 }
+                { "monsters/bastet", 87,    -39,   -4,    0 }
+                { "monsters/bastet", 104,    -26,  -73,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 15,    -15,  -93,    0 }
+                { "monsters/bastet", 16,    -15,  -29,    0 }
+                { "monsters/bastet", 113,    -24,  -84,    0 }
+                { "monsters/bastet", 114,    -24,  -20,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 15,    -15,  -93,    0 }
+                { "monsters/bastet", 16,    -15,  -29,    0 }
+                { "monsters/bastet", 113,    -24,  -84,    0 }
+                { "monsters/bastet", 114,    -24,  -20,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 27,    -17,  -92,    0 }
+                { "monsters/bastet", 28,    -17,  -28,    0 }
+                { "monsters/bastet", 104,    -26,  -73,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 27,    -17,  -92,    0 }
+                { "monsters/bastet", 28,    -17,  -28,    0 }
+                { "monsters/bastet", 104,    -26,  -73,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 37,    -16,  -91,    0 }
+                { "monsters/bastet", 38,    -16,  -27,    0 }
+                { "monsters/bastet", 113,    -26,  -80,    0 }
+                { "monsters/bastet", 114,    -26,  -16,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##020    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 37,    -16,  -91,    0 }
+                { "monsters/bastet", 38,    -16,  -27,    0 }
+                { "monsters/bastet", 113,    -26,  -80,    0 }
+                { "monsters/bastet", 114,    -26,  -16,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##021    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 45,    -14,  -90,    0 }
+                { "monsters/bastet", 46,    -14,  -26,    0 }
+                { "monsters/bastet", 104,    -27,  -59,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##022    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 45,    -14,  -90,    0 }
+                { "monsters/bastet", 46,    -14,  -26,    0 }
+                { "monsters/bastet", 104,    -27,  -59,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##023    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 113,    -27,  -75,    0 }
+                { "monsters/bastet", 114,    -27,  -11,    0 }
+                { "monsters/bastet", 52,     -4,  -88,    0 }
+                { "monsters/bastet", 53,     -4,  -24,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##024    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 104,    -27,  -59,    0 }
+                { "monsters/bastet", 60,     -1,  -82,    0 }
+                { "monsters/bastet", 61,     -1,  -18,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##025    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 113,    -26,  -77,    0 }
+                { "monsters/bastet", 114,    -26,  -13,    0 }
+                { "monsters/bastet", 77,     -6,  -77,    0 }
+                { "monsters/bastet", 78,     -6,  -13,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##026    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 104,    -27,  -59,    0 }
+                { "monsters/bastet", 91,     -9,  -70,    0 }
+                { "monsters/bastet", 92,     -9,   -6,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##027    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 103,    -14,  -61,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##028    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 112,    -17,  -51,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##029    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 120,    -16,  -43,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##030    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 125,    -12,  -37,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##031    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 130,     -8,  -27,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##032    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 102,     -4,  -21,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##033    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 111,     -6,  -10,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##034    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+                { "monsters/bastet", 119,     -8,   -4,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##035    0    0
+            sprites
+            {
+                { "monsters/bastet", 87,    -22,   -3,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##036    0    0
+            sprites
+            {
+                { "monsters/bastet", 97,    -10,    0,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##037    0    0
+        action A_Hide()
+        goto "monsters/bastet_chase"
+        delay 4
+    }
+
+}
+
+bastet_teleport_in
+{
+    // frames:   23
+    frame
+    {
+        // ##000    0    0
+        action A_Show()
+            sprites
+            {
+                { "monsters/bastet", 97,     -9,   -2,    0 }
+                { "monsters/bastet", 119,     -7,   -5,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##001   87    0
+        action A_PlayLocalSound("sounds/bastettelein.wav")
+            sprites
+            {
+                { "monsters/bastet", 97,     -9,   -2,    0 }
+                { "monsters/bastet", 119,     -7,   -5,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+            sprites
+            {
+                { "monsters/bastet", 102,    -13,  -20,    1 }
+            }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+            sprites
+            {
+                { "monsters/bastet", 130,    -11,  -26,    1 }
+            }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+            sprites
+            {
+                { "monsters/bastet", 125,    -13,  -35,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+            sprites
+            {
+                { "monsters/bastet", 120,    -10,  -41,    1 }
+            }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+            sprites
+            {
+                { "monsters/bastet", 112,     -7,  -49,    1 }
+            }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+            sprites
+            {
+                { "monsters/bastet", 103,     -9,  -59,    1 }
+            }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+            sprites
+            {
+                { "monsters/bastet", 91,    -10,  -68,    0 }
+                { "monsters/bastet", 92,    -10,   -4,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+            sprites
+            {
+                { "monsters/bastet", 77,    -13,  -75,    1 }
+                { "monsters/bastet", 78,    -13,  -11,    1 }
+            }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+            sprites
+            {
+                { "monsters/bastet", 60,    -15,  -81,    1 }
+                { "monsters/bastet", 61,    -15,  -17,    1 }
+            }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+            sprites
+            {
+                { "monsters/bastet", 52,    -14,  -87,    1 }
+                { "monsters/bastet", 53,    -14,  -23,    1 }
+            }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+            sprites
+            {
+                { "monsters/bastet", 45,    -13,  -90,    0 }
+                { "monsters/bastet", 46,    -13,  -26,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+            sprites
+            {
+                { "monsters/bastet", 27,     -7,  -91,    1 }
+                { "monsters/bastet", 28,     -7,  -27,    1 }
+            }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+            sprites
+            {
+                { "monsters/bastet", 8,    -11,  -95,    0 }
+                { "monsters/bastet", 9,    -11,  -31,    0 }
+                { "monsters/bastet", 104,    -27,  -58,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+            sprites
+            {
+                { "monsters/bastet", 8,    -11,  -97,    0 }
+                { "monsters/bastet", 9,    -11,  -33,    0 }
+                { "monsters/bastet", 113,    -28,  -77,    0 }
+                { "monsters/bastet", 114,    -28,  -13,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##016   85    0
+        action A_PlayLocalSound("sounds/bastetact01.wav")
+            sprites
+            {
+                { "monsters/bastet", 104,    -27,  -58,    0 }
+                { "monsters/bastet", 17,    -13,  -99,    0 }
+                { "monsters/bastet", 18,    -13,  -35,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+            sprites
+            {
+                { "monsters/bastet", 17,    -13, -101,    0 }
+                { "monsters/bastet", 18,    -13,  -37,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+            sprites
+            {
+                { "monsters/bastet", 29,    -17, -102,    0 }
+                { "monsters/bastet", 30,    -17,  -38,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+            sprites
+            {
+                { "monsters/bastet", 47,    -38,  -87,    0 }
+                { "monsters/bastet", 48,     26,  -87,    0 }
+                { "monsters/bastet", 49,    -38,  -23,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##020    0    0
+            sprites
+            {
+                { "monsters/bastet", 47,    -38,  -83,    0 }
+                { "monsters/bastet", 48,     26,  -83,    0 }
+                { "monsters/bastet", 49,    -38,  -19,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##021    0    0
+            sprites
+            {
+                { "monsters/bastet", 47,    -38,  -79,    0 }
+                { "monsters/bastet", 48,     26,  -79,    0 }
+                { "monsters/bastet", 49,    -38,  -15,    0 }
+            }
+
+    }
+
+    frame
+    {
+        // ##022    0    0
+        action A_BastetTeleportIn()
+        goto "monsters/bastet_chase"
+            sprites
+            {
+                { "monsters/bastet", 47,    -38,  -75,    0 }
+                { "monsters/bastet", 48,     26,  -75,    0 }
+                { "monsters/bastet", 49,    -38,  -11,    0 }
+            }
+    }
+}
+
+bastet_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/bastet", 109,    -13,  -91,    0 }
+            { "monsters/bastet", 110,    -13,  -27,    0 }
+        }
+    }
+}
+
+bastet_gib01
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/bastet", 76,     -6,  -21,    0 }
+        }
+    }
+}
+
+bastet_gib02
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/bastet", 90,    -11,  -13,    0 }
+        }
+    }
+}
+
+bastet_gib03
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/bastet", 140,    -17,  -27,    0 }
+        }
+    }
+}
+
+bastet_gib04
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/bastet", 10,    -11,  -17,    0 }
+        }
+    }
+}
+
+bastet_death
+{
+    frame
+    {
+        action A_GibDeath(0.0)
+        action A_PlayLocalSound("sounds/bastetatk01.wav")
+        action A_PlayLocalSound("sounds/bastetdeath01.wav")
+        action A_TossActor("Obj_Bastet_Gib01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Bastet_Gib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Bastet_Gib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Bastet_Gib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Bastet_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Bastet_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_Bastet_Gib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_Destroy()
+        delay 1
+    }
+}

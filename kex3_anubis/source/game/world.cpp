@@ -1291,7 +1291,8 @@ void kexWorld::CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source, 
 // kexWorld::RadialDamage
 //
 
-void kexWorld::RadialDamage(kexActor *source, const float radius, const int damage)
+void kexWorld::RadialDamage(kexActor *source, const float radius, const int damage,
+                            const bool bCanDestroyWalls)
 {
     if(source->Sector() == NULL)
     {
@@ -1376,7 +1377,10 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
             }
         }
 
-        ExplodeWallEvent(sector);
+        if(bCanDestroyWalls)
+        {
+            ExplodeWallEvent(sector);
+        }
         
     } while(scanCount < scanSectors.CurrentLength());
 }

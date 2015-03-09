@@ -555,15 +555,6 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
                 continue;
             }
 
-            r = (actor->Radius() + moveActor->Radius()) * 2;
-
-            // make sure that we are within range
-            if(start.DistanceSq(actor->Origin()) > (r*r) &&
-               end.DistanceSq(actor->Origin()) > (r*r))
-            {
-                continue;
-            }
-
             r = (actor->Radius() * 0.5f) + moveActor->Radius();
             
             if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height(),
@@ -586,7 +577,6 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
             float z;
             float d;
             kexVec3 vOrg = actor->Origin();
-            vOrg.z -= actor->Height() * 0.5f;
             
             // adjust z-height of the testing sphere. this will closely mimic
             // doing a trace against a capsule

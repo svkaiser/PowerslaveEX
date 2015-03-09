@@ -126,14 +126,15 @@ kexDataConvert::~kexDataConvert(void)
 void kexDataConvert::DumpSaturnLevelData(const char *file)
 {
     kexBinFile mapFile;
-    int numSectors, numFaces, numVertices, numPolys, numTexCoords, numActors;
-    int numUnknown[8];
+    int numSectors, numFaces, numVertices, numPolys, numTexCoords;
+    int numUnknown[9];
     saturnSector_t *sectors;
     saturnFace_t *faces;
     saturnVertex_t *vertices;
     saturnPoly_t *polys;
-    saturnTexCoord_t *texCoords;
     kexStr fPath;
+    int16_t *lookupTable[2];
+    int missingFaces = 0;
     FILE *f;
 
     fPath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), file);
@@ -158,7 +159,6 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
     numPolys        = kex::cEndian->SwapBE32(mapFile.Read32());
     numTexCoords    = kex::cEndian->SwapBE32(mapFile.Read32());
     numUnknown[0]   = kex::cEndian->SwapBE32(mapFile.Read32());
-    numActors       = kex::cEndian->SwapBE32(mapFile.Read32());
     numUnknown[1]   = kex::cEndian->SwapBE32(mapFile.Read32());
     numUnknown[2]   = kex::cEndian->SwapBE32(mapFile.Read32());
     numUnknown[3]   = kex::cEndian->SwapBE32(mapFile.Read32());
@@ -166,12 +166,14 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
     numUnknown[5]   = kex::cEndian->SwapBE32(mapFile.Read32());
     numUnknown[6]   = kex::cEndian->SwapBE32(mapFile.Read32());
     numUnknown[7]   = kex::cEndian->SwapBE32(mapFile.Read32());
+    numUnknown[8]   = kex::cEndian->SwapBE32(mapFile.Read32());
 
-    sectors     = new saturnSector_t[numSectors];
-    faces       = new saturnFace_t[numFaces];
-    vertices    = new saturnVertex_t[numVertices];
-    polys       = new saturnPoly_t[numPolys];
-    texCoords   = new saturnTexCoord_t[numTexCoords];
+    sectors         = new saturnSector_t[numSectors];
+    faces           = new saturnFace_t[numFaces];
+    vertices        = new saturnVertex_t[numVertices];
+    polys           = new saturnPoly_t[numPolys];
+    lookupTable[0]  = new int16_t[numUnknown[1]];
+    lookupTable[1]  = new int16_t[numUnknown[1]];
 
     for(int i = 0; i < numSectors; ++i)
     {
@@ -229,18 +231,6 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
         polys[i].indices[3]         = kex::cEndian->SwapBE16(mapFile.Read16());
         polys[i].texture            = mapFile.Read8();
         polys[i].u1                 = mapFile.Read8();
-    }
-
-    for(int i = 0; i < numTexCoords; ++i)
-    {
-        texCoords[i].u[0]           = mapFile.Read8();
-        texCoords[i].u[1]           = mapFile.Read8();
-        texCoords[i].u[2]           = mapFile.Read8();
-        texCoords[i].u[3]           = mapFile.Read8();
-        texCoords[i].v[0]           = mapFile.Read8();
-        texCoords[i].v[1]           = mapFile.Read8();
-        texCoords[i].v[2]           = mapFile.Read8();
-        texCoords[i].v[3]           = mapFile.Read8();
     }
 
     fPath.StripFile();
@@ -329,19 +319,82 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
 
     fclose(f);
 
-    f = fopen(kexStr(fPath + "_texCoords.txt").c_str(), "w");
+    f = fopen(kexStr(fPath + "_unknown1.txt").c_str(), "w");
 
-    for(int i = 0; i < numTexCoords; ++i)
+    for(int i = 0; i < numUnknown[1]; ++i)
+    {
+        lookupTable[0][i] = kex::cEndian->SwapBE16(mapFile.Read16());
+        lookupTable[1][i] = kex::cEndian->SwapBE16(mapFile.Read16());
+
+        fprintf(f, "%04d: ", i);
+        fprintf(f, "%8i ", lookupTable[0][i]);
+        fprintf(f, "%8i ", lookupTable[1][i]);
+        fprintf(f, "\n");
+    }
+
+    fclose(f);
+
+    f = fopen(kexStr(fPath + "_unknown3.txt").c_str(), "w");
+
+    for(int i = 0; i < numUnknown[3]; ++i)
     {
         fprintf(f, "%04d: ", i);
-        fprintf(f, "%8i ", texCoords[i].u[0]);
-        fprintf(f, "%8i ", texCoords[i].u[1]);
-        fprintf(f, "%8i ", texCoords[i].u[2]);
-        fprintf(f, "%8i ", texCoords[i].u[3]);
-        fprintf(f, "%8i ", texCoords[i].v[0]);
-        fprintf(f, "%8i ", texCoords[i].v[1]);
-        fprintf(f, "%8i ", texCoords[i].v[2]);
-        fprintf(f, "%8i ", texCoords[i].v[3]);
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "\n");
+    }
+
+    fclose(f);
+
+    f = fopen(kexStr(fPath + "_unknown5.txt").c_str(), "w");
+
+    for(int i = 0; i < numUnknown[5]; ++i)
+    {
+        fprintf(f, "%04d: ", i);
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "\n");
+    }
+
+    fclose(f);
+
+    f = fopen(kexStr(fPath + "_unknown4.txt").c_str(), "w");
+
+    for(int i = 0; i < numUnknown[4]; ++i)
+    {
+        fprintf(f, "%04d: ", i);
+        fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+        fprintf(f, "\n");
+    }
+
+    fclose(f);
+
+    f = fopen(kexStr(fPath + "_unknown1_lookup.txt").c_str(), "w");
+
+    for(int i = 0; i < numUnknown[1]; ++i)
+    {
+        fprintf(f, "%04d: ", i);
+        if(i == numUnknown[1]-1)
+        {
+            for(int j = 0; j < numUnknown[2] / 2 - (lookupTable[1][i] / 2); ++j)
+            {
+                fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+            }
+        }
+        else
+        {
+            for(int j = 0; j < (lookupTable[1][i+1] / 2) - (lookupTable[1][i] / 2); ++j)
+            {
+                fprintf(f, "%6i ", kex::cEndian->SwapBE16(mapFile.Read16()));
+            }
+        }
         fprintf(f, "\n");
     }
 
@@ -372,6 +425,7 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
 
             if(face->polyStart <= -1 || face->polyEnd <= -1)
             {
+                missingFaces++;
                 continue;
             }
 
@@ -398,9 +452,10 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
     delete[] faces;
     delete[] vertices;
     delete[] polys;
-    delete[] texCoords;
+    delete[] lookupTable[0];
+    delete[] lookupTable[1];
 
     mapFile.Close();
 
-    kex::cSystem->Printf("Done\n");
+    kex::cSystem->Printf("Done (%i missing faces)\n", missingFaces);
 }

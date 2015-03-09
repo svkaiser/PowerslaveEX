@@ -57,6 +57,19 @@ Fx_GreenCobraExplode -1
     color                   "0.375 0.75 0.375"
 }
 
+Fx_RedCobraExplode -1
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   2.0
+    animSpeed               0.25
+    spawnAnim               "effects/magicPuff"
+    fullbright              1
+    color                   "0.75 0.25 0.25"
+}
+
 Fx_FireballExplode -1
 {
     classname               "kexActor"

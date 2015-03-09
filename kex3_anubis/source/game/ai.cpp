@@ -88,6 +88,7 @@ kexAI::kexAI(void)
     this->painChance = 0xff;
     this->moveSpeed = 8;
     this->meleeExtraDist = 0;
+    this->turnSpeed = 8;
 
     for(int i = 0; i < 4; ++i)
     {
@@ -191,9 +192,17 @@ void kexAI::OnDamage(kexActor *instigator)
     }
 
     // we took damage but we're not active yet. target whoever damaged us
-    if(!target && instigator != this && instigator->Flags() & AF_SHOOTABLE)
+    if(!target && instigator != this && (instigator->Flags() & AF_SHOOTABLE ||
+        instigator->InstanceOf(&kexProjectile::info)))
     {
-        SetTarget(instigator);
+        if(instigator && instigator->InstanceOf(&kexProjectile::info))
+        {
+            SetTarget(instigator->Target());
+        }
+        else
+        {
+            SetTarget(instigator);
+        }
 
         if(state == AIS_IDLE && anim != chaseAnim)
         {
@@ -521,7 +530,7 @@ bool kexAI::SetDesiredDirection(const int dir)
         if(CheckDirection(directionVectors[dir]))
         {
             desiredYaw = directionAngles[dir];
-            turnAmount = desiredYaw.Diff(yaw) / 8;
+            turnAmount = desiredYaw.Diff(yaw) / turnSpeed;
             return true;
         }
     }
@@ -679,7 +688,7 @@ void kexAI::ChangeDirection(void)
         if(CheckDirection(forward))
         {
             desiredYaw = newYaw;
-            turnAmount = desiredYaw.Diff(yaw) / 8;
+            turnAmount = desiredYaw.Diff(yaw) / turnSpeed;
             return;
         }
         
@@ -689,14 +698,14 @@ void kexAI::ChangeDirection(void)
         if(CheckDirection(forward))
         {
             desiredYaw = newYaw;
-            turnAmount = desiredYaw.Diff(yaw) / 8;
+            turnAmount = desiredYaw.Diff(yaw) / turnSpeed;
             return;
         }
     }
 
     // no idea what to do now. randomly pick a direction and hope for the best
     desiredYaw = yaw + (kexMath::Deg2Rad(135) + (kexRand::Float() * kexMath::Deg2Rad(90)));
-    turnAmount = desiredYaw.Diff(yaw) / 8;
+    turnAmount = desiredYaw.Diff(yaw) / turnSpeed;
 }
 
 //
@@ -723,7 +732,7 @@ void kexAI::Ignite(kexGameObject *igniteTarget)
             
             x = origin.x + (kexRand::Float() * (radius*0.5f));
             y = origin.y + (kexRand::Float() * (radius*0.5f));
-            z = origin.z + (kexRand::Float() * (height*0.8f));
+            z = origin.z + (kexRand::Float() * (height*0.5f));
 
             if(z < origin.z + stepHeight && stepHeight < height)
             {
@@ -948,6 +957,7 @@ void kexAI::Spawn(void)
         definition->GetInt("painChance", painChance, 0xff);
         definition->GetFloat("moveSpeed", moveSpeed, 8);
         definition->GetFloat("meleeExtraDist", meleeExtraDist);
+        definition->GetFloat("turnSpeed", turnSpeed, 8);
         definition->GetString("painSound", painSound);
         definition->GetString("sightSound", sightSound);
 
@@ -976,5 +986,10 @@ void kexAI::Spawn(void)
         {
             attackAnim = kexGame::cLocal->SpriteAnimManager()->Get(animName);
         }
+    }
+
+    if(turnSpeed <= 0)
+    {
+        turnSpeed = 1;
     }
 }

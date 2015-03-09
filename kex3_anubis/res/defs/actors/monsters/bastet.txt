@@ -1,0 +1,76 @@
+AI_Bastet 2
+{
+    classname               "kexAI"
+    radius                  24
+    height                  192
+    stepHeight              48
+    scale                   1.5
+    health                  150
+    moveSpeed               16
+    spawnAnim               "monsters/bastet_idle"
+    chaseAnim               "monsters/bastet_chase"
+    painAnim                "monsters/bastet_pain"
+    meleeAnim               "monsters/bastet_attack"
+    deathAnim               "monsters/bastet_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    noDropOff               1
+    lookAllAround           1
+    painChance              128
+    meleeExtraDist          48
+    turnSpeed               4
+    sightSound              "sounds/bastetact02.wav"
+}
+
+Obj_Bastet_Gib01 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/bastet_gib01"
+    moveable                1
+    expires                 1
+}
+
+Obj_Bastet_Gib02 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/bastet_gib02"
+    moveable                1
+    expires                 1
+}
+
+Obj_Bastet_Gib03 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/bastet_gib03"
+    moveable                1
+    expires                 1
+}
+
+Obj_Bastet_Gib04 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/bastet_gib04"
+    moveable                1
+    expires                 1
+}

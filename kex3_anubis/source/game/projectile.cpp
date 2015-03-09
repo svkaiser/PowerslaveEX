@@ -106,7 +106,7 @@ void kexProjectile::HomingThink(void)
             return;
         }
 
-        kexVec3 vOrigin = homingActor->Origin() + kexVec3(0, 0, homingActor->StepHeight());
+        kexVec3 vOrigin = homingActor->Origin() + kexVec3(0, 0, homingActor->Height()*0.5f);
         kexVec3 dir = (vOrigin - origin).Normalize();
         kexAngle an1 = dir.ToYaw();
 

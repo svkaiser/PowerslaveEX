@@ -101,7 +101,7 @@ cobra_green_death
     {
         action A_DestroyCobraJoints()
         action A_CStaffExplode()
-        action A_RadialBlast(256, 100)
+        action A_RadialBlast(256, 100, 0)
         delay 3
     }
     
@@ -232,26 +232,26 @@ cobra_red_death
     frame
     {
         action A_DestroyCobraJoints()
-        action A_CStaffExplode()
-        action A_RadialBlast(224, 50)
+        action A_RedCobraExplode()
+        action A_RadialBlast(224, 50, 0)
         delay 3
     }
     
     frame
     {
-        action A_CStaffExplode()
+        action A_RedCobraExplode()
         delay 3
     }
     
     frame
     {
-        action A_CStaffExplode()
+        action A_RedCobraExplode()
         delay 3
     }
     
     frame
     {
-        action A_CStaffExplode()
+        action A_RedCobraExplode()
         delay 3
     }
     

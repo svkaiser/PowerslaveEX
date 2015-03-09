@@ -43,6 +43,7 @@ void kexScriptObjActor::Init(void)
     e->RegisterObjectMethod("kActor", "kVec3 &Movement(void)", asMETHODPR(kexActor, Movement, (void), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "int16 &Health(void)", asMETHODPR(kexActor, Health, (void), int16_t&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "int &Type(void)", asMETHODPR(kexActor, Type, (void), int&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "uint &Flags(void)", asMETHODPR(kexActor, Flags, (void), unsigned int&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "float &Radius(void)", asMETHODPR(kexActor, Radius, (void), float&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "float &Height(void)", asMETHODPR(kexActor, Height, (void), float&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "float &StepHeight(void)", asMETHODPR(kexActor, StepHeight, (void), float&), asCALL_THISCALL);
@@ -57,4 +58,22 @@ void kexScriptObjActor::Init(void)
     e->RegisterObjectMethod("kActor", "void ChangeAnim(const kStr &in)", asMETHODPR(kexActor, ChangeAnim, (const kexStr&), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "const int GameTicks(void) const", asMETHODPR(kexActor, GameTicks, (void) const, const int), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kVec3 &Color(void)", asMETHODPR(kexActor, Color, (void), kexVec3&), asCALL_THISCALL);
+
+    e->RegisterEnum("EnumActorFlags");
+    e->RegisterEnumValue("EnumActorFlags", "AF_FLOORFRICTION", AF_FLOORFRICTION);
+    e->RegisterEnumValue("EnumActorFlags", "AF_CEILINGFRICTION", AF_CEILINGFRICTION);
+    e->RegisterEnumValue("EnumActorFlags", "AF_SOLID", AF_SOLID);
+    e->RegisterEnumValue("EnumActorFlags", "AF_NOADVANCEFRAMES", AF_NOADVANCEFRAMES);
+    e->RegisterEnumValue("EnumActorFlags", "AF_RANDOMIZATION", AF_RANDOMIZATION);
+    e->RegisterEnumValue("EnumActorFlags", "AF_FLASH", AF_FLASH);
+    e->RegisterEnumValue("EnumActorFlags", "AF_SHOOTABLE", AF_SHOOTABLE);
+    e->RegisterEnumValue("EnumActorFlags", "AF_FULLBRIGHT", AF_FULLBRIGHT);
+    e->RegisterEnumValue("EnumActorFlags", "AF_MOVEABLE", AF_MOVEABLE);
+    e->RegisterEnumValue("EnumActorFlags", "AF_TOUCHABLE", AF_TOUCHABLE);
+    e->RegisterEnumValue("EnumActorFlags", "AF_BOUNCY", AF_BOUNCY);
+    e->RegisterEnumValue("EnumActorFlags", "AF_INWATER", AF_INWATER);
+    e->RegisterEnumValue("EnumActorFlags", "AF_NODROPOFF", AF_NODROPOFF);
+    e->RegisterEnumValue("EnumActorFlags", "AF_EXPIRES", AF_EXPIRES);
+    e->RegisterEnumValue("EnumActorFlags", "AF_HIDDEN", AF_HIDDEN);
+    e->RegisterEnumValue("EnumActorFlags", "AF_NOEXITWATER", AF_NOEXITWATER);
 }

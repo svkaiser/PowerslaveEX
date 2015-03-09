@@ -395,8 +395,9 @@ DECLARE_KEX_ACTION(kexActionRadialBlast)
     kexGameLocal *game  = kexGame::cLocal;
     float radius        = this->args[0].f;
     int damage          = this->args[1].i;
+    int destroyWalls    = this->args[2].i;
     
-    game->World()->RadialDamage(actor, radius, damage);
+    game->World()->RadialDamage(actor, radius, damage, (destroyWalls == 1));
 }
 
 //-----------------------------------------------------------------------------
@@ -705,7 +706,7 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_TossActor", kexActionTossActor::info.Create,
                    AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
     RegisterAction("A_DestroyAtRest", kexActionDestroyAtRest::info.Create, AAT_FLOAT);
-    RegisterAction("A_RadialBlast", kexActionRadialBlast::info.Create, AAT_FLOAT, AAT_INTEGER);
+    RegisterAction("A_RadialBlast", kexActionRadialBlast::info.Create, AAT_FLOAT, AAT_INTEGER, AAT_INTEGER);
     RegisterAction("A_ConsumeAmmo", kexActionConsumeAmmo::info.Create, AAT_INTEGER);
     RegisterAction("A_PlayLocalSound", kexActionPlaySound::info.Create, AAT_STRING);
     RegisterAction("A_FaceTarget", kexActionFaceTarget::info.Create);

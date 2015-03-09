@@ -42,6 +42,24 @@ void A_GibDeath(kActor @actor, const float offset)
 }
 
 //
+// A_Hide
+//
+
+void A_Hide(kActor @actor)
+{
+    actor.Flags() |= AF_HIDDEN;
+}
+
+//
+// A_Show
+//
+
+void A_Show(kActor @actor)
+{
+    actor.Flags() &= ~AF_HIDDEN;
+}
+
+//
 // A_AnubisDeath
 //
 
@@ -232,4 +250,139 @@ void A_SetupRedCobraJoints(kActor @actor)
     j5.Scale() = 0.5f;
     
     actor.SetTaggedActor(j5);
+}
+
+//
+// A_RedCobraExplode
+//
+
+void A_RedCobraExplode(kActor @actor)
+{
+    float x = actor.Origin().x + (Math::RandCFloat() * 32.0f);
+    float y = actor.Origin().y + (Math::RandCFloat() * 32.0f);
+    float z = actor.Origin().z + (Math::RandCFloat() * 32.0f);
+    kActor @puff;
+    
+    @puff = Game.SpawnActor("Fx_RedCobraExplode", x, y, z, 0, actor.SectorIndex());
+    
+    if(puff is null)
+    {
+        return;
+    }
+    
+    puff.PlaySound("sounds/pbexplode.wav");
+}
+
+//
+// A_BastetTryTeleport
+//
+
+void A_BastetTryTeleport(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    if((actor.Flags() & AF_HIDDEN) != 0)
+    {
+        A_BastetTryTeleportIn(actor);
+        return;
+    }
+    
+    if(Math::RandMax(1024) < 1020)
+    {
+        return;
+    }
+    
+    actor.Velocity().Clear();
+    actor.StepHeight() = 64.0f;
+    actor.Flags() &= ~(AF_SOLID|AF_SHOOTABLE);
+    actor.ChangeAnim("monsters/bastet_teleport_out");
+}
+
+//
+// A_BastetPainTeleport
+//
+
+void A_BastetPainTeleport(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    if((actor.Flags() & AF_HIDDEN) != 0)
+    {
+        A_BastetTryTeleportIn(actor);
+        return;
+    }
+    
+    if((Math::Rand() & 3) != 0)
+    {
+        return;
+    }
+    
+    actor.Velocity().Clear();
+    actor.StepHeight() = 64.0f;
+    actor.Flags() &= ~(AF_SOLID|AF_SHOOTABLE);
+    actor.ChangeAnim("monsters/bastet_teleport_out");
+}
+
+//
+// A_BastetTryTeleportIn
+//
+
+void A_BastetTryTeleportIn(kActor @actor)
+{
+    if(Math::Rand() < 32600)
+    {
+        return;
+    }
+    
+    actor.ChangeAnim("monsters/bastet_teleport_in");
+}
+
+//
+// A_BastetCheckTeleport
+//
+
+void A_BastetCheckTeleport(kActor @actor)
+{
+    if((actor.Flags() & AF_HIDDEN) == 0)
+    {
+        if(Math::RandMax(256) >= 248)
+        {
+            actor.ChangeAnim("monsters/bastet_teleport_in");
+        }
+        return;
+    }
+    
+    actor.ChangeAnim("monsters/bastet_chase");
+}
+
+//
+// A_BastetTeleportIn
+//
+
+void A_BastetTeleportIn(kActor @actor)
+{
+    actor.Flags() |= (AF_SOLID|AF_SHOOTABLE);
+    actor.StepHeight() = 48.0f;
+}
+
+//
+// A_BastetScream
+//
+
+void A_BastetScream(kActor @actor)
+{
+    if((Math::Rand() & 1) == 0)
+    {
+        actor.PlaySound("sounds/bastetpain01.wav");
+    }
+    else
+    {
+        actor.PlaySound("sounds/bastetpain02.wav");
+    }
 }

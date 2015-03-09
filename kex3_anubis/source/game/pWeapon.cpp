@@ -275,6 +275,7 @@ void kexPlayerWeapon::DrawAnimFrame(spriteAnim_t *sprAnim)
 
         x += bob_x + weaponInfo->offsetX;
         y += bob_y + weaponInfo->offsetY;
+        x += (owner->Actor()->Roll()*64);
 
         if(!(frame->flags & SFF_FULLBRIGHT))
         {
@@ -347,6 +348,7 @@ void kexPlayerWeapon::DrawFlame(void)
         
         x += bob_x + weaponInfo->offsetX;
         y += bob_y + weaponInfo->offsetY;
+        x += (owner->Actor()->Roll()*64);
         y += 8;
         
         if(!(frame->flags & SFF_FULLBRIGHT))
