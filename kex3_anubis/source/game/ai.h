@@ -102,6 +102,7 @@ private:
 
     static const float              directionAngles[NUMAIDIRTYPES];
     static const kexVec3            directionVectors[NUMAIDIRTYPES];
+    static const int                oppositeDirection[NUMAIDIRTYPES];
 
     spriteAnim_t                    *chaseAnim;
     spriteAnim_t                    *painAnim;

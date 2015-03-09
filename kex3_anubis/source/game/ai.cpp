@@ -44,6 +44,18 @@ const kexVec3 kexAI::directionVectors[NUMAIDIRTYPES] =
     kexVec3(-0.5f, 0.5f, 0)
 };
 
+const int kexAI::oppositeDirection[NUMAIDIRTYPES] =
+{
+    ADT_SOUTH,
+    ADT_SOUTHWEST,
+    ADT_WEST,
+    ADT_NORTHWEST,
+    ADT_NORTH,
+    ADT_NORTHEAST,
+    ADT_EAST,
+    ADT_SOUTHEAST
+};
+
 //
 // noaitarget
 //
@@ -668,9 +680,16 @@ void kexAI::ChangeDirection(void)
             }
         }
 
-        if(SetDesiredDirection(moveDir))
+        if(moveDir != ADT_NONE)
         {
-            bAdjust = false;
+            if(SetDesiredDirection(moveDir))
+            {
+                bAdjust = false;
+            }
+            else if(SetDesiredDirection(oppositeDirection[moveDir]))
+            {
+                bAdjust = false;
+            }
         }
     }
     
