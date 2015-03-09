@@ -30,6 +30,9 @@ typedef enum
     TSI_QUIT,
     TSI_GAMEPLAY,
     TSI_INPUT,
+    TSI_KEYBOARD,
+    TSI_MOUSE,
+    TSI_GAMEPAD,
     TSI_GRAPHICS,
     TSI_AUDIO,
     TSI_SFXVOLUME,
@@ -38,6 +41,7 @@ typedef enum
     TSI_MUSICSLIDER,
     TSI_EXIT_AUDIO,
     TSI_EXIT_OPTIONS,
+    TSI_EXIT_INPUT,
 
     NUMTITLESCREENITEMS
 } titleScreenItems_t;
@@ -169,9 +173,24 @@ MENUITEM(Gameplay, "Gameplay", -100, 114, 1,
 
 MENUITEM(Input, "Input", 420, 132, 1,
 {
+    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_INPUT)
+    {
+        return;
+    }
+    
+    titleMenu[TSI_KEYBOARD]->item->LerpTo(160);
+    titleMenu[TSI_MOUSE]->item->LerpTo(160);
+    titleMenu[TSI_GAMEPAD]->item->LerpTo(160);
+    titleMenu[TSI_EXIT_INPUT]->item->LerpTo(160);
 },
 {
-    kexGame::cLocal->TitleScreen()->DeselectAllItems();
+    titleMenu[TSI_OPTIONS]->item->LerpTo(-100, 64);
+    titleMenu[TSI_GAMEPLAY]->item->LerpTo(-100);
+    titleMenu[TSI_INPUT]->item->LerpTo(160, 64);
+    titleMenu[TSI_INPUT]->item->Toggle(false);
+    titleMenu[TSI_GRAPHICS]->item->LerpTo(-100);
+    titleMenu[TSI_AUDIO]->item->LerpTo(420);
+    titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(-100);
 });
 
 //-----------------------------------------------------------------------------
@@ -292,6 +311,74 @@ MENUITEM(AudioExit, "Exit", 420, 182, 1,
     titleMenu[TSI_EXIT_AUDIO]->item->LerpTo(-100);
 });
 
+//-----------------------------------------------------------------------------
+//
+// Input: Keyboard
+//
+//-----------------------------------------------------------------------------
+
+MENUITEM(Keyboard, "Keyboard", -100, 114, 1,
+{
+},
+{
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
+});
+
+//-----------------------------------------------------------------------------
+//
+// Input: Mouse
+//
+//-----------------------------------------------------------------------------
+
+MENUITEM(Mouse, "Mouse", 420, 132, 1,
+{
+},
+{
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
+});
+
+//-----------------------------------------------------------------------------
+//
+// Input: Gamepad
+//
+//-----------------------------------------------------------------------------
+
+MENUITEM(Gamepad, "Gamepad", -100, 150, 1,
+{
+},
+{
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
+});
+
+//-----------------------------------------------------------------------------
+//
+// Input: Exit
+//
+//-----------------------------------------------------------------------------
+
+MENUITEM(InputExit, "Exit", 420, 168, 1,
+{
+    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_EXIT_INPUT)
+    {
+        return;
+    }
+    
+    titleMenu[TSI_OPTIONS]->item->LerpTo(160, 64);
+    titleMenu[TSI_GAMEPLAY]->item->LerpTo(160);
+    titleMenu[TSI_INPUT]->item->LerpTo(160, 132);
+    titleMenu[TSI_INPUT]->item->Toggle(true);
+    titleMenu[TSI_GRAPHICS]->item->LerpTo(160);
+    titleMenu[TSI_AUDIO]->item->LerpTo(160);
+    titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(160);
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
+},
+{
+    titleMenu[TSI_KEYBOARD]->item->LerpTo(420);
+    titleMenu[TSI_MOUSE]->item->LerpTo(-100);
+    titleMenu[TSI_GAMEPAD]->item->LerpTo(420);
+    titleMenu[TSI_EXIT_INPUT]->item->LerpTo(-100);
+});
+
 //
 // kexTitleScreen::kexTitleScreen
 //
@@ -310,6 +397,9 @@ kexTitleScreen::kexTitleScreen(void)
     titleMenu[TSI_QUIT] = &menuGroup_Quit;
     titleMenu[TSI_GAMEPLAY] = &menuGroup_Gameplay;
     titleMenu[TSI_INPUT] = &menuGroup_Input;
+    titleMenu[TSI_KEYBOARD] = &menuGroup_Keyboard;
+    titleMenu[TSI_MOUSE] = &menuGroup_Mouse;
+    titleMenu[TSI_GAMEPAD] = &menuGroup_Gamepad;
     titleMenu[TSI_GRAPHICS] = &menuGroup_Graphics;
     titleMenu[TSI_AUDIO] = &menuGroup_Audio;
     titleMenu[TSI_SFXVOLUME] = &menuGroup_SoundVolume;
@@ -318,6 +408,7 @@ kexTitleScreen::kexTitleScreen(void)
     titleMenu[TSI_MUSICSLIDER] = &menuGroup_MusicVolSlider;
     titleMenu[TSI_EXIT_AUDIO] = &menuGroup_AudioExit;
     titleMenu[TSI_EXIT_OPTIONS] = &menuGroup_OptionExit;
+    titleMenu[TSI_EXIT_INPUT] = &menuGroup_InputExit;
 }
 
 //
