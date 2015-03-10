@@ -211,6 +211,35 @@ COMMAND(give)
 }
 
 //
+// weapon
+//
+
+COMMAND(weapon)
+{
+    int argc = kex::cCommands->GetArgc();
+    playerWeapons_t wpn;
+    
+    if(gameLocal.GameState() != GS_LEVEL || gameLocal.Player()->Actor() == NULL)
+    {
+        return;
+    }
+    
+    if(argc != 2)
+    {
+        kex::cSystem->Printf("weapon <weapon num>\n");
+        return;
+    }
+    
+    wpn = static_cast<playerWeapons_t>(atoi(kex::cCommands->GetArgv(1)));
+    if(wpn < 0 || wpn >= NUMPLAYERWEAPONS)
+    {
+        return;
+    }
+    
+    kexGame::cLocal->Player()->PendingWeapon() = wpn;
+}
+
+//
 // kexGameLocal::kexGameLocal
 //
 
