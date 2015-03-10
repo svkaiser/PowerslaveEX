@@ -228,8 +228,11 @@ void kexCommand::Execute(const char *buffer)
                     }
                     else
                     {
-                        // no match, assume typo
-                        kex::cSystem->Warning("Unknown command: %s\n", cmd_argv[0]);
+                        if(kexStr::Compare(cmd_argv[0], " "))
+                        {
+                            // no match, assume typo
+                            kex::cSystem->Warning("Unknown command: %s\n", cmd_argv[0]);
+                        }
                     }
                 }
 
