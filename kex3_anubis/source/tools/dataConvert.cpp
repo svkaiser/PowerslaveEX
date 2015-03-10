@@ -42,7 +42,7 @@ typedef struct
     int16_t u1;
     int16_t u2;
     uint16_t flags;
-    int16_t texCoord;
+    int16_t genTextureID;
     int16_t polyStart;
     int16_t polyEnd;
     int16_t vertexStart;
@@ -68,12 +68,6 @@ typedef struct
     int8_t  texture;
     int8_t  u1;
 } saturnPoly_t;
-
-typedef struct
-{
-    int8_t  u[4];
-    int8_t  v[4];
-} saturnTexCoord_t;
 
 class kexDataConvert
 {
@@ -126,7 +120,7 @@ kexDataConvert::~kexDataConvert(void)
 void kexDataConvert::DumpSaturnLevelData(const char *file)
 {
     kexBinFile mapFile;
-    int numSectors, numFaces, numVertices, numPolys, numTexCoords;
+    int numSectors, numFaces, numVertices, numPolys, numGenTextures;
     int numUnknown[9];
     saturnSector_t *sectors;
     saturnFace_t *faces;
@@ -157,7 +151,7 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
     numFaces        = kex::cEndian->SwapBE32(mapFile.Read32());
     numVertices     = kex::cEndian->SwapBE32(mapFile.Read32());
     numPolys        = kex::cEndian->SwapBE32(mapFile.Read32());
-    numTexCoords    = kex::cEndian->SwapBE32(mapFile.Read32());
+    numGenTextures  = kex::cEndian->SwapBE32(mapFile.Read32());
     numUnknown[0]   = kex::cEndian->SwapBE32(mapFile.Read32());
     numUnknown[1]   = kex::cEndian->SwapBE32(mapFile.Read32());
     numUnknown[2]   = kex::cEndian->SwapBE32(mapFile.Read32());
@@ -200,7 +194,7 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
         faces[i].u1                 = kex::cEndian->SwapBE16(mapFile.Read16());
         faces[i].u2                 = kex::cEndian->SwapBE16(mapFile.Read16());
         faces[i].flags              = kex::cEndian->SwapBE16(mapFile.Read16());
-        faces[i].texCoord           = kex::cEndian->SwapBE16(mapFile.Read16());
+        faces[i].genTextureID       = kex::cEndian->SwapBE16(mapFile.Read16());
         faces[i].polyStart          = kex::cEndian->SwapBE16(mapFile.Read16());
         faces[i].polyEnd            = kex::cEndian->SwapBE16(mapFile.Read16());
         faces[i].vertexStart        = kex::cEndian->SwapBE16(mapFile.Read16());
@@ -271,7 +265,7 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
         fprintf(f, "%8i ", faces[i].u1);
         fprintf(f, "%8i ", faces[i].u2);
         fprintf(f, "%8i ", faces[i].flags);
-        fprintf(f, "%8i ", faces[i].texCoord);
+        fprintf(f, "%8i ", faces[i].genTextureID);
         fprintf(f, "%8i ", faces[i].polyStart);
         fprintf(f, "%8i ", faces[i].polyEnd);
         fprintf(f, "%8i ", faces[i].vertexStart);
@@ -400,6 +394,82 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
 
     fclose(f);
 
+    f = fopen(kexStr(fPath + "_generatedPolyTextures.txt").c_str(), "w");
+
+    for(int i = 0; i < numFaces; ++i)
+    {
+        saturnFace_t *face = &faces[i];
+        int count = 0;
+
+        if(!(face->flags & 1))
+        {
+            continue;
+        }
+
+        fprintf(f, "%04d: ", i);
+
+        for(int j = i+1; j < numFaces; ++j)
+        {
+            saturnFace_t *f = &faces[j];
+
+            if(!(f->flags & 1))
+            {
+                continue;
+            }
+
+            count = f->genTextureID - face->genTextureID;
+            break;
+        }
+
+        for(int j = 0; j < count/2; ++j)
+        {
+            int16_t val = kex::cEndian->SwapBE16(mapFile.Read16());
+
+            fprintf(f, "%6i/%i ", val & 0xff, (val >> 8) & 0xff);
+        }
+
+        fprintf(f, "\n");
+    }
+
+    fclose(f);
+
+    f = fopen(kexStr(fPath + "_generatedLightVertex.txt").c_str(), "w");
+
+    for(int i = 0; i < numFaces; ++i)
+    {
+        saturnFace_t *face = &faces[i];
+        int count = 0;
+
+        if(!(face->flags & 1))
+        {
+            continue;
+        }
+
+        fprintf(f, "%04d: ", i);
+
+        for(int j = i+1; j < numFaces; ++j)
+        {
+            saturnFace_t *f = &faces[j];
+
+            if(!(f->flags & 1))
+            {
+                continue;
+            }
+
+            count = f->lookup1 - face->lookup1;
+            break;
+        }
+
+        for(int j = 0; j < count; ++j)
+        {
+            fprintf(f, "%6i ", mapFile.Read8() << 8);
+        }
+
+        fprintf(f, "\n");
+    }
+
+    fclose(f);
+
     f = fopen(kexStr(fPath + "_SAT.obj").c_str(), "w");
 
     for(int i = 0; i < numVertices; ++i)
@@ -423,13 +493,24 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
                 continue;
             }
 
+            fprintf(f, "o face_%03d_%03d\n", i, j);
+            fprintf(f, "f %i %i %i %i\n", face->polyVert[0]+1,
+                                          face->polyVert[1]+1,
+                                          face->polyVert[2]+1,
+                                          face->polyVert[3]+1);
+
             if(face->polyStart <= -1 || face->polyEnd <= -1)
             {
                 missingFaces++;
+                /*fprintf(f, "o face_%03d_%03d\n", i, j);
+                fprintf(f, "f %i %i %i %i\n", face->polyVert[0]+1,
+                                              face->polyVert[1]+1,
+                                              face->polyVert[2]+1,
+                                              face->polyVert[3]+1);*/
                 continue;
             }
 
-            fprintf(f, "o face_%03d_%03d\n", i, j);
+            /*fprintf(f, "o face_%03d_%03d\n", i, j);
 
             for(int k = face->polyStart; k <= face->polyEnd; ++k)
             {
@@ -442,7 +523,7 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
                 indices[3] = face->vertexStart + poly->indices[3];
 
                 fprintf(f, "f %i %i %i %i\n", indices[0]+1, indices[1]+1, indices[2]+1, indices[3]+1);
-            }
+            }*/
         }
     }
 

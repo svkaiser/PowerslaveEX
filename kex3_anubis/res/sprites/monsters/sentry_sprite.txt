@@ -1,0 +1,350 @@
+texture "sprites/monsters/sentry.png"
+
+// working\kilmaat\sprite0365.tga
+sprite 0 0 0 64 64
+
+// working\kilmaat\sprite0366.tga
+sprite 1 64 0 20 64
+
+// working\kilmaat\sprite0367.tga
+sprite 2 84 0 64 38
+
+// working\kilmaat\sprite0368.tga
+sprite 3 148 0 20 38
+
+// working\kilmaat\sprite0369.tga
+sprite 4 168 0 52 64
+
+// working\kilmaat\sprite0370.tga
+sprite 5 220 0 52 44
+
+// working\kilmaat\sprite0371.tga
+sprite 6 272 0 24 23
+
+// working\kilmaat\sprite0372.tga
+sprite 7 296 0 64 64
+
+// working\kilmaat\sprite0373.tga
+sprite 8 360 0 8 64
+
+// working\kilmaat\sprite0374.tga
+sprite 9 368 0 64 42
+
+// working\kilmaat\sprite0375.tga
+sprite 10 432 0 12 12
+
+// working\kilmaat\sprite0376.tga
+sprite 11 444 0 44 64
+
+// working\kilmaat\sprite0377.tga
+sprite 12 488 0 44 49
+
+// working\kilmaat\sprite0378.tga
+sprite 13 532 0 12 11
+
+// working\kilmaat\sprite0379.tga
+sprite 14 544 0 12 16
+
+// working\kilmaat\sprite0380.tga
+sprite 15 556 0 24 27
+
+// working\kilmaat\sprite0381.tga
+sprite 16 580 0 64 64
+
+// working\kilmaat\sprite0382.tga
+sprite 17 644 0 12 64
+
+// working\kilmaat\sprite0383.tga
+sprite 18 656 0 64 43
+
+// working\kilmaat\sprite0384.tga
+sprite 19 720 0 12 43
+
+// working\kilmaat\sprite0385.tga
+sprite 20 732 0 28 31
+
+// working\kilmaat\sprite0386.tga
+sprite 21 760 0 60 64
+
+// working\kilmaat\sprite0387.tga
+sprite 22 820 0 60 44
+
+// working\kilmaat\sprite0388.tga
+sprite 23 880 0 64 64
+
+// working\kilmaat\sprite0389.tga
+sprite 24 944 0 64 49
+
+// working\kilmaat\sprite0390.tga
+sprite 25 532 16 24 18
+
+// working\kilmaat\sprite0391.tga
+sprite 26 84 38 64 64
+
+// working\kilmaat\sprite0392.tga
+sprite 27 272 23 20 64
+
+// working\kilmaat\sprite0393.tga
+sprite 28 368 42 64 37
+
+// working\kilmaat\sprite0394.tga
+sprite 29 556 27 20 37
+
+// working\kilmaat\sprite0395.tga
+sprite 30 656 43 52 46
+
+// working\kilmaat\sprite0396.tga
+sprite 31 488 49 64 64
+
+// working\kilmaat\sprite0397.tga
+sprite 32 944 49 64 50
+
+// working\kilmaat\sprite0398.tga
+sprite 33 708 43 48 64
+
+// working\kilmaat\sprite0399.tga
+sprite 34 220 44 48 48
+
+// working\kilmaat\sprite0400.tga
+sprite 35 0 64 64 64
+
+// working\kilmaat\sprite0401.tga
+sprite 36 1008 0 8 64
+
+// working\kilmaat\sprite0402.tga
+sprite 37 148 64 64 41
+
+// working\kilmaat\sprite0403.tga
+sprite 38 292 64 64 64
+
+// working\kilmaat\sprite0404.tga
+sprite 39 820 44 16 64
+
+// working\kilmaat\sprite0405.tga
+sprite 40 552 64 64 38
+
+// working\kilmaat\sprite0406.tga
+sprite 41 836 44 16 38
+
+// working\kilmaat\sprite0407.tga
+sprite 42 756 64 64 64
+
+// working\kilmaat\sprite0408.tga
+sprite 43 1016 0 4 64
+
+// working\kilmaat\sprite0409.tga
+sprite 44 852 64 64 47
+
+// working\kilmaat\sprite0410.tga
+sprite 45 1020 0 4 47
+
+// working\kilmaat\sprite0411.tga
+sprite 46 432 64 44 64
+
+// working\kilmaat\sprite0412.tga
+sprite 47 356 79 44 50
+
+// working\kilmaat\sprite0413.tga
+sprite 48 616 89 64 64
+
+// working\kilmaat\sprite0414.tga
+sprite 49 212 92 64 36
+
+// working\kilmaat\sprite0415.tga
+sprite 50 64 64 12 36
+
+// working\kilmaat\sprite0416.tga
+sprite 51 916 99 64 64
+
+// working\kilmaat\sprite0417.tga
+sprite 52 1008 64 16 64
+
+// working\kilmaat\sprite0418.tga
+sprite 53 64 102 64 36
+
+// working\kilmaat\sprite0419.tga
+sprite 54 552 102 64 64
+
+// working\kilmaat\sprite0420.tga
+sprite 55 400 79 32 64
+
+// working\kilmaat\sprite0421.tga
+sprite 56 128 105 64 47
+
+// working\kilmaat\sprite0422.tga
+sprite 57 680 107 32 47
+
+// working\kilmaat\sprite0423.tga
+sprite 58 820 111 52 64
+
+// working\kilmaat\sprite0424.tga
+sprite 59 476 113 52 46
+
+// working\kilmaat\sprite0425.tga
+sprite 60 0 128 56 64
+
+// working\kilmaat\sprite0426.tga
+sprite 61 192 128 56 40
+
+// working\kilmaat\sprite0427.tga
+sprite 62 248 128 52 64
+
+// working\kilmaat\sprite0428.tga
+sprite 63 300 128 52 40
+
+// working\kilmaat\sprite0429.tga
+sprite 64 712 128 64 64
+
+// working\kilmaat\sprite0430.tga
+sprite 65 980 99 4 64
+
+// working\kilmaat\sprite0431.tga
+sprite 66 56 138 64 49
+
+// working\kilmaat\sprite0432.tga
+sprite 67 352 143 52 64
+
+// working\kilmaat\sprite0433.tga
+sprite 68 404 143 52 47
+
+// working\kilmaat\sprite0434.tga
+sprite 69 120 152 64 64
+
+// working\kilmaat\sprite0435.tga
+sprite 70 984 99 8 64
+
+// working\kilmaat\sprite0436.tga
+sprite 71 616 153 64 37
+
+// working\kilmaat\sprite0437.tga
+sprite 72 456 159 64 64
+
+// working\kilmaat\sprite0438.tga
+sprite 73 992 99 16 64
+
+// working\kilmaat\sprite0439.tga
+sprite 74 872 163 64 49
+
+// working\kilmaat\sprite0440.tga
+sprite 75 528 113 16 49
+
+// working\kilmaat\sprite0441.tga
+sprite 76 936 163 64 64
+
+// working\kilmaat\sprite0442.tga
+sprite 77 520 166 64 44
+
+// working\kilmaat\sprite0443.tga
+sprite 78 184 168 64 64
+
+// working\kilmaat\sprite0444.tga
+sprite 79 776 175 64 35
+
+// working\kilmaat\sprite0445.tga
+sprite 80 56 187 64 64
+
+// working\kilmaat\sprite0446.tga
+sprite 81 300 168 36 64
+
+// working\kilmaat\sprite0447.tga
+sprite 82 584 190 64 49
+
+// working\kilmaat\sprite0448.tga
+sprite 83 404 190 36 49
+
+// working\kilmaat\sprite0449.tga
+sprite 84 648 190 60 64
+
+// working\kilmaat\sprite0450.tga
+sprite 85 708 192 60 42
+
+// working\kilmaat\sprite0451.tga
+sprite 86 336 207 64 64
+
+// working\kilmaat\sprite0452.tga
+sprite 87 520 210 64 42
+
+// working\kilmaat\sprite0453.tga
+sprite 88 768 210 60 64
+
+// working\kilmaat\sprite0454.tga
+sprite 89 828 212 60 45
+
+// working\kilmaat\sprite0455.tga
+sprite 90 120 216 64 64
+
+// working\kilmaat\sprite0456.tga
+sprite 91 1008 128 12 64
+
+// working\kilmaat\sprite0457.tga
+sprite 92 440 223 64 48
+
+// working\kilmaat\sprite0458.tga
+sprite 93 0 192 12 48
+
+// working\kilmaat\sprite0459.tga
+sprite 94 888 227 60 64
+
+// working\kilmaat\sprite0460.tga
+sprite 95 948 227 60 42
+
+// working\kilmaat\sprite0461.tga
+sprite 96 12 192 20 12
+
+// working\kilmaat\sprite0462.tga
+sprite 97 184 232 64 64
+
+// working\kilmaat\sprite0463.tga
+sprite 98 248 232 64 42
+
+// working\kilmaat\sprite0464.tga
+sprite 99 32 192 8 42
+
+// working\kilmaat\sprite0465.tga
+sprite 100 708 234 52 64
+
+// working\kilmaat\sprite0466.tga
+sprite 101 584 239 52 47
+
+// working\kilmaat\sprite0467.tga
+sprite 102 0 251 64 64
+
+// working\kilmaat\sprite0468.tga
+sprite 103 504 252 64 45
+
+// working\kilmaat\sprite0469.tga
+sprite 104 1020 128 4 45
+
+// working\kilmaat\sprite0470.tga
+sprite 105 636 254 60 64
+
+// working\kilmaat\sprite0471.tga
+sprite 106 828 257 60 41
+
+// working\kilmaat\sprite0472.tga
+sprite 107 948 269 64 64
+
+// working\kilmaat\sprite0473.tga
+sprite 108 312 271 64 43
+
+// working\kilmaat\sprite0474.tga
+sprite 109 1020 173 4 43
+
+// working\kilmaat\sprite0475.tga
+sprite 110 64 251 48 64
+
+// working\kilmaat\sprite0476.tga
+sprite 111 376 271 48 41
+
+// working\kilmaat\sprite0477.tga
+sprite 112 424 271 64 64
+
+// working\kilmaat\sprite0478.tga
+sprite 113 1012 192 4 64
+
+// working\kilmaat\sprite0479.tga
+sprite 114 248 274 64 46
+
+// working\kilmaat\sprite0480.tga
+sprite 115 1016 192 4 46
+

@@ -2020,6 +2020,7 @@ anubis_melee
     frame
     {
         action A_PlayLocalSound("sounds/anubisslap.wav")
+        action A_MeleeAttack(48, 20)
         rotation_N
         {
             sprites
@@ -3031,6 +3032,7 @@ anubis_melee
     frame
     {
         action A_PlayLocalSound("sounds/anubisslap.wav")
+        action A_MeleeAttack(48, 20)
         rotation_N
         {
             sprites

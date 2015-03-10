@@ -1664,6 +1664,7 @@ spider_attack
     {
         // ##011    0    0
         action A_PlayLocalSound("sounds/spidchomp.wav")
+        action A_MeleeAttack(16, 10)
         delay 4
         rotation_N
         {

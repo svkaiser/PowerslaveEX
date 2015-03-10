@@ -27,6 +27,21 @@ Proj_Anubis 18
     damage                  20
 }
 
+Proj_Blaster 19
+{
+    classname               "kexProjectile"
+    radius                  36
+    height                  32
+    stepHeight              36
+    scale                   1.0
+    spawnAnim               "monsters/sentry_projectile_loop"
+    deathAnim               "monsters/sentry_projectile_destroy"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    damage                  30
+}
+
 Proj_Cobra_Green 20
 {
     classname               "kexProjectile"

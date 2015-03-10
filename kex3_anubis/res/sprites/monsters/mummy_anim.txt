@@ -2167,6 +2167,7 @@ mummy_melee
     frame
     {
         // ##011    0    0
+        action A_MeleeAttack(48, 20)
         rotation_N
         {
             sprites

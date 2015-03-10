@@ -469,7 +469,7 @@ DECLARE_KEX_ACTION(kexActionCheckMelee)
     kexActor *targ;
     kexAI *ai;
     
-    if(!actor->InstanceOf(&kexAI::info))
+    if(!actor->InstanceOf(&kexAI::info) || !actor->Target())
     {
         return;
     }
@@ -547,6 +547,42 @@ DECLARE_KEX_ACTION(kexActionSpawnProjectile)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionMeleeAttack
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionMeleeAttack)
+{
+    float r;
+    kexVec3 org;
+    kexActor *targ;
+    kexAI *ai;
+    
+    if(!actor->InstanceOf(&kexAI::info) || !actor->Target())
+    {
+        return;
+    }
+    
+    ai = static_cast<kexAI*>(actor);
+
+    targ = static_cast<kexActor*>(ai->Target());
+    r = (ai->Radius() + targ->Radius()) + this->args[0].f;
+
+    org = targ->Origin();
+
+    if(ai->AIFlags() & AIF_FLYING)
+    {
+        org.z += targ->Height() * 0.5f;
+    }
+    
+    if(ai->Origin().DistanceSq(org) <= (r * r))
+    {
+        targ->InflictDamage(actor, this->args[1].i);
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionGotoIfUnderwater
 //
 //-----------------------------------------------------------------------------
@@ -559,6 +595,22 @@ DECLARE_KEX_ACTION(kexActionGotoIfUnderwater)
     {
         actor->ChangeAnim(gotoFrame);
     }
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionClearBurnState
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionClearBurnState)
+{
+    if(!actor->InstanceOf(&kexAI::info))
+    {
+        return;
+    }
+    
+    static_cast<kexAI*>(actor)->ClearBurn();
 }
 
 //-----------------------------------------------------------------------------
@@ -713,5 +765,7 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_CheckMelee", kexActionCheckMelee::info.Create, AAT_STRING, AAT_FLOAT);
     RegisterAction("A_FireProjectile", kexActionSpawnProjectile::info.Create,
                    AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
+    RegisterAction("A_MeleeAttack", kexActionMeleeAttack::info.Create, AAT_FLOAT, AAT_INTEGER);
     RegisterAction("A_GotoIfUnderwater", kexActionGotoIfUnderwater::info.Create, AAT_STRING);
+    RegisterAction("A_ClearBurnState", kexActionClearBurnState::info.Create);
 }

@@ -78,6 +78,7 @@ public:
     void                            Ignite(kexGameObject *igniteTarget);
     void                            Ignite(kexProjectileFlame *instigator);
     void                            Ignite(void);
+    void                            ClearBurn(void);
 
     aiState_t                       &State(void) { return state; }
     unsigned int                    &AIFlags(void) { return aiFlags; }

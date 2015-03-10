@@ -229,6 +229,27 @@ void kexAI::OnDamage(kexActor *instigator)
 }
 
 //
+// kexAI::ClearBurn
+//
+
+void kexAI::ClearBurn(void)
+{
+    for(int i = 0; i < 4; ++i)
+    {
+        if(igniteTicks[i] <= -1 || igniteFlames[i] == NULL)
+        {
+            continue;
+        }
+
+        igniteFlames[i]->Remove();
+        igniteFlames[i] = NULL;
+        igniteTicks[i] = -1;
+    }
+
+    aiFlags &= ~AIF_ONFIRE;
+}
+
+//
 // kexAI::UpdateBurn
 //
 // Slowly take damage over time. The more flames
@@ -615,6 +636,11 @@ void kexAI::ChangeDirection(void)
                     {
                         moveDir = ADT_SOUTHEAST;
                     }
+
+                    if(!CheckDirection(directionVectors[moveDir]))
+                    {
+                        moveDir = ADT_EAST;
+                    }
                 }
                 else
                 {
@@ -632,6 +658,11 @@ void kexAI::ChangeDirection(void)
                     else
                     {
                         moveDir = ADT_SOUTHWEST;
+                    }
+
+                    if(!CheckDirection(directionVectors[moveDir]))
+                    {
+                        moveDir = ADT_WEST;
                     }
                 }
                 else
@@ -654,6 +685,11 @@ void kexAI::ChangeDirection(void)
                     {
                         moveDir = ADT_NORTHWEST;
                     }
+
+                    if(!CheckDirection(directionVectors[moveDir]))
+                    {
+                        moveDir = ADT_NORTH;
+                    }
                 }
                 else
                 {
@@ -672,6 +708,11 @@ void kexAI::ChangeDirection(void)
                     {
                         moveDir = ADT_SOUTHWEST;
                     }
+
+                    if(!CheckDirection(directionVectors[moveDir]))
+                    {
+                        moveDir = ADT_SOUTH;
+                    }
                 }
                 else
                 {
@@ -680,16 +721,9 @@ void kexAI::ChangeDirection(void)
             }
         }
 
-        if(moveDir != ADT_NONE)
+        if(SetDesiredDirection(moveDir))
         {
-            if(SetDesiredDirection(moveDir))
-            {
-                bAdjust = false;
-            }
-            else if(SetDesiredDirection(oppositeDirection[moveDir]))
-            {
-                bAdjust = false;
-            }
+            bAdjust = false;
         }
     }
     

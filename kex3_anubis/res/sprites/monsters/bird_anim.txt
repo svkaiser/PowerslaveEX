@@ -913,6 +913,7 @@ bird_attack
         // ##000    0    0
         delay 8
         goto "monsters/bird_fly_retreat"
+        action A_MeleeAttack(16, 20)
         rotation_N
         {
             sprites

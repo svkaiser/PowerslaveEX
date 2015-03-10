@@ -1035,6 +1035,7 @@ bastet_attack
     {
         // ##001   85    0
         action A_PlayLocalSound("sounds/bastetact01.wav")
+        action A_MeleeAttack(48, 10)
         rotation_N
         {
             sprites
@@ -1520,6 +1521,7 @@ bastet_attack
     {
         // ##007   85    0
         action A_PlayLocalSound("sounds/bastetatk01.wav")
+        action A_MeleeAttack(48, 10)
         rotation_N
         {
             sprites
@@ -3160,6 +3162,7 @@ bastet_teleport_out
     frame
     {
         // ##000    0    0
+        action A_ClearBurnState()
             sprites
             {
                 { "monsters/bastet", 95,    -19,  -91,    0 }

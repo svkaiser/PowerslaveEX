@@ -1,0 +1,86 @@
+AI_Sentry 10
+{
+    classname               "kexAI"
+    radius                  24
+    height                  192
+    stepHeight              48
+    scale                   1.5
+    health                  180
+    moveSpeed               8
+    spawnAnim               "monsters/sentry_idle"
+    chaseAnim               "monsters/sentry_chase"
+    painAnim                "monsters/sentry_pain"
+    rangeAttackAnim         "monsters/sentry_attack"
+    deathAnim               "monsters/sentry_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    noDropOff               1
+    painChance              128
+    sightSound              "sounds/mantisact01.wav"
+}
+
+Obj_Sentry_Gib01 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/sentry_gib01"
+    moveable                1
+    expires                 1
+}
+
+Obj_Sentry_Gib02 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/sentry_gib02"
+    moveable                1
+    expires                 1
+}
+
+Obj_Sentry_Gib03 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/sentry_gib03"
+    moveable                1
+    expires                 1
+}
+
+Obj_Sentry_Gib04 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/sentry_gib04"
+    moveable                1
+    expires                 1
+}
+
+Obj_Sentry_Gib05 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/sentry_gib05"
+    moveable                1
+    expires                 1
+}
