@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410A697F1AAF53FC000BD442 /* dataConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410A697E1AAF53FC000BD442 /* dataConvert.cpp */; };
 		4111E0821A8D4B19000D5B22 /* pickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4111E0801A8D4B19000D5B22 /* pickup.cpp */; };
 		413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413DD5BD1A89674B00767E49 /* actorObject.cpp */; };
 		4178638F1A8E6B2C00329895 /* mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4178638D1A8E6B2C00329895 /* mover.cpp */; };
@@ -163,6 +164,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		410A697E1AAF53FC000BD442 /* dataConvert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dataConvert.cpp; path = ../../source/tools/dataConvert.cpp; sourceTree = "<group>"; };
 		4111E0801A8D4B19000D5B22 /* pickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pickup.cpp; path = ../../source/game/pickup.cpp; sourceTree = "<group>"; };
 		4111E0811A8D4B19000D5B22 /* pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pickup.h; path = ../../source/game/pickup.h; sourceTree = "<group>"; };
 		413DD5BD1A89674B00767E49 /* actorObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorObject.cpp; path = ../../source/script/objects/actorObject.cpp; sourceTree = "<group>"; };
@@ -401,9 +403,10 @@
 		41B96A9A1A69798B004397E6 /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				41B8F3E01A72FED50014CDAB /* mapEditor */,
+				410A697E1AAF53FC000BD442 /* dataConvert.cpp */,
 				41B96A9D1A697996004397E6 /* spriteMake.cpp */,
 				41B96A9E1A697996004397E6 /* spriteMake.h */,
+				41B8F3E01A72FED50014CDAB /* mapEditor */,
 			);
 			name = tools;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41C7FC6A1A5AFB98003864CB /* renderFont.cpp in Sources */,
+				410A697F1AAF53FC000BD442 /* dataConvert.cpp in Sources */,
 				41C7FC661A5AFB98003864CB /* fbo.cpp in Sources */,
 				41C7FC831A5AFBC0003864CB /* soundOAL.cpp in Sources */,
 				41BCC06C1A6ECCB800F8B3FA /* renderScene.cpp in Sources */,
