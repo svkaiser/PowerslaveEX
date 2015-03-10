@@ -842,6 +842,11 @@ void kexImage::Blit(kexImage &image, const int x, const int y)
             int dstdelta = ((width * (h + y)) + (w + x)) * bits;
             int srcdelta = ((srcW * h) + w) * srcBits;
 
+            if(bits == 4 && pdst[dstdelta + 3] != 0)
+            {
+                continue;
+            }
+
             pdst[dstdelta + 0] = psrc[srcdelta + 0];
             pdst[dstdelta + 1] = psrc[srcdelta + 1];
             pdst[dstdelta + 2] = psrc[srcdelta + 2];
