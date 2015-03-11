@@ -554,6 +554,11 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
                 // don't let projectiles collide with its source/owner
                 continue;
             }
+            
+            if(!actorBounds.IntersectingBox(actor->Bounds() + actor->Origin()))
+            {
+                continue;
+            }
 
             r = (actor->Radius() * 0.5f) + moveActor->Radius();
             
