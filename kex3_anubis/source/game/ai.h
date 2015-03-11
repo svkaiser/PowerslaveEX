@@ -88,7 +88,8 @@ public:
 private:
     float                           GetTargetHeightDifference(void);
     void                            UpdateBurn(void);
-    bool                            SetDesiredDirection(const int dir);
+    bool                            TrySetDesiredDirection(const int dir);
+    void                            SetDesiredDirection(const float angle);
     void                            ChangeStateFromAnim(void);
     bool                            CheckMeleeRange(void);
     bool                            CheckRangeAttack(void);
@@ -124,6 +125,7 @@ private:
     int                             igniteTicks[4];
     kexActor                        *igniteFlames[4];
     float                           turnSpeed;
+    int                             turnCount;
 END_KEX_CLASS();
 
 #endif

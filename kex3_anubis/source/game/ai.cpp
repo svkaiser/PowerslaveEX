@@ -101,6 +101,7 @@ kexAI::kexAI(void)
     this->moveSpeed = 8;
     this->meleeExtraDist = 0;
     this->turnSpeed = 8;
+    this->turnCount = 0;
 
     for(int i = 0; i < 4; ++i)
     {
@@ -507,11 +508,12 @@ bool kexAI::CheckRangeAttack(void)
 
 bool kexAI::CheckDirection(const kexVec3 &dir)
 {
-    kexVec3 start;
+    kexVec3 start, end;
 
     start = origin + kexVec3(0, 0, stepHeight);
+    end = start + (dir * (radius * 1.5f));
     
-    if(kexGame::cLocal->CModel()->Trace(this, sector, start, start + (dir * (radius * 1.5f))))
+    if(kexGame::cLocal->CModel()->Trace(this, sector, start, end))
     {
         return (kexGame::cLocal->CModel()->ContactActor() == target);
     }
@@ -529,12 +531,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
                 continue;
             }
             
-            if(kexGame::cLocal->CModel()->PointOnFaceSide(origin, face, radius * 1.125f) > 0)
-            {
-                continue;
-            }
-
-            if(face->plane.IsFacing(yaw))
+            if(kexGame::cLocal->CModel()->PointOnFaceSide(end, face, radius * 1.125f) > 0)
             {
                 continue;
             }
@@ -556,14 +553,24 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
 // kexAI::SetDesiredDirection
 //
 
-bool kexAI::SetDesiredDirection(const int dir)
+void kexAI::SetDesiredDirection(const float angle)
+{
+    desiredYaw = angle;
+    turnAmount = desiredYaw.Diff(yaw) / turnSpeed;
+    turnCount = 0;
+}
+
+//
+// kexAI::SetDesiredDirection
+//
+
+bool kexAI::TrySetDesiredDirection(const int dir)
 {
     if(dir != ADT_NONE)
     {
         if(CheckDirection(directionVectors[dir]))
         {
-            desiredYaw = directionAngles[dir];
-            turnAmount = desiredYaw.Diff(yaw) / turnSpeed;
+            SetDesiredDirection(directionAngles[dir]);
             return true;
         }
     }
@@ -721,7 +728,7 @@ void kexAI::ChangeDirection(void)
             }
         }
 
-        if(SetDesiredDirection(moveDir))
+        if(TrySetDesiredDirection(moveDir))
         {
             bAdjust = false;
         }
@@ -733,32 +740,37 @@ void kexAI::ChangeDirection(void)
     }
 
     // direction was blocked, so pick another direction
-    for(int i = 1; i < 8; ++i)
+    if(kexRand::Float() >= 0.5f)
     {
-        newYaw = yaw + kexMath::Deg2Rad(25.71f * (float)i);
-        kexVec3::ToAxis(&forward, 0, 0, newYaw, 0, 0);
-        
-        if(CheckDirection(forward))
+        for(int i = 1; i < 8; ++i)
         {
-            desiredYaw = newYaw;
-            turnAmount = desiredYaw.Diff(yaw) / turnSpeed;
-            return;
+            newYaw = yaw + kexMath::Deg2Rad(25.71f * (float)i);
+            kexVec3::ToAxis(&forward, 0, 0, newYaw, 0, 0);
+            
+            if(CheckDirection(forward))
+            {
+                SetDesiredDirection(newYaw);
+                return;
+            }
         }
-        
-        newYaw = yaw - kexMath::Deg2Rad(25.71f * (float)i);
-        kexVec3::ToAxis(&forward, 0, 0, newYaw, 0, 0);
-        
-        if(CheckDirection(forward))
+    }
+    else
+    {
+        for(int i = 1; i < 8; ++i)
         {
-            desiredYaw = newYaw;
-            turnAmount = desiredYaw.Diff(yaw) / turnSpeed;
-            return;
+            newYaw = yaw - kexMath::Deg2Rad(25.71f * (float)i);
+            kexVec3::ToAxis(&forward, 0, 0, newYaw, 0, 0);
+            
+            if(CheckDirection(forward))
+            {
+                SetDesiredDirection(newYaw);
+                return;
+            }
         }
     }
 
     // no idea what to do now. randomly pick a direction and hope for the best
-    desiredYaw = yaw + (kexMath::Deg2Rad(135) + (kexRand::Float() * kexMath::Deg2Rad(90)));
-    turnAmount = desiredYaw.Diff(yaw) / turnSpeed;
+    SetDesiredDirection(yaw + (kexMath::Deg2Rad(135) + (kexRand::Float() * kexMath::Deg2Rad(90))));
 }
 
 //
@@ -898,7 +910,7 @@ void kexAI::ChaseTarget(void)
         yaw += turnAmount;
         kexVec3::ToAxis(&forward, 0, 0, yaw, 0, 0);
 
-        if(kexMath::Fabs(yaw.Diff(desiredYaw)) < kexMath::Deg2Rad(10.0f))
+        if(++turnCount >= turnSpeed)
         {
             aiFlags &= ~AIF_TURNING;
             timeBeforeTurning = 8 + kexRand::Max(16);
