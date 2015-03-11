@@ -391,6 +391,8 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
         return;
     }
     
+    face->flags |= FF_MAPPED;
+    
     for(int k = face->polyStart; k <= face->polyEnd; ++k)
     {
         DrawPolygon(face, &world->Polys()[k]);

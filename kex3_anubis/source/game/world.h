@@ -80,6 +80,7 @@ typedef enum
     FF_HIDDEN           = BIT(12),
     FF_PORTAL           = BIT(13),
     FF_UNDERWATER       = BIT(14),
+    FF_MAPPED           = BIT(15)
 } faceFlags_t;
 
 typedef enum

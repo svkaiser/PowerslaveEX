@@ -40,10 +40,18 @@ public:
     void                        PickupFlash(void) { hud.SetPickupFlash(); }
     void                        DamageFlash(void) { hud.SetDamageFlash(); }
     void                        ElectrocuteFlash(void) { hud.SetElectrocuteFlash(); }
+    const bool                  AutomapEnabled(void) { return bShowAutomap; }
+    void                        ToggleAutomap(const bool bToggle) { bShowAutomap = bToggle; }
+    void                        ToggleMapAll(const bool bToggle) { bMapAll = bToggle; }
     
 private:
     void                        InitWater(void);
     void                        UpdateWater(void);
+    void                        DrawAutomap(void);
+    void                        DrawAutomapArrow(kexRenderView &view, const float angle, const kexVec3 &pos,
+                                                 const float size, const byte r, const byte g, const byte b);
+    void                        DrawAutomapActors(kexRenderView &view);
+    void                        DrawAutomapWalls(kexRenderView &view);
 
     int                         ticks;
     kexHud                      hud;
@@ -52,6 +60,8 @@ private:
     int                         waterAccelPoints[16][16];
     int                         waterVelocityPoints[16][16];
     int                         waterMaxMagnitude;
+    bool                        bShowAutomap;
+    bool                        bMapAll;
 };
 
 #endif

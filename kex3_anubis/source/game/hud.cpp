@@ -306,6 +306,14 @@ void kexHud::Update(void)
 
 void kexHud::Display(void)
 {
+    kexRender::cScreen->SetOrtho();
+    
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+    
     kexRender::cVertList->BindDrawPointers();
     
     DrawAmmoBar();
