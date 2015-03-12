@@ -158,6 +158,57 @@ kexActor *kexActorFactory::Spawn(const kexStr &name, const float x, const float 
 }
 
 //
+// kexActorFactory::SpawnFromActor
+//
+
+kexActor *kexActorFactory::SpawnFromActor(const char *name, const float x, const float y, const float z,
+                                          kexActor *source, const float yaw)
+{
+    kexActor *actor;
+    kexVec3 start, end;
+    
+    if(!source)
+    {
+        return NULL;
+    }
+    
+    actor = Spawn(name,
+                  source->Origin().x,
+                  source->Origin().y,
+                  source->Origin().z,
+                  yaw, source->SectorIndex());
+    
+    if(actor == NULL)
+    {
+        return NULL;
+    }
+    
+    start = source->Origin();
+    end = start;
+    
+    end.x += x;
+    end.y += y;
+    end.z += z;
+    
+    kexGame::cLocal->CModel()->Trace(source, source->Sector(), start, end);
+    
+    actor->Origin().Lerp(end, kexGame::cLocal->CModel()->Fraction());
+    actor->SetSector(kexGame::cLocal->CModel()->ContactSector());
+    
+    return actor;
+}
+
+//
+// kexActorFactory::SpawnFromActor
+//
+
+kexActor *kexActorFactory::SpawnFromActor(const kexStr &name, const float x, const float y, const float z,
+                                          kexActor *source, const float yaw)
+{
+    return SpawnFromActor(name.c_str(), x, y, z, source, yaw);
+}
+
+//
 // kexActorFactory::SpawnMover
 //
 

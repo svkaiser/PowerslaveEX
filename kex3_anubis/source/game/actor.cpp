@@ -480,6 +480,15 @@ bool kexActor::RandomDecision(const int rnd)
 }
 
 //
+// kexActor::SpawnActor
+//
+
+kexActor *kexActor::SpawnActor(const kexStr &name, const float x, const float y, const float z)
+{
+    return kexGame::cActorFactory->SpawnFromActor(name, x, y, z, this, yaw);
+}
+
+//
 // kexActor::UpdateVelocity
 //
 

@@ -493,7 +493,6 @@ DECLARE_KEX_ACTION(kexActionCheckMelee)
 
 DECLARE_KEX_ACTION(kexActionSpawnProjectile)
 {
-    kexGameLocal *game  = kexGame::cLocal;
     char *defName       = this->args[0].s;
     float yaw           = this->args[1].f + actor->Yaw();
     float pitch         = this->args[2].f + actor->Pitch();
@@ -506,12 +505,11 @@ DECLARE_KEX_ACTION(kexActionSpawnProjectile)
     
     kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
     
-    x = actor->Origin().x + (forward.x * dist);
-    y = actor->Origin().y + (forward.y * dist);
-    z = actor->Origin().z + (forward.z * dist);
+    x = forward.x * dist;
+    y = forward.y * dist;
+    z = forward.z * dist;
     
-    proj = kexGame::cActorFactory->Spawn(defName, x, y, z + offset, actor->Yaw(),
-                                         actor->Sector() - game->World()->Sectors());
+    proj = kexGame::cActorFactory->SpawnFromActor(defName, x, y, z + offset, actor, actor->Yaw());
     
     kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), actor->Pitch(), 0);
     

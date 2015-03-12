@@ -30,6 +30,10 @@ public:
                                        const float yaw, const int sector = -1);
     kexActor                    *Spawn(const kexStr &name, const float x, const float y, const float z,
                                        const float yaw, const int sector = -1);
+    kexActor                    *SpawnFromActor(const char *name, const float x, const float y, const float z,
+                                                kexActor *source, const float yaw);
+    kexActor                    *SpawnFromActor(const kexStr &name, const float x, const float y, const float z,
+                                                kexActor *source, const float yaw);
     kexMover*                   SpawnMover(const char *className, const int type, const int sector);
     kexFireballFactory          *SpawnFireballFactory(mapActor_t *mapActor);
     

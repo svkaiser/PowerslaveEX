@@ -58,6 +58,7 @@ void kexScriptObjActor::Init(void)
     e->RegisterObjectMethod("kActor", "void ChangeAnim(const kStr &in)", asMETHODPR(kexActor, ChangeAnim, (const kexStr&), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "const int GameTicks(void) const", asMETHODPR(kexActor, GameTicks, (void) const, const int), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kVec3 &Color(void)", asMETHODPR(kexActor, Color, (void), kexVec3&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "kActor @SpawnActor(const kStr &in, const float, const float, const float)", asMETHODPR(kexActor, SpawnActor, (const kexStr&, const float, const float, const float), kexActor*), asCALL_THISCALL);
 
     e->RegisterEnum("EnumActorFlags");
     e->RegisterEnumValue("EnumActorFlags", "AF_FLOORFRICTION", AF_FLOORFRICTION);

@@ -1254,7 +1254,7 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
     fraction = 1;
     interceptVector = end;
     contactNormal.Clear();
-    contactSector = NULL;
+    contactSector = sector;
     contactFace = NULL;
     contactActor = NULL;
 
@@ -1293,6 +1293,7 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
                 {
                     // add to list if the ray passes through the portal
                     sectorList.Set(&sectors[face->sector]);
+                    contactSector = &sectors[face->sector];
                 }
             }
             else if(face->flags & FF_SOLID)

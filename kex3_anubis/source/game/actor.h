@@ -88,6 +88,8 @@ public:
     void                            UnlinkSector(void);
     void                            InflictDamage(kexActor *inflictor, const int amount);
     bool                            RandomDecision(const int rnd);
+    kexActor                        *SpawnActor(const kexStr &name,
+                                                const float x, const float y, const float z);
 
     kexVec3                         &Velocity(void) { return velocity; }
     kexVec3                         &Movement(void) { return movement; }
