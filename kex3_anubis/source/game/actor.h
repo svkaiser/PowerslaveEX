@@ -122,6 +122,7 @@ public:
     void                            SetTaggedActor(kexActor *actor) { taggedActor = actor; }
     kexVec3                         &Color(void) { return color; }
     kexVec3                         &PrevOrigin(void) { return prevOrigin; }
+    void                            UpdateGameTicks(void) { gameTicks++; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 

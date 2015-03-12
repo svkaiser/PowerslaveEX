@@ -91,6 +91,7 @@ sentry_chase
     frame
     {
         // ##000    0    0
+        action A_SentryChatter()
         rotation_N
         {
             sprites
@@ -752,6 +753,7 @@ sentry_pain
     frame
     {
         // ##000    0    0
+        action A_PlayLocalSound("sounds/mantispain01.wav")
         rotation_N
         {
             sprites
@@ -2710,6 +2712,7 @@ sentry_death
     frame
     {
         action A_GibDeath(64.0)
+        action A_SentryDeath()
         action A_TossActor("Obj_Sentry_Gib01", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Sentry_Gib01", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Sentry_Gib02", 0, 0, 32, 8, 8, 4, 16)

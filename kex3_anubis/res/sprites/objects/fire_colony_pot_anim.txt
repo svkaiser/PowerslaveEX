@@ -1,0 +1,136 @@
+fire_colony_pot_idle
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 3,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 3,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 3,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 2,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 2,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 2,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 1,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 1,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 1,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 0,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 0,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "objects/fire_colony_pot", 0,     -2,  -50,    0 }
+            { "objects/fire_colony_pot", 4,     -9,  -36,    0 }
+        }
+
+    }
+
+}

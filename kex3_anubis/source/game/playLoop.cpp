@@ -262,7 +262,7 @@ void kexPlayLoop::DrawAutomapWalls(kexRenderView &view)
 {
     kexWorld *w = kexGame::cLocal->World();
     
-    for(int i = 0; i < w->NumSectors(); ++i)
+    for(unsigned int i = 0; i < w->NumSectors(); ++i)
     {
         mapSector_t *sector = &w->Sectors()[i];
         kexBBox bounds = sector->bounds;
@@ -283,7 +283,7 @@ void kexPlayLoop::DrawAutomapWalls(kexRenderView &view)
             byte r1, g1, b1;
             byte r2, g2, b2;
             
-            if((!(face->flags & FF_MAPPED) && !bMapAll) ||
+            if(face->flags & FF_HIDDEN || (!(face->flags & FF_MAPPED) && !bMapAll) ||
                (face->flags & FF_PORTAL && !(face->flags & FF_SOLID)))
             {
                 continue;
@@ -310,18 +310,18 @@ void kexPlayLoop::DrawAutomapWalls(kexRenderView &view)
             {
                 kexMath::Clamp(f1, 0, 1);
                 
-                fr = 255 - (float)r1 * f1 + (float)r1;
+                fr =   0 - (float)r1 * f1 + (float)r1;
                 fg =   0 - (float)g1 * f1 + (float)g1;
-                fb =   0 - (float)b1 * f1 + (float)b1;
+                fb = 255 - (float)b1 * f1 + (float)b1;
             }
             else
             {
                 f1 = -f1;
                 kexMath::Clamp(f1, 0, 1);
                 
-                fr =   0 - (float)r1 * f1 + (float)r1;
+                fr = 255 - (float)r1 * f1 + (float)r1;
                 fg =   0 - (float)g1 * f1 + (float)g1;
-                fb = 255 - (float)b1 * f1 + (float)b1;
+                fb =   0 - (float)b1 * f1 + (float)b1;
             }
             
             kexMath::Clamp(fr, 0, 255);
@@ -336,18 +336,18 @@ void kexPlayLoop::DrawAutomapWalls(kexRenderView &view)
             {
                 kexMath::Clamp(f2, 0, 1);
                 
-                fr = 255 - (float)r1 * f2 + (float)r1;
+                fr =   0 - (float)r1 * f2 + (float)r1;
                 fg =   0 - (float)g1 * f2 + (float)g1;
-                fb =   0 - (float)b1 * f2 + (float)b1;
+                fb = 255 - (float)b1 * f2 + (float)b1;
             }
             else
             {
                 f2 = -f2;
                 kexMath::Clamp(f2, 0, 1);
                 
-                fr =   0 - (float)r1 * f2 + (float)r1;
+                fr = 255 - (float)r1 * f2 + (float)r1;
                 fg =   0 - (float)g1 * f2 + (float)g1;
-                fb = 255 - (float)b1 * f2 + (float)b1;
+                fb =   0 - (float)b1 * f2 + (float)b1;
             }
             
             kexMath::Clamp(fr, 0, 255);
@@ -459,7 +459,7 @@ void kexPlayLoop::DrawAutomap(void)
     automapView.Fov() = 45;
     
     automapView.Origin() = renderView.Origin();
-    automapView.Origin().z = 1024;
+    automapView.Origin().z = 2048;
     
     automapView.Yaw() = renderView.Yaw();
     automapView.Pitch() = kexMath::Deg2Rad(90);
@@ -476,9 +476,13 @@ void kexPlayLoop::DrawAutomap(void)
     
     kexRender::cTextures->whiteTexture->Bind();
     kexRender::cVertList->BindDrawPointers();
+
+    dglLineWidth(2);
     
     DrawAutomapWalls(automapView);
     DrawAutomapActors(automapView);
     DrawAutomapArrow(automapView, automapView.Yaw(), automapView.Origin(),
                      kexGame::cLocal->Player()->Actor()->Radius(), 255, 255, 255);
+
+    dglLineWidth(1);
 }

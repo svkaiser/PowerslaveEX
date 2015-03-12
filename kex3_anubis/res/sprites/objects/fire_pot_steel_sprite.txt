@@ -1,0 +1,17 @@
+texture "sprites/objects/fire_pot_steel.png"
+
+// working\fire_pot_steel\sprite0515.tga
+sprite 0 0 0 48 41
+
+// working\fire_pot_steel\sprite0516.tga
+sprite 1 48 0 48 41
+
+// working\fire_pot_steel\sprite0517.tga
+sprite 2 96 0 44 41
+
+// working\fire_pot_steel\sprite0518.tga
+sprite 3 140 0 48 41
+
+// working\fire_pot_steel\sprite0519.tga
+sprite 4 188 0 56 25
+

@@ -1,0 +1,17 @@
+texture "sprites/objects/fire_pot_skull.png"
+
+// working\fire_pot_skull\sprite0431.tga
+sprite 0 0 0 8 16
+
+// working\fire_pot_skull\sprite0432.tga
+sprite 1 8 0 8 16
+
+// working\fire_pot_skull\sprite0433.tga
+sprite 2 16 0 8 16
+
+// working\fire_pot_skull\sprite0434.tga
+sprite 3 24 0 32 59
+
+// working\fire_pot_skull\sprite0435.tga
+sprite 4 56 0 8 16
+

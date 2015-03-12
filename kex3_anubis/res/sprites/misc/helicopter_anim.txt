@@ -1,0 +1,277 @@
+helicopter_idle
+{
+    // frames:   16
+    frame
+    {
+        // ##000   66    0
+        action A_PlayLocalSound("sounds/chopper.wav")
+        sprites
+        {
+            { "misc/helicopter", 0,    -83,  -81,    0 }
+            { "misc/helicopter", 1,    -19,  -81,    0 }
+            { "misc/helicopter", 2,     45,  -81,    0 }
+            { "misc/helicopter", 3,    109,  -81,    0 }
+            { "misc/helicopter", 4,    173,  -81,    0 }
+            { "misc/helicopter", 5,    -83,  -17,    0 }
+            { "misc/helicopter", 6,    -19,  -17,    0 }
+            { "misc/helicopter", 7,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "misc/helicopter", 8,    -83,  -81,    0 }
+            { "misc/helicopter", 9,    -19,  -81,    0 }
+            { "misc/helicopter", 10,     45,  -81,    0 }
+            { "misc/helicopter", 11,    109,  -81,    0 }
+            { "misc/helicopter", 12,    173,  -81,    0 }
+            { "misc/helicopter", 13,    -83,  -17,    0 }
+            { "misc/helicopter", 14,    -19,  -17,    0 }
+            { "misc/helicopter", 15,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "misc/helicopter", 16,   -114,  -81,    0 }
+            { "misc/helicopter", 17,    -50,  -81,    0 }
+            { "misc/helicopter", 18,     14,  -81,    0 }
+            { "misc/helicopter", 19,     78,  -81,    0 }
+            { "misc/helicopter", 20,    142,  -81,    0 }
+            { "misc/helicopter", 21,   -114,  -17,    0 }
+            { "misc/helicopter", 22,    -50,  -17,    0 }
+            { "misc/helicopter", 23,     14,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "misc/helicopter", 24,    -83,  -81,    0 }
+            { "misc/helicopter", 25,    -19,  -81,    0 }
+            { "misc/helicopter", 26,     45,  -81,    0 }
+            { "misc/helicopter", 27,    109,  -81,    0 }
+            { "misc/helicopter", 28,    173,  -81,    0 }
+            { "misc/helicopter", 29,    -83,  -17,    0 }
+            { "misc/helicopter", 30,    -19,  -17,    0 }
+            { "misc/helicopter", 31,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "misc/helicopter", 0,    -83,  -81,    0 }
+            { "misc/helicopter", 1,    -19,  -81,    0 }
+            { "misc/helicopter", 2,     45,  -81,    0 }
+            { "misc/helicopter", 3,    109,  -81,    0 }
+            { "misc/helicopter", 4,    173,  -81,    0 }
+            { "misc/helicopter", 5,    -83,  -17,    0 }
+            { "misc/helicopter", 6,    -19,  -17,    0 }
+            { "misc/helicopter", 7,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "misc/helicopter", 8,    -83,  -81,    0 }
+            { "misc/helicopter", 9,    -19,  -81,    0 }
+            { "misc/helicopter", 10,     45,  -81,    0 }
+            { "misc/helicopter", 11,    109,  -81,    0 }
+            { "misc/helicopter", 12,    173,  -81,    0 }
+            { "misc/helicopter", 13,    -83,  -17,    0 }
+            { "misc/helicopter", 14,    -19,  -17,    0 }
+            { "misc/helicopter", 15,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "misc/helicopter", 16,   -114,  -81,    0 }
+            { "misc/helicopter", 17,    -50,  -81,    0 }
+            { "misc/helicopter", 18,     14,  -81,    0 }
+            { "misc/helicopter", 19,     78,  -81,    0 }
+            { "misc/helicopter", 20,    142,  -81,    0 }
+            { "misc/helicopter", 21,   -114,  -17,    0 }
+            { "misc/helicopter", 22,    -50,  -17,    0 }
+            { "misc/helicopter", 23,     14,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "misc/helicopter", 24,    -83,  -81,    0 }
+            { "misc/helicopter", 25,    -19,  -81,    0 }
+            { "misc/helicopter", 26,     45,  -81,    0 }
+            { "misc/helicopter", 27,    109,  -81,    0 }
+            { "misc/helicopter", 28,    173,  -81,    0 }
+            { "misc/helicopter", 29,    -83,  -17,    0 }
+            { "misc/helicopter", 30,    -19,  -17,    0 }
+            { "misc/helicopter", 31,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "misc/helicopter", 0,    -83,  -81,    0 }
+            { "misc/helicopter", 1,    -19,  -81,    0 }
+            { "misc/helicopter", 2,     45,  -81,    0 }
+            { "misc/helicopter", 3,    109,  -81,    0 }
+            { "misc/helicopter", 4,    173,  -81,    0 }
+            { "misc/helicopter", 5,    -83,  -17,    0 }
+            { "misc/helicopter", 6,    -19,  -17,    0 }
+            { "misc/helicopter", 7,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "misc/helicopter", 8,    -83,  -81,    0 }
+            { "misc/helicopter", 9,    -19,  -81,    0 }
+            { "misc/helicopter", 10,     45,  -81,    0 }
+            { "misc/helicopter", 11,    109,  -81,    0 }
+            { "misc/helicopter", 12,    173,  -81,    0 }
+            { "misc/helicopter", 13,    -83,  -17,    0 }
+            { "misc/helicopter", 14,    -19,  -17,    0 }
+            { "misc/helicopter", 15,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "misc/helicopter", 16,   -114,  -81,    0 }
+            { "misc/helicopter", 17,    -50,  -81,    0 }
+            { "misc/helicopter", 18,     14,  -81,    0 }
+            { "misc/helicopter", 19,     78,  -81,    0 }
+            { "misc/helicopter", 20,    142,  -81,    0 }
+            { "misc/helicopter", 21,   -114,  -17,    0 }
+            { "misc/helicopter", 22,    -50,  -17,    0 }
+            { "misc/helicopter", 23,     14,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "misc/helicopter", 24,    -83,  -81,    0 }
+            { "misc/helicopter", 25,    -19,  -81,    0 }
+            { "misc/helicopter", 26,     45,  -81,    0 }
+            { "misc/helicopter", 27,    109,  -81,    0 }
+            { "misc/helicopter", 28,    173,  -81,    0 }
+            { "misc/helicopter", 29,    -83,  -17,    0 }
+            { "misc/helicopter", 30,    -19,  -17,    0 }
+            { "misc/helicopter", 31,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "misc/helicopter", 0,    -83,  -81,    0 }
+            { "misc/helicopter", 1,    -19,  -81,    0 }
+            { "misc/helicopter", 2,     45,  -81,    0 }
+            { "misc/helicopter", 3,    109,  -81,    0 }
+            { "misc/helicopter", 4,    173,  -81,    0 }
+            { "misc/helicopter", 5,    -83,  -17,    0 }
+            { "misc/helicopter", 6,    -19,  -17,    0 }
+            { "misc/helicopter", 7,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "misc/helicopter", 8,    -83,  -81,    0 }
+            { "misc/helicopter", 9,    -19,  -81,    0 }
+            { "misc/helicopter", 10,     45,  -81,    0 }
+            { "misc/helicopter", 11,    109,  -81,    0 }
+            { "misc/helicopter", 12,    173,  -81,    0 }
+            { "misc/helicopter", 13,    -83,  -17,    0 }
+            { "misc/helicopter", 14,    -19,  -17,    0 }
+            { "misc/helicopter", 15,     45,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "misc/helicopter", 16,   -114,  -81,    0 }
+            { "misc/helicopter", 17,    -50,  -81,    0 }
+            { "misc/helicopter", 18,     14,  -81,    0 }
+            { "misc/helicopter", 19,     78,  -81,    0 }
+            { "misc/helicopter", 20,    142,  -81,    0 }
+            { "misc/helicopter", 21,   -114,  -17,    0 }
+            { "misc/helicopter", 22,    -50,  -17,    0 }
+            { "misc/helicopter", 23,     14,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "misc/helicopter", 24,    -83,  -81,    0 }
+            { "misc/helicopter", 25,    -19,  -81,    0 }
+            { "misc/helicopter", 26,     45,  -81,    0 }
+            { "misc/helicopter", 27,    109,  -81,    0 }
+            { "misc/helicopter", 28,    173,  -81,    0 }
+            { "misc/helicopter", 29,    -83,  -17,    0 }
+            { "misc/helicopter", 30,    -19,  -17,    0 }
+            { "misc/helicopter", 31,     45,  -17,    0 }
+        }
+
+    }
+
+}

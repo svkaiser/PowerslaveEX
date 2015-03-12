@@ -259,7 +259,11 @@ void kexProjectile::CheckFloorAndCeilings(void)
         // bump ceiling
         if(ceilingSide == kexPlane::PSIDE_BACK || ceilingSide == kexPlane::PSIDE_ON)
         {
-            if(projectileFlags & PF_IMPACTWALLSONLY)
+            if(flags & AF_BOUNCY)
+            {
+                velocity.Project(sector->ceilingFace->plane.Normal(), 2.048f);
+            }
+            else if(projectileFlags & PF_IMPACTWALLSONLY)
             {
                 AdjustAlongFace(sector->ceilingFace);
             }
@@ -278,7 +282,19 @@ void kexProjectile::CheckFloorAndCeilings(void)
         // bump floor
         if(floorSide == kexPlane::PSIDE_BACK || floorSide == kexPlane::PSIDE_ON)
         {
-            if(projectileFlags & PF_IMPACTWALLSONLY)
+            if(flags & AF_BOUNCY)
+            {
+                if(flags & AF_EXPIRES)
+                {
+                    if(--health == 0)
+                    {
+                        OnImpact(NULL);
+                        return;
+                    }
+                }
+                velocity.Project(sector->floorFace->plane.Normal(), 2.048f);
+            }
+            else if(projectileFlags & PF_IMPACTWALLSONLY)
             {
                 AdjustAlongFace(sector->floorFace);
             }
@@ -303,10 +319,28 @@ void kexProjectile::UpdateMovement(void)
 
     if(kexGame::cLocal->CModel()->Fraction() != 1)
     {
+        mapFace_t *face = kexGame::cLocal->CModel()->ContactFace();
+
+        if(flags & AF_BOUNCY && face)
+        {
+            velocity.Project(face->plane.Normal(), 2.0f);
+            return;
+        }
+
         OnImpact(kexGame::cLocal->CModel()->ContactActor());
+        return;
     }
 
-    if(velocity.UnitSq() <= 0.05f)
+    if(flags & AF_EXPIRES && !(flags & AF_BOUNCY))
+    {
+        if(--health == 0)
+        {
+            OnImpact(NULL);
+            return;
+        }
+    }
+
+    if(velocity.UnitSq() <= 0.05f || (origin - prevOrigin).UnitSq() <= 0.05f)
     {
         OnImpact(NULL);
         return;

@@ -364,6 +364,11 @@ void kexActor::UpdateSprite(void)
     
     frame = &anim->frames[frameID];
     ticks += (1.0f / (float)frame->delay) * animSpeed;
+
+    if(frame->delay == 0)
+    {
+        gameTicks++;
+    }
     
     // handle advancing to next frame
     if(ticks >= 1)

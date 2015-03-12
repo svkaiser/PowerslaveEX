@@ -526,6 +526,8 @@ void kexPuppet::Tick(void)
     {
         GroundMove(cmd);
     }
+
+    gameTicks++;
 }
 
 //

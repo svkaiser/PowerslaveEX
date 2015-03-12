@@ -1,0 +1,136 @@
+wall_light_marsh_idle
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 3,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 0,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 0,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 0,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 1,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 1,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 1,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 2,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 2,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 2,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 3,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "objects/wall_light_marsh", 3,    -12,  -90,    0 }
+            { "objects/wall_light_marsh", 4,    -15,  -33,    0 }
+        }
+
+    }
+
+}

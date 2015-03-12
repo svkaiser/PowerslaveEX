@@ -175,3 +175,64 @@ void A_CobraSlither(kActor @actor)
     actor.Velocity() = (kVec3(0, 8, 0) * rotation);
     actor.Velocity() -= (kVec3(4 * Math::Cos(t * 0.25f), 0, 0) * rotation);
 }
+
+//
+// A_FireRa
+//
+
+void A_FireRa(kActor @actor)
+{
+    float offset;
+    
+    if((actor.GameTicks() & 1) == 0)
+    {
+        offset = 32.0f;
+    }
+    else
+    {
+        offset = -32.0f;
+    }
+    
+    float x = actor.Origin().x + (Math::Cos(-actor.Yaw()) * offset);
+    float y = actor.Origin().y + (Math::Sin(-actor.Yaw()) * offset);
+    float z = actor.Origin().z + 32.0f;
+    float cp = Math::Cos(actor.Pitch());
+    kVec3 dir;
+    kActor @ra;
+    
+    @ra = Game.SpawnActor("Proj_Ra_Fire", x, y, z, actor.Yaw(), actor.SectorIndex());
+    
+    if(ra is null)
+    {
+        return;
+    }
+    
+    float rAn = 0;
+
+    switch(actor.GameTicks() & 7)
+    {
+    case 0:
+    case 7:
+        rAn = -0.25f;
+        break;
+    case 1:
+    case 6:
+        rAn = 0.25f;
+        break;
+    case 2:
+    case 5:
+        rAn = -0.08333f;
+        break;
+    case 3:
+    case 4:
+        rAn = 0.08333f;
+        break;
+    }
+    
+    dir.x = (Math::Sin(actor.Yaw() + rAn) * cp) * 16.0f;
+    dir.y = (Math::Cos(actor.Yaw() + rAn) * cp) * 16.0f;
+    dir.z = 12.0f;
+    
+    ra.SetTarget(actor);
+    ra.Velocity() = dir;
+}

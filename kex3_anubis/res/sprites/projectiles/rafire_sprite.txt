@@ -1,0 +1,5 @@
+texture "sprites/projectiles/rafire.png"
+
+// working\rafire\sprite0128.tga
+sprite 0 0 0 20 20
+

@@ -1,0 +1,98 @@
+texture "sprites/misc/helicopter.png"
+
+// working\helicopter\sprite0565.tga
+sprite 0 0 0 64 64
+
+// working\helicopter\sprite0566.tga
+sprite 1 64 0 64 64
+
+// working\helicopter\sprite0567.tga
+sprite 2 128 0 64 64
+
+// working\helicopter\sprite0568.tga
+sprite 3 192 0 64 64
+
+// working\helicopter\sprite0569.tga
+sprite 4 256 0 16 64
+
+// working\helicopter\sprite0570.tga
+sprite 5 272 0 64 20
+
+// working\helicopter\sprite0571.tga
+sprite 6 336 0 64 20
+
+// working\helicopter\sprite0572.tga
+sprite 7 400 0 64 20
+
+// working\helicopter\sprite0573.tga
+sprite 8 272 20 64 64
+
+// working\helicopter\sprite0574.tga
+sprite 9 336 20 64 64
+
+// working\helicopter\sprite0575.tga
+sprite 10 400 20 64 64
+
+// working\helicopter\sprite0576.tga
+sprite 11 0 64 64 64
+
+// working\helicopter\sprite0577.tga
+sprite 12 464 0 28 64
+
+// working\helicopter\sprite0578.tga
+sprite 13 64 64 64 20
+
+// working\helicopter\sprite0579.tga
+sprite 14 128 64 64 20
+
+// working\helicopter\sprite0580.tga
+sprite 15 192 64 64 20
+
+// working\helicopter\sprite0581.tga
+sprite 16 64 84 64 64
+
+// working\helicopter\sprite0582.tga
+sprite 17 128 84 64 64
+
+// working\helicopter\sprite0583.tga
+sprite 18 192 84 64 64
+
+// working\helicopter\sprite0584.tga
+sprite 19 256 84 64 64
+
+// working\helicopter\sprite0585.tga
+sprite 20 464 64 48 64
+
+// working\helicopter\sprite0586.tga
+sprite 21 320 84 64 20
+
+// working\helicopter\sprite0587.tga
+sprite 22 384 84 64 20
+
+// working\helicopter\sprite0588.tga
+sprite 23 320 104 64 20
+
+// working\helicopter\sprite0589.tga
+sprite 24 384 104 64 64
+
+// working\helicopter\sprite0590.tga
+sprite 25 320 124 64 64
+
+// working\helicopter\sprite0591.tga
+sprite 26 0 128 64 64
+
+// working\helicopter\sprite0592.tga
+sprite 27 448 128 64 64
+
+// working\helicopter\sprite0593.tga
+sprite 28 64 148 20 64
+
+// working\helicopter\sprite0594.tga
+sprite 29 84 148 64 20
+
+// working\helicopter\sprite0595.tga
+sprite 30 148 148 64 20
+
+// working\helicopter\sprite0596.tga
+sprite 31 212 148 64 20
+

@@ -1,0 +1,40 @@
+//-----------------------------------------------------------------------------
+//
+// special objects
+//
+//-----------------------------------------------------------------------------
+
+Obj_Camel 58
+{
+    classname               "kexActor"
+    radius                  48
+    height                  96
+    stepHeight              48
+    scale                   1.25
+    spawnAnim               "objects/camel_idle"
+    solid                   1
+}
+
+Obj_Debris 123
+{
+    classname               "kexActor"
+    radius                  12
+    height                  12
+    stepHeight              32
+    scale                   1.0
+    spawnAnim               "objects/debris"
+    randomizeFrames         1
+    fullbright              1
+    moveable                1
+    noAdvanceFrames         1
+}
+
+Obj_Choppa 131
+{
+    classname               "kexActor"
+    radius                  144
+    height                  576
+    stepHeight              48
+    scale                   3
+    spawnAnim               "misc/helicopter_idle"
+}

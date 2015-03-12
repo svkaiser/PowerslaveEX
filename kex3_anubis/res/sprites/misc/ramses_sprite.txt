@@ -1,0 +1,833 @@
+texture "sprites/misc/ramses.png"
+
+// working\ramses\sprite0301.tga
+sprite 0 0 0 64 53
+
+// working\ramses\sprite0302.tga
+sprite 1 64 0 36 53
+
+// working\ramses\sprite0303.tga
+sprite 2 100 0 64 64
+
+// working\ramses\sprite0304.tga
+sprite 3 164 0 44 64
+
+// working\ramses\sprite0305.tga
+sprite 4 208 0 64 36
+
+// working\ramses\sprite0306.tga
+sprite 5 272 0 44 36
+
+// working\ramses\sprite0307.tga
+sprite 6 316 0 64 64
+
+// working\ramses\sprite0308.tga
+sprite 7 380 0 36 64
+
+// working\ramses\sprite0309.tga
+sprite 8 416 0 64 42
+
+// working\ramses\sprite0310.tga
+sprite 9 480 0 36 42
+
+// working\ramses\sprite0311.tga
+sprite 10 516 0 64 64
+
+// working\ramses\sprite0312.tga
+sprite 11 580 0 36 64
+
+// working\ramses\sprite0313.tga
+sprite 12 616 0 64 42
+
+// working\ramses\sprite0314.tga
+sprite 13 680 0 36 42
+
+// working\ramses\sprite0315.tga
+sprite 14 716 0 64 49
+
+// working\ramses\sprite0316.tga
+sprite 15 780 0 36 49
+
+// working\ramses\sprite0317.tga
+sprite 16 816 0 64 64
+
+// working\ramses\sprite0318.tga
+sprite 17 880 0 52 64
+
+// working\ramses\sprite0319.tga
+sprite 18 932 0 64 33
+
+// working\ramses\sprite0320.tga
+sprite 19 932 33 52 33
+
+// working\ramses\sprite0321.tga
+sprite 20 208 36 64 64
+
+// working\ramses\sprite0322.tga
+sprite 21 996 0 20 64
+
+// working\ramses\sprite0323.tga
+sprite 22 416 42 64 51
+
+// working\ramses\sprite0324.tga
+sprite 23 272 36 20 51
+
+// working\ramses\sprite0325.tga
+sprite 24 616 42 64 64
+
+// working\ramses\sprite0326.tga
+sprite 25 480 42 36 64
+
+// working\ramses\sprite0327.tga
+sprite 26 680 49 64 42
+
+// working\ramses\sprite0328.tga
+sprite 27 744 49 36 42
+
+// working\ramses\sprite0329.tga
+sprite 28 0 53 64 64
+
+// working\ramses\sprite0330.tga
+sprite 29 780 49 36 64
+
+// working\ramses\sprite0331.tga
+sprite 30 64 64 64 42
+
+// working\ramses\sprite0332.tga
+sprite 31 128 64 36 42
+
+// working\ramses\sprite0333.tga
+sprite 32 292 64 64 49
+
+// working\ramses\sprite0334.tga
+sprite 33 164 64 36 49
+
+// working\ramses\sprite0335.tga
+sprite 34 516 64 64 64
+
+// working\ramses\sprite0336.tga
+sprite 35 356 64 52 64
+
+// working\ramses\sprite0337.tga
+sprite 36 816 64 64 29
+
+// working\ramses\sprite0338.tga
+sprite 37 880 64 52 29
+
+// working\ramses\sprite0339.tga
+sprite 38 932 66 64 64
+
+// working\ramses\sprite0340.tga
+sprite 39 680 91 64 34
+
+// working\ramses\sprite0341.tga
+sprite 40 408 93 64 64
+
+// working\ramses\sprite0342.tga
+sprite 41 580 64 16 64
+
+// working\ramses\sprite0343.tga
+sprite 42 816 93 64 52
+
+// working\ramses\sprite0344.tga
+sprite 43 596 64 16 52
+
+// working\ramses\sprite0345.tga
+sprite 44 200 100 64 64
+
+// working\ramses\sprite0346.tga
+sprite 45 744 91 36 64
+
+// working\ramses\sprite0347.tga
+sprite 46 64 106 64 43
+
+// working\ramses\sprite0348.tga
+sprite 47 880 93 36 43
+
+// working\ramses\sprite0349.tga
+sprite 48 612 106 64 64
+
+// working\ramses\sprite0350.tga
+sprite 49 128 106 36 64
+
+// working\ramses\sprite0351.tga
+sprite 50 264 113 64 42
+
+// working\ramses\sprite0352.tga
+sprite 51 472 106 36 42
+
+// working\ramses\sprite0353.tga
+sprite 52 0 117 64 38
+
+// working\ramses\sprite0354.tga
+sprite 53 996 64 24 38
+
+// working\ramses\sprite0355.tga
+sprite 54 676 125 64 64
+
+// working\ramses\sprite0356.tga
+sprite 55 328 128 52 64
+
+// working\ramses\sprite0357.tga
+sprite 56 508 128 64 25
+
+// working\ramses\sprite0358.tga
+sprite 57 916 130 52 25
+
+// working\ramses\sprite0359.tga
+sprite 58 780 145 64 64
+
+// working\ramses\sprite0360.tga
+sprite 59 164 113 36 64
+
+// working\ramses\sprite0361.tga
+sprite 60 844 145 64 42
+
+// working\ramses\sprite0362.tga
+sprite 61 572 128 36 42
+
+// working\ramses\sprite0363.tga
+sprite 62 968 130 44 64
+
+// working\ramses\sprite0364.tga
+sprite 63 64 149 44 1
+
+// working\ramses\sprite0365.tga
+sprite 64 64 150 64 64
+
+// working\ramses\sprite0366.tga
+sprite 65 472 153 64 34
+
+// working\ramses\sprite0367.tga
+sprite 66 0 155 64 64
+
+// working\ramses\sprite0368.tga
+sprite 67 380 128 16 64
+
+// working\ramses\sprite0369.tga
+sprite 68 264 155 64 64
+
+// working\ramses\sprite0370.tga
+sprite 69 536 153 16 64
+
+// working\ramses\sprite0371.tga
+sprite 70 396 157 64 4
+
+// working\ramses\sprite0372.tga
+sprite 71 396 161 64 64
+
+// working\ramses\sprite0373.tga
+sprite 72 740 155 36 64
+
+// working\ramses\sprite0374.tga
+sprite 73 200 164 64 42
+
+// working\ramses\sprite0375.tga
+sprite 74 908 155 36 42
+
+// working\ramses\sprite0376.tga
+sprite 75 552 170 64 33
+
+// working\ramses\sprite0377.tga
+sprite 76 944 155 20 33
+
+// working\ramses\sprite0378.tga
+sprite 77 128 177 64 64
+
+// working\ramses\sprite0379.tga
+sprite 78 616 170 44 64
+
+// working\ramses\sprite0380.tga
+sprite 79 460 187 64 21
+
+// working\ramses\sprite0381.tga
+sprite 80 844 187 44 21
+
+// working\ramses\sprite0382.tga
+sprite 81 660 189 44 64
+
+// working\ramses\sprite0383.tga
+sprite 82 328 192 64 64
+
+// working\ramses\sprite0384.tga
+sprite 83 944 194 64 34
+
+// working\ramses\sprite0385.tga
+sprite 84 552 203 64 64
+
+// working\ramses\sprite0386.tga
+sprite 85 1012 102 12 64
+
+// working\ramses\sprite0387.tga
+sprite 86 192 206 64 18
+
+// working\ramses\sprite0388.tga
+sprite 87 1012 166 12 18
+
+// working\ramses\sprite0389.tga
+sprite 88 460 208 64 64
+
+// working\ramses\sprite0390.tga
+sprite 89 704 189 36 64
+
+// working\ramses\sprite0391.tga
+sprite 90 844 208 64 42
+
+// working\ramses\sprite0392.tga
+sprite 91 908 197 36 42
+
+// working\ramses\sprite0393.tga
+sprite 92 776 209 64 25
+
+// working\ramses\sprite0394.tga
+sprite 93 1008 194 16 25
+
+// working\ramses\sprite0395.tga
+sprite 94 64 214 64 64
+
+// working\ramses\sprite0396.tga
+sprite 95 0 219 40 64
+
+// working\ramses\sprite0397.tga
+sprite 96 256 219 64 17
+
+// working\ramses\sprite0398.tga
+sprite 97 192 224 40 17
+
+// working\ramses\sprite0399.tga
+sprite 98 392 225 44 44
+
+// working\ramses\sprite0400.tga
+sprite 99 944 228 48 64
+
+// working\ramses\sprite0401.tga
+sprite 100 740 234 48 2
+
+// working\ramses\sprite0402.tga
+sprite 101 232 236 64 64
+
+// working\ramses\sprite0403.tga
+sprite 102 524 187 4 64
+
+// working\ramses\sprite0404.tga
+sprite 103 740 236 64 32
+
+// working\ramses\sprite0405.tga
+sprite 104 128 241 64 64
+
+// working\ramses\sprite0406.tga
+sprite 105 528 217 16 64
+
+// working\ramses\sprite0407.tga
+sprite 106 804 250 64 23
+
+// working\ramses\sprite0408.tga
+sprite 107 40 219 16 23
+
+// working\ramses\sprite0409.tga
+sprite 108 868 250 64 64
+
+// working\ramses\sprite0410.tga
+sprite 109 616 234 36 64
+
+// working\ramses\sprite0411.tga
+sprite 110 652 253 64 42
+
+// working\ramses\sprite0412.tga
+sprite 111 192 241 36 42
+
+// working\ramses\sprite0413.tga
+sprite 112 296 256 64 64
+
+// working\ramses\sprite0414.tga
+sprite 113 544 267 36 64
+
+// working\ramses\sprite0415.tga
+sprite 114 716 268 64 42
+
+// working\ramses\sprite0416.tga
+sprite 115 580 267 36 42
+
+// working\ramses\sprite0417.tga
+sprite 116 360 269 64 64
+
+// working\ramses\sprite0418.tga
+sprite 117 424 269 36 64
+
+// working\ramses\sprite0419.tga
+sprite 118 460 272 64 14
+
+// working\ramses\sprite0420.tga
+sprite 119 780 273 36 14
+
+// working\ramses\sprite0421.tga
+sprite 120 816 273 48 53
+
+// working\ramses\sprite0422.tga
+sprite 121 40 278 52 64
+
+// working\ramses\sprite0423.tga
+sprite 122 460 286 52 5
+
+// working\ramses\sprite0424.tga
+sprite 123 460 291 64 64
+
+// working\ramses\sprite0425.tga
+sprite 124 1008 219 12 64
+
+// working\ramses\sprite0426.tga
+sprite 125 932 292 64 31
+
+// working\ramses\sprite0427.tga
+sprite 126 652 295 64 64
+
+// working\ramses\sprite0428.tga
+sprite 127 92 278 28 64
+
+// working\ramses\sprite0429.tga
+sprite 128 192 300 64 34
+
+// working\ramses\sprite0430.tga
+sprite 129 0 283 28 34
+
+// working\ramses\sprite0431.tga
+sprite 130 120 305 64 64
+
+// working\ramses\sprite0432.tga
+sprite 131 780 287 36 64
+
+// working\ramses\sprite0433.tga
+sprite 132 580 309 64 42
+
+// working\ramses\sprite0434.tga
+sprite 133 256 300 36 42
+
+// working\ramses\sprite0435.tga
+sprite 134 716 310 64 64
+
+// working\ramses\sprite0436.tga
+sprite 135 864 314 36 64
+
+// working\ramses\sprite0437.tga
+sprite 136 292 320 64 42
+
+// working\ramses\sprite0438.tga
+sprite 137 0 317 36 42
+
+// working\ramses\sprite0439.tga
+sprite 138 900 323 64 64
+
+// working\ramses\sprite0440.tga
+sprite 139 964 323 36 64
+
+// working\ramses\sprite0441.tga
+sprite 140 356 333 64 43
+
+// working\ramses\sprite0442.tga
+sprite 141 816 326 36 43
+
+// working\ramses\sprite0443.tga
+sprite 142 184 334 60 60
+
+// working\ramses\sprite0444.tga
+sprite 143 524 331 56 64
+
+// working\ramses\sprite0445.tga
+sprite 144 36 342 56 7
+
+// working\ramses\sprite0446.tga
+sprite 145 36 349 64 64
+
+// working\ramses\sprite0447.tga
+sprite 146 1000 283 16 64
+
+// working\ramses\sprite0448.tga
+sprite 147 580 351 64 36
+
+// working\ramses\sprite0449.tga
+sprite 148 420 355 64 64
+
+// working\ramses\sprite0450.tga
+sprite 149 244 342 36 64
+
+// working\ramses\sprite0451.tga
+sprite 150 644 359 64 42
+
+// working\ramses\sprite0452.tga
+sprite 151 780 351 36 42
+
+// working\ramses\sprite0453.tga
+sprite 152 280 362 64 64
+
+// working\ramses\sprite0454.tga
+sprite 153 484 355 36 64
+
+// working\ramses\sprite0455.tga
+sprite 154 100 369 64 42
+
+// working\ramses\sprite0456.tga
+sprite 155 0 359 36 42
+
+// working\ramses\sprite0457.tga
+sprite 156 708 374 64 64
+
+// working\ramses\sprite0458.tga
+sprite 157 816 369 36 64
+
+// working\ramses\sprite0459.tga
+sprite 158 344 376 64 43
+
+// working\ramses\sprite0460.tga
+sprite 159 852 378 36 43
+
+// working\ramses\sprite0461.tga
+sprite 160 580 387 64 64
+
+// working\ramses\sprite0462.tga
+sprite 161 888 387 56 64
+
+// working\ramses\sprite0463.tga
+sprite 162 944 387 56 9
+
+// working\ramses\sprite0464.tga
+sprite 163 164 394 64 64
+
+// working\ramses\sprite0465.tga
+sprite 164 1000 347 20 64
+
+// working\ramses\sprite0466.tga
+sprite 165 644 401 64 39
+
+// working\ramses\sprite0467.tga
+sprite 166 100 411 64 64
+
+// working\ramses\sprite0468.tga
+sprite 167 772 393 36 64
+
+// working\ramses\sprite0469.tga
+sprite 168 944 411 64 42
+
+// working\ramses\sprite0470.tga
+sprite 169 520 395 36 42
+
+// working\ramses\sprite0471.tga
+sprite 170 0 413 64 64
+
+// working\ramses\sprite0472.tga
+sprite 171 228 406 40 64
+
+// working\ramses\sprite0473.tga
+sprite 172 344 419 64 42
+
+// working\ramses\sprite0474.tga
+sprite 173 408 419 40 42
+
+// working\ramses\sprite0475.tga
+sprite 174 448 419 64 64
+
+// working\ramses\sprite0476.tga
+sprite 175 1020 219 4 64
+
+// working\ramses\sprite0477.tga
+sprite 176 268 426 64 1
+
+// working\ramses\sprite0478.tga
+sprite 177 268 427 56 64
+
+// working\ramses\sprite0479.tga
+sprite 178 808 433 56 10
+
+// working\ramses\sprite0480.tga
+sprite 179 512 437 64 64
+
+// working\ramses\sprite0481.tga
+sprite 180 64 413 24 64
+
+// working\ramses\sprite0482.tga
+sprite 181 708 438 64 41
+
+// working\ramses\sprite0483.tga
+sprite 182 864 421 24 41
+
+// working\ramses\sprite0484.tga
+sprite 183 644 440 64 64
+
+// working\ramses\sprite0485.tga
+sprite 184 808 443 36 64
+
+// working\ramses\sprite0486.tga
+sprite 185 576 451 64 42
+
+// working\ramses\sprite0487.tga
+sprite 186 888 451 36 42
+
+// working\ramses\sprite0488.tga
+sprite 187 924 453 64 64
+
+// working\ramses\sprite0489.tga
+sprite 188 988 453 36 64
+
+// working\ramses\sprite0490.tga
+sprite 189 164 458 64 42
+
+// working\ramses\sprite0491.tga
+sprite 190 772 457 36 42
+
+// working\ramses\sprite0492.tga
+sprite 191 324 461 64 64
+
+// working\ramses\sprite0493.tga
+sprite 192 388 461 36 64
+
+// working\ramses\sprite0494.tga
+sprite 193 88 475 64 42
+
+// working\ramses\sprite0495.tga
+sprite 194 844 462 36 42
+
+// working\ramses\sprite0496.tga
+sprite 195 0 477 64 64
+
+// working\ramses\sprite0497.tga
+sprite 196 228 470 36 64
+
+// working\ramses\sprite0498.tga
+sprite 197 708 479 64 42
+
+// working\ramses\sprite0499.tga
+sprite 198 424 483 36 42
+
+// working\ramses\sprite0500.tga
+sprite 199 576 493 64 64
+
+// working\ramses\sprite0501.tga
+sprite 200 460 483 36 64
+
+// working\ramses\sprite0502.tga
+sprite 201 152 500 64 42
+
+// working\ramses\sprite0503.tga
+sprite 202 264 491 36 42
+
+// working\ramses\sprite0504.tga
+sprite 203 496 501 64 64
+
+// working\ramses\sprite0505.tga
+sprite 204 640 504 64 6
+
+// working\ramses\sprite0506.tga
+sprite 205 844 504 60 64
+
+// working\ramses\sprite0507.tga
+sprite 206 772 507 60 12
+
+// working\ramses\sprite0508.tga
+sprite 207 640 510 64 64
+
+// working\ramses\sprite0509.tga
+sprite 208 64 477 24 64
+
+// working\ramses\sprite0510.tga
+sprite 209 88 517 64 40
+
+// working\ramses\sprite0511.tga
+sprite 210 300 491 24 40
+
+// working\ramses\sprite0512.tga
+sprite 211 904 517 64 64
+
+// working\ramses\sprite0513.tga
+sprite 212 968 517 36 64
+
+// working\ramses\sprite0514.tga
+sprite 213 772 519 64 42
+
+// working\ramses\sprite0515.tga
+sprite 214 704 521 36 42
+
+// working\ramses\sprite0516.tga
+sprite 215 324 525 64 64
+
+// working\ramses\sprite0517.tga
+sprite 216 388 525 36 64
+
+// working\ramses\sprite0518.tga
+sprite 217 216 534 64 42
+
+// working\ramses\sprite0519.tga
+sprite 218 424 525 36 42
+
+// working\ramses\sprite0520.tga
+sprite 219 0 541 60 64
+
+// working\ramses\sprite0521.tga
+sprite 220 152 542 60 8
+
+// working\ramses\sprite0522.tga
+sprite 221 152 550 64 64
+
+// working\ramses\sprite0523.tga
+sprite 222 60 557 64 16
+
+// working\ramses\sprite0524.tga
+sprite 223 560 557 64 64
+
+// working\ramses\sprite0525.tga
+sprite 224 740 521 24 64
+
+// working\ramses\sprite0526.tga
+sprite 225 764 561 64 43
+
+// working\ramses\sprite0527.tga
+sprite 226 300 531 24 43
+
+// working\ramses\sprite0528.tga
+sprite 227 460 565 64 20
+
+// working\ramses\sprite0529.tga
+sprite 228 836 507 8 20
+
+// working\ramses\sprite0530.tga
+sprite 229 828 568 52 64
+
+// working\ramses\sprite0531.tga
+sprite 230 60 573 52 6
+
+// working\ramses\sprite0532.tga
+sprite 231 624 574 64 64
+
+// working\ramses\sprite0533.tga
+sprite 232 216 576 64 30
+
+// working\ramses\sprite0534.tga
+sprite 233 60 579 64 64
+
+// working\ramses\sprite0535.tga
+sprite 234 704 563 36 64
+
+// working\ramses\sprite0536.tga
+sprite 235 880 581 64 43
+
+// working\ramses\sprite0537.tga
+sprite 236 524 565 36 43
+
+// working\ramses\sprite0538.tga
+sprite 237 944 581 64 64
+
+// working\ramses\sprite0539.tga
+sprite 238 424 567 36 64
+
+// working\ramses\sprite0540.tga
+sprite 239 460 585 64 43
+
+// working\ramses\sprite0541.tga
+sprite 240 280 574 36 43
+
+// working\ramses\sprite0542.tga
+sprite 241 316 589 64 64
+
+// working\ramses\sprite0543.tga
+sprite 242 380 589 36 64
+
+// working\ramses\sprite0544.tga
+sprite 243 740 604 64 8
+
+// working\ramses\sprite0545.tga
+sprite 244 0 605 36 8
+
+// working\ramses\sprite0546.tga
+sprite 245 216 606 64 10
+
+// working\ramses\sprite0547.tga
+sprite 246 1008 517 8 10
+
+// working\ramses\sprite0548.tga
+sprite 247 740 612 44 64
+
+// working\ramses\sprite0549.tga
+sprite 248 784 612 44 2
+
+// working\ramses\sprite0550.tga
+sprite 249 124 614 64 64
+
+// working\ramses\sprite0551.tga
+sprite 250 524 608 36 64
+
+// working\ramses\sprite0552.tga
+sprite 251 188 616 64 2
+
+// working\ramses\sprite0553.tga
+sprite 252 252 617 64 64
+
+// working\ramses\sprite0554.tga
+sprite 253 0 613 36 64
+
+// working\ramses\sprite0555.tga
+sprite 254 188 618 64 42
+
+// working\ramses\sprite0556.tga
+sprite 255 784 614 36 42
+
+// working\ramses\sprite0557.tga
+sprite 256 560 621 64 64
+
+// working\ramses\sprite0558.tga
+sprite 257 880 624 36 64
+
+// working\ramses\sprite0559.tga
+sprite 258 460 628 64 42
+
+// working\ramses\sprite0560.tga
+sprite 259 688 627 36 42
+
+// working\ramses\sprite0561.tga
+sprite 260 624 638 64 62
+
+// working\ramses\sprite0562.tga
+sprite 261 416 631 36 62
+
+// working\ramses\sprite0563.tga
+sprite 262 36 643 64 64
+
+// working\ramses\sprite0564.tga
+sprite 263 820 632 36 64
+
+// working\ramses\sprite0565.tga
+sprite 264 916 645 64 42
+
+// working\ramses\sprite0566.tga
+sprite 265 980 645 36 42
+
+// working\ramses\sprite0567.tga
+sprite 266 316 653 64 55
+
+// working\ramses\sprite0568.tga
+sprite 267 380 653 36 55
+
+// working\ramses\sprite0569.tga
+sprite 268 188 660 64 64
+
+// working\ramses\sprite0570.tga
+sprite 269 688 669 40 64
+
+// working\ramses\sprite0571.tga
+sprite 270 452 670 64 39
+
+// working\ramses\sprite0572.tga
+sprite 271 516 672 40 39
+
+// working\ramses\sprite0573.tga
+sprite 272 728 676 64 64
+
+// working\ramses\sprite0574.tga
+sprite 273 0 677 36 64
+
+// working\ramses\sprite0575.tga
+sprite 274 100 678 64 42
+
+// working\ramses\sprite0576.tga
+sprite 275 252 681 36 42
+
+// working\ramses\sprite0577.tga
+sprite 276 556 685 40 41
+

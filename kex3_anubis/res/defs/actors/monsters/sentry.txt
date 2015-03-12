@@ -16,6 +16,8 @@ AI_Sentry 10
     shootable               1
     moveable                1
     noDropOff               1
+    lookAllAround           1
+    turnSpeed               2
     painChance              128
     sightSound              "sounds/mantisact01.wav"
 }

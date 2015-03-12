@@ -1,0 +1,28 @@
+rafire_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "projectiles/rafire", 0,     -9,  -10,    0 }
+        }
+    }
+}
+
+rafire_explode
+{
+    frame
+    {
+        action A_Spawn("Fx_RedCobraExplode", 0, 0, 2)
+        action A_PlayLocalSound("sounds/pbexplode.wav")
+        delay 1
+    }
+    
+    frame
+    {
+        action A_Destroy()
+        delay 1
+    }
+}

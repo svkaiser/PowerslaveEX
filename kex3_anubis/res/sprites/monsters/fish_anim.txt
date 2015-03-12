@@ -807,7 +807,6 @@ fish_attack
     {
         // ##002   92    0
         action A_PlayLocalSound("sounds/fishatk.wav")
-        action A_MeleeAttack(16, 20)
         rotation_N
         {
             sprites

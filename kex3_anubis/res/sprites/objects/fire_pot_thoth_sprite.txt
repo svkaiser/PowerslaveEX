@@ -1,0 +1,14 @@
+texture "sprites/objects/fire_pot_thoth.png"
+
+// working\fire_pot_thoth\sprite0516.tga
+sprite 0 0 0 40 62
+
+// working\fire_pot_thoth\sprite0517.tga
+sprite 1 40 0 24 57
+
+// working\fire_pot_thoth\sprite0518.tga
+sprite 2 64 0 24 57
+
+// working\fire_pot_thoth\sprite0519.tga
+sprite 3 88 0 24 57
+

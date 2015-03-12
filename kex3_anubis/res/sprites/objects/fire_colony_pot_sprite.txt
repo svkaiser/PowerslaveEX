@@ -1,0 +1,17 @@
+texture "sprites/objects/fire_colony_pot.png"
+
+// working\fire_colony_pot\sprite0534.tga
+sprite 0 0 0 8 16
+
+// working\fire_colony_pot\sprite0535.tga
+sprite 1 8 0 8 16
+
+// working\fire_colony_pot\sprite0536.tga
+sprite 2 16 0 8 16
+
+// working\fire_colony_pot\sprite0537.tga
+sprite 3 24 0 8 16
+
+// working\fire_colony_pot\sprite0538.tga
+sprite 4 32 0 20 37
+

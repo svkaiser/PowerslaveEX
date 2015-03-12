@@ -173,6 +173,11 @@ void kexPlayerWeapon::UpdateSprite(void)
 
     frame = &anim->frames[frameID];
     ticks += (1.0f / (float)frame->delay) * 0.5f;
+
+    if(frame->delay == 0)
+    {
+        owner->Actor()->UpdateGameTicks();
+    }
     
     // handle advancing to next frame
     if(ticks >= 1)

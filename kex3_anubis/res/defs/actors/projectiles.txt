@@ -74,8 +74,26 @@ Proj_Flame 21
     moveable                1
     randomizeFrames         1
     gravity                 0
-    damage                  5
+    damage                  10
     lifeTime                30
+}
+
+Proj_Ra_Fire 23
+{
+    classname               "kexProjectile"
+    radius                  33
+    height                  64
+    stepHeight              0
+    scale                   1.0
+    health                  5
+    spawnAnim               "projectiles/rafire_loop"
+    deathAnim               "projectiles/rafire_explode"
+    fullbright              1
+    moveable                1
+    bouncy                  1
+    expires                 1
+    friction                0.0
+    damage                  20
 }
 
 Proj_Fireball 26

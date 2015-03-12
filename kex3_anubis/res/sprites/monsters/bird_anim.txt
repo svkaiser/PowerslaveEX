@@ -913,7 +913,7 @@ bird_attack
         // ##000    0    0
         delay 8
         goto "monsters/bird_fly_retreat"
-        action A_MeleeAttack(16, 20)
+        action A_MeleeAttack(32, 20)
         rotation_N
         {
             sprites
@@ -1471,6 +1471,7 @@ bird_fly_chase
     frame
     {
         // ##001   68    0
+        action A_PlayLocalSound("sounds/birdflap01.wav")
         rotation_N
         {
             sprites
@@ -1678,6 +1679,7 @@ bird_fly_chase
     frame
     {
         // ##004   67    0
+        action A_PlayLocalSound("sounds/birdflap02.wav")
         rotation_N
         {
             sprites

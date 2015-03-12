@@ -386,3 +386,44 @@ void A_BastetScream(kActor @actor)
         actor.PlaySound("sounds/bastetpain02.wav");
     }
 }
+
+//
+// A_SentryChatter
+//
+
+void A_SentryChatter(kActor @actor)
+{
+    if(Math::RandFloat() < 0.95f)
+    {
+        return;
+    }
+    
+    switch(Math::RandMax(3))
+    {
+    case 0:
+        actor.PlaySound("sounds/mantisact02.wav");
+        break;
+    case 1:
+        actor.PlaySound("sounds/mantisact03.wav");
+        break;
+    case 2:
+        actor.PlaySound("sounds/mantisact04.wav");
+        break;
+    }
+}
+
+//
+// A_SentryDeath
+//
+
+void A_SentryDeath(kActor @actor)
+{
+    if((Math::Rand() & 1) == 0)
+    {
+        actor.PlaySound("sounds/mantisdeath01.wav");
+    }
+    else
+    {
+        actor.PlaySound("sounds/mantisdeath02.wav");
+    }
+}

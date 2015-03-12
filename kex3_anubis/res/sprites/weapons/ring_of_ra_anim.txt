@@ -481,6 +481,9 @@ ring_ra_fire
     {
         // ##000    0  128
         fullbright
+        action A_FireRa()
+        action A_ConsumeAmmo(1)
+        action A_PlayLocalSound("sounds/rafire.wav")
         sprites
         {
             { "weapons/ring_of_ra", 0,     52,  -81,    0 }
@@ -500,6 +503,7 @@ ring_ra_fire
         // ##001    0  128
         fullbright
         goto "weapons/ring_ra_idle"
+        delay 0
         sprites
         {
             { "weapons/ring_of_ra", 0,     54,  -81,    0 }

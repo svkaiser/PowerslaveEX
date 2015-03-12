@@ -1,0 +1,136 @@
+fire_pot_skull_idle
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 4,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 4,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 4,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 2,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 2,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 2,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 1,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 1,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 1,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 0,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 0,     -3,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "objects/fire_pot_skull", 3,    -14,  -59,    0 }
+            { "objects/fire_pot_skull", 0,     -3,  -72,    0 }
+        }
+
+    }
+
+}
