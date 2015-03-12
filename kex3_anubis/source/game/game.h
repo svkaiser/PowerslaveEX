@@ -142,6 +142,7 @@ typedef enum
 #include "pWeapon.h"
 #include "player.h"
 #include "actionDef.h"
+#include "actorFactory.h"
 
 //-----------------------------------------------------------------------------
 //
@@ -202,17 +203,10 @@ public:
     kexIndexDefManager          &ActorDefs(void) { return actorDefs; }
 
     kexObject                   *ConstructObject(const char *className);
-    kexActor                    *ConstructActor(const char *className, kexDict *def, const int type,
-                                                const float x, const float y, const float z,
-                                                const float yaw, const int sector = -1);
     kexActor                    *SpawnActor(const int type, const float x, const float y, const float z,
-                                            const float yaw, const int sector = -1);
-    kexActor                    *SpawnActor(const char *name, const float x, const float y, const float z,
                                             const float yaw, const int sector = -1);
     kexActor                    *SpawnActor(const kexStr &name, const float x, const float y, const float z,
                                             const float yaw, const int sector = -1);
-    kexMover*                   SpawnMover(const char *className, const int type, const int sector);
-    kexFireballFactory          *SpawnFireballFactory(mapActor_t *mapActor);
     void                        DrawSmallString(const char *string, float x, float y, float scale, bool center,
                                                 byte r = 0xff, byte g = 0xff, byte b = 0xff);
     void                        DrawBigString(const char *string, float x, float y, float scale, bool center,
@@ -260,6 +254,7 @@ public:
     static kexGameLocal         *cLocal;
     static kexScriptManager     *cScriptManager;
     static kexActionDefManager  *cActionDefManager;
+    static kexActorFactory      *cActorFactory;
 };
 
 #endif

@@ -544,7 +544,7 @@ void kexWorld::SpawnMapActor(mapActor_t *mapActor)
     z   = (float)mapActor->z;
     an  = kexMath::Deg2Rad((360 - (float)mapActor->angle) + 90);
     
-    actor = kexGame::cLocal->SpawnActor(mapActor->type, x, y, z, an, mapActor->sector);
+    actor = kexGame::cActorFactory->Spawn(mapActor->type, x, y, z, an, mapActor->sector);
     actor->SetMapActor(mapActor);
 }
 
@@ -633,7 +633,7 @@ void kexWorld::SetupFloatingPlatforms(mapEvent_t *ev, mapSector_t *sector, const
 
     s = &sectors[ev->sector];
     s->linkedSector = ev->params;
-    s->objectThinker = kexGame::cLocal->SpawnMover(className, ev->type, ev->sector);
+    s->objectThinker = kexGame::cActorFactory->SpawnMover(className, ev->type, ev->sector);
 }
 
 //
@@ -844,7 +844,7 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
     switch(ev->type)
     {
     case 1:
-        kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+        kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
         break;
     case 3:
     case 4:
@@ -857,13 +857,13 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
         break;
     case 8:
     case 9:
-        kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+        kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
         break;
     case 21:
-        kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
+        kexGame::cActorFactory->SpawnMover("kexLift", ev->type, ev->sector);
         break;
     case 22:
-        kexGame::cLocal->SpawnMover("kexFloor", ev->type, ev->sector);
+        kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
         face->tag = -1;
         break;
     case 200:
@@ -890,7 +890,7 @@ void kexWorld::UseLockedDoor(kexPlayer *player, mapEvent_t *ev)
         return;
     }
 
-    kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+    kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
 }
 
 //
@@ -994,7 +994,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
     switch(ev->type)
     {
     case 21:
-        kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
+        kexGame::cActorFactory->SpawnMover("kexLift", ev->type, ev->sector);
         break;
     case 23:
         actor->PlaySound("sounds/switch.wav");
@@ -1003,7 +1003,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         sector->event = -1;
         break;
     case 24:
-        kexGame::cLocal->SpawnMover("kexLift", ev->type, ev->sector);
+        kexGame::cActorFactory->SpawnMover("kexLift", ev->type, ev->sector);
         break;
     case 48:
         static_cast<kexDropPad*>(sector->objectThinker)->Start();
@@ -1051,7 +1051,7 @@ void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
             {
             case AT_FIREBALLSPAWNER:
             case AT_LASERSPAWNER:
-                fbFactory = kexGame::cLocal->SpawnFireballFactory(&actors[j]);
+                fbFactory = kexGame::cActorFactory->SpawnFireballFactory(&actors[j]);
                 fbFactory->ExtraDelay() = extraDelay;
                 extraDelay += 8;
                 break;
@@ -1119,27 +1119,27 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
             switch(ev->type)
             {
             case 2:
-                kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+                kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
                 break;
             case 7:
-                kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+                kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
                 bClearEventRef = true;
                 break;
             case 8:
             case 9:
-                kexGame::cLocal->SpawnMover("kexDoor", ev->type, ev->sector);
+                kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
                 bClearEventRef = true;
                 break;
             case 21:
-                kexGame::cLocal->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
+                kexGame::cActorFactory->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
                 bClearEventRef = true;
                 break;
             case 22:
-                kexGame::cLocal->SpawnMover("kexFloor", ev->type, ev->sector);
+                kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
                 bClearEventRef = true;
                 break;
             case 24:
-                kexGame::cLocal->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
+                kexGame::cActorFactory->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
                 bClearEventRef = true;
                 break;
             case 48:
@@ -1164,7 +1164,7 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
 
 void kexWorld::ExplodeWall(mapFace_t *face)
 {
-    kexGameLocal *gLocal = kexGame::cLocal;
+    kexActorFactory *af = kexGame::cActorFactory;
     kexVec3 org;
 
     face->flags &= ~(FF_SOLID|FF_TOGGLE);
@@ -1184,11 +1184,11 @@ void kexWorld::ExplodeWall(mapFace_t *face)
             org.y += 128.0f * kexRand::CFloat();
             org.z += 128.0f * kexRand::CFloat();
 
-            gLocal->SpawnActor(AT_EXPLODEPUFF, org.x, org.y, org.z, 0, face->sectorOwner);
+            af->Spawn(AT_EXPLODEPUFF, org.x, org.y, org.z, 0, face->sectorOwner);
         }
         else
         {
-            kexActor *debris = gLocal->SpawnActor(AT_DEBRIS, org.x, org.y, org.z, 0, face->sectorOwner);
+            kexActor *debris = af->Spawn(AT_DEBRIS, org.x, org.y, org.z, 0, face->sectorOwner);
 
             if(debris == NULL)
             {

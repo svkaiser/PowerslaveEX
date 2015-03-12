@@ -143,7 +143,7 @@ COMMAND(summon)
     y = a->Origin().y + (forward.y * a->Radius());
     z = a->Origin().z + (forward.z * a->Radius());
 
-    gameLocal.SpawnActor(kex::cCommands->GetArgv(1), x, y, z, a->Yaw());
+    kexGame::cActorFactory->Spawn(kex::cCommands->GetArgv(1), x, y, z, a->Yaw());
 }
 
 //
@@ -619,111 +619,13 @@ void kexGameLocal::RemoveAllGameObjects(void)
 }
 
 //
-// kexGameLocal::ConstructActor
-//
-
-kexActor *kexGameLocal::ConstructActor(const char *className, kexDict *def, const int type,
-                                       const float x, const float y, const float z,
-                                       const float yaw, const int sector)
-{
-    kexActor *actor;
-
-    if(!(actor = static_cast<kexActor*>(ConstructObject(className))))
-    {
-        return NULL;
-    }
-
-    actor->SetDefinition(def);
-    
-    actor->Origin().Set(x, y, z);
-    actor->Yaw() = yaw;
-    actor->Type() = type;
-    
-    if(sector <= -1)
-    {
-        actor->FindSector(actor->Origin());
-    }
-    else
-    {
-        actor->SetSector(&world->Sectors()[sector]);
-    }
-    
-    actor->CallSpawn();
-    return actor;
-}
-
-//
 // kexGameLocal::SpawnActor
 //
 
 kexActor *kexGameLocal::SpawnActor(const int type, const float x, const float y, const float z,
                                    const float yaw, const int sector)
 {
-    kexStr className;
-    kexDict *def;
-    kexActor *actor;
-    
-    if((def = actorDefs.GetEntry(type)))
-    {
-        if(!def->GetString("classname", className))
-        {
-            className = "kexActor";
-        }
-    }
-    else
-    {
-        switch(type)
-        {
-        case AT_PLAYER:
-            className = "kexPuppet";
-            break;
-
-        case AT_FIREBALLSPAWNER:
-        case AT_LASERSPAWNER:
-            className = "kexFireballSpawner";
-            break;
-        
-        default:
-            className = "kexActor";
-            break;
-        }
-    }
-    
-    actor = ConstructActor(className, def, type, x, y, z, yaw, sector);
-    return actor;
-}
-
-//
-// kexGameLocal::SpawnActor
-//
-
-kexActor *kexGameLocal::SpawnActor(const char *name, const float x, const float y, const float z,
-                                   const float yaw, const int sector)
-{
-    kexStr className = "kexActor";
-    kexDict *def = NULL;
-    kexActor *actor;
-    int type = -1;
-    kexHashList<kexDict>::hashKey_t *hashKey = actorDefs.defs.GetHashKey(name);
-    
-    // when looking up the name from the hash, we have no way of knowing what
-    // the type index is, so we need to pull the actual hash key and look
-    // up the reference index
-    if(hashKey)
-    {
-        if((def = &hashKey->data))
-        {
-            def->GetString("classname", className);
-        }
-    }
-
-    if(hashKey)
-    {
-        type = hashKey->refIndex;
-    }
-    
-    actor = ConstructActor(className, def, type, x, y, z, yaw, sector);
-    return actor;
+    return kexGame::cActorFactory->Spawn(type, x, y, z, yaw, sector);
 }
 
 //
@@ -733,55 +635,5 @@ kexActor *kexGameLocal::SpawnActor(const char *name, const float x, const float 
 kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const float y, const float z,
                                    const float yaw, const int sector)
 {
-    return SpawnActor(name.c_str(), x, y, z, yaw, sector);
-}
-
-//
-// kexGameLocal::SpawnMover
-//
-
-kexMover *kexGameLocal::SpawnMover(const char *className, const int type, const int sector)
-{
-    kexMover *mover;
-    
-    if(sector <= -1 || sector >= (int)world->NumSectors())
-    {
-        return NULL;
-    }
-    
-    if(!(mover = static_cast<kexMover*>(ConstructObject(className))))
-    {
-        return NULL;
-    }
-    
-    mover->Type() = type;
-    mover->SetSector(&world->Sectors()[sector]);
-    mover->CallSpawn();
-
-    return mover;
-}
-
-//
-// kexGameLocal::SpawnFireballFactory
-//
-
-kexFireballFactory *kexGameLocal::SpawnFireballFactory(mapActor_t *mapActor)
-{
-    kexFireballFactory *fbf;
-
-    if(mapActor->sector <= -1 || mapActor->sector >= (int)world->NumSectors())
-    {
-        return NULL;
-    }
-
-    if(!(fbf = static_cast<kexFireballFactory*>(ConstructObject("kexFireballFactory"))))
-    {
-        return NULL;
-    }
-
-    fbf->FireballType() = mapActor->type;
-    fbf->SetSector(&world->Sectors()[mapActor->sector]);
-    fbf->CallSpawn();
-
-    return fbf;
+    return kexGame::cActorFactory->Spawn(name, x, y, z, yaw, sector);
 }

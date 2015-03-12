@@ -96,6 +96,7 @@
 		41E2CE9F1A51D57700FC28DC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E2CE9E1A51D57700FC28DC /* OpenGL.framework */; };
 		41E2CEA11A51D5CC00FC28DC /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E2CE971A51D3E300FC28DC /* libpng.a */; };
 		41E2CEA31A51D68C00FC28DC /* SDL2.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 41E2CE351A51D1EE00FC28DC /* SDL2.framework */; };
+		41E9B2EE1AB1F45000ECA62E /* actorFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E9B2EC1AB1F45000ECA62E /* actorFactory.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,6 +334,8 @@
 		41E2CE8E1A51D3E300FC28DC /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = libpng/xcode/libpng.xcodeproj; sourceTree = "<group>"; };
 		41E2CE9C1A51D40700FC28DC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		41E2CE9E1A51D57700FC28DC /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		41E9B2EC1AB1F45000ECA62E /* actorFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorFactory.cpp; path = ../../source/game/actorFactory.cpp; sourceTree = "<group>"; };
+		41E9B2ED1AB1F45000ECA62E /* actorFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actorFactory.h; path = ../../source/game/actorFactory.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +419,7 @@
 			children = (
 				419C3BB21A89100400C19D68 /* actionDef.cpp */,
 				41BAB90E1A5EF32100DD0D11 /* actor.cpp */,
+				41E9B2EC1AB1F45000ECA62E /* actorFactory.cpp */,
 				41D3D50F1A95053C000E7FD6 /* ai.cpp */,
 				41C979F71A642CCA00E9C798 /* cmodel.cpp */,
 				41C7FC2E1A5AFB84003864CB /* game.cpp */,
@@ -437,6 +441,7 @@
 				41C7FC3E1A5AFB84003864CB /* world.cpp */,
 				419C3BB31A89100400C19D68 /* actionDef.h */,
 				41BAB90F1A5EF32100DD0D11 /* actor.h */,
+				41E9B2ED1AB1F45000ECA62E /* actorFactory.h */,
 				41D3D5101A95053C000E7FD6 /* ai.h */,
 				41C979F81A642CCA00E9C798 /* cmodel.h */,
 				41C7FC2F1A5AFB84003864CB /* game.h */,
@@ -853,6 +858,7 @@
 				41B5F0FE1A9BA76600698014 /* spring.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,
 				41C7FC6D1A5AFB98003864CB /* renderView.cpp in Sources */,
+				41E9B2EE1AB1F45000ECA62E /* actorFactory.cpp in Sources */,
 				41C7FC201A5AFB6E003864CB /* binFile.cpp in Sources */,
 				41C7FC231A5AFB6E003864CB /* dict.cpp in Sources */,
 				41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */,

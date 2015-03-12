@@ -804,7 +804,7 @@ void kexAI::Ignite(kexGameObject *igniteTarget)
                 z = origin.z + stepHeight;
             }
             
-            ignite = kexGame::cLocal->SpawnActor(AT_IGNITEFLAME, x, y, z, 0, SectorIndex());
+            ignite = kexGame::cActorFactory->Spawn(AT_IGNITEFLAME, x, y, z, 0, SectorIndex());
             ignite->SetTarget(igniteTarget);
             
             igniteFlames[i] = ignite;

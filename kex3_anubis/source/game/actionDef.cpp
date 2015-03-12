@@ -245,8 +245,8 @@ DECLARE_KEX_ACTION(kexActionHitScan)
         }
         else
         {
-            game->SpawnActor(name, x, y, z, actor->Yaw(),
-                             cm->ContactSector() - game->World()->Sectors());
+            kexGame::cActorFactory->Spawn(name, x, y, z, actor->Yaw(),
+                                          cm->ContactSector() - game->World()->Sectors());
         }
     }
 }
@@ -312,8 +312,8 @@ DECLARE_KEX_ACTION(kexActionSpawn)
     float y             = this->args[2].f + actor->Origin().y;
     float z             = this->args[3].f + actor->Origin().z;
 
-    game->SpawnActor(defName, x, y, z, actor->Yaw(),
-                     actor->Sector() - game->World()->Sectors());
+    kexGame::cActorFactory->Spawn(defName, x, y, z, actor->Yaw(),
+                                  actor->Sector() - game->World()->Sectors());
 }
 
 //-----------------------------------------------------------------------------
@@ -335,8 +335,8 @@ DECLARE_KEX_ACTION(kexActionTossActor)
     float zSpreadMin    = this->args[6].f;
     float zSpreadMax    = this->args[7].f;
     
-    toss = game->SpawnActor(defName, x, y, z, actor->Yaw(),
-                            actor->Sector() - game->World()->Sectors());
+    toss = kexGame::cActorFactory->Spawn(defName, x, y, z, actor->Yaw(),
+                                         actor->Sector() - game->World()->Sectors());
     
     toss->Velocity().x += kexRand::Range(-xSpread, xSpread);
     toss->Velocity().y += kexRand::Range(-ySpread, ySpread);
@@ -510,8 +510,8 @@ DECLARE_KEX_ACTION(kexActionSpawnProjectile)
     y = actor->Origin().y + (forward.y * dist);
     z = actor->Origin().z + (forward.z * dist);
     
-    proj = game->SpawnActor(defName, x, y, z + offset, actor->Yaw(),
-                            actor->Sector() - game->World()->Sectors());
+    proj = kexGame::cActorFactory->Spawn(defName, x, y, z + offset, actor->Yaw(),
+                                         actor->Sector() - game->World()->Sectors());
     
     kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), actor->Pitch(), 0);
     

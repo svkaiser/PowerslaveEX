@@ -610,7 +610,7 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
     switch(type)
     {
     case AT_FIREBALLSPAWNER:
-        kexGame::cLocal->SpawnActor(AT_FIREBALLPUFF, vOrigin.x, vOrigin.y, vOrigin.z, 0, secID);
+        kexGame::cActorFactory->Spawn(AT_FIREBALLPUFF, vOrigin.x, vOrigin.y, vOrigin.z, 0, secID);
         projType = AT_FIREBALL;
         speed = 8;
         break;
@@ -624,10 +624,10 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
         return;
     }
 
-    proj = kexGame::cLocal->SpawnActor(projType,
-                                       vOrigin.x, vOrigin.y, vOrigin.z,
-                                       face->plane.Normal().ToYaw(),
-                                       secID);
+    proj = kexGame::cActorFactory->Spawn(projType,
+                                         vOrigin.x, vOrigin.y, vOrigin.z,
+                                         face->plane.Normal().ToYaw(),
+                                         secID);
 
     if(proj == NULL)
     {

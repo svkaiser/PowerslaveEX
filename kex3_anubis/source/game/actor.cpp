@@ -581,11 +581,13 @@ void kexActor::UpdateMovement(void)
 
         if(!(oldSector->flags & SF_WATER) && sector->flags & SF_WATER)
         {
+            float splashZ = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector);
+            
             PlaySound("sounds/splash01.wav");
-            kexGame::cLocal->SpawnActor(AT_WATERSPLASH,
-                origin.x,
-                origin.y,
-                kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector), 0, SectorIndex());
+            kexGame::cActorFactory->Spawn(AT_WATERSPLASH,
+                                          origin.x,
+                                          origin.y,
+                                          splashZ, 0, SectorIndex());
 
             flags |= AF_INWATER;
         }
