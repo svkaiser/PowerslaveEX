@@ -417,6 +417,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\actorFactory.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\ai.cpp"
 					>
 				</File>
@@ -768,6 +772,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\actor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\actorFactory.h"
 					>
 				</File>
 				<File

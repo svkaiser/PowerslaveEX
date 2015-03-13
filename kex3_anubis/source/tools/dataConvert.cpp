@@ -69,6 +69,61 @@ typedef struct
     int8_t  u1;
 } saturnPoly_t;
 
+#ifdef _MSC_VER
+#pragma pack(push, 1)
+#endif
+
+typedef struct
+{
+    int16_t wallptr;
+    int16_t wallnum;
+    int16_t ceilingpicnum;
+    int16_t floorpicnum;
+    int16_t ceilingheinum;
+    int16_t floorheinum;
+    int32_t ceilingz;
+    int32_t floorz;
+    int8_t ceilingshade;
+    int8_t floorshade;
+    int8_t ceilingxpanning;
+    int8_t floorxpanning;
+    int8_t ceilingypanning;
+    int8_t floorypanning;
+    int16_t ceilingstat;
+    int16_t floorstat;
+    int8_t ceilingpal;
+    int8_t floorpal;
+    int8_t visibility;
+    int16_t lotag;
+    int16_t hitag;
+    int16_t extra;
+} PACKED buildSector_t;
+
+typedef struct
+{
+    int32_t x;
+    int32_t y;
+    int16_t point2;
+    int16_t nextsector;
+    int16_t nextwall;
+    int16_t picnum;
+    int16_t overpicnum;
+    int8_t shade;
+    int8_t pal;
+    int16_t cstat;
+    int8_t xrepeat;
+    int8_t yrepeat;
+    int8_t xpanning;
+    int8_t ypanning;
+    int16_t lotag;
+    int16_t hitag;
+    int16_t extra;
+} PACKED buildWall_t;
+
+#ifdef _MSC_VER
+#pragma pack(pop)
+#endif
+
 class kexDataConvert
 {
 public:
@@ -76,6 +131,7 @@ public:
     ~kexDataConvert(void);
 
     void                DumpSaturnLevelData(const char *file);
+    void                DumpBuildLevelData(const char *file);
 };
 
 static kexDataConvert dataConvertLocal;
@@ -98,6 +154,23 @@ COMMAND(dumpsaturnmap)
 }
 
 //
+// dumpbuildmap
+//
+
+COMMAND(dumpbuildmap)
+{
+    int argc = kex::cCommands->GetArgc();
+
+    if(argc != 2)
+    {
+        kex::cSystem->Printf("dumpbuildmap <filename>\n");
+        return;
+    }
+
+    dataConvertLocal.DumpBuildLevelData(kex::cCommands->GetArgv(1));
+}
+
+//
 // kexDataConvert::kexDataConvert
 //
 
@@ -111,6 +184,125 @@ kexDataConvert::kexDataConvert(void)
 
 kexDataConvert::~kexDataConvert(void)
 {
+}
+
+//
+// kexDataConvert::DumpBuildLevelData
+//
+
+void kexDataConvert::DumpBuildLevelData(const char *file)
+{
+    kexBinFile mapFile;
+    kexStr fPath;
+    buildSector_t *sectors;
+    buildWall_t *walls;
+    int numSectors;
+    int numWalls;
+    int numVerts;
+    FILE *f;
+
+    fPath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), file);
+    fPath.NormalizeSlashes();
+
+    kex::cSystem->Printf("Reading %s\n", file);
+
+    if(!mapFile.Open(file))
+    {
+        kex::cSystem->Warning("File not found\n");
+        return;
+    }
+
+    mapFile.SetPosition(20);
+
+    numSectors = mapFile.Read16();
+    sectors = new buildSector_t[numSectors];
+
+    for(int i = 0; i < numSectors; ++i)
+    {
+        sectors[i].wallptr = mapFile.Read16();
+        sectors[i].wallnum = mapFile.Read16();
+        sectors[i].ceilingpicnum = mapFile.Read16();
+        sectors[i].floorpicnum = mapFile.Read16();
+        sectors[i].ceilingheinum = mapFile.Read16();
+        sectors[i].floorheinum = mapFile.Read16();
+        sectors[i].ceilingz = mapFile.Read32();
+        sectors[i].floorz = mapFile.Read32();
+        sectors[i].ceilingshade = mapFile.Read8();
+        sectors[i].floorshade = mapFile.Read8();
+        sectors[i].ceilingxpanning = mapFile.Read8();
+        sectors[i].floorxpanning = mapFile.Read8();
+        sectors[i].ceilingypanning = mapFile.Read8();
+        sectors[i].floorypanning = mapFile.Read8();
+        sectors[i].ceilingstat = mapFile.Read8();
+        sectors[i].floorstat = mapFile.Read8();
+        sectors[i].ceilingpal = mapFile.Read8();
+        sectors[i].floorpal = mapFile.Read8();
+        sectors[i].visibility = mapFile.Read8();
+        sectors[i].lotag = mapFile.Read16();
+        sectors[i].hitag = mapFile.Read16();
+        sectors[i].extra = mapFile.Read16();
+    }
+
+    numWalls = mapFile.Read16();
+    walls = new buildWall_t[numWalls];
+
+    for(int i = 0; i < numWalls; ++i)
+    {
+        walls[i].x = mapFile.Read32();
+        walls[i].y = mapFile.Read32();
+        walls[i].point2 = mapFile.Read16();
+        walls[i].nextsector = mapFile.Read16();
+        walls[i].nextwall = mapFile.Read16();
+        walls[i].picnum = mapFile.Read16();
+        walls[i].overpicnum = mapFile.Read16();
+        walls[i].shade = mapFile.Read8();
+        walls[i].pal = mapFile.Read8();
+        walls[i].cstat = mapFile.Read16();
+        walls[i].xrepeat = mapFile.Read8();
+        walls[i].yrepeat = mapFile.Read8();
+        walls[i].xpanning = mapFile.Read8();
+        walls[i].ypanning = mapFile.Read8();
+        walls[i].lotag = mapFile.Read16();
+        walls[i].hitag = mapFile.Read16();
+        walls[i].extra = mapFile.Read16();
+    }
+
+    f = fopen(kexStr(fPath + "_BUILD.obj").c_str(), "w");
+    numVerts = 0;
+
+    for(int i = 0; i < numSectors; ++i)
+    {
+        for(int j = sectors[i].wallptr; j < sectors[i].wallptr + sectors[i].wallnum; ++j)
+        {
+            buildWall_t *wall = &walls[j];
+
+            fprintf(f, "v %f %f %f\n", (float)wall->x / 1024.0f,
+                                       -(float)sectors[i].ceilingz / 16384.0f,
+                                       (float)wall->y / 1024.0f);
+            fprintf(f, "v %f %f %f\n", (float)walls[wall->point2].x / 1024.0f,
+                                       -(float)sectors[i].ceilingz / 16384.0f,
+                                       (float)walls[wall->point2].y / 1024.0f);
+            fprintf(f, "v %f %f %f\n", (float)walls[wall->point2].x / 1024.0f,
+                                       -(float)sectors[i].floorz / 16384.0f,
+                                       (float)walls[wall->point2].y / 1024.0f);
+            fprintf(f, "v %f %f %f\n", (float)wall->x / 1024.0f,
+                                       -(float)sectors[i].floorz / 16384.0f,
+                                       (float)wall->y / 1024.0f);
+
+            fprintf(f, "o wall_%03d_%03d\n", i, j);
+            fprintf(f, "f %i %i %i %i\n", numVerts+0+1, numVerts+1+1, numVerts+2+1, numVerts+3+1);
+            numVerts += 4;
+        }
+    }
+
+    fclose(f);
+
+    mapFile.Close();
+
+    delete[] sectors;
+    delete[] walls;
+
+    kex::cSystem->Printf("Done\n");
 }
 
 //

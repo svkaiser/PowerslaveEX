@@ -1,0 +1,350 @@
+texture "sprites/monsters/mantis.png"
+
+// working\mantis\sprite0495.tga
+sprite 0 0 0 64 48
+
+// working\mantis\sprite0496.tga
+sprite 1 64 0 8 48
+
+// working\mantis\sprite0497.tga
+sprite 2 72 0 64 44
+
+// working\mantis\sprite0498.tga
+sprite 3 136 0 40 44
+
+// working\mantis\sprite0499.tga
+sprite 4 176 0 36 46
+
+// working\mantis\sprite0500.tga
+sprite 5 212 0 64 64
+
+// working\mantis\sprite0501.tga
+sprite 6 276 0 8 64
+
+// working\mantis\sprite0502.tga
+sprite 7 284 0 64 49
+
+// working\mantis\sprite0503.tga
+sprite 8 348 0 24 26
+
+// working\mantis\sprite0504.tga
+sprite 9 372 0 64 64
+
+// working\mantis\sprite0505.tga
+sprite 10 436 0 24 64
+
+// working\mantis\sprite0506.tga
+sprite 11 460 0 64 64
+
+// working\mantis\sprite0507.tga
+sprite 12 524 0 24 64
+
+// working\mantis\sprite0508.tga
+sprite 13 548 0 64 5
+
+// working\mantis\sprite0509.tga
+sprite 14 612 0 64 47
+
+// working\mantis\sprite0510.tga
+sprite 15 676 0 8 47
+
+// working\mantis\sprite0511.tga
+sprite 16 684 0 64 64
+
+// working\mantis\sprite0512.tga
+sprite 17 748 0 56 64
+
+// working\mantis\sprite0513.tga
+sprite 18 804 0 64 59
+
+// working\mantis\sprite0514.tga
+sprite 19 868 0 56 59
+
+// working\mantis\sprite0515.tga
+sprite 20 924 0 40 46
+
+// working\mantis\sprite0516.tga
+sprite 21 548 5 64 64
+
+// working\mantis\sprite0517.tga
+sprite 22 964 0 28 64
+
+// working\mantis\sprite0518.tga
+sprite 23 72 44 64 64
+
+// working\mantis\sprite0519.tga
+sprite 24 992 0 28 64
+
+// working\mantis\sprite0520.tga
+sprite 25 136 46 64 5
+
+// working\mantis\sprite0521.tga
+sprite 26 612 47 64 64
+
+// working\mantis\sprite0522.tga
+sprite 27 0 48 64 64
+
+// working\mantis\sprite0523.tga
+sprite 28 284 49 64 64
+
+// working\mantis\sprite0524.tga
+sprite 29 136 51 64 64
+
+// working\mantis\sprite0525.tga
+sprite 30 1020 0 4 64
+
+// working\mantis\sprite0526.tga
+sprite 31 804 59 64 1
+
+// working\mantis\sprite0527.tga
+sprite 32 868 59 64 64
+
+// working\mantis\sprite0528.tga
+sprite 33 804 60 36 64
+
+// working\mantis\sprite0529.tga
+sprite 34 200 64 64 59
+
+// working\mantis\sprite0530.tga
+sprite 35 348 64 36 59
+
+// working\mantis\sprite0531.tga
+sprite 36 384 64 36 43
+
+// working\mantis\sprite0532.tga
+sprite 37 420 64 64 64
+
+// working\mantis\sprite0533.tga
+sprite 38 484 64 40 64
+
+// working\mantis\sprite0534.tga
+sprite 39 676 64 64 54
+
+// working\mantis\sprite0535.tga
+sprite 40 740 64 40 54
+
+// working\mantis\sprite0536.tga
+sprite 41 932 64 64 64
+
+// working\mantis\sprite0537.tga
+sprite 42 524 69 36 64
+
+// working\mantis\sprite0538.tga
+sprite 43 64 108 64 64
+
+// working\mantis\sprite0539.tga
+sprite 44 560 69 36 64
+
+// working\mantis\sprite0540.tga
+sprite 45 596 111 64 6
+
+// working\mantis\sprite0541.tga
+sprite 46 384 107 36 6
+
+// working\mantis\sprite0542.tga
+sprite 47 0 112 64 64
+
+// working\mantis\sprite0543.tga
+sprite 48 840 60 20 64
+
+// working\mantis\sprite0544.tga
+sprite 49 264 113 64 64
+
+// working\mantis\sprite0545.tga
+sprite 50 780 64 20 64
+
+// working\mantis\sprite0546.tga
+sprite 51 128 115 64 64
+
+// working\mantis\sprite0547.tga
+sprite 52 596 117 48 64
+
+// working\mantis\sprite0548.tga
+sprite 53 644 118 64 49
+
+// working\mantis\sprite0549.tga
+sprite 54 708 118 48 49
+
+// working\mantis\sprite0550.tga
+sprite 55 192 123 64 48
+
+// working\mantis\sprite0551.tga
+sprite 56 328 123 64 33
+
+// working\mantis\sprite0552.tga
+sprite 57 996 64 24 33
+
+// working\mantis\sprite0553.tga
+sprite 58 860 123 64 64
+
+// working\mantis\sprite0554.tga
+sprite 59 800 124 40 64
+
+// working\mantis\sprite0555.tga
+sprite 60 392 128 64 64
+
+// working\mantis\sprite0556.tga
+sprite 61 456 128 40 64
+
+// working\mantis\sprite0557.tga
+sprite 62 924 128 64 5
+
+// working\mantis\sprite0558.tga
+sprite 63 756 128 40 5
+
+// working\mantis\sprite0559.tga
+sprite 64 496 133 64 64
+
+// working\mantis\sprite0560.tga
+sprite 65 996 97 28 64
+
+// working\mantis\sprite0561.tga
+sprite 66 924 133 64 59
+
+// working\mantis\sprite0562.tga
+sprite 67 560 133 28 59
+
+// working\mantis\sprite0563.tga
+sprite 68 328 156 64 64
+
+// working\mantis\sprite0564.tga
+sprite 69 644 167 52 64
+
+// working\mantis\sprite0565.tga
+sprite 70 696 167 64 64
+
+// working\mantis\sprite0566.tga
+sprite 71 192 171 52 64
+
+// working\mantis\sprite0567.tga
+sprite 72 64 172 64 5
+
+// working\mantis\sprite0568.tga
+sprite 73 0 176 52 5
+
+// working\mantis\sprite0569.tga
+sprite 74 52 177 64 64
+
+// working\mantis\sprite0570.tga
+sprite 75 840 124 16 64
+
+// working\mantis\sprite0571.tga
+sprite 76 244 177 64 64
+
+// working\mantis\sprite0572.tga
+sprite 77 760 133 16 64
+
+// working\mantis\sprite0573.tga
+sprite 78 116 179 64 64
+
+// working\mantis\sprite0574.tga
+sprite 79 0 181 40 64
+
+// working\mantis\sprite0575.tga
+sprite 80 856 187 64 63
+
+// working\mantis\sprite0576.tga
+sprite 81 588 181 40 63
+
+// working\mantis\sprite0577.tga
+sprite 82 776 188 64 64
+
+// working\mantis\sprite0578.tga
+sprite 83 988 161 12 64
+
+// working\mantis\sprite0579.tga
+sprite 84 392 192 64 54
+
+// working\mantis\sprite0580.tga
+sprite 85 1000 161 12 54
+
+// working\mantis\sprite0581.tga
+sprite 86 920 192 64 47
+
+// working\mantis\sprite0582.tga
+sprite 87 456 197 64 64
+
+// working\mantis\sprite0583.tga
+sprite 88 520 197 32 64
+
+// working\mantis\sprite0584.tga
+sprite 89 308 220 64 56
+
+// working\mantis\sprite0585.tga
+sprite 90 552 197 32 56
+
+// working\mantis\sprite0586.tga
+sprite 91 984 225 40 45
+
+// working\mantis\sprite0587.tga
+sprite 92 628 231 64 64
+
+// working\mantis\sprite0588.tga
+sprite 93 840 188 16 64
+
+// working\mantis\sprite0589.tga
+sprite 94 692 231 64 53
+
+// working\mantis\sprite0590.tga
+sprite 95 180 235 64 64
+
+// working\mantis\sprite0591.tga
+sprite 96 760 197 16 64
+
+// working\mantis\sprite0592.tga
+sprite 97 920 239 64 60
+
+// working\mantis\sprite0593.tga
+sprite 98 372 220 16 60
+
+// working\mantis\sprite0594.tga
+sprite 99 40 241 64 64
+
+// working\mantis\sprite0595.tga
+sprite 100 244 241 16 64
+
+// working\mantis\sprite0596.tga
+sprite 101 104 243 64 5
+
+// working\mantis\sprite0597.tga
+sprite 102 388 246 64 64
+
+// working\mantis\sprite0598.tga
+sprite 103 104 248 52 64
+
+// working\mantis\sprite0599.tga
+sprite 104 856 250 64 33
+
+// working\mantis\sprite0600.tga
+sprite 105 776 252 52 33
+
+// working\mantis\sprite0601.tga
+sprite 106 552 253 64 64
+
+// working\mantis\sprite0602.tga
+sprite 107 452 261 64 64
+
+// working\mantis\sprite0603.tga
+sprite 108 260 276 64 2
+
+// working\mantis\sprite0604.tga
+sprite 109 260 278 64 2
+
+// working\mantis\sprite0605.tga
+sprite 110 260 280 64 26
+
+// working\mantis\sprite0606.tga
+sprite 111 324 280 56 26
+
+// working\mantis\sprite0607.tga
+sprite 112 828 283 64 64
+
+// working\mantis\sprite0608.tga
+sprite 113 0 245 24 64
+
+// working\mantis\sprite0609.tga
+sprite 114 692 284 64 53
+
+// working\mantis\sprite0610.tga
+sprite 115 156 248 24 53
+

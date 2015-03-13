@@ -83,6 +83,19 @@ Obj_Fire_Pot_Large01 98
     fullbright              1
 }
 
+Obj_Fire_Pot_Thoth 99
+{
+    classname               "kexActor"
+    radius                  16
+    height                  64
+    stepHeight              48
+    scale                   2.0
+    spawnAnim               "objects/fire_pot_thoth_idle"
+    solid                   1
+    randomizeFrames         1
+    fullbright              1
+}
+
 Obj_Fire_Wall_Marsh 100
 {
     classname               "kexActor"

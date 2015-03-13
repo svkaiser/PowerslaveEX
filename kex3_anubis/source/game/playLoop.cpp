@@ -261,6 +261,7 @@ const int kexPlayLoop::GetWaterVelocityPoint(const float x, const float y)
 void kexPlayLoop::DrawAutomapWalls(kexRenderView &view)
 {
     kexWorld *w = kexGame::cLocal->World();
+    float floorz = kexGame::cLocal->Player()->Actor()->FloorHeight();
     
     for(unsigned int i = 0; i < w->NumSectors(); ++i)
     {
@@ -303,8 +304,8 @@ void kexPlayLoop::DrawAutomapWalls(kexRenderView &view)
             r1 = 255; g1 = 255; b1 = 255;
             r2 = 255; g2 = 255; b2 = 255;
             
-            f1 = (renderView.Origin().z - w->Vertices()[face->vertexStart+2].origin.z) / 2048.0f;
-            f2 = (renderView.Origin().z - w->Vertices()[face->vertexStart+3].origin.z) / 2048.0f;
+            f1 = (floorz - w->Vertices()[face->vertexStart+2].origin.z) / 2048.0f;
+            f2 = (floorz - w->Vertices()[face->vertexStart+3].origin.z) / 2048.0f;
             
             if(f1 >= 0)
             {

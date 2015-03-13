@@ -4,6 +4,7 @@ debris
     frame
     {
         // ##000    0    0
+        action A_GotoIfUnderwater("objects/debris_underwater1")
         sprites
         {
             { "objects/debris", 3,    -17,  -13,    0 }
@@ -13,6 +14,7 @@ debris
     frame
     {
         // ##001    0    0
+        action A_GotoIfUnderwater("objects/debris_underwater2")
         sprites
         {
             { "objects/debris", 0,    -17,  -13,    0 }
@@ -22,6 +24,7 @@ debris
     frame
     {
         // ##002    0    0
+        action A_GotoIfUnderwater("objects/debris_underwater3")
         sprites
         {
             { "objects/debris", 1,    -17,  -13,    0 }
@@ -31,9 +34,60 @@ debris
     frame
     {
         // ##003    0    0
+        action A_GotoIfUnderwater("objects/debris_underwater4")
         sprites
         {
             { "objects/debris", 2,    -17,  -13,    0 }
+        }
+    }
+}
+
+debris_underwater1
+{
+    // frames:    4
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "objects/debris2", 1,    -17,  -13,    0 }
+        }
+    }
+}
+
+debris_underwater2
+{
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "objects/debris2", 2,    -17,  -13,    0 }
+        }
+    }
+}
+
+debris_underwater3
+{
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "objects/debris2", 3,    -17,  -13,    0 }
+        }
+
+    }
+}
+
+debris_underwater4
+{
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "objects/debris2", 0,    -17,  -13,    0 }
         }
     }
 }

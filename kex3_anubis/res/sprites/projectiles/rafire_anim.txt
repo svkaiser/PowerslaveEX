@@ -15,7 +15,7 @@ rafire_explode
 {
     frame
     {
-        action A_Spawn("Fx_RedCobraExplode", 0, 0, 2)
+        action A_Spawn("Fx_FireballExplode", 0, 0, 2)
         action A_PlayLocalSound("sounds/pbexplode.wav")
         delay 1
     }

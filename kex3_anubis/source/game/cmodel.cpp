@@ -618,8 +618,8 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
         if(i <= sector->faceEnd && face->flags & FF_PORTAL && face->sector >= 0)
         {
             mapSector_t *s = &sectors[face->sector];
-            float ceilingz = (float)s->ceilingHeight;
-            float floorz = (float)s->floorHeight;
+            float ceilingz = GetCeilingHeight(end, s);
+            float floorz = GetFloorHeight(end, s);
 
             if((s->ceilingFace->flags & FF_SOLID && s->floorFace->flags & FF_SOLID) &&
                ceilingz - floorz < actorHeight)

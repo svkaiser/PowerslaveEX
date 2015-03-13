@@ -24,9 +24,9 @@ float bombChargeThrow = 16.0f;
 void A_ThrowAmunBomb(kActor @actor)
 {
     float cp = Math::Cos(actor.Pitch());
-    float x = actor.Origin().x;
-    float y = actor.Origin().y;
-    float z = actor.Origin().z + 64.0f;
+    float x = 0;
+    float y = 0;
+    float z = 64.0f;
     kVec3 dir;
     kActor @bomb;
     
@@ -38,7 +38,7 @@ void A_ThrowAmunBomb(kActor @actor)
     y += dir.y * actor.Radius();
     z += dir.z * actor.Radius();
     
-    @bomb = Game.SpawnActor("Proj_AmunBomb", x, y, z, actor.Yaw(), actor.SectorIndex());
+    @bomb = actor.SpawnActor("Proj_AmunBomb", x, y, z);
     
     if(bomb is null)
     {
@@ -193,14 +193,15 @@ void A_FireRa(kActor @actor)
         offset = -32.0f;
     }
     
-    float x = actor.Origin().x + (Math::Cos(-actor.Yaw()) * offset);
-    float y = actor.Origin().y + (Math::Sin(-actor.Yaw()) * offset);
-    float z = actor.Origin().z + 32.0f;
+    float x = (Math::Cos(-actor.Yaw()) * offset);
+    float y = (Math::Sin(-actor.Yaw()) * offset);
+    float z = 32.0f;
     float cp = Math::Cos(actor.Pitch());
+    float sp = Math::Sin(actor.Pitch());
     kVec3 dir;
     kActor @ra;
     
-    @ra = Game.SpawnActor("Proj_Ra_Fire", x, y, z, actor.Yaw(), actor.SectorIndex());
+    @ra = actor.SpawnActor("Proj_Ra_Fire", x, y, z);
     
     if(ra is null)
     {
@@ -231,7 +232,7 @@ void A_FireRa(kActor @actor)
     
     dir.x = (Math::Sin(actor.Yaw() + rAn) * cp) * 16.0f;
     dir.y = (Math::Cos(actor.Yaw() + rAn) * cp) * 16.0f;
-    dir.z = 12.0f;
+    dir.z = 12.0f + (12.0f * -sp);
     
     ra.SetTarget(actor);
     ra.Velocity() = dir;

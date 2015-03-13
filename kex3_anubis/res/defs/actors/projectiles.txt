@@ -1,17 +1,3 @@
-Proj_AmunBomb 40
-{
-    classname               "kexProjectile"
-    radius                  9
-    height                  16
-    stepHeight              16
-    scale                   0.5
-    spawnAnim               "projectiles/amun_bomb_idle"
-    deathAnim               "projectiles/amun_bomb_death"
-    deathWaterAnim          "projectiles/amun_bomb_death_water"
-    fullbright              1
-    moveable                1
-}
-
 Proj_Anubis 18
 {
     classname               "kexProjectile"
@@ -109,6 +95,20 @@ Proj_Fireball 26
     moveable                1
     gravity                 0
     damage                  0
+}
+
+Proj_AmunBomb 40
+{
+    classname               "kexProjectile"
+    radius                  9
+    height                  16
+    stepHeight              16
+    scale                   0.5
+    spawnAnim               "projectiles/amun_bomb_idle"
+    deathAnim               "projectiles/amun_bomb_death"
+    deathWaterAnim          "projectiles/amun_bomb_death_water"
+    fullbright              1
+    moveable                1
 }
 
 Proj_Cobra_Red -1

@@ -12,3 +12,6 @@ sprite 2 64 0 24 57
 // working\fire_pot_thoth\sprite0519.tga
 sprite 3 88 0 24 57
 
+// working\fire_pot_thoth\sprite0520.tga
+sprite 4 112 0 24 57
+

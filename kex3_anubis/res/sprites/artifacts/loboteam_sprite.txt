@@ -1,0 +1,71 @@
+texture "sprites/artifacts/loboteam.png"
+
+// working\loboteam\sprite0306.tga
+sprite 0 0 0 60 64
+
+// working\loboteam\sprite0307.tga
+sprite 1 60 0 60 43
+
+// working\loboteam\sprite0521.tga
+sprite 2 120 0 60 64
+
+// working\loboteam\sprite0870.tga
+sprite 3 180 0 60 64
+
+// working\loboteam\sprite0875.tga
+sprite 4 240 0 60 64
+
+// working\loboteam\sprite1004.tga
+sprite 5 300 0 60 64
+
+// working\loboteam\sprite1454.tga
+sprite 6 360 0 60 64
+
+// working\loboteam\sprite1463.tga
+sprite 7 420 0 60 64
+
+// working\loboteam\sprite1476.tga
+sprite 8 480 0 60 64
+
+// working\loboteam\sprite1641.tga
+sprite 9 540 0 60 64
+
+// working\loboteam\sprite1652.tga
+sprite 10 600 0 60 64
+
+// working\loboteam\sprite1654.tga
+sprite 11 660 0 60 64
+
+// working\loboteam\sprite1668.tga
+sprite 12 720 0 60 64
+
+// working\loboteam\sprite1671.tga
+sprite 13 780 0 60 64
+
+// working\loboteam\sprite1775.tga
+sprite 14 840 0 60 64
+
+// working\loboteam\sprite1783.tga
+sprite 15 900 0 60 64
+
+// working\loboteam\sprite2041.tga
+sprite 16 960 0 60 64
+
+// working\loboteam\sprite2043.tga
+sprite 17 60 43 60 64
+
+// working\loboteam\sprite2050.tga
+sprite 18 0 64 60 64
+
+// working\loboteam\sprite2066.tga
+sprite 19 120 64 60 64
+
+// working\loboteam\sprite2068.tga
+sprite 20 180 64 60 64
+
+// working\loboteam\sprite2321.tga
+sprite 21 240 64 60 64
+
+// working\loboteam\sprite2325.tga
+sprite 22 300 64 60 64
+
