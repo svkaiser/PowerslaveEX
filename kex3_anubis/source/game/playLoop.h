@@ -43,10 +43,14 @@ public:
     const bool                  AutomapEnabled(void) { return bShowAutomap; }
     void                        ToggleAutomap(const bool bToggle) { bShowAutomap = bToggle; }
     void                        ToggleMapAll(const bool bToggle) { bMapAll = bToggle; }
+    const bool                  IsPaused(void) const { return bPaused; }
+    void                        TogglePause(const bool bToggle) { bPaused = bToggle; }
+    void                        ToggleInventoryMenu(void);
     
 private:
     void                        InitWater(void);
     void                        UpdateWater(void);
+    void                        DrawInventoryMenu(void);
     void                        DrawAutomap(void);
     void                        DrawAutomapArrow(kexRenderView &view, const float angle, const kexVec3 &pos,
                                                  const float size, const byte r, const byte g, const byte b);
@@ -57,11 +61,14 @@ private:
     kexHud                      hud;
     kexRenderView               renderView;
     kexRenderScene              renderScene;
+    kexTexture                  *menuBackTexture;
     int                         waterAccelPoints[16][16];
     int                         waterVelocityPoints[16][16];
     int                         waterMaxMagnitude;
     bool                        bShowAutomap;
     bool                        bMapAll;
+    bool                        bPaused;
+    bool                        bInventoryActive;
 };
 
 #endif

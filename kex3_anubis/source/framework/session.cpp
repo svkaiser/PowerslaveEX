@@ -26,20 +26,6 @@ static const float clockspeed = kexMath::FrameSec(60.0f);
 kexCvar cvarClientFPS("cl_maxfps", CVF_INT|CVF_CONFIG, "60", 1, 60, "Game render FPS");
 
 //
-// pausegame
-//
-
-COMMAND(pausegame)
-{
-    if(kex::cCommands->GetArgc() < 1)
-    {
-        return;
-    }
-
-    sessionLocal.TogglePause(sessionLocal.IsPaused() ^ 1);
-}
-
-//
 // kexSession::kexSession
 //
 
@@ -51,7 +37,6 @@ kexSession::kexSession(void)
     this->curtime       = 0;
     this->deltaTime     = 0;
     this->ticks         = 0;
-    this->bPaused       = false;
     this->bShowCursor   = false;
 }
 

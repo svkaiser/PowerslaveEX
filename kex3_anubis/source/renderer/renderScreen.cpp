@@ -89,8 +89,8 @@ void kexRenderScreen::SetAspectDimentions(float &x, float &y, float &width, floa
 //
 
 void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const float y,
-                                    byte r, byte g, byte b, byte a,
-                                    const int fixedWidth, const int fixedHeight)
+                                  byte r, byte g, byte b, byte a,
+                                  const int fixedWidth, const int fixedHeight)
 {
     float texwidth;
     float texheight;

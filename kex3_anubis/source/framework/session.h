@@ -37,8 +37,6 @@ public:
     void                        RunGame(void);
     void                        Shutdown(void);
 
-    const bool                  IsPaused(void) const { return bPaused; }
-    void                        TogglePause(const bool bToggle) { bPaused = bToggle; }
     const int                   GetTime(void) const { return time; }
     const float                 GetDeltaTime(void) const { return deltaTime; }
     const int                   GetTicks(void) const { return ticks; }
@@ -63,7 +61,6 @@ private:
     int                         curtime;
     float                       deltaTime;
     int                         ticks;
-    bool                        bPaused;
     bool                        bShowCursor;
     kexTexture                  *cursorTexture;
 

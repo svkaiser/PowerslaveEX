@@ -58,6 +58,34 @@ COMMAND(mapall)
 }
 
 //
+// pausegame
+//
+
+COMMAND(pausegame)
+{
+    if(kex::cCommands->GetArgc() < 1)
+    {
+        return;
+    }
+
+    kexGame::cLocal->PlayLoop()->TogglePause(kexGame::cLocal->PlayLoop()->IsPaused() ^ 1);
+}
+
+//
+// inventorymenu
+//
+
+COMMAND(inventorymenu)
+{
+    if(kex::cCommands->GetArgc() < 1)
+    {
+        return;
+    }
+
+    kexGame::cLocal->PlayLoop()->ToggleInventoryMenu();
+}
+
+//
 // kexPlayLoop::kexPlayLoop
 //
 
@@ -80,7 +108,10 @@ kexPlayLoop::~kexPlayLoop(void)
 void kexPlayLoop::Init(void)
 {
     hud.Init();
+    menuBackTexture = kexRender::cTextures->Cache("gfx/menuback.png", TC_CLAMP, TF_NEAREST);
     bShowAutomap = false;
+    bPaused = false;
+    bInventoryActive = false;
 }
 
 //
@@ -108,6 +139,8 @@ void kexPlayLoop::Start(void)
     
     bShowAutomap = false;
     bMapAll = false;
+    bPaused = false;
+    bInventoryActive = false;
 }
 
 //
@@ -127,6 +160,12 @@ void kexPlayLoop::Draw(void)
 {
     kexPlayer *p = kexGame::cLocal->Player();
     kexWorld *world = kexGame::cLocal->World();
+
+    if(bInventoryActive)
+    {
+        DrawInventoryMenu();
+        return;
+    }
     
     renderView.SetupFromPlayer(p);
     
@@ -147,7 +186,7 @@ void kexPlayLoop::Draw(void)
 
 void kexPlayLoop::Tick(void)
 {
-    if(ticks > 4)
+    if(ticks > 4 && !bPaused && !bInventoryActive)
     {
         kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
@@ -165,6 +204,26 @@ void kexPlayLoop::Tick(void)
 bool kexPlayLoop::ProcessInput(inputEvent_t *ev)
 {
     return false;
+}
+
+//
+// kexPlayLoop::ToggleInventoryMenu
+//
+
+void kexPlayLoop::ToggleInventoryMenu(void)
+{
+    bInventoryActive ^= 1;
+
+    if(bInventoryActive)
+    {
+        kex::cInput->ToggleMouseGrab(false);
+        kex::cSession->ToggleCursor(true);
+    }
+    else
+    {
+        kex::cInput->ToggleMouseGrab(true);
+        kex::cSession->ToggleCursor(false);
+    }
 }
 
 //
@@ -252,6 +311,23 @@ const int kexPlayLoop::GetWaterVelocityPoint(const float x, const float y)
     int index = ((((ix + iy) >> 4) & 60) + (ix & 960)) >> 2;
 
     return vel[index & 0xff];
+}
+
+//
+// kexPlayLoop::DrawInventoryMenu
+//
+
+void kexPlayLoop::DrawInventoryMenu(void)
+{
+    kexRender::cScreen->SetOrtho();
+
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+
+    kexRender::cScreen->DrawTexture(menuBackTexture, 32, -8, 255, 255, 255, 255);
 }
 
 //
