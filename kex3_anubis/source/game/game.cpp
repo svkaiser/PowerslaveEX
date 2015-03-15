@@ -235,6 +235,11 @@ COMMAND(weapon)
     {
         return;
     }
+
+    if(!kexGame::cLocal->Player()->WeaponOwned(wpn))
+    {
+        return;
+    }
     
     kexGame::cLocal->Player()->PendingWeapon() = wpn;
 }

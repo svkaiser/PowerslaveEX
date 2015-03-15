@@ -392,6 +392,7 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
     }
     
     face->flags |= FF_MAPPED;
+    face->flags &= ~FF_HIDDEN;
     
     for(int k = face->polyStart; k <= face->polyEnd; ++k)
     {

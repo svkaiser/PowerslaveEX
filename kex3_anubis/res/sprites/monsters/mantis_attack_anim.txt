@@ -1,0 +1,1341 @@
+mantis_attack
+{
+    // frames:   13
+    frame
+    {
+        // ##000    0    0
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 41,    -34, -130,    0 }
+                { "monsters/mantis", 42,     30, -130,    0 }
+                { "monsters/mantis", 43,    -34,  -66,    0 }
+                { "monsters/mantis", 44,     30,  -66,    0 }
+                { "monsters/mantis", 45,    -34,   -2,    0 }
+                { "monsters/mantis", 46,     30,   -2,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     35,  -43,    0 }
+                { "monsters/mantis", 95,    -50, -122,    0 }
+                { "monsters/mantis", 96,     14, -122,    0 }
+                { "monsters/mantis", 97,    -50,  -58,    0 }
+                { "monsters/mantis", 98,     14,  -58,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     14,  -44,    0 }
+                { "monsters/mantis", 92,    -64, -115,    0 }
+                { "monsters/mantis", 93,      0, -115,    0 }
+                { "monsters/mantis", 94,    -64,  -51,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 37,    -44, -117,    0 }
+                { "monsters/mantis", 38,     20, -117,    0 }
+                { "monsters/mantis", 39,    -44,  -53,    0 }
+                { "monsters/mantis", 40,     20,  -53,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 87,    -52, -116,    0 }
+                { "monsters/mantis", 88,     12, -116,    0 }
+                { "monsters/mantis", 89,    -52,  -52,    0 }
+                { "monsters/mantis", 90,     12,  -52,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 37,    -20, -117,    1 }
+                { "monsters/mantis", 38,    -60, -117,    1 }
+                { "monsters/mantis", 39,    -20,  -53,    1 }
+                { "monsters/mantis", 40,    -60,  -53,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,    -58,  -44,    1 }
+                { "monsters/mantis", 92,      0, -115,    1 }
+                { "monsters/mantis", 93,    -16, -115,    1 }
+                { "monsters/mantis", 94,      0,  -51,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -45,  -45,    1 }
+                { "monsters/mantis", 95,    -13, -123,    1 }
+                { "monsters/mantis", 96,    -29, -123,    1 }
+                { "monsters/mantis", 97,    -13,  -59,    1 }
+                { "monsters/mantis", 98,    -29,  -59,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 41,    -34, -130,    0 }
+                { "monsters/mantis", 42,     30, -130,    0 }
+                { "monsters/mantis", 43,    -34,  -66,    0 }
+                { "monsters/mantis", 44,     30,  -66,    0 }
+                { "monsters/mantis", 45,    -34,   -2,    0 }
+                { "monsters/mantis", 46,     30,   -2,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     35,  -43,    0 }
+                { "monsters/mantis", 95,    -50, -122,    0 }
+                { "monsters/mantis", 96,     14, -122,    0 }
+                { "monsters/mantis", 97,    -50,  -58,    0 }
+                { "monsters/mantis", 98,     14,  -58,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     14,  -44,    0 }
+                { "monsters/mantis", 92,    -64, -115,    0 }
+                { "monsters/mantis", 93,      0, -115,    0 }
+                { "monsters/mantis", 94,    -64,  -51,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 37,    -44, -117,    0 }
+                { "monsters/mantis", 38,     20, -117,    0 }
+                { "monsters/mantis", 39,    -44,  -53,    0 }
+                { "monsters/mantis", 40,     20,  -53,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 87,    -52, -116,    0 }
+                { "monsters/mantis", 88,     12, -116,    0 }
+                { "monsters/mantis", 89,    -52,  -52,    0 }
+                { "monsters/mantis", 90,     12,  -52,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 37,    -20, -117,    1 }
+                { "monsters/mantis", 38,    -60, -117,    1 }
+                { "monsters/mantis", 39,    -20,  -53,    1 }
+                { "monsters/mantis", 40,    -60,  -53,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,    -58,  -44,    1 }
+                { "monsters/mantis", 92,      0, -115,    1 }
+                { "monsters/mantis", 93,    -16, -115,    1 }
+                { "monsters/mantis", 94,      0,  -51,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -45,  -45,    1 }
+                { "monsters/mantis", 95,    -13, -123,    1 }
+                { "monsters/mantis", 96,    -29, -123,    1 }
+                { "monsters/mantis", 97,    -13,  -59,    1 }
+                { "monsters/mantis", 98,    -29,  -59,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 41,    -34, -130,    0 }
+                { "monsters/mantis", 42,     30, -130,    0 }
+                { "monsters/mantis", 43,    -34,  -66,    0 }
+                { "monsters/mantis", 44,     30,  -66,    0 }
+                { "monsters/mantis", 45,    -34,   -2,    0 }
+                { "monsters/mantis", 46,     30,   -2,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     35,  -43,    0 }
+                { "monsters/mantis", 95,    -50, -122,    0 }
+                { "monsters/mantis", 96,     14, -122,    0 }
+                { "monsters/mantis", 97,    -50,  -58,    0 }
+                { "monsters/mantis", 98,     14,  -58,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     14,  -44,    0 }
+                { "monsters/mantis", 92,    -64, -115,    0 }
+                { "monsters/mantis", 93,      0, -115,    0 }
+                { "monsters/mantis", 94,    -64,  -51,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 37,    -44, -117,    0 }
+                { "monsters/mantis", 38,     20, -117,    0 }
+                { "monsters/mantis", 39,    -44,  -53,    0 }
+                { "monsters/mantis", 40,     20,  -53,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 87,    -52, -116,    0 }
+                { "monsters/mantis", 88,     12, -116,    0 }
+                { "monsters/mantis", 89,    -52,  -52,    0 }
+                { "monsters/mantis", 90,     12,  -52,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 37,    -20, -117,    1 }
+                { "monsters/mantis", 38,    -60, -117,    1 }
+                { "monsters/mantis", 39,    -20,  -53,    1 }
+                { "monsters/mantis", 40,    -60,  -53,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,    -58,  -44,    1 }
+                { "monsters/mantis", 92,      0, -115,    1 }
+                { "monsters/mantis", 93,    -16, -115,    1 }
+                { "monsters/mantis", 94,      0,  -51,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -45,  -45,    1 }
+                { "monsters/mantis", 95,    -13, -123,    1 }
+                { "monsters/mantis", 96,    -29, -123,    1 }
+                { "monsters/mantis", 97,    -13,  -59,    1 }
+                { "monsters/mantis", 98,    -29,  -59,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 41,    -34, -130,    0 }
+                { "monsters/mantis", 42,     30, -130,    0 }
+                { "monsters/mantis", 43,    -34,  -66,    0 }
+                { "monsters/mantis", 44,     30,  -66,    0 }
+                { "monsters/mantis", 45,    -34,   -2,    0 }
+                { "monsters/mantis", 46,     30,   -2,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     35,  -43,    0 }
+                { "monsters/mantis", 95,    -50, -122,    0 }
+                { "monsters/mantis", 96,     14, -122,    0 }
+                { "monsters/mantis", 97,    -50,  -58,    0 }
+                { "monsters/mantis", 98,     14,  -58,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     14,  -44,    0 }
+                { "monsters/mantis", 92,    -64, -115,    0 }
+                { "monsters/mantis", 93,      0, -115,    0 }
+                { "monsters/mantis", 94,    -64,  -51,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 37,    -44, -117,    0 }
+                { "monsters/mantis", 38,     20, -117,    0 }
+                { "monsters/mantis", 39,    -44,  -53,    0 }
+                { "monsters/mantis", 40,     20,  -53,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 87,    -52, -116,    0 }
+                { "monsters/mantis", 88,     12, -116,    0 }
+                { "monsters/mantis", 89,    -52,  -52,    0 }
+                { "monsters/mantis", 90,     12,  -52,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 37,    -20, -117,    1 }
+                { "monsters/mantis", 38,    -60, -117,    1 }
+                { "monsters/mantis", 39,    -20,  -53,    1 }
+                { "monsters/mantis", 40,    -60,  -53,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,    -58,  -44,    1 }
+                { "monsters/mantis", 92,      0, -115,    1 }
+                { "monsters/mantis", 93,    -16, -115,    1 }
+                { "monsters/mantis", 94,      0,  -51,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -45,  -45,    1 }
+                { "monsters/mantis", 95,    -13, -123,    1 }
+                { "monsters/mantis", 96,    -29, -123,    1 }
+                { "monsters/mantis", 97,    -13,  -59,    1 }
+                { "monsters/mantis", 98,    -29,  -59,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004   84  132
+        action A_PlayLocalSound("sounds/selkisatk01.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 68,    -46, -129,    0 }
+                { "monsters/mantis", 69,     18, -129,    0 }
+                { "monsters/mantis", 70,    -46,  -65,    0 }
+                { "monsters/mantis", 71,     18,  -65,    0 }
+                { "monsters/mantis", 72,    -46,   -1,    0 }
+                { "monsters/mantis", 73,     18,   -1,    0 }
+            }
+        }
+        // ##004   84  132
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     34,  -43,    0 }
+                { "monsters/mantis", 21,    -50, -131,    0 }
+                { "monsters/mantis", 22,     14, -131,    0 }
+                { "monsters/mantis", 23,    -50,  -67,    0 }
+                { "monsters/mantis", 24,     14,  -67,    0 }
+                { "monsters/mantis", 25,    -50,   -3,    0 }
+            }
+        }
+        // ##004   84  132
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     15,  -45,    0 }
+                { "monsters/mantis", 74,    -49, -127,    0 }
+                { "monsters/mantis", 75,     15, -127,    0 }
+                { "monsters/mantis", 76,    -49,  -63,    0 }
+                { "monsters/mantis", 77,     15,  -63,    0 }
+            }
+        }
+        // ##004   84  132
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,    -56, -126,    0 }
+                { "monsters/mantis", 27,      8, -126,    0 }
+                { "monsters/mantis", 28,    -56,  -62,    0 }
+                { "monsters/mantis", 29,      8,  -62,    0 }
+                { "monsters/mantis", 30,     72,  -62,    0 }
+                { "monsters/mantis", 31,    -56,    2,    0 }
+            }
+        }
+        // ##004   84  132
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 78,    -48, -119,    0 }
+                { "monsters/mantis", 79,     16, -119,    0 }
+                { "monsters/mantis", 80,    -48,  -55,    0 }
+                { "monsters/mantis", 81,     16,  -55,    0 }
+            }
+        }
+        // ##004   84  132
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,     -9, -126,    1 }
+                { "monsters/mantis", 27,    -73, -126,    1 }
+                { "monsters/mantis", 28,     -9,  -62,    1 }
+                { "monsters/mantis", 29,    -73,  -62,    1 }
+                { "monsters/mantis", 30,    -77,  -62,    1 }
+                { "monsters/mantis", 31,     -9,    2,    1 }
+            }
+        }
+        // ##004   84  132
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 14,    -64,  -45,    1 }
+                { "monsters/mantis", 15,    -72,  -45,    1 }
+                { "monsters/mantis", 74,    -15, -127,    1 }
+                { "monsters/mantis", 75,    -31, -127,    1 }
+                { "monsters/mantis", 76,    -15,  -63,    1 }
+                { "monsters/mantis", 77,    -31,  -63,    1 }
+            }
+        }
+        // ##004   84  132
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -46,  -45,    1 }
+                { "monsters/mantis", 21,    -14, -131,    1 }
+                { "monsters/mantis", 22,    -42, -131,    1 }
+                { "monsters/mantis", 23,    -14,  -67,    1 }
+                { "monsters/mantis", 24,    -42,  -67,    1 }
+                { "monsters/mantis", 25,    -14,   -3,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0  132
+        action A_MantisAttack()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 68,    -46, -129,    0 }
+                { "monsters/mantis", 69,     18, -129,    0 }
+                { "monsters/mantis", 70,    -46,  -65,    0 }
+                { "monsters/mantis", 71,     18,  -65,    0 }
+                { "monsters/mantis", 72,    -46,   -1,    0 }
+                { "monsters/mantis", 73,     18,   -1,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     34,  -43,    0 }
+                { "monsters/mantis", 21,    -50, -131,    0 }
+                { "monsters/mantis", 22,     14, -131,    0 }
+                { "monsters/mantis", 23,    -50,  -67,    0 }
+                { "monsters/mantis", 24,     14,  -67,    0 }
+                { "monsters/mantis", 25,    -50,   -3,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     15,  -45,    0 }
+                { "monsters/mantis", 74,    -49, -127,    0 }
+                { "monsters/mantis", 75,     15, -127,    0 }
+                { "monsters/mantis", 76,    -49,  -63,    0 }
+                { "monsters/mantis", 77,     15,  -63,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,    -56, -126,    0 }
+                { "monsters/mantis", 27,      8, -126,    0 }
+                { "monsters/mantis", 28,    -56,  -62,    0 }
+                { "monsters/mantis", 29,      8,  -62,    0 }
+                { "monsters/mantis", 30,     72,  -62,    0 }
+                { "monsters/mantis", 31,    -56,    2,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 78,    -48, -119,    0 }
+                { "monsters/mantis", 79,     16, -119,    0 }
+                { "monsters/mantis", 80,    -48,  -55,    0 }
+                { "monsters/mantis", 81,     16,  -55,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,     -9, -126,    1 }
+                { "monsters/mantis", 27,    -73, -126,    1 }
+                { "monsters/mantis", 28,     -9,  -62,    1 }
+                { "monsters/mantis", 29,    -73,  -62,    1 }
+                { "monsters/mantis", 30,    -77,  -62,    1 }
+                { "monsters/mantis", 31,     -9,    2,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 14,    -64,  -45,    1 }
+                { "monsters/mantis", 15,    -72,  -45,    1 }
+                { "monsters/mantis", 74,    -15, -127,    1 }
+                { "monsters/mantis", 75,    -31, -127,    1 }
+                { "monsters/mantis", 76,    -15,  -63,    1 }
+                { "monsters/mantis", 77,    -31,  -63,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -46,  -45,    1 }
+                { "monsters/mantis", 21,    -14, -131,    1 }
+                { "monsters/mantis", 22,    -42, -131,    1 }
+                { "monsters/mantis", 23,    -14,  -67,    1 }
+                { "monsters/mantis", 24,    -42,  -67,    1 }
+                { "monsters/mantis", 25,    -14,   -3,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0  132
+        action A_MantisAttack()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 68,    -46, -129,    0 }
+                { "monsters/mantis", 69,     18, -129,    0 }
+                { "monsters/mantis", 70,    -46,  -65,    0 }
+                { "monsters/mantis", 71,     18,  -65,    0 }
+                { "monsters/mantis", 72,    -46,   -1,    0 }
+                { "monsters/mantis", 73,     18,   -1,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     34,  -43,    0 }
+                { "monsters/mantis", 21,    -50, -131,    0 }
+                { "monsters/mantis", 22,     14, -131,    0 }
+                { "monsters/mantis", 23,    -50,  -67,    0 }
+                { "monsters/mantis", 24,     14,  -67,    0 }
+                { "monsters/mantis", 25,    -50,   -3,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     15,  -45,    0 }
+                { "monsters/mantis", 74,    -49, -127,    0 }
+                { "monsters/mantis", 75,     15, -127,    0 }
+                { "monsters/mantis", 76,    -49,  -63,    0 }
+                { "monsters/mantis", 77,     15,  -63,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,    -56, -126,    0 }
+                { "monsters/mantis", 27,      8, -126,    0 }
+                { "monsters/mantis", 28,    -56,  -62,    0 }
+                { "monsters/mantis", 29,      8,  -62,    0 }
+                { "monsters/mantis", 30,     72,  -62,    0 }
+                { "monsters/mantis", 31,    -56,    2,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 78,    -48, -119,    0 }
+                { "monsters/mantis", 79,     16, -119,    0 }
+                { "monsters/mantis", 80,    -48,  -55,    0 }
+                { "monsters/mantis", 81,     16,  -55,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,     -9, -126,    1 }
+                { "monsters/mantis", 27,    -73, -126,    1 }
+                { "monsters/mantis", 28,     -9,  -62,    1 }
+                { "monsters/mantis", 29,    -73,  -62,    1 }
+                { "monsters/mantis", 30,    -77,  -62,    1 }
+                { "monsters/mantis", 31,     -9,    2,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 14,    -64,  -45,    1 }
+                { "monsters/mantis", 15,    -72,  -45,    1 }
+                { "monsters/mantis", 74,    -15, -127,    1 }
+                { "monsters/mantis", 75,    -31, -127,    1 }
+                { "monsters/mantis", 76,    -15,  -63,    1 }
+                { "monsters/mantis", 77,    -31,  -63,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -46,  -45,    1 }
+                { "monsters/mantis", 21,    -14, -131,    1 }
+                { "monsters/mantis", 22,    -42, -131,    1 }
+                { "monsters/mantis", 23,    -14,  -67,    1 }
+                { "monsters/mantis", 24,    -42,  -67,    1 }
+                { "monsters/mantis", 25,    -14,   -3,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0  132
+        action A_MantisAttack()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 68,    -46, -129,    0 }
+                { "monsters/mantis", 69,     18, -129,    0 }
+                { "monsters/mantis", 70,    -46,  -65,    0 }
+                { "monsters/mantis", 71,     18,  -65,    0 }
+                { "monsters/mantis", 72,    -46,   -1,    0 }
+                { "monsters/mantis", 73,     18,   -1,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     34,  -43,    0 }
+                { "monsters/mantis", 21,    -50, -131,    0 }
+                { "monsters/mantis", 22,     14, -131,    0 }
+                { "monsters/mantis", 23,    -50,  -67,    0 }
+                { "monsters/mantis", 24,     14,  -67,    0 }
+                { "monsters/mantis", 25,    -50,   -3,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     15,  -45,    0 }
+                { "monsters/mantis", 74,    -49, -127,    0 }
+                { "monsters/mantis", 75,     15, -127,    0 }
+                { "monsters/mantis", 76,    -49,  -63,    0 }
+                { "monsters/mantis", 77,     15,  -63,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,    -56, -126,    0 }
+                { "monsters/mantis", 27,      8, -126,    0 }
+                { "monsters/mantis", 28,    -56,  -62,    0 }
+                { "monsters/mantis", 29,      8,  -62,    0 }
+                { "monsters/mantis", 30,     72,  -62,    0 }
+                { "monsters/mantis", 31,    -56,    2,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 78,    -48, -119,    0 }
+                { "monsters/mantis", 79,     16, -119,    0 }
+                { "monsters/mantis", 80,    -48,  -55,    0 }
+                { "monsters/mantis", 81,     16,  -55,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,     -9, -126,    1 }
+                { "monsters/mantis", 27,    -73, -126,    1 }
+                { "monsters/mantis", 28,     -9,  -62,    1 }
+                { "monsters/mantis", 29,    -73,  -62,    1 }
+                { "monsters/mantis", 30,    -77,  -62,    1 }
+                { "monsters/mantis", 31,     -9,    2,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 14,    -64,  -45,    1 }
+                { "monsters/mantis", 15,    -72,  -45,    1 }
+                { "monsters/mantis", 74,    -15, -127,    1 }
+                { "monsters/mantis", 75,    -31, -127,    1 }
+                { "monsters/mantis", 76,    -15,  -63,    1 }
+                { "monsters/mantis", 77,    -31,  -63,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -46,  -45,    1 }
+                { "monsters/mantis", 21,    -14, -131,    1 }
+                { "monsters/mantis", 22,    -42, -131,    1 }
+                { "monsters/mantis", 23,    -14,  -67,    1 }
+                { "monsters/mantis", 24,    -42,  -67,    1 }
+                { "monsters/mantis", 25,    -14,   -3,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0  132
+        action A_MantisAttack()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 68,    -46, -129,    0 }
+                { "monsters/mantis", 69,     18, -129,    0 }
+                { "monsters/mantis", 70,    -46,  -65,    0 }
+                { "monsters/mantis", 71,     18,  -65,    0 }
+                { "monsters/mantis", 72,    -46,   -1,    0 }
+                { "monsters/mantis", 73,     18,   -1,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     34,  -43,    0 }
+                { "monsters/mantis", 21,    -50, -131,    0 }
+                { "monsters/mantis", 22,     14, -131,    0 }
+                { "monsters/mantis", 23,    -50,  -67,    0 }
+                { "monsters/mantis", 24,     14,  -67,    0 }
+                { "monsters/mantis", 25,    -50,   -3,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     15,  -45,    0 }
+                { "monsters/mantis", 74,    -49, -127,    0 }
+                { "monsters/mantis", 75,     15, -127,    0 }
+                { "monsters/mantis", 76,    -49,  -63,    0 }
+                { "monsters/mantis", 77,     15,  -63,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,    -56, -126,    0 }
+                { "monsters/mantis", 27,      8, -126,    0 }
+                { "monsters/mantis", 28,    -56,  -62,    0 }
+                { "monsters/mantis", 29,      8,  -62,    0 }
+                { "monsters/mantis", 30,     72,  -62,    0 }
+                { "monsters/mantis", 31,    -56,    2,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 78,    -48, -119,    0 }
+                { "monsters/mantis", 79,     16, -119,    0 }
+                { "monsters/mantis", 80,    -48,  -55,    0 }
+                { "monsters/mantis", 81,     16,  -55,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,     -9, -126,    1 }
+                { "monsters/mantis", 27,    -73, -126,    1 }
+                { "monsters/mantis", 28,     -9,  -62,    1 }
+                { "monsters/mantis", 29,    -73,  -62,    1 }
+                { "monsters/mantis", 30,    -77,  -62,    1 }
+                { "monsters/mantis", 31,     -9,    2,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 14,    -64,  -45,    1 }
+                { "monsters/mantis", 15,    -72,  -45,    1 }
+                { "monsters/mantis", 74,    -15, -127,    1 }
+                { "monsters/mantis", 75,    -31, -127,    1 }
+                { "monsters/mantis", 76,    -15,  -63,    1 }
+                { "monsters/mantis", 77,    -31,  -63,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -46,  -45,    1 }
+                { "monsters/mantis", 21,    -14, -131,    1 }
+                { "monsters/mantis", 22,    -42, -131,    1 }
+                { "monsters/mantis", 23,    -14,  -67,    1 }
+                { "monsters/mantis", 24,    -42,  -67,    1 }
+                { "monsters/mantis", 25,    -14,   -3,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0  132
+        action A_MantisAttack()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 68,    -46, -129,    0 }
+                { "monsters/mantis", 69,     18, -129,    0 }
+                { "monsters/mantis", 70,    -46,  -65,    0 }
+                { "monsters/mantis", 71,     18,  -65,    0 }
+                { "monsters/mantis", 72,    -46,   -1,    0 }
+                { "monsters/mantis", 73,     18,   -1,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     34,  -43,    0 }
+                { "monsters/mantis", 21,    -50, -131,    0 }
+                { "monsters/mantis", 22,     14, -131,    0 }
+                { "monsters/mantis", 23,    -50,  -67,    0 }
+                { "monsters/mantis", 24,     14,  -67,    0 }
+                { "monsters/mantis", 25,    -50,   -3,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     15,  -45,    0 }
+                { "monsters/mantis", 74,    -49, -127,    0 }
+                { "monsters/mantis", 75,     15, -127,    0 }
+                { "monsters/mantis", 76,    -49,  -63,    0 }
+                { "monsters/mantis", 77,     15,  -63,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,    -56, -126,    0 }
+                { "monsters/mantis", 27,      8, -126,    0 }
+                { "monsters/mantis", 28,    -56,  -62,    0 }
+                { "monsters/mantis", 29,      8,  -62,    0 }
+                { "monsters/mantis", 30,     72,  -62,    0 }
+                { "monsters/mantis", 31,    -56,    2,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 78,    -48, -119,    0 }
+                { "monsters/mantis", 79,     16, -119,    0 }
+                { "monsters/mantis", 80,    -48,  -55,    0 }
+                { "monsters/mantis", 81,     16,  -55,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 26,     -9, -126,    1 }
+                { "monsters/mantis", 27,    -73, -126,    1 }
+                { "monsters/mantis", 28,     -9,  -62,    1 }
+                { "monsters/mantis", 29,    -73,  -62,    1 }
+                { "monsters/mantis", 30,    -77,  -62,    1 }
+                { "monsters/mantis", 31,     -9,    2,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 14,    -63,  -44,    1 }
+                { "monsters/mantis", 15,    -71,  -44,    1 }
+                { "monsters/mantis", 47,    -13, -126,    1 }
+                { "monsters/mantis", 48,    -33, -126,    1 }
+                { "monsters/mantis", 49,    -13,  -62,    1 }
+                { "monsters/mantis", 50,    -33,  -62,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -46,  -45,    1 }
+                { "monsters/mantis", 21,    -14, -131,    1 }
+                { "monsters/mantis", 22,    -42, -131,    1 }
+                { "monsters/mantis", 23,    -14,  -67,    1 }
+                { "monsters/mantis", 24,    -42,  -67,    1 }
+                { "monsters/mantis", 25,    -14,   -3,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 58,    -37, -129,    0 }
+                { "monsters/mantis", 59,     27, -129,    0 }
+                { "monsters/mantis", 60,    -37,  -65,    0 }
+                { "monsters/mantis", 61,     27,  -65,    0 }
+                { "monsters/mantis", 62,    -37,   -1,    0 }
+                { "monsters/mantis", 63,     27,   -1,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     34,  -43,    0 }
+                { "monsters/mantis", 9,    -47, -131,    0 }
+                { "monsters/mantis", 10,     17, -131,    0 }
+                { "monsters/mantis", 11,    -47,  -67,    0 }
+                { "monsters/mantis", 12,     17,  -67,    0 }
+                { "monsters/mantis", 13,    -47,   -3,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     17,  -45,    0 }
+                { "monsters/mantis", 47,    -49, -126,    0 }
+                { "monsters/mantis", 48,     15, -126,    0 }
+                { "monsters/mantis", 49,    -49,  -62,    0 }
+                { "monsters/mantis", 50,     15,  -62,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 16,    -47, -122,    0 }
+                { "monsters/mantis", 17,     17, -122,    0 }
+                { "monsters/mantis", 18,    -47,  -58,    0 }
+                { "monsters/mantis", 19,     17,  -58,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 64,    -45, -115,    0 }
+                { "monsters/mantis", 65,     19, -115,    0 }
+                { "monsters/mantis", 66,    -45,  -51,    0 }
+                { "monsters/mantis", 67,     19,  -51,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 16,    -18, -122,    1 }
+                { "monsters/mantis", 17,    -74, -122,    1 }
+                { "monsters/mantis", 18,    -18,  -58,    1 }
+                { "monsters/mantis", 19,    -74,  -58,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 14,    -63,  -44,    1 }
+                { "monsters/mantis", 15,    -71,  -44,    1 }
+                { "monsters/mantis", 47,    -13, -126,    1 }
+                { "monsters/mantis", 48,    -33, -126,    1 }
+                { "monsters/mantis", 49,    -13,  -62,    1 }
+                { "monsters/mantis", 50,    -33,  -62,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -47,  -45,    1 }
+                { "monsters/mantis", 9,    -16, -131,    1 }
+                { "monsters/mantis", 10,    -40, -131,    1 }
+                { "monsters/mantis", 11,    -16,  -67,    1 }
+                { "monsters/mantis", 12,    -40,  -67,    1 }
+                { "monsters/mantis", 13,    -16,   -3,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 58,    -37, -129,    0 }
+                { "monsters/mantis", 59,     27, -129,    0 }
+                { "monsters/mantis", 60,    -37,  -65,    0 }
+                { "monsters/mantis", 61,     27,  -65,    0 }
+                { "monsters/mantis", 62,    -37,   -1,    0 }
+                { "monsters/mantis", 63,     27,   -1,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     34,  -43,    0 }
+                { "monsters/mantis", 9,    -47, -131,    0 }
+                { "monsters/mantis", 10,     17, -131,    0 }
+                { "monsters/mantis", 11,    -47,  -67,    0 }
+                { "monsters/mantis", 12,     17,  -67,    0 }
+                { "monsters/mantis", 13,    -47,   -3,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     17,  -45,    0 }
+                { "monsters/mantis", 47,    -49, -126,    0 }
+                { "monsters/mantis", 48,     15, -126,    0 }
+                { "monsters/mantis", 49,    -49,  -62,    0 }
+                { "monsters/mantis", 50,     15,  -62,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 16,    -47, -122,    0 }
+                { "monsters/mantis", 17,     17, -122,    0 }
+                { "monsters/mantis", 18,    -47,  -58,    0 }
+                { "monsters/mantis", 19,     17,  -58,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 64,    -45, -115,    0 }
+                { "monsters/mantis", 65,     19, -115,    0 }
+                { "monsters/mantis", 66,    -45,  -51,    0 }
+                { "monsters/mantis", 67,     19,  -51,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 16,    -18, -122,    1 }
+                { "monsters/mantis", 17,    -74, -122,    1 }
+                { "monsters/mantis", 18,    -18,  -58,    1 }
+                { "monsters/mantis", 19,    -74,  -58,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 14,    -63,  -44,    1 }
+                { "monsters/mantis", 15,    -71,  -44,    1 }
+                { "monsters/mantis", 47,    -13, -126,    1 }
+                { "monsters/mantis", 48,    -33, -126,    1 }
+                { "monsters/mantis", 49,    -13,  -62,    1 }
+                { "monsters/mantis", 50,    -33,  -62,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -47,  -45,    1 }
+                { "monsters/mantis", 9,    -16, -131,    1 }
+                { "monsters/mantis", 10,    -40, -131,    1 }
+                { "monsters/mantis", 11,    -16,  -67,    1 }
+                { "monsters/mantis", 12,    -40,  -67,    1 }
+                { "monsters/mantis", 13,    -16,   -3,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        goto "monsters/mantis_submerge"
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/mantis", 58,    -37, -129,    0 }
+                { "monsters/mantis", 59,     27, -129,    0 }
+                { "monsters/mantis", 60,    -37,  -65,    0 }
+                { "monsters/mantis", 61,     27,  -65,    0 }
+                { "monsters/mantis", 62,    -37,   -1,    0 }
+                { "monsters/mantis", 63,     27,   -1,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,     34,  -43,    0 }
+                { "monsters/mantis", 9,    -47, -131,    0 }
+                { "monsters/mantis", 10,     17, -131,    0 }
+                { "monsters/mantis", 11,    -47,  -67,    0 }
+                { "monsters/mantis", 12,     17,  -67,    0 }
+                { "monsters/mantis", 13,    -47,   -3,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/mantis", 86,     17,  -45,    0 }
+                { "monsters/mantis", 47,    -49, -126,    0 }
+                { "monsters/mantis", 48,     15, -126,    0 }
+                { "monsters/mantis", 49,    -49,  -62,    0 }
+                { "monsters/mantis", 50,     15,  -62,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/mantis", 16,    -47, -122,    0 }
+                { "monsters/mantis", 17,     17, -122,    0 }
+                { "monsters/mantis", 18,    -47,  -58,    0 }
+                { "monsters/mantis", 19,     17,  -58,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/mantis", 64,    -45, -115,    0 }
+                { "monsters/mantis", 65,     19, -115,    0 }
+                { "monsters/mantis", 66,    -45,  -51,    0 }
+                { "monsters/mantis", 67,     19,  -51,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/mantis", 16,    -18, -122,    1 }
+                { "monsters/mantis", 17,    -74, -122,    1 }
+                { "monsters/mantis", 18,    -18,  -58,    1 }
+                { "monsters/mantis", 19,    -74,  -58,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -45,  -45,    1 }
+                { "monsters/mantis", 95,    -13, -123,    1 }
+                { "monsters/mantis", 96,    -29, -123,    1 }
+                { "monsters/mantis", 97,    -13,  -59,    1 }
+                { "monsters/mantis", 98,    -29,  -59,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/mantis", 20,    -47,  -45,    1 }
+                { "monsters/mantis", 9,    -16, -131,    1 }
+                { "monsters/mantis", 10,    -40, -131,    1 }
+                { "monsters/mantis", 11,    -16,  -67,    1 }
+                { "monsters/mantis", 12,    -40,  -67,    1 }
+                { "monsters/mantis", 13,    -16,   -3,    1 }
+            }
+        }
+
+    }
+
+}

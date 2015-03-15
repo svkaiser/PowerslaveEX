@@ -427,3 +427,145 @@ void A_SentryDeath(kActor @actor)
         actor.PlaySound("sounds/mantisdeath02.wav");
     }
 }
+
+//
+// A_MantisThink
+//
+
+void A_MantisThink(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    if((actor.Flags() & AF_COLLIDEDWALL) != 0)
+    {
+        actor.Yaw() -= (actor.CollidedWallAngle() + 0.08f);
+    }
+    else if((Math::Rand() & 1) != 0)
+    {
+        actor.Yaw() += Math::RandCFloat() * 0.125f;
+    }
+    
+    if((Math::Rand() & 255) <= 4)
+    {
+        if((actor.GameTicks() & 32) == 0)
+        {
+            kVec3 org = actor.GetTarget().Origin();
+            org.z += actor.GetTarget().Height() * 0.5f;
+            
+            if(actor.CanSee(org, 2000))
+            {
+                actor.Velocity().Clear();
+                actor.ChangeAnim("monsters/mantis_rise");
+                return;
+            }
+        }
+        
+        actor.Velocity().Clear();
+        actor.ChangeAnim("monsters/mantis_peak");
+    }
+    else
+    {
+        actor.Velocity().x = Math::Sin(actor.Yaw()) * 64.0f;
+        actor.Velocity().y = Math::Cos(actor.Yaw()) * 64.0f;
+        actor.Velocity().z = 0;
+    }
+}
+
+//
+// A_MantisAttack
+//
+
+void A_MantisAttack(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    float an;
+    float dist;
+    float offset;
+    float x, y;
+    kVec3 tVec;
+    kVec3 dir;
+    kActor @proj;
+    
+    @proj = actor.SpawnActor("Proj_Fireball", 0, 0, 192);
+    
+    if(proj is null)
+    {
+        return;
+    }
+    
+    an = actor.Yaw() + (Math::RandCFloat() * 0.0625f);
+    proj.Yaw() = an;
+    
+    dir.x = Math::Sin(an) * 8.0f;
+    dir.y = Math::Cos(an) * 8.0f;
+    
+    tVec = actor.GetTarget().Origin();
+    
+    x = tVec.x - proj.Origin().x;
+    y = tVec.y - proj.Origin().y;
+    
+    dist = Math::Sqrt(x * x + y * y) / 8.0f;
+    
+    if(dist < 1)
+    {
+        dist = 1;
+    }
+    
+    offset = tVec.z + (actor.GetTarget().Height() * 0.5f);
+    dir.z = ((offset - proj.Origin().z) / dist) + Math::RandCFloat();
+    
+    proj.SetTarget(actor);
+    proj.Velocity() = dir;
+}
+
+//
+// A_MantisSetBlocking
+//
+
+void A_MantisSetBlocking(kActor @actor, const int toggle)
+{
+    if(toggle >= 1)
+    {
+        actor.Flags() |= (AF_SOLID|AF_SHOOTABLE);
+    }
+    else
+    {
+        actor.Flags() &= ~(AF_SOLID|AF_SHOOTABLE);
+    }
+}
+
+//
+// A_MantisExplode
+//
+
+void A_MantisExplode(kActor @actor)
+{
+    kVec3 dir;
+    
+    for(int i = 0; i < 20; ++i)
+    {
+         kActor @obj = actor.SpawnActor("Proj_Ra_Fire", 0, 0, 192);
+    
+        if(obj is null)
+        {
+            continue;
+        }
+        
+        float an = Math::RandCFloat() * 3.14f;
+        float amt = Math::RandCFloat() * 16.0f;
+        
+        dir.x = Math::Sin(an) * amt;
+        dir.y = Math::Cos(an) * amt;
+        dir.z = Math::RandFloat() * 24.0f;
+        
+        obj.Health() = 1;
+        obj.Velocity() = dir;
+    }
+}

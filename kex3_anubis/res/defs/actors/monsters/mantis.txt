@@ -1,0 +1,22 @@
+AI_Mantis 5
+{
+    classname               "kexAI"
+    radius                  48
+    height                  384
+    stepHeight              4
+    scale                   3
+    health                  400
+    moveSpeed               0
+    spawnAnim               "monsters/mantis_spawn"
+    chaseAnim               "monsters/mantis_chase"
+    painAnim                "monsters/mantis_pain"
+    deathAnim               "monsters/mantis_death"
+    solid                   0
+    shootable               0
+    moveable                1
+    noDropOff               1
+    lookAllAround           1
+    hidden                  1
+    noLavaDamage            1
+    painChance              16
+}

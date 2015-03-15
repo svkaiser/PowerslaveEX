@@ -255,9 +255,13 @@ void kexProjectile::CheckFloorAndCeilings(void)
     if(sector->ceilingFace->flags & FF_SOLID)
     {
         kexPlane::planeSide_t ceilingSide;
-        ceilingSide = sector->ceilingFace->plane.PointOnSide(position + kexVec3(0, 0, height));
+        kexVec3 cPosition = position + kexVec3(0, 0, height);
+
+        ceilingSide = sector->ceilingFace->plane.PointOnSide(cPosition);
+
         // bump ceiling
-        if(ceilingSide == kexPlane::PSIDE_BACK || ceilingSide == kexPlane::PSIDE_ON)
+        if(ceilingSide == kexPlane::PSIDE_BACK || ceilingSide == kexPlane::PSIDE_ON ||
+            cPosition.z >= ceilingHeight)
         {
             if(flags & AF_BOUNCY)
             {
@@ -279,8 +283,10 @@ void kexProjectile::CheckFloorAndCeilings(void)
     {
         kexPlane::planeSide_t floorSide;
         floorSide = sector->floorFace->plane.PointOnSide(position);
+
         // bump floor
-        if(floorSide == kexPlane::PSIDE_BACK || floorSide == kexPlane::PSIDE_ON)
+        if(floorSide == kexPlane::PSIDE_BACK || floorSide == kexPlane::PSIDE_ON ||
+            position.z <= floorHeight)
         {
             if(flags & AF_BOUNCY)
             {

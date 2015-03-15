@@ -621,14 +621,20 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
             float ceilingz = GetCeilingHeight(end, s);
             float floorz = GetFloorHeight(end, s);
 
-            if((s->ceilingFace->flags & FF_SOLID && s->floorFace->flags & FF_SOLID) &&
-               ceilingz - floorz < actorHeight)
-            {
-                CollideFace(face);
-            }
-            else if(moveActor->Flags() & AF_NODROPOFF)
+            if(moveActor->Flags() & AF_NODROPOFF)
             {
                 if((float)moveActor->Sector()->floorHeight - floorz > moveActor->StepHeight())
+                {
+                    CollideFace(face);
+                }
+            }
+            else
+            {
+                float fc = kexMath::Fabs(s->floorFace->plane.c);
+                float cc = kexMath::Fabs(s->ceilingFace->plane.c);
+
+                if((s->ceilingFace->flags & FF_SOLID && s->floorFace->flags & FF_SOLID) &&
+                   ceilingz - floorz < actorHeight && (fc > 0.5f && cc > 0.5f))
                 {
                     CollideFace(face);
                 }
@@ -1073,6 +1079,13 @@ void kexCModel::CollideActorWithWorld(void)
             PushFromRadialBounds(contactActor->Origin().ToVec2(), contactActor->Radius());
         }
 
+        if(contactFace && !(moveActor->Flags() & AF_COLLIDEDWALL))
+        {
+            moveActor->Flags() |= AF_COLLIDEDWALL;
+            moveActor->CollidedWallAngle() = contactFace->angle;
+            moveActor->CollidedWallNormal() = contactFace->plane.Normal();
+        }
+
         if(!moveActor->OnCollide(this))
         {
             return;
@@ -1200,6 +1213,8 @@ bool kexCModel::MoveActor(kexActor *actor)
     {
         return false;
     }
+
+    actor->Flags() &= ~AF_COLLIDEDWALL;
 
     moveActor = actor;
     sourceActor = actor;

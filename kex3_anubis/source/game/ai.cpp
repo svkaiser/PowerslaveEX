@@ -976,7 +976,7 @@ void kexAI::UpdateMovement(void)
     
     movement += velocity;
 
-    if(sector->floorFace->flags & FF_LAVA &&
+    if(!(aiFlags & AIF_NOLAVADAMAGE) && sector->floorFace->flags & FF_LAVA &&
         kexGame::cLocal->CModel()->PointOnFaceSide(origin, sector->floorFace) <= 0.1f)
     {
         // dumbass fell into lava
@@ -1031,6 +1031,7 @@ void kexAI::Spawn(void)
         if(definition->GetBool("flying"))               aiFlags |= AIF_FLYING;
         if(definition->GetBool("retreatAfterMelee"))    aiFlags |= AIF_RETREATAFTERMELEE;
         if(definition->GetBool("flyAdjustViewLevel"))   aiFlags |= AIF_FLYADJUSTVIEWLEVEL;
+        if(definition->GetBool("noLavaDamage"))         aiFlags |= AIF_NOLAVADAMAGE;
         
         if(definition->GetString("chaseAnim", animName))
         {

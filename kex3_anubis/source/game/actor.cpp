@@ -176,6 +176,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("noDropOff"))        flags |= AF_NODROPOFF;
         if(definition->GetBool("expires"))          flags |= AF_EXPIRES;
         if(definition->GetBool("noExitWater"))      flags |= AF_NOEXITWATER;
+        if(definition->GetBool("hidden"))           flags |= AF_HIDDEN;
 
         if(flags & AF_BOUNCY)
         {
@@ -477,6 +478,23 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
 bool kexActor::RandomDecision(const int rnd)
 {
     return (kexRand::Int() & rnd) != (gameTicks & rnd);
+}
+
+//
+// kexActor::CanSee
+//
+
+bool kexActor::CanSee(kexVec3 &point, const float maxDistance)
+{
+    kexVec3 org = origin;
+    org.z += (height * 0.5f) + stepHeight;
+
+    if(org.DistanceSq(point) > (maxDistance*maxDistance))
+    {
+        return false;
+    }
+
+    return !kexGame::cLocal->CModel()->Trace(this, sector, org, point, 0, false);
 }
 
 //

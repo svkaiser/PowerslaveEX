@@ -90,8 +90,8 @@ Item_Ammo 41
     moveable                1
     gravity                 0.25
     touchable               1
-    divisor                 20
-    multiplier              4
+    divisor                 16
+    multiplier              2.5
     floorOffset             48
     pickupMessage           "$str_109"
 }

@@ -59,6 +59,9 @@ void kexScriptObjActor::Init(void)
     e->RegisterObjectMethod("kActor", "const int GameTicks(void) const", asMETHODPR(kexActor, GameTicks, (void) const, const int), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kVec3 &Color(void)", asMETHODPR(kexActor, Color, (void), kexVec3&), asCALL_THISCALL);
     e->RegisterObjectMethod("kActor", "kActor @SpawnActor(const kStr &in, const float, const float, const float)", asMETHODPR(kexActor, SpawnActor, (const kexStr&, const float, const float, const float), kexActor*), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "kAngle &CollidedWallAngle(void)", asMETHODPR(kexActor, CollidedWallAngle, (void), kexAngle&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "kVec3 &CollidedWallNormal(void)", asMETHODPR(kexActor, CollidedWallNormal, (void), kexVec3&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kActor", "bool CanSee(const kVec3 &in, const float)", asMETHODPR(kexActor, CanSee, (kexVec3&, const float), bool), asCALL_THISCALL);
 
     e->RegisterEnum("EnumActorFlags");
     e->RegisterEnumValue("EnumActorFlags", "AF_FLOORFRICTION", AF_FLOORFRICTION);
@@ -77,4 +80,5 @@ void kexScriptObjActor::Init(void)
     e->RegisterEnumValue("EnumActorFlags", "AF_EXPIRES", AF_EXPIRES);
     e->RegisterEnumValue("EnumActorFlags", "AF_HIDDEN", AF_HIDDEN);
     e->RegisterEnumValue("EnumActorFlags", "AF_NOEXITWATER", AF_NOEXITWATER);
+    e->RegisterEnumValue("EnumActorFlags", "AF_COLLIDEDWALL", AF_COLLIDEDWALL);
 }

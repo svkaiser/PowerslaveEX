@@ -53,7 +53,8 @@ typedef enum
     AF_NODROPOFF        = BIT(12),
     AF_EXPIRES          = BIT(13),
     AF_HIDDEN           = BIT(14),
-    AF_NOEXITWATER      = BIT(15)
+    AF_NOEXITWATER      = BIT(15),
+    AF_COLLIDEDWALL     = BIT(16)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -88,6 +89,7 @@ public:
     void                            UnlinkSector(void);
     void                            InflictDamage(kexActor *inflictor, const int amount);
     bool                            RandomDecision(const int rnd);
+    bool                            CanSee(kexVec3 &point, const float maxDistance);
     kexActor                        *SpawnActor(const kexStr &name,
                                                 const float x, const float y, const float z);
 
@@ -125,6 +127,8 @@ public:
     kexVec3                         &Color(void) { return color; }
     kexVec3                         &PrevOrigin(void) { return prevOrigin; }
     void                            UpdateGameTicks(void) { gameTicks++; }
+    kexAngle                        &CollidedWallAngle(void) { return collidedWallAngle; }
+    kexVec3                         &CollidedWallNormal(void) { return collidedWallNormal; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
@@ -168,6 +172,8 @@ protected:
     kexActor                        *taggedActor;
     kexVec3                         color;
     kexVec3                         prevOrigin;
+    kexAngle                        collidedWallAngle;
+    kexVec3                         collidedWallNormal;
 END_KEX_CLASS();
 
 #include "pickup.h"
