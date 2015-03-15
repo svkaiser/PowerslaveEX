@@ -327,6 +327,7 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
             case 44:
             case 45:
             case 60:
+            case 65:
             case 68:
                 SetupFloatingPlatforms(&events[i], s, "kexFloatingPlatform");
                 break;
@@ -736,21 +737,25 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
     
     UpdateSectorBounds(sector);
     
-    if(moveAmount < 0)
+    for(kexActor *actor = sector->actorList.Next();
+        actor != NULL;
+        actor = actor->SectorLink().Next())
     {
-        for(kexActor *actor = sector->actorList.Next();
-            actor != NULL;
-            actor = actor->SectorLink().Next())
+        if(actor->Origin().z <= actor->FloorHeight() || kexMath::Fabs(actor->Velocity().z) <= 0.001f)
         {
-            if(actor->Origin().z <= actor->FloorHeight() || kexMath::Fabs(actor->Velocity().z) <= 0.001f)
+            float d = kexGame::cLocal->CModel()->GetFloorHeight(actor->Origin(), sector);
+            float floorDist = actor->Origin().z - d;
+            
+            if(floorDist <= -(moveAmount*2))
             {
-                float d = kexGame::cLocal->CModel()->GetFloorHeight(actor->Origin(), sector);
-                
-                if(actor->Origin().z - d <= -(moveAmount*2))
-                {
-                    actor->FloorHeight() = d;
-                    actor->Origin().z = actor->FloorHeight();
-                }
+                actor->FloorHeight() = d;
+                actor->Origin().z = actor->FloorHeight();
+            }
+
+            // dumb hack
+            if(!actor->InstanceOf(&kexPuppet::info) && moveAmount > 0 && floorDist <= 0.1f)
+            {
+                actor->Velocity().z += (moveAmount * 0.5f);
             }
         }
     }

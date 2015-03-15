@@ -838,6 +838,11 @@ void kexFloatingPlatform::Spawn(void)
         moveHeight = 128;
         break;
 
+    case 65:
+        moveSpeed = 1.5f + kexRand::Float() * 0.5f;
+        moveHeight = 128 + kexRand::Float() * 128;
+        break;
+
     case 68:
         moveSpeed = 2;
         moveHeight = 512;
