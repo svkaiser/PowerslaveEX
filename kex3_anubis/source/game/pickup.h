@@ -78,7 +78,7 @@ public:
 private:
     int                             weaponSlotToGive;
     int                             divisor;
-    int                             multiplier;
+    float                           multiplier;
     bool                            bFullAmmo;
 END_KEX_CLASS();
 

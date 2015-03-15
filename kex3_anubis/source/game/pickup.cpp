@@ -185,7 +185,7 @@ kexAmmoPickup::kexAmmoPickup(void)
 {
     this->weaponSlotToGive = -1;
     this->divisor = 1;
-    this->multiplier = 1;
+    this->multiplier = 5;
     this->bFullAmmo = false;
 }
 
@@ -257,11 +257,13 @@ void kexAmmoPickup::OnTouch(kexActor *instigator)
         return;
     }
 
-    give = divisor;
-
     if(scale > 1)
     {
-        give /= multiplier;
+        give = (int)kexMath::Floor((float)wpInfo->maxAmmo / (multiplier * scale));
+    }
+    else
+    {
+        give = (int)kexMath::Floor((float)wpInfo->maxAmmo / (float)divisor);
     }
 
     if(give <= 0)
@@ -269,7 +271,7 @@ void kexAmmoPickup::OnTouch(kexActor *instigator)
         return;
     }
 
-    player->GiveAmmo(weapon, (int16_t)(wpInfo->maxAmmo / give));
+    player->GiveAmmo(weapon, (int16_t)give);
     kexPickup::OnTouch(instigator);
 }
 
@@ -283,7 +285,7 @@ void kexAmmoPickup::Spawn(void)
     {
         definition->GetInt("weaponSlotToGive", weaponSlotToGive, -1);
         definition->GetInt("divisor", divisor, 1);
-        definition->GetInt("multiplier", multiplier, 1);
+        definition->GetFloat("multiplier", multiplier, 5);
         definition->GetBool("fullAmmo", bFullAmmo);
 
         if(divisor <= 0) divisor = 1;
