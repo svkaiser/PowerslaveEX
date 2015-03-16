@@ -1,0 +1,13 @@
+sandals_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/sandals", 0,    -47,  -79,    0 }
+            { "artifacts/sandals", 1,     17,  -79,    0 }
+        }
+    }
+}

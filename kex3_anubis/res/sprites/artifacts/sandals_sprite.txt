@@ -1,0 +1,8 @@
+texture "sprites/artifacts/sandals.png"
+
+// working\sandals\sprite0489.tga
+sprite 0 0 0 64 47
+
+// working\sandals\sprite0490.tga
+sprite 1 64 0 36 47
+

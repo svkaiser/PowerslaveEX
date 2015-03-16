@@ -1,0 +1,13 @@
+Arti_Sandals 34
+{
+    classname               "kexArtifactPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/sandals_loop"
+    fullbright              1
+    touchable               1
+    type                    0
+    pickupMessage           "$str_100"
+}
