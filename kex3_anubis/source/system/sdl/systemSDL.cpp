@@ -25,33 +25,34 @@ public:
     kexSystemSDL(void);
     ~kexSystemSDL(void);
 
-    virtual void            Main(int argc, char **argv);
-    virtual void            Init(void);
-    virtual void            Shutdown(void);
-    virtual void            SwapBuffers(void);
-    virtual int             GetWindowFlags(void);
-    virtual const char      *GetWindowTitle(void);
-    virtual void            SetWindowTitle(const char *string);
-    virtual void            SetWindowGrab(const bool bEnable);
-    virtual void            WarpMouseToCenter(void);
-    virtual void            *GetProcAddress(const char *proc);
-    virtual int             CheckParam(const char *check);
-    virtual const char      *GetBaseDirectory(void);
-    virtual const char      *GetClipboardText(void);
-    virtual void            Log(const char *fmt, ...);
-    virtual void            Printf(const char *string, ...);
-    virtual void            CPrintf(rcolor color, const char *string, ...);
-    virtual void            Warning(const char *string, ...);
-    virtual void            DPrintf(const char *string, ...);
-    virtual void            Error(const char *string, ...);
+    virtual void                            Main(int argc, char **argv);
+    virtual void                            Init(void);
+    virtual void                            Shutdown(void);
+    virtual void                            SwapBuffers(void);
+    virtual int                             GetWindowFlags(void);
+    virtual const char                      *GetWindowTitle(void);
+    virtual void                            SetWindowTitle(const char *string);
+    virtual void                            SetWindowGrab(const bool bEnable);
+    virtual void                            WarpMouseToCenter(void);
+    virtual void                            *GetProcAddress(const char *proc);
+    virtual int                             CheckParam(const char *check);
+    virtual const char                      *GetBaseDirectory(void);
+    virtual const char                      *GetClipboardText(void);
+    virtual void                            Log(const char *fmt, ...);
+    virtual void                            Printf(const char *string, ...);
+    virtual void                            CPrintf(rcolor color, const char *string, ...);
+    virtual void                            Warning(const char *string, ...);
+    virtual void                            DPrintf(const char *string, ...);
+    virtual void                            Error(const char *string, ...);
+    virtual void                            GetAvailableDisplayModes(kexArray<videoDisplayInfo_t> &list);
 
-    virtual void            *Window(void) { return window; }
+    virtual void                            *Window(void) { return window; }
 
 private:
-    void                    InitVideo(void);
+    void                                    InitVideo(void);
 
-    SDL_Window              *window;
-    SDL_GLContext           glContext;
+    SDL_Window                              *window;
+    SDL_GLContext                           glContext;
 };
 
 kexCvar cvarFixedTime("fixedtime", CVF_INT|CVF_CONFIG, "0", "TODO");
@@ -67,6 +68,26 @@ static kexSystemSDL systemLocal;
 kexSystem *kex::cSystem = &systemLocal;
 
 static char buffer[4096];
+
+//
+// listresolutions
+//
+
+COMMAND(listresolutions)
+{
+    kexArray<kexSystem::videoDisplayInfo_t> displayList;
+
+    systemLocal.GetAvailableDisplayModes(displayList);
+    kex::cSystem->CPrintf(COLOR_CYAN, "\nAvailable Resolutions:\n");
+
+    for(unsigned int i = 0; i < displayList.Length(); ++i)
+    {
+        kex::cSystem->CPrintf(COLOR_GREEN, "%ix%i (%i)\n",
+            displayList[i].width,
+            displayList[i].height,
+            displayList[i].refresh);
+    }
+}
 
 //
 // kexSystemSDL::kexSystemSDL
@@ -243,6 +264,33 @@ void kexSystemSDL::InitVideo(void)
     SDL_GL_SetSwapInterval(cvarVidVSync.GetBool());
 
     kex::cSystem->Printf("Video Initialized\n");
+}
+
+//
+// kexSystemSDL::GetAvailableDisplayModes
+//
+
+void kexSystemSDL::GetAvailableDisplayModes(kexArray<kexSystem::videoDisplayInfo_t> &list)
+{
+    SDL_DisplayMode mode;
+    int numDisplays = SDL_GetNumDisplayModes(0);
+
+    for(int i = 0; i < numDisplays; ++i)
+    {
+        kexSystem::videoDisplayInfo_t *info;
+
+        if(SDL_GetDisplayMode(0, i, &mode) < 0)
+        {
+            continue;
+        }
+
+        info = list.Grow();
+
+        info->width = mode.w;
+        info->height = mode.h;
+        info->refresh = mode.refresh_rate;
+        info->aspectRatio = (float)mode.w / (float)mode.h;
+    }
 }
 
 //

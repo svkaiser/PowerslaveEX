@@ -20,48 +20,57 @@ class kexSystem
 public:
     kexSystem(void);
 
-    virtual void            Main(int argc, char **argv) = 0;
-    virtual void            Init(void) = 0;
-    virtual void            Shutdown(void) = 0;
-    virtual void            SwapBuffers(void) = 0;
-    virtual int             GetWindowFlags(void);
-    virtual const char      *GetWindowTitle(void);
-    virtual void            SetWindowTitle(const char *string);
-    virtual void            SetWindowGrab(const bool bEnable);
-    virtual void            WarpMouseToCenter(void);
-    virtual void            *GetProcAddress(const char *proc);
-    virtual int             CheckParam(const char *check);
-    virtual const char      *GetBaseDirectory(void);
-    virtual void            Log(const char *fmt, ...);
-    virtual void            Printf(const char *string, ...);
-    virtual void            CPrintf(rcolor color, const char *string, ...);
-    virtual void            Warning(const char *string, ...);
-    virtual void            DPrintf(const char *string, ...);
-    virtual void            Error(const char *string, ...);
-    virtual void            ReadConfigFile(const char *file);
-    virtual void            WriteConfigFile(void);
-    virtual const char      *GetClipboardText(void);
+    typedef struct
+    {
+        int width;
+        int height;
+        int refresh;
+        float aspectRatio;
+    } videoDisplayInfo_t;
 
-    int                     VideoWidth(void) { return videoWidth; }
-    int                     VideoHeight(void) { return videoHeight; }
-    float                   VideoRatio(void) { return videoRatio; }
-    bool                    IsWindowed(void) { return bWindowed; }
-    virtual void            *Window(void) { return NULL; }
-    bool                    IsShuttingDown(void) { return bShuttingDown; }
-    const int               Argc(void) const { return argc; }
-    const char              **Argv(void) { return (const char**)argv; }
+    virtual void                            Main(int argc, char **argv) = 0;
+    virtual void                            Init(void) = 0;
+    virtual void                            Shutdown(void) = 0;
+    virtual void                            SwapBuffers(void) = 0;
+    virtual int                             GetWindowFlags(void);
+    virtual const char                      *GetWindowTitle(void);
+    virtual void                            SetWindowTitle(const char *string);
+    virtual void                            SetWindowGrab(const bool bEnable);
+    virtual void                            WarpMouseToCenter(void);
+    virtual void                            *GetProcAddress(const char *proc);
+    virtual int                             CheckParam(const char *check);
+    virtual const char                      *GetBaseDirectory(void);
+    virtual void                            Log(const char *fmt, ...);
+    virtual void                            Printf(const char *string, ...);
+    virtual void                            CPrintf(rcolor color, const char *string, ...);
+    virtual void                            Warning(const char *string, ...);
+    virtual void                            DPrintf(const char *string, ...);
+    virtual void                            Error(const char *string, ...);
+    virtual void                            ReadConfigFile(const char *file);
+    virtual void                            WriteConfigFile(void);
+    virtual const char                      *GetClipboardText(void);
+    virtual void                            GetAvailableDisplayModes(kexArray<videoDisplayInfo_t> &list);
+
+    int                                     VideoWidth(void) { return videoWidth; }
+    int                                     VideoHeight(void) { return videoHeight; }
+    float                                   VideoRatio(void) { return videoRatio; }
+    bool                                    IsWindowed(void) { return bWindowed; }
+    virtual void                            *Window(void) { return NULL; }
+    bool                                    IsShuttingDown(void) { return bShuttingDown; }
+    const int                               Argc(void) const { return argc; }
+    const char                              **Argv(void) { return (const char**)argv; }
 
 protected:
-    int                     videoWidth;
-    int                     videoHeight;
-    float                   videoRatio;
-    bool                    bWindowed;
-    bool                    bShuttingDown;
-    FILE                    *f_stdout;
-    FILE                    *f_stderr;
-    int                     argc;
-    char                    **argv;
-    char                    *basePath;
+    int                                     videoWidth;
+    int                                     videoHeight;
+    float                                   videoRatio;
+    bool                                    bWindowed;
+    bool                                    bShuttingDown;
+    FILE                                    *f_stdout;
+    FILE                                    *f_stderr;
+    int                                     argc;
+    char                                    **argv;
+    char                                    *basePath;
 };
 
 #endif

@@ -153,6 +153,14 @@ void kexSystem::WriteConfigFile(void)
 }
 
 //
+// kexSystem::GetAvailableDisplayModes
+//
+
+void kexSystem::GetAvailableDisplayModes(kexArray<kexSystem::videoDisplayInfo_t> &list)
+{
+}
+
+//
 // kexSystem::GetClipboardText
 //
 
