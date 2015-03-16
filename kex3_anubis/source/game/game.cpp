@@ -161,7 +161,7 @@ COMMAND(give)
     
     if(argc < 2)
     {
-        kex::cSystem->Printf("give <weapon#, weapons>\n");
+        kex::cSystem->Printf("give <name>\n");
         return;
     }
     
@@ -204,9 +204,30 @@ COMMAND(give)
 
         kex::cSystem->Printf("Got all keys!\n");
     }
+    else if(!kexStr::Compare(kex::cCommands->GetArgv(1), "artifact"))
+    {
+        if(argc != 3)
+        {
+            kex::cSystem->Printf("give artifact <0 - 5>\n");
+            return;
+        }
+        else
+        {
+            int arti = atoi(kex::cCommands->GetArgv(2));
+            
+            if(arti <= -1 || arti >= 5)
+            {
+                kex::cSystem->Printf("give artifact <0 - 5>\n");
+                return;
+            }
+            
+            gameLocal.Player()->Artifacts() |= BIT(arti);
+            kex::cSystem->Printf("Got %s!\n", kexGame::cLocal->Translation()->GetString(100+arti));
+        }
+    }
     else
     {
-        kex::cSystem->Printf("give <weapon#, weapons, keys>\n");
+        kex::cSystem->Printf("give <weapon#, weapons, keys, artifact#>\n");
     }
 }
 
@@ -302,6 +323,8 @@ void kexGameLocal::Init(void)
     kex::cActions->AddAction(IA_WEAPNEXT, "+weapnext");
     kex::cActions->AddAction(IA_WEAPPREV, "+weapprev");
     kex::cActions->AddAction(IA_USE, "+use");
+    kex::cActions->AddAction(IA_MAPZOOMIN, "mapzoomin");
+    kex::cActions->AddAction(IA_MAPZOOMOUT, "mapzoomout");
     
     kex::cSystem->ReadConfigFile("config.cfg");
     kex::cPakFiles->LoadZipFile("game.kpf");

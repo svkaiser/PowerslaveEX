@@ -18,6 +18,7 @@
 #include "renderView.h"
 #include "renderScene.h"
 #include "hud.h"
+#include "inventoryMenu.h"
 
 class kexPlayLoop : public kexGameLoop
 {
@@ -33,6 +34,7 @@ public:
     void                        Print(const char *string);
     bool                        ProcessInput(inputEvent_t *ev);
     const int                   GetWaterVelocityPoint(const float x, const float y);
+    void                        ZoomAutomap(const float amount);
     
     kexRenderView               &View(void) { return renderView; }
     const int                   Ticks(void) const { return ticks; }
@@ -45,12 +47,11 @@ public:
     void                        ToggleMapAll(const bool bToggle) { bMapAll = bToggle; }
     const bool                  IsPaused(void) const { return bPaused; }
     void                        TogglePause(const bool bToggle) { bPaused = bToggle; }
-    void                        ToggleInventoryMenu(void);
+    kexInventoryMenu            &InventoryMenu(void) { return inventoryMenu; }
     
 private:
     void                        InitWater(void);
     void                        UpdateWater(void);
-    void                        DrawInventoryMenu(void);
     void                        DrawAutomap(void);
     void                        DrawAutomapArrow(kexRenderView &view, const float angle, const kexVec3 &pos,
                                                  const float size, const byte r, const byte g, const byte b);
@@ -59,16 +60,16 @@ private:
 
     int                         ticks;
     kexHud                      hud;
+    kexInventoryMenu            inventoryMenu;
     kexRenderView               renderView;
     kexRenderScene              renderScene;
-    kexTexture                  *menuBackTexture;
     int                         waterAccelPoints[16][16];
     int                         waterVelocityPoints[16][16];
     int                         waterMaxMagnitude;
     bool                        bShowAutomap;
     bool                        bMapAll;
     bool                        bPaused;
-    bool                        bInventoryActive;
+    float                       automapZoom;
 };
 
 #endif

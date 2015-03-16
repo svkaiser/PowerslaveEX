@@ -22,6 +22,7 @@
 #define PMOVE_SPEED             0.976f
 #define PMOVE_WATER_SPEED       0.48828125f
 #define PMOVE_SPEED_JUMP        10.25f
+#define PMOVE_JUMP_BOOST        1.5f
 #define PMOVE_MAX_JUMPTICKS     13
 
 const int16_t kexPlayer::maxHealth = 200;
@@ -179,6 +180,11 @@ void kexPuppet::Jump(kexPlayerCmd *cmd)
             if(jumpTicks < PMOVE_MAX_JUMPTICKS)
             {
                 velocity.z = PMOVE_SPEED_JUMP;
+                if(owner->Artifacts() & PA_SANDALS)
+                {
+                    velocity.z *= PMOVE_JUMP_BOOST;
+                }
+
                 jumpTicks++;
             }
             else
@@ -881,6 +887,14 @@ void kexPlayer::Tick(void)
     if(cmd.Buttons() & BC_USE)
     {
         TryUse();
+    }
+    if(cmd.Buttons() & BC_MAPZOOMIN)
+    {
+        kexGame::cLocal->PlayLoop()->ZoomAutomap(-128);
+    }
+    if(cmd.Buttons() & BC_MAPZOOMOUT)
+    {
+        kexGame::cLocal->PlayLoop()->ZoomAutomap(128);
     }
 
     if(lockTime > 0)

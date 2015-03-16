@@ -35,6 +35,8 @@ typedef enum
     IA_WEAPNEXT,
     IA_WEAPPREV,
     IA_USE,
+    IA_MAPZOOMIN,
+    IA_MAPZOOMOUT,
     
     NUMINPUTACTIONS
 } inputActions_t;

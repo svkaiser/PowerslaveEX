@@ -4,6 +4,16 @@
 //
 //-----------------------------------------------------------------------------
 
+Obj_WarpPryamid 33
+{
+    classname               "kexActor"
+    radius                  32
+    height                  64
+    stepHeight              48
+    scale                   1.25
+    spawnAnim               "misc/warpPryamid_loop"
+}
+
 Obj_Camel 58
 {
     classname               "kexActor"

@@ -89,6 +89,8 @@ public:
     void                        SetActor(kexPuppet *_actor) { actor = _actor; }
     void                        ClearActor(void) { actor = NULL; }
 
+    int16_t                     &Artifacts(void) { return artifacts; }
+
     const float                 Bob(void) const { return bob; }
     float                       &LandTime(void) { return landTime; }
     float                       &StepViewZ(void) { return stepViewZ; }

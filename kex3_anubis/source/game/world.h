@@ -183,6 +183,7 @@ public:
     float                   GetLowestSurroundingFloor(mapSector_t *sector);
     void                    MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount);
     void                    ResetWallSwitchFromTag(const int tag);
+    void                    FireRemoteEventFromTag(const int tag);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
@@ -216,6 +217,7 @@ private:
                                                       const float radius, const int damage);
     void                    UseLockedDoor(kexPlayer *player, mapEvent_t *ev);
     void                    UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev);
+    void                    TriggerEvent(mapEvent_t *ev);
     void                    SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event);
     void                    SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev);
     void                    ExplodeWallEvent(mapSector_t *sector);

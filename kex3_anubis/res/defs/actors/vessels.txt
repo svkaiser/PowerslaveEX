@@ -506,9 +506,9 @@ Obj_Barrel_Shard01 -1
     moveable                1
     initialFrame            1
     bouncy                  1
-    bounceSound_1           "sounds/glass01.wav"
-    bounceSound_2           "sounds/glass02.wav"
-    bounceSound_3           "sounds/glass03.wav"
+    bounceSound_1           "sounds/wood01.wav"
+    bounceSound_2           "sounds/wood02.wav"
+    bounceSound_3           "sounds/wood03.wav"
 }
 
 Obj_Barrel_Shard02 -1
@@ -523,9 +523,9 @@ Obj_Barrel_Shard02 -1
     moveable                1
     initialFrame            2
     bouncy                  1
-    bounceSound_1           "sounds/glass01.wav"
-    bounceSound_2           "sounds/glass02.wav"
-    bounceSound_3           "sounds/glass03.wav"
+    bounceSound_1           "sounds/wood01.wav"
+    bounceSound_2           "sounds/wood02.wav"
+    bounceSound_3           "sounds/wood03.wav"
 }
 
 Obj_Barrel_Shard03 -1
@@ -540,9 +540,9 @@ Obj_Barrel_Shard03 -1
     moveable                1
     initialFrame            3
     bouncy                  1
-    bounceSound_1           "sounds/glass01.wav"
-    bounceSound_2           "sounds/glass02.wav"
-    bounceSound_3           "sounds/glass03.wav"
+    bounceSound_1           "sounds/wood01.wav"
+    bounceSound_2           "sounds/wood02.wav"
+    bounceSound_3           "sounds/wood03.wav"
 }
 
 Obj_Barrel_Shard04 -1
@@ -557,9 +557,9 @@ Obj_Barrel_Shard04 -1
     moveable                1
     initialFrame            4
     bouncy                  1
-    bounceSound_1           "sounds/glass01.wav"
-    bounceSound_2           "sounds/glass02.wav"
-    bounceSound_3           "sounds/glass03.wav"
+    bounceSound_1           "sounds/wood01.wav"
+    bounceSound_2           "sounds/wood02.wav"
+    bounceSound_3           "sounds/wood03.wav"
 }
 
 //-----------------------------------------------------------------------------

@@ -446,3 +446,83 @@ void kexKeyPickup::Spawn(void)
         definition->GetInt("keyType", bits, 0);
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// kexArtifactPickup
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexArtifactPickup, kexPickup)
+
+//
+// kexArtifactPickup::kexArtifactPickup
+//
+
+kexArtifactPickup::kexArtifactPickup(void)
+{
+    this->bits = 0;
+}
+
+//
+// kexArtifactPickup::~kexArtifactPickup
+//
+
+kexArtifactPickup::~kexArtifactPickup(void)
+{
+}
+
+//
+// kexArtifactPickup::Tick
+//
+
+void kexArtifactPickup::Tick(void)
+{
+    kexPickup::Tick();
+}
+
+//
+// kexArtifactPickup::OnTouch
+//
+
+void kexArtifactPickup::OnTouch(kexActor *instigator)
+{
+    kexPlayer *player;
+
+    if(Removing())
+    {
+        return;
+    }
+
+    if(!instigator->InstanceOf(&kexPuppet::info) || bits < 0)
+    {
+        return;
+    }
+
+    player = static_cast<kexPuppet*>(instigator)->Owner();
+
+    if(!(player->Artifacts() & BIT(bits)))
+    {
+        player->Artifacts() |= BIT(bits);
+        kexPickup::OnTouch(instigator);
+
+        kexGame::cLocal->World()->FireRemoteEventFromTag(1000 + bits);
+    }
+}
+
+//
+// kexArtifactPickup::Spawn
+//
+
+void kexArtifactPickup::Spawn(void)
+{
+    if(definition)
+    {
+        definition->GetInt("type", bits, 0);
+    }
+
+    if(kexGame::cLocal->Player()->Artifacts() & BIT(bits))
+    {
+        Remove();
+    }
+}

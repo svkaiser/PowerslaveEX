@@ -977,6 +977,58 @@ void kexWorld::ResetWallSwitchFromTag(const int tag)
 }
 
 //
+// kexWorld::FireRemoteEventFromTag
+//
+
+void kexWorld::FireRemoteEventFromTag(const int tag)
+{
+    for(unsigned int i = 0; i < numEvents; ++i)
+    {
+        mapEvent_t *ev = &events[i];
+
+        if(ev->tag != tag)
+        {
+            continue;
+        }
+
+        TriggerEvent(ev);
+        break;
+    }
+}
+
+//
+// kexWorld::TriggerEvent
+//
+
+void kexWorld::TriggerEvent(mapEvent_t *ev)
+{
+    switch(ev->type)
+    {
+    case 2:
+    case 7:
+    case 8:
+    case 9:
+        kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
+        break;
+    case 21:
+        kexGame::cActorFactory->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
+        break;
+    case 22:
+        kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
+        break;
+    case 24:
+        kexGame::cActorFactory->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
+        break;
+    case 48:
+        static_cast<kexDropPad*>(sectors[ev->sector].objectThinker)->Reset();
+        break;
+
+    default:
+        break;
+    }
+}
+
+//
 // kexWorld::EnterSectorSpecial
 //
 
@@ -1121,36 +1173,18 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
                 continue;
             }
 
+            TriggerEvent(ev);
+
             switch(ev->type)
             {
-            case 2:
-                kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
-                break;
             case 7:
-                kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
-                bClearEventRef = true;
-                break;
             case 8:
             case 9:
-                kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
-                bClearEventRef = true;
-                break;
             case 21:
-                kexGame::cActorFactory->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
-                bClearEventRef = true;
-                break;
             case 22:
-                kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
-                bClearEventRef = true;
-                break;
             case 24:
-                kexGame::cActorFactory->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
                 bClearEventRef = true;
                 break;
-            case 48:
-                static_cast<kexDropPad*>(sectors[ev->sector].objectThinker)->Reset();
-                break;
-
             default:
                 break;
             }

@@ -82,7 +82,7 @@ COMMAND(inventorymenu)
         return;
     }
 
-    kexGame::cLocal->PlayLoop()->ToggleInventoryMenu();
+    kexGame::cLocal->PlayLoop()->InventoryMenu().Toggle();
 }
 
 //
@@ -108,10 +108,9 @@ kexPlayLoop::~kexPlayLoop(void)
 void kexPlayLoop::Init(void)
 {
     hud.Init();
-    menuBackTexture = kexRender::cTextures->Cache("gfx/menuback.png", TC_CLAMP, TF_NEAREST);
+    inventoryMenu.Init();
     bShowAutomap = false;
     bPaused = false;
-    bInventoryActive = false;
 }
 
 //
@@ -135,12 +134,14 @@ void kexPlayLoop::Start(void)
 
     kexGame::cLocal->Player()->Ready();
     hud.Reset();
+    inventoryMenu.Reset();
     InitWater();
+
+    automapZoom = 2048;
     
     bShowAutomap = false;
     bMapAll = false;
     bPaused = false;
-    bInventoryActive = false;
 }
 
 //
@@ -161,9 +162,9 @@ void kexPlayLoop::Draw(void)
     kexPlayer *p = kexGame::cLocal->Player();
     kexWorld *world = kexGame::cLocal->World();
 
-    if(bInventoryActive)
+    if(inventoryMenu.IsActive())
     {
-        DrawInventoryMenu();
+        inventoryMenu.Display();
         return;
     }
     
@@ -186,12 +187,16 @@ void kexPlayLoop::Draw(void)
 
 void kexPlayLoop::Tick(void)
 {
-    if(ticks > 4 && !bPaused && !bInventoryActive)
+    if(ticks > 4 && !bPaused && !inventoryMenu.IsActive())
     {
         kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
         hud.Update();
         UpdateWater();
+    }
+    else if(inventoryMenu.IsActive())
+    {
+        inventoryMenu.Update();
     }
     
     ticks++;
@@ -203,27 +208,12 @@ void kexPlayLoop::Tick(void)
 
 bool kexPlayLoop::ProcessInput(inputEvent_t *ev)
 {
+    if(inventoryMenu.IsActive())
+    {
+        return inventoryMenu.ProcessInput(ev);
+    }
+
     return false;
-}
-
-//
-// kexPlayLoop::ToggleInventoryMenu
-//
-
-void kexPlayLoop::ToggleInventoryMenu(void)
-{
-    bInventoryActive ^= 1;
-
-    if(bInventoryActive)
-    {
-        kex::cInput->ToggleMouseGrab(false);
-        kex::cSession->ToggleCursor(true);
-    }
-    else
-    {
-        kex::cInput->ToggleMouseGrab(true);
-        kex::cSession->ToggleCursor(false);
-    }
 }
 
 //
@@ -311,23 +301,6 @@ const int kexPlayLoop::GetWaterVelocityPoint(const float x, const float y)
     int index = ((((ix + iy) >> 4) & 60) + (ix & 960)) >> 2;
 
     return vel[index & 0xff];
-}
-
-//
-// kexPlayLoop::DrawInventoryMenu
-//
-
-void kexPlayLoop::DrawInventoryMenu(void)
-{
-    kexRender::cScreen->SetOrtho();
-
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
-    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
-    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
-    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-
-    kexRender::cScreen->DrawTexture(menuBackTexture, 32, -8, 255, 255, 255, 255);
 }
 
 //
@@ -521,6 +494,21 @@ void kexPlayLoop::DrawAutomapActors(kexRenderView &view)
 }
 
 //
+// kexPlayLoop::ZoomAutomap
+//
+
+void kexPlayLoop::ZoomAutomap(const float amount)
+{
+    if(bShowAutomap == false)
+    {
+        return;
+    }
+
+    automapZoom += amount;
+    kexMath::Clamp(automapZoom, 1024, 8192);
+}
+
+//
 // kexPlayLoop::DrawAutomap
 //
 
@@ -536,7 +524,7 @@ void kexPlayLoop::DrawAutomap(void)
     automapView.Fov() = 45;
     
     automapView.Origin() = renderView.Origin();
-    automapView.Origin().z = 2048;
+    automapView.Origin().z = automapZoom;
     
     automapView.Yaw() = renderView.Yaw();
     automapView.Pitch() = kexMath::Deg2Rad(90);
