@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		410A697F1AAF53FC000BD442 /* dataConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410A697E1AAF53FC000BD442 /* dataConvert.cpp */; };
 		4111E0821A8D4B19000D5B22 /* pickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4111E0801A8D4B19000D5B22 /* pickup.cpp */; };
+		411358D21AB75FE200916706 /* inventoryMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411358D01AB75FE200916706 /* inventoryMenu.cpp */; };
 		413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413DD5BD1A89674B00767E49 /* actorObject.cpp */; };
 		4178638F1A8E6B2C00329895 /* mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4178638D1A8E6B2C00329895 /* mover.cpp */; };
 		419342261A8BB38B002C7F8E /* gameSysObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419342251A8BB38B002C7F8E /* gameSysObject.cpp */; };
@@ -168,6 +169,8 @@
 		410A697E1AAF53FC000BD442 /* dataConvert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dataConvert.cpp; path = ../../source/tools/dataConvert.cpp; sourceTree = "<group>"; };
 		4111E0801A8D4B19000D5B22 /* pickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pickup.cpp; path = ../../source/game/pickup.cpp; sourceTree = "<group>"; };
 		4111E0811A8D4B19000D5B22 /* pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pickup.h; path = ../../source/game/pickup.h; sourceTree = "<group>"; };
+		411358D01AB75FE200916706 /* inventoryMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = inventoryMenu.cpp; path = ../../source/game/inventoryMenu.cpp; sourceTree = "<group>"; };
+		411358D11AB75FE200916706 /* inventoryMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inventoryMenu.h; path = ../../source/game/inventoryMenu.h; sourceTree = "<group>"; };
 		413DD5BD1A89674B00767E49 /* actorObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorObject.cpp; path = ../../source/script/objects/actorObject.cpp; sourceTree = "<group>"; };
 		413DD5BE1A89674B00767E49 /* actorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actorObject.h; path = ../../source/script/objects/actorObject.h; sourceTree = "<group>"; };
 		4178638D1A8E6B2C00329895 /* mover.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mover.cpp; path = ../../source/game/mover.cpp; sourceTree = "<group>"; };
@@ -425,6 +428,7 @@
 				41C7FC2E1A5AFB84003864CB /* game.cpp */,
 				41C7FC301A5AFB84003864CB /* gameObject.cpp */,
 				41B5F18E1A926BC00016327B /* hud.cpp */,
+				411358D01AB75FE200916706 /* inventoryMenu.cpp */,
 				41C7FC321A5AFB84003864CB /* localization.cpp */,
 				41C7FC341A5AFB84003864CB /* menu.cpp */,
 				4178638D1A8E6B2C00329895 /* mover.cpp */,
@@ -447,6 +451,7 @@
 				41C7FC2F1A5AFB84003864CB /* game.h */,
 				41C7FC311A5AFB84003864CB /* gameObject.h */,
 				41B5F18F1A926BC00016327B /* hud.h */,
+				411358D11AB75FE200916706 /* inventoryMenu.h */,
 				41C7FC331A5AFB84003864CB /* localization.h */,
 				41C7FC351A5AFB84003864CB /* menu.h */,
 				4178638E1A8E6B2C00329895 /* mover.h */,
@@ -822,6 +827,7 @@
 				41C7FC661A5AFB98003864CB /* fbo.cpp in Sources */,
 				41C7FC831A5AFBC0003864CB /* soundOAL.cpp in Sources */,
 				41BCC06C1A6ECCB800F8B3FA /* renderScene.cpp in Sources */,
+				411358D21AB75FE200916706 /* inventoryMenu.cpp in Sources */,
 				41DA07431A51FDE000562B25 /* timerSDL.cpp in Sources */,
 				41BCC0621A6EBACB00F8B3FA /* pWeapon.cpp in Sources */,
 				41C7FC471A5AFB84003864CB /* playerCmd.cpp in Sources */,
