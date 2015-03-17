@@ -153,6 +153,8 @@ bool kexMenuItem::OnCursor(void)
 
 void kexMenuItem::Tick(void)
 {
+    static kexMenuItem *lastItem;
+
     if(bLerping)
     {
         Move();
@@ -163,11 +165,22 @@ void kexMenuItem::Tick(void)
         if(!(bHighLighted = OnCursor()))
         {
             highlightTime = 0;
+
+            if(lastItem == this)
+            {
+                lastItem = NULL;
+            }
         }
         else
         {
             highlightTime += 1.0f;
         }
+    }
+
+    if(bHighLighted && lastItem != this)
+    {
+        lastItem = this;
+        kexGame::cLocal->PlaySound("sounds/menu_highlight.wav");
     }
 }
 

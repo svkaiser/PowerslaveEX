@@ -253,6 +253,55 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
 }
 
 //
+// kexCModel::TestIntersectSector
+//
+// A much simplier version of TraceFacePlane
+//
+
+bool kexCModel::TestIntersectSector(mapFace_t *face, const float extent)
+{
+    float d1, d2;
+    kexVec3 hit;
+
+    d1 = PointOnFaceSide(start, face, extent);
+    d2 = PointOnFaceSide(end, face, extent);
+
+    if(d1 <= d2 || d1 < 0 || d2 > 0)
+    {
+        // no intersection
+        return false;
+    }
+
+    float frac = (d1 / (d1 - d2));
+
+    if(frac > 1 || frac < 0)
+    {
+        // not a valid contact
+        return false;
+    }
+
+    if(frac >= fraction)
+    {
+        // farther than the current contact
+        return false;
+    }
+
+    hit.Lerp(start, end, frac);
+
+    if(!PointWithinSectorEdges(hit, &sectors[face->sectorOwner], extent))
+    {
+        return false;
+    }
+
+    fraction = frac;
+    interceptVector = hit;
+    contactNormal = face->plane.Normal();
+    contactFace = face;
+    contactSector = &sectors[face->sectorOwner];
+    return true;
+}
+
+//
 // kexCModel::TraceSphere
 //
 // Performs a intersection test on a 2D-circle
@@ -1313,8 +1362,16 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
             }
             else if(face->flags & FF_SOLID)
             {
-                // test solid wall
-                TraceFacePlane(face, 0, radius);
+                if(i <= s->faceEnd)
+                {
+                    // test solid wall
+                    TraceFacePlane(face, 0, radius);
+                }
+                else
+                {
+                    // test ceiling/floor
+                    TestIntersectSector(face, radius);
+                }
             }
         }
 

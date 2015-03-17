@@ -101,7 +101,9 @@ private:
     void                            InPain(void);
     void                            LookForTarget(void);
     void                            ChaseTarget(void);
+    bool                            IsFacingTarget(kexActor *actor, const float fov);
     bool                            CheckTargetSight(kexActor *actor);
+    bool                            CanSeeTarget(kexActor *actor);
 
     static const float              directionAngles[NUMAIDIRTYPES];
     static const kexVec3            directionVectors[NUMAIDIRTYPES];

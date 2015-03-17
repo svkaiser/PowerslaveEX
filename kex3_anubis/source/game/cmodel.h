@@ -62,6 +62,7 @@ private:
     void                    CheckSurroundingSectors(void);
     bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0,
                                            const bool bTestOnly = false);
+    bool                    TestIntersectSector(mapFace_t *face, const float extent);
     bool                    CollideFace(mapFace_t *face);
     bool                    TraceSphere(const float radius, const kexVec2 &point,
                                         const float heightMax = 0, const float heightMin = 0,

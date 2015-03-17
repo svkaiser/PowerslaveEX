@@ -298,6 +298,28 @@ void kexAI::UpdateBurn(void)
 }
 
 //
+// kexAI::CanSeeTarget
+//
+
+bool kexAI::CanSeeTarget(kexActor *actor)
+{
+    kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
+    kexVec3 end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
+    
+    return !kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0, false);
+}
+
+//
+// kexAI::IsFacingTarget
+//
+
+bool kexAI::IsFacingTarget(kexActor *actor, const float fov)
+{
+    return kexMath::Fabs(yaw.Diff(kexMath::ATan2(actor->Origin().x - origin.x,
+                                                 actor->Origin().y - origin.y))) <= fov;
+}
+
+//
 // kexAI::CheckTargetSight
 //
 
@@ -313,18 +335,14 @@ bool kexAI::CheckTargetSight(kexActor *actor)
 
     if(!(aiFlags & AIF_LOOKALLAROUND))
     {
-        if(kexMath::Fabs(yaw.Diff(kexMath::ATan2(actor->Origin().x - origin.x,
-                                                 actor->Origin().y - origin.y))) > 0.785f)
+        if(!IsFacingTarget(actor, 1.04f))
         {
             // not within FOV
             return false;
         }
     }
 
-    kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
-    kexVec3 end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
-    
-    return !kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0, false);
+    return CanSeeTarget(actor);
 }
 
 //
@@ -490,7 +508,7 @@ bool kexAI::CheckRangeAttack(void)
 {
     kexActor *targ = static_cast<kexActor*>(target);
     
-    if(!attackAnim || (!CheckTargetSight(targ) && !(aiFlags & AIF_ALWAYSRANGEATTACK)) ||
+    if(!attackAnim || (!CanSeeTarget(targ) && !(aiFlags & AIF_ALWAYSRANGEATTACK)) ||
         RandomDecision(30))
     {
         return false;
