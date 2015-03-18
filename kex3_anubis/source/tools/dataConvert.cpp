@@ -21,37 +21,37 @@ extern kexCvar cvarBasePath;
 
 typedef struct
 {
-    int16_t u1;
-    int16_t u2;
-    int16_t ceilSlope;
-    int16_t floorSlope;
-    int16_t ceilingHeight;
-    int16_t floorHeight;
-    int16_t faceStart;
-    int16_t faceEnd;
-    int16_t lightLevel;
-    int16_t flags;
-    int16_t u3;
-    int16_t u4;
+    int16_t     u1;
+    int16_t     u2;
+    int16_t     ceilSlope;
+    int16_t     floorSlope;
+    int16_t     ceilingHeight;
+    int16_t     floorHeight;
+    int16_t     faceStart;
+    int16_t     faceEnd;
+    int16_t     lightLevel;
+    int16_t     flags;
+    int16_t     u3;
+    int16_t     u4;
 } saturnSector_t;
 
 typedef struct
 {
-    int32_t normal[3];
-    int32_t angle;
-    int16_t u1;
-    int16_t u2;
-    uint16_t flags;
-    int16_t genTextureID;
-    int16_t polyStart;
-    int16_t polyEnd;
-    int16_t vertexStart;
-    int16_t vertexEnd;
-    int16_t polyVert[4];
-    int16_t sector;
-    int16_t lookup1;
-    int16_t u3;
-    int16_t u4;
+    int32_t     normal[3];
+    int32_t     angle;
+    int16_t     u1;
+    int16_t     u2;
+    uint16_t    flags;
+    uint16_t    genTextureID;
+    int16_t     polyStart;
+    int16_t     polyEnd;
+    uint16_t    vertexStart;
+    uint16_t    vertexEnd;
+    uint16_t    polyVert[4];
+    int16_t     sector;
+    uint16_t    lookup1;
+    int16_t     u3;
+    int16_t     u4;
 } saturnFace_t;
 
 typedef struct
@@ -679,17 +679,44 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
         for(int j = sectors[i].faceStart; j <= sectors[i].faceEnd; ++j)
         {
             saturnFace_t *face = &faces[j];
+            int indices[4] = { 0, 0, 0, 0 };
+            int idx = 0;
 
             if(face->sector != -1)
             {
                 continue;
             }
 
+            for(int k = 0; k < 4; ++k)
+            {
+                int x1 = vertices[face->polyVert[k]].x;
+                int y1 = vertices[face->polyVert[k]].y;
+                int z1 = vertices[face->polyVert[k]].z;
+                int x2 = vertices[face->polyVert[(k+1)%4]].x;
+                int y2 = vertices[face->polyVert[(k+1)%4]].y;
+                int z2 = vertices[face->polyVert[(k+1)%4]].z;
+
+                if(x1 == x2 && y1 == y2 && z1 == z2)
+                {
+                    continue;
+                }
+
+                indices[idx++] = face->polyVert[k];
+            }
+
+            if(idx <= 1)
+            {
+                continue;
+            }
+
             fprintf(f, "o face_%03d_%03d\n", i, j);
-            fprintf(f, "f %i %i %i %i\n", face->polyVert[0]+1,
-                                          face->polyVert[1]+1,
-                                          face->polyVert[2]+1,
-                                          face->polyVert[3]+1);
+            fprintf(f, "f ");
+
+            for(int k = 0; k < idx; ++k)
+            {
+                fprintf(f, "%i ", indices[k]+1);
+            }
+            fprintf(f, "\n");
 
             if(face->polyStart <= -1 || face->polyEnd <= -1)
             {
