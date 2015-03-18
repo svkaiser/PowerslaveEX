@@ -240,6 +240,7 @@ private:
     kexIndexDefManager          weaponDef;
     kexStr                      pendingMap;
     weaponInfo_t                weaponInfo[NUMPLAYERWEAPONS];
+    kexTexture                  *loadingPic;
 };
 
 //-----------------------------------------------------------------------------

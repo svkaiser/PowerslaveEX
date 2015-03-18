@@ -191,8 +191,8 @@ void kexHud::AddMessage(const char *msg)
 void kexHud::DrawCompass(void)
 {
     kexCpuVertList *vl = kexRender::cVertList;
-    float tw = (float)backImage->OriginalWidth();
-    float th = (float)backImage->OriginalHeight();
+    float tw = (float)backImage->Width();
+    float th = (float)backImage->Height();
     float u1 = 225.0f / tw;
     float u2 = 1;
     float v1 = 0;
@@ -265,6 +265,65 @@ void kexHud::DrawCompass(void)
 }
 
 //
+// kexHud::DrawDot
+//
+
+void kexHud::DrawDot(const float x, const float y, bool bRedDot, bool bOn)
+{
+    kexCpuVertList *vl = kexRender::cVertList;
+    float u1, u2;
+    float v1, v2;
+
+    backImage->Bind();
+
+    v1 = 48.0f / (float)backImage->Height();
+    v2 = 54.0f / (float)backImage->Height();
+
+    if(!bOn)
+    {
+        u1 = 136.0f / (float)backImage->Width();
+        u2 = 146.0f / (float)backImage->Width();
+    }
+    else
+    {
+        if(!bRedDot)
+        {
+            u1 = 146.0f / (float)backImage->Width();
+            u2 = 156.0f / (float)backImage->Width();
+        }
+        else
+        {
+            u1 = 156.0f / (float)backImage->Width();
+            u2 = 166.0f / (float)backImage->Width();
+        }
+    }
+
+    vl->AddQuad(x, y, 0, 9, 6, u1, v1, u2, v2, 255, 255, 255, 255);
+    vl->DrawElements();
+}
+
+//
+// kexHud::DrawDots
+//
+
+void kexHud::DrawDots(void)
+{
+    kexPlayer *player = kexGame::cLocal->Player();
+
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        if(!player->WeaponOwned(i))
+        {
+            continue;
+        }
+
+        DrawDot(55 + (10.0f * (float)i), 228, false, player->PendingWeapon() == i);
+    }
+
+    DrawDot(196, 228, true, true);
+}
+
+//
 // kexHud::DrawBackPic
 //
 
@@ -323,6 +382,8 @@ void kexHud::Display(void)
     DrawBackPic();
 
     DrawCompass();
+
+    DrawDots();
 
     DrawFlash();
 

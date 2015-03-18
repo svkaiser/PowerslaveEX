@@ -49,6 +49,8 @@ private:
     void                DrawFlash(void);
     void                DrawMessages(void);
     void                DrawMessage(const char *msg, const float x, const float y);
+    void                DrawDot(const float x, const float y, bool bRedDot, bool bOn);
+    void                DrawDots(void);
     
     kexTexture          *backImage;
     kexPlayer           *player;

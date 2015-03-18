@@ -344,6 +344,12 @@ void kexGameLocal::Start(void)
 {
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");
+    loadingPic  = kexRender::cTextures->Cache("gfx/loadback.png", TC_CLAMP, TF_NEAREST);
+
+    kexRender::cScreen->SetOrtho();
+    kexRender::cScreen->DrawTexture(loadingPic, 0, 0, 255, 255, 255, 255);
+    DrawSmallString("Loading", 160, 120, 1, true);
+    kexRender::cBackend->SwapBuffers();
 
     titleScreen->Init();
     playLoop->Init();
