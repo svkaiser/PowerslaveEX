@@ -523,6 +523,7 @@ void kexArtifactPickup::Spawn(void)
 
     if(kexGame::cLocal->Player()->Artifacts() & BIT(bits))
     {
+        kexGame::cLocal->World()->FireRemoteEventFromTag(1000 + bits);
         Remove();
     }
 }

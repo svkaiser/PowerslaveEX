@@ -613,6 +613,37 @@ DECLARE_KEX_ACTION(kexActionClearBurnState)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionTriggerEvent
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionTriggerEvent)
+{
+    kexWorld *w = kexGame::cLocal->World();
+
+    if(actor->MapActor() == NULL)
+    {
+        return;
+    }
+
+    for(unsigned int i = 0; i < w->NumEvents(); ++i)
+    {
+        if(w->Events()[i].type != 70)
+        {
+            continue;
+        }
+
+        if(actor->MapActor()->sector != w->Events()[i].sector)
+        {
+            continue;
+        }
+
+        w->FireRemoteEventFromTag(w->Events()[i].tag);
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionDefManager
 //
 //-----------------------------------------------------------------------------
@@ -766,4 +797,5 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_MeleeAttack", kexActionMeleeAttack::info.Create, AAT_FLOAT, AAT_INTEGER);
     RegisterAction("A_GotoIfUnderwater", kexActionGotoIfUnderwater::info.Create, AAT_STRING);
     RegisterAction("A_ClearBurnState", kexActionClearBurnState::info.Create);
+    RegisterAction("A_TriggerEvent", kexActionTriggerEvent::info.Create);
 }

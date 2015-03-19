@@ -991,6 +991,11 @@ void kexWorld::FireRemoteEventFromTag(const int tag)
             continue;
         }
 
+        if(ev->type == 70)
+        {
+            continue;
+        }
+
         TriggerEvent(ev);
         break;
     }

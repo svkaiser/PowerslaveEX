@@ -4,6 +4,7 @@ mantis_death
     frame
     {
         // ##000   90    0
+        action A_TriggerEvent()
         action A_PlayLocalSound("sounds/selkisdeath.wav")
         action A_MantisSetBlocking(0)
         action A_MantisExplode()
