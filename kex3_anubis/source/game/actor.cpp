@@ -177,6 +177,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("expires"))          flags |= AF_EXPIRES;
         if(definition->GetBool("noExitWater"))      flags |= AF_NOEXITWATER;
         if(definition->GetBool("hidden"))           flags |= AF_HIDDEN;
+        if(definition->GetBool("stretchy"))         flags |= AF_STRETCHY;
 
         if(flags & AF_BOUNCY)
         {

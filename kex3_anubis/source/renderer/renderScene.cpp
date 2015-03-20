@@ -523,72 +523,12 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
     kexCpuVertList      *vl = kexRender::cVertList;
     kexVec3             org;
     kexMatrix           scale;
+    kexMatrix           mtx;
     spriteFrame_t       *frame;
     spriteSet_t         *spriteSet;
     kexSprite           *sprite;
     spriteInfo_t        *info;
     int                 rotation = 0;
-
-#if 0
-    int start = sector->faceStart;
-    int end = sector->faceEnd;
-    int rectY;
-    
-    if(sector != kexGame::cLocal->Player()->Actor()->Sector())
-    {
-        kexRender::cBackend->SetState(GLSTATE_STENCILTEST, true);
-        kexRender::cTextures->whiteTexture->Bind();
-        kexRender::cBackend->SetColorMask(0);
-        
-        rectY = (int)sector->y2;
-        
-        if(rectY > clipY)
-        {
-            rectY = clipY;
-        }
-        
-        kexRender::cBackend->SetScissorRect((int)sector->x1, (int)sector->y1,
-                                            (int)sector->x2 - (int)sector->x1, rectY);
-        
-        dglStencilFunc(GL_NOTEQUAL, 1, 0xff);
-        dglStencilMask(0xff);
-        
-        for(int j = start; j < end+3; ++j)
-        {
-            mapFace_t *face = &world->Faces()[j];
-            
-            if(!(face->flags & FF_PORTAL))
-            {
-                dglStencilOp(GL_DECR, GL_DECR, GL_DECR);
-            }
-            else
-            {
-                dglStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
-            }
-            
-            vl->AddVertex(world->Vertices()[face->vertexStart+3].origin, 0, 0);
-            vl->AddVertex(world->Vertices()[face->vertexStart+2].origin, 0, 0);
-            vl->AddVertex(world->Vertices()[face->vertexStart+1].origin, 0, 0);
-            vl->AddVertex(world->Vertices()[face->vertexStart+0].origin, 0, 0);
-            
-            vl->AddTriangle(0, 2, 1);
-            vl->AddTriangle(0, 3, 2);
-            
-            vl->DrawElements();
-        }
-        
-        dglStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-        dglStencilFunc(GL_EQUAL, 1, 0xff);
-        
-        kexRender::cBackend->SetColorMask(1);
-    }
-    else
-    {
-        kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
-    }
-    
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-#endif
     
     for(kexActor *actor = sector->actorList.Next();
         actor != NULL;
@@ -627,6 +567,14 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
             if(rotation <  0) rotation += 8;
         }
 
+        kexRender::cBackend->SetState(GLSTATE_CULL, !(actor->Flags() & AF_STRETCHY));
+
+        if(actor->Flags() & AF_STRETCHY)
+        {
+            mtx = kexMatrix(-actor->Pitch(), 1) * kexMatrix(actor->Yaw() + 1.57f, 2);
+            mtx.RotateX(kexMath::pi);
+        }
+
         for(unsigned int i = 0; i < frame->spriteSet[rotation].Length(); ++i)
         {
             int c = 0xff;
@@ -655,10 +603,20 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
             kexVec3 p3 = kexVec3(x, 0, y+h);
             kexVec3 p4 = kexVec3(x+w, 0, y+h);
 
-            p1 *= spriteMatrix;
-            p2 *= spriteMatrix;
-            p3 *= spriteMatrix;
-            p4 *= spriteMatrix;
+            if(!(actor->Flags() & AF_STRETCHY))
+            {
+                p1 *= spriteMatrix;
+                p2 *= spriteMatrix;
+                p3 *= spriteMatrix;
+                p4 *= spriteMatrix;
+            }
+            else
+            {
+                p1 *= mtx;
+                p2 *= mtx;
+                p3 *= mtx;
+                p4 *= mtx;
+            }
 
             p1 *= scale;
             p2 *= scale;

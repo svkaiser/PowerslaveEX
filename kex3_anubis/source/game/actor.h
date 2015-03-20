@@ -54,7 +54,8 @@ typedef enum
     AF_EXPIRES          = BIT(13),
     AF_HIDDEN           = BIT(14),
     AF_NOEXITWATER      = BIT(15),
-    AF_COLLIDEDWALL     = BIT(16)
+    AF_COLLIDEDWALL     = BIT(16),
+    AF_STRETCHY         = BIT(17)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------

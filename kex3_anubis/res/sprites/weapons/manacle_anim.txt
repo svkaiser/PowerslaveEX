@@ -28,6 +28,7 @@ manacle_raise
     frame
     {
         // ##004   73    0 (no groups)
+        action A_PlayLocalSound("sounds/braceletup.wav")
         delay 1
     }
 
@@ -283,6 +284,7 @@ manacle_lower
     frame
     {
         // ##000   72    0
+        action A_PlayLocalSound("sounds/braceletdown.wav")
         sprites
         {
             { "weapons/manacle", 0,    -11,  -63,    0 }
@@ -467,6 +469,7 @@ manacle_fire
     frame
     {
         // ##000   74    0
+        action A_PlayLocalSound("sounds/braceletcharge.wav")
         sprites
         {
             { "weapons/manacle", 0,     -9,  -59,    0 }
@@ -652,6 +655,7 @@ manacle_charge
     frame
     {
         // ##011    0    0
+        refire "weapons/manacle_charge"
         goto "weapons/manacle_release"
         sprites
         {
@@ -669,6 +673,8 @@ manacle_release
     frame
     {
         // ##000   71  128
+        action A_PlayLocalSound("sounds/braceletfire.wav")
+        action A_FireBolts()
         sprites
         {
             { "weapons/manacle", 4,     20, -109,    0 }

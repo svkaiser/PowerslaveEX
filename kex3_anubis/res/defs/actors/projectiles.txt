@@ -82,6 +82,37 @@ Proj_Ra_Fire 23
     damage                  20
 }
 
+Proj_Beam -1
+{
+    classname               "kexProjectile"
+    radius                  36
+    height                  8
+    stepHeight              0
+    scale                   1.0
+    spawnAnim               "projectiles/beam_loop"
+    deathAnim               "projectiles/beam_destroy"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    impactWallsOnly         1
+    stretchy                1
+    damage                  100
+}
+
+Proj_Beam_Tail -1
+{
+    classname               "kexActor"
+    radius                  36
+    height                  8
+    stepHeight              0
+    scale                   1.0
+    spawnAnim               "projectiles/beam_tail_loop"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    stretchy                1
+}
+
 Proj_Fireball 26
 {
     classname               "kexProjectile"

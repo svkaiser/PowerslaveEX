@@ -237,3 +237,130 @@ void A_FireRa(kActor @actor)
     ra.SetTarget(actor);
     ra.Velocity() = dir;
 }
+
+//
+// A_FireBolts
+//
+
+void A_FireBolts(kActor @actor)
+{
+    float x = (Math::Sin(actor.Yaw()) * 64.0f);
+    float y = (Math::Cos(actor.Yaw()) * 64.0f);
+    float z = 80.0f;
+    float cp = Math::Cos(actor.Pitch());
+    float sp = Math::Sin(actor.Pitch());
+    kVec3 dir;
+    kActor @bolt;
+    kActor @j1;
+    kActor @j2;
+    kActor @j3;
+    kActor @j4;
+    kActor @j5;
+    kActor @j6;
+    kActor @j7;
+    
+    @bolt = actor.SpawnActor("Proj_Beam", x, y, z);
+    
+    if(bolt is null)
+    {
+        return;
+    }
+    
+    bolt.Yaw() = actor.Yaw();
+    bolt.Pitch() = actor.Pitch();
+    
+    dir.x = (Math::Sin(actor.Yaw()) * cp) * 16.0f;
+    dir.y = (Math::Cos(actor.Yaw()) * cp) * 16.0f;
+    dir.z = 16.0f * -sp;
+    
+    bolt.Velocity() = dir;
+    bolt.SetTarget(actor);
+    
+    x = bolt.Origin().x;
+    y = bolt.Origin().y;
+    z = bolt.Origin().z;
+    
+    @j1 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
+    @j2 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
+    @j3 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
+    @j4 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
+    @j5 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
+    @j6 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
+    @j7 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
+    
+    j1.SetTarget(bolt);
+    j2.SetTarget(j1);
+    j3.SetTarget(j2);
+    j4.SetTarget(j3);
+    j5.SetTarget(j4);
+    j6.SetTarget(j5);
+    j7.SetTarget(j6);
+    
+    bolt.SetTaggedActor(j7);
+}
+
+//
+// A_BoltJitter
+//
+
+void A_BoltJitter(kActor @actor)
+{
+    float r1 = Math::RandCFloat() * (0.392f * 2.0f);
+    float r2 = Math::RandCFloat() * (0.392f * 2.0f);
+    
+    if(!(actor.GetTarget() is null))
+    {
+        actor.Yaw() = actor.GetTarget().Yaw();
+        actor.Pitch() = actor.GetTarget().Pitch();
+    }
+    
+    kQuat rotation = kQuat(actor.Pitch() + r2, -1, 0, 0) * kQuat(0.125f + (actor.Yaw() + r1), 0, 0, -1);
+    actor.Velocity() = (kVec3(0, 16, 0) * rotation);
+}
+
+//
+// A_UpdateBoltTail
+//
+
+void A_UpdateBoltTail(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    actor.Yaw() = actor.GetTarget().Yaw();
+    actor.Origin().Lerp(actor.GetTarget().Origin(), 0.8f);
+    actor.SetSector(actor.GetTarget().SectorIndex());
+}
+
+//
+// A_DestroyBoltTails
+//
+
+void A_DestroyBoltTails(kActor @actor)
+{
+    kActor @j1;
+    kActor @j2;
+    kActor @j3;
+    kActor @j4;
+    kActor @j5;
+    kActor @j6;
+    kActor @j7;
+    
+    @j7 = actor.GetTaggedActor();
+    @j6 = j7.GetTarget();
+    @j5 = j6.GetTarget();
+    @j4 = j5.GetTarget();
+    @j3 = j4.GetTarget();
+    @j2 = j3.GetTarget();
+    @j1 = j2.GetTarget();
+    
+    j1.Remove();
+    j2.Remove();
+    j3.Remove();
+    j4.Remove();
+    j5.Remove();
+    j6.Remove();
+    j7.Remove();
+}
