@@ -87,7 +87,7 @@ public:
     static float            Range(const float r1, const float r2);
 
 private:
-    static int              seed;
+    static unsigned int     seed;
 };
 
 class kexQuat

@@ -22,7 +22,7 @@
 #define RANGE_MAX   10000
 #define RANGE_DET   (1.0f / (float)RANGE_MAX)
 
-int kexRand::seed = 0;
+unsigned int kexRand::seed = 0;
 
 //
 // kexRand::SetSeed
@@ -30,7 +30,7 @@ int kexRand::seed = 0;
 
 void kexRand::SetSeed(const int randSeed)
 {
-    seed = randSeed;
+    seed = (randSeed * 2 + 1) * 69069ul;
 }
 
 //
@@ -48,7 +48,7 @@ int kexRand::SysRand(void)
 
 int kexRand::Int(void)
 {
-    seed = 1479838765 * seed + 470403613;
+    seed = seed * 1664525ul + 221297ul;
     return seed & RANDOM_MAX;
 }
 
