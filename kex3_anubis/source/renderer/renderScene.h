@@ -46,6 +46,8 @@ private:
     void                    DrawPortal(mapFace_t *face, byte r, byte g, byte b);
     void                    DrawPolygon(mapFace_t *face, mapPoly_t *poly);
     void                    DrawActorList(mapSector_t *sector);
+    void                    DrawSprite(mapSector_t *sector, kexActor *actor);
+    void                    DrawStretchSprite(mapSector_t *sector, kexActor *actor);
     void                    DrawWater(void);
     void                    PrintStats(void);
     

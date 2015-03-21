@@ -515,21 +515,248 @@ void kexRenderScene::DrawWater(void)
 }
 
 //
+// kexRenderScene::DrawSprite
+//
+
+void kexRenderScene::DrawSprite(mapSector_t *sector, kexActor *actor)
+{
+    kexCpuVertList  *vl = kexRender::cVertList;
+    spriteFrame_t   *frame;
+    spriteSet_t     *spriteSet;
+    kexSprite       *sprite;
+    spriteInfo_t    *info;
+    int             rotation;
+    kexMatrix       scale;
+    kexVec3         org;
+
+    org = actor->Origin();
+    scale.Identity(actor->Scale(), actor->Scale(), actor->Scale());
+
+    frame = actor->Frame();
+    rotation = 0;
+
+    if(frame->flags & SFF_HASROTATIONS)
+    {
+        float an = actor->Yaw() - kexMath::ATan2(actor->Origin().x - view->Origin().x,
+                                                 actor->Origin().y - view->Origin().y);
+        
+        kexAngle::Clamp360(an);
+        rotation = (int)((an + ((45 / 2) * 9)) / 45);
+
+        if(rotation >= 8) rotation -= 8;
+        if(rotation <  0) rotation += 8;
+    }
+
+    for(unsigned int i = 0; i < frame->spriteSet[rotation].Length(); ++i)
+    {
+        int c = 0xff;
+        int r, g, b;
+
+        spriteSet = &frame->spriteSet[rotation][i];
+        sprite = spriteSet->sprite;
+        info = &sprite->InfoList()[spriteSet->index];
+
+        float x = (float)spriteSet->x;
+        float y = (float)spriteSet->y;
+        float w = (float)info->atlas.w;
+        float h = (float)info->atlas.h;
+
+        float u1, u2, v1, v2;
+        
+        u1 = info->u[0 ^ spriteSet->bFlipped];
+        u2 = info->u[1 ^ spriteSet->bFlipped];
+        v1 = info->v[0];
+        v2 = info->v[1];
+
+        sprite->Texture()->Bind();
+
+        kexVec3 p1 = kexVec3(x, 0, y);
+        kexVec3 p2 = kexVec3(x+w, 0, y);
+        kexVec3 p3 = kexVec3(x, 0, y+h);
+        kexVec3 p4 = kexVec3(x+w, 0, y+h);
+
+        p1 *= spriteMatrix;
+        p2 *= spriteMatrix;
+        p3 *= spriteMatrix;
+        p4 *= spriteMatrix;
+
+        p1 *= scale;
+        p2 *= scale;
+        p3 *= scale;
+        p4 *= scale;
+
+        p1 += org;
+        p2 += org;
+        p3 += org;
+        p4 += org;
+
+        if(!(actor->Flags() & AF_FULLBRIGHT))
+        {
+            c = (sector->lightLevel << 1) + 32;
+
+            if(c > 255)
+            {
+                c = 255;
+            }
+        }
+
+        r = (int)((float)c * actor->Color().x * 2);
+        g = (int)((float)c * actor->Color().y * 2);
+        b = (int)((float)c * actor->Color().z * 2);
+
+        kexMath::Clamp(r, 0, 255);
+        kexMath::Clamp(g, 0, 255);
+        kexMath::Clamp(b, 0, 255);
+
+        vl->AddVertex(p1, u1, v1, r, g, b, 255);
+        vl->AddVertex(p2, u2, v1, r, g, b, 255);
+        vl->AddVertex(p3, u1, v2, r, g, b, 255);
+        vl->AddVertex(p4, u2, v2, r, g, b, 255);
+
+        vl->AddTriangle(0, 2, 1);
+        vl->AddTriangle(1, 2, 3);
+
+        if(actor->Flags() & AF_FLASH)
+        {
+            vl->DrawElements(false);
+            
+            kexRender::cBackend->SetDepth(GLFUNC_EQUAL);
+            kexRender::cBackend->SetBlend(GLSRC_ONE, GLDST_ONE);
+            
+            vl->DrawElements();
+            
+            kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+            kexRender::cBackend->SetDepth(GLFUNC_LEQUAL);
+        }
+        else
+        {
+            vl->DrawElements();
+        }
+    }
+
+    if(bShowCollision && actor->Flags() & AF_SOLID)
+    {
+        kexRender::cUtils->DrawRadius(org.x, org.y, org.z - (actor->Height()*0.5f),
+                                      actor->Radius(), actor->Height() + actor->StepHeight(),
+                                      255, 128, 64);
+        kexRender::cUtils->DrawSphere(org.x, org.y, org.z + actor->StepHeight(),
+                                      actor->Radius(), 255, 32, 32);
+    }
+}
+
+//
+// kexRenderScene::DrawStretchSprite
+//
+
+void kexRenderScene::DrawStretchSprite(mapSector_t *sector, kexActor *actor)
+{
+    kexMatrix       mtx, scale;
+    kexVec3         org;
+    int             count, tris;
+    spriteFrame_t   *frame;
+    spriteSet_t     *spriteSet;
+    kexSprite       *sprite;
+    spriteInfo_t    *info;
+    kexCpuVertList  *vl = kexRender::cVertList;
+
+    if(!actor->GetTaggedActor())
+    {
+        return;
+    }
+
+    frame = actor->Frame();
+
+    if(frame->spriteSet[0].Length() == 0)
+    {
+        return;
+    }
+
+    spriteSet = &frame->spriteSet[0][0];
+    sprite = spriteSet->sprite;
+    info = &sprite->InfoList()[spriteSet->index];
+
+    scale.Identity(actor->Scale(), actor->Scale(), actor->Scale());
+    count = -1;
+
+    for(kexActor *child = actor->GetTaggedActor(); ; child = static_cast<kexActor*>(child->Target()))
+    {
+        int c = 0xff;
+        int r, g, b;
+
+        org = child->Origin();
+
+        mtx = kexMatrix(-child->Pitch(), 1) * kexMatrix(child->Yaw() + 1.57f, 2);
+        mtx.RotateX(kexMath::pi);
+
+        float x = (float)spriteSet->x;
+        float y = (float)spriteSet->y;
+        float w = (float)info->atlas.w;
+        float h = (float)info->atlas.h;
+
+        float u1, u2, v1, v2;
+        
+        u1 = info->u[0];
+        u2 = info->u[1];
+        v1 = info->v[0];
+        v2 = info->v[1];
+
+        kexVec3 p1 = kexVec3(x, 0, y);
+        kexVec3 p2 = kexVec3(x, 0, y+h);
+
+        p1 *= (mtx * scale);
+        p2 *= (mtx * scale);
+
+        p1 += org;
+        p2 += org;
+
+        if(!(child->Flags() & AF_FULLBRIGHT))
+        {
+            c = (sector->lightLevel << 1) + 32;
+
+            if(c > 255)
+            {
+                c = 255;
+            }
+        }
+
+        r = (int)((float)c * child->Color().x * 2);
+        g = (int)((float)c * child->Color().y * 2);
+        b = (int)((float)c * child->Color().z * 2);
+
+        kexMath::Clamp(r, 0, 255);
+        kexMath::Clamp(g, 0, 255);
+        kexMath::Clamp(b, 0, 255);
+
+        vl->AddVertex(p1, u1, v1, r, g, b, 255);
+        vl->AddVertex(p2, u1, v2, r, g, b, 255);
+
+        count++;
+
+        if(child == actor)
+        {
+            break;
+        }
+    }
+
+    tris = 0;
+
+    for(int i = 0; i < count; ++i)
+    {
+        vl->AddTriangle(tris+0, tris+2, tris+1);
+        vl->AddTriangle(tris+1, tris+2, tris+3);
+        tris += 2;
+    }
+
+    sprite->Texture()->Bind();
+    vl->DrawElements();
+}
+
+//
 // kexRenderScene::DrawActorList
 //
 
 void kexRenderScene::DrawActorList(mapSector_t *sector)
 {
-    kexCpuVertList      *vl = kexRender::cVertList;
-    kexVec3             org;
-    kexMatrix           scale;
-    kexMatrix           mtx;
-    spriteFrame_t       *frame;
-    spriteSet_t         *spriteSet;
-    kexSprite           *sprite;
-    spriteInfo_t        *info;
-    int                 rotation = 0;
-    
     for(kexActor *actor = sector->actorList.Next();
         actor != NULL;
         actor = actor->SectorLink().Next())
@@ -549,136 +776,15 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
             continue;
         }
         
-        org = actor->Origin();
-        scale.Identity(actor->Scale(), actor->Scale(), actor->Scale());
-
-        frame = actor->Frame();
-        rotation = 0;
-
-        if(frame->flags & SFF_HASROTATIONS)
-        {
-            float an = actor->Yaw() - kexMath::ATan2(actor->Origin().x - view->Origin().x,
-                                                     actor->Origin().y - view->Origin().y);
-            
-            kexAngle::Clamp360(an);
-            rotation = (int)((an + ((45 / 2) * 9)) / 45);
-
-            if(rotation >= 8) rotation -= 8;
-            if(rotation <  0) rotation += 8;
-        }
-
         kexRender::cBackend->SetState(GLSTATE_CULL, !(actor->Flags() & AF_STRETCHY));
 
         if(actor->Flags() & AF_STRETCHY)
         {
-            mtx = kexMatrix(-actor->Pitch(), 1) * kexMatrix(actor->Yaw() + 1.57f, 2);
-            mtx.RotateX(kexMath::pi);
+            DrawStretchSprite(sector, actor);
         }
-
-        for(unsigned int i = 0; i < frame->spriteSet[rotation].Length(); ++i)
+        else
         {
-            int c = 0xff;
-            int r, g, b;
-
-            spriteSet = &frame->spriteSet[rotation][i];
-            sprite = spriteSet->sprite;
-            info = &sprite->InfoList()[spriteSet->index];
-
-            float x = (float)spriteSet->x;
-            float y = (float)spriteSet->y;
-            float w = (float)info->atlas.w;
-            float h = (float)info->atlas.h;
-
-            float u1, u2, v1, v2;
-            
-            u1 = info->u[0 ^ spriteSet->bFlipped];
-            u2 = info->u[1 ^ spriteSet->bFlipped];
-            v1 = info->v[0];
-            v2 = info->v[1];
-
-            sprite->Texture()->Bind();
-
-            kexVec3 p1 = kexVec3(x, 0, y);
-            kexVec3 p2 = kexVec3(x+w, 0, y);
-            kexVec3 p3 = kexVec3(x, 0, y+h);
-            kexVec3 p4 = kexVec3(x+w, 0, y+h);
-
-            if(!(actor->Flags() & AF_STRETCHY))
-            {
-                p1 *= spriteMatrix;
-                p2 *= spriteMatrix;
-                p3 *= spriteMatrix;
-                p4 *= spriteMatrix;
-            }
-            else
-            {
-                p1 *= mtx;
-                p2 *= mtx;
-                p3 *= mtx;
-                p4 *= mtx;
-            }
-
-            p1 *= scale;
-            p2 *= scale;
-            p3 *= scale;
-            p4 *= scale;
-
-            p1 += org;
-            p2 += org;
-            p3 += org;
-            p4 += org;
-
-            if(!(actor->Flags() & AF_FULLBRIGHT))
-            {
-                c = (sector->lightLevel << 1) + 32;
-
-                if(c > 255)
-                {
-                    c = 255;
-                }
-            }
-
-            r = (int)((float)c * actor->Color().x * 2);
-            g = (int)((float)c * actor->Color().y * 2);
-            b = (int)((float)c * actor->Color().z * 2);
-
-            kexMath::Clamp(r, 0, 255);
-            kexMath::Clamp(g, 0, 255);
-            kexMath::Clamp(b, 0, 255);
-
-            vl->AddVertex(p1, u1, v1, r, g, b, 255);
-            vl->AddVertex(p2, u2, v1, r, g, b, 255);
-            vl->AddVertex(p3, u1, v2, r, g, b, 255);
-            vl->AddVertex(p4, u2, v2, r, g, b, 255);
-
-            vl->AddTriangle(0, 2, 1);
-            vl->AddTriangle(1, 2, 3);
-
-            if(actor->Flags() & AF_FLASH)
-            {
-                vl->DrawElements(false);
-                
-                kexRender::cBackend->SetDepth(GLFUNC_EQUAL);
-                kexRender::cBackend->SetBlend(GLSRC_ONE, GLDST_ONE);
-                
-                vl->DrawElements();
-                
-                kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-                kexRender::cBackend->SetDepth(GLFUNC_LEQUAL);
-            }
-            else
-            {
-                vl->DrawElements();
-            }
-        }
-        
-        if(bShowCollision && actor->Flags() & AF_SOLID)
-        {
-            kexRender::cUtils->DrawRadius(org.x, org.y, org.z - (actor->Height()*0.5f),
-                                          actor->Radius(), actor->Height() + actor->StepHeight(),
-                                          255, 128, 64);
-            kexRender::cUtils->DrawSphere(org.x, org.y, org.z + actor->StepHeight(),
-                                          actor->Radius(), 255, 32, 32);
+            DrawSprite(sector, actor);
         }
     }
     

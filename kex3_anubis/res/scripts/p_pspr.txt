@@ -239,6 +239,22 @@ void A_FireRa(kActor @actor)
 }
 
 //
+// A_ChargeManacle
+//
+
+int manacleChargeTime = -1;
+
+void A_ChargeManacle(kActor @actor)
+{
+    manacleChargeTime++;
+    
+    if(manacleChargeTime > 8)
+    {
+        manacleChargeTime = 8;
+    }
+}
+
+//
 // A_FireBolts
 //
 
@@ -249,54 +265,61 @@ void A_FireBolts(kActor @actor)
     float z = 80.0f;
     float cp = Math::Cos(actor.Pitch());
     float sp = Math::Sin(actor.Pitch());
-    kVec3 dir;
-    kActor @bolt;
-    kActor @j1;
-    kActor @j2;
-    kActor @j3;
-    kActor @j4;
-    kActor @j5;
-    kActor @j6;
-    kActor @j7;
     
-    @bolt = actor.SpawnActor("Proj_Beam", x, y, z);
-    
-    if(bolt is null)
+    for(int i = 0; i < manacleChargeTime+1; ++i)
     {
-        return;
+        float bx, by, bz;
+        kVec3 dir;
+        kActor @bolt;
+        kActor @j1;
+        kActor @j2;
+        kActor @j3;
+        kActor @j4;
+        kActor @j5;
+        kActor @j6;
+        kActor @j7;
+        
+        @bolt = actor.SpawnActor("Proj_Beam", x, y, z);
+        
+        if(bolt is null)
+        {
+            continue;
+        }
+        
+        bolt.Yaw() = actor.Yaw();
+        bolt.Pitch() = actor.Pitch();
+        
+        dir.x = (Math::Sin(actor.Yaw()) * cp) * 16.0f;
+        dir.y = (Math::Cos(actor.Yaw()) * cp) * 16.0f;
+        dir.z = 16.0f * -sp;
+        
+        bolt.Velocity() = dir;
+        bolt.SetTarget(actor);
+        
+        bx = bolt.Origin().x;
+        by = bolt.Origin().y;
+        bz = bolt.Origin().z;
+        
+        @j1 = Game.SpawnActor("Proj_Beam_Tail", bx, by, bz, bolt.Yaw(), bolt.SectorIndex());
+        @j2 = Game.SpawnActor("Proj_Beam_Tail", bx, by, bz, bolt.Yaw(), bolt.SectorIndex());
+        @j3 = Game.SpawnActor("Proj_Beam_Tail", bx, by, bz, bolt.Yaw(), bolt.SectorIndex());
+        @j4 = Game.SpawnActor("Proj_Beam_Tail", bx, by, bz, bolt.Yaw(), bolt.SectorIndex());
+        @j5 = Game.SpawnActor("Proj_Beam_Tail", bx, by, bz, bolt.Yaw(), bolt.SectorIndex());
+        @j6 = Game.SpawnActor("Proj_Beam_Tail", bx, by, bz, bolt.Yaw(), bolt.SectorIndex());
+        @j7 = Game.SpawnActor("Proj_Beam_Tail", bx, by, bz, bolt.Yaw(), bolt.SectorIndex());
+        
+        j1.SetTarget(bolt);
+        j2.SetTarget(j1);
+        j3.SetTarget(j2);
+        j4.SetTarget(j3);
+        j5.SetTarget(j4);
+        j6.SetTarget(j5);
+        j7.SetTarget(j6);
+        
+        bolt.SetTaggedActor(j7);
     }
     
-    bolt.Yaw() = actor.Yaw();
-    bolt.Pitch() = actor.Pitch();
-    
-    dir.x = (Math::Sin(actor.Yaw()) * cp) * 16.0f;
-    dir.y = (Math::Cos(actor.Yaw()) * cp) * 16.0f;
-    dir.z = 16.0f * -sp;
-    
-    bolt.Velocity() = dir;
-    bolt.SetTarget(actor);
-    
-    x = bolt.Origin().x;
-    y = bolt.Origin().y;
-    z = bolt.Origin().z;
-    
-    @j1 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
-    @j2 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
-    @j3 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
-    @j4 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
-    @j5 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
-    @j6 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
-    @j7 = Game.SpawnActor("Proj_Beam_Tail", x, y, z, bolt.Yaw(), bolt.SectorIndex());
-    
-    j1.SetTarget(bolt);
-    j2.SetTarget(j1);
-    j3.SetTarget(j2);
-    j4.SetTarget(j3);
-    j5.SetTarget(j4);
-    j6.SetTarget(j5);
-    j7.SetTarget(j6);
-    
-    bolt.SetTaggedActor(j7);
+    manacleChargeTime = -1;
 }
 
 //
@@ -330,7 +353,7 @@ void A_UpdateBoltTail(kActor @actor)
     }
     
     actor.Yaw() = actor.GetTarget().Yaw();
-    actor.Origin().Lerp(actor.GetTarget().Origin(), 0.8f);
+    actor.Origin().Lerp(actor.GetTarget().Origin(), 0.95f);
     actor.SetSector(actor.GetTarget().SectorIndex());
 }
 

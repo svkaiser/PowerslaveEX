@@ -523,6 +523,7 @@ manacle_charge
     frame
     {
         // ##000    0    0
+        action A_ChargeManacle()
         sprites
         {
             { "weapons/manacle", 9,     58,  -45,    0 }
