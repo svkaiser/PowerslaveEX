@@ -35,7 +35,7 @@ kexProjectile::kexProjectile(void)
     this->damage = 0;
     this->projectileFlags = 0;
     this->homingTurnAngles = 0.03125f;
-    this->homingMaxPitch = 0.25f;
+    this->homingMaxPitch = 0.125f;
     this->homingMaxSightDistance = 2000;
     this->homingActor = NULL;
 }
@@ -60,6 +60,10 @@ void kexProjectile::Tick(void)
     if(projectileFlags & PF_HOMING)
     {
         HomingThink();
+    }
+    else if(projectileFlags & PF_AIMONSPAWN)
+    {
+        AimThink();
     }
 }
 
@@ -122,6 +126,93 @@ void kexProjectile::HomingThink(void)
     else if(!RandomDecision(14))
     {
         SeekTargets();
+    }
+}
+
+//
+// kexProjectile::AimThink
+//
+
+void kexProjectile::AimThink(void)
+{
+    if(projectileFlags & PF_AIMING)
+    {
+        kexVec3 start;
+        kexVec3 end;
+        kexVec2 v;
+        kexStack<mapSector_t*> *sectorList;
+        kexActor *aimActor;
+        float maxDist = kexMath::infinity;
+        float dist;
+
+        start = origin + kexVec3(0, 0, height * 0.5f);
+        aimActor = NULL;
+        sectorList = kexGame::cLocal->World()->FloodFill(start, sector, 1024);
+
+        projectileFlags &= ~PF_AIMING;
+
+        for(unsigned int i = 0; i < sectorList->CurrentLength(); ++i)
+        {
+            for(kexActor *actor = (*sectorList)[i]->actorList.Next();
+                actor != NULL;
+                actor = actor->SectorLink().Next())
+            {
+                if(actor == this || actor == target ||
+                    actor->Health() <= 0 || !(actor->Flags() & AF_SHOOTABLE))
+                {
+                    continue;
+                }
+
+                end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
+                dist = start.DistanceSq(end);
+
+                if(dist > maxDist)
+                {
+                    continue;
+                }
+
+                v.Set(end.x - start.x, end.y - start.y);
+                v.Normalize();
+
+                if((kexMath::Sin(yaw) * v.x + kexMath::Cos(yaw) * v.y) < 0.5f)
+                {
+                    continue;
+                }
+
+                if(kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0, false))
+                {
+                    continue;
+                }
+
+                aimActor = actor;
+                maxDist = dist;
+            }
+        }
+
+        SetHomingTarget(aimActor);
+    }
+    else if(homingActor)
+    {
+        if(homingActor->Removing() || homingActor->Health() <= 0)
+        {
+            SetHomingTarget(NULL);
+            return;
+        }
+
+        kexVec3 dir;
+        kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
+        kexVec3 end;
+
+        end = homingActor->Origin() + kexVec3(0, 0, homingActor->Height() * 0.5f);
+        dir = (end - start).Normalize();
+
+        yaw = dir.ToYaw();
+        pitch = -dir.ToPitch();
+    }
+    else if(target)
+    {
+        yaw = target->Yaw();
+        pitch = target->Pitch();
     }
 }
 
@@ -406,6 +497,12 @@ void kexProjectile::Spawn(void)
 
         if(definition->GetBool("impactWallsOnly"))  projectileFlags |= PF_IMPACTWALLSONLY;
         if(definition->GetBool("homing"))           projectileFlags |= PF_HOMING;
+        if(definition->GetBool("aimOnSpawn"))       projectileFlags |= PF_AIMONSPAWN;
+    }
+
+    if(projectileFlags & PF_AIMONSPAWN)
+    {
+        projectileFlags |= PF_AIMING;
     }
 }
 

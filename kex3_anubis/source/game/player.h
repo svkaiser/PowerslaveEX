@@ -91,6 +91,9 @@ public:
 
     int16_t                     &Artifacts(void) { return artifacts; }
 
+    kexActor                    *AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitch,
+                                         const float dist, const float aimAngle);
+
     const float                 Bob(void) const { return bob; }
     float                       &LandTime(void) { return landTime; }
     float                       &StepViewZ(void) { return stepViewZ; }

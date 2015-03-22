@@ -21,7 +21,9 @@ typedef enum
 {
     PF_IMPACTWALLSONLY  = BIT(0),
     PF_HOMING           = BIT(1),
-    PF_IMPACTED         = BIT(2)
+    PF_IMPACTED         = BIT(2),
+    PF_AIMONSPAWN       = BIT(3),
+    PF_AIMING           = BIT(4)
 } projectileFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -51,6 +53,7 @@ private:
     virtual void                    UpdateMovement(void);
 
     void                            HomingThink(void);
+    void                            AimThink(void);
     void                            AdjustAlongFace(mapFace_t *face);
     void                            SeekTargets(void);
     bool                            CheckSeekTarget(kexVec3 &start, kexActor *actor);

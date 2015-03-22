@@ -268,7 +268,7 @@ void kexAmmoPickup::OnTouch(kexActor *instigator)
 
     if(give <= 0)
     {
-        return;
+        give = 1;
     }
 
     player->GiveAmmo(weapon, (int16_t)give);

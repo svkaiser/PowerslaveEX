@@ -96,6 +96,7 @@ Proj_Beam -1
     gravity                 0
     impactWallsOnly         1
     stretchy                1
+    aimOnSpawn              1
     damage                  100
 }
 

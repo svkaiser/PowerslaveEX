@@ -215,6 +215,7 @@ DECLARE_KEX_ACTION(kexActionHitScan)
     float height        = this->args[5].f;
     char *name          = this->args[6].s;
     float an1, an2;
+    kexAngle yaw, pitch;
     kexVec3 forward;
     kexVec3 start, end;
 
@@ -226,8 +227,17 @@ DECLARE_KEX_ACTION(kexActionHitScan)
     an1 = kexRand::Range(-hSpan, hSpan);
     an2 = kexRand::Range(-vSpan, vSpan);
 
-    kexVec3::ToAxis(&forward, 0, 0, actor->Yaw() + an1, actor->Pitch() + an2, 0);
+    yaw = actor->Yaw() + an1;
+    pitch = actor->Pitch() + an2;
     start = actor->Origin() + kexVec3(0, 0, height);
+
+    if(actor->InstanceOf(&kexPuppet::info))
+    {
+        kexPlayer *p = static_cast<kexPuppet*>(actor)->Owner();
+        p->AutoAim(start, yaw, pitch, dist, 0.25f);
+    }
+
+    kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
     end = start + (forward * dist);
 
     if(cm->Trace(actor, actor->Sector(), start, end))
@@ -266,6 +276,7 @@ DECLARE_KEX_ACTION(kexActionPlayerMelee)
     char *gotoFrameObj      = this->args[4].s;
     kexPlayer *player;
     kexVec3 forward;
+    kexAngle yaw, pitch;
     kexVec3 start, end;
 
     if(!actor->InstanceOf(&kexPuppet::info))
@@ -275,9 +286,13 @@ DECLARE_KEX_ACTION(kexActionPlayerMelee)
     
     player = static_cast<kexPuppet*>(actor)->Owner();
     height += player->Bob();
-
-    kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), actor->Pitch(), 0);
     start = actor->Origin() + kexVec3(0, 0, height);
+    yaw = actor->Yaw();
+    pitch = actor->Pitch();
+
+    player->AutoAim(start, yaw, pitch, dist, 0.25f);
+
+    kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
     end = start + (forward * dist);
 
     if(cm->Trace(actor, actor->Sector(), start, end))

@@ -18,7 +18,7 @@ Obj_Camel 58
 {
     classname               "kexActor"
     radius                  48
-    height                  96
+    height                  192
     stepHeight              48
     scale                   1.25
     spawnAnim               "objects/camel_idle"

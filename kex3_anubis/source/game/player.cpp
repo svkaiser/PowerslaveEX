@@ -18,6 +18,8 @@
 #include "kexlib.h"
 #include "game.h"
 
+kexCvar cvarAutoAim("g_autoaim", CVF_BOOL|CVF_CONFIG, "1", "Enable auto aiming");
+
 #define PMOVE_MIN               0.125f
 #define PMOVE_SPEED             0.976f
 #define PMOVE_WATER_SPEED       0.48828125f
@@ -702,6 +704,72 @@ void kexPlayer::TryUse(void)
             kexGame::cLocal->World()->UseWallSpecial(this, useFace);
         }
     }
+}
+
+//
+// kexPlayer::AutoAim
+//
+
+kexActor *kexPlayer::AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitch,
+                             const float dist, const float aimAngle)
+{
+    kexStack<mapSector_t*> *sectorList;
+    kexActor *aimActor;
+    kexVec3 aVec, aDir;
+    kexAngle bestYaw, bestPitch;
+    kexAngle aYaw, aPitch;
+    float maxDist = kexMath::infinity;
+
+    if(cvarAutoAim.GetBool() == false)
+    {
+        return NULL;
+    }
+
+    bestYaw = yaw;
+    bestPitch = pitch;
+    aimActor = NULL;
+    sectorList = kexGame::cLocal->World()->FloodFill(start, actor->Sector(), dist);
+
+    for(unsigned int i = 0; i < sectorList->CurrentLength(); ++i)
+    {
+        for(kexActor *a = (*sectorList)[i]->actorList.Next(); a != NULL; a = a->SectorLink().Next())
+        {
+            if(a->Flags() & AF_HIDDEN)
+            {
+                continue;
+            }
+
+            if(a == actor || a->Health() <= 0 || !(a->Flags() & AF_SHOOTABLE))
+            {
+                continue;
+            }
+
+            aVec = a->Origin() + kexVec3(0, 0, a->Height() * 0.5f);
+
+            if(!actor->CanSee(aVec, maxDist))
+            {
+                continue;
+            }
+
+            aDir = (aVec - start);
+
+            aYaw = aDir.ToYaw();
+            aPitch = -aDir.ToPitch();
+
+            if(kexMath::Fabs(yaw.Diff(aYaw)) > (aimAngle * 0.5f)) continue;
+            if(kexMath::Fabs(pitch.Diff(aPitch)) > aimAngle) continue;
+
+            bestYaw = aYaw;
+            bestPitch = aPitch;
+            aimActor = a;
+            maxDist = start.Distance(aVec);
+        }
+    }
+
+    yaw = bestYaw;
+    pitch = bestPitch;
+
+    return aimActor;
 }
 
 //

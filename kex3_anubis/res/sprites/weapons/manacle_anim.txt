@@ -470,6 +470,7 @@ manacle_fire
     {
         // ##000   74    0
         action A_PlayLocalSound("sounds/braceletcharge.wav")
+        action A_ConsumeAmmo(1)
         sprites
         {
             { "weapons/manacle", 0,     -9,  -59,    0 }

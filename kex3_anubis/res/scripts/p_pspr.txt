@@ -331,13 +331,7 @@ void A_BoltJitter(kActor @actor)
     float r1 = Math::RandCFloat() * (0.392f * 2.0f);
     float r2 = Math::RandCFloat() * (0.392f * 2.0f);
     
-    if(!(actor.GetTarget() is null))
-    {
-        actor.Yaw() = actor.GetTarget().Yaw();
-        actor.Pitch() = actor.GetTarget().Pitch();
-    }
-    
-    kQuat rotation = kQuat(actor.Pitch() + r2, -1, 0, 0) * kQuat(0.125f + (actor.Yaw() + r1), 0, 0, -1);
+    kQuat rotation = kQuat(0.125f + actor.Pitch() + r2, -1, 0, 0) * kQuat(0.125f + (actor.Yaw() + r1), 0, 0, -1);
     actor.Velocity() = (kVec3(0, 16, 0) * rotation);
 }
 
