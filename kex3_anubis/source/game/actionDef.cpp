@@ -227,17 +227,17 @@ DECLARE_KEX_ACTION(kexActionHitScan)
     an1 = kexRand::Range(-hSpan, hSpan);
     an2 = kexRand::Range(-vSpan, vSpan);
 
-    yaw = actor->Yaw() + an1;
-    pitch = actor->Pitch() + an2;
+    yaw = actor->Yaw();
+    pitch = actor->Pitch();
     start = actor->Origin() + kexVec3(0, 0, height);
 
     if(actor->InstanceOf(&kexPuppet::info))
     {
         kexPlayer *p = static_cast<kexPuppet*>(actor)->Owner();
-        p->AutoAim(start, yaw, pitch, dist, 0.25f);
+        p->AutoAim(start, yaw, pitch, dist, 0.125f);
     }
 
-    kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
+    kexVec3::ToAxis(&forward, 0, 0, yaw + an1, pitch + an2, 0);
     end = start + (forward * dist);
 
     if(cm->Trace(actor, actor->Sector(), start, end))
@@ -497,6 +497,31 @@ DECLARE_KEX_ACTION(kexActionCheckMelee)
     if(ai->Origin().DistanceSq(targ->Origin()) > (r * r))
     {
         ai->ChangeAnim(gotoFrame);
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionCanSeeTarget
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionCanSeeTarget)
+{
+    char *gotoFrame = this->args[0].s;
+    float dist      = this->args[1].f;
+    kexActor *targ;
+    
+    if(!actor->Target())
+    {
+        return;
+    }
+    
+    targ = static_cast<kexActor*>(actor->Target());
+
+    if(actor->CanSee(targ->Origin() + kexVec3(0, 0, targ->Height() * 0.5f), dist))
+    {
+        actor->ChangeAnim(gotoFrame);
     }
 }
 
@@ -807,6 +832,7 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_PlayLocalSound", kexActionPlaySound::info.Create, AAT_STRING);
     RegisterAction("A_FaceTarget", kexActionFaceTarget::info.Create);
     RegisterAction("A_CheckMelee", kexActionCheckMelee::info.Create, AAT_STRING, AAT_FLOAT);
+    RegisterAction("A_CanSeeTarget", kexActionCanSeeTarget::info.Create, AAT_STRING, AAT_FLOAT);
     RegisterAction("A_FireProjectile", kexActionSpawnProjectile::info.Create,
                    AAT_STRING, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT);
     RegisterAction("A_MeleeAttack", kexActionMeleeAttack::info.Create, AAT_FLOAT, AAT_INTEGER);

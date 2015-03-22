@@ -1,0 +1,322 @@
+magic8ball_idle
+{
+    // frames:   20
+    frame
+    {
+        // ##000    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -21,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -22,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -22,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -22,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##005    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -22,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##006    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -23,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##007    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -24,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##008    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -25,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##009    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -25,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##010    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -26,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##011    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -26,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##012    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -25,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##013    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -24,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##014    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -23,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##015    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -22,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##016    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -21,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##017    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##018    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -19,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##019    0    0
+        action A_CanSeeTarget("misc/magic8ball_detonate", 192)
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -20,    0 }
+        }
+    }
+}
+
+magic8ball_detonate
+{
+    // frames:    5
+    frame
+    {
+        // ##000   80    0
+        action A_PlayLocalSound("sounds/mineact.wav")
+        action A_StartCountdown()
+        sprites
+        {
+            { "misc/magic8ball", 0,    -20,  -20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "misc/magic8ball", 1,    -25,  -20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "misc/magic8ball", 1,    -25,  -20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "misc/magic8ball", 2,    -31,  -20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##004    0    0
+        goto "misc/magic8ball_detonate_loop"
+        sprites
+        {
+            { "misc/magic8ball", 2,    -31,  -20,    0 }
+        }
+    }
+}
+
+magic8ball_detonate_loop
+{
+    // frames:    3
+    frame
+    {
+        // ##000    0    0
+        action A_DetonateCountdown()
+        sprites
+        {
+            { "misc/magic8ball", 2,    -31,  -20,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_DetonateCountdown()
+        sprites
+        {
+            { "misc/magic8ball", 2,    -32,  -19,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##002    0    0
+        action A_DetonateCountdown()
+        sprites
+        {
+            { "misc/magic8ball", 2,    -30,  -21,    0 }
+        }
+    }
+}
+
+magic8ball_explode
+{
+    frame
+    {
+        action A_Spawn("Fx_Explosion01", 0, 0, 32)
+        action A_RadialBlast(512, 140, 1)
+        delay 1
+    }
+    
+    frame
+    {
+        action A_Destroy()
+        delay 1
+    }
+}
+
+magic8ball_explode_water
+{
+    frame
+    {
+        action A_Spawn("Fx_Explosion01_Water", 0, 0, 32)
+        action A_RadialBlast(512, 140, 1)
+        delay 1
+    }
+    
+    frame
+    {
+        action A_Destroy()
+        delay 1
+    }
+}

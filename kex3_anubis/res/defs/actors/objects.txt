@@ -122,6 +122,19 @@ Obj_Fire_Pot_Steel 108
     fullbright              1
 }
 
+Obj_Fire_Candle_Tall 110
+{
+    classname               "kexActor"
+    radius                  16
+    height                  64
+    stepHeight              48
+    scale                   2.0
+    spawnAnim               "objects/fire_candle_tall_idle"
+    solid                   1
+    randomizeFrames         1
+    fullbright              1
+}
+
 Obj_Fire_Pot_Large02 111
 {
     classname               "kexActor"

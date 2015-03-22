@@ -1326,8 +1326,12 @@ void kexWorld::CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source, 
             }
         }
         
-        dmgAmount = (1.0f - (dist / (radius * radius))) * (float)damage;
-        actor->InflictDamage(source, (int)dmgAmount);
+        dmgAmount = ((radius - kexMath::Sqrt(dist)) * (float)damage) / radius;
+
+        if(dmgAmount > 0)
+        {
+            actor->InflictDamage(source, (int)dmgAmount);
+        }
     }
 }
 
@@ -1338,7 +1342,7 @@ void kexWorld::CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source, 
 void kexWorld::RadialDamage(kexActor *source, const float radius, const int damage,
                             const bool bCanDestroyWalls)
 {
-    if(source->Sector() == NULL)
+    if(source->Sector() == NULL || radius <= 0)
     {
         return;
     }

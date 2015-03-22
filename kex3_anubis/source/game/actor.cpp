@@ -458,7 +458,7 @@ void kexActor::InflictDamage(kexActor *inflictor, const int amount)
         {
             if(!InstanceOf(&kexPuppet::info))
             {
-                flags &= AF_SHOOTABLE;
+                flags &= ~AF_SHOOTABLE;
             }
 
             if(flags & AF_INWATER && deathWaterAnim)

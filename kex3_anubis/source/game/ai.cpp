@@ -508,13 +508,17 @@ bool kexAI::CheckRangeAttack(void)
 {
     kexActor *targ = static_cast<kexActor*>(target);
     
-    if(!attackAnim || (!CanSeeTarget(targ) && !(aiFlags & AIF_ALWAYSRANGEATTACK)) ||
-        RandomDecision(30))
+    if(!attackAnim || RandomDecision(30))
     {
         return false;
     }
 
-    return !((kexRand::Int() & 7) < 4);
+    if(((kexRand::Int() & 255) & 7) < 4)
+    {
+        return false;
+    }
+
+    return ((aiFlags & AIF_ALWAYSRANGEATTACK) || CanSeeTarget(targ));
 }
 
 //

@@ -1,0 +1,17 @@
+texture "sprites/objects/fire_candle_tall.png"
+
+// working\fire_candle_tall\sprite0505.tga
+sprite 0 0 0 24 49
+
+// working\fire_candle_tall\sprite0506.tga
+sprite 1 24 0 8 16
+
+// working\fire_candle_tall\sprite0507.tga
+sprite 2 32 0 8 16
+
+// working\fire_candle_tall\sprite0508.tga
+sprite 3 40 0 8 16
+
+// working\fire_candle_tall\sprite0509.tga
+sprite 4 48 0 8 16
+

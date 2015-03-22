@@ -569,3 +569,37 @@ void A_MantisExplode(kActor @actor)
         obj.Velocity() = dir;
     }
 }
+
+//
+// A_StartCountdown
+//
+
+void A_StartCountdown(kActor @actor)
+{
+    actor.Flags() &= ~AF_SHOOTABLE;
+    actor.Health() = 30;
+}
+
+//
+// A_DetonateCountdown
+//
+
+void A_DetonateCountdown(kActor @actor)
+{
+    if(actor.Health() <= 1)
+    {
+        return;
+    }
+    
+    if(--actor.Health() == 1)
+    {
+        if((actor.Flags() & AF_INWATER) != 0)
+        {
+            actor.ChangeAnim("misc/magic8ball_explode_water");
+        }
+        else
+        {
+            actor.ChangeAnim("misc/magic8ball_explode");
+        }
+    }
+}

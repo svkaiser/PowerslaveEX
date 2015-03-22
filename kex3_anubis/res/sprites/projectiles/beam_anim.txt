@@ -1,0 +1,35 @@
+beam_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        action A_BoltJitter()
+        delay 1
+        sprites
+        {
+            { "projectiles/beam", 0,      0,    0,    0 }
+        }
+    }
+}
+
+beam_tail_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        action A_UpdateBoltTail()
+        delay 1
+    }
+}
+
+beam_destroy
+{
+    // frames:    1
+    frame
+    {
+        action A_DestroyBoltTails()
+        action A_Destroy()
+    }
+}

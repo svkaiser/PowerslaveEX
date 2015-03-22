@@ -4,6 +4,22 @@
 //
 //-----------------------------------------------------------------------------
 
+AI_Magic8Ball 13
+{
+    classname               "kexAI"
+    radius                  16
+    height                  32
+    stepHeight              16
+    health                  60
+    scale                   1.0
+    moveSpeed               0
+    spawnAnim               "misc/magic8ball_idle"
+    deathAnim               "misc/magic8ball_detonate"
+    solid                   1
+    shootable               1
+    lookAllAround           1
+}
+
 Obj_WarpPryamid 33
 {
     classname               "kexActor"

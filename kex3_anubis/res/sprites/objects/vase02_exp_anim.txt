@@ -315,7 +315,7 @@ vase02_exp_death
     frame
     {
         action A_Spawn("Fx_Explosion01", 0, 0, 32)
-        action A_RadialBlast(512, 128, 1)
+        action A_RadialBlast(512, 140, 1)
         action A_TossActor("Obj_Vase_Explode02_Shard01", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Vase_Explode02_Shard02", 0, 0, 32, 8, 8, 4, 16)
         action A_TossActor("Obj_Vase_Explode02_Shard03", 0, 0, 32, 8, 8, 4, 16)

@@ -1,0 +1,11 @@
+texture "sprites/misc/magic8ball.png"
+
+// working\magic8ball\sprite0376.tga
+sprite 0 0 0 44 42
+
+// working\magic8ball\sprite0377.tga
+sprite 1 44 0 52 42
+
+// working\magic8ball\sprite0378.tga
+sprite 2 96 0 64 42
+
