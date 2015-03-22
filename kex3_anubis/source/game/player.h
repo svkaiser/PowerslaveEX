@@ -99,6 +99,7 @@ public:
     float                       &StepViewZ(void) { return stepViewZ; }
     float                       &ViewZ(void) { return viewZ; }
     int                         &LockTime(void) { return lockTime; }
+    int16_t                     &AirSupply(void) { return airSupply; }
 
     kexPlayerWeapon             &Weapon(void) { return weapon; }
     const playerWeapons_t       CurrentWeapon(void) const { return currentWeapon; }
@@ -108,6 +109,7 @@ public:
     static const int16_t        maxHealth;
 
 private:
+    void                        UpdateAirSupply(void);
     void                        TryUse(void);
     void                        UpdateWeaponBob(void);
     void                        UpdateViewBob(void);
@@ -136,6 +138,8 @@ private:
     int16_t                     artifacts;
     int16_t                     keys;
     int16_t                     transmitter;
+    int16_t                     airSupply;
+    int16_t                     airSupplyTime;
     int                         teamDolls;
     int                         lockTime;
     kexPuppet                   *actor;

@@ -30,6 +30,7 @@ kexHud::kexHud(void)
     this->player = NULL;
     this->currentHealth = 0;
     this->currentMessage = 0;
+    this->airSupplyGfxOffset = -300;
 }
 
 //
@@ -46,7 +47,9 @@ kexHud::~kexHud(void)
 
 void kexHud::Init(void)
 {
-    backImage = kexRender::cTextures->Cache("gfx/hud.png", TC_CLAMP, TF_NEAREST);
+    backImage       = kexRender::cTextures->Cache("gfx/hud.png", TC_CLAMP, TF_NEAREST);
+    airSupplyFront  = kexRender::cTextures->Cache("gfx/airsupply_front.png", TC_CLAMP, TF_NEAREST);
+    airSupplyBack   = kexRender::cTextures->Cache("gfx/airsupply_back.png", TC_CLAMP, TF_NEAREST);
 }
 
 //
@@ -341,6 +344,45 @@ void kexHud::DrawBackPic(void)
 }
 
 //
+// kexHud::DrawAirSupply
+//
+
+void kexHud::DrawAirSupply(void)
+{
+    kexPlayer *player = kexGame::cLocal->Player();
+    kexCpuVertList *vl = kexRender::cVertList;
+    float x, y, w, h;
+    float scale;
+
+    if(!(player->Actor()->Flags() & AF_INWATER))
+    {
+        airSupplyGfxOffset = (-300 - airSupplyGfxOffset) * 0.08f + airSupplyGfxOffset;
+    }
+
+    airSupplyGfxOffset = (116 - airSupplyGfxOffset) * 0.25f + airSupplyGfxOffset;
+
+    w = (float)airSupplyBack->Width();
+    h = (float)airSupplyBack->Height();
+    x = 272 - (w * 0.5f);
+    y = (airSupplyGfxOffset - 64) - (h * 0.5f);
+
+    airSupplyBack->Bind();
+    vl->AddQuad(x, y, 0, w, h, 0, 0, 1, 1, 255, 255, 255, 224);
+    vl->DrawElements();
+
+    scale = (float)player->AirSupply() / 64.0f;
+
+    w = (float)airSupplyFront->Width() * scale;
+    h = (float)airSupplyFront->Height() * scale;
+    x = 272 - (w * 0.5f);
+    y = (airSupplyGfxOffset - 64) - (h * 0.5f);
+
+    airSupplyFront->Bind();
+    vl->AddQuad(x, y, 0, w, h, 0, 0, 1, 1, 255, 255, 255, 224);
+    vl->DrawElements();
+}
+
+//
 // kexHud::Update
 //
 
@@ -384,6 +426,8 @@ void kexHud::Display(void)
     DrawCompass();
 
     DrawDots();
+
+    DrawAirSupply();
 
     DrawFlash();
 

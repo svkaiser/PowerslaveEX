@@ -596,6 +596,8 @@ void kexPlayer::Reset(void)
     landTime = 0;
     stepViewZ = 0;
     viewZ = 64.0f;
+    airSupply = 64;
+    airSupplyTime = 0;
 
     memset(weapons, 0, NUMPLAYERWEAPONS);
 
@@ -629,6 +631,8 @@ void kexPlayer::Ready(void)
     landTime = 0;
     stepViewZ = 0;
     keys = 0;
+    airSupply = 64;
+    airSupplyTime = 0;
 
     weapon.ChangeAnim(WS_RAISE);
 }
@@ -679,6 +683,53 @@ void kexPlayer::UpdateViewBob(void)
         if(stepViewZ >= 0)
         {
             stepViewZ = 0;
+        }
+    }
+}
+
+//
+// kexPlayer::UpdateAirSupply
+//
+
+void kexPlayer::UpdateAirSupply(void)
+{
+    int maxAirSupplyTime;
+
+    if(!(actor->Flags() & AF_INWATER) || actor->PlayerFlags() & PF_INWATERSURFACE)
+    {
+        airSupplyTime = 0;
+        airSupply += 8;
+        if(airSupply > 64)
+        {
+            airSupply = 64;
+        }
+        return;
+    }
+
+    airSupplyTime++;
+    maxAirSupplyTime = (artifacts & PA_MASK) ? 100 : 5;
+    
+    if(airSupplyTime >= maxAirSupplyTime)
+    {
+        if(airSupply > 0)
+        {
+            airSupplyTime = 0;
+            airSupply -= 2;
+            if(airSupply < 0)
+            {
+                airSupply = 0;
+            }
+            else if(artifacts & PA_MASK && (airSupply & 3) == 2)
+            {
+                actor->PlaySound("sounds/pwbreathe.wav");
+            }
+        }
+        else
+        {
+            if((airSupplyTime & 0x7f) == 0)
+            {
+                actor->InflictDamage(NULL, airSupplyTime >> 2);
+            }
         }
     }
 }
@@ -972,6 +1023,7 @@ void kexPlayer::Tick(void)
     }
 
     UpdateViewBob();
+    UpdateAirSupply();
 
     weapon.Update();
 }

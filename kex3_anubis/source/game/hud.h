@@ -51,8 +51,11 @@ private:
     void                DrawMessage(const char *msg, const float x, const float y);
     void                DrawDot(const float x, const float y, bool bRedDot, bool bOn);
     void                DrawDots(void);
+    void                DrawAirSupply(void);
     
     kexTexture          *backImage;
+    kexTexture          *airSupplyFront;
+    kexTexture          *airSupplyBack;
     kexPlayer           *player;
     float               currentHealth;
     hudMessage_t        messages[MAXMESSAGES];
@@ -60,6 +63,7 @@ private:
     int                 damageFlashTicks;
     int                 pickupFlashTicks;
     int                 electrocuteFlashTicks;
+    float               airSupplyGfxOffset;
 };
 
 #endif
