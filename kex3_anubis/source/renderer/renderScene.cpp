@@ -690,7 +690,6 @@ void kexRenderScene::DrawStretchSprite(mapSector_t *sector, kexActor *actor)
 
         float x = (float)spriteSet->x;
         float y = (float)spriteSet->y;
-        float w = (float)info->atlas.w;
         float h = (float)info->atlas.h;
 
         float u1, u2, v1, v2;

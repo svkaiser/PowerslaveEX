@@ -544,6 +544,7 @@ DECLARE_KEX_ACTION(kexActionCanSeeTarget)
     char *gotoFrame = this->args[0].s;
     float dist      = this->args[1].f;
     kexActor *targ;
+    kexVec3 org;
     
     if(!actor->Target())
     {
@@ -551,8 +552,9 @@ DECLARE_KEX_ACTION(kexActionCanSeeTarget)
     }
     
     targ = static_cast<kexActor*>(actor->Target());
+    org = targ->Origin() + kexVec3(0, 0, targ->Height() * 0.5f);
 
-    if(actor->CanSee(targ->Origin() + kexVec3(0, 0, targ->Height() * 0.5f), dist))
+    if(actor->CanSee(org, dist))
     {
         actor->ChangeAnim(gotoFrame);
     }

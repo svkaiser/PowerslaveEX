@@ -173,6 +173,7 @@
 		411358D11AB75FE200916706 /* inventoryMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inventoryMenu.h; path = ../../source/game/inventoryMenu.h; sourceTree = "<group>"; };
 		413DD5BD1A89674B00767E49 /* actorObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorObject.cpp; path = ../../source/script/objects/actorObject.cpp; sourceTree = "<group>"; };
 		413DD5BE1A89674B00767E49 /* actorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actorObject.h; path = ../../source/script/objects/actorObject.h; sourceTree = "<group>"; };
+		41573F331AC07ECB0007662B /* joystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = joystick.h; path = ../../source/system/joystick.h; sourceTree = "<group>"; };
 		4178638D1A8E6B2C00329895 /* mover.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mover.cpp; path = ../../source/game/mover.cpp; sourceTree = "<group>"; };
 		4178638E1A8E6B2C00329895 /* mover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mover.h; path = ../../source/game/mover.h; sourceTree = "<group>"; };
 		419342241A8BB38B002C7F8E /* gameSysObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gameSysObject.h; path = ../../source/script/objects/gameSysObject.h; sourceTree = "<group>"; };
@@ -696,6 +697,7 @@
 				41C7FC7A1A5AFBAB003864CB /* timer.cpp */,
 				41C7FC711A5AFBAB003864CB /* endian.h */,
 				41C7FC731A5AFBAB003864CB /* input.h */,
+				41573F331AC07ECB0007662B /* joystick.h */,
 				41C7FC741A5AFBAB003864CB /* keyboard.h */,
 				41C7FC751A5AFBAB003864CB /* mouse.h */,
 				41C7FC771A5AFBAB003864CB /* sound.h */,
