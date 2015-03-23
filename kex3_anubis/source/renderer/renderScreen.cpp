@@ -176,6 +176,39 @@ void kexRenderScreen::DrawStretchPic(const char *name, const float x, const floa
 }
 
 //
+// kexRenderScreen::DrawFillPic
+//
+
+void kexRenderScreen::DrawFillPic(kexTexture *texture, const float x, const float y,
+                                  const float w, const float h)
+{
+    float texwidth;
+    float texheight;
+    float tex_x;
+    float tex_y;
+    
+    texwidth = w;
+    texheight = h;
+    tex_x = x;
+    tex_y = y;
+    
+    SetAspectDimentions(tex_x, tex_y, texwidth, texheight);
+    
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+    kexRender::cBackend->SetState(GLSTATE_CULL, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+    kexRender::cBackend->SetCull(GLCULL_BACK);
+    
+    texture->Bind();
+    DrawQuad(tex_x, texwidth, tex_y, texheight, 0,
+             texwidth / (float)texture->Width(), 0,
+             texheight / (float)texture->Height(),
+             255, 255, 255, 255);
+}
+
+//
 // kexRenderScreen::DrawQuad
 //
 

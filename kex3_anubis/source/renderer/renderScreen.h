@@ -32,6 +32,8 @@ public:
                                        const float width, const float height);
     void                DrawStretchPic(const char *name, const float x, const float y,
                                        const float width, const float height);
+    void                DrawFillPic(kexTexture *texture, const float x, const float y,
+                                    const float w, const float h);
     void                DrawQuad(float x, float w, float y, float h,
                                  float tu1, float tu2, float tv1, float tv2,
                                  byte r, byte g, byte b, byte a);
