@@ -119,9 +119,12 @@ void kexSystemSDL::Shutdown(void)
     kexRender::cBackend->Shutdown();
     kex::cPakFiles->Shutdown();
     kex::cCvars->Shutdown();
+    kex::cInput->Shutdown();
     
     Mem_Purge(hb_static);
     Mem_Purge(hb_object);
+
+    SDL_QuitSubSystem(SDL_INIT_TIMER);
 
     if(glContext)
     {

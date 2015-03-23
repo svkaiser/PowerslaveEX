@@ -17,8 +17,9 @@
 
 #include "keyboard.h"
 #include "mouse.h"
+#include "joystick.h"
 
-#define MAX_KEYS    (NUMKEYBOARDKEYS + NUMMOUSEBUTTONS)
+#define MAX_KEYS    (NUMKEYBOARDKEYS + NUMMOUSEBUTTONS + NUMJOYSTICKBUTTONS)
 
 typedef struct keyaction_s
 {

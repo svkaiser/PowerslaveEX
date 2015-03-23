@@ -40,23 +40,29 @@ public:
 
     void                BuildCommands(void);
     void                Reset(void);
+    void                SetJoy(inputEvent_t *ev);
 
     const word          Buttons(void) const { return buttons; }
     void                SetTurnXY(const int x, const int y) { turnx = x; turny = y; }
     const int           TurnX(void) const { return turnx; }
     const int           TurnY(void) const { return turny; }
     float               *Angles(void) { return angles; }
+    float               *Movement(void) { return movement; }
 
 private:
     void                BuildButtons(void);
     void                BuildTurning(void);
+    void                BuildJoy(void);
 
     word                buttons;
     float               angles[2];
+    float               movement[2];
     int                 frame;
     int                 time;
     int                 turnx;
     int                 turny;
+    int                 joyturn[2];
+    int                 joymove[2];
 };
 
 #endif

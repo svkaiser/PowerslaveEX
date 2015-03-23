@@ -747,6 +747,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\system\joystick.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\system\keyboard.h"
 					>
 				</File>

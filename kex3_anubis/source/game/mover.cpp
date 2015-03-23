@@ -493,9 +493,10 @@ void kexLift::Tick(void)
     case LS_UP:
         if(currentHeight >= destHeight)
         {
+            StopLoopingSounds();
+
             if(!bDirection)
             {
-                StopLoopingSounds();
                 PlaySound("sounds/stonestop.wav");
 
                 Remove();

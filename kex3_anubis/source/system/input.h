@@ -17,6 +17,7 @@
 
 #include "keyboard.h"
 #include "mouse.h"
+#include "joystick.h"
 
 // Input event types.
 typedef enum
@@ -27,7 +28,9 @@ typedef enum
     ev_mousedown,
     ev_mouseup,
     ev_mousewheel,
-    ev_gamepad
+    ev_joystick,
+    ev_joybtnup,
+    ev_joybtndown
 } eventType_t;
 
 // Event structure.
@@ -58,15 +61,30 @@ public:
     virtual int     TranslateKeyboard(const int val);
     virtual int     TranslateMouse(const int val);
     virtual bool    CapslockOn(void);
+    virtual void    Shutdown(void);
+    virtual void    ActivateJoystickDevice(int index);
 
     const bool      MouseGrabbed(void) const { return bGrabMouse; }
     void            SetEnabled(bool enable) { bEnabled = enable; }
+    const bool      JoystickEnabled(void) const { return bJoystickEnabled; }
     void            ToggleMouseGrab(bool enable) { bGrabMouse = enable; }
     const int       MouseX(void) const { return mouse_x; }
     const int       MouseY(void) const { return mouse_y; }
 
+    static kexCvar  cvarJoystick_XAxis;
+    static kexCvar  cvarJoystick_XInvert;
+    static kexCvar  cvarJoystick_YAxis;
+    static kexCvar  cvarJoystick_YInvert;
+    static kexCvar  cvarJoystick_StrafeAxis;
+    static kexCvar  cvarJoystick_StrafeInvert;
+    static kexCvar  cvarJoystick_LookAxis;
+    static kexCvar  cvarJoystick_LookInvert;
+
 protected:
+    virtual void    CloseJoystickDevice(void);
+
     bool            bEnabled;
+    bool            bJoystickEnabled;
     bool            bGrabMouse;
     int             mouse_x;
     int             mouse_y;

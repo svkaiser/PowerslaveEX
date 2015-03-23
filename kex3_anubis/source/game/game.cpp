@@ -510,13 +510,19 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
         player->Cmd().SetTurnXY(ev->data1, ev->data2);
         break;
 
+    case ev_joystick:
+        player->Cmd().SetJoy(ev);
+        break;
+
     case ev_keydown:
     case ev_mousedown:
+    case ev_joybtndown:
         kex::cActions->ExecuteCommand(ev->data1, false, ev->type);
         break;
 
     case ev_keyup:
     case ev_mouseup:
+    case ev_joybtnup:
         kex::cActions->ExecuteCommand(ev->data1, true, ev->type);
         break;
     }

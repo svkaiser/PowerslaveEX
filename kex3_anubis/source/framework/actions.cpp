@@ -143,6 +143,43 @@ static keyinfo_t mousenames[] =
     { 0,                                NULL }
 };
 
+static keyinfo_t joybuttonnames[] =
+{
+    { KJSB_0+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_0" },
+    { KJSB_1+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_1" },
+    { KJSB_2+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_2" },
+    { KJSB_3+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_3" },
+    { KJSB_4+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_4" },
+    { KJSB_5+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_5" },
+    { KJSB_6+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_6" },
+    { KJSB_7+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_7" },
+    { KJSB_8+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_8" },
+    { KJSB_9+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),     "joy_9" },
+    { KJSB_10+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_10" },
+    { KJSB_11+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_11" },
+    { KJSB_12+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_12" },
+    { KJSB_13+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_13" },
+    { KJSB_14+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_14" },
+    { KJSB_15+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_15" },
+    { KJSB_16+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_16" },
+    { KJSB_17+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_17" },
+    { KJSB_18+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_18" },
+    { KJSB_19+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_19" },
+    { KJSB_20+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_20" },
+    { KJSB_21+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_21" },
+    { KJSB_22+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_22" },
+    { KJSB_23+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_23" },
+    { KJSB_24+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_24" },
+    { KJSB_25+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_25" },
+    { KJSB_26+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_26" },
+    { KJSB_27+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_27" },
+    { KJSB_28+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_28" },
+    { KJSB_29+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_29" },
+    { KJSB_30+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_30" },
+    { KJSB_31+(NUMKEYBOARDKEYS+NUMMOUSEBUTTONS),    "joy_31" },
+    { 0,                                            NULL }
+};
+
 //
 // bind
 //
@@ -239,6 +276,14 @@ int kexInputAction::GetKeyCode(char *key)
         }
     }
 
+    for(pkey = joybuttonnames; pkey->name; pkey++)
+    {
+        if(!strcmp(key, pkey->name))
+        {
+            return pkey->code;
+        }
+    }
+
     return -1;
 }
 
@@ -259,6 +304,14 @@ char *kexInputAction::GetKeyName(int key)
     }
 
     for(pkey = mousenames; pkey->name; pkey++)
+    {
+        if(key == pkey->code)
+        {
+            return (char*)pkey->name;
+        }
+    }
+
+    for(pkey = joybuttonnames; pkey->name; pkey++)
     {
         if(key == pkey->code)
         {
@@ -367,6 +420,10 @@ void kexInputAction::ExecuteCommand(int key, bool keyup, const int eventType)
     if(eventType == ev_mousedown || eventType == ev_mouseup)
     {
         key += NUMKEYBOARDKEYS;
+    }
+    else if(eventType == ev_joybtndown || eventType == ev_joybtnup)
+    {
+        key += (NUMKEYBOARDKEYS+NUMMOUSEBUTTONS);
     }
 
     keycmd = &keycmds[key];

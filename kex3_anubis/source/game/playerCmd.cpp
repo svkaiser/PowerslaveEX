@@ -23,6 +23,10 @@ kexCvar cvarMSensitivityX("cl_msensitivityx", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-
 kexCvar cvarMSensitivityY("cl_msensitivityy", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-Y sensitivity");
 kexCvar cvarInvertLook("cl_mlookinvert", CVF_BOOL|CVF_CONFIG, "0", "Invert mouse-look");
 kexCvar cvarMSmooth("cl_mousesmooth", CVF_INT|CVF_CONFIG, "4", 1, 4, "Set smooth mouse threshold");
+kexCvar cvarJLookSensitivityX("cl_joylooksensitivityx", CVF_FLOAT|CVF_CONFIG, "1", "JoystickLook-X sensitivity");
+kexCvar cvarJLookSensitivityY("cl_joylooksensitivityy", CVF_FLOAT|CVF_CONFIG, "1", "JoystickLook-Y sensitivity");
+kexCvar cvarJMoveSensitivityX("cl_joymovesensitivityx", CVF_FLOAT|CVF_CONFIG, "1", "JoystickMove-X sensitivity");
+kexCvar cvarJMoveSensitivityY("cl_joymovesensitivityy", CVF_FLOAT|CVF_CONFIG, "1", "JoystickMove-Y sensitivity");
 
 //
 // kexPlayerCmd::kexPlayerCmd
@@ -49,7 +53,10 @@ void kexPlayerCmd::Reset(void)
 {
     buttons = 0;
     angles[0] = angles[1] = 0;
+    movement[0] = movement[1] = 0;
     turnx = turny = 0;
+    joyturn[0] = joyturn[1] = 0;
+    joymove[0] = joymove[1] = 0;
 }
 
 //
@@ -100,6 +107,45 @@ void kexPlayerCmd::BuildTurning(void)
 }
 
 //
+// kexPlayerCmd::BuildJoy
+//
+// And there was rejoice...
+//
+
+void kexPlayerCmd::BuildJoy(void)
+{
+    float m1 = (float)joymove[0];
+    float m2 = (float)joymove[1];
+
+    angles[0] += ((float)joyturn[0] * cvarJLookSensitivityX.GetFloat()) / 2048.0f;
+    angles[1] += ((float)joyturn[1] * cvarJLookSensitivityY.GetFloat()) / 2048.0f;
+
+    if(m1 >= 1 || m1 <= -1)
+    {
+        movement[0] = (m1 * cvarJMoveSensitivityX.GetFloat()) / 32768.0f;
+        kexMath::Clamp(movement[0], -1, 1);
+    }
+
+    if(m2 >= 1 || m2 <= -1)
+    {
+        movement[1] = (m2 * cvarJMoveSensitivityY.GetFloat()) / 32768.0f;
+        kexMath::Clamp(movement[1], -1, 1);
+    }
+}
+
+//
+// kexPlayerCmd::SetJoy
+//
+
+void kexPlayerCmd::SetJoy(inputEvent_t *ev)
+{
+    joyturn[0] = ev->data2;
+    joyturn[1] = ev->data1;
+    joymove[1] = ev->data4;
+    joymove[0] = ev->data3;
+}
+
+//
 // kexPlayerCmd::BuildCommands
 //
 
@@ -107,4 +153,5 @@ void kexPlayerCmd::BuildCommands(void)
 {
     BuildButtons();
     BuildTurning();
+    BuildJoy();
 }

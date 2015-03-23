@@ -17,6 +17,15 @@
 
 #include "kexlib.h"
 
+kexCvar kexInput::cvarJoystick_XAxis("in_joystick_xaxis", CVF_INT|CVF_CONFIG, "-1", " ");
+kexCvar kexInput::cvarJoystick_XInvert("in_joystick_xinvert", CVF_INT|CVF_CONFIG, "0", " ");
+kexCvar kexInput::cvarJoystick_YAxis("in_joystick_yaxis", CVF_INT|CVF_CONFIG, "-1", " ");
+kexCvar kexInput::cvarJoystick_YInvert("in_joystick_yinvert", CVF_INT|CVF_CONFIG, "0", " ");
+kexCvar kexInput::cvarJoystick_StrafeAxis("in_joystick_strafeaxis", CVF_INT|CVF_CONFIG, "-1", " ");
+kexCvar kexInput::cvarJoystick_StrafeInvert("in_joystick_strafeinvert", CVF_INT|CVF_CONFIG, "0", " ");
+kexCvar kexInput::cvarJoystick_LookAxis("in_joystick_lookaxis", CVF_INT|CVF_CONFIG, "-1", " ");
+kexCvar kexInput::cvarJoystick_LookInvert("in_joystick_lookinvert", CVF_INT|CVF_CONFIG, "0", " ");
+
 //
 // kexInput::kexInput
 //
@@ -24,6 +33,7 @@
 kexInput::kexInput()
 {
     bEnabled = true;
+    bJoystickEnabled = false;
 }
 
 //
@@ -39,6 +49,14 @@ kexInput::~kexInput()
 //
 
 void kexInput::Init(void)
+{
+}
+
+//
+// kexInput::Shutdown
+//
+
+void kexInput::Shutdown(void)
 {
 }
 
@@ -134,5 +152,21 @@ bool kexInput::CapslockOn(void)
 //
 
 void kexInput::CenterMouse(void)
+{
+}
+
+//
+// kexInput::CloseJoystickDevice
+//
+
+void kexInput::CloseJoystickDevice(void)
+{
+}
+
+//
+// kexInput::ActivateJoystickDevice
+//
+
+void kexInput::ActivateJoystickDevice(int index)
 {
 }

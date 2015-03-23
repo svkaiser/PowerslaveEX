@@ -256,6 +256,11 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         velocity.y = 0;
     }
 
+    //velocity.x += (forward.x * cmd->Movement()[0]) * PMOVE_SPEED;
+    //velocity.y += (forward.y * cmd->Movement()[0]) * PMOVE_SPEED;
+    //velocity.x += (right.x * cmd->Movement()[1]) * PMOVE_SPEED;
+    //velocity.y += (right.y * cmd->Movement()[1]) * PMOVE_SPEED;
+
     if(cmd->Buttons() & BC_FORWARD)
     {
         velocity.x += forward.x * PMOVE_SPEED;
