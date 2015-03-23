@@ -554,7 +554,6 @@ void kexInputSDL::JoystickButtonEvent(void)
             {
                 ev.type = ev_joybtndown;
                 ev.data1 = i;
-                kex::cSystem->Printf("%i\n", i);
                 kex::cSession->EventQueue().Push(&ev);
             }
         }

@@ -41,6 +41,7 @@ public:
     void                BuildCommands(void);
     void                Reset(void);
     void                SetJoy(inputEvent_t *ev);
+    void                SetJoyTurnThreshold(const int turn, const int look);
 
     const word          Buttons(void) const { return buttons; }
     void                SetTurnXY(const int x, const int y) { turnx = x; turny = y; }
@@ -63,6 +64,8 @@ private:
     int                 turny;
     int                 joyturn[2];
     int                 joymove[2];
+    float               joyturnthreshold;
+    float               joylookthreshold;
 };
 
 #endif

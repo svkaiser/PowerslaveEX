@@ -23,10 +23,9 @@ kexCvar cvarMSensitivityX("cl_msensitivityx", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-
 kexCvar cvarMSensitivityY("cl_msensitivityy", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-Y sensitivity");
 kexCvar cvarInvertLook("cl_mlookinvert", CVF_BOOL|CVF_CONFIG, "0", "Invert mouse-look");
 kexCvar cvarMSmooth("cl_mousesmooth", CVF_INT|CVF_CONFIG, "4", 1, 4, "Set smooth mouse threshold");
-kexCvar cvarJLookSensitivityX("cl_joylooksensitivityx", CVF_FLOAT|CVF_CONFIG, "1", "JoystickLook-X sensitivity");
-kexCvar cvarJLookSensitivityY("cl_joylooksensitivityy", CVF_FLOAT|CVF_CONFIG, "1", "JoystickLook-Y sensitivity");
-kexCvar cvarJMoveSensitivityX("cl_joymovesensitivityx", CVF_FLOAT|CVF_CONFIG, "1", "JoystickMove-X sensitivity");
-kexCvar cvarJMoveSensitivityY("cl_joymovesensitivityy", CVF_FLOAT|CVF_CONFIG, "1", "JoystickMove-Y sensitivity");
+kexCvar cvarJoyStickLookSensitivity("cl_joylooksensitivity", CVF_FLOAT|CVF_CONFIG, "1", "Joystick Look sensitivity");
+kexCvar cvarJoyStickMoveSensitivity("cl_joymovesensitivity", CVF_FLOAT|CVF_CONFIG, "1", "Joystick Move sensitivity");
+kexCvar cvarJoyStickThreshold("cl_joystickthreshold", CVF_FLOAT|CVF_CONFIG, "10", " ");
 
 //
 // kexPlayerCmd::kexPlayerCmd
@@ -35,6 +34,8 @@ kexCvar cvarJMoveSensitivityY("cl_joymovesensitivityy", CVF_FLOAT|CVF_CONFIG, "1
 kexPlayerCmd::kexPlayerCmd(void)
 {
     Reset();
+    joyturnthreshold = 0;
+    joylookthreshold = 0;
 }
 
 //
@@ -117,18 +118,21 @@ void kexPlayerCmd::BuildJoy(void)
     float m1 = (float)joymove[0];
     float m2 = (float)joymove[1];
 
-    angles[0] += ((float)joyturn[0] * cvarJLookSensitivityX.GetFloat()) / 2048.0f;
-    angles[1] += ((float)joyturn[1] * cvarJLookSensitivityY.GetFloat()) / 2048.0f;
+    if(joyturn[0] == 0) joyturnthreshold = 0;
+    if(joyturn[1] == 0) joylookthreshold = 0;
+
+    angles[0] += ((float)joyturn[0] * joyturnthreshold) / 2048.0f;
+    angles[1] += ((float)joyturn[1] * joylookthreshold) / 2048.0f;
 
     if(m1 >= 1 || m1 <= -1)
     {
-        movement[0] = (m1 * cvarJMoveSensitivityX.GetFloat()) / 32768.0f;
+        movement[0] = (m1 * cvarJoyStickMoveSensitivity.GetFloat()) / 32768.0f;
         kexMath::Clamp(movement[0], -1, 1);
     }
 
     if(m2 >= 1 || m2 <= -1)
     {
-        movement[1] = (m2 * cvarJMoveSensitivityY.GetFloat()) / 32768.0f;
+        movement[1] = (m2 * cvarJoyStickMoveSensitivity.GetFloat()) / 32768.0f;
         kexMath::Clamp(movement[1], -1, 1);
     }
 }
@@ -143,6 +147,45 @@ void kexPlayerCmd::SetJoy(inputEvent_t *ev)
     joyturn[1] = ev->data1;
     joymove[1] = ev->data4;
     joymove[0] = ev->data3;
+
+    SetJoyTurnThreshold(ev->data2, ev->data1);
+}
+
+//
+// kexPlayerCmd::SetJoyTurnThreshold
+//
+
+void kexPlayerCmd::SetJoyTurnThreshold(const int turn, const int look)
+{
+    float turnspeed = 1.0f / cvarJoyStickThreshold.GetFloat();
+
+    if(turn == 0)
+    {
+        joyturnthreshold = 0;
+    }
+    else
+    {
+        joyturnthreshold += turnspeed;
+
+        if(joyturnthreshold >= cvarJoyStickLookSensitivity.GetFloat())
+        {
+            joyturnthreshold = cvarJoyStickLookSensitivity.GetFloat();
+        }
+    }
+
+    if(look == 0)
+    {
+        joylookthreshold = 0;
+    }
+    else
+    {
+        joylookthreshold += turnspeed;
+
+        if(joylookthreshold >= cvarJoyStickLookSensitivity.GetFloat())
+        {
+            joylookthreshold = cvarJoyStickLookSensitivity.GetFloat();
+        }
+    }
 }
 
 //
