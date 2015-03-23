@@ -182,13 +182,21 @@ void kexDoor::Tick(void)
     float lastHeight = currentHeight;
     kexWorld *world = kexGame::cLocal->World();
 
+    if(IsStale())
+    {
+        return;
+    }
+
     switch(state)
     {
     case DS_UP:
         if(currentHeight >= destHeight)
         {
+            StopLoopingSounds();
+
             if(waitDelay <= -1)
             {
+                PlaySound("sounds/stonestop.wav");
                 Remove();
                 return;
             }
@@ -196,6 +204,10 @@ void kexDoor::Tick(void)
             state = DS_WAIT;
             currentTime = waitDelay;
             return;
+        }
+        else
+        {
+            PlayLoopingSound("sounds/stonemov.wav");
         }
 
         currentHeight += moveSpeed;
@@ -215,8 +227,15 @@ void kexDoor::Tick(void)
                 sector->objectThinker = NULL;
             }
 
+            StopLoopingSounds();
+            PlaySound("sounds/stonestop.wav");
+
             Remove();
             return;
+        }
+        else
+        {
+            PlayLoopingSound("sounds/stonemov.wav");
         }
 
         currentHeight -= moveSpeed;
@@ -352,10 +371,21 @@ void kexFloor::Tick(void)
 {
     float lastHeight = currentHeight;
 
+    if(IsStale())
+    {
+        return;
+    }
+
     if(currentHeight <= destHeight)
     {
+        StopLoopingSounds();
+        PlaySound("sounds/stonestop.wav");
         Remove();
         return;
+    }
+    else
+    {
+        PlayLoopingSound("sounds/platstart.wav");
     }
 
     currentHeight -= moveSpeed;
@@ -441,6 +471,11 @@ void kexLift::Tick(void)
     float lastHeight = currentHeight;
     float moveAmount;
 
+    if(IsStale())
+    {
+        return;
+    }
+
     switch(state)
     {
     case LS_IDLE:
@@ -460,12 +495,19 @@ void kexLift::Tick(void)
         {
             if(!bDirection)
             {
+                StopLoopingSounds();
+                PlaySound("sounds/stonestop.wav");
+
                 Remove();
                 return;
             }
 
             state = LS_WAIT;
             currentTime = waitDelay;
+        }
+        else
+        {
+            PlayLoopingSound("sounds/platstart.wav");
         }
 
         currentHeight += moveSpeed;
@@ -479,14 +521,22 @@ void kexLift::Tick(void)
     case LS_DOWN:
         if(currentHeight <= destHeight)
         {
+            StopLoopingSounds();
+
             if(bDirection)
             {
+                PlaySound("sounds/stonestop.wav");
+
                 Remove();
                 return;
             }
 
             state = LS_WAIT;
             currentTime = waitDelay;
+        }
+        else
+        {
+            PlayLoopingSound("sounds/platstart.wav");
         }
 
         currentHeight -= moveSpeed;

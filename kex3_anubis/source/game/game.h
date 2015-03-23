@@ -217,6 +217,8 @@ public:
 private:
     void                        LoadNewMap(void);
     void                        InitWeaponDefs(void);
+    void                        StopSounds(void);
+    void                        UpdateSounds(void);
     
     kexFont                     *smallFont;
     kexFont                     *bigFont;

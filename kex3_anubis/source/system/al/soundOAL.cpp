@@ -19,6 +19,7 @@
 #include "alc.h"
 
 #include "kexlib.h"
+#include "gameObject.h"
 
 //-----------------------------------------------------------------------------
 //
@@ -74,8 +75,10 @@ public:
     void                                Free(void);
     void                                Delete(void);
     void                                Update(void);
+    void                                UpdateParameters(void);
 
     bool                                InUse(void) const { return bInUse; }
+    bool                                &Looping(void) { return bLooping; }
 
 private:
     ALuint                              handle;
@@ -105,7 +108,10 @@ public:
     virtual void                    Init(void);
     virtual void                    Shutdown(void);
     virtual bool                    Playing(const int handle);
-    virtual void                    Play(void *data, const int volume, const int sep, kexObject *ref = NULL);
+    virtual bool                    SourceLooping(const int handle);
+    virtual void                    Play(void *data, const int volume, const int sep,
+                                         kexObject *ref = NULL, bool bLooping = false);
+    virtual void                    Stop(const int handle);
     virtual void                    UpdateSource(const int handle, const int volume, const int sep);
     virtual void                    Update(void);
     virtual const int               NumSources(void) const;
@@ -357,6 +363,12 @@ void kexSoundSource::Free(void)
     volume      = 1.0f;
     pitch       = 1.0f;
     startTime   = 0;
+
+    if(refObject && refObject->InstanceOf(&kexGameObject::info))
+    {
+        static_cast<kexGameObject*>(refObject)->RemoveRef();
+    }
+
     refObject   = NULL;
 
     alSource3f(handle, AL_POSITION, 0, 0, 0);
@@ -370,10 +382,9 @@ void kexSoundSource::Delete(void)
 {
     if(bPlaying)
     {
+        Stop();
         Free();
     }
-
-    Stop();
 
     alSourcei(handle, AL_BUFFER, 0);
     alDeleteSources(1, &handle);
@@ -395,20 +406,30 @@ void kexSoundSource::Reset(void)
 }
 
 //
-// kexSoundSource::Play
+// kexSoundSource::UpdateParameters
 //
 
-void kexSoundSource::Play(void)
+void kexSoundSource::UpdateParameters(void)
 {
     kexVec3 dir;
-
-    alSourceQueueBuffers(handle, 1, wave->GetBuffer());
-    alSourcei(handle, AL_SOURCE_RELATIVE, AL_TRUE);
 
     kexVec3::ToAxis(&dir, 0, 0, kexMath::Deg2Rad(pan * 1.40625f), 0, 0);
 
     alSourcefv(handle, AL_POSITION, dir.ToFloatPtr());
     alSourcef(handle, AL_GAIN, volume);
+}
+
+//
+// kexSoundSource::Play
+//
+
+void kexSoundSource::Play(void)
+{
+    alSourceQueueBuffers(handle, 1, wave->GetBuffer());
+    alSourcei(handle, AL_SOURCE_RELATIVE, AL_TRUE);
+    alSourcei(handle, AL_LOOPING, bLooping);
+
+    UpdateParameters();
     alSourcePlay(handle);
 
     bPlaying = true;
@@ -589,7 +610,7 @@ kexSoundSource *kexSoundOAL::GetAvailableSource(void)
 // kexSoundOAL::Play
 //
 
-void kexSoundOAL::Play(void *data, const int volume, const int sep, kexObject *ref)
+void kexSoundOAL::Play(void *data, const int volume, const int sep, kexObject *ref, bool bLooping)
 {
     kexSoundSource *src;
     kexWavFile *wavFile = NULL;
@@ -624,9 +645,30 @@ void kexSoundOAL::Play(void *data, const int volume, const int sep, kexObject *r
     src->volume = ((float)volume / 128.0f) * cvarVolume.GetFloat();
     src->pan = (float)sep;
     src->pitch = 1;
+    src->Looping() = bLooping;
     src->refObject = ref;
 
+    if(ref && ref->InstanceOf(&kexGameObject::info))
+    {
+        static_cast<kexGameObject*>(ref)->AddRef();
+    }
+
     src->Play();
+}
+
+//
+// kexSoundOAL::Stop
+//
+
+void kexSoundOAL::Stop(const int handle)
+{
+    if(handle < 0 || handle >= activeSources)
+    {
+        return;
+    }
+
+    sources[handle].Stop();
+    sources[handle].Free();
 }
 
 //
@@ -642,16 +684,29 @@ bool kexSoundOAL::Playing(const int handle)
 }
 
 //
+// kexSoundOAL::SourceLooping
+//
+
+bool kexSoundOAL::SourceLooping(const int handle)
+{
+    if(handle < 0 || handle >= activeSources)
+    {
+        return false;
+    }
+
+    return sources[handle].Looping();
+}
+
+//
 // kexSoundOAL::UpdateSource
 //
 
 void kexSoundOAL::UpdateSource(const int handle, const int volume, const int sep)
 {
-    int left = ((254 - sep) * volume) / 127;
-    int right = ((sep) * volume) / 127;
+    sources[handle].volume = ((float)volume / 128.0f) * cvarVolume.GetFloat();
+    sources[handle].pan = (float)sep;
 
-    kexMath::Clamp(left, 0, 255);
-    kexMath::Clamp(right, 0, 255);
+    sources[handle].UpdateParameters();
 }
 
 //

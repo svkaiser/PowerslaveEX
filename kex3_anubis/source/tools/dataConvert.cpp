@@ -272,6 +272,8 @@ void kexDataConvert::DumpBuildLevelData(const char *file)
 
     for(int i = 0; i < numSectors; ++i)
     {
+        fprintf(f, "o sector_%03d\n", i);
+
         for(int j = sectors[i].wallptr; j < sectors[i].wallptr + sectors[i].wallnum; ++j)
         {
             buildWall_t *wall = &walls[j];
@@ -289,7 +291,6 @@ void kexDataConvert::DumpBuildLevelData(const char *file)
                                        -(float)sectors[i].floorz / 16384.0f,
                                        (float)wall->y / 1024.0f);
 
-            fprintf(f, "o wall_%03d_%03d\n", i, j);
             fprintf(f, "f %i %i %i %i\n", numVerts+0+1, numVerts+1+1, numVerts+2+1, numVerts+3+1);
             numVerts += 4;
         }

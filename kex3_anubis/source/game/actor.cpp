@@ -109,7 +109,7 @@ void kexActor::Remove(void)
 {
     animSpeed = 0;
     flags &= ~(AF_SOLID|AF_SHOOTABLE|AF_MOVEABLE|AF_TOUCHABLE|AF_BOUNCY);
-    flags |= AF_NOADVANCEFRAMES;
+    flags |= (AF_NOADVANCEFRAMES|AF_HIDDEN);
     
     kexGameObject::Remove();
 }

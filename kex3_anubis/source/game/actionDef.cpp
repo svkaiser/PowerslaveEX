@@ -448,6 +448,39 @@ DECLARE_KEX_ACTION(kexActionPlaySound)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionPlayLoopingSound
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionPlayLoopingSound)
+{
+    actor->PlayLoopingSound(this->args[0].s);
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionStopSound
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionStopSound)
+{
+    actor->StopSound();
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexActionStopLoopingSound
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionStopLoopingSound)
+{
+    actor->StopLoopingSounds();
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionFaceTarget
 //
 //-----------------------------------------------------------------------------
@@ -830,6 +863,9 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_RadialBlast", kexActionRadialBlast::info.Create, AAT_FLOAT, AAT_INTEGER, AAT_INTEGER);
     RegisterAction("A_ConsumeAmmo", kexActionConsumeAmmo::info.Create, AAT_INTEGER);
     RegisterAction("A_PlayLocalSound", kexActionPlaySound::info.Create, AAT_STRING);
+    RegisterAction("A_PlayLoopingLocalSound", kexActionPlayLoopingSound::info.Create, AAT_STRING);
+    RegisterAction("A_StopSounds", kexActionStopSound::info.Create);
+    RegisterAction("A_StopLoopingSounds", kexActionStopLoopingSound::info.Create);
     RegisterAction("A_FaceTarget", kexActionFaceTarget::info.Create);
     RegisterAction("A_CheckMelee", kexActionCheckMelee::info.Create, AAT_STRING, AAT_FLOAT);
     RegisterAction("A_CanSeeTarget", kexActionCanSeeTarget::info.Create, AAT_STRING, AAT_FLOAT);

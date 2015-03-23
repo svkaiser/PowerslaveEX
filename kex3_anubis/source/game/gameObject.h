@@ -36,8 +36,13 @@ public:
     int                         RemoveRef(void);
     void                        SetTarget(kexGameObject *targ);
     const bool                  Removing(void) const;
+    const bool                  GetSoundParameters(float &volume, float &pan);
     void                        PlaySound(const char *snd);
+    void                        PlayLoopingSound(const char *snd);
     void                        PlaySound(const kexStr &snd) { PlaySound(snd.c_str()); }
+    void                        PlayLoopingSound(const kexStr &snd) { PlayLoopingSound(snd.c_str()); }
+    void                        StopSound(void);
+    void                        StopLoopingSounds(void);
 
     kexLinklist<kexGameObject>  &Link(void) { return link; }
     kexVec3                     &Origin(void) { return origin; }

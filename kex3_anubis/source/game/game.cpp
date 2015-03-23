@@ -432,6 +432,7 @@ void kexGameLocal::Tick(void)
 
     if(pendingGameState != GS_NONE)
     {
+        StopSounds();
         gameLoop->Stop();
         
         switch(pendingGameState)
@@ -476,6 +477,8 @@ void kexGameLocal::Tick(void)
     gameLoop->Tick();
     
     player->Cmd().Reset();
+
+    UpdateSounds();
     
     ticks++;
 }
@@ -528,6 +531,44 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
 void kexGameLocal::PlaySound(const char *name)
 {
     kex::cSound->Play((void*)name, 128, 0);
+}
+
+//
+// kexGameLocal::StopSounds
+//
+
+void kexGameLocal::StopSounds(void)
+{
+    for(int i = 0; i < kex::cSound->NumSources(); ++i)
+    {
+        kex::cSound->Stop(i);
+    }
+}
+
+//
+// kexGameLocal::UpdateSounds
+//
+
+void kexGameLocal::UpdateSounds(void)
+{
+    for(int i = 0; i < kex::cSound->NumSources(); ++i)
+    {
+        kexObject *obj = kex::cSound->GetRefObject(i);
+        float volume, pan;
+
+        if(!obj || !obj->InstanceOf(&kexGameObject::info))
+        {
+            continue;
+        }
+
+        if(obj == player->Actor())
+        {
+            continue;
+        }
+
+        static_cast<kexGameObject*>(obj)->GetSoundParameters(volume, pan);
+        kex::cSound->UpdateSource(i, (int)volume, (int)pan);
+    }
 }
 
 //

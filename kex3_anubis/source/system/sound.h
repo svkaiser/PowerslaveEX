@@ -24,9 +24,11 @@ public:
     virtual void            Shutdown(void);
     virtual void            Update(void);
     virtual void            UpdateSource(const int handle, const int volume, const int sep);
-    virtual void            Play(void *data, const int volume, const int sep, kexObject *ref = NULL);
+    virtual void            Play(void *data, const int volume, const int sep,
+                                 kexObject *ref = NULL, bool bLooping = false);
     virtual void            Stop(const int handle);
     virtual bool            Playing(const int handle);
+    virtual bool            SourceLooping(const int handle);
     virtual const int       NumSources(void) const;
     virtual kexObject       *GetRefObject(const int handle);
 

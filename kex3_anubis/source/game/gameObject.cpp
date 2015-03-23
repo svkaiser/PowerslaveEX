@@ -96,14 +96,11 @@ const bool kexGameObject::Removing(void) const
 }
 
 //
-// kexGameObject::PlaySound
+// kexGameObject::GetSoundParameters
 //
 
-void kexGameObject::PlaySound(const char *snd)
+const bool kexGameObject::GetSoundParameters(float &volume, float &pan)
 {
-    float volume;
-    float pan;
-
     if(this == kexGame::cLocal->Player()->Actor())
     {
         volume = 128;
@@ -122,7 +119,7 @@ void kexGameObject::PlaySound(const char *snd)
         dist = listenOrg.DistanceSq(origin);
         if(dist > SOUND_DISTANCE)
         {
-            return;
+            return false;
         }
 
         volume = 128 - ((dist / SOUND_DISTANCE) * 128);
@@ -133,7 +130,94 @@ void kexGameObject::PlaySound(const char *snd)
     kexMath::Clamp(volume, 0, 128);
     kexMath::Clamp(pan, -128, 128);
 
+    return true;
+}
+
+//
+// kexGameObject::PlaySound
+//
+
+void kexGameObject::PlaySound(const char *snd)
+{
+    float volume;
+    float pan;
+
+    if(!GetSoundParameters(volume, pan))
+    {
+        return;
+    }
+
     kex::cSound->Play((void*)snd, (int)volume, (int)pan, this);
+}
+
+//
+// kexGameObject::StopSound
+//
+
+void kexGameObject::StopSound(void)
+{
+    for(int i = 0; i < kex::cSound->NumSources(); ++i)
+    {
+        if(kex::cSound->GetRefObject(i) != this)
+        {
+            continue;
+        }
+
+        kex::cSound->Stop(i);
+    }
+}
+
+//
+// kexGameObject::PlayLoopingSound
+//
+
+void kexGameObject::PlayLoopingSound(const char *snd)
+{
+    float volume;
+    float pan;
+
+    for(int i = 0; i < kex::cSound->NumSources(); ++i)
+    {
+        if(kex::cSound->GetRefObject(i) != this)
+        {
+            continue;
+        }
+
+        if(kex::cSound->SourceLooping(i))
+        {
+            // only one looping source per object allowed
+            return;
+        }
+    }
+
+    if(!GetSoundParameters(volume, pan))
+    {
+        return;
+    }
+
+    kex::cSound->Play((void*)snd, (int)volume, (int)pan, this, true);
+}
+
+//
+// kexGameObject::StopLoopingSounds
+//
+
+void kexGameObject::StopLoopingSounds(void)
+{
+    for(int i = 0; i < kex::cSound->NumSources(); ++i)
+    {
+        if(kex::cSound->GetRefObject(i) != this)
+        {
+            continue;
+        }
+
+        if(!kex::cSound->SourceLooping(i))
+        {
+            continue;
+        }
+
+        kex::cSound->Stop(i);
+    }
 }
 
 //

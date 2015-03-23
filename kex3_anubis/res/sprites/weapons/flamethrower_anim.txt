@@ -527,6 +527,7 @@ flamethrower_fire
     frame
     {
         // ##000    0  128
+        action A_PlayLoopingLocalSound("sounds/fthrowfire.wav")
         action A_FireProjectile("Proj_Flame", 0, 0, -48, 80, 16)
         action A_ConsumeAmmo(1)
         fullbright
@@ -604,6 +605,7 @@ flamethrower_idle
     frame
     {
         // ##000    0    0
+        action A_StopLoopingSounds()
         sprites
         {
             { "weapons/flamethrower", 0,   -115,    6,    0 }

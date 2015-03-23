@@ -78,7 +78,7 @@ void kexSound::UpdateSource(const int handle, const int volume, const int sep)
 // kexSound::Play
 //
 
-void kexSound::Play(void *data, const int volume, const int sep, kexObject *ref)
+void kexSound::Play(void *data, const int volume, const int sep, kexObject *ref, bool bLooping)
 {
 }
 
@@ -95,6 +95,15 @@ void kexSound::Stop(const int handle)
 //
 
 bool kexSound::Playing(const int handle)
+{
+    return false;
+}
+
+//
+// kexSound::SourceLooping
+//
+
+bool kexSound::SourceLooping(const int handle)
 {
     return false;
 }
