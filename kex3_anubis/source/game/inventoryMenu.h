@@ -40,7 +40,6 @@ private:
     void                    DrawKeys(void);
     void                    DrawAutomap(void);
 
-    kexTexture              *backTexture;
     kexTexture              *keyTextures[2][4];
     kexTexture              *artifactTextures[6];
     kexTexture              *weaponTextures[NUMPLAYERWEAPONS];

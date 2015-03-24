@@ -90,7 +90,7 @@ void kexRenderScreen::SetAspectDimentions(float &x, float &y, float &width, floa
 
 void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const float y,
                                   byte r, byte g, byte b, byte a,
-                                  const int fixedWidth, const int fixedHeight)
+                                  const float fixedWidth, const float fixedHeight)
 {
     float texwidth;
     float texheight;
@@ -122,7 +122,7 @@ void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const floa
 //
 
 void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const float y,
-                                  const int fixedWidth, const int fixedHeight)
+                                  const float fixedWidth, const float fixedHeight)
 {
     DrawTexture(texture, x, y, 255, 255, 255, 255, fixedWidth, fixedHeight);
 }
@@ -134,7 +134,7 @@ void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const floa
 //
 
 void kexRenderScreen::DrawTexture(const char *name, const float x, const float y,
-                                  const int fixedWidth, const int fixedHeight)
+                                  const float fixedWidth, const float fixedHeight)
 {
     kexTexture *texture = kexRender::cTextures->Cache(name, TC_CLAMP, TF_NEAREST);
     DrawTexture(texture, x, y, fixedWidth, fixedHeight);
@@ -216,13 +216,9 @@ void kexRenderScreen::DrawQuad(float x, float w, float y, float h,
                                float tu1, float tu2, float tv1, float tv2,
                                byte r, byte g, byte b, byte a)
 {
-    dglBegin(GL_QUADS);
-    dglColor4ub(r, g, b, a);
-    dglTexCoord2f(tu1, tv1); dglVertex2f(x,   y);
-    dglTexCoord2f(tu1, tv2); dglVertex2f(x,   y+h);
-    dglTexCoord2f(tu2, tv2); dglVertex2f(x+w, y+h);
-    dglTexCoord2f(tu2, tv1); dglVertex2f(x+w, y);
-    dglEnd();
+    kexRender::cVertList->BindDrawPointers();
+    kexRender::cVertList->AddQuad(x, y, 0, w, h, tu1, tv1, tu2, tv2, r, g, b, a);
+    kexRender::cVertList->DrawElements();
 }
 
 //

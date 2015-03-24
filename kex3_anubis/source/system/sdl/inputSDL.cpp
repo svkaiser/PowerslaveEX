@@ -22,6 +22,7 @@
 
 #define DEAD_ZONE (32768 / 3)
 #define NUM_VIRTUAL_BUTTONS 15
+#define NUM_JOY_AXIS 6
 
 // If this bit is set in a configuration file axis value, the axis is
 // not actually a joystick axis, but instead is a "button axis". This
@@ -83,6 +84,8 @@ public:
 private:
     virtual void        CloseJoystickDevice(void);
 
+    static kexCvar      cvarProfileJoyButtons;
+
     void                CalibrateJoystickAxis(void);
     const bool          IsJoystickAxisButton(int physbutton);
     const int           GetJoystickAxis(const int index);
@@ -103,7 +106,7 @@ private:
     Uint8               lastmbtn;
     SDL_Joystick        *joystick;
     int                 joystick_index;
-    int                 joystick_axisoffset[6];
+    int                 joystick_axisoffset[NUM_JOY_AXIS];
     int                 joystick_oldbuttons;
 };
 
@@ -115,6 +118,9 @@ kexInput *kex::cInput = &inputSystem;
 int kexInputSDL::joystick_physical_buttons[NUM_VIRTUAL_BUTTONS] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
 };
+
+kexCvar kexInputSDL::cvarProfileJoyButtons("in_profilejoybuttons", CVF_BOOL, "0",
+                                           "Display joystick button ID in console when pressed");
 
 //
 // kexInputSDL::kexInputSDL
@@ -208,7 +214,7 @@ void kexInputSDL::CalibrateJoystickAxis(void)
         return;
     }
 
-    numaxis = MIN(SDL_JoystickNumAxes(joystick), 6);
+    numaxis = MIN(SDL_JoystickNumAxes(joystick), NUM_JOY_AXIS);
 
     for(i = 0; i < numaxis; ++i)
     {
@@ -289,7 +295,7 @@ void kexInputSDL::ReadMouse(void)
 
 const int kexInputSDL::GetJoystickAxis(const int index)
 {
-    if(index < 0 || index >= 6)
+    if(index < 0 || index >= NUM_JOY_AXIS)
     {
         return 0;
     }
@@ -484,7 +490,7 @@ const int kexInputSDL::GetJoystickButtonsState(void)
     }
 
     // I am going to assume, at most, that the most number of axis a joystick can have is 5
-    for(i = 0; i < 5; ++i)
+    for(i = 0; i < NUM_JOY_AXIS; ++i)
     {
         if(i >= SDL_JoystickNumAxes(joystick))
         {
@@ -501,7 +507,7 @@ const int kexInputSDL::GetJoystickButtonsState(void)
             }
             else
             {
-                result |= 1 << (NUM_VIRTUAL_BUTTONS + 5 + i);
+                result |= 1 << (NUM_VIRTUAL_BUTTONS + NUM_JOY_AXIS + i);
             }
         }
     }
@@ -521,7 +527,7 @@ const int kexInputSDL::GetJoystickButtonsState(void)
         {
             if(axis & (1 << j))
             {
-                result |= 1 << (NUM_VIRTUAL_BUTTONS + 10 + j);
+                result |= 1 << (NUM_VIRTUAL_BUTTONS + (NUM_JOY_AXIS*2) + j);
             }
         }
     }
@@ -552,6 +558,11 @@ void kexInputSDL::JoystickButtonEvent(void)
         {
             if(bits & (1 << i))
             {
+                if(cvarProfileJoyButtons.GetBool())
+                {
+                    kex::cSystem->DPrintf("%i\n", i);
+                }
+
                 ev.type = ev_joybtndown;
                 ev.data1 = i;
                 kex::cSession->EventQueue().Push(&ev);

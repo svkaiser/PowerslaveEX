@@ -12,46 +12,22 @@
 // GNU General Public License for more details.
 //
 
-#ifndef __JOYSTICK_H__
-#define __JOYSTICK_H__
+#ifndef __MENU_PANEL_H__
+#define __MENU_PANEL_H__
 
-typedef enum
+class kexMenuPanel
 {
-    KJSB_UNDEFINED  = -1,
-    KJSB_0,
-    KJSB_1,
-    KJSB_2,
-    KJSB_3,
-    KJSB_4,
-    KJSB_5,
-    KJSB_6,
-    KJSB_7,
-    KJSB_8,
-    KJSB_9,
-    KJSB_10,
-    KJSB_11,
-    KJSB_12,
-    KJSB_13,
-    KJSB_14,
-    KJSB_15,
-    KJSB_16,
-    KJSB_17,
-    KJSB_18,
-    KJSB_19,
-    KJSB_20,
-    KJSB_21,
-    KJSB_22,
-    KJSB_23,
-    KJSB_24,
-    KJSB_25,
-    KJSB_26,
-    KJSB_27,
-    KJSB_28,
-    KJSB_29,
-    KJSB_30,
-    KJSB_31,
+public:
+    kexMenuPanel(void);
+    ~kexMenuPanel(void);
     
-    NUMJOYSTICKBUTTONS
-} joystickButtons_t;
+    void                    Init(void);
+    void                    DrawPanel(const float x, const float y, const float w, const float h,
+                                      const float borderSize);
+    void                    DrawInset(const float x, const float y, const float w, const float h);
+    
+private:
+    kexTexture              *bgTexture;
+};
 
 #endif

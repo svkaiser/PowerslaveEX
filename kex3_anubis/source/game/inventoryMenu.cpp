@@ -19,6 +19,7 @@
 #include "game.h"
 #include "localization.h"
 #include "renderMain.h"
+#include "menuPanel.h"
 #include "inventoryMenu.h"
 
 //
@@ -44,7 +45,6 @@ kexInventoryMenu::~kexInventoryMenu(void)
 void kexInventoryMenu::Init(void)
 {
     kexStr str;
-    backTexture = kexRender::cTextures->Cache("gfx/menu/menuback.png", TC_CLAMP, TF_NEAREST);
 
     font = kexFont::Alloc("smallfont");
 
@@ -215,7 +215,9 @@ bool kexInventoryMenu::CursorOnRightArrow(float &mx, float &my)
 
 void kexInventoryMenu::DrawBackground(void)
 {
-    kexRender::cScreen->DrawTexture(backTexture, 32, -8, 255, 255, 255, 255);
+    kexGame::cMenuPanel->DrawPanel(32, 24, 256, 192, 4);
+    kexGame::cMenuPanel->DrawInset(152, 39, 117, 87);
+    kexGame::cMenuPanel->DrawInset(52, 160, 217, 41);
 }
 
 //

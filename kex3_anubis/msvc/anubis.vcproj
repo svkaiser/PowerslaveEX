@@ -453,6 +453,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\menuPanel.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\mover.cpp"
 					>
 				</File>
@@ -816,6 +820,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\menu.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\menuPanel.h"
 					>
 				</File>
 				<File

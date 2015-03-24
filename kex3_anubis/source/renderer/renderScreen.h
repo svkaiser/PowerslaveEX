@@ -23,11 +23,11 @@ public:
     void                SetAspectDimentions(float &x, float &y, float &width, float &height);
     void                DrawTexture(kexTexture *texture, const float x, const float y,
                                     byte r, byte g, byte b, byte a,
-                                    const int fixedWidth = 0, const int fixedHeight = 0);
+                                    const float fixedWidth = 0, const float fixedHeight = 0);
     void                DrawTexture(kexTexture *texture, const float x, const float y,
-                                    const int fixedWidth = 0, const int fixedHeight = 0);
+                                    const float fixedWidth = 0, const float fixedHeight = 0);
     void                DrawTexture(const char *name, const float x, const float y,
-                                    const int fixedWidth = 0, const int fixedHeight = 0);
+                                    const float fixedWidth = 0, const float fixedHeight = 0);
     void                DrawStretchPic(kexTexture *texture, const float x, const float y,
                                        const float width, const float height);
     void                DrawStretchPic(const char *name, const float x, const float y,

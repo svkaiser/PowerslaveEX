@@ -256,10 +256,17 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         velocity.y = 0;
     }
 
-    //velocity.x += (forward.x * cmd->Movement()[0]) * PMOVE_SPEED;
-    //velocity.y += (forward.y * cmd->Movement()[0]) * PMOVE_SPEED;
-    //velocity.x += (right.x * cmd->Movement()[1]) * PMOVE_SPEED;
-    //velocity.y += (right.y * cmd->Movement()[1]) * PMOVE_SPEED;
+    if(cmd->Movement()[0] != 0)
+    {
+        velocity.x += (forward.x * cmd->Movement()[0]) * PMOVE_SPEED;
+        velocity.y += (forward.y * cmd->Movement()[0]) * PMOVE_SPEED;
+    }
+
+    if(cmd->Movement()[1] != 0)
+    {
+        velocity.x += (right.x * cmd->Movement()[1]) * PMOVE_SPEED;
+        velocity.y += (right.y * cmd->Movement()[1]) * PMOVE_SPEED;
+    }
 
     if(cmd->Buttons() & BC_FORWARD)
     {
@@ -657,7 +664,7 @@ void kexPlayer::UpdateViewBob(void)
     else
     {
         if( cmd.Buttons() & (BC_FORWARD|BC_BACKWARD|BC_STRAFELEFT|BC_STRAFERIGHT) ||
-            actor->Flags() & AF_INWATER)
+            actor->Flags() & AF_INWATER || (cmd.Movement()[0] != 0 || cmd.Movement()[1] != 0))
         {
             float speed = (actor->Flags() & AF_INWATER) ? 0.25f : 1;
 

@@ -22,6 +22,7 @@
 #include "mover.h"
 #include "titlescreen.h"
 #include "playLoop.h"
+#include "menuPanel.h"
 #include "localization.h"
 #include "mapEditor.h"
 
@@ -332,6 +333,7 @@ void kexGameLocal::Init(void)
     actorDefs.LoadFilesInDirectory("defs/actors/");
     weaponDef.LoadFile("defs/weaponInfo.txt");
     
+    kexGame::cMenuPanel->Init();
     kexGame::cScriptManager->Init();
     kexGame::cActionDefManager->RegisterActions();
 }

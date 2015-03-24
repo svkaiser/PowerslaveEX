@@ -21,6 +21,7 @@ class kexTranslation;
 class kexPlayLoop;
 class kexRenderView;
 class kexMover;
+class kexMenuPanel;
 
 typedef enum
 {
@@ -260,6 +261,7 @@ public:
     static kexScriptManager     *cScriptManager;
     static kexActionDefManager  *cActionDefManager;
     static kexActorFactory      *cActorFactory;
+    static kexMenuPanel         *cMenuPanel;
 };
 
 #endif
