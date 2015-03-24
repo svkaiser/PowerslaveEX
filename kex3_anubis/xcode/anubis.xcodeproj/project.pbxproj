@@ -14,6 +14,7 @@
 		4178638F1A8E6B2C00329895 /* mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4178638D1A8E6B2C00329895 /* mover.cpp */; };
 		419342261A8BB38B002C7F8E /* gameSysObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419342251A8BB38B002C7F8E /* gameSysObject.cpp */; };
 		419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419C3BB21A89100400C19D68 /* actionDef.cpp */; };
+		41A534511AC2092E00A666D5 /* menuPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A5344F1AC2092E00A666D5 /* menuPanel.cpp */; };
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
 		41B5F0FE1A9BA76600698014 /* spring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F0FC1A9BA76600698014 /* spring.cpp */; };
@@ -180,6 +181,8 @@
 		419342251A8BB38B002C7F8E /* gameSysObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gameSysObject.cpp; path = ../../source/script/objects/gameSysObject.cpp; sourceTree = "<group>"; };
 		419C3BB21A89100400C19D68 /* actionDef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actionDef.cpp; path = ../../source/game/actionDef.cpp; sourceTree = "<group>"; };
 		419C3BB31A89100400C19D68 /* actionDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actionDef.h; path = ../../source/game/actionDef.h; sourceTree = "<group>"; };
+		41A5344F1AC2092E00A666D5 /* menuPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = menuPanel.cpp; path = ../../source/game/menuPanel.cpp; sourceTree = "<group>"; };
+		41A534501AC2092E00A666D5 /* menuPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = menuPanel.h; path = ../../source/game/menuPanel.h; sourceTree = "<group>"; };
 		41B3A5471A5DEE84006DCCB9 /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actions.cpp; sourceTree = "<group>"; };
 		41B3A5481A5DEE84006DCCB9 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
 		41B3A54A1A5DEEBC006DCCB9 /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = console.cpp; sourceTree = "<group>"; };
@@ -432,6 +435,7 @@
 				411358D01AB75FE200916706 /* inventoryMenu.cpp */,
 				41C7FC321A5AFB84003864CB /* localization.cpp */,
 				41C7FC341A5AFB84003864CB /* menu.cpp */,
+				41A5344F1AC2092E00A666D5 /* menuPanel.cpp */,
 				4178638D1A8E6B2C00329895 /* mover.cpp */,
 				4111E0801A8D4B19000D5B22 /* pickup.cpp */,
 				41C7FC361A5AFB84003864CB /* player.cpp */,
@@ -455,6 +459,7 @@
 				411358D11AB75FE200916706 /* inventoryMenu.h */,
 				41C7FC331A5AFB84003864CB /* localization.h */,
 				41C7FC351A5AFB84003864CB /* menu.h */,
+				41A534501AC2092E00A666D5 /* menuPanel.h */,
 				4178638E1A8E6B2C00329895 /* mover.h */,
 				4111E0811A8D4B19000D5B22 /* pickup.h */,
 				41C7FC371A5AFB84003864CB /* player.h */,
@@ -898,6 +903,7 @@
 				41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */,
 				41C7FC271A5AFB6E003864CB /* object.cpp in Sources */,
 				41B96A9F1A697996004397E6 /* spriteMake.cpp in Sources */,
+				41A534511AC2092E00A666D5 /* menuPanel.cpp in Sources */,
 				4178638F1A8E6B2C00329895 /* mover.cpp in Sources */,
 				41BE76CD1A851A4700DD893E /* defs.cpp in Sources */,
 				41B7765C1A83EA5E008C8F23 /* systemObject.cpp in Sources */,
