@@ -190,7 +190,7 @@ COMMAND(bind)
     int key;
     int i;
     char cmd[1024];
-    keycmd_t *keycmd;
+    cmdLink_t *keycmd;
     cmdlist_t *cmdlist;
 
     argc = kex::cCommands->GetArgc();
@@ -219,7 +219,7 @@ COMMAND(bind)
     
     keycmd = &kex::cActions->KeyCommands()[key];
     
-    for(cmdlist = keycmd->cmds; cmdlist; cmdlist = cmdlist->next)
+    for(cmdlist = keycmd->Next(); cmdlist; cmdlist = cmdlist->link.Next())
     {
         if(!strcmp(cmdlist->command, cmd))
         {
@@ -238,6 +238,24 @@ COMMAND(bind)
 
 COMMAND(unbind)
 {
+    int argc;
+    int key;
+    
+    argc = kex::cCommands->GetArgc();
+    
+    if(argc != 3)
+    {
+        kex::cSystem->Printf("unbind <key> <command>\n");
+        return;
+    }
+    
+    if((key = actions.GetKeyCode(kex::cCommands->GetArgv(1))) <= -1)
+    {
+        kex::cSystem->Warning("\"%s\" isn't a valid key\n", kex::cCommands->GetArgv(1));
+        return;
+    }
+    
+    actions.UnBindCommand(key, kex::cCommands->GetArgv(2));
 }
 
 //
@@ -328,22 +346,53 @@ char *kexInputAction::GetKeyName(int key)
 
 void kexInputAction::BindCommand(int key, const char *string)
 {
-    keycmd_t *keycmd;
+    cmdLink_t *keycmd;
     cmdlist_t *newcmd;
     int actionid;
 
     keycmd = &keycmds[key];
     newcmd = (cmdlist_t*)Mem_Malloc(sizeof(cmdlist_t), hb_static);
     newcmd->command = Mem_Strdup(string, hb_static);
-    newcmd->next = keycmd->cmds;
+    newcmd->link.SetData(newcmd);
+    newcmd->link.AddBefore(*keycmd);
     newcmd->action = NULL;
 
     if((actionid = FindAction(string)) != -1)
     {
         newcmd->action = &keyActions[actionid];
     }
+}
 
-    keycmd->cmds = newcmd;
+//
+// kexInputAction::UnBindCommand
+//
+
+void kexInputAction::UnBindCommand(int key, const char *string)
+{
+    cmdLink_t *keycmd;
+    cmdlist_t *cmd;
+    cmdlist_t *next;
+    
+    if(key < 0 || key >= MAX_KEYS)
+    {
+        return;
+    }
+    
+    keycmd = &keycmds[key];
+    next = NULL;
+    
+    for(cmd = keycmd->Next(); cmd; cmd = next)
+    {
+        next = cmd->link.Next();
+        
+        if(!kexStr::Compare(cmd->command, string))
+        {
+            cmd->link.Remove();
+            
+            Mem_Free(cmd->command);
+            Mem_Free(cmd);
+        }
+    }
 }
 
 //
@@ -352,7 +401,7 @@ void kexInputAction::BindCommand(int key, const char *string)
 
 void kexInputAction::ListBindings(void)
 {
-    keycmd_t *keycmd;
+    cmdLink_t *keycmd;
     cmdlist_t *cmd;
     char *tmp;
 
@@ -367,7 +416,7 @@ void kexInputAction::ListBindings(void)
             continue;
         }
 
-        for(cmd = keycmd->cmds; cmd; cmd = cmd->next)
+        for(cmd = keycmd->Next(); cmd; cmd = cmd->link.Next())
         {
             kex::cSystem->CPrintf(COLOR_GREEN, "%s : \"%s\"\n", tmp, cmd->command);
         }
@@ -414,7 +463,7 @@ bool kexInputAction::ActionExists(const char *name)
 
 void kexInputAction::ExecuteCommand(int key, bool keyup, const int eventType)
 {
-    keycmd_t *keycmd;
+    cmdLink_t *keycmd;
     cmdlist_t *cmd;
 
     if(eventType == ev_mousedown || eventType == ev_mouseup)
@@ -428,7 +477,7 @@ void kexInputAction::ExecuteCommand(int key, bool keyup, const int eventType)
 
     keycmd = &keycmds[key];
 
-    for(cmd = keycmd->cmds; cmd; cmd = cmd->next)
+    for(cmd = keycmd->Next(); cmd; cmd = cmd->link.Next())
     {
         if(cmd->action != NULL)
         {
@@ -486,7 +535,7 @@ void kexInputAction::AddAction(byte id, const char *name)
 
 void kexInputAction::WriteBindings(FILE *file)
 {
-    keycmd_t *keycmd;
+    cmdLink_t *keycmd;
     cmdlist_t *cmd;
     char *tmp;
 
@@ -499,7 +548,7 @@ void kexInputAction::WriteBindings(FILE *file)
             continue;
         }
 
-        for(cmd = keycmd->cmds; cmd; cmd = cmd->next)
+        for(cmd = keycmd->Next(); cmd; cmd = cmd->link.Next())
         {
             fprintf(file, "bind %s \"%s\"\n", tmp,
                 (cmd->action == NULL) ? cmd->command : cmd->action->name.c_str());

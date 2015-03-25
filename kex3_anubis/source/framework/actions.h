@@ -21,6 +21,8 @@
 
 #define MAX_KEYS    (NUMKEYBOARDKEYS + NUMMOUSEBUTTONS + NUMJOYSTICKBUTTONS)
 
+typedef kexLinklist<struct cmdlist_s> cmdLink_t;
+
 typedef struct keyaction_s
 {
     byte                keyid;
@@ -31,13 +33,8 @@ typedef struct cmdlist_s
 {
     char                *command;
     keyaction_t         *action;
-    struct cmdlist_s    *next;
+    cmdLink_t           link;
 } cmdlist_t;
-
-typedef struct
-{
-    cmdlist_t           *cmds;
-} keycmd_t;
 
 class kexInputAction
 {
@@ -52,13 +49,14 @@ public:
     int                     GetKeyCode(char *key);
     char                    *GetKeyName(int key);
     void                    BindCommand(int key, const char *string);
+    void                    UnBindCommand(int key, const char *string);
     void                    ListBindings(void);
     
     const int               GetAction(const int id);
-    keycmd_t                *KeyCommands(void) { return keycmds; }
+    cmdLink_t               *KeyCommands(void) { return keycmds; }
 
 private:
-    keycmd_t                keycmds[MAX_KEYS];
+    cmdLink_t               keycmds[MAX_KEYS];
     kexArray<keyaction_t>   keyActions;
     kexArray<int>           heldActions;
 };
