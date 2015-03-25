@@ -246,7 +246,16 @@ void kexSession::RunGame(void)
             DrawFrame();
 
             // decide how many game ticks to run for next loop
-            ticsToRun = GetNextTickCount();
+
+            if(!bForceSingleFrame)
+            {
+                ticsToRun = GetNextTickCount();
+            }
+            else
+            {
+                ticsToRun = 1;
+                bForceSingleFrame = false;
+            }
 
             // handle garbage collection
             Mem_GC();

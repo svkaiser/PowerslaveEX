@@ -256,16 +256,22 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         velocity.y = 0;
     }
 
-    if(cmd->Movement()[0] != 0)
+    if(!(cmd->Buttons() & (BC_FORWARD|BC_BACKWARD)))
     {
-        velocity.x += (forward.x * cmd->Movement()[0]) * PMOVE_SPEED;
-        velocity.y += (forward.y * cmd->Movement()[0]) * PMOVE_SPEED;
+        if(cmd->Movement()[0] != 0)
+        {
+            velocity.x += (forward.x * cmd->Movement()[0]) * PMOVE_SPEED;
+            velocity.y += (forward.y * cmd->Movement()[0]) * PMOVE_SPEED;
+        }
     }
 
-    if(cmd->Movement()[1] != 0)
+    if(!(cmd->Buttons() & (BC_STRAFELEFT|BC_STRAFERIGHT)))
     {
-        velocity.x += (right.x * cmd->Movement()[1]) * PMOVE_SPEED;
-        velocity.y += (right.y * cmd->Movement()[1]) * PMOVE_SPEED;
+        if(cmd->Movement()[1] != 0)
+        {
+            velocity.x += (right.x * cmd->Movement()[1]) * PMOVE_SPEED;
+            velocity.y += (right.y * cmd->Movement()[1]) * PMOVE_SPEED;
+        }
     }
 
     if(cmd->Buttons() & BC_FORWARD)
@@ -397,6 +403,19 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
     if(cmd->Buttons() & BC_FORWARD)
     {
         velocity += (forward * PMOVE_WATER_SPEED);
+    }
+    else if(cmd->Movement()[0] > 0)
+    {
+        velocity += (forward * cmd->Movement()[0]) * PMOVE_WATER_SPEED;
+    }
+
+    if(cmd->Buttons() & BC_BACKWARD)
+    {
+        velocity -= (forward * (PMOVE_WATER_SPEED*0.5f));
+    }
+    else if(cmd->Movement()[0] < 0)
+    {
+        velocity += (forward * cmd->Movement()[0]) * (PMOVE_WATER_SPEED*0.5f);
     }
 
     if(sector->ceilingFace->flags & FF_WATER)
@@ -819,7 +838,7 @@ kexActor *kexPlayer::AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitc
             aYaw = aDir.ToYaw();
             aPitch = -aDir.ToPitch();
 
-            if(kexMath::Fabs(yaw.Diff(aYaw)) > (aimAngle * 0.5f)) continue;
+            if(kexMath::Fabs(yaw.Diff(aYaw)) > aimAngle) continue;
             if(kexMath::Fabs(pitch.Diff(aPitch)) > aimAngle) continue;
 
             bestYaw = aYaw;

@@ -50,6 +50,7 @@ public:
     kexInventoryMenu            &InventoryMenu(void) { return inventoryMenu; }
     
 private:
+    void                        FadeToBlack(void);
     void                        InitWater(void);
     void                        UpdateWater(void);
     void                        DrawAutomap(void);

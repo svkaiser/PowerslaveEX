@@ -150,6 +150,7 @@ void kexPlayLoop::Start(void)
 
 void kexPlayLoop::Stop(void)
 {
+    FadeToBlack();
     kexGame::cLocal->World()->UnloadMap();
 }
 
@@ -214,6 +215,50 @@ bool kexPlayLoop::ProcessInput(inputEvent_t *ev)
     }
 
     return false;
+}
+
+//
+// kexPlayLoop::FadeToBlack
+//
+
+void kexPlayLoop::FadeToBlack(void)
+{
+    int fade = 0xff;
+    float w, h;
+    float y;
+    kexFBO fadeScreen;
+
+    fadeScreen.InitColorAttachment(0);
+    fadeScreen.CopyBackBuffer();
+    fadeScreen.BindImage();
+
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+    kexRender::cBackend->SetState(GLSTATE_CULL, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, false);
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+    kexRender::cBackend->SetCull(GLCULL_BACK);
+
+    w = (float)kexMath::RoundPowerOfTwo(kex::cSystem->VideoWidth());
+    h = (float)kexMath::RoundPowerOfTwo(kex::cSystem->VideoHeight());
+    y = (float)kex::cSystem->VideoHeight() - h;
+
+    kexRender::cBackend->SetOrtho();
+    kexRender::cVertList->BindDrawPointers();
+
+    while(fade > 0)
+    {
+        kexRender::cBackend->ClearBuffer();
+
+        kexRender::cVertList->AddQuad(0, y, 0, w, h, 0, 1, 1, 0, fade, fade, fade, 255);
+
+        kexRender::cVertList->DrawElements();
+        kexRender::cBackend->SwapBuffers();
+
+        fade -= 8;
+    }
+
+    fadeScreen.UnBindImage();
 }
 
 //

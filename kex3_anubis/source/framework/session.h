@@ -45,6 +45,7 @@ public:
     kexQueue<inputEvent_t>      &EventQueue(void) { return eventQueue; }
     const bool                  CursorVisible(void) const { return bShowCursor; }
     void                        ToggleCursor(const bool b) { bShowCursor = b; }
+    void                        ForceSingleFrame(void) { bForceSingleFrame = true; }
 
 private:
     int                         GetNextTickCount(void);
@@ -63,6 +64,7 @@ private:
     int                         ticks;
     bool                        bShowCursor;
     kexTexture                  *cursorTexture;
+    bool                        bForceSingleFrame;
 
     kexQueue<inputEvent_t>      eventQueue;
 };

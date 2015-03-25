@@ -436,6 +436,8 @@ void kexGameLocal::Tick(void)
     {
         StopSounds();
         gameLoop->Stop();
+
+        kex::cSession->ForceSingleFrame();
         
         switch(pendingGameState)
         {
