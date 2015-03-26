@@ -51,7 +51,8 @@ void kexStr::CheckSize(int size, bool bKeepString)
 void kexStr::CopyNew(const char *string, int len)
 {
     CheckSize(len+1, false);
-    strcpy(charPtr, string);
+    strncpy(charPtr, string, len);
+    charPtr[len] = 0;
     length = len;
 }
 

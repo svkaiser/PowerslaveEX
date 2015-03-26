@@ -22,6 +22,14 @@
 #include "menuPanel.h"
 #include "inventoryMenu.h"
 
+#define NUM_ARTIFACTS   6
+#define BUTTON_OFFSET   39
+#define LEFT_ARROW_X    156
+#define RIGHT_ARROW_Y   256
+#define ARROW_OFFSET    78
+#define PIC_X           210
+#define PIC_Y           83
+
 //
 // kexInventoryMenu::kexInventoryMenu
 //
@@ -106,13 +114,13 @@ void kexInventoryMenu::Update(void)
     switch(categorySelected)
     {
     case 2:
-        kexMath::Clamp(artifactSelected, 0, 5);
+        kexMath::Clamp(artifactSelected, 0, NUM_ARTIFACTS-1);
 
         if(p->Artifacts() != 0 && !(p->Artifacts() & BIT(artifactSelected)))
         {
-            for(int i = 0; i < 6; ++i)
+            for(int i = 0; i < NUM_ARTIFACTS; ++i)
             {
-                int arti = (artifactSelected + i) % 6;
+                int arti = (artifactSelected + i) % NUM_ARTIFACTS;
 
                 if(p->Artifacts() & BIT(arti))
                 {
@@ -142,7 +150,7 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
         {
             float mx = (float)kex::cInput->MouseX();
             float my = (float)kex::cInput->MouseY();
-            float y = 39;
+            float y = BUTTON_OFFSET;
         
             kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
 
@@ -170,9 +178,9 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                 break;
 
             case 2:
-                if(artifactSelected < 5)
+                if(artifactSelected < NUM_ARTIFACTS-1)
                 {
-                    for(int i = artifactSelected+1; i < 6; ++i)
+                    for(int i = artifactSelected+1; i < NUM_ARTIFACTS; ++i)
                     {
                         if(p->Artifacts() & BIT(i))
                         {
@@ -239,7 +247,7 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
 
 void kexInventoryMenu::DrawLeftArrow(void)
 {
-    kexRender::cScreen->DrawTexture(arrows[0], 156, 78, 255, 255, 255, 255);
+    kexRender::cScreen->DrawTexture(arrows[0], LEFT_ARROW_X, ARROW_OFFSET, 255, 255, 255, 255);
 }
 
 //
@@ -248,7 +256,7 @@ void kexInventoryMenu::DrawLeftArrow(void)
 
 void kexInventoryMenu::DrawRightArrow(void)
 {
-    kexRender::cScreen->DrawTexture(arrows[1], 256, 78, 255, 255, 255, 255);
+    kexRender::cScreen->DrawTexture(arrows[1], RIGHT_ARROW_Y, ARROW_OFFSET, 255, 255, 255, 255);
 }
 
 //
@@ -257,8 +265,8 @@ void kexInventoryMenu::DrawRightArrow(void)
 
 bool kexInventoryMenu::CursorOnLeftArrow(float &mx, float &my)
 {
-    return(mx >= 156 && mx <= 156 + arrows[0]->OriginalWidth() &&
-           my >= 78  && my <= 78  + arrows[0]->OriginalHeight());
+    return(mx >= LEFT_ARROW_X && mx <= LEFT_ARROW_X + arrows[0]->OriginalWidth() &&
+           my >= ARROW_OFFSET  && my <= ARROW_OFFSET  + arrows[0]->OriginalHeight());
 }
 
 //
@@ -267,8 +275,8 @@ bool kexInventoryMenu::CursorOnLeftArrow(float &mx, float &my)
 
 bool kexInventoryMenu::CursorOnRightArrow(float &mx, float &my)
 {
-    return(mx >= 256 && mx <= 256 + arrows[1]->OriginalWidth() &&
-           my >= 78  && my <= 78  + arrows[1]->OriginalHeight());
+    return(mx >= RIGHT_ARROW_Y && mx <= RIGHT_ARROW_Y + arrows[1]->OriginalWidth() &&
+           my >= ARROW_OFFSET  && my <= ARROW_OFFSET  + arrows[1]->OriginalHeight());
 }
 
 //
@@ -278,7 +286,7 @@ bool kexInventoryMenu::CursorOnRightArrow(float &mx, float &my)
 void kexInventoryMenu::DrawBackground(void)
 {
     kexGame::cMenuPanel->DrawPanel(32, 24, 256, 192, 4);
-    kexGame::cMenuPanel->DrawInset(152, 39, 117, 87);
+    kexGame::cMenuPanel->DrawInset(152, BUTTON_OFFSET, 117, 87);
     kexGame::cMenuPanel->DrawInset(52, 160, 217, 41);
 }
 
@@ -293,7 +301,7 @@ void kexInventoryMenu::DrawButtons(void)
         float offs = (24 * (float)i);
         kexTexture *texture = buttonTexture[bButtonPressed[i]];
 
-        kexRender::cScreen->DrawTexture(texture, 52, 39 + offs, 255, 255, 255, 255);
+        kexRender::cScreen->DrawTexture(texture, 52, BUTTON_OFFSET + offs, 255, 255, 255, 255);
         font->DrawString(kexGame::cLocal->Translation()->GetString(44+i), 56, 43 + offs, 1, false);
     }
 }
@@ -338,13 +346,13 @@ void kexInventoryMenu::DrawAutomap(void)
     if(kexGame::cLocal->PlayLoop()->AutomapEnabled())
     {
         DrawLeftArrow();
-        DrawCenteredImage(mapOpenTexture, 210, 83);
+        DrawCenteredImage(mapOpenTexture, PIC_X, PIC_Y);
         font->DrawString(kexGame::cLocal->Translation()->GetString(55), 160, 176, 1, true);
     }
     else
     {
         DrawRightArrow();
-        DrawCenteredImage(mapClosedTexture, 210, 83);
+        DrawCenteredImage(mapClosedTexture, PIC_X, PIC_Y);
         font->DrawString(kexGame::cLocal->Translation()->GetString(54), 160, 176, 1, true);
     }
 }
@@ -370,9 +378,9 @@ void kexInventoryMenu::DrawArtifacts(void)
         return;
     }
 
-    if(artifactSelected < 5)
+    if(artifactSelected < NUM_ARTIFACTS-1)
     {
-        for(int i = artifactSelected+1; i < 6; ++i)
+        for(int i = artifactSelected+1; i < NUM_ARTIFACTS; ++i)
         {
             if(p->Artifacts() & BIT(i))
             {
@@ -393,7 +401,7 @@ void kexInventoryMenu::DrawArtifacts(void)
         }
     }
 
-    DrawCenteredImage(artifactTextures[artifactSelected], 210, 83);
+    DrawCenteredImage(artifactTextures[artifactSelected], PIC_X, PIC_Y);
     label = kexGame::cLocal->Translation()->GetString(65 + artifactSelected);
     label.Split(labels, '\n');
 
