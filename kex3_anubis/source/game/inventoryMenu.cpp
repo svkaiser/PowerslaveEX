@@ -23,6 +23,7 @@
 #include "inventoryMenu.h"
 
 #define NUM_ARTIFACTS   6
+#define BUTTON_X        52
 #define BUTTON_OFFSET   39
 #define LEFT_ARROW_X    156
 #define RIGHT_ARROW_Y   256
@@ -223,7 +224,7 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                     continue;
                 }
 
-                if(mx >= 52 && mx <= 52 + buttonTexture[0]->OriginalWidth() &&
+                if(mx >= BUTTON_X && mx <= BUTTON_X + buttonTexture[0]->OriginalWidth() &&
                    my >= y  && my <= y  + buttonTexture[0]->OriginalHeight())
                 {
                     bButtonPressed[0] = bButtonPressed[1] = bButtonPressed[2] = bButtonPressed[3] = false;
@@ -287,7 +288,7 @@ void kexInventoryMenu::DrawBackground(void)
 {
     kexGame::cMenuPanel->DrawPanel(32, 24, 256, 192, 4);
     kexGame::cMenuPanel->DrawInset(152, BUTTON_OFFSET, 117, 87);
-    kexGame::cMenuPanel->DrawInset(52, 160, 217, 41);
+    kexGame::cMenuPanel->DrawInset(BUTTON_X, 160, 217, 41);
 }
 
 //
@@ -301,7 +302,7 @@ void kexInventoryMenu::DrawButtons(void)
         float offs = (24 * (float)i);
         kexTexture *texture = buttonTexture[bButtonPressed[i]];
 
-        kexRender::cScreen->DrawTexture(texture, 52, BUTTON_OFFSET + offs, 255, 255, 255, 255);
+        kexRender::cScreen->DrawTexture(texture, BUTTON_X, BUTTON_OFFSET + offs, 255, 255, 255, 255);
         font->DrawString(kexGame::cLocal->Translation()->GetString(44+i), 56, 43 + offs, 1, false);
     }
 }
