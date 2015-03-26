@@ -66,7 +66,7 @@ void kexInventoryMenu::Init(void)
         }
     }
 
-    for(int i = 0; i < 6; ++i)
+    for(int i = 0; i < NUM_ARTIFACTS; ++i)
     {
         str = kexStr("gfx/menu/menuartifact_") + i + kexStr(".png");
         artifactTextures[i] = kexRender::cTextures->Cache(str, TC_CLAMP, TF_NEAREST);
