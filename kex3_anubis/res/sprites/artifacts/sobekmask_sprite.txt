@@ -1,0 +1,5 @@
+texture "sprites/artifacts/sobekmask.png"
+
+// working\sobekmask\sprite0465.tga
+sprite 0 0 0 40 45
+

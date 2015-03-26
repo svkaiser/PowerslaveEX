@@ -1,0 +1,8 @@
+texture "sprites/artifacts/anklets.png"
+
+// working\anklets\sprite0438.tga
+sprite 0 0 0 64 49
+
+// working\anklets\sprite0439.tga
+sprite 1 64 0 16 49
+

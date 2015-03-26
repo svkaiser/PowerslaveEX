@@ -1,0 +1,5 @@
+texture "sprites/artifacts/shawl.png"
+
+// working\shawl\sprite0553.tga
+sprite 0 0 0 40 62
+

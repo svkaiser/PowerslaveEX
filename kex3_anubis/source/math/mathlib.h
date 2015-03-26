@@ -67,6 +67,7 @@ public:
     static bool             FCmp(float f1, float f2);
     static void             Clamp(float &f, const float min, const float max);
     static void             Clamp(int &i, const int min, const int max);
+    static void             Clamp(short &i, const short min, const short max);
     static void             Clamp(byte &b, const byte min, const byte max);
 
     static void             CubicCurve(const kexVec3 &start, const kexVec3 &end, const float time,

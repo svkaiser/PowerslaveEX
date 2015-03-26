@@ -39,6 +39,8 @@ private:
     void                    DrawButtons(void);
     void                    DrawKeys(void);
     void                    DrawAutomap(void);
+    void                    DrawArtifacts(void);
+    void                    DrawCenteredImage(kexTexture *texture, const float x, const float y);
 
     kexTexture              *keyTextures[2][4];
     kexTexture              *artifactTextures[6];
@@ -50,7 +52,8 @@ private:
     kexFont                 *font;
     bool                    bActive;
     bool                    bButtonPressed[4];
-    int                     categorySelected;
+    short                   categorySelected;
+    short                   artifactSelected;
 };
 
 #endif

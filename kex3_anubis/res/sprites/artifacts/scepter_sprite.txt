@@ -1,0 +1,5 @@
+texture "sprites/artifacts/scepter.png"
+
+// working\scepter\sprite0409.tga
+sprite 0 0 0 16 62
+

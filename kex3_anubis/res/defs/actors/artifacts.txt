@@ -11,3 +11,73 @@ Arti_Sandals 34
     type                    0
     pickupMessage           "$str_100"
 }
+
+Arti_Mask 35
+{
+    classname               "kexArtifactPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/sobekmask_loop"
+    fullbright              1
+    touchable               1
+    type                    1
+    pickupMessage           "$str_101"
+}
+
+Arti_Shawl 36
+{
+    classname               "kexArtifactPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/shawl_loop"
+    fullbright              1
+    touchable               1
+    type                    2
+    pickupMessage           "$str_102"
+}
+
+Arti_Anklets 37
+{
+    classname               "kexArtifactPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/anklets_loop"
+    fullbright              1
+    touchable               1
+    type                    3
+    pickupMessage           "$str_103"
+}
+
+Arti_Scepter 38
+{
+    classname               "kexArtifactPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/scepter_loop"
+    fullbright              1
+    touchable               1
+    type                    4
+    pickupMessage           "$str_104"
+}
+
+Arti_Feather 39
+{
+    classname               "kexArtifactPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/feather_loop"
+    fullbright              1
+    touchable               1
+    type                    5
+    pickupMessage           "$str_105"
+}

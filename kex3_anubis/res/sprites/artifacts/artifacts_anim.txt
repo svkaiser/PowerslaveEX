@@ -11,3 +11,72 @@ sandals_loop
         }
     }
 }
+
+sobekmask_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/sobekmask", 0,    -19,  -77,    0 }
+        }
+
+    }
+}
+
+shawl_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/shawl", 0,    -18,  -94,    0 }
+        }
+
+    }
+}
+
+anklets_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/anklets", 0,    -38,  -81,    0 }
+            { "artifacts/anklets", 1,     26,  -81,    0 }
+        }
+
+    }
+}
+
+scepter_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/scepter", 0,     -7,  -94,    0 }
+        }
+    }
+}
+
+feather_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/feather", 0,    -27,  -67,    0 }
+        }
+    }
+}

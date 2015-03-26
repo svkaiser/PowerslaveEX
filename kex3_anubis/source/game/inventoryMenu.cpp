@@ -88,6 +88,7 @@ void kexInventoryMenu::Reset(void)
 {
     bActive = false;
     categorySelected = 0;
+    artifactSelected = 0;
     bButtonPressed[0] = true;
     bButtonPressed[1] = false;
     bButtonPressed[2] = false;
@@ -100,6 +101,31 @@ void kexInventoryMenu::Reset(void)
 
 void kexInventoryMenu::Update(void)
 {
+    kexPlayer *p = kexGame::cLocal->Player();
+
+    switch(categorySelected)
+    {
+    case 2:
+        kexMath::Clamp(artifactSelected, 0, 5);
+
+        if(p->Artifacts() != 0 && !(p->Artifacts() & BIT(artifactSelected)))
+        {
+            for(int i = 0; i < 6; ++i)
+            {
+                int arti = (artifactSelected + i) % 6;
+
+                if(p->Artifacts() & BIT(arti))
+                {
+                    artifactSelected = arti;
+                    break;
+                }
+            }
+        }
+        break;
+
+    default:
+        break;
+    }
 }
 
 //
@@ -108,6 +134,8 @@ void kexInventoryMenu::Update(void)
 
 bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
 {
+    kexPlayer *p = kexGame::cLocal->Player();
+
     if(ev->type == ev_mousedown)
     {
         if(ev->data1 == KMSB_LEFT)
@@ -137,6 +165,40 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                         kexGame::cLocal->PlaySound("sounds/select.wav");
                         kexGame::cLocal->PlayLoop()->ToggleAutomap(true);
                         return true;
+                    }
+                }
+                break;
+
+            case 2:
+                if(artifactSelected < 5)
+                {
+                    for(int i = artifactSelected+1; i < 6; ++i)
+                    {
+                        if(p->Artifacts() & BIT(i))
+                        {
+                           if(CursorOnRightArrow(mx, my))
+                            {
+                                artifactSelected = i;
+                                kexGame::cLocal->PlaySound("sounds/select.wav");
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                if(artifactSelected > 0)
+                {
+                    for(int i = artifactSelected-1; i >= 0; --i)
+                    {
+                        if(p->Artifacts() & BIT(i))
+                        {
+                            if(CursorOnLeftArrow(mx, my))
+                            {
+                                artifactSelected = i;
+                                kexGame::cLocal->PlaySound("sounds/select.wav");
+                            }
+                            break;
+                        }
                     }
                 }
                 break;
@@ -254,6 +316,20 @@ void kexInventoryMenu::DrawKeys(void)
 }
 
 //
+// kexInventoryMenu::DrawCenteredImage
+//
+
+void kexInventoryMenu::DrawCenteredImage(kexTexture *texture, const float x, const float y)
+{
+    float w, h;
+
+    w = (float)texture->OriginalWidth();
+    h = (float)texture->OriginalHeight();
+
+    kexRender::cScreen->DrawTexture(texture, x-(w*0.5f), y-(h*0.5f), 255, 255, 255, 255);
+}
+
+//
 // kexInventoryMenu::DrawAutomap
 //
 
@@ -262,14 +338,69 @@ void kexInventoryMenu::DrawAutomap(void)
     if(kexGame::cLocal->PlayLoop()->AutomapEnabled())
     {
         DrawLeftArrow();
-        kexRender::cScreen->DrawTexture(mapOpenTexture, 182, 56, 255, 255, 255, 255);
+        DrawCenteredImage(mapOpenTexture, 210, 83);
         font->DrawString(kexGame::cLocal->Translation()->GetString(55), 160, 176, 1, true);
     }
     else
     {
         DrawRightArrow();
-        kexRender::cScreen->DrawTexture(mapClosedTexture, 196, 64, 255, 255, 255, 255);
+        DrawCenteredImage(mapClosedTexture, 210, 83);
         font->DrawString(kexGame::cLocal->Translation()->GetString(54), 160, 176, 1, true);
+    }
+}
+
+//
+// kexInventoryMenu::DrawArtifacts
+//
+
+void kexInventoryMenu::DrawArtifacts(void)
+{
+    kexPlayer *p = kexGame::cLocal->Player();
+    kexStrList labels;
+    kexStr label;
+
+    if(p->Artifacts() == 0)
+    {
+        font->DrawString(kexGame::cLocal->Translation()->GetString(64), 152, 164, 1, true);
+        return;
+    }
+
+    if(!(p->Artifacts() & BIT(artifactSelected)))
+    {
+        return;
+    }
+
+    if(artifactSelected < 5)
+    {
+        for(int i = artifactSelected+1; i < 6; ++i)
+        {
+            if(p->Artifacts() & BIT(i))
+            {
+                DrawRightArrow();
+                break;
+            }
+        }
+    }
+    if(artifactSelected > 0)
+    {
+        for(int i = artifactSelected-1; i >= 0; --i)
+        {
+            if(p->Artifacts() & BIT(i))
+            {
+                DrawLeftArrow();
+                break;
+            }
+        }
+    }
+
+    DrawCenteredImage(artifactTextures[artifactSelected], 210, 83);
+    label = kexGame::cLocal->Translation()->GetString(65 + artifactSelected);
+    label.Split(labels, '\n');
+
+    for(unsigned int i = 0; i < labels.Length(); ++i)
+    {
+        float height = font->StringHeight(labels[i], 1, 0);
+        font->DrawString(labels[i], 152, 164 + (height * (float)i), 1, true);
     }
 }
 
@@ -297,6 +428,10 @@ void kexInventoryMenu::Display(void)
     {
     case 0:
         DrawAutomap();
+        break;
+
+    case 2:
+        DrawArtifacts();
         break;
 
     default:
