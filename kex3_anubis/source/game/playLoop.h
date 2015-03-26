@@ -51,6 +51,8 @@ public:
     
 private:
     void                        FadeToBlack(void);
+    void                        FadeIn(void);
+    void                        DrawFadeIn(void);
     void                        InitWater(void);
     void                        UpdateWater(void);
     void                        DrawAutomap(void);
@@ -60,6 +62,7 @@ private:
     void                        DrawAutomapWalls(kexRenderView &view);
 
     int                         ticks;
+    short                       fadeInTicks;
     kexHud                      hud;
     kexInventoryMenu            inventoryMenu;
     kexRenderView               renderView;

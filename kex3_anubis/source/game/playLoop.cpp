@@ -138,10 +138,13 @@ void kexPlayLoop::Start(void)
     InitWater();
 
     automapZoom = 2048;
+    fadeInTicks = 0xff;
     
     bShowAutomap = false;
     bMapAll = false;
     bPaused = false;
+
+    kex::cSession->ForceSingleFrame();
 }
 
 //
@@ -150,6 +153,7 @@ void kexPlayLoop::Start(void)
 
 void kexPlayLoop::Stop(void)
 {
+    fadeInTicks = 0;
     FadeToBlack();
     kexGame::cLocal->World()->UnloadMap();
 }
@@ -180,6 +184,8 @@ void kexPlayLoop::Draw(void)
     DrawAutomap();
     
     hud.Display();
+
+    DrawFadeIn();
 }
 
 //
@@ -188,7 +194,11 @@ void kexPlayLoop::Draw(void)
 
 void kexPlayLoop::Tick(void)
 {
-    if(ticks > 4 && !bPaused && !inventoryMenu.IsActive())
+    if(fadeInTicks > 0)
+    {
+        FadeIn();
+    }
+    else if(ticks > 4 && !bPaused && !inventoryMenu.IsActive())
     {
         kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
@@ -259,6 +269,61 @@ void kexPlayLoop::FadeToBlack(void)
     }
 
     fadeScreen.UnBindImage();
+}
+
+//
+// kexPlayLoop::FadeIn
+//
+
+void kexPlayLoop::FadeIn(void)
+{
+    if(ticks <= 4)
+    {
+        return;
+    }
+
+    fadeInTicks -= 8;
+
+    if(fadeInTicks < 0)
+    {
+        fadeInTicks = 0;
+    }
+}
+
+//
+// kexPlayLoop::DrawFadeIn
+//
+
+void kexPlayLoop::DrawFadeIn(void)
+{
+    float w, h;
+    byte fade;
+
+    if(fadeInTicks <= 0)
+    {
+        return;
+    }
+
+    kexRender::cBackend->SetOrtho();
+    kexRender::cVertList->BindDrawPointers();
+
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+    kexRender::cBackend->SetState(GLSTATE_CULL, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+    kexRender::cBackend->SetCull(GLCULL_BACK);
+
+    w = (float)kexMath::RoundPowerOfTwo(kex::cSystem->VideoWidth());
+    h = (float)kexMath::RoundPowerOfTwo(kex::cSystem->VideoHeight());
+
+    fade = (byte)fadeInTicks;
+    kexMath::Clamp(fade, 0, 0xff);
+
+    kexRender::cTextures->whiteTexture->Bind();
+
+    kexRender::cVertList->AddQuad(0, 0, w, h, 0, 0, 0, fade);
+    kexRender::cVertList->DrawElements();
 }
 
 //
