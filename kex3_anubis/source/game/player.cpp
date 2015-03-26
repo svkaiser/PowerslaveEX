@@ -793,7 +793,7 @@ void kexPlayer::TryUse(void)
 //
 
 kexActor *kexPlayer::AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitch,
-                             const float dist, const float aimAngle)
+                             const float dist, const float aimYaw, const float aimPitch)
 {
     kexStack<mapSector_t*> *sectorList;
     kexActor *aimActor;
@@ -838,8 +838,8 @@ kexActor *kexPlayer::AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitc
             aYaw = aDir.ToYaw();
             aPitch = -aDir.ToPitch();
 
-            if(kexMath::Fabs(yaw.Diff(aYaw)) > aimAngle) continue;
-            if(kexMath::Fabs(pitch.Diff(aPitch)) > aimAngle) continue;
+            if(kexMath::Fabs(yaw.Diff(aYaw)) > aimYaw) continue;
+            if(kexMath::Fabs(pitch.Diff(aPitch)) > aimPitch) continue;
 
             bestYaw = aYaw;
             bestPitch = aPitch;

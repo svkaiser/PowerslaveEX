@@ -234,7 +234,7 @@ DECLARE_KEX_ACTION(kexActionHitScan)
     if(actor->InstanceOf(&kexPuppet::info))
     {
         kexPlayer *p = static_cast<kexPuppet*>(actor)->Owner();
-        p->AutoAim(start, yaw, pitch, dist, 0.125f);
+        p->AutoAim(start, yaw, pitch, dist, 0.0625f, 0.125f);
     }
 
     kexVec3::ToAxis(&forward, 0, 0, yaw + an1, pitch + an2, 0);
@@ -290,7 +290,7 @@ DECLARE_KEX_ACTION(kexActionPlayerMelee)
     yaw = actor->Yaw();
     pitch = actor->Pitch();
 
-    player->AutoAim(start, yaw, pitch, dist, 0.25f);
+    player->AutoAim(start, yaw, pitch, dist, 0.25f, 0.25f);
 
     kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
     end = start + (forward * dist);
