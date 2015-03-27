@@ -24,7 +24,7 @@ kexCvar cvarAutoAim("g_autoaim", CVF_BOOL|CVF_CONFIG, "1", "Enable auto aiming")
 #define PMOVE_SPEED             0.976f
 #define PMOVE_WATER_SPEED       0.48828125f
 #define PMOVE_SPEED_JUMP        10.25f
-#define PMOVE_JUMP_BOOST        1.5f
+#define PMOVE_JUMP_BOOST        1.4878f
 #define PMOVE_MAX_JUMPTICKS     13
 
 const int16_t kexPlayer::maxHealth = 200;
@@ -142,20 +142,40 @@ void kexPuppet::OnDamage(kexActor *instigator)
 }
 
 //
+// kexPuppet::CheckFallDamage
+//
+
+void kexPuppet::CheckFallDamage(void)
+{
+    float amt = velocity.z + 28.5f;
+
+    if(amt >= 0)
+    {
+        return;
+    }
+
+    InflictDamage(NULL, (int)(-amt * 16.0f));
+}
+
+//
 // kexPuppet::Jump
 //
 
 void kexPuppet::Jump(kexPlayerCmd *cmd)
 {
-    if(cmd->Buttons() & BC_JUMP && !(sector->floorFace->flags & FF_WATER))
+    if(cmd->Buttons() & BC_JUMP)
     {
         if(!(playerFlags & PF_USERJUMPED))
         {
             if(!(playerFlags & PF_JUMPING))
             {
+                if(origin.z - floorHeight >= 1)
+                {
+                    return;
+                }
                 // let the actor object know that
                 // it is now jumping
-                playerFlags |= PF_JUMPING;
+                playerFlags |= (PF_JUMPING|PF_JUMPWASHELD);
 
                 switch(kexRand::Max(5))
                 {
@@ -199,6 +219,8 @@ void kexPuppet::Jump(kexPlayerCmd *cmd)
     }
     else
     {
+        playerFlags &= ~PF_JUMPWASHELD;
+
         // jump key/button was released, check if we're actually moving first
         if((velocity.z >= PMOVE_MIN || velocity.z <= -(PMOVE_MIN * 48)) || playerFlags & PF_JUMPING)
         {
@@ -243,7 +265,16 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     // check for drop-offs
     if(origin.z > floorHeight)
     {
-        velocity.z -= gravity;
+        if(!(playerFlags & PF_JUMPWASHELD) && velocity.z <= 0 &&
+            owner->Artifacts() & PA_SHAWL &&
+            cmd->Buttons() & BC_JUMP)
+        {
+            velocity.z = -4;
+        }
+        else
+        {
+            velocity.z -= gravity;
+        }
     }
 
     if(kexMath::Fabs(velocity.x) < PMOVE_MIN)
@@ -314,6 +345,8 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         {
             owner->LandTime() = velocity.z;
         }
+
+        CheckFallDamage();
 
         origin.z = floorHeight;
         velocity.z = 0;
@@ -728,6 +761,12 @@ void kexPlayer::UpdateAirSupply(void)
 
     if(!(actor->Flags() & AF_INWATER) || actor->PlayerFlags() & PF_INWATERSURFACE)
     {
+        if(actor->PlayerFlags() & PF_NEEDTOGASP)
+        {
+            actor->PlaySound("sounds/pwgasp.wav");
+            actor->PlayerFlags() &= ~PF_NEEDTOGASP;
+        }
+
         airSupplyTime = 0;
         airSupply += 8;
         if(airSupply > 64)
@@ -746,6 +785,12 @@ void kexPlayer::UpdateAirSupply(void)
         {
             airSupplyTime = 0;
             airSupply -= 2;
+
+            if(!(actor->PlayerFlags() & PF_NEEDTOGASP) &&  airSupply <= 48)
+            {
+                actor->PlayerFlags() |= PF_NEEDTOGASP;
+            }
+
             if(airSupply < 0)
             {
                 airSupply = 0;
@@ -1026,6 +1071,14 @@ void kexPlayer::CyclePrevWeapon(void)
 
 void kexPlayer::Tick(void)
 {
+    UpdateAirSupply();
+
+    if(lockTime > 0)
+    {
+        lockTime--;
+        return;
+    }
+
     if(cmd.Buttons() & BC_WEAPONLEFT)
     {
         CyclePrevWeapon();
@@ -1047,14 +1100,6 @@ void kexPlayer::Tick(void)
         kexGame::cLocal->PlayLoop()->ZoomAutomap(128);
     }
 
-    if(lockTime > 0)
-    {
-        lockTime--;
-        return;
-    }
-
     UpdateViewBob();
-    UpdateAirSupply();
-
     weapon.Update();
 }

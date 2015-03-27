@@ -23,7 +23,9 @@ typedef enum
     PF_USERJUMPED       = BIT(1),
     PF_NOCLIP           = BIT(2),
     PF_FLY              = BIT(3),
-    PF_INWATERSURFACE   = BIT(4)
+    PF_INWATERSURFACE   = BIT(4),
+    PF_JUMPWASHELD      = BIT(5),
+    PF_NEEDTOGASP       = BIT(6)
 } playerFlags_t;
 
 class kexActor;
@@ -53,6 +55,7 @@ private:
     void                            GroundMove(kexPlayerCmd *cmd);
     void                            FlyMove(kexPlayerCmd *cmd);
     void                            WaterMove(kexPlayerCmd *cmd);
+    void                            CheckFallDamage(void);
 
     kexPlayer                       *owner;
     unsigned int                    playerFlags;

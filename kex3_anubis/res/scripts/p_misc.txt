@@ -21,13 +21,13 @@
 
 void A_RandomItem(kActor @actor)
 {
-    int r = Math::Rand() & 2;
+    int r = Math::Rand() & 7;
     float x = actor.Origin().x;
     float y = actor.Origin().y;
     float z = actor.Origin().z + actor.Height();
     kActor @obj;
     
-    if(r != 0)
+    if(r > 3)
     {
         return;
     }
@@ -41,7 +41,7 @@ void A_RandomItem(kActor @actor)
         @obj = Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
     }
     
-    if(!(obj is null) && (Math::Rand() & 255) >= 160)
+    if(!(obj is null) && (Math::Rand() & 255) >= 128)
     {
         obj.Scale() = 2.0f;
     }
@@ -80,7 +80,7 @@ void A_RandomVaseItem(kActor @actor)
         return;
     }
     
-    if(!(obj is null) && (Math::Rand() & 255) >= 160)
+    if(!(obj is null) && (Math::Rand() & 255) >= 128)
     {
         obj.Scale() = 2.0f;
     }

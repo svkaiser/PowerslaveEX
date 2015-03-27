@@ -104,7 +104,7 @@ Obj_Fire_Wall_Marsh 100
     stepHeight              48
     scale                   2.0
     spawnAnim               "objects/wall_light_marsh_idle"
-    solid                   1
+    solid                   0
     randomizeFrames         1
     fullbright              1
 }

@@ -169,6 +169,7 @@ void kexAI::Tick(void)
 
 void kexAI::OnRemove(void)
 {
+    ClearBurn();
     kexActor::OnRemove();
 }
 
@@ -178,17 +179,7 @@ void kexAI::OnRemove(void)
 
 void kexAI::OnDeath(kexActor *instigator)
 {
-    for(int i = 0; i < 4; ++i)
-    {
-        if(igniteFlames[i] == NULL)
-        {
-            continue;
-        }
-
-        igniteFlames[i]->Remove();
-        igniteFlames[i] = NULL;
-        igniteTicks[i] = -1;
-    }
+    ClearBurn();
 }
 
 //
@@ -242,6 +233,7 @@ void kexAI::ClearBurn(void)
             continue;
         }
 
+        igniteFlames[i]->SetTarget(NULL);
         igniteFlames[i]->Remove();
         igniteFlames[i] = NULL;
         igniteTicks[i] = -1;
@@ -276,6 +268,7 @@ void kexAI::UpdateBurn(void)
         // flame expired?
         if(--igniteTicks[i] < 0)
         {
+            igniteFlames[i]->SetTarget(NULL);
             igniteFlames[i]->Remove();
             igniteFlames[i] = NULL;
             igniteTicks[i] = -1;
