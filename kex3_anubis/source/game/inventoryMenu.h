@@ -27,6 +27,7 @@ public:
     void                    Update(void);
     bool                    ProcessInput(inputEvent_t *ev);
     void                    Toggle(void);
+    void                    ShowArtifact(const int artifact);
 
     const bool              IsActive(void) { return bActive; }
     
@@ -51,7 +52,10 @@ private:
     kexTexture              *mapOpenTexture;
     kexFont                 *font;
     bool                    bActive;
+    bool                    bFlashArtifact;
+    int                     flashBits;
     bool                    bButtonPressed[4];
+    short                   flashCount;
     short                   categorySelected;
     short                   artifactSelected;
 };
