@@ -1323,6 +1323,7 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
     contactActor = NULL;
 
     sectorList.Set(sector);
+    sector->validcount = validcount;
     sectorCount = 0;
 
     if(bTestActors)
@@ -1353,12 +1354,19 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
                     TraceActorsInSector(&sectors[face->sector]);
                 }
 
+                if(sectors[face->sector].validcount == validcount)
+                {
+                    // we already checked this sector
+                    continue;
+                }
+
                 // test if the trace intersected the portal. immediately enter
                 // next sector if its a water surface
                 if(face->flags & FF_WATER || TraceFacePlane(face, 0, radius, true))
                 {
                     // add to list if the ray passes through the portal
                     sectorList.Set(&sectors[face->sector]);
+                    sectors[face->sector].validcount = validcount;
                     contactSector = &sectors[face->sector];
                 }
             }
@@ -1379,5 +1387,6 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
 
     } while(sectorCount < sectorList.CurrentLength());
 
+    validcount++;
     return (fraction != 1);
 }
