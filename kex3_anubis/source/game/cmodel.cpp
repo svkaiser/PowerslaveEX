@@ -1353,7 +1353,9 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
                     TraceActorsInSector(&sectors[face->sector]);
                 }
 
-                if(TraceFacePlane(face, 0, radius, true))
+                // test if the trace intersected the portal. immediately enter
+                // next sector if its a water surface
+                if(face->flags & FF_WATER || TraceFacePlane(face, 0, radius, true))
                 {
                     // add to list if the ray passes through the portal
                     sectorList.Set(&sectors[face->sector]);
