@@ -92,23 +92,13 @@ void kexDefManager::LoadFilesInDirectory(const char *directory)
 
     for(unsigned int i = 0; i < list.Length(); ++i)
     {
-        kexLexer *lexer;
-
         // must be a valid text file
         if(list[i].IndexOf(".txt\0") == -1)
         {
             continue;
         }
 
-        if(!(lexer = kex::cParser->Open(list[i].c_str())))
-        {
-            continue;
-        }
-
-        Parse(lexer);
-
-        // we're done with the file
-        kex::cParser->Close();
+        LoadFile(list[i].c_str());
     }
 }
 

@@ -235,11 +235,29 @@ int kexPakFile::OpenFile(const char *filename, byte **data, kexHeapBlock &hb) co
 }
 
 //
+// kexPakFile::LoadUserFiles
+//
+
+void kexPakFile::LoadUserFiles(void)
+{
+    int p;
+
+    if((p = kex::cSystem->CheckParam("-file")))
+    {
+        while(++p != kex::cSystem->Argc() && kex::cSystem->Argv()[p][0] != '-')
+        {
+            kex::cPakFiles->LoadZipFile(kex::cSystem->Argv()[p]);
+        }
+    }
+}
+
+//
 // kexPakFile::GetMatchingFiles
 //
 
 void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
 {
+    // for development mode, scan local directories that's not part of the pak file
     if(kex::cvarDeveloper.GetBool())
     {
         DIR *dir;
@@ -271,6 +289,7 @@ void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
         }
     }
 
+    // scan files inside pak files
     for(kpf_t *pack = root; pack; pack = pack->next)
     {
         for(unsigned int i = 0; i < pack->numfiles; i++)
@@ -288,6 +307,27 @@ void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
                 {
                     GetMatchingFiles(list, (kexStr(search) + file->name + "/").c_str());
                     continue;
+                }
+
+                // check to make sure we don't open the same file twice if we
+                // already found it in the local directory
+                if(kex::cvarDeveloper.GetBool())
+                {
+                    bool bFoundDupFile = false;
+
+                    for(unsigned int j = 0; j < list.Length(); ++j)
+                    {
+                        if(list[j] == file->name)
+                        {
+                            bFoundDupFile = true;
+                            break;
+                        }
+                    }
+
+                    if(bFoundDupFile)
+                    {
+                        continue;
+                    }
                 }
 
                 list.Push(file->name);

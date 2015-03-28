@@ -26,6 +26,7 @@ public:
     ~kexPakFile();
 
     void                Shutdown(void);
+    void                LoadUserFiles(void);
     void                LoadZipFile(const char *file);
     int                 OpenFile(const char *filename, byte **data, kexHeapBlock &hb) const;
     int                 OpenExternalFile(const char *name, byte **buffer) const;

@@ -328,6 +328,8 @@ void kexGameLocal::Init(void)
     kex::cActions->AddAction(IA_MAPZOOMOUT, "mapzoomout");
     
     kex::cSystem->ReadConfigFile("config.cfg");
+
+    kex::cPakFiles->LoadUserFiles();
     kex::cPakFiles->LoadZipFile("game.kpf");
 
     actorDefs.LoadFilesInDirectory("defs/actors/");
