@@ -85,7 +85,7 @@ public:
     void                        GiveAmmo(const int weaponID, int16_t amount);
     bool                        GiveHealth(const int amount);
     bool                        GiveKey(const int key);
-    bool                        IncreaseMaxHealth(void);
+    bool                        IncreaseMaxHealth(const int bits);
     bool                        CheckKey(const int key) { return (keys & BIT(key)) != 0; }
 
     kexPlayerCmd                &Cmd(void) { return cmd; }
@@ -93,6 +93,7 @@ public:
     void                        SetActor(kexPuppet *_actor) { actor = _actor; }
     void                        ClearActor(void) { actor = NULL; }
     const int16_t               Ankahs(void) const { return ankahs; }
+    const int16_t               AnkahFlags(void) const { return ankahFlags; }
 
     int16_t                     &Artifacts(void) { return artifacts; }
 
@@ -125,6 +126,7 @@ private:
     kexPlayerCmd                cmd;
 
     int16_t                     ankahs;
+    int16_t                     ankahFlags;
     float                       bob;
     float                       bobTime;
     float                       bobSpeed;

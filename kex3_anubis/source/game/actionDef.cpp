@@ -437,6 +437,17 @@ DECLARE_KEX_ACTION(kexActionConsumeAmmo)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionDie
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionDie)
+{
+    actor->Flags() &= ~(AF_SOLID|AF_SHOOTABLE);
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionPlaySound
 //
 //-----------------------------------------------------------------------------
@@ -864,6 +875,7 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_DestroyAtRest", kexActionDestroyAtRest::info.Create, AAT_FLOAT);
     RegisterAction("A_RadialBlast", kexActionRadialBlast::info.Create, AAT_FLOAT, AAT_INTEGER, AAT_INTEGER);
     RegisterAction("A_ConsumeAmmo", kexActionConsumeAmmo::info.Create, AAT_INTEGER);
+    RegisterAction("A_Die", kexActionDie::info.Create);
     RegisterAction("A_PlayLocalSound", kexActionPlaySound::info.Create, AAT_STRING);
     RegisterAction("A_PlayLoopingLocalSound", kexActionPlayLoopingSound::info.Create, AAT_STRING);
     RegisterAction("A_StopSounds", kexActionStopSound::info.Create);

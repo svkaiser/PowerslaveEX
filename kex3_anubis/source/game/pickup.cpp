@@ -393,6 +393,7 @@ DECLARE_KEX_CLASS(kexMaxHealthPickup, kexPickup)
 
 kexMaxHealthPickup::kexMaxHealthPickup(void)
 {
+    this->bits = 0;
 }
 
 //
@@ -434,12 +435,29 @@ void kexMaxHealthPickup::OnTouch(kexActor *instigator)
     puppet = static_cast<kexPuppet*>(instigator);
     player = puppet->Owner();
 
-    if(!player->IncreaseMaxHealth())
+    if(!player->IncreaseMaxHealth(BIT(bits)))
     {
         return;
     }
 
     kexPickup::OnTouch(instigator);
+}
+
+//
+// kexMaxHealthPickup::Spawn
+//
+
+void kexMaxHealthPickup::Spawn(void)
+{
+    if(definition)
+    {
+        definition->GetInt("bits", bits, 0);
+    }
+
+    if(kexGame::cLocal->Player()->AnkahFlags() & BIT(bits))
+    {
+        Remove();
+    }
 }
 
 //-----------------------------------------------------------------------------

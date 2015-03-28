@@ -112,7 +112,7 @@ void kexPlayerCmd::BuildTurning(void)
 //
 // And there was rejoice...
 //
-
+ 
 void kexPlayerCmd::BuildJoy(void)
 {
     float m1 = (float)joymove[0];
@@ -122,7 +122,7 @@ void kexPlayerCmd::BuildJoy(void)
     if(joyturn[1] == 0) joylookthreshold = 0;
 
     angles[0] += ((float)joyturn[0] * joyturnthreshold) / 2048.0f;
-    angles[1] += ((float)joyturn[1] * joylookthreshold) / 2048.0f;
+    angles[1] += ((float)joyturn[1] * joylookthreshold) / 4096.0f;
 
     if(m1 >= 1 || m1 <= -1)
     {

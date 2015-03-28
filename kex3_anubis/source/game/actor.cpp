@@ -365,6 +365,11 @@ void kexActor::UpdateSprite(void)
     }
     
     frame = &anim->frames[frameID];
+    if(frame->delay == 0xffff)
+    {
+        return;
+    }
+
     ticks += (1.0f / (float)frame->delay) * animSpeed;
 
     if(frame->delay == 0)

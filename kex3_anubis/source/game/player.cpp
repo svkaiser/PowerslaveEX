@@ -649,6 +649,7 @@ kexPlayer::~kexPlayer(void)
 void kexPlayer::Reset(void)
 {
     ankahs = 0;
+    ankahFlags = 0;
     actor = NULL;
 
     cmd.Reset();
@@ -1022,17 +1023,18 @@ bool kexPlayer::GiveKey(const int key)
 // kexPlayer::IncreaseMaxHealth
 //
 
-bool kexPlayer::IncreaseMaxHealth(void)
+bool kexPlayer::IncreaseMaxHealth(const int bits)
 {
     ankahs++;
 
-    if(ankahs > 8)
+    if(ankahs > 8 || ankahFlags & bits)
     {
         ankahs = 8;
         return false;
     }
 
     actor->Health() = maxHealth * (ankahs+1);
+    ankahFlags |= bits;
     return true;
 }
 
