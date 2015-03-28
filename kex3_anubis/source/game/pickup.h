@@ -106,6 +106,21 @@ END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------
 //
+// kexMaxHealthPickup
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexMaxHealthPickup, kexPickup);
+public:
+    kexMaxHealthPickup(void);
+    ~kexMaxHealthPickup(void);
+
+    virtual void                    Tick(void);
+    virtual void                    OnTouch(kexActor *instigator);
+END_KEX_CLASS();
+
+//-----------------------------------------------------------------------------
+//
 // kexKeyPickup
 //
 //-----------------------------------------------------------------------------

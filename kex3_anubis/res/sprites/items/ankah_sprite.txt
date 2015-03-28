@@ -1,0 +1,17 @@
+texture "sprites/items/ankah.png"
+
+// working\ankah\sprite0318.tga
+sprite 0 0 0 36 64
+
+// working\ankah\sprite0319.tga
+sprite 1 36 0 24 64
+
+// working\ankah\sprite0320.tga
+sprite 2 60 0 12 64
+
+// working\ankah\sprite0321.tga
+sprite 3 72 0 40 64
+
+// working\ankah\sprite0322.tga
+sprite 4 112 0 40 64
+

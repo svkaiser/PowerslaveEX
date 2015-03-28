@@ -648,7 +648,6 @@ kexPlayer::~kexPlayer(void)
 
 void kexPlayer::Reset(void)
 {
-    health = maxHealth;
     ankahs = 0;
     actor = NULL;
 
@@ -985,16 +984,18 @@ void kexPlayer::GiveAmmo(const int weaponID, int16_t amount)
 
 bool kexPlayer::GiveHealth(const int amount)
 {
-    if(actor->Health() >= maxHealth)
+    int max = maxHealth * (ankahs+1);
+
+    if(actor->Health() >= max)
     {
         return false;
     }
 
     actor->Health() += amount;
 
-    if(actor->Health() > maxHealth)
+    if(actor->Health() > max)
     {
-        actor->Health() = maxHealth;
+        actor->Health() = max;
     }
 
     return true;
@@ -1014,6 +1015,24 @@ bool kexPlayer::GiveKey(const int key)
     }
 
     this->keys |= keyFlag;
+    return true;
+}
+
+//
+// kexPlayer::IncreaseMaxHealth
+//
+
+bool kexPlayer::IncreaseMaxHealth(void)
+{
+    ankahs++;
+
+    if(ankahs > 8)
+    {
+        ankahs = 8;
+        return false;
+    }
+
+    actor->Health() = maxHealth * (ankahs+1);
     return true;
 }
 

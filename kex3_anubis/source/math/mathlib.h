@@ -49,6 +49,7 @@ public:
     static float            Log(float x) { return logf(x); }
     static float            Floor(float x) { return floorf(x); }
     static float            Ceil(float x) { return ceilf(x); }
+    static float            FMod(float x, float y) { return fmodf(x, y); }
     static float            Deg2Rad(float x) { return x * rad; }
     static float            Rad2Deg(float x) { return x * deg; }
     static float            Sec2MSec(float x) { return x * 1000.0f; }

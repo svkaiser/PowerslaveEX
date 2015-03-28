@@ -164,3 +164,20 @@ Item_Health_Full 52
     multiplier              1.0
     pickupMessage           "$str_107"
 }
+
+Item_Health_Ankah 54
+{
+    classname               "kexMaxHealthPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/ankah_loop"
+    pickupSound             "sounds/fhealth.wav"
+    fullbright              1
+    touchable               1
+    moveable                1
+    gravity                 0
+    floorOffset             48
+    pickupMessage           "$str_108"
+}

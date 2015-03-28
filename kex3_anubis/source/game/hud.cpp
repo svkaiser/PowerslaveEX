@@ -98,9 +98,10 @@ void kexHud::DrawAmmoBar(void)
 void kexHud::DrawHealthBar(void)
 {
     kexCpuVertList *vl = kexRender::cVertList;
+    float maxHealth = (float)kexPlayer::maxHealth;
 
     currentHealth = ((float)player->Actor()->Health() - currentHealth) * 0.125f + currentHealth;
-    float width = currentHealth / (float)kexPlayer::maxHealth;
+    float width = kexMath::FMod(currentHealth, maxHealth) / maxHealth;
 
     kexRender::cTextures->whiteTexture->Bind();
     vl->AddQuad(193, 222, 0, 88 * width, 8, 255, 32, 32, 255);
@@ -312,6 +313,8 @@ void kexHud::DrawDot(const float x, const float y, bool bRedDot, bool bOn)
 void kexHud::DrawDots(void)
 {
     kexPlayer *player = kexGame::cLocal->Player();
+    int health = player->Actor()->Health();
+    int maxHealth;
 
     for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
     {
@@ -323,7 +326,11 @@ void kexHud::DrawDots(void)
         DrawDot(55 + (10.0f * (float)i), 228, false, player->PendingWeapon() == i);
     }
 
-    DrawDot(196, 228, true, true);
+    for(int i = 0; i < player->Ankahs(); ++i)
+    {
+        maxHealth = kexPlayer::maxHealth * (i+1);
+        DrawDot(196 + (10.0f * (float)i), 228, true, health >= maxHealth);
+    }
 }
 
 //

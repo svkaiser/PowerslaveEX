@@ -381,6 +381,69 @@ void kexHealthPickup::Spawn(void)
 
 //-----------------------------------------------------------------------------
 //
+// kexMaxHealthPickup
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexMaxHealthPickup, kexPickup)
+
+//
+// kexMaxHealthPickup::kexMaxHealthPickup
+//
+
+kexMaxHealthPickup::kexMaxHealthPickup(void)
+{
+}
+
+//
+// kexMaxHealthPickup::~kexMaxHealthPickup
+//
+
+kexMaxHealthPickup::~kexMaxHealthPickup(void)
+{
+}
+
+//
+// kexMaxHealthPickup::Tick
+//
+
+void kexMaxHealthPickup::Tick(void)
+{
+    kexPickup::Tick();
+}
+
+//
+// kexMaxHealthPickup::OnTouch
+//
+
+void kexMaxHealthPickup::OnTouch(kexActor *instigator)
+{
+    kexPuppet *puppet;
+    kexPlayer *player;
+
+    if(Removing())
+    {
+        return;
+    }
+
+    if(!instigator->InstanceOf(&kexPuppet::info))
+    {
+        return;
+    }
+
+    puppet = static_cast<kexPuppet*>(instigator);
+    player = puppet->Owner();
+
+    if(!player->IncreaseMaxHealth())
+    {
+        return;
+    }
+
+    kexPickup::OnTouch(instigator);
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexKeyPickup
 //
 //-----------------------------------------------------------------------------
