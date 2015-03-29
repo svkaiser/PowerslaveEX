@@ -91,6 +91,14 @@ void kexSound::Stop(const int handle)
 }
 
 //
+// kexSound::PlayMusic
+//
+
+void kexSound::PlayMusic(const char *name)
+{
+}
+
+//
 // kexSound::Playing
 //
 

@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects;.\..\ogg\libogg\include\;.\..\ogg\libvorbis\include\"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -59,7 +59,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib .\..\angelscript\angelscript\lib\angelscriptd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
+				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib .\..\ogg\libogg\win32\VS2008\Win32\Debug\libogg_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Debug\libvorbis_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Debug\libvorbisfile_static.lib .\..\angelscript\angelscript\lib\angelscriptd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="MSVCRT"
 				GenerateDebugInformation="true"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects"
+				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects;.\..\ogg\libogg\include\;.\..\ogg\libvorbis\include\"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"

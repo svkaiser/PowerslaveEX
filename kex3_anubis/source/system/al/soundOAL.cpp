@@ -18,8 +18,13 @@
 #include "al.h"
 #include "alc.h"
 
+#include "vorbis/vorbisfile.h"
+
 #include "kexlib.h"
 #include "gameObject.h"
+
+#define OGG_BUFFER_SIZE     4096
+#define OGG_BUFFER_COUNT    4
 
 //-----------------------------------------------------------------------------
 //
@@ -57,6 +62,37 @@ private:
 
 //-----------------------------------------------------------------------------
 //
+// Ogg File Class
+//
+//-----------------------------------------------------------------------------
+
+class kexOggFile
+{
+public:
+    kexOggFile(void);
+    ~kexOggFile(void);
+
+    bool                                OpenFile(const char *name);
+    void                                FillBuffer(ALuint &buffer);
+
+    OggVorbis_File                      &File(void) { return oggFile; }
+    vorbis_info                         *VorbisInfo(void) { return vorbisInfo; }
+    kexBinFile                          *BinFile(void) { return binFile; }
+    int64_t                             &Length(void) { return length; }
+    ALuint                              *Buffers(void) { return buffers; }
+
+private:
+    OggVorbis_File                      oggFile;
+    vorbis_info                         *vorbisInfo;
+    kexBinFile                          *binFile;
+    int64_t                             length;
+    ALuint                              buffers[OGG_BUFFER_COUNT];
+    unsigned int                        offset;
+    int                                 format;
+};
+
+//-----------------------------------------------------------------------------
+//
 // Sound Source
 //
 //-----------------------------------------------------------------------------
@@ -90,6 +126,7 @@ private:
     float                               pan;
     float                               pitch;
     kexWavFile                          *wave;
+    kexOggFile                          *ogg;
     kexObject                           *refObject;
 };
 
@@ -112,6 +149,7 @@ public:
     virtual void                    Play(void *data, const int volume, const int sep,
                                          kexObject *ref = NULL, bool bLooping = false);
     virtual void                    Stop(const int handle);
+    virtual void                    PlayMusic(const char *name);
     virtual void                    UpdateSource(const int handle, const int volume, const int sep);
     virtual void                    Update(void);
     virtual const int               NumSources(void) const;
@@ -149,6 +187,15 @@ COMMAND(printsoundinfo)
     kex::cSystem->CPrintf(COLOR_CYAN, "------------- Sound Info -------------\n");
     kex::cSystem->CPrintf(COLOR_GREEN, "Device: %s\n", soundSystem.GetDeviceName());
     kex::cSystem->CPrintf(COLOR_GREEN, "Available Sources: %i\n", soundSystem.GetNumActiveSources());
+}
+
+//
+// testmusic
+//
+
+COMMAND(testmusic)
+{
+    soundSystem.PlayMusic("music/title.ogg");
 }
 
 //-----------------------------------------------------------------------------
@@ -286,6 +333,116 @@ void kexWavFile::Delete(void)
 
 //-----------------------------------------------------------------------------
 //
+// Ogg File Class Routines
+//
+//-----------------------------------------------------------------------------
+
+//
+// kexOggFile::kexOggFile
+//
+
+kexOggFile::kexOggFile(void)
+{
+    this->binFile = NULL;
+    this->vorbisInfo = NULL;
+    this->offset = 0;
+}
+
+//
+// kexOggFile::~kexOggFile
+//
+
+kexOggFile::~kexOggFile(void)
+{
+    if(binFile)
+    {
+        ov_clear(&oggFile);
+        binFile->Close();
+
+        delete binFile;
+        binFile = NULL;
+    }
+
+    alDeleteBuffers(OGG_BUFFER_COUNT, buffers);
+}
+
+//
+// kexOggFile::FillBuffer
+//
+
+void kexOggFile::FillBuffer(ALuint &buffer)
+{
+    char data[OGG_BUFFER_SIZE];
+    int read = 0;
+    int res, section;
+
+    while(read < OGG_BUFFER_SIZE)
+    {
+        res = ov_read(&oggFile, data + read, OGG_BUFFER_SIZE - read, 0, 2, 1, &section);
+        
+        if(res > 0)
+        {
+            read += res;
+            offset += res;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    alBufferData(buffer, format, data, OGG_BUFFER_SIZE, vorbisInfo->rate);
+}
+
+//
+// kexOggFile::OpenFile
+//
+
+bool kexOggFile::OpenFile(const char *name)
+{
+    extern kexCvar cvarBasePath;
+
+    kexStr fPath;
+
+    fPath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), name);
+    fPath.NormalizeSlashes();
+
+    binFile = new kexBinFile;
+
+    if(!binFile->OpenStream(fPath.c_str()) || ov_open(binFile->Handle(), &oggFile, NULL, 0) < 0)
+    {
+        delete binFile;
+        binFile = NULL;
+        kex::cSystem->Warning("kexOggFile::OpenFile: Error opening %s or file not found\n", fPath.c_str());
+        return false;
+    }
+
+    alGenBuffers(OGG_BUFFER_COUNT, buffers);
+
+    vorbisInfo = ov_info(&oggFile , -1);
+    length = ov_pcm_total(&oggFile, -1);
+    ov_pcm_seek(&oggFile, 0);
+
+    switch(vorbisInfo->channels)
+    {
+    case 1:
+        format = AL_FORMAT_MONO16;
+        break;
+    case 2:
+        format = AL_FORMAT_STEREO16;
+        break;
+    }
+
+    for(int i = 0; i < OGG_BUFFER_COUNT; ++i)
+    {
+        FillBuffer(buffers[i]);
+    }
+
+    return true;
+}
+
+//-----------------------------------------------------------------------------
+//
 // Sound Source Routines
 //
 //-----------------------------------------------------------------------------
@@ -328,6 +485,7 @@ bool kexSoundSource::Generate(void)
     volume      = 1.0f;
     pan         = 0;
     refObject   = NULL;
+    ogg         = NULL;
 
     alSourcei(handle, AL_LOOPING, AL_FALSE);
     alSourcei(handle, AL_SOURCE_RELATIVE, AL_TRUE);
@@ -348,6 +506,21 @@ void kexSoundSource::Stop(void)
     {
         alSourceUnqueueBuffers(handle, 1, wave->GetBuffer());
     }
+
+    if(ogg != NULL)
+    {
+        int queued = 0;
+
+        alGetSourcei(handle, AL_BUFFERS_QUEUED, &queued);
+
+        while(queued > 0)
+	    {
+	        ALuint buffer;
+    	    
+	        alSourceUnqueueBuffers(handle, 1, &buffer);
+	        queued--;
+	    }
+    }
 }
 
 //
@@ -367,6 +540,12 @@ void kexSoundSource::Free(void)
     if(refObject && refObject->InstanceOf(&kexGameObject::info))
     {
         static_cast<kexGameObject*>(refObject)->RemoveRef();
+    }
+
+    if(ogg)
+    {
+        delete ogg;
+        ogg = NULL;
     }
 
     refObject   = NULL;
@@ -445,6 +624,44 @@ void kexSoundSource::Update(void)
 
     if(!bInUse)
     {
+        return;
+    }
+
+    if(ogg != NULL)
+    {
+        int processed = 0;
+
+        volume = kex::cSound->cvarMusicVolume.GetFloat();
+        UpdateParameters();
+        alGetSourcei(handle, AL_BUFFERS_PROCESSED, &processed);
+
+        if(processed <= 0)
+        {
+            int queued;
+
+            alGetSourcei(handle, AL_BUFFERS_QUEUED, &queued);
+            alGetSourcei(handle, AL_SOURCE_STATE, &state);
+
+            if(queued == OGG_BUFFER_COUNT && state != AL_PLAYING)
+            {
+                alSourcePlay(handle);
+            }
+        }
+        else
+        {
+            while(processed > 0)
+	        {
+	            ALuint buffer;
+        	    
+	            alSourceUnqueueBuffers(handle, 1, &buffer);
+
+                ogg->FillBuffer(buffer);
+
+	            alSourceQueueBuffers(handle, 1, &buffer);
+	            processed--;
+	        }
+        }
+
         return;
     }
 
@@ -669,6 +886,51 @@ void kexSoundOAL::Stop(const int handle)
 
     sources[handle].Stop();
     sources[handle].Free();
+}
+
+//
+// kexSoundOAL::PlayMusic
+//
+
+void kexSoundOAL::PlayMusic(const char *name)
+{
+    kexSoundSource *src;
+
+    if(!bInitialized)
+    {
+        return;
+    }
+
+    if(!(src = GetAvailableSource()))
+    {
+        sources[0].Stop();
+        sources[0].Free();
+
+        src = &sources[0];
+    }
+
+    src->ogg = new kexOggFile;
+
+    if(!src->ogg->OpenFile(name))
+    {
+        delete src->ogg;
+        src->ogg = NULL;
+        return;
+    }
+
+    src->volume = cvarMusicVolume.GetFloat();
+    src->pan = 0;
+    src->pitch = 1;
+    src->Looping() = false;
+    src->refObject = NULL;
+    src->bPlaying = true;
+
+    alSourceQueueBuffers(src->handle, OGG_BUFFER_COUNT, src->ogg->Buffers());
+    alSourcei(src->handle, AL_SOURCE_RELATIVE, AL_TRUE);
+    alSourcei(src->handle, AL_LOOPING, false);
+
+    src->UpdateParameters();
+    alSourcePlay(src->handle);
 }
 
 //
