@@ -25,9 +25,13 @@ public:
     void                    DrawPanel(const float x, const float y, const float w, const float h,
                                       const float borderSize);
     void                    DrawInset(const float x, const float y, const float w, const float h);
+    void                    DrawButton(const float x, const float y, bool bPressed, const char *text);
+    bool                    PointOnButton(const float x, const float y, const float mx, const float my);
     
 private:
     kexTexture              *bgTexture;
+    kexTexture              *buttonTexture[2];
+    kexFont                 *font;
 };
 
 #endif

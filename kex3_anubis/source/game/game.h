@@ -170,6 +170,7 @@ public:
     void                        RemoveAllGameObjects(void);
     void                        ChangeMap(const char *name);
     void                        PlaySound(const char *name);
+    void                        ToggleQuitConfirm(const bool bToggle);
 
     typedef struct
     {
@@ -220,6 +221,7 @@ private:
     void                        InitWeaponDefs(void);
     void                        StopSounds(void);
     void                        UpdateSounds(void);
+    void                        DrawQuitConfirm(void);
     
     kexFont                     *smallFont;
     kexFont                     *bigFont;
@@ -244,6 +246,7 @@ private:
     kexStr                      pendingMap;
     weaponInfo_t                weaponInfo[NUMPLAYERWEAPONS];
     kexTexture                  *loadingPic;
+    bool                        bQuitConfirm;
 };
 
 //-----------------------------------------------------------------------------

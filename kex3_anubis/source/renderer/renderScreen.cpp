@@ -44,6 +44,17 @@ void kexRenderScreen::CoordsToRenderScreenCoords(float &x, float &y)
 }
 
 //
+// kexRenderScreen::PointOnPic
+//
+
+bool kexRenderScreen::PointOnPic(kexTexture *texture, const float x, const float y,
+                                 const float mx, const float my)
+{
+    return (mx >= x && mx <= x + texture->OriginalWidth() &&
+            my >= y && my <= y  + texture->OriginalHeight());
+}
+
+//
 // kexRenderScreen::SetAspectDimentions
 //
 // Sets up the dimentions that confines to the aspect ratio
@@ -173,6 +184,28 @@ void kexRenderScreen::DrawStretchPic(const char *name, const float x, const floa
 {
     kexTexture *texture = kexRender::cTextures->Cache(name, TC_CLAMP, TF_NEAREST);
     DrawStretchPic(texture, x, y, width, height);
+}
+
+//
+// kexRenderScreen::DrawStretchPic
+//
+// Simply draws a textured quad without being
+// resized to match the aspect ratio
+//
+
+void kexRenderScreen::DrawStretchPic(kexTexture *texture, const float x, const float y,
+                                     const float width, const float height,
+                                     byte r, byte g, byte b, byte a)
+{
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+    kexRender::cBackend->SetState(GLSTATE_CULL, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+    kexRender::cBackend->SetCull(GLCULL_BACK);
+    
+    texture->Bind();
+    DrawQuad(x, width, y, height, 0, 1, 0, 1, r, g, b, a);
 }
 
 //

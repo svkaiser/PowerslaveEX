@@ -149,7 +149,8 @@ MENUITEM(Quit, "Quit", 420, 182, 1,
 {
 },
 {
-    kex::cCommands->Execute("quit");
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
+    kexGame::cLocal->ToggleQuitConfirm(true);
 });
 
 //-----------------------------------------------------------------------------

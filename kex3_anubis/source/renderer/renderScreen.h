@@ -30,6 +30,9 @@ public:
                                     const float fixedWidth = 0, const float fixedHeight = 0);
     void                DrawStretchPic(kexTexture *texture, const float x, const float y,
                                        const float width, const float height);
+    void                DrawStretchPic(kexTexture *texture, const float x, const float y,
+                                       const float width, const float height,
+                                       byte r, byte g, byte b, byte a);
     void                DrawStretchPic(const char *name, const float x, const float y,
                                        const float width, const float height);
     void                DrawFillPic(kexTexture *texture, const float x, const float y,
@@ -39,6 +42,8 @@ public:
                                  byte r, byte g, byte b, byte a);
     void                DrawQuad(float x, float w, float y, float h);
     void                DrawQuad(float x, float w, float y, float h, byte r, byte g, byte b, byte a);
+    bool                PointOnPic(kexTexture *texture, const float x, const float y,
+                                   const float mx, const float my);
     
     static const int    SCREEN_WIDTH;
     static const int    SCREEN_HEIGHT;

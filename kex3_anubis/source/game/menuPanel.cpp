@@ -46,6 +46,10 @@ kexMenuPanel::~kexMenuPanel(void)
 void kexMenuPanel::Init(void)
 {
     bgTexture = kexRender::cTextures->Cache("gfx/menu/menu_bg.png", TC_REPEAT, TF_NEAREST);
+    buttonTexture[0] = kexRender::cTextures->Cache("gfx/menu/menubutton_up.png", TC_CLAMP, TF_NEAREST);
+    buttonTexture[1] = kexRender::cTextures->Cache("gfx/menu/menubutton_down.png", TC_CLAMP, TF_NEAREST);
+
+    font = kexFont::Alloc("smallfont");
 }
 
 //
@@ -120,4 +124,23 @@ void kexMenuPanel::DrawInset(const float x, const float y, const float w, const 
     vl->AddQuad(x+1, y+1, 1, h-2, 0, 0, 0, 255);
 
     vl->DrawElements();
+}
+
+//
+// kexMenuPanel::DrawButton
+//
+
+void kexMenuPanel::DrawButton(const float x, const float y, bool bPressed, const char *text)
+{
+    kexRender::cScreen->DrawTexture(buttonTexture[bPressed], x, y, 255, 255, 255, 255);
+    font->DrawString(text, x+4, y+4, 1, false);
+}
+
+//
+// kexMenuPanel::PointOnButton
+//
+
+bool kexMenuPanel::PointOnButton(const float x, const float y, const float mx, const float my)
+{
+    return kexRender::cScreen->PointOnPic(buttonTexture[0], x, y, mx, my);
 }

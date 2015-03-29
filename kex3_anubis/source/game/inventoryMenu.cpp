@@ -26,7 +26,7 @@
 #define BUTTON_X        52
 #define BUTTON_OFFSET   39
 #define LEFT_ARROW_X    156
-#define RIGHT_ARROW_Y   256
+#define RIGHT_ARROW_X   256
 #define ARROW_OFFSET    78
 #define PIC_X           210
 #define PIC_Y           83
@@ -77,9 +77,6 @@ void kexInventoryMenu::Init(void)
         str = kexStr("gfx/menu/menuweapon_") + i + kexStr(".png");
         weaponTextures[i] = kexRender::cTextures->Cache(str, TC_CLAMP, TF_NEAREST);
     }
-
-    buttonTexture[0] = kexRender::cTextures->Cache("gfx/menu/menubutton_up.png", TC_CLAMP, TF_NEAREST);
-    buttonTexture[1] = kexRender::cTextures->Cache("gfx/menu/menubutton_down.png", TC_CLAMP, TF_NEAREST);
 
     arrows[0] = kexRender::cTextures->Cache("gfx/menu/menuarrow_left.png", TC_CLAMP, TF_NEAREST);
     arrows[1] = kexRender::cTextures->Cache("gfx/menu/menuarrow_right.png", TC_CLAMP, TF_NEAREST);
@@ -262,8 +259,7 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                     continue;
                 }
 
-                if(mx >= BUTTON_X && mx <= BUTTON_X + buttonTexture[0]->OriginalWidth() &&
-                   my >= y  && my <= y  + buttonTexture[0]->OriginalHeight())
+                if(kexGame::cMenuPanel->PointOnButton(BUTTON_X, y, mx, my))
                 {
                     bButtonPressed[0] = bButtonPressed[1] = bButtonPressed[2] = bButtonPressed[3] = false;
                     bButtonPressed[i] = true;
@@ -315,7 +311,7 @@ void kexInventoryMenu::DrawLeftArrow(void)
 
 void kexInventoryMenu::DrawRightArrow(void)
 {
-    kexRender::cScreen->DrawTexture(arrows[1], RIGHT_ARROW_Y, ARROW_OFFSET, 255, 255, 255, 255);
+    kexRender::cScreen->DrawTexture(arrows[1], RIGHT_ARROW_X, ARROW_OFFSET, 255, 255, 255, 255);
 }
 
 //
@@ -324,8 +320,7 @@ void kexInventoryMenu::DrawRightArrow(void)
 
 bool kexInventoryMenu::CursorOnLeftArrow(float &mx, float &my)
 {
-    return(mx >= LEFT_ARROW_X && mx <= LEFT_ARROW_X + arrows[0]->OriginalWidth() &&
-           my >= ARROW_OFFSET  && my <= ARROW_OFFSET  + arrows[0]->OriginalHeight());
+    return kexRender::cScreen->PointOnPic(arrows[0], LEFT_ARROW_X, ARROW_OFFSET, mx, my);
 }
 
 //
@@ -334,8 +329,7 @@ bool kexInventoryMenu::CursorOnLeftArrow(float &mx, float &my)
 
 bool kexInventoryMenu::CursorOnRightArrow(float &mx, float &my)
 {
-    return(mx >= RIGHT_ARROW_Y && mx <= RIGHT_ARROW_Y + arrows[1]->OriginalWidth() &&
-           my >= ARROW_OFFSET  && my <= ARROW_OFFSET  + arrows[1]->OriginalHeight());
+    return kexRender::cScreen->PointOnPic(arrows[1], RIGHT_ARROW_X, ARROW_OFFSET, mx, my);
 }
 
 //
@@ -360,8 +354,8 @@ void kexInventoryMenu::DrawButtons(void)
         float offs = (24 * (float)i);
         kexTexture *texture = buttonTexture[bButtonPressed[i]];
 
-        kexRender::cScreen->DrawTexture(texture, BUTTON_X, BUTTON_OFFSET + offs, 255, 255, 255, 255);
-        font->DrawString(kexGame::cLocal->Translation()->GetString(44+i), 56, 43 + offs, 1, false);
+        kexGame::cMenuPanel->DrawButton(BUTTON_X, BUTTON_OFFSET + offs, bButtonPressed[i],
+            kexGame::cLocal->Translation()->GetString(44+i));
     }
 }
 

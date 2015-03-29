@@ -278,6 +278,7 @@ kexGameLocal::kexGameLocal(void)
     this->gameState         = GS_NONE;
     this->pendingGameState  = GS_NONE;
     this->gameLoop          = &this->gameLoopStub;
+    this->bQuitConfirm      = false;
 
     this->titleScreen       = new kexTitleScreen;
     this->playLoop          = new kexPlayLoop;
@@ -480,7 +481,10 @@ void kexGameLocal::Tick(void)
     
     player->Cmd().BuildCommands();
     
-    gameLoop->Tick();
+    if(!bQuitConfirm)
+    {
+        gameLoop->Tick();
+    }
     
     player->Cmd().Reset();
 
@@ -501,6 +505,12 @@ void kexGameLocal::Draw(void)
     }
     
     gameLoop->Draw();
+
+    if(bQuitConfirm)
+    {
+        DrawQuitConfirm();
+    }
+
     kexGame::cScriptManager->DrawGCStats();
 }
 
@@ -531,6 +541,29 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
     case ev_joybtnup:
         kex::cActions->ExecuteCommand(ev->data1, true, ev->type);
         break;
+    }
+
+    if(bQuitConfirm)
+    {
+        float mx = (float)kex::cInput->MouseX();
+        float my = (float)kex::cInput->MouseY();
+        
+        kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+
+        if(kexGame::cMenuPanel->PointOnButton(48, 128, mx, my))
+        {
+            kex::cCommands->Execute("quit");
+            return true;
+        }
+
+        if(kexGame::cMenuPanel->PointOnButton(184, 128, mx, my))
+        {
+            bQuitConfirm = false;
+            kexGame::cLocal->PlaySound("sounds/select.wav");
+            return true;
+        }
+
+        return false;
     }
 
     return gameLoop->ProcessInput(ev);
@@ -723,4 +756,36 @@ kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const floa
                                    const float yaw, const int sector)
 {
     return kexGame::cActorFactory->Spawn(name, x, y, z, yaw, sector);
+}
+
+//
+// kexGameLocal::ToggleQuitConfirm
+//
+
+void kexGameLocal::ToggleQuitConfirm(const bool bToggle)
+{
+    bQuitConfirm = bToggle;
+}
+
+//
+// kexGameLocal::DrawQuitConfirm
+//
+
+void kexGameLocal::DrawQuitConfirm(void)
+{
+    float w, h;
+
+    kexRender::cScreen->SetOrtho();
+
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 128);
+
+    kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
+    kexGame::cMenuPanel->DrawInset(40, 72, 238, 32);
+    smallFont->DrawString("Are you sure you want to quit?", 144, 82, 1, true);
+
+    kexGame::cMenuPanel->DrawButton(48, 128, false, "Yes");
+    kexGame::cMenuPanel->DrawButton(184, 128, false, "No");
 }
