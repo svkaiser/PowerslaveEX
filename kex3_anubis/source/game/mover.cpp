@@ -874,14 +874,25 @@ void kexFloatingPlatform::Spawn(void)
         moveHeight = 128;
         break;
 
+    case 43:
+        moveSpeed = 1.46875f;
+        moveHeight = 158;
+        kexGame::cLocal->World()->MoveSector(linkedSector, true, 60);
+        kexGame::cLocal->World()->MoveSector(sector, false, 60);
+        break;
+
     case 44:
-        moveSpeed = 1.5f;
-        moveHeight = 128;
+        moveSpeed = 1.9375f;
+        moveHeight = 180;
+        kexGame::cLocal->World()->MoveSector(linkedSector, true, 120);
+        kexGame::cLocal->World()->MoveSector(sector, false, 120);
         break;
 
     case 45:
-        moveSpeed = 2.5f;
-        moveHeight = 128;
+        moveSpeed = 2.40625f;
+        moveHeight = 270;
+        kexGame::cLocal->World()->MoveSector(linkedSector, true, 180);
+        kexGame::cLocal->World()->MoveSector(sector, false, 180);
         break;
 
     case 60:
@@ -897,6 +908,8 @@ void kexFloatingPlatform::Spawn(void)
     case 68:
         moveSpeed = 2;
         moveHeight = 512;
+        kexGame::cLocal->World()->MoveSector(linkedSector, true, 224);
+        kexGame::cLocal->World()->MoveSector(sector, false, 224);
         break;
 
     default:
