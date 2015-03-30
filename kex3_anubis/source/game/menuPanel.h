@@ -28,6 +28,17 @@ public:
     void                    DrawButton(const float x, const float y, bool bPressed, const char *text);
     bool                    PointOnButton(const float x, const float y, const float mx, const float my);
     
+    typedef struct
+    {
+        float x;
+        float y;
+        kexStrList labels;
+        int pressedIndex;
+    } buttonSet_t;
+    
+    bool                    TestPointInButtonSet(buttonSet_t *buttonSet, const float mx, const float my);
+    void                    DrawButtonSet(buttonSet_t *buttonSet);
+    
 private:
     kexTexture              *bgTexture;
     kexTexture              *buttonTexture[2];

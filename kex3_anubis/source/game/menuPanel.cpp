@@ -144,3 +144,46 @@ bool kexMenuPanel::PointOnButton(const float x, const float y, const float mx, c
 {
     return kexRender::cScreen->PointOnPic(buttonTexture[0], x, y, mx, my);
 }
+
+//
+// kexMenuPanel::TestPointInButtonSet
+//
+
+bool kexMenuPanel::TestPointInButtonSet(buttonSet_t *buttonSet, const float mx, const float my)
+{
+    float y = buttonSet->y;
+    
+    for(unsigned int i = 0; i < buttonSet->labels.Length(); ++i)
+    {
+        if(i == buttonSet->pressedIndex)
+        {
+            y += 24;
+            continue;
+        }
+        
+        if(PointOnButton(buttonSet->x, y, mx, my))
+        {
+            buttonSet->pressedIndex = i;
+            return true;
+        }
+        
+        y += 24;
+    }
+    
+    return false;
+}
+
+//
+// kexMenuPanel::DrawButtonSet
+//
+
+void kexMenuPanel::DrawButtonSet(buttonSet_t *buttonSet)
+{
+    for(unsigned int i = 0; i < buttonSet->labels.Length(); ++i)
+    {
+        float offs = (24 * (float)i);
+        bool bPressed = (buttonSet->pressedIndex == i);
+        
+        DrawButton(buttonSet->x, buttonSet->y + offs, bPressed, buttonSet->labels[i].c_str());
+    }
+}

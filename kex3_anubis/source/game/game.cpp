@@ -363,8 +363,8 @@ void kexGameLocal::Start(void)
     kexRender::cBackend->SwapBuffers();
 
     titleScreen->Init();
-    playLoop->Init();
     translation->Init();
+    playLoop->Init();
     spriteManager->Init();
     spriteAnimManager->Init();
 

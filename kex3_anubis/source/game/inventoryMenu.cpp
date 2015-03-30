@@ -82,6 +82,14 @@ void kexInventoryMenu::Init(void)
     arrows[1] = kexRender::cTextures->Cache("gfx/menu/menuarrow_right.png", TC_CLAMP, TF_NEAREST);
     mapClosedTexture = kexRender::cTextures->Cache("gfx/menu/menumap_closed.png", TC_CLAMP, TF_NEAREST);
     mapOpenTexture = kexRender::cTextures->Cache("gfx/menu/menumap_open.png", TC_CLAMP, TF_NEAREST);
+    
+    for(int i = 0; i < 4; ++i)
+    {
+        buttonSet.labels.Push(kexStr(kexGame::cLocal->Translation()->GetString(44+i)));
+    }
+    
+    buttonSet.x = BUTTON_X;
+    buttonSet.y = BUTTON_OFFSET;
 
     Reset();
 }
@@ -98,10 +106,7 @@ void kexInventoryMenu::Reset(void)
     flashBits = 0;
     flashCount = 0;
     bFlashArtifact = false;
-    bButtonPressed[0] = true;
-    bButtonPressed[1] = false;
-    bButtonPressed[2] = false;
-    bButtonPressed[3] = false;
+    buttonSet.pressedIndex = -1;
 }
 
 //
@@ -181,7 +186,6 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
         {
             float mx = (float)kex::cInput->MouseX();
             float my = (float)kex::cInput->MouseY();
-            float y = BUTTON_OFFSET;
         
             kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
 
@@ -251,24 +255,11 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                 break;
             }
 
-            for(int i = 0; i < 4; ++i)
+            if(kexGame::cMenuPanel->TestPointInButtonSet(&buttonSet, mx, my))
             {
-                if(bButtonPressed[i])
-                {
-                    y += 24;
-                    continue;
-                }
-
-                if(kexGame::cMenuPanel->PointOnButton(BUTTON_X, y, mx, my))
-                {
-                    bButtonPressed[0] = bButtonPressed[1] = bButtonPressed[2] = bButtonPressed[3] = false;
-                    bButtonPressed[i] = true;
-                    categorySelected = i;
-                    kexGame::cLocal->PlaySound("sounds/click.wav");
-                    return true;
-                }
-
-                y += 24;
+                categorySelected = buttonSet.pressedIndex;
+                kexGame::cLocal->PlaySound("sounds/click.wav");
+                return true;
             }
         }
     }
@@ -287,11 +278,7 @@ void kexInventoryMenu::ShowArtifact(const int artifact)
     flashBits = 0;
     flashCount = 0;
     bFlashArtifact = true;
-
-    bButtonPressed[0] = false;
-    bButtonPressed[1] = false;
-    bButtonPressed[2] = true;
-    bButtonPressed[3] = false;
+    buttonSet.pressedIndex = 2;
 
     Toggle();
 }
@@ -349,13 +336,7 @@ void kexInventoryMenu::DrawBackground(void)
 
 void kexInventoryMenu::DrawButtons(void)
 {
-    for(int i = 0; i < 4; ++i)
-    {
-        float offs = (24 * (float)i);
-        
-        kexGame::cMenuPanel->DrawButton(BUTTON_X, BUTTON_OFFSET + offs, bButtonPressed[i],
-            kexGame::cLocal->Translation()->GetString(44+i));
-    }
+    kexGame::cMenuPanel->DrawButtonSet(&buttonSet);
 }
 
 //
