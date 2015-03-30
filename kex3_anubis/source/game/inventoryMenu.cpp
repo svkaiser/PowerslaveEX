@@ -352,8 +352,7 @@ void kexInventoryMenu::DrawButtons(void)
     for(int i = 0; i < 4; ++i)
     {
         float offs = (24 * (float)i);
-        kexTexture *texture = buttonTexture[bButtonPressed[i]];
-
+        
         kexGame::cMenuPanel->DrawButton(BUTTON_X, BUTTON_OFFSET + offs, bButtonPressed[i],
             kexGame::cLocal->Translation()->GetString(44+i));
     }

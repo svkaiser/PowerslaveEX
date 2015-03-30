@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -263,52 +263,52 @@
 			isa = PBXGroup;
 			children = (
 				F5D8F60A03389C830112CE8F /* analysis.c */,
-				F5D8F60B03389C830112CE8F /* backends.h */,
 				F5D8F60C03389C830112CE8F /* barkmel.c */,
 				F5D8F60D03389C830112CE8F /* bitrate.c */,
-				F5D8F60E03389C830112CE8F /* bitrate.h */,
 				F5D8F60F03389C830112CE8F /* block.c */,
-				F5D8F61003389C830112CE8F /* books */,
 				F5D8F62303389C830112CE8F /* codebook.c */,
-				F5D8F62403389C830112CE8F /* codebook.h */,
-				F5D8F62503389C830112CE8F /* codec_internal.h */,
 				F5D8F62603389C830112CE8F /* envelope.c */,
-				F5D8F62703389C830112CE8F /* envelope.h */,
 				F5D8F62803389C830112CE8F /* floor0.c */,
 				F5D8F62903389C830112CE8F /* floor1.c */,
-				F5D8F62A03389C830112CE8F /* highlevel.h */,
 				F5D8F62B03389C830112CE8F /* info.c */,
 				F5D8F62C03389C830112CE8F /* lookup.c */,
-				F5D8F62D03389C830112CE8F /* lookup.h */,
-				F5D8F62E03389C830112CE8F /* lookup_data.h */,
 				F5D8F63003389C830112CE8F /* lpc.c */,
-				F5D8F63103389C830112CE8F /* lpc.h */,
 				F5D8F63203389C830112CE8F /* lsp.c */,
-				F5D8F63303389C830112CE8F /* lsp.h */,
 				F5D8F63603389C830112CE8F /* mapping0.c */,
-				F5D8F63703389C830112CE8F /* masking.h */,
 				F5D8F63803389C830112CE8F /* mdct.c */,
-				F5D8F63903389C830112CE8F /* mdct.h */,
 				F5D8F63A03389C830112CE8F /* misc.c */,
-				F5D8F63B03389C830112CE8F /* misc.h */,
-				F5D8F63C03389C830112CE8F /* modes */,
-				F5D8F65103389C830112CE8F /* os.h */,
 				F5D8F65203389C830112CE8F /* psy.c */,
-				F5D8F65303389C830112CE8F /* psy.h */,
 				F5D8F65403389C830112CE8F /* psytune.c */,
 				F5D8F65503389C830112CE8F /* registry.c */,
-				F5D8F65603389C830112CE8F /* registry.h */,
 				F5D8F65703389C830112CE8F /* res0.c */,
-				F5D8F65803389C830112CE8F /* scales.h */,
 				F5D8F65903389C830112CE8F /* sharedbook.c */,
 				F5D8F65A03389C830112CE8F /* smallft.c */,
-				F5D8F65B03389C830112CE8F /* smallft.h */,
 				F5D8F65C03389C830112CE8F /* synthesis.c */,
 				F5D8F65D03389C830112CE8F /* tone.c */,
 				F5D8F65E03389C830112CE8F /* vorbisenc.c */,
 				F5D8F65F03389C830112CE8F /* vorbisfile.c */,
 				F5D8F66003389C830112CE8F /* window.c */,
+				F5D8F60B03389C830112CE8F /* backends.h */,
+				F5D8F60E03389C830112CE8F /* bitrate.h */,
+				F5D8F62403389C830112CE8F /* codebook.h */,
+				F5D8F62503389C830112CE8F /* codec_internal.h */,
+				F5D8F62703389C830112CE8F /* envelope.h */,
+				F5D8F62A03389C830112CE8F /* highlevel.h */,
+				F5D8F62D03389C830112CE8F /* lookup.h */,
+				F5D8F62E03389C830112CE8F /* lookup_data.h */,
+				F5D8F63103389C830112CE8F /* lpc.h */,
+				F5D8F63303389C830112CE8F /* lsp.h */,
+				F5D8F63703389C830112CE8F /* masking.h */,
+				F5D8F63903389C830112CE8F /* mdct.h */,
+				F5D8F63B03389C830112CE8F /* misc.h */,
+				F5D8F65103389C830112CE8F /* os.h */,
+				F5D8F65303389C830112CE8F /* psy.h */,
+				F5D8F65603389C830112CE8F /* registry.h */,
+				F5D8F65803389C830112CE8F /* scales.h */,
+				F5D8F65B03389C830112CE8F /* smallft.h */,
 				F5D8F66103389C830112CE8F /* window.h */,
+				F5D8F61003389C830112CE8F /* books */,
+				F5D8F63C03389C830112CE8F /* modes */,
 			);
 			name = lib;
 			path = ../lib;
@@ -524,11 +524,20 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
 			buildConfigurationList = 730F23F3091827B200AB638C /* Build configuration list for PBXProject "Vorbis" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* vorbis */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				730F23A1091827B100AB638C /* Vorbis */,
 				738835E30B18F870005C7A69 /* libvorbis (static) */,
@@ -649,6 +658,7 @@
 		730F23ED091827B100AB638C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -663,6 +673,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Vorbis;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -677,6 +688,7 @@
 		730F23EE091827B100AB638C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -689,6 +701,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Vorbis;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -705,17 +718,14 @@
 			buildSettings = {
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
 			name = Debug;
 		};
 		730F23F5091827B200AB638C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				OTHER_CFLAGS = (
@@ -723,7 +733,7 @@
 					"-ffast-math",
 					"-falign-loops=16",
 				);
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
 			name = Release;
 		};
@@ -737,11 +747,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					../../ogg/include,
+					../../libogg/include,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = vorbis;
+				SDKROOT = macosx;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -754,11 +765,12 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					../../ogg/include,
+					../../libogg/include,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = vorbis;
+				SDKROOT = macosx;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -774,11 +786,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					../lib,
-					../../ogg/include,
+					../../libogg/include,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = vorbisenc;
+				SDKROOT = macosx;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -792,11 +805,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					../lib,
-					../../ogg/include,
+					../../libogg/include,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = vorbisenc;
+				SDKROOT = macosx;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -811,11 +825,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					../../ogg/include,
+					../../libogg/include,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = vorbisfile;
+				SDKROOT = macosx;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -828,11 +843,12 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					../../ogg/include,
+					../../libogg/include,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = vorbisfile;
+				SDKROOT = macosx;
 				ZERO_LINK = NO;
 			};
 			name = Release;

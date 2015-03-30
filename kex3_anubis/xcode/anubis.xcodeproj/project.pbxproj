@@ -11,6 +11,9 @@
 		4111E0821A8D4B19000D5B22 /* pickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4111E0801A8D4B19000D5B22 /* pickup.cpp */; };
 		411358D21AB75FE200916706 /* inventoryMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411358D01AB75FE200916706 /* inventoryMenu.cpp */; };
 		413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413DD5BD1A89674B00767E49 /* actorObject.cpp */; };
+		415A071F1AC9B81800D74D25 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 415A07091AC9B5E700D74D25 /* libogg.a */; };
+		415A07201AC9B81800D74D25 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 415A07141AC9B5EF00D74D25 /* libvorbis.a */; };
+		415A07211AC9B81800D74D25 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 415A07181AC9B5EF00D74D25 /* libvorbisfile.a */; };
 		4178638F1A8E6B2C00329895 /* mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4178638D1A8E6B2C00329895 /* mover.cpp */; };
 		419342261A8BB38B002C7F8E /* gameSysObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419342251A8BB38B002C7F8E /* gameSysObject.cpp */; };
 		419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419C3BB21A89100400C19D68 /* actionDef.cpp */; };
@@ -102,6 +105,69 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		415A07061AC9B5E700D74D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415A06FE1AC9B5E700D74D25 /* Ogg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
+			remoteInfo = Ogg;
+		};
+		415A07081AC9B5E700D74D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415A06FE1AC9B5E700D74D25 /* Ogg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 734FB2E50B18B33E00D561D7;
+			remoteInfo = "libogg (static)";
+		};
+		415A07111AC9B5EF00D74D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415A070A1AC9B5EF00D74D25 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 730F23F1091827B100AB638C;
+			remoteInfo = Vorbis;
+		};
+		415A07131AC9B5EF00D74D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415A070A1AC9B5EF00D74D25 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 738835E40B18F870005C7A69;
+			remoteInfo = "libvorbis (static)";
+		};
+		415A07151AC9B5EF00D74D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415A070A1AC9B5EF00D74D25 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 738836130B190488005C7A69;
+			remoteInfo = "libvorbisenc (static)";
+		};
+		415A07171AC9B5EF00D74D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415A070A1AC9B5EF00D74D25 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 738836220B1905E5005C7A69;
+			remoteInfo = "libvorbisfile (static)";
+		};
+		415A07191AC9B5FC00D74D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415A06FE1AC9B5E700D74D25 /* Ogg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 734FB2E40B18B33E00D561D7;
+			remoteInfo = "libogg (static)";
+		};
+		415A071B1AC9B60100D74D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415A070A1AC9B5EF00D74D25 /* Vorbis.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 738835E30B18F870005C7A69;
+			remoteInfo = "libvorbis (static)";
+		};
+		415A071D1AC9B60400D74D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415A070A1AC9B5EF00D74D25 /* Vorbis.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 738836210B1905E5005C7A69;
+			remoteInfo = "libvorbisfile (static)";
+		};
 		41B7764C1A83E81C008C8F23 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 41B776471A83E81C008C8F23 /* angelscript.xcodeproj */;
@@ -175,6 +241,8 @@
 		413DD5BD1A89674B00767E49 /* actorObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorObject.cpp; path = ../../source/script/objects/actorObject.cpp; sourceTree = "<group>"; };
 		413DD5BE1A89674B00767E49 /* actorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actorObject.h; path = ../../source/script/objects/actorObject.h; sourceTree = "<group>"; };
 		41573F331AC07ECB0007662B /* joystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = joystick.h; path = ../../source/system/joystick.h; sourceTree = "<group>"; };
+		415A06FE1AC9B5E700D74D25 /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ../ogg/libogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
+		415A070A1AC9B5EF00D74D25 /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = ../ogg/libvorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
 		4178638D1A8E6B2C00329895 /* mover.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mover.cpp; path = ../../source/game/mover.cpp; sourceTree = "<group>"; };
 		4178638E1A8E6B2C00329895 /* mover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mover.h; path = ../../source/game/mover.h; sourceTree = "<group>"; };
 		419342241A8BB38B002C7F8E /* gameSysObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gameSysObject.h; path = ../../source/script/objects/gameSysObject.h; sourceTree = "<group>"; };
@@ -350,6 +418,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				415A071F1AC9B81800D74D25 /* libogg.a in Frameworks */,
+				415A07201AC9B81800D74D25 /* libvorbis.a in Frameworks */,
+				415A07211AC9B81800D74D25 /* libvorbisfile.a in Frameworks */,
 				41B776581A83E8D3008C8F23 /* libangelscript.a in Frameworks */,
 				41BB267F1A547A9A00311383 /* OpenAL.framework in Frameworks */,
 				41E2CEA11A51D5CC00FC28DC /* libpng.a in Frameworks */,
@@ -363,6 +434,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		415A06FF1AC9B5E700D74D25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				415A07071AC9B5E700D74D25 /* Ogg.framework */,
+				415A07091AC9B5E700D74D25 /* libogg.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		415A070B1AC9B5EF00D74D25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				415A07121AC9B5EF00D74D25 /* Vorbis.framework */,
+				415A07141AC9B5EF00D74D25 /* libvorbis.a */,
+				415A07161AC9B5EF00D74D25 /* libvorbisenc.a */,
+				415A07181AC9B5EF00D74D25 /* libvorbisfile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		41B776481A83E81C008C8F23 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -688,6 +779,8 @@
 			children = (
 				41B776471A83E81C008C8F23 /* angelscript.xcodeproj */,
 				41E2CE8E1A51D3E300FC28DC /* libpng.xcodeproj */,
+				415A06FE1AC9B5E700D74D25 /* Ogg.xcodeproj */,
+				415A070A1AC9B5EF00D74D25 /* Vorbis.xcodeproj */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
@@ -729,6 +822,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				415A071E1AC9B60400D74D25 /* PBXTargetDependency */,
+				415A071C1AC9B60100D74D25 /* PBXTargetDependency */,
+				415A071A1AC9B5FC00D74D25 /* PBXTargetDependency */,
 				41B776531A83E828008C8F23 /* PBXTargetDependency */,
 				41E2CE9B1A51D3FB00FC28DC /* PBXTargetDependency */,
 			);
@@ -765,6 +861,14 @@
 					ProductGroup = 41E2CE8F1A51D3E300FC28DC /* Products */;
 					ProjectRef = 41E2CE8E1A51D3E300FC28DC /* libpng.xcodeproj */;
 				},
+				{
+					ProductGroup = 415A06FF1AC9B5E700D74D25 /* Products */;
+					ProjectRef = 415A06FE1AC9B5E700D74D25 /* Ogg.xcodeproj */;
+				},
+				{
+					ProductGroup = 415A070B1AC9B5EF00D74D25 /* Products */;
+					ProjectRef = 415A070A1AC9B5EF00D74D25 /* Vorbis.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -774,6 +878,48 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		415A07071AC9B5E700D74D25 /* Ogg.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Ogg.framework;
+			remoteRef = 415A07061AC9B5E700D74D25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		415A07091AC9B5E700D74D25 /* libogg.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libogg.a;
+			remoteRef = 415A07081AC9B5E700D74D25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		415A07121AC9B5EF00D74D25 /* Vorbis.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Vorbis.framework;
+			remoteRef = 415A07111AC9B5EF00D74D25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		415A07141AC9B5EF00D74D25 /* libvorbis.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libvorbis.a;
+			remoteRef = 415A07131AC9B5EF00D74D25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		415A07161AC9B5EF00D74D25 /* libvorbisenc.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libvorbisenc.a;
+			remoteRef = 415A07151AC9B5EF00D74D25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		415A07181AC9B5EF00D74D25 /* libvorbisfile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libvorbisfile.a;
+			remoteRef = 415A07171AC9B5EF00D74D25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		41B7764D1A83E81C008C8F23 /* libangelscript.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -916,6 +1062,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		415A071A1AC9B5FC00D74D25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libogg (static)";
+			targetProxy = 415A07191AC9B5FC00D74D25 /* PBXContainerItemProxy */;
+		};
+		415A071C1AC9B60100D74D25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libvorbis (static)";
+			targetProxy = 415A071B1AC9B60100D74D25 /* PBXContainerItemProxy */;
+		};
+		415A071E1AC9B60400D74D25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libvorbisfile (static)";
+			targetProxy = 415A071D1AC9B60400D74D25 /* PBXContainerItemProxy */;
+		};
 		41B776531A83E828008C8F23 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "angelscript OSX";
@@ -1040,6 +1201,8 @@
 					"$(PROJECT_DIR)/../lpng1612",
 					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenAL.framework/Versions/A/Headers/,
 					"$(PROJECT_DIR)/../angelscript/angelscript/include",
+					"$(PROJECT_DIR)/../ogg/libogg/include",
+					"$(PROJECT_DIR)/../ogg/libvorbis/include",
 				);
 				INFOPLIST_FILE = "anubis/anubis-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @executable_path/../Frameworks/";
@@ -1071,6 +1234,8 @@
 					"$(PROJECT_DIR)/../lpng1612",
 					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenAL.framework/Versions/A/Headers/,
 					"$(PROJECT_DIR)/../angelscript/angelscript/include",
+					"$(PROJECT_DIR)/../ogg/libogg/include",
+					"$(PROJECT_DIR)/../ogg/libvorbis/include",
 				);
 				INFOPLIST_FILE = "anubis/anubis-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @executable_path/../Frameworks/";
