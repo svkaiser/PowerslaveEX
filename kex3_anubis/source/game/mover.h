@@ -202,6 +202,7 @@ private:
     float                   baseHeight;
     float                   currentHeight;
     mapSector_t             *linkedSector;
+    int                     time;
 END_KEX_CLASS();
 
 #endif

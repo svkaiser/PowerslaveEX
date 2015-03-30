@@ -831,6 +831,7 @@ kexFloatingPlatform::kexFloatingPlatform(void)
 {
     this->moveSpeed = 2;
     this->moveHeight = 128;
+    this->time = 0;
 }
 
 //
@@ -848,13 +849,14 @@ kexFloatingPlatform::~kexFloatingPlatform(void)
 void kexFloatingPlatform::Tick(void)
 {
     kexWorld *world = kexGame::cLocal->World();
-    float a = (float)kexGame::cLocal->PlayLoop()->Ticks() * (moveSpeed * kexMath::Deg2Rad(1));
+    float a = (float)time * (moveSpeed * kexMath::Deg2Rad(1));
     float move = kexMath::Cos(a) * (((moveHeight * 0.5f) * moveSpeed) * kexMath::Deg2Rad(1));
     
     world->MoveSector(linkedSector, true, move);
     world->MoveSector(sector, false, move);
     
     UpdateFloorOrigin();
+    time++;
 }
 
 //
@@ -877,23 +879,17 @@ void kexFloatingPlatform::Spawn(void)
 
     case 43:
         moveSpeed = 1.46875f;
-        moveHeight = 158;
-        kexGame::cLocal->World()->MoveSector(linkedSector, true, 60);
-        kexGame::cLocal->World()->MoveSector(sector, false, 60);
+        moveHeight = 188;
         break;
 
     case 44:
         moveSpeed = 1.9375f;
-        moveHeight = 180;
-        kexGame::cLocal->World()->MoveSector(linkedSector, true, 120);
-        kexGame::cLocal->World()->MoveSector(sector, false, 120);
+        moveHeight = 248;
         break;
 
     case 45:
         moveSpeed = 2.40625f;
-        moveHeight = 270;
-        kexGame::cLocal->World()->MoveSector(linkedSector, true, 180);
-        kexGame::cLocal->World()->MoveSector(sector, false, 180);
+        moveHeight = 308;
         break;
 
     case 60:
@@ -908,9 +904,7 @@ void kexFloatingPlatform::Spawn(void)
 
     case 68:
         moveSpeed = 2;
-        moveHeight = 512;
-        kexGame::cLocal->World()->MoveSector(linkedSector, true, 224);
-        kexGame::cLocal->World()->MoveSector(sector, false, 224);
+        moveHeight = 583;
         break;
 
     default:
