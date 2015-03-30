@@ -12,7 +12,13 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Game logic
+//      High level game logic class. This class runs above all
+//      other sub-game loop classes and processes all high-level
+//      input events (player commands, mouse response, etc), updating
+//      active game objects, sounds, and scheduling map changes.
+//
+//      This class is also responsible for initializing all global
+//      game data and scripts on startup.
 //
 
 #include "kexlib.h"

@@ -12,7 +12,10 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Game Object
+//      Game Object Class. Everything that exists in a world
+//      inherits from this object. When having an object
+//      referencing other objects, it must increment the ref
+//      counter for that object to be targeted.
 //
 
 #include "kexlib.h"

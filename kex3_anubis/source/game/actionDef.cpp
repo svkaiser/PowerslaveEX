@@ -12,7 +12,12 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Action Definitions
+//      Action Definition Objects
+//
+//      Each instanced object can have unique parameters defined in
+//      the actor's animation file. Each action def can contain up to
+//      8 parameters. Each action def must be registered and must have
+//      the type specified for each parameter.
 //
 
 #include "kexlib.h"

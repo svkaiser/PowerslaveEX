@@ -12,7 +12,11 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Player class
+//      Player and puppet classes. The player object must have an
+//      active puppet actor that exists in the world that it can control.
+//      The puppet actor handles all the movement and interaction behavior
+//      while the player controller contains all the player-specific data
+//      such as ammo, inventory, artifacts, etc
 //
 
 #include "kexlib.h"

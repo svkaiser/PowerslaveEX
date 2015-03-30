@@ -12,7 +12,8 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Play loop (in-game) logic
+//      In-Game logic. Handles level transitions (fading) automap,
+//      environement effects, player hud, world updates, etc
 //
 
 #include "kexlib.h"

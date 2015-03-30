@@ -14,6 +14,10 @@
 // DESCRIPTION:
 //      Actor Object
 //
+//      Actors are the most commonly used object that exists in
+//      a world. Actors can either be static sprites or moving
+//      objects that can collide or interact with other objects.
+//
 
 #include "kexlib.h"
 #include "game.h"

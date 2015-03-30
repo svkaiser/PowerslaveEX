@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Actor Creation
+//      Simple class for managing and spawning actors
 //
 
 #include "kexlib.h"

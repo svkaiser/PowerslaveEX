@@ -12,7 +12,8 @@
 // GNU General Public License for more details.
 //
 // DESCRIPTION:
-//      Mover Object
+//      Mover Objects. Movers can manipulate sectors and faces
+//      to achieve effects such as opening doors, lifts, etc
 //
 
 #include "kexlib.h"
