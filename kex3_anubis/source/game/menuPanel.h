@@ -42,7 +42,7 @@ public:
         float y;
         float w;
         float h;
-        char *label;
+        kexStr label;
         bool bPressed;
         bool bSelected;
         bool bHover;
