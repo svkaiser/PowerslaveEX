@@ -526,7 +526,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
     kexVec3 start, end;
 
     start = origin + kexVec3(0, 0, stepHeight);
-    end = start + (dir * (radius * 1.5f));
+    end = start + (dir * (radius * 2.5f));
     
     if(kexGame::cLocal->CModel()->Trace(this, sector, start, end))
     {
