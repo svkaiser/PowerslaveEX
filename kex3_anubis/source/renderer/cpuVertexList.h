@@ -34,6 +34,7 @@ public:
                                       byte r, byte g, byte b, byte a);
     void                    AddVertex(float x, float y, float z, float s, float t);
     void                    AddVertex(float x, float y, float z, float s, float t, byte *rgba);
+    void                    AddVertex(float x, float y, float z, float s, float t, const byte *rgba);
     void                    AddVertex(const kexVec3 &vec, float s, float t,
                                       byte r, byte g, byte b, byte a);
     void                    AddVertex(const kexVec3 &vec, float s, float t, byte *rgba);

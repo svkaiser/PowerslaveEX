@@ -296,6 +296,8 @@ kexGameLocal::kexGameLocal(void)
     this->spriteAnimManager = new kexSpriteAnimManager;
 
     memset(weaponInfo, 0, sizeof(weaponInfo_t) * NUMPLAYERWEAPONS);
+    memset(&quitYesButton, 0, sizeof(kexMenuPanel::selectButton_t));
+    memset(&quitNoButton, 0, sizeof(kexMenuPanel::selectButton_t));
 }
 
 //
@@ -345,6 +347,18 @@ void kexGameLocal::Init(void)
     kexGame::cMenuPanel->Init();
     kexGame::cScriptManager->Init();
     kexGame::cActionDefManager->RegisterActions();
+
+    quitYesButton.x = 40;
+    quitYesButton.y = 120;
+    quitYesButton.w = 96;
+    quitYesButton.h = 24;
+    quitYesButton.label = "Yes";
+
+    quitNoButton.x = 182;
+    quitNoButton.y = 120;
+    quitNoButton.w = 96;
+    quitNoButton.h = 24;
+    quitNoButton.label = "No";
 }
 
 //
@@ -491,6 +505,11 @@ void kexGameLocal::Tick(void)
     {
         gameLoop->Tick();
     }
+    else
+    {
+        kexGame::cMenuPanel->UpdateSelectButton(&quitYesButton);
+        kexGame::cMenuPanel->UpdateSelectButton(&quitNoButton);
+    }
     
     player->Cmd().Reset();
 
@@ -551,18 +570,13 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
 
     if(bQuitConfirm)
     {
-        float mx = (float)kex::cInput->MouseX();
-        float my = (float)kex::cInput->MouseY();
-        
-        kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
-
-        if(kexGame::cMenuPanel->PointOnButton(48, 128, mx, my))
+        if(kexGame::cMenuPanel->TestSelectButtonInput(&quitYesButton, ev))
         {
             kex::cCommands->Execute("quit");
             return true;
         }
 
-        if(kexGame::cMenuPanel->PointOnButton(184, 128, mx, my))
+        if(kexGame::cMenuPanel->TestSelectButtonInput(&quitNoButton, ev))
         {
             bQuitConfirm = false;
             kexGame::cLocal->PlaySound("sounds/select.wav");
@@ -790,8 +804,8 @@ void kexGameLocal::DrawQuitConfirm(void)
 
     kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
     kexGame::cMenuPanel->DrawInset(40, 72, 238, 32);
-    smallFont->DrawString("Are you sure you want to quit?", 144, 82, 1, true);
+    DrawSmallString("Are you sure you want to quit?", 144, 82, 1, true);
 
-    kexGame::cMenuPanel->DrawButton(48, 128, false, "Yes");
-    kexGame::cMenuPanel->DrawButton(184, 128, false, "No");
+    kexGame::cMenuPanel->DrawSelectButton(&quitYesButton);
+    kexGame::cMenuPanel->DrawSelectButton(&quitNoButton);
 }

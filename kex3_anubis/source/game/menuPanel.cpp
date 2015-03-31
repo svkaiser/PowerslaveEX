@@ -61,8 +61,8 @@ void kexMenuPanel::DrawPanel(const float x, const float y, const float w, const 
 {
     kexCpuVertList *vl = kexRender::cVertList;
 
-    byte w_rgba[4] = { 255, 255, 255, 160 };
-    byte b_rgba[4] = { 80, 40, 10, 144 };
+    static const byte w_rgba[4] = { 255, 255, 255, 160 };
+    static const byte b_rgba[4] = { 80, 40, 10, 144 };
 
     kexRender::cScreen->DrawFillPic(bgTexture, x, y, w, h);
 
@@ -186,4 +186,133 @@ void kexMenuPanel::DrawButtonSet(buttonSet_t *buttonSet)
         
         DrawButton(buttonSet->x, buttonSet->y + offs, bPressed, buttonSet->labels[i].c_str());
     }
+}
+
+//
+// kexMenuPanel::UpdateSelectButton
+//
+
+void kexMenuPanel::UpdateSelectButton(selectButton_t *button)
+{
+    float mx = (float)kex::cInput->MouseX();
+    float my = (float)kex::cInput->MouseY();
+        
+    kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+
+    button->bHover = (mx >= button->x && mx <= button->x + button->w &&
+                      my >= button->y && my <= button->y + button->h);
+}
+
+//
+// kexMenuPanel::TestSelectButtonInput
+//
+
+bool kexMenuPanel::TestSelectButtonInput(selectButton_t *button, inputEvent_t *ev)
+{
+    switch(ev->type)
+    {
+    case ev_mousedown:
+        if(ev->data1 == KMSB_LEFT)
+        {
+            if(button->bHover)
+            {
+                button->bPressed = true;
+            }
+        }
+        break;
+
+    case ev_mouseup:
+        if(ev->data1 == KMSB_LEFT)
+        {
+            button->bPressed = false;
+
+            if(button->bHover)
+            {
+                return true;
+            }
+        }
+        break;
+    }
+
+    return false;
+}
+
+//
+// kexMenuPanel::DrawSelectButton
+//
+
+void kexMenuPanel::DrawSelectButton(selectButton_t *button)
+{
+    kexCpuVertList *vl = kexRender::cVertList;
+    byte r, g, b;
+
+    kexRender::cTextures->whiteTexture->Bind();
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+
+    vl->AddQuad(button->x, button->y, button->w, 1, 0, 0, 0, 255);
+    vl->AddQuad(button->x, button->y, 1, button->h, 0, 0, 0, 255);
+    vl->AddQuad(button->x+button->w, button->y, 1, button->h+1, 0, 0, 0, 255);
+    vl->AddQuad(button->x, button->y+button->h, button->w, 1, 0, 0, 0, 255);
+
+    r = 96;
+    g = 96;
+    b = 120;
+
+    if(button->bPressed)
+    {
+        r /= 2;
+        g /= 2;
+        b /= 2;
+    }
+    else if(button->bHover)
+    {
+        r *= 2;
+        g *= 2;
+        b *= 2;
+    }
+
+    vl->AddQuad(button->x+1, button->y+1, button->w-1, 1, r, g, b, 255);
+    vl->AddQuad(button->x+1, button->y+1, 1, button->h-1, r, g, b, 255);
+
+    r = 16;
+    g = 16;
+    b = 80;
+
+    if(button->bPressed)
+    {
+        r /= 2;
+        g /= 2;
+        b /= 2;
+    }
+    else if(button->bHover)
+    {
+        r *= 2;
+        g *= 2;
+        b *= 2;
+    }
+
+    vl->AddQuad(button->x+button->w-1, button->y+1, 1, button->h-1, r, g, b, 255);
+    vl->AddQuad(button->x+1, button->y+button->h-1, button->w-1, 1, r, g, b, 255);
+
+    r = 48;
+    g = 48;
+    b = 120;
+
+    if(button->bPressed)
+    {
+        r /= 2;
+        g /= 2;
+        b /= 2;
+    }
+    else if(button->bHover)
+    {
+        r *= 2;
+        g *= 2;
+        b *= 2;
+    }
+
+    vl->AddQuad(button->x+2, button->y+2, button->w-3, button->h-3, r, g, b, 255);
+    vl->DrawElements();
+
+    font->DrawString(button->label, button->x+(button->w*0.5f), button->y+(button->h*0.5f)-2, 1, true);
 }

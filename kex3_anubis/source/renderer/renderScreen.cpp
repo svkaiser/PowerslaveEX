@@ -51,7 +51,7 @@ bool kexRenderScreen::PointOnPic(kexTexture *texture, const float x, const float
                                  const float mx, const float my)
 {
     return (mx >= x && mx <= x + texture->OriginalWidth() &&
-            my >= y && my <= y  + texture->OriginalHeight());
+            my >= y && my <= y + texture->OriginalHeight());
 }
 
 //

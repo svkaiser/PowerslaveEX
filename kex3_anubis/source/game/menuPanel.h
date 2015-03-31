@@ -35,9 +35,25 @@ public:
         kexStrList labels;
         int pressedIndex;
     } buttonSet_t;
+
+    typedef struct
+    {
+        float x;
+        float y;
+        float w;
+        float h;
+        char *label;
+        bool bPressed;
+        bool bSelected;
+        bool bHover;
+    } selectButton_t;
     
     bool                    TestPointInButtonSet(buttonSet_t *buttonSet, const float mx, const float my);
     void                    DrawButtonSet(buttonSet_t *buttonSet);
+
+    void                    UpdateSelectButton(selectButton_t *button);
+    bool                    TestSelectButtonInput(selectButton_t *button, inputEvent_t *ev);
+    void                    DrawSelectButton(selectButton_t *button);
     
 private:
     kexTexture              *bgTexture;

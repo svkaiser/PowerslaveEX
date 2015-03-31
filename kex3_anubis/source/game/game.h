@@ -159,94 +159,96 @@ public:
     kexGameLocal(void);
     ~kexGameLocal(void);
 
-    void                        Init(void);
-    void                        Start(void);
-    void                        Stop(void);
-    void                        Tick(void);
-    void                        Draw(void);
-    bool                        ProcessInput(inputEvent_t *ev);
-    void                        UpdateGameObjects(void);
-    void                        RemoveGameObject(kexGameObject *go);
-    void                        RemoveAllGameObjects(void);
-    void                        ChangeMap(const char *name);
-    void                        PlaySound(const char *name);
-    void                        ToggleQuitConfirm(const bool bToggle);
+    void                            Init(void);
+    void                            Start(void);
+    void                            Stop(void);
+    void                            Tick(void);
+    void                            Draw(void);
+    bool                            ProcessInput(inputEvent_t *ev);
+    void                            UpdateGameObjects(void);
+    void                            RemoveGameObject(kexGameObject *go);
+    void                            RemoveAllGameObjects(void);
+    void                            ChangeMap(const char *name);
+    void                            PlaySound(const char *name);
+    void                            ToggleQuitConfirm(const bool bToggle);
 
     typedef struct
     {
-        int                     maxAmmo;
-        bool                    bPersistent;
-        float                   offsetX;
-        float                   offsetY;
-        spriteAnim_t            *raise;
-        spriteAnim_t            *lower;
-        spriteAnim_t            *idle;
-        spriteAnim_t            *fire;
-        spriteAnim_t            *flame;
-        spriteAnim_t            *ammoIdle[3];
-        spriteAnim_t            *ammoRaise[3];
-        spriteAnim_t            *ammoLower[3];
-        spriteAnim_t            *ammoFire[3];
+        int             maxAmmo;
+        bool            bPersistent;
+        float           offsetX;
+        float           offsetY;
+        spriteAnim_t    *raise;
+        spriteAnim_t    *lower;
+        spriteAnim_t    *idle;
+        spriteAnim_t    *fire;
+        spriteAnim_t    *flame;
+        spriteAnim_t    *ammoIdle[3];
+        spriteAnim_t    *ammoRaise[3];
+        spriteAnim_t    *ammoLower[3];
+        spriteAnim_t    *ammoFire[3];
     } weaponInfo_t;
     
-    kexTitleScreen              *TitleScreen(void) { return titleScreen; }
-    kexPlayLoop                 *PlayLoop(void) { return playLoop; }
-    kexTranslation              *Translation(void) { return translation; }
-    kexWorld                    *World(void) { return world; }
-    kexFont                     *SmallFont(void) { return smallFont; }
-    kexFont                     *BigFont(void) { return bigFont; }
-    const int                   GetTicks(void) const { return ticks; }
-    const gameState_t           GameState(void) const { return gameState; }
-    void                        SetGameState(const gameState_t state) { pendingGameState = state; }
-    kexPlayer                   *Player(void) { return player; }
-    kexLinklist<kexGameObject>  &GameObjects(void) { return gameObjects; }
-    kexCModel                   *CModel(void) { return cmodel; }
-    kexSpriteManager            *SpriteManager(void) { return spriteManager; }
-    kexSpriteAnimManager        *SpriteAnimManager(void) { return spriteAnimManager; }
-    const weaponInfo_t          *WeaponInfo(const int id) const { return &weaponInfo[id]; }
-    kexIndexDefManager          &ActorDefs(void) { return actorDefs; }
+    kexTitleScreen                  *TitleScreen(void) { return titleScreen; }
+    kexPlayLoop                     *PlayLoop(void) { return playLoop; }
+    kexTranslation                  *Translation(void) { return translation; }
+    kexWorld                        *World(void) { return world; }
+    kexFont                         *SmallFont(void) { return smallFont; }
+    kexFont                         *BigFont(void) { return bigFont; }
+    const int                       GetTicks(void) const { return ticks; }
+    const gameState_t               GameState(void) const { return gameState; }
+    void                            SetGameState(const gameState_t state) { pendingGameState = state; }
+    kexPlayer                       *Player(void) { return player; }
+    kexLinklist<kexGameObject>      &GameObjects(void) { return gameObjects; }
+    kexCModel                       *CModel(void) { return cmodel; }
+    kexSpriteManager                *SpriteManager(void) { return spriteManager; }
+    kexSpriteAnimManager            *SpriteAnimManager(void) { return spriteAnimManager; }
+    const weaponInfo_t              *WeaponInfo(const int id) const { return &weaponInfo[id]; }
+    kexIndexDefManager              &ActorDefs(void) { return actorDefs; }
 
-    kexObject                   *ConstructObject(const char *className);
-    kexActor                    *SpawnActor(const int type, const float x, const float y, const float z,
-                                            const float yaw, const int sector = -1);
-    kexActor                    *SpawnActor(const kexStr &name, const float x, const float y, const float z,
-                                            const float yaw, const int sector = -1);
-    void                        DrawSmallString(const char *string, float x, float y, float scale, bool center,
-                                                byte r = 0xff, byte g = 0xff, byte b = 0xff);
-    void                        DrawBigString(const char *string, float x, float y, float scale, bool center,
-                                              byte r = 0xff, byte g = 0xff, byte b = 0xff);
+    kexObject                       *ConstructObject(const char *className);
+    kexActor                        *SpawnActor(const int type, const float x, const float y, const float z,
+                                                const float yaw, const int sector = -1);
+    kexActor                        *SpawnActor(const kexStr &name, const float x, const float y, const float z,
+                                                const float yaw, const int sector = -1);
+    void                            DrawSmallString(const char *string, float x, float y, float scale, bool center,
+                                                    byte r = 0xff, byte g = 0xff, byte b = 0xff);
+    void                            DrawBigString(const char *string, float x, float y, float scale, bool center,
+                                                  byte r = 0xff, byte g = 0xff, byte b = 0xff);
 
 private:
-    void                        LoadNewMap(void);
-    void                        InitWeaponDefs(void);
-    void                        StopSounds(void);
-    void                        UpdateSounds(void);
-    void                        DrawQuitConfirm(void);
+    void                            LoadNewMap(void);
+    void                            InitWeaponDefs(void);
+    void                            StopSounds(void);
+    void                            UpdateSounds(void);
+    void                            DrawQuitConfirm(void);
     
-    kexFont                     *smallFont;
-    kexFont                     *bigFont;
-    kexTitleScreen              *titleScreen;
-    kexPlayLoop                 *playLoop;
-    kexTranslation              *translation;
-    kexWorld                    *world;
-    kexCModel                   *cmodel;
-    kexSpriteManager            *spriteManager;
-    kexSpriteAnimManager        *spriteAnimManager;
+    kexFont                         *smallFont;
+    kexFont                         *bigFont;
+    kexTitleScreen                  *titleScreen;
+    kexPlayLoop                     *playLoop;
+    kexTranslation                  *translation;
+    kexWorld                        *world;
+    kexCModel                       *cmodel;
+    kexSpriteManager                *spriteManager;
+    kexSpriteAnimManager            *spriteAnimManager;
 
-    int                         ticks;
-    gameState_t                 gameState;
-    gameState_t                 pendingGameState;
-    kexPlayer                   *player;
-    kexGameLoop                 gameLoopStub;
-    kexGameLoop                 *gameLoop;
-    kexGameObject               *goRover;
-    kexLinklist<kexGameObject>  gameObjects;
-    kexIndexDefManager          actorDefs;
-    kexIndexDefManager          weaponDef;
-    kexStr                      pendingMap;
-    weaponInfo_t                weaponInfo[NUMPLAYERWEAPONS];
-    kexTexture                  *loadingPic;
-    bool                        bQuitConfirm;
+    int                             ticks;
+    gameState_t                     gameState;
+    gameState_t                     pendingGameState;
+    kexPlayer                       *player;
+    kexGameLoop                     gameLoopStub;
+    kexGameLoop                     *gameLoop;
+    kexGameObject                   *goRover;
+    kexLinklist<kexGameObject>      gameObjects;
+    kexIndexDefManager              actorDefs;
+    kexIndexDefManager              weaponDef;
+    kexStr                          pendingMap;
+    weaponInfo_t                    weaponInfo[NUMPLAYERWEAPONS];
+    kexTexture                      *loadingPic;
+    bool                            bQuitConfirm;
+    kexMenuPanel::selectButton_t    quitYesButton;
+    kexMenuPanel::selectButton_t    quitNoButton;
 };
 
 //-----------------------------------------------------------------------------
