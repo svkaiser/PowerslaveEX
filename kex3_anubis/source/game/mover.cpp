@@ -833,6 +833,7 @@ kexFloatingPlatform::kexFloatingPlatform(void)
     this->moveHeight = 128;
     this->time = 0;
     this->angOffset = 0;
+    this->currentHeight = 0;
 }
 
 //
@@ -851,7 +852,10 @@ void kexFloatingPlatform::Tick(void)
 {
     kexWorld *world = kexGame::cLocal->World();
     float a = (float)time * (moveSpeed * kexMath::Deg2Rad(1));
-    float move = kexMath::Cos(a+angOffset) * (((moveHeight * 0.5f) * moveSpeed) * kexMath::Deg2Rad(1));
+    float amt = (kexMath::Cos(a+angOffset+kexMath::pi) * (moveHeight*0.5f));
+    float move = amt - currentHeight;
+    
+    currentHeight = amt;
     
     world->MoveSector(linkedSector, true, move);
     world->MoveSector(sector, false, move);
