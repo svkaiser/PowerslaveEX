@@ -832,6 +832,7 @@ kexFloatingPlatform::kexFloatingPlatform(void)
     this->moveSpeed = 2;
     this->moveHeight = 128;
     this->time = 0;
+    this->angOffset = 0;
 }
 
 //
@@ -850,7 +851,7 @@ void kexFloatingPlatform::Tick(void)
 {
     kexWorld *world = kexGame::cLocal->World();
     float a = (float)time * (moveSpeed * kexMath::Deg2Rad(1));
-    float move = kexMath::Cos(a) * (((moveHeight * 0.5f) * moveSpeed) * kexMath::Deg2Rad(1));
+    float move = kexMath::Cos(a+angOffset) * (((moveHeight * 0.5f) * moveSpeed) * kexMath::Deg2Rad(1));
     
     world->MoveSector(linkedSector, true, move);
     world->MoveSector(sector, false, move);
@@ -865,10 +866,12 @@ void kexFloatingPlatform::Tick(void)
 
 void kexFloatingPlatform::Spawn(void)
 {
+    kexWorld *world = kexGame::cLocal->World();
+
     assert(sector != NULL);
     assert(sector->linkedSector >= 0);
 
-    linkedSector = &kexGame::cLocal->World()->Sectors()[sector->linkedSector];
+    linkedSector = &world->Sectors()[sector->linkedSector];
 
     switch(type)
     {
@@ -878,33 +881,51 @@ void kexFloatingPlatform::Spawn(void)
         break;
 
     case 43:
-        moveSpeed = 1.46875f;
-        moveHeight = 188;
+        moveSpeed = 2;
+        moveHeight = 128;
+        angOffset = kexMath::Deg2Rad(60);
         break;
 
     case 44:
-        moveSpeed = 1.9375f;
-        moveHeight = 248;
+        moveSpeed = 2;
+        moveHeight = 128;
+        angOffset = kexMath::Deg2Rad(120);
         break;
 
     case 45:
-        moveSpeed = 2.40625f;
-        moveHeight = 308;
+        moveSpeed = 2;
+        moveHeight = 128;
+        angOffset = kexMath::pi;
+        break;
+
+    case 46:
+        moveSpeed = 2;
+        moveHeight = 128;
+        angOffset = kexMath::Deg2Rad(-60);
+        break;
+
+    case 47:
+        moveSpeed = 2;
+        moveHeight = 128;
+        angOffset = kexMath::Deg2Rad(-120);
         break;
 
     case 60:
-        moveSpeed = 1;
-        moveHeight = 128;
+        moveSpeed = 2;
+        moveHeight = 64;
+        angOffset = kexMath::Deg2Rad(world->Events()[sector->event].params);
         break;
 
     case 65:
-        moveSpeed = 1.5f + kexRand::Float() * 0.5f;
-        moveHeight = 128 + kexRand::Float() * 128;
+        moveSpeed = 2;
+        moveHeight = 128;
+        angOffset = kexMath::Deg2Rad(kexRand::CFloat() * 256);
         break;
 
     case 68:
         moveSpeed = 2;
-        moveHeight = 583;
+        moveHeight = 512;
+        angOffset = kexMath::Deg2Rad(world->Events()[sector->event].params);
         break;
 
     default:

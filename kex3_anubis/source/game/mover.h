@@ -198,6 +198,7 @@ public:
 
 private:
     float                   moveSpeed;
+    kexAngle                angOffset;
     float                   moveHeight;
     float                   baseHeight;
     float                   currentHeight;
