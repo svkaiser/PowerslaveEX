@@ -38,6 +38,7 @@ public:
     } hashKey_t;
 
     hashKey_t           *GetHashKey(const char *tname);
+    hashKey_t           *GetHashKey(const unsigned int index);
     hashKey_t           *AddAndReturnHashKey(const char *tname, kexHeapBlock &hb = hb_static);
 
     hashKey_t           *hashlist[MAX_HASH];
@@ -156,6 +157,15 @@ typename kexHashList<type>::hashKey_t *kexHashList<type>::GetHashKey(const char 
     }
 
     return NULL;
+}
+
+//
+// kexHashList::GetHashKey
+//
+template<class type>
+typename kexHashList<type>::hashKey_t *kexHashList<type>::GetHashKey(const unsigned int index)
+{
+    return hashlist[index];
 }
 
 //

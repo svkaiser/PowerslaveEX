@@ -189,6 +189,16 @@ public:
         spriteAnim_t    *ammoFire[3];
     } weaponInfo_t;
     
+    typedef struct
+    {
+        kexStr          title;
+        kexStr          musicTrack;
+        float           overworldX;
+        float           overworldY;
+        int16_t         transmitterBit;
+        int16_t         refID;
+    } mapInfo_t;
+    
     kexTitleScreen                  *TitleScreen(void) { return titleScreen; }
     kexPlayLoop                     *PlayLoop(void) { return playLoop; }
     kexTranslation                  *Translation(void) { return translation; }
@@ -223,6 +233,7 @@ public:
 private:
     void                            LoadNewMap(void);
     void                            InitWeaponDefs(void);
+    void                            InitMapDefs(void);
     void                            StopSounds(void);
     void                            UpdateSounds(void);
     
@@ -245,11 +256,13 @@ private:
     kexGameObject                   *goRover;
     kexLinklist<kexGameObject>      gameObjects;
     kexIndexDefManager              actorDefs;
-    kexIndexDefManager              weaponDef;
+    kexIndexDefManager              weaponDefs;
+    kexIndexDefManager              mapDefs;
     kexStr                          pendingMap;
     weaponInfo_t                    weaponInfo[NUMPLAYERWEAPONS];
     kexTexture                      *loadingPic;
     kexMenu                         *activeMenu;
+    kexArray<mapInfo_t>             mapInfoList;
 };
 
 //-----------------------------------------------------------------------------

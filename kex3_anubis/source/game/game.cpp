@@ -341,7 +341,8 @@ void kexGameLocal::Init(void)
     kex::cPakFiles->LoadZipFile("game.kpf");
 
     actorDefs.LoadFilesInDirectory("defs/actors/");
-    weaponDef.LoadFile("defs/weaponInfo.txt");
+    weaponDefs.LoadFile("defs/weaponInfo.txt");
+    mapDefs.LoadFile("defs/mapInfo.txt");
     
     kexGame::cMenuPanel->Init();
     kexGame::cScriptManager->Init();
@@ -376,6 +377,7 @@ void kexGameLocal::Start(void)
 
     pendingGameState = GS_TITLE;
     InitWeaponDefs();
+    InitMapDefs();
 
     player->Reset();
 }
@@ -391,7 +393,7 @@ void kexGameLocal::InitWeaponDefs(void)
     
     for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
     {
-        kexDict *dict = weaponDef.GetEntry(i);
+        kexDict *dict = weaponDefs.GetEntry(i);
         weapon = &weaponInfo[i];
         
         memset(weapon, 0, sizeof(weaponInfo_t));
@@ -423,6 +425,59 @@ void kexGameLocal::InitWeaponDefs(void)
         if(dict->GetString("ammoLower_Zero", animName)) weapon->ammoLower[2] = spriteAnimManager->Get(animName);
         if(dict->GetString("ammoRaise_Zero", animName)) weapon->ammoRaise[2] = spriteAnimManager->Get(animName);
         if(dict->GetString("ammoFire_Zero", animName))  weapon->ammoFire[2]  = spriteAnimManager->Get(animName);
+    }
+}
+
+//
+// kexGameLocal::InitMapDefs
+//
+
+void kexGameLocal::InitMapDefs(void)
+{
+    int totalMaps = 0;
+    kexDict *dict;
+    mapInfo_t *mapInfo;
+    
+    for(int i = 0; i < MAX_HASH; i++)
+    {
+        kexHashList<kexDict>::hashKey_t *hashKey = mapDefs.defs.GetHashKey(i);
+        
+        if(hashKey == NULL)
+        {
+            continue;
+        }
+        
+        if(hashKey->refIndex > totalMaps)
+        {
+            totalMaps = hashKey->refIndex;
+        }
+    }
+    
+    if(totalMaps <= 0)
+    {
+        return;
+    }
+    
+    mapInfoList.Resize(totalMaps);
+    
+    for(unsigned int i = 0; i < mapInfoList.Length(); ++i)
+    {
+        dict = mapDefs.GetEntry(i);
+        
+        if(!dict)
+        {
+            continue;
+        }
+        
+        mapInfo = &mapInfoList[i];
+        
+        dict->GetString("title", mapInfo->title);
+        dict->GetString("musicTrack", mapInfo->musicTrack);
+        dict->GetFloat("overworld_x", mapInfo->overworldX);
+        dict->GetFloat("overworld_y", mapInfo->overworldY);
+        dict->GetInt("transmitter", mapInfo->transmitterBit);
+        
+        mapInfo->refID = i;
     }
 }
 
