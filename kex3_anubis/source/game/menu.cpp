@@ -22,6 +22,149 @@
 
 //-----------------------------------------------------------------------------
 //
+// kexMenu
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexMenu, kexObject)
+
+//
+// kexMenu::Init
+//
+
+void kexMenu::Init(void)
+{
+}
+
+//
+// kexMenu::Update
+//
+
+void kexMenu::Update(void)
+{
+}
+
+//
+// kexMenu::Display
+//
+
+void kexMenu::Display(void)
+{
+}
+
+//
+// kexMenu::Reset
+//
+
+void kexMenu::Reset(void)
+{
+}
+
+//
+// kexMenu::ProcessInput
+//
+
+bool kexMenu::ProcessInput(inputEvent_t *ev)
+{
+    return false;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuQuitConfirm
+//
+//-----------------------------------------------------------------------------
+
+DEFINE_MENU_CLASS(kexMenuQuitConfirm);
+public:
+    virtual void                    Init(void);
+    virtual void                    Display(void);
+    virtual void                    Update(void);
+    virtual bool                    ProcessInput(inputEvent_t *ev);
+
+private:
+    kexMenuPanel::selectButton_t    quitYesButton;
+    kexMenuPanel::selectButton_t    quitNoButton;
+END_MENU_CLASS();
+
+DECLARE_MENU_CLASS(kexMenuQuitConfirm, MENU_QUITCONFIRM);
+
+//
+// kexMenuQuitConfirm::Init
+//
+
+void kexMenuQuitConfirm::Init(void)
+{
+    quitYesButton.x = 40;
+    quitYesButton.y = 120;
+    quitYesButton.w = 96;
+    quitYesButton.h = 24;
+    quitYesButton.label = "Yes";
+    
+    quitNoButton.x = 182;
+    quitNoButton.y = 120;
+    quitNoButton.w = 96;
+    quitNoButton.h = 24;
+    quitNoButton.label = "No";
+}
+
+//
+// kexMenuQuitConfirm::Update
+//
+
+void kexMenuQuitConfirm::Update(void)
+{
+    kexGame::cMenuPanel->UpdateSelectButton(&quitYesButton);
+    kexGame::cMenuPanel->UpdateSelectButton(&quitNoButton);
+}
+
+//
+// kexMenuQuitConfirm::Display
+//
+
+void kexMenuQuitConfirm::Display(void)
+{
+    float w, h;
+    
+    kexRender::cScreen->SetOrtho();
+    
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+    
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 128);
+    
+    kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
+    kexGame::cMenuPanel->DrawInset(40, 72, 238, 32);
+    kexGame::cLocal->DrawSmallString("Are you sure you want to quit?", 144, 82, 1, true);
+    
+    kexGame::cMenuPanel->DrawSelectButton(&quitYesButton);
+    kexGame::cMenuPanel->DrawSelectButton(&quitNoButton);
+}
+
+//
+// kexMenuQuitConfirm::ProcessInput
+//
+
+bool kexMenuQuitConfirm::ProcessInput(inputEvent_t *ev)
+{
+    if(kexGame::cMenuPanel->TestSelectButtonInput(&quitYesButton, ev))
+    {
+        kex::cCommands->Execute("quit");
+        return true;
+    }
+    
+    if(kexGame::cMenuPanel->TestSelectButtonInput(&quitNoButton, ev))
+    {
+        kexGame::cLocal->ClearMenu();
+        kexGame::cLocal->PlaySound("sounds/select.wav");
+        return true;
+    }
+    
+    return false;
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexMenuItem
 //
 //-----------------------------------------------------------------------------

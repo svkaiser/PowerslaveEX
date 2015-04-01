@@ -15,6 +15,36 @@
 #ifndef __MENU_H__
 #define __MENU_H__
 
+typedef enum
+{
+    MENU_QUITCONFIRM    = 0,
+    NUMMENUS
+} menus_t;
+
+BEGIN_EXTENDED_KEX_CLASS(kexMenu, kexObject);
+public:
+    virtual void                Init(void);
+    virtual void                Display(void);
+    virtual void                Reset(void);
+    virtual void                Update(void);
+    virtual bool                ProcessInput(inputEvent_t *ev);
+END_KEX_CLASS();
+
+#define DEFINE_MENU_CLASS(name)   \
+BEGIN_EXTENDED_KEX_CLASS(name, kexMenu);  \
+public: \
+name(void)
+
+#define END_MENU_CLASS  END_KEX_CLASS
+
+#define DECLARE_MENU_CLASS(name, id)    \
+DECLARE_KEX_CLASS(name, kexMenu)  \
+static name local_ ## name;   \
+name::name(void)    \
+{   \
+kexGameLocal::menus[id] = this;   \
+}
+
 class kexMenuItem;
 typedef void(*menuItemLerpDone_t)(kexMenuItem*);
 

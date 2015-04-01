@@ -36,6 +36,8 @@ static kexGameLocal gameLocal;
 kexGameLoop *kex::cGame = &gameLocal;
 kexGameLocal *kexGame::cLocal = &gameLocal;
 
+kexMenu *kexGameLocal::menus[NUMMENUS];
+
 //
 // map
 //
@@ -284,7 +286,6 @@ kexGameLocal::kexGameLocal(void)
     this->gameState         = GS_NONE;
     this->pendingGameState  = GS_NONE;
     this->gameLoop          = &this->gameLoopStub;
-    this->bQuitConfirm      = false;
 
     this->titleScreen       = new kexTitleScreen;
     this->playLoop          = new kexPlayLoop;
@@ -296,8 +297,6 @@ kexGameLocal::kexGameLocal(void)
     this->spriteAnimManager = new kexSpriteAnimManager;
 
     memset(weaponInfo, 0, sizeof(weaponInfo_t) * NUMPLAYERWEAPONS);
-    memset(&quitYesButton, 0, sizeof(kexMenuPanel::selectButton_t));
-    memset(&quitNoButton, 0, sizeof(kexMenuPanel::selectButton_t));
 }
 
 //
@@ -348,17 +347,10 @@ void kexGameLocal::Init(void)
     kexGame::cScriptManager->Init();
     kexGame::cActionDefManager->RegisterActions();
 
-    quitYesButton.x = 40;
-    quitYesButton.y = 120;
-    quitYesButton.w = 96;
-    quitYesButton.h = 24;
-    quitYesButton.label = "Yes";
-
-    quitNoButton.x = 182;
-    quitNoButton.y = 120;
-    quitNoButton.w = 96;
-    quitNoButton.h = 24;
-    quitNoButton.label = "No";
+    for(int i = 0; i < NUMMENUS; ++i)
+    {
+        menus[i]->Init();
+    }
 }
 
 //
@@ -459,6 +451,12 @@ void kexGameLocal::Tick(void)
     {
         StopSounds();
         gameLoop->Stop();
+        
+        if(activeMenu != NULL)
+        {
+            activeMenu->Reset();
+            ClearMenu();
+        }
 
         kex::cSession->ForceSingleFrame();
         
@@ -501,14 +499,13 @@ void kexGameLocal::Tick(void)
     
     player->Cmd().BuildCommands();
     
-    if(!bQuitConfirm)
+    if(activeMenu == NULL)
     {
         gameLoop->Tick();
     }
     else
     {
-        kexGame::cMenuPanel->UpdateSelectButton(&quitYesButton);
-        kexGame::cMenuPanel->UpdateSelectButton(&quitNoButton);
+        activeMenu->Update();
     }
     
     player->Cmd().Reset();
@@ -531,9 +528,9 @@ void kexGameLocal::Draw(void)
     
     gameLoop->Draw();
 
-    if(bQuitConfirm)
+    if(activeMenu != NULL)
     {
-        DrawQuitConfirm();
+        activeMenu->Display();
     }
 
     kexGame::cScriptManager->DrawGCStats();
@@ -568,22 +565,9 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
         break;
     }
 
-    if(bQuitConfirm)
+    if(activeMenu != NULL)
     {
-        if(kexGame::cMenuPanel->TestSelectButtonInput(&quitYesButton, ev))
-        {
-            kex::cCommands->Execute("quit");
-            return true;
-        }
-
-        if(kexGame::cMenuPanel->TestSelectButtonInput(&quitNoButton, ev))
-        {
-            bQuitConfirm = false;
-            kexGame::cLocal->PlaySound("sounds/select.wav");
-            return true;
-        }
-
-        return false;
+        return activeMenu->ProcessInput(ev);
     }
 
     return gameLoop->ProcessInput(ev);
@@ -776,36 +760,4 @@ kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const floa
                                    const float yaw, const int sector)
 {
     return kexGame::cActorFactory->Spawn(name, x, y, z, yaw, sector);
-}
-
-//
-// kexGameLocal::ToggleQuitConfirm
-//
-
-void kexGameLocal::ToggleQuitConfirm(const bool bToggle)
-{
-    bQuitConfirm = bToggle;
-}
-
-//
-// kexGameLocal::DrawQuitConfirm
-//
-
-void kexGameLocal::DrawQuitConfirm(void)
-{
-    float w, h;
-
-    kexRender::cScreen->SetOrtho();
-
-    w = (float)kex::cSystem->VideoWidth();
-    h = (float)kex::cSystem->VideoHeight();
-
-    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 128);
-
-    kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
-    kexGame::cMenuPanel->DrawInset(40, 72, 238, 32);
-    DrawSmallString("Are you sure you want to quit?", 144, 82, 1, true);
-
-    kexGame::cMenuPanel->DrawSelectButton(&quitYesButton);
-    kexGame::cMenuPanel->DrawSelectButton(&quitNoButton);
 }

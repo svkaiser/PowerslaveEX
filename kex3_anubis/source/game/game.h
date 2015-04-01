@@ -146,6 +146,7 @@ typedef enum
 #include "player.h"
 #include "actionDef.h"
 #include "actorFactory.h"
+#include "menu.h"
 
 //-----------------------------------------------------------------------------
 //
@@ -170,7 +171,6 @@ public:
     void                            RemoveAllGameObjects(void);
     void                            ChangeMap(const char *name);
     void                            PlaySound(const char *name);
-    void                            ToggleQuitConfirm(const bool bToggle);
 
     typedef struct
     {
@@ -205,6 +205,8 @@ public:
     kexSpriteAnimManager            *SpriteAnimManager(void) { return spriteAnimManager; }
     const weaponInfo_t              *WeaponInfo(const int id) const { return &weaponInfo[id]; }
     kexIndexDefManager              &ActorDefs(void) { return actorDefs; }
+    void                            SetMenu(const menus_t menu) { activeMenu = menus[menu]; }
+    void                            ClearMenu(void) { activeMenu = NULL; }
 
     kexObject                       *ConstructObject(const char *className);
     kexActor                        *SpawnActor(const int type, const float x, const float y, const float z,
@@ -216,12 +218,13 @@ public:
     void                            DrawBigString(const char *string, float x, float y, float scale, bool center,
                                                   byte r = 0xff, byte g = 0xff, byte b = 0xff);
 
+    static kexMenu                  *menus[NUMMENUS];
+    
 private:
     void                            LoadNewMap(void);
     void                            InitWeaponDefs(void);
     void                            StopSounds(void);
     void                            UpdateSounds(void);
-    void                            DrawQuitConfirm(void);
     
     kexFont                         *smallFont;
     kexFont                         *bigFont;
@@ -246,9 +249,7 @@ private:
     kexStr                          pendingMap;
     weaponInfo_t                    weaponInfo[NUMPLAYERWEAPONS];
     kexTexture                      *loadingPic;
-    bool                            bQuitConfirm;
-    kexMenuPanel::selectButton_t    quitYesButton;
-    kexMenuPanel::selectButton_t    quitNoButton;
+    kexMenu                         *activeMenu;
 };
 
 //-----------------------------------------------------------------------------
