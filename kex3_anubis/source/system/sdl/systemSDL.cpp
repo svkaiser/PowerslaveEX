@@ -529,7 +529,15 @@ void kexSystemSDL::Error(const char* string, ...)
 const char *kexSystemSDL::GetBaseDirectory(void)
 {
 #ifdef KEX_MACOSX
-    return "./";
+    static kexStr path = SDL_GetBasePath();
+    int idx = path.IndexOf("anubis.app");
+    if(idx == -1)
+    {
+        return "./";
+    }
+    
+    path.Remove(idx, path.Length());
+    return path.c_str();
 #else
     static const char dummyDirectory[] = {"."};
     // cache multiple requests
