@@ -515,6 +515,39 @@ const int kexInputAction::GetAction(const int id)
 }
 
 //
+// kexInputAction::GetActionBinds
+//
+
+void kexInputAction::GetActionBinds(kexStrList &bindList, const int id)
+{
+    cmdLink_t *keycmd;
+    cmdlist_t *cmd;
+    char *tmp;
+    
+    for(int i = 0; i < MAX_KEYS; i++)
+    {
+        keycmd = &keycmds[i];
+        
+        if((tmp = GetKeyName(i)) == NULL)
+        {
+            continue;
+        }
+        
+        
+        for(cmd = keycmd->Next(); cmd; cmd = cmd->link.Next())
+        {
+            if(cmd->action != &keyActions[id])
+            {
+                continue;
+            }
+            
+            bindList.Push(kexStr(tmp));
+            break;
+        }
+    }
+}
+
+//
 // kexInputAction::AddAction
 //
 

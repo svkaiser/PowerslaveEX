@@ -276,6 +276,25 @@ COMMAND(weapon)
 }
 
 //
+// showmenu
+//
+
+COMMAND(showmenu)
+{
+    int argc = kex::cCommands->GetArgc();
+    menus_t menuType;
+    
+    if(argc != 2)
+    {
+        kex::cSystem->Printf("showmenu <type>\n");
+        return;
+    }
+    
+    menuType = static_cast<menus_t>(atoi(kex::cCommands->GetArgv(1)));
+    gameLocal.SetMenu(menuType);
+}
+
+//
 // kexGameLocal::kexGameLocal
 //
 

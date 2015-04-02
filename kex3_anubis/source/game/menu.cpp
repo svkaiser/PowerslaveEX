@@ -165,6 +165,101 @@ bool kexMenuQuitConfirm::ProcessInput(inputEvent_t *ev)
 
 //-----------------------------------------------------------------------------
 //
+// kexMenuInput
+//
+//-----------------------------------------------------------------------------
+
+DEFINE_MENU_CLASS(kexMenuInput);
+public:
+    virtual void                    Init(void);
+    virtual void                    Display(void);
+    virtual void                    Update(void);
+    virtual bool                    ProcessInput(inputEvent_t *ev);
+
+private:
+    kexMenuPanel::selectButton_t    exitButton;
+    int                             categorySelected;
+END_MENU_CLASS();
+
+DECLARE_MENU_CLASS(kexMenuInput, MENU_INPUT);
+
+//
+// kexMenuInput::Init
+//
+
+void kexMenuInput::Init(void)
+{
+    categorySelected = 0;
+    
+    exitButton.x = 112;
+    exitButton.y = 204;
+    exitButton.w = 96;
+    exitButton.h = 24;
+    exitButton.label = "Exit";
+}
+
+//
+// kexMenuInput::Update
+//
+
+void kexMenuInput::Update(void)
+{
+    kexGame::cMenuPanel->UpdateSelectButton(&exitButton);
+}
+
+//
+// kexMenuInput::Display
+//
+
+void kexMenuInput::Display(void)
+{
+    kexRender::cScreen->SetOrtho();
+    
+    kexGame::cMenuPanel->DrawPanel(0, 0, 320, 240, 4);
+    kexGame::cMenuPanel->DrawInset(16, 16, 288, 16);
+    kexGame::cMenuPanel->DrawInset(16, 40, 288, 16);
+    kexGame::cMenuPanel->DrawInset(16, 56, 288, 16);
+    kexGame::cMenuPanel->DrawInset(16, 72, 288, 16);
+    kexGame::cMenuPanel->DrawInset(16, 88, 288, 16);
+    kexGame::cMenuPanel->DrawInset(16, 104, 288, 16);
+    kexGame::cMenuPanel->DrawInset(16, 120, 288, 16);
+    kexGame::cMenuPanel->DrawInset(16, 136, 288, 16);
+    kexGame::cMenuPanel->DrawInset(16, 152, 288, 16);
+    kexGame::cMenuPanel->DrawInset(16, 168, 288, 16);
+    
+    kexGame::cMenuPanel->DrawSelectButton(&exitButton);
+    
+    kexGame::cLocal->DrawSmallString("Page 1/2", 160, 20, 1, true);
+    
+    kexGame::cLocal->DrawSmallString("Attack", 24, 44, 1, false);
+    kexGame::cLocal->DrawSmallString("Jump", 24, 60, 1, false);
+    kexGame::cLocal->DrawSmallString("Forward", 24, 76, 1, false);
+    kexGame::cLocal->DrawSmallString("Backward", 24, 92, 1, false);
+    kexGame::cLocal->DrawSmallString("Turn-L", 24, 108, 1, false);
+    kexGame::cLocal->DrawSmallString("Turn-R", 24, 124, 1, false);
+    kexGame::cLocal->DrawSmallString("Strafe-L", 24, 140, 1, false);
+    kexGame::cLocal->DrawSmallString("Strafe-R", 24, 156, 1, false);
+    kexGame::cLocal->DrawSmallString("Interact", 24, 172, 1, false);
+}
+
+//
+// kexMenuInput::ProcessInput
+//
+
+bool kexMenuInput::ProcessInput(inputEvent_t *ev)
+{
+    if(kexGame::cMenuPanel->TestSelectButtonInput(&exitButton, ev))
+    {
+        kexGame::cLocal->ClearMenu();
+        kexGame::cLocal->PlaySound("sounds/select.wav");
+        return true;
+    }
+    
+    return false;
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexMenuItem
 //
 //-----------------------------------------------------------------------------

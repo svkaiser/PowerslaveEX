@@ -51,8 +51,9 @@ public:
     void                    BindCommand(int key, const char *string);
     void                    UnBindCommand(int key, const char *string);
     void                    ListBindings(void);
-    
     const int               GetAction(const int id);
+    void                    GetActionBinds(kexStrList &bindList, const int id);
+    
     cmdLink_t               *KeyCommands(void) { return keycmds; }
 
 private:
