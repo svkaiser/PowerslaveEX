@@ -121,7 +121,6 @@ void kexOverWorld::SetupMatrix(const int zoom)
 const int kexOverWorld::GetFade(void)
 {
     int c = 0;
-    float scale = 2;
 
     if(!bFading)
     {
@@ -258,6 +257,7 @@ void kexOverWorld::Tick(void)
     float my = (float)kex::cInput->MouseY();
     float nx;
     float ny;
+    float extend;
         
     kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
 
@@ -274,6 +274,11 @@ void kexOverWorld::Tick(void)
 
     nx = kexGame::cLocal->MapInfoList()[selectedMap].overworldX;
     ny = kexGame::cLocal->MapInfoList()[selectedMap].overworldY;
+    
+    extend = (320.0f * (1.0f - (((float)pic.OriginalWidth() - nx) / 320.0f)));
+    kexMath::Clamp(extend, -80, 80);
+    
+    nx += extend;
 
     camera_x = (nx - camera_x) * 0.05f + camera_x;
     camera_y = (ny - camera_y) * 0.05f + camera_y;
