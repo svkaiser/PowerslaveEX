@@ -1,0 +1,107 @@
+texture "sprites/misc/overworld.png"
+
+// working\overworld\overworld_00.tga
+sprite 0 0 0 12 9
+
+// working\overworld\overworld_01.tga
+sprite 1 12 0 40 16
+
+// working\overworld\overworld_02.tga
+sprite 2 52 0 40 16
+
+// working\overworld\overworld_03.tga
+sprite 3 92 0 12 11
+
+// working\overworld\overworld_04.tga
+sprite 4 104 0 40 16
+
+// working\overworld\overworld_05.tga
+sprite 5 144 0 40 16
+
+// working\overworld\overworld_06.tga
+sprite 6 184 0 40 16
+
+// working\overworld\overworld_07.tga
+sprite 7 0 16 40 16
+
+// working\overworld\overworld_08.tga
+sprite 8 40 16 40 16
+
+// working\overworld\overworld_09.tga
+sprite 9 80 16 40 16
+
+// working\overworld\overworld_10.tga
+sprite 10 120 16 40 16
+
+// working\overworld\overworld_11.tga
+sprite 11 160 16 40 16
+
+// working\overworld\overworld_12.tga
+sprite 12 200 16 40 16
+
+// working\overworld\overworld_13.tga
+sprite 13 0 32 40 16
+
+// working\overworld\overworld_14.tga
+sprite 14 40 32 40 16
+
+// working\overworld\overworld_15.tga
+sprite 15 80 32 40 16
+
+// working\overworld\overworld_16.tga
+sprite 16 120 32 40 16
+
+// working\overworld\overworld_17.tga
+sprite 17 160 32 40 16
+
+// working\overworld\overworld_18.tga
+sprite 18 200 32 40 16
+
+// working\overworld\overworld_19.tga
+sprite 19 0 48 40 16
+
+// working\overworld\overworld_20.tga
+sprite 20 40 48 40 16
+
+// working\overworld\overworld_21.tga
+sprite 21 80 48 40 16
+
+// working\overworld\overworld_22.tga
+sprite 22 120 48 40 16
+
+// working\overworld\overworld_23.tga
+sprite 23 160 48 40 16
+
+// working\overworld\overworld_24.tga
+sprite 24 200 48 40 16
+
+// working\overworld\overworld_25.tga
+sprite 25 0 64 40 15
+
+// working\overworld\overworld_26.tga
+sprite 26 40 64 40 16
+
+// working\overworld\overworld_27.tga
+sprite 27 80 64 40 16
+
+// working\overworld\overworld_28.tga
+sprite 28 120 64 40 16
+
+// working\overworld\overworld_29.tga
+sprite 29 160 64 40 16
+
+// working\overworld\overworld_30.tga
+sprite 30 200 64 40 16
+
+// working\overworld\overworld_31.tga
+sprite 31 0 79 40 16
+
+// working\overworld\overworld_32.tga
+sprite 32 240 0 12 9
+
+// working\overworld\overworld_33.tga
+sprite 33 240 9 12 11
+
+// working\overworld\overworld_34.tga
+sprite 34 40 80 40 16
+

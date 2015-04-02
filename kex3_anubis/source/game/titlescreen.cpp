@@ -499,8 +499,7 @@ void kexTitleScreen::FadeDone(void)
         titleMenu[TSI_QUIT]->item->LerpTo(160);
         break;
     case TSS_NEWGAME:
-        //kexGame::cLocal->SetGameState(GS_LEVEL);
-        kexGame::cLocal->ChangeMap("maps/TOMB.MAP");
+        kexGame::cLocal->SetGameState(GS_OVERWORLD);
         break;
     default:
         break;

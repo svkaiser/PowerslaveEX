@@ -1,0 +1,20 @@
+Map_Tomb1   0
+{
+    title           "$str_000"
+    overworld_x     326
+    overworld_y     208
+}
+
+Map_Karnak   1
+{
+    title           "$str_001"
+    overworld_x     404
+    overworld_y     294
+}
+
+Map_Sanctuary 2
+{
+    title           "$str_002"
+    overworld_x     558
+    overworld_y     286
+}

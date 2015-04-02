@@ -1,0 +1,34 @@
+mapcursor
+{
+    frame { sprites { { "misc/overworld", 10, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 11, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 14, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 17, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 20, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 23, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 26, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 29, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 31, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 4, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 6, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 8, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 12, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 15, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 18, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 21, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 24, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 27, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 30, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 2, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 5, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 7, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 9, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 13, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 16, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 19, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 22, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 25, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 28, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 34, -1, -1, 0 } } }
+    frame { sprites { { "misc/overworld", 1, -1, -1, 0 } } }
+}

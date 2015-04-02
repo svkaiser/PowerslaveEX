@@ -19,6 +19,7 @@ class kexFont;
 class kexTitleScreen;
 class kexTranslation;
 class kexPlayLoop;
+class kexOverWorld;
 class kexRenderView;
 class kexMover;
 class kexMenuPanel;
@@ -46,6 +47,7 @@ typedef enum
 {
     GS_NONE     = 0,
     GS_TITLE,
+    GS_OVERWORLD,
     GS_LEVEL,
     GS_CHANGELEVEL,
     GS_MAPEDITOR,
@@ -147,6 +149,7 @@ typedef enum
 #include "actionDef.h"
 #include "actorFactory.h"
 #include "menu.h"
+#include "textureObject.h"
 
 //-----------------------------------------------------------------------------
 //
@@ -191,12 +194,13 @@ public:
     
     typedef struct
     {
-        kexStr          title;
-        kexStr          musicTrack;
-        float           overworldX;
-        float           overworldY;
-        int16_t         transmitterBit;
-        int16_t         refID;
+        kexStr              title;
+        kexStr              musicTrack;
+        float               overworldX;
+        float               overworldY;
+        int16_t             transmitterBit;
+        int16_t             refID;
+        int16_t             nextMap[4];
     } mapInfo_t;
     
     kexTitleScreen                  *TitleScreen(void) { return titleScreen; }
@@ -217,6 +221,7 @@ public:
     kexIndexDefManager              &ActorDefs(void) { return actorDefs; }
     void                            SetMenu(const menus_t menu) { activeMenu = menus[menu]; }
     void                            ClearMenu(void) { activeMenu = NULL; }
+    kexArray<mapInfo_t>             &MapInfoList(void) { return mapInfoList; }
 
     kexObject                       *ConstructObject(const char *className);
     kexActor                        *SpawnActor(const int type, const float x, const float y, const float z,
@@ -241,6 +246,7 @@ private:
     kexFont                         *bigFont;
     kexTitleScreen                  *titleScreen;
     kexPlayLoop                     *playLoop;
+    kexOverWorld                    *overWorld;
     kexTranslation                  *translation;
     kexWorld                        *world;
     kexCModel                       *cmodel;
@@ -260,9 +266,10 @@ private:
     kexIndexDefManager              mapDefs;
     kexStr                          pendingMap;
     weaponInfo_t                    weaponInfo[NUMPLAYERWEAPONS];
-    kexTexture                      *loadingPic;
+    kexTexture                      loadingPic;
     kexMenu                         *activeMenu;
     kexArray<mapInfo_t>             mapInfoList;
+    kexArray<bool>                  bMapUnlockList;
 };
 
 //-----------------------------------------------------------------------------

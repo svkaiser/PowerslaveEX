@@ -28,6 +28,11 @@
 
 COMMAND(gprint)
 {
+    if(kexGame::cLocal->GameState() != GS_LEVEL)
+    {
+        return;
+    }
+
     int argc = kex::cCommands->GetArgc();
 
     if(argc != 2)
@@ -45,6 +50,11 @@ COMMAND(gprint)
 
 COMMAND(automap)
 {
+    if(kexGame::cLocal->GameState() != GS_LEVEL)
+    {
+        return;
+    }
+
     kexPlayLoop *pl = kexGame::cLocal->PlayLoop();
     pl->ToggleAutomap(pl->AutomapEnabled() ^ 1);
 }
@@ -55,6 +65,11 @@ COMMAND(automap)
 
 COMMAND(mapall)
 {
+    if(kexGame::cLocal->GameState() != GS_LEVEL)
+    {
+        return;
+    }
+
     kexGame::cLocal->PlayLoop()->ToggleMapAll(true);
 }
 
@@ -64,6 +79,11 @@ COMMAND(mapall)
 
 COMMAND(pausegame)
 {
+    if(kexGame::cLocal->GameState() != GS_LEVEL)
+    {
+        return;
+    }
+
     if(kex::cCommands->GetArgc() < 1)
     {
         return;
@@ -78,6 +98,11 @@ COMMAND(pausegame)
 
 COMMAND(inventorymenu)
 {
+    if(kexGame::cLocal->GameState() != GS_LEVEL)
+    {
+        return;
+    }
+
     if(kex::cCommands->GetArgc() < 1)
     {
         return;

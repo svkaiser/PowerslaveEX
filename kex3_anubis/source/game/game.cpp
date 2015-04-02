@@ -28,6 +28,7 @@
 #include "mover.h"
 #include "titlescreen.h"
 #include "playLoop.h"
+#include "overWorld.h"
 #include "menuPanel.h"
 #include "localization.h"
 #include "mapEditor.h"
@@ -289,6 +290,7 @@ kexGameLocal::kexGameLocal(void)
 
     this->titleScreen       = new kexTitleScreen;
     this->playLoop          = new kexPlayLoop;
+    this->overWorld         = new kexOverWorld;
     this->translation       = new kexTranslation;
     this->world             = new kexWorld;
     this->player            = new kexPlayer;
@@ -307,6 +309,7 @@ kexGameLocal::~kexGameLocal(void)
 {
     delete titleScreen;
     delete playLoop;
+    delete overWorld;
     delete translation;
     delete world;
     delete player;
@@ -362,10 +365,11 @@ void kexGameLocal::Start(void)
 {
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");
-    loadingPic  = kexRender::cTextures->Cache("gfx/loadback.png", TC_CLAMP, TF_NEAREST);
+
+    loadingPic.LoadFromFile("gfx/loadback.png", TC_CLAMP, TF_NEAREST);
 
     kexRender::cScreen->SetOrtho();
-    kexRender::cScreen->DrawTexture(loadingPic, 0, 0, 255, 255, 255, 255);
+    kexRender::cScreen->DrawTexture(&loadingPic, 0, 0, 255, 255, 255, 255);
     DrawSmallString("Loading", 160, 120, 1, true);
     kexRender::cBackend->SwapBuffers();
 
@@ -374,11 +378,13 @@ void kexGameLocal::Start(void)
     playLoop->Init();
     spriteManager->Init();
     spriteAnimManager->Init();
+    overWorld->Init();
 
     pendingGameState = GS_TITLE;
     InitWeaponDefs();
     InitMapDefs();
 
+    loadingPic.Delete();
     player->Reset();
 }
 
@@ -459,9 +465,14 @@ void kexGameLocal::InitMapDefs(void)
     }
     
     mapInfoList.Resize(totalMaps);
+    bMapUnlockList.Resize(totalMaps);
     
-    for(unsigned int i = 0; i < mapInfoList.Length(); ++i)
+    for(int i = 0; i < totalMaps; ++i)
     {
+        int nextMap[4];
+
+        bMapUnlockList[i] = false;
+
         dict = mapDefs.GetEntry(i);
         
         if(!dict)
@@ -476,6 +487,21 @@ void kexGameLocal::InitMapDefs(void)
         dict->GetFloat("overworld_x", mapInfo->overworldX);
         dict->GetFloat("overworld_y", mapInfo->overworldY);
         dict->GetInt("transmitter", mapInfo->transmitterBit);
+        dict->GetInt("nextmap_north", nextMap[0], -1);
+        dict->GetInt("nextmap_east", nextMap[1], -1);
+        dict->GetInt("nextmap_south", nextMap[2], -1);
+        dict->GetInt("nextmap_west", nextMap[3], -1);
+
+        for(int j = 0; j < 4; ++j)
+        {
+            if(nextMap[j] <= -1 || nextMap[j] >= (int)mapInfoList.Length())
+            {
+                mapInfo->nextMap[j] = -1;
+                continue;
+            }
+
+            mapInfo->nextMap[j] = j;
+        }
         
         mapInfo->refID = i;
     }
@@ -523,6 +549,10 @@ void kexGameLocal::Tick(void)
 
             case GS_LEVEL:
                 gameLoop = playLoop;
+                break;
+
+            case GS_OVERWORLD:
+                gameLoop = overWorld;
                 break;
                 
             case GS_CHANGELEVEL:

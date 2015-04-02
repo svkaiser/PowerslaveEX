@@ -461,6 +461,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\overWorld.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\pickup.cpp"
 					>
 				</File>
@@ -828,6 +832,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\mover.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\overWorld.h"
 					>
 				</File>
 				<File
