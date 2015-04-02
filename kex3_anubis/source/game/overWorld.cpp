@@ -43,6 +43,7 @@ kexOverWorld::~kexOverWorld(void)
 void kexOverWorld::Init(void)
 {
     mapCursor = kexGame::cLocal->SpriteAnimManager()->Get("misc/mapcursor");
+    selectedMap = 0;
 }
 
 //
@@ -63,8 +64,8 @@ void kexOverWorld::Start(void)
     kex::cInput->ToggleMouseGrab(false);
     kex::cSession->ToggleCursor(true);
 
-    camera_x = kexGame::cLocal->MapInfoList()[0].overworldX;
-    camera_y = kexGame::cLocal->MapInfoList()[0].overworldY;
+    camera_x = kexGame::cLocal->MapInfoList()[selectedMap].overworldX;
+    camera_y = kexGame::cLocal->MapInfoList()[selectedMap].overworldY;
 
     fadeTime = kex::cSession->GetTicks();
     curFadeTime = 0;
@@ -166,6 +167,8 @@ void kexOverWorld::DrawBackground(const int fade)
 void kexOverWorld::DrawCursor(const int fade)
 {
     int frm = 0;
+    float nx = kexGame::cLocal->MapInfoList()[selectedMap].overworldX;
+    float ny = kexGame::cLocal->MapInfoList()[selectedMap].overworldY;
 
     if(mapCursor->NumFrames() > 0)
     {
@@ -184,8 +187,8 @@ void kexOverWorld::DrawCursor(const int fade)
         sprite = spriteSet->sprite;
         info = &sprite->InfoList()[spriteSet->index];
 
-        float x = (float)spriteSet->x + camera_x;
-        float y = (float)spriteSet->y + camera_y;
+        float x = (float)spriteSet->x + nx;
+        float y = (float)spriteSet->y + ny;
         float w = (float)info->atlas.w;
         float h = (float)info->atlas.h;
 
@@ -205,6 +208,25 @@ void kexOverWorld::DrawCursor(const int fade)
 }
 
 //
+// kexOverWorld::DrawDots
+//
+
+void kexOverWorld::DrawDots(const int fade)
+{
+    kexCpuVertList *vl = kexRender::cVertList;
+    kexRender::cTextures->whiteTexture->Bind();
+
+    for(unsigned int i = 0; i < kexGame::cLocal->MapInfoList().Length(); ++i)
+    {
+        kexGameLocal::mapInfo_t *minfo = &kexGame::cLocal->MapInfoList()[i];
+
+        vl->AddQuad(minfo->overworldX+16, minfo->overworldY+16, 4, 4, fade, fade, fade, 255);
+    }
+
+    vl->DrawElements();
+}
+
+//
 // kexOverWorld::Draw
 //
 
@@ -221,6 +243,8 @@ void kexOverWorld::Draw(void)
 
     DrawBackground(c);
 
+    DrawDots(c);
+
     DrawCursor(c);
 }
 
@@ -230,6 +254,13 @@ void kexOverWorld::Draw(void)
 
 void kexOverWorld::Tick(void)
 {
+    float mx = (float)kex::cInput->MouseX();
+    float my = (float)kex::cInput->MouseY();
+    float nx;
+    float ny;
+        
+    kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+
     if(bFading)
     {
         curFadeTime = ((kex::cSession->GetTicks() - fadeTime)) << 3;
@@ -238,6 +269,27 @@ void kexOverWorld::Tick(void)
     else if(!bFadeIn)
     {
         kexGame::cLocal->ChangeMap("maps/TOMB.MAP");
+        return;
+    }
+
+    nx = kexGame::cLocal->MapInfoList()[selectedMap].overworldX;
+    ny = kexGame::cLocal->MapInfoList()[selectedMap].overworldY;
+
+    camera_x = (nx - camera_x) * 0.05f + camera_x;
+    camera_y = (ny - camera_y) * 0.05f + camera_y;
+
+    for(unsigned int i = 0; i < kexGame::cLocal->MapInfoList().Length(); ++i)
+    {
+        kexGameLocal::mapInfo_t *minfo = &kexGame::cLocal->MapInfoList()[i];
+        float sx = ((minfo->overworldX+18) - (camera_x*0.5f)) - mx;
+        float sy = ((minfo->overworldY+18) - (camera_y*0.5f)) - my;
+
+        if(sx * sx + sy * sy > 4096)
+        {
+            continue;
+        }
+
+        selectedMap = (int16_t)i;
     }
 }
 

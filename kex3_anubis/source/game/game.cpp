@@ -463,6 +463,8 @@ void kexGameLocal::InitMapDefs(void)
     {
         return;
     }
+
+    totalMaps++;
     
     mapInfoList.Resize(totalMaps);
     bMapUnlockList.Resize(totalMaps);

@@ -31,12 +31,14 @@ public:
 private:
     void                        DrawCursor(const int fade);
     void                        DrawBackground(const int fade);
+    void                        DrawDots(const int fade);
     void                        SetupMatrix(const int zoom);
     const int                   GetFade(void);
 
     kexTexture                  pic;
     float                       camera_x;
     float                       camera_y;
+    int16_t                     selectedMap;
     int                         fadeTime;
     int                         curFadeTime;
     bool                        bFadeIn;
