@@ -271,7 +271,7 @@ float kexFont::StringWidth(const char* string, float scale, int fixedLen)
 
     for(i = 0; i < len; i++)
     {
-        width += (atlas[string[i]].w * scale);
+        width += ((atlas[string[i]].w + padWidth) * scale);
     }
 
     return width;
