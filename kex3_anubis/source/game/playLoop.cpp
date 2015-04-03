@@ -358,15 +358,7 @@ void kexPlayLoop::DrawFadeIn(void)
 
 void kexPlayLoop::Print(const char *string)
 {
-    if(kexStr::IndexOf(string, "$str_") == 0)
-    {
-        int index = atoi(string + 5);
-
-        hud.AddMessage(kexGame::cLocal->Translation()->GetString(index));
-        return;
-    }
-
-    hud.AddMessage(string);
+    hud.AddMessage(kexGame::cLocal->Translation()->TranslateString(string));
 }
 
 //

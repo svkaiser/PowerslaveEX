@@ -78,8 +78,6 @@ void kexInventoryMenu::Init(void)
         weaponTextures[i] = kexRender::cTextures->Cache(str, TC_CLAMP, TF_NEAREST);
     }
 
-    arrows[0] = kexRender::cTextures->Cache("gfx/menu/menuarrow_left.png", TC_CLAMP, TF_NEAREST);
-    arrows[1] = kexRender::cTextures->Cache("gfx/menu/menuarrow_right.png", TC_CLAMP, TF_NEAREST);
     mapClosedTexture = kexRender::cTextures->Cache("gfx/menu/menumap_closed.png", TC_CLAMP, TF_NEAREST);
     mapOpenTexture = kexRender::cTextures->Cache("gfx/menu/menumap_open.png", TC_CLAMP, TF_NEAREST);
     
@@ -184,17 +182,12 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
     {
         if(ev->data1 == KMSB_LEFT)
         {
-            float mx = (float)kex::cInput->MouseX();
-            float my = (float)kex::cInput->MouseY();
-        
-            kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
-
             switch(categorySelected)
             {
             case 0:
                 if(kexGame::cLocal->PlayLoop()->AutomapEnabled())
                 {
-                    if(CursorOnLeftArrow(mx, my))
+                    if(kexGame::cMenuPanel->CursorOnLeftArrow(LEFT_ARROW_X, ARROW_OFFSET))
                     {
                         kexGame::cLocal->PlaySound("sounds/select.wav");
                         kexGame::cLocal->PlayLoop()->ToggleAutomap(false);
@@ -203,7 +196,7 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                 }
                 else
                 {
-                    if(CursorOnRightArrow(mx, my))
+                    if(kexGame::cMenuPanel->CursorOnRightArrow(RIGHT_ARROW_X, ARROW_OFFSET))
                     {
                         kexGame::cLocal->PlaySound("sounds/select.wav");
                         kexGame::cLocal->PlayLoop()->ToggleAutomap(true);
@@ -224,7 +217,7 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                     {
                         if(p->Artifacts() & BIT(i))
                         {
-                           if(CursorOnRightArrow(mx, my))
+                           if(kexGame::cMenuPanel->CursorOnRightArrow(RIGHT_ARROW_X, ARROW_OFFSET))
                             {
                                 artifactSelected = i;
                                 kexGame::cLocal->PlaySound("sounds/select.wav");
@@ -240,7 +233,7 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                     {
                         if(p->Artifacts() & BIT(i))
                         {
-                            if(CursorOnLeftArrow(mx, my))
+                            if(kexGame::cMenuPanel->CursorOnLeftArrow(LEFT_ARROW_X, ARROW_OFFSET))
                             {
                                 artifactSelected = i;
                                 kexGame::cLocal->PlaySound("sounds/select.wav");
@@ -255,7 +248,7 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                 break;
             }
 
-            if(kexGame::cMenuPanel->TestPointInButtonSet(&buttonSet, mx, my))
+            if(kexGame::cMenuPanel->TestPointInButtonSet(&buttonSet))
             {
                 categorySelected = buttonSet.pressedIndex;
                 kexGame::cLocal->PlaySound("sounds/click.wav");
@@ -281,42 +274,6 @@ void kexInventoryMenu::ShowArtifact(const int artifact)
     buttonSet.pressedIndex = 2;
 
     Toggle();
-}
-
-//
-// kexInventoryMenu::DrawLeftArrow
-//
-
-void kexInventoryMenu::DrawLeftArrow(void)
-{
-    kexRender::cScreen->DrawTexture(arrows[0], LEFT_ARROW_X, ARROW_OFFSET, 255, 255, 255, 255);
-}
-
-//
-// kexInventoryMenu::DrawRightArrow
-//
-
-void kexInventoryMenu::DrawRightArrow(void)
-{
-    kexRender::cScreen->DrawTexture(arrows[1], RIGHT_ARROW_X, ARROW_OFFSET, 255, 255, 255, 255);
-}
-
-//
-// kexInventoryMenu::CursorOnLeftArrow
-//
-
-bool kexInventoryMenu::CursorOnLeftArrow(float &mx, float &my)
-{
-    return kexRender::cScreen->PointOnPic(arrows[0], LEFT_ARROW_X, ARROW_OFFSET, mx, my);
-}
-
-//
-// kexInventoryMenu::CursorOnRightArrow
-//
-
-bool kexInventoryMenu::CursorOnRightArrow(float &mx, float &my)
-{
-    return kexRender::cScreen->PointOnPic(arrows[1], RIGHT_ARROW_X, ARROW_OFFSET, mx, my);
 }
 
 //
@@ -378,13 +335,13 @@ void kexInventoryMenu::DrawAutomap(void)
 {
     if(kexGame::cLocal->PlayLoop()->AutomapEnabled())
     {
-        DrawLeftArrow();
+        kexGame::cMenuPanel->DrawLeftArrow(LEFT_ARROW_X, ARROW_OFFSET);
         DrawCenteredImage(mapOpenTexture, PIC_X, PIC_Y);
         font->DrawString(kexGame::cLocal->Translation()->GetString(55), 160, 176, 1, true);
     }
     else
     {
-        DrawRightArrow();
+        kexGame::cMenuPanel->DrawRightArrow(RIGHT_ARROW_X, ARROW_OFFSET);
         DrawCenteredImage(mapClosedTexture, PIC_X, PIC_Y);
         font->DrawString(kexGame::cLocal->Translation()->GetString(54), 160, 176, 1, true);
     }
@@ -402,7 +359,7 @@ void kexInventoryMenu::DrawArtifacts(void)
 
     if(p->Artifacts() == 0)
     {
-        font->DrawString(kexGame::cLocal->Translation()->GetString(64), 152, 164, 1, true);
+        font->DrawString(kexGame::cLocal->Translation()->GetString(64), 160, 164, 1, true);
         return;
     }
 
@@ -419,7 +376,7 @@ void kexInventoryMenu::DrawArtifacts(void)
             {
                 if(p->Artifacts() & BIT(i))
                 {
-                    DrawRightArrow();
+                    kexGame::cMenuPanel->DrawRightArrow(RIGHT_ARROW_X, ARROW_OFFSET);
                     break;
                 }
             }
@@ -430,7 +387,7 @@ void kexInventoryMenu::DrawArtifacts(void)
             {
                 if(p->Artifacts() & BIT(i))
                 {
-                    DrawLeftArrow();
+                    kexGame::cMenuPanel->DrawLeftArrow(LEFT_ARROW_X, ARROW_OFFSET);
                     break;
                 }
             }
@@ -448,7 +405,7 @@ void kexInventoryMenu::DrawArtifacts(void)
     for(unsigned int i = 0; i < labels.Length(); ++i)
     {
         float height = font->StringHeight(labels[i], 1, 0);
-        font->DrawString(labels[i], 152, 164 + (height * (float)i), 1, true);
+        font->DrawString(labels[i], 160, 164 + (height * (float)i), 1, true);
     }
 }
 

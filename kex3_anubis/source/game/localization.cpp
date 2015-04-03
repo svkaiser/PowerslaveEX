@@ -51,6 +51,22 @@ const char *kexTranslation::GetString(const int index)
 }
 
 //
+// kexTranslation::TranslateString
+//
+
+const char *kexTranslation::TranslateString(const char *str)
+{
+    if(kexStr::IndexOf(str, "$str_") == 0)
+    {
+        int index = atoi(str + 5);
+
+        return GetString(index);
+    }
+
+    return str;
+}
+
+//
 // kexTranslation::Init
 //
 

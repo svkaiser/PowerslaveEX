@@ -34,10 +34,6 @@ public:
     const bool                  IsActive(void) { return bActive; }
     
 private:
-    void                        DrawLeftArrow(void);
-    void                        DrawRightArrow(void);
-    bool                        CursorOnLeftArrow(float &mx, float &my);
-    bool                        CursorOnRightArrow(float &mx, float &my);
     void                        DrawBackground(void);
     void                        DrawButtons(void);
     void                        DrawKeys(void);
@@ -48,7 +44,6 @@ private:
     kexTexture                  *keyTextures[2][4];
     kexTexture                  *artifactTextures[6];
     kexTexture                  *weaponTextures[NUMPLAYERWEAPONS];
-    kexTexture                  *arrows[2];
     kexTexture                  *mapClosedTexture;
     kexTexture                  *mapOpenTexture;
     kexFont                     *font;

@@ -503,10 +503,12 @@ void kexGameLocal::InitMapDefs(void)
         
         mapInfo = &mapInfoList[i];
         
+        dict->GetString("map", mapInfo->map);
         dict->GetString("title", mapInfo->title);
         dict->GetString("musicTrack", mapInfo->musicTrack);
         dict->GetFloat("overworld_x", mapInfo->overworldX);
         dict->GetFloat("overworld_y", mapInfo->overworldY);
+        dict->GetFloat("selectRadius", mapInfo->selectRadius);
         dict->GetInt("transmitter", mapInfo->transmitterBit);
         dict->GetInt("nextmap_north", nextMap[0], -1);
         dict->GetInt("nextmap_east", nextMap[1], -1);

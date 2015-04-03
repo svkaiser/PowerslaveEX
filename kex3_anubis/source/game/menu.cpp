@@ -176,12 +176,36 @@ public:
     virtual void                    Update(void);
     virtual bool                    ProcessInput(inputEvent_t *ev);
 
+    typedef struct
+    {
+        const char *action;
+        int actionID;
+    } inputBinds_t;
+
+    static const inputBinds_t       inputBinds1[];
+
 private:
+    void                            DrawBinds(const kexMenuInput::inputBinds_t binds[]);
+
     kexMenuPanel::selectButton_t    exitButton;
-    int                             categorySelected;
+    int                             pageNum;
 END_MENU_CLASS();
 
 DECLARE_MENU_CLASS(kexMenuInput, MENU_INPUT);
+
+const kexMenuInput::inputBinds_t kexMenuInput::inputBinds1[] =
+{
+    { "Attack",     IA_ATTACK },
+    { "Jump",       IA_JUMP },
+    { "Forward",    IA_FORWARD },
+    { "Backward",   IA_BACKWARD },
+    { "Turn-L",     IA_LEFT },
+    { "Turn-R",     IA_RIGHT },
+    { "Strafe-L",   IA_STRAFELEFT },
+    { "Strafe-R",   IA_STRAFERIGHT },
+    { "Interact",   IA_USE },
+    { NULL,         -1 }
+};
 
 //
 // kexMenuInput::Init
@@ -189,7 +213,7 @@ DECLARE_MENU_CLASS(kexMenuInput, MENU_INPUT);
 
 void kexMenuInput::Init(void)
 {
-    categorySelected = 0;
+    pageNum = 0;
     
     exitButton.x = 112;
     exitButton.y = 204;
@@ -208,6 +232,48 @@ void kexMenuInput::Update(void)
 }
 
 //
+// kexMenuInput::DrawBinds
+//
+
+void kexMenuInput::DrawBinds(const kexMenuInput::inputBinds_t binds[])
+{
+    static kexFont *font = NULL;
+    kexStrList bindList;
+    const kexMenuInput::inputBinds_t *bind;
+    float len;
+    float y;
+
+    if(font == NULL)
+    {
+        if(!(font = kexFont::Get("smallfont")))
+        {
+            return;
+        }
+    }
+
+    y = 44;
+
+    for(bind = binds; bind->action != NULL; bind++)
+    {
+        kex::cActions->GetActionBinds(bindList, bind->actionID);
+
+        kexGame::cMenuPanel->DrawInset(16, y-4, 288, 16);
+        kexGame::cLocal->DrawSmallString(bind->action, 24, y, 1, false);
+
+        if(bindList.Length() != 0)
+        {
+            len = font->StringWidth(bindList[0].c_str(), 1, 0);
+            kexGame::cLocal->DrawSmallString(bindList[0].c_str(), 288-len, y, 1, false);
+            bindList.Empty();
+        }
+
+        y += 16;
+    }
+
+    kexGame::cMenuPanel->DrawRightArrow(288, 21);
+}
+
+//
 // kexMenuInput::Display
 //
 
@@ -217,29 +283,12 @@ void kexMenuInput::Display(void)
     
     kexGame::cMenuPanel->DrawPanel(0, 0, 320, 240, 4);
     kexGame::cMenuPanel->DrawInset(16, 16, 288, 16);
-    kexGame::cMenuPanel->DrawInset(16, 40, 288, 16);
-    kexGame::cMenuPanel->DrawInset(16, 56, 288, 16);
-    kexGame::cMenuPanel->DrawInset(16, 72, 288, 16);
-    kexGame::cMenuPanel->DrawInset(16, 88, 288, 16);
-    kexGame::cMenuPanel->DrawInset(16, 104, 288, 16);
-    kexGame::cMenuPanel->DrawInset(16, 120, 288, 16);
-    kexGame::cMenuPanel->DrawInset(16, 136, 288, 16);
-    kexGame::cMenuPanel->DrawInset(16, 152, 288, 16);
-    kexGame::cMenuPanel->DrawInset(16, 168, 288, 16);
     
     kexGame::cMenuPanel->DrawSelectButton(&exitButton);
     
     kexGame::cLocal->DrawSmallString("Page 1/2", 160, 20, 1, true);
     
-    kexGame::cLocal->DrawSmallString("Attack", 24, 44, 1, false);
-    kexGame::cLocal->DrawSmallString("Jump", 24, 60, 1, false);
-    kexGame::cLocal->DrawSmallString("Forward", 24, 76, 1, false);
-    kexGame::cLocal->DrawSmallString("Backward", 24, 92, 1, false);
-    kexGame::cLocal->DrawSmallString("Turn-L", 24, 108, 1, false);
-    kexGame::cLocal->DrawSmallString("Turn-R", 24, 124, 1, false);
-    kexGame::cLocal->DrawSmallString("Strafe-L", 24, 140, 1, false);
-    kexGame::cLocal->DrawSmallString("Strafe-R", 24, 156, 1, false);
-    kexGame::cLocal->DrawSmallString("Interact", 24, 172, 1, false);
+    DrawBinds(inputBinds1);
 }
 
 //

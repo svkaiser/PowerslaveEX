@@ -19,6 +19,7 @@
 #include "renderMain.h"
 #include "game.h"
 #include "overworld.h"
+#include "localization.h"
 
 //
 // kexOverWorld::kexOverWorld
@@ -93,19 +94,19 @@ void kexOverWorld::SetupMatrix(const int zoom)
 {
     kexMatrix mtx;
     float x, y;
+    int sx = (kexRenderScreen::SCREEN_WIDTH >> 1);
+    int sy = (kexRenderScreen::SCREEN_HEIGHT >> 1);
 
     kexRender::cScreen->SetOrtho();
 
-    x = -camera_x*0.5f;
-    y = -camera_y*0.5f;
+    x = -camera_x + sx;
+    y = -camera_y + sy;
 
     mtx.AddTranslation(x, y, 0);
 
     if(bFading)
     {
         float scale = 2.0f - ((float)zoom / 255.0f);
-        int sx = (kexRenderScreen::SCREEN_WIDTH >> 1);
-        int sy = (kexRenderScreen::SCREEN_HEIGHT >> 1);
 
         mtx.AddTranslation((x - sx) * (scale-1), (y - sy) * (scale-1), 0);
         mtx.Scale(scale, scale, 1);
@@ -207,22 +208,34 @@ void kexOverWorld::DrawCursor(const int fade)
 }
 
 //
-// kexOverWorld::DrawDots
+// kexOverWorld::DrawTitle
 //
 
-void kexOverWorld::DrawDots(const int fade)
+void kexOverWorld::DrawTitle(void)
 {
     kexCpuVertList *vl = kexRender::cVertList;
-    kexRender::cTextures->whiteTexture->Bind();
+    const char *title;
+    float width;
+    kexGameLocal::mapInfo_t *map = &kexGame::cLocal->MapInfoList()[selectedMap];
 
-    for(unsigned int i = 0; i < kexGame::cLocal->MapInfoList().Length(); ++i)
+    if(bFading)
     {
-        kexGameLocal::mapInfo_t *minfo = &kexGame::cLocal->MapInfoList()[i];
-
-        vl->AddQuad(minfo->overworldX+16, minfo->overworldY+16, 4, 4, fade, fade, fade, 255);
+        return;
     }
 
+    kexRender::cScreen->SetOrtho();
+
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+
+    title = kexGame::cLocal->Translation()->TranslateString(map->title);
+    width = kexFont::Get("bigfont")->StringWidth(title, 1, 0);
+
+    kexRender::cTextures->whiteTexture->Bind();
+    vl->AddQuad((160 - (width*0.5f))-8, 24, width+16, 26, 0, 0, 0, 192);
     vl->DrawElements();
+
+    kexGame::cLocal->DrawBigString(title, 160, 32, 1, true);
 }
 
 //
@@ -238,13 +251,18 @@ void kexOverWorld::Draw(void)
 
     int c = GetFade();
 
+    if(c <= 0)
+    {
+        return;
+    }
+
     SetupMatrix(c);
 
     DrawBackground(c);
 
-    DrawDots(c);
-
     DrawCursor(c);
+
+    DrawTitle();
 }
 
 //
@@ -253,11 +271,13 @@ void kexOverWorld::Draw(void)
 
 void kexOverWorld::Tick(void)
 {
+    kexGameLocal::mapInfo_t *map = &kexGame::cLocal->MapInfoList()[selectedMap];
+    float sx = (float)(kexRenderScreen::SCREEN_WIDTH >> 1);
+    float sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
     float mx = (float)kex::cInput->MouseX();
     float my = (float)kex::cInput->MouseY();
     float nx;
     float ny;
-    float extend;
         
     kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
 
@@ -265,31 +285,33 @@ void kexOverWorld::Tick(void)
     {
         curFadeTime = ((kex::cSession->GetTicks() - fadeTime)) << 3;
     }
-    // TEMP
     else if(!bFadeIn)
     {
-        kexGame::cLocal->ChangeMap("maps/TOMB.MAP");
+        kexGame::cLocal->ChangeMap(map->map);
         return;
     }
 
-    nx = kexGame::cLocal->MapInfoList()[selectedMap].overworldX;
-    ny = kexGame::cLocal->MapInfoList()[selectedMap].overworldY;
-    
-    extend = (320.0f * (1.0f - (((float)pic.OriginalWidth() - nx) / 320.0f)));
-    kexMath::Clamp(extend, -80, 80);
-    
-    nx += extend;
+    if(bFading)
+    {
+        return;
+    }
+
+    nx = map->overworldX;
+    ny = map->overworldY;
 
     camera_x = (nx - camera_x) * 0.05f + camera_x;
     camera_y = (ny - camera_y) * 0.05f + camera_y;
 
+    kexMath::Clamp(camera_x, sx, (float)pic.OriginalWidth() - sx);
+    kexMath::Clamp(camera_y, sy, (float)pic.OriginalHeight() - sy);
+
     for(unsigned int i = 0; i < kexGame::cLocal->MapInfoList().Length(); ++i)
     {
         kexGameLocal::mapInfo_t *minfo = &kexGame::cLocal->MapInfoList()[i];
-        float sx = ((minfo->overworldX+18) - (camera_x*0.5f)) - mx;
-        float sy = ((minfo->overworldY+18) - (camera_y*0.5f)) - my;
+        float x = ((minfo->overworldX+18) - (camera_x - sx)) - mx;
+        float y = ((minfo->overworldY+18) - (camera_y - sy)) - my;
 
-        if(sx * sx + sy * sy > 4096)
+        if(x * x + y * y > minfo->selectRadius)
         {
             continue;
         }
@@ -304,7 +326,11 @@ void kexOverWorld::Tick(void)
 
 bool kexOverWorld::ProcessInput(inputEvent_t *ev)
 {
-    // TEMP
+    if(bFading)
+    {
+        return false;
+    }
+
     if(ev->type == ev_mousedown && ev->data1 == KMSB_LEFT)
     {
         bFading = true;

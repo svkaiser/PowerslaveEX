@@ -1,20 +1,200 @@
-Map_Tomb1   0
+Map_Tomb1       0
 {
     title           "$str_000"
     overworld_x     326
     overworld_y     208
+    selectRadius    200
+    map             "maps/TOMB.MAP"
 }
 
-Map_Karnak   1
+Map_Karnak      1
 {
     title           "$str_001"
     overworld_x     404
     overworld_y     294
+    selectRadius    600
+    map             "maps/KARNAK.MAP"
 }
 
-Map_Sanctuary 2
+Map_Sanctuary   2
 {
     title           "$str_002"
     overworld_x     558
     overworld_y     286
+    selectRadius    3000
+    map             "maps/SANCTUAR.MAP"
+}
+
+Map_Pass        3
+{
+    title           "$str_003"
+    overworld_x     366
+    overworld_y     190
+    selectRadius    200
+    map             "maps/PASS.MAP"
+}
+
+Map_Shrine      4
+{
+    title           "$str_004"
+    overworld_x     376
+    overworld_y     154
+    selectRadius    200
+    map             "maps/SHRINE.MAP"
+}
+
+Map_Mines       5
+{
+    title           "$str_005"
+    overworld_x     384
+    overworld_y     402
+    selectRadius    700
+    map             "maps/MINES.MAP"
+}
+
+Map_Palace      6
+{
+    title           "$str_006"
+    overworld_x     482
+    overworld_y     408
+    selectRadius    500
+    map             "maps/SETPALAC.MAP"
+}
+
+Map_Arena1      7
+{
+    title           "$str_007"
+    overworld_x     558
+    overworld_y     412
+    selectRadius    800
+    map             "maps/SETARENA.MAP"
+}
+
+Map_Cavern      8
+{
+    title           "$str_008"
+    overworld_x     258
+    overworld_y     438
+    selectRadius    500
+    map             "maps/CAVERN.MAP"
+}
+
+Map_Gorge       9
+{
+    title           "$str_009"
+    overworld_x     156
+    overworld_y     460
+    selectRadius    1000
+    map             "maps/GORGE.MAP"
+}
+
+Map_Thoth       10
+{
+    title           "$str_010"
+    overworld_x     64
+    overworld_y     404
+    selectRadius    800
+    map             "maps/THOTH.MAP"
+}
+
+Map_Marsh       11
+{
+    title           "$str_011"
+    overworld_x     550
+    overworld_y     164
+    selectRadius    1500
+    map             "maps/MARSH.MAP"
+}
+
+Map_Sunken      12
+{
+    title           "$str_012"
+    overworld_x     546
+    overworld_y     60
+    selectRadius    1500
+    map             "maps/SUNKEN.MAP"
+}
+
+Map_Camp        13
+{
+    title           "$str_013"
+    overworld_x     402
+    overworld_y     64
+    selectRadius    1000
+    map             "maps/SLAVCAMP.MAP"
+}
+
+Map_Path        14
+{
+    title           "$str_014"
+    overworld_x     288
+    overworld_y     66
+    selectRadius    800
+    map             "maps/SELPATH.MAP"
+}
+
+Map_Burrow      15
+{
+    title           "$str_015"
+    overworld_x     226
+    overworld_y     88
+    selectRadius    800
+    map             "maps/SELBUROW.MAP"
+}
+
+Map_Magma       16
+{
+    title           "$str_016"
+    overworld_x     232
+    overworld_y     188
+    selectRadius    800
+    map             "maps/MAGMA.MAP"
+}
+
+Map_Peak        17
+{
+    title           "$str_017"
+    overworld_x     226
+    overworld_y     266
+    selectRadius    500
+    map             "maps/PEAK.MAP"
+}
+
+Map_Chaos       18
+{
+    title           "$str_018"
+    overworld_x     32
+    overworld_y     300
+    selectRadius    3000
+    map             "maps/CHAOS.MAP"
+}
+
+Map_Colony      19
+{
+    title           "$str_019"
+    overworld_x     54
+    overworld_y     166
+    selectRadius    2000
+    map             "maps/COLONY.MAP"
+}
+
+Map_Entry       20
+{
+    title           "$str_020"
+    overworld_x     54
+    overworld_y     70
+    selectRadius    1000
+    map             "maps/KILENTRY.MAP"
+}
+
+Map_Arena2      21
+{
+    title           "$str_021"
+    map             "maps/KILARENA.MAP"
+}
+
+Map_Tomb2       22
+{
+    title           "$str_000"
+    map             "maps/TOMBEND.MAP"
 }

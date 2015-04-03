@@ -31,7 +31,7 @@ public:
 private:
     void                        DrawCursor(const int fade);
     void                        DrawBackground(const int fade);
-    void                        DrawDots(const int fade);
+    void                        DrawTitle(void);
     void                        SetupMatrix(const int zoom);
     const int                   GetFade(void);
 

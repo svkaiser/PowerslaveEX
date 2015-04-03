@@ -33,6 +33,7 @@ public:
 
     void                Init(void);
     const char          *GetString(const int index);
+    const char          *TranslateString(const char *str);
 
     void                SetLanguage(const languages_t lang) { language = lang; }
 

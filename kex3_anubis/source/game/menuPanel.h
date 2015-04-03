@@ -27,6 +27,10 @@ public:
     void                    DrawInset(const float x, const float y, const float w, const float h);
     void                    DrawButton(const float x, const float y, bool bPressed, const char *text);
     bool                    PointOnButton(const float x, const float y, const float mx, const float my);
+    void                    DrawLeftArrow(const float x, const float y);
+    void                    DrawRightArrow(const float x, const float y);
+    bool                    CursorOnLeftArrow(const float x, const float y);
+    bool                    CursorOnRightArrow(const float x, const float y);
     
     typedef struct
     {
@@ -48,7 +52,7 @@ public:
         bool bHover;
     } selectButton_t;
     
-    bool                    TestPointInButtonSet(buttonSet_t *buttonSet, const float mx, const float my);
+    bool                    TestPointInButtonSet(buttonSet_t *buttonSet);
     void                    DrawButtonSet(buttonSet_t *buttonSet);
 
     void                    UpdateSelectButton(selectButton_t *button);
@@ -58,6 +62,7 @@ public:
 private:
     kexTexture              *bgTexture;
     kexTexture              *buttonTexture[2];
+    kexTexture              *arrows[2];
     kexFont                 *font;
 };
 

@@ -48,6 +48,8 @@ void kexMenuPanel::Init(void)
     bgTexture = kexRender::cTextures->Cache("gfx/menu/menu_bg.png", TC_REPEAT, TF_NEAREST);
     buttonTexture[0] = kexRender::cTextures->Cache("gfx/menu/menubutton_up.png", TC_CLAMP, TF_NEAREST);
     buttonTexture[1] = kexRender::cTextures->Cache("gfx/menu/menubutton_down.png", TC_CLAMP, TF_NEAREST);
+    arrows[0] = kexRender::cTextures->Cache("gfx/menu/menuarrow_left.png", TC_CLAMP, TF_NEAREST);
+    arrows[1] = kexRender::cTextures->Cache("gfx/menu/menuarrow_right.png", TC_CLAMP, TF_NEAREST);
 
     font = kexFont::Alloc("smallfont");
 }
@@ -149,9 +151,13 @@ bool kexMenuPanel::PointOnButton(const float x, const float y, const float mx, c
 // kexMenuPanel::TestPointInButtonSet
 //
 
-bool kexMenuPanel::TestPointInButtonSet(buttonSet_t *buttonSet, const float mx, const float my)
+bool kexMenuPanel::TestPointInButtonSet(buttonSet_t *buttonSet)
 {
     float y = buttonSet->y;
+    float mx = (float)kex::cInput->MouseX();
+    float my = (float)kex::cInput->MouseY();
+        
+    kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
     
     for(unsigned int i = 0; i < buttonSet->labels.Length(); ++i)
     {
@@ -315,4 +321,50 @@ void kexMenuPanel::DrawSelectButton(selectButton_t *button)
     vl->DrawElements();
 
     font->DrawString(button->label, button->x+(button->w*0.5f), button->y+(button->h*0.5f)-2, 1, true);
+}
+
+//
+// kexMenuPanel::DrawLeftArrow
+//
+
+void kexMenuPanel::DrawLeftArrow(const float x, const float y)
+{
+    kexRender::cScreen->DrawTexture(arrows[0], x, y, 255, 255, 255, 255);
+}
+
+//
+// kexMenuPanel::DrawRightArrow
+//
+
+void kexMenuPanel::DrawRightArrow(const float x, const float y)
+{
+    kexRender::cScreen->DrawTexture(arrows[1], x, y, 255, 255, 255, 255);
+}
+
+//
+// kexMenuPanel::CursorOnLeftArrow
+//
+
+bool kexMenuPanel::CursorOnLeftArrow(const float x, const float y)
+{
+    float mx = (float)kex::cInput->MouseX();
+    float my = (float)kex::cInput->MouseY();
+        
+    kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+
+    return kexRender::cScreen->PointOnPic(arrows[0], x, y, mx, my);
+}
+
+//
+// kexMenuPanel::CursorOnRightArrow
+//
+
+bool kexMenuPanel::CursorOnRightArrow(const float x, const float y)
+{
+    float mx = (float)kex::cInput->MouseX();
+    float my = (float)kex::cInput->MouseY();
+        
+    kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+
+    return kexRender::cScreen->PointOnPic(arrows[1], x, y, mx, my);
 }

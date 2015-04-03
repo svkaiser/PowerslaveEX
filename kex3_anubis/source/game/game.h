@@ -196,8 +196,10 @@ public:
     {
         kexStr              title;
         kexStr              musicTrack;
+        kexStr              map;
         float               overworldX;
         float               overworldY;
+        float               selectRadius;
         int16_t             transmitterBit;
         int16_t             refID;
         int16_t             nextMap[4];
