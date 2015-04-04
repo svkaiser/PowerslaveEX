@@ -58,6 +58,9 @@ void kexOverWorld::Init(void)
 
 void kexOverWorld::Start(void)
 {
+    const float sx = (float)(kexRenderScreen::SCREEN_WIDTH >> 1);
+    const float sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
+
     if(kexGame::cLocal->MapInfoList().Length() == 0)
     {
         kex::cSystem->Warning("No map definitions present\n");
@@ -73,7 +76,10 @@ void kexOverWorld::Start(void)
     camera_x = kexGame::cLocal->MapInfoList()[selectedMap].overworldX;
     camera_y = kexGame::cLocal->MapInfoList()[selectedMap].overworldY;
 
-    fadeTime = kex::cSession->GetTicks();
+    kexMath::Clamp(camera_x, sx, (float)pic.OriginalWidth() - sx);
+    kexMath::Clamp(camera_y, sy, (float)pic.OriginalHeight() - sy);
+
+    fadeTime = 0;
     curFadeTime = 0;
     bFading = true;
     bFadeIn = true;
@@ -264,46 +270,50 @@ void kexOverWorld::DrawArrows(void)
 
     if(map->nextMap[0] >= 0)
     {
-        if(kexGame::cLocal->MapUnlockList()[selectedMap] == false)
+        if(kexGame::cLocal->MapUnlockList()[map->nextMap[0]] == false)
         {
-            movey = 16;
-            color = 64;
+            DrawArrow(map->overworldX, map->overworldY-16, 0, 64);
         }
-
-        DrawArrow(map->overworldX, map->overworldY-movey, 0, color);
+        else
+        {
+            DrawArrow(map->overworldX, map->overworldY-movey, 0, color);
+        }
     }
 
     if(map->nextMap[1] >= 0)
     {
-        if(kexGame::cLocal->MapUnlockList()[selectedMap] == false)
+        if(kexGame::cLocal->MapUnlockList()[map->nextMap[1]] == false)
         {
-            movex = 32;
-            color = 64;
+            DrawArrow(map->overworldX+32, map->overworldY, 1, 64);
         }
-
-        DrawArrow(map->overworldX+movex, map->overworldY, 1, color);
+        else
+        {
+            DrawArrow(map->overworldX+movex, map->overworldY, 1, color);
+        }
     }
 
     if(map->nextMap[2] >= 0)
     {
-        if(kexGame::cLocal->MapUnlockList()[selectedMap] == false)
+        if(kexGame::cLocal->MapUnlockList()[map->nextMap[2]] == false)
         {
-            movey = 16;
-            color = 64;
+            DrawArrow(map->overworldX, map->overworldY+16, 2, 64);
         }
-
-        DrawArrow(map->overworldX, map->overworldY+movey, 2, color);
+        else
+        {
+            DrawArrow(map->overworldX, map->overworldY+movey, 2, color);
+        }
     }
 
     if(map->nextMap[3] >= 0)
     {
-        if(kexGame::cLocal->MapUnlockList()[selectedMap] == false)
+        if(kexGame::cLocal->MapUnlockList()[map->nextMap[3]] == false)
         {
-            movex = 32;
-            color = 64;
+            DrawArrow(map->overworldX-32, map->overworldY, 3, 64);
         }
-
-        DrawArrow(map->overworldX-movex, map->overworldY, 3, color);
+        else
+        {
+            DrawArrow(map->overworldX-movex, map->overworldY, 3, color);
+        }
     }
 }
 
@@ -346,10 +356,12 @@ void kexOverWorld::Draw(void)
 {
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
     kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
-    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
     kexRender::cBackend->SetState(GLSTATE_BLEND, false);
 
     int c = GetFade();
+
+    fadeTime++;
 
     if(c <= 0)
     {
@@ -374,8 +386,8 @@ void kexOverWorld::Draw(void)
 void kexOverWorld::Tick(void)
 {
     kexGameLocal::mapInfo_t *map = &kexGame::cLocal->MapInfoList()[selectedMap];
-    float sx = (float)(kexRenderScreen::SCREEN_WIDTH >> 1);
-    float sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
+    const float sx = (float)(kexRenderScreen::SCREEN_WIDTH >> 1);
+    const float sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
     float mx = (float)kex::cInput->MouseX();
     float my = (float)kex::cInput->MouseY();
     float nx;
@@ -385,7 +397,7 @@ void kexOverWorld::Tick(void)
 
     if(bFading)
     {
-        curFadeTime = ((kex::cSession->GetTicks() - fadeTime)) << 3;
+        curFadeTime = fadeTime << 3;
     }
     else if(!bFadeIn)
     {
@@ -425,7 +437,7 @@ bool kexOverWorld::ProcessInput(inputEvent_t *ev)
     {
         bFading = true;
         bFadeIn = false;
-        fadeTime = kex::cSession->GetTicks();
+        fadeTime = 0;
         curFadeTime = 0;
         return true;
     }

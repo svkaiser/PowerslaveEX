@@ -180,5 +180,6 @@ END_KEX_CLASS();
 #include "pickup.h"
 #include "projectile.h"
 #include "ai.h"
+#include "travelObject.h"
 
 #endif

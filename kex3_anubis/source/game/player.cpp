@@ -88,6 +88,13 @@ bool kexPuppet::OnCollide(kexCModel *cmodel)
             // TODO
         }
     }
+    else if(cmodel->ContactActor())
+    {
+        if(cmodel->ContactActor()->InstanceOf(&kexTravelObject::info))
+        {
+            cmodel->ContactActor()->OnTouch(this);
+        }
+    }
 
     return true;
 }

@@ -103,6 +103,11 @@ COMMAND(inventorymenu)
         return;
     }
 
+    if(kexGame::cLocal->ActiveMenu() != NULL)
+    {
+        return;
+    }
+
     if(kex::cCommands->GetArgc() < 1)
     {
         return;

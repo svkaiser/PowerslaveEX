@@ -505,6 +505,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\game\travelObject.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\game\world.cpp"
 					>
 				</File>
@@ -876,6 +880,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\titlescreen.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\travelObject.h"
 					>
 				</File>
 				<File

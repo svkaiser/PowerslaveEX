@@ -19,6 +19,7 @@ typedef enum
 {
     MENU_QUITCONFIRM    = 0,
     MENU_INPUT,
+    MENU_TRAVEL,
     NUMMENUS
 } menus_t;
 

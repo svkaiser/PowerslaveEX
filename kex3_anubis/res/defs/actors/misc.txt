@@ -32,13 +32,16 @@ Obj_WarpPryamid 33
 
 Obj_Camel 58
 {
-    classname               "kexActor"
+    classname               "kexTravelObject"
     radius                  48
     height                  192
     stepHeight              48
     scale                   1.25
     spawnAnim               "objects/camel_idle"
     solid                   1
+    warpSound_1             "sounds/camel01.wav"
+    warpSound_2             "sounds/camel02.wav"
+    warpSound_3             "sounds/camel03.wav"
 }
 
 Obj_Debris 123

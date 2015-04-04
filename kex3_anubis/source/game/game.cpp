@@ -302,6 +302,7 @@ kexGameLocal::kexGameLocal(void)
 {
     this->smallFont         = NULL;
     this->bigFont           = NULL;
+    this->activeMap         = NULL;
     this->ticks             = 0;
     this->gameState         = GS_NONE;
     this->pendingGameState  = GS_NONE;
@@ -508,7 +509,6 @@ void kexGameLocal::InitMapDefs(void)
         dict->GetString("musicTrack", mapInfo->musicTrack);
         dict->GetFloat("overworld_x", mapInfo->overworldX);
         dict->GetFloat("overworld_y", mapInfo->overworldY);
-        dict->GetFloat("selectRadius", mapInfo->selectRadius);
         dict->GetInt("transmitter", mapInfo->transmitterBit);
         dict->GetInt("nextmap_north", nextMap[0], -1);
         dict->GetInt("nextmap_east", nextMap[1], -1);
@@ -682,6 +682,38 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
 }
 
 //
+// kexGameLocal::SetMenu
+//
+
+void kexGameLocal::SetMenu(const menus_t menu)
+{
+    activeMenu = menus[menu];
+    bCursorEnabled.Push(!kex::cInput->MouseGrabbed() && kex::cSession->CursorVisible());
+
+    kex::cInput->ToggleMouseGrab(false);
+    kex::cSession->ToggleCursor(true);
+}
+
+//
+// kexGameLocal::ClearMenu
+//
+
+void kexGameLocal::ClearMenu(void)
+{
+    unsigned int len = bCursorEnabled.Length();
+
+    activeMenu = NULL;
+
+    if(len != 0 && bCursorEnabled[len-1] == false)
+    {
+        kex::cInput->ToggleMouseGrab(true);
+        kex::cSession->ToggleCursor(false);
+    }
+
+    bCursorEnabled.Pop();
+}
+
+//
 // kexGameLocal::PlaySound
 //
 
@@ -768,6 +800,15 @@ void kexGameLocal::ChangeMap(const char *name)
 
 void kexGameLocal::LoadNewMap(void)
 {
+    for(unsigned int i = 0; i < mapInfoList.Length(); ++i)
+    {
+        if(!kexStr::Compare(pendingMap, mapInfoList[i].map))
+        {
+            activeMap = &mapInfoList[i];
+            break;
+        }
+    }
+
     if(!world->LoadMap(pendingMap.c_str()))
     {
         SetGameState(GS_TITLE);

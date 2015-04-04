@@ -199,7 +199,6 @@ public:
         kexStr              map;
         float               overworldX;
         float               overworldY;
-        float               selectRadius;
         int16_t             transmitterBit;
         int16_t             refID;
         int16_t             nextMap[4];
@@ -221,11 +220,13 @@ public:
     kexSpriteAnimManager            *SpriteAnimManager(void) { return spriteAnimManager; }
     const weaponInfo_t              *WeaponInfo(const int id) const { return &weaponInfo[id]; }
     kexIndexDefManager              &ActorDefs(void) { return actorDefs; }
-    void                            SetMenu(const menus_t menu) { activeMenu = menus[menu]; }
-    void                            ClearMenu(void) { activeMenu = NULL; }
     kexArray<mapInfo_t>             &MapInfoList(void) { return mapInfoList; }
     kexArray<bool>                  &MapUnlockList(void) { return bMapUnlockList; }
+    kexMenu                         *ActiveMenu(void) { return activeMenu; }
+    mapInfo_t                       *ActiveMap(void) { return activeMap; }
 
+    void                            SetMenu(const menus_t menu);
+    void                            ClearMenu(void);
     kexObject                       *ConstructObject(const char *className);
     kexActor                        *SpawnActor(const int type, const float x, const float y, const float z,
                                                 const float yaw, const int sector = -1);
@@ -272,7 +273,9 @@ private:
     kexTexture                      loadingPic;
     kexMenu                         *activeMenu;
     kexArray<mapInfo_t>             mapInfoList;
+    mapInfo_t                       *activeMap;
     kexArray<bool>                  bMapUnlockList;
+    kexArray<bool>                  bCursorEnabled;
 };
 
 //-----------------------------------------------------------------------------

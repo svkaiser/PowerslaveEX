@@ -19,6 +19,7 @@
 #include "game.h"
 #include "renderMain.h"
 #include "menu.h"
+#include "localization.h"
 
 //-----------------------------------------------------------------------------
 //
@@ -135,7 +136,7 @@ void kexMenuQuitConfirm::Display(void)
     
     kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
     kexGame::cMenuPanel->DrawInset(40, 72, 238, 32);
-    kexGame::cLocal->DrawSmallString("Are you sure you want to quit?", 144, 82, 1, true);
+    kexGame::cLocal->DrawSmallString("Are you sure you want to quit?", 160, 82, 1, true);
     
     kexGame::cMenuPanel->DrawSelectButton(&quitYesButton);
     kexGame::cMenuPanel->DrawSelectButton(&quitNoButton);
@@ -298,6 +299,124 @@ void kexMenuInput::Display(void)
 bool kexMenuInput::ProcessInput(inputEvent_t *ev)
 {
     if(kexGame::cMenuPanel->TestSelectButtonInput(&exitButton, ev))
+    {
+        kexGame::cLocal->ClearMenu();
+        kexGame::cLocal->PlaySound("sounds/select.wav");
+        return true;
+    }
+    
+    return false;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuTravel
+//
+//-----------------------------------------------------------------------------
+
+DEFINE_MENU_CLASS(kexMenuTravel);
+public:
+    virtual void                    Init(void);
+    virtual void                    Display(void);
+    virtual void                    Update(void);
+    virtual bool                    ProcessInput(inputEvent_t *ev);
+
+private:
+    kexMenuPanel::selectButton_t    travelYesButton;
+    kexMenuPanel::selectButton_t    travelNoButton;
+END_MENU_CLASS();
+
+DECLARE_MENU_CLASS(kexMenuTravel, MENU_TRAVEL);
+
+//
+// kexMenuTravel::Init
+//
+
+void kexMenuTravel::Init(void)
+{
+    travelYesButton.x = 40;
+    travelYesButton.y = 120;
+    travelYesButton.w = 96;
+    travelYesButton.h = 24;
+    travelYesButton.label = "Travel";
+    
+    travelNoButton.x = 182;
+    travelNoButton.y = 120;
+    travelNoButton.w = 96;
+    travelNoButton.h = 24;
+    travelNoButton.label = "Remain";
+}
+
+//
+// kexMenuTravel::Update
+//
+
+void kexMenuTravel::Update(void)
+{
+    kexGame::cMenuPanel->UpdateSelectButton(&travelYesButton);
+    kexGame::cMenuPanel->UpdateSelectButton(&travelNoButton);
+}
+
+//
+// kexMenuTravel::Display
+//
+
+void kexMenuTravel::Display(void)
+{
+    float w, h;
+    
+    kexRender::cScreen->SetOrtho();
+    
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+    
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 255);
+    
+    kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
+    kexGame::cMenuPanel->DrawInset(40, 72, 238, 32);
+    kexGame::cLocal->DrawSmallString(kexGame::cLocal->Translation()->GetString(127), 160, 82, 1, true);
+    
+    kexGame::cMenuPanel->DrawSelectButton(&travelYesButton);
+    kexGame::cMenuPanel->DrawSelectButton(&travelNoButton);
+}
+
+//
+// kexMenuTravel::ProcessInput
+//
+
+bool kexMenuTravel::ProcessInput(inputEvent_t *ev)
+{
+    if(kexGame::cMenuPanel->TestSelectButtonInput(&travelYesButton, ev))
+    {
+        int angBit;
+        int nextMap;
+        float ang;
+
+        if(kexTravelObject::currentObject == NULL)
+        {
+            return true;
+        }
+
+        ang = kexTravelObject::currentObject->Yaw().an;
+        kexAngle::Clamp360(ang);
+
+        angBit = ((int)(ang * (4096.0f / 360.0f)) >> 10) & 3;
+        nextMap = kexGame::cLocal->ActiveMap()->nextMap[angBit];
+
+        if(nextMap <= -1)
+        {
+            kexGame::cLocal->ClearMenu();
+            kex::cSystem->Warning("No linked map has been found for %s\n",
+                                  kexGame::cLocal->ActiveMap()->title.c_str());
+            return true;
+        }
+
+        kexGame::cLocal->MapUnlockList()[nextMap] = true;
+        kexGame::cLocal->SetGameState(GS_OVERWORLD);
+        return true;
+    }
+    
+    if(kexGame::cMenuPanel->TestSelectButtonInput(&travelNoButton, ev))
     {
         kexGame::cLocal->ClearMenu();
         kexGame::cLocal->PlaySound("sounds/select.wav");
