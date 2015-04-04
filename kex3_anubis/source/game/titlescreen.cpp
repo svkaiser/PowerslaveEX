@@ -30,7 +30,7 @@ typedef enum
     TSI_QUIT,
     TSI_GAMEPLAY,
     TSI_INPUT,
-    TSI_KEYBOARD,
+    TSI_BINDINGS,
     TSI_MOUSE,
     TSI_GAMEPAD,
     TSI_GRAPHICS,
@@ -179,7 +179,7 @@ MENUITEM(Input, "Input", 420, 132, 1,
         return;
     }
     
-    titleMenu[TSI_KEYBOARD]->item->LerpTo(160);
+    titleMenu[TSI_BINDINGS]->item->LerpTo(160);
     titleMenu[TSI_MOUSE]->item->LerpTo(160);
     titleMenu[TSI_GAMEPAD]->item->LerpTo(160);
     titleMenu[TSI_EXIT_INPUT]->item->LerpTo(160);
@@ -314,14 +314,15 @@ MENUITEM(AudioExit, "Exit", 420, 182, 1,
 
 //-----------------------------------------------------------------------------
 //
-// Input: Keyboard
+// Input: Bindings
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(Keyboard, "Keyboard", -100, 114, 1,
+MENUITEM(Bindings, "Bindings", -100, 114, 1,
 {
 },
 {
+    kexGame::cLocal->SetMenu(MENU_INPUT);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
@@ -374,7 +375,7 @@ MENUITEM(InputExit, "Exit", 420, 168, 1,
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 },
 {
-    titleMenu[TSI_KEYBOARD]->item->LerpTo(420);
+    titleMenu[TSI_BINDINGS]->item->LerpTo(420);
     titleMenu[TSI_MOUSE]->item->LerpTo(-100);
     titleMenu[TSI_GAMEPAD]->item->LerpTo(420);
     titleMenu[TSI_EXIT_INPUT]->item->LerpTo(-100);
@@ -398,7 +399,7 @@ kexTitleScreen::kexTitleScreen(void)
     titleMenu[TSI_QUIT] = &menuGroup_Quit;
     titleMenu[TSI_GAMEPLAY] = &menuGroup_Gameplay;
     titleMenu[TSI_INPUT] = &menuGroup_Input;
-    titleMenu[TSI_KEYBOARD] = &menuGroup_Keyboard;
+    titleMenu[TSI_BINDINGS] = &menuGroup_Bindings;
     titleMenu[TSI_MOUSE] = &menuGroup_Mouse;
     titleMenu[TSI_GAMEPAD] = &menuGroup_Gamepad;
     titleMenu[TSI_GRAPHICS] = &menuGroup_Graphics;
@@ -445,6 +446,8 @@ void kexTitleScreen::Start(void)
     selectedItem = -1;
     kex::cInput->ToggleMouseGrab(false);
     kex::cSession->ToggleCursor(true);
+
+    kex::cSound->PlayMusic("music/title.ogg");
 }
 
 //

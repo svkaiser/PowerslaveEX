@@ -150,23 +150,27 @@ void kexPlayLoop::Init(void)
 
 void kexPlayLoop::Start(void)
 {
+    kexGameLocal *game = kexGame::cLocal;
+
     ticks = 0;
     
-    if(kexGame::cLocal->Player()->Actor() == NULL)
+    if(game->Player()->Actor() == NULL)
     {
         kex::cSystem->Warning("No player starts present\n");
-        kexGame::cLocal->SetGameState(GS_TITLE);
+        game->SetGameState(GS_TITLE);
         return;
     }
     
-    hud.SetPlayer(kexGame::cLocal->Player());
+    hud.SetPlayer(game->Player());
     renderScene.SetView(&renderView);
-    renderScene.SetWorld(kexGame::cLocal->World());
+    renderScene.SetWorld(game->World());
 
-    kexGame::cLocal->Player()->Ready();
+    game->Player()->Ready();
     hud.Reset();
     inventoryMenu.Reset();
     InitWater();
+
+    kex::cSound->PlayMusic(game->ActiveMap()->musicTrack.c_str());
 
     automapZoom = 2048;
     fadeInTicks = 0xff;

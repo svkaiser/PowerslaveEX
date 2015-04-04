@@ -50,6 +50,15 @@ public:
     float               *Angles(void) { return angles; }
     float               *Movement(void) { return movement; }
 
+    static kexCvar      cvarMSensitivityX;
+    static kexCvar      cvarMSensitivityY;
+    static kexCvar      cvarInvertLook;
+    static kexCvar      cvarMSmooth;
+    static kexCvar      cvarJoyStickLookSensitivityX;
+    static kexCvar      cvarJoyStickLookSensitivityY;
+    static kexCvar      cvarJoyStickMoveSensitivity;
+    static kexCvar      cvarJoyStickThreshold;
+
 private:
     void                BuildButtons(void);
     void                BuildTurning(void);

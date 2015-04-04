@@ -19,13 +19,14 @@
 #include "game.h"
 #include "playerCmd.h"
 
-kexCvar cvarMSensitivityX("cl_msensitivityx", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-X sensitivity");
-kexCvar cvarMSensitivityY("cl_msensitivityy", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-Y sensitivity");
-kexCvar cvarInvertLook("cl_mlookinvert", CVF_BOOL|CVF_CONFIG, "0", "Invert mouse-look");
-kexCvar cvarMSmooth("cl_mousesmooth", CVF_INT|CVF_CONFIG, "4", 1, 4, "Set smooth mouse threshold");
-kexCvar cvarJoyStickLookSensitivity("cl_joylooksensitivity", CVF_FLOAT|CVF_CONFIG, "1", "Joystick Look sensitivity");
-kexCvar cvarJoyStickMoveSensitivity("cl_joymovesensitivity", CVF_FLOAT|CVF_CONFIG, "1", "Joystick Move sensitivity");
-kexCvar cvarJoyStickThreshold("cl_joystickthreshold", CVF_FLOAT|CVF_CONFIG, "10", " ");
+kexCvar kexPlayerCmd::cvarMSensitivityX("cl_msensitivityx", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-X sensitivity");
+kexCvar kexPlayerCmd::cvarMSensitivityY("cl_msensitivityy", CVF_FLOAT|CVF_CONFIG, "5", "Mouse-Y sensitivity");
+kexCvar kexPlayerCmd::cvarInvertLook("cl_mlookinvert", CVF_BOOL|CVF_CONFIG, "0", "Invert mouse-look");
+kexCvar kexPlayerCmd::cvarMSmooth("cl_mousesmooth", CVF_INT|CVF_CONFIG, "4", 1, 4, "Set smooth mouse threshold");
+kexCvar kexPlayerCmd::cvarJoyStickLookSensitivityX("cl_joylooksensitivity_x", CVF_FLOAT|CVF_CONFIG, "0.5", "Joystick Look sensitivity (x-axis)");
+kexCvar kexPlayerCmd::cvarJoyStickLookSensitivityY("cl_joylooksensitivity_y", CVF_FLOAT|CVF_CONFIG, "0.25", "Joystick Look sensitivity (y-axis)");
+kexCvar kexPlayerCmd::cvarJoyStickMoveSensitivity("cl_joymovesensitivity", CVF_FLOAT|CVF_CONFIG, "1", "Joystick Move sensitivity");
+kexCvar kexPlayerCmd::cvarJoyStickThreshold("cl_joystickthreshold", CVF_FLOAT|CVF_CONFIG, "10", " ");
 
 //
 // kexPlayerCmd::kexPlayerCmd
@@ -122,7 +123,7 @@ void kexPlayerCmd::BuildJoy(void)
     if(joyturn[1] == 0) joylookthreshold = 0;
 
     angles[0] += ((float)joyturn[0] * joyturnthreshold) / 2048.0f;
-    angles[1] += ((float)joyturn[1] * joylookthreshold) / 4096.0f;
+    angles[1] += ((float)joyturn[1] * joylookthreshold) / 2048.0f;
 
     if(m1 >= 1 || m1 <= -1)
     {
@@ -158,6 +159,8 @@ void kexPlayerCmd::SetJoy(inputEvent_t *ev)
 void kexPlayerCmd::SetJoyTurnThreshold(const int turn, const int look)
 {
     float turnspeed = 1.0f / cvarJoyStickThreshold.GetFloat();
+    float x = cvarJoyStickLookSensitivityX.GetFloat() / 128.0f;
+    float y = cvarJoyStickLookSensitivityY.GetFloat() / 128.0f;
 
     if(turn == 0)
     {
@@ -167,9 +170,9 @@ void kexPlayerCmd::SetJoyTurnThreshold(const int turn, const int look)
     {
         joyturnthreshold += turnspeed;
 
-        if(joyturnthreshold >= cvarJoyStickLookSensitivity.GetFloat())
+        if(joyturnthreshold >= x)
         {
-            joyturnthreshold = cvarJoyStickLookSensitivity.GetFloat();
+            joyturnthreshold = x;
         }
     }
 
@@ -181,9 +184,9 @@ void kexPlayerCmd::SetJoyTurnThreshold(const int turn, const int look)
     {
         joylookthreshold += turnspeed;
 
-        if(joylookthreshold >= cvarJoyStickLookSensitivity.GetFloat())
+        if(joylookthreshold >= y)
         {
-            joylookthreshold = cvarJoyStickLookSensitivity.GetFloat();
+            joylookthreshold = y;
         }
     }
 }

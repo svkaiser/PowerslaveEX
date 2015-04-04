@@ -53,6 +53,7 @@ public:
     void                    ListBindings(void);
     const int               GetAction(const int id);
     void                    GetActionBinds(kexStrList &bindList, const int id);
+    void                    GetCommandBinds(kexStrList &bindList, const char *command);
     
     cmdLink_t               *KeyCommands(void) { return keycmds; }
 

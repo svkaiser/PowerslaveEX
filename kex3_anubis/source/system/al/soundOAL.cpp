@@ -73,18 +73,20 @@ public:
     ~kexOggFile(void);
 
     bool                                OpenFile(const char *name);
-    void                                FillBuffer(ALuint &buffer);
+    bool                                FillBuffer(ALuint &buffer);
 
     OggVorbis_File                      &File(void) { return oggFile; }
     vorbis_info                         *VorbisInfo(void) { return vorbisInfo; }
     kexBinFile                          *BinFile(void) { return binFile; }
     int64_t                             &Length(void) { return length; }
     ALuint                              *Buffers(void) { return buffers; }
+    kexStr                              &FileName(void) { return fileName; }
 
 private:
     OggVorbis_File                      oggFile;
     vorbis_info                         *vorbisInfo;
     kexBinFile                          *binFile;
+    kexStr                              fileName;
     int64_t                             length;
     ALuint                              buffers[OGG_BUFFER_COUNT];
     unsigned int                        offset;
@@ -195,7 +197,13 @@ COMMAND(printsoundinfo)
 
 COMMAND(testmusic)
 {
-    soundSystem.PlayMusic("music/title.ogg");
+    if(kex::cCommands->GetArgc() != 2)
+    {
+        kex::cSystem->Printf("testmusic <file>\n");
+        return;
+    }
+
+    soundSystem.PlayMusic(kex::cCommands->GetArgv(1));
 }
 
 //-----------------------------------------------------------------------------
@@ -370,7 +378,7 @@ kexOggFile::~kexOggFile(void)
 // kexOggFile::FillBuffer
 //
 
-void kexOggFile::FillBuffer(ALuint &buffer)
+bool kexOggFile::FillBuffer(ALuint &buffer)
 {
     char data[OGG_BUFFER_SIZE];
     int read = 0;
@@ -387,11 +395,23 @@ void kexOggFile::FillBuffer(ALuint &buffer)
         }
         else
         {
-            break;
+            ov_pcm_seek(&oggFile, 0);
+            res = ov_read(&oggFile, data + read, OGG_BUFFER_SIZE - read, 0, 2, 1, &section);
+        
+            if(res > 0)
+            {
+                read += res;
+                offset += res;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 
     alBufferData(buffer, format, data, OGG_BUFFER_SIZE, vorbisInfo->rate);
+    return true;
 }
 
 //
@@ -403,6 +423,11 @@ bool kexOggFile::OpenFile(const char *name)
     extern kexCvar cvarBasePath;
 
     kexStr fPath;
+
+    if(name[0] == 0)
+    {
+        return false;
+    }
 
     fPath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), name);
     fPath.NormalizeSlashes();
@@ -418,6 +443,8 @@ bool kexOggFile::OpenFile(const char *name)
     }
 
     alGenBuffers(OGG_BUFFER_COUNT, buffers);
+
+    fileName = name;
 
     vorbisInfo = ov_info(&oggFile , -1);
     length = ov_pcm_total(&oggFile, -1);
@@ -942,7 +969,7 @@ bool kexSoundOAL::Playing(const int handle)
     ALint state;
     alGetSourcei(handle, AL_SOURCE_STATE, &state);
 
-    return (state == AL_PLAYING);
+    return (state == AL_PLAYING) || sources[handle].bPlaying;
 }
 
 //

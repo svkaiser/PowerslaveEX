@@ -38,6 +38,7 @@ kexGameLoop *kex::cGame = &gameLocal;
 kexGameLocal *kexGame::cLocal = &gameLocal;
 
 kexMenu *kexGameLocal::menus[NUMMENUS];
+bool kexGameLocal::bShowSoundStats = false;
 
 //
 // map
@@ -292,6 +293,15 @@ COMMAND(showmenu)
     
     menuType = static_cast<menus_t>(atoi(kex::cCommands->GetArgv(1)));
     gameLocal.SetMenu(menuType);
+}
+
+//
+// statsound
+//
+
+COMMAND(statsound)
+{
+    kexGameLocal::bShowSoundStats ^= 1;
 }
 
 //
@@ -642,6 +652,7 @@ void kexGameLocal::Draw(void)
     }
 
     kexGame::cScriptManager->DrawGCStats();
+    PrintSoundStats();
 }
 
 //
@@ -758,6 +769,31 @@ void kexGameLocal::UpdateSounds(void)
         static_cast<kexGameObject*>(obj)->GetSoundParameters(volume, pan);
         kex::cSound->UpdateSource(i, (int)volume, (int)pan);
     }
+}
+
+//
+// kexGameLocal::PrintSoundStats
+//
+
+void kexGameLocal::PrintSoundStats(void)
+{
+    int active = 0;
+
+    if(!bShowSoundStats)
+    {
+        return;
+    }
+
+    for(int i = 0; i < kex::cSound->NumSources(); ++i)
+    {
+        if(kex::cSound->Playing(i))
+        {
+            active++;
+        }
+    }
+
+    kexRender::cUtils->PrintStatsText("Active Sounds:", ": %i", active);
+    kexRender::cUtils->AddDebugLineSpacing();
 }
 
 //

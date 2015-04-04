@@ -533,10 +533,41 @@ void kexInputAction::GetActionBinds(kexStrList &bindList, const int id)
             continue;
         }
         
-        
         for(cmd = keycmd->Next(); cmd; cmd = cmd->link.Next())
         {
             if(cmd->action != &keyActions[id])
+            {
+                continue;
+            }
+            
+            bindList.Push(kexStr(tmp));
+            break;
+        }
+    }
+}
+
+//
+// kexInputAction::GetCommandBinds
+//
+
+void kexInputAction::GetCommandBinds(kexStrList &bindList, const char *command)
+{
+    cmdLink_t *keycmd;
+    cmdlist_t *cmd;
+    char *tmp;
+    
+    for(int i = 0; i < MAX_KEYS; i++)
+    {
+        keycmd = &keycmds[i];
+        
+        if((tmp = GetKeyName(i)) == NULL)
+        {
+            continue;
+        }
+        
+        for(cmd = keycmd->Next(); cmd; cmd = cmd->link.Next())
+        {
+            if(kexStr::Compare(cmd->command, command))
             {
                 continue;
             }

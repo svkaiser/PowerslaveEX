@@ -4,6 +4,7 @@ Map_Tomb1       0
     overworld_x     326
     overworld_y     208
     map             "maps/TOMB.MAP"
+    musicTrack      "music/egypt2.ogg"
     nextmap_east    1
 }
 
@@ -13,6 +14,7 @@ Map_Karnak      1
     overworld_x     404
     overworld_y     294
     map             "maps/KARNAK.MAP"
+    musicTrack      "music/egypt1.ogg"
     nextmap_north   3
     nextmap_east    2
     nextmap_south   5
@@ -25,6 +27,7 @@ Map_Sanctuary   2
     overworld_x     558
     overworld_y     286
     map             "maps/SANCTUAR.MAP"
+    musicTrack      "music/temple2.ogg"
     nextmap_north   11
     nextmap_west    1
 }
@@ -35,6 +38,7 @@ Map_Pass        3
     overworld_x     366
     overworld_y     190
     map             "maps/PASS.MAP"
+    musicTrack      "music/peak.ogg"
     nextmap_north   4
     nextmap_south   1
 }
@@ -45,6 +49,7 @@ Map_Shrine      4
     overworld_x     376
     overworld_y     154
     map             "maps/SHRINE.MAP"
+    musicTrack      "music/temple1.ogg"
     nextmap_west    16
     nextmap_south   3
 }
@@ -55,6 +60,7 @@ Map_Mines       5
     overworld_x     384
     overworld_y     402
     map             "maps/MINES.MAP"
+    musicTrack      "music/cave.ogg"
     nextmap_north   1
     nextmap_west    8
     nextmap_east    6
@@ -66,6 +72,7 @@ Map_Palace      6
     overworld_x     482
     overworld_y     408
     map             "maps/SETPALAC.MAP"
+    musicTrack      "music/temple2.ogg"
     nextmap_west    5
     nextmap_east    7
 }
@@ -76,6 +83,7 @@ Map_Arena1      7
     overworld_x     558
     overworld_y     412
     map             "maps/SETARENA.MAP"
+    musicTrack      "music/arena1.ogg"
     nextmap_west    6
 }
 
@@ -85,6 +93,7 @@ Map_Cavern      8
     overworld_x     258
     overworld_y     438
     map             "maps/CAVERN.MAP"
+    musicTrack      "music/cave.ogg"
     nextmap_west    9
     nextmap_east    5
 }
@@ -95,6 +104,7 @@ Map_Gorge       9
     overworld_x     156
     overworld_y     460
     map             "maps/GORGE.MAP"
+    musicTrack      "music/peak.ogg"
     nextmap_west    10
     nextmap_east    8
 }
@@ -105,6 +115,7 @@ Map_Thoth       10
     overworld_x     64
     overworld_y     404
     map             "maps/THOTH.MAP"
+    musicTrack      "music/temple1.ogg"
     nextmap_north   18
     nextmap_east    9
 }
@@ -115,6 +126,7 @@ Map_Marsh       11
     overworld_x     550
     overworld_y     164
     map             "maps/MARSH.MAP"
+    musicTrack      "music/marsh.ogg"
     nextmap_north   12
     nextmap_south   2
 }
@@ -125,6 +137,7 @@ Map_Sunken      12
     overworld_x     546
     overworld_y     60
     map             "maps/SUNKEN.MAP"
+    musicTrack      "music/cave.ogg"
     nextmap_west    13
     nextmap_south   11
 }
@@ -135,6 +148,7 @@ Map_Camp        13
     overworld_x     402
     overworld_y     64
     map             "maps/SLAVCAMP.MAP"
+    musicTrack      "music/temple2.ogg"
     nextmap_west    14
     nextmap_east    12
 }
@@ -145,6 +159,7 @@ Map_Path        14
     overworld_x     288
     overworld_y     66
     map             "maps/SELPATH.MAP"
+    musicTrack      "music/magma.ogg"
     nextmap_west    15
     nextmap_east    13
 }
@@ -155,6 +170,7 @@ Map_Burrow      15
     overworld_x     226
     overworld_y     88
     map             "maps/SELBUROW.MAP"
+    musicTrack      "music/arena1.ogg"
     nextmap_east    14
 }
 
@@ -164,6 +180,7 @@ Map_Magma       16
     overworld_x     232
     overworld_y     188
     map             "maps/MAGMA.MAP"
+    musicTrack      "music/magma.ogg"
     nextmap_east    4
     nextmap_south   17
 }
@@ -174,6 +191,7 @@ Map_Peak        17
     overworld_x     226
     overworld_y     266
     map             "maps/PEAK.MAP"
+    musicTrack      "music/peak.ogg"
     nextmap_north   16
 }
 
@@ -183,6 +201,7 @@ Map_Chaos       18
     overworld_x     32
     overworld_y     300
     map             "maps/CHAOS.MAP"
+    musicTrack      "music/magma.ogg"
     nextmap_north   19
     nextmap_south   10
 }
@@ -193,6 +212,7 @@ Map_Colony      19
     overworld_x     54
     overworld_y     166
     map             "maps/COLONY.MAP"
+    musicTrack      "music/arena1.ogg"
     nextmap_north   20
     nextmap_south   18
 }
@@ -203,6 +223,7 @@ Map_Entry       20
     overworld_x     54
     overworld_y     70
     map             "maps/KILENTRY.MAP"
+    musicTrack      "music/egypt2.ogg"
     nextmap_south   19
 }
 
@@ -210,10 +231,12 @@ Map_Arena2      21
 {
     title           "$str_021"
     map             "maps/KILARENA.MAP"
+    musicTrack      "music/arena2.ogg"
 }
 
 Map_Tomb2       22
 {
     title           "$str_000"
     map             "maps/TOMBEND.MAP"
+    musicTrack      "music/egypt2.ogg"
 }

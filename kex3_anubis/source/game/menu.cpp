@@ -179,34 +179,73 @@ public:
 
     typedef struct
     {
-        const char *action;
-        int actionID;
+        const char  *action;
+        int         actionID;
+        const char  *command;
     } inputBinds_t;
 
     static const inputBinds_t       inputBinds1[];
+    static const inputBinds_t       inputBinds2[];
+    static const inputBinds_t       inputBinds3[];
+
+    static const float              bindXOffset;
+    static const float              bindYOffset;
+    static const float              bindRowHeight;
+    static const float              bindRowWidth;
 
 private:
     void                            DrawBinds(const kexMenuInput::inputBinds_t binds[]);
 
     kexMenuPanel::selectButton_t    exitButton;
     int                             pageNum;
+    const inputBinds_t              *selectedBind;
 END_MENU_CLASS();
 
 DECLARE_MENU_CLASS(kexMenuInput, MENU_INPUT);
 
 const kexMenuInput::inputBinds_t kexMenuInput::inputBinds1[] =
 {
-    { "Attack",     IA_ATTACK },
-    { "Jump",       IA_JUMP },
-    { "Forward",    IA_FORWARD },
-    { "Backward",   IA_BACKWARD },
-    { "Turn-L",     IA_LEFT },
-    { "Turn-R",     IA_RIGHT },
-    { "Strafe-L",   IA_STRAFELEFT },
-    { "Strafe-R",   IA_STRAFERIGHT },
-    { "Interact",   IA_USE },
-    { NULL,         -1 }
+    { "Attack",         IA_ATTACK,          NULL },
+    { "Jump",           IA_JUMP,            NULL },
+    { "Forward",        IA_FORWARD,         NULL },
+    { "Backward",       IA_BACKWARD,        NULL },
+    { "Turn-L",         IA_LEFT,            NULL },
+    { "Turn-R",         IA_RIGHT,           NULL },
+    { "Strafe-L",       IA_STRAFELEFT,      NULL },
+    { "Strafe-R",       IA_STRAFERIGHT,     NULL },
+    { "Interact",       IA_USE,             NULL },
+    { NULL,             -1,                 NULL }
 };
+
+const kexMenuInput::inputBinds_t kexMenuInput::inputBinds2[] =
+{
+    { "Machete",        -1,                 "weapon 0" },
+    { "Pistol",         -1,                 "weapon 1" },
+    { "M-60",           -1,                 "weapon 2" },
+    { "Amun Bombs",     -1,                 "weapon 3" },
+    { "Flame Thrower",  -1,                 "weapon 4" },
+    { "Cobra Staff",    -1,                 "weapon 5" },
+    { "Ring Of Ra",     -1,                 "weapon 6" },
+    { "Manacle",        -1,                 "weapon 7" },
+    { "Next Weapon",    IA_WEAPNEXT,        NULL },
+    { "Prev Weapon",    IA_WEAPPREV,        NULL },
+    { NULL,             -1,                 NULL }
+};
+
+const kexMenuInput::inputBinds_t kexMenuInput::inputBinds3[] =
+{
+    { "Map Zoom-In",    IA_MAPZOOMIN,       NULL },
+    { "Map Zoom-Out",   IA_MAPZOOMOUT,      NULL },
+    { "Automap",        -1,                 "automap" },
+    { "Inventory Menu", -1,                 "inventorymenu" },
+    { "Screenshot",     -1,                 "screenshot" },
+    { NULL,             -1,                 NULL }
+};
+
+const float kexMenuInput::bindXOffset   = 16;
+const float kexMenuInput::bindYOffset   = 44;
+const float kexMenuInput::bindRowHeight = 16;
+const float kexMenuInput::bindRowWidth  = 288;
 
 //
 // kexMenuInput::Init
@@ -229,7 +268,45 @@ void kexMenuInput::Init(void)
 
 void kexMenuInput::Update(void)
 {
+    const kexMenuInput::inputBinds_t *bind;
+    const kexMenuInput::inputBinds_t *binds;
+    float mx = (float)kex::cInput->MouseX();
+    float my = (float)kex::cInput->MouseY();
+    float y;
+
     kexGame::cMenuPanel->UpdateSelectButton(&exitButton);
+    kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+
+    y = bindYOffset;
+
+    switch(pageNum)
+    {
+    case 0:
+        binds = inputBinds1;
+        break;
+    case 1:
+        binds = inputBinds2;
+        break;
+    case 2:
+        binds = inputBinds3;
+        break;
+    default:
+        return;
+    }
+
+    selectedBind = NULL;
+
+    for(bind = binds; bind->action != NULL; bind++)
+    {
+        if(mx >= bindXOffset+3 && mx <= (bindXOffset+3) + (bindRowWidth-3) &&
+           my >= y-2 && my <= y + (bindRowHeight-6))
+        {
+            selectedBind = bind;
+            break;
+        }
+
+        y += bindRowHeight;
+    }
 }
 
 //
@@ -252,26 +329,55 @@ void kexMenuInput::DrawBinds(const kexMenuInput::inputBinds_t binds[])
         }
     }
 
-    y = 44;
+    y = bindYOffset;
 
     for(bind = binds; bind->action != NULL; bind++)
     {
-        kex::cActions->GetActionBinds(bindList, bind->actionID);
+        if(bind->actionID >= 0)
+        {
+            kex::cActions->GetActionBinds(bindList, bind->actionID);
+        }
+        else
+        {
+            kex::cActions->GetCommandBinds(bindList, bind->command);
+        }
 
-        kexGame::cMenuPanel->DrawInset(16, y-4, 288, 16);
-        kexGame::cLocal->DrawSmallString(bind->action, 24, y, 1, false);
+        kexGame::cMenuPanel->DrawInset(bindXOffset, y-4, bindRowWidth, bindRowHeight);
+
+        if(selectedBind == bind)
+        {
+            kexRender::cScreen->DrawTexture(kexRender::cTextures->whiteTexture, (bindXOffset+2), y-2,
+                                            192, 32, 32, 128, (bindRowWidth-3), (bindRowHeight-4));
+        }
+
+        kexGame::cLocal->DrawSmallString(bind->action, bindXOffset+8, y, 1, false);
 
         if(bindList.Length() != 0)
         {
             len = font->StringWidth(bindList[0].c_str(), 1, 0);
-            kexGame::cLocal->DrawSmallString(bindList[0].c_str(), 288-len, y, 1, false);
+            kexGame::cLocal->DrawSmallString(bindList[0].c_str(), (bindRowWidth-len)+10, y, 1, false);
             bindList.Empty();
         }
+        else
+        {
+            const char *tmp = "Unbound";
 
-        y += 16;
+            len = font->StringWidth(tmp, 1, 0);
+            kexGame::cLocal->DrawSmallString(tmp, (bindRowWidth-len)+10, y, 1, false);
+        }
+
+        y += bindRowHeight;
     }
 
-    kexGame::cMenuPanel->DrawRightArrow(288, 21);
+    if(pageNum < 2)
+    {
+        kexGame::cMenuPanel->DrawRightArrow(bindRowWidth, 21);
+    }
+
+    if(pageNum > 0)
+    {
+        kexGame::cMenuPanel->DrawLeftArrow(24, 21);
+    }
 }
 
 //
@@ -283,13 +389,26 @@ void kexMenuInput::Display(void)
     kexRender::cScreen->SetOrtho();
     
     kexGame::cMenuPanel->DrawPanel(0, 0, 320, 240, 4);
-    kexGame::cMenuPanel->DrawInset(16, 16, 288, 16);
+    kexGame::cMenuPanel->DrawInset(bindXOffset, 16, bindRowWidth, 16);
     
     kexGame::cMenuPanel->DrawSelectButton(&exitButton);
     
-    kexGame::cLocal->DrawSmallString("Page 1/2", 160, 20, 1, true);
+    kexGame::cLocal->DrawSmallString(kexStr::Format("Page %i/3", pageNum+1), 160, 20, 1, true);
     
-    DrawBinds(inputBinds1);
+    switch(pageNum)
+    {
+    case 0:
+        DrawBinds(inputBinds1);
+        break;
+    case 1:
+        DrawBinds(inputBinds2);
+        break;
+    case 2:
+        DrawBinds(inputBinds3);
+        break;
+    default:
+        break;
+    }
 }
 
 //
@@ -303,6 +422,33 @@ bool kexMenuInput::ProcessInput(inputEvent_t *ev)
         kexGame::cLocal->ClearMenu();
         kexGame::cLocal->PlaySound("sounds/select.wav");
         return true;
+    }
+
+    switch(ev->type)
+    {
+    case ev_mousedown:
+        if(ev->data1 == KMSB_LEFT)
+        {
+            if(pageNum < 2 && kexGame::cMenuPanel->CursorOnRightArrow(288, 21))
+            {
+                kexGame::cLocal->PlaySound("sounds/select.wav");
+                pageNum++;
+                return true;
+            }
+            if(pageNum > 0 && kexGame::cMenuPanel->CursorOnLeftArrow(24, 21))
+            {
+                kexGame::cLocal->PlaySound("sounds/select.wav");
+                pageNum--;
+                return true;
+            }
+        }
+        break;
+
+    case ev_mouseup:
+        if(ev->data1 == KMSB_LEFT)
+        {
+        }
+        break;
     }
     
     return false;
@@ -400,7 +546,7 @@ bool kexMenuTravel::ProcessInput(inputEvent_t *ev)
         ang = kexTravelObject::currentObject->Yaw().an;
         kexAngle::Clamp360(ang);
 
-        angBit = ((int)(ang * (4096.0f / 360.0f)) >> 10) & 3;
+        angBit = ((int)kexMath::Ceil(ang * (4096.0f / 360.0f)) >> 10) & 3;
         nextMap = kexGame::cLocal->ActiveMap()->nextMap[angBit];
 
         if(nextMap <= -1)
@@ -828,7 +974,7 @@ void kexMenuItemSlider::Tick(void)
     
     if(bSelected)
     {
-        float width = (kexGame::cLocal->BigFont()->StringWidth(label.c_str(), scale, 0) * 0.5f) * 1.25f;
+        float width = (kexGame::cLocal->BigFont()->StringWidth(label.c_str(), scale, 0) * 0.5f);
         float mx = (float)kex::cInput->MouseX();
         float my = (float)kex::cInput->MouseY();
         float val;
@@ -873,5 +1019,5 @@ void kexMenuItemSlider::Tick(void)
 
 void kexMenuItemSlider::Draw(void)
 {
-    DrawBigString(label, x-8, y, scale, true, bHighLighted);
+    DrawBigString(label, x, y, scale, true, bHighLighted);
 }

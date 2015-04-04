@@ -238,6 +238,7 @@ public:
                                                   byte r = 0xff, byte g = 0xff, byte b = 0xff);
 
     static kexMenu                  *menus[NUMMENUS];
+    static bool                     bShowSoundStats;
     
 private:
     void                            LoadNewMap(void);
@@ -245,6 +246,7 @@ private:
     void                            InitMapDefs(void);
     void                            StopSounds(void);
     void                            UpdateSounds(void);
+    void                            PrintSoundStats(void);
     
     kexFont                         *smallFont;
     kexFont                         *bigFont;

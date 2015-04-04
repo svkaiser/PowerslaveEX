@@ -79,6 +79,8 @@ void kexOverWorld::Start(void)
     kexMath::Clamp(camera_x, sx, (float)pic.OriginalWidth() - sx);
     kexMath::Clamp(camera_y, sy, (float)pic.OriginalHeight() - sy);
 
+    kex::cSound->PlayMusic("music/overworld.ogg");
+
     fadeTime = 0;
     curFadeTime = 0;
     bFading = true;
