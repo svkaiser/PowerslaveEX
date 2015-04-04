@@ -333,17 +333,33 @@ void kexInventoryMenu::DrawCenteredImage(kexTexture *texture, const float x, con
 
 void kexInventoryMenu::DrawAutomap(void)
 {
+    kexGameLocal *game = kexGame::cLocal;
+
+    if(kexGame::cLocal->ActiveMap())
+    {
+        kexStr title = game->ActiveMap()->title;
+        const char *label = kexStr::Format("-%s-", game->Translation()->TranslateString(title.c_str()));
+
+        font->DrawString(label, 160, 164, 1, true, RGBA(224, 224, 224, 255));
+    }
+
     if(kexGame::cLocal->PlayLoop()->AutomapEnabled())
     {
+        const char *label = game->Translation()->GetString(55);
+        float height = font->StringHeight(label, 1, 0);
+
         kexGame::cMenuPanel->DrawLeftArrow(LEFT_ARROW_X, ARROW_OFFSET);
         DrawCenteredImage(mapOpenTexture, PIC_X, PIC_Y);
-        font->DrawString(kexGame::cLocal->Translation()->GetString(55), 160, 176, 1, true);
+        font->DrawString(label, 160, 164+height, 1, true);
     }
     else
     {
+        const char *label = game->Translation()->GetString(54);
+        float height = font->StringHeight(label, 1, 0);
+
         kexGame::cMenuPanel->DrawRightArrow(RIGHT_ARROW_X, ARROW_OFFSET);
         DrawCenteredImage(mapClosedTexture, PIC_X, PIC_Y);
-        font->DrawString(kexGame::cLocal->Translation()->GetString(54), 160, 176, 1, true);
+        font->DrawString(label, 160, 164+height, 1, true);
     }
 }
 
