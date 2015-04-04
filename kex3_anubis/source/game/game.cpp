@@ -718,6 +718,7 @@ void kexGameLocal::ClearMenu(void)
     if(len != 0 && bCursorEnabled[len-1] == false)
     {
         kex::cInput->ToggleMouseGrab(true);
+        kex::cInput->CenterMouse();
         kex::cSession->ToggleCursor(false);
     }
 

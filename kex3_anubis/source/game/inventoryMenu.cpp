@@ -460,6 +460,7 @@ void kexInventoryMenu::Toggle(void)
     else
     {
         kex::cInput->ToggleMouseGrab(true);
+        kex::cInput->CenterMouse();
         kex::cSession->ToggleCursor(false);
     }
 }

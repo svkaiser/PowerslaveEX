@@ -159,6 +159,7 @@ bool kexMapEditor::ProcessInput(inputEvent_t *ev)
         case KKEY_SPACE:
             bCameraMove = true;
             kex::cInput->ToggleMouseGrab(true);
+            kex::cInput->CenterMouse();
             kex::cSession->ToggleCursor(false);
             ok = true;
             break;
