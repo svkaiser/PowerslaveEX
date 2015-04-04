@@ -523,7 +523,7 @@ void kexGameLocal::InitMapDefs(void)
                 continue;
             }
 
-            mapInfo->nextMap[j] = j;
+            mapInfo->nextMap[j] = nextMap[j];
         }
         
         mapInfo->refID = i;

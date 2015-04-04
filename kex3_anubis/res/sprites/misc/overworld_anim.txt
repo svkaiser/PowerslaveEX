@@ -32,3 +32,23 @@ mapcursor
     frame { sprites { { "misc/overworld", 34, -1, -1, 0 } } }
     frame { sprites { { "misc/overworld", 1, -1, -1, 0 } } }
 }
+
+maparrow_right
+{
+    frame { sprites { { "misc/overworld", 32, 12, 1, 0 } } }
+}
+
+maparrow_down
+{
+    frame { sprites { { "misc/overworld", 33, 13, 2, 0 } } }
+}
+
+maparrow_left
+{
+    frame { sprites { { "misc/overworld", 0, 12, 1, 0 } } }
+}
+
+maparrow_up
+{
+    frame { sprites { { "misc/overworld", 3, 13, 0, 0 } } }
+}

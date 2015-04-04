@@ -224,6 +224,7 @@ public:
     void                            SetMenu(const menus_t menu) { activeMenu = menus[menu]; }
     void                            ClearMenu(void) { activeMenu = NULL; }
     kexArray<mapInfo_t>             &MapInfoList(void) { return mapInfoList; }
+    kexArray<bool>                  &MapUnlockList(void) { return bMapUnlockList; }
 
     kexObject                       *ConstructObject(const char *className);
     kexActor                        *SpawnActor(const int type, const float x, const float y, const float z,

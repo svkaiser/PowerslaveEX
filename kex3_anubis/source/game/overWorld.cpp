@@ -44,6 +44,11 @@ kexOverWorld::~kexOverWorld(void)
 void kexOverWorld::Init(void)
 {
     mapCursor = kexGame::cLocal->SpriteAnimManager()->Get("misc/mapcursor");
+    arrows[0] = kexGame::cLocal->SpriteAnimManager()->Get("misc/maparrow_up");
+    arrows[1] = kexGame::cLocal->SpriteAnimManager()->Get("misc/maparrow_right");
+    arrows[2] = kexGame::cLocal->SpriteAnimManager()->Get("misc/maparrow_down");
+    arrows[3] = kexGame::cLocal->SpriteAnimManager()->Get("misc/maparrow_left");
+
     selectedMap = 0;
 }
 
@@ -161,22 +166,25 @@ void kexOverWorld::DrawBackground(const int fade)
 }
 
 //
-// kexOverWorld::DrawCursor
+// kexOverWorld::DrawSprite
 //
 
-void kexOverWorld::DrawCursor(const int fade)
+void kexOverWorld::DrawSprite(const float sx, const float sy, const byte color, spriteAnim_t *anim)
 {
     int frm = 0;
-    float nx = kexGame::cLocal->MapInfoList()[selectedMap].overworldX;
-    float ny = kexGame::cLocal->MapInfoList()[selectedMap].overworldY;
+
+    if(!anim)
+    {
+        return;
+    }
 
     if(mapCursor->NumFrames() > 0)
     {
-        frm = (kex::cSession->GetTicks() >> 1) % mapCursor->NumFrames();
+        frm = (kex::cSession->GetTicks() >> 1) % anim->NumFrames();
     }
 
     kexCpuVertList  *vl = kexRender::cVertList;
-    spriteFrame_t   *frame = &mapCursor->frames[frm];
+    spriteFrame_t   *frame = &anim->frames[frm];
     spriteSet_t     *spriteSet;
     kexSprite       *sprite;
     spriteInfo_t    *info;
@@ -187,8 +195,8 @@ void kexOverWorld::DrawCursor(const int fade)
         sprite = spriteSet->sprite;
         info = &sprite->InfoList()[spriteSet->index];
 
-        float x = (float)spriteSet->x + nx;
-        float y = (float)spriteSet->y + ny;
+        float x = (float)spriteSet->x + sx;
+        float y = (float)spriteSet->y + sy;
         float w = (float)info->atlas.w;
         float h = (float)info->atlas.h;
 
@@ -202,8 +210,100 @@ void kexOverWorld::DrawCursor(const int fade)
         kexRender::cScreen->SetAspectDimentions(x, y, w, h);
         sprite->Texture()->Bind();
 
-        vl->AddQuad(x, y, 0, w, h, u1, v1, u2, v2, fade, fade, fade, 255);
+        vl->AddQuad(x, y, 0, w, h, u1, v1, u2, v2, color, color, color, 255);
         vl->DrawElements();
+    }
+}
+
+//
+// kexOverWorld::DrawCursor
+//
+
+void kexOverWorld::DrawCursor(const int fade)
+{
+    float nx = kexGame::cLocal->MapInfoList()[selectedMap].overworldX;
+    float ny = kexGame::cLocal->MapInfoList()[selectedMap].overworldY;
+
+    DrawSprite(nx, ny, fade, mapCursor);
+}
+
+//
+// kexOverWorld::DrawArrow
+//
+
+void kexOverWorld::DrawArrow(const float ax, const float ay, const int pic, const byte color)
+{
+    assert(pic >= 0 && pic <= 3);
+    DrawSprite(ax, ay, color, arrows[pic]);
+}
+
+//
+// kexOverWorld::DrawArrows
+//
+
+void kexOverWorld::DrawArrows(void)
+{
+    kexGameLocal::mapInfo_t *map = &kexGame::cLocal->MapInfoList()[selectedMap];
+    int time;
+    byte color;
+    float c;
+    float movex, movey;
+
+    if(bFading)
+    {
+        return;
+    }
+
+    time = (16 - (kex::cSession->GetTicks() & 0x1F)) << 8;
+    c = kexMath::Cos(kexMath::Deg2Rad((float)time * kexMath::rad)) * 16.0f;
+
+    movex = 16 + c;
+    movey = 8 + c;
+
+    color = 31 + (byte)(c * 14);
+
+    if(map->nextMap[0] >= 0)
+    {
+        if(kexGame::cLocal->MapUnlockList()[selectedMap] == false)
+        {
+            movey = 16;
+            color = 64;
+        }
+
+        DrawArrow(map->overworldX, map->overworldY-movey, 0, color);
+    }
+
+    if(map->nextMap[1] >= 0)
+    {
+        if(kexGame::cLocal->MapUnlockList()[selectedMap] == false)
+        {
+            movex = 32;
+            color = 64;
+        }
+
+        DrawArrow(map->overworldX+movex, map->overworldY, 1, color);
+    }
+
+    if(map->nextMap[2] >= 0)
+    {
+        if(kexGame::cLocal->MapUnlockList()[selectedMap] == false)
+        {
+            movey = 16;
+            color = 64;
+        }
+
+        DrawArrow(map->overworldX, map->overworldY+movey, 2, color);
+    }
+
+    if(map->nextMap[3] >= 0)
+    {
+        if(kexGame::cLocal->MapUnlockList()[selectedMap] == false)
+        {
+            movex = 32;
+            color = 64;
+        }
+
+        DrawArrow(map->overworldX-movex, map->overworldY, 3, color);
     }
 }
 
@@ -262,6 +362,8 @@ void kexOverWorld::Draw(void)
 
     DrawCursor(c);
 
+    DrawArrows();
+
     DrawTitle();
 }
 
@@ -304,20 +406,6 @@ void kexOverWorld::Tick(void)
 
     kexMath::Clamp(camera_x, sx, (float)pic.OriginalWidth() - sx);
     kexMath::Clamp(camera_y, sy, (float)pic.OriginalHeight() - sy);
-
-    for(unsigned int i = 0; i < kexGame::cLocal->MapInfoList().Length(); ++i)
-    {
-        kexGameLocal::mapInfo_t *minfo = &kexGame::cLocal->MapInfoList()[i];
-        float x = ((minfo->overworldX+18) - (camera_x - sx)) - mx;
-        float y = ((minfo->overworldY+18) - (camera_y - sy)) - my;
-
-        if(x * x + y * y > minfo->selectRadius)
-        {
-            continue;
-        }
-
-        selectedMap = (int16_t)i;
-    }
 }
 
 //
@@ -326,6 +414,8 @@ void kexOverWorld::Tick(void)
 
 bool kexOverWorld::ProcessInput(inputEvent_t *ev)
 {
+    kexGameLocal::mapInfo_t *map = &kexGame::cLocal->MapInfoList()[selectedMap];
+
     if(bFading)
     {
         return false;
@@ -338,6 +428,40 @@ bool kexOverWorld::ProcessInput(inputEvent_t *ev)
         fadeTime = kex::cSession->GetTicks();
         curFadeTime = 0;
         return true;
+    }
+    else if(ev->type == ev_keydown)
+    {
+        switch(ev->data1)
+        {
+        case KKEY_UP:
+            if(map->nextMap[0] >= 0)
+            {
+                selectedMap = map->nextMap[0];
+                return true;
+            }
+            break;
+        case KKEY_RIGHT:
+            if(map->nextMap[1] >= 0)
+            {
+                selectedMap = map->nextMap[1];
+                return true;
+            }
+            break;
+        case KKEY_DOWN:
+            if(map->nextMap[2] >= 0)
+            {
+                selectedMap = map->nextMap[2];
+                return true;
+            }
+            break;
+        case KKEY_LEFT:
+            if(map->nextMap[3] >= 0)
+            {
+                selectedMap = map->nextMap[3];
+                return true;
+            }
+            break;
+        }
     }
 
     return false;

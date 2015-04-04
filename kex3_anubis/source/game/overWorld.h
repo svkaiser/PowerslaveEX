@@ -29,7 +29,11 @@ public:
     bool                        ProcessInput(inputEvent_t *ev);
 
 private:
+    void                        DrawSprite(const float sx, const float sy, const byte color,
+                                           spriteAnim_t *anim);
     void                        DrawCursor(const int fade);
+    void                        DrawArrows(void);
+    void                        DrawArrow(const float ax, const float ay, const int pic, const byte color);
     void                        DrawBackground(const int fade);
     void                        DrawTitle(void);
     void                        SetupMatrix(const int zoom);
@@ -44,6 +48,7 @@ private:
     bool                        bFadeIn;
     bool                        bFading;
     spriteAnim_t                *mapCursor;
+    spriteAnim_t                *arrows[4];
 };
 
 #endif
