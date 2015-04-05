@@ -73,7 +73,7 @@ public:
     ~kexOggFile(void);
 
     bool                                OpenFile(const char *name);
-    bool                                FillBuffer(ALuint &buffer);
+    bool                                FillBuffer(ALuint &buffer, const bool bLoop);
 
     OggVorbis_File                      &File(void) { return oggFile; }
     vorbis_info                         *VorbisInfo(void) { return vorbisInfo; }
@@ -151,7 +151,8 @@ public:
     virtual void                    Play(void *data, const int volume, const int sep,
                                          kexObject *ref = NULL, bool bLooping = false);
     virtual void                    Stop(const int handle);
-    virtual void                    PlayMusic(const char *name);
+    virtual void                    PlayMusic(const char *name, const bool bLoop = true);
+    virtual void                    StopMusic(void);
     virtual void                    UpdateSource(const int handle, const int volume, const int sep);
     virtual void                    Update(void);
     virtual const int               NumSources(void) const;
@@ -378,7 +379,7 @@ kexOggFile::~kexOggFile(void)
 // kexOggFile::FillBuffer
 //
 
-bool kexOggFile::FillBuffer(ALuint &buffer)
+bool kexOggFile::FillBuffer(ALuint &buffer, const bool bLoop)
 {
     char data[OGG_BUFFER_SIZE];
     int read = 0;
@@ -395,7 +396,11 @@ bool kexOggFile::FillBuffer(ALuint &buffer)
         }
         else
         {
-            ov_pcm_seek(&oggFile, 0);
+            if(bLoop)
+            {
+                ov_pcm_seek(&oggFile, 0);
+            }
+
             res = ov_read(&oggFile, data + read, OGG_BUFFER_SIZE - read, 0, 2, 1, &section);
         
             if(res > 0)
@@ -462,7 +467,7 @@ bool kexOggFile::OpenFile(const char *name)
 
     for(int i = 0; i < OGG_BUFFER_COUNT; ++i)
     {
-        FillBuffer(buffers[i]);
+        FillBuffer(buffers[i], false);
     }
 
     return true;
@@ -682,7 +687,12 @@ void kexSoundSource::Update(void)
         	    
 	            alSourceUnqueueBuffers(handle, 1, &buffer);
 
-                ogg->FillBuffer(buffer);
+                if(!ogg->FillBuffer(buffer, bLooping))
+                {
+                    Stop();
+                    Free();
+                    return;
+                }
 
 	            alSourceQueueBuffers(handle, 1, &buffer);
 	            processed--;
@@ -919,7 +929,7 @@ void kexSoundOAL::Stop(const int handle)
 // kexSoundOAL::PlayMusic
 //
 
-void kexSoundOAL::PlayMusic(const char *name)
+void kexSoundOAL::PlayMusic(const char *name, const bool bLoop)
 {
     kexSoundSource *src;
 
@@ -948,7 +958,7 @@ void kexSoundOAL::PlayMusic(const char *name)
     src->volume = cvarMusicVolume.GetFloat();
     src->pan = 0;
     src->pitch = 1;
-    src->Looping() = false;
+    src->Looping() = bLoop;
     src->refObject = NULL;
     src->bPlaying = true;
 
@@ -958,6 +968,24 @@ void kexSoundOAL::PlayMusic(const char *name)
 
     src->UpdateParameters();
     alSourcePlay(src->handle);
+}
+
+//
+// kexSoundOAL::StopMusic
+//
+
+void kexSoundOAL::StopMusic(void)
+{
+    for(int i = 0; i < activeSources; i++)
+    {
+        if(sources[i].ogg == NULL)
+        {
+            continue;
+        }
+
+        sources[i].Stop();
+        sources[i].Free();
+    }
 }
 
 //

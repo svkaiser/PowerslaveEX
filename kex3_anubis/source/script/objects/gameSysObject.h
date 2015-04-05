@@ -19,6 +19,13 @@ class kexScriptObjGame
 {
 public:
     static void         Init(void);
+
+    void                CallDelayedMapScript(const kexStr &str, kexActor *instigator, const float delay);
+    void                CallDelayedMapScript(const int scriptID, kexActor *instigator, const float delay);
+    void                HaltMapScript(const int scriptID);
+    void                FireRemoteEventFromTag(const int tag);
+    void                PlayMusic(const kexStr &str, const bool bLoop);
+    void                StopMusic(void);
 };
 
 #endif

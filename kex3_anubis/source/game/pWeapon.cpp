@@ -110,6 +110,11 @@ void kexPlayerWeapon::ChangeAnim(const weaponState_t changeState)
         state = WS_LOWER;
         break;
 
+    case WS_HOLDSTER:
+        ChangeAnim(weaponInfo->lower);
+        state = WS_HOLDSTER;
+        break;
+
     case WS_FIRE:
         ChangeAnim(weaponInfo->fire);
         state = WS_FIRE;
@@ -207,6 +212,11 @@ void kexPlayerWeapon::UpdateSprite(void)
             if(state == WS_LOWER)
             {
                 owner->ChangeWeapon();
+                ChangeAnim(WS_RAISE);
+                return;
+            }
+            else if(state == WS_HOLDSTER)
+            {
                 ChangeAnim(WS_RAISE);
                 return;
             }
@@ -457,6 +467,7 @@ void kexPlayerWeapon::Draw(void)
         break;
 
     case WS_LOWER:
+    case WS_HOLDSTER:
         DrawAnimFrame(weaponInfo->ammoLower[which]);
         break;
 

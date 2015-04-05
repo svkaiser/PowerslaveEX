@@ -5,6 +5,7 @@ Map_Tomb1       0
     overworld_y     208
     map             "maps/TOMB.MAP"
     musicTrack      "music/egypt2.ogg"
+    script          "scripts/map/TOMB_script.txt"
     nextmap_east    1
 }
 

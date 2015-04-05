@@ -94,7 +94,15 @@ void kexSound::Stop(const int handle)
 // kexSound::PlayMusic
 //
 
-void kexSound::PlayMusic(const char *name)
+void kexSound::PlayMusic(const char *name, const bool bLoop)
+{
+}
+
+//
+// kexSound::StopMusic
+//
+
+void kexSound::StopMusic(void)
 {
 }
 

@@ -1,0 +1,118 @@
+//
+// Copyright(C) 2014-2015 Samuel Villarreal
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// DESCRIPTION:
+//      Level Script For TOMB.MAP
+//
+
+bool bScript1Triggered = false;
+kActor @ramses;
+
+//
+// EndRamsesEvent
+//
+
+void EndRamsesEvent(kActor @instigator)
+{
+    ramses.ChangeAnim("misc/ramses_vanish");
+        
+    Game.StopMusic();
+    Game.PlayMusic("music/egypt2.ogg", true);
+    
+    Game.FireRemoteEventFromTag(1020);
+    Game.CallDelayedMapScript(3, instigator, 2.0f);
+}
+
+//
+// script 1
+//
+
+$script 1
+{
+    if(bScript1Triggered)
+    {
+        return;
+    }
+    
+    Game.StopMusic();
+    Game.PlayMusic("music/ramses/ra12.ogg", false);
+    
+    instigator.Velocity().Clear();
+    instigator.Movement().Clear();
+    
+    @ramses = Game.SpawnActor("Obj_Ramses", -1104, -2464, -704, 0, 14);
+    
+    Player.HoldsterWeapon();
+    Game.CallDelayedMapScript(2, instigator, 0);
+    Game.CallDelayedMapScript(4, instigator, 2.0f);
+    Game.CallDelayedMapScript(5, instigator, 116.0f);
+    
+    bScript1Triggered = true;
+}
+
+//
+// script 2
+//
+
+$script 2
+{
+    kVec3 dir;
+    
+    Player.LockTime() = 8;
+    dir = (ramses.Origin() - instigator.Origin()).Normalize();
+    
+    instigator.Yaw() = (dir.ToYaw() - instigator.Yaw()) * 0.0625f + instigator.Yaw();
+    instigator.Pitch() = (-dir.ToPitch() - instigator.Pitch()) * 0.0625f + instigator.Pitch();
+    
+    $restart;
+}
+
+//
+// script 3
+//
+
+$script 3
+{
+    bScript1Triggered = false;
+}
+
+//
+// script 4
+//
+
+$script 4
+{
+    if((Player.Buttons() & (BC_USE|BC_ATTACK|BC_JUMP)) != 0)
+    {
+        Game.HaltMapScript(2);
+        Game.HaltMapScript(5);
+        
+        EndRamsesEvent(instigator);
+        return;
+    }
+    
+    $restart;
+}
+
+//
+// script 5
+//
+
+$script 5
+{
+    Game.HaltMapScript(2);
+    Game.HaltMapScript(4);
+    
+    EndRamsesEvent(instigator);
+}
+

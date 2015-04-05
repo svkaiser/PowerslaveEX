@@ -117,6 +117,32 @@ COMMAND(inventorymenu)
 }
 
 //
+// puke
+//
+
+COMMAND(puke)
+{
+    if(kexGame::cLocal->GameState() != GS_LEVEL)
+    {
+        return;
+    }
+
+    if(kexGame::cLocal->ActiveMenu() != NULL)
+    {
+        return;
+    }
+
+    if(kex::cCommands->GetArgc() != 2)
+    {
+        kex::cSystem->Printf("puke <script number>\n");
+        return;
+    }
+
+    kexGame::cScriptManager->CallDelayedMapScript(kexStr::Format("mapscript_%i_root",
+        atoi(kex::cCommands->GetArgv(1))), NULL, 0);
+}
+
+//
 // kexPlayLoop::kexPlayLoop
 //
 
@@ -170,6 +196,7 @@ void kexPlayLoop::Start(void)
     inventoryMenu.Reset();
     InitWater();
 
+    kexGame::cScriptManager->LoadLevelScript(game->ActiveMap()->script.c_str());
     kex::cSound->PlayMusic(game->ActiveMap()->musicTrack.c_str());
 
     automapZoom = 2048;
@@ -190,6 +217,7 @@ void kexPlayLoop::Stop(void)
 {
     fadeInTicks = 0;
     FadeToBlack();
+    kexGame::cScriptManager->DestroyLevelScripts();
     kexGame::cLocal->World()->UnloadMap();
 }
 
@@ -239,6 +267,8 @@ void kexPlayLoop::Tick(void)
         kexGame::cLocal->Player()->Tick();
         hud.Update();
         UpdateWater();
+
+        kexGame::cScriptManager->UpdateLevelScripts();
     }
     else if(inventoryMenu.IsActive())
     {

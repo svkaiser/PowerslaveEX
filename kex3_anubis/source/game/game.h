@@ -74,6 +74,7 @@ typedef enum
     WS_RAISE,
     WS_LOWER,
     WS_FIRE,
+    WS_HOLDSTER,
 
     NUMWEAPONSTATES
 } weaponState_t;
@@ -197,6 +198,7 @@ public:
         kexStr              title;
         kexStr              musicTrack;
         kexStr              map;
+        kexStr              script;
         float               overworldX;
         float               overworldY;
         int16_t             transmitterBit;

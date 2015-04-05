@@ -67,3 +67,14 @@ Obj_Choppa 131
     scale                   3
     spawnAnim               "misc/helicopter_idle"
 }
+
+Obj_Ramses 170
+{
+    classname               "kexActor"
+    radius                  16
+    height                  32
+    stepHeight              0
+    scale                   2.0
+    spawnAnim               "misc/ramses_spawn"
+    fullbright              1
+}

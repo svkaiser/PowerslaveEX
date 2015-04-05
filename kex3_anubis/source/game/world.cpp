@@ -1073,6 +1073,9 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
     case 50:
         SendRemoteTrigger(sector, ev);
         break;
+    case 63:
+        kexGame::cScriptManager->CallDelayedMapScript(ev->params+1, actor, 0);
+        break;
 
     default:
         break;

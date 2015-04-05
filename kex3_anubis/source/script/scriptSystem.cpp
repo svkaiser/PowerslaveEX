@@ -32,6 +32,8 @@ kexScriptManager *kexGame::cScriptManager = &scriptManagerLocal;
 
 static kexHeapBlock hb_script("script", false, NULL, NULL);
 
+kexCvar kexScriptManager::cvarDumpMapScripts("g_dumpmapscripts", CVF_BOOL|CVF_CONFIG, "0", "Dumps compiled level scripts to disk");
+
 //
 // call
 //
@@ -89,6 +91,9 @@ kexScriptManager::kexScriptManager(void)
     this->engine        = NULL;
     this->ctx           = NULL;
     this->module        = NULL;
+    this->mapModule     = NULL;
+    this->scriptNum     = 0;
+    this->scriptPart    = 0;
     this->bDrawGCStats  = false;
 }
 
@@ -178,7 +183,7 @@ void kexScriptManager::Init(void)
     
     module = engine->GetModule("core", asGM_CREATE_IF_NOT_EXISTS);
     
-    ProcessScript("scripts/main.txt");
+    ProcessScript("scripts/main.txt", module);
     scriptBuffer += "\0";
     
     module->Build();
@@ -388,7 +393,7 @@ bool kexScriptManager::HasScriptFile(const char *file)
 // kexScriptManager::ProcessScript
 //
 
-void kexScriptManager::ProcessScript(const char *file)
+void kexScriptManager::ProcessScript(const char *file, asIScriptModule *mod)
 {
     kexLexer *lexer;
     kexStr scrBuffer;
@@ -412,7 +417,7 @@ void kexScriptManager::ProcessScript(const char *file)
 
                 if(!HasScriptFile(nfile))
                 {
-                    ProcessScript(nfile);
+                    ProcessScript(nfile, mod);
                     scriptFiles.Push(kexStr(nfile).StripExtension().StripPath());
                 }
                 continue;
@@ -420,7 +425,54 @@ void kexScriptManager::ProcessScript(const char *file)
             else
             {
                 kex::cParser->Error("kexScriptManager::ProcessScript: unknown token: %s\n",
-                                      lexer->Token());
+                                     lexer->Token());
+            }
+        }
+        else if(ch == '$')
+        {
+            lexer->Find();
+
+            if(lexer->Matches("script"))
+            {
+                scriptNum = lexer->GetNumber();
+                const char *str = kexStr::Format("void mapscript_%i_root(kActor @instigator)", scriptNum);
+
+                scriptPart = 0;
+
+                scriptBuffer += str;
+                scrBuffer += str;
+                continue;
+            }
+            else if(lexer->Matches("delay"))
+            {
+                lexer->ExpectNextToken(TK_LPAREN);
+                float val = (float)lexer->GetFloat();
+                lexer->ExpectNextToken(TK_RPAREN);
+                lexer->ExpectNextToken(TK_SEMICOLON);
+
+                kexStr str("Game.CallDelayedMapScript(");
+
+                str += kexStr::Format("\"mapscript_%i_part_%i\", instigator, %f);", scriptNum, scriptPart, val);
+                str += "\n}\n\n";
+                str += kexStr::Format("void mapscript_%i_part_%i(kActor @instigator)", scriptNum, scriptPart);
+                str += "\n{\n";
+
+                scriptPart++;
+
+                scriptBuffer += str.c_str();
+                scrBuffer += str.c_str();
+                continue;
+            }
+            else if(lexer->Matches("restart"))
+            {
+                lexer->ExpectNextToken(TK_SEMICOLON);
+
+                kexStr str("Game.CallDelayedMapScript(");
+                str += kexStr::Format("\"mapscript_%i_root\", instigator, 0);", scriptNum);
+
+                scriptBuffer += str.c_str();
+                scrBuffer += str.c_str();
+                continue;
             }
         }
 
@@ -428,8 +480,8 @@ void kexScriptManager::ProcessScript(const char *file)
         scrBuffer += ch;
     }
 
-    module->AddScriptSection(kexStr(file).StripExtension().StripPath(),
-                             scrBuffer.c_str(), scrBuffer.Length());
+    mod->AddScriptSection(kexStr(file).StripExtension().StripPath(),
+                          scrBuffer.c_str(), scrBuffer.Length());
 
     kex::cParser->Close();
 }
@@ -459,23 +511,23 @@ void kexScriptManager::CallExternalScript(const char *file, const char *function
         return;
     }
 
-    asIScriptModule *mod;
+    asIScriptModule *tempModule;
 
-    mod = engine->GetModule(kexStr(file).StripExtension().StripPath(),
-                            asGM_CREATE_IF_NOT_EXISTS);
-    mod->AddScriptSection("externalSection", &data[0], size);
-    mod->Build();
+    tempModule = engine->GetModule(kexStr(file).StripExtension().StripPath(),
+                                   asGM_CREATE_IF_NOT_EXISTS);
+    tempModule->AddScriptSection("externalSection", &data[0], size);
+    tempModule->Build();
 
     Mem_Free(data);
 
-    asIScriptFunction *func = mod->GetFunctionByDecl(function);
+    asIScriptFunction *func = tempModule->GetFunctionByDecl(function);
 
     if(func != 0)
     {
         ctx->Prepare(func);
         if(ctx->Execute() == asEXECUTION_FINISHED)
         {
-            mod->Discard();
+            tempModule->Discard();
             return;
         }
 
@@ -512,6 +564,159 @@ void kexScriptManager::CallCommand(const char *decl)
         {
             ctx->PopState();
         }
+    }
+}
+
+//
+// kexScriptManager::LoadLevelScript
+//
+
+bool kexScriptManager::LoadLevelScript(const char *name)
+{
+    kexLexer *lexer;
+
+    if(name[0] == 0)
+    {
+        return false;
+    }
+
+    if(!(lexer = kex::cParser->Open(name)))
+    {
+        return false;
+    }
+
+    scriptBuffer.Clear();
+    scriptFiles.Empty();
+
+    scriptNum = 0;
+    scriptPart = 0;
+
+    mapModule = engine->GetModule("levelScript", asGM_ALWAYS_CREATE);
+
+    ProcessScript(name, mapModule);
+    scriptBuffer += "\0";
+
+    if(cvarDumpMapScripts.GetBool())
+    {
+        kexStr fPath;
+        extern kexCvar cvarBasePath;
+
+        fPath = kexStr::Format("%s\\scriptout.txt", cvarBasePath.GetValue());
+        fPath.NormalizeSlashes();
+
+        scriptBuffer.WriteToFile(fPath);
+    }
+
+    mapModule->Build();
+
+    // we're done with the file
+    kex::cParser->Close();
+    return true;
+}
+
+//
+// kexScriptManager::CallDelayedMapScript
+//
+
+void kexScriptManager::CallDelayedMapScript(const char *func, kexActor *instigator, const float delay)
+{
+    if(mapModule == NULL)
+    {
+        return;
+    }
+
+    mapScriptInfo_t *callScript = new mapScriptInfo_t;
+
+    callScript->function = func;
+    callScript->instigator = instigator;
+    callScript->delay = delay;
+    callScript->link.SetData(callScript);
+    callScript->bDirty = false;
+
+    callScript->link.Add(delayedMapScripts);
+}
+
+//
+// kexScriptManager::CallDelayedMapScript
+//
+
+void kexScriptManager::CallDelayedMapScript(const int scriptNum, kexActor *instigator, const float delay)
+{
+    CallDelayedMapScript(kexStr::Format("mapscript_%i_root", scriptNum), instigator, delay);
+}
+
+//
+// kexScriptManager::UpdateLevelScripts
+//
+
+void kexScriptManager::UpdateLevelScripts(void)
+{
+    mapScriptInfo_t *next = NULL;
+    
+    for(mapScriptInfo_t *scrInfo = delayedMapScripts.Next(); scrInfo != NULL; scrInfo = next)
+    {
+        next = scrInfo->link.Next();
+
+        if(scrInfo->bDirty == true)
+        {
+            scrInfo->link.Remove();
+            delete scrInfo;
+
+            continue;
+        }
+        
+        scrInfo->delay -= (1.0f / 60.0f);
+        if(scrInfo->delay <= 0)
+        {
+            kexStr function = "void ";
+            function += scrInfo->function;
+            function += "(kActor@)";
+
+            if(PrepareFunction(mapModule->GetFunctionByDecl(function)))
+            {
+                ctx->SetArgObject(0, scrInfo->instigator);
+
+                scrInfo->link.Remove();
+                delete scrInfo;
+
+                Execute();
+            }
+            else
+            {
+                scrInfo->link.Remove();
+                delete scrInfo;
+            }
+        }
+    }
+}
+
+//
+// kexScriptManager::HaltMapScript
+//
+
+void kexScriptManager::HaltMapScript(const int scriptNum)
+{
+    const char *search = kexStr::Format("mapscript_%i_", scriptNum);
+    
+    for(mapScriptInfo_t *scrInfo = delayedMapScripts.Next(); scrInfo != NULL; scrInfo = scrInfo->link.Next())
+    {
+        if(scrInfo->function.IndexOf(search) != -1)
+        {
+            scrInfo->bDirty = true;
+        }
+    }
+}
+
+//
+// kexScriptManager::DestroyLevelScripts
+//
+
+void kexScriptManager::DestroyLevelScripts(void)
+{
+    if(mapModule)
+    {
+        mapModule->Discard();
+        mapModule = NULL;
     }
 }
 

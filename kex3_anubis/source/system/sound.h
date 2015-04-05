@@ -31,7 +31,8 @@ public:
     virtual bool            SourceLooping(const int handle);
     virtual const int       NumSources(void) const;
     virtual kexObject       *GetRefObject(const int handle);
-    virtual void            PlayMusic(const char *name);
+    virtual void            PlayMusic(const char *name, const bool bLoop = true);
+    virtual void            StopMusic(void);
 
     static kexCvar          cvarSampleRate;
     static kexCvar          cvarSliceTime;

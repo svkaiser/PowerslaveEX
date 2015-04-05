@@ -20,6 +20,42 @@
 #include "scriptSystem.h"
 #include "actorObject.h"
 
+#define REGISTER_ACTOR_CLASS(asName, clsName)   \
+    e->RegisterObjectType(asName, sizeof(kexActor), asOBJ_REF | asOBJ_NOCOUNT);   \
+    e->RegisterObjectMethod(asName, "kAngle &Yaw(void)", asMETHODPR(clsName, Yaw, (void), kexAngle&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "kAngle &Pitch(void)", asMETHODPR(clsName, Pitch, (void), kexAngle&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "kAngle &Roll(void)", asMETHODPR(clsName, Roll, (void), kexAngle&), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "kVec3 &Origin(void)", asMETHODPR(clsName, Origin, (void), kexVec3&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "void SetTarget(kActor@)", asMETHODPR(clsName, SetTarget, (kexGameObject*), void), asCALL_THISCALL); \
+    e->RegisterObjectMethod(asName, "kActor @GetTarget(void)", asMETHODPR(clsName, Target, (void), kexGameObject*), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "void SetTaggedActor(kActor@)", asMETHODPR(clsName, SetTaggedActor, (kexActor*), void), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "kActor @GetTaggedActor(void)", asMETHODPR(clsName, GetTaggedActor, (void), kexActor*), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "void SetSector(const uint)", asMETHODPR(clsName, SetSector, (const unsigned int), void), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "void Remove(void)", asMETHODPR(clsName, Remove, (void), void), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "kVec3 &Velocity(void)", asMETHODPR(clsName, Velocity, (void), kexVec3&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "kVec3 &Movement(void)", asMETHODPR(clsName, Movement, (void), kexVec3&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "int16 &Health(void)", asMETHODPR(clsName, Health, (void), int16_t&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "int &Type(void)", asMETHODPR(clsName, Type, (void), int&), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "uint &Flags(void)", asMETHODPR(clsName, Flags, (void), unsigned int&), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "float &Radius(void)", asMETHODPR(clsName, Radius, (void), float&), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "float &Height(void)", asMETHODPR(clsName, Height, (void), float&), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "float &StepHeight(void)", asMETHODPR(clsName, StepHeight, (void), float&), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "float &Scale(void)", asMETHODPR(clsName, Scale, (void), float&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "float &Ticks(void)", asMETHODPR(clsName, Ticks, (void), float&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "float &FloorHeight(void)", asMETHODPR(clsName, FloorHeight, (void), float&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "float &CeilingHeight(void)", asMETHODPR(clsName, CeilingHeight, (void), float&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "const int FrameID(void) const", asMETHODPR(clsName, FrameID, (void) const, const int), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "const int SectorIndex(void)", asMETHODPR(clsName, SectorIndex, (void), const int), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "bool InstanceOf(const kStr &in) const", asMETHODPR(clsName, InstanceOf, (const kexStr&) const, bool), asCALL_THISCALL); \
+    e->RegisterObjectMethod(asName, "void PlaySound(const kStr &in)", asMETHODPR(clsName, PlaySound, (const kexStr&), void), asCALL_THISCALL);   \
+    e->RegisterObjectMethod(asName, "void ChangeAnim(const kStr &in)", asMETHODPR(clsName, ChangeAnim, (const kexStr&), void), asCALL_THISCALL); \
+    e->RegisterObjectMethod(asName, "const int GameTicks(void) const", asMETHODPR(clsName, GameTicks, (void) const, const int), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "kVec3 &Color(void)", asMETHODPR(clsName, Color, (void), kexVec3&), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "kActor @SpawnActor(const kStr &in, const float, const float, const float)", asMETHODPR(clsName, SpawnActor, (const kexStr&, const float, const float, const float), kexActor*), asCALL_THISCALL);   \
+    e->RegisterObjectMethod(asName, "kAngle &CollidedWallAngle(void)", asMETHODPR(clsName, CollidedWallAngle, (void), kexAngle&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "kVec3 &CollidedWallNormal(void)", asMETHODPR(clsName, CollidedWallNormal, (void), kexVec3&), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "bool CanSee(const kVec3 &in, const float)", asMETHODPR(clsName, CanSee, (kexVec3&, const float), bool), asCALL_THISCALL)
+
 //
 // kexScriptObjActor::Init
 //
@@ -28,40 +64,7 @@ void kexScriptObjActor::Init(void)
 {
     asIScriptEngine *e = kexGame::cScriptManager->Engine();
     
-    e->RegisterObjectType("kActor", sizeof(kexActor), asOBJ_REF | asOBJ_NOCOUNT);
-    e->RegisterObjectMethod("kActor", "kAngle &Yaw(void)", asMETHODPR(kexActor, Yaw, (void), kexAngle&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kAngle &Pitch(void)", asMETHODPR(kexActor, Pitch, (void), kexAngle&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kAngle &Roll(void)", asMETHODPR(kexActor, Roll, (void), kexAngle&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kVec3 &Origin(void)", asMETHODPR(kexActor, Origin, (void), kexVec3&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "void SetTarget(kActor@)", asMETHODPR(kexActor, SetTarget, (kexGameObject*), void), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kActor @GetTarget(void)", asMETHODPR(kexActor, Target, (void), kexGameObject*), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "void SetTaggedActor(kActor@)", asMETHODPR(kexActor, SetTaggedActor, (kexActor*), void), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kActor @GetTaggedActor(void)", asMETHODPR(kexActor, GetTaggedActor, (void), kexActor*), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "void SetSector(const uint)", asMETHODPR(kexActor, SetSector, (const unsigned int), void), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "void Remove(void)", asMETHODPR(kexActor, Remove, (void), void), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kVec3 &Velocity(void)", asMETHODPR(kexActor, Velocity, (void), kexVec3&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kVec3 &Movement(void)", asMETHODPR(kexActor, Movement, (void), kexVec3&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "int16 &Health(void)", asMETHODPR(kexActor, Health, (void), int16_t&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "int &Type(void)", asMETHODPR(kexActor, Type, (void), int&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "uint &Flags(void)", asMETHODPR(kexActor, Flags, (void), unsigned int&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "float &Radius(void)", asMETHODPR(kexActor, Radius, (void), float&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "float &Height(void)", asMETHODPR(kexActor, Height, (void), float&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "float &StepHeight(void)", asMETHODPR(kexActor, StepHeight, (void), float&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "float &Scale(void)", asMETHODPR(kexActor, Scale, (void), float&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "float &Ticks(void)", asMETHODPR(kexActor, Ticks, (void), float&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "float &FloorHeight(void)", asMETHODPR(kexActor, FloorHeight, (void), float&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "float &CeilingHeight(void)", asMETHODPR(kexActor, CeilingHeight, (void), float&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "const int FrameID(void) const", asMETHODPR(kexActor, FrameID, (void) const, const int), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "const int SectorIndex(void)", asMETHODPR(kexActor, SectorIndex, (void), const int), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "bool InstanceOf(const kStr &in) const", asMETHODPR(kexActor, InstanceOf, (const kexStr&) const, bool), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "void PlaySound(const kStr &in)", asMETHODPR(kexActor, PlaySound, (const kexStr&), void), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "void ChangeAnim(const kStr &in)", asMETHODPR(kexActor, ChangeAnim, (const kexStr&), void), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "const int GameTicks(void) const", asMETHODPR(kexActor, GameTicks, (void) const, const int), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kVec3 &Color(void)", asMETHODPR(kexActor, Color, (void), kexVec3&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kActor @SpawnActor(const kStr &in, const float, const float, const float)", asMETHODPR(kexActor, SpawnActor, (const kexStr&, const float, const float, const float), kexActor*), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kAngle &CollidedWallAngle(void)", asMETHODPR(kexActor, CollidedWallAngle, (void), kexAngle&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "kVec3 &CollidedWallNormal(void)", asMETHODPR(kexActor, CollidedWallNormal, (void), kexVec3&), asCALL_THISCALL);
-    e->RegisterObjectMethod("kActor", "bool CanSee(const kVec3 &in, const float)", asMETHODPR(kexActor, CanSee, (kexVec3&, const float), bool), asCALL_THISCALL);
+    REGISTER_ACTOR_CLASS("kActor", kexActor);
 
     e->RegisterEnum("EnumActorFlags");
     e->RegisterEnumValue("EnumActorFlags", "AF_FLOORFRICTION", AF_FLOORFRICTION);

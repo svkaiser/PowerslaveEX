@@ -87,6 +87,7 @@ public:
     bool                        GiveKey(const int key);
     bool                        IncreaseMaxHealth(const int bits);
     bool                        CheckKey(const int key) { return (keys & BIT(key)) != 0; }
+    void                        HoldsterWeapon(void);
 
     kexPlayerCmd                &Cmd(void) { return cmd; }
     kexPuppet                   *Actor(void) { return actor; }
@@ -96,6 +97,7 @@ public:
     const int16_t               AnkahFlags(void) const { return ankahFlags; }
 
     int16_t                     &Artifacts(void) { return artifacts; }
+    const uint16_t              Buttons(void) const { return cmd.Buttons(); }
 
     kexActor                    *AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitch,
                                          const float dist, const float aimYaw, const float aimPitch);

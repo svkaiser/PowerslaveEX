@@ -316,6 +316,6 @@ void kexSpriteAnimManager::Load(const char *name)
         }
     }
 
-   // we're done with the file
+    // we're done with the file
     kex::cParser->Close();
 }

@@ -17,6 +17,17 @@
 
 #include "angelscript.h"
 
+typedef kexLinklist<struct mapScriptInfo_s> mapScriptLink_t;
+
+typedef struct mapScriptInfo_s
+{
+    kexStr          function;
+    kexActor        *instigator;
+    float           delay;
+    bool            bDirty;
+    mapScriptLink_t link;
+} mapScriptInfo_t;
+
 class kexScriptManager
 {
 public:
@@ -35,9 +46,19 @@ public:
     bool                                Execute(void);
     void                                RegisterMethod(const char *name, const char *decl,
                                                        const asSFuncPtr &funcPointer);
+    bool                                LoadLevelScript(const char *name);
+    void                                CallDelayedMapScript(const char *func, kexActor *instigator,
+                                                             const float delay);
+    void                                CallDelayedMapScript(const int scriptNum, kexActor *instigator,
+                                                             const float delay);
+    void                                HaltMapScript(const int scriptNum);
+    void                                UpdateLevelScripts(void);
+    void                                DestroyLevelScripts(void);
 
     static void                         *MemAlloc(size_t size);
     static void                         MemFree(void *ptr);
+
+    static kexCvar                      cvarDumpMapScripts;
 
     template<class derived, class base>
     static derived                      *RefCast(base *c) { return static_cast<derived*>(c); }
@@ -53,8 +74,10 @@ public:
 private:
     void                                InitActions(void);
     void                                GetArgTypesFromFunction(kexStrList &list, asIScriptFunction *function);
-    void                                ProcessScript(const char *file);
+    void                                ProcessScript(const char *file, asIScriptModule *mod);
     bool                                HasScriptFile(const char *file);
+
+    kexLinklist<mapScriptInfo_t>        delayedMapScripts;
 
     static void                         MessageCallback(const asSMessageInfo *msg, void *param);
 
@@ -66,7 +89,9 @@ private:
     asIScriptEngine                     *engine;
     asIScriptContext                    *ctx;
     asIScriptModule                     *module;
-
+    asIScriptModule                     *mapModule;
+    int                                 scriptNum;
+    int                                 scriptPart;
     int                                 state;
 };
 

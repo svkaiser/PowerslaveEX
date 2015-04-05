@@ -517,6 +517,7 @@ void kexGameLocal::InitMapDefs(void)
         dict->GetString("map", mapInfo->map);
         dict->GetString("title", mapInfo->title);
         dict->GetString("musicTrack", mapInfo->musicTrack);
+        dict->GetString("script", mapInfo->script);
         dict->GetFloat("overworld_x", mapInfo->overworldX);
         dict->GetFloat("overworld_y", mapInfo->overworldY);
         dict->GetInt("transmitter", mapInfo->transmitterBit);

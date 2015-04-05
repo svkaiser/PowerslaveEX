@@ -1098,6 +1098,15 @@ void kexPlayer::CyclePrevWeapon(void)
 }
 
 //
+// kexPlayer::HoldsterWeapon
+//
+
+void kexPlayer::HoldsterWeapon(void)
+{
+    weapon.ChangeAnim(WS_HOLDSTER);
+}
+
+//
 // kexPlayer::Tick
 //
 
@@ -1107,6 +1116,11 @@ void kexPlayer::Tick(void)
 
     if(lockTime > 0)
     {
+        if(weapon.State() == WS_HOLDSTER)
+        {
+            weapon.Update();
+        }
+
         lockTime--;
         return;
     }
