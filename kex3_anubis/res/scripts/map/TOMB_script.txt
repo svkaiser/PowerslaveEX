@@ -74,6 +74,8 @@ $script 2
     instigator.Yaw() = (dir.ToYaw() - instigator.Yaw()) * 0.0625f + instigator.Yaw();
     instigator.Pitch() = (-dir.ToPitch() - instigator.Pitch()) * 0.0625f + instigator.Pitch();
     
+    instigator.Origin().Lerp(kVec3(-1088.0f, -2794.7f, -864.0f), 0.0625f);
+    
     $restart;
 }
 

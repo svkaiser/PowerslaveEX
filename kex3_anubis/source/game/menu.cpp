@@ -320,6 +320,7 @@ void kexMenuInput::DrawBinds(const kexMenuInput::inputBinds_t binds[])
     const kexMenuInput::inputBinds_t *bind;
     float len;
     float y;
+    int which;
 
     if(font == NULL)
     {
@@ -330,6 +331,7 @@ void kexMenuInput::DrawBinds(const kexMenuInput::inputBinds_t binds[])
     }
 
     y = bindYOffset;
+    which = kex::cSession->GetTicks() >> 6;
 
     for(bind = binds; bind->action != NULL; bind++)
     {
@@ -354,8 +356,10 @@ void kexMenuInput::DrawBinds(const kexMenuInput::inputBinds_t binds[])
 
         if(bindList.Length() != 0)
         {
-            len = font->StringWidth(bindList[0].c_str(), 1, 0);
-            kexGame::cLocal->DrawSmallString(bindList[0].c_str(), (bindRowWidth-len)+10, y, 1, false);
+            int i = which % bindList.Length();
+
+            len = font->StringWidth(bindList[i].c_str(), 1, 0);
+            kexGame::cLocal->DrawSmallString(bindList[i].c_str(), (bindRowWidth-len)+10, y, 1, false);
             bindList.Empty();
         }
         else
@@ -564,6 +568,112 @@ bool kexMenuTravel::ProcessInput(inputEvent_t *ev)
     }
     
     if(kexGame::cMenuPanel->TestSelectButtonInput(&travelNoButton, ev))
+    {
+        kexGame::cLocal->ClearMenu();
+        kexGame::cLocal->PlaySound("sounds/select.wav");
+        return true;
+    }
+    
+    return false;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuStartupNotice
+//
+//-----------------------------------------------------------------------------
+
+DEFINE_MENU_CLASS(kexMenuStartupNotice);
+public:
+    virtual void                    Init(void);
+    virtual void                    Display(void);
+    virtual void                    Update(void);
+    virtual bool                    ProcessInput(inputEvent_t *ev);
+
+private:
+    kexMenuPanel::selectButton_t    okButton;
+END_MENU_CLASS();
+
+DECLARE_MENU_CLASS(kexMenuStartupNotice, MENU_STARTUP_NOTICE);
+
+//
+// kexMenuStartupNotice::Init
+//
+
+void kexMenuStartupNotice::Init(void)
+{
+    okButton.x = 112;
+    okButton.y = 168;
+    okButton.w = 96;
+    okButton.h = 24;
+    okButton.label = "Ok";
+}
+
+//
+// kexMenuStartupNotice::Update
+//
+
+void kexMenuStartupNotice::Update(void)
+{
+    kexGame::cMenuPanel->UpdateSelectButton(&okButton);
+}
+
+//
+// kexMenuStartupNotice::Display
+//
+
+void kexMenuStartupNotice::Display(void)
+{
+    float w, h, y;
+    static const char *noticeStrings[] =
+    {
+        "--NOTICE--",
+        " ",
+        "This build of PowerslaveEX is",
+        "still in early development",
+        "and may be unstable. Some",
+        "features may also be",
+        "unavailable.",
+        " ",
+        "Be sure to report any issues",
+        "to svkaiser-at-gmail.com",
+        NULL
+    };
+    
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+
+    kexRender::cScreen->SetOrtho();
+    
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+    y = 50;
+    
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 128);
+    
+    kexGame::cMenuPanel->DrawPanel(32, 32, 256, 176, 4);
+    kexGame::cMenuPanel->DrawInset(40, 40, 238, 120);
+
+    for(int i = 0; noticeStrings[i]; ++i)
+    {
+        const char *text = noticeStrings[i];
+
+        float height = kexFont::Get("smallfont")->StringHeight(text, 1, 0);
+        kexGame::cLocal->DrawSmallString(text, 160, y, 1, true);
+
+        y += (height * 1.25f);
+    }
+    
+    kexGame::cMenuPanel->DrawSelectButton(&okButton);
+}
+
+//
+// kexMenuStartupNotice::ProcessInput
+//
+
+bool kexMenuStartupNotice::ProcessInput(inputEvent_t *ev)
+{
+    if(kexGame::cMenuPanel->TestSelectButtonInput(&okButton, ev))
     {
         kexGame::cLocal->ClearMenu();
         kexGame::cLocal->PlaySound("sounds/select.wav");

@@ -448,6 +448,10 @@ void kexTitleScreen::Start(void)
     kex::cSession->ToggleCursor(true);
 
     kex::cSound->PlayMusic("music/title.ogg");
+
+#if 0
+    kexGame::cLocal->SetMenu(MENU_STARTUP_NOTICE);
+#endif
 }
 
 //
@@ -517,6 +521,11 @@ void kexTitleScreen::Draw(void)
 {
     int fade;
 
+    if(bFading)
+    {
+        curFadeTime = ((kex::cSession->GetTicks() - fadeTime)) << 3;
+    }
+
     if(!bFading)
     {
         fade = 0xff;
@@ -560,17 +569,10 @@ void kexTitleScreen::Draw(void)
 
 void kexTitleScreen::Tick(void)
 {
-    if(bFading)
+    for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
     {
-        curFadeTime = ((kex::cSession->GetTicks() - fadeTime)) << 3;
-    }
-    else
-    {
-        for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
-        {
-            kexMenuItem *item = titleMenu[i]->item;
-            item->Tick();
-        }
+        kexMenuItem *item = titleMenu[i]->item;
+        item->Tick();
     }
 }
 

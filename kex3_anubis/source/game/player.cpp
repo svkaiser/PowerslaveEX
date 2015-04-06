@@ -643,6 +643,7 @@ void kexPuppet::Spawn(void)
 kexPlayer::kexPlayer(void)
 {
     this->weapon.owner = this;
+    this->lockTime = 0;
 }
 
 //
@@ -673,6 +674,7 @@ void kexPlayer::Reset(void)
     viewZ = 64.0f;
     airSupply = 64;
     airSupplyTime = 0;
+    lockTime = 0;
 
     memset(weapons, 0, NUMPLAYERWEAPONS);
 
@@ -708,6 +710,7 @@ void kexPlayer::Ready(void)
     keys = 0;
     airSupply = 64;
     airSupplyTime = 0;
+    lockTime = 0;
 
     weapon.ChangeAnim(WS_RAISE);
 }

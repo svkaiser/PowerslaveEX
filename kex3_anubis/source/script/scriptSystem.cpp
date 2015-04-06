@@ -608,9 +608,6 @@ bool kexScriptManager::LoadLevelScript(const char *name)
     }
 
     mapModule->Build();
-
-    // we're done with the file
-    kex::cParser->Close();
     return true;
 }
 
