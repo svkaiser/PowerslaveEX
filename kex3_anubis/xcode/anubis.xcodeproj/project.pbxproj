@@ -19,6 +19,7 @@
 		419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419C3BB21A89100400C19D68 /* actionDef.cpp */; };
 		41A534511AC2092E00A666D5 /* menuPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A5344F1AC2092E00A666D5 /* menuPanel.cpp */; };
 		41A9A1821ACD9EE2009B4ECF /* overWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A9A1801ACD9EE2009B4ECF /* overWorld.cpp */; };
+		41A9A1971AD2E968009B4ECF /* travelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A9A1951AD2E968009B4ECF /* travelObject.cpp */; };
 		41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A5471A5DEE84006DCCB9 /* actions.cpp */; };
 		41B3A54C1A5DEEBC006DCCB9 /* console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B3A54A1A5DEEBC006DCCB9 /* console.cpp */; };
 		41B5F0FE1A9BA76600698014 /* spring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F0FC1A9BA76600698014 /* spring.cpp */; };
@@ -254,6 +255,8 @@
 		41A534501AC2092E00A666D5 /* menuPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = menuPanel.h; path = ../../source/game/menuPanel.h; sourceTree = "<group>"; };
 		41A9A1801ACD9EE2009B4ECF /* overWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = overWorld.cpp; path = ../../source/game/overWorld.cpp; sourceTree = "<group>"; };
 		41A9A1811ACD9EE2009B4ECF /* overWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = overWorld.h; path = ../../source/game/overWorld.h; sourceTree = "<group>"; };
+		41A9A1951AD2E968009B4ECF /* travelObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = travelObject.cpp; path = ../../source/game/travelObject.cpp; sourceTree = "<group>"; };
+		41A9A1961AD2E968009B4ECF /* travelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = travelObject.h; path = ../../source/game/travelObject.h; sourceTree = "<group>"; };
 		41B3A5471A5DEE84006DCCB9 /* actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actions.cpp; sourceTree = "<group>"; };
 		41B3A5481A5DEE84006DCCB9 /* actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
 		41B3A54A1A5DEEBC006DCCB9 /* console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = console.cpp; sourceTree = "<group>"; };
@@ -542,6 +545,7 @@
 				41B817331A6D6EF500151622 /* sprite.cpp */,
 				41B817351A6D6EF500151622 /* spriteAnim.cpp */,
 				41C7FC3C1A5AFB84003864CB /* titlescreen.cpp */,
+				41A9A1951AD2E968009B4ECF /* travelObject.cpp */,
 				41C7FC3E1A5AFB84003864CB /* world.cpp */,
 				419C3BB31A89100400C19D68 /* actionDef.h */,
 				41BAB90F1A5EF32100DD0D11 /* actor.h */,
@@ -567,6 +571,7 @@
 				41B817341A6D6EF500151622 /* sprite.h */,
 				41B817361A6D6EF500151622 /* spriteAnim.h */,
 				41C7FC3D1A5AFB84003864CB /* titlescreen.h */,
+				41A9A1961AD2E968009B4ECF /* travelObject.h */,
 				41C7FC3F1A5AFB84003864CB /* world.h */,
 			);
 			name = game;
@@ -1018,6 +1023,7 @@
 				41E2CE841A51D39B00FC28DC /* pluecker.cpp in Sources */,
 				41C979F91A642CCA00E9C798 /* cmodel.cpp in Sources */,
 				41C7FC241A5AFB6E003864CB /* kpf.cpp in Sources */,
+				41A9A1971AD2E968009B4ECF /* travelObject.cpp in Sources */,
 				41B7765F1A83EB0A008C8F23 /* refObject.cpp in Sources */,
 				41B5F0FE1A9BA76600698014 /* spring.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,

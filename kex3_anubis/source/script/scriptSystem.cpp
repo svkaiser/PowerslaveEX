@@ -650,6 +650,11 @@ void kexScriptManager::UpdateLevelScripts(void)
 {
     mapScriptInfo_t *next = NULL;
     
+    if(mapModule == NULL)
+    {
+        return;
+    }
+    
     for(mapScriptInfo_t *scrInfo = delayedMapScripts.Next(); scrInfo != NULL; scrInfo = next)
     {
         next = scrInfo->link.Next();
@@ -712,6 +717,16 @@ void kexScriptManager::DestroyLevelScripts(void)
 {
     if(mapModule)
     {
+        mapScriptInfo_t *next = NULL;
+        
+        for(mapScriptInfo_t *scrInfo = delayedMapScripts.Next(); scrInfo != NULL; scrInfo = next)
+        {
+            next = scrInfo->link.Next();
+            
+            scrInfo->link.Remove();
+            delete scrInfo;
+        }
+        
         mapModule->Discard();
         mapModule = NULL;
     }
