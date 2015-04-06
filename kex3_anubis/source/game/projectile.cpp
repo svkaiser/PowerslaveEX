@@ -104,6 +104,8 @@ void kexProjectile::HomingThink(void)
 {
     if(homingActor != NULL)
     {
+        float speed;
+
         if(homingActor->Removing() || homingActor->Health() <= 0)
         {
             SetHomingTarget(NULL);
@@ -122,6 +124,14 @@ void kexProjectile::HomingThink(void)
         
         pitch = -dir.ToPitch();
         kexMath::Clamp(pitch.an, -homingMaxPitch, homingMaxPitch);
+
+        if(!(projectileFlags & PF_NOHOMINGTHRUST))
+        {
+            speed = velocity.Unit();
+
+            kexVec3::ToAxis(&velocity, 0, 0, yaw, pitch, 0);
+            velocity *= speed;
+        }
     }
     else if(!RandomDecision(14))
     {
@@ -498,6 +508,7 @@ void kexProjectile::Spawn(void)
         if(definition->GetBool("impactWallsOnly"))  projectileFlags |= PF_IMPACTWALLSONLY;
         if(definition->GetBool("homing"))           projectileFlags |= PF_HOMING;
         if(definition->GetBool("aimOnSpawn"))       projectileFlags |= PF_AIMONSPAWN;
+        if(definition->GetBool("noHomingThrust"))   projectileFlags |= PF_NOHOMINGTHRUST;
     }
 
     if(projectileFlags & PF_AIMONSPAWN)

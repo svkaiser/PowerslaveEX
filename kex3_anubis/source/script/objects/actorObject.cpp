@@ -40,6 +40,7 @@
     e->RegisterObjectMethod(asName, "float &Radius(void)", asMETHODPR(clsName, Radius, (void), float&), asCALL_THISCALL);    \
     e->RegisterObjectMethod(asName, "float &Height(void)", asMETHODPR(clsName, Height, (void), float&), asCALL_THISCALL);    \
     e->RegisterObjectMethod(asName, "float &StepHeight(void)", asMETHODPR(clsName, StepHeight, (void), float&), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "float &Friction(void)", asMETHODPR(clsName, Friction, (void), float&), asCALL_THISCALL);    \
     e->RegisterObjectMethod(asName, "float &Scale(void)", asMETHODPR(clsName, Scale, (void), float&), asCALL_THISCALL);  \
     e->RegisterObjectMethod(asName, "float &Ticks(void)", asMETHODPR(clsName, Ticks, (void), float&), asCALL_THISCALL);  \
     e->RegisterObjectMethod(asName, "float &FloorHeight(void)", asMETHODPR(clsName, FloorHeight, (void), float&), asCALL_THISCALL);  \
@@ -65,6 +66,12 @@ void kexScriptObjActor::Init(void)
     asIScriptEngine *e = kexGame::cScriptManager->Engine();
     
     REGISTER_ACTOR_CLASS("kActor", kexActor);
+    REGISTER_ACTOR_CLASS("kAI", kexAI);
+
+    e->RegisterObjectMethod("kAI", "float &MoveSpeed(void)", asMETHODPR(kexAI, MoveSpeed, (void), float&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAI", "int &PainChance(void)", asMETHODPR(kexAI, PainChance, (void), int&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAI", "void Ignite(void)", asMETHODPR(kexAI, Ignite, (void), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAI", "void ClearBurn(void)", asMETHODPR(kexAI, ClearBurn, (void), void), asCALL_THISCALL);
 
     e->RegisterEnum("EnumActorFlags");
     e->RegisterEnumValue("EnumActorFlags", "AF_FLOORFRICTION", AF_FLOORFRICTION);

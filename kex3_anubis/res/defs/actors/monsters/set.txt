@@ -1,0 +1,20 @@
+AI_Set 11
+{
+    classname               "kexAI"
+    radius                  48
+    height                  192
+    stepHeight              48
+    scale                   1.5
+    health                  3000
+    moveSpeed               10
+    spawnAnim               "monsters/set_idle"
+    chaseAnim               "monsters/set_chase"
+    painAnim                "monsters/set_pain"
+    meleeAnim               "monsters/set_melee"
+    deathAnim               "monsters/set_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    painChance              128
+    sightSound              "sounds/setact02.wav"
+}

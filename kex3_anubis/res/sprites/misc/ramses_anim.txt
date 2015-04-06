@@ -1,0 +1,1087 @@
+ramses_spawn
+{
+    // frames:   55
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "misc/ramses", 276,    -17,    5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "misc/ramses", 98,    -20,    2,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "misc/ramses", 120,    -25,   -7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "misc/ramses", 142,    -34,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "misc/ramses", 160,    -36,  -20,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "misc/ramses", 174,    -36,  -21,    0 }
+            { "misc/ramses", 175,     28,  -21,    0 }
+            { "misc/ramses", 176,    -36,   43,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "misc/ramses", 203,    -33,  -25,    0 }
+            { "misc/ramses", 204,    -33,   39,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "misc/ramses", 219,    -29,  -26,    0 }
+            { "misc/ramses", 220,    -29,   38,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "misc/ramses", 229,    -26,  -26,    0 }
+            { "misc/ramses", 230,    -26,   38,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "misc/ramses", 247,    -14,  -24,    0 }
+            { "misc/ramses", 248,    -14,   40,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "misc/ramses", 62,    -16,  -22,    0 }
+            { "misc/ramses", 63,    -16,   42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "misc/ramses", 81,    -16,  -21,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "misc/ramses", 99,    -19,  -23,    0 }
+            { "misc/ramses", 100,    -19,   41,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "misc/ramses", 121,    -22,  -26,    0 }
+            { "misc/ramses", 122,    -22,   38,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "misc/ramses", 143,    -23,  -27,    0 }
+            { "misc/ramses", 144,    -23,   37,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "misc/ramses", 161,    -24,  -31,    0 }
+            { "misc/ramses", 162,    -24,   33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "misc/ramses", 177,    -23,  -32,    0 }
+            { "misc/ramses", 178,    -23,   32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "misc/ramses", 205,    -24,  -33,    0 }
+            { "misc/ramses", 206,    -24,   31,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "misc/ramses", 221,    -25,  -37,    0 }
+            { "misc/ramses", 222,    -25,   27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        sprites
+        {
+            { "misc/ramses", 231,    -24,  -47,    0 }
+            { "misc/ramses", 232,    -24,   17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##020    0    0
+        sprites
+        {
+            { "misc/ramses", 38,    -24,  -53,    0 }
+            { "misc/ramses", 39,    -24,   11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##021    0    0
+        sprites
+        {
+            { "misc/ramses", 64,    -23,  -56,    0 }
+            { "misc/ramses", 65,    -23,    8,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##022    0    0
+        sprites
+        {
+            { "misc/ramses", 82,    -24,  -57,    0 }
+            { "misc/ramses", 83,    -24,    7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##023    0    0
+        sprites
+        {
+            { "misc/ramses", 101,    -30,  -56,    0 }
+            { "misc/ramses", 102,     34,  -56,    0 }
+            { "misc/ramses", 103,    -30,    8,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##024    0    0
+        sprites
+        {
+            { "misc/ramses", 123,    -35,  -52,    0 }
+            { "misc/ramses", 124,     29,  -52,    0 }
+            { "misc/ramses", 125,    -35,   12,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##025    0    0
+        sprites
+        {
+            { "misc/ramses", 145,    -40,  -56,    0 }
+            { "misc/ramses", 146,     24,  -56,    0 }
+            { "misc/ramses", 147,    -40,    8,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##026    0    0
+        sprites
+        {
+            { "misc/ramses", 163,    -45,  -62,    0 }
+            { "misc/ramses", 164,     19,  -62,    0 }
+            { "misc/ramses", 165,    -45,    2,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##027    0    0
+        sprites
+        {
+            { "misc/ramses", 179,    -48,  -66,    0 }
+            { "misc/ramses", 180,     16,  -66,    0 }
+            { "misc/ramses", 181,    -48,   -2,    0 }
+            { "misc/ramses", 182,     16,   -2,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##028    0    0
+        sprites
+        {
+            { "misc/ramses", 207,    -48,  -68,    0 }
+            { "misc/ramses", 208,     16,  -68,    0 }
+            { "misc/ramses", 209,    -48,   -4,    0 }
+            { "misc/ramses", 210,     16,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##029    0    0
+        sprites
+        {
+            { "misc/ramses", 223,    -48,  -71,    0 }
+            { "misc/ramses", 224,     16,  -71,    0 }
+            { "misc/ramses", 225,    -48,   -7,    0 }
+            { "misc/ramses", 226,     16,   -7,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##030    0    0
+        sprites
+        {
+            { "misc/ramses", 20,    -44,  -80,    0 }
+            { "misc/ramses", 21,     20,  -80,    0 }
+            { "misc/ramses", 22,    -44,  -16,    0 }
+            { "misc/ramses", 23,     20,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##031    0    0
+        sprites
+        {
+            { "misc/ramses", 40,    -41,  -80,    0 }
+            { "misc/ramses", 41,     23,  -80,    0 }
+            { "misc/ramses", 42,    -41,  -16,    0 }
+            { "misc/ramses", 43,     23,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##032    0    0
+        sprites
+        {
+            { "misc/ramses", 66,    -38,  -94,    0 }
+            { "misc/ramses", 67,     26,  -94,    0 }
+            { "misc/ramses", 68,    -38,  -30,    0 }
+            { "misc/ramses", 69,     26,  -30,    0 }
+            { "misc/ramses", 70,    -38,   34,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##033    0    0
+        sprites
+        {
+            { "misc/ramses", 84,    -34,  -94,    0 }
+            { "misc/ramses", 85,     30,  -94,    0 }
+            { "misc/ramses", 86,    -34,  -30,    0 }
+            { "misc/ramses", 87,     30,  -30,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##034    0    0
+        sprites
+        {
+            { "misc/ramses", 104,    -37,  -97,    0 }
+            { "misc/ramses", 105,     27,  -97,    0 }
+            { "misc/ramses", 106,    -37,  -33,    0 }
+            { "misc/ramses", 107,     27,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##035    0    0
+        sprites
+        {
+            { "misc/ramses", 126,    -43, -102,    0 }
+            { "misc/ramses", 127,     21, -102,    0 }
+            { "misc/ramses", 128,    -43,  -38,    0 }
+            { "misc/ramses", 129,     21,  -38,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##036    0    0
+        sprites
+        {
+            { "misc/ramses", 148,    -48, -106,    0 }
+            { "misc/ramses", 149,     16, -106,    0 }
+            { "misc/ramses", 150,    -48,  -42,    0 }
+            { "misc/ramses", 151,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##037    0    0
+        sprites
+        {
+            { "misc/ramses", 166,    -48, -106,    0 }
+            { "misc/ramses", 167,     16, -106,    0 }
+            { "misc/ramses", 168,    -48,  -42,    0 }
+            { "misc/ramses", 169,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##038    0    0
+        sprites
+        {
+            { "misc/ramses", 183,    -48, -106,    0 }
+            { "misc/ramses", 184,     16, -106,    0 }
+            { "misc/ramses", 185,    -48,  -42,    0 }
+            { "misc/ramses", 186,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##039    0    0
+        sprites
+        {
+            { "misc/ramses", 211,    -48, -106,    0 }
+            { "misc/ramses", 212,     16, -106,    0 }
+            { "misc/ramses", 213,    -48,  -42,    0 }
+            { "misc/ramses", 214,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##040    0    0
+        sprites
+        {
+            { "misc/ramses", 6,    -48, -106,    0 }
+            { "misc/ramses", 7,     16, -106,    0 }
+            { "misc/ramses", 8,    -48,  -42,    0 }
+            { "misc/ramses", 9,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##041    0    0
+        sprites
+        {
+            { "misc/ramses", 24,    -48, -106,    0 }
+            { "misc/ramses", 25,     16, -106,    0 }
+            { "misc/ramses", 26,    -48,  -42,    0 }
+            { "misc/ramses", 27,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##042    0    0
+        sprites
+        {
+            { "misc/ramses", 44,    -48, -107,    0 }
+            { "misc/ramses", 45,     16, -107,    0 }
+            { "misc/ramses", 46,    -48,  -43,    0 }
+            { "misc/ramses", 47,     16,  -43,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##043    0    0
+        sprites
+        {
+            { "misc/ramses", 71,    -48, -106,    0 }
+            { "misc/ramses", 72,     16, -106,    0 }
+            { "misc/ramses", 73,    -48,  -42,    0 }
+            { "misc/ramses", 74,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##044    0    0
+        sprites
+        {
+            { "misc/ramses", 88,    -48, -106,    0 }
+            { "misc/ramses", 89,     16, -106,    0 }
+            { "misc/ramses", 90,    -48,  -42,    0 }
+            { "misc/ramses", 91,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##045    0    0
+        sprites
+        {
+            { "misc/ramses", 108,    -48, -106,    0 }
+            { "misc/ramses", 109,     16, -106,    0 }
+            { "misc/ramses", 110,    -48,  -42,    0 }
+            { "misc/ramses", 111,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##046    0    0
+        sprites
+        {
+            { "misc/ramses", 130,    -48, -106,    0 }
+            { "misc/ramses", 131,     16, -106,    0 }
+            { "misc/ramses", 132,    -48,  -42,    0 }
+            { "misc/ramses", 133,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##047    0    0
+        sprites
+        {
+            { "misc/ramses", 152,    -48, -106,    0 }
+            { "misc/ramses", 153,     16, -106,    0 }
+            { "misc/ramses", 154,    -48,  -42,    0 }
+            { "misc/ramses", 155,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##048    0    0
+        sprites
+        {
+            { "misc/ramses", 170,    -48, -106,    0 }
+            { "misc/ramses", 171,     16, -106,    0 }
+            { "misc/ramses", 172,    -48,  -42,    0 }
+            { "misc/ramses", 173,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##049    0    0
+        sprites
+        {
+            { "misc/ramses", 187,    -48, -106,    0 }
+            { "misc/ramses", 188,     16, -106,    0 }
+            { "misc/ramses", 189,    -48,  -42,    0 }
+            { "misc/ramses", 190,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##050    0    0
+        sprites
+        {
+            { "misc/ramses", 272,    -48, -106,    0 }
+            { "misc/ramses", 273,     16, -106,    0 }
+            { "misc/ramses", 274,    -48,  -42,    0 }
+            { "misc/ramses", 275,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##051    0    0
+        sprites
+        {
+            { "misc/ramses", 10,    -48, -106,    0 }
+            { "misc/ramses", 11,     16, -106,    0 }
+            { "misc/ramses", 12,    -48,  -42,    0 }
+            { "misc/ramses", 13,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##052    0    0
+        sprites
+        {
+            { "misc/ramses", 28,    -48, -106,    0 }
+            { "misc/ramses", 29,     16, -106,    0 }
+            { "misc/ramses", 30,    -48,  -42,    0 }
+            { "misc/ramses", 31,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##053    0    0
+        sprites
+        {
+            { "misc/ramses", 48,    -48, -106,    0 }
+            { "misc/ramses", 49,     16, -106,    0 }
+            { "misc/ramses", 50,    -48,  -42,    0 }
+            { "misc/ramses", 51,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##054    0    0
+        goto "misc/ramses_talk"
+        sprites
+        {
+            { "misc/ramses", 58,    -48, -106,    0 }
+            { "misc/ramses", 59,     16, -106,    0 }
+            { "misc/ramses", 60,    -48,  -42,    0 }
+            { "misc/ramses", 61,     16,  -42,    0 }
+        }
+
+    }
+
+}
+
+ramses_vanish
+{
+    // frames:   21
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "misc/ramses", 256,    -48, -106,    0 }
+            { "misc/ramses", 257,     16, -106,    0 }
+            { "misc/ramses", 258,    -48,  -42,    0 }
+            { "misc/ramses", 259,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "misc/ramses", 268,    -49, -103,    0 }
+            { "misc/ramses", 269,     15, -103,    0 }
+            { "misc/ramses", 270,    -49,  -39,    0 }
+            { "misc/ramses", 271,     15,  -39,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "misc/ramses", 2,    -51, -100,    0 }
+            { "misc/ramses", 3,     13, -100,    0 }
+            { "misc/ramses", 4,    -51,  -36,    0 }
+            { "misc/ramses", 5,     13,  -36,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "misc/ramses", 16,    -55,  -97,    0 }
+            { "misc/ramses", 17,      9,  -97,    0 }
+            { "misc/ramses", 18,    -55,  -33,    0 }
+            { "misc/ramses", 19,      9,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "misc/ramses", 34,    -55,  -93,    0 }
+            { "misc/ramses", 35,      9,  -93,    0 }
+            { "misc/ramses", 36,    -55,  -29,    0 }
+            { "misc/ramses", 37,      9,  -29,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "misc/ramses", 54,    -55,  -89,    0 }
+            { "misc/ramses", 55,      9,  -89,    0 }
+            { "misc/ramses", 56,    -55,  -25,    0 }
+            { "misc/ramses", 57,      9,  -25,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "misc/ramses", 77,    -50,  -85,    0 }
+            { "misc/ramses", 78,     14,  -85,    0 }
+            { "misc/ramses", 79,    -50,  -21,    0 }
+            { "misc/ramses", 80,     14,  -21,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "misc/ramses", 94,    -48,  -81,    0 }
+            { "misc/ramses", 95,     16,  -81,    0 }
+            { "misc/ramses", 96,    -48,  -17,    0 }
+            { "misc/ramses", 97,     16,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "misc/ramses", 116,    -48,  -78,    0 }
+            { "misc/ramses", 117,     16,  -78,    0 }
+            { "misc/ramses", 118,    -48,  -14,    0 }
+            { "misc/ramses", 119,     16,  -14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "misc/ramses", 241,    -48,  -72,    0 }
+            { "misc/ramses", 242,     16,  -72,    0 }
+            { "misc/ramses", 243,    -48,   -8,    0 }
+            { "misc/ramses", 244,     16,   -8,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "misc/ramses", 249,    -48,  -66,    0 }
+            { "misc/ramses", 250,     16,  -66,    0 }
+            { "misc/ramses", 251,    -48,   -2,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "misc/ramses", 260,    -48,  -62,    0 }
+            { "misc/ramses", 261,     16,  -62,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "misc/ramses", 266,    -48,  -55,    0 }
+            { "misc/ramses", 267,     16,  -55,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "misc/ramses", 0,    -51,  -50,    0 }
+            { "misc/ramses", 1,     13,  -50,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "misc/ramses", 14,    -51,  -46,    0 }
+            { "misc/ramses", 15,     13,  -46,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "misc/ramses", 32,    -51,  -44,    0 }
+            { "misc/ramses", 33,     13,  -44,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "misc/ramses", 52,    -47,  -38,    0 }
+            { "misc/ramses", 53,     17,  -38,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "misc/ramses", 75,    -46,  -33,    0 }
+            { "misc/ramses", 76,     18,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "misc/ramses", 92,    -43,  -25,    0 }
+            { "misc/ramses", 93,     21,  -25,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        sprites
+        {
+            { "misc/ramses", 227,    -35,  -16,    0 }
+            { "misc/ramses", 228,     29,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##020    0    0
+        sprites
+        {
+            { "misc/ramses", 245,    -35,   -9,    0 }
+            { "misc/ramses", 246,     29,   -9,    0 }
+        }
+    }
+    
+    frame
+    {
+        action A_Destroy()
+    }
+}
+
+ramses_talk
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "misc/ramses", 191,    -48, -106,    0 }
+            { "misc/ramses", 192,     16, -106,    0 }
+            { "misc/ramses", 193,    -48,  -42,    0 }
+            { "misc/ramses", 194,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "misc/ramses", 199,    -48, -106,    0 }
+            { "misc/ramses", 200,     16, -106,    0 }
+            { "misc/ramses", 201,    -48,  -42,    0 }
+            { "misc/ramses", 202,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "misc/ramses", 138,    -48, -106,    0 }
+            { "misc/ramses", 139,     16, -106,    0 }
+            { "misc/ramses", 140,    -48,  -42,    0 }
+            { "misc/ramses", 141,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "misc/ramses", 134,    -48, -106,    0 }
+            { "misc/ramses", 135,     16, -106,    0 }
+            { "misc/ramses", 136,    -48,  -42,    0 }
+            { "misc/ramses", 137,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "misc/ramses", 112,    -48, -106,    0 }
+            { "misc/ramses", 113,     16, -106,    0 }
+            { "misc/ramses", 114,    -48,  -42,    0 }
+            { "misc/ramses", 115,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "misc/ramses", 233,    -48, -106,    0 }
+            { "misc/ramses", 234,     16, -106,    0 }
+            { "misc/ramses", 235,    -48,  -42,    0 }
+            { "misc/ramses", 236,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "misc/ramses", 215,    -48, -106,    0 }
+            { "misc/ramses", 216,     16, -106,    0 }
+            { "misc/ramses", 217,    -48,  -42,    0 }
+            { "misc/ramses", 218,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "misc/ramses", 252,    -48, -106,    0 }
+            { "misc/ramses", 253,     16, -106,    0 }
+            { "misc/ramses", 254,    -48,  -42,    0 }
+            { "misc/ramses", 255,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "misc/ramses", 156,    -48, -106,    0 }
+            { "misc/ramses", 157,     16, -106,    0 }
+            { "misc/ramses", 158,    -48,  -42,    0 }
+            { "misc/ramses", 159,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "misc/ramses", 262,    -48, -106,    0 }
+            { "misc/ramses", 263,     16, -106,    0 }
+            { "misc/ramses", 264,    -48,  -42,    0 }
+            { "misc/ramses", 265,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "misc/ramses", 195,    -48, -106,    0 }
+            { "misc/ramses", 196,     16, -106,    0 }
+            { "misc/ramses", 197,    -48,  -42,    0 }
+            { "misc/ramses", 198,     16,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "misc/ramses", 237,    -48, -106,    0 }
+            { "misc/ramses", 238,     16, -106,    0 }
+            { "misc/ramses", 239,    -48,  -42,    0 }
+            { "misc/ramses", 240,     16,  -42,    0 }
+        }
+
+    }
+
+}

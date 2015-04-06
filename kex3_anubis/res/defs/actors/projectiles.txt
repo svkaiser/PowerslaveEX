@@ -45,6 +45,7 @@ Proj_Cobra_Green 20
     damage                  0
     impactWallsOnly         1
     homing                  1
+    noHomingThrust          1
 }
 
 Proj_Flame 21
@@ -160,6 +161,7 @@ Proj_Cobra_Red -1
     damage                  0
     impactWallsOnly         1
     homing                  1
+    noHomingThrust          1
 }
 
 Proj_Laser 201
@@ -175,4 +177,23 @@ Proj_Laser 201
     moveable                1
     gravity                 0
     damage                  9999
+}
+
+Proj_Soul -1
+{
+    classname               "kexProjectile"
+    radius                  36
+    height                  32
+    stepHeight              0
+    scale                   1.0
+    stepHeight              0
+    floorOffset             8
+    spawnAnim               "projectiles/soul_proj_idle"
+    deathAnim               "projectiles/soul_explode"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    damage                  40
+    impactWallsOnly         1
+    homing                  1
 }

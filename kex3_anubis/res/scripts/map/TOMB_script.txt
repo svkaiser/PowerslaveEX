@@ -30,7 +30,7 @@ void EndRamsesEvent(kActor @instigator)
     Game.PlayMusic("music/egypt2.ogg", true);
     
     Game.FireRemoteEventFromTag(1020);
-    Game.CallDelayedMapScript(3, instigator, 2.0f);
+    Game.CallDelayedMapScript(3, instigator, 4.0f);
 }
 
 //

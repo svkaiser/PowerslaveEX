@@ -1,0 +1,106 @@
+soul_proj_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+            { "projectiles/soul", 1,    -32,  -15,    0 }
+            }
+            }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+            { "projectiles/soul", 2,    -35,  -13,    0 }
+            }
+            }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+            { "projectiles/soul", 3,    -40,  -22,    0 }
+            { "projectiles/soul", 4,     24,  -22,    0 }
+            }
+            }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+            { "projectiles/soul", 5,    -26,  -24,    0 }
+            }
+            }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+            { "projectiles/soul", 0,    -22,  -17,    0 }
+            }
+            }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+            { "projectiles/soul", 5,    -26,  -24,    1 }
+            }
+            }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+            { "projectiles/soul", 3,    -24,  -22,    1 }
+            { "projectiles/soul", 4,    -28,  -22,    1 }
+            }
+            }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+            { "projectiles/soul", 2,    -23,  -13,    1 }
+            }
+            }
+    }
+}
+
+soul_explode
+{
+    frame
+    {
+        action A_RedCobraExplode()
+        delay 3
+    }
+    
+    frame
+    {
+        action A_RedCobraExplode()
+        delay 3
+    }
+    
+    frame
+    {
+        action A_RedCobraExplode()
+        delay 3
+    }
+    
+    frame
+    {
+        action A_RedCobraExplode()
+        delay 3
+    }
+    
+    frame
+    {
+        action A_Destroy()
+        delay 1
+    }
+}

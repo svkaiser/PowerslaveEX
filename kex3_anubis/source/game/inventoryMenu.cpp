@@ -475,6 +475,10 @@ void kexInventoryMenu::Toggle(void)
     }
     else
     {
+        flashBits = 0;
+        flashCount = 0;
+        bFlashArtifact = false;
+
         kex::cInput->ToggleMouseGrab(true);
         kex::cInput->CenterMouse();
         kex::cSession->ToggleCursor(false);

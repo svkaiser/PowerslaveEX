@@ -23,7 +23,8 @@ typedef enum
     PF_HOMING           = BIT(1),
     PF_IMPACTED         = BIT(2),
     PF_AIMONSPAWN       = BIT(3),
-    PF_AIMING           = BIT(4)
+    PF_AIMING           = BIT(4),
+    PF_NOHOMINGTHRUST   = BIT(5)
 } projectileFlags_t;
 
 //-----------------------------------------------------------------------------

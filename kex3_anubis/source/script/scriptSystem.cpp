@@ -346,9 +346,9 @@ void kexScriptManager::InitActions(void)
                 
                 GetArgTypesFromFunction(argNameTypes, func);
                 
-                if(argNameTypes[0] != "kActor@")
+                if(argNameTypes[0] != "kActor@" && argNameTypes[0] != "kAI@")
                 {
-                    kex::cSystem->Warning("%s must have kActor@ declared as the first argument\n",
+                    kex::cSystem->Warning("%s must have kActor@ or kAI@ declared as the first argument\n",
                                           actionName.c_str());
                     continue;
                 }

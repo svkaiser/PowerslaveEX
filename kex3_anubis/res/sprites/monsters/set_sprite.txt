@@ -1,0 +1,749 @@
+texture "sprites/monsters/set.png"
+
+// working\set\sprite0262.tga
+sprite 0 0 0 64 64
+
+// working\set\sprite0263.tga
+sprite 1 64 0 32 64
+
+// working\set\sprite0264.tga
+sprite 2 96 0 64 64
+
+// working\set\sprite0265.tga
+sprite 3 160 0 32 64
+
+// working\set\sprite0266.tga
+sprite 4 192 0 64 11
+
+// working\set\sprite0267.tga
+sprite 5 256 0 32 11
+
+// working\set\sprite0268.tga
+sprite 6 288 0 64 64
+
+// working\set\sprite0269.tga
+sprite 7 352 0 44 64
+
+// working\set\sprite0270.tga
+sprite 8 396 0 64 52
+
+// working\set\sprite0271.tga
+sprite 9 460 0 44 52
+
+// working\set\sprite0272.tga
+sprite 10 504 0 64 64
+
+// working\set\sprite0273.tga
+sprite 11 568 0 56 64
+
+// working\set\sprite0274.tga
+sprite 12 624 0 64 63
+
+// working\set\sprite0275.tga
+sprite 13 688 0 56 63
+
+// working\set\sprite0276.tga
+sprite 14 744 0 64 64
+
+// working\set\sprite0277.tga
+sprite 15 808 0 32 64
+
+// working\set\sprite0278.tga
+sprite 16 840 0 64 64
+
+// working\set\sprite0279.tga
+sprite 17 904 0 32 64
+
+// working\set\sprite0280.tga
+sprite 18 936 0 64 9
+
+// working\set\sprite0281.tga
+sprite 19 936 9 32 9
+
+// working\set\sprite0282.tga
+sprite 20 192 11 64 64
+
+// working\set\sprite0283.tga
+sprite 21 968 9 40 64
+
+// working\set\sprite0284.tga
+sprite 22 396 52 64 64
+
+// working\set\sprite0285.tga
+sprite 23 460 52 40 64
+
+// working\set\sprite0286.tga
+sprite 24 624 63 64 6
+
+// working\set\sprite0287.tga
+sprite 25 0 64 64 64
+
+// working\set\sprite0288.tga
+sprite 26 256 11 24 64
+
+// working\set\sprite0289.tga
+sprite 27 64 64 64 58
+
+// working\set\sprite0290.tga
+sprite 28 936 18 24 58
+
+// working\set\sprite0291.tga
+sprite 29 128 64 64 64
+
+// working\set\sprite0292.tga
+sprite 30 688 63 48 64
+
+// working\set\sprite0293.tga
+sprite 31 280 64 64 59
+
+// working\set\sprite0294.tga
+sprite 32 344 64 48 59
+
+// working\set\sprite0295.tga
+sprite 33 500 64 64 64
+
+// working\set\sprite0296.tga
+sprite 34 564 64 28 64
+
+// working\set\sprite0297.tga
+sprite 35 736 64 64 64
+
+// working\set\sprite0298.tga
+sprite 36 592 64 28 64
+
+// working\set\sprite0299.tga
+sprite 37 800 64 64 14
+
+// working\set\sprite0300.tga
+sprite 38 864 64 28 14
+
+// working\set\sprite0301.tga
+sprite 39 620 69 64 64
+
+// working\set\sprite0302.tga
+sprite 40 960 73 48 64
+
+// working\set\sprite0303.tga
+sprite 41 192 75 64 64
+
+// working\set\sprite0304.tga
+sprite 42 892 76 48 64
+
+// working\set\sprite0305.tga
+sprite 43 800 78 64 6
+
+// working\set\sprite0306.tga
+sprite 44 800 84 48 6
+
+// working\set\sprite0307.tga
+sprite 45 800 90 64 64
+
+// working\set\sprite0308.tga
+sprite 46 392 116 60 64
+
+// working\set\sprite0309.tga
+sprite 47 64 122 64 51
+
+// working\set\sprite0310.tga
+sprite 48 256 123 60 51
+
+// working\set\sprite0311.tga
+sprite 49 316 123 64 64
+
+// working\set\sprite0312.tga
+sprite 50 452 116 36 64
+
+// working\set\sprite0313.tga
+sprite 51 0 128 64 52
+
+// working\set\sprite0314.tga
+sprite 52 684 127 36 52
+
+// working\set\sprite0315.tga
+sprite 53 128 128 64 64
+
+// working\set\sprite0316.tga
+sprite 54 488 128 60 64
+
+// working\set\sprite0317.tga
+sprite 55 548 128 64 51
+
+// working\set\sprite0318.tga
+sprite 56 720 128 60 51
+
+// working\set\sprite0319.tga
+sprite 57 612 133 64 64
+
+// working\set\sprite0320.tga
+sprite 58 940 76 20 64
+
+// working\set\sprite0321.tga
+sprite 59 960 137 64 64
+
+// working\set\sprite0322.tga
+sprite 60 864 78 20 64
+
+// working\set\sprite0323.tga
+sprite 61 192 139 64 55
+
+// working\set\sprite0324.tga
+sprite 62 884 140 64 55
+
+// working\set\sprite0325.tga
+sprite 63 380 123 4 55
+
+// working\set\sprite0326.tga
+sprite 64 780 154 64 64
+
+// working\set\sprite0327.tga
+sprite 65 64 173 56 64
+
+// working\set\sprite0328.tga
+sprite 66 548 179 64 64
+
+// working\set\sprite0329.tga
+sprite 67 256 174 56 64
+
+// working\set\sprite0330.tga
+sprite 68 676 179 64 6
+
+// working\set\sprite0331.tga
+sprite 69 0 180 56 6
+
+// working\set\sprite0332.tga
+sprite 70 380 180 64 64
+
+// working\set\sprite0333.tga
+sprite 71 676 185 48 64
+
+// working\set\sprite0334.tga
+sprite 72 0 186 64 64
+
+// working\set\sprite0335.tga
+sprite 73 724 185 48 64
+
+// working\set\sprite0336.tga
+sprite 74 312 187 64 2
+
+// working\set\sprite0337.tga
+sprite 75 312 189 48 2
+
+// working\set\sprite0338.tga
+sprite 76 312 191 64 64
+
+// working\set\sprite0339.tga
+sprite 77 120 192 64 64
+
+// working\set\sprite0340.tga
+sprite 78 444 192 64 55
+
+// working\set\sprite0341.tga
+sprite 79 184 194 64 55
+
+// working\set\sprite0342.tga
+sprite 80 844 195 64 64
+
+// working\set\sprite0343.tga
+sprite 81 508 192 36 64
+
+// working\set\sprite0344.tga
+sprite 82 612 197 64 64
+
+// working\set\sprite0345.tga
+sprite 83 908 195 36 64
+
+// working\set\sprite0346.tga
+sprite 84 944 201 64 64
+
+// working\set\sprite0347.tga
+sprite 85 772 218 28 64
+
+// working\set\sprite0348.tga
+sprite 86 248 238 64 46
+
+// working\set\sprite0349.tga
+sprite 87 800 218 28 46
+
+// working\set\sprite0350.tga
+sprite 88 544 243 64 64
+
+// working\set\sprite0351.tga
+sprite 89 64 237 20 64
+
+// working\set\sprite0352.tga
+sprite 90 376 244 64 64
+
+// working\set\sprite0353.tga
+sprite 91 84 237 20 64
+
+// working\set\sprite0354.tga
+sprite 92 440 247 64 7
+
+// working\set\sprite0355.tga
+sprite 93 184 249 64 64
+
+// working\set\sprite0356.tga
+sprite 94 676 249 36 64
+
+// working\set\sprite0357.tga
+sprite 95 0 250 64 64
+
+// working\set\sprite0358.tga
+sprite 96 712 249 36 64
+
+// working\set\sprite0359.tga
+sprite 97 440 254 64 5
+
+// working\set\sprite0360.tga
+sprite 98 312 255 36 5
+
+// working\set\sprite0361.tga
+sprite 99 104 256 64 64
+
+// working\set\sprite0362.tga
+sprite 100 504 256 40 64
+
+// working\set\sprite0363.tga
+sprite 101 440 259 64 53
+
+// working\set\sprite0364.tga
+sprite 102 828 259 40 53
+
+// working\set\sprite0365.tga
+sprite 103 868 259 64 64
+
+// working\set\sprite0366.tga
+sprite 104 748 249 24 64
+
+// working\set\sprite0367.tga
+sprite 105 312 260 64 54
+
+// working\set\sprite0368.tga
+sprite 106 608 261 24 54
+
+// working\set\sprite0369.tga
+sprite 107 932 265 64 64
+
+// working\set\sprite0370.tga
+sprite 108 632 261 28 64
+
+// working\set\sprite0371.tga
+sprite 109 248 284 64 64
+
+// working\set\sprite0372.tga
+sprite 110 800 264 28 64
+
+// working\set\sprite0373.tga
+sprite 111 544 307 64 2
+
+// working\set\sprite0374.tga
+sprite 112 376 308 64 64
+
+// working\set\sprite0375.tga
+sprite 113 1008 201 12 64
+
+// working\set\sprite0376.tga
+sprite 114 544 309 64 44
+
+// working\set\sprite0377.tga
+sprite 115 168 256 12 44
+
+// working\set\sprite0378.tga
+sprite 116 440 312 64 64
+
+// working\set\sprite0379.tga
+sprite 117 168 313 64 64
+
+// working\set\sprite0380.tga
+sprite 118 64 301 32 64
+
+// working\set\sprite0381.tga
+sprite 119 660 313 64 12
+
+// working\set\sprite0382.tga
+sprite 120 828 312 32 12
+
+// working\set\sprite0383.tga
+sprite 121 724 313 64 64
+
+// working\set\sprite0384.tga
+sprite 122 0 314 40 64
+
+// working\set\sprite0385.tga
+sprite 123 312 314 64 64
+
+// working\set\sprite0386.tga
+sprite 124 96 320 40 64
+
+// working\set\sprite0387.tga
+sprite 125 860 323 64 10
+
+// working\set\sprite0388.tga
+sprite 126 504 320 40 10
+
+// working\set\sprite0389.tga
+sprite 127 608 325 64 64
+
+// working\set\sprite0390.tga
+sprite 128 788 328 64 64
+
+// working\set\sprite0391.tga
+sprite 129 924 329 64 56
+
+// working\set\sprite0392.tga
+sprite 130 852 333 64 56
+
+// working\set\sprite0393.tga
+sprite 131 1020 201 4 56
+
+// working\set\sprite0394.tga
+sprite 132 232 348 64 64
+
+// working\set\sprite0395.tga
+sprite 133 996 265 20 64
+
+// working\set\sprite0396.tga
+sprite 134 504 353 64 59
+
+// working\set\sprite0397.tga
+sprite 135 40 314 20 59
+
+// working\set\sprite0398.tga
+sprite 136 376 372 64 64
+
+// working\set\sprite0399.tga
+sprite 137 136 320 32 64
+
+// working\set\sprite0400.tga
+sprite 138 440 376 64 64
+
+// working\set\sprite0401.tga
+sprite 139 672 325 32 64
+
+// working\set\sprite0402.tga
+sprite 140 168 377 64 7
+
+// working\set\sprite0403.tga
+sprite 141 988 329 32 7
+
+// working\set\sprite0404.tga
+sprite 142 704 377 64 64
+
+// working\set\sprite0405.tga
+sprite 143 988 336 24 64
+
+// working\set\sprite0406.tga
+sprite 144 0 378 64 45
+
+// working\set\sprite0407.tga
+sprite 145 568 353 24 45
+
+// working\set\sprite0408.tga
+sprite 146 296 378 64 64
+
+// working\set\sprite0409.tga
+sprite 147 64 384 56 64
+
+// working\set\sprite0410.tga
+sprite 148 120 384 64 64
+
+// working\set\sprite0411.tga
+sprite 149 916 385 56 64
+
+// working\set\sprite0412.tga
+sprite 150 592 389 64 8
+
+// working\set\sprite0413.tga
+sprite 151 852 389 56 8
+
+// working\set\sprite0414.tga
+sprite 152 768 392 64 64
+
+// working\set\sprite0415.tga
+sprite 153 184 384 44 64
+
+// working\set\sprite0416.tga
+sprite 154 592 397 64 64
+
+// working\set\sprite0417.tga
+sprite 155 656 389 44 64
+
+// working\set\sprite0418.tga
+sprite 156 832 397 64 2
+
+// working\set\sprite0419.tga
+sprite 157 832 399 44 2
+
+// working\set\sprite0420.tga
+sprite 158 832 401 64 64
+
+// working\set\sprite0421.tga
+sprite 159 972 400 36 64
+
+// working\set\sprite0422.tga
+sprite 160 228 412 64 60
+
+// working\set\sprite0423.tga
+sprite 161 504 412 36 60
+
+// working\set\sprite0424.tga
+sprite 162 0 423 64 64
+
+// working\set\sprite0425.tga
+sprite 163 540 412 32 64
+
+// working\set\sprite0426.tga
+sprite 164 360 436 64 47
+
+// working\set\sprite0427.tga
+sprite 165 424 440 32 47
+
+// working\set\sprite0428.tga
+sprite 166 700 441 64 64
+
+// working\set\sprite0429.tga
+sprite 167 456 440 24 64
+
+// working\set\sprite0430.tga
+sprite 168 292 442 64 45
+
+// working\set\sprite0431.tga
+sprite 169 480 440 24 45
+
+// working\set\sprite0432.tga
+sprite 170 64 448 64 64
+
+// working\set\sprite0433.tga
+sprite 171 128 448 60 64
+
+// working\set\sprite0434.tga
+sprite 172 896 449 64 64
+
+// working\set\sprite0435.tga
+sprite 173 764 456 60 64
+
+// working\set\sprite0436.tga
+sprite 174 572 461 60 1
+
+// working\set\sprite0437.tga
+sprite 175 632 461 64 64
+
+// working\set\sprite0438.tga
+sprite 176 572 462 60 64
+
+// working\set\sprite0439.tga
+sprite 177 960 464 64 61
+
+// working\set\sprite0440.tga
+sprite 178 824 465 60 61
+
+// working\set\sprite0441.tga
+sprite 179 188 472 64 64
+
+// working\set\sprite0442.tga
+sprite 180 504 476 60 64
+
+// working\set\sprite0443.tga
+sprite 181 356 483 64 45
+
+// working\set\sprite0444.tga
+sprite 182 0 487 60 45
+
+// working\set\sprite0445.tga
+sprite 183 252 487 64 64
+
+// working\set\sprite0446.tga
+sprite 184 420 504 48 64
+
+// working\set\sprite0447.tga
+sprite 185 696 505 64 29
+
+// working\set\sprite0448.tga
+sprite 186 60 512 48 29
+
+// working\set\sprite0449.tga
+sprite 187 108 512 64 64
+
+// working\set\sprite0450.tga
+sprite 188 884 513 64 64
+
+// working\set\sprite0451.tga
+sprite 189 760 520 64 60
+
+// working\set\sprite0452.tga
+sprite 190 632 525 64 60
+
+// working\set\sprite0453.tga
+sprite 191 564 476 8 60
+
+// working\set\sprite0454.tga
+sprite 192 948 525 64 64
+
+// working\set\sprite0455.tga
+sprite 193 316 487 28 64
+
+// working\set\sprite0456.tga
+sprite 194 344 528 64 59
+
+// working\set\sprite0457.tga
+sprite 195 468 504 28 59
+
+// working\set\sprite0458.tga
+sprite 196 696 534 64 64
+
+// working\set\sprite0459.tga
+sprite 197 572 526 52 64
+
+// working\set\sprite0460.tga
+sprite 198 172 536 64 28
+
+// working\set\sprite0461.tga
+sprite 199 824 526 52 28
+
+// working\set\sprite0462.tga
+sprite 200 496 540 64 64
+
+// working\set\sprite0463.tga
+sprite 201 0 532 60 64
+
+// working\set\sprite0464.tga
+sprite 202 236 551 64 53
+
+// working\set\sprite0465.tga
+sprite 203 824 554 60 53
+
+// working\set\sprite0466.tga
+sprite 204 172 564 64 64
+
+// working\set\sprite0467.tga
+sprite 205 60 541 36 64
+
+// working\set\sprite0468.tga
+sprite 206 408 568 64 47
+
+// working\set\sprite0469.tga
+sprite 207 300 551 36 47
+
+// working\set\sprite0470.tga
+sprite 208 96 576 64 64
+
+// working\set\sprite0471.tga
+sprite 209 884 577 64 64
+
+// working\set\sprite0472.tga
+sprite 210 1012 525 8 64
+
+// working\set\sprite0473.tga
+sprite 211 760 580 64 42
+
+// working\set\sprite0474.tga
+sprite 212 624 585 64 42
+
+// working\set\sprite0475.tga
+sprite 213 564 536 8 42
+
+// working\set\sprite0476.tga
+sprite 214 336 587 64 64
+
+// working\set\sprite0477.tga
+sprite 215 948 589 56 64
+
+// working\set\sprite0478.tga
+sprite 216 560 590 64 64
+
+// working\set\sprite0479.tga
+sprite 217 0 596 56 64
+
+// working\set\sprite0480.tga
+sprite 218 688 598 56 1
+
+// working\set\sprite0481.tga
+sprite 219 688 599 64 64
+
+// working\set\sprite0482.tga
+sprite 220 300 598 28 64
+
+// working\set\sprite0483.tga
+sprite 221 236 604 64 56
+
+// working\set\sprite0484.tga
+sprite 222 472 604 28 56
+
+// working\set\sprite0485.tga
+sprite 223 400 615 64 64
+
+// working\set\sprite0486.tga
+sprite 224 500 604 48 64
+
+// working\set\sprite0487.tga
+sprite 225 752 622 64 64
+
+// working\set\sprite0488.tga
+sprite 226 824 607 48 64
+
+// working\set\sprite0489.tga
+sprite 227 624 627 64 7
+
+// working\set\sprite0490.tga
+sprite 228 160 628 64 64
+
+// working\set\sprite0491.tga
+sprite 229 1004 589 20 64
+
+// working\set\sprite0492.tga
+sprite 230 624 634 64 63
+
+// working\set\sprite0493.tga
+sprite 231 56 605 20 63
+
+// working\set\sprite0494.tga
+sprite 232 76 640 64 64
+
+// working\set\sprite0495.tga
+sprite 233 872 641 52 64
+
+// working\set\sprite0496.tga
+sprite 234 328 651 64 48
+
+// working\set\sprite0497.tga
+sprite 235 924 653 52 48
+
+// working\set\sprite0498.tga
+sprite 236 548 654 64 64
+
+// working\set\sprite0499.tga
+sprite 237 0 660 52 64
+
+// working\set\sprite0500.tga
+sprite 238 224 660 64 64
+
+// working\set\sprite0501.tga
+sprite 239 688 663 52 64
+
+// working\set\sprite0502.tga
+sprite 240 464 668 64 2
+
+// working\set\sprite0503.tga
+sprite 241 464 670 64 64
+
+// working\set\sprite0504.tga
+sprite 242 976 653 32 64
+
+// working\set\sprite0505.tga
+sprite 243 392 679 64 55
+
+// working\set\sprite0506.tga
+sprite 244 288 662 32 55
+
+// working\set\sprite0507.tga
+sprite 245 740 686 64 64
+
+// working\set\sprite0508.tga
+sprite 246 816 671 44 64
+
+// working\set\sprite0509.tga
+sprite 247 140 692 64 62
+
+// working\set\sprite0510.tga
+sprite 248 612 697 44 62
+

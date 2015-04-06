@@ -603,3 +603,91 @@ void A_DetonateCountdown(kActor @actor)
         }
     }
 }
+
+//
+// A_SetThink
+//
+
+void A_SetThink(kAI @ai)
+{
+    int threshold = (80 - (ai.Health() / 75)) / 4;
+    ai.MoveSpeed() = threshold;
+    
+    if((ai.GameTicks() & 30) != (Math::Rand() & 30))
+    {
+        return;
+    }
+    
+    if(Math::RandMax(255) <= 16)
+    {
+        ai.PlaySound("sounds/setact01.wav");
+    }
+    
+    if(ai.Health() < 1500 && (Math::RandMax(255) & 1) == 0)
+    {
+        ai.Movement().Clear();
+        ai.Velocity().Clear();
+        
+        ai.ChangeAnim("monsters/set_fire_souls");
+    }
+    else if(ai.Health() < 2000 && (Math::RandMax(255) & 3) == 0)
+    {
+        ai.Movement().Clear();
+        ai.Velocity().Clear();
+        
+        ai.PainChance() = 0;
+        
+        ai.ChangeAnim("monsters/set_leap_start");
+    }
+}
+
+//
+// A_SetLeap
+//
+
+void A_SetLeap(kAI @ai)
+{
+    float speed = (ai.MoveSpeed() * 0.5f) + 5.0f;
+    
+    ai.Velocity().x = Math::Sin(ai.Yaw()) * speed;
+    ai.Velocity().y = Math::Cos(ai.Yaw()) * speed;
+    ai.Velocity().z = 30.0f;
+    
+    ai.Friction() = 1.0f;
+}
+
+//
+// A_SetCheckGround
+//
+
+void A_SetCheckGround(kAI @ai)
+{
+    if(ai.Velocity().z > 0)
+    {
+        return;
+    }
+    
+    if((ai.Origin().z + ai.Velocity().z) <= ai.FloorHeight()+2.048f)
+    {
+        ai.Movement().Clear();
+        ai.Velocity().Clear();
+        
+        ai.Friction() = 0.5f;
+        ai.PainChance() = 128;
+        ai.ClearBurn();
+        
+        ai.ChangeAnim("monsters/set_leap_land");
+    }
+}
+
+//
+// A_SetDeath
+//
+
+void A_SetDeath(kActor @actor)
+{
+    actor.Height() = 80.0f;
+    actor.Friction() = 0.5f;
+    
+    Game.FireRemoteEventFromTag(1010);
+}

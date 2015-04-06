@@ -1,0 +1,20 @@
+texture "sprites/projectiles/soul.png"
+
+// working\soul\sprite0511.tga
+sprite 0 0 0 44 46
+
+// working\soul\sprite0512.tga
+sprite 1 44 0 64 47
+
+// working\soul\sprite0513.tga
+sprite 2 108 0 56 48
+
+// working\soul\sprite0514.tga
+sprite 3 164 0 64 49
+
+// working\soul\sprite0515.tga
+sprite 4 228 0 4 49
+
+// working\soul\sprite0516.tga
+sprite 5 232 0 56 48
+

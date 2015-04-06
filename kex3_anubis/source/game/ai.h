@@ -83,6 +83,8 @@ public:
 
     aiState_t                       &State(void) { return state; }
     unsigned int                    &AIFlags(void) { return aiFlags; }
+    float                           &MoveSpeed(void) { return moveSpeed; }
+    int                             &PainChance(void) { return painChance; }
 
     static bool                     bNoTargetEnemy;
 
