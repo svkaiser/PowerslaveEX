@@ -22,11 +22,15 @@ AI_Magic8Ball 13
 
 Obj_WarpPryamid 33
 {
-    classname               "kexActor"
+    classname               "kexTravelObject"
     radius                  32
     height                  64
     stepHeight              48
     scale                   1.25
+    solid                   1
+    warpSound_1             "sounds/warp.wav"
+    mapDestination          0
+    destinationPosition     "-1088.0 -2794.7 -864.0"
     spawnAnim               "misc/warpPryamid_loop"
 }
 

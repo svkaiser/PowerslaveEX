@@ -43,6 +43,9 @@ const int16_t kexPlayer::maxHealth = 200;
 
 DECLARE_KEX_CLASS(kexPuppet, kexActor)
 
+kexVec3 kexPuppet::mapDestinationPosition;
+bool kexPuppet::bScheduleNextMapWarp = false;
+
 //
 // kexPuppet::kexPuppet
 //
@@ -583,6 +586,16 @@ void kexPuppet::FlyMove(kexPlayerCmd *cmd)
 }
 
 //
+// kexPuppet::ScheduleWarpForNextMap
+//
+
+void kexPuppet::ScheduleWarpForNextMap(const kexVec3 &destination)
+{
+    kexPuppet::bScheduleNextMapWarp = true;
+    mapDestinationPosition = destination;
+}
+
+//
 // kexPuppet::Tick
 //
 
@@ -713,6 +726,18 @@ void kexPlayer::Ready(void)
     lockTime = 0;
 
     weapon.ChangeAnim(WS_RAISE);
+    
+    if(actor)
+    {
+        if(kexPuppet::bScheduleNextMapWarp == true)
+        {
+            kexPuppet::bScheduleNextMapWarp = false;
+            actor->Origin() = kexPuppet::mapDestinationPosition;
+            actor->FindSector(actor->Origin());
+        }
+        
+        kexGame::cLocal->World()->EnterSectorSpecial(actor, actor->Sector());
+    }
 }
 
 //

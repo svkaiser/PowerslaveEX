@@ -32,6 +32,8 @@ public:
 private:
     kexStrList                      warpSounds;
     int                             reTriggerTime;
+    int                             mapDestination;
+    kexVec3                         destinationPosition;
 END_KEX_CLASS();
 
 #endif

@@ -191,12 +191,13 @@ void kexPlayLoop::Start(void)
     renderScene.SetView(&renderView);
     renderScene.SetWorld(game->World());
 
+    kexGame::cScriptManager->LoadLevelScript(game->ActiveMap()->script.c_str());
+    
     game->Player()->Ready();
     hud.Reset();
     inventoryMenu.Reset();
     InitWater();
 
-    kexGame::cScriptManager->LoadLevelScript(game->ActiveMap()->script.c_str());
     kex::cSound->PlayMusic(game->ActiveMap()->musicTrack.c_str());
 
     automapZoom = 2048;

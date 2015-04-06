@@ -47,6 +47,11 @@ public:
     virtual void                    OnDamage(kexActor *instigator);
     virtual bool                    OnCollide(kexCModel *cmodel);
 
+    void                            ScheduleWarpForNextMap(const kexVec3 &destination);
+
+    static kexVec3                  mapDestinationPosition;
+    static bool                     bScheduleNextMapWarp;
+
     kexPlayer                       *Owner(void) { return owner; }
     unsigned int                    &PlayerFlags(void) { return playerFlags; }
 

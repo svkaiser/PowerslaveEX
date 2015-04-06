@@ -29,6 +29,7 @@ kexTravelObject *kexTravelObject::currentObject = NULL;
 kexTravelObject::kexTravelObject(void)
 {
     this->reTriggerTime = 0;
+    this->mapDestination = -1;
 }
 
 //
@@ -59,14 +60,23 @@ void kexTravelObject::Tick(void)
 
 void kexTravelObject::OnTouch(kexActor *instigator)
 {
-    if(reTriggerTime > 0)
+    if(reTriggerTime > 0 || !instigator->InstanceOf(&kexPuppet::info))
     {
         return;
     }
 
-    reTriggerTime = 120;
-    currentObject = this;
-    kexGame::cLocal->SetMenu(MENU_TRAVEL);
+    if(mapDestination <= -1)
+    {
+        reTriggerTime = 120;
+        currentObject = this;
+        kexGame::cLocal->SetMenu(MENU_TRAVEL);
+    }
+    else
+    {
+        kexGame::cLocal->ChangeMap(kexGame::cLocal->MapInfoList()[mapDestination].map);
+        static_cast<kexPuppet*>(instigator)->ScheduleWarpForNextMap(destinationPosition);
+        reTriggerTime = 10000;
+    }
 
     if(warpSounds.Length() == 0)
     {
@@ -85,6 +95,23 @@ void kexTravelObject::OnTouch(kexActor *instigator)
 void kexTravelObject::Spawn(void)
 {
     int i = 1;
+    
+    if(!definition)
+    {
+        return;
+    }
+    
+    definition->GetInt("mapDestination", mapDestination, -1);
+    definition->GetVector("destinationPosition", destinationPosition);
+    
+    if(kexGame::cLocal->MapInfoList().Length() != 0)
+    {
+        kexMath::Clamp(mapDestination, 0, kexGame::cLocal->MapInfoList().Length());
+    }
+    else
+    {
+        mapDestination = -1;
+    }
 
     while(1)
     {
