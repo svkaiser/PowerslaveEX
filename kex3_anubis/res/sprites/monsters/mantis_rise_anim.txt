@@ -6,6 +6,7 @@ mantis_rise
         // ##000    0    0
         action A_FaceTarget()
         action A_Show()
+        action A_Quake(60)
         rotation_N
         {
             sprites

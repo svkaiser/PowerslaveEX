@@ -51,7 +51,6 @@ public:
     
 private:
     void                        FadeToBlack(void);
-    void                        FadeIn(void);
     void                        DrawFadeIn(void);
     void                        InitWater(void);
     void                        UpdateWater(void);

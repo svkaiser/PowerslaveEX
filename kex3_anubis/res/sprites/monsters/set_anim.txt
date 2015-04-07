@@ -5927,6 +5927,7 @@ set_leap_land
     {
         // ##006   72    0
         action A_PlayLocalSound("sounds/setland.wav")
+        action A_Quake(8)
         rotation_N
         {
             sprites

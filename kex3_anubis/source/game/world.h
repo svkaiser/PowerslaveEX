@@ -184,6 +184,8 @@ public:
     void                    MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount);
     void                    ResetWallSwitchFromTag(const int tag);
     void                    FireRemoteEventFromTag(const int tag);
+    void                    MoveScriptedSector(const int tag, const float height,
+                                               const float speed, const bool bCeiling);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 

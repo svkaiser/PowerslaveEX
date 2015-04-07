@@ -1002,6 +1002,49 @@ void kexWorld::FireRemoteEventFromTag(const int tag)
 }
 
 //
+// kexWorld::MoveScriptedSector
+//
+
+void kexWorld::MoveScriptedSector(const int tag, const float height,
+                                  const float speed, const bool bCeiling)
+{
+    for(unsigned int i = 0; i < numEvents; ++i)
+    {
+        mapEvent_t *ev = &events[i];
+        kexScriptedMover *mover;
+
+        if(ev->tag != tag)
+        {
+            continue;
+        }
+
+        if(ev->type != 49)
+        {
+            continue;
+        }
+
+        // negative speeds indicate 'instant'
+        if(speed <= -1)
+        {
+            MoveSector(&sectors[ev->sector], false^bCeiling, height);
+
+            if(ev->params >= 0)
+            {
+                MoveSector(&sectors[ev->params], true^bCeiling, height);
+            }
+
+            // no moving thinker is needed
+            continue;
+        }
+
+        mover = static_cast<kexScriptedMover*>(
+            kexGame::cActorFactory->SpawnMover("kexScriptedMover", ev->type, ev->sector));
+
+        mover->Start(height, speed, ev, bCeiling);
+    }
+}
+
+//
 // kexWorld::TriggerEvent
 //
 

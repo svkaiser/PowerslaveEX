@@ -65,6 +65,12 @@ void kexTravelObject::OnTouch(kexActor *instigator)
         return;
     }
 
+
+    if(warpSounds.Length() != 0)
+    {
+        PlaySound(warpSounds[kexRand::Max(warpSounds.Length())].c_str());
+    }
+
     if(mapDestination <= -1)
     {
         reTriggerTime = 120;
@@ -77,15 +83,6 @@ void kexTravelObject::OnTouch(kexActor *instigator)
         static_cast<kexPuppet*>(instigator)->ScheduleWarpForNextMap(destinationPosition);
         reTriggerTime = 10000;
     }
-
-    if(warpSounds.Length() == 0)
-    {
-        return;
-    }
-
-    int r = kexRand::Max(warpSounds.Length());
-    
-    PlaySound(warpSounds[r].c_str());
 }
 
 //
@@ -106,7 +103,7 @@ void kexTravelObject::Spawn(void)
     
     if(kexGame::cLocal->MapInfoList().Length() != 0)
     {
-        kexMath::Clamp(mapDestination, 0, kexGame::cLocal->MapInfoList().Length());
+        kexMath::Clamp(mapDestination, -1, kexGame::cLocal->MapInfoList().Length());
     }
     else
     {

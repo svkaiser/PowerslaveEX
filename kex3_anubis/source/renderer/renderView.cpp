@@ -107,8 +107,6 @@ void kexRenderView::SetupMatrices(void)
     // re-adjust translation
     transform.SetTranslation(0, 0, -32);
     modelView = (transform * modelView);
-
-    clipMatrix = modelView * projectionView;
 }
 
 //
@@ -129,6 +127,12 @@ void kexRenderView::SetupFromPlayer(kexPlayer *player)
     kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
     
     SetupMatrices();
+
+    if(player->ShakeTime() > 0 && (int)player->Actor()->Velocity().z == 0)
+    {
+        modelView.AddTranslation(player->ShakeVector().x, 0, player->ShakeVector().y);
+    }
+
     MakeClipPlanes();
     TransformPoints(origin, forward, fov, kex::cSystem->VideoRatio(), 0.1f, 8192);
 }
@@ -151,6 +155,8 @@ void kexRenderView::Setup(void)
 
 void kexRenderView::MakeClipPlanes(void)
 {
+    clipMatrix = modelView * projectionView;
+
     for(int i = 0; i < 4; i++)
     {
         p[FP_RIGHT][i]  = clipMatrix.vectors[i].w - clipMatrix.vectors[i].x;

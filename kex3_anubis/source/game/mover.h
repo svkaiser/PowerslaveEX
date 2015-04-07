@@ -206,4 +206,27 @@ private:
     int                     time;
 END_KEX_CLASS();
 
+//-----------------------------------------------------------------------------
+//
+// kexScriptedMover
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexScriptedMover, kexMover);
+public:
+    kexScriptedMover(void);
+    ~kexScriptedMover(void);
+
+    virtual void            Tick(void);
+    void                    Start(const float height, const float speed,
+                                  const mapEvent_t *ev, bool bCeiling);
+
+private:
+    float                   moveSpeed;
+    float                   moveHeight;
+    float                   currentHeight;
+    bool                    bCeiling;
+    mapSector_t             *linkedSector;
+END_KEX_CLASS();
+
 #endif

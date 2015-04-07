@@ -607,11 +607,15 @@ float kexAI::GetTargetHeightDifference(void)
     }
 
     float targHeight = static_cast<kexActor*>(target)->Height();
-    heightLevel = ((origin.z + height) - target->Origin().z);
 
     if(aiFlags & AIF_FLYADJUSTVIEWLEVEL)
     {
-        return heightLevel - ((targHeight * 0.5f) + stepHeight);
+        heightLevel = ((origin.z + (height * 0.5f)) - target->Origin().z) - (targHeight * 0.5f);
+        return heightLevel - (targHeight / 4);
+    }
+    else
+    {
+        heightLevel = ((origin.z + height) - target->Origin().z);
     }
 
     return heightLevel - targHeight;

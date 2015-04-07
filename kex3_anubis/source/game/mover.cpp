@@ -690,6 +690,8 @@ void kexDropPad::Tick(void)
     case DPS_FALLING:
         if(currentHeight <= destHeight)
         {
+            kexGame::cLocal->Player()->ShakeTime() = 16;
+
             PlaySound("sounds/platfall.wav");
             state = DPS_DOWN;
             sector->flags &= ~SF_SPECIAL;
@@ -939,4 +941,93 @@ void kexFloatingPlatform::Spawn(void)
     }
 
     baseHeight = -linkedSector->ceilingFace->plane.d;
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexScriptedMover
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexScriptedMover, kexMover)
+
+//
+// kexScriptedMover::kexScriptedMover
+//
+
+kexScriptedMover::kexScriptedMover(void)
+{
+    this->moveSpeed = 2;
+    this->moveHeight = 128;
+    this->currentHeight = 0;
+    this->bCeiling = false;
+}
+
+//
+// kexScriptedMover::~kexScriptedMover
+//
+
+kexScriptedMover::~kexScriptedMover(void)
+{
+}
+
+//
+// kexScriptedMover::Tick
+//
+
+void kexScriptedMover::Tick(void)
+{
+    float lastHeight = currentHeight;
+    float move;
+    kexWorld *world = kexGame::cLocal->World();
+
+    if(IsStale())
+    {
+        return;
+    }
+
+    if((moveHeight >= 0 && currentHeight >= moveHeight) ||
+       (moveHeight  < 0 && currentHeight <= moveHeight))
+    {
+        Remove();
+        return;
+    }
+
+    if(moveHeight >= 0)
+    {
+        currentHeight += moveSpeed;
+    }
+    else
+    {
+        currentHeight -= moveSpeed;
+    }
+
+    move = currentHeight - lastHeight;
+    
+    if(sector->linkedSector >= 0)
+    {
+        world->MoveSector(&world->Sectors()[sector->linkedSector], true^bCeiling, move);
+    }
+
+    world->MoveSector(sector, false^bCeiling, move);
+    UpdateFloorOrigin();
+}
+
+//
+// kexScriptedMover::Start
+//
+
+void kexScriptedMover::Start(const float height, const float speed,
+                             const mapEvent_t *ev, bool bCeiling)
+{
+    kexWorld *world = kexGame::cLocal->World();
+
+    assert(sector != NULL);
+
+    sector->flags |= SF_SPECIAL;
+    sector->linkedSector = ev->params;
+
+    this->bCeiling = bCeiling;
+    moveSpeed = kexMath::Fabs(speed);
+    moveHeight = height;
 }

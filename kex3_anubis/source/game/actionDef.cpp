@@ -735,6 +735,17 @@ DECLARE_KEX_ACTION(kexActionTriggerEvent)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionQuake
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionQuake)
+{
+    kexGame::cLocal->Player()->ShakeTime() = this->args[0].i;
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionDefManager
 //
 //-----------------------------------------------------------------------------
@@ -894,4 +905,5 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_GotoIfUnderwater", kexActionGotoIfUnderwater::info.Create, AAT_STRING);
     RegisterAction("A_ClearBurnState", kexActionClearBurnState::info.Create);
     RegisterAction("A_TriggerEvent", kexActionTriggerEvent::info.Create);
+    RegisterAction("A_Quake", kexActionQuake::info.Create, AAT_INTEGER);
 }

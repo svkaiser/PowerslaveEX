@@ -192,6 +192,7 @@ void kexPlayLoop::Start(void)
     renderScene.SetWorld(game->World());
 
     kexGame::cScriptManager->LoadLevelScript(game->ActiveMap()->script.c_str());
+    kexGame::cScriptManager->CallDelayedMapScript(0, game->Player()->Actor(), 0);
     
     game->Player()->Ready();
     hud.Reset();
@@ -260,9 +261,11 @@ void kexPlayLoop::Tick(void)
 {
     if(fadeInTicks > 0)
     {
-        FadeIn();
+        ticks++;
+        return;
     }
-    else if(ticks > 4 && !bPaused && !inventoryMenu.IsActive())
+
+    if(ticks > 4 && !bPaused && !inventoryMenu.IsActive())
     {
         kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
@@ -338,25 +341,6 @@ void kexPlayLoop::FadeToBlack(void)
 }
 
 //
-// kexPlayLoop::FadeIn
-//
-
-void kexPlayLoop::FadeIn(void)
-{
-    if(ticks <= 4)
-    {
-        return;
-    }
-
-    fadeInTicks -= 8;
-
-    if(fadeInTicks < 0)
-    {
-        fadeInTicks = 0;
-    }
-}
-
-//
 // kexPlayLoop::DrawFadeIn
 //
 
@@ -368,6 +352,13 @@ void kexPlayLoop::DrawFadeIn(void)
     if(fadeInTicks <= 0)
     {
         return;
+    }
+
+    fadeInTicks -= 8;
+
+    if(fadeInTicks < 0)
+    {
+        fadeInTicks = 0;
     }
 
     kexRender::cBackend->SetOrtho();

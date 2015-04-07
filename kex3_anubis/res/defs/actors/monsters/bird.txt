@@ -3,7 +3,7 @@ AI_Bird 3
     classname               "kexAI"
     radius                  16
     height                  128
-    stepHeight              128
+    stepHeight              48
     scale                   1.0
     health                  10
     moveSpeed               8

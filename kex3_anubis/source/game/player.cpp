@@ -657,6 +657,7 @@ kexPlayer::kexPlayer(void)
 {
     this->weapon.owner = this;
     this->lockTime = 0;
+    this->shakeTime = 0;
 }
 
 //
@@ -688,6 +689,8 @@ void kexPlayer::Reset(void)
     airSupply = 64;
     airSupplyTime = 0;
     lockTime = 0;
+    shakeTime = 0;
+    shakeVector.Clear();
 
     memset(weapons, 0, NUMPLAYERWEAPONS);
 
@@ -724,6 +727,8 @@ void kexPlayer::Ready(void)
     airSupply = 64;
     airSupplyTime = 0;
     lockTime = 0;
+    shakeTime = 0;
+    shakeVector.Clear();
 
     weapon.ChangeAnim(WS_RAISE);
     
@@ -1141,6 +1146,17 @@ void kexPlayer::HoldsterWeapon(void)
 void kexPlayer::Tick(void)
 {
     UpdateAirSupply();
+
+    if(shakeTime > 0)
+    {
+        shakeVector.x = kexRand::CFloat() * 32;
+        shakeVector.y = kexRand::CFloat() * 32;
+
+        if(--shakeTime <= 0)
+        {
+            shakeVector.Clear();
+        }
+    }
 
     if(lockTime > 0)
     {

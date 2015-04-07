@@ -113,6 +113,8 @@ public:
     float                       &ViewZ(void) { return viewZ; }
     int                         &LockTime(void) { return lockTime; }
     int16_t                     &AirSupply(void) { return airSupply; }
+    int                         &ShakeTime(void) { return shakeTime; }
+    kexVec2                     &ShakeVector(void) { return shakeVector; }
 
     kexPlayerWeapon             &Weapon(void) { return weapon; }
     const playerWeapons_t       CurrentWeapon(void) const { return currentWeapon; }
@@ -155,6 +157,8 @@ private:
     int16_t                     airSupplyTime;
     int                         teamDolls;
     int                         lockTime;
+    int                         shakeTime;
+    kexVec2                     shakeVector;
     kexPuppet                   *actor;
 };
 
