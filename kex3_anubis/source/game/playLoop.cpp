@@ -217,7 +217,11 @@ void kexPlayLoop::Start(void)
 
 void kexPlayLoop::Stop(void)
 {
+    kexPlayer *player = kexGame::cLocal->Player();
+    
     fadeInTicks = 0;
+    player->Health() = player->Actor()->Health();
+    
     FadeToBlack();
     kexGame::cScriptManager->DestroyLevelScripts();
     kexGame::cLocal->World()->UnloadMap();

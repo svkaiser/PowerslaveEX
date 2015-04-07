@@ -680,6 +680,7 @@ void kexPlayer::Reset(void)
 
     cmd.Reset();
 
+    health = maxHealth;
     bob = 0;
     bobTime = 0;
     bobSpeed = 0;
@@ -734,6 +735,8 @@ void kexPlayer::Ready(void)
     
     if(actor)
     {
+        actor->Health() = health;
+        
         if(kexPuppet::bScheduleNextMapWarp == true)
         {
             kexPuppet::bScheduleNextMapWarp = false;

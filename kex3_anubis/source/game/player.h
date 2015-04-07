@@ -107,6 +107,7 @@ public:
     kexActor                    *AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitch,
                                          const float dist, const float aimYaw, const float aimPitch);
 
+    int16_t                     &Health(void) { return health; }
     const float                 Bob(void) const { return bob; }
     float                       &LandTime(void) { return landTime; }
     float                       &StepViewZ(void) { return stepViewZ; }
@@ -142,6 +143,7 @@ private:
     float                       landTime;
     float                       stepViewZ;
     float                       viewZ;
+    int16_t                     health;
 
     kexPlayerWeapon             weapon;
     playerWeapons_t             currentWeapon;
