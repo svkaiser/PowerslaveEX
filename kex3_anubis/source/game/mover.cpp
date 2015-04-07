@@ -1020,8 +1020,6 @@ void kexScriptedMover::Tick(void)
 void kexScriptedMover::Start(const float height, const float speed,
                              const mapEvent_t *ev, bool bCeiling)
 {
-    kexWorld *world = kexGame::cLocal->World();
-
     assert(sector != NULL);
 
     sector->flags |= SF_SPECIAL;
