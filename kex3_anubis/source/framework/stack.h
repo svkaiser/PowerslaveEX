@@ -25,11 +25,14 @@ public:
     kexStack(const unsigned int stackSize);
     ~kexStack(void);
     
+    typedef int         compare_t(const type*, const type*);
+    
     void                Init(const unsigned int stackSize);
     void                Reset(void);
     void                Empty(void);
     type                *Get(void);
     void                Set(type t);
+    void                Sort(compare_t *function);
     
     const unsigned int  MaxLength(void) const { return length; }
     const unsigned int  CurrentLength(void) const { return aidx; }
@@ -209,6 +212,26 @@ const type &kexStack<type>::operator[](unsigned int index) const
 {
     assert(index < length);
     return data[index];
+}
+
+//
+// kexStack::Sort
+//
+// Note that data will be shuffled around, so this could invalidate any
+// pointers that relies on the array/data
+//
+template<class type>
+void kexStack<type>::Sort(compare_t *function)
+{
+    if(data == NULL || aidx <= 2)
+    {
+        return;
+    }
+    
+    typedef int compareCast(const void*, const void*);
+    compareCast *cmpFunc = (compareCast*)function;
+    
+    qsort((void*)data, aidx, sizeof(type), cmpFunc);
 }
 
 #endif
