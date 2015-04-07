@@ -48,12 +48,19 @@ public:
     void                    ExecuteMouseCommand(int button, bool up);
     int                     GetKeyCode(char *key);
     char                    *GetKeyName(int key);
+    const char              *GetKeyboardKey(const int key);
+    const char              *GetMouseKey(const int key);
+    const char              *GetJoystickKey(const int key);
+    const int               GetKeyboardCode(const int key);
+    const int               GetMouseCode(const int key);
+    const int               GetJoystickCode(const int key);
     void                    BindCommand(int key, const char *string);
     void                    UnBindCommand(int key, const char *string);
     void                    ListBindings(void);
     const int               GetAction(const int id);
     void                    GetActionBinds(kexStrList &bindList, const int id);
     void                    GetCommandBinds(kexStrList &bindList, const char *command);
+    bool                    IsKeyBindedToAction(const int key, const char *action);
     
     cmdLink_t               *KeyCommands(void) { return keycmds; }
 

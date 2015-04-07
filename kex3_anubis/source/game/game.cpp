@@ -305,6 +305,18 @@ COMMAND(statsound)
 }
 
 //
+// generic button events (client-side only)
+//
+
+COMMAND(menu_up)        { gameLocal.ButtonEvent() |= GBE_MENU_UP; }
+COMMAND(menu_right)     { gameLocal.ButtonEvent() |= GBE_MENU_RIGHT; }
+COMMAND(menu_down)      { gameLocal.ButtonEvent() |= GBE_MENU_DOWN; }
+COMMAND(menu_left)      { gameLocal.ButtonEvent() |= GBE_MENU_LEFT; }
+COMMAND(menu_select)    { gameLocal.ButtonEvent() |= GBE_MENU_SELECT; }
+COMMAND(menu_cancel)    { gameLocal.ButtonEvent() |= GBE_MENU_CANCEL; }
+COMMAND(menu_back)      { gameLocal.ButtonEvent() |= GBE_MENU_BACK; }
+
+//
 // kexGameLocal::kexGameLocal
 //
 
@@ -314,6 +326,7 @@ kexGameLocal::kexGameLocal(void)
     this->bigFont           = NULL;
     this->activeMap         = NULL;
     this->ticks             = 0;
+    this->buttonEvent       = 0;
     this->gameState         = GS_NONE;
     this->pendingGameState  = GS_NONE;
     this->gameLoop          = &this->gameLoopStub;
@@ -628,6 +641,7 @@ void kexGameLocal::Tick(void)
     }
     
     player->Cmd().Reset();
+    buttonEvent = 0;
 
     UpdateSounds();
     

@@ -45,6 +45,18 @@ typedef enum
 
 typedef enum
 {
+    GBE_MENU_UP         = BIT(0),
+    GBE_MENU_RIGHT      = BIT(1),
+    GBE_MENU_DOWN       = BIT(2),
+    GBE_MENU_LEFT       = BIT(3),
+    GBE_MENU_SELECT     = BIT(4),
+    GBE_MENU_CANCEL     = BIT(5),
+    GBE_MENU_BACK       = BIT(6),
+    NUMGAMEBUTTONEVENTS
+} gameButtonEvents_t;
+
+typedef enum
+{
     GS_NONE     = 0,
     GS_TITLE,
     GS_OVERWORLD,
@@ -226,6 +238,7 @@ public:
     kexArray<bool>                  &MapUnlockList(void) { return bMapUnlockList; }
     kexMenu                         *ActiveMenu(void) { return activeMenu; }
     mapInfo_t                       *ActiveMap(void) { return activeMap; }
+    unsigned int                    &ButtonEvent(void) { return buttonEvent; }
 
     void                            SetMenu(const menus_t menu);
     void                            ClearMenu(void);
@@ -280,6 +293,7 @@ private:
     mapInfo_t                       *activeMap;
     kexArray<bool>                  bMapUnlockList;
     kexArray<bool>                  bCursorEnabled;
+    unsigned int                    buttonEvent;
 };
 
 //-----------------------------------------------------------------------------

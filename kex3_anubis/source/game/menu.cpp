@@ -187,6 +187,7 @@ public:
     static const inputBinds_t       inputBinds1[];
     static const inputBinds_t       inputBinds2[];
     static const inputBinds_t       inputBinds3[];
+    static const inputBinds_t       inputBinds4[];
 
     static const float              bindXOffset;
     static const float              bindYOffset;
@@ -195,25 +196,27 @@ public:
 
 private:
     void                            DrawBinds(const kexMenuInput::inputBinds_t binds[]);
+    bool                            SetBind(const inputEvent_t *ev);
 
     kexMenuPanel::selectButton_t    exitButton;
     int                             pageNum;
     const inputBinds_t              *selectedBind;
+    int                             bindTime;
 END_MENU_CLASS();
 
 DECLARE_MENU_CLASS(kexMenuInput, MENU_INPUT);
 
 const kexMenuInput::inputBinds_t kexMenuInput::inputBinds1[] =
 {
-    { "Attack",         IA_ATTACK,          NULL },
-    { "Jump",           IA_JUMP,            NULL },
-    { "Forward",        IA_FORWARD,         NULL },
-    { "Backward",       IA_BACKWARD,        NULL },
-    { "Turn-L",         IA_LEFT,            NULL },
-    { "Turn-R",         IA_RIGHT,           NULL },
-    { "Strafe-L",       IA_STRAFELEFT,      NULL },
-    { "Strafe-R",       IA_STRAFERIGHT,     NULL },
-    { "Interact",       IA_USE,             NULL },
+    { "Attack",         IA_ATTACK,          "attack" },
+    { "Jump",           IA_JUMP,            "jump" },
+    { "Forward",        IA_FORWARD,         "forward" },
+    { "Backward",       IA_BACKWARD,        "backward" },
+    { "Turn-L",         IA_LEFT,            "left" },
+    { "Turn-R",         IA_RIGHT,           "right" },
+    { "Strafe-L",       IA_STRAFELEFT,      "strafeleft" },
+    { "Strafe-R",       IA_STRAFERIGHT,     "straferight" },
+    { "Interact",       IA_USE,             "+use" },
     { NULL,             -1,                 NULL }
 };
 
@@ -227,18 +230,30 @@ const kexMenuInput::inputBinds_t kexMenuInput::inputBinds2[] =
     { "Cobra Staff",    -1,                 "weapon 5" },
     { "Ring Of Ra",     -1,                 "weapon 6" },
     { "Manacle",        -1,                 "weapon 7" },
-    { "Next Weapon",    IA_WEAPNEXT,        NULL },
-    { "Prev Weapon",    IA_WEAPPREV,        NULL },
+    { "Next Weapon",    IA_WEAPNEXT,        "+weapnext" },
+    { "Prev Weapon",    IA_WEAPPREV,        "+weapprev" },
     { NULL,             -1,                 NULL }
 };
 
 const kexMenuInput::inputBinds_t kexMenuInput::inputBinds3[] =
 {
-    { "Map Zoom-In",    IA_MAPZOOMIN,       NULL },
-    { "Map Zoom-Out",   IA_MAPZOOMOUT,      NULL },
+    { "Map Zoom-In",    IA_MAPZOOMIN,       "mapzoomin" },
+    { "Map Zoom-Out",   IA_MAPZOOMOUT,      "mapzoomout" },
     { "Automap",        -1,                 "automap" },
     { "Inventory Menu", -1,                 "inventorymenu" },
     { "Screenshot",     -1,                 "screenshot" },
+    { NULL,             -1,                 NULL }
+};
+
+const kexMenuInput::inputBinds_t kexMenuInput::inputBinds4[] =
+{
+    { "Menu Up",        -1,                 "menu_up" },
+    { "Menu Right",     -1,                 "menu_right" },
+    { "Menu Down",      -1,                 "menu_down" },
+    { "Menu Left",      -1,                 "menu_left" },
+    { "Menu Select",    -1,                 "menu_select" },
+    { "Menu Cancel",    -1,                 "menu_cancel" },
+    { "Menu Back",      -1,                 "menu_back" },
     { NULL,             -1,                 NULL }
 };
 
@@ -273,6 +288,19 @@ void kexMenuInput::Update(void)
     float mx = (float)kex::cInput->MouseX();
     float my = (float)kex::cInput->MouseY();
     float y;
+    
+    if(bindTime > 0)
+    {
+        if(selectedBind == NULL)
+        {
+            bindTime = 0;
+        }
+        else
+        {
+            bindTime--;
+            return;
+        }
+    }
 
     kexGame::cMenuPanel->UpdateSelectButton(&exitButton);
     kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
@@ -289,6 +317,9 @@ void kexMenuInput::Update(void)
         break;
     case 2:
         binds = inputBinds3;
+        break;
+    case 3:
+        binds = inputBinds4;
         break;
     default:
         return;
@@ -373,7 +404,7 @@ void kexMenuInput::DrawBinds(const kexMenuInput::inputBinds_t binds[])
         y += bindRowHeight;
     }
 
-    if(pageNum < 2)
+    if(pageNum < 3)
     {
         kexGame::cMenuPanel->DrawRightArrow(bindRowWidth, 21);
     }
@@ -397,7 +428,7 @@ void kexMenuInput::Display(void)
     
     kexGame::cMenuPanel->DrawSelectButton(&exitButton);
     
-    kexGame::cLocal->DrawSmallString(kexStr::Format("Page %i/3", pageNum+1), 160, 20, 1, true);
+    kexGame::cLocal->DrawSmallString(kexStr::Format("Page %i/4", pageNum+1), 160, 20, 1, true);
     
     switch(pageNum)
     {
@@ -410,9 +441,77 @@ void kexMenuInput::Display(void)
     case 2:
         DrawBinds(inputBinds3);
         break;
+    case 3:
+        DrawBinds(inputBinds4);
+        break;
     default:
         break;
     }
+    
+    if(bindTime > 0 && selectedBind)
+    {
+        float w, h;
+        
+        w = (float)kex::cSystem->VideoWidth();
+        h = (float)kex::cSystem->VideoHeight();
+        
+        kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 128);
+        
+        kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
+        kexGame::cMenuPanel->DrawInset(40, 72, 238, 80);
+        kexGame::cLocal->DrawSmallString(kexStr::Format("Set bind for %s", selectedBind->action),
+                                         160, 82, 1, true);
+        kexGame::cLocal->DrawSmallString("Wait 5 seconds to cancel", 160, 92, 1, true);
+    }
+}
+
+//
+// kexMenuInput::SetBind
+//
+
+bool kexMenuInput::SetBind(const inputEvent_t *ev)
+{
+    int key;
+    
+    if(!selectedBind)
+    {
+        return false;
+    }
+    
+    switch(ev->type)
+    {
+    case ev_keydown:
+        key = kex::cActions->GetKeyboardCode(ev->data1);
+        break;
+        
+    case ev_mousedown:
+        key = kex::cActions->GetMouseCode(ev->data1);
+        break;
+        
+    case ev_joybtndown:
+        key = kex::cActions->GetJoystickCode(ev->data1);
+        break;
+        
+    default:
+        return false;
+    }
+    
+    if(key <= -1)
+    {
+        return false;
+    }
+    
+    if(kex::cActions->IsKeyBindedToAction(key, selectedBind->command))
+    {
+        kex::cActions->UnBindCommand(key, selectedBind->command);
+    }
+    else
+    {
+        kex::cActions->BindCommand(key, selectedBind->command);
+    }
+    
+    bindTime = 0;
+    return true;
 }
 
 //
@@ -421,6 +520,11 @@ void kexMenuInput::Display(void)
 
 bool kexMenuInput::ProcessInput(inputEvent_t *ev)
 {
+    if(bindTime > 0)
+    {
+        return SetBind(ev);
+    }
+    
     if(kexGame::cMenuPanel->TestSelectButtonInput(&exitButton, ev))
     {
         kexGame::cLocal->ClearMenu();
@@ -433,7 +537,7 @@ bool kexMenuInput::ProcessInput(inputEvent_t *ev)
     case ev_mousedown:
         if(ev->data1 == KMSB_LEFT)
         {
-            if(pageNum < 2 && kexGame::cMenuPanel->CursorOnRightArrow(288, 21))
+            if(pageNum < 3 && kexGame::cMenuPanel->CursorOnRightArrow(288, 21))
             {
                 kexGame::cLocal->PlaySound("sounds/select.wav");
                 pageNum++;
@@ -444,6 +548,10 @@ bool kexMenuInput::ProcessInput(inputEvent_t *ev)
                 kexGame::cLocal->PlaySound("sounds/select.wav");
                 pageNum--;
                 return true;
+            }
+            if(selectedBind != NULL)
+            {
+                bindTime = 300;
             }
         }
         break;

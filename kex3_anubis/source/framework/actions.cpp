@@ -190,8 +190,6 @@ COMMAND(bind)
     int key;
     int i;
     char cmd[1024];
-    cmdLink_t *keycmd;
-    cmdlist_t *cmdlist;
 
     argc = kex::cCommands->GetArgc();
 
@@ -217,16 +215,11 @@ COMMAND(bind)
         }
     }
     
-    keycmd = &kex::cActions->KeyCommands()[key];
-    
-    for(cmdlist = keycmd->Next(); cmdlist; cmdlist = cmdlist->link.Next())
+    if(kex::cActions->IsKeyBindedToAction(key, cmd))
     {
-        if(!strcmp(cmdlist->command, cmd))
-        {
-            kex::cSystem->Warning("\"%s\" is already binded to %s\n",
-                                  kex::cCommands->GetArgv(1), cmdlist->command);
-            return;
-        }
+        kex::cSystem->Warning("\"%s\" is already binded to %s\n",
+                              kex::cCommands->GetArgv(1), cmd);
+        return;
     }
 
     actions.BindCommand(key, cmd);
@@ -338,6 +331,60 @@ char *kexInputAction::GetKeyName(int key)
     }
 
     return NULL;
+}
+
+//
+// kexInputAction::GetKeyboardKey
+//
+
+const char *kexInputAction::GetKeyboardKey(const int key)
+{
+    return GetKeyName(key);
+}
+
+//
+// kexInputAction::GetMouseKey
+//
+
+const char *kexInputAction::GetMouseKey(const int key)
+{
+    return GetKeyName(key+NUMKEYBOARDKEYS);
+}
+
+//
+// kexInputAction::GetJoystickKey
+//
+
+const char *kexInputAction::GetJoystickKey(const int key)
+{
+    return GetKeyName(key+NUMKEYBOARDKEYS+NUMMOUSEBUTTONS);
+}
+
+//
+// kexInputAction::GetKeyboardCode
+//
+
+const int kexInputAction::GetKeyboardCode(const int key)
+{
+    return key;
+}
+
+//
+// kexInputAction::GetMouseCode
+//
+
+const int kexInputAction::GetMouseCode(const int key)
+{
+    return key+NUMKEYBOARDKEYS;
+}
+
+//
+// kexInputAction::GetJoystickCode
+//
+
+const int kexInputAction::GetJoystickCode(const int key)
+{
+    return key+NUMKEYBOARDKEYS+NUMMOUSEBUTTONS;
 }
 
 //
@@ -468,11 +515,11 @@ void kexInputAction::ExecuteCommand(int key, bool keyup, const int eventType)
 
     if(eventType == ev_mousedown || eventType == ev_mouseup)
     {
-        key += NUMKEYBOARDKEYS;
+        key = GetMouseCode(key);
     }
     else if(eventType == ev_joybtndown || eventType == ev_joybtnup)
     {
-        key += (NUMKEYBOARDKEYS+NUMMOUSEBUTTONS);
+        key = GetJoystickCode(key);
     }
 
     keycmd = &keycmds[key];
@@ -576,6 +623,28 @@ void kexInputAction::GetCommandBinds(kexStrList &bindList, const char *command)
             break;
         }
     }
+}
+
+//
+// kexInputAction::IsKeyBindedToAction
+//
+
+bool kexInputAction::IsKeyBindedToAction(const int key, const char *action)
+{
+    cmdLink_t *keycmd;
+    cmdlist_t *cmdlist;
+    
+    keycmd = &kex::cActions->KeyCommands()[key];
+    
+    for(cmdlist = keycmd->Next(); cmdlist; cmdlist = cmdlist->link.Next())
+    {
+        if(!strcmp(cmdlist->command, action))
+        {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 //
