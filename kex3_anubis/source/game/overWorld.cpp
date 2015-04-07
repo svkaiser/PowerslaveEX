@@ -392,6 +392,7 @@ void kexOverWorld::Tick(void)
     const float sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
     float mx = (float)kex::cInput->MouseX();
     float my = (float)kex::cInput->MouseY();
+    unsigned int buttons;
     float nx;
     float ny;
         
@@ -411,6 +412,8 @@ void kexOverWorld::Tick(void)
     {
         return;
     }
+    
+    buttons = kexGame::cLocal->ButtonEvent();
 
     nx = map->overworldX;
     ny = map->overworldY;
@@ -420,6 +423,42 @@ void kexOverWorld::Tick(void)
 
     kexMath::Clamp(camera_x, sx, (float)pic.OriginalWidth() - sx);
     kexMath::Clamp(camera_y, sy, (float)pic.OriginalHeight() - sy);
+    
+    if(buttons & GBE_MENU_SELECT)
+    {
+        bFading = true;
+        bFadeIn = false;
+        fadeTime = 0;
+        curFadeTime = 0;
+    }
+    else if(buttons & GBE_MENU_UP)
+    {
+        if(map->nextMap[0] >= 0)
+        {
+            selectedMap = map->nextMap[0];
+        }
+    }
+    else if(buttons & GBE_MENU_RIGHT)
+    {
+        if(map->nextMap[1] >= 0)
+        {
+            selectedMap = map->nextMap[1];
+        }
+    }
+    else if(buttons & GBE_MENU_DOWN)
+    {
+        if(map->nextMap[2] >= 0)
+        {
+            selectedMap = map->nextMap[2];
+        }
+    }
+    else if(buttons & GBE_MENU_LEFT)
+    {
+        if(map->nextMap[3] >= 0)
+        {
+            selectedMap = map->nextMap[3];
+        }
+    }
 }
 
 //
@@ -428,55 +467,5 @@ void kexOverWorld::Tick(void)
 
 bool kexOverWorld::ProcessInput(inputEvent_t *ev)
 {
-    kexGameLocal::mapInfo_t *map = &kexGame::cLocal->MapInfoList()[selectedMap];
-
-    if(bFading)
-    {
-        return false;
-    }
-
-    if(ev->type == ev_mousedown && ev->data1 == KMSB_LEFT)
-    {
-        bFading = true;
-        bFadeIn = false;
-        fadeTime = 0;
-        curFadeTime = 0;
-        return true;
-    }
-    else if(ev->type == ev_keydown)
-    {
-        switch(ev->data1)
-        {
-        case KKEY_UP:
-            if(map->nextMap[0] >= 0)
-            {
-                selectedMap = map->nextMap[0];
-                return true;
-            }
-            break;
-        case KKEY_RIGHT:
-            if(map->nextMap[1] >= 0)
-            {
-                selectedMap = map->nextMap[1];
-                return true;
-            }
-            break;
-        case KKEY_DOWN:
-            if(map->nextMap[2] >= 0)
-            {
-                selectedMap = map->nextMap[2];
-                return true;
-            }
-            break;
-        case KKEY_LEFT:
-            if(map->nextMap[3] >= 0)
-            {
-                selectedMap = map->nextMap[3];
-                return true;
-            }
-            break;
-        }
-    }
-
     return false;
 }
