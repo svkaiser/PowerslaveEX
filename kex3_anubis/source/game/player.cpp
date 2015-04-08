@@ -77,18 +77,26 @@ bool kexPuppet::OnCollide(kexCModel *cmodel)
 
         if(face->flags & FF_FORCEFIELD)
         {
-            owner->LockTime() = 60;
-            InflictDamage(NULL, 50);
-            velocity.Clear();
-            movement.Clear();
+            if(owner->Artifacts() & PA_SCEPTER)
+            {
+                face->flags &= ~(FF_SOLID|FF_FORCEFIELD);
+                face->flags |= FF_INVISIBLE;
+            }
+            else
+            {
+                owner->LockTime() = 60;
+                InflictDamage(NULL, 50);
+                velocity.Clear();
+                movement.Clear();
+            }
         }
         if(face->flags & FF_LAVA)
         {
-            // TODO
+            LavaDamage(face);
         }
         if(face->flags & FF_SLIME)
         {
-            // TODO
+            SlimeDamage();
         }
     }
     else if(cmodel->ContactActor())
@@ -116,6 +124,12 @@ void kexPuppet::OnDamage(kexActor *instigator)
     }
 
     kexGame::cLocal->PlayLoop()->DamageFlash();
+
+    if(lavaTicks > 0 || slimeTicks > 0)
+    {
+        PlaySound("sounds/psizzle.wav");
+        return;
+    }
 
     if(flags & AF_INWATER && !(playerFlags & PF_INWATERSURFACE))
     {
@@ -169,6 +183,52 @@ void kexPuppet::CheckFallDamage(void)
     }
 
     InflictDamage(NULL, (int)(-amt * 16.0f));
+}
+
+//
+// kexPuppet::SlimeDamage
+//
+
+void kexPuppet::SlimeDamage(void)
+{
+    if((int)velocity.z != 0)
+    {
+        slimeTicks = 0;
+    }
+    else
+    {
+        if(owner->Artifacts() & PA_ANKLETS)
+        {
+            if((++slimeTicks & 63) == 1)
+            {
+                InflictDamage(NULL, 5);
+            }
+        }
+        else
+        {
+            if((++slimeTicks & 31) == 1)
+            {
+                InflictDamage(NULL, 375);
+            }
+        }
+    }
+}
+
+//
+// kexPuppet::LavaDamage
+//
+
+void kexPuppet::LavaDamage(mapFace_t *face)
+{
+    if((int)velocity.z != 0 && kexMath::Fabs(face->plane.c) > 0.5f)
+    {
+        lavaTicks = 0;
+    }
+    else if((++lavaTicks & 31) == 1)
+    {
+        int damage = (owner->Artifacts() & PA_ANKLETS) ? 50 : health;
+        InflictDamage(NULL, damage);
+    }
 }
 
 //
@@ -288,6 +348,32 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
         else
         {
             velocity.z -= gravity;
+        }
+    }
+    else
+    {
+        if(sector->floorFace->flags & FF_LAVA)
+        {
+            if(origin.z - kexGame::cLocal->CModel()->GetFloorHeight(origin, sector) <= 0)
+            {
+                LavaDamage(sector->floorFace);
+            }
+        }
+        else
+        {
+            lavaTicks = 0;
+        }
+
+        if(sector->floorFace->flags & FF_SLIME)
+        {
+            if(origin.z - kexGame::cLocal->CModel()->GetFloorHeight(origin, sector) <= 0)
+            {
+                SlimeDamage();
+            }
+        }
+        else
+        {
+            slimeTicks = 0;
         }
     }
 
@@ -641,6 +727,8 @@ void kexPuppet::Spawn(void)
     health      = 200;
     friction    = 0.9375f;
     flags       = (AF_SOLID|AF_SHOOTABLE);
+    lavaTicks   = 0;
+    slimeTicks  = 0;
 }
 
 //-----------------------------------------------------------------------------

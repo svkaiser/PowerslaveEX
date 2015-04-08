@@ -61,11 +61,15 @@ private:
     void                            FlyMove(kexPlayerCmd *cmd);
     void                            WaterMove(kexPlayerCmd *cmd);
     void                            CheckFallDamage(void);
+    void                            SlimeDamage(void);
+    void                            LavaDamage(mapFace_t *face);
 
     kexPlayer                       *owner;
     unsigned int                    playerFlags;
     byte                            jumpTicks;
     kexVec3                         oldMovement;
+    int                             lavaTicks;
+    int                             slimeTicks;
 END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------
