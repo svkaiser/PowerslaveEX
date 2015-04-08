@@ -573,8 +573,6 @@ void kexGameLocal::Stop(void)
 
 void kexGameLocal::Tick(void)
 {
-    kexRand::SetSeed(kex::cTimer->GetTicks() >> 4);
-
     if(pendingGameState != GS_NONE)
     {
         StopSounds();
@@ -620,6 +618,8 @@ void kexGameLocal::Tick(void)
         
         gameState = pendingGameState;
         pendingGameState = GS_NONE;
+        
+        kexRand::SetSeed(kex::cTimer->GetTicks() >> 4);
         
         gameLoop->Start();
         

@@ -46,6 +46,7 @@ void kexScriptObjMath::Init(void)
     e->RegisterGlobalFunction("float InvSqrt(float)", asFUNCTION(kexMath::InvSqrt), asCALL_CDECL);
     e->RegisterGlobalFunction("int SysRand(void)", asFUNCTION(kexRand::SysRand), asCALL_CDECL);
     e->RegisterGlobalFunction("int Rand(void)", asFUNCTION(kexRand::Int), asCALL_CDECL);
+    e->RegisterGlobalFunction("int RandByte(void)", asFUNCTION(kexRand::Byte), asCALL_CDECL);
     e->RegisterGlobalFunction("int RandMax(const int)", asFUNCTION(kexRand::Max), asCALL_CDECL);
     e->RegisterGlobalFunction("float RandFloat(void)", asFUNCTION(kexRand::Float), asCALL_CDECL);
     e->RegisterGlobalFunction("float RandCFloat(void)", asFUNCTION(kexRand::CFloat), asCALL_CDECL);

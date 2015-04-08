@@ -83,6 +83,7 @@ public:
     static void             SetSeed(const int randSeed);
     static int              SysRand(void);
     static int              Int(void);
+    static uint8_t          Byte(void);
     static int              Max(const int max);
     static float            Float(void);
     static float            CFloat(void);

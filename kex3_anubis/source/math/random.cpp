@@ -48,8 +48,26 @@ int kexRand::SysRand(void)
 
 int kexRand::Int(void)
 {
+    int r;
+    
     seed = seed * 1664525ul + 221297ul;
-    return seed & RANDOM_MAX;
+    r = (seed & RANDOM_MAX) + ((seed >> 0xF) & RANDOM_MAX) + (seed >> 0x1F);
+    
+    return ((r & RANDOM_MAX) + (r >> 0xF)) & RANDOM_MAX;
+}
+
+//
+// kexRand::Byte
+//
+
+uint8_t kexRand::Byte(void)
+{
+    int r;
+    
+    seed = seed * 1664525ul + 221297ul;
+    r = (seed & 0xFF) + ((seed >> 7) & 0xFF) + (seed >> 0xF);
+    
+    return ((r & 0xFF) + (r >> 7)) & 0xFF;
 }
 
 //
