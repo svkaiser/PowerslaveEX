@@ -685,7 +685,14 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
                 if((s->ceilingFace->flags & FF_SOLID && s->floorFace->flags & FF_SOLID) &&
                    ceilingz - floorz < actorHeight && (fc > 0.5f && cc > 0.5f))
                 {
-                    CollideFace(face);
+                    kexPlane *fp = &s->floorFace->plane;
+                    kexPlane *cp = &s->ceilingFace->plane;
+                    
+                    if(fp->Distance(start) - fp->d < 0 || cp->Distance(start) - cp->d > actorHeight)
+                    {
+                        // couldn't squeeze through this portal
+                        CollideFace(face);
+                    }
                 }
             }
         }
