@@ -178,6 +178,7 @@ typedef union
 #include "binFile.h"
 #include "endian.h"
 #include "timer.h"
+#include "thread.h"
 #include "system.h"
 #include "input.h"
 #include "session.h"
@@ -197,6 +198,7 @@ public:
     static kexSystem            *cSystem;
     static kexTimer             *cTimer;
     static kexEndian            *cEndian;
+    static kexThread            *cThread;
     static kexInput             *cInput;
     static kexSound             *cSound;
     static kexCvarManager       *cCvars;
