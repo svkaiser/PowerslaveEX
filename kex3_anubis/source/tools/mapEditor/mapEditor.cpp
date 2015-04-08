@@ -273,7 +273,7 @@ void kexMapEditor::DrawWorld(void)
         return;
     }
     
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
     kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
     kexRender::cBackend->SetState(GLSTATE_BLEND, true);
     
@@ -290,7 +290,29 @@ void kexMapEditor::DrawWorld(void)
         {
             mapFace_t *face = &world->Faces()[j];
             
-            if(face->sector != -1 && !(face->flags & FF_SOLID))
+            if(face->sector != -1)
+            {
+                continue;
+            }
+            
+            kexRender::cUtils->DrawLine(*face->LeftEdge()->v2, *face->RightEdge()->v1, 255, 255, 255);
+        }
+    }
+    
+    for(unsigned int i = 0; i < world->NumSectors(); ++i)
+    {
+        mapSector_t *sector = &world->Sectors()[i];
+        
+        int start = sector->faceStart;
+        int end = sector->faceEnd;
+        
+        sector->floodCount = 0;
+        
+        for(int j = start; j < end+1; ++j)
+        {
+            mapFace_t *face = &world->Faces()[j];
+            
+            if(face->sector != -1)
             {
                 mapSector_t *s = &world->Sectors()[face->sector];
                 mapFace_t *f1a = &world->Faces()[s->faceEnd+1];
@@ -304,20 +326,7 @@ void kexMapEditor::DrawWorld(void)
                 }
                 
                 kexRender::cUtils->DrawLine(*face->LeftEdge()->v2, *face->RightEdge()->v1, 255, 32, 64);
-                continue;
             }
-
-            if(face->BottomEdge()->flags & EGF_TOPSTEP)
-            {
-                continue;
-            }
-            
-            if(face->TopEdge()->flags & EGF_BOTTOMSTEP)
-            {
-                continue;
-            }
-            
-            kexRender::cUtils->DrawLine(*face->LeftEdge()->v2, *face->RightEdge()->v1, 255, 255, 255);
         }
     }
 }
