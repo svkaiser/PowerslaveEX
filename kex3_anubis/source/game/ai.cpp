@@ -214,7 +214,7 @@ void kexAI::OnDamage(kexActor *instigator)
         }
     }
     
-    if(kexRand::Max(255) < painChance)
+    if(kexRand::Byte() < painChance)
     {
         StartPain();
     }
@@ -506,7 +506,7 @@ bool kexAI::CheckRangeAttack(void)
         return false;
     }
 
-    if(((kexRand::Int() & 255) & 7) < 4)
+    if((kexRand::Byte() & 7) < 4)
     {
         return false;
     }

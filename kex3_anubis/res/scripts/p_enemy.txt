@@ -613,24 +613,24 @@ void A_SetThink(kAI @ai)
     int threshold = (80 - (ai.Health() / 75)) / 4;
     ai.MoveSpeed() = threshold;
     
-    if((ai.GameTicks() & 30) != (Math::Rand() & 30))
+    if(ai.RandomDecision(30))
     {
         return;
     }
     
-    if(Math::RandMax(255) <= 16)
+    if(Math::RandByte() <= 16)
     {
         ai.PlaySound("sounds/setact01.wav");
     }
     
-    if(ai.Health() < 1500 && (Math::RandMax(255) & 1) == 0)
+    if(ai.Health() < 1500 && (Math::RandByte() & 1) == 0)
     {
         ai.Movement().Clear();
         ai.Velocity().Clear();
         
         ai.ChangeAnim("monsters/set_fire_souls");
     }
-    else if(ai.Health() < 2000 && (Math::RandMax(255) & 3) == 0)
+    else if(ai.Health() < 2000 && (Math::RandByte() & 3) == 0)
     {
         ai.Movement().Clear();
         ai.Velocity().Clear();
@@ -690,4 +690,95 @@ void A_SetDeath(kActor @actor)
     actor.Friction() = 0.5f;
     
     Game.FireRemoteEventFromTag(1010);
+}
+
+//
+// A_SelkisThink
+//
+
+void A_SelkisThink(kAI @ai)
+{
+    int threshold = (96 - (ai.Health() / 83)) / 4;
+    ai.MoveSpeed() = threshold;
+    
+    if(ai.RandomDecision(30))
+    {
+        return;
+    }
+    
+    if((Math::RandByte() & 7) == 4)
+    {
+        ai.PlaySound("sounds/selkisact.wav");
+    }
+    
+    if((Math::RandByte() & 7) != 3)
+    {
+        return;
+    }
+    
+    if(ai.Health() < 1000)
+    {
+        ai.ChangeAnim("monsters/selkis_malfunction2");
+    }
+    else if(ai.Health() < 2000)
+    {
+        ai.ChangeAnim("monsters/selkis_malfunction1");
+    }
+    else if(ai.Health() < 3000)
+    {
+        ai.ChangeAnim("monsters/selkis_wounded");
+    }
+}
+
+//
+// A_SelkisCountDown
+//
+
+void A_SelkisCountDown(kActor @actor, int bStart)
+{
+    float x, y, z;
+    
+    if(bStart == 1)
+    {
+        actor.Health() = 40;
+        return;
+    }
+    
+    if(--actor.Health() <= 0)
+    {
+        actor.PlaySound("sounds/selkisdeath.wav");
+        actor.ChangeAnim("monsters/selkis_corpse");
+        
+        actor.Height() = 64.0f;
+        actor.Radius() = 32.0f;
+        
+        for(int i = 0; i < 12; ++i)
+        {
+            x = Math::RandCFloat() * 80.0f;
+            y = Math::RandCFloat() * 80.0f;
+            z = Math::RandCFloat() * 80.0f;
+    
+            kActor @spider = actor.SpawnActor("AI_Spider", x, y, z);
+            
+            spider.Velocity().x = x;
+            spider.Velocity().y = y;
+            spider.Velocity().z = z;
+            
+            spider.Movement() = spider.Velocity();
+        }
+    
+        Game.FireRemoteEventFromTag(1010);
+        return;
+    }
+    
+    if((Math::RandByte() & 1) == 0)
+    {
+        return;
+    }
+    
+    x = Math::RandCFloat() * 128.0f;
+    y = Math::RandCFloat() * 128.0f;
+    z = Math::RandCFloat() * 128.0f;
+    
+    actor.SpawnActor("Fx_Explosion01", x, y, z + 192.0f);
 }

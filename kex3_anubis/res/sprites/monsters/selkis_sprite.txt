@@ -1,0 +1,311 @@
+texture "sprites/monsters/selkis.png"
+
+// working\selkis\sprite0287.tga
+sprite 0 0 0 64 64
+
+// working\selkis\sprite0288.tga
+sprite 1 64 0 52 64
+
+// working\selkis\sprite0289.tga
+sprite 2 116 0 64 35
+
+// working\selkis\sprite0290.tga
+sprite 3 180 0 52 35
+
+// working\selkis\sprite0291.tga
+sprite 4 232 0 64 64
+
+// working\selkis\sprite0292.tga
+sprite 5 296 0 52 64
+
+// working\selkis\sprite0293.tga
+sprite 6 348 0 64 38
+
+// working\selkis\sprite0294.tga
+sprite 7 412 0 52 38
+
+// working\selkis\sprite0295.tga
+sprite 8 464 0 28 22
+
+// working\selkis\sprite0296.tga
+sprite 9 492 0 32 16
+
+// working\selkis\sprite0297.tga
+sprite 10 524 0 64 64
+
+// working\selkis\sprite0298.tga
+sprite 11 588 0 48 64
+
+// working\selkis\sprite0299.tga
+sprite 12 636 0 64 42
+
+// working\selkis\sprite0300.tga
+sprite 13 700 0 48 42
+
+// working\selkis\sprite0301.tga
+sprite 14 748 0 64 64
+
+// working\selkis\sprite0302.tga
+sprite 15 812 0 44 64
+
+// working\selkis\sprite0303.tga
+sprite 16 856 0 64 30
+
+// working\selkis\sprite0304.tga
+sprite 17 920 0 44 30
+
+// working\selkis\sprite0305.tga
+sprite 18 856 30 64 64
+
+// working\selkis\sprite0306.tga
+sprite 19 964 0 60 64
+
+// working\selkis\sprite0307.tga
+sprite 20 116 35 64 39
+
+// working\selkis\sprite0308.tga
+sprite 21 464 22 60 39
+
+// working\selkis\sprite0309.tga
+sprite 22 348 38 64 64
+
+// working\selkis\sprite0310.tga
+sprite 23 636 42 64 64
+
+// working\selkis\sprite0311.tga
+sprite 24 412 61 64 39
+
+// working\selkis\sprite0312.tga
+sprite 25 0 64 64 39
+
+// working\selkis\sprite0313.tga
+sprite 26 920 30 8 39
+
+// working\selkis\sprite0314.tga
+sprite 27 180 64 64 64
+
+// working\selkis\sprite0315.tga
+sprite 28 700 42 48 64
+
+// working\selkis\sprite0316.tga
+sprite 29 244 64 64 37
+
+// working\selkis\sprite0317.tga
+sprite 30 476 61 48 37
+
+// working\selkis\sprite0318.tga
+sprite 31 524 64 64 64
+
+// working\selkis\sprite0319.tga
+sprite 32 748 64 64 64
+
+// working\selkis\sprite0320.tga
+sprite 33 928 64 64 41
+
+// working\selkis\sprite0321.tga
+sprite 34 64 74 64 41
+
+// working\selkis\sprite0322.tga
+sprite 35 812 94 64 64
+
+// working\selkis\sprite0323.tga
+sprite 36 412 100 64 64
+
+// working\selkis\sprite0324.tga
+sprite 37 244 101 64 39
+
+// working\selkis\sprite0325.tga
+sprite 38 308 102 64 39
+
+// working\selkis\sprite0326.tga
+sprite 39 0 103 64 64
+
+// working\selkis\sprite0327.tga
+sprite 40 128 74 52 64
+
+// working\selkis\sprite0328.tga
+sprite 41 876 105 64 33
+
+// working\selkis\sprite0329.tga
+sprite 42 940 105 52 33
+
+// working\selkis\sprite0330.tga
+sprite 43 588 106 64 64
+
+// working\selkis\sprite0331.tga
+sprite 44 652 106 60 64
+
+// working\selkis\sprite0332.tga
+sprite 45 64 115 64 32
+
+// working\selkis\sprite0333.tga
+sprite 46 180 128 60 32
+
+// working\selkis\sprite0334.tga
+sprite 47 476 128 64 64
+
+// working\selkis\sprite0335.tga
+sprite 48 712 128 64 64
+
+// working\selkis\sprite0336.tga
+sprite 49 876 138 64 32
+
+// working\selkis\sprite0337.tga
+sprite 50 940 138 64 32
+
+// working\selkis\sprite0338.tga
+sprite 51 1004 64 4 32
+
+// working\selkis\sprite0339.tga
+sprite 52 372 102 28 22
+
+// working\selkis\sprite0340.tga
+sprite 53 240 140 64 64
+
+// working\selkis\sprite0341.tga
+sprite 54 128 138 52 64
+
+// working\selkis\sprite0342.tga
+sprite 55 304 141 64 31
+
+// working\selkis\sprite0343.tga
+sprite 56 64 147 52 31
+
+// working\selkis\sprite0344.tga
+sprite 57 1004 96 20 24
+
+// working\selkis\sprite0345.tga
+sprite 58 776 158 64 64
+
+// working\selkis\sprite0346.tga
+sprite 59 540 128 48 64
+
+// working\selkis\sprite0347.tga
+sprite 60 368 164 64 38
+
+// working\selkis\sprite0348.tga
+sprite 61 180 160 48 38
+
+// working\selkis\sprite0349.tga
+sprite 62 840 158 32 16
+
+// working\selkis\sprite0350.tga
+sprite 63 0 167 64 64
+
+// working\selkis\sprite0351.tga
+sprite 64 588 170 56 64
+
+// working\selkis\sprite0352.tga
+sprite 65 644 170 64 30
+
+// working\selkis\sprite0353.tga
+sprite 66 872 170 56 30
+
+// working\selkis\sprite0354.tga
+sprite 67 928 170 64 30
+
+// working\selkis\sprite0355.tga
+sprite 68 1004 120 16 30
+
+// working\selkis\sprite0356.tga
+sprite 69 304 172 64 64
+
+// working\selkis\sprite0357.tga
+sprite 70 64 178 52 64
+
+// working\selkis\sprite0358.tga
+sprite 71 432 192 64 39
+
+// working\selkis\sprite0359.tga
+sprite 72 496 192 52 39
+
+// working\selkis\sprite0360.tga
+sprite 73 708 192 64 64
+
+// working\selkis\sprite0361.tga
+sprite 74 180 198 52 64
+
+// working\selkis\sprite0362.tga
+sprite 75 644 200 64 31
+
+// working\selkis\sprite0363.tga
+sprite 76 840 200 52 31
+
+// working\selkis\sprite0364.tga
+sprite 77 892 200 64 64
+
+// working\selkis\sprite0365.tga
+sprite 78 956 200 56 64
+
+// working\selkis\sprite0366.tga
+sprite 79 116 202 64 30
+
+// working\selkis\sprite0367.tga
+sprite 80 368 202 56 30
+
+// working\selkis\sprite0368.tga
+sprite 81 232 204 64 64
+
+// working\selkis\sprite0369.tga
+sprite 82 772 222 60 64
+
+// working\selkis\sprite0370.tga
+sprite 83 0 231 64 31
+
+// working\selkis\sprite0371.tga
+sprite 84 424 231 60 31
+
+// working\selkis\sprite0372.tga
+sprite 85 484 231 64 64
+
+// working\selkis\sprite0373.tga
+sprite 86 644 231 60 64
+
+// working\selkis\sprite0374.tga
+sprite 87 116 232 64 42
+
+// working\selkis\sprite0375.tga
+sprite 88 832 231 60 42
+
+// working\selkis\sprite0376.tga
+sprite 89 548 192 40 35
+
+// working\selkis\sprite0377.tga
+sprite 90 548 234 64 64
+
+// working\selkis\sprite0378.tga
+sprite 91 368 232 44 64
+
+// working\selkis\sprite0379.tga
+sprite 92 296 236 64 35
+
+// working\selkis\sprite0380.tga
+sprite 93 64 242 44 35
+
+// working\selkis\sprite0381.tga
+sprite 94 704 256 64 64
+
+// working\selkis\sprite0382.tga
+sprite 95 0 262 52 64
+
+// working\selkis\sprite0383.tga
+sprite 96 412 262 64 41
+
+// working\selkis\sprite0384.tga
+sprite 97 180 262 52 41
+
+// working\selkis\sprite0385.tga
+sprite 98 612 234 28 24
+
+// working\selkis\sprite0386.tga
+sprite 99 892 264 64 64
+
+// working\selkis\sprite0387.tga
+sprite 100 956 264 52 64
+
+// working\selkis\sprite0388.tga
+sprite 101 232 268 64 45
+
+// working\selkis\sprite0389.tga
+sprite 102 296 271 52 45
+

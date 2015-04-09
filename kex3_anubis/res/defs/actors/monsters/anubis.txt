@@ -17,7 +17,7 @@ AI_Anubis 1
     shootable               1
     moveable                1
     noDropOff               1
-    painChance              128
+    painChance              64
     sightSound              "sounds/anubisact.wav"
 }
 

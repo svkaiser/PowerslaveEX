@@ -997,7 +997,6 @@ void kexWorld::FireRemoteEventFromTag(const int tag)
         }
 
         TriggerEvent(ev);
-        break;
     }
 }
 

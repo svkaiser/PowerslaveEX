@@ -55,7 +55,8 @@
     e->RegisterObjectMethod(asName, "kActor @SpawnActor(const kStr &in, const float, const float, const float)", asMETHODPR(clsName, SpawnActor, (const kexStr&, const float, const float, const float), kexActor*), asCALL_THISCALL);   \
     e->RegisterObjectMethod(asName, "kAngle &CollidedWallAngle(void)", asMETHODPR(clsName, CollidedWallAngle, (void), kexAngle&), asCALL_THISCALL);  \
     e->RegisterObjectMethod(asName, "kVec3 &CollidedWallNormal(void)", asMETHODPR(clsName, CollidedWallNormal, (void), kexVec3&), asCALL_THISCALL);  \
-    e->RegisterObjectMethod(asName, "bool CanSee(const kVec3 &in, const float)", asMETHODPR(clsName, CanSee, (kexVec3&, const float), bool), asCALL_THISCALL)
+    e->RegisterObjectMethod(asName, "bool CanSee(const kVec3 &in, const float)", asMETHODPR(clsName, CanSee, (kexVec3&, const float), bool), asCALL_THISCALL);  \
+    e->RegisterObjectMethod(asName, "bool RandomDecision(const int)", asMETHODPR(clsName, RandomDecision, (const int), bool), asCALL_THISCALL)
 
 //
 // kexScriptObjActor::Init

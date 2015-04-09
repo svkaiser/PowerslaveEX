@@ -1,0 +1,21 @@
+AI_Selkis 9
+{
+    classname               "kexAI"
+    radius                  96
+    height                  192
+    stepHeight              48
+    scale                   2.5
+    health                  4000
+    moveSpeed               12
+    spawnAnim               "monsters/selkis_idle"
+    chaseAnim               "monsters/selkis_chase"
+    painAnim                "monsters/selkis_pain"
+    meleeAnim               "monsters/selkis_melee"
+    rangeAttackAnim         "monsters/selkis_shoot"
+    deathAnim               "monsters/selkis_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    painChance              16
+    sightSound              "sounds/selkisact.wav"
+}

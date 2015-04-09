@@ -17,7 +17,7 @@ AI_Bastet 2
     moveable                1
     noDropOff               1
     lookAllAround           1
-    painChance              128
+    painChance              64
     meleeExtraDist          48
     turnSpeed               4
     sightSound              "sounds/bastetact02.wav"

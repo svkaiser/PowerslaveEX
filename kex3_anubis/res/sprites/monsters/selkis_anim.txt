@@ -1,0 +1,5955 @@
+selkis_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,    -62,  -96,    0 }
+                { "monsters/selkis", 23,      2,  -96,    0 }
+                { "monsters/selkis", 24,    -62,  -32,    0 }
+                { "monsters/selkis", 25,      2,  -32,    0 }
+                { "monsters/selkis", 26,     66,  -32,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,    -63,  -96,    0 }
+                { "monsters/selkis", 23,      1,  -96,    0 }
+                { "monsters/selkis", 24,    -63,  -32,    0 }
+                { "monsters/selkis", 25,      1,  -32,    0 }
+                { "monsters/selkis", 26,     65,  -32,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 14,    -53,  -92,    0 }
+                { "monsters/selkis", 15,     11,  -92,    0 }
+                { "monsters/selkis", 16,    -53,  -28,    0 }
+                { "monsters/selkis", 17,     11,  -28,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 43,    -64,  -99,    0 }
+                { "monsters/selkis", 44,      0,  -99,    0 }
+                { "monsters/selkis", 45,    -64,  -35,    0 }
+                { "monsters/selkis", 46,      0,  -35,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,    -57, -106,    0 }
+                { "monsters/selkis", 95,      7, -106,    0 }
+                { "monsters/selkis", 96,    -57,  -42,    0 }
+                { "monsters/selkis", 97,      7,  -42,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 63,     -5,  -93,    1 }
+                { "monsters/selkis", 64,    -61,  -93,    1 }
+                { "monsters/selkis", 65,     -5,  -29,    1 }
+                { "monsters/selkis", 66,    -61,  -29,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 14,    -17,  -96,    1 }
+                { "monsters/selkis", 15,    -61,  -96,    1 }
+                { "monsters/selkis", 16,    -17,  -32,    1 }
+                { "monsters/selkis", 17,    -61,  -32,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,      6,  -99,    1 }
+                { "monsters/selkis", 23,    -58,  -99,    1 }
+                { "monsters/selkis", 24,      6,  -35,    1 }
+                { "monsters/selkis", 25,    -58,  -35,    1 }
+                { "monsters/selkis", 26,    -66,  -35,    1 }
+            }
+        }
+
+    }
+}
+
+selkis_chase
+{
+    // frames:    8
+    frame
+    {
+        // ##000    0    0
+        action A_SelkisThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -51, -106,    0 }
+                { "monsters/selkis", 11,     13, -106,    0 }
+                { "monsters/selkis", 12,    -51,  -42,    0 }
+                { "monsters/selkis", 13,     13,  -42,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -51, -106,    0 }
+                { "monsters/selkis", 11,     13, -106,    0 }
+                { "monsters/selkis", 12,    -51,  -42,    0 }
+                { "monsters/selkis", 13,     13,  -42,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -52, -106,    0 }
+                { "monsters/selkis", 11,     12, -106,    0 }
+                { "monsters/selkis", 12,    -52,  -42,    0 }
+                { "monsters/selkis", 13,     12,  -42,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 43,    -69, -101,    0 }
+                { "monsters/selkis", 44,     -5, -101,    0 }
+                { "monsters/selkis", 45,    -69,  -37,    0 }
+                { "monsters/selkis", 46,     -5,  -37,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 43,    -69, -100,    0 }
+                { "monsters/selkis", 44,     -5, -100,    0 }
+                { "monsters/selkis", 45,    -69,  -36,    0 }
+                { "monsters/selkis", 46,     -5,  -36,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 43,      1, -102,    1 }
+                { "monsters/selkis", 44,    -59, -102,    1 }
+                { "monsters/selkis", 45,      1,  -38,    1 }
+                { "monsters/selkis", 46,    -59,  -38,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -16, -105,    1 }
+                { "monsters/selkis", 11,    -64, -105,    1 }
+                { "monsters/selkis", 12,    -16,  -41,    1 }
+                { "monsters/selkis", 13,    -64,  -41,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,      1,  -98,    1 }
+                { "monsters/selkis", 23,    -63,  -98,    1 }
+                { "monsters/selkis", 24,      1,  -34,    1 }
+                { "monsters/selkis", 25,    -63,  -34,    1 }
+                { "monsters/selkis", 26,    -71,  -34,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_SelkisThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -51, -105,    0 }
+                { "monsters/selkis", 11,     13, -105,    0 }
+                { "monsters/selkis", 12,    -51,  -41,    0 }
+                { "monsters/selkis", 13,     13,  -41,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -51, -106,    0 }
+                { "monsters/selkis", 11,     13, -106,    0 }
+                { "monsters/selkis", 12,    -51,  -42,    0 }
+                { "monsters/selkis", 13,     13,  -42,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -52, -106,    0 }
+                { "monsters/selkis", 11,     12, -106,    0 }
+                { "monsters/selkis", 12,    -52,  -42,    0 }
+                { "monsters/selkis", 13,     12,  -42,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 43,    -69, -101,    0 }
+                { "monsters/selkis", 44,     -5, -101,    0 }
+                { "monsters/selkis", 45,    -69,  -37,    0 }
+                { "monsters/selkis", 46,     -5,  -37,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 43,    -69, -100,    0 }
+                { "monsters/selkis", 44,     -5, -100,    0 }
+                { "monsters/selkis", 45,    -69,  -36,    0 }
+                { "monsters/selkis", 46,     -5,  -36,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 43,      1, -102,    1 }
+                { "monsters/selkis", 44,    -59, -102,    1 }
+                { "monsters/selkis", 45,      1,  -38,    1 }
+                { "monsters/selkis", 46,    -59,  -38,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -16, -105,    1 }
+                { "monsters/selkis", 11,    -64, -105,    1 }
+                { "monsters/selkis", 12,    -16,  -41,    1 }
+                { "monsters/selkis", 13,    -64,  -41,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,      1,  -98,    1 }
+                { "monsters/selkis", 23,    -63,  -98,    1 }
+                { "monsters/selkis", 24,      1,  -34,    1 }
+                { "monsters/selkis", 25,    -63,  -34,    1 }
+                { "monsters/selkis", 26,    -71,  -34,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        action A_SelkisThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,    -63, -100,    0 }
+                { "monsters/selkis", 23,      1, -100,    0 }
+                { "monsters/selkis", 24,    -63,  -36,    0 }
+                { "monsters/selkis", 25,      1,  -36,    0 }
+                { "monsters/selkis", 26,     65,  -36,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,    -63, -100,    0 }
+                { "monsters/selkis", 23,      1, -100,    0 }
+                { "monsters/selkis", 24,    -63,  -36,    0 }
+                { "monsters/selkis", 25,      1,  -36,    0 }
+                { "monsters/selkis", 26,     65,  -36,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,    -63, -100,    0 }
+                { "monsters/selkis", 23,      1, -100,    0 }
+                { "monsters/selkis", 24,    -63,  -36,    0 }
+                { "monsters/selkis", 25,      1,  -36,    0 }
+                { "monsters/selkis", 26,     65,  -36,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 53,    -64,  -97,    0 }
+                { "monsters/selkis", 54,      0,  -97,    0 }
+                { "monsters/selkis", 55,    -64,  -33,    0 }
+                { "monsters/selkis", 56,      0,  -33,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 53,    -64,  -96,    0 }
+                { "monsters/selkis", 54,      0,  -96,    0 }
+                { "monsters/selkis", 55,    -64,  -32,    0 }
+                { "monsters/selkis", 56,      0,  -32,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 53,     -4,  -97,    1 }
+                { "monsters/selkis", 54,    -56,  -97,    1 }
+                { "monsters/selkis", 55,     -4,  -33,    1 }
+                { "monsters/selkis", 56,    -56,  -33,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,     -1, -100,    1 }
+                { "monsters/selkis", 23,    -65, -100,    1 }
+                { "monsters/selkis", 24,     -1,  -36,    1 }
+                { "monsters/selkis", 25,    -65,  -36,    1 }
+                { "monsters/selkis", 26,    -73,  -36,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,     -6, -100,    1 }
+                { "monsters/selkis", 19,    -66, -100,    1 }
+                { "monsters/selkis", 20,     -6,  -36,    1 }
+                { "monsters/selkis", 21,    -66,  -36,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        action A_SelkisThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,    -63,  -99,    0 }
+                { "monsters/selkis", 23,      1,  -99,    0 }
+                { "monsters/selkis", 24,    -63,  -35,    0 }
+                { "monsters/selkis", 25,      1,  -35,    0 }
+                { "monsters/selkis", 26,     65,  -35,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,    -63,  -99,    0 }
+                { "monsters/selkis", 23,      1,  -99,    0 }
+                { "monsters/selkis", 24,    -63,  -35,    0 }
+                { "monsters/selkis", 25,      1,  -35,    0 }
+                { "monsters/selkis", 26,     65,  -35,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,    -63,  -99,    0 }
+                { "monsters/selkis", 23,      1,  -99,    0 }
+                { "monsters/selkis", 24,    -63,  -35,    0 }
+                { "monsters/selkis", 25,      1,  -35,    0 }
+                { "monsters/selkis", 26,     65,  -35,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 53,    -64,  -97,    0 }
+                { "monsters/selkis", 54,      0,  -97,    0 }
+                { "monsters/selkis", 55,    -64,  -33,    0 }
+                { "monsters/selkis", 56,      0,  -33,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 53,    -64,  -96,    0 }
+                { "monsters/selkis", 54,      0,  -96,    0 }
+                { "monsters/selkis", 55,    -64,  -32,    0 }
+                { "monsters/selkis", 56,      0,  -32,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 53,     -4,  -97,    1 }
+                { "monsters/selkis", 54,    -56,  -97,    1 }
+                { "monsters/selkis", 55,     -4,  -33,    1 }
+                { "monsters/selkis", 56,    -56,  -33,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 22,     -1,  -99,    1 }
+                { "monsters/selkis", 23,    -65,  -99,    1 }
+                { "monsters/selkis", 24,     -1,  -35,    1 }
+                { "monsters/selkis", 25,    -65,  -35,    1 }
+                { "monsters/selkis", 26,    -73,  -35,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,     -6, -101,    1 }
+                { "monsters/selkis", 19,    -66, -101,    1 }
+                { "monsters/selkis", 20,     -6,  -37,    1 }
+                { "monsters/selkis", 21,    -66,  -37,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        action A_SelkisThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,    -55, -102,    0 }
+                { "monsters/selkis", 19,      9, -102,    0 }
+                { "monsters/selkis", 20,    -55,  -38,    0 }
+                { "monsters/selkis", 21,      9,  -38,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,    -54, -103,    0 }
+                { "monsters/selkis", 19,     10, -103,    0 }
+                { "monsters/selkis", 20,    -54,  -39,    0 }
+                { "monsters/selkis", 21,     10,  -39,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,    -56, -101,    0 }
+                { "monsters/selkis", 19,      8, -101,    0 }
+                { "monsters/selkis", 20,    -56,  -37,    0 }
+                { "monsters/selkis", 21,      8,  -37,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 63,    -57,  -94,    0 }
+                { "monsters/selkis", 64,      7,  -94,    0 }
+                { "monsters/selkis", 65,    -57,  -30,    0 }
+                { "monsters/selkis", 66,      7,  -30,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 63,    -57,  -95,    0 }
+                { "monsters/selkis", 64,      7,  -95,    0 }
+                { "monsters/selkis", 65,    -57,  -31,    0 }
+                { "monsters/selkis", 66,      7,  -31,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 63,     -9,  -95,    1 }
+                { "monsters/selkis", 64,    -65,  -95,    1 }
+                { "monsters/selkis", 65,     -9,  -31,    1 }
+                { "monsters/selkis", 66,    -65,  -31,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,    -10, -101,    1 }
+                { "monsters/selkis", 19,    -70, -101,    1 }
+                { "monsters/selkis", 20,    -10,  -37,    1 }
+                { "monsters/selkis", 21,    -70,  -37,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,     -5, -107,    1 }
+                { "monsters/selkis", 32,    -69, -107,    1 }
+                { "monsters/selkis", 33,     -5,  -43,    1 }
+                { "monsters/selkis", 34,    -69,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        action A_SelkisThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,    -55, -103,    0 }
+                { "monsters/selkis", 19,      9, -103,    0 }
+                { "monsters/selkis", 20,    -55,  -39,    0 }
+                { "monsters/selkis", 21,      9,  -39,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,    -54, -104,    0 }
+                { "monsters/selkis", 19,     10, -104,    0 }
+                { "monsters/selkis", 20,    -54,  -40,    0 }
+                { "monsters/selkis", 21,     10,  -40,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,    -56, -102,    0 }
+                { "monsters/selkis", 19,      8, -102,    0 }
+                { "monsters/selkis", 20,    -56,  -38,    0 }
+                { "monsters/selkis", 21,      8,  -38,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 63,    -57,  -95,    0 }
+                { "monsters/selkis", 64,      7,  -95,    0 }
+                { "monsters/selkis", 65,    -57,  -31,    0 }
+                { "monsters/selkis", 66,      7,  -31,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 63,    -56,  -95,    0 }
+                { "monsters/selkis", 64,      8,  -95,    0 }
+                { "monsters/selkis", 65,    -56,  -31,    0 }
+                { "monsters/selkis", 66,      8,  -31,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 63,     -9,  -95,    1 }
+                { "monsters/selkis", 64,    -65,  -95,    1 }
+                { "monsters/selkis", 65,     -9,  -31,    1 }
+                { "monsters/selkis", 66,    -65,  -31,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 18,    -10, -102,    1 }
+                { "monsters/selkis", 19,    -70, -102,    1 }
+                { "monsters/selkis", 20,    -10,  -38,    1 }
+                { "monsters/selkis", 21,    -70,  -38,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,     -5, -108,    1 }
+                { "monsters/selkis", 32,    -69, -108,    1 }
+                { "monsters/selkis", 33,     -5,  -44,    1 }
+                { "monsters/selkis", 34,    -69,  -44,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        action A_SelkisThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,    -57, -109,    0 }
+                { "monsters/selkis", 32,      7, -109,    0 }
+                { "monsters/selkis", 33,    -57,  -45,    0 }
+                { "monsters/selkis", 34,      7,  -45,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,    -57, -109,    0 }
+                { "monsters/selkis", 32,      7, -109,    0 }
+                { "monsters/selkis", 33,    -57,  -45,    0 }
+                { "monsters/selkis", 34,      7,  -45,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,    -58, -108,    0 }
+                { "monsters/selkis", 32,      6, -108,    0 }
+                { "monsters/selkis", 33,    -58,  -44,    0 }
+                { "monsters/selkis", 34,      6,  -44,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 73,    -45,  -96,    0 }
+                { "monsters/selkis", 74,     19,  -96,    0 }
+                { "monsters/selkis", 75,    -45,  -32,    0 }
+                { "monsters/selkis", 76,     19,  -32,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 73,    -45,  -96,    0 }
+                { "monsters/selkis", 74,     19,  -96,    0 }
+                { "monsters/selkis", 75,    -45,  -32,    0 }
+                { "monsters/selkis", 76,     19,  -32,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 73,    -23,  -96,    1 }
+                { "monsters/selkis", 74,    -75,  -96,    1 }
+                { "monsters/selkis", 75,    -23,  -32,    1 }
+                { "monsters/selkis", 76,    -75,  -32,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,     -9, -108,    1 }
+                { "monsters/selkis", 32,    -73, -108,    1 }
+                { "monsters/selkis", 33,     -9,  -44,    1 }
+                { "monsters/selkis", 34,    -73,  -44,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -13, -106,    1 }
+                { "monsters/selkis", 11,    -61, -106,    1 }
+                { "monsters/selkis", 12,    -13,  -42,    1 }
+                { "monsters/selkis", 13,    -61,  -42,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        action A_SelkisThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,    -57, -110,    0 }
+                { "monsters/selkis", 32,      7, -110,    0 }
+                { "monsters/selkis", 33,    -57,  -46,    0 }
+                { "monsters/selkis", 34,      7,  -46,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,    -56, -110,    0 }
+                { "monsters/selkis", 32,      8, -110,    0 }
+                { "monsters/selkis", 33,    -56,  -46,    0 }
+                { "monsters/selkis", 34,      8,  -46,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,    -58, -109,    0 }
+                { "monsters/selkis", 32,      6, -109,    0 }
+                { "monsters/selkis", 33,    -58,  -45,    0 }
+                { "monsters/selkis", 34,      6,  -45,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 73,    -45,  -95,    0 }
+                { "monsters/selkis", 74,     19,  -95,    0 }
+                { "monsters/selkis", 75,    -45,  -31,    0 }
+                { "monsters/selkis", 76,     19,  -31,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 73,    -45,  -97,    0 }
+                { "monsters/selkis", 74,     19,  -97,    0 }
+                { "monsters/selkis", 75,    -45,  -33,    0 }
+                { "monsters/selkis", 76,     19,  -33,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 73,    -24,  -96,    1 }
+                { "monsters/selkis", 74,    -76,  -96,    1 }
+                { "monsters/selkis", 75,    -24,  -32,    1 }
+                { "monsters/selkis", 76,    -76,  -32,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 31,     -9, -109,    1 }
+                { "monsters/selkis", 32,    -73, -109,    1 }
+                { "monsters/selkis", 33,     -9,  -45,    1 }
+                { "monsters/selkis", 34,    -73,  -45,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 10,    -13, -105,    1 }
+                { "monsters/selkis", 11,    -61, -105,    1 }
+                { "monsters/selkis", 12,    -13,  -41,    1 }
+                { "monsters/selkis", 13,    -61,  -41,    1 }
+            }
+        }
+
+    }
+}
+
+selkis_shoot
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 27,    -52, -104,    0 }
+                { "monsters/selkis", 28,     12, -104,    0 }
+                { "monsters/selkis", 29,    -52,  -40,    0 }
+                { "monsters/selkis", 30,     12,  -40,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 27,    -54, -104,    0 }
+                { "monsters/selkis", 28,     10, -104,    0 }
+                { "monsters/selkis", 29,    -54,  -40,    0 }
+                { "monsters/selkis", 30,     10,  -40,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 69,    -65, -101,    0 }
+                { "monsters/selkis", 70,     -1, -101,    0 }
+                { "monsters/selkis", 71,    -65,  -37,    0 }
+                { "monsters/selkis", 72,     -1,  -37,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,    -65, -107,    0 }
+                { "monsters/selkis", 95,     -1, -107,    0 }
+                { "monsters/selkis", 96,    -65,  -43,    0 }
+                { "monsters/selkis", 97,     -1,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,    -63, -107,    0 }
+                { "monsters/selkis", 95,      1, -107,    0 }
+                { "monsters/selkis", 96,    -63,  -43,    0 }
+                { "monsters/selkis", 97,      1,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,     -2, -107,    1 }
+                { "monsters/selkis", 95,    -54, -107,    1 }
+                { "monsters/selkis", 96,     -2,  -43,    1 }
+                { "monsters/selkis", 97,    -54,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 69,     -2, -100,    1 }
+                { "monsters/selkis", 70,    -54, -100,    1 }
+                { "monsters/selkis", 71,     -2,  -36,    1 }
+                { "monsters/selkis", 72,    -54,  -36,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 27,     -8, -104,    1 }
+                { "monsters/selkis", 28,    -56, -104,    1 }
+                { "monsters/selkis", 29,     -8,  -40,    1 }
+                { "monsters/selkis", 30,    -56,  -40,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 27,    -52, -104,    0 }
+                { "monsters/selkis", 28,     12, -104,    0 }
+                { "monsters/selkis", 29,    -52,  -40,    0 }
+                { "monsters/selkis", 30,     12,  -40,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 27,    -54, -104,    0 }
+                { "monsters/selkis", 28,     10, -104,    0 }
+                { "monsters/selkis", 29,    -54,  -40,    0 }
+                { "monsters/selkis", 30,     10,  -40,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 69,    -65, -101,    0 }
+                { "monsters/selkis", 70,     -1, -101,    0 }
+                { "monsters/selkis", 71,    -65,  -37,    0 }
+                { "monsters/selkis", 72,     -1,  -37,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,    -65, -107,    0 }
+                { "monsters/selkis", 95,     -1, -107,    0 }
+                { "monsters/selkis", 96,    -65,  -43,    0 }
+                { "monsters/selkis", 97,     -1,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,    -63, -107,    0 }
+                { "monsters/selkis", 95,      1, -107,    0 }
+                { "monsters/selkis", 96,    -63,  -43,    0 }
+                { "monsters/selkis", 97,      1,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,     -2, -107,    1 }
+                { "monsters/selkis", 95,    -54, -107,    1 }
+                { "monsters/selkis", 96,     -2,  -43,    1 }
+                { "monsters/selkis", 97,    -54,  -43,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 69,     -2, -101,    1 }
+                { "monsters/selkis", 70,    -54, -101,    1 }
+                { "monsters/selkis", 71,     -2,  -37,    1 }
+                { "monsters/selkis", 72,    -54,  -37,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 27,     -8, -104,    1 }
+                { "monsters/selkis", 28,    -56, -104,    1 }
+                { "monsters/selkis", 29,     -8,  -40,    1 }
+                { "monsters/selkis", 30,    -56,  -40,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 27,    -52, -104,    0 }
+                { "monsters/selkis", 28,     12, -104,    0 }
+                { "monsters/selkis", 29,    -52,  -40,    0 }
+                { "monsters/selkis", 30,     12,  -40,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 27,    -54, -104,    0 }
+                { "monsters/selkis", 28,     10, -104,    0 }
+                { "monsters/selkis", 29,    -54,  -40,    0 }
+                { "monsters/selkis", 30,     10,  -40,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 69,    -65, -101,    0 }
+                { "monsters/selkis", 70,     -1, -101,    0 }
+                { "monsters/selkis", 71,    -65,  -37,    0 }
+                { "monsters/selkis", 72,     -1,  -37,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,    -65, -107,    0 }
+                { "monsters/selkis", 95,     -1, -107,    0 }
+                { "monsters/selkis", 96,    -65,  -43,    0 }
+                { "monsters/selkis", 97,     -1,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,    -63, -107,    0 }
+                { "monsters/selkis", 95,      1, -107,    0 }
+                { "monsters/selkis", 96,    -63,  -43,    0 }
+                { "monsters/selkis", 97,      1,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 94,     -2, -107,    1 }
+                { "monsters/selkis", 95,    -54, -107,    1 }
+                { "monsters/selkis", 96,     -2,  -43,    1 }
+                { "monsters/selkis", 97,    -54,  -43,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 69,     -2, -100,    1 }
+                { "monsters/selkis", 70,    -54, -100,    1 }
+                { "monsters/selkis", 71,     -2,  -36,    1 }
+                { "monsters/selkis", 72,    -54,  -36,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 27,     -8, -104,    1 }
+                { "monsters/selkis", 28,    -56, -104,    1 }
+                { "monsters/selkis", 29,     -8,  -40,    1 }
+                { "monsters/selkis", 30,    -56,  -40,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003   70  132
+        action A_PlayLocalSound("sounds/sentryfire.wav")
+        action A_FireProjectile("Proj_Cobra_Red", 0, 0, 2, 144, 64)
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 39,    -57, -100,    0 }
+                { "monsters/selkis", 40,      7, -100,    0 }
+                { "monsters/selkis", 41,    -57,  -36,    0 }
+                { "monsters/selkis", 42,      7,  -36,    0 }
+                { "monsters/selkis", 52,    -12,  -83,    0 }
+            }
+        }
+        // ##003   70    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 39,    -59, -100,    0 }
+                { "monsters/selkis", 40,      5, -100,    0 }
+                { "monsters/selkis", 41,    -59,  -36,    0 }
+                { "monsters/selkis", 42,      5,  -36,    0 }
+                { "monsters/selkis", 62,    -30,  -81,    0 }
+            }
+        }
+        // ##003   70    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 85,    -66, -105,    0 }
+                { "monsters/selkis", 86,     -2, -105,    0 }
+                { "monsters/selkis", 87,    -66,  -41,    0 }
+                { "monsters/selkis", 88,     -2,  -41,    0 }
+            }
+        }
+        // ##003   70    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 9,    -21,  -81,    0 }
+                { "monsters/selkis", 99,    -62, -107,    0 }
+                { "monsters/selkis", 100,      2, -107,    0 }
+                { "monsters/selkis", 101,    -62,  -43,    0 }
+                { "monsters/selkis", 102,      2,  -43,    0 }
+            }
+        }
+        // ##003   70    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 99,    -62, -107,    0 }
+                { "monsters/selkis", 100,      2, -107,    0 }
+                { "monsters/selkis", 101,    -62,  -43,    0 }
+                { "monsters/selkis", 102,      2,  -43,    0 }
+                { "monsters/selkis", 8,      0,  -87,    0 }
+            }
+        }
+        // ##003   70    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 9,    -15,  -81,    1 }
+                { "monsters/selkis", 99,     -6, -107,    1 }
+                { "monsters/selkis", 100,    -58, -107,    1 }
+                { "monsters/selkis", 101,     -6,  -43,    1 }
+                { "monsters/selkis", 102,    -58,  -43,    1 }
+            }
+        }
+        // ##003   70    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 85,      1, -104,    1 }
+                { "monsters/selkis", 86,    -59, -104,    1 }
+                { "monsters/selkis", 87,      1,  -40,    1 }
+                { "monsters/selkis", 88,    -59,  -40,    1 }
+            }
+        }
+        // ##003   70    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 39,     -2, -101,    1 }
+                { "monsters/selkis", 40,    -54, -101,    1 }
+                { "monsters/selkis", 41,     -2,  -37,    1 }
+                { "monsters/selkis", 42,    -54,  -37,    1 }
+                { "monsters/selkis", 62,      0,  -82,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 39,    -57, -100,    0 }
+                { "monsters/selkis", 40,      7, -100,    0 }
+                { "monsters/selkis", 41,    -57,  -36,    0 }
+                { "monsters/selkis", 42,      7,  -36,    0 }
+                { "monsters/selkis", 52,    -12,  -82,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 39,    -57, -100,    0 }
+                { "monsters/selkis", 40,      7, -100,    0 }
+                { "monsters/selkis", 41,    -57,  -36,    0 }
+                { "monsters/selkis", 42,      7,  -36,    0 }
+                { "monsters/selkis", 62,    -28,  -80,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 85,    -65, -105,    0 }
+                { "monsters/selkis", 86,     -1, -105,    0 }
+                { "monsters/selkis", 87,    -65,  -41,    0 }
+                { "monsters/selkis", 88,     -1,  -41,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 9,    -20,  -81,    0 }
+                { "monsters/selkis", 99,    -61, -107,    0 }
+                { "monsters/selkis", 100,      3, -107,    0 }
+                { "monsters/selkis", 101,    -61,  -43,    0 }
+                { "monsters/selkis", 102,      3,  -43,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 99,    -62, -107,    0 }
+                { "monsters/selkis", 100,      2, -107,    0 }
+                { "monsters/selkis", 101,    -62,  -43,    0 }
+                { "monsters/selkis", 102,      2,  -43,    0 }
+                { "monsters/selkis", 8,      0,  -86,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 9,    -14,  -81,    1 }
+                { "monsters/selkis", 99,     -5, -107,    1 }
+                { "monsters/selkis", 100,    -57, -107,    1 }
+                { "monsters/selkis", 101,     -5,  -43,    1 }
+                { "monsters/selkis", 102,    -57,  -43,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 85,      0, -104,    1 }
+                { "monsters/selkis", 86,    -60, -104,    1 }
+                { "monsters/selkis", 87,      0,  -40,    1 }
+                { "monsters/selkis", 88,    -60,  -40,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 39,     -1, -101,    1 }
+                { "monsters/selkis", 40,    -53, -101,    1 }
+                { "monsters/selkis", 41,     -1,  -37,    1 }
+                { "monsters/selkis", 42,    -53,  -37,    1 }
+                { "monsters/selkis", 62,      1,  -81,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        goto "monsters/selkis_chase"
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 39,    -57, -100,    0 }
+                { "monsters/selkis", 40,      7, -100,    0 }
+                { "monsters/selkis", 41,    -57,  -36,    0 }
+                { "monsters/selkis", 42,      7,  -36,    0 }
+                { "monsters/selkis", 52,    -12,  -83,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 39,    -58, -100,    0 }
+                { "monsters/selkis", 40,      6, -100,    0 }
+                { "monsters/selkis", 41,    -58,  -36,    0 }
+                { "monsters/selkis", 42,      6,  -36,    0 }
+                { "monsters/selkis", 62,    -29,  -80,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 85,    -65, -105,    0 }
+                { "monsters/selkis", 86,     -1, -105,    0 }
+                { "monsters/selkis", 87,    -65,  -41,    0 }
+                { "monsters/selkis", 88,     -1,  -41,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 9,    -21,  -81,    0 }
+                { "monsters/selkis", 99,    -62, -107,    0 }
+                { "monsters/selkis", 100,      2, -107,    0 }
+                { "monsters/selkis", 101,    -62,  -43,    0 }
+                { "monsters/selkis", 102,      2,  -43,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 99,    -62, -107,    0 }
+                { "monsters/selkis", 100,      2, -107,    0 }
+                { "monsters/selkis", 101,    -62,  -43,    0 }
+                { "monsters/selkis", 102,      2,  -43,    0 }
+                { "monsters/selkis", 8,      0,  -87,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 9,    -13,  -81,    1 }
+                { "monsters/selkis", 99,     -4, -107,    1 }
+                { "monsters/selkis", 100,    -56, -107,    1 }
+                { "monsters/selkis", 101,     -4,  -43,    1 }
+                { "monsters/selkis", 102,    -56,  -43,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 85,      1, -104,    1 }
+                { "monsters/selkis", 86,    -59, -104,    1 }
+                { "monsters/selkis", 87,      1,  -40,    1 }
+                { "monsters/selkis", 88,    -59,  -40,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 39,     -1, -101,    1 }
+                { "monsters/selkis", 40,    -53, -101,    1 }
+                { "monsters/selkis", 41,     -1,  -37,    1 }
+                { "monsters/selkis", 42,    -53,  -37,    1 }
+                { "monsters/selkis", 62,      1,  -83,    1 }
+            }
+        }
+    }
+}
+
+selkis_melee
+{
+    // frames:    9
+    frame
+    {
+        // ##000   73    0
+        action A_PlayLocalSound("sounds/selkisatk01.wav")
+        action A_MeleeAttack(48, 20)
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 58,    -50, -106,    0 }
+                { "monsters/selkis", 59,     14, -106,    0 }
+                { "monsters/selkis", 60,    -50,  -42,    0 }
+                { "monsters/selkis", 61,     14,  -42,    0 }
+            }
+        }
+        // ##000   73    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 58,    -52, -103,    0 }
+                { "monsters/selkis", 59,     12, -103,    0 }
+                { "monsters/selkis", 60,    -52,  -39,    0 }
+                { "monsters/selkis", 61,     12,  -39,    0 }
+            }
+        }
+        // ##000   73    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -102,    0 }
+                { "monsters/selkis", 91,      6, -102,    0 }
+                { "monsters/selkis", 92,    -58,  -38,    0 }
+                { "monsters/selkis", 93,      6,  -38,    0 }
+            }
+        }
+        // ##000   73    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57, -103,    0 }
+                { "monsters/selkis", 91,      7, -103,    0 }
+                { "monsters/selkis", 92,    -57,  -39,    0 }
+                { "monsters/selkis", 93,      7,  -39,    0 }
+            }
+        }
+        // ##000   73    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -101,    1 }
+                { "monsters/selkis", 91,    -50, -101,    1 }
+                { "monsters/selkis", 92,     -6,  -37,    1 }
+                { "monsters/selkis", 93,    -50,  -37,    1 }
+            }
+        }
+        // ##000   73    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -101,    1 }
+                { "monsters/selkis", 91,    -50, -101,    1 }
+                { "monsters/selkis", 92,     -6,  -37,    1 }
+                { "monsters/selkis", 93,    -50,  -37,    1 }
+            }
+        }
+        // ##000   73    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 58,    -12, -101,    1 }
+                { "monsters/selkis", 59,    -60, -101,    1 }
+                { "monsters/selkis", 60,    -12,  -37,    1 }
+                { "monsters/selkis", 61,    -60,  -37,    1 }
+            }
+        }
+        // ##000   73    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 58,    -12, -105,    1 }
+                { "monsters/selkis", 59,    -60, -105,    1 }
+                { "monsters/selkis", 60,    -12,  -41,    1 }
+                { "monsters/selkis", 61,    -60,  -41,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 58,    -50, -106,    0 }
+                { "monsters/selkis", 59,     14, -106,    0 }
+                { "monsters/selkis", 60,    -50,  -42,    0 }
+                { "monsters/selkis", 61,     14,  -42,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 58,    -52, -103,    0 }
+                { "monsters/selkis", 59,     12, -103,    0 }
+                { "monsters/selkis", 60,    -52,  -39,    0 }
+                { "monsters/selkis", 61,     12,  -39,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -102,    0 }
+                { "monsters/selkis", 91,      6, -102,    0 }
+                { "monsters/selkis", 92,    -58,  -38,    0 }
+                { "monsters/selkis", 93,      6,  -38,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57, -103,    0 }
+                { "monsters/selkis", 91,      7, -103,    0 }
+                { "monsters/selkis", 92,    -57,  -39,    0 }
+                { "monsters/selkis", 93,      7,  -39,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -101,    1 }
+                { "monsters/selkis", 91,    -50, -101,    1 }
+                { "monsters/selkis", 92,     -6,  -37,    1 }
+                { "monsters/selkis", 93,    -50,  -37,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -101,    1 }
+                { "monsters/selkis", 91,    -50, -101,    1 }
+                { "monsters/selkis", 92,     -6,  -37,    1 }
+                { "monsters/selkis", 93,    -50,  -37,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 58,    -12, -101,    1 }
+                { "monsters/selkis", 59,    -60, -101,    1 }
+                { "monsters/selkis", 60,    -12,  -37,    1 }
+                { "monsters/selkis", 61,    -60,  -37,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 58,    -12, -105,    1 }
+                { "monsters/selkis", 59,    -60, -105,    1 }
+                { "monsters/selkis", 60,    -12,  -41,    1 }
+                { "monsters/selkis", 61,    -60,  -41,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002   68    0
+        action A_PlayLocalSound("sounds/selkisatk02.wav")
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -55,  -99,    0 }
+                { "monsters/selkis", 48,      9,  -99,    0 }
+                { "monsters/selkis", 49,    -55,  -35,    0 }
+                { "monsters/selkis", 50,      9,  -35,    0 }
+                { "monsters/selkis", 51,     73,  -35,    0 }
+            }
+        }
+        // ##002   68    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -58,  -95,    0 }
+                { "monsters/selkis", 48,      6,  -95,    0 }
+                { "monsters/selkis", 49,    -58,  -31,    0 }
+                { "monsters/selkis", 50,      6,  -31,    0 }
+                { "monsters/selkis", 51,     70,  -31,    0 }
+            }
+        }
+        // ##002   68    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -46,  -95,    0 }
+                { "monsters/selkis", 1,     18,  -95,    0 }
+                { "monsters/selkis", 2,    -46,  -31,    0 }
+                { "monsters/selkis", 3,     18,  -31,    0 }
+            }
+        }
+        // ##002   68    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57, -103,    0 }
+                { "monsters/selkis", 91,      7, -103,    0 }
+                { "monsters/selkis", 92,    -57,  -39,    0 }
+                { "monsters/selkis", 93,      7,  -39,    0 }
+            }
+        }
+        // ##002   68    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -101,    1 }
+                { "monsters/selkis", 91,    -50, -101,    1 }
+                { "monsters/selkis", 92,     -6,  -37,    1 }
+                { "monsters/selkis", 93,    -50,  -37,    1 }
+            }
+        }
+        // ##002   68    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -11,  -93,    1 }
+                { "monsters/selkis", 1,    -63,  -93,    1 }
+                { "monsters/selkis", 2,    -11,  -29,    1 }
+                { "monsters/selkis", 3,    -63,  -29,    1 }
+            }
+        }
+        // ##002   68    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -5,  -94,    1 }
+                { "monsters/selkis", 48,    -69,  -94,    1 }
+                { "monsters/selkis", 49,     -5,  -30,    1 }
+                { "monsters/selkis", 50,    -69,  -30,    1 }
+                { "monsters/selkis", 51,    -73,  -30,    1 }
+            }
+        }
+        // ##002   68    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -5,  -97,    1 }
+                { "monsters/selkis", 48,    -69,  -97,    1 }
+                { "monsters/selkis", 49,     -5,  -33,    1 }
+                { "monsters/selkis", 50,    -69,  -33,    1 }
+                { "monsters/selkis", 51,    -73,  -33,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -55,  -99,    0 }
+                { "monsters/selkis", 48,      9,  -99,    0 }
+                { "monsters/selkis", 49,    -55,  -35,    0 }
+                { "monsters/selkis", 50,      9,  -35,    0 }
+                { "monsters/selkis", 51,     73,  -35,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -58,  -95,    0 }
+                { "monsters/selkis", 48,      6,  -95,    0 }
+                { "monsters/selkis", 49,    -58,  -31,    0 }
+                { "monsters/selkis", 50,      6,  -31,    0 }
+                { "monsters/selkis", 51,     70,  -31,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -46,  -95,    0 }
+                { "monsters/selkis", 1,     18,  -95,    0 }
+                { "monsters/selkis", 2,    -46,  -31,    0 }
+                { "monsters/selkis", 3,     18,  -31,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -47,  -94,    0 }
+                { "monsters/selkis", 1,     17,  -94,    0 }
+                { "monsters/selkis", 2,    -47,  -30,    0 }
+                { "monsters/selkis", 3,     17,  -30,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -15,  -95,    1 }
+                { "monsters/selkis", 1,    -67,  -95,    1 }
+                { "monsters/selkis", 2,    -15,  -31,    1 }
+                { "monsters/selkis", 3,    -67,  -31,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -11,  -93,    1 }
+                { "monsters/selkis", 1,    -63,  -93,    1 }
+                { "monsters/selkis", 2,    -11,  -29,    1 }
+                { "monsters/selkis", 3,    -63,  -29,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -5,  -94,    1 }
+                { "monsters/selkis", 48,    -69,  -94,    1 }
+                { "monsters/selkis", 49,     -5,  -30,    1 }
+                { "monsters/selkis", 50,    -69,  -30,    1 }
+                { "monsters/selkis", 51,    -73,  -30,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -55,  -99,    0 }
+                { "monsters/selkis", 48,      9,  -99,    0 }
+                { "monsters/selkis", 49,    -55,  -35,    0 }
+                { "monsters/selkis", 50,      9,  -35,    0 }
+                { "monsters/selkis", 51,     73,  -35,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -59,  -95,    0 }
+                { "monsters/selkis", 48,      5,  -95,    0 }
+                { "monsters/selkis", 49,    -59,  -31,    0 }
+                { "monsters/selkis", 50,      5,  -31,    0 }
+                { "monsters/selkis", 51,     69,  -31,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -46,  -95,    0 }
+                { "monsters/selkis", 1,     18,  -95,    0 }
+                { "monsters/selkis", 2,    -46,  -31,    0 }
+                { "monsters/selkis", 3,     18,  -31,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -47,  -95,    0 }
+                { "monsters/selkis", 1,     17,  -95,    0 }
+                { "monsters/selkis", 2,    -47,  -31,    0 }
+                { "monsters/selkis", 3,     17,  -31,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -15,  -95,    1 }
+                { "monsters/selkis", 1,    -67,  -95,    1 }
+                { "monsters/selkis", 2,    -15,  -31,    1 }
+                { "monsters/selkis", 3,    -67,  -31,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -11,  -93,    1 }
+                { "monsters/selkis", 1,    -63,  -93,    1 }
+                { "monsters/selkis", 2,    -11,  -29,    1 }
+                { "monsters/selkis", 3,    -63,  -29,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -94,    1 }
+                { "monsters/selkis", 48,    -68,  -94,    1 }
+                { "monsters/selkis", 49,     -4,  -30,    1 }
+                { "monsters/selkis", 50,    -68,  -30,    1 }
+                { "monsters/selkis", 51,    -72,  -30,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005   73    0
+        action A_PlayLocalSound("sounds/selkisatk01.wav")
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 35,    -58, -103,    0 }
+                { "monsters/selkis", 36,      6, -103,    0 }
+                { "monsters/selkis", 37,    -58,  -39,    0 }
+                { "monsters/selkis", 38,      6,  -39,    0 }
+            }
+        }
+        // ##005   73    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 35,    -59, -103,    0 }
+                { "monsters/selkis", 36,      5, -103,    0 }
+                { "monsters/selkis", 37,    -59,  -39,    0 }
+                { "monsters/selkis", 38,      5,  -39,    0 }
+            }
+        }
+        // ##005   73    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -55,  -97,    0 }
+                { "monsters/selkis", 5,      9,  -97,    0 }
+                { "monsters/selkis", 6,    -55,  -33,    0 }
+                { "monsters/selkis", 7,      9,  -33,    0 }
+            }
+        }
+        // ##005   73    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -55,  -97,    0 }
+                { "monsters/selkis", 5,      9,  -97,    0 }
+                { "monsters/selkis", 6,    -55,  -33,    0 }
+                { "monsters/selkis", 7,      9,  -33,    0 }
+            }
+        }
+        // ##005   73    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -15,  -96,    1 }
+                { "monsters/selkis", 1,    -67,  -96,    1 }
+                { "monsters/selkis", 2,    -15,  -32,    1 }
+                { "monsters/selkis", 3,    -67,  -32,    1 }
+            }
+        }
+        // ##005   73    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,     -3,  -95,    1 }
+                { "monsters/selkis", 5,    -55,  -95,    1 }
+                { "monsters/selkis", 6,     -3,  -31,    1 }
+                { "monsters/selkis", 7,    -55,  -31,    1 }
+            }
+        }
+        // ##005   73    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 35,     -5, -103,    1 }
+                { "monsters/selkis", 36,    -69, -103,    1 }
+                { "monsters/selkis", 37,     -5,  -39,    1 }
+                { "monsters/selkis", 38,    -69,  -39,    1 }
+            }
+        }
+        // ##005   73    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 35,     -2, -102,    1 }
+                { "monsters/selkis", 36,    -66, -102,    1 }
+                { "monsters/selkis", 37,     -2,  -38,    1 }
+                { "monsters/selkis", 38,    -66,  -38,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        action A_MeleeAttack(48, 20)
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 35,    -58, -103,    0 }
+                { "monsters/selkis", 36,      6, -103,    0 }
+                { "monsters/selkis", 37,    -58,  -39,    0 }
+                { "monsters/selkis", 38,      6,  -39,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 35,    -59, -103,    0 }
+                { "monsters/selkis", 36,      5, -103,    0 }
+                { "monsters/selkis", 37,    -59,  -39,    0 }
+                { "monsters/selkis", 38,      5,  -39,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -55,  -98,    0 }
+                { "monsters/selkis", 5,      9,  -98,    0 }
+                { "monsters/selkis", 6,    -55,  -34,    0 }
+                { "monsters/selkis", 7,      9,  -34,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -55,  -97,    0 }
+                { "monsters/selkis", 5,      9,  -97,    0 }
+                { "monsters/selkis", 6,    -55,  -33,    0 }
+                { "monsters/selkis", 7,      9,  -33,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,     -4,  -98,    1 }
+                { "monsters/selkis", 5,    -56,  -98,    1 }
+                { "monsters/selkis", 6,     -4,  -34,    1 }
+                { "monsters/selkis", 7,    -56,  -34,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,     -3,  -95,    1 }
+                { "monsters/selkis", 5,    -55,  -95,    1 }
+                { "monsters/selkis", 6,     -3,  -31,    1 }
+                { "monsters/selkis", 7,    -55,  -31,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 35,     -5, -103,    1 }
+                { "monsters/selkis", 36,    -69, -103,    1 }
+                { "monsters/selkis", 37,     -5,  -39,    1 }
+                { "monsters/selkis", 38,    -69,  -39,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 35,     -2, -102,    1 }
+                { "monsters/selkis", 36,    -66, -102,    1 }
+                { "monsters/selkis", 37,     -2,  -38,    1 }
+                { "monsters/selkis", 38,    -66,  -38,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -54,  -97,    0 }
+                { "monsters/selkis", 48,     10,  -97,    0 }
+                { "monsters/selkis", 49,    -54,  -33,    0 }
+                { "monsters/selkis", 50,     10,  -33,    0 }
+                { "monsters/selkis", 51,     74,  -33,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -57,  -95,    0 }
+                { "monsters/selkis", 48,      7,  -95,    0 }
+                { "monsters/selkis", 49,    -57,  -31,    0 }
+                { "monsters/selkis", 50,      7,  -31,    0 }
+                { "monsters/selkis", 51,     71,  -31,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -47,  -94,    0 }
+                { "monsters/selkis", 1,     17,  -94,    0 }
+                { "monsters/selkis", 2,    -47,  -30,    0 }
+                { "monsters/selkis", 3,     17,  -30,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -49,  -96,    0 }
+                { "monsters/selkis", 1,     15,  -96,    0 }
+                { "monsters/selkis", 2,    -49,  -32,    0 }
+                { "monsters/selkis", 3,     15,  -32,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,     -4,  -98,    1 }
+                { "monsters/selkis", 5,    -56,  -98,    1 }
+                { "monsters/selkis", 6,     -4,  -34,    1 }
+                { "monsters/selkis", 7,    -56,  -34,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,     -9,  -92,    1 }
+                { "monsters/selkis", 1,    -61,  -92,    1 }
+                { "monsters/selkis", 2,     -9,  -28,    1 }
+                { "monsters/selkis", 3,    -61,  -28,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -9,  -95,    1 }
+                { "monsters/selkis", 48,    -73,  -95,    1 }
+                { "monsters/selkis", 49,     -9,  -31,    1 }
+                { "monsters/selkis", 50,    -73,  -31,    1 }
+                { "monsters/selkis", 51,    -77,  -31,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -3,  -95,    1 }
+                { "monsters/selkis", 48,    -67,  -95,    1 }
+                { "monsters/selkis", 49,     -3,  -31,    1 }
+                { "monsters/selkis", 50,    -67,  -31,    1 }
+                { "monsters/selkis", 51,    -71,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        action A_PlayLocalSound("sounds/selkisatk01.wav")
+        action A_CheckMelee("monsters/selkis_chase", 0)
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -53,  -97,    0 }
+                { "monsters/selkis", 48,     11,  -97,    0 }
+                { "monsters/selkis", 49,    -53,  -33,    0 }
+                { "monsters/selkis", 50,     11,  -33,    0 }
+                { "monsters/selkis", 51,     75,  -33,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -56,  -95,    0 }
+                { "monsters/selkis", 48,      8,  -95,    0 }
+                { "monsters/selkis", 49,    -56,  -31,    0 }
+                { "monsters/selkis", 50,      8,  -31,    0 }
+                { "monsters/selkis", 51,     72,  -31,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,    -47,  -94,    0 }
+                { "monsters/selkis", 1,     17,  -94,    0 }
+                { "monsters/selkis", 2,    -47,  -30,    0 }
+                { "monsters/selkis", 3,     17,  -30,    0 }
+            }
+        }
+        // ##008   73    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -101,    1 }
+                { "monsters/selkis", 91,    -50, -101,    1 }
+                { "monsters/selkis", 92,     -6,  -37,    1 }
+                { "monsters/selkis", 93,    -50,  -37,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,     -4,  -98,    1 }
+                { "monsters/selkis", 5,    -56,  -98,    1 }
+                { "monsters/selkis", 6,     -4,  -34,    1 }
+                { "monsters/selkis", 7,    -56,  -34,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 0,     -9,  -92,    1 }
+                { "monsters/selkis", 1,    -61,  -92,    1 }
+                { "monsters/selkis", 2,     -9,  -28,    1 }
+                { "monsters/selkis", 3,    -61,  -28,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -9,  -95,    1 }
+                { "monsters/selkis", 48,    -73,  -95,    1 }
+                { "monsters/selkis", 49,     -9,  -31,    1 }
+                { "monsters/selkis", 50,    -73,  -31,    1 }
+                { "monsters/selkis", 51,    -77,  -31,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -3,  -95,    1 }
+                { "monsters/selkis", 48,    -67,  -95,    1 }
+                { "monsters/selkis", 49,     -3,  -31,    1 }
+                { "monsters/selkis", 50,    -67,  -31,    1 }
+                { "monsters/selkis", 51,    -71,  -31,    1 }
+            }
+        }
+    }
+}
+
+selkis_pain
+{
+    // frames:   25
+    frame
+    {
+        // ##000   72    0
+        action A_PlayLocalSound("sounds/selkisact.wav")
+        action A_FaceTarget()
+        
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -95,    0 }
+                { "monsters/selkis", 48,      2,  -95,    0 }
+                { "monsters/selkis", 49,    -62,  -31,    0 }
+                { "monsters/selkis", 50,      2,  -31,    0 }
+                { "monsters/selkis", 51,     66,  -31,    0 }
+            }
+        }
+        // ##000   72    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+            }
+        }
+        // ##000   72    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+            }
+        }
+        // ##000   72    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##000   72    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##000   72    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -100,    1 }
+                { "monsters/selkis", 91,    -50, -100,    1 }
+                { "monsters/selkis", 92,     -6,  -36,    1 }
+                { "monsters/selkis", 93,    -50,  -36,    1 }
+            }
+        }
+        // ##000   72    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -3,  -93,    1 }
+                { "monsters/selkis", 82,    -63,  -93,    1 }
+                { "monsters/selkis", 83,     -3,  -29,    1 }
+                { "monsters/selkis", 84,    -63,  -29,    1 }
+            }
+        }
+        // ##000   72    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -96,    0 }
+                { "monsters/selkis", 48,      2,  -96,    0 }
+                { "monsters/selkis", 49,    -62,  -32,    0 }
+                { "monsters/selkis", 50,      2,  -32,    0 }
+                { "monsters/selkis", 51,     66,  -32,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -100,    1 }
+                { "monsters/selkis", 91,    -50, -100,    1 }
+                { "monsters/selkis", 92,     -6,  -36,    1 }
+                { "monsters/selkis", 93,    -50,  -36,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -3,  -93,    1 }
+                { "monsters/selkis", 82,    -63,  -93,    1 }
+                { "monsters/selkis", 83,     -3,  -29,    1 }
+                { "monsters/selkis", 84,    -63,  -29,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -96,    0 }
+                { "monsters/selkis", 48,      2,  -96,    0 }
+                { "monsters/selkis", 49,    -62,  -32,    0 }
+                { "monsters/selkis", 50,      2,  -32,    0 }
+                { "monsters/selkis", 51,     66,  -32,    0 }
+                { "monsters/selkis", 57,    -25,  -81,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -100,    1 }
+                { "monsters/selkis", 91,    -50, -100,    1 }
+                { "monsters/selkis", 92,     -6,  -36,    1 }
+                { "monsters/selkis", 93,    -50,  -36,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -3,  -93,    1 }
+                { "monsters/selkis", 82,    -63,  -93,    1 }
+                { "monsters/selkis", 83,     -3,  -29,    1 }
+                { "monsters/selkis", 84,    -63,  -29,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+                { "monsters/selkis", 57,      5,  -81,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -96,    0 }
+                { "monsters/selkis", 48,      2,  -96,    0 }
+                { "monsters/selkis", 49,    -62,  -32,    0 }
+                { "monsters/selkis", 50,      2,  -32,    0 }
+                { "monsters/selkis", 51,     66,  -32,    0 }
+                { "monsters/selkis", 57,    -25,  -81,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -100,    1 }
+                { "monsters/selkis", 91,    -50, -100,    1 }
+                { "monsters/selkis", 92,     -6,  -36,    1 }
+                { "monsters/selkis", 93,    -50,  -36,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -82,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+                { "monsters/selkis", 57,      5,  -81,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -96,    0 }
+                { "monsters/selkis", 48,      2,  -96,    0 }
+                { "monsters/selkis", 49,    -62,  -32,    0 }
+                { "monsters/selkis", 50,      2,  -32,    0 }
+                { "monsters/selkis", 51,     66,  -32,    0 }
+                { "monsters/selkis", 57,    -25,  -81,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -100,    1 }
+                { "monsters/selkis", 91,    -50, -100,    1 }
+                { "monsters/selkis", 92,     -6,  -36,    1 }
+                { "monsters/selkis", 93,    -50,  -36,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+                { "monsters/selkis", 57,      5,  -81,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -96,    0 }
+                { "monsters/selkis", 48,      2,  -96,    0 }
+                { "monsters/selkis", 49,    -62,  -32,    0 }
+                { "monsters/selkis", 50,      2,  -32,    0 }
+                { "monsters/selkis", 51,     66,  -32,    0 }
+                { "monsters/selkis", 57,    -25,  -81,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -100,    1 }
+                { "monsters/selkis", 91,    -50, -100,    1 }
+                { "monsters/selkis", 92,     -6,  -36,    1 }
+                { "monsters/selkis", 93,    -50,  -36,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+                { "monsters/selkis", 57,      5,  -81,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -96,    0 }
+                { "monsters/selkis", 48,      2,  -96,    0 }
+                { "monsters/selkis", 49,    -62,  -32,    0 }
+                { "monsters/selkis", 50,      2,  -32,    0 }
+                { "monsters/selkis", 51,     66,  -32,    0 }
+                { "monsters/selkis", 57,    -25,  -81,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -100,    1 }
+                { "monsters/selkis", 91,    -50, -100,    1 }
+                { "monsters/selkis", 92,     -6,  -36,    1 }
+                { "monsters/selkis", 93,    -50,  -36,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+                { "monsters/selkis", 57,      5,  -81,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -96,    0 }
+                { "monsters/selkis", 48,      2,  -96,    0 }
+                { "monsters/selkis", 49,    -62,  -32,    0 }
+                { "monsters/selkis", 50,      2,  -32,    0 }
+                { "monsters/selkis", 51,     66,  -32,    0 }
+                { "monsters/selkis", 57,    -25,  -81,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,     -6, -100,    1 }
+                { "monsters/selkis", 91,    -50, -100,    1 }
+                { "monsters/selkis", 92,     -6,  -36,    1 }
+                { "monsters/selkis", 93,    -50,  -36,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##007    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+                { "monsters/selkis", 57,      5,  -81,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -95,    0 }
+                { "monsters/selkis", 48,      2,  -95,    0 }
+                { "monsters/selkis", 49,    -62,  -31,    0 }
+                { "monsters/selkis", 50,      2,  -31,    0 }
+                { "monsters/selkis", 51,     66,  -31,    0 }
+                { "monsters/selkis", 57,    -25,  -80,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##008    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -62,  -95,    0 }
+                { "monsters/selkis", 48,      2,  -95,    0 }
+                { "monsters/selkis", 49,    -62,  -31,    0 }
+                { "monsters/selkis", 50,      2,  -31,    0 }
+                { "monsters/selkis", 51,     66,  -31,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -2,  -96,    1 }
+                { "monsters/selkis", 48,    -66,  -96,    1 }
+                { "monsters/selkis", 49,     -2,  -32,    1 }
+                { "monsters/selkis", 50,    -66,  -32,    1 }
+                { "monsters/selkis", 51,    -70,  -32,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010   73    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+                { "monsters/selkis", 57,    -26,  -80,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -57,  -97,    0 }
+                { "monsters/selkis", 91,      7,  -97,    0 }
+                { "monsters/selkis", 92,    -57,  -33,    0 }
+                { "monsters/selkis", 93,      7,  -33,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##010   73    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,    -63,  -95,    0 }
+                { "monsters/selkis", 48,      1,  -95,    0 }
+                { "monsters/selkis", 49,    -63,  -31,    0 }
+                { "monsters/selkis", 50,      1,  -31,    0 }
+                { "monsters/selkis", 51,     65,  -31,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##013   73    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -59,  -91,    0 }
+                { "monsters/selkis", 82,      5,  -91,    0 }
+                { "monsters/selkis", 83,    -59,  -27,    0 }
+                { "monsters/selkis", 84,      5,  -27,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -91,    0 }
+                { "monsters/selkis", 82,      6,  -91,    0 }
+                { "monsters/selkis", 83,    -58,  -27,    0 }
+                { "monsters/selkis", 84,      6,  -27,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##014    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##014    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##015    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##015    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##016    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##016    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##016    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##017    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##017    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##017    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##017    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##017    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##017    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##017    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##018    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##018    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##018    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##018    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##018    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##018    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##018    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##019    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##019    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##019    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##019    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##019    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##019    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##019    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##020    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##020    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##020    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##020    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##020    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##020    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##020    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+                { "monsters/selkis", 57,      3,  -83,    1 }
+            }
+        }
+        // ##020    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##021    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##021    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##021    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##021    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##021    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##021    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##021    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+            }
+        }
+        // ##021    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##022    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##022    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##022    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##022    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##022    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##022    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##022    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+            }
+        }
+        // ##022    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##023    0    0
+        
+        action A_FaceTarget()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##023    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##023    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -54,  -91,    0 }
+                { "monsters/selkis", 82,     10,  -91,    0 }
+                { "monsters/selkis", 83,    -54,  -27,    0 }
+                { "monsters/selkis", 84,     10,  -27,    0 }
+            }
+        }
+        // ##023    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##023    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##023    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##023    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+            }
+        }
+        // ##023    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##024    0    0
+        goto "monsters/selkis_chase"
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -58,  -90,    0 }
+                { "monsters/selkis", 82,      6,  -90,    0 }
+                { "monsters/selkis", 83,    -58,  -26,    0 }
+                { "monsters/selkis", 84,      6,  -26,    0 }
+            }
+        }
+        // ##024    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,    -55,  -91,    0 }
+                { "monsters/selkis", 82,      9,  -91,    0 }
+                { "monsters/selkis", 83,    -55,  -27,    0 }
+                { "monsters/selkis", 84,      9,  -27,    0 }
+            }
+        }
+        // ##024   72    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/selkis", 90,    -58, -100,    0 }
+                { "monsters/selkis", 91,      6, -100,    0 }
+                { "monsters/selkis", 92,    -58,  -36,    0 }
+                { "monsters/selkis", 93,      6,  -36,    0 }
+            }
+        }
+        // ##024    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -51,  -95,    0 }
+                { "monsters/selkis", 5,     13,  -95,    0 }
+                { "monsters/selkis", 6,    -51,  -31,    0 }
+                { "monsters/selkis", 7,     13,  -31,    0 }
+            }
+        }
+        // ##024    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -53,  -95,    0 }
+                { "monsters/selkis", 5,     11,  -95,    0 }
+                { "monsters/selkis", 6,    -53,  -31,    0 }
+                { "monsters/selkis", 7,     11,  -31,    0 }
+            }
+        }
+        // ##024    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/selkis", 4,    -10,  -96,    1 }
+                { "monsters/selkis", 5,    -62,  -96,    1 }
+                { "monsters/selkis", 6,    -10,  -32,    1 }
+                { "monsters/selkis", 7,    -62,  -32,    1 }
+            }
+        }
+        // ##024    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/selkis", 47,     -4,  -97,    1 }
+                { "monsters/selkis", 48,    -68,  -97,    1 }
+                { "monsters/selkis", 49,     -4,  -33,    1 }
+                { "monsters/selkis", 50,    -68,  -33,    1 }
+                { "monsters/selkis", 51,    -72,  -33,    1 }
+            }
+        }
+        // ##024    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/selkis", 81,     -9,  -95,    1 }
+                { "monsters/selkis", 82,    -69,  -95,    1 }
+                { "monsters/selkis", 83,     -9,  -31,    1 }
+                { "monsters/selkis", 84,    -69,  -31,    1 }
+            }
+        }
+    }
+}
+
+selkis_wounded
+{
+    // frames:   40
+    frame
+    {
+        // ##000    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 47,    -61,  -96,    0 }
+            { "monsters/selkis", 48,      3,  -96,    0 }
+            { "monsters/selkis", 49,    -61,  -32,    0 }
+            { "monsters/selkis", 50,      3,  -32,    0 }
+            { "monsters/selkis", 51,     67,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "monsters/selkis", 47,    -61,  -96,    0 }
+            { "monsters/selkis", 48,      3,  -96,    0 }
+            { "monsters/selkis", 49,    -61,  -32,    0 }
+            { "monsters/selkis", 50,      3,  -32,    0 }
+            { "monsters/selkis", 51,     67,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "monsters/selkis", 47,    -61,  -96,    0 }
+            { "monsters/selkis", 48,      3,  -96,    0 }
+            { "monsters/selkis", 49,    -61,  -32,    0 }
+            { "monsters/selkis", 50,      3,  -32,    0 }
+            { "monsters/selkis", 51,     67,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 47,    -61,  -96,    0 }
+            { "monsters/selkis", 48,      3,  -96,    0 }
+            { "monsters/selkis", 49,    -61,  -32,    0 }
+            { "monsters/selkis", 50,      3,  -32,    0 }
+            { "monsters/selkis", 51,     67,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "monsters/selkis", 47,    -61,  -96,    0 }
+            { "monsters/selkis", 48,      3,  -96,    0 }
+            { "monsters/selkis", 49,    -61,  -32,    0 }
+            { "monsters/selkis", 50,      3,  -32,    0 }
+            { "monsters/selkis", 51,     67,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 47,    -61,  -96,    0 }
+            { "monsters/selkis", 48,      3,  -96,    0 }
+            { "monsters/selkis", 49,    -61,  -32,    0 }
+            { "monsters/selkis", 50,      3,  -32,    0 }
+            { "monsters/selkis", 51,     67,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "monsters/selkis", 47,    -61,  -96,    0 }
+            { "monsters/selkis", 48,      3,  -96,    0 }
+            { "monsters/selkis", 49,    -61,  -32,    0 }
+            { "monsters/selkis", 50,      3,  -32,    0 }
+            { "monsters/selkis", 51,     67,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "monsters/selkis", 10,    -52,  -93,    0 }
+            { "monsters/selkis", 11,     12,  -93,    0 }
+            { "monsters/selkis", 12,    -52,  -29,    0 }
+            { "monsters/selkis", 13,     12,  -29,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 10,    -52,  -94,    0 }
+            { "monsters/selkis", 11,     12,  -94,    0 }
+            { "monsters/selkis", 12,    -52,  -30,    0 }
+            { "monsters/selkis", 13,     12,  -30,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "monsters/selkis", 10,    -52,  -95,    0 }
+            { "monsters/selkis", 11,     12,  -95,    0 }
+            { "monsters/selkis", 12,    -52,  -31,    0 }
+            { "monsters/selkis", 13,     12,  -31,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 10,    -52,  -97,    0 }
+            { "monsters/selkis", 11,     12,  -97,    0 }
+            { "monsters/selkis", 12,    -52,  -33,    0 }
+            { "monsters/selkis", 13,     12,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "monsters/selkis", 10,    -51,  -98,    0 }
+            { "monsters/selkis", 11,     13,  -98,    0 }
+            { "monsters/selkis", 12,    -51,  -34,    0 }
+            { "monsters/selkis", 13,     13,  -34,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -61,  -95,    0 }
+            { "monsters/selkis", 23,      3,  -95,    0 }
+            { "monsters/selkis", 24,    -61,  -31,    0 }
+            { "monsters/selkis", 25,      3,  -31,    0 }
+            { "monsters/selkis", 26,     67,  -31,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -97,    0 }
+            { "monsters/selkis", 23,      4,  -97,    0 }
+            { "monsters/selkis", 24,    -60,  -33,    0 }
+            { "monsters/selkis", 25,      4,  -33,    0 }
+            { "monsters/selkis", 26,     68,  -33,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015   72    0
+        action A_PlayLocalSound("sounds/selkisact.wav")
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##020    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##021    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##022    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##023    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##024    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##025    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##026    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##027    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##028    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##029    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##030    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##031    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##032    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##033    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##034    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+            { "monsters/selkis", 57,    -22,  -90,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##035    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##036    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##037    0    0
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##038    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##039    0    0
+        goto "monsters/selkis_chase"
+        sprites
+        {
+            { "monsters/selkis", 22,    -60,  -99,    0 }
+            { "monsters/selkis", 23,      4,  -99,    0 }
+            { "monsters/selkis", 24,    -60,  -35,    0 }
+            { "monsters/selkis", 25,      4,  -35,    0 }
+            { "monsters/selkis", 26,     68,  -35,    0 }
+        }
+    }
+}
+
+selkis_malfunction1
+{
+    // frames:   12
+    frame
+    {
+        // ##000    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 47,    -61,  -96,    0 }
+            { "monsters/selkis", 48,      3,  -96,    0 }
+            { "monsters/selkis", 49,    -61,  -32,    0 }
+            { "monsters/selkis", 50,      3,  -32,    0 }
+            { "monsters/selkis", 51,     67,  -32,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 77,    -60,  -93,    0 }
+            { "monsters/selkis", 78,      4,  -93,    0 }
+            { "monsters/selkis", 79,    -60,  -29,    0 }
+            { "monsters/selkis", 80,      4,  -29,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "monsters/selkis", 77,    -60,  -93,    0 }
+            { "monsters/selkis", 78,      4,  -93,    0 }
+            { "monsters/selkis", 79,    -60,  -29,    0 }
+            { "monsters/selkis", 80,      4,  -29,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "monsters/selkis", 47,    -63,  -94,    0 }
+            { "monsters/selkis", 48,      1,  -94,    0 }
+            { "monsters/selkis", 49,    -63,  -30,    0 }
+            { "monsters/selkis", 50,      1,  -30,    0 }
+            { "monsters/selkis", 51,     65,  -30,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 47,    -63,  -94,    0 }
+            { "monsters/selkis", 48,      1,  -94,    0 }
+            { "monsters/selkis", 49,    -63,  -30,    0 }
+            { "monsters/selkis", 50,      1,  -30,    0 }
+            { "monsters/selkis", 51,     65,  -30,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "monsters/selkis", 47,    -63,  -94,    0 }
+            { "monsters/selkis", 48,      1,  -94,    0 }
+            { "monsters/selkis", 49,    -63,  -30,    0 }
+            { "monsters/selkis", 50,      1,  -30,    0 }
+            { "monsters/selkis", 51,     65,  -30,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 47,    -63,  -94,    0 }
+            { "monsters/selkis", 48,      1,  -94,    0 }
+            { "monsters/selkis", 49,    -63,  -30,    0 }
+            { "monsters/selkis", 50,      1,  -30,    0 }
+            { "monsters/selkis", 51,     65,  -30,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007   69    0
+        action A_PlayLocalSound("sounds/selkishurt.wav")
+        sprites
+        {
+            { "monsters/selkis", 47,    -63,  -94,    0 }
+            { "monsters/selkis", 48,      1,  -94,    0 }
+            { "monsters/selkis", 49,    -63,  -30,    0 }
+            { "monsters/selkis", 50,      1,  -30,    0 }
+            { "monsters/selkis", 51,     65,  -30,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008   74    0
+        action A_PlayLocalSound("sounds/selkisfizz01.wav")
+        sprites
+        {
+            { "monsters/selkis", 77,    -62,  -91,    0 }
+            { "monsters/selkis", 78,      2,  -91,    0 }
+            { "monsters/selkis", 79,    -62,  -27,    0 }
+            { "monsters/selkis", 80,      2,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 77,    -62,  -92,    0 }
+            { "monsters/selkis", 78,      2,  -92,    0 }
+            { "monsters/selkis", 79,    -62,  -28,    0 }
+            { "monsters/selkis", 80,      2,  -28,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "monsters/selkis", 77,    -62,  -91,    0 }
+            { "monsters/selkis", 78,      2,  -91,    0 }
+            { "monsters/selkis", 79,    -62,  -27,    0 }
+            { "monsters/selkis", 80,      2,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        goto "monsters/selkis_chase"
+        sprites
+        {
+            { "monsters/selkis", 77,    -62,  -92,    0 }
+            { "monsters/selkis", 78,      2,  -92,    0 }
+            { "monsters/selkis", 79,    -62,  -28,    0 }
+            { "monsters/selkis", 80,      2,  -28,    0 }
+        }
+    }
+}
+
+selkis_malfunction2
+{
+    // frames:   20
+    frame
+    {
+        // ##000    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 77,    -60,  -93,    0 }
+            { "monsters/selkis", 78,      4,  -93,    0 }
+            { "monsters/selkis", 79,    -60,  -29,    0 }
+            { "monsters/selkis", 80,      4,  -29,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 89,    -24,  -96,    1 }
+            { "monsters/selkis", 77,    -60,  -93,    0 }
+            { "monsters/selkis", 78,      4,  -93,    0 }
+            { "monsters/selkis", 79,    -60,  -29,    0 }
+            { "monsters/selkis", 80,      4,  -29,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 89,    -24, -100,    1 }
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 89,    -24, -104,    1 }
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 89,    -24, -107,    1 }
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 89,    -24, -112,    1 }
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 89,    -24, -118,    1 }
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016   71    0
+        action A_FaceTarget()
+        action A_PlayLocalSound("sounds/selkisfizz02.wav")
+        sprites
+        {
+            { "monsters/selkis", 98,    -19, -118,    0 }
+            { "monsters/selkis", 77,    -62,  -92,    0 }
+            { "monsters/selkis", 78,      2,  -92,    0 }
+            { "monsters/selkis", 79,    -62,  -28,    0 }
+            { "monsters/selkis", 80,      2,  -28,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 98,    -19, -122,    0 }
+            { "monsters/selkis", 77,    -62,  -92,    0 }
+            { "monsters/selkis", 78,      2,  -92,    0 }
+            { "monsters/selkis", 79,    -62,  -28,    0 }
+            { "monsters/selkis", 80,      2,  -28,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        action A_FaceTarget()
+        sprites
+        {
+            { "monsters/selkis", 98,    -19, -129,    0 }
+            { "monsters/selkis", 77,    -62,  -92,    0 }
+            { "monsters/selkis", 78,      2,  -92,    0 }
+            { "monsters/selkis", 79,    -62,  -28,    0 }
+            { "monsters/selkis", 80,      2,  -28,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        goto "monsters/selkis_chase"
+        sprites
+        {
+            { "monsters/selkis", 98,    -19, -137,    0 }
+            { "monsters/selkis", 77,    -62,  -92,    0 }
+            { "monsters/selkis", 78,      2,  -92,    0 }
+            { "monsters/selkis", 79,    -62,  -28,    0 }
+            { "monsters/selkis", 80,      2,  -28,    0 }
+        }
+    }
+}
+
+selkis_death
+{
+    // frames:    3
+    frame
+    {
+        delay 0
+        action A_SelkisCountdown(1)
+        goto "monsters/selkis_explode"
+    }
+}
+
+selkis_explode
+{
+    // frames:    3
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -91,    0 }
+            { "monsters/selkis", 82,      5,  -91,    0 }
+            { "monsters/selkis", 83,    -59,  -27,    0 }
+            { "monsters/selkis", 84,      5,  -27,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_SelkisCountdown(0)
+        sprites
+        {
+            { "monsters/selkis", 81,    -59,  -92,    0 }
+            { "monsters/selkis", 82,      5,  -92,    0 }
+            { "monsters/selkis", 83,    -59,  -28,    0 }
+            { "monsters/selkis", 84,      5,  -28,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002   71    0
+        action A_PlayLocalSound("sounds/selkisfizz02.wav")
+        sprites
+        {
+            { "monsters/selkis", 77,    -63,  -93,    0 }
+            { "monsters/selkis", 78,      1,  -93,    0 }
+            { "monsters/selkis", 79,    -63,  -29,    0 }
+            { "monsters/selkis", 80,      1,  -29,    0 }
+        }
+
+    }
+
+}
+
+selkis_corpse
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/selkis", 67,    -36,  -27,    0 }
+            { "monsters/selkis", 68,     28,  -27,    0 }
+        }
+    }
+}
