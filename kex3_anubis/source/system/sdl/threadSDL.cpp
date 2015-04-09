@@ -26,8 +26,8 @@ public:
     virtual int         SetThreadPriority(kThread_t thread, const threadPriority_t priority);
     virtual void        WaitThread(kThread_t thread, int *status);
     
-    virtual kMutex_t    CreateMutex(void);
-    virtual int         AllocMutex(kMutex_t mutex, const bool bTimeOut = false);
+    virtual kMutex_t    AllocMutex(void);
+    virtual int         LockMutex(kMutex_t mutex, const bool bTimeOut = false);
     virtual int         UnlockMutex(kMutex_t mutex);
     virtual void        DestroyMutex(kMutex_t mutex);
 };
@@ -93,19 +93,19 @@ void kexThreadSDL::WaitThread(kThread_t thread, int *status)
 }
 
 //
-// kexThreadSDL::CreateMutex
+// kexThreadSDL::AllocMutex
 //
 
-kexThread::kMutex_t kexThreadSDL::CreateMutex(void)
+kexThread::kMutex_t kexThreadSDL::AllocMutex(void)
 {
     return SDL_CreateMutex();
 }
 
 //
-// kexThreadSDL::AllocMutex
+// kexThreadSDL::LockMutex
 //
 
-int kexThreadSDL::AllocMutex(kMutex_t mutex, const bool bTimeOut)
+int kexThreadSDL::LockMutex(kMutex_t mutex, const bool bTimeOut)
 {
     if(bTimeOut)
     {
