@@ -5,7 +5,7 @@ mantis_death
     {
         // ##000   90    0
         action A_TriggerEvent()
-        action A_PlayLocalSound("sounds/selkisdeath.wav")
+        action A_PlayLocalSound("sounds/mantisdeath.wav")
         action A_MantisSetBlocking(0)
         action A_MantisExplode()
         rotation_N
@@ -3255,7 +3255,7 @@ mantis_death
     frame
     {
         // ##004   87    0
-        action A_PlayLocalSound("sounds/selkisact03.wav")
+        action A_PlayLocalSound("sounds/mantisact03.wav")
         sprites
         {
             { "monsters/mantis", 8,    -16,  -98,    0 }
@@ -3353,7 +3353,7 @@ mantis_death
     frame
     {
         // ##010   88    0
-        action A_PlayLocalSound("sounds/selkisact04.wav")
+        action A_PlayLocalSound("sounds/mantisact04.wav")
         sprites
         {
             { "monsters/mantis", 8,     63,  -26,    0 }

@@ -4,7 +4,7 @@ mantis_pain
     frame
     {
         // ##000   90    0
-        action A_PlayLocalSound("sounds/selkispain.wav")
+        action A_PlayLocalSound("sounds/mantispain.wav")
         action A_MantisSetBlocking(0)
         rotation_N
         {

@@ -401,13 +401,13 @@ void A_SentryChatter(kActor @actor)
     switch(Math::RandMax(3))
     {
     case 0:
-        actor.PlaySound("sounds/mantisact02.wav");
+        actor.PlaySound("sounds/sentryact02.wav");
         break;
     case 1:
-        actor.PlaySound("sounds/mantisact03.wav");
+        actor.PlaySound("sounds/sentryact03.wav");
         break;
     case 2:
-        actor.PlaySound("sounds/mantisact04.wav");
+        actor.PlaySound("sounds/sentryact04.wav");
         break;
     }
 }
@@ -420,11 +420,11 @@ void A_SentryDeath(kActor @actor)
 {
     if((Math::Rand() & 1) == 0)
     {
-        actor.PlaySound("sounds/mantisdeath01.wav");
+        actor.PlaySound("sounds/sentrydeath01.wav");
     }
     else
     {
-        actor.PlaySound("sounds/mantisdeath02.wav");
+        actor.PlaySound("sounds/sentrydeath02.wav");
     }
 }
 

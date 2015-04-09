@@ -53,10 +53,10 @@ void kexThread::WaitThread(kThread_t thread, int *status)
 }
 
 //
-// kexThread::CreateMutex
+// kexThread::AllocMutex
 //
 
-kexThread::kMutex_t kexThread::CreateMutex(void)
+kexThread::kMutex_t kexThread::AllocMutex(void)
 {
     return NULL;
 }

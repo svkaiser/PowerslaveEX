@@ -753,7 +753,7 @@ sentry_pain
     frame
     {
         // ##000    0    0
-        action A_PlayLocalSound("sounds/mantispain01.wav")
+        action A_PlayLocalSound("sounds/sentrypain01.wav")
         rotation_N
         {
             sprites
@@ -2277,7 +2277,7 @@ sentry_attack
     frame
     {
         // ##006   84    0
-        action A_PlayLocalSound("sounds/mantisfire.wav")
+        action A_PlayLocalSound("sounds/sentryfire.wav")
         action A_FireProjectile("Proj_Blaster", 0, 0, 4, 96, 64)
         fullbright
         rotation_N

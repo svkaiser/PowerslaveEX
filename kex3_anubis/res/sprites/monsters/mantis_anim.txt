@@ -72,7 +72,7 @@ mantis_peak
     frame
     {
         // ##002   85    0
-        action A_PlayLocalSound("sounds/selkisact01.wav")
+        action A_PlayLocalSound("sounds/mantisact01.wav")
         sprites
         {
             { "monsters/mantis", 55,     13,   -7,    0 }
@@ -301,7 +301,7 @@ mantis_peak
     frame
     {
         // ##024   87    0
-        action A_PlayLocalSound("sounds/selkisact03.wav")
+        action A_PlayLocalSound("sounds/mantisact03.wav")
         sprites
         {
             { "monsters/mantis", 110,    -83,  -20,    0 }
@@ -471,7 +471,7 @@ mantis_peak
     frame
     {
         // ##037   86    0
-        action A_PlayLocalSound("sounds/selkisact02.wav")
+        action A_PlayLocalSound("sounds/mantisact02.wav")
         sprites
         {
             { "monsters/mantis", 56,    -77,  -21,    0 }

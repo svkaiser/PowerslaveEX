@@ -19,7 +19,7 @@ AI_Sentry 10
     lookAllAround           1
     turnSpeed               2
     painChance              128
-    sightSound              "sounds/mantisact01.wav"
+    sightSound              "sounds/sentryact01.wav"
 }
 
 Obj_Sentry_Gib01 -1

@@ -378,6 +378,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\system\thread.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\system\timer.cpp"
 					>
 				</File>
@@ -394,6 +398,10 @@
 					</File>
 					<File
 						RelativePath="..\source\system\sdl\systemSDL.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\source\system\sdl\threadSDL.cpp"
 						>
 					</File>
 					<File
@@ -781,6 +789,10 @@
 				</File>
 				<File
 					RelativePath="..\source\system\system.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\system\thread.h"
 					>
 				</File>
 				<File

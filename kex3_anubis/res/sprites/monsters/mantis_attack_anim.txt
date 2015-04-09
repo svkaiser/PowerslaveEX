@@ -393,7 +393,7 @@ mantis_attack
     frame
     {
         // ##004   84  132
-        action A_PlayLocalSound("sounds/selkisatk01.wav")
+        action A_PlayLocalSound("sounds/mantisatk01.wav")
         rotation_N
         {
             sprites

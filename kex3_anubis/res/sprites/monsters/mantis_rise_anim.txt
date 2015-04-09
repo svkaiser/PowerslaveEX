@@ -383,7 +383,7 @@ mantis_rise
     frame
     {
         // ##004   86    0
-        action A_PlayLocalSound("sounds/selkisact02.wav")
+        action A_PlayLocalSound("sounds/mantisact02.wav")
         rotation_N
         {
             sprites
@@ -1266,7 +1266,7 @@ mantis_rise
     frame
     {
         // ##012   88    0
-        action A_PlayLocalSound("sounds/selkisact04.wav")
+        action A_PlayLocalSound("sounds/mantisact04.wav")
         rotation_N
         {
             sprites
@@ -1521,7 +1521,7 @@ mantis_rise
     frame
     {
         // ##014   89    0
-        action A_PlayLocalSound("sounds/selkisrise.wav")
+        action A_PlayLocalSound("sounds/mantisrise.wav")
         rotation_N
         {
             sprites

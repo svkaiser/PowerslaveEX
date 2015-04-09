@@ -35,7 +35,7 @@ public:
     virtual int         SetThreadPriority(kThread_t thread, const threadPriority_t priority);
     virtual void        WaitThread(kThread_t thread, int *status);
     
-    virtual kMutex_t    CreateMutex(void);
+    virtual kMutex_t    AllocMutex(void);
     virtual int         LockMutex(kMutex_t mutex, const bool bTimeOut = false);
     virtual int         UnlockMutex(kMutex_t mutex);
     virtual void        DestroyMutex(kMutex_t mutex);
