@@ -734,13 +734,14 @@ void A_SelkisThink(kAI @ai)
 // A_SelkisCountDown
 //
 
-void A_SelkisCountDown(kActor @actor, int bStart)
+void A_SelkisCountDown(kAI @actor, int bStart)
 {
     float x, y, z;
     
     if(bStart == 1)
     {
-        actor.Health() = 40;
+        actor.Health() = 20;
+        actor.PainChance() = 0;
         return;
     }
     
