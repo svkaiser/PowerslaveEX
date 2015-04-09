@@ -437,6 +437,29 @@ void kexProjectile::UpdateMovement(void)
         OnImpact(kexGame::cLocal->CModel()->ContactActor());
         return;
     }
+    else
+    {
+        float dist;
+        float r;
+        
+        // make sure we explode if we're stuck inside an actor
+        for(kexActor *actor = sector->actorList.Next(); actor != NULL; actor = actor->SectorLink().Next())
+        {
+            if(actor == this || actor == target)
+            {
+                continue;
+            }
+            
+            dist = origin.DistanceSq(actor->Origin());
+            r = actor->Radius() + 1.024f;
+            
+            if(dist <= (r * r))
+            {
+                OnImpact(actor);
+                return;
+            }
+        }
+    }
 
     if(flags & AF_EXPIRES && !(flags & AF_BOUNCY))
     {
