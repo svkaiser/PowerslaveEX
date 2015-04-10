@@ -26,6 +26,7 @@ public:
     void                FireRemoteEventFromTag(const int tag);
     void                PlayMusic(const kexStr &str, const bool bLoop);
     void                StopMusic(void);
+    void                ChangeMap(const kexStr &map);
     void                MoveScriptedSector(const int tag, const float height,
                                            const float speed, const bool bCeiling);
 };

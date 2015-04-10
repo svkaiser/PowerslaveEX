@@ -117,7 +117,10 @@ void kexHud::DrawFlash(void)
 {
     kexCpuVertList *vl = kexRender::cVertList;
 
-    if(damageFlashTicks <= 0 && pickupFlashTicks <= 0 && electrocuteFlashTicks <= 0)
+    if(damageFlashTicks <= 0 &&
+       pickupFlashTicks <= 0 &&
+       electrocuteFlashTicks <= 0 &&
+       teleportFlashTicks <= 0)
     {
         return;
     }
@@ -137,6 +140,11 @@ void kexHud::DrawFlash(void)
     if(electrocuteFlashTicks > 0)
     {
         vl->AddQuad(0, 0, 320, 240, 32, 255, 32, electrocuteFlashTicks);
+    }
+
+    if(teleportFlashTicks > 0)
+    {
+        vl->AddQuad(0, 0, 320, 240, 0, 255, 8, teleportFlashTicks);
     }
 
     vl->DrawElements();
@@ -406,6 +414,7 @@ void kexHud::Update(void)
     if(damageFlashTicks > 0) damageFlashTicks -= 8;
     if(pickupFlashTicks > 0) pickupFlashTicks -= 8;
     if(electrocuteFlashTicks > 0) electrocuteFlashTicks -= 4;
+    if(teleportFlashTicks > 0) teleportFlashTicks -= 4;
 }
 
 //

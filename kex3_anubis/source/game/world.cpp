@@ -314,6 +314,7 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
                 break;
 
             case 23:
+            case 25:
                 height = (float)s->floorHeight + 16;
                 MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
@@ -1115,8 +1116,15 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
     case 50:
         SendRemoteTrigger(sector, ev);
         break;
+    case 52:
+        kexGame::cScriptManager->CallDelayedMapScript(ev->tag+1, actor, 0);
+        sector->event = -1;
+        break;
     case 63:
-        kexGame::cScriptManager->CallDelayedMapScript(ev->params+1, actor, 0);
+        kexGame::cScriptManager->CallDelayedMapScript(ev->tag+1, actor, 0);
+        break;
+    case 71:
+        TeleportEvent(actor, ev);
         break;
 
     default:
@@ -1179,6 +1187,43 @@ void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
 
             sec->objectThinker->Remove();
         }
+    }
+}
+
+//
+// kexWorld::TeleportEvent
+//
+
+void kexWorld::TeleportEvent(kexActor *actor, mapEvent_t *event)
+{
+    kexVec3 org;
+    mapFace_t *face;
+
+    for(unsigned int i = 0; i < numEvents; ++i)
+    {
+        mapEvent_t *ev = &events[i];
+
+        if(ev == event || ev->type != 72 || ev->tag != event->tag || ev->sector <= -1)
+        {
+            continue;
+        }
+
+        face = sectors[ev->sector].floorFace;
+        org = (vertices[face->vertexStart+0].origin +
+               vertices[face->vertexStart+1].origin +
+               vertices[face->vertexStart+2].origin) / 3;
+
+        actor->Origin() = org;
+        actor->SetSector(&sectors[ev->sector]);
+
+        // player hack
+        if(actor->InstanceOf(&kexPuppet::info))
+        {
+            actor->PlaySound("sounds/teleport.wav");
+            kexGame::cLocal->PlayLoop()->TeleportFlash();
+        }
+
+        break;
     }
 }
 

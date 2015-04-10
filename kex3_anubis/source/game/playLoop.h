@@ -42,6 +42,7 @@ public:
     void                        PickupFlash(void) { hud.SetPickupFlash(); }
     void                        DamageFlash(void) { hud.SetDamageFlash(); }
     void                        ElectrocuteFlash(void) { hud.SetElectrocuteFlash(); }
+    void                        TeleportFlash(void) { hud.SetTeleportFlash(); }
     const bool                  AutomapEnabled(void) { return bShowAutomap; }
     void                        ToggleAutomap(const bool bToggle) { bShowAutomap = bToggle; }
     void                        ToggleMapAll(const bool bToggle) { bMapAll = bToggle; }

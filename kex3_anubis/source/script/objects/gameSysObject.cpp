@@ -42,6 +42,7 @@ void kexScriptObjGame::Init(void)
     e->RegisterObjectMethod("kGame", "void PlayMusic(const kStr &in, const bool)", asMETHODPR(kexScriptObjGame, PlayMusic, (const kexStr&, const bool), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void StopMusic(void)", asMETHODPR(kexScriptObjGame, StopMusic, (void), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void MoveScriptedSector(const int, const float, const float, const bool)", asMETHODPR(kexScriptObjGame, MoveScriptedSector, (const int, const float, const float, const bool), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kGame", "void ChangeMap(const kStr &in)", asMETHODPR(kexScriptObjGame, ChangeMap, (const kexStr&), void), asCALL_THISCALL);
 
     e->RegisterGlobalProperty("kPlayLoop PlayLoop", kexGame::cLocal->PlayLoop());
     e->RegisterObjectMethod("kPlayLoop", "const int Ticks(void) const", asMETHODPR(kexPlayLoop, Ticks, (void) const, const int), asCALL_THISCALL);
@@ -119,6 +120,15 @@ void kexScriptObjGame::PlayMusic(const kexStr &str, const bool bLoop)
 void kexScriptObjGame::StopMusic(void)
 {
     kex::cSound->StopMusic();
+}
+
+//
+// kexScriptObjGame::ChangeMap
+//
+
+void kexScriptObjGame::ChangeMap(const kexStr &map)
+{
+    kexGame::cLocal->ChangeMap(map.c_str());
 }
 
 //

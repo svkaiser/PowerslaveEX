@@ -222,6 +222,7 @@ private:
     void                    TriggerEvent(mapEvent_t *ev);
     void                    SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event);
     void                    SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev);
+    void                    TeleportEvent(kexActor *actor, mapEvent_t *event);
     void                    ExplodeWallEvent(mapSector_t *sector);
     void                    ExplodeWall(mapFace_t *face);
     void                    BuildAreaNodes(void);

@@ -225,6 +225,7 @@ Map_Entry       20
     overworld_y     70
     map             "maps/KILENTRY.MAP"
     musicTrack      "music/egypt2.ogg"
+    script          "scripts/map/KILENTRY_script.txt"
     nextmap_south   19
 }
 
@@ -233,6 +234,7 @@ Map_Arena2      21
     title           "$str_021"
     map             "maps/KILARENA.MAP"
     musicTrack      "music/arena2.ogg"
+    script          "scripts/map/KILARENA_script.txt"
 }
 
 Map_Tomb2       22

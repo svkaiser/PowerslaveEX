@@ -29,6 +29,7 @@ public:
     void                SetDamageFlash(void) { damageFlashTicks = 192; }
     void                SetPickupFlash(void) { pickupFlashTicks = 192; }
     void                SetElectrocuteFlash(void) { electrocuteFlashTicks = 192; }
+    void                SetTeleportFlash(void) { teleportFlashTicks = 255; }
     
     void                SetPlayer(kexPlayer *p) { player = p; }
     
@@ -63,6 +64,7 @@ private:
     int                 damageFlashTicks;
     int                 pickupFlashTicks;
     int                 electrocuteFlashTicks;
+    int                 teleportFlashTicks;
     float               airSupplyGfxOffset;
 };
 
