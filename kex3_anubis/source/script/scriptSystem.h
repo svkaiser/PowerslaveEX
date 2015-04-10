@@ -21,11 +21,12 @@ typedef kexLinklist<struct mapScriptInfo_s> mapScriptLink_t;
 
 typedef struct mapScriptInfo_s
 {
-    kexStr          function;
-    kexActor        *instigator;
-    float           delay;
-    bool            bDirty;
-    mapScriptLink_t link;
+    kexStr              function;
+    kexActor            *instigator;
+    float               delay;
+    bool                bDirty;
+    asIScriptContext    *context;
+    mapScriptLink_t     link;
 } mapScriptInfo_t;
 
 class kexScriptManager
@@ -57,6 +58,7 @@ public:
 
     static void                         *MemAlloc(size_t size);
     static void                         MemFree(void *ptr);
+    static void                         DelayScript(const float time);
 
     static kexCvar                      cvarDumpMapScripts;
 

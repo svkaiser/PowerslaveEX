@@ -149,6 +149,15 @@ void kexScriptManager::MessageCallback(const asSMessageInfo *msg, void *param)
 }
 
 //
+// kexScriptManager::DelayScript
+//
+
+void kexScriptManager::DelayScript(const float time)
+{
+    scriptManagerLocal.Context()->Suspend();
+}
+
+//
 // kexScriptManager::Init
 //
 
@@ -170,6 +179,9 @@ void kexScriptManager::Init(void)
     engine->SetMessageCallback(asFUNCTION(kexScriptManager::MessageCallback), 0, asCALL_CDECL);
 
     ctx = engine->CreateContext();
+    
+    engine->RegisterGlobalFunction("void delay(const float)",
+                                   asFUNCTION(kexScriptManager::DelayScript), asCALL_CDECL);
 
     kexScriptObjHandle::Init();
     kexScriptObjString::Init();
@@ -244,6 +256,11 @@ void kexScriptManager::PopState(void)
 bool kexScriptManager::PrepareFunction(asIScriptFunction *function)
 {
     if(function == NULL)
+    {
+        return false;
+    }
+    
+    if(ctx->GetState() == asEXECUTION_SUSPENDED)
     {
         return false;
     }
