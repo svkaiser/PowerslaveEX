@@ -1,0 +1,1870 @@
+queen_tail_missile
+{
+    // frames:   16
+    frame
+    {
+        // ##000    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 125,    -57, -140,    0 }
+                { "monsters/queen", 126,      7, -140,    0 }
+                { "monsters/queen", 127,    -57,  -76,    0 }
+                { "monsters/queen", 128,      7,  -76,    0 }
+                { "monsters/queen", 129,     71,  -76,    0 }
+                { "monsters/queen", 130,    -57,  -12,    0 }
+                { "monsters/queen", 131,      7,  -12,    0 }
+                { "monsters/queen", 132,     71,  -12,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 255,    -69, -145,    0 }
+                { "monsters/queen", 256,     -5, -145,    0 }
+                { "monsters/queen", 257,    -69,  -81,    0 }
+                { "monsters/queen", 258,     -5,  -81,    0 }
+                { "monsters/queen", 259,     59,  -81,    0 }
+                { "monsters/queen", 260,    -69,  -17,    0 }
+                { "monsters/queen", 261,     -5,  -17,    0 }
+                { "monsters/queen", 139,     20, -129,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 48,    -71, -132,    0 }
+                { "monsters/queen", 49,     -7, -132,    0 }
+                { "monsters/queen", 50,    -71,  -68,    0 }
+                { "monsters/queen", 51,     -7,  -68,    0 }
+                { "monsters/queen", 52,     57,  -68,    0 }
+                { "monsters/queen", 53,    -71,   -4,    0 }
+                { "monsters/queen", 312,     13, -132,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 248,    -71, -125,    0 }
+                { "monsters/queen", 249,     -7, -125,    0 }
+                { "monsters/queen", 250,    -71,  -61,    0 }
+                { "monsters/queen", 251,     -7,  -61,    0 }
+                { "monsters/queen", 252,     57,  -61,    0 }
+                { "monsters/queen", 253,    -71,    3,    0 }
+                { "monsters/queen", 133,     -3, -123,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 7,    -63, -115,    0 }
+                { "monsters/queen", 8,      1, -115,    0 }
+                { "monsters/queen", 9,    -63,  -51,    0 }
+                { "monsters/queen", 10,      1,  -51,    0 }
+                { "monsters/queen", 6,    -26, -137,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 248,      9, -125,    1 }
+                { "monsters/queen", 249,    -55, -125,    1 }
+                { "monsters/queen", 250,      9,  -61,    1 }
+                { "monsters/queen", 251,    -55,  -61,    1 }
+                { "monsters/queen", 252,    -75,  -61,    1 }
+                { "monsters/queen", 253,      9,    3,    1 }
+                { "monsters/queen", 133,    -43, -123,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 48,     10, -132,    1 }
+                { "monsters/queen", 49,    -54, -132,    1 }
+                { "monsters/queen", 50,     10,  -68,    1 }
+                { "monsters/queen", 51,    -54,  -68,    1 }
+                { "monsters/queen", 52,    -74,  -68,    1 }
+                { "monsters/queen", 53,     10,   -4,    1 }
+                { "monsters/queen", 312,    -55, -132,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 255,      6, -145,    1 }
+                { "monsters/queen", 256,    -58, -145,    1 }
+                { "monsters/queen", 257,      6,  -81,    1 }
+                { "monsters/queen", 258,    -58,  -81,    1 }
+                { "monsters/queen", 259,    -90,  -81,    1 }
+                { "monsters/queen", 260,      6,  -17,    1 }
+                { "monsters/queen", 261,    -58,  -17,    1 }
+                { "monsters/queen", 139,    -43, -129,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 125,    -57, -140,    0 }
+                { "monsters/queen", 126,      7, -140,    0 }
+                { "monsters/queen", 127,    -57,  -76,    0 }
+                { "monsters/queen", 128,      7,  -76,    0 }
+                { "monsters/queen", 129,     71,  -76,    0 }
+                { "monsters/queen", 130,    -57,  -12,    0 }
+                { "monsters/queen", 131,      7,  -12,    0 }
+                { "monsters/queen", 132,     71,  -12,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 255,    -69, -145,    0 }
+                { "monsters/queen", 256,     -5, -145,    0 }
+                { "monsters/queen", 257,    -69,  -81,    0 }
+                { "monsters/queen", 258,     -5,  -81,    0 }
+                { "monsters/queen", 259,     59,  -81,    0 }
+                { "monsters/queen", 260,    -69,  -17,    0 }
+                { "monsters/queen", 261,     -5,  -17,    0 }
+                { "monsters/queen", 139,     20, -129,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 48,    -71, -132,    0 }
+                { "monsters/queen", 49,     -7, -132,    0 }
+                { "monsters/queen", 50,    -71,  -68,    0 }
+                { "monsters/queen", 51,     -7,  -68,    0 }
+                { "monsters/queen", 52,     57,  -68,    0 }
+                { "monsters/queen", 53,    -71,   -4,    0 }
+                { "monsters/queen", 312,     13, -132,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 248,    -71, -125,    0 }
+                { "monsters/queen", 249,     -7, -125,    0 }
+                { "monsters/queen", 250,    -71,  -61,    0 }
+                { "monsters/queen", 251,     -7,  -61,    0 }
+                { "monsters/queen", 252,     57,  -61,    0 }
+                { "monsters/queen", 253,    -71,    3,    0 }
+                { "monsters/queen", 133,     -3, -123,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 7,    -63, -115,    0 }
+                { "monsters/queen", 8,      1, -115,    0 }
+                { "monsters/queen", 9,    -63,  -51,    0 }
+                { "monsters/queen", 10,      1,  -51,    0 }
+                { "monsters/queen", 6,    -26, -137,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 248,      9, -125,    1 }
+                { "monsters/queen", 249,    -55, -125,    1 }
+                { "monsters/queen", 250,      9,  -61,    1 }
+                { "monsters/queen", 251,    -55,  -61,    1 }
+                { "monsters/queen", 252,    -75,  -61,    1 }
+                { "monsters/queen", 253,      9,    3,    1 }
+                { "monsters/queen", 133,    -43, -123,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 48,     10, -132,    1 }
+                { "monsters/queen", 49,    -54, -132,    1 }
+                { "monsters/queen", 50,     10,  -68,    1 }
+                { "monsters/queen", 51,    -54,  -68,    1 }
+                { "monsters/queen", 52,    -74,  -68,    1 }
+                { "monsters/queen", 53,     10,   -4,    1 }
+                { "monsters/queen", 312,    -55, -132,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 255,      6, -145,    1 }
+                { "monsters/queen", 256,    -58, -145,    1 }
+                { "monsters/queen", 257,      6,  -81,    1 }
+                { "monsters/queen", 258,    -58,  -81,    1 }
+                { "monsters/queen", 259,    -90,  -81,    1 }
+                { "monsters/queen", 260,      6,  -17,    1 }
+                { "monsters/queen", 261,    -58,  -17,    1 }
+                { "monsters/queen", 139,    -43, -129,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 125,    -57, -140,    0 }
+                { "monsters/queen", 126,      7, -140,    0 }
+                { "monsters/queen", 127,    -57,  -76,    0 }
+                { "monsters/queen", 128,      7,  -76,    0 }
+                { "monsters/queen", 129,     71,  -76,    0 }
+                { "monsters/queen", 130,    -57,  -12,    0 }
+                { "monsters/queen", 131,      7,  -12,    0 }
+                { "monsters/queen", 132,     71,  -12,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 255,    -69, -145,    0 }
+                { "monsters/queen", 256,     -5, -145,    0 }
+                { "monsters/queen", 257,    -69,  -81,    0 }
+                { "monsters/queen", 258,     -5,  -81,    0 }
+                { "monsters/queen", 259,     59,  -81,    0 }
+                { "monsters/queen", 260,    -69,  -17,    0 }
+                { "monsters/queen", 261,     -5,  -17,    0 }
+                { "monsters/queen", 139,     20, -129,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 48,    -71, -132,    0 }
+                { "monsters/queen", 49,     -7, -132,    0 }
+                { "monsters/queen", 50,    -71,  -68,    0 }
+                { "monsters/queen", 51,     -7,  -68,    0 }
+                { "monsters/queen", 52,     57,  -68,    0 }
+                { "monsters/queen", 53,    -71,   -4,    0 }
+                { "monsters/queen", 312,     13, -132,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 248,    -71, -125,    0 }
+                { "monsters/queen", 249,     -7, -125,    0 }
+                { "monsters/queen", 250,    -71,  -61,    0 }
+                { "monsters/queen", 251,     -7,  -61,    0 }
+                { "monsters/queen", 252,     57,  -61,    0 }
+                { "monsters/queen", 253,    -71,    3,    0 }
+                { "monsters/queen", 133,     -3, -123,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 7,    -63, -115,    0 }
+                { "monsters/queen", 8,      1, -115,    0 }
+                { "monsters/queen", 9,    -63,  -51,    0 }
+                { "monsters/queen", 10,      1,  -51,    0 }
+                { "monsters/queen", 6,    -26, -137,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 248,      9, -125,    1 }
+                { "monsters/queen", 249,    -55, -125,    1 }
+                { "monsters/queen", 250,      9,  -61,    1 }
+                { "monsters/queen", 251,    -55,  -61,    1 }
+                { "monsters/queen", 252,    -75,  -61,    1 }
+                { "monsters/queen", 253,      9,    3,    1 }
+                { "monsters/queen", 133,    -43, -123,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 48,     10, -132,    1 }
+                { "monsters/queen", 49,    -54, -132,    1 }
+                { "monsters/queen", 50,     10,  -68,    1 }
+                { "monsters/queen", 51,    -54,  -68,    1 }
+                { "monsters/queen", 52,    -74,  -68,    1 }
+                { "monsters/queen", 53,     10,   -4,    1 }
+                { "monsters/queen", 312,    -55, -132,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 255,      6, -145,    1 }
+                { "monsters/queen", 256,    -58, -145,    1 }
+                { "monsters/queen", 257,      6,  -81,    1 }
+                { "monsters/queen", 258,    -58,  -81,    1 }
+                { "monsters/queen", 259,    -90,  -81,    1 }
+                { "monsters/queen", 260,      6,  -17,    1 }
+                { "monsters/queen", 261,    -58,  -17,    1 }
+                { "monsters/queen", 139,    -43, -129,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 163,    -46, -139,    0 }
+                { "monsters/queen", 164,     18, -139,    0 }
+                { "monsters/queen", 165,    -46,  -75,    0 }
+                { "monsters/queen", 166,     18,  -75,    0 }
+                { "monsters/queen", 167,     82,  -75,    0 }
+                { "monsters/queen", 168,    -46,  -11,    0 }
+                { "monsters/queen", 169,     18,  -11,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 280,    -71, -144,    0 }
+                { "monsters/queen", 281,     -7, -144,    0 }
+                { "monsters/queen", 282,    -71,  -80,    0 }
+                { "monsters/queen", 283,     -7,  -80,    0 }
+                { "monsters/queen", 284,     57,  -80,    0 }
+                { "monsters/queen", 285,    -71,  -16,    0 }
+                { "monsters/queen", 286,     -7,  -16,    0 }
+                { "monsters/queen", 287,     57,  -16,    0 }
+                { "monsters/queen", 176,     14, -122,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 69,    -71, -133,    0 }
+                { "monsters/queen", 70,     -7, -133,    0 }
+                { "monsters/queen", 71,     57, -133,    0 }
+                { "monsters/queen", 72,    -71,  -69,    0 }
+                { "monsters/queen", 73,     -7,  -69,    0 }
+                { "monsters/queen", 74,     57,  -69,    0 }
+                { "monsters/queen", 75,     -7,   -5,    0 }
+                { "monsters/queen", 338,     11, -125,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 387,    -73, -124,    0 }
+                { "monsters/queen", 388,     -9, -124,    0 }
+                { "monsters/queen", 389,    -73,  -60,    0 }
+                { "monsters/queen", 390,     -9,  -60,    0 }
+                { "monsters/queen", 391,     55,  -60,    0 }
+                { "monsters/queen", 170,      4, -114,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 158,    -81, -121,    0 }
+                { "monsters/queen", 159,    -17, -121,    0 }
+                { "monsters/queen", 160,    -81,  -57,    0 }
+                { "monsters/queen", 161,    -17,  -57,    0 }
+                { "monsters/queen", 162,     47,  -57,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 387,      9, -124,    1 }
+                { "monsters/queen", 388,    -55, -124,    1 }
+                { "monsters/queen", 389,      9,  -60,    1 }
+                { "monsters/queen", 390,    -55,  -60,    1 }
+                { "monsters/queen", 391,    -83,  -60,    1 }
+                { "monsters/queen", 170,    -46, -114,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 69,     12, -132,    1 }
+                { "monsters/queen", 70,    -52, -132,    1 }
+                { "monsters/queen", 71,    -60, -132,    1 }
+                { "monsters/queen", 72,     12,  -68,    1 }
+                { "monsters/queen", 73,    -52,  -68,    1 }
+                { "monsters/queen", 74,    -60,  -68,    1 }
+                { "monsters/queen", 75,    -52,   -4,    1 }
+                { "monsters/queen", 338,    -57, -124,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 280,      8, -145,    1 }
+                { "monsters/queen", 281,    -56, -145,    1 }
+                { "monsters/queen", 282,      8,  -81,    1 }
+                { "monsters/queen", 283,    -56,  -81,    1 }
+                { "monsters/queen", 284,    -68,  -81,    1 }
+                { "monsters/queen", 285,      8,  -17,    1 }
+                { "monsters/queen", 286,    -56,  -17,    1 }
+                { "monsters/queen", 287,    -68,  -17,    1 }
+                { "monsters/queen", 176,    -45, -123,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 163,    -46, -139,    0 }
+                { "monsters/queen", 164,     18, -139,    0 }
+                { "monsters/queen", 165,    -46,  -75,    0 }
+                { "monsters/queen", 166,     18,  -75,    0 }
+                { "monsters/queen", 167,     82,  -75,    0 }
+                { "monsters/queen", 168,    -46,  -11,    0 }
+                { "monsters/queen", 169,     18,  -11,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 280,    -71, -144,    0 }
+                { "monsters/queen", 281,     -7, -144,    0 }
+                { "monsters/queen", 282,    -71,  -80,    0 }
+                { "monsters/queen", 283,     -7,  -80,    0 }
+                { "monsters/queen", 284,     57,  -80,    0 }
+                { "monsters/queen", 285,    -71,  -16,    0 }
+                { "monsters/queen", 286,     -7,  -16,    0 }
+                { "monsters/queen", 287,     57,  -16,    0 }
+                { "monsters/queen", 176,     14, -122,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 69,    -71, -133,    0 }
+                { "monsters/queen", 70,     -7, -133,    0 }
+                { "monsters/queen", 71,     57, -133,    0 }
+                { "monsters/queen", 72,    -71,  -69,    0 }
+                { "monsters/queen", 73,     -7,  -69,    0 }
+                { "monsters/queen", 74,     57,  -69,    0 }
+                { "monsters/queen", 75,     -7,   -5,    0 }
+                { "monsters/queen", 338,     11, -125,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 387,    -73, -124,    0 }
+                { "monsters/queen", 388,     -9, -124,    0 }
+                { "monsters/queen", 389,    -73,  -60,    0 }
+                { "monsters/queen", 390,     -9,  -60,    0 }
+                { "monsters/queen", 391,     55,  -60,    0 }
+                { "monsters/queen", 170,      4, -114,    0 }
+            }
+        }
+        // ##004   70    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 158,    -81, -116,    0 }
+                { "monsters/queen", 159,    -17, -116,    0 }
+                { "monsters/queen", 160,    -81,  -52,    0 }
+                { "monsters/queen", 161,    -17,  -52,    0 }
+                { "monsters/queen", 162,     47,  -52,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 387,      9, -124,    1 }
+                { "monsters/queen", 388,    -55, -124,    1 }
+                { "monsters/queen", 389,      9,  -60,    1 }
+                { "monsters/queen", 390,    -55,  -60,    1 }
+                { "monsters/queen", 391,    -83,  -60,    1 }
+                { "monsters/queen", 170,    -46, -114,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 69,     12, -132,    1 }
+                { "monsters/queen", 70,    -52, -132,    1 }
+                { "monsters/queen", 71,    -60, -132,    1 }
+                { "monsters/queen", 72,     12,  -68,    1 }
+                { "monsters/queen", 73,    -52,  -68,    1 }
+                { "monsters/queen", 74,    -60,  -68,    1 }
+                { "monsters/queen", 75,    -52,   -4,    1 }
+                { "monsters/queen", 338,    -57, -124,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 280,      8, -145,    1 }
+                { "monsters/queen", 281,    -56, -145,    1 }
+                { "monsters/queen", 282,      8,  -81,    1 }
+                { "monsters/queen", 283,    -56,  -81,    1 }
+                { "monsters/queen", 284,    -68,  -81,    1 }
+                { "monsters/queen", 285,      8,  -17,    1 }
+                { "monsters/queen", 286,    -56,  -17,    1 }
+                { "monsters/queen", 287,    -68,  -17,    1 }
+                { "monsters/queen", 176,    -45, -123,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 163,    -46, -139,    0 }
+                { "monsters/queen", 164,     18, -139,    0 }
+                { "monsters/queen", 165,    -46,  -75,    0 }
+                { "monsters/queen", 166,     18,  -75,    0 }
+                { "monsters/queen", 167,     82,  -75,    0 }
+                { "monsters/queen", 168,    -46,  -11,    0 }
+                { "monsters/queen", 169,     18,  -11,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 280,    -71, -144,    0 }
+                { "monsters/queen", 281,     -7, -144,    0 }
+                { "monsters/queen", 282,    -71,  -80,    0 }
+                { "monsters/queen", 283,     -7,  -80,    0 }
+                { "monsters/queen", 284,     57,  -80,    0 }
+                { "monsters/queen", 285,    -71,  -16,    0 }
+                { "monsters/queen", 286,     -7,  -16,    0 }
+                { "monsters/queen", 287,     57,  -16,    0 }
+                { "monsters/queen", 176,     14, -122,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 69,    -71, -133,    0 }
+                { "monsters/queen", 70,     -7, -133,    0 }
+                { "monsters/queen", 71,     57, -133,    0 }
+                { "monsters/queen", 72,    -71,  -69,    0 }
+                { "monsters/queen", 73,     -7,  -69,    0 }
+                { "monsters/queen", 74,     57,  -69,    0 }
+                { "monsters/queen", 75,     -7,   -5,    0 }
+                { "monsters/queen", 338,     11, -125,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 387,    -73, -124,    0 }
+                { "monsters/queen", 388,     -9, -124,    0 }
+                { "monsters/queen", 389,    -73,  -60,    0 }
+                { "monsters/queen", 390,     -9,  -60,    0 }
+                { "monsters/queen", 391,     55,  -60,    0 }
+                { "monsters/queen", 170,      4, -114,    0 }
+            }
+        }
+        // ##005    0  128
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 158,    -81, -116,    0 }
+                { "monsters/queen", 159,    -17, -116,    0 }
+                { "monsters/queen", 160,    -81,  -52,    0 }
+                { "monsters/queen", 161,    -17,  -52,    0 }
+                { "monsters/queen", 162,     47,  -52,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 387,      9, -124,    1 }
+                { "monsters/queen", 388,    -55, -124,    1 }
+                { "monsters/queen", 389,      9,  -60,    1 }
+                { "monsters/queen", 390,    -55,  -60,    1 }
+                { "monsters/queen", 391,    -83,  -60,    1 }
+                { "monsters/queen", 170,    -46, -114,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 69,     12, -132,    1 }
+                { "monsters/queen", 70,    -52, -132,    1 }
+                { "monsters/queen", 71,    -60, -132,    1 }
+                { "monsters/queen", 72,     12,  -68,    1 }
+                { "monsters/queen", 73,    -52,  -68,    1 }
+                { "monsters/queen", 74,    -60,  -68,    1 }
+                { "monsters/queen", 75,    -52,   -4,    1 }
+                { "monsters/queen", 338,    -57, -124,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 280,      8, -145,    1 }
+                { "monsters/queen", 281,    -56, -145,    1 }
+                { "monsters/queen", 282,      8,  -81,    1 }
+                { "monsters/queen", 283,    -56,  -81,    1 }
+                { "monsters/queen", 284,    -68,  -81,    1 }
+                { "monsters/queen", 285,      8,  -17,    1 }
+                { "monsters/queen", 286,    -56,  -17,    1 }
+                { "monsters/queen", 287,    -68,  -17,    1 }
+                { "monsters/queen", 176,    -45, -123,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 163,    -46, -139,    0 }
+                { "monsters/queen", 164,     18, -139,    0 }
+                { "monsters/queen", 165,    -46,  -75,    0 }
+                { "monsters/queen", 166,     18,  -75,    0 }
+                { "monsters/queen", 167,     82,  -75,    0 }
+                { "monsters/queen", 168,    -46,  -11,    0 }
+                { "monsters/queen", 169,     18,  -11,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 280,    -71, -144,    0 }
+                { "monsters/queen", 281,     -7, -144,    0 }
+                { "monsters/queen", 282,    -71,  -80,    0 }
+                { "monsters/queen", 283,     -7,  -80,    0 }
+                { "monsters/queen", 284,     57,  -80,    0 }
+                { "monsters/queen", 285,    -71,  -16,    0 }
+                { "monsters/queen", 286,     -7,  -16,    0 }
+                { "monsters/queen", 287,     57,  -16,    0 }
+                { "monsters/queen", 176,     14, -122,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 69,    -71, -133,    0 }
+                { "monsters/queen", 70,     -7, -133,    0 }
+                { "monsters/queen", 71,     57, -133,    0 }
+                { "monsters/queen", 72,    -71,  -69,    0 }
+                { "monsters/queen", 73,     -7,  -69,    0 }
+                { "monsters/queen", 74,     57,  -69,    0 }
+                { "monsters/queen", 75,     -7,   -5,    0 }
+                { "monsters/queen", 338,     11, -125,    0 }
+            }
+        }
+        // ##006   70    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 307,    -64, -124,    0 }
+                { "monsters/queen", 308,      0, -124,    0 }
+                { "monsters/queen", 309,    -64,  -60,    0 }
+                { "monsters/queen", 310,      0,  -60,    0 }
+                { "monsters/queen", 311,     64,  -60,    0 }
+            }
+        }
+        // ##006    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 158,    -81, -116,    0 }
+                { "monsters/queen", 159,    -17, -116,    0 }
+                { "monsters/queen", 160,    -81,  -52,    0 }
+                { "monsters/queen", 161,    -17,  -52,    0 }
+                { "monsters/queen", 162,     47,  -52,    0 }
+            }
+        }
+        // ##006   70    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 307,      2, -120,    1 }
+                { "monsters/queen", 308,    -62, -120,    1 }
+                { "monsters/queen", 309,      2,  -56,    1 }
+                { "monsters/queen", 310,    -62,  -56,    1 }
+                { "monsters/queen", 311,    -74,  -56,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 69,     12, -132,    1 }
+                { "monsters/queen", 70,    -52, -132,    1 }
+                { "monsters/queen", 71,    -60, -132,    1 }
+                { "monsters/queen", 72,     12,  -68,    1 }
+                { "monsters/queen", 73,    -52,  -68,    1 }
+                { "monsters/queen", 74,    -60,  -68,    1 }
+                { "monsters/queen", 75,    -52,   -4,    1 }
+                { "monsters/queen", 338,    -57, -124,    1 }
+            }
+        }
+        // ##006    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 280,      8, -145,    1 }
+                { "monsters/queen", 281,    -56, -145,    1 }
+                { "monsters/queen", 282,      8,  -81,    1 }
+                { "monsters/queen", 283,    -56,  -81,    1 }
+                { "monsters/queen", 284,    -68,  -81,    1 }
+                { "monsters/queen", 285,      8,  -17,    1 }
+                { "monsters/queen", 286,    -56,  -17,    1 }
+                { "monsters/queen", 287,    -68,  -17,    1 }
+                { "monsters/queen", 176,    -45, -123,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##007   70    0
+        action A_PlayLocalSound("sounds/queenatk04.wav")
+        action A_QueenFireProjectile()
+        fullbright
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 204,    -49, -139,    0 }
+                { "monsters/queen", 205,     15, -139,    0 }
+                { "monsters/queen", 206,    -49,  -75,    0 }
+                { "monsters/queen", 207,     15,  -75,    0 }
+                { "monsters/queen", 208,    -49,  -11,    0 }
+                { "monsters/queen", 209,     15,  -11,    0 }
+            }
+        }
+        // ##007   70    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 243,    -57, -141,    0 }
+                { "monsters/queen", 244,      7, -141,    0 }
+                { "monsters/queen", 245,    -57,  -77,    0 }
+                { "monsters/queen", 246,      7,  -77,    0 }
+                { "monsters/queen", 247,      7,  -13,    0 }
+            }
+        }
+        // ##007   70    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 274,    -71, -128,    0 }
+                { "monsters/queen", 275,     -7, -128,    0 }
+                { "monsters/queen", 276,    -71,  -64,    0 }
+                { "monsters/queen", 277,     -7,  -64,    0 }
+                { "monsters/queen", 278,     57,  -64,    0 }
+            }
+        }
+        // ##007    0  128
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 307,    -64, -124,    0 }
+                { "monsters/queen", 308,      0, -124,    0 }
+                { "monsters/queen", 309,    -64,  -60,    0 }
+                { "monsters/queen", 310,      0,  -60,    0 }
+                { "monsters/queen", 311,     64,  -60,    0 }
+            }
+        }
+        // ##007    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 43,    -63, -116,    0 }
+                { "monsters/queen", 44,      1, -116,    0 }
+                { "monsters/queen", 45,    -63,  -52,    0 }
+                { "monsters/queen", 46,      1,  -52,    0 }
+                { "monsters/queen", 42,    -14, -125,    0 }
+            }
+        }
+        // ##007    0  128
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 307,      2, -120,    1 }
+                { "monsters/queen", 308,    -62, -120,    1 }
+                { "monsters/queen", 309,      2,  -56,    1 }
+                { "monsters/queen", 310,    -62,  -56,    1 }
+                { "monsters/queen", 311,    -74,  -56,    1 }
+            }
+        }
+        // ##007   70    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 274,      8, -127,    1 }
+                { "monsters/queen", 275,    -56, -127,    1 }
+                { "monsters/queen", 276,      8,  -63,    1 }
+                { "monsters/queen", 277,    -56,  -63,    1 }
+                { "monsters/queen", 278,    -68,  -63,    1 }
+            }
+        }
+        // ##007   70    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 243,     -2, -141,    1 }
+                { "monsters/queen", 244,    -58, -141,    1 }
+                { "monsters/queen", 245,     -2,  -77,    1 }
+                { "monsters/queen", 246,    -58,  -77,    1 }
+                { "monsters/queen", 247,    -58,  -13,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0  128
+        action A_QueenThink()
+        fullbright
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 204,    -49, -139,    0 }
+                { "monsters/queen", 205,     15, -139,    0 }
+                { "monsters/queen", 206,    -49,  -75,    0 }
+                { "monsters/queen", 207,     15,  -75,    0 }
+                { "monsters/queen", 208,    -49,  -11,    0 }
+                { "monsters/queen", 209,     15,  -11,    0 }
+            }
+        }
+        // ##008    0  128
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 243,    -56, -141,    0 }
+                { "monsters/queen", 244,      8, -141,    0 }
+                { "monsters/queen", 245,    -56,  -77,    0 }
+                { "monsters/queen", 246,      8,  -77,    0 }
+                { "monsters/queen", 247,      8,  -13,    0 }
+            }
+        }
+        // ##008    0  128
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 274,    -71, -128,    0 }
+                { "monsters/queen", 275,     -7, -128,    0 }
+                { "monsters/queen", 276,    -71,  -64,    0 }
+                { "monsters/queen", 277,     -7,  -64,    0 }
+                { "monsters/queen", 278,     57,  -64,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 307,    -64, -124,    0 }
+                { "monsters/queen", 308,      0, -124,    0 }
+                { "monsters/queen", 309,    -64,  -60,    0 }
+                { "monsters/queen", 310,      0,  -60,    0 }
+                { "monsters/queen", 311,     64,  -60,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 43,    -63, -116,    0 }
+                { "monsters/queen", 44,      1, -116,    0 }
+                { "monsters/queen", 45,    -63,  -52,    0 }
+                { "monsters/queen", 46,      1,  -52,    0 }
+                { "monsters/queen", 42,    -14, -125,    0 }
+            }
+        }
+        // ##008    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 307,      2, -120,    1 }
+                { "monsters/queen", 308,    -62, -120,    1 }
+                { "monsters/queen", 309,      2,  -56,    1 }
+                { "monsters/queen", 310,    -62,  -56,    1 }
+                { "monsters/queen", 311,    -74,  -56,    1 }
+            }
+        }
+        // ##008    0  128
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 274,      8, -127,    1 }
+                { "monsters/queen", 275,    -56, -127,    1 }
+                { "monsters/queen", 276,      8,  -63,    1 }
+                { "monsters/queen", 277,    -56,  -63,    1 }
+                { "monsters/queen", 278,    -68,  -63,    1 }
+            }
+        }
+        // ##008    0  128
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 243,     -2, -141,    1 }
+                { "monsters/queen", 244,    -58, -141,    1 }
+                { "monsters/queen", 245,     -2,  -77,    1 }
+                { "monsters/queen", 246,    -58,  -77,    1 }
+                { "monsters/queen", 247,    -58,  -13,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 204,    -49, -139,    0 }
+                { "monsters/queen", 205,     15, -139,    0 }
+                { "monsters/queen", 206,    -49,  -75,    0 }
+                { "monsters/queen", 207,     15,  -75,    0 }
+                { "monsters/queen", 208,    -49,  -11,    0 }
+                { "monsters/queen", 209,     15,  -11,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 243,    -57, -141,    0 }
+                { "monsters/queen", 244,      7, -141,    0 }
+                { "monsters/queen", 245,    -57,  -77,    0 }
+                { "monsters/queen", 246,      7,  -77,    0 }
+                { "monsters/queen", 247,      7,  -13,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 274,    -71, -128,    0 }
+                { "monsters/queen", 275,     -7, -128,    0 }
+                { "monsters/queen", 276,    -71,  -64,    0 }
+                { "monsters/queen", 277,     -7,  -64,    0 }
+                { "monsters/queen", 278,     57,  -64,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 307,    -64, -124,    0 }
+                { "monsters/queen", 308,      0, -124,    0 }
+                { "monsters/queen", 309,    -64,  -60,    0 }
+                { "monsters/queen", 310,      0,  -60,    0 }
+                { "monsters/queen", 311,     64,  -60,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 43,    -63, -116,    0 }
+                { "monsters/queen", 44,      1, -116,    0 }
+                { "monsters/queen", 45,    -63,  -52,    0 }
+                { "monsters/queen", 46,      1,  -52,    0 }
+                { "monsters/queen", 42,    -14, -125,    0 }
+            }
+        }
+        // ##009    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 307,      2, -120,    1 }
+                { "monsters/queen", 308,    -62, -120,    1 }
+                { "monsters/queen", 309,      2,  -56,    1 }
+                { "monsters/queen", 310,    -62,  -56,    1 }
+                { "monsters/queen", 311,    -74,  -56,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 274,      8, -127,    1 }
+                { "monsters/queen", 275,    -56, -127,    1 }
+                { "monsters/queen", 276,      8,  -63,    1 }
+                { "monsters/queen", 277,    -56,  -63,    1 }
+                { "monsters/queen", 278,    -68,  -63,    1 }
+            }
+        }
+        // ##009    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 243,     -2, -141,    1 }
+                { "monsters/queen", 244,    -58, -141,    1 }
+                { "monsters/queen", 245,     -2,  -77,    1 }
+                { "monsters/queen", 246,    -58,  -77,    1 }
+                { "monsters/queen", 247,    -58,  -13,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 163,    -49, -139,    0 }
+                { "monsters/queen", 164,     15, -139,    0 }
+                { "monsters/queen", 165,    -49,  -75,    0 }
+                { "monsters/queen", 166,     15,  -75,    0 }
+                { "monsters/queen", 167,     79,  -75,    0 }
+                { "monsters/queen", 168,    -49,  -11,    0 }
+                { "monsters/queen", 169,     15,  -11,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 243,    -56, -141,    0 }
+                { "monsters/queen", 244,      8, -141,    0 }
+                { "monsters/queen", 245,    -56,  -77,    0 }
+                { "monsters/queen", 246,      8,  -77,    0 }
+                { "monsters/queen", 247,      8,  -13,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 69,    -67, -132,    0 }
+                { "monsters/queen", 70,     -3, -132,    0 }
+                { "monsters/queen", 71,     61, -132,    0 }
+                { "monsters/queen", 72,    -67,  -68,    0 }
+                { "monsters/queen", 73,     -3,  -68,    0 }
+                { "monsters/queen", 74,     61,  -68,    0 }
+                { "monsters/queen", 75,     -3,   -4,    0 }
+                { "monsters/queen", 338,     15, -124,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 387,    -74, -124,    0 }
+                { "monsters/queen", 388,    -10, -124,    0 }
+                { "monsters/queen", 389,    -74,  -60,    0 }
+                { "monsters/queen", 390,    -10,  -60,    0 }
+                { "monsters/queen", 391,     54,  -60,    0 }
+                { "monsters/queen", 170,      3, -114,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 43,    -63, -116,    0 }
+                { "monsters/queen", 44,      1, -116,    0 }
+                { "monsters/queen", 45,    -63,  -52,    0 }
+                { "monsters/queen", 46,      1,  -52,    0 }
+                { "monsters/queen", 42,    -14, -125,    0 }
+            }
+        }
+        // ##010    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 387,      9, -124,    1 }
+                { "monsters/queen", 388,    -55, -124,    1 }
+                { "monsters/queen", 389,      9,  -60,    1 }
+                { "monsters/queen", 390,    -55,  -60,    1 }
+                { "monsters/queen", 391,    -83,  -60,    1 }
+                { "monsters/queen", 170,    -46, -114,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 69,      6, -132,    1 }
+                { "monsters/queen", 70,    -58, -132,    1 }
+                { "monsters/queen", 71,    -66, -132,    1 }
+                { "monsters/queen", 72,      6,  -68,    1 }
+                { "monsters/queen", 73,    -58,  -68,    1 }
+                { "monsters/queen", 74,    -66,  -68,    1 }
+                { "monsters/queen", 75,    -58,   -4,    1 }
+                { "monsters/queen", 338,    -63, -124,    1 }
+            }
+        }
+        // ##010    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 280,      1, -146,    1 }
+                { "monsters/queen", 281,    -63, -146,    1 }
+                { "monsters/queen", 282,      1,  -82,    1 }
+                { "monsters/queen", 283,    -63,  -82,    1 }
+                { "monsters/queen", 284,    -75,  -82,    1 }
+                { "monsters/queen", 285,      1,  -18,    1 }
+                { "monsters/queen", 286,    -63,  -18,    1 }
+                { "monsters/queen", 287,    -75,  -18,    1 }
+                { "monsters/queen", 176,    -52, -124,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 163,    -49, -139,    0 }
+                { "monsters/queen", 164,     15, -139,    0 }
+                { "monsters/queen", 165,    -49,  -75,    0 }
+                { "monsters/queen", 166,     15,  -75,    0 }
+                { "monsters/queen", 167,     79,  -75,    0 }
+                { "monsters/queen", 168,    -49,  -11,    0 }
+                { "monsters/queen", 169,     15,  -11,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 280,    -65, -145,    0 }
+                { "monsters/queen", 281,     -1, -145,    0 }
+                { "monsters/queen", 282,    -65,  -81,    0 }
+                { "monsters/queen", 283,     -1,  -81,    0 }
+                { "monsters/queen", 284,     63,  -81,    0 }
+                { "monsters/queen", 285,    -65,  -17,    0 }
+                { "monsters/queen", 286,     -1,  -17,    0 }
+                { "monsters/queen", 287,     63,  -17,    0 }
+                { "monsters/queen", 176,     20, -123,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 69,    -67, -132,    0 }
+                { "monsters/queen", 70,     -3, -132,    0 }
+                { "monsters/queen", 71,     61, -132,    0 }
+                { "monsters/queen", 72,    -67,  -68,    0 }
+                { "monsters/queen", 73,     -3,  -68,    0 }
+                { "monsters/queen", 74,     61,  -68,    0 }
+                { "monsters/queen", 75,     -3,   -4,    0 }
+                { "monsters/queen", 338,     15, -124,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 387,    -74, -124,    0 }
+                { "monsters/queen", 388,    -10, -124,    0 }
+                { "monsters/queen", 389,    -74,  -60,    0 }
+                { "monsters/queen", 390,    -10,  -60,    0 }
+                { "monsters/queen", 391,     54,  -60,    0 }
+                { "monsters/queen", 170,      3, -114,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 43,    -63, -116,    0 }
+                { "monsters/queen", 44,      1, -116,    0 }
+                { "monsters/queen", 45,    -63,  -52,    0 }
+                { "monsters/queen", 46,      1,  -52,    0 }
+                { "monsters/queen", 42,    -14, -125,    0 }
+            }
+        }
+        // ##011    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 387,      9, -124,    1 }
+                { "monsters/queen", 388,    -55, -124,    1 }
+                { "monsters/queen", 389,      9,  -60,    1 }
+                { "monsters/queen", 390,    -55,  -60,    1 }
+                { "monsters/queen", 391,    -83,  -60,    1 }
+                { "monsters/queen", 170,    -46, -114,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 69,      6, -132,    1 }
+                { "monsters/queen", 70,    -58, -132,    1 }
+                { "monsters/queen", 71,    -66, -132,    1 }
+                { "monsters/queen", 72,      6,  -68,    1 }
+                { "monsters/queen", 73,    -58,  -68,    1 }
+                { "monsters/queen", 74,    -66,  -68,    1 }
+                { "monsters/queen", 75,    -58,   -4,    1 }
+                { "monsters/queen", 338,    -63, -124,    1 }
+            }
+        }
+        // ##011    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 280,      1, -146,    1 }
+                { "monsters/queen", 281,    -63, -146,    1 }
+                { "monsters/queen", 282,      1,  -82,    1 }
+                { "monsters/queen", 283,    -63,  -82,    1 }
+                { "monsters/queen", 284,    -75,  -82,    1 }
+                { "monsters/queen", 285,      1,  -18,    1 }
+                { "monsters/queen", 286,    -63,  -18,    1 }
+                { "monsters/queen", 287,    -75,  -18,    1 }
+                { "monsters/queen", 176,    -52, -124,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 163,    -49, -139,    0 }
+                { "monsters/queen", 164,     15, -139,    0 }
+                { "monsters/queen", 165,    -49,  -75,    0 }
+                { "monsters/queen", 166,     15,  -75,    0 }
+                { "monsters/queen", 167,     79,  -75,    0 }
+                { "monsters/queen", 168,    -49,  -11,    0 }
+                { "monsters/queen", 169,     15,  -11,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 280,    -65, -145,    0 }
+                { "monsters/queen", 281,     -1, -145,    0 }
+                { "monsters/queen", 282,    -65,  -81,    0 }
+                { "monsters/queen", 283,     -1,  -81,    0 }
+                { "monsters/queen", 284,     63,  -81,    0 }
+                { "monsters/queen", 285,    -65,  -17,    0 }
+                { "monsters/queen", 286,     -1,  -17,    0 }
+                { "monsters/queen", 287,     63,  -17,    0 }
+                { "monsters/queen", 176,     20, -123,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 69,    -67, -132,    0 }
+                { "monsters/queen", 70,     -3, -132,    0 }
+                { "monsters/queen", 71,     61, -132,    0 }
+                { "monsters/queen", 72,    -67,  -68,    0 }
+                { "monsters/queen", 73,     -3,  -68,    0 }
+                { "monsters/queen", 74,     61,  -68,    0 }
+                { "monsters/queen", 75,     -3,   -4,    0 }
+                { "monsters/queen", 338,     15, -124,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 387,    -74, -124,    0 }
+                { "monsters/queen", 388,    -10, -124,    0 }
+                { "monsters/queen", 389,    -74,  -60,    0 }
+                { "monsters/queen", 390,    -10,  -60,    0 }
+                { "monsters/queen", 391,     54,  -60,    0 }
+                { "monsters/queen", 170,      3, -114,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 62,    -67, -116,    0 }
+                { "monsters/queen", 63,     -3, -116,    0 }
+                { "monsters/queen", 64,     61, -116,    0 }
+                { "monsters/queen", 65,    -67,  -52,    0 }
+                { "monsters/queen", 66,     -3,  -52,    0 }
+                { "monsters/queen", 67,     61,  -52,    0 }
+                { "monsters/queen", 61,     -2, -118,    0 }
+            }
+        }
+        // ##012    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 387,      9, -124,    1 }
+                { "monsters/queen", 388,    -55, -124,    1 }
+                { "monsters/queen", 389,      9,  -60,    1 }
+                { "monsters/queen", 390,    -55,  -60,    1 }
+                { "monsters/queen", 391,    -83,  -60,    1 }
+                { "monsters/queen", 170,    -46, -114,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 69,      6, -132,    1 }
+                { "monsters/queen", 70,    -58, -132,    1 }
+                { "monsters/queen", 71,    -66, -132,    1 }
+                { "monsters/queen", 72,      6,  -68,    1 }
+                { "monsters/queen", 73,    -58,  -68,    1 }
+                { "monsters/queen", 74,    -66,  -68,    1 }
+                { "monsters/queen", 75,    -58,   -4,    1 }
+                { "monsters/queen", 338,    -63, -124,    1 }
+            }
+        }
+        // ##012    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 280,      1, -146,    1 }
+                { "monsters/queen", 281,    -63, -146,    1 }
+                { "monsters/queen", 282,      1,  -82,    1 }
+                { "monsters/queen", 283,    -63,  -82,    1 }
+                { "monsters/queen", 284,    -75,  -82,    1 }
+                { "monsters/queen", 285,      1,  -18,    1 }
+                { "monsters/queen", 286,    -63,  -18,    1 }
+                { "monsters/queen", 287,    -75,  -18,    1 }
+                { "monsters/queen", 176,    -52, -124,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 125,    -65, -139,    0 }
+                { "monsters/queen", 126,     -1, -139,    0 }
+                { "monsters/queen", 127,    -65,  -75,    0 }
+                { "monsters/queen", 128,     -1,  -75,    0 }
+                { "monsters/queen", 129,     63,  -75,    0 }
+                { "monsters/queen", 130,    -65,  -11,    0 }
+                { "monsters/queen", 131,     -1,  -11,    0 }
+                { "monsters/queen", 132,     63,  -11,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 280,    -65, -145,    0 }
+                { "monsters/queen", 281,     -1, -145,    0 }
+                { "monsters/queen", 282,    -65,  -81,    0 }
+                { "monsters/queen", 283,     -1,  -81,    0 }
+                { "monsters/queen", 284,     63,  -81,    0 }
+                { "monsters/queen", 285,    -65,  -17,    0 }
+                { "monsters/queen", 286,     -1,  -17,    0 }
+                { "monsters/queen", 287,     63,  -17,    0 }
+                { "monsters/queen", 176,     20, -123,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 48,    -65, -133,    0 }
+                { "monsters/queen", 49,     -1, -133,    0 }
+                { "monsters/queen", 50,    -65,  -69,    0 }
+                { "monsters/queen", 51,     -1,  -69,    0 }
+                { "monsters/queen", 52,     63,  -69,    0 }
+                { "monsters/queen", 53,    -65,   -5,    0 }
+                { "monsters/queen", 312,     19, -133,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 248,    -71, -125,    0 }
+                { "monsters/queen", 249,     -7, -125,    0 }
+                { "monsters/queen", 250,    -71,  -61,    0 }
+                { "monsters/queen", 251,     -7,  -61,    0 }
+                { "monsters/queen", 252,     57,  -61,    0 }
+                { "monsters/queen", 253,    -71,    3,    0 }
+                { "monsters/queen", 133,     -3, -123,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 62,    -67, -116,    0 }
+                { "monsters/queen", 63,     -3, -116,    0 }
+                { "monsters/queen", 64,     61, -116,    0 }
+                { "monsters/queen", 65,    -67,  -52,    0 }
+                { "monsters/queen", 66,     -3,  -52,    0 }
+                { "monsters/queen", 67,     61,  -52,    0 }
+                { "monsters/queen", 61,     -2, -118,    0 }
+            }
+        }
+        // ##013    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 248,      9, -125,    1 }
+                { "monsters/queen", 249,    -55, -125,    1 }
+                { "monsters/queen", 250,      9,  -61,    1 }
+                { "monsters/queen", 251,    -55,  -61,    1 }
+                { "monsters/queen", 252,    -75,  -61,    1 }
+                { "monsters/queen", 253,      9,    3,    1 }
+                { "monsters/queen", 133,    -43, -123,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 48,      4, -131,    1 }
+                { "monsters/queen", 49,    -60, -131,    1 }
+                { "monsters/queen", 50,      4,  -67,    1 }
+                { "monsters/queen", 51,    -60,  -67,    1 }
+                { "monsters/queen", 52,    -80,  -67,    1 }
+                { "monsters/queen", 53,      4,   -3,    1 }
+                { "monsters/queen", 312,    -61, -131,    1 }
+            }
+        }
+        // ##013    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 255,      0, -145,    1 }
+                { "monsters/queen", 256,    -64, -145,    1 }
+                { "monsters/queen", 257,      0,  -81,    1 }
+                { "monsters/queen", 258,    -64,  -81,    1 }
+                { "monsters/queen", 259,    -96,  -81,    1 }
+                { "monsters/queen", 260,      0,  -17,    1 }
+                { "monsters/queen", 261,    -64,  -17,    1 }
+                { "monsters/queen", 139,    -49, -129,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        action A_QueenThink()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 125,    -65, -139,    0 }
+                { "monsters/queen", 126,     -1, -139,    0 }
+                { "monsters/queen", 127,    -65,  -75,    0 }
+                { "monsters/queen", 128,     -1,  -75,    0 }
+                { "monsters/queen", 129,     63,  -75,    0 }
+                { "monsters/queen", 130,    -65,  -11,    0 }
+                { "monsters/queen", 131,     -1,  -11,    0 }
+                { "monsters/queen", 132,     63,  -11,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 255,    -67, -144,    0 }
+                { "monsters/queen", 256,     -3, -144,    0 }
+                { "monsters/queen", 257,    -67,  -80,    0 }
+                { "monsters/queen", 258,     -3,  -80,    0 }
+                { "monsters/queen", 259,     61,  -80,    0 }
+                { "monsters/queen", 260,    -67,  -16,    0 }
+                { "monsters/queen", 261,     -3,  -16,    0 }
+                { "monsters/queen", 139,     22, -128,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 48,    -65, -133,    0 }
+                { "monsters/queen", 49,     -1, -133,    0 }
+                { "monsters/queen", 50,    -65,  -69,    0 }
+                { "monsters/queen", 51,     -1,  -69,    0 }
+                { "monsters/queen", 52,     63,  -69,    0 }
+                { "monsters/queen", 53,    -65,   -5,    0 }
+                { "monsters/queen", 312,     19, -133,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 248,    -71, -125,    0 }
+                { "monsters/queen", 249,     -7, -125,    0 }
+                { "monsters/queen", 250,    -71,  -61,    0 }
+                { "monsters/queen", 251,     -7,  -61,    0 }
+                { "monsters/queen", 252,     57,  -61,    0 }
+                { "monsters/queen", 253,    -71,    3,    0 }
+                { "monsters/queen", 133,     -3, -123,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 92,    -61, -113,    0 }
+                { "monsters/queen", 93,      3, -113,    0 }
+                { "monsters/queen", 94,    -61,  -49,    0 }
+                { "monsters/queen", 95,      3,  -49,    0 }
+                { "monsters/queen", 96,     67,  -49,    0 }
+                { "monsters/queen", 91,      0, -122,    0 }
+            }
+        }
+        // ##014    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 248,      9, -125,    1 }
+                { "monsters/queen", 249,    -55, -125,    1 }
+                { "monsters/queen", 250,      9,  -61,    1 }
+                { "monsters/queen", 251,    -55,  -61,    1 }
+                { "monsters/queen", 252,    -75,  -61,    1 }
+                { "monsters/queen", 253,      9,    3,    1 }
+                { "monsters/queen", 133,    -43, -123,    1 }
+            }
+        }
+        // ##014    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 48,      4, -131,    1 }
+                { "monsters/queen", 49,    -60, -131,    1 }
+                { "monsters/queen", 50,      4,  -67,    1 }
+                { "monsters/queen", 51,    -60,  -67,    1 }
+                { "monsters/queen", 52,    -80,  -67,    1 }
+                { "monsters/queen", 53,      4,   -3,    1 }
+                { "monsters/queen", 312,    -61, -131,    1 }
+            }
+        }
+        // ##014    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 255,      0, -145,    1 }
+                { "monsters/queen", 256,    -64, -145,    1 }
+                { "monsters/queen", 257,      0,  -81,    1 }
+                { "monsters/queen", 258,    -64,  -81,    1 }
+                { "monsters/queen", 259,    -96,  -81,    1 }
+                { "monsters/queen", 260,      0,  -17,    1 }
+                { "monsters/queen", 261,    -64,  -17,    1 }
+                { "monsters/queen", 139,    -49, -129,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        action A_QueenCheckRefire()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 125,    -65, -139,    0 }
+                { "monsters/queen", 126,     -1, -139,    0 }
+                { "monsters/queen", 127,    -65,  -75,    0 }
+                { "monsters/queen", 128,     -1,  -75,    0 }
+                { "monsters/queen", 129,     63,  -75,    0 }
+                { "monsters/queen", 130,    -65,  -11,    0 }
+                { "monsters/queen", 131,     -1,  -11,    0 }
+                { "monsters/queen", 132,     63,  -11,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 255,    -67, -144,    0 }
+                { "monsters/queen", 256,     -3, -144,    0 }
+                { "monsters/queen", 257,    -67,  -80,    0 }
+                { "monsters/queen", 258,     -3,  -80,    0 }
+                { "monsters/queen", 259,     61,  -80,    0 }
+                { "monsters/queen", 260,    -67,  -16,    0 }
+                { "monsters/queen", 261,     -3,  -16,    0 }
+                { "monsters/queen", 139,     22, -128,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 48,    -65, -133,    0 }
+                { "monsters/queen", 49,     -1, -133,    0 }
+                { "monsters/queen", 50,    -65,  -69,    0 }
+                { "monsters/queen", 51,     -1,  -69,    0 }
+                { "monsters/queen", 52,     63,  -69,    0 }
+                { "monsters/queen", 53,    -65,   -5,    0 }
+                { "monsters/queen", 312,     19, -133,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 248,    -71, -125,    0 }
+                { "monsters/queen", 249,     -7, -125,    0 }
+                { "monsters/queen", 250,    -71,  -61,    0 }
+                { "monsters/queen", 251,     -7,  -61,    0 }
+                { "monsters/queen", 252,     57,  -61,    0 }
+                { "monsters/queen", 253,    -71,    3,    0 }
+                { "monsters/queen", 133,     -3, -123,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 92,    -61, -113,    0 }
+                { "monsters/queen", 93,      3, -113,    0 }
+                { "monsters/queen", 94,    -61,  -49,    0 }
+                { "monsters/queen", 95,      3,  -49,    0 }
+                { "monsters/queen", 96,     67,  -49,    0 }
+                { "monsters/queen", 91,      0, -122,    0 }
+            }
+        }
+        // ##015    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 248,      9, -125,    1 }
+                { "monsters/queen", 249,    -55, -125,    1 }
+                { "monsters/queen", 250,      9,  -61,    1 }
+                { "monsters/queen", 251,    -55,  -61,    1 }
+                { "monsters/queen", 252,    -75,  -61,    1 }
+                { "monsters/queen", 253,      9,    3,    1 }
+                { "monsters/queen", 133,    -43, -123,    1 }
+            }
+        }
+        // ##015    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 48,      4, -131,    1 }
+                { "monsters/queen", 49,    -60, -131,    1 }
+                { "monsters/queen", 50,      4,  -67,    1 }
+                { "monsters/queen", 51,    -60,  -67,    1 }
+                { "monsters/queen", 52,    -80,  -67,    1 }
+                { "monsters/queen", 53,      4,   -3,    1 }
+                { "monsters/queen", 312,    -61, -131,    1 }
+            }
+        }
+        // ##015    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 255,      0, -145,    1 }
+                { "monsters/queen", 256,    -64, -145,    1 }
+                { "monsters/queen", 257,      0,  -81,    1 }
+                { "monsters/queen", 258,    -64,  -81,    1 }
+                { "monsters/queen", 259,    -96,  -81,    1 }
+                { "monsters/queen", 260,      0,  -17,    1 }
+                { "monsters/queen", 261,    -64,  -17,    1 }
+                { "monsters/queen", 139,    -49, -129,    1 }
+            }
+        }
+    }
+}

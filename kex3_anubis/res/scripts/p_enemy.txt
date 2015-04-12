@@ -15,6 +15,12 @@
 //      AI/Monster Actions
 //
 
+//-----------------------------------------------------------------------------
+//
+// common actions
+//
+//-----------------------------------------------------------------------------
+
 //
 // A_ThrustZVelocity
 //
@@ -59,6 +65,12 @@ void A_Show(kActor @actor)
     actor.Flags() &= ~AF_HIDDEN;
 }
 
+//-----------------------------------------------------------------------------
+//
+// anubis
+//
+//-----------------------------------------------------------------------------
+
 //
 // A_AnubisDeath
 //
@@ -74,6 +86,12 @@ void A_AnubisDeath(kActor @actor)
         actor.PlaySound("sounds/anubisdeath02.wav");
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// spider
+//
+//-----------------------------------------------------------------------------
 
 //
 // A_SpiderLeap
@@ -107,6 +125,12 @@ void A_SpiderCheckGround(kActor @actor)
     }
 }
 
+//-----------------------------------------------------------------------------
+//
+// wasp
+//
+//-----------------------------------------------------------------------------
+
 //
 // A_WaspDeath
 //
@@ -122,6 +146,12 @@ void A_WaspDeath(kActor @actor)
         actor.PlaySound("sounds/waspdeath02.wav");
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// hawk
+//
+//-----------------------------------------------------------------------------
 
 //
 // A_BirdDeath
@@ -196,6 +226,12 @@ void A_BirdRetreat(kActor @actor)
         actor.SetTarget(null);
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// mummy
+//
+//-----------------------------------------------------------------------------
 
 //
 // A_MummyDeath
@@ -272,6 +308,12 @@ void A_RedCobraExplode(kActor @actor)
     
     puff.PlaySound("sounds/pbexplode.wav");
 }
+
+//-----------------------------------------------------------------------------
+//
+// bastet
+//
+//-----------------------------------------------------------------------------
 
 //
 // A_BastetTryTeleport
@@ -387,6 +429,12 @@ void A_BastetScream(kActor @actor)
     }
 }
 
+//-----------------------------------------------------------------------------
+//
+// kilmaat sentry
+//
+//-----------------------------------------------------------------------------
+
 //
 // A_SentryChatter
 //
@@ -427,6 +475,12 @@ void A_SentryDeath(kActor @actor)
         actor.PlaySound("sounds/sentrydeath02.wav");
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// lava mantis
+//
+//-----------------------------------------------------------------------------
 
 //
 // A_MantisThink
@@ -570,6 +624,12 @@ void A_MantisExplode(kActor @actor)
     }
 }
 
+//-----------------------------------------------------------------------------
+//
+// magic 8 ball
+//
+//-----------------------------------------------------------------------------
+
 //
 // A_StartCountdown
 //
@@ -603,6 +663,12 @@ void A_DetonateCountdown(kActor @actor)
         }
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// set boss
+//
+//-----------------------------------------------------------------------------
 
 //
 // A_SetThink
@@ -691,6 +757,12 @@ void A_SetDeath(kActor @actor)
     
     Game.FireRemoteEventFromTag(1010);
 }
+
+//-----------------------------------------------------------------------------
+//
+// selkis boss
+//
+//-----------------------------------------------------------------------------
 
 //
 // A_SelkisThink
@@ -782,4 +854,426 @@ void A_SelkisCountDown(kAI @actor, int bStart)
     z = Math::RandCFloat() * 128.0f;
     
     actor.SpawnActor("Fx_Explosion01", x, y, z + 192.0f);
+}
+
+//-----------------------------------------------------------------------------
+//
+// queen boss
+//
+//-----------------------------------------------------------------------------
+
+int maxQueenSeeds = 0;
+
+//
+// A_QueenThink
+//
+
+void A_QueenThink(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    if(actor.Health() <= 2400)
+    {
+        actor.ChangeAnim("monsters/queen_pain");
+        return;
+    }
+    
+    kAngle angles = ((actor.GetTarget().Origin() - actor.Origin()).Normalize()).ToYaw();
+    kAngle turnAngles = angles.Diff(actor.Yaw());
+    kAngle strafeAngles;
+    
+    if(turnAngles > 0.025f)
+    {
+        actor.Yaw() += 0.025f;
+    }
+    else if(turnAngles < -0.025f)
+    {
+        actor.Yaw() -= 0.025f;
+    }
+    
+    if(!actor.RandomDecision(14) && (Math::RandByte() & 7) == 0)
+    {
+        actor.ChangeAnim("monsters/queen_tail_missile");
+    }
+    
+    if(actor.RandomDecision(62))
+    {
+        return;
+    }
+    
+    if(Math::RandByte() <= 16)
+    {
+        actor.PlaySound("sounds/queenact02.wav");
+    }
+    
+    strafeAngles = angles + (Math::RandCFloat() * Math::Deg2Rad(90.0f));
+    
+    if((Math::RandByte() & 1) != 0)
+    {
+        strafeAngles = -strafeAngles;
+    }
+    
+    actor.Velocity().x = Math::Sin(strafeAngles) * 4.0f;
+    actor.Velocity().y = Math::Cos(strafeAngles) * 4.0f;
+}
+
+//
+// A_QueenThinkStumpy
+//
+
+void A_QueenThinkStumpy(kActor @actor)
+{
+    if(actor.RandomDecision(14))
+    {
+        return;
+    }
+    
+    if(Math::RandByte() <= 16)
+    {
+        actor.PlaySound("sounds/queenatk03.wav");
+    }
+    
+    if(actor.Health() <= 1200 && (Math::RandByte() & 1) != 0)
+    {
+        if(maxQueenSeeds < 8)
+        {
+            actor.ChangeAnim("monsters/queen_hurl");
+        }
+    }
+    else if((Math::RandByte() & 7) == 0)
+    {
+        actor.ChangeAnim("monsters/queen_chase_charge");
+    }
+}
+
+//
+// A_QueenCheckState
+//
+
+void A_QueenCheckState(kActor @actor)
+{
+    if(actor.Health() > 2400)
+    {
+        actor.ChangeAnim("monsters/queen_base");
+    }
+}
+
+//
+// A_QueenCheckRefire
+//
+
+void A_QueenCheckRefire(kActor @actor)
+{
+    if((Math::RandByte() & 3) == 0)
+    {
+        actor.ChangeAnim("monsters/queen_chase");
+        return;
+    }
+}
+
+//
+// A_QueenFireProjectile
+//
+
+void A_QueenFireProjectile(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    float an;
+    float dist;
+    float offset;
+    float x, y;
+    kVec3 tVec;
+    kVec3 dir;
+    kActor @proj;
+    
+    @proj = actor.SpawnActor("Proj_Seedling", 0, 0, 128);
+    
+    if(proj is null)
+    {
+        return;
+    }
+    
+    an = ((actor.GetTarget().Origin() - actor.Origin()).Normalize()).ToYaw();
+    proj.Yaw() = an;
+    
+    dir.x = Math::Sin(an) * 32.0f;
+    dir.y = Math::Cos(an) * 32.0f;
+    
+    tVec = actor.GetTarget().Origin();
+    
+    x = tVec.x - proj.Origin().x;
+    y = tVec.y - proj.Origin().y;
+    
+    dist = Math::Sqrt(x * x + y * y) / 32.0f;
+    
+    if(dist < 1)
+    {
+        dist = 1;
+    }
+    
+    offset = tVec.z + (actor.GetTarget().Height() * 0.5f);
+    dir.z = ((offset - proj.Origin().z) / dist);
+    
+    proj.SetTarget(actor);
+    proj.Velocity() = dir;
+}
+
+//
+// A_QueenAfterPain
+//
+
+void A_QueenAfterPain(kAI @actor)
+{
+    actor.Friction() = 0.5f;
+    actor.MoveSpeed() = 8.0f;
+}
+
+//
+// A_QueenChargeThink
+//
+
+void A_QueenChargeThink(kActor @actor)
+{
+    kActor @target = actor.GetTarget();
+    
+    if(target is null)
+    {
+        actor.ChangeAnim("monsters/queen_chase");
+        return;
+    }
+    
+    kVec3 dir = target.Origin() - actor.Origin();
+    float turnAmount;
+    float dist;
+    float r;
+    
+    dist = dir.UnitSq();
+    r = actor.Radius() + target.Radius();
+    
+    if(dist >= (192*192))
+    {
+        turnAmount = Math::Deg2Rad(11.25f);
+    }
+    else
+    {
+        turnAmount = Math::Deg2Rad(5.625f);
+    }
+    
+    kAngle angles = dir.Normalize().ToYaw();
+    kAngle turnAngles = angles.Diff(actor.Yaw());
+    
+    if(turnAngles > turnAmount)
+    {
+        actor.Yaw() += turnAmount;
+    }
+    else if(turnAngles < -turnAmount)
+    {
+        actor.Yaw() -= turnAmount;
+    }
+    
+    actor.Friction() = 1.0f;
+    
+    actor.Velocity().x = Math::Sin(actor.Yaw()) * 16.0f;
+    actor.Velocity().y = Math::Cos(actor.Yaw()) * 16.0f;
+    
+    if(dist <= (r * r))
+    {
+        target.InflictDamage(actor, 40);
+        
+        target.Velocity().x = actor.Velocity().x * 2.0f;
+        target.Velocity().y = actor.Velocity().y * 2.0f;
+        
+        actor.Friction() = 0.5f;        
+        actor.ChangeAnim("monsters/queen_after_charge");
+    }
+}
+
+//
+// A_QueenHurlSeedling
+//
+
+void A_QueenHurlSeedling(kActor @actor)
+{
+    kActor @seed;
+    kVec3 dir;
+    
+    @seed = actor.SpawnActor("Obj_Seedling_Spawn", 0, 0, 128);
+    
+    if(seed is null)
+    {
+        return;
+    }
+    
+    seed.Yaw() = actor.Yaw();
+    
+    seed.Velocity().x = Math::Sin(seed.Yaw()) * 32.0f;
+    seed.Velocity().y = Math::Cos(seed.Yaw()) * 32.0f;
+    
+    maxQueenSeeds++;
+}
+
+//
+// A_QueenSeedDeath
+//
+
+void A_QueenSeedDeath(kActor @actor)
+{
+    maxQueenSeeds--;
+}
+
+//
+// AddSnakeTail
+//
+
+void AddSnakeTail(kActor @actor, int &in count)
+{
+    kActor @tail;
+    
+    if(--count < 0)
+    {
+        return;
+    }
+    
+    @tail = actor.SpawnActor("Obj_Queen_Snake_Tail", 0, 0, 0);
+    tail.SetTarget(actor);
+    
+    if(count == 0)
+    {
+        tail.Flags() |= AF_SHOOTABLE;
+    }
+    
+    AddSnakeTail(tail, count);
+}
+
+//
+// A_QueenSnakeSetup
+//
+
+void A_QueenSnakeSetup(kActor @actor)
+{
+    if(!(actor.GetTaggedActor() is null))
+    {
+        return;
+    }
+    
+    kActor @tail;
+    int count = 10;
+    
+    @tail = actor.SpawnActor("Obj_Queen_Snake_Tail", 0, 0, 0);
+    tail.SetTarget(actor);
+    actor.SetTaggedActor(tail);
+    
+    AddSnakeTail(tail, count);
+}
+
+//
+// A_UpdateQueenTailJoints
+//
+
+void A_UpdateQueenTailJoints(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    actor.Origin().Lerp(actor.GetTarget().Origin(), 0.5f);
+    actor.SetSector(actor.GetTarget().SectorIndex());
+}
+
+//
+// A_QueenSnakeTailDeath
+//
+
+void A_QueenSnakeTailDeath(kActor @actor)
+{
+    if(actor.GetTarget() is null)
+    {
+        return;
+    }
+    
+    actor.GetTarget().Flags() |= AF_SHOOTABLE;
+}
+
+//
+// A_QueenSnakeHop
+//
+
+void A_QueenSnakeHop(kAI @actor)
+{
+    if(actor.GetTarget() is null || Math::Fabs(actor.Velocity().z) > 0.01f)
+    {
+        return;
+    }
+    
+    if((actor.GameTicks() & 512) == 0 &&
+       (actor.AIFlags() & AIF_TURNING) == 0 &&
+       (actor.AIFlags() & AIF_RETREATTURN) == 0)
+    {
+        kAngle angles = ((actor.GetTarget().Origin() - actor.Origin()).Normalize()).ToYaw();
+        kAngle turnAngles = angles.Diff(actor.Yaw());
+        float an;
+        
+        if(actor.Origin().Distance(actor.GetTarget().Origin()) < 1024.0f)
+        {
+            an = Math::Deg2Rad(22.5f);
+        }
+        else
+        {
+            an = Math::Deg2Rad(2.8125f);
+        }
+        
+        if(turnAngles > an)
+        {
+            actor.Yaw() += an;
+        }
+        else if(turnAngles < -an)
+        {
+            actor.Yaw() -= an;
+        }
+    }
+    
+    if((Math::RandByte() & 31) != 0)
+    {
+        return;
+    }
+    
+    actor.Velocity().z = Math::RandFloat() * 32.0f;
+    
+    if(actor.Origin().Distance(actor.GetTarget().Origin()) <= 512.0f)
+    {
+        actor.Velocity().z *= 0.5f;
+    }
+}
+
+//
+// A_QueenSnakeExplode
+//
+
+void A_QueenSnakeExplode(kActor @actor)
+{
+    float x, y, z;
+    
+    x = Math::RandCFloat() * 128.0f;
+    y = Math::RandCFloat() * 128.0f;
+    z = Math::RandCFloat() * 128.0f;
+    
+    actor.SpawnActor("Fx_Explosion01", x, y, z + 192.0f);
+}
+
+//
+// A_QueenDeath
+//
+
+void A_QueenDeath(kActor @actor)
+{
+    actor.PlaySound("sounds/queenroar.wav");
+    Game.FireRemoteEventFromTag(1010);
 }

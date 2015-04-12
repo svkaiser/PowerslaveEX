@@ -448,6 +448,11 @@ void kexActor::OnDeactivate(kexActor *instigator)
 
 void kexActor::InflictDamage(kexActor *inflictor, const int amount)
 {
+    if(!(flags & AF_SHOOTABLE))
+    {
+        return;
+    }
+
     flags |= AF_FLASH;
     flashTicks = 1;
     

@@ -1,0 +1,994 @@
+queen_death
+{
+    // frames:   61
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/queen", 332,    -55, -142,    0 }
+            { "monsters/queen", 333,      9, -142,    0 }
+            { "monsters/queen", 334,    -55,  -78,    0 }
+            { "monsters/queen", 335,      9,  -78,    0 }
+            { "monsters/queen", 336,    -55,  -14,    0 }
+            { "monsters/queen", 337,      9,  -14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -48,  -96,    1 }
+            { "monsters/queen", 348,    -12,  -96,    0 }
+            { "monsters/queen", 332,    -55, -142,    0 }
+            { "monsters/queen", 333,      9, -142,    0 }
+            { "monsters/queen", 334,    -55,  -78,    0 }
+            { "monsters/queen", 335,      9,  -78,    0 }
+            { "monsters/queen", 336,    -55,  -14,    0 }
+            { "monsters/queen", 337,      9,  -14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -60,  -99,    1 }
+            { "monsters/queen", 348,      3,  -98,    0 }
+            { "monsters/queen", 332,    -55, -142,    0 }
+            { "monsters/queen", 333,      9, -142,    0 }
+            { "monsters/queen", 334,    -55,  -78,    0 }
+            { "monsters/queen", 335,      9,  -78,    0 }
+            { "monsters/queen", 336,    -55,  -14,    0 }
+            { "monsters/queen", 337,      9,  -14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -63, -103,    1 }
+            { "monsters/queen", 348,      7, -103,    0 }
+            { "monsters/queen", 332,    -55, -142,    0 }
+            { "monsters/queen", 333,      9, -142,    0 }
+            { "monsters/queen", 334,    -55,  -78,    0 }
+            { "monsters/queen", 335,      9,  -78,    0 }
+            { "monsters/queen", 336,    -55,  -14,    0 }
+            { "monsters/queen", 337,      9,  -14,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004   65    0
+        action A_PlayLocalSound("sounds/queendeath01.wav")
+        sprites
+        {
+            { "monsters/queen", 364,    -71, -122,    1 }
+            { "monsters/queen", 364,     16, -121,    0 }
+            { "monsters/queen", 264,    -58, -144,    0 }
+            { "monsters/queen", 265,      6, -144,    0 }
+            { "monsters/queen", 266,    -58,  -80,    0 }
+            { "monsters/queen", 267,      6,  -80,    0 }
+            { "monsters/queen", 268,    -58,  -16,    0 }
+            { "monsters/queen", 269,      6,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "monsters/queen", 364,    -76, -128,    1 }
+            { "monsters/queen", 364,     19, -129,    0 }
+            { "monsters/queen", 264,    -58, -144,    0 }
+            { "monsters/queen", 265,      6, -144,    0 }
+            { "monsters/queen", 266,    -58,  -80,    0 }
+            { "monsters/queen", 267,      6,  -80,    0 }
+            { "monsters/queen", 268,    -58,  -16,    0 }
+            { "monsters/queen", 269,      6,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##006    0    0
+        sprites
+        {
+            { "monsters/queen", 60,    -52, -152,    1 }
+            { "monsters/queen", 60,     20, -152,    0 }
+            { "monsters/queen", 264,    -58, -144,    0 }
+            { "monsters/queen", 265,      6, -144,    0 }
+            { "monsters/queen", 266,    -58,  -80,    0 }
+            { "monsters/queen", 267,      6,  -80,    0 }
+            { "monsters/queen", 268,    -58,  -16,    0 }
+            { "monsters/queen", 269,      6,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##007    0    0
+        sprites
+        {
+            { "monsters/queen", 60,    -51, -154,    1 }
+            { "monsters/queen", 60,     17, -154,    0 }
+            { "monsters/queen", 264,    -58, -144,    0 }
+            { "monsters/queen", 265,      6, -144,    0 }
+            { "monsters/queen", 266,    -58,  -80,    0 }
+            { "monsters/queen", 267,      6,  -80,    0 }
+            { "monsters/queen", 268,    -58,  -16,    0 }
+            { "monsters/queen", 269,      6,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##008    0    0
+        sprites
+        {
+            { "monsters/queen", 60,    -48, -157,    1 }
+            { "monsters/queen", 60,     14, -160,    0 }
+            { "monsters/queen", 264,    -58, -144,    0 }
+            { "monsters/queen", 265,      6, -144,    0 }
+            { "monsters/queen", 266,    -58,  -80,    0 }
+            { "monsters/queen", 267,      6,  -80,    0 }
+            { "monsters/queen", 268,    -58,  -16,    0 }
+            { "monsters/queen", 269,      6,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##009    0    0
+        sprites
+        {
+            { "monsters/queen", 60,    -43, -159,    1 }
+            { "monsters/queen", 60,      7, -160,    0 }
+            { "monsters/queen", 264,    -58, -144,    0 }
+            { "monsters/queen", 265,      6, -144,    0 }
+            { "monsters/queen", 266,    -58,  -80,    0 }
+            { "monsters/queen", 267,      6,  -80,    0 }
+            { "monsters/queen", 268,    -58,  -16,    0 }
+            { "monsters/queen", 269,      6,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##010    0    0
+        sprites
+        {
+            { "monsters/queen", 60,    -46, -157,    1 }
+            { "monsters/queen", 60,     11, -157,    0 }
+            { "monsters/queen", 264,    -58, -144,    0 }
+            { "monsters/queen", 265,      6, -144,    0 }
+            { "monsters/queen", 266,    -58,  -80,    0 }
+            { "monsters/queen", 267,      6,  -80,    0 }
+            { "monsters/queen", 268,    -58,  -16,    0 }
+            { "monsters/queen", 269,      6,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##011    0    0
+        sprites
+        {
+            { "monsters/queen", 60,    -44, -154,    1 }
+            { "monsters/queen", 60,     16, -152,    0 }
+            { "monsters/queen", 192,    -53, -144,    0 }
+            { "monsters/queen", 193,     11, -144,    0 }
+            { "monsters/queen", 194,    -53,  -80,    0 }
+            { "monsters/queen", 195,     11,  -80,    0 }
+            { "monsters/queen", 196,    -53,  -16,    0 }
+            { "monsters/queen", 197,     11,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "monsters/queen", 60,    -44, -154,    1 }
+            { "monsters/queen", 60,     16, -152,    0 }
+            { "monsters/queen", 192,    -53, -144,    0 }
+            { "monsters/queen", 193,     11, -144,    0 }
+            { "monsters/queen", 194,    -53,  -80,    0 }
+            { "monsters/queen", 195,     11,  -80,    0 }
+            { "monsters/queen", 196,    -53,  -16,    0 }
+            { "monsters/queen", 197,     11,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "monsters/queen", 60,    -45, -152,    1 }
+            { "monsters/queen", 60,     17, -150,    0 }
+            { "monsters/queen", 192,    -53, -144,    0 }
+            { "monsters/queen", 193,     11, -144,    0 }
+            { "monsters/queen", 194,    -53,  -80,    0 }
+            { "monsters/queen", 195,     11,  -80,    0 }
+            { "monsters/queen", 196,    -53,  -16,    0 }
+            { "monsters/queen", 197,     11,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "monsters/queen", 60,    -46, -151,    1 }
+            { "monsters/queen", 60,     18, -149,    0 }
+            { "monsters/queen", 192,    -53, -144,    0 }
+            { "monsters/queen", 193,     11, -144,    0 }
+            { "monsters/queen", 194,    -53,  -80,    0 }
+            { "monsters/queen", 195,     11,  -80,    0 }
+            { "monsters/queen", 196,    -53,  -16,    0 }
+            { "monsters/queen", 197,     11,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "monsters/queen", 364,    -75, -128,    1 }
+            { "monsters/queen", 364,     14, -128,    0 }
+            { "monsters/queen", 177,    -58, -143,    0 }
+            { "monsters/queen", 178,      6, -143,    0 }
+            { "monsters/queen", 179,    -58,  -79,    0 }
+            { "monsters/queen", 180,      6,  -79,    0 }
+            { "monsters/queen", 181,     70,  -79,    0 }
+            { "monsters/queen", 182,    -58,  -15,    0 }
+            { "monsters/queen", 183,      6,  -15,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##016    0    0
+        sprites
+        {
+            { "monsters/queen", 364,    -77, -124,    1 }
+            { "monsters/queen", 364,     17, -124,    0 }
+            { "monsters/queen", 177,    -57, -144,    0 }
+            { "monsters/queen", 178,      7, -144,    0 }
+            { "monsters/queen", 179,    -57,  -80,    0 }
+            { "monsters/queen", 180,      7,  -80,    0 }
+            { "monsters/queen", 181,     71,  -80,    0 }
+            { "monsters/queen", 182,    -57,  -16,    0 }
+            { "monsters/queen", 183,      7,  -16,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##017    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -78,  -98,    1 }
+            { "monsters/queen", 348,     23,  -96,    0 }
+            { "monsters/queen", 177,    -58, -143,    0 }
+            { "monsters/queen", 178,      6, -143,    0 }
+            { "monsters/queen", 179,    -58,  -79,    0 }
+            { "monsters/queen", 180,      6,  -79,    0 }
+            { "monsters/queen", 181,     70,  -79,    0 }
+            { "monsters/queen", 182,    -58,  -15,    0 }
+            { "monsters/queen", 183,      6,  -15,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##018    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -79, -100,    1 }
+            { "monsters/queen", 348,     22,  -98,    0 }
+            { "monsters/queen", 177,    -59, -145,    0 }
+            { "monsters/queen", 178,      5, -145,    0 }
+            { "monsters/queen", 179,    -59,  -81,    0 }
+            { "monsters/queen", 180,      5,  -81,    0 }
+            { "monsters/queen", 181,     69,  -81,    0 }
+            { "monsters/queen", 182,    -59,  -17,    0 }
+            { "monsters/queen", 183,      5,  -17,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##019    0    0
+        sprites
+        {
+            { "monsters/queen", 348,     18,  -98,    0 }
+            { "monsters/queen", 348,    -81,  -96,    1 }
+            { "monsters/queen", 177,     -2, -143,    1 }
+            { "monsters/queen", 178,    -66, -143,    1 }
+            { "monsters/queen", 179,     -2,  -79,    1 }
+            { "monsters/queen", 180,    -66,  -79,    1 }
+            { "monsters/queen", 181,    -70,  -79,    1 }
+            { "monsters/queen", 182,     -2,  -15,    1 }
+            { "monsters/queen", 183,    -66,  -15,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##020    0    0
+        sprites
+        {
+            { "monsters/queen", 348,     18,  -98,    0 }
+            { "monsters/queen", 348,    -81,  -96,    1 }
+            { "monsters/queen", 177,     -2, -143,    1 }
+            { "monsters/queen", 178,    -66, -143,    1 }
+            { "monsters/queen", 179,     -2,  -79,    1 }
+            { "monsters/queen", 180,    -66,  -79,    1 }
+            { "monsters/queen", 181,    -70,  -79,    1 }
+            { "monsters/queen", 182,     -2,  -15,    1 }
+            { "monsters/queen", 183,    -66,  -15,    1 }
+        }
+
+    }
+
+    frame
+    {
+        // ##021    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -76,  -93,    1 }
+            { "monsters/queen", 348,     17,  -93,    0 }
+            { "monsters/queen", 332,    -55, -139,    0 }
+            { "monsters/queen", 333,      9, -139,    0 }
+            { "monsters/queen", 334,    -55,  -75,    0 }
+            { "monsters/queen", 335,      9,  -75,    0 }
+            { "monsters/queen", 336,    -55,  -11,    0 }
+            { "monsters/queen", 337,      9,  -11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##022    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -76,  -93,    1 }
+            { "monsters/queen", 348,     17,  -93,    0 }
+            { "monsters/queen", 332,    -55, -139,    0 }
+            { "monsters/queen", 333,      9, -139,    0 }
+            { "monsters/queen", 334,    -55,  -75,    0 }
+            { "monsters/queen", 335,      9,  -75,    0 }
+            { "monsters/queen", 336,    -55,  -11,    0 }
+            { "monsters/queen", 337,      9,  -11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##023    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -76,  -93,    1 }
+            { "monsters/queen", 348,     17,  -93,    0 }
+            { "monsters/queen", 332,    -55, -139,    0 }
+            { "monsters/queen", 333,      9, -139,    0 }
+            { "monsters/queen", 334,    -55,  -75,    0 }
+            { "monsters/queen", 335,      9,  -75,    0 }
+            { "monsters/queen", 336,    -55,  -11,    0 }
+            { "monsters/queen", 337,      9,  -11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##024    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -71,  -92,    1 }
+            { "monsters/queen", 348,     12,  -92,    0 }
+            { "monsters/queen", 332,    -55, -138,    0 }
+            { "monsters/queen", 333,      9, -138,    0 }
+            { "monsters/queen", 334,    -55,  -74,    0 }
+            { "monsters/queen", 335,      9,  -74,    0 }
+            { "monsters/queen", 336,    -55,  -10,    0 }
+            { "monsters/queen", 337,      9,  -10,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##025    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -67,  -94,    1 }
+            { "monsters/queen", 348,      8,  -94,    0 }
+            { "monsters/queen", 332,    -55, -139,    0 }
+            { "monsters/queen", 333,      9, -139,    0 }
+            { "monsters/queen", 334,    -55,  -75,    0 }
+            { "monsters/queen", 335,      9,  -75,    0 }
+            { "monsters/queen", 336,    -55,  -11,    0 }
+            { "monsters/queen", 337,      9,  -11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##026    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -61,  -95,    1 }
+            { "monsters/queen", 348,      2,  -93,    0 }
+            { "monsters/queen", 332,    -55, -140,    0 }
+            { "monsters/queen", 333,      9, -140,    0 }
+            { "monsters/queen", 334,    -55,  -76,    0 }
+            { "monsters/queen", 335,      9,  -76,    0 }
+            { "monsters/queen", 336,    -55,  -12,    0 }
+            { "monsters/queen", 337,      9,  -12,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##027    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -56,  -94,    1 }
+            { "monsters/queen", 348,     -2,  -93,    0 }
+            { "monsters/queen", 332,    -55, -139,    0 }
+            { "monsters/queen", 333,      9, -139,    0 }
+            { "monsters/queen", 334,    -55,  -75,    0 }
+            { "monsters/queen", 335,      9,  -75,    0 }
+            { "monsters/queen", 336,    -55,  -11,    0 }
+            { "monsters/queen", 337,      9,  -11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##028    0    0
+        sprites
+        {
+            { "monsters/queen", 348,    -48,  -95,    1 }
+            { "monsters/queen", 348,    -10,  -94,    0 }
+            { "monsters/queen", 332,    -55, -138,    0 }
+            { "monsters/queen", 333,      9, -138,    0 }
+            { "monsters/queen", 334,    -55,  -74,    0 }
+            { "monsters/queen", 335,      9,  -74,    0 }
+            { "monsters/queen", 336,    -55,  -10,    0 }
+            { "monsters/queen", 337,      9,  -10,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##029    0    0
+        sprites
+        {
+            { "monsters/queen", 332,    -55, -139,    0 }
+            { "monsters/queen", 333,      9, -139,    0 }
+            { "monsters/queen", 334,    -55,  -75,    0 }
+            { "monsters/queen", 335,      9,  -75,    0 }
+            { "monsters/queen", 336,    -55,  -11,    0 }
+            { "monsters/queen", 337,      9,  -11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##030    0    0
+        sprites
+        {
+            { "monsters/queen", 332,    -55, -140,    0 }
+            { "monsters/queen", 333,      9, -140,    0 }
+            { "monsters/queen", 334,    -55,  -76,    0 }
+            { "monsters/queen", 335,      9,  -76,    0 }
+            { "monsters/queen", 336,    -55,  -12,    0 }
+            { "monsters/queen", 337,      9,  -12,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##031    0    0
+        sprites
+        {
+            { "monsters/queen", 332,    -55, -139,    0 }
+            { "monsters/queen", 333,      9, -139,    0 }
+            { "monsters/queen", 334,    -55,  -75,    0 }
+            { "monsters/queen", 335,      9,  -75,    0 }
+            { "monsters/queen", 336,    -55,  -11,    0 }
+            { "monsters/queen", 337,      9,  -11,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##032    0    0
+        sprites
+        {
+            { "monsters/queen", 332,    -55, -138,    0 }
+            { "monsters/queen", 333,      9, -138,    0 }
+            { "monsters/queen", 334,    -55,  -74,    0 }
+            { "monsters/queen", 335,      9,  -74,    0 }
+            { "monsters/queen", 336,    -55,  -10,    0 }
+            { "monsters/queen", 337,      9,  -10,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##033    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##034   69    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -133,    0 }
+            { "monsters/queen", 359,      7, -133,    0 }
+            { "monsters/queen", 360,    -57,  -69,    0 }
+            { "monsters/queen", 361,      7,  -69,    0 }
+            { "monsters/queen", 362,    -57,   -5,    0 }
+            { "monsters/queen", 363,      7,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##035    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -134,    0 }
+            { "monsters/queen", 359,      7, -134,    0 }
+            { "monsters/queen", 360,    -57,  -70,    0 }
+            { "monsters/queen", 361,      7,  -70,    0 }
+            { "monsters/queen", 362,    -57,   -6,    0 }
+            { "monsters/queen", 363,      7,   -6,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##036    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -133,    0 }
+            { "monsters/queen", 359,      7, -133,    0 }
+            { "monsters/queen", 360,    -57,  -69,    0 }
+            { "monsters/queen", 361,      7,  -69,    0 }
+            { "monsters/queen", 362,    -57,   -5,    0 }
+            { "monsters/queen", 363,      7,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##037    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##038    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -131,    0 }
+            { "monsters/queen", 359,      7, -131,    0 }
+            { "monsters/queen", 360,    -57,  -67,    0 }
+            { "monsters/queen", 361,      7,  -67,    0 }
+            { "monsters/queen", 362,    -57,   -3,    0 }
+            { "monsters/queen", 363,      7,   -3,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##039    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##040    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -133,    0 }
+            { "monsters/queen", 359,      7, -133,    0 }
+            { "monsters/queen", 360,    -57,  -69,    0 }
+            { "monsters/queen", 361,      7,  -69,    0 }
+            { "monsters/queen", 362,    -57,   -5,    0 }
+            { "monsters/queen", 363,      7,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##041    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##042    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##043    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##044    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##045    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##046    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##047    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##048    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##049    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##050    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -133,    0 }
+            { "monsters/queen", 359,      7, -133,    0 }
+            { "monsters/queen", 360,    -57,  -69,    0 }
+            { "monsters/queen", 361,      7,  -69,    0 }
+            { "monsters/queen", 362,    -57,   -5,    0 }
+            { "monsters/queen", 363,      7,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##051    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##052    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -133,    0 }
+            { "monsters/queen", 359,      7, -133,    0 }
+            { "monsters/queen", 360,    -57,  -69,    0 }
+            { "monsters/queen", 361,      7,  -69,    0 }
+            { "monsters/queen", 362,    -57,   -5,    0 }
+            { "monsters/queen", 363,      7,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##053    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##054    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -133,    0 }
+            { "monsters/queen", 359,      7, -133,    0 }
+            { "monsters/queen", 360,    -57,  -69,    0 }
+            { "monsters/queen", 361,      7,  -69,    0 }
+            { "monsters/queen", 362,    -57,   -5,    0 }
+            { "monsters/queen", 363,      7,   -5,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##055    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##056    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -134,    0 }
+            { "monsters/queen", 359,      7, -134,    0 }
+            { "monsters/queen", 360,    -57,  -70,    0 }
+            { "monsters/queen", 361,      7,  -70,    0 }
+            { "monsters/queen", 362,    -57,   -6,    0 }
+            { "monsters/queen", 363,      7,   -6,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##057    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##058    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -134,    0 }
+            { "monsters/queen", 359,      7, -134,    0 }
+            { "monsters/queen", 360,    -57,  -70,    0 }
+            { "monsters/queen", 361,      7,  -70,    0 }
+            { "monsters/queen", 362,    -57,   -6,    0 }
+            { "monsters/queen", 363,      7,   -6,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##059    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -132,    0 }
+            { "monsters/queen", 359,      7, -132,    0 }
+            { "monsters/queen", 360,    -57,  -68,    0 }
+            { "monsters/queen", 361,      7,  -68,    0 }
+            { "monsters/queen", 362,    -57,   -4,    0 }
+            { "monsters/queen", 363,      7,   -4,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##060    0    0
+        sprites
+        {
+            { "monsters/queen", 358,    -57, -135,    0 }
+            { "monsters/queen", 359,      7, -135,    0 }
+            { "monsters/queen", 360,    -57,  -71,    0 }
+            { "monsters/queen", 361,      7,  -71,    0 }
+            { "monsters/queen", 362,    -57,   -7,    0 }
+            { "monsters/queen", 363,      7,   -7,    0 }
+        }
+    }
+    
+    frame
+    {
+        action A_GibDeath(64.0)
+        action A_Spawn("AI_Queen_Snake", 0, 0, 0)
+        action A_TossActor("Obj_QueenGib01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_QueenGib02", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_QueenGib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_QueenGib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_QueenGib05", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_QueenGib06", 0, 0, 32, 8, 8, 4, 16)
+        action A_Destroy()
+        delay 1
+    }
+}

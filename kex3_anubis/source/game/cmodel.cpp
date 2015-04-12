@@ -571,11 +571,13 @@ bool kexCModel::CollideFace(mapFace_t *face)
 void kexCModel::TraceActorsInSector(mapSector_t *sector)
 {
     if(moveActor && !(moveActor->Flags() & AF_SOLID) &&
-       !moveActor->InstanceOf(&kexProjectile::info))
+        !moveActor->InstanceOf(&kexProjectile::info))
     {
+        // this moveActor is not a valid object to test collision with
         return;
     }
     
+    // test all linked actors in this sector
     for(kexActor *actor = sector->actorList.Next();
         actor != NULL;
         actor = actor->SectorLink().Next())
@@ -588,8 +590,11 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
             continue;
         }
 
-        if(!(actor->Flags() & AF_SOLID) && !(actor->Flags() & AF_TOUCHABLE))
+        if(!(actor->Flags() & AF_SOLID) &&
+           !(actor->Flags() & AF_TOUCHABLE) &&
+           !(actor->Flags() & AF_SHOOTABLE))
         {
+            // ignore this actor
             continue;
         }
         
@@ -598,7 +603,11 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         // performing ray-trace tests.
         if(moveActor)
         {
-            if(moveActor->InstanceOf(&kexProjectile::info) && actor == moveActor->Target())
+            bool bTestOnly = false;
+            bool bTestProjectile = false;
+            bool bIsAProjectile = moveActor->InstanceOf(&kexProjectile::info);
+
+            if(bIsAProjectile && actor == moveActor->Target())
             {
                 // don't let projectiles collide with its source/owner
                 continue;
@@ -610,23 +619,34 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
             }
 
             r = (actor->Radius() * 0.5f) + moveActor->Radius();
+            bTestProjectile = (bIsAProjectile && actor->Flags() & AF_SHOOTABLE);
+
+            // do actual collision if the following conditions are met:
+            // 1: the actor is solid
+            // 2: the moveactor is a projectile AND the actor we're testing is shootable
+            // 3: the actor is touchable
+
+            if(!bTestProjectile && (actor->Flags() & AF_SOLID) == 0)
+            {
+                bTestOnly = true;
+            }
             
             if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height(),
-                           0, (actor->Flags() & AF_SOLID) == 0))
+                           0, bTestOnly))
             {   
                 if(actor->Flags() & AF_TOUCHABLE)
                 {
                     actor->OnTouch(moveActor);
                 }
                 
-                if(actor->Flags() & AF_SOLID)
+                if(actor->Flags() & AF_SOLID || bTestProjectile)
                 {
                     contactActor = actor;
                     contactSector = actor->Sector();
                 }
             }
         }
-        else if(actor->Flags() & AF_SOLID)
+        else if(actor->Flags() & (AF_SOLID|AF_SHOOTABLE))
         {
             float z;
             float d;
@@ -672,7 +692,7 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
 
             if(moveActor->Flags() & AF_NODROPOFF)
             {
-                if((float)moveActor->Sector()->floorHeight - floorz > moveActor->StepHeight())
+                if(GetFloorHeight(start, moveActor->Sector()) - floorz > moveActor->StepHeight())
                 {
                     CollideFace(face);
                 }

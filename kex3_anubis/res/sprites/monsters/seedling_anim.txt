@@ -1,0 +1,633 @@
+seedling_projectile
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "monsters/seedling", 9,     -7,  -29,    0 }
+        }
+    }
+}
+
+seedling_explode
+{
+    frame
+    {
+        action A_Spawn("Fx_FireballExplode", 0, 0, 2)
+        action A_PlayLocalSound("sounds/pbexplode.wav")
+        delay 1
+    }
+    
+    frame
+    {
+        action A_Destroy()
+        delay 1
+    }
+}
+
+seedling_spawn
+{
+    frame
+    {
+        delay 60
+        
+        sprites
+        {
+            { "monsters/seedling", 9,     -7,  -29,    0 }
+        }
+    }
+    
+    frame
+    {
+        action A_Spawn("Fx_Explosion01", 0, 0, 32)
+        action A_Spawn("AI_Seedling", 0, 0, 0)
+        action A_Quake(92)
+        action A_Destroy()
+    }
+}
+
+seedling_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/seedling", 7,    -21,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -23,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -23,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -22,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/seedling", 5,    -24,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -23,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -22,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -22,  -43,    1 }
+            }
+        }
+
+    }
+
+}
+
+seedling_chase
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/seedling", 7,    -21,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -23,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -23,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -22,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/seedling", 5,    -24,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -23,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -22,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -22,  -43,    1 }
+            }
+        }
+
+    }
+
+}
+
+seedling_attack
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/seedling", 7,    -21,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -22,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -22,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -22,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/seedling", 5,    -24,  -43,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -23,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -23,  -43,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -23,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/seedling", 7,    -21,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -22,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -22,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -22,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/seedling", 5,    -24,  -43,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -23,  -43,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -23,  -43,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -23,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/seedling", 7,    -21,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -22,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -22,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -22,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/seedling", 5,    -24,  -43,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/seedling", 3,    -23,  -43,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/seedling", 1,    -23,  -43,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/seedling", 10,    -23,  -43,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003   71    0
+        action A_MeleeAttack(48, 20)
+        action A_PlayLocalSound("sounds/queenatk05.wav")
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/seedling", 8,    -21,  -46,    0 }
+            }
+        }
+        // ##003   71    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/seedling", 0,    -22,  -47,    0 }
+            }
+        }
+        // ##003   71    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/seedling", 2,    -22,  -45,    0 }
+            }
+        }
+        // ##003   71    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/seedling", 4,    -21,  -45,    0 }
+            }
+        }
+        // ##003   71    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/seedling", 6,    -24,  -46,    0 }
+            }
+        }
+        // ##003   71    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/seedling", 4,    -22,  -44,    1 }
+            }
+        }
+        // ##003   71    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/seedling", 2,    -22,  -46,    1 }
+            }
+        }
+        // ##003   71    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/seedling", 0,    -24,  -45,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/seedling", 8,    -21,  -46,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/seedling", 0,    -22,  -47,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/seedling", 2,    -22,  -45,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/seedling", 4,    -21,  -45,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/seedling", 6,    -24,  -46,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/seedling", 4,    -22,  -44,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/seedling", 2,    -22,  -46,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/seedling", 0,    -24,  -45,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        action A_CheckMelee("monsters/seedling_chase", 0)
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/seedling", 8,    -21,  -46,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/seedling", 0,    -22,  -47,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/seedling", 2,    -22,  -45,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/seedling", 4,    -21,  -45,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/seedling", 6,    -24,  -46,    0 }
+            }
+        }
+        // ##005    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/seedling", 4,    -22,  -44,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/seedling", 2,    -22,  -46,    1 }
+            }
+        }
+        // ##005    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/seedling", 0,    -24,  -45,    1 }
+            }
+        }
+    }
+}
+
+seedling_death
+{
+    frame
+    {
+        action A_QueenSeedDeath()
+        action A_GibDeath(32.0)
+        action A_TossActor("Obj_QueenGib01", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_QueenGib03", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_QueenGib04", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_QueenGib05", 0, 0, 32, 8, 8, 4, 16)
+        action A_TossActor("Obj_QueenGib06", 0, 0, 32, 8, 8, 4, 16)
+        action A_Destroy()
+        delay 1
+    }
+}

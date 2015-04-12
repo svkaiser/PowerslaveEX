@@ -1,0 +1,1244 @@
+texture "sprites/monsters/queen.png"
+
+// working\queen\sprite0261.tga
+sprite 0 0 0 64 64
+
+// working\queen\sprite0262.tga
+sprite 1 64 0 56 64
+
+// working\queen\sprite0263.tga
+sprite 2 120 0 64 64
+
+// working\queen\sprite0264.tga
+sprite 3 184 0 56 64
+
+// working\queen\sprite0265.tga
+sprite 4 240 0 64 6
+
+// working\queen\sprite0266.tga
+sprite 5 304 0 56 6
+
+// working\queen\sprite0267.tga
+sprite 6 360 0 20 59
+
+// working\queen\sprite0268.tga
+sprite 7 380 0 64 64
+
+// working\queen\sprite0269.tga
+sprite 8 444 0 64 64
+
+// working\queen\sprite0270.tga
+sprite 9 508 0 64 55
+
+// working\queen\sprite0271.tga
+sprite 10 572 0 64 55
+
+// working\queen\sprite0272.tga
+sprite 11 636 0 64 64
+
+// working\queen\sprite0273.tga
+sprite 12 700 0 64 64
+
+// working\queen\sprite0274.tga
+sprite 13 764 0 64 64
+
+// working\queen\sprite0275.tga
+sprite 14 828 0 64 64
+
+// working\queen\sprite0276.tga
+sprite 15 892 0 12 64
+
+// working\queen\sprite0277.tga
+sprite 16 904 0 64 11
+
+// working\queen\sprite0278.tga
+sprite 17 968 0 12 11
+
+// working\queen\sprite0279.tga
+sprite 18 980 0 20 51
+
+// working\queen\sprite0280.tga
+sprite 19 1000 0 64 64
+
+// working\queen\sprite0281.tga
+sprite 20 1064 0 64 64
+
+// working\queen\sprite0282.tga
+sprite 21 1128 0 12 64
+
+// working\queen\sprite0283.tga
+sprite 22 1140 0 64 55
+
+// working\queen\sprite0284.tga
+sprite 23 1204 0 64 55
+
+// working\queen\sprite0285.tga
+sprite 24 1268 0 12 55
+
+// working\queen\sprite0286.tga
+sprite 25 1280 0 48 35
+
+// working\queen\sprite0287.tga
+sprite 26 1328 0 64 64
+
+// working\queen\sprite0288.tga
+sprite 27 1392 0 64 64
+
+// working\queen\sprite0289.tga
+sprite 28 1456 0 16 64
+
+// working\queen\sprite0290.tga
+sprite 29 1472 0 64 64
+
+// working\queen\sprite0291.tga
+sprite 30 1536 0 64 64
+
+// working\queen\sprite0292.tga
+sprite 31 1600 0 16 64
+
+// working\queen\sprite0293.tga
+sprite 32 1616 0 64 6
+
+// working\queen\sprite0294.tga
+sprite 33 1680 0 16 6
+
+// working\queen\sprite0295.tga
+sprite 34 1696 0 64 64
+
+// working\queen\sprite0296.tga
+sprite 35 1760 0 64 64
+
+// working\queen\sprite0297.tga
+sprite 36 1824 0 64 64
+
+// working\queen\sprite0298.tga
+sprite 37 1888 0 64 64
+
+// working\queen\sprite0299.tga
+sprite 38 1952 0 4 64
+
+// working\queen\sprite0300.tga
+sprite 39 1956 0 64 8
+
+// working\queen\sprite0301.tga
+sprite 40 240 6 64 8
+
+// working\queen\sprite0302.tga
+sprite 41 2020 0 4 8
+
+// working\queen\sprite0303.tga
+sprite 42 2024 0 16 46
+
+// working\queen\sprite0304.tga
+sprite 43 1616 6 64 64
+
+// working\queen\sprite0305.tga
+sprite 44 1956 8 64 64
+
+// working\queen\sprite0306.tga
+sprite 45 904 11 64 56
+
+// working\queen\sprite0307.tga
+sprite 46 240 14 64 56
+
+// working\queen\sprite0308.tga
+sprite 47 304 6 44 41
+
+// working\queen\sprite0309.tga
+sprite 48 508 55 64 64
+
+// working\queen\sprite0310.tga
+sprite 49 572 55 64 64
+
+// working\queen\sprite0311.tga
+sprite 50 1140 55 64 64
+
+// working\queen\sprite0312.tga
+sprite 51 1204 55 64 64
+
+// working\queen\sprite0313.tga
+sprite 52 1280 35 20 64
+
+// working\queen\sprite0314.tga
+sprite 53 304 59 64 7
+
+// working\queen\sprite0315.tga
+sprite 54 0 64 64 64
+
+// working\queen\sprite0316.tga
+sprite 55 64 64 44 64
+
+// working\queen\sprite0317.tga
+sprite 56 108 64 64 64
+
+// working\queen\sprite0318.tga
+sprite 57 172 64 44 64
+
+// working\queen\sprite0319.tga
+sprite 58 368 64 64 20
+
+// working\queen\sprite0320.tga
+sprite 59 432 64 44 20
+
+// working\queen\sprite0321.tga
+sprite 60 636 64 36 59
+
+// working\queen\sprite0322.tga
+sprite 61 1300 35 28 41
+
+// working\queen\sprite0323.tga
+sprite 62 672 64 64 64
+
+// working\queen\sprite0324.tga
+sprite 63 736 64 64 64
+
+// working\queen\sprite0325.tga
+sprite 64 1680 6 16 64
+
+// working\queen\sprite0326.tga
+sprite 65 800 64 64 51
+
+// working\queen\sprite0327.tga
+sprite 66 968 64 64 51
+
+// working\queen\sprite0328.tga
+sprite 67 2020 46 16 51
+
+// working\queen\sprite0329.tga
+sprite 68 1032 64 44 63
+
+// working\queen\sprite0330.tga
+sprite 69 1076 64 64 64
+
+// working\queen\sprite0331.tga
+sprite 70 1328 64 64 64
+
+// working\queen\sprite0332.tga
+sprite 71 2040 0 8 64
+
+// working\queen\sprite0333.tga
+sprite 72 1392 64 64 64
+
+// working\queen\sprite0334.tga
+sprite 73 1456 64 64 64
+
+// working\queen\sprite0335.tga
+sprite 74 1268 55 8 64
+
+// working\queen\sprite0336.tga
+sprite 75 1520 64 64 9
+
+// working\queen\sprite0337.tga
+sprite 76 1696 64 64 64
+
+// working\queen\sprite0338.tga
+sprite 77 1760 64 56 64
+
+// working\queen\sprite0339.tga
+sprite 78 1816 64 64 64
+
+// working\queen\sprite0340.tga
+sprite 79 1880 64 56 64
+
+// working\queen\sprite0341.tga
+sprite 80 304 66 64 18
+
+// working\queen\sprite0342.tga
+sprite 81 864 67 56 18
+
+// working\queen\sprite0343.tga
+sprite 82 216 70 64 64
+
+// working\queen\sprite0344.tga
+sprite 83 1584 70 64 64
+
+// working\queen\sprite0345.tga
+sprite 84 920 67 40 64
+
+// working\queen\sprite0346.tga
+sprite 85 1936 72 64 64
+
+// working\queen\sprite0347.tga
+sprite 86 1520 73 64 64
+
+// working\queen\sprite0348.tga
+sprite 87 1648 70 40 64
+
+// working\queen\sprite0349.tga
+sprite 88 280 84 64 18
+
+// working\queen\sprite0350.tga
+sprite 89 344 84 64 18
+
+// working\queen\sprite0351.tga
+sprite 90 408 84 40 18
+
+// working\queen\sprite0352.tga
+sprite 91 476 64 32 45
+
+// working\queen\sprite0353.tga
+sprite 92 280 102 64 64
+
+// working\queen\sprite0354.tga
+sprite 93 344 102 64 64
+
+// working\queen\sprite0355.tga
+sprite 94 408 102 64 51
+
+// working\queen\sprite0356.tga
+sprite 95 800 115 64 51
+
+// working\queen\sprite0357.tga
+sprite 96 2036 64 8 51
+
+// working\queen\sprite0358.tga
+sprite 97 864 85 48 56
+
+// working\queen\sprite0359.tga
+sprite 98 960 115 64 64
+
+// working\queen\sprite0360.tga
+sprite 99 472 119 64 64
+
+// working\queen\sprite0361.tga
+sprite 100 2000 72 20 64
+
+// working\queen\sprite0362.tga
+sprite 101 536 119 64 64
+
+// working\queen\sprite0363.tga
+sprite 102 1140 119 64 64
+
+// working\queen\sprite0364.tga
+sprite 103 1300 76 20 64
+
+// working\queen\sprite0365.tga
+sprite 104 1204 119 64 8
+
+// working\queen\sprite0366.tga
+sprite 105 2020 97 16 57
+
+// working\queen\sprite0367.tga
+sprite 106 600 123 64 64
+
+// working\queen\sprite0368.tga
+sprite 107 1204 127 64 64
+
+// working\queen\sprite0369.tga
+sprite 108 0 128 64 64
+
+// working\queen\sprite0370.tga
+sprite 109 64 128 64 64
+
+// working\queen\sprite0371.tga
+sprite 110 1276 55 4 64
+
+// working\queen\sprite0372.tga
+sprite 111 128 128 64 16
+
+// working\queen\sprite0373.tga
+sprite 112 664 128 64 16
+
+// working\queen\sprite0374.tga
+sprite 113 2044 64 4 16
+
+// working\queen\sprite0375.tga
+sprite 114 1024 127 48 43
+
+// working\queen\sprite0376.tga
+sprite 115 728 128 64 53
+
+// working\queen\sprite0377.tga
+sprite 116 1280 99 20 53
+
+// working\queen\sprite0378.tga
+sprite 117 1072 128 64 64
+
+// working\queen\sprite0379.tga
+sprite 118 1320 128 64 64
+
+// working\queen\sprite0380.tga
+sprite 119 192 128 20 64
+
+// working\queen\sprite0381.tga
+sprite 120 1384 128 64 64
+
+// working\queen\sprite0382.tga
+sprite 121 1448 128 64 64
+
+// working\queen\sprite0383.tga
+sprite 122 1688 128 20 64
+
+// working\queen\sprite0384.tga
+sprite 123 1708 128 64 6
+
+// working\queen\sprite0385.tga
+sprite 124 1772 128 20 6
+
+// working\queen\sprite0386.tga
+sprite 125 1792 128 64 64
+
+// working\queen\sprite0387.tga
+sprite 126 1856 128 64 64
+
+// working\queen\sprite0388.tga
+sprite 127 212 134 64 64
+
+// working\queen\sprite0389.tga
+sprite 128 1584 134 64 64
+
+// working\queen\sprite0390.tga
+sprite 129 912 85 8 64
+
+// working\queen\sprite0391.tga
+sprite 130 1708 134 64 19
+
+// working\queen\sprite0392.tga
+sprite 131 1920 136 64 19
+
+// working\queen\sprite0393.tga
+sprite 132 2036 115 8 19
+
+// working\queen\sprite0394.tga
+sprite 133 1512 137 48 50
+
+// working\queen\sprite0395.tga
+sprite 134 128 144 64 64
+
+// working\queen\sprite0396.tga
+sprite 135 664 144 60 64
+
+// working\queen\sprite0397.tga
+sprite 136 864 149 64 64
+
+// working\queen\sprite0398.tga
+sprite 137 408 153 60 64
+
+// working\queen\sprite0399.tga
+sprite 138 1708 153 60 7
+
+// working\queen\sprite0400.tga
+sprite 139 928 131 24 52
+
+// working\queen\sprite0401.tga
+sprite 140 1984 154 64 64
+
+// working\queen\sprite0402.tga
+sprite 141 1920 155 64 64
+
+// working\queen\sprite0403.tga
+sprite 142 1708 160 64 64
+
+// working\queen\sprite0404.tga
+sprite 143 276 166 64 64
+
+// working\queen\sprite0405.tga
+sprite 144 1648 134 20 64
+
+// working\queen\sprite0406.tga
+sprite 145 340 166 64 18
+
+// working\queen\sprite0407.tga
+sprite 146 792 166 64 18
+
+// working\queen\sprite0408.tga
+sprite 147 1668 134 20 18
+
+// working\queen\sprite0409.tga
+sprite 148 1268 152 52 49
+
+// working\queen\sprite0410.tga
+sprite 149 1560 137 24 26
+
+// working\queen\sprite0411.tga
+sprite 150 952 179 64 64
+
+// working\queen\sprite0412.tga
+sprite 151 724 181 64 64
+
+// working\queen\sprite0413.tga
+sprite 152 1016 179 52 64
+
+// working\queen\sprite0414.tga
+sprite 153 468 183 64 64
+
+// working\queen\sprite0415.tga
+sprite 154 532 183 64 64
+
+// working\queen\sprite0416.tga
+sprite 155 1136 183 52 64
+
+// working\queen\sprite0417.tga
+sprite 156 340 184 64 17
+
+// working\queen\sprite0418.tga
+sprite 157 788 184 64 17
+
+// working\queen\sprite0419.tga
+sprite 158 596 187 64 64
+
+// working\queen\sprite0420.tga
+sprite 159 1512 187 64 64
+
+// working\queen\sprite0421.tga
+sprite 160 1188 191 64 54
+
+// working\queen\sprite0422.tga
+sprite 161 0 192 64 54
+
+// working\queen\sprite0423.tga
+sprite 162 1772 134 16 54
+
+// working\queen\sprite0424.tga
+sprite 163 64 192 64 64
+
+// working\queen\sprite0425.tga
+sprite 164 1068 192 64 64
+
+// working\queen\sprite0426.tga
+sprite 165 1320 192 64 64
+
+// working\queen\sprite0427.tga
+sprite 166 1384 192 64 64
+
+// working\queen\sprite0428.tga
+sprite 167 1668 152 8 64
+
+// working\queen\sprite0429.tga
+sprite 168 1448 192 64 12
+
+// working\queen\sprite0430.tga
+sprite 169 1772 192 64 12
+
+// working\queen\sprite0431.tga
+sprite 170 1836 192 40 35
+
+// working\queen\sprite0432.tga
+sprite 171 192 198 64 64
+
+// working\queen\sprite0433.tga
+sprite 172 1576 198 60 64
+
+// working\queen\sprite0434.tga
+sprite 173 340 201 64 64
+
+// working\queen\sprite0435.tga
+sprite 174 788 201 60 64
+
+// working\queen\sprite0436.tga
+sprite 175 1252 201 60 2
+
+// working\queen\sprite0437.tga
+sprite 176 1676 192 32 50
+
+// working\queen\sprite0438.tga
+sprite 177 1252 203 64 64
+
+// working\queen\sprite0439.tga
+sprite 178 1448 204 64 64
+
+// working\queen\sprite0440.tga
+sprite 179 1772 204 64 64
+
+// working\queen\sprite0441.tga
+sprite 180 128 208 64 64
+
+// working\queen\sprite0442.tga
+sprite 181 404 166 4 64
+
+// working\queen\sprite0443.tga
+sprite 182 660 208 64 15
+
+// working\queen\sprite0444.tga
+sprite 183 848 213 64 15
+
+// working\queen\sprite0445.tga
+sprite 184 1876 192 40 52
+
+// working\queen\sprite0446.tga
+sprite 185 1984 218 64 64
+
+// working\queen\sprite0447.tga
+sprite 186 1916 219 64 64
+
+// working\queen\sprite0448.tga
+sprite 187 928 183 20 64
+
+// working\queen\sprite0449.tga
+sprite 188 660 223 64 64
+
+// working\queen\sprite0450.tga
+sprite 189 1708 224 64 64
+
+// working\queen\sprite0451.tga
+sprite 190 256 198 20 64
+
+// working\queen\sprite0452.tga
+sprite 191 848 228 64 7
+
+// working\queen\sprite0453.tga
+sprite 192 276 230 64 64
+
+// working\queen\sprite0454.tga
+sprite 193 408 217 52 64
+
+// working\queen\sprite0455.tga
+sprite 194 848 235 64 64
+
+// working\queen\sprite0456.tga
+sprite 195 1636 242 52 64
+
+// working\queen\sprite0457.tga
+sprite 196 948 243 64 18
+
+// working\queen\sprite0458.tga
+sprite 197 1012 243 52 18
+
+// working\queen\sprite0459.tga
+sprite 198 1836 244 64 64
+
+// working\queen\sprite0460.tga
+sprite 199 724 245 52 64
+
+// working\queen\sprite0461.tga
+sprite 200 1188 245 64 64
+
+// working\queen\sprite0462.tga
+sprite 201 0 246 52 64
+
+// working\queen\sprite0463.tga
+sprite 202 460 247 64 7
+
+// working\queen\sprite0464.tga
+sprite 203 524 247 52 7
+
+// working\queen\sprite0465.tga
+sprite 204 576 251 64 64
+
+// working\queen\sprite0466.tga
+sprite 205 1132 247 52 64
+
+// working\queen\sprite0467.tga
+sprite 206 1512 251 64 64
+
+// working\queen\sprite0468.tga
+sprite 207 460 254 52 64
+
+// working\queen\sprite0469.tga
+sprite 208 512 254 64 18
+
+// working\queen\sprite0470.tga
+sprite 209 52 256 52 18
+
+// working\queen\sprite0471.tga
+sprite 210 912 247 32 43
+
+// working\queen\sprite0472.tga
+sprite 211 1064 256 64 64
+
+// working\queen\sprite0473.tga
+sprite 212 1316 256 64 64
+
+// working\queen\sprite0474.tga
+sprite 213 1380 256 64 58
+
+// working\queen\sprite0475.tga
+sprite 214 944 261 64 58
+
+// working\queen\sprite0476.tga
+sprite 215 1980 219 4 58
+
+// working\queen\sprite0477.tga
+sprite 216 1008 261 36 41
+
+// working\queen\sprite0478.tga
+sprite 217 192 262 64 64
+
+// working\queen\sprite0479.tga
+sprite 218 340 265 64 64
+
+// working\queen\sprite0480.tga
+sprite 219 776 265 64 64
+
+// working\queen\sprite0481.tga
+sprite 220 1252 267 64 64
+
+// working\queen\sprite0482.tga
+sprite 221 1688 242 16 64
+
+// working\queen\sprite0483.tga
+sprite 222 1444 268 64 22
+
+// working\queen\sprite0484.tga
+sprite 223 1772 268 64 22
+
+// working\queen\sprite0485.tga
+sprite 224 1900 244 16 22
+
+// working\queen\sprite0486.tga
+sprite 225 1576 262 40 49
+
+// working\queen\sprite0487.tga
+sprite 226 104 272 64 64
+
+// working\queen\sprite0488.tga
+sprite 227 512 272 64 64
+
+// working\queen\sprite0489.tga
+sprite 228 1980 282 64 64
+
+// working\queen\sprite0490.tga
+sprite 229 1900 283 64 64
+
+// working\queen\sprite0491.tga
+sprite 230 640 287 64 11
+
+// working\queen\sprite0492.tga
+sprite 231 1704 288 64 64
+
+// working\queen\sprite0493.tga
+sprite 232 1444 290 64 64
+
+// working\queen\sprite0494.tga
+sprite 233 1768 290 64 64
+
+// working\queen\sprite0495.tga
+sprite 234 256 294 64 64
+
+// working\queen\sprite0496.tga
+sprite 235 640 298 64 17
+
+// working\queen\sprite0497.tga
+sprite 236 840 299 64 17
+
+// working\queen\sprite0498.tga
+sprite 237 1616 306 64 64
+
+// working\queen\sprite0499.tga
+sprite 238 1832 308 64 64
+
+// working\queen\sprite0500.tga
+sprite 239 704 309 64 64
+
+// working\queen\sprite0501.tga
+sprite 240 1184 309 64 64
+
+// working\queen\sprite0502.tga
+sprite 241 0 310 64 8
+
+// working\queen\sprite0503.tga
+sprite 242 1380 314 64 8
+
+// working\queen\sprite0504.tga
+sprite 243 576 315 64 64
+
+// working\queen\sprite0505.tga
+sprite 244 404 281 56 64
+
+// working\queen\sprite0506.tga
+sprite 245 640 315 64 64
+
+// working\queen\sprite0507.tga
+sprite 246 1008 302 56 64
+
+// working\queen\sprite0508.tga
+sprite 247 1128 311 56 17
+
+// working\queen\sprite0509.tga
+sprite 248 1508 315 64 64
+
+// working\queen\sprite0510.tga
+sprite 249 840 316 64 64
+
+// working\queen\sprite0511.tga
+sprite 250 0 318 64 64
+
+// working\queen\sprite0512.tga
+sprite 251 904 319 64 64
+
+// working\queen\sprite0513.tga
+sprite 252 168 272 20 64
+
+// working\queen\sprite0514.tga
+sprite 253 1064 320 64 1
+
+// working\queen\sprite0515.tga
+sprite 254 64 274 40 42
+
+// working\queen\sprite0516.tga
+sprite 255 1316 320 64 64
+
+// working\queen\sprite0517.tga
+sprite 256 1064 321 64 64
+
+// working\queen\sprite0518.tga
+sprite 257 1380 322 64 64
+
+// working\queen\sprite0519.tga
+sprite 258 188 326 64 64
+
+// working\queen\sprite0520.tga
+sprite 259 1576 311 32 64
+
+// working\queen\sprite0521.tga
+sprite 260 320 329 64 22
+
+// working\queen\sprite0522.tga
+sprite 261 768 329 64 22
+
+// working\queen\sprite0523.tga
+sprite 262 460 318 44 48
+
+// working\queen\sprite0524.tga
+sprite 263 1128 328 56 18
+
+// working\queen\sprite0525.tga
+sprite 264 1248 331 64 64
+
+// working\queen\sprite0526.tga
+sprite 265 64 336 56 64
+
+// working\queen\sprite0527.tga
+sprite 266 120 336 64 64
+
+// working\queen\sprite0528.tga
+sprite 267 504 336 56 64
+
+// working\queen\sprite0529.tga
+sprite 268 384 345 64 14
+
+// working\queen\sprite0530.tga
+sprite 269 1128 346 56 14
+
+// working\queen\sprite0531.tga
+sprite 270 1964 346 64 64
+
+// working\queen\sprite0532.tga
+sprite 271 1896 347 48 64
+
+// working\queen\sprite0533.tga
+sprite 272 320 351 64 64
+
+// working\queen\sprite0534.tga
+sprite 273 768 351 48 64
+
+// working\queen\sprite0535.tga
+sprite 274 1680 352 64 64
+
+// working\queen\sprite0536.tga
+sprite 275 1444 354 64 64
+
+// working\queen\sprite0537.tga
+sprite 276 1744 354 64 63
+
+// working\queen\sprite0538.tga
+sprite 277 252 358 64 63
+
+// working\queen\sprite0539.tga
+sprite 278 968 319 12 63
+
+// working\queen\sprite0540.tga
+sprite 279 384 359 40 58
+
+// working\queen\sprite0541.tga
+sprite 280 424 366 64 64
+
+// working\queen\sprite0542.tga
+sprite 281 980 366 64 64
+
+// working\queen\sprite0543.tga
+sprite 282 1608 370 64 64
+
+// working\queen\sprite0544.tga
+sprite 283 1808 372 64 64
+
+// working\queen\sprite0545.tga
+sprite 284 560 336 12 64
+
+// working\queen\sprite0546.tga
+sprite 285 704 373 64 17
+
+// working\queen\sprite0547.tga
+sprite 286 1128 373 64 17
+
+// working\queen\sprite0548.tga
+sprite 287 2028 346 12 17
+
+// working\queen\sprite0549.tga
+sprite 288 1192 373 52 53
+
+// working\queen\sprite0550.tga
+sprite 289 572 379 52 49
+
+// working\queen\sprite0551.tga
+sprite 290 624 379 64 64
+
+// working\queen\sprite0552.tga
+sprite 291 1508 379 64 64
+
+// working\queen\sprite0553.tga
+sprite 292 1572 375 28 64
+
+// working\queen\sprite0554.tga
+sprite 293 816 380 64 64
+
+// working\queen\sprite0555.tga
+sprite 294 0 382 64 64
+
+// working\queen\sprite0556.tga
+sprite 295 880 383 28 64
+
+// working\queen\sprite0557.tga
+sprite 296 908 383 64 4
+
+// working\queen\sprite0558.tga
+sprite 297 1312 384 64 64
+
+// working\queen\sprite0559.tga
+sprite 298 1044 385 44 64
+
+// working\queen\sprite0560.tga
+sprite 299 1376 386 64 64
+
+// working\queen\sprite0561.tga
+sprite 300 908 387 44 64
+
+// working\queen\sprite0562.tga
+sprite 301 184 390 64 11
+
+// working\queen\sprite0563.tga
+sprite 302 688 390 44 11
+
+// working\queen\sprite0564.tga
+sprite 303 1088 390 64 64
+
+// working\queen\sprite0565.tga
+sprite 304 1244 395 56 64
+
+// working\queen\sprite0566.tga
+sprite 305 64 400 64 64
+
+// working\queen\sprite0567.tga
+sprite 306 128 400 56 64
+
+// working\queen\sprite0568.tga
+sprite 307 488 400 64 64
+
+// working\queen\sprite0569.tga
+sprite 308 184 401 64 64
+
+// working\queen\sprite0570.tga
+sprite 309 688 401 64 57
+
+// working\queen\sprite0571.tga
+sprite 310 1944 410 64 57
+
+// working\queen\sprite0572.tga
+sprite 311 2028 363 12 57
+
+// working\queen\sprite0573.tga
+sprite 312 1872 411 44 53
+
+// working\queen\sprite0574.tga
+sprite 313 316 415 44 53
+
+// working\queen\sprite0575.tga
+sprite 314 752 415 64 64
+
+// working\queen\sprite0576.tga
+sprite 315 1672 416 52 64
+
+// working\queen\sprite0577.tga
+sprite 316 360 417 64 64
+
+// working\queen\sprite0578.tga
+sprite 317 1724 417 52 64
+
+// working\queen\sprite0579.tga
+sprite 318 1440 418 64 9
+
+// working\queen\sprite0580.tga
+sprite 319 248 421 52 9
+
+// working\queen\sprite0581.tga
+sprite 320 1152 426 64 64
+
+// working\queen\sprite0582.tga
+sprite 321 1440 427 56 64
+
+// working\queen\sprite0583.tga
+sprite 322 552 428 64 64
+
+// working\queen\sprite0584.tga
+sprite 323 248 430 56 64
+
+// working\queen\sprite0585.tga
+sprite 324 424 430 64 7
+
+// working\queen\sprite0586.tga
+sprite 325 952 430 56 7
+
+// working\queen\sprite0587.tga
+sprite 326 1600 434 64 64
+
+// working\queen\sprite0588.tga
+sprite 327 1776 436 64 64
+
+// working\queen\sprite0589.tga
+sprite 328 424 437 64 64
+
+// working\queen\sprite0590.tga
+sprite 329 952 437 64 64
+
+// working\queen\sprite0591.tga
+sprite 330 2008 410 16 64
+
+// working\queen\sprite0592.tga
+sprite 331 616 443 64 2
+
+// working\queen\sprite0593.tga
+sprite 332 1496 443 64 64
+
+// working\queen\sprite0594.tga
+sprite 333 816 444 44 64
+
+// working\queen\sprite0595.tga
+sprite 334 616 445 64 64
+
+// working\queen\sprite0596.tga
+sprite 335 0 446 44 64
+
+// working\queen\sprite0597.tga
+sprite 336 1300 448 64 13
+
+// working\queen\sprite0598.tga
+sprite 337 860 447 44 13
+
+// working\queen\sprite0599.tga
+sprite 338 1016 449 48 49
+
+// working\queen\sprite0600.tga
+sprite 339 1560 443 40 49
+
+// working\queen\sprite0601.tga
+sprite 340 1364 450 64 64
+
+// working\queen\sprite0602.tga
+sprite 341 1064 454 64 64
+
+// working\queen\sprite0603.tga
+sprite 342 1916 411 16 64
+
+// working\queen\sprite0604.tga
+sprite 343 680 458 64 64
+
+// working\queen\sprite0605.tga
+sprite 344 1216 459 64 64
+
+// working\queen\sprite0606.tga
+sprite 345 2024 420 16 64
+
+// working\queen\sprite0607.tga
+sprite 346 860 460 64 8
+
+// working\queen\sprite0608.tga
+sprite 347 1840 436 16 8
+
+// working\queen\sprite0609.tga
+sprite 348 1280 461 60 18
+
+// working\queen\sprite0610.tga
+sprite 349 1840 444 24 32
+
+// working\queen\sprite0611.tga
+sprite 350 44 464 64 64
+
+// working\queen\sprite0612.tga
+sprite 351 108 464 60 64
+
+// working\queen\sprite0613.tga
+sprite 352 488 464 64 64
+
+// working\queen\sprite0614.tga
+sprite 353 168 465 60 64
+
+// working\queen\sprite0615.tga
+sprite 354 1932 467 64 5
+
+// working\queen\sprite0616.tga
+sprite 355 860 468 60 5
+
+// working\queen\sprite0617.tga
+sprite 356 1864 464 44 51
+
+// working\queen\sprite0618.tga
+sprite 357 924 451 16 8
+
+// working\queen\sprite0619.tga
+sprite 358 1932 472 64 64
+
+// working\queen\sprite0620.tga
+sprite 359 304 468 56 64
+
+// working\queen\sprite0621.tga
+sprite 360 860 473 64 64
+
+// working\queen\sprite0622.tga
+sprite 361 744 479 56 64
+
+// working\queen\sprite0623.tga
+sprite 362 1280 479 64 4
+
+// working\queen\sprite0624.tga
+sprite 363 1664 480 56 4
+
+// working\queen\sprite0625.tga
+sprite 364 360 481 60 29
+
+// working\queen\sprite0626.tga
+sprite 365 1280 483 64 64
+
+// working\queen\sprite0627.tga
+sprite 366 1720 481 52 64
+
+// working\queen\sprite0628.tga
+sprite 367 1128 490 64 64
+
+// working\queen\sprite0629.tga
+sprite 368 1664 484 52 64
+
+// working\queen\sprite0630.tga
+sprite 369 1428 491 64 9
+
+// working\queen\sprite0631.tga
+sprite 370 1996 484 52 9
+
+// working\queen\sprite0632.tga
+sprite 371 552 492 40 42
+
+// working\queen\sprite0633.tga
+sprite 372 228 494 64 64
+
+// working\queen\sprite0634.tga
+sprite 373 1560 498 64 64
+
+// working\queen\sprite0635.tga
+sprite 374 1428 500 64 64
+
+// working\queen\sprite0636.tga
+sprite 375 1772 500 64 64
+
+// working\queen\sprite0637.tga
+sprite 376 420 501 64 15
+
+// working\queen\sprite0638.tga
+sprite 377 924 501 64 15
+
+// working\queen\sprite0639.tga
+sprite 378 1996 493 52 45
+
+// working\queen\sprite0640.tga
+sprite 379 1016 498 28 15
+
+// working\queen\sprite0641.tga
+sprite 380 1492 507 64 64
+
+// working\queen\sprite0642.tga
+sprite 381 592 509 64 64
+
+// working\queen\sprite0643.tga
+sprite 382 988 513 64 64
+
+// working\queen\sprite0644.tga
+sprite 383 1344 514 64 64
+
+// working\queen\sprite0645.tga
+sprite 384 1908 464 4 64
+
+// working\queen\sprite0646.tga
+sprite 385 1836 515 64 10
+
+// working\queen\sprite0647.tga
+sprite 386 360 516 64 10
+
+// working\queen\sprite0648.tga
+sprite 387 424 516 64 64
+
+// working\queen\sprite0649.tga
+sprite 388 924 516 64 64
+
+// working\queen\sprite0650.tga
+sprite 389 1052 518 64 64
+
+// working\queen\sprite0651.tga
+sprite 390 656 522 64 64
+
+// working\queen\sprite0652.tga
+sprite 391 1624 498 28 64
+
+// working\queen\sprite0653.tga
+sprite 392 800 508 44 49
+
+// working\queen\sprite0654.tga
+sprite 393 1192 523 64 64
+
+// working\queen\sprite0655.tga
+sprite 394 1836 525 64 64
+
+// working\queen\sprite0656.tga
+sprite 395 360 526 64 64
+
+// working\queen\sprite0657.tga
+sprite 396 0 528 64 64
+
+// working\queen\sprite0658.tga
+sprite 397 1912 475 8 64
+
+// working\queen\sprite0659.tga
+sprite 398 64 528 64 11
+
+// working\queen\sprite0660.tga
+sprite 399 488 528 64 11
+
+// working\queen\sprite0661.tga
+sprite 400 128 529 64 64
+
+// working\queen\sprite0662.tga
+sprite 401 292 532 64 64
+
+// working\queen\sprite0663.tga
+sprite 402 1920 536 64 64
+
+// working\queen\sprite0664.tga
+sprite 403 844 537 64 64
+
+// working\queen\sprite0665.tga
+sprite 404 1984 538 64 2
+
+// working\queen\sprite0666.tga
+sprite 405 64 539 64 2
+
+// working\queen\sprite0667.tga
+sprite 406 488 539 64 64
+
+// working\queen\sprite0668.tga
+sprite 407 1984 540 64 64
+
+// working\queen\sprite0669.tga
+sprite 408 64 541 64 64
+
+// working\queen\sprite0670.tga
+sprite 409 720 543 64 64
+
+// working\queen\sprite0671.tga
+sprite 410 1652 498 8 64
+
+// working\queen\sprite0672.tga
+sprite 411 1256 547 64 14
+
+// working\queen\sprite0673.tga
+sprite 412 1660 548 64 14
+
+// working\queen\sprite0674.tga
+sprite 413 1408 514 8 14
+

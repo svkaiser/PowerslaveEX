@@ -1,0 +1,659 @@
+queen_snake_tail
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        action A_UpdateQueenTailJoints()
+        delay 0
+        sprites
+        {
+            { "monsters/queen", 114,    -23,  -25,    0 }
+        }
+    }
+}
+
+queen_snake_tail_explode
+{
+    frame
+    {
+        action A_Spawn("Fx_Explosion01", 0, 0, 8)
+        action A_QueenSnakeTailDeath()
+        action A_Destroy()
+    }
+}
+
+queen_snake_chase
+{
+    // frames:    5
+    frame
+    {
+        // ##000    0    0
+        action A_QueenSnakeHop()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 148,    -24,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 184,    -23,  -37,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 225,    -22,  -34,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 262,    -24,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 289,    -25,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 262,    -18,  -33,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 225,    -18,  -34,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 184,    -17,  -37,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        action A_QueenSnakeHop()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 148,    -24,  -33,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 184,    -23,  -37,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 225,    -22,  -34,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 262,    -24,  -33,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 289,    -25,  -33,    0 }
+            }
+        }
+        // ##001    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 262,    -18,  -33,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 225,    -18,  -34,    1 }
+            }
+        }
+        // ##001    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 184,    -17,  -37,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        action A_QueenSnakeHop()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 288,    -24,  -31,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 313,    -25,  -34,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 339,    -21,  -32,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 356,    -26,  -31,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 289,    -25,  -34,    0 }
+            }
+        }
+        // ##002    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 356,    -18,  -31,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 339,    -16,  -32,    1 }
+            }
+        }
+        // ##002    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 313,    -17,  -34,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        action A_QueenSnakeHop()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 288,    -24,  -32,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 313,    -25,  -35,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 339,    -21,  -33,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 356,    -25,  -31,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 289,    -25,  -34,    0 }
+            }
+        }
+        // ##003    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 356,    -19,  -31,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 339,    -16,  -33,    1 }
+            }
+        }
+        // ##003    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 313,    -17,  -35,    1 }
+            }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        action A_QueenSnakeHop()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 288,    -24,  -32,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 313,    -25,  -35,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 339,    -21,  -33,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 356,    -25,  -31,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 289,    -25,  -34,    0 }
+            }
+        }
+        // ##004    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 356,    -19,  -31,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 339,    -16,  -33,    1 }
+            }
+        }
+        // ##004    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 313,    -17,  -35,    1 }
+            }
+        }
+    }
+}
+
+queen_snake_idle
+{
+    frame
+    {
+        // ##000    0    0
+        action A_QueenSnakeSetup()
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 148,    -24,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 184,    -23,  -37,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 225,    -22,  -34,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 262,    -24,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 289,    -25,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 262,    -18,  -33,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 225,    -18,  -34,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 184,    -17,  -37,    1 }
+            }
+        }
+
+    }
+}
+
+queen_snake_melee
+{
+    frame
+    {
+        // ##000    0    0
+        action A_MeleeAttack(48, 30)
+        goto "monsters/queen_snake_chase"
+        rotation_N
+        {
+            sprites
+            {
+                { "monsters/queen", 148,    -24,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_NE
+        {
+            sprites
+            {
+                { "monsters/queen", 184,    -23,  -37,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_E
+        {
+            sprites
+            {
+                { "monsters/queen", 225,    -22,  -34,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_ES
+        {
+            sprites
+            {
+                { "monsters/queen", 262,    -24,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_S
+        {
+            sprites
+            {
+                { "monsters/queen", 289,    -25,  -33,    0 }
+            }
+        }
+        // ##000    0    0
+        rotation_SW
+        {
+            sprites
+            {
+                { "monsters/queen", 262,    -18,  -33,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_W
+        {
+            sprites
+            {
+                { "monsters/queen", 225,    -18,  -34,    1 }
+            }
+        }
+        // ##000    0    0
+        rotation_WN
+        {
+            sprites
+            {
+                { "monsters/queen", 184,    -17,  -37,    1 }
+            }
+        }
+    }
+}
+
+queen_snake_explode
+{
+    frame
+    {
+        action A_QueenDeath()
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_QueenSnakeExplode()
+        delay 4.0
+    }
+    
+    frame
+    {
+        action A_Destroy()
+        delay 0
+    }
+}

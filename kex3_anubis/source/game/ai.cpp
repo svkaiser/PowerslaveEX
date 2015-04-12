@@ -540,6 +540,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
         {
             mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
             mapSector_t *s;
+            float fh1, fh2;
             
             if(face->sector <= -1)
             {
@@ -552,8 +553,11 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
             }
             
             s = &kexGame::cLocal->World()->Sectors()[face->sector];
-            if(sector->floorHeight - s->floorHeight > stepHeight ||
-               (!(flags & AF_INWATER) && s->flags & SF_WATER))
+
+            fh1 = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector);
+            fh2 = kexGame::cLocal->CModel()->GetFloorHeight(origin, s);
+
+            if(fh1 - fh2 > stepHeight || (!(flags & AF_INWATER) && s->flags & SF_WATER))
             {
                 // sector the ai is on is too high, so avoid this edge
                 return false;

@@ -1,0 +1,172 @@
+AI_Queen 4
+{
+    classname               "kexAI"
+    radius                  64
+    height                  256
+    stepHeight              48
+    scale                   1.5
+    health                  3600
+    moveSpeed               0
+    spawnAnim               "monsters/queen_idle"
+    chaseAnim               "monsters/queen_chase"
+    meleeAnim               "monsters/queen_flap"
+    deathAnim               "monsters/queen_death"
+    solid                   1
+    shootable               1
+    moveable                1
+    painChance              0
+    lookAllAround           1
+    noDropOff               1
+    friction                1
+    turnSpeed               16
+    sightSound              "sounds/queenact01.wav"
+}
+
+AI_Queen_Snake -1
+{
+    classname               "kexAI"
+    radius                  20
+    height                  48
+    stepHeight              48
+    scale                   1.5
+    health                  200
+    moveSpeed               16
+    spawnAnim               "monsters/queen_snake_idle"
+    chaseAnim               "monsters/queen_snake_chase"
+    meleeAnim               "monsters/queen_snake_melee"
+    deathAnim               "monsters/queen_snake_explode"
+    solid                   1
+    shootable               0
+    moveable                1
+    painChance              0
+    lookAllAround           1
+    noDropOff               1
+    retreatAfterMelee       1
+    turnSpeed               4
+}
+
+Obj_Queen_Snake_Tail -1
+{
+    classname               "kexActor"
+    radius                  20
+    height                  48
+    stepHeight              48
+    scale                   1.5
+    health                  200
+    spawnAnim               "monsters/queen_snake_tail"
+    deathAnim               "monsters/queen_snake_tail_explode"
+    solid                   0
+    shootable               0
+    moveable                0
+}
+
+AI_Seedling -1
+{
+    classname               "kexAI"
+    radius                  36
+    height                  96
+    health                  100
+    stepHeight              256
+    scale                   2.0
+    spawnAnim               "monsters/seedling_idle"
+    chaseAnim               "monsters/seedling_chase"
+    meleeAnim               "monsters/seedling_attack"
+    deathAnim               "monsters/seedling_death"
+    moveable                1
+    solid                   1
+    shootable               1
+    moveSpeed               16
+    painChance              0
+    lookAllAround           1
+    noDropOff               1
+}
+
+Obj_Seedling_Spawn -1
+{
+    classname               "kexActor"
+    radius                  36
+    height                  32
+    stepHeight              256
+    scale                   1.0
+    spawnAnim               "monsters/seedling_spawn"
+    moveable                1
+    noDropOff               1
+}
+
+Obj_QueenGib01 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/queen_gib01"
+    moveable                1
+    expires                 1
+}
+
+Obj_QueenGib02 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/queen_gib02"
+    moveable                1
+    expires                 1
+}
+
+Obj_QueenGib03 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/queen_gib03"
+    moveable                1
+    expires                 1
+}
+
+Obj_QueenGib04 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/queen_gib04"
+    moveable                1
+    expires                 1
+}
+
+Obj_QueenGib05 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/queen_gib05"
+    moveable                1
+    expires                 1
+}
+
+Obj_QueenGib06 -1
+{
+    classname               "kexActor"
+    radius                  28
+    height                  56
+    stepHeight              32
+    scale                   1.5
+    health                  100
+    spawnAnim               "monsters/queen_gib06"
+    moveable                1
+    expires                 1
+}

@@ -1,0 +1,35 @@
+texture "sprites/monsters/seedling.png"
+
+// working\seedling\sprite0675.tga
+sprite 0 0 0 48 50
+
+// working\seedling\sprite0676.tga
+sprite 1 48 0 48 44
+
+// working\seedling\sprite0677.tga
+sprite 2 96 0 48 49
+
+// working\seedling\sprite0678.tga
+sprite 3 144 0 48 44
+
+// working\seedling\sprite0679.tga
+sprite 4 192 0 44 49
+
+// working\seedling\sprite0680.tga
+sprite 5 236 0 48 44
+
+// working\seedling\sprite0681.tga
+sprite 6 284 0 48 49
+
+// working\seedling\sprite0682.tga
+sprite 7 332 0 44 44
+
+// working\seedling\sprite0683.tga
+sprite 8 376 0 44 50
+
+// working\seedling\sprite0684.tga
+sprite 9 420 0 16 14
+
+// working\seedling\sprite0685.tga
+sprite 10 436 0 48 44
+

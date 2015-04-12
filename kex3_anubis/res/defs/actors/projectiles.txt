@@ -144,6 +144,21 @@ Proj_AmunBomb 40
     moveable                1
 }
 
+Proj_Seedling -1
+{
+    classname               "kexProjectile"
+    radius                  36
+    height                  32
+    stepHeight              16
+    scale                   1.0
+    spawnAnim               "monsters/seedling_projectile"
+    deathAnim               "monsters/seedling_explode"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    damage                  20
+}
+
 Proj_Cobra_Red -1
 {
     classname               "kexProjectile"

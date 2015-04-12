@@ -1390,7 +1390,7 @@ void kexWorld::CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source, 
             continue;
         }
         
-        if(!(actor->Flags() & AF_SOLID) || !(actor->Flags() & AF_SHOOTABLE))
+        if(!(actor->Flags() & AF_SHOOTABLE))
         {
             continue;
         }

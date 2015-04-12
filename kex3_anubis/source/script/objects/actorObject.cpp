@@ -71,9 +71,11 @@ void kexScriptObjActor::Init(void)
     REGISTER_ACTOR_CLASS("kAI", kexAI);
 
     e->RegisterObjectMethod("kAI", "float &MoveSpeed(void)", asMETHODPR(kexAI, MoveSpeed, (void), float&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAI", "float &TurnSpeed(void)", asMETHODPR(kexAI, TurnSpeed, (void), float&), asCALL_THISCALL);
     e->RegisterObjectMethod("kAI", "int &PainChance(void)", asMETHODPR(kexAI, PainChance, (void), int&), asCALL_THISCALL);
     e->RegisterObjectMethod("kAI", "void Ignite(void)", asMETHODPR(kexAI, Ignite, (void), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kAI", "void ClearBurn(void)", asMETHODPR(kexAI, ClearBurn, (void), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kAI", "uint &AIFlags(void)", asMETHODPR(kexAI, AIFlags, (void), unsigned int&), asCALL_THISCALL);
 
     e->RegisterEnum("EnumActorFlags");
     e->RegisterEnumValue("EnumActorFlags", "AF_FLOORFRICTION", AF_FLOORFRICTION);
@@ -93,4 +95,15 @@ void kexScriptObjActor::Init(void)
     e->RegisterEnumValue("EnumActorFlags", "AF_HIDDEN", AF_HIDDEN);
     e->RegisterEnumValue("EnumActorFlags", "AF_NOEXITWATER", AF_NOEXITWATER);
     e->RegisterEnumValue("EnumActorFlags", "AF_COLLIDEDWALL", AF_COLLIDEDWALL);
+
+    e->RegisterEnum("EnumAIFlags");
+    e->RegisterEnumValue("EnumAIFlags", "AIF_TURNING", AIF_TURNING);
+    e->RegisterEnumValue("EnumAIFlags", "AIF_LOOKALLAROUND", AIF_LOOKALLAROUND);
+    e->RegisterEnumValue("EnumAIFlags", "AIF_ALWAYSRANGEATTACK", AIF_ALWAYSRANGEATTACK);
+    e->RegisterEnumValue("EnumAIFlags", "AIF_ONFIRE", AIF_ONFIRE);
+    e->RegisterEnumValue("EnumAIFlags", "AIF_FLYING", AIF_FLYING);
+    e->RegisterEnumValue("EnumAIFlags", "AIF_RETREATAFTERMELEE", AIF_RETREATAFTERMELEE);
+    e->RegisterEnumValue("EnumAIFlags", "AIF_RETREATTURN", AIF_RETREATTURN);
+    e->RegisterEnumValue("EnumAIFlags", "AIF_FLYADJUSTVIEWLEVEL", AIF_FLYADJUSTVIEWLEVEL);
+    e->RegisterEnumValue("EnumAIFlags", "AIF_NOLAVADAMAGE", AIF_NOLAVADAMAGE);
 }
