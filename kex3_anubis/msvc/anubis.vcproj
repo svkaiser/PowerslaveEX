@@ -314,10 +314,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\source\renderer\drawLists.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\source\renderer\fbo.cpp"
 					>
 				</File>
@@ -656,6 +652,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\framework\msort.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\framework\object.h"
 					>
 				</File>
@@ -709,10 +709,6 @@
 				>
 				<File
 					RelativePath="..\source\renderer\cpuVertexList.h"
-					>
-				</File>
-				<File
-					RelativePath="..\source\renderer\drawLists.h"
 					>
 				</File>
 				<File

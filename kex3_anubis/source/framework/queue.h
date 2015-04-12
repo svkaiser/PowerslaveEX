@@ -36,11 +36,11 @@ public:
     const type          &operator[](unsigned int index) const;
 
 protected:
-    unsigned int    length;
-    unsigned int    head;
-    unsigned int    tail;
-    type            *data;
-    type            defaultDataSize[64];
+    unsigned int        length;
+    unsigned int        head;
+    unsigned int        tail;
+    type                *data;
+    type                defaultDataSize[64];
 };
 
 //
