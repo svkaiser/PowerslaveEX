@@ -168,6 +168,8 @@ void kexPlayLoop::Init(void)
     inventoryMenu.Init();
     bShowAutomap = false;
     bPaused = false;
+    bFadeOut = false;
+    mapChange = NULL;
 }
 
 //
@@ -207,6 +209,8 @@ void kexPlayLoop::Start(void)
     bShowAutomap = false;
     bMapAll = false;
     bPaused = false;
+    bFadeOut = false;
+    mapChange = NULL;
 
     kex::cSession->ForceSingleFrame();
 }
@@ -221,8 +225,12 @@ void kexPlayLoop::Stop(void)
     
     fadeInTicks = 0;
     player->Health() = player->Actor()->Health();
+
+    if(!bFadeOut)
+    {
+        FadeToBlack();
+    }
     
-    FadeToBlack();
     kexGame::cScriptManager->DestroyLevelScripts();
     kexGame::cLocal->World()->UnloadMap();
 }
@@ -265,6 +273,25 @@ void kexPlayLoop::Tick(void)
 {
     if(fadeInTicks > 0)
     {
+        if(bFadeOut)
+        {
+            fadeInTicks += 4;
+
+            if(fadeInTicks > 255)
+            {
+                fadeInTicks = 255;
+
+                if(mapChange)
+                {
+                    kexGame::cLocal->ChangeMap(mapChange);
+                }
+                else
+                {
+                    kexGame::cLocal->SetGameState(GS_OVERWORLD);
+                }
+            }
+        }
+
         ticks++;
         return;
     }
@@ -345,6 +372,17 @@ void kexPlayLoop::FadeToBlack(void)
 }
 
 //
+// kexPlayLoop::RequestExit
+//
+
+void kexPlayLoop::RequestExit(const char *map)
+{
+    mapChange = map;
+    fadeInTicks = 1;
+    bFadeOut = true;
+}
+
+//
 // kexPlayLoop::DrawFadeIn
 //
 
@@ -353,16 +391,19 @@ void kexPlayLoop::DrawFadeIn(void)
     float w, h;
     byte fade;
 
-    if(fadeInTicks <= 0)
+    if((!bFadeOut && fadeInTicks <= 0) || (bFadeOut && fadeInTicks >= 255))
     {
         return;
     }
 
-    fadeInTicks -= 8;
-
-    if(fadeInTicks < 0)
+    if(!bFadeOut)
     {
-        fadeInTicks = 0;
+        fadeInTicks -= 8;
+
+        if(fadeInTicks < 0)
+        {
+            fadeInTicks = 0;
+        }
     }
 
     kexRender::cBackend->SetOrtho();

@@ -48,6 +48,19 @@ Obj_Camel 58
     warpSound_3             "sounds/camel03.wav"
 }
 
+Obj_Ramses_Body 101
+{
+    classname               "kexTravelObject"
+    radius                  32
+    height                  192
+    stepHeight              48
+    scale                   0.5
+    solid                   1
+    mapDestination          22
+    destinationPosition     "12 2273 -256"
+    spawnAnim               "misc/ramses_body_idle"
+}
+
 Obj_Debris 123
 {
     classname               "kexActor"

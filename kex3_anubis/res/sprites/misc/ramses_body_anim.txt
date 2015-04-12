@@ -1,0 +1,25 @@
+ramses_body_idle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "misc/ramses_body", 0,   -155, -117,    0 }
+            { "misc/ramses_body", 1,    -91, -117,    0 }
+            { "misc/ramses_body", 2,    -27, -117,    0 }
+            { "misc/ramses_body", 3,     37, -117,    0 }
+            { "misc/ramses_body", 4,    101, -117,    0 }
+            { "misc/ramses_body", 5,   -155,  -53,    0 }
+            { "misc/ramses_body", 6,    -91,  -53,    0 }
+            { "misc/ramses_body", 7,    -27,  -53,    0 }
+            { "misc/ramses_body", 8,     37,  -53,    0 }
+            { "misc/ramses_body", 9,    101,  -53,    0 }
+            { "misc/ramses_body", 10,    -27,   11,    0 }
+            { "misc/ramses_body", 11,    -27,   75,    0 }
+            { "misc/ramses_body", 12,    -91,  139,    0 }
+            { "misc/ramses_body", 13,    -27,  139,    0 }
+        }
+    }
+}

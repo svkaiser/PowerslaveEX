@@ -161,6 +161,19 @@ Obj_Fire_HeadStone 112
     fullbright              1
 }
 
+Obj_Fire_HeadStone 113
+{
+    classname               "kexActor"
+    radius                  64
+    height                  64
+    stepHeight              48
+    scale                   2.0
+    spawnAnim               "objects/fire_pot_large03_idle"
+    solid                   1
+    randomizeFrames         1
+    fullbright              1
+}
+
 Obj_Torch_Wall02 117
 {
     classname               "kexActor"

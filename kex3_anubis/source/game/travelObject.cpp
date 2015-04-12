@@ -79,7 +79,7 @@ void kexTravelObject::OnTouch(kexActor *instigator)
     }
     else
     {
-        kexGame::cLocal->ChangeMap(kexGame::cLocal->MapInfoList()[mapDestination].map);
+        kexGame::cLocal->PlayLoop()->RequestExit(kexGame::cLocal->MapInfoList()[mapDestination].map);
         static_cast<kexPuppet*>(instigator)->ScheduleWarpForNextMap(destinationPosition);
         reTriggerTime = 10000;
     }

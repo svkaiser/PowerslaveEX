@@ -1,0 +1,17 @@
+texture "sprites/misc/ramses_body_rest.png"
+
+// working\ramses_body_rest\sprite0597.tga
+sprite 0 0 0 64 53
+
+// working\ramses_body_rest\sprite0598.tga
+sprite 1 64 0 64 53
+
+// working\ramses_body_rest\sprite0599.tga
+sprite 2 128 0 64 53
+
+// working\ramses_body_rest\sprite0600.tga
+sprite 3 192 0 64 53
+
+// working\ramses_body_rest\sprite0601.tga
+sprite 4 256 0 64 53
+

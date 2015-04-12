@@ -35,6 +35,7 @@ public:
     bool                        ProcessInput(inputEvent_t *ev);
     const int                   GetWaterVelocityPoint(const float x, const float y);
     void                        ZoomAutomap(const float amount);
+    void                        RequestExit(const char *map);
     
     kexRenderView               &View(void) { return renderView; }
     const int                   Ticks(void) const { return ticks; }
@@ -73,7 +74,9 @@ private:
     bool                        bShowAutomap;
     bool                        bMapAll;
     bool                        bPaused;
+    bool                        bFadeOut;
     float                       automapZoom;
+    const char                  *mapChange;
 };
 
 #endif

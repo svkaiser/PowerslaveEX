@@ -1,0 +1,44 @@
+texture "sprites/misc/ramses_body.png"
+
+// working\ramses_body\sprite0686.tga
+sprite 0 0 0 64 64
+
+// working\ramses_body\sprite0687.tga
+sprite 1 64 0 64 64
+
+// working\ramses_body\sprite0688.tga
+sprite 2 128 0 64 64
+
+// working\ramses_body\sprite0689.tga
+sprite 3 192 0 64 64
+
+// working\ramses_body\sprite0690.tga
+sprite 4 256 0 64 64
+
+// working\ramses_body\sprite0691.tga
+sprite 5 320 0 64 64
+
+// working\ramses_body\sprite0692.tga
+sprite 6 384 0 64 64
+
+// working\ramses_body\sprite0693.tga
+sprite 7 448 0 64 64
+
+// working\ramses_body\sprite0694.tga
+sprite 8 0 64 64 64
+
+// working\ramses_body\sprite0695.tga
+sprite 9 64 64 64 64
+
+// working\ramses_body\sprite0696.tga
+sprite 10 128 64 64 64
+
+// working\ramses_body\sprite0697.tga
+sprite 11 192 64 64 64
+
+// working\ramses_body\sprite0698.tga
+sprite 12 256 64 64 62
+
+// working\ramses_body\sprite0699.tga
+sprite 13 320 64 64 62
+
