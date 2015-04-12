@@ -737,6 +737,8 @@ void kexScriptManager::RunMapScript(mapScriptInfo_t *script)
         return;
     }
 
+    script->context->SetArgObject(0, script->instigator);
+
     ExecuteMapScript(script);
 
     if(state == asEXECUTION_ACTIVE)
