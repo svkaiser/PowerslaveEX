@@ -93,7 +93,6 @@ kexScriptManager::kexScriptManager(void)
     this->module        = NULL;
     this->mapModule     = NULL;
     this->scriptNum     = 0;
-    this->scriptPart    = 0;
     this->bDrawGCStats  = false;
 }
 
@@ -154,7 +153,23 @@ void kexScriptManager::MessageCallback(const asSMessageInfo *msg, void *param)
 
 void kexScriptManager::DelayScript(const float time)
 {
-    scriptManagerLocal.Context()->Suspend();
+    asIScriptContext *context = asGetActiveContext();
+    mapScriptInfo_t *mapScript;
+
+    if(!context || context == scriptManagerLocal.Context())
+    {
+        return;
+    }
+
+    mapScript = (mapScriptInfo_t*)context->GetUserData(0);
+
+    if(mapScript == NULL)
+    {
+        return;
+    }
+
+    context->Suspend();
+    mapScript->delay = time;
 }
 
 //
@@ -454,30 +469,8 @@ void kexScriptManager::ProcessScript(const char *file, asIScriptModule *mod)
                 scriptNum = lexer->GetNumber();
                 const char *str = kexStr::Format("void mapscript_%i_root(kActor @instigator)", scriptNum);
 
-                scriptPart = 0;
-
                 scriptBuffer += str;
                 scrBuffer += str;
-                continue;
-            }
-            else if(lexer->Matches("delay"))
-            {
-                lexer->ExpectNextToken(TK_LPAREN);
-                float val = (float)lexer->GetFloat();
-                lexer->ExpectNextToken(TK_RPAREN);
-                lexer->ExpectNextToken(TK_SEMICOLON);
-
-                kexStr str("Game.CallDelayedMapScript(");
-
-                str += kexStr::Format("\"mapscript_%i_part_%i\", instigator, %f);", scriptNum, scriptPart, val);
-                str += "\n}\n\n";
-                str += kexStr::Format("void mapscript_%i_part_%i(kActor @instigator)", scriptNum, scriptPart);
-                str += "\n{\n";
-
-                scriptPart++;
-
-                scriptBuffer += str.c_str();
-                scrBuffer += str.c_str();
                 continue;
             }
             else if(lexer->Matches("restart"))
@@ -606,7 +599,6 @@ bool kexScriptManager::LoadLevelScript(const char *name)
     scriptFiles.Empty();
 
     scriptNum = 0;
-    scriptPart = 0;
 
     mapModule = engine->GetModule("levelScript", asGM_ALWAYS_CREATE);
 
@@ -646,6 +638,12 @@ void kexScriptManager::CallDelayedMapScript(const char *func, kexActor *instigat
     callScript->delay = delay;
     callScript->link.SetData(callScript);
     callScript->bDirty = false;
+    callScript->context = engine->RequestContext();
+
+    if(callScript->context)
+    {
+        callScript->context->SetUserData(callScript, 0);
+    }
 
     callScript->link.Add(delayedMapScripts);
 }
@@ -657,6 +655,109 @@ void kexScriptManager::CallDelayedMapScript(const char *func, kexActor *instigat
 void kexScriptManager::CallDelayedMapScript(const int scriptNum, kexActor *instigator, const float delay)
 {
     CallDelayedMapScript(kexStr::Format("mapscript_%i_root", scriptNum), instigator, delay);
+}
+
+//
+// kexScriptManager::ExecuteMapScript
+//
+
+void kexScriptManager::ExecuteMapScript(mapScriptInfo_t *script)
+{
+    switch(script->context->Execute())
+    {
+    case asEXECUTION_EXCEPTION:
+        kex::cSystem->Warning("%s", script->context->GetExceptionString());
+        script->bDirty = true;
+        break;
+
+    case asEXECUTION_SUSPENDED:
+        break;
+
+    case asEXECUTION_FINISHED:
+        script->bDirty = true;
+        break;
+    }
+}
+
+//
+// kexScriptManager::RunMapScript
+//
+
+void kexScriptManager::RunMapScript(mapScriptInfo_t *script)
+{
+    kexStr function;
+    asIScriptFunction *funcPtr;
+    int state;
+
+    if(script->context == NULL)
+    {
+        script->bDirty = true;
+        return;
+    }
+
+    state = script->context->GetState();
+
+    if(state == asEXECUTION_SUSPENDED)
+    {
+        // resume
+        ExecuteMapScript(script);
+        return;
+    }
+
+    if(state == asEXECUTION_ACTIVE)
+    {
+        script->context->PushState();
+    }
+
+    function = "void ";
+    function += script->function;
+    function += "(kActor@)";
+
+    funcPtr = mapModule->GetFunctionByDecl(function);
+
+    if(funcPtr == NULL)
+    {
+        if(state == asEXECUTION_ACTIVE)
+        {
+            script->context->PopState();
+        }
+
+        script->bDirty = true;
+        return;
+    }
+
+    if(script->context->Prepare(funcPtr) != 0)
+    {
+        if(state == asEXECUTION_ACTIVE)
+        {
+            script->context->PopState();
+        }
+
+        script->bDirty = true;
+        return;
+    }
+
+    ExecuteMapScript(script);
+
+    if(state == asEXECUTION_ACTIVE)
+    {
+        script->context->PopState();
+    }
+}
+
+//
+// kexScriptManager::DestroyMapScriptData
+//
+
+void kexScriptManager::DestroyMapScriptData(mapScriptInfo_t *script)
+{
+    if(script->context->GetState() == asEXECUTION_SUSPENDED)
+    {
+        script->context->Abort();
+    }
+
+    script->link.Remove();
+    engine->ReturnContext(script->context);
 }
 
 //
@@ -678,7 +779,7 @@ void kexScriptManager::UpdateLevelScripts(void)
 
         if(scrInfo->bDirty == true)
         {
-            scrInfo->link.Remove();
+            DestroyMapScriptData(scrInfo);
             delete scrInfo;
 
             continue;
@@ -687,24 +788,7 @@ void kexScriptManager::UpdateLevelScripts(void)
         scrInfo->delay -= (1.0f / 60.0f);
         if(scrInfo->delay <= 0)
         {
-            kexStr function = "void ";
-            function += scrInfo->function;
-            function += "(kActor@)";
-
-            if(PrepareFunction(mapModule->GetFunctionByDecl(function)))
-            {
-                ctx->SetArgObject(0, scrInfo->instigator);
-
-                scrInfo->link.Remove();
-                delete scrInfo;
-
-                Execute();
-            }
-            else
-            {
-                scrInfo->link.Remove();
-                delete scrInfo;
-            }
+            RunMapScript(scrInfo);
         }
     }
 }
@@ -740,7 +824,7 @@ void kexScriptManager::DestroyLevelScripts(void)
         {
             next = scrInfo->link.Next();
             
-            scrInfo->link.Remove();
+            DestroyMapScriptData(scrInfo);
             delete scrInfo;
         }
         

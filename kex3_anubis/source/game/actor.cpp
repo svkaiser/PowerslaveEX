@@ -126,6 +126,7 @@ void kexActor::OnRemove(void)
 {
     UnlinkArea();
     UnlinkSector();
+    SetTaggedActor(NULL);
     
     kexGameObject::OnRemove();
 }

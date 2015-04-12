@@ -921,6 +921,8 @@ void kexGameLocal::UpdateGameObjects(void)
 void kexGameLocal::RemoveGameObject(kexGameObject *go)
 {
     go->OnRemove();
+    assert(go->RefCount() == 0);
+
     delete go;
 }
 

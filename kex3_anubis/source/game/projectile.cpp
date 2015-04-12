@@ -445,7 +445,7 @@ void kexProjectile::UpdateMovement(void)
         // make sure we explode if we're stuck inside an actor
         for(kexActor *actor = sector->actorList.Next(); actor != NULL; actor = actor->SectorLink().Next())
         {
-            if(actor == this || actor == target)
+            if(actor == this || actor == target || !(actor->Flags() & AF_SOLID))
             {
                 continue;
             }

@@ -78,6 +78,9 @@ private:
     void                                GetArgTypesFromFunction(kexStrList &list, asIScriptFunction *function);
     void                                ProcessScript(const char *file, asIScriptModule *mod);
     bool                                HasScriptFile(const char *file);
+    void                                RunMapScript(mapScriptInfo_t *script);
+    void                                ExecuteMapScript(mapScriptInfo_t *script);
+    void                                DestroyMapScriptData(mapScriptInfo_t *script);
 
     kexLinklist<mapScriptInfo_t>        delayedMapScripts;
 
@@ -93,7 +96,6 @@ private:
     asIScriptModule                     *module;
     asIScriptModule                     *mapModule;
     int                                 scriptNum;
-    int                                 scriptPart;
     int                                 state;
 };
 

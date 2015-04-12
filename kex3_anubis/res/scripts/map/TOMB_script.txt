@@ -73,7 +73,7 @@ $script 1
     Player.HoldsterWeapon();
     Game.CallDelayedMapScript(2, instigator, 0);
     
-    $delay(0.5);
+    delay(0.5f);
     
     @ramses = Game.SpawnActor("Obj_Ramses", ramsesOrigin.x, ramsesOrigin.y, ramsesOrigin.z, 0, 14);
     
