@@ -332,7 +332,7 @@ void A_BastetTryTeleport(kActor @actor)
         return;
     }
     
-    if(Math::RandMax(1024) < 1020)
+    if(actor.RandomDecision(14) || (Math::RandByte() & 63) != 0)
     {
         return;
     }
@@ -360,7 +360,7 @@ void A_BastetPainTeleport(kActor @actor)
         return;
     }
     
-    if((Math::Rand() & 3) != 0)
+    if((Math::RandByte() & 3) != 0)
     {
         return;
     }
@@ -377,7 +377,7 @@ void A_BastetPainTeleport(kActor @actor)
 
 void A_BastetTryTeleportIn(kActor @actor)
 {
-    if(Math::Rand() < 32600)
+    if(actor.RandomDecision(30) || (Math::RandByte() & 7) != 0)
     {
         return;
     }
@@ -393,7 +393,7 @@ void A_BastetCheckTeleport(kActor @actor)
 {
     if((actor.Flags() & AF_HIDDEN) == 0)
     {
-        if(Math::RandMax(256) >= 248)
+        if(!actor.RandomDecision(30) && (Math::RandByte() & 7) == 0)
         {
             actor.ChangeAnim("monsters/bastet_teleport_in");
         }

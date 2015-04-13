@@ -1492,7 +1492,7 @@ fish_attack
     frame
     {
         // ##012    0    0
-        action A_MeleeAttack(20, 20)
+        action A_MeleeAttack(48, 20)
         rotation_N
         {
             sprites
