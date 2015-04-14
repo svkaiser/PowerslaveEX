@@ -129,6 +129,20 @@ Fx_Explosion01_Water -1
     fullbright              1
 }
 
+Fx_Bubble 125
+{
+    classname               "kexActor"
+    radius                  8
+    height                  8
+    stepHeight              8
+    scale                   1.0
+    spawnAnim               "effects/bubble_loop"
+    moveable                1
+    gravity                 -0.01
+    damage                  0
+    solid                   0
+}
+
 Fx_FireballShootPuff 200
 {
     classname               "kexActor"

@@ -1453,3 +1453,16 @@ flame_burn
 
     }
 }
+
+bubble_loop
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "effects/splash", 20,     -3,   -3,    0 }
+        }
+    }
+}

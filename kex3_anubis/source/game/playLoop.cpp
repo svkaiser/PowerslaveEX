@@ -302,6 +302,7 @@ void kexPlayLoop::Tick(void)
         kexGame::cLocal->Player()->Tick();
         hud.Update();
         UpdateWater();
+        WaterBubbles();
 
         kexGame::cScriptManager->UpdateLevelScripts();
     }
@@ -491,6 +492,53 @@ void kexPlayLoop::UpdateWater(void)
             waterVelocityPoints[i][j] += (waterAccelPoints[i][j] >> 9);
         }
     }
+}
+
+//
+// kexPlayLoop::WaterBubbles
+//
+
+void kexPlayLoop::WaterBubbles(void)
+{
+    mapSector_t *sector;
+    mapFace_t *face;
+    mapPoly_t *poly;
+    mapVertex_t *verts;
+    kexWorld *world;
+    kexVec3 org;
+    uint numVisSectors;
+    int secnum;
+
+    if((ticks & 63) != 0)
+    {
+        return;
+    }
+
+    world = kexGame::cLocal->World();
+    numVisSectors = world->VisibleSectors().CurrentLength();
+
+    if(numVisSectors == 0)
+    {
+        return;
+    }
+    
+    secnum = world->VisibleSectors()[kexRand::Max(numVisSectors)];
+    sector = &world->Sectors()[secnum];
+
+    if(!(sector->flags & SF_WATER))
+    {
+        return;
+    }
+
+    face = sector->floorFace;
+    poly = &world->Polys()[face->polyStart + (kexRand::Max(face->polyEnd - face->polyStart))];
+    verts = world->Vertices();
+
+    org = (verts[face->vertStart + poly->indices[0]].origin +
+           verts[face->vertStart + poly->indices[1]].origin +
+           verts[face->vertStart + poly->indices[2]].origin) / 3;
+
+    kexGame::cActorFactory->Spawn(AT_WATERBUBBLE, org.x, org.y, org.z+16, 0, sector - world->Sectors());
 }
 
 //

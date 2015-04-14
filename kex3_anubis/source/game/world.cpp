@@ -314,7 +314,6 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
                 break;
 
             case 23:
-            case 25:
                 height = (float)s->floorHeight + 16;
                 MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
@@ -1103,7 +1102,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         break;
     case 23:
         actor->PlaySound("sounds/switch.wav");
-        MoveSector(sector, false, -(sector->floorFace->plane.d - (float)sector->floorHeight));
+        kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
         SendRemoteTrigger(sector, ev);
         sector->event = -1;
         break;

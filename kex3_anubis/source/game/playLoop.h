@@ -56,6 +56,7 @@ private:
     void                        DrawFadeIn(void);
     void                        InitWater(void);
     void                        UpdateWater(void);
+    void                        WaterBubbles(void);
     void                        DrawAutomap(void);
     void                        DrawAutomapArrow(kexRenderView &view, const float angle, const kexVec3 &pos,
                                                  const float size, const byte r, const byte g, const byte b);

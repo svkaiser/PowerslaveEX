@@ -183,6 +183,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("noExitWater"))      flags |= AF_NOEXITWATER;
         if(definition->GetBool("hidden"))           flags |= AF_HIDDEN;
         if(definition->GetBool("stretchy"))         flags |= AF_STRETCHY;
+        if(definition->GetBool("verticalFriction")) flags |= AF_VERTICALFRICTION;
 
         if(flags & AF_BOUNCY)
         {
@@ -531,8 +532,13 @@ kexActor *kexActor::SpawnActor(const kexStr &name, const float x, const float y,
 
 void kexActor::UpdateVelocity(void)
 {
+    if(flags & AF_VERTICALFRICTION)
+    {
+        velocity.z *= friction;
+    }
+
     // check for drop-offs
-    if(origin.z > floorHeight)
+    if(origin.z > floorHeight || gravity < 0)
     {
         velocity.z -= gravity;
     }
@@ -565,6 +571,12 @@ void kexActor::CheckFloorAndCeilings(void)
     // bump ceiling
     if((origin.z + height) + velocity.z >= ceilingHeight)
     {
+        if(type == AT_WATERBUBBLE)
+        {
+            Remove();
+            return;
+        }
+
         if(gravity != 0)
         {
             velocity.z = -velocity.z;
@@ -623,6 +635,15 @@ void kexActor::UpdateMovement(void)
         else
         {
             velocity = movement;
+        }
+
+        if(type == AT_WATERBUBBLE)
+        {
+            if(oldSector->flags & SF_WATER && !(sector->flags & SF_WATER))
+            {
+                Remove();
+                return;
+            }
         }
 
         if(!(oldSector->flags & SF_WATER) && sector->flags & SF_WATER)

@@ -339,7 +339,7 @@ void kexProjectile::SeekTargets(void)
 void kexProjectile::UpdateVelocity(void)
 {
     // check for drop-offs
-    if(origin.z > floorHeight)
+    if(origin.z > floorHeight || gravity < 0)
     {
         velocity.z -= gravity;
     }
@@ -506,7 +506,14 @@ void kexProjectile::OnImpact(kexActor *contactActor)
     }
     else
     {
-        ChangeAnim(deathAnim);
+        if(deathAnim)
+        {
+            ChangeAnim(deathAnim);
+        }
+        else
+        {
+            Remove();
+        }
     }
 
     SetHomingTarget(NULL);

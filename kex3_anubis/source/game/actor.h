@@ -30,6 +30,7 @@ typedef enum
     AT_EXPLODEPUFF      = 62,
     AT_DEBRIS           = 123,
     AT_WATERSPLASH      = 124,
+    AT_WATERBUBBLE      = 125,
     AT_LASERSPAWNER     = 126,
     AT_FIREBALLPUFF     = 200,
     AT_LASER            = 201,
@@ -55,7 +56,8 @@ typedef enum
     AF_HIDDEN           = BIT(14),
     AF_NOEXITWATER      = BIT(15),
     AF_COLLIDEDWALL     = BIT(16),
-    AF_STRETCHY         = BIT(17)
+    AF_STRETCHY         = BIT(17),
+    AF_VERTICALFRICTION = BIT(18)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------
