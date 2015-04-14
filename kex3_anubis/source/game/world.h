@@ -233,6 +233,8 @@ private:
     void                    MarkSectorInPVS(const int secnum);
     bool                    SectorInPVS(const int secnum);
     bool                    SetFaceSpans(kexRenderView &view, mapFace_t *face);
+    bool                    ClipFaceToPlane(kexRenderView &view, kexPlane &plane, mapFace_t *face,
+                                            float &bx1, float &bx2, float &by1, float &by2);
     void                    SetupFloatingPlatforms(mapEvent_t *ev, mapSector_t *sector, const char *className);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);

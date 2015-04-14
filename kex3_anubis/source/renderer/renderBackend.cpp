@@ -356,7 +356,7 @@ void kexRenderBackend::SetScissorRect(const int x, const int y, const int w, con
     
     vh = kex::cSystem->VideoHeight();
 
-    dglScissor(x, vh - h, w, vh - y);
+    dglScissor(x, vh-h, w-x, vh-(y+(vh-h)));
 }
 
 //

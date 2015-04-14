@@ -1622,11 +1622,126 @@ bool kexWorld::SectorInPVS(const int secnum)
 }
 
 //
+// kexWorld::ClipFaceToPlane
+//
+
+bool kexWorld::ClipFaceToPlane(kexRenderView &view, kexPlane &plane, mapFace_t *face,
+                               float &bx1, float &bx2, float &by1, float &by2)
+{
+    kexVec3 points[6];
+    int numPoints = 0;
+    float f, w, h;
+    kexVec3 pt;
+    kexVec3 v[4];
+    float dist[4];
+    int sign[4];
+    float x1, x2, y1, y2;
+    
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+    
+    x1 = x2 = y1 = y2 = 0;
+    
+    for(int i = 0; i < 4; ++i)
+    {
+        v[i] = vertices[face->vertexStart+i].origin;
+        dist[i] = plane.Distance(v[i]) + plane.d;
+        sign[i] = dist[i] > 0;
+        
+        if(sign[i])
+        {
+            points[numPoints++] = v[i];
+        }
+    }
+    
+    for(int i = 0; i < 4; ++i)
+    {
+        if(sign[i] != sign[(i+1)&3])
+        {
+            f = dist[i] / (dist[i] - dist[(i+1)&3]);
+            points[numPoints++].Lerp(v[i], v[(i+1)&3], f);
+        }
+    }
+    
+    if(numPoints < 3)
+    {
+        return false;
+    }
+    
+    for(int i = 0; i < numPoints; ++i)
+    {
+        pt = view.ProjectPoint(points[i]);
+        
+        if(pt.z <= 0)
+        {
+            x1 = 0;
+            x2 = w;
+            y1 = 0;
+            y2 = h;
+            break;
+        }
+        
+        if(i == 0)
+        {
+            x1 = x2 = pt.x;
+            y1 = y2 = pt.y;
+        }
+        else
+        {
+            if(x1 > pt.x) x1 = pt.x;
+            if(x2 < pt.x) x2 = pt.x;
+            if(y1 > pt.y) y1 = pt.y;
+            if(y2 < pt.y) y2 = pt.y;
+        }
+    }
+    
+    if(x1 < 0) x1 = 0;
+    if(x2 > w) x2 = w;
+    if(y1 < 0) y1 = 0;
+    if(y2 > h) y2 = h;
+    
+    if(x1 > bx1) bx1 = x1;
+    if(x2 < bx2) bx2 = x2;
+    if(y1 > by1) by1 = y1;
+    if(y2 < by2) by2 = y2;
+    
+    return true;
+}
+
+//
 // kexWorld::SetFaceSpans
 //
 
 bool kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
 {
+#if 1
+    float bx1, bx2, by1, by2;
+    float w, h;
+    
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+    
+    bx1 = 0;
+    bx2 = w;
+    by1 = 0;
+    by2 = h;
+    
+    ClipFaceToPlane(view, view.NearPlane(), face, bx1, bx2, by1, by2);
+    ClipFaceToPlane(view, view.TopPlane(), face, bx1, bx2, by1, by2);
+    ClipFaceToPlane(view, view.RightPlane(), face, bx1, bx2, by1, by2);
+    ClipFaceToPlane(view, view.LeftPlane(), face, bx1, bx2, by1, by2);
+    ClipFaceToPlane(view, view.BottomPlane(), face, bx1, bx2, by1, by2);
+    
+    if(bx1 > bx2) bx1 = 0;
+    if(bx2 < bx1) bx2 = w;
+    if(by1 > by2) by1 = 0;
+    if(by2 < by1) by2 = h;
+    
+    face->x1 = bx1;
+    face->x2 = bx2;
+    face->y1 = by1;
+    face->y2 = by2;
+#else
     float x1, x2, x3, x4, y1, y2, y3, y4;
     float fx1, fx2, fy1, fy2;
     float w, h;
@@ -1687,7 +1802,7 @@ bool kexWorld::SetFaceSpans(kexRenderView &view, mapFace_t *face)
         face->y1 = 0;
         face->y2 = h;
     }
-
+#endif
     return true;
 }
 
@@ -1771,21 +1886,9 @@ void kexWorld::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
                     {
                         continue;
                     }
-
-                    SetFaceSpans(view, &faces[i]);
-
-                    if(dist <= 96)
-                    {
-                        faces[i].x1 = 0;
-                        faces[i].x2 = w;
-                        faces[i].y1 = 0;
-                        faces[i].y2 = h;
-                    }
                 }
-                else
-                {
-                    SetFaceSpans(view, &faces[i]);
-                }
+                
+                SetFaceSpans(view, &faces[i]);
             }
         }
         
