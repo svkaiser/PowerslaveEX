@@ -63,7 +63,6 @@
 		41C7FC491A5AFB84003864CB /* titlescreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC3C1A5AFB84003864CB /* titlescreen.cpp */; };
 		41C7FC4A1A5AFB84003864CB /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC3E1A5AFB84003864CB /* world.cpp */; };
 		41C7FC641A5AFB98003864CB /* cpuVertexList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC4B1A5AFB98003864CB /* cpuVertexList.cpp */; };
-		41C7FC651A5AFB98003864CB /* drawLists.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC4D1A5AFB98003864CB /* drawLists.cpp */; };
 		41C7FC661A5AFB98003864CB /* fbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC4F1A5AFB98003864CB /* fbo.cpp */; };
 		41C7FC681A5AFB98003864CB /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC531A5AFB98003864CB /* image.cpp */; };
 		41C7FC691A5AFB98003864CB /* renderBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41C7FC551A5AFB98003864CB /* renderBackend.cpp */; };
@@ -242,6 +241,7 @@
 		4111E0811A8D4B19000D5B22 /* pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pickup.h; path = ../../source/game/pickup.h; sourceTree = "<group>"; };
 		411358D01AB75FE200916706 /* inventoryMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = inventoryMenu.cpp; path = ../../source/game/inventoryMenu.cpp; sourceTree = "<group>"; };
 		411358D11AB75FE200916706 /* inventoryMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inventoryMenu.h; path = ../../source/game/inventoryMenu.h; sourceTree = "<group>"; };
+		412E5A5D1ADC1B5600CE6BB8 /* msort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msort.h; sourceTree = "<group>"; };
 		413DD5BD1A89674B00767E49 /* actorObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorObject.cpp; path = ../../source/script/objects/actorObject.cpp; sourceTree = "<group>"; };
 		413DD5BE1A89674B00767E49 /* actorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actorObject.h; path = ../../source/script/objects/actorObject.h; sourceTree = "<group>"; };
 		41573F331AC07ECB0007662B /* joystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = joystick.h; path = ../../source/system/joystick.h; sourceTree = "<group>"; };
@@ -347,8 +347,6 @@
 		41C7FC3F1A5AFB84003864CB /* world.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = world.h; path = ../../source/game/world.h; sourceTree = "<group>"; };
 		41C7FC4B1A5AFB98003864CB /* cpuVertexList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cpuVertexList.cpp; sourceTree = "<group>"; };
 		41C7FC4C1A5AFB98003864CB /* cpuVertexList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpuVertexList.h; sourceTree = "<group>"; };
-		41C7FC4D1A5AFB98003864CB /* drawLists.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drawLists.cpp; sourceTree = "<group>"; };
-		41C7FC4E1A5AFB98003864CB /* drawLists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drawLists.h; sourceTree = "<group>"; };
 		41C7FC4F1A5AFB98003864CB /* fbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fbo.cpp; sourceTree = "<group>"; };
 		41C7FC501A5AFB98003864CB /* fbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fbo.h; sourceTree = "<group>"; };
 		41C7FC531A5AFB98003864CB /* image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
@@ -706,6 +704,7 @@
 				41C7FC151A5AFB6E003864CB /* kstring.h */,
 				41C7FC161A5AFB6E003864CB /* linkedlist.h */,
 				41C7FC181A5AFB6E003864CB /* memHeap.h */,
+				412E5A5D1ADC1B5600CE6BB8 /* msort.h */,
 				41C7FC1A1A5AFB6E003864CB /* object.h */,
 				41C7FC1C1A5AFB6E003864CB /* parser.h */,
 				41C7FC1D1A5AFB6E003864CB /* queue.h */,
@@ -751,7 +750,6 @@
 			isa = PBXGroup;
 			children = (
 				41C7FC4B1A5AFB98003864CB /* cpuVertexList.cpp */,
-				41C7FC4D1A5AFB98003864CB /* drawLists.cpp */,
 				41C7FC4F1A5AFB98003864CB /* fbo.cpp */,
 				41C7FC531A5AFB98003864CB /* image.cpp */,
 				41C7FC551A5AFB98003864CB /* renderBackend.cpp */,
@@ -763,7 +761,6 @@
 				41C7FC601A5AFB98003864CB /* textureManager.cpp */,
 				41C7FC621A5AFB98003864CB /* textureObject.cpp */,
 				41C7FC4C1A5AFB98003864CB /* cpuVertexList.h */,
-				41C7FC4E1A5AFB98003864CB /* drawLists.h */,
 				41C7FC501A5AFB98003864CB /* fbo.h */,
 				41C7FC541A5AFB98003864CB /* image.h */,
 				41C7FC561A5AFB98003864CB /* renderBackend.h */,
@@ -1046,7 +1043,6 @@
 				41D3D5111A95053C000E7FD6 /* ai.cpp in Sources */,
 				41C7FC801A5AFBAB003864CB /* timer.cpp in Sources */,
 				41B3A5491A5DEE84006DCCB9 /* actions.cpp in Sources */,
-				41C7FC651A5AFB98003864CB /* drawLists.cpp in Sources */,
 				41C7FC251A5AFB6E003864CB /* kstring.cpp in Sources */,
 				41C7FC451A5AFB84003864CB /* menu.cpp in Sources */,
 				419342261A8BB38B002C7F8E /* gameSysObject.cpp in Sources */,

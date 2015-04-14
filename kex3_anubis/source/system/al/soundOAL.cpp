@@ -672,8 +672,6 @@ void kexSoundSource::Update(void)
 
     if(ogg != NULL)
     {
-        int processed = 0;
-
         volume = kex::cSound->cvarMusicVolume.GetFloat();
         UpdateParameters();
         
