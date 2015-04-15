@@ -243,7 +243,6 @@ void kexPlayLoop::Stop(void)
 void kexPlayLoop::Draw(void)
 {
     kexPlayer *p = kexGame::cLocal->Player();
-    kexWorld *world = kexGame::cLocal->World();
 
     if(inventoryMenu.IsActive())
     {
