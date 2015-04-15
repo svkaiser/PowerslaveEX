@@ -1,5 +1,6 @@
 A_RandomItem            "void A_RandomItem(kActor@)"
 A_RandomVaseItem        "void A_RandomVaseItem(kActor@)"
+A_SetRandomFrame        "void A_SetRandomFrame(kActor@, const int)"
 A_SpawnOrbPickup        "void A_SpawnOrbPickup(kActor@)"
 A_ThrowAmunBomb         "void A_ThrowAmunBomb(kActor@)"
 A_ChargeBombThrow       "void A_ChargeBombThrow(kActor@)"

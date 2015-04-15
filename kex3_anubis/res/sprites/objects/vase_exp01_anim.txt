@@ -183,6 +183,7 @@ vase01_exp_death
     frame
     {
         // ##000    0    0
+        action A_SetRandomFrame(16)
         sprites
         {
             { "objects/vase_exp01", 7,    -24,  -80,    0 }

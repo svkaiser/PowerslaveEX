@@ -183,6 +183,7 @@ vase02_exp_death
     frame
     {
         // ##000    0    0
+        action A_SetRandomFrame(16)
         sprites
         {
             { "objects/vase02_exp", 7,     -8,  -90,    0 }
@@ -307,6 +308,50 @@ vase02_exp_death
         sprites
         {
             { "objects/vase02_exp", 9,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##012    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 10,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 10,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##014    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 10,     -8,  -90,    0 }
+            { "objects/vase02_exp", 0,    -35,  -47,    0 }
+            { "objects/vase02_exp", 1,     29,  -47,    0 }
+        }
+    }
+
+    frame
+    {
+        // ##015    0    0
+        sprites
+        {
+            { "objects/vase02_exp", 10,     -8,  -90,    0 }
             { "objects/vase02_exp", 0,    -35,  -47,    0 }
             { "objects/vase02_exp", 1,     29,  -47,    0 }
         }
