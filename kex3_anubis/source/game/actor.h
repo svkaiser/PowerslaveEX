@@ -121,6 +121,7 @@ public:
     spriteAnim_t                    *Anim(void) { return anim; }
     spriteFrame_t                   *Frame(void) { return &anim->frames[frameID]; }
     const int                       FrameID(void) const { return frameID; }
+    void                            SetFrameID(const int frmID) { frameID = frmID; }
     float                           &Ticks(void) { return ticks; }
     const int                       GameTicks(void) const { return gameTicks; }
     void                            SetDefinition(kexDict *dict) { definition = dict; }

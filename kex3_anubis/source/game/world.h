@@ -25,16 +25,16 @@ class kexGameObject;
 
 typedef struct
 {
-    kexVec3             origin;
-    byte                rgba[4];
+    kexVec3                 origin;
+    byte                    rgba[4];
 } mapVertex_t;
 
 typedef enum
 {
-    SF_DEBUG            = BIT(0),
-    SF_CLIPPED          = BIT(1),
-    SF_SPECIAL          = BIT(2),
-    SF_WATER            = BIT(8)
+    SF_DEBUG                = BIT(0),
+    SF_CLIPPED              = BIT(1),
+    SF_SPECIAL              = BIT(2),
+    SF_WATER                = BIT(8)
 } sectorFlags_t;
 
 typedef struct
@@ -174,7 +174,6 @@ public:
     void                    RadialDamage(kexActor *source, const float radius, const int damage,
                                          const bool bCanDestroyWalls = true);
     kexStack<mapSector_t*>  *FloodFill(const kexVec3 &start, mapSector_t *sector, const float maxDistance);
-    void                    FindVisibleSectors(kexRenderView &view, mapSector_t *sector);
     void                    UpdateSectorBounds(mapSector_t *sector);
     void                    UpdateFacePlaneAndBounds(mapFace_t *face);
     void                    EnterSectorSpecial(kexActor *actor, mapSector_t *sector);
@@ -186,6 +185,9 @@ public:
     void                    FireRemoteEventFromTag(const int tag);
     void                    MoveScriptedSector(const int tag, const float height,
                                                const float speed, const bool bCeiling);
+    void                    ClearSectorPVS(void);
+    void                    MarkSectorInPVS(const int secnum);
+    bool                    SectorInPVS(const int secnum);
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
@@ -207,8 +209,6 @@ public:
     mapEvent_t              *Events(void) { return events; }
     mapActor_t              *Actors(void) { return actors; }
 
-    kexStack<int>           &VisibleSectors(void) { return visibleSectors; }
-    kexStack<int>           &VisibleSkyFaces(void) { return visibleSkyFaces; }
     kexSDNode<kexActor>     &AreaNodes(void) { return areaNodes; }
 
     static kexHeapBlock     hb_world;
@@ -230,11 +230,6 @@ private:
     void                    SetupEdges(void);
     void                    SpawnMapActor(mapActor_t *mapActor);
     void                    BuildPortals(unsigned int count);
-    void                    MarkSectorInPVS(const int secnum);
-    bool                    SectorInPVS(const int secnum);
-    bool                    SetFaceSpans(kexRenderView &view, mapFace_t *face);
-    bool                    ClipFaceToPlane(kexRenderView &view, kexPlane &plane, mapFace_t *face,
-                                            float &bx1, float &bx2, float &by1, float &by2);
     void                    SetupFloatingPlatforms(mapEvent_t *ev, mapSector_t *sector, const char *className);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);
@@ -272,8 +267,6 @@ private:
     mapEvent_t              *events;
     mapActor_t              *actors;
 
-    kexStack<int>           visibleSectors;
-    kexStack<int>           visibleSkyFaces;
     kexStack<mapSector_t*>  scanSectors;
     kexSDNode<kexActor>     areaNodes;
 };

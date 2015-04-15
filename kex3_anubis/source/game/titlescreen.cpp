@@ -462,6 +462,7 @@ void kexTitleScreen::Stop(void)
     DeselectAllItems();
     kex::cInput->ToggleMouseGrab(true);
     kex::cSession->ToggleCursor(false);
+    kex::cSound->StopMusic();
 }
 
 //

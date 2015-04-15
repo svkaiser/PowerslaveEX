@@ -190,7 +190,6 @@ void kexPlayLoop::Start(void)
     }
     
     hud.SetPlayer(game->Player());
-    renderScene.SetView(&renderView);
     renderScene.SetWorld(game->World());
 
     kexGame::cScriptManager->LoadLevelScript(game->ActiveMap()->script.c_str());
@@ -231,6 +230,8 @@ void kexPlayLoop::Stop(void)
         FadeToBlack();
     }
     
+    kex::cSound->StopMusic();
+
     kexGame::cScriptManager->DestroyLevelScripts();
     kexGame::cLocal->World()->UnloadMap();
 }
@@ -252,9 +253,7 @@ void kexPlayLoop::Draw(void)
     
     renderView.SetupFromPlayer(p);
     
-    world->FindVisibleSectors(renderView, p->Actor()->Sector());
-    
-    renderScene.Draw();
+    renderScene.DrawView(renderView, p->Actor()->Sector());
 
     p->Weapon().Draw();
     
@@ -515,14 +514,14 @@ void kexPlayLoop::WaterBubbles(void)
     }
 
     world = kexGame::cLocal->World();
-    numVisSectors = world->VisibleSectors().CurrentLength();
+    numVisSectors = renderScene.VisibleSectors().CurrentLength();
 
     if(numVisSectors == 0)
     {
         return;
     }
     
-    secnum = world->VisibleSectors()[kexRand::Max(numVisSectors)];
+    secnum = renderScene.VisibleSectors()[kexRand::Max(numVisSectors)];
     sector = &world->Sectors()[secnum];
 
     if(!(sector->flags & SF_WATER))

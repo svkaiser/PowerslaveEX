@@ -757,6 +757,11 @@ int kexSoundOAL::MusicThread(void *data)
             while(processed > 0)
 	        {
 	            ALuint buffer;
+
+                if(src->bInUse == false)
+                {
+                    break;
+                }
         	    
 	            alSourceUnqueueBuffers(src->handle, 1, &buffer);
 
@@ -1029,6 +1034,7 @@ void kexSoundOAL::PlayMusic(const char *name, const bool bLoop)
     src->Looping() = bLoop;
     src->refObject = NULL;
     src->bPlaying = true;
+    src->bInUse = true;
 
     alSourceQueueBuffers(src->handle, OGG_BUFFER_COUNT, src->ogg->Buffers());
     alSourcei(src->handle, AL_SOURCE_RELATIVE, AL_TRUE);

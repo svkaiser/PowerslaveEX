@@ -46,6 +46,7 @@
     e->RegisterObjectMethod(asName, "float &FloorHeight(void)", asMETHODPR(clsName, FloorHeight, (void), float&), asCALL_THISCALL);  \
     e->RegisterObjectMethod(asName, "float &CeilingHeight(void)", asMETHODPR(clsName, CeilingHeight, (void), float&), asCALL_THISCALL);  \
     e->RegisterObjectMethod(asName, "const int FrameID(void) const", asMETHODPR(clsName, FrameID, (void) const, const int), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "void SetFrameID(const int)", asMETHODPR(clsName, SetFrameID, (const int), void), asCALL_THISCALL); \
     e->RegisterObjectMethod(asName, "const int SectorIndex(void)", asMETHODPR(clsName, SectorIndex, (void), const int), asCALL_THISCALL);    \
     e->RegisterObjectMethod(asName, "bool InstanceOf(const kStr &in) const", asMETHODPR(clsName, InstanceOf, (const kexStr&) const, bool), asCALL_THISCALL); \
     e->RegisterObjectMethod(asName, "void PlaySound(const kStr &in)", asMETHODPR(clsName, PlaySound, (const kexStr&), void), asCALL_THISCALL);   \

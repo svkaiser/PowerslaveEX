@@ -95,6 +95,8 @@ void kexOverWorld::Stop(void)
 {
     pic.Delete();
 
+    kex::cSound->StopMusic();
+
     kex::cInput->ToggleMouseGrab(true);
     kex::cSession->ToggleCursor(false);
 }

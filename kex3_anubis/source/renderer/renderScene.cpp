@@ -89,7 +89,6 @@ COMMAND(showcollision)
 kexRenderScene::kexRenderScene(void)
 {
     this->world = NULL;
-    this->view = NULL;
     this->clipY = 0;
 }
 
@@ -102,16 +101,379 @@ kexRenderScene::~kexRenderScene(void)
 }
 
 //
+// kexRenderScene::ClipFaceToPlane
+//
+
+bool kexRenderScene::ClipFaceToPlane(kexRenderView &view, kexPlane &plane, mapFace_t *face,
+                                     float &bx1, float &bx2, float &by1, float &by2)
+{
+    kexVec3 points[6];
+    int numPoints = 0;
+    float f, w, h;
+    kexVec3 pt;
+    kexVec3 v[4];
+    float dist[4];
+    int sign[4];
+    float x1, x2, y1, y2;
+    
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+    
+    x1 = x2 = y1 = y2 = 0;
+    
+    for(int i = 0; i < 4; ++i)
+    {
+        v[i] = world->Vertices()[face->vertexStart+i].origin;
+        dist[i] = plane.Distance(v[i]) + plane.d;
+        sign[i] = dist[i] > 0;
+        
+        if(sign[i])
+        {
+            points[numPoints++] = v[i];
+        }
+    }
+    
+    for(int i = 0; i < 4; ++i)
+    {
+        int j = (i + 1) & 3;
+
+        if(sign[i] != sign[j])
+        {
+            f = dist[i] / (dist[i] - dist[j]);
+            points[numPoints++].Lerp(v[i], v[j], f);
+        }
+    }
+    
+    if(numPoints < 3)
+    {
+        return false;
+    }
+    
+    for(int i = 0; i < numPoints; ++i)
+    {
+        pt = view.ProjectPoint(points[i]);
+        
+        if(pt.z <= 0)
+        {
+            x1 = 0;
+            x2 = w;
+            y1 = 0;
+            y2 = h;
+            break;
+        }
+        
+        if(i == 0)
+        {
+            x1 = x2 = pt.x;
+            y1 = y2 = pt.y;
+        }
+        else
+        {
+            if(x1 > pt.x) x1 = pt.x;
+            if(x2 < pt.x) x2 = pt.x;
+            if(y1 > pt.y) y1 = pt.y;
+            if(y2 < pt.y) y2 = pt.y;
+        }
+    }
+    
+    if(x1 < 0) x1 = 0;
+    if(x2 > w) x2 = w;
+    if(y1 < 0) y1 = 0;
+    if(y2 > h) y2 = h;
+    
+    if(x1 > bx1) bx1 = x1;
+    if(x2 < bx2) bx2 = x2;
+    if(y1 > by1) by1 = y1;
+    if(y2 < by2) by2 = y2;
+    
+    return true;
+}
+
+//
+// kexRenderScene::SetScissorRect
+//
+
+bool kexRenderScene::SetScissorRect(kexRenderView &view, mapFace_t *face)
+{
+#if 1
+    float bx1, bx2, by1, by2;
+    float w, h;
+    
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+    
+    bx1 = 0;
+    bx2 = w;
+    by1 = 0;
+    by2 = h;
+    
+    ClipFaceToPlane(view, view.NearPlane(), face, bx1, bx2, by1, by2);
+    ClipFaceToPlane(view, view.TopPlane(), face, bx1, bx2, by1, by2);
+    ClipFaceToPlane(view, view.RightPlane(), face, bx1, bx2, by1, by2);
+    ClipFaceToPlane(view, view.LeftPlane(), face, bx1, bx2, by1, by2);
+    ClipFaceToPlane(view, view.BottomPlane(), face, bx1, bx2, by1, by2);
+    
+    if(bx1 > bx2) bx1 = 0;
+    if(bx2 < bx1) bx2 = w;
+    if(by1 > by2) by1 = 0;
+    if(by2 < by1) by2 = h;
+    
+    face->x1 = bx1;
+    face->x2 = bx2;
+    face->y1 = by1;
+    face->y2 = by2;
+#else
+    float x1, x2, x3, x4, y1, y2, y3, y4;
+    float fx1, fx2, fy1, fy2;
+    float w, h;
+    
+    kexVec3 p1 = view.ProjectPoint(world->Vertices()[face->vertexStart+2].origin);
+    kexVec3 p2 = view.ProjectPoint(world->Vertices()[face->vertexStart+3].origin);
+    kexVec3 p3 = view.ProjectPoint(world->Vertices()[face->vertexStart+1].origin);
+    kexVec3 p4 = view.ProjectPoint(world->Vertices()[face->vertexStart+0].origin);
+
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+
+    x1 = p4.x;
+    x2 = p2.x;
+    x3 = p1.x;
+    x4 = p3.x;
+    y1 = p2.y;
+    y2 = p4.y;
+    y3 = p3.y;
+    y4 = p1.y;
+
+    fx1 = (x2 < x1) ? x2 : x1;
+    if(x3 < fx1) fx1 = x3;
+    if(x4 < fx1) fx1 = x4;
+
+    fx2 = (x1 < x2) ? x2 : x1;
+    if(fx2 < x3) fx2 = x3;
+    if(fx2 < x4) fx2 = x4;
+    
+    fy1 = (y2 < y1) ? y2 : y1;
+    if(y3 < fy1) fy1 = y3;
+    if(y4 < fy1) fy1 = y4;
+
+    fy2 = (y1 < y2) ? y2 : y1;
+    if(fy2 < y3) fy2 = y3;
+    if(fy2 < y4) fy2 = y4;
+
+    if(fx1 < 0) fx1 = 0;
+    if(fx2 > w) fx2 = w;
+    if(fy1 < 0) fy1 = 0;
+    if(fy2 > h) fy2 = h;
+
+    face->x1 = fx1;
+    face->x2 = fx2;
+    face->y1 = fy1;
+    face->y2 = fy2;
+
+    if(p2.z <= 0 || p4.z <= 0)
+    {
+        face->x1 = 0;
+        face->y1 = 0;
+        face->y2 = h;
+    }
+
+    if(p1.z <= 0 || p3.z <= 0)
+    {
+        face->x2 = w;
+        face->y1 = 0;
+        face->y2 = h;
+    }
+#endif
+    return true;
+}
+
+//
+// kexRenderScene::FindVisibleSectors
+//
+
+void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
+{
+    static int clipCount = 0;
+    static kexStack<mapSector_t*> scanSectors;
+
+    int secnum;
+    int start, end;
+    kexVec3 origin;
+    unsigned int scanCount;
+    float w, h;
+
+    secnum = sector - world->Sectors();
+
+    clipCount++;
+
+    w = (float)kex::cSystem->VideoWidth();
+    h = (float)kex::cSystem->VideoHeight();
+
+    for(unsigned int i = 0; i < world->NumSectors(); ++i)
+    {
+        world->Sectors()[i].x1 = w;
+        world->Sectors()[i].x2 = 0;
+        world->Sectors()[i].y1 = h;
+        world->Sectors()[i].y2 = 0;
+
+        world->Sectors()[i].floodCount = 0;
+        world->Sectors()[i].flags &= ~SF_CLIPPED;
+    }
+
+    origin = view.Origin();
+
+    scanSectors.Reset();
+    scanSectors.Set(sector);
+
+    visibleSkyFaces.Reset();
+    visibleSectors.Reset();
+    visibleSectors.Set(secnum);
+
+    world->ClearSectorPVS();
+    world->MarkSectorInPVS(secnum);
+
+    sector->floodCount = 1;
+    sector->x1 = 0;
+    sector->x2 = w;
+    sector->y1 = 0;
+    sector->y2 = h;
+
+    scanCount = 0;
+    
+    do
+    {
+        mapSector_t *s = scanSectors[scanCount++];
+        
+        if(s->floodCount == 0)
+        {
+            continue;
+        }
+        
+        s->floodCount = 0;
+
+        start = s->faceStart;
+        end = s->faceEnd;
+        
+        if(s->clipCount != clipCount)
+        {
+            float dist = 0;
+
+            s->clipCount = clipCount;
+
+            for(int i = start; i < end+3; ++i)
+            {
+                mapFace_t *face = &world->Faces()[i];
+
+                if(face->flags & FF_PORTAL)
+                {
+                    dist = face->plane.Distance(origin) - face->plane.d;
+
+                    if(i < end+1 && dist <= 0)
+                    {
+                        continue;
+                    }
+                }
+
+                if(face->flags & FF_WATER)
+                {
+                    face->x1 = 0;
+                    face->x2 = w;
+                    face->y1 = 0;
+                    face->y2 = h;
+                }
+                else
+                {
+                    SetScissorRect(view, &world->Faces()[i]);
+                }
+            }
+        }
+        
+        for(int i = start; i < end+3; ++i)
+        {
+            mapFace_t *face = &world->Faces()[i];
+
+            if(i < end+1 && !view.TestBoundingBox(face->bounds))
+            {
+                continue;
+            }
+            
+            if(face->sector >= 0)
+            {
+                mapSector_t *next = &world->Sectors()[face->sector];
+                bool bInside = false;
+
+                if(next->bounds.max.z <= next->bounds.min.z)
+                {
+                    continue;
+                }
+
+                if(face->x2 < s->x1) continue;
+                if(face->x1 > s->x2) continue;
+                if(face->y2 < s->y1) continue;
+                if(face->y1 > s->y2) continue;
+
+                float tx1 = face->x1;
+                float tx2 = face->x2;
+                float ty1 = face->y1;
+                float ty2 = face->y2;
+                
+                if(tx1 < s->x1) tx1 = s->x1;
+                if(tx2 > s->x2) tx2 = s->x2;
+                if(ty1 < s->y1) ty1 = s->y1;
+                if(ty2 > s->y2) ty2 = s->y2;
+
+                if(tx1 < next->x1) { next->x1 = tx1; bInside = true; }
+                if(tx2 > next->x2) { next->x2 = tx2; bInside = true; }
+                if(ty1 < next->y1) { next->y1 = ty1; bInside = true; }
+                if(ty2 > next->y2) { next->y2 = ty2; bInside = true; }
+
+                if(!bInside)
+                {
+                    next->flags |= SF_CLIPPED;
+                    continue;
+                }
+                
+                if(!world->SectorInPVS(face->sector))
+                {
+                    world->MarkSectorInPVS(face->sector);
+                    visibleSectors.Set(face->sector);
+                }
+
+                scanSectors.Set(next);
+                next->floodCount = 1;
+            }
+            else
+            {
+                face->flags |= FF_OCCLUDED;
+
+                if(face->x2 < s->x1) continue;
+                if(face->x1 > s->x2) continue;
+                if(face->y2 < s->y1) continue;
+                if(face->y1 > s->y2) continue;
+
+                face->flags &= ~FF_OCCLUDED;
+
+                if((face->polyStart == -1 || face->polyEnd == -1))
+                {
+                    visibleSkyFaces.Set(i);
+                }
+            }
+        }
+        
+    } while(scanCount < scanSectors.CurrentLength());
+}
+
+//
 // kexRenderScene::DrawSky
 //
 
-void kexRenderScene::DrawSky(void)
+void kexRenderScene::DrawSky(kexRenderView &view)
 {
     kexCpuVertList *vl = kexRender::cVertList;
     float s, c;
-    float x = view->Origin().x;
-    float y = view->Origin().y;
-    float z = view->Origin().z + 1280;
+    float x = view.Origin().x;
+    float y = view.Origin().y;
+    float z = view.Origin().z + 1280;
     int t = 0;
     int u = 0;
     float radius = 8192;
@@ -123,9 +485,9 @@ void kexRenderScene::DrawSky(void)
     
     kexRender::cTextures->whiteTexture->Bind();
     
-    for(unsigned int i = 0; i < world->VisibleSkyFaces().CurrentLength(); ++i)
+    for(unsigned int i = 0; i < visibleSkyFaces.CurrentLength(); ++i)
     {
-        mapFace_t *face = &world->Faces()[world->VisibleSkyFaces()[i]];
+        mapFace_t *face = &world->Faces()[visibleSkyFaces[i]];
         mapVertex_t *v = &world->Vertices()[face->vertexStart];
 
         vl->AddVertex(v[0].origin, 0, 0);
@@ -295,13 +657,13 @@ void kexRenderScene::DrawSky(void)
 // kexRenderScene::DrawSector
 //
 
-void kexRenderScene::DrawSector(mapSector_t *sector)
+void kexRenderScene::DrawSector(kexRenderView &view, mapSector_t *sector)
 {
     int start = sector->faceStart;
     int end = sector->faceEnd;
     int rectY;
     
-    if(!view->TestBoundingBox(sector->bounds))
+    if(!view.TestBoundingBox(sector->bounds))
     {
         return;
     }
@@ -313,8 +675,11 @@ void kexRenderScene::DrawSector(mapSector_t *sector)
         rectY = clipY;
     }
     
-    kexRender::cBackend->SetScissorRect((int)sector->x1, (int)sector->y1,
-                                        (int)sector->x2, rectY);
+    // backend accepts the values as integers so there's precision loss when
+    // converting from float to ints. add -/+1 to the rect to avoid getting
+    // tiny seams between walls
+    kexRender::cBackend->SetScissorRect((int)sector->x1-1, (int)sector->y1-1,
+                                        (int)sector->x2+1, rectY+1);
     
     if(sector->flags & SF_DEBUG)
     {
@@ -323,7 +688,7 @@ void kexRenderScene::DrawSector(mapSector_t *sector)
     
     for(int j = start; j < end+3; ++j)
     {
-        DrawFace(sector, j);
+        DrawFace(view, sector, j);
     }
 }
 
@@ -331,7 +696,7 @@ void kexRenderScene::DrawSector(mapSector_t *sector)
 // kexRenderScene::DrawPortal
 //
 
-void kexRenderScene::DrawPortal(mapFace_t *face, byte r, byte g, byte b)
+void kexRenderScene::DrawPortal(kexRenderView &view, mapFace_t *face, byte r, byte g, byte b)
 {
     mapVertex_t *v = &world->Vertices()[face->vertexStart];
     
@@ -345,7 +710,7 @@ void kexRenderScene::DrawPortal(mapFace_t *face, byte r, byte g, byte b)
 // kexRenderScene::DrawFace
 //
 
-void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
+void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int faceID)
 {
     mapFace_t *face = &world->Faces()[faceID];
     
@@ -362,12 +727,12 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
 
     if(face->flags & FF_WATER && bShowWaterPortals)
     {
-        DrawPortal(face, 0, 0, 255);
+        DrawPortal(view, face, 0, 0, 255);
     }
     
     if(face->flags & FF_PORTAL && bShowPortals)
     {
-        DrawPortal(face, 255, 0, 255);
+        DrawPortal(view, face, 255, 0, 255);
     }
     
     if(face->polyStart == -1 || face->polyEnd == -1)
@@ -375,12 +740,12 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
         return;
     }
     
-    if(!view->TestBoundingBox(face->bounds))
+    if(!view.TestBoundingBox(face->bounds))
     {
         return;
     }
     
-    if(faceID <= sector->faceEnd && face->plane.PointOnSide(view->Origin()) == kexPlane::PSIDE_BACK)
+    if(faceID <= sector->faceEnd && face->plane.PointOnSide(view.Origin()) == kexPlane::PSIDE_BACK)
     {
         return;
     }
@@ -396,7 +761,7 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
     
     for(int k = face->polyStart; k <= face->polyEnd; ++k)
     {
-        DrawPolygon(face, &world->Polys()[k]);
+        DrawPolygon(view, face, &world->Polys()[k]);
     }
 }
 
@@ -404,7 +769,7 @@ void kexRenderScene::DrawFace(mapSector_t *sector, int faceID)
 // kexRenderScene::DrawPolygon
 //
 
-void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
+void kexRenderScene::DrawPolygon(kexRenderView &view, mapFace_t *face, mapPoly_t *poly)
 {
     int tris = 0;
     kexCpuVertList *vl = kexRender::cVertList;
@@ -496,7 +861,7 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 // kexRenderScene::DrawWater
 //
 
-void kexRenderScene::DrawWater(void)
+void kexRenderScene::DrawWater(kexRenderView &view)
 {
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     kexRender::cBackend->SetDepthMask(0);
@@ -507,7 +872,7 @@ void kexRenderScene::DrawWater(void)
         
         for(int k = face->polyStart; k <= face->polyEnd; ++k)
         {
-            DrawPolygon(face, &world->Polys()[k]);
+            DrawPolygon(view, face, &world->Polys()[k]);
         }
     }
     
@@ -518,7 +883,7 @@ void kexRenderScene::DrawWater(void)
 // kexRenderScene::DrawSprite
 //
 
-void kexRenderScene::DrawSprite(mapSector_t *sector, kexActor *actor)
+void kexRenderScene::DrawSprite(kexRenderView &view, mapSector_t *sector, kexActor *actor)
 {
     kexCpuVertList  *vl = kexRender::cVertList;
     spriteFrame_t   *frame;
@@ -537,8 +902,8 @@ void kexRenderScene::DrawSprite(mapSector_t *sector, kexActor *actor)
 
     if(frame->flags & SFF_HASROTATIONS)
     {
-        float an = actor->Yaw() - kexMath::ATan2(actor->Origin().x - view->Origin().x,
-                                                 actor->Origin().y - view->Origin().y);
+        float an = actor->Yaw() - kexMath::ATan2(actor->Origin().x - view.Origin().x,
+                                                 actor->Origin().y - view.Origin().y);
         
         kexAngle::Clamp360(an);
         rotation = (int)((an + ((45 / 2) * 9)) / 45);
@@ -648,7 +1013,7 @@ void kexRenderScene::DrawSprite(mapSector_t *sector, kexActor *actor)
 // kexRenderScene::DrawStretchSprite
 //
 
-void kexRenderScene::DrawStretchSprite(mapSector_t *sector, kexActor *actor)
+void kexRenderScene::DrawStretchSprite(kexRenderView &view, mapSector_t *sector, kexActor *actor)
 {
     kexMatrix       mtx, scale;
     kexVec3         org;
@@ -754,7 +1119,7 @@ void kexRenderScene::DrawStretchSprite(mapSector_t *sector, kexActor *actor)
 // kexRenderScene::DrawActorList
 //
 
-void kexRenderScene::DrawActorList(mapSector_t *sector)
+void kexRenderScene::DrawActorList(kexRenderView &view, mapSector_t *sector)
 {
     for(kexActor *actor = sector->actorList.Next();
         actor != NULL;
@@ -770,7 +1135,7 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
             continue;
         }
         
-        if(!view->TestBoundingBox(actor->Bounds() + actor->Origin()))
+        if(!view.TestBoundingBox(actor->Bounds() + actor->Origin()))
         {
             continue;
         }
@@ -779,11 +1144,11 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
 
         if(actor->Flags() & AF_STRETCHY)
         {
-            DrawStretchSprite(sector, actor);
+            DrawStretchSprite(view, sector, actor);
         }
         else
         {
-            DrawSprite(sector, actor);
+            DrawSprite(view, sector, actor);
         }
     }
     
@@ -795,11 +1160,11 @@ void kexRenderScene::DrawActorList(mapSector_t *sector)
 // kexRenderScene::DrawSectors
 //
 
-void kexRenderScene::DrawSectors(void)
+void kexRenderScene::DrawSectors(kexRenderView &view)
 {
-    for(unsigned int i = 0; i < world->VisibleSectors().CurrentLength(); ++i)
+    for(unsigned int i = 0; i < visibleSectors.CurrentLength(); ++i)
     {
-        DrawSector(&world->Sectors()[world->VisibleSectors()[i]]);
+        DrawSector(view, &world->Sectors()[visibleSectors[i]]);
     }
 }
 
@@ -807,16 +1172,16 @@ void kexRenderScene::DrawSectors(void)
 // kexRenderScene::DrawActors
 //
 
-void kexRenderScene::DrawActors(void)
+void kexRenderScene::DrawActors(kexRenderView &view)
 {
-    spriteMatrix = kexMatrix(-view->Pitch(), 1) * kexMatrix(view->Yaw(), 2);
+    spriteMatrix = kexMatrix(-view.Pitch(), 1) * kexMatrix(view.Yaw(), 2);
     spriteMatrix.RotateX(kexMath::pi);
     
     kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
     
-    for(int i = (int)world->VisibleSectors().CurrentLength()-1; i >= 0; i--)
+    for(int i = (int)visibleSectors.CurrentLength()-1; i >= 0; i--)
     {
-        DrawActorList(&world->Sectors()[world->VisibleSectors()[i]]);
+        DrawActorList(view, &world->Sectors()[visibleSectors[i]]);
     }
 }
 
@@ -824,15 +1189,15 @@ void kexRenderScene::DrawActors(void)
 // kexRenderScene::Prepare
 //
 
-void kexRenderScene::Prepare(void)
+void kexRenderScene::Prepare(kexRenderView &view)
 {
     int h;
     
     vertCount = 0;
     triCount = 0;
     
-    kexRender::cBackend->LoadProjectionMatrix(view->ProjectionView());
-    kexRender::cBackend->LoadModelViewMatrix(view->ModelView());
+    kexRender::cBackend->LoadProjectionMatrix(view.ProjectionView());
+    kexRender::cBackend->LoadModelViewMatrix(view.ModelView());
     
     kexRender::cBackend->ClearBuffer(GLCB_STENCIL);
     
@@ -865,25 +1230,27 @@ void kexRenderScene::PrintStats(void)
 }
 
 //
-// kexRenderScene::Draw
+// kexRenderScene::DrawView
 //
 
-void kexRenderScene::Draw(void)
+void kexRenderScene::DrawView(kexRenderView &view, mapSector_t *sector)
 {
     if(!world->MapLoaded())
     {
         return;
     }
+
+    FindVisibleSectors(view, sector);
     
-    Prepare();
+    Prepare(view);
     
-    DrawSky();
+    DrawSky(view);
     
-    DrawSectors();
+    DrawSectors(view);
     
-    DrawActors();
+    DrawActors(view);
     
-    DrawWater();
+    DrawWater(view);
     
     PrintStats();
 }

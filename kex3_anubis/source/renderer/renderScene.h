@@ -26,10 +26,12 @@ public:
     kexRenderScene(void);
     ~kexRenderScene(void);
     
-    void                    Draw(void);
+    void                    DrawView(kexRenderView &view, mapSector_t *sector);
 
     void                    SetWorld(kexWorld *wld) { world = wld; }
-    void                    SetView(kexRenderView *v) { view = v; }
+
+    kexStack<int>           &VisibleSectors(void) { return visibleSectors; }
+    kexStack<int>           &VisibleSkyFaces(void) { return visibleSkyFaces; }
     
     static bool             bPrintStats;
     static bool             bShowPortals;
@@ -37,27 +39,32 @@ public:
     static bool             bShowCollision;
 
 private:
-    void                    Prepare(void);
-    void                    DrawSky(void);
-    void                    DrawSectors(void);
-    void                    DrawActors(void);
-    void                    DrawSector(mapSector_t *sector);
-    void                    DrawFace(mapSector_t *sector, int faceID);
-    void                    DrawPortal(mapFace_t *face, byte r, byte g, byte b);
-    void                    DrawPolygon(mapFace_t *face, mapPoly_t *poly);
-    void                    DrawActorList(mapSector_t *sector);
-    void                    DrawSprite(mapSector_t *sector, kexActor *actor);
-    void                    DrawStretchSprite(mapSector_t *sector, kexActor *actor);
-    void                    DrawWater(void);
+    void                    Prepare(kexRenderView &view);
+    void                    DrawSky(kexRenderView &view);
+    void                    DrawSectors(kexRenderView &view);
+    void                    DrawActors(kexRenderView &view);
+    void                    DrawSector(kexRenderView &view, mapSector_t *sector);
+    void                    DrawFace(kexRenderView &view, mapSector_t *sector, int faceID);
+    void                    DrawPortal(kexRenderView &view, mapFace_t *face, byte r, byte g, byte b);
+    void                    DrawPolygon(kexRenderView &view, mapFace_t *face, mapPoly_t *poly);
+    void                    DrawActorList(kexRenderView &view, mapSector_t *sector);
+    void                    DrawSprite(kexRenderView &view, mapSector_t *sector, kexActor *actor);
+    void                    DrawStretchSprite(kexRenderView &view, mapSector_t *sector, kexActor *actor);
+    void                    DrawWater(kexRenderView &view);
     void                    PrintStats(void);
+    void                    FindVisibleSectors(kexRenderView &view, mapSector_t *sector);
+    bool                    SetScissorRect(kexRenderView &view, mapFace_t *face);
+    bool                    ClipFaceToPlane(kexRenderView &view, kexPlane &plane, mapFace_t *face,
+                                            float &bx1, float &bx2, float &by1, float &by2);
     
     kexStack<int>           waterFaces;
     kexMatrix               spriteMatrix;
     kexWorld                *world;
-    kexRenderView           *view;
     int                     clipY;
     int                     vertCount;
     int                     triCount;
+    kexStack<int>           visibleSectors;
+    kexStack<int>           visibleSkyFaces;
 };
 
 #endif
