@@ -248,6 +248,19 @@ void kexWorld::ReadPolys(kexBinFile &mapfile, const unsigned int count)
         polys[i].texture    = mapfile.Read16();
         polys[i].flipped    = mapfile.Read16();
     }
+
+    for(unsigned int i = 0; i < numFaces; ++i)
+    {
+        if(faces[i].polyStart <= -1 || faces[i].polyEnd <= -1)
+        {
+            continue;
+        }
+
+        for(int j = faces[i].polyStart; j <= faces[i].polyEnd; ++j)
+        {
+            polys[j].faceRef = i;
+        }
+    }
 }
 
 //

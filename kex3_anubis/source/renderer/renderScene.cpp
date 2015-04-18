@@ -90,6 +90,7 @@ kexRenderScene::kexRenderScene(void)
 {
     this->world = NULL;
     this->clipY = 0;
+    this->polyList.Init(512);
 }
 
 //
@@ -364,17 +365,17 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
             {
                 mapFace_t *face = &world->Faces()[i];
 
+                dist = face->plane.Distance(origin) - face->plane.d;
+
                 if(face->flags & FF_PORTAL)
                 {
-                    dist = face->plane.Distance(origin) - face->plane.d;
-
                     if(i < end+1 && dist <= 0)
                     {
                         continue;
                     }
                 }
 
-                if(face->flags & FF_WATER)
+                if(face->flags & FF_WATER || dist <= 0.5f)
                 {
                     face->x1 = 0;
                     face->x2 = w;
@@ -661,25 +662,11 @@ void kexRenderScene::DrawSector(kexRenderView &view, mapSector_t *sector)
 {
     int start = sector->faceStart;
     int end = sector->faceEnd;
-    int rectY;
     
     if(!view.TestBoundingBox(sector->bounds))
     {
         return;
     }
-    
-    rectY = (int)sector->y2;
-    
-    if(rectY > clipY)
-    {
-        rectY = clipY;
-    }
-    
-    // backend accepts the values as integers so there's precision loss when
-    // converting from float to ints. add -/+1 to the rect to avoid getting
-    // tiny seams between walls
-    kexRender::cBackend->SetScissorRect((int)sector->x1-1, (int)sector->y1-1,
-                                        (int)sector->x2+1, rectY+1);
     
     if(sector->flags & SF_DEBUG)
     {
@@ -761,7 +748,7 @@ void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int face
     
     for(int k = face->polyStart; k <= face->polyEnd; ++k)
     {
-        DrawPolygon(view, face, &world->Polys()[k]);
+        polyList.Set(k);
     }
 }
 
@@ -1157,14 +1144,62 @@ void kexRenderScene::DrawActorList(kexRenderView &view, mapSector_t *sector)
 }
 
 //
+// kexRenderScene::SortPolys
+//
+
+int kexRenderScene::SortPolys(const int *p1, const int *p2)
+{
+    mapPoly_t *poly1 = &kexGame::cLocal->World()->Polys()[*p1];
+    mapPoly_t *poly2 = &kexGame::cLocal->World()->Polys()[*p2];
+
+    if(poly1->texture < poly2->texture) return  1;
+    if(poly1->texture > poly2->texture) return -1;
+
+    return 0;
+}
+
+//
 // kexRenderScene::DrawSectors
 //
 
 void kexRenderScene::DrawSectors(kexRenderView &view)
 {
+    mapSector_t *prevSector = NULL;
+
+    polyList.Reset();
+
     for(unsigned int i = 0; i < visibleSectors.CurrentLength(); ++i)
     {
         DrawSector(view, &world->Sectors()[visibleSectors[i]]);
+    }
+
+    polyList.Sort(kexRenderScene::SortPolys);
+
+    for(uint i = 0; i < polyList.CurrentLength(); ++i)
+    {
+        mapPoly_t *poly = &world->Polys()[polyList[i]];
+        mapFace_t *face = &world->Faces()[poly->faceRef];
+        mapSector_t *sector = &world->Sectors()[face->sectorOwner];
+
+        if(sector != prevSector)
+        {
+            int rectY = (int)sector->y2;
+        
+            if(rectY > clipY)
+            {
+                rectY = clipY;
+            }
+
+            prevSector = sector;
+            
+            // backend accepts the values as integers so there's precision loss when
+            // converting from float to ints. add -/+1 to the rect to avoid getting
+            // tiny seams between walls
+            kexRender::cBackend->SetScissorRect((int)sector->x1-1, (int)sector->y1-1,
+                                                (int)sector->x2+1, rectY+1);
+        }
+
+        DrawPolygon(view, face, poly);
     }
 }
 

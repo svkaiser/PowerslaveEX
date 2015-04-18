@@ -129,6 +129,7 @@ typedef struct
     short               tcoords[4];
     short               texture;
     short               flipped;
+    short               faceRef;
 } mapPoly_t;
 
 typedef struct

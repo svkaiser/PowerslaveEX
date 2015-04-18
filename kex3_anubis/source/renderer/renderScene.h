@@ -39,6 +39,8 @@ public:
     static bool             bShowCollision;
 
 private:
+    static int              SortPolys(const int *p1, const int *p2);
+
     void                    Prepare(kexRenderView &view);
     void                    DrawSky(kexRenderView &view);
     void                    DrawSectors(kexRenderView &view);
@@ -65,6 +67,7 @@ private:
     int                     triCount;
     kexStack<int>           visibleSectors;
     kexStack<int>           visibleSkyFaces;
+    kexStack<int>           polyList;
 };
 
 #endif

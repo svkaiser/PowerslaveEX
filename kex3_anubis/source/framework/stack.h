@@ -223,7 +223,7 @@ const type &kexStack<type>::operator[](unsigned int index) const
 template<class type>
 void kexStack<type>::Sort(compare_t *function)
 {
-    if(data == NULL || aidx <= 2)
+    if(data == NULL)
     {
         return;
     }
