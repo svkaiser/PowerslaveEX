@@ -115,6 +115,7 @@ typedef struct mapFace_s
     float               y1;
     float               x2;
     float               y2;
+    float               dist;
     mapEdge_t           edges[4];
     
     mapEdge_t           *BottomEdge(void) { return &edges[2]; }

@@ -56,6 +56,7 @@ private:
     void                    PrintStats(void);
     void                    FindVisibleSectors(kexRenderView &view, mapSector_t *sector);
     bool                    SetScissorRect(kexRenderView &view, mapFace_t *face);
+    void                    SetFaceDistance(kexRenderView &view, mapFace_t *face);
     bool                    ClipFaceToPlane(kexRenderView &view, kexPlane &plane, mapFace_t *face,
                                             float &bx1, float &bx2, float &by1, float &by2);
     

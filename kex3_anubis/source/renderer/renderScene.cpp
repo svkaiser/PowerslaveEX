@@ -289,6 +289,108 @@ bool kexRenderScene::SetScissorRect(kexRenderView &view, mapFace_t *face)
 }
 
 //
+// kexRenderScene::SetFaceDistance
+//
+
+void kexRenderScene::SetFaceDistance(kexRenderView &view, mapFace_t *face)
+{
+    kexVec3 p[4];
+    float max_x = kexMath::infinity;
+    int inc_x = 0;
+    float max_y = kexMath::infinity;
+    int inc_y = 0;
+    float max_z = kexMath::infinity;
+    int inc_z = 0;
+    float d;
+    float best;
+    kexMatrix mtx(view.Pitch(), 1);
+
+    mtx = mtx * kexMatrix(-view.Yaw()-kexMath::pi, 2);
+
+    p[0] = world->Vertices()[face->vertexStart+0].origin-view.Origin();
+    p[1] = world->Vertices()[face->vertexStart+1].origin-view.Origin();
+    p[2] = world->Vertices()[face->vertexStart+2].origin-view.Origin();
+    p[3] = world->Vertices()[face->vertexStart+3].origin-view.Origin();
+
+    p[0] *= mtx;
+    p[1] *= mtx;
+    p[2] *= mtx;
+    p[3] *= mtx;
+
+    for(int i = 0; i < 4; ++i)
+    {
+        d = p[i].x;
+        if(d < 0)
+        {
+            d = -d;
+        }
+        else
+        {
+            inc_x++;
+        }
+
+        if(d < max_x)
+        {
+            max_x = d;
+        }
+
+        d = p[i].y;
+        if(d < 0)
+        {
+            d = -d;
+        }
+        else
+        {
+            inc_y++;
+        }
+
+        if(d < max_y)
+        {
+            max_y = d;
+        }
+
+        d = p[i].z;
+        if(d < 0)
+        {
+            d = -d;
+        }
+        else
+        {
+            inc_z++;
+        }
+
+        if(d < max_z)
+        {
+            max_z = d;
+        }
+    }
+
+    if(!(inc_x == 0 || inc_x == 4)) max_x = 0;
+    if(!(inc_y == 0 || inc_y == 4)) max_y = 0;
+    if(!(inc_z == 0 || inc_z == 4)) max_z = 0;
+
+    if(max_x < 0) max_x = -max_x;
+    if(max_y < 0) max_y = -max_y;
+    if(max_z < 0) max_z = -max_z;
+
+    if(max_x < max_y)
+    {
+        best = max_x;
+    }
+    else
+    {
+        best = max_y;
+    }
+
+    if(max_z < best)
+    {
+        best = max_z;
+    }
+
+    face->dist = (max_x + max_y + max_z) - (best * 0.5f);
+}
+
+//
 // kexRenderScene::FindVisibleSectors
 //
 
