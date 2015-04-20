@@ -339,19 +339,29 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     // check for drop-offs
     if(origin.z > floorHeight)
     {
-        if(!(playerFlags & PF_JUMPWASHELD) && velocity.z <= 0 &&
-            owner->Artifacts() & PA_SHAWL &&
-            cmd->Buttons() & BC_JUMP)
+        if(!(playerFlags & PF_JUMPWASHELD) && velocity.z <= 0 && cmd->Buttons() & BC_JUMP &&
+            owner->Artifacts() & (PA_SHAWL|PA_FEATHER))
         {
-            velocity.z = -4;
+            if(owner->Artifacts() & PA_FEATHER)
+            {
+                velocity.z = 0;
+                playerFlags |= PF_FLOATING;
+            }
+            else if(owner->Artifacts() & PA_SHAWL)
+            {
+                velocity.z = -4;
+            }
         }
         else
         {
+            playerFlags &= ~PF_FLOATING;
             velocity.z -= gravity;
         }
     }
     else
     {
+        playerFlags &= ~PF_FLOATING;
+
         if(sector->floorFace->flags & FF_LAVA)
         {
             if(origin.z - kexGame::cLocal->CModel()->GetFloorHeight(origin, sector) <= 0)
@@ -842,7 +852,8 @@ void kexPlayer::Ready(void)
 
 void kexPlayer::UpdateViewBob(void)
 {
-    if(actor->Origin().z > actor->FloorHeight() && !(actor->Flags() & AF_INWATER))
+    if(actor->Origin().z > actor->FloorHeight() &&
+        !(actor->Flags() & AF_INWATER) && !(actor->PlayerFlags() & PF_FLOATING))
     {
         bob = 0;
         bobTime = 0;
@@ -851,9 +862,19 @@ void kexPlayer::UpdateViewBob(void)
     else
     {
         if( cmd.Buttons() & (BC_FORWARD|BC_BACKWARD|BC_STRAFELEFT|BC_STRAFERIGHT) ||
-            actor->Flags() & AF_INWATER || (cmd.Movement()[0] != 0 || cmd.Movement()[1] != 0))
+            actor->Flags() & AF_INWATER || actor->PlayerFlags() & PF_FLOATING ||
+            (cmd.Movement()[0] != 0 || cmd.Movement()[1] != 0))
         {
-            float speed = (actor->Flags() & AF_INWATER) ? 0.25f : 1;
+            float speed;
+            
+            if(actor->Flags() & AF_INWATER || actor->PlayerFlags() & PF_FLOATING)
+            {
+                speed = 0.25f;
+            }
+            else
+            {
+                speed = 1;
+            }
 
             bobSpeed = (0.148f - bobSpeed) * 0.35f + bobSpeed;
             bob = kexMath::Sin(bobTime * speed) * 7.0f;

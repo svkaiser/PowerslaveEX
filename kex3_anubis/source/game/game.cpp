@@ -226,9 +226,9 @@ COMMAND(give)
         {
             int arti = atoi(kex::cCommands->GetArgv(2));
             
-            if(arti <= -1 || arti >= 5)
+            if(arti <= -1 || arti >= 6)
             {
-                kex::cSystem->Printf("give artifact <0 - 5>\n");
+                kex::cSystem->Printf("give artifact <0 - 6>\n");
                 return;
             }
             

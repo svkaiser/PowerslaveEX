@@ -207,12 +207,57 @@ bool kexRenderScene::SetScissorRect(kexRenderView &view, mapFace_t *face)
     bx2 = w;
     by1 = 0;
     by2 = h;
+
+    if( view.TestSphere(world->Vertices()[face->vertexStart+0].origin, 0) &&
+        view.TestSphere(world->Vertices()[face->vertexStart+1].origin, 0) &&
+        view.TestSphere(world->Vertices()[face->vertexStart+2].origin, 0) &&
+        view.TestSphere(world->Vertices()[face->vertexStart+3].origin, 0))
+    {
+        kexVec3 pt;
+        float x1, x2, y1, y2;
+
+        x1 = x2 = y1 = y2 = 0;
+
+        for(int i = 0; i < 4; ++i)
+        {
+            pt = view.ProjectPoint(world->Vertices()[face->vertexStart+i].origin);
+
+            if(pt.z <= 0)
+            {
+                x1 = 0;
+                x2 = w;
+                y1 = 0;
+                y2 = h;
+                break;
+            }
+            
+            if(i == 0)
+            {
+                x1 = x2 = pt.x;
+                y1 = y2 = pt.y;
+            }
+            else
+            {
+                if(x1 > pt.x) x1 = pt.x;
+                if(x2 < pt.x) x2 = pt.x;
+                if(y1 > pt.y) y1 = pt.y;
+                if(y2 < pt.y) y2 = pt.y;
+            }
+        }
     
-    ClipFaceToPlane(view, view.NearPlane(), face, bx1, bx2, by1, by2);
-    ClipFaceToPlane(view, view.TopPlane(), face, bx1, bx2, by1, by2);
-    ClipFaceToPlane(view, view.RightPlane(), face, bx1, bx2, by1, by2);
-    ClipFaceToPlane(view, view.LeftPlane(), face, bx1, bx2, by1, by2);
-    ClipFaceToPlane(view, view.BottomPlane(), face, bx1, bx2, by1, by2);
+        if(x1 > bx1) bx1 = x1;
+        if(x2 < bx2) bx2 = x2;
+        if(y1 > by1) by1 = y1;
+        if(y2 < by2) by2 = y2;
+    }
+    else
+    {
+        ClipFaceToPlane(view, view.NearPlane(), face, bx1, bx2, by1, by2);
+        ClipFaceToPlane(view, view.TopPlane(), face, bx1, bx2, by1, by2);
+        ClipFaceToPlane(view, view.RightPlane(), face, bx1, bx2, by1, by2);
+        ClipFaceToPlane(view, view.LeftPlane(), face, bx1, bx2, by1, by2);
+        ClipFaceToPlane(view, view.BottomPlane(), face, bx1, bx2, by1, by2);
+    }
     
     if(bx1 > bx2) bx1 = 0;
     if(bx2 < bx1) bx2 = w;
@@ -788,6 +833,10 @@ void kexRenderScene::DrawSector(kexRenderView &view, mapSector_t *sector)
 void kexRenderScene::DrawPortal(kexRenderView &view, mapFace_t *face, byte r, byte g, byte b)
 {
     mapVertex_t *v = &world->Vertices()[face->vertexStart];
+    mapSector_t *sector = &world->Sectors()[face->sectorOwner];
+
+    kexRender::cBackend->SetScissorRect((int)sector->x1, (int)sector->y1,
+                                        (int)sector->x2, (int)sector->y2);
     
     kexRender::cUtils->DrawLine(v[0].origin, v[1].origin, r, g, b);
     kexRender::cUtils->DrawLine(v[1].origin, v[2].origin, r, g, b);
@@ -1240,9 +1289,6 @@ void kexRenderScene::DrawActorList(kexRenderView &view, mapSector_t *sector)
             DrawSprite(view, sector, actor);
         }
     }
-    
-    kexRender::cBackend->SetState(GLSTATE_STENCILTEST, false);
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
 }
 
 //
