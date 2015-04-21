@@ -78,7 +78,7 @@ private:
 
     static int              validcount;
 
-    kexStack<mapSector_t*>  sectorList;
+    sectorList_t            sectorList;
     kexActor                *moveActor;
     kexActor                *sourceActor;
     mapSector_t             *contactSector;

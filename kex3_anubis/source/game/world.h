@@ -63,6 +63,8 @@ typedef struct
     kexLinklist<kexActor>   actorList;
 } mapSector_t;
 
+typedef kexStack<mapSector_t*> sectorList_t;
+
 typedef enum
 {
     FF_SOLID            = BIT(0),
@@ -175,7 +177,7 @@ public:
     void                    UnloadMap(void);
     void                    RadialDamage(kexActor *source, const float radius, const int damage,
                                          const bool bCanDestroyWalls = true);
-    kexStack<mapSector_t*>  *FloodFill(const kexVec3 &start, mapSector_t *sector, const float maxDistance);
+    sectorList_t            *FloodFill(const kexVec3 &start, mapSector_t *sector, const float maxDistance);
     void                    UpdateSectorBounds(mapSector_t *sector);
     void                    UpdateFacePlaneAndBounds(mapFace_t *face);
     void                    EnterSectorSpecial(kexActor *actor, mapSector_t *sector);
@@ -200,6 +202,8 @@ public:
     const unsigned int      NumTexCoords(void) const { return numTCoords; }
     const unsigned int      NumEvents(void) const { return numEvents; }
     const unsigned int      NumActors(void) const { return numActors; }
+
+    sectorList_t            &ScanSectors(void) { return scanSectors; }
 
     kexTexture              *SkyTexture(void) { return skyTexture; }
     kexTexture              **Textures(void) { return textures; }
@@ -269,7 +273,7 @@ private:
     mapEvent_t              *events;
     mapActor_t              *actors;
 
-    kexStack<mapSector_t*>  scanSectors;
+    sectorList_t            scanSectors;
     kexSDNode<kexActor>     areaNodes;
 };
 

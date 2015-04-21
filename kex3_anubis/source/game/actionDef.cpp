@@ -746,6 +746,25 @@ DECLARE_KEX_ACTION(kexActionQuake)
 
 //-----------------------------------------------------------------------------
 //
+// kexActionSpawnLight
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_ACTION(kexActionSpawnLight)
+{
+    kexGameLocal *game  = kexGame::cLocal;
+    float radius        = this->args[0].f;
+    float r             = this->args[1].f;
+    float g             = this->args[2].f;
+    float b             = this->args[3].f;
+    float t             = this->args[4].f;
+    int p               = this->args[5].i;
+
+    kexGame::cLocal->SpawnDynamicLight(actor, radius, kexVec3(r, g, b), t, p);
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexActionDefManager
 //
 //-----------------------------------------------------------------------------
@@ -906,4 +925,6 @@ void kexActionDefManager::RegisterActions(void)
     RegisterAction("A_ClearBurnState", kexActionClearBurnState::info.Create);
     RegisterAction("A_TriggerEvent", kexActionTriggerEvent::info.Create);
     RegisterAction("A_Quake", kexActionQuake::info.Create, AAT_INTEGER);
+    RegisterAction("A_SpawnLight", kexActionSpawnLight::info.Create,
+                   AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_FLOAT, AAT_INTEGER);
 }

@@ -93,6 +93,39 @@ void kexTextureManager::CreateDefaultTexture(void)
 }
 
 //
+// kexTextureManager::CreateLightTexture
+//
+
+void kexTextureManager::CreateLightTexture(void)
+{
+    kexBinFile lightFile;
+    byte rgb[64*64*4];
+    memset(rgb, 0, 64*64*4);
+
+    lightFile.Open("gfx/light.bin");
+    lightTexture = textureList.Add("_light", kexTexture::hb_texture);
+
+    lightTexture->colorMode = TCR_RGBA;
+    lightTexture->origwidth = 64;
+    lightTexture->origheight = 64;
+    lightTexture->width = 64;
+    lightTexture->height = 64;
+
+    for(int h = 0; h < 64; ++h)
+    {
+        for(int w = 0; w < 64; ++w)
+        {
+            rgb[(64 * h + w) * 4 + 0] = lightFile.Read8();
+            rgb[(64 * h + w) * 4 + 1] = lightFile.Read8();
+            rgb[(64 * h + w) * 4 + 2] = lightFile.Read8();
+            rgb[(64 * h + w) * 4 + 3] = rgb[(64 * h + w) * 4 + 2];
+        }
+    }
+
+    lightTexture->Upload(rgb, TC_CLAMP, TF_LINEAR);
+}
+
+//
 // kexTextureManager::Init
 //
 
@@ -100,6 +133,7 @@ void kexTextureManager::Init(void)
 {
     CreateWhiteTexture();
     CreateDefaultTexture();
+    CreateLightTexture();
 }
 
 //

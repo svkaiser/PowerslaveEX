@@ -1539,7 +1539,7 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
 // kexWorld::FloodFill
 //
 
-kexStack<mapSector_t*> *kexWorld::FloodFill(const kexVec3 &start, mapSector_t *sector, const float maxDistance)
+sectorList_t *kexWorld::FloodFill(const kexVec3 &start, mapSector_t *sector, const float maxDistance)
 {
     unsigned int scanCount = 0;
 

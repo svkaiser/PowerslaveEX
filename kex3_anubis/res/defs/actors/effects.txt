@@ -39,7 +39,7 @@ Fx_VaseExplodePuff 62
     stepHeight              32
     scale                   2.0
     animSpeed               0.25
-    spawnAnim               "effects/magicPuff"
+    spawnAnim               "effects/vasePuff"
     fullbright              1
     color                   "0.5 0.5 0.25"
 }
@@ -52,7 +52,7 @@ Fx_GreenCobraExplode -1
     stepHeight              32
     scale                   2.0
     animSpeed               0.25
-    spawnAnim               "effects/magicPuff"
+    spawnAnim               "effects/cobraPuff1"
     fullbright              1
     color                   "0.375 0.75 0.375"
 }
@@ -65,7 +65,7 @@ Fx_RedCobraExplode -1
     stepHeight              32
     scale                   2.0
     animSpeed               0.25
-    spawnAnim               "effects/magicPuff"
+    spawnAnim               "effects/cobraPuff2"
     fullbright              1
     color                   "0.75 0.25 0.25"
 }

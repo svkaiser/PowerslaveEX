@@ -29,10 +29,12 @@ public:
 
     kexTexture              *defaultTexture;
     kexTexture              *whiteTexture;
+    kexTexture              *lightTexture;
 
 private:
     void                    CreateWhiteTexture(void);
     void                    CreateDefaultTexture(void);
+    void                    CreateLightTexture(void);
 
     kexHashList<kexTexture> textureList;
 };

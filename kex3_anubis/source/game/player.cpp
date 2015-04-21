@@ -996,7 +996,7 @@ void kexPlayer::TryUse(void)
 kexActor *kexPlayer::AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitch,
                              const float dist, const float aimYaw, const float aimPitch)
 {
-    kexStack<mapSector_t*> *sectorList;
+    sectorList_t *sectorList;
     kexActor *aimActor;
     kexVec3 aVec, aDir;
     kexAngle bestYaw, bestPitch;

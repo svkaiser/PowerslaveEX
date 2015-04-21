@@ -11,6 +11,10 @@ Proj_Anubis 18
     moveable                1
     gravity                 0
     damage                  20
+    spawnLight              1
+    lightColor              "0.375 0.375 0.75"
+    lightRadius             512
+    lightPasses             2
 }
 
 Proj_Blaster 19
@@ -26,6 +30,10 @@ Proj_Blaster 19
     moveable                1
     gravity                 0
     damage                  30
+    spawnLight              1
+    lightColor              "0.75 0.375 0.25"
+    lightRadius             384
+    lightPasses             2
 }
 
 Proj_Cobra_Green 20

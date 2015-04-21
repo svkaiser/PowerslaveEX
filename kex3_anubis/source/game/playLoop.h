@@ -38,6 +38,8 @@ public:
     void                        RequestExit(const char *map);
     
     kexRenderView               &View(void) { return renderView; }
+    kexRenderScene              &RenderScene(void) { return renderScene; }
+
     const int                   Ticks(void) const { return ticks; }
     const int                   MaxWaterMagnitude(void) { return waterMaxMagnitude; }
     void                        PickupFlash(void) { hud.SetPickupFlash(); }

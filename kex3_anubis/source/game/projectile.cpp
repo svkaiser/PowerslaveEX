@@ -17,6 +17,7 @@
 
 #include "kexlib.h"
 #include "game.h"
+#include "dlightObj.h"
 
 //-----------------------------------------------------------------------------
 //
@@ -150,7 +151,7 @@ void kexProjectile::AimThink(void)
         kexVec3 start;
         kexVec3 end;
         kexVec2 v;
-        kexStack<mapSector_t*> *sectorList;
+        sectorList_t *sectorList;
         kexActor *aimActor;
         float maxDist = kexMath::infinity;
         float dist;
@@ -302,7 +303,7 @@ void kexProjectile::SeekTargets(void)
     }
     else
     {
-        kexStack<mapSector_t*> *sectorList;
+        sectorList_t *sectorList;
         sectorList = kexGame::cLocal->World()->FloodFill(start, sector, homingMaxSightDistance);
 
         for(unsigned int i = 0; i < sectorList->CurrentLength(); ++i)
@@ -539,6 +540,19 @@ void kexProjectile::Spawn(void)
         if(definition->GetBool("homing"))           projectileFlags |= PF_HOMING;
         if(definition->GetBool("aimOnSpawn"))       projectileFlags |= PF_AIMONSPAWN;
         if(definition->GetBool("noHomingThrust"))   projectileFlags |= PF_NOHOMINGTHRUST;
+
+        if(definition->GetBool("spawnLight"))
+        {
+            float lightRadius;
+            int lightPasses;
+            kexVec3 lightColor;
+
+            definition->GetVector("lightColor", lightColor);
+            definition->GetFloat("lightRadius", lightRadius);
+            definition->GetInt("lightPasses", lightPasses);
+
+            kexGame::cLocal->SpawnDynamicLight(this, lightRadius, lightColor, -1, lightPasses);
+        }
     }
 
     if(projectileFlags & PF_AIMONSPAWN)

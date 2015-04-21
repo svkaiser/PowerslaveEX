@@ -18,11 +18,33 @@
 #include "world.h"
 
 class kexRenderView;
+class kexRenderScene;
 class kexWorld;
+class kexDLight;
+
+#define MAX_DLIGHTS     32
+
+class kexRenderDLight
+{
+public:
+    kexRenderDLight(void);
+
+    void                    Init(void);
+    void                    Clear(void);
+    void                    AddLight(kexDLight *light);
+    void                    Draw(kexRenderScene *rScene, kexStack<int> &polygons);
+
+private:
+    uint                    *lightMarks;
+    uint                    numDLights;
+    kexDLight               *dLightList[MAX_DLIGHTS];
+};
 
 class kexRenderScene
 {
 public:
+    friend class kexRenderDLight;
+
     kexRenderScene(void);
     ~kexRenderScene(void);
     
@@ -32,6 +54,7 @@ public:
 
     kexStack<int>           &VisibleSectors(void) { return visibleSectors; }
     kexStack<int>           &VisibleSkyFaces(void) { return visibleSkyFaces; }
+    kexRenderDLight         &DLights(void) { return dLights; }
     
     static bool             bPrintStats;
     static bool             bShowPortals;
@@ -48,7 +71,7 @@ private:
     void                    DrawSector(kexRenderView &view, mapSector_t *sector);
     void                    DrawFace(kexRenderView &view, mapSector_t *sector, int faceID);
     void                    DrawPortal(kexRenderView &view, mapFace_t *face, byte r, byte g, byte b);
-    void                    DrawPolygon(kexRenderView &view, mapFace_t *face, mapPoly_t *poly);
+    void                    DrawPolygon(mapFace_t *face, mapPoly_t *poly);
     void                    DrawActorList(kexRenderView &view, mapSector_t *sector);
     void                    DrawSprite(kexRenderView &view, mapSector_t *sector, kexActor *actor);
     void                    DrawStretchSprite(kexRenderView &view, mapSector_t *sector, kexActor *actor);
@@ -69,6 +92,7 @@ private:
     kexStack<int>           visibleSectors;
     kexStack<int>           visibleSkyFaces;
     kexStack<int>           polyList;
+    kexRenderDLight         dLights;
 };
 
 #endif

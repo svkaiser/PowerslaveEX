@@ -326,6 +326,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\renderDynLight.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\renderFont.cpp"
 					>
 				</File>
@@ -435,6 +439,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\cmodel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\dlightObj.cpp"
 					>
 				</File>
 				<File
@@ -817,6 +825,10 @@
 				</File>
 				<File
 					RelativePath="..\source\game\cmodel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\game\dlightObj.h"
 					>
 				</File>
 				<File

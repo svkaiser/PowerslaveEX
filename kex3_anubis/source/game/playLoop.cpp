@@ -191,6 +191,7 @@ void kexPlayLoop::Start(void)
     
     hud.SetPlayer(game->Player());
     renderScene.SetWorld(game->World());
+    renderScene.DLights().Init();
 
     kexGame::cScriptManager->LoadLevelScript(game->ActiveMap()->script.c_str());
     kexGame::cScriptManager->CallDelayedMapScript(0, game->Player()->Actor(), 0);
@@ -296,9 +297,13 @@ void kexPlayLoop::Tick(void)
 
     if(ticks > 4 && !bPaused && !inventoryMenu.IsActive())
     {
+        renderScene.DLights().Clear();
+
         kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
+
         hud.Update();
+
         UpdateWater();
         WaterBubbles();
 

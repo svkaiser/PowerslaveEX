@@ -32,6 +32,7 @@
 #include "menuPanel.h"
 #include "localization.h"
 #include "mapEditor.h"
+#include "dlightObj.h"
 
 static kexGameLocal gameLocal;
 kexGameLoop *kex::cGame = &gameLocal;
@@ -963,4 +964,34 @@ kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const floa
                                    const float yaw, const int sector)
 {
     return kexGame::cActorFactory->Spawn(name, x, y, z, yaw, sector);
+}
+
+//
+// kexGameLocal::SpawnDynamicLight
+//
+
+kexDLight *kexGameLocal::SpawnDynamicLight(kexActor *source, const float radius,
+                                           const kexVec3 &color, const float fadeTime, const int passes)
+{
+    if(!source)
+    {
+        return NULL;
+    }
+
+    kexDLight *obj = static_cast<kexDLight*>(ConstructObject("kexDLight"));
+
+    obj->Origin() = source->Origin();
+    obj->Sector() = source->Sector();
+
+    obj->Radius() = radius;
+    obj->FadeTime() = fadeTime;
+    obj->Passes() = passes;
+    obj->Color()[0] = (byte)(color.x * 255.0f);
+    obj->Color()[1] = (byte)(color.y * 255.0f);
+    obj->Color()[2] = (byte)(color.z * 255.0f);
+
+    obj->CallSpawn();
+    obj->SetTarget(source);
+
+    return obj;
 }

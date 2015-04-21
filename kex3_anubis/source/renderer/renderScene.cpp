@@ -442,7 +442,7 @@ void kexRenderScene::SetFaceDistance(kexRenderView &view, mapFace_t *face)
 void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector)
 {
     static int clipCount = 0;
-    static kexStack<mapSector_t*> scanSectors;
+    sectorList_t *scanSectors;
 
     int secnum;
     int start, end;
@@ -470,8 +470,10 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
 
     origin = view.Origin();
 
-    scanSectors.Reset();
-    scanSectors.Set(sector);
+    scanSectors = &world->ScanSectors();
+
+    scanSectors->Reset();
+    scanSectors->Set(sector);
 
     visibleSkyFaces.Reset();
     visibleSectors.Reset();
@@ -490,7 +492,7 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
     
     do
     {
-        mapSector_t *s = scanSectors[scanCount++];
+        mapSector_t *s = (*scanSectors)[scanCount++];
         
         if(s->floodCount == 0)
         {
@@ -587,7 +589,7 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
                     visibleSectors.Set(face->sector);
                 }
 
-                scanSectors.Set(next);
+                scanSectors->Set(next);
                 next->floodCount = 1;
             }
             else
@@ -608,7 +610,7 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
             }
         }
         
-    } while(scanCount < scanSectors.CurrentLength());
+    } while(scanCount < scanSectors->CurrentLength());
 }
 
 //
@@ -907,7 +909,7 @@ void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int face
 // kexRenderScene::DrawPolygon
 //
 
-void kexRenderScene::DrawPolygon(kexRenderView &view, mapFace_t *face, mapPoly_t *poly)
+void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 {
     int tris = 0;
     kexCpuVertList *vl = kexRender::cVertList;
@@ -1010,7 +1012,7 @@ void kexRenderScene::DrawWater(kexRenderView &view)
         
         for(int k = face->polyStart; k <= face->polyEnd; ++k)
         {
-            DrawPolygon(view, face, &world->Polys()[k]);
+            DrawPolygon(face, &world->Polys()[k]);
         }
     }
     
@@ -1347,7 +1349,7 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
                                                 (int)sector->x2+1, rectY+1);
         }
 
-        DrawPolygon(view, face, poly);
+        DrawPolygon(face, poly);
     }
 }
 
@@ -1430,6 +1432,8 @@ void kexRenderScene::DrawView(kexRenderView &view, mapSector_t *sector)
     DrawSky(view);
     
     DrawSectors(view);
+
+    dLights.Draw(this, polyList);
     
     DrawActors(view);
     

@@ -23,6 +23,7 @@ class kexOverWorld;
 class kexRenderView;
 class kexMover;
 class kexMenuPanel;
+class kexDLight;
 
 typedef enum
 {
@@ -247,11 +248,13 @@ public:
                                                 const float yaw, const int sector = -1);
     kexActor                        *SpawnActor(const kexStr &name, const float x, const float y, const float z,
                                                 const float yaw, const int sector = -1);
+
     void                            DrawSmallString(const char *string, float x, float y, float scale, bool center,
                                                     byte r = 0xff, byte g = 0xff, byte b = 0xff);
     void                            DrawBigString(const char *string, float x, float y, float scale, bool center,
                                                   byte r = 0xff, byte g = 0xff, byte b = 0xff);
-
+    kexDLight                       *SpawnDynamicLight(kexActor *source, const float radius,
+                                                       const kexVec3 &color, const float fadeTime = -1, const int passes = 2);
     static kexMenu                  *menus[NUMMENUS];
     static bool                     bShowSoundStats;
     
