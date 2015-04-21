@@ -279,6 +279,15 @@ bool kexRenderView::TestSphere(const kexVec3 &org, const float radius)
 }
 
 //
+// kexRenderView::TestPointNearPlane
+//
+
+bool kexRenderView::TestPointNearPlane(const kexVec3 &org)
+{
+    return ((p[FP_NEAR].Distance(org) + p[FP_NEAR].d) >= 0);
+}
+
+//
 // kexRenderView::SphereBits
 //
 

@@ -70,6 +70,7 @@ void kexRenderDLight::AddLight(kexDLight *light)
     kexWorld *w = kexGame::cLocal->World();
     mapFace_t *faces;
     mapSector_t *sectors;
+    mapSector_t *startSector;
     sectorList_t *sectorList;
 
     if(numDLights >= MAX_DLIGHTS)
@@ -83,8 +84,10 @@ void kexRenderDLight::AddLight(kexDLight *light)
     faces = w->Faces();
     sectors = w->Sectors();
     
-    sectorList->Set(light->Sector());
-    lightMarks[light->Sector() - sectors] |= BIT(numDLights);
+    startSector = light->Sector();
+    
+    sectorList->Set(startSector);
+    lightMarks[startSector - sectors] |= BIT(numDLights);
     
     do
     {
@@ -102,6 +105,11 @@ void kexRenderDLight::AddLight(kexDLight *light)
             
             s = &sectors[face->sector];
             
+            if(s == startSector || s->floodCount != 1)
+            {
+                continue;
+            }
+            
             if(lightMarks[s - sectors] & BIT(numDLights))
             {
                 // we already checked this sector
@@ -112,6 +120,7 @@ void kexRenderDLight::AddLight(kexDLight *light)
             if(light->Bounds().IntersectingBox(s->bounds))
             {
                 sectorList->Set(s);
+                s->floodCount = 1;
                 lightMarks[s - sectors] |= BIT(numDLights);
             }
         }

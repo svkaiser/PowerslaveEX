@@ -208,10 +208,10 @@ bool kexRenderScene::SetScissorRect(kexRenderView &view, mapFace_t *face)
     by1 = 0;
     by2 = h;
 
-    if( view.TestSphere(world->Vertices()[face->vertexStart+0].origin, 0) &&
-        view.TestSphere(world->Vertices()[face->vertexStart+1].origin, 0) &&
-        view.TestSphere(world->Vertices()[face->vertexStart+2].origin, 0) &&
-        view.TestSphere(world->Vertices()[face->vertexStart+3].origin, 0))
+    if( view.TestPointNearPlane(world->Vertices()[face->vertexStart+0].origin) &&
+        view.TestPointNearPlane(world->Vertices()[face->vertexStart+1].origin) &&
+        view.TestPointNearPlane(world->Vertices()[face->vertexStart+2].origin) &&
+        view.TestPointNearPlane(world->Vertices()[face->vertexStart+3].origin))
     {
         kexVec3 pt;
         float x1, x2, y1, y2;
@@ -524,7 +524,12 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
                     }
                 }
 
-                if(face->flags & FF_WATER || dist <= 0.5f)
+                // compute the scissor rect if the portal is either:
+                // * not a water surface
+                // * render view is not 'on' the plane
+                // * render view is 64 units away from a ceiling/floor portal
+                
+                if(face->flags & FF_WATER || dist <= 0.5f || (i >= end+1 && dist < 64))
                 {
                     face->x1 = 0;
                     face->x2 = w;

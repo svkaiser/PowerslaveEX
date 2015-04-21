@@ -58,6 +58,7 @@ public:
     kexVec3             ProjectPoint(const kexVec3 &point, kexVec4 *projVector = NULL);
     bool                TestBoundingBox(const kexBBox &bbox);
     bool                TestSphere(const kexVec3 &org, const float radius);
+    bool                TestPointNearPlane(const kexVec3 &org);
     byte                SphereBits(const kexVec3 &org, const float radius);
     bool                BoxDistance(const kexBBox &box, const float distance);
 
