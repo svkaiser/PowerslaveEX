@@ -153,7 +153,6 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
         for(int j = 0; j < MAX_DLIGHTS; ++j)
         {
             int indices[4] = { 0, 0, 0, 0 };
-            int tcoords[4] = { 0, 0, 0, 0 };
             int curIdx = 0;
             kexVec3 vPoint;
             kexVec3 vStart;

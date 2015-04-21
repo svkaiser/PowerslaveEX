@@ -760,7 +760,7 @@ DECLARE_KEX_ACTION(kexActionSpawnLight)
     float t             = this->args[4].f;
     int p               = this->args[5].i;
 
-    kexGame::cLocal->SpawnDynamicLight(actor, radius, kexVec3(r, g, b), t, p);
+    game->SpawnDynamicLight(actor, radius, kexVec3(r, g, b), t, p);
 }
 
 //-----------------------------------------------------------------------------

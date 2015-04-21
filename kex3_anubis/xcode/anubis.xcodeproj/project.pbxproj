@@ -10,6 +10,8 @@
 		410A697F1AAF53FC000BD442 /* dataConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410A697E1AAF53FC000BD442 /* dataConvert.cpp */; };
 		4111E0821A8D4B19000D5B22 /* pickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4111E0801A8D4B19000D5B22 /* pickup.cpp */; };
 		411358D21AB75FE200916706 /* inventoryMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411358D01AB75FE200916706 /* inventoryMenu.cpp */; };
+		4124D2251AE6A6F600FB03C0 /* dlightObj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4124D2231AE6A6F600FB03C0 /* dlightObj.cpp */; };
+		4124D22D1AE6A70400FB03C0 /* renderDynLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4124D22C1AE6A70400FB03C0 /* renderDynLight.cpp */; };
 		413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413DD5BD1A89674B00767E49 /* actorObject.cpp */; };
 		415A071F1AC9B81800D74D25 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 415A07091AC9B5E700D74D25 /* libogg.a */; };
 		415A07201AC9B81800D74D25 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 415A07141AC9B5EF00D74D25 /* libvorbis.a */; };
@@ -241,6 +243,9 @@
 		4111E0811A8D4B19000D5B22 /* pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pickup.h; path = ../../source/game/pickup.h; sourceTree = "<group>"; };
 		411358D01AB75FE200916706 /* inventoryMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = inventoryMenu.cpp; path = ../../source/game/inventoryMenu.cpp; sourceTree = "<group>"; };
 		411358D11AB75FE200916706 /* inventoryMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inventoryMenu.h; path = ../../source/game/inventoryMenu.h; sourceTree = "<group>"; };
+		4124D2231AE6A6F600FB03C0 /* dlightObj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dlightObj.cpp; path = ../../source/game/dlightObj.cpp; sourceTree = "<group>"; };
+		4124D2241AE6A6F600FB03C0 /* dlightObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dlightObj.h; path = ../../source/game/dlightObj.h; sourceTree = "<group>"; };
+		4124D22C1AE6A70400FB03C0 /* renderDynLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = renderDynLight.cpp; sourceTree = "<group>"; };
 		412E5A5D1ADC1B5600CE6BB8 /* msort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msort.h; sourceTree = "<group>"; };
 		413DD5BD1A89674B00767E49 /* actorObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = actorObject.cpp; path = ../../source/script/objects/actorObject.cpp; sourceTree = "<group>"; };
 		413DD5BE1A89674B00767E49 /* actorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actorObject.h; path = ../../source/script/objects/actorObject.h; sourceTree = "<group>"; };
@@ -529,6 +534,7 @@
 				41E9B2EC1AB1F45000ECA62E /* actorFactory.cpp */,
 				41D3D50F1A95053C000E7FD6 /* ai.cpp */,
 				41C979F71A642CCA00E9C798 /* cmodel.cpp */,
+				4124D2231AE6A6F600FB03C0 /* dlightObj.cpp */,
 				41C7FC2E1A5AFB84003864CB /* game.cpp */,
 				41C7FC301A5AFB84003864CB /* gameObject.cpp */,
 				41B5F18E1A926BC00016327B /* hud.cpp */,
@@ -555,6 +561,7 @@
 				41E9B2ED1AB1F45000ECA62E /* actorFactory.h */,
 				41D3D5101A95053C000E7FD6 /* ai.h */,
 				41C979F81A642CCA00E9C798 /* cmodel.h */,
+				4124D2241AE6A6F600FB03C0 /* dlightObj.h */,
 				41C7FC2F1A5AFB84003864CB /* game.h */,
 				41C7FC311A5AFB84003864CB /* gameObject.h */,
 				41B5F18F1A926BC00016327B /* hud.h */,
@@ -753,6 +760,7 @@
 				41C7FC4F1A5AFB98003864CB /* fbo.cpp */,
 				41C7FC531A5AFB98003864CB /* image.cpp */,
 				41C7FC551A5AFB98003864CB /* renderBackend.cpp */,
+				4124D22C1AE6A70400FB03C0 /* renderDynLight.cpp */,
 				41C7FC571A5AFB98003864CB /* renderFont.cpp */,
 				41BCC06A1A6ECCB800F8B3FA /* renderScene.cpp */,
 				41C7FC5A1A5AFB98003864CB /* renderScreen.cpp */,
@@ -1023,6 +1031,7 @@
 				41C7FC7C1A5AFBAB003864CB /* endian.cpp in Sources */,
 				41C7FC681A5AFB98003864CB /* image.cpp in Sources */,
 				41C7FC691A5AFB98003864CB /* renderBackend.cpp in Sources */,
+				4124D2251AE6A6F600FB03C0 /* dlightObj.cpp in Sources */,
 				41B5F1901A926BC00016327B /* hud.cpp in Sources */,
 				41C7FC491A5AFB84003864CB /* titlescreen.cpp in Sources */,
 				413DD5BF1A89674B00767E49 /* actorObject.cpp in Sources */,
@@ -1031,6 +1040,7 @@
 				41C7FC241A5AFB6E003864CB /* kpf.cpp in Sources */,
 				41A9A1971AD2E968009B4ECF /* travelObject.cpp in Sources */,
 				41B7765F1A83EB0A008C8F23 /* refObject.cpp in Sources */,
+				4124D22D1AE6A70400FB03C0 /* renderDynLight.cpp in Sources */,
 				41B5F0FE1A9BA76600698014 /* spring.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,
 				41C7FC6D1A5AFB98003864CB /* renderView.cpp in Sources */,
