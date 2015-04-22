@@ -27,6 +27,8 @@ public:
     void                PlayMusic(const kexStr &str, const bool bLoop);
     void                StopMusic(void);
     void                ChangeMap(const kexStr &map);
+    void                SpawnLight(kexActor *source, const float radius,
+                                   const kexVec3 &color, const float fadeTime, const int passes);
     void                MoveScriptedSector(const int tag, const float height,
                                            const float speed, const bool bCeiling);
 };

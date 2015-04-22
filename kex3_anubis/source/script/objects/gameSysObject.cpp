@@ -43,6 +43,7 @@ void kexScriptObjGame::Init(void)
     e->RegisterObjectMethod("kGame", "void StopMusic(void)", asMETHODPR(kexScriptObjGame, StopMusic, (void), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void MoveScriptedSector(const int, const float, const float, const bool)", asMETHODPR(kexScriptObjGame, MoveScriptedSector, (const int, const float, const float, const bool), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void ChangeMap(const kStr &in)", asMETHODPR(kexScriptObjGame, ChangeMap, (const kexStr&), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kGame", "void SpawnLight(kActor@, const float, const kVec3 &in, const float, const int)", asMETHODPR(kexScriptObjGame, SpawnLight, (kexActor *source, const float radius, const kexVec3 &color, const float fadeTime, const int passes), void), asCALL_THISCALL);
 
     e->RegisterGlobalProperty("kPlayLoop PlayLoop", kexGame::cLocal->PlayLoop());
     e->RegisterObjectMethod("kPlayLoop", "const int Ticks(void) const", asMETHODPR(kexPlayLoop, Ticks, (void) const, const int), asCALL_THISCALL);
@@ -129,6 +130,16 @@ void kexScriptObjGame::StopMusic(void)
 void kexScriptObjGame::ChangeMap(const kexStr &map)
 {
     kexGame::cLocal->ChangeMap(map.c_str());
+}
+
+//
+// kexScriptObjGame::SpawnLight
+//
+
+void kexScriptObjGame::SpawnLight(kexActor *source, const float radius,
+                                  const kexVec3 &color, const float fadeTime, const int passes)
+{
+    kexGame::cLocal->SpawnDynamicLight(source, radius, color, fadeTime, passes);
 }
 
 //
