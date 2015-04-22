@@ -973,7 +973,7 @@ kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const floa
 kexDLight *kexGameLocal::SpawnDynamicLight(kexActor *source, const float radius,
                                            const kexVec3 &color, const float fadeTime, const int passes)
 {
-    if(!source)
+    if(!source || playLoop->RenderScene().DLights().MaxedOutLights())
     {
         return NULL;
     }

@@ -70,7 +70,7 @@ void kexDLight::Tick(void)
 
     actor = static_cast<kexActor*>(target);
 
-    float r = radius * 2;
+    float r = radius * 0.5f;
 
     bounds.min.Set(-r, -r, -r);
     bounds.max.Set( r,  r,  r);

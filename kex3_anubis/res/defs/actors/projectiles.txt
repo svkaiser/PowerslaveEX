@@ -13,7 +13,7 @@ Proj_Anubis 18
     damage                  20
     spawnLight              1
     lightColor              "0.375 0.375 0.75"
-    lightRadius             512
+    lightRadius             256
     lightPasses             2
 }
 
@@ -32,7 +32,7 @@ Proj_Blaster 19
     damage                  30
     spawnLight              1
     lightColor              "0.75 0.375 0.25"
-    lightRadius             384
+    lightRadius             256
     lightPasses             2
 }
 

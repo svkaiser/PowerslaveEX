@@ -34,6 +34,8 @@ public:
     void                    AddLight(kexDLight *light);
     void                    Draw(kexRenderScene *rScene, kexStack<int> &polygons);
 
+    bool                    MaxedOutLights(void) { return numDLights >= MAX_DLIGHTS; }
+
 private:
     uint                    *lightMarks;
     uint                    numDLights;

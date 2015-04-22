@@ -73,11 +73,6 @@ void kexRenderDLight::AddLight(kexDLight *light)
     mapSector_t *startSector;
     sectorList_t *sectorList;
 
-    if(numDLights >= MAX_DLIGHTS)
-    {
-        return;
-    }
-
     sectorList = &w->ScanSectors();
     sectorList->Reset();
 
@@ -105,7 +100,7 @@ void kexRenderDLight::AddLight(kexDLight *light)
             
             s = &sectors[face->sector];
             
-            if(s == startSector || s->floodCount != 1)
+            if(s == startSector || s == sec)
             {
                 continue;
             }
@@ -120,7 +115,6 @@ void kexRenderDLight::AddLight(kexDLight *light)
             if(light->Bounds().IntersectingBox(s->bounds))
             {
                 sectorList->Set(s);
-                s->floodCount = 1;
                 lightMarks[s - sectors] |= BIT(numDLights);
             }
         }
@@ -140,7 +134,7 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
     kexCpuVertList *vl = kexRender::cVertList;
     int xi, yi, tris;
     float n1, n2, v1, v2;
-    float radius;
+    float radius, rHalf;
     int passes;
     byte *rgb;
     mapVertex_t *verts;
@@ -158,6 +152,8 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
         mapPoly_t *poly = &w->Polys()[polygons[i]];
         mapFace_t *face = &w->Faces()[poly->faceRef];
         mapSector_t *sector = &w->Sectors()[face->sectorOwner];
+
+        sector->floodCount = 0;
 
         for(int j = 0; j < MAX_DLIGHTS; ++j)
         {
@@ -184,14 +180,11 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
             light = dLightList[j];
 
             lightOrg = light->Origin();
-            radius = light->Radius();
+            radius = light->Radius() * 4;
             passes = light->Passes();
             rgb = light->Color();
 
-            if(light->FadeTime() > -1)
-            {
-                radius *= light->FadeFrac();
-            }
+            rHalf = radius * 0.5f;
 
             dist = (face->plane.Distance(lightOrg) - face->plane.d) / radius;
 
@@ -241,21 +234,28 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
             v1 = vStart[xi];
             v2 = vStart[yi];
 
-            px = ((v1 - n1) / radius) + 0.5f;
-            py = ((v2 - n2) / radius) + 0.5f;
+            px = ((v1 - n1) / rHalf) + 0.5f;
+            py = ((v2 - n2) / rHalf) + 0.5f;
 
             r = (byte)(rgb[0] * (1.0f - dist));
             g = (byte)(rgb[1] * (1.0f - dist));
             b = (byte)(rgb[2] * (1.0f - dist));
             a = 255;
 
+            if(light->FadeTime() > -1)
+            {
+                r = (byte)(r * light->FadeFrac());
+                g = (byte)(g * light->FadeFrac());
+                b = (byte)(b * light->FadeFrac());
+            }
+
             for(int idx = (curIdx-1); idx >= 0; idx--)
             {
                 vertex = &verts[face->vertStart + indices[idx]];
                 vPoint = vertex->origin;
 
-                float tu = px + ((vPoint[xi] - v1) / radius);
-                float tv = py + ((vPoint[yi] - v2) / radius);
+                float tu = px + ((vPoint[xi] - v1) / rHalf);
+                float tv = py + ((vPoint[yi] - v2) / rHalf);
 
                 vl->AddVertex(vPoint, tu, tv, r, g, b, a);
             }
