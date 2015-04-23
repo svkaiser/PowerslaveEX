@@ -195,25 +195,25 @@ public:
 
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
-    const unsigned int      NumVertices(void) const { return numVertices; }
-    const unsigned int      NumSectors(void) const { return numSectors; }
-    const unsigned int      NumFaces(void) const { return numFaces; }
-    const unsigned int      NumPolys(void) const { return numPolys; }
-    const unsigned int      NumTexCoords(void) const { return numTCoords; }
-    const unsigned int      NumEvents(void) const { return numEvents; }
-    const unsigned int      NumActors(void) const { return numActors; }
+    d_inline const uint     NumVertices(void) const { return numVertices; }
+    d_inline const uint     NumSectors(void) const { return numSectors; }
+    d_inline const uint     NumFaces(void) const { return numFaces; }
+    d_inline const uint     NumPolys(void) const { return numPolys; }
+    d_inline const uint     NumTexCoords(void) const { return numTCoords; }
+    d_inline const uint     NumEvents(void) const { return numEvents; }
+    d_inline const uint     NumActors(void) const { return numActors; }
 
     sectorList_t            &ScanSectors(void) { return scanSectors; }
 
-    kexTexture              *SkyTexture(void) { return skyTexture; }
-    kexTexture              **Textures(void) { return textures; }
-    mapVertex_t             *Vertices(void) { return vertices; }
-    mapSector_t             *Sectors(void) { return sectors; }
-    mapFace_t               *Faces(void) { return faces; }
-    mapPoly_t               *Polys(void) { return polys; }
-    mapTexCoords_t          *TexCoords(void) { return texCoords; }
-    mapEvent_t              *Events(void) { return events; }
-    mapActor_t              *Actors(void) { return actors; }
+    d_inline kexTexture     *SkyTexture(void) { return skyTexture; }
+    d_inline kexTexture     **Textures(void) { return textures; }
+    d_inline mapVertex_t    *Vertices(void) { return vertices; }
+    d_inline mapSector_t    *Sectors(void) { return sectors; }
+    d_inline mapFace_t      *Faces(void) { return faces; }
+    d_inline mapPoly_t      *Polys(void) { return polys; }
+    d_inline mapTexCoords_t *TexCoords(void) { return texCoords; }
+    d_inline mapEvent_t     *Events(void) { return events; }
+    d_inline mapActor_t     *Actors(void) { return actors; }
 
     kexSDNode<kexActor>     &AreaNodes(void) { return areaNodes; }
 

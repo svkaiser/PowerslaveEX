@@ -34,9 +34,9 @@ public:
     void                Set(type t);
     void                Sort(compare_t *function);
     
-    const unsigned int  MaxLength(void) const { return length; }
-    const unsigned int  CurrentLength(void) const { return aidx; }
-    const unsigned int  StackSize(void) const { return size; }
+    d_inline const uint MaxLength(void) const { return length; }
+    d_inline const uint CurrentLength(void) const { return aidx; }
+    d_inline const uint StackSize(void) const { return size; }
     
     type                &operator[](unsigned int index);
     const type          &operator[](unsigned int index) const;
@@ -198,7 +198,7 @@ void kexStack<type>::Set(type t)
 // kexStack::operator[]
 //
 template <class type>
-type &kexStack<type>::operator[](unsigned int index)
+d_inline type &kexStack<type>::operator[](unsigned int index)
 {
     assert(index < length);
     return data[index];
@@ -208,7 +208,7 @@ type &kexStack<type>::operator[](unsigned int index)
 // kexStack::operator[]
 //
 template <class type>
-const type &kexStack<type>::operator[](unsigned int index) const
+d_inline const type &kexStack<type>::operator[](unsigned int index) const
 {
     assert(index < length);
     return data[index];

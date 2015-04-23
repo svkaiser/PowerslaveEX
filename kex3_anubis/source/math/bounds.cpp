@@ -88,6 +88,18 @@ float kexBBox::Radius(void) const
 }
 
 //
+// kexBBox::Radius2D
+//
+
+float kexBBox::Radius2D(void) const
+{
+    float x = max.x - min.x;
+    float y = max.y - min.y;
+
+    return kexMath::Sqrt(x * x + y * y);
+}
+
+//
 // kexBBox::AddPoint
 //
 

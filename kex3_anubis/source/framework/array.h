@@ -274,7 +274,7 @@ void kexArray<type>::Sort(compare_t *function, unsigned int count)
 // kexArray::operator[]
 //
 template <class type>
-type &kexArray<type>::operator[](unsigned int index)
+d_inline type &kexArray<type>::operator[](unsigned int index)
 {
     assert(index < length);
     return data[index];
@@ -284,7 +284,7 @@ type &kexArray<type>::operator[](unsigned int index)
 // kexArray::operator[]
 //
 template <class type>
-const type &kexArray<type>::operator[](unsigned int index) const
+d_inline const type &kexArray<type>::operator[](unsigned int index) const
 {
     assert(index < length);
     return data[index];

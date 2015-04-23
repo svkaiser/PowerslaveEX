@@ -460,6 +460,7 @@ public:
     void                    Clear(void);
     kexVec3                 Center(void) const;
     float                   Radius(void) const;
+    float                   Radius2D(void) const;
     void                    AddPoint(const kexVec3 &vec);
     bool                    PointInside(const kexVec3 &vec) const;
     bool                    IntersectingBox(const kexBBox &box) const;

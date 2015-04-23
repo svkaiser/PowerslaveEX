@@ -1273,8 +1273,8 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
                 if(event->type == 66)
                 {
                     ev->tag = -1;
+                    sector->event = -1;
                     ExplodeWallEvent(&sectors[ev->sector]);
-                    bClearEventRef = true;
                 }
 
                 continue;
