@@ -22,6 +22,7 @@ public:
     virtual void            Sleep(unsigned long usecs);
     virtual int             GetMS(void);
     virtual uint64_t        GetPerformanceCounter(void);
+    virtual double        MeasurePerformance(const uint64_t value);
     virtual int             GetTicks(void);
 };
 

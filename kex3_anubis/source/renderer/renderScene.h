@@ -95,6 +95,10 @@ private:
     kexStack<int>           visibleSkyFaces;
     kexStack<int>           polyList;
     kexRenderDLight         dLights;
+    uint64_t                floodFillTime;
+    uint64_t                drawSectorTime;
+    uint64_t                drawActorTime;
+    uint64_t                polySortTime;
 };
 
 #endif

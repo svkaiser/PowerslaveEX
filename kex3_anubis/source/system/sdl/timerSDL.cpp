@@ -25,6 +25,7 @@ public:
     virtual void            Sleep(unsigned long usecs);
     virtual int             GetMS(void);
     virtual uint64_t        GetPerformanceCounter(void);
+    virtual double          MeasurePerformance(const uint64_t value);
     virtual int             GetTicks(void);
 };
 
@@ -84,4 +85,13 @@ int kexTimerSDL::GetMS(void)
 uint64_t kexTimerSDL::GetPerformanceCounter(void)
 {
     return SDL_GetPerformanceCounter();
+}
+
+//
+// kexTimerSDL::MeasurePerformance
+//
+
+double kexTimerSDL::MeasurePerformance(const uint64_t value)
+{
+    return (1000.0 * (double)value) / (double)SDL_GetPerformanceFrequency();
 }

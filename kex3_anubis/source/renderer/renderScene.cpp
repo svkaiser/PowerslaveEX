@@ -449,6 +449,11 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
     kexVec3 origin;
     unsigned int scanCount;
     float w, h;
+    
+    if(bPrintStats)
+    {
+        floodFillTime = kex::cTimer->GetPerformanceCounter();
+    }
 
     secnum = sector - world->Sectors();
 
@@ -616,6 +621,11 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
         }
         
     } while(scanCount < scanSectors->CurrentLength());
+    
+    if(bPrintStats)
+    {
+        floodFillTime = kex::cTimer->GetPerformanceCounter() - floodFillTime;
+    }
 }
 
 //
@@ -1320,6 +1330,11 @@ int kexRenderScene::SortPolys(const int *p1, const int *p2)
 void kexRenderScene::DrawSectors(kexRenderView &view)
 {
     mapSector_t *prevSector = NULL;
+    
+    if(bPrintStats)
+    {
+        drawSectorTime = kex::cTimer->GetPerformanceCounter();
+    }
 
     polyList.Reset();
 
@@ -1328,7 +1343,17 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
         DrawSector(view, &world->Sectors()[visibleSectors[i]]);
     }
 
+    if(bPrintStats)
+    {
+        polySortTime = kex::cTimer->GetPerformanceCounter();
+    }
+    
     polyList.Sort(kexRenderScene::SortPolys);
+    
+    if(bPrintStats)
+    {
+        polySortTime = kex::cTimer->GetPerformanceCounter() - polySortTime;
+    }
 
     for(uint i = 0; i < polyList.CurrentLength(); ++i)
     {
@@ -1356,6 +1381,11 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
 
         DrawPolygon(face, poly);
     }
+    
+    if(bPrintStats)
+    {
+        drawSectorTime = kex::cTimer->GetPerformanceCounter() - drawSectorTime;
+    }
 }
 
 //
@@ -1364,6 +1394,11 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
 
 void kexRenderScene::DrawActors(kexRenderView &view)
 {
+    if(bPrintStats)
+    {
+        drawActorTime = kex::cTimer->GetPerformanceCounter();
+    }
+    
     spriteMatrix = kexMatrix(-view.Pitch(), 1) * kexMatrix(view.Yaw(), 2);
     spriteMatrix.RotateX(kexMath::pi);
     
@@ -1372,6 +1407,11 @@ void kexRenderScene::DrawActors(kexRenderView &view)
     for(int i = (int)visibleSectors.CurrentLength()-1; i >= 0; i--)
     {
         DrawActorList(view, &world->Sectors()[visibleSectors[i]]);
+    }
+    
+    if(bPrintStats)
+    {
+        drawActorTime = kex::cTimer->GetPerformanceCounter() - drawActorTime;
     }
 }
 
@@ -1417,6 +1457,21 @@ void kexRenderScene::PrintStats(void)
     
     kexRender::cUtils->PrintStatsText("Vertices Drawn", "%i", vertCount);
     kexRender::cUtils->PrintStatsText("Triangles Drawn", "%i", triCount/3);
+    kexRender::cUtils->PrintStatsText("Visible Sectors", "%i", visibleSectors.CurrentLength());
+    kexRender::cUtils->PrintStatsText("Visible Polygons", "%i", polyList.CurrentLength());
+    
+    kexRender::cUtils->AddDebugLineSpacing();
+    
+    kexRender::cUtils->PrintStatsText("Flood Fill Time", "%fms",
+                                      kex::cTimer->MeasurePerformance(floodFillTime));
+    kexRender::cUtils->PrintStatsText("Draw Sector Time", "%fms",
+                                      kex::cTimer->MeasurePerformance(drawSectorTime));
+    kexRender::cUtils->PrintStatsText("Draw Actor Time", "%fms",
+                                      kex::cTimer->MeasurePerformance(drawActorTime));
+    kexRender::cUtils->PrintStatsText("Polygon Sort Time", "%fms",
+                                      kex::cTimer->MeasurePerformance(polySortTime));
+    
+    kexRender::cUtils->AddDebugLineSpacing();
 }
 
 //
@@ -1429,7 +1484,7 @@ void kexRenderScene::DrawView(kexRenderView &view, mapSector_t *sector)
     {
         return;
     }
-
+    
     FindVisibleSectors(view, sector);
     
     Prepare(view);

@@ -59,3 +59,12 @@ uint64_t kexTimer::GetPerformanceCounter(void)
 {
     return 0;
 }
+
+//
+// kexTimer::MeasurePerformance
+//
+
+double kexTimer::MeasurePerformance(const uint64_t value)
+{
+    return 0;
+}
