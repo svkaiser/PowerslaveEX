@@ -1,0 +1,103 @@
+Transmitter_1 132
+{
+    classname               "kexQuestPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "transmitter/transmitter_1"
+    fullbright              1
+    touchable               1
+    type                    0
+}
+
+Transmitter_2 133
+{
+    classname               "kexQuestPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "transmitter/transmitter_2"
+    fullbright              1
+    touchable               1
+    type                    1
+}
+
+Transmitter_3 134
+{
+    classname               "kexQuestPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "transmitter/transmitter_3"
+    fullbright              1
+    touchable               1
+    type                    2
+}
+
+Transmitter_4 135
+{
+    classname               "kexQuestPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "transmitter/transmitter_4"
+    fullbright              1
+    touchable               1
+    type                    3
+}
+
+Transmitter_5 136
+{
+    classname               "kexQuestPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "transmitter/transmitter_5"
+    fullbright              1
+    touchable               1
+    type                    4
+}
+
+Transmitter_6 137
+{
+    classname               "kexQuestPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "transmitter/transmitter_6"
+    fullbright              1
+    touchable               1
+    type                    5
+}
+
+Transmitter_7 138
+{
+    classname               "kexQuestPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "transmitter/transmitter_7"
+    fullbright              1
+    touchable               1
+    type                    6
+}
+
+Transmitter_8 139
+{
+    classname               "kexQuestPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "transmitter/transmitter_8"
+    fullbright              1
+    touchable               1
+    type                    7
+}

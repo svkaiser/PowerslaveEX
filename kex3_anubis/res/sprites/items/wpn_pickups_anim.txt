@@ -71,3 +71,196 @@ weapon_pickup_m60
     }
 
 }
+
+weapon_pickup_bomb
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/wpn_bomb", 0,    -21,  -39,    0 }
+        }
+
+    }
+
+}
+
+weapon_pickup_flamethrower
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/wpn_flamethrower", 0,    -66,  -85,    0 }
+            { "items/wpn_flamethrower", 1,     -2,  -85,    0 }
+            { "items/wpn_flamethrower", 2,    -66,  -73,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/wpn_flamethrower", 0,    -66,  -84,    0 }
+            { "items/wpn_flamethrower", 1,     -2,  -84,    0 }
+            { "items/wpn_flamethrower", 3,    -66,  -72,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/wpn_flamethrower", 0,    -66,  -83,    0 }
+            { "items/wpn_flamethrower", 1,     -2,  -83,    0 }
+            { "items/wpn_flamethrower", 2,    -66,  -71,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/wpn_flamethrower", 0,    -66,  -82,    0 }
+            { "items/wpn_flamethrower", 1,     -2,  -82,    0 }
+            { "items/wpn_flamethrower", 3,    -66,  -70,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/wpn_flamethrower", 0,    -66,  -83,    0 }
+            { "items/wpn_flamethrower", 1,     -2,  -83,    0 }
+            { "items/wpn_flamethrower", 2,    -66,  -71,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/wpn_flamethrower", 0,    -66,  -84,    0 }
+            { "items/wpn_flamethrower", 1,     -2,  -84,    0 }
+            { "items/wpn_flamethrower", 3,    -66,  -72,    0 }
+        }
+
+    }
+
+}
+
+weapon_pickup_cstaff
+{
+    // frames:    6
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/wpn_cstaff", 0,     -5, -107,    0 }
+            { "items/wpn_cstaff", 1,     -5,  -43,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##001    0    0
+        sprites
+        {
+            { "items/wpn_cstaff", 2,     -5, -106,    0 }
+            { "items/wpn_cstaff", 3,     -5,  -42,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##002    0    0
+        sprites
+        {
+            { "items/wpn_cstaff", 4,     -5, -105,    0 }
+            { "items/wpn_cstaff", 5,     -5,  -41,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##003    0    0
+        sprites
+        {
+            { "items/wpn_cstaff", 6,     -5, -104,    0 }
+            { "items/wpn_cstaff", 7,     -5,  -40,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##004    0    0
+        sprites
+        {
+            { "items/wpn_cstaff", 8,     -6, -108,    0 }
+            { "items/wpn_cstaff", 9,     -6,  -44,    0 }
+        }
+
+    }
+
+    frame
+    {
+        // ##005    0    0
+        sprites
+        {
+            { "items/wpn_cstaff", 10,     -5, -107,    0 }
+            { "items/wpn_cstaff", 11,     -5,  -43,    0 }
+        }
+
+    }
+
+}
+
+weapon_pickup_ring
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/wpn_ring", 0,    -21,  -73,    0 }
+        }
+
+    }
+
+}
+
+weapon_pickup_manacle
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "items/wpn_manacle", 0,    -16,  -66,    0 }
+        }
+
+    }
+
+}

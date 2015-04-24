@@ -1,0 +1,5 @@
+texture "sprites/items/wpn_ring.png"
+
+// working\wpn_ring\sprite0451.tga
+sprite 0 0 0 44 41
+

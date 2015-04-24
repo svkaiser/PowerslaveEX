@@ -107,6 +107,7 @@ public:
     const int16_t               AnkahFlags(void) const { return ankahFlags; }
 
     int16_t                     &Artifacts(void) { return artifacts; }
+    int16_t                     &QuestItems(void) { return questItems; }
     const uint16_t              Buttons(void) const { return cmd.Buttons(); }
 
     kexActor                    *AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitch,
@@ -159,7 +160,7 @@ private:
 
     int16_t                     artifacts;
     int16_t                     keys;
-    int16_t                     transmitter;
+    int16_t                     questItems;
     int16_t                     airSupply;
     int16_t                     airSupplyTime;
     int                         teamDolls;

@@ -78,7 +78,7 @@ Fx_FireballExplode -1
     stepHeight              32
     scale                   2.0
     animSpeed               0.25
-    spawnAnim               "effects/magicPuff"
+    spawnAnim               "effects/fireballPuff"
     fullbright              1
     color                   "0.75 0.375 0.25"
 }

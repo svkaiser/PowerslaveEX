@@ -1479,6 +1479,16 @@ vasePuff
     }
 }
 
+fireballPuff
+{
+    frame
+    {
+        action A_SpawnLight(256, 0.75, 0.375, 0.25, 15, 1)
+        goto "effects/magicPuff"
+        delay 0
+    }
+}
+
 cobraPuff1
 {
     frame

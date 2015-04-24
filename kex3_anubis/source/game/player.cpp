@@ -807,7 +807,7 @@ void kexPlayer::Reset(void)
 
     artifacts = 0;
     keys = 0;
-    transmitter = 0;
+    questItems = 0;
     teamDolls = 0;
 }
 

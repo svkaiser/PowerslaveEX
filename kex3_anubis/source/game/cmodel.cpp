@@ -612,9 +612,11 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
                 // don't let projectiles collide with its source/owner
                 continue;
             }
-            
-            if(!actorBounds.IntersectingBox(actor->Bounds() + actor->Origin()))
+
+            if(end.z > actor->Origin().z + actor->Height() ||
+                actorHeight + end.z < actor->Origin().z)
             {
+                // either over or under actor
                 continue;
             }
 

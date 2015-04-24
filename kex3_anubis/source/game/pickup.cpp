@@ -610,3 +610,81 @@ void kexArtifactPickup::Spawn(void)
         Remove();
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// kexQuestPickup
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexQuestPickup, kexPickup)
+
+//
+// kexQuestPickup::kexQuestPickup
+//
+
+kexQuestPickup::kexQuestPickup(void)
+{
+    this->bits = 0;
+}
+
+//
+// kexQuestPickup::~kexQuestPickup
+//
+
+kexQuestPickup::~kexQuestPickup(void)
+{
+}
+
+//
+// kexQuestPickup::Tick
+//
+
+void kexQuestPickup::Tick(void)
+{
+    kexPickup::Tick();
+}
+
+//
+// kexQuestPickup::OnTouch
+//
+
+void kexQuestPickup::OnTouch(kexActor *instigator)
+{
+    kexPlayer *player;
+
+    if(Removing())
+    {
+        return;
+    }
+
+    if(!instigator->InstanceOf(&kexPuppet::info) || bits < 0)
+    {
+        return;
+    }
+
+    player = static_cast<kexPuppet*>(instigator)->Owner();
+
+    if(!(player->QuestItems() & BIT(bits)))
+    {
+        player->QuestItems() |= BIT(bits);
+        kexPickup::OnTouch(instigator);
+    }
+}
+
+//
+// kexQuestPickup::Spawn
+//
+
+void kexQuestPickup::Spawn(void)
+{
+    if(definition)
+    {
+        definition->GetInt("type", bits, 0);
+    }
+
+    if(kexGame::cLocal->Player()->QuestItems() & BIT(bits))
+    {
+        Remove();
+    }
+}

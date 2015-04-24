@@ -1,0 +1,26 @@
+texture "sprites/transmitter/transmitter.png"
+
+// working\transmitter\sprite0255.tga
+sprite 0 0 0 40 52
+
+// working\transmitter\sprite0303.tga
+sprite 1 40 0 60 50
+
+// working\transmitter\sprite0303a.tga
+sprite 2 100 0 64 37
+
+// working\transmitter\sprite0414.tga
+sprite 3 164 0 16 15
+
+// working\transmitter\sprite0452.tga
+sprite 4 180 0 60 39
+
+// working\transmitter\sprite0515.tga
+sprite 5 240 0 52 64
+
+// working\transmitter\sprite0520.tga
+sprite 6 292 0 64 25
+
+// working\transmitter\sprite0566.tga
+sprite 7 356 0 64 40
+

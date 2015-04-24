@@ -1,0 +1,5 @@
+texture "sprites/items/wpn_manacle.png"
+
+// working\wpn_mantacle\sprite0523.tga
+sprite 0 0 0 32 34
+

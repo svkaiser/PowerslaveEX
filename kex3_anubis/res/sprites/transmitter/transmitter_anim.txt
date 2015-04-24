@@ -1,0 +1,119 @@
+transmitter_1
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "transmitter/transmitter", 3,     -7,  -14,    0 }
+        }
+
+    }
+
+}
+
+transmitter_2
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "transmitter/transmitter", 2,    -35,  -37,    0 }
+        }
+
+    }
+
+}
+
+transmitter_3
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "transmitter/transmitter", 0,    -22,  -52,    0 }
+        }
+
+    }
+
+}
+
+transmitter_4
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "transmitter/transmitter", 5,    -23,  -64,    0 }
+        }
+
+    }
+
+}
+
+transmitter_5
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "transmitter/transmitter", 7,    -24,  -40,    0 }
+        }
+
+    }
+
+}
+
+transmitter_6
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "transmitter/transmitter", 6,    -29,  -25,    0 }
+        }
+
+    }
+
+}
+
+transmitter_7
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "transmitter/transmitter", 4,    -29,  -39,    0 }
+        }
+
+    }
+
+}
+
+transmitter_8
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "transmitter/transmitter", 1,    -29,  -50,    0 }
+        }
+
+    }
+
+}

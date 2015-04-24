@@ -1,0 +1,5 @@
+texture "sprites/items/wpn_bomb.png"
+
+// working\w_bombs\sprite0121.tga
+sprite 0 0 0 52 43
+

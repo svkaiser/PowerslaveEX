@@ -1,0 +1,38 @@
+texture "sprites/items/wpn_cstaff.png"
+
+// working\wpn_cstaff\sprite0516.tga
+sprite 0 0 0 32 64
+
+// working\wpn_cstaff\sprite0517.tga
+sprite 1 32 0 32 11
+
+// working\wpn_cstaff\sprite0518.tga
+sprite 2 64 0 12 64
+
+// working\wpn_cstaff\sprite0519.tga
+sprite 3 76 0 12 11
+
+// working\wpn_cstaff\sprite0520.tga
+sprite 4 88 0 12 64
+
+// working\wpn_cstaff\sprite0521.tga
+sprite 5 100 0 12 11
+
+// working\wpn_cstaff\sprite0522.tga
+sprite 6 112 0 12 64
+
+// working\wpn_cstaff\sprite0523.tga
+sprite 7 124 0 12 11
+
+// working\wpn_cstaff\sprite0524.tga
+sprite 8 136 0 16 64
+
+// working\wpn_cstaff\sprite0525.tga
+sprite 9 152 0 16 14
+
+// working\wpn_cstaff\sprite0526.tga
+sprite 10 168 0 12 64
+
+// working\wpn_cstaff\sprite0527.tga
+sprite 11 180 0 12 12
+

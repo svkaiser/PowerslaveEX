@@ -128,6 +128,86 @@ Item_Weapon_M60 43
     pickupMessage           "$str_94"
 }
 
+Item_Weapon_Bomb 44
+{
+    classname               "kexWeaponPickup"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/weapon_pickup_bomb"
+    pickupSound             "sounds/fammo.wav"
+    fullbright              1
+    touchable               1
+    weaponSlotToGive        3
+    removeIfOwned           1
+    pickupMessage           "$str_95"
+}
+
+Item_Weapon_FlameThrower 45
+{
+    classname               "kexWeaponPickup"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/weapon_pickup_flamethrower"
+    pickupSound             "sounds/fammo.wav"
+    fullbright              1
+    touchable               1
+    weaponSlotToGive        4
+    removeIfOwned           1
+    pickupMessage           "$str_96"
+}
+
+Item_Weapon_CStaff 46
+{
+    classname               "kexWeaponPickup"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/weapon_pickup_cstaff"
+    pickupSound             "sounds/fammo.wav"
+    fullbright              1
+    touchable               1
+    weaponSlotToGive        5
+    removeIfOwned           1
+    pickupMessage           "$str_97"
+}
+
+Item_Weapon_Ring 47
+{
+    classname               "kexWeaponPickup"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/weapon_pickup_ring"
+    pickupSound             "sounds/fammo.wav"
+    fullbright              1
+    touchable               1
+    weaponSlotToGive        6
+    removeIfOwned           1
+    pickupMessage           "$str_98"
+}
+
+Item_Weapon_Manacle 48
+{
+    classname               "kexWeaponPickup"
+    radius                  64
+    height                  64
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/weapon_pickup_manacle"
+    pickupSound             "sounds/fammo.wav"
+    fullbright              1
+    touchable               1
+    weaponSlotToGive        7
+    removeIfOwned           1
+    pickupMessage           "$str_99"
+}
+
 Item_Ammo_Full 51
 {
     classname               "kexAmmoPickup"
