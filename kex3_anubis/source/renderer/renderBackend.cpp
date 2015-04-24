@@ -218,7 +218,9 @@ void kexRenderBackend::Init(void)
     }
 
     bIsInit = true;
+    
     kexRender::cTextures->Init();
+    kexRender::cPostProcess->Init();
 
     kex::cSystem->Printf("Backend Renderer Initialized\n");
 }
@@ -230,6 +232,8 @@ void kexRenderBackend::Init(void)
 void kexRenderBackend::Shutdown(void)
 {
     kex::cSystem->Printf("Shutting down render system\n");
+    
+    kexRender::cPostProcess->Shutdown();
     kexRender::cTextures->Shutdown();
 }
 

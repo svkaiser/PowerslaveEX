@@ -1500,5 +1500,8 @@ void kexRenderScene::DrawView(kexRenderView &view, mapSector_t *sector)
     
     DrawWater(view);
     
+    kexRender::cPostProcess->RenderBloom();
+    kexRender::cPostProcess->RenderFXAA();
+    
     PrintStats();
 }

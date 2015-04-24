@@ -20,6 +20,8 @@
 		419342261A8BB38B002C7F8E /* gameSysObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419342251A8BB38B002C7F8E /* gameSysObject.cpp */; };
 		419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419C3BB21A89100400C19D68 /* actionDef.cpp */; };
 		41A534511AC2092E00A666D5 /* menuPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A5344F1AC2092E00A666D5 /* menuPanel.cpp */; };
+		41A60FBD1AEAE70900FD0415 /* shaderProg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A60FBB1AEAE70900FD0415 /* shaderProg.cpp */; };
+		41A60FC61AEAEBE600FD0415 /* renderPostProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A60FC51AEAEBE600FD0415 /* renderPostProcess.cpp */; };
 		41A9A1821ACD9EE2009B4ECF /* overWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A9A1801ACD9EE2009B4ECF /* overWorld.cpp */; };
 		41A9A1971AD2E968009B4ECF /* travelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A9A1951AD2E968009B4ECF /* travelObject.cpp */; };
 		41AC33AE1AD5DF5A0096408D /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41AC33AC1AD5DF5A0096408D /* thread.cpp */; };
@@ -260,6 +262,10 @@
 		419C3BB31A89100400C19D68 /* actionDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = actionDef.h; path = ../../source/game/actionDef.h; sourceTree = "<group>"; };
 		41A5344F1AC2092E00A666D5 /* menuPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = menuPanel.cpp; path = ../../source/game/menuPanel.cpp; sourceTree = "<group>"; };
 		41A534501AC2092E00A666D5 /* menuPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = menuPanel.h; path = ../../source/game/menuPanel.h; sourceTree = "<group>"; };
+		41A60FBB1AEAE70900FD0415 /* shaderProg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shaderProg.cpp; sourceTree = "<group>"; };
+		41A60FBC1AEAE70900FD0415 /* shaderProg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shaderProg.h; sourceTree = "<group>"; };
+		41A60FC41AEAEBC200FD0415 /* renderPostProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderPostProcess.h; sourceTree = "<group>"; };
+		41A60FC51AEAEBE600FD0415 /* renderPostProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = renderPostProcess.cpp; sourceTree = "<group>"; };
 		41A9A1801ACD9EE2009B4ECF /* overWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = overWorld.cpp; path = ../../source/game/overWorld.cpp; sourceTree = "<group>"; };
 		41A9A1811ACD9EE2009B4ECF /* overWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = overWorld.h; path = ../../source/game/overWorld.h; sourceTree = "<group>"; };
 		41A9A1951AD2E968009B4ECF /* travelObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = travelObject.cpp; path = ../../source/game/travelObject.cpp; sourceTree = "<group>"; };
@@ -762,10 +768,12 @@
 				41C7FC551A5AFB98003864CB /* renderBackend.cpp */,
 				4124D22C1AE6A70400FB03C0 /* renderDynLight.cpp */,
 				41C7FC571A5AFB98003864CB /* renderFont.cpp */,
+				41A60FC51AEAEBE600FD0415 /* renderPostProcess.cpp */,
 				41BCC06A1A6ECCB800F8B3FA /* renderScene.cpp */,
 				41C7FC5A1A5AFB98003864CB /* renderScreen.cpp */,
 				41C7FC5C1A5AFB98003864CB /* renderUtils.cpp */,
 				41C7FC5E1A5AFB98003864CB /* renderView.cpp */,
+				41A60FBB1AEAE70900FD0415 /* shaderProg.cpp */,
 				41C7FC601A5AFB98003864CB /* textureManager.cpp */,
 				41C7FC621A5AFB98003864CB /* textureObject.cpp */,
 				41C7FC4C1A5AFB98003864CB /* cpuVertexList.h */,
@@ -774,10 +782,12 @@
 				41C7FC561A5AFB98003864CB /* renderBackend.h */,
 				41C7FC581A5AFB98003864CB /* renderFont.h */,
 				41C7FC591A5AFB98003864CB /* renderMain.h */,
+				41A60FC41AEAEBC200FD0415 /* renderPostProcess.h */,
 				41BCC06B1A6ECCB800F8B3FA /* renderScene.h */,
 				41C7FC5B1A5AFB98003864CB /* renderScreen.h */,
 				41C7FC5D1A5AFB98003864CB /* renderUtils.h */,
 				41C7FC5F1A5AFB98003864CB /* renderView.h */,
+				41A60FBC1AEAE70900FD0415 /* shaderProg.h */,
 				41C7FC611A5AFB98003864CB /* textureManager.h */,
 				41C7FC631A5AFB98003864CB /* textureObject.h */,
 			);
@@ -1011,6 +1021,7 @@
 				41C7FC6F1A5AFB98003864CB /* textureObject.cpp in Sources */,
 				41C7FC6E1A5AFB98003864CB /* textureManager.cpp in Sources */,
 				419C3BB41A89100400C19D68 /* actionDef.cpp in Sources */,
+				41A60FBD1AEAE70900FD0415 /* shaderProg.cpp in Sources */,
 				41B776571A83E850008C8F23 /* scriptSystem.cpp in Sources */,
 				41C7FC461A5AFB84003864CB /* player.cpp in Sources */,
 				41C7FC421A5AFB84003864CB /* game.cpp in Sources */,
@@ -1040,6 +1051,7 @@
 				41C7FC241A5AFB6E003864CB /* kpf.cpp in Sources */,
 				41A9A1971AD2E968009B4ECF /* travelObject.cpp in Sources */,
 				41B7765F1A83EB0A008C8F23 /* refObject.cpp in Sources */,
+				41A60FC61AEAEBE600FD0415 /* renderPostProcess.cpp in Sources */,
 				4124D22D1AE6A70400FB03C0 /* renderDynLight.cpp in Sources */,
 				41B5F0FE1A9BA76600698014 /* spring.cpp in Sources */,
 				41E2CE8D1A51D39B00FC28DC /* main.cpp in Sources */,

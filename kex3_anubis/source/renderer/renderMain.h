@@ -18,6 +18,8 @@
 #include "renderBackend.h"
 #include "renderScreen.h"
 #include "renderUtils.h"
+#include "shaderProg.h"
+#include "renderPostProcess.h"
 
 class kexRender
 {
@@ -27,6 +29,7 @@ public:
     static kexCpuVertList       *cVertList;
     static kexRenderScreen      *cScreen;
     static kexRenderUtils       *cUtils;
+    static kexRenderPostProcess *cPostProcess;
 };
 
 #endif
