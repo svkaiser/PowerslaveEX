@@ -1019,6 +1019,7 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 void kexRenderScene::DrawWater(kexRenderView &view)
 {
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+    kexRender::cBackend->SetState(GLSTATE_CULL, true);
     kexRender::cBackend->SetDepthMask(0);
     
     for(unsigned int i = 0; i < waterFaces.CurrentLength(); ++i)

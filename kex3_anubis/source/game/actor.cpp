@@ -211,8 +211,13 @@ void kexActor::Spawn(void)
     
     if(sector)
     {
-        floorHeight = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector);
-        ceilingHeight = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector);
+        floorHeight = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector, true);
+        ceilingHeight = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector, true);
+        
+        if(sector->flags & SF_WATER)
+        {
+            flags |= AF_INWATER;
+        }
     }
     
     if(anim == NULL)

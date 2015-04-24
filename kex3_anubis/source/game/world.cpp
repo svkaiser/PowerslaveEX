@@ -1431,6 +1431,11 @@ void kexWorld::CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source, 
 
         if(dmgAmount > 0)
         {
+            if(actor->InstanceOf(&kexAI::info))
+            {
+                static_cast<kexAI*>(actor)->Ignite(source);
+            }
+            
             actor->InflictDamage(source, (int)dmgAmount);
         }
     }
