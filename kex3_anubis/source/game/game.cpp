@@ -936,6 +936,12 @@ void kexGameLocal::RemoveAllGameObjects(void)
     kexGameObject *go;
     kexGameObject *next;
     
+    // de-reference all targets
+    for(go = gameObjects.Next(); go != NULL; go = go->Link().Next())
+    {
+        go->SetTarget(NULL);
+    }
+    
     // remove all game objects
     for(go = gameObjects.Next(); go != NULL; go = next)
     {
@@ -973,7 +979,7 @@ kexActor *kexGameLocal::SpawnActor(const kexStr &name, const float x, const floa
 kexDLight *kexGameLocal::SpawnDynamicLight(kexActor *source, const float radius,
                                            const kexVec3 &color, const float fadeTime, const int passes)
 {
-    if(!source || playLoop->RenderScene().DLights().MaxedOutLights())
+    if(!source || source->IsStale() || playLoop->RenderScene().DLights().MaxedOutLights())
     {
         return NULL;
     }
