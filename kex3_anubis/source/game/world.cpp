@@ -1117,7 +1117,6 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         actor->PlaySound("sounds/switch.wav");
         kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
         SendRemoteTrigger(sector, ev);
-        sector->event = -1;
         break;
     case 24:
         kexGame::cActorFactory->SpawnMover("kexLift", ev->type, ev->sector);

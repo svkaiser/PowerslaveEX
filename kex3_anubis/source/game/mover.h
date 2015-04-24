@@ -96,11 +96,20 @@ public:
     void                    Spawn(void);
 
 private:
+    typedef enum
+    {
+        FS_IDLE     = 0,
+        FS_DOWN,
+        FS_UP,
+        FS_LOWERED
+    } floorState_t;
+
     float                   moveSpeed;
     float                   lip;
     float                   baseHeight;
     float                   destHeight;
     float                   currentHeight;
+    floorState_t            state;
 END_KEX_CLASS();
 
 //-----------------------------------------------------------------------------

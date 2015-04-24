@@ -215,8 +215,16 @@ kexActor *kexActorFactory::SpawnFromActor(const kexStr &name, const float x, con
 kexMover *kexActorFactory::SpawnMover(const char *className, const int type, const int sector)
 {
     kexMover *mover;
+    mapSector_t *sec;
     
     if(sector <= -1 || sector >= (int)kexGame::cLocal->World()->NumSectors())
+    {
+        return NULL;
+    }
+    
+    sec = &kexGame::cLocal->World()->Sectors()[sector];
+    
+    if(sec->flags & SF_SPECIAL)
     {
         return NULL;
     }
@@ -227,7 +235,7 @@ kexMover *kexActorFactory::SpawnMover(const char *className, const int type, con
     }
     
     mover->Type() = type;
-    mover->SetSector(&kexGame::cLocal->World()->Sectors()[sector]);
+    mover->SetSector(sec);
     mover->CallSpawn();
     
     return mover;

@@ -354,6 +354,7 @@ kexFloor::kexFloor(void)
     this->lip = 0;
     this->moveSpeed = 4;
     this->destHeight = 0;
+    this->state = FS_IDLE;
 }
 
 //
@@ -376,28 +377,46 @@ void kexFloor::Tick(void)
     {
         return;
     }
-
-    if(currentHeight <= destHeight)
+    
+    if(state == FS_LOWERED)
     {
-        StopLoopingSounds();
-        PlaySound("sounds/stonestop.wav");
-        Remove();
         return;
     }
-    else
-    {
-        PlayLoopingSound("sounds/platstart.wav");
-    }
 
-    currentHeight -= moveSpeed;
-
-    if(currentHeight < destHeight)
+    if(state == FS_DOWN)
     {
-        currentHeight = destHeight;
+        if(currentHeight <= destHeight)
+        {
+            if(type != 23)
+            {
+                StopLoopingSounds();
+                PlaySound("sounds/stonestop.wav");
+                Remove();
+            }
+            else
+            {
+                state = FS_LOWERED;
+            }
+            return;
+        }
+        else
+        {
+            if(type != 23)
+            {
+                PlayLoopingSound("sounds/platstart.wav");
+            }
+        }
+
+        currentHeight -= moveSpeed;
+
+        if(currentHeight < destHeight)
+        {
+            currentHeight = destHeight;
+        }
+        
+        kexGame::cLocal->World()->MoveSector(sector, false, currentHeight - lastHeight);
+        UpdateFloorOrigin();
     }
-    
-    kexGame::cLocal->World()->MoveSector(sector, false, currentHeight - lastHeight);
-    UpdateFloorOrigin();
 }
 
 //
@@ -426,6 +445,8 @@ void kexFloor::Spawn(void)
     }
 
     sector->flags |= SF_SPECIAL;
+    
+    state = FS_DOWN;
     
     baseHeight = sector->floorFace->plane.d;
     currentHeight = baseHeight;
