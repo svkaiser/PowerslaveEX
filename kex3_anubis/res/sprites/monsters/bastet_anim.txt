@@ -3274,7 +3274,7 @@ bastet_teleport_out
     {
         // ##010   88    0
         action A_PlayLocalSound("sounds/bastetteleout.wav")
-        action A_SpawnLight(768, 0.75, 0.75, 0.75, 20, 2)
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
             sprites
             {
                 { "monsters/bastet", 2,    -13,  -94,    0 }
@@ -3639,7 +3639,7 @@ bastet_teleport_in
     {
         // ##001   87    0
         action A_PlayLocalSound("sounds/bastettelein.wav")
-        action A_SpawnLight(768, 0.75, 0.75, 0.75, 20, 2)
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
             sprites
             {
                 { "monsters/bastet", 97,     -9,   -2,    0 }

@@ -920,7 +920,7 @@ explosion01
     {
         // ##000   55    0
         action A_PlayLocalSound("sounds/explode01.wav")
-        action A_SpawnLight(512, 0.75, 0.375, 0.25, 20, 2)
+        action A_SpawnLight(768, 0.75, 0.375, 0.25, 20, 3)
         sprites
         {
             { "effects/explosion01", 0,    -17,  -14,    0 }
@@ -1163,7 +1163,7 @@ explosion01_water
     {
         // ##000   57    0 (no groups)
         action A_PlayLocalSound("sounds/explode02.wav")
-        action A_SpawnLight(512, 0.75, 0.375, 0.25, 20, 2)
+        action A_SpawnLight(768, 0.75, 0.375, 0.25, 20, 3)
         delay 1
     }
 
@@ -1473,7 +1473,7 @@ vasePuff
 {
     frame
     {
-        action A_SpawnLight(256, 0.5, 0.5, 0.25, 15, 1)
+        action A_SpawnLight(384, 0.5, 0.5, 0.25, 15, 1)
         goto "effects/magicPuff"
         delay 0
     }
@@ -1483,7 +1483,7 @@ fireballPuff
 {
     frame
     {
-        action A_SpawnLight(256, 0.75, 0.375, 0.25, 15, 1)
+        action A_SpawnLight(512, 0.75, 0.375, 0.25, 15, 1)
         goto "effects/magicPuff"
         delay 0
     }
@@ -1493,7 +1493,7 @@ cobraPuff1
 {
     frame
     {
-        action A_SpawnLight(256, 0.375, 0.75, 0.375, 15, 0)
+        action A_SpawnLight(768, 0.375, 0.75, 0.375, 15, 0)
         goto "effects/magicPuff"
         delay 0
     }
@@ -1503,7 +1503,7 @@ cobraPuff2
 {
     frame
     {
-        action A_SpawnLight(256, 0.75, 0.375, 0.375, 15, 0)
+        action A_SpawnLight(384, 0.75, 0.375, 0.375, 15, 0)
         goto "effects/magicPuff"
         delay 0
     }

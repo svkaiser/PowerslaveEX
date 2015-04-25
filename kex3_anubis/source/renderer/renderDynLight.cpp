@@ -140,6 +140,7 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
     mapVertex_t *verts;
     kexVec3 lightOrg;
 
+    kexRender::cBackend->SetDepth(GLFUNC_EQUAL);
     kexRender::cBackend->SetBlend(GLSRC_DST_COLOR, GLDST_ONE);
     kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
     kexRender::cTextures->lightTexture->Bind();
@@ -186,12 +187,15 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
 
             rHalf = radius * 0.5f;
 
-            dist = (face->plane.Distance(lightOrg) - face->plane.d) / radius;
+            dist = face->plane.Distance(lightOrg) - face->plane.d;
 
-            if(dist < 0 || dist > 1)
+            if(dist > radius || dist < 0)
             {
                 continue;
             }
+
+            dist = (radius / (dist * dist)) * 16;
+            kexMath::Clamp(dist, 0, 1);
 
             for(int idx = 0; idx < 4; idx++)
             {
@@ -237,9 +241,9 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
             px = ((v1 - n1) / rHalf) + 0.5f;
             py = ((v2 - n2) / rHalf) + 0.5f;
 
-            r = (byte)(rgb[0] * (1.0f - dist));
-            g = (byte)(rgb[1] * (1.0f - dist));
-            b = (byte)(rgb[2] * (1.0f - dist));
+            r = (byte)(rgb[0] * dist);
+            g = (byte)(rgb[1] * dist);
+            b = (byte)(rgb[2] * dist);
             a = 255;
 
             if(light->FadeTime() > -1)
@@ -279,5 +283,6 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
     }
 
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+    kexRender::cBackend->SetDepth(GLFUNC_LEQUAL);
     kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
 }
