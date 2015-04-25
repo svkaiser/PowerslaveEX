@@ -23,6 +23,8 @@ kexRenderPostProcess *kexRender::cPostProcess = &postProcessLocal;
 
 kexCvar kexRenderPostProcess::cvarRenderFXAA("r_fxaa", CVF_BOOL|CVF_CONFIG, "0", "Enables fxaa");
 kexCvar kexRenderPostProcess::cvarRenderBloom("r_bloom", CVF_BOOL|CVF_CONFIG, "0", "Enables bloom");
+kexCvar kexRenderPostProcess::cvarBloomThreshold("r_bloomthreshold", CVF_FLOAT|CVF_CONFIG, "0.7",
+                                                 0.625f, 1, "Sets bloom intensity");
 
 //
 // kexRenderPostProcess::kexRenderPostProcess
@@ -60,7 +62,13 @@ void kexRenderPostProcess::Init(void)
 void kexRenderPostProcess::Shutdown(void)
 {
     fxaaFBO.Delete();
+    bloomFBO.Delete();
+    blurFBO[0].Delete();
+    blurFBO[1].Delete();
+
     fxaaShader.Delete();
+    blurShader.Delete();
+    bloomShader.Delete();
 }
 
 //
@@ -86,8 +94,6 @@ void kexRenderPostProcess::RenderFXAA(void)
 {
     int w = kex::cSystem->VideoWidth();
     int h = kex::cSystem->VideoHeight();
-    float pw;
-    float ph;
     
     if(!has_GL_ARB_shader_objects       ||
        !has_GL_ARB_framebuffer_object   ||
@@ -101,7 +107,10 @@ void kexRenderPostProcess::RenderFXAA(void)
         return;
     }
     
+    kexRender::cBackend->SetOrtho();
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+
     fxaaFBO.CopyBackBuffer();
     fxaaFBO.BindImage();
     
@@ -112,22 +121,18 @@ void kexRenderPostProcess::RenderFXAA(void)
     fxaaShader.SetUniform("uMaxSpan", 8.0f);
     fxaaShader.SetUniform("uReduceMax", 8.0f);
     fxaaShader.SetUniform("uReduceMin", 128.0f);
-    
-    kexRender::cBackend->SetOrtho();
-    
-    pw = (float)w / (float)fxaaFBO.Width();
-    ph = (float)h / (float)fxaaFBO.Height();
-    
+
     kexRender::cVertList->BindDrawPointers();
-    kexRender::cVertList->AddQuad(0, 0, 0,
+    kexRender::cVertList->AddQuad(0, (float)(h - fxaaFBO.Height()), 0,
                                   (float)fxaaFBO.Width(),
-                                  (float)fxaaFBO.Height() * ph,
-                                  0, ph,
+                                  (float)fxaaFBO.Height(),
+                                  0, 1,
                                   1, 0,
                                   255, 255, 255, 255);
     
     kexRender::cVertList->DrawElements();
     kexRender::cBackend->DisableShaders();
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
     
     fxaaFBO.UnBindImage();
 }
@@ -138,10 +143,9 @@ void kexRenderPostProcess::RenderFXAA(void)
 
 void kexRenderPostProcess::RenderBloom(void)
 {
-    //int w = kex::cSystem->VideoWidth();
-    //int h = kex::cSystem->VideoHeight();
-    //float pw;
-    //float ph;
+    int w = kex::cSystem->VideoWidth();
+    int h = kex::cSystem->VideoHeight();
+    kexTexture fBuffer;
     
     if(!has_GL_ARB_shader_objects       ||
        !has_GL_ARB_framebuffer_object   ||
@@ -155,35 +159,25 @@ void kexRenderPostProcess::RenderBloom(void)
         return;
     }
     
-#if 0
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     kexRender::cBackend->SetState(GLSTATE_BLEND, true);
     kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-    
-    bloomFBO.CopyBackBuffer();
-    bloomFBO.BindImage();
-    
-    bloomShader.Bind();
-    bloomShader.SetUniform("uDiffuse", 0);
-    bloomShader.SetUniform("uBloomThreshold", 0.75f);
-    
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+
     kexRender::cBackend->SetOrtho();
     
-    pw = (float)w / (float)bloomFBO.Width();
-    ph = (float)h / (float)bloomFBO.Height();
+    fBuffer.BindFrameBuffer();
+    bloomFBO.Bind();
+    bloomShader.Bind();
+    bloomShader.SetUniform("uDiffuse", 0);
+    bloomShader.SetUniform("uBloomThreshold", cvarBloomThreshold.GetFloat());
     
     kexRender::cVertList->BindDrawPointers();
-    kexRender::cVertList->AddQuad(0, 0, 0,
-                                  (float)bloomFBO.Width(),
-                                  (float)bloomFBO.Height() * ph,
-                                  0, ph,
-                                  1, 0,
-                                  255, 255, 255, 255);
+    kexRender::cVertList->AddQuad(0, 0, 0, (float)w, (float)h, 0, 1, 1, 0, 255, 255, 255, 255);
+    kexRender::cVertList->DrawElements(false);
     
-    kexRender::cVertList->DrawElements();
-    
-    bloomFBO.UnBindImage();
+    bloomFBO.UnBind();
     
     blurShader.Bind();
     blurShader.SetUniform("uDiffuse", 0);
@@ -195,44 +189,18 @@ void kexRenderPostProcess::RenderBloom(void)
         blurFBO[i].CopyFrameBuffer(bloomFBO);
         bloomFBO.Bind();
         blurFBO[i].BindImage();
-
         blurShader.SetUniform("uSize", (float)blurFBO[i].Width());
         blurShader.SetUniform("uDirection", 1);
-        
-        pw = (float)w / (float)blurFBO[i].Width();
-        ph = (float)h / (float)blurFBO[i].Height();
-        
-        kexRender::cVertList->BindDrawPointers();
-        kexRender::cVertList->AddQuad(0, 0, 0,
-                                      (float)blurFBO[i].Width(),
-                                      (float)blurFBO[i].Height() * ph,
-                                      0, ph,
-                                      1, 0,
-                                      255, 255, 255, 255);
-        
-        kexRender::cVertList->DrawElements();
+        kexRender::cVertList->DrawElements(false);
         bloomFBO.UnBind();
         
         // vertical
         blurFBO[i].CopyFrameBuffer(bloomFBO);
         bloomFBO.Bind();
         blurFBO[i].BindImage();
-        
         blurShader.SetUniform("uSize", (float)blurFBO[i].Height());
         blurShader.SetUniform("uDirection", 0);
-        
-        pw = (float)w / (float)blurFBO[i].Width();
-        ph = (float)h / (float)blurFBO[i].Height();
-        
-        kexRender::cVertList->BindDrawPointers();
-        kexRender::cVertList->AddQuad(0, 0, 0,
-                                      (float)blurFBO[i].Width(),
-                                      (float)blurFBO[i].Height() * ph,
-                                      0, ph,
-                                      1, 0,
-                                      255, 255, 255, 255);
-        
-        kexRender::cVertList->DrawElements();
+        kexRender::cVertList->DrawElements(false);
         bloomFBO.UnBind();
     }
     
@@ -240,19 +208,18 @@ void kexRenderPostProcess::RenderBloom(void)
     
     bloomFBO.BindImage();
     kexRender::cBackend->SetBlend(GLSRC_ONE_MINUS_DST_COLOR, GLDST_ONE);
-    pw = (float)w / (float)bloomFBO.Width();
-    ph = (float)h / (float)bloomFBO.Height();
     
     kexRender::cVertList->BindDrawPointers();
-    kexRender::cVertList->AddQuad(0, 0, 0,
+    kexRender::cVertList->AddQuad(0, (float)(h - bloomFBO.Height()), 0,
                                   (float)bloomFBO.Width(),
-                                  (float)bloomFBO.Height() * ph,
-                                  0, ph,
+                                  (float)bloomFBO.Height(),
+                                  0, 1,
                                   1, 0,
                                   255, 255, 255, 255);
     
     kexRender::cVertList->DrawElements();
-    
     bloomFBO.UnBindImage();
-#endif
+
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
+    fBuffer.Delete();
 }

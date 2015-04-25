@@ -334,6 +334,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\renderPostProcess.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\renderScene.cpp"
 					>
 				</File>
@@ -347,6 +351,10 @@
 				</File>
 				<File
 					RelativePath="..\source\renderer\renderView.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\shaderProg.cpp"
 					>
 				</File>
 				<File
@@ -740,6 +748,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\renderPostProcess.h"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\renderScene.h"
 					>
 				</File>
@@ -753,6 +765,10 @@
 				</File>
 				<File
 					RelativePath="..\source\renderer\renderView.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\renderer\shaderProg.h"
 					>
 				</File>
 				<File

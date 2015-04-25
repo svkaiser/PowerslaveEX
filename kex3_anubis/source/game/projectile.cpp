@@ -367,7 +367,7 @@ void kexProjectile::CheckFloorAndCeilings(void)
         {
             if(flags & AF_BOUNCY)
             {
-                velocity.Project(sector->ceilingFace->plane.Normal(), 2.048f);
+                velocity.Project(sector->ceilingFace->plane.Normal(), 2);
             }
             else if(projectileFlags & PF_IMPACTWALLSONLY)
             {
@@ -400,7 +400,7 @@ void kexProjectile::CheckFloorAndCeilings(void)
                         return;
                     }
                 }
-                velocity.Project(sector->floorFace->plane.Normal(), 2.048f);
+                velocity.Project(sector->floorFace->plane.Normal(), 2);
             }
             else if(projectileFlags & PF_IMPACTWALLSONLY)
             {

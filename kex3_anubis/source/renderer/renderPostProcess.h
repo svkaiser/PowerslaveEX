@@ -31,6 +31,8 @@ public:
 private:
     static kexCvar              cvarRenderFXAA;
     static kexCvar              cvarRenderBloom;
+    static kexCvar              cvarBloomThreshold;
+
     kexShaderObj                fxaaShader;
     kexShaderObj                blurShader;
     kexShaderObj                bloomShader;

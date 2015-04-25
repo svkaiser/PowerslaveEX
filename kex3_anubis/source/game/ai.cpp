@@ -299,7 +299,11 @@ bool kexAI::CanSeeTarget(kexActor *actor)
     kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
     kexVec3 end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
     
-    return !kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0, false);
+    kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0);
+
+    // trace must contact the target only and not a wall
+    return (kexGame::cLocal->CModel()->ContactFace() == NULL &&
+            kexGame::cLocal->CModel()->ContactActor() == actor);
 }
 
 //
