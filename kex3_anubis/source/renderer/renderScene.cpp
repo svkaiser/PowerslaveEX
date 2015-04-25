@@ -21,66 +21,23 @@
 #include "renderView.h"
 #include "renderScene.h"
 
-bool kexRenderScene::bPrintStats = false;
-bool kexRenderScene::bShowPortals = false;
-bool kexRenderScene::bShowWaterPortals = false;
-bool kexRenderScene::bShowCollision = false;
-
-//
-// statscene
-//
-
-COMMAND(statscene)
-{
-    if(kex::cCommands->GetArgc() < 1)
-    {
-        return;
+#define RENDERSCENE_DEFINE_DEBUG_COMMAND(var, cmd)  \
+    bool kexRenderScene:: ## var = false;  \
+    COMMAND(cmd)    \
+    {   \
+        if(kex::cCommands->GetArgc() < 1)   \
+        {   \
+            return; \
+        }   \
+        \
+        kexRenderScene:: ## var ^= 1;   \
     }
-    
-    kexRenderScene::bPrintStats ^= 1;
-}
 
-//
-// showportals
-//
-
-COMMAND(showportals)
-{
-    if(kex::cCommands->GetArgc() < 1)
-    {
-        return;
-    }
-    
-    kexRenderScene::bShowPortals ^= 1;
-}
-
-//
-// showwaterportals
-//
-
-COMMAND(showwaterportals)
-{
-    if(kex::cCommands->GetArgc() < 1)
-    {
-        return;
-    }
-    
-    kexRenderScene::bShowWaterPortals ^= 1;
-}
-
-//
-// showcollision
-//
-
-COMMAND(showcollision)
-{
-    if(kex::cCommands->GetArgc() < 1)
-    {
-        return;
-    }
-    
-    kexRenderScene::bShowCollision ^= 1;
-}
+RENDERSCENE_DEFINE_DEBUG_COMMAND(bPrintStats, statscene);
+RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowPortals, showportals);
+RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowWaterPortals, showwaterportals);
+RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowCollision, showcollision);
+RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowBounds, showbounds);
 
 //
 // kexRenderScene::kexRenderScene
@@ -836,6 +793,11 @@ void kexRenderScene::DrawSector(kexRenderView &view, mapSector_t *sector)
     {
         sector->flags &= ~SF_DEBUG;
     }
+
+    if(bShowBounds)
+    {
+        kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 64, 64);
+    }
     
     for(int j = start; j < end+3; ++j)
     {
@@ -903,6 +865,11 @@ void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int face
     if(faceID <= sector->faceEnd && face->plane.PointOnSide(view.Origin()) == kexPlane::PSIDE_BACK)
     {
         return;
+    }
+
+    if(bShowBounds)
+    {
+        kexRender::cUtils->DrawBoundingBox(face->bounds, 64, 255, 0);
     }
     
     if(face->flags & FF_WATER)
@@ -1162,6 +1129,11 @@ void kexRenderScene::DrawSprite(kexRenderView &view, mapSector_t *sector, kexAct
                                       255, 128, 64);
         kexRender::cUtils->DrawSphere(org.x, org.y, org.z + actor->StepHeight(),
                                       actor->Radius(), 255, 32, 32);
+    }
+
+    if(bShowBounds)
+    {
+        kexRender::cUtils->DrawBoundingBox(actor->Bounds() + actor->Origin(), 32, 128, 255);
     }
 }
 

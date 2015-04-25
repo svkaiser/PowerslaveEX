@@ -62,6 +62,7 @@ public:
     static bool             bShowPortals;
     static bool             bShowWaterPortals;
     static bool             bShowCollision;
+    static bool             bShowBounds;
 
 private:
     static int              SortPolys(const int *p1, const int *p2);
