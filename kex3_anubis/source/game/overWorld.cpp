@@ -276,7 +276,7 @@ void kexOverWorld::DrawArrows(void)
     {
         if(kexGame::cLocal->MapUnlockList()[map->nextMap[0]] == false)
         {
-            DrawArrow(map->overworldX, map->overworldY-16, 0, 64);
+            DrawArrow(map->overworldX, map->overworldY-16, 0, 128);
         }
         else
         {
@@ -288,7 +288,7 @@ void kexOverWorld::DrawArrows(void)
     {
         if(kexGame::cLocal->MapUnlockList()[map->nextMap[1]] == false)
         {
-            DrawArrow(map->overworldX+32, map->overworldY, 1, 64);
+            DrawArrow(map->overworldX+32, map->overworldY, 1, 128);
         }
         else
         {
@@ -300,7 +300,7 @@ void kexOverWorld::DrawArrows(void)
     {
         if(kexGame::cLocal->MapUnlockList()[map->nextMap[2]] == false)
         {
-            DrawArrow(map->overworldX, map->overworldY+16, 2, 64);
+            DrawArrow(map->overworldX, map->overworldY+16, 2, 128);
         }
         else
         {
@@ -312,7 +312,7 @@ void kexOverWorld::DrawArrows(void)
     {
         if(kexGame::cLocal->MapUnlockList()[map->nextMap[3]] == false)
         {
-            DrawArrow(map->overworldX-32, map->overworldY, 3, 64);
+            DrawArrow(map->overworldX-32, map->overworldY, 3, 128);
         }
         else
         {

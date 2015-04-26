@@ -78,6 +78,13 @@ void kexInventoryMenu::Init(void)
         weaponTextures[i] = kexRender::cTextures->Cache(str, TC_CLAMP, TF_NEAREST);
     }
 
+    for(int i = 0; i < 8; ++i)
+    {
+        str = kexStr("gfx/menu/menutransmitter_") + i + kexStr(".png");
+        questTextures[i] = kexRender::cTextures->Cache(str, TC_CLAMP, TF_NEAREST);
+    }
+
+    questCompleted = kexRender::cTextures->Cache("gfx/menu/menutransmitter_on.png", TC_CLAMP, TF_NEAREST);
     mapClosedTexture = kexRender::cTextures->Cache("gfx/menu/menumap_closed.png", TC_CLAMP, TF_NEAREST);
     mapOpenTexture = kexRender::cTextures->Cache("gfx/menu/menumap_open.png", TC_CLAMP, TF_NEAREST);
     
@@ -103,8 +110,41 @@ void kexInventoryMenu::Reset(void)
     artifactSelected = 0;
     flashBits = 0;
     flashCount = 0;
+    focusedTransmitter = -1;
     bFlashArtifact = false;
     buttonSet.pressedIndex = -1;
+}
+
+//
+// kexInventoryMenu::UpdateFlash
+//
+
+void kexInventoryMenu::UpdateFlash(void)
+{
+    int bits = (kexGame::cLocal->PlayLoop()->Ticks() & 0x10);
+
+    if(bits != 0)
+    {
+        flashBits = bits;
+        return;
+    }
+
+    if((bits ^ flashBits) != 0)
+    {
+        if(++flashCount >= 4)
+        {
+            kexGame::cLocal->PlaySound("sounds/ding02.wav");
+            flashBits = 0;
+            flashCount = 0;
+            bFlashArtifact = false;
+        }
+        else
+        {
+            kexGame::cLocal->PlaySound("sounds/ding01.wav");
+        }
+    }
+
+    flashBits = bits;
 }
 
 //
@@ -136,32 +176,14 @@ void kexInventoryMenu::Update(void)
 
         if(bFlashArtifact)
         {
-            int bits;
+            UpdateFlash();
+        }
+        break;
 
-            bits = (kexGame::cLocal->PlayLoop()->Ticks() & 0x10);
-
-            if(bits != 0)
-            {
-                flashBits = bits;
-                return;
-            }
-
-            if((bits ^ flashBits) != 0)
-            {
-                if(++flashCount >= 4)
-                {
-                    kexGame::cLocal->PlaySound("sounds/ding02.wav");
-                    flashBits = 0;
-                    flashCount = 0;
-                    bFlashArtifact = false;
-                }
-                else
-                {
-                    kexGame::cLocal->PlaySound("sounds/ding01.wav");
-                }
-            }
-
-            flashBits = bits;
+    case 3:
+        if(bFlashArtifact)
+        {
+            UpdateFlash();
         }
         break;
 
@@ -244,6 +266,13 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                 }
                 break;
 
+            case 3:
+                if(bFlashArtifact)
+                {
+                    return false;
+                }
+                break;
+
             default:
                 break;
             }
@@ -272,6 +301,22 @@ void kexInventoryMenu::ShowArtifact(const int artifact)
     flashCount = 0;
     bFlashArtifact = true;
     buttonSet.pressedIndex = 2;
+
+    Toggle();
+}
+
+//
+// kexInventoryMenu::ShowTransmitter
+//
+
+void kexInventoryMenu::ShowTransmitter(const int item)
+{
+    categorySelected = 3;
+    flashBits = 0;
+    flashCount = 0;
+    focusedTransmitter = item;
+    bFlashArtifact = true;
+    buttonSet.pressedIndex = 3;
 
     Toggle();
 }
@@ -426,6 +471,60 @@ void kexInventoryMenu::DrawArtifacts(void)
 }
 
 //
+// kexInventoryMenu::DrawTransmitterItem
+//
+
+void kexInventoryMenu::DrawTransmitterItem(const int item, const float x, const float y)
+{
+    byte alpha = 128;
+
+    if(kexGame::cLocal->Player()->QuestItems() & BIT(item))
+    {
+        alpha = 255;
+    }
+
+    if(focusedTransmitter == item && bFlashArtifact && (flashBits & 0x10) != 0)
+    {
+        alpha = 128;
+    }
+
+    kexRender::cScreen->DrawTexture(questTextures[item], x, y, 255, 255, 255, alpha);
+}
+
+//
+// kexInventoryMenu::DrawTransmitter
+//
+
+void kexInventoryMenu::DrawTransmitter(void)
+{
+    kexGameLocal *game = kexGame::cLocal;
+    const char *title;
+    kexStrList labels;
+    kexStr label;
+
+    title = game->Translation()->GetString(72);
+    font->DrawString(title, 160, 164, 1, true, RGBA(224, 224, 224, 255));
+
+    label = game->Translation()->GetString(75);
+    label.Split(labels, '\n');
+
+    for(unsigned int i = 0; i < labels.Length(); ++i)
+    {
+        float height = font->StringHeight(labels[i], 1, 0);
+        font->DrawString(labels[i], 160, 172 + (height * (float)i), 1, true);
+    }
+
+    DrawTransmitterItem(0, 228, 108);
+    DrawTransmitterItem(1, 172, 86);
+    DrawTransmitterItem(2, 184, 50);
+    DrawTransmitterItem(3, 168, 63);
+    DrawTransmitterItem(4, 188, 88);
+    DrawTransmitterItem(5, 186, 98);
+    DrawTransmitterItem(6, 208, 59);
+    DrawTransmitterItem(7, 202, 51);
+}
+
+//
 // kexInventoryMenu::Display
 //
 
@@ -453,6 +552,10 @@ void kexInventoryMenu::Display(void)
 
     case 2:
         DrawArtifacts();
+        break;
+
+    case 3:
+        DrawTransmitter();
         break;
 
     default:

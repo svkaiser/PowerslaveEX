@@ -668,6 +668,8 @@ void kexQuestPickup::OnTouch(kexActor *instigator)
     if(!(player->QuestItems() & BIT(bits)))
     {
         player->QuestItems() |= BIT(bits);
+        kexGame::cLocal->PlayLoop()->InventoryMenu().ShowTransmitter(bits);
+
         kexPickup::OnTouch(instigator);
     }
 }

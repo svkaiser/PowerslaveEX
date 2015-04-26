@@ -30,6 +30,7 @@ public:
     bool                        ProcessInput(inputEvent_t *ev);
     void                        Toggle(void);
     void                        ShowArtifact(const int artifact);
+    void                        ShowTransmitter(const int item);
 
     const bool                  IsActive(void) { return bActive; }
     
@@ -38,14 +39,19 @@ private:
     void                        DrawButtons(void);
     void                        DrawKeys(void);
     void                        DrawAutomap(void);
+    void                        DrawTransmitterItem(const int item, const float x, const float y);
+    void                        DrawTransmitter(void);
     void                        DrawArtifacts(void);
     void                        DrawCenteredImage(kexTexture *texture, const float x, const float y);
+    void                        UpdateFlash(void);
 
     kexTexture                  *keyTextures[2][4];
     kexTexture                  *artifactTextures[6];
     kexTexture                  *weaponTextures[NUMPLAYERWEAPONS];
     kexTexture                  *mapClosedTexture;
     kexTexture                  *mapOpenTexture;
+    kexTexture                  *questTextures[8];
+    kexTexture                  *questCompleted;
     kexFont                     *font;
     kexMenuPanel::buttonSet_t   buttonSet;
     bool                        bActive;
@@ -54,6 +60,7 @@ private:
     short                       flashCount;
     short                       categorySelected;
     short                       artifactSelected;
+    short                       focusedTransmitter;
 };
 
 #endif

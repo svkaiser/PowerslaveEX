@@ -558,6 +558,12 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
             
             s = &kexGame::cLocal->World()->Sectors()[face->sector];
 
+            if(s->floorFace->flags & FF_LAVA)
+            {
+                // avoid lava
+                return false;
+            }
+
             fh1 = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector);
             fh2 = kexGame::cLocal->CModel()->GetFloorHeight(origin, s);
 
