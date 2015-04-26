@@ -4,11 +4,14 @@ transmitter_1
     frame
     {
         // ##000    0    0
+        delay 60
+        action A_PlayLocalSound("sounds/om_transmitter.wav")
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
+        
         sprites
         {
             { "transmitter/transmitter", 3,     -7,  -14,    0 }
         }
-
     }
 
 }
@@ -19,6 +22,10 @@ transmitter_2
     frame
     {
         // ##000    0    0
+        delay 60
+        action A_PlayLocalSound("sounds/om_transmitter.wav")
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
+        
         sprites
         {
             { "transmitter/transmitter", 2,    -35,  -37,    0 }
@@ -34,6 +41,10 @@ transmitter_3
     frame
     {
         // ##000    0    0
+        delay 60
+        action A_PlayLocalSound("sounds/om_transmitter.wav")
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
+        
         sprites
         {
             { "transmitter/transmitter", 0,    -22,  -52,    0 }
@@ -49,6 +60,10 @@ transmitter_4
     frame
     {
         // ##000    0    0
+        delay 60
+        action A_PlayLocalSound("sounds/om_transmitter.wav")
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
+        
         sprites
         {
             { "transmitter/transmitter", 5,    -23,  -64,    0 }
@@ -64,6 +79,10 @@ transmitter_5
     frame
     {
         // ##000    0    0
+        delay 60
+        action A_PlayLocalSound("sounds/om_transmitter.wav")
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
+        
         sprites
         {
             { "transmitter/transmitter", 7,    -24,  -40,    0 }
@@ -79,6 +98,10 @@ transmitter_6
     frame
     {
         // ##000    0    0
+        delay 60
+        action A_PlayLocalSound("sounds/om_transmitter.wav")
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
+        
         sprites
         {
             { "transmitter/transmitter", 6,    -29,  -25,    0 }
@@ -94,6 +117,10 @@ transmitter_7
     frame
     {
         // ##000    0    0
+        delay 60
+        action A_PlayLocalSound("sounds/om_transmitter.wav")
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
+        
         sprites
         {
             { "transmitter/transmitter", 4,    -29,  -39,    0 }
@@ -109,6 +136,10 @@ transmitter_8
     frame
     {
         // ##000    0    0
+        delay 60
+        action A_PlayLocalSound("sounds/om_transmitter.wav")
+        action A_SpawnLight(1024, 0.75, 0.75, 0.75, 20, 2)
+        
         sprites
         {
             { "transmitter/transmitter", 1,    -29,  -50,    0 }
