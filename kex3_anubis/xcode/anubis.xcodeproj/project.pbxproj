@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4103ED451AEEA27A00E69B68 /* vertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4103ED431AEEA27A00E69B68 /* vertexBuffer.cpp */; };
 		410A697F1AAF53FC000BD442 /* dataConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410A697E1AAF53FC000BD442 /* dataConvert.cpp */; };
 		4111E0821A8D4B19000D5B22 /* pickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4111E0801A8D4B19000D5B22 /* pickup.cpp */; };
 		411358D21AB75FE200916706 /* inventoryMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411358D01AB75FE200916706 /* inventoryMenu.cpp */; };
@@ -240,6 +241,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4103ED431AEEA27A00E69B68 /* vertexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertexBuffer.cpp; sourceTree = "<group>"; };
+		4103ED441AEEA27A00E69B68 /* vertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vertexBuffer.h; sourceTree = "<group>"; };
 		410A697E1AAF53FC000BD442 /* dataConvert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dataConvert.cpp; path = ../../source/tools/dataConvert.cpp; sourceTree = "<group>"; };
 		4111E0801A8D4B19000D5B22 /* pickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pickup.cpp; path = ../../source/game/pickup.cpp; sourceTree = "<group>"; };
 		4111E0811A8D4B19000D5B22 /* pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pickup.h; path = ../../source/game/pickup.h; sourceTree = "<group>"; };
@@ -776,6 +779,7 @@
 				41A60FBB1AEAE70900FD0415 /* shaderProg.cpp */,
 				41C7FC601A5AFB98003864CB /* textureManager.cpp */,
 				41C7FC621A5AFB98003864CB /* textureObject.cpp */,
+				4103ED431AEEA27A00E69B68 /* vertexBuffer.cpp */,
 				41C7FC4C1A5AFB98003864CB /* cpuVertexList.h */,
 				41C7FC501A5AFB98003864CB /* fbo.h */,
 				41C7FC541A5AFB98003864CB /* image.h */,
@@ -790,6 +794,7 @@
 				41A60FBC1AEAE70900FD0415 /* shaderProg.h */,
 				41C7FC611A5AFB98003864CB /* textureManager.h */,
 				41C7FC631A5AFB98003864CB /* textureObject.h */,
+				4103ED441AEEA27A00E69B68 /* vertexBuffer.h */,
 			);
 			name = renderer;
 			path = ../../source/renderer;
@@ -1088,6 +1093,7 @@
 				41C7FC7E1A5AFBAB003864CB /* sound.cpp in Sources */,
 				41DA07411A51FD8900562B25 /* endianSDL.cpp in Sources */,
 				41C7FC271A5AFB6E003864CB /* object.cpp in Sources */,
+				4103ED451AEEA27A00E69B68 /* vertexBuffer.cpp in Sources */,
 				41B96A9F1A697996004397E6 /* spriteMake.cpp in Sources */,
 				41A534511AC2092E00A666D5 /* menuPanel.cpp in Sources */,
 				4178638F1A8E6B2C00329895 /* mover.cpp in Sources */,
