@@ -22,7 +22,7 @@
 #include "renderScene.h"
 
 #define RENDERSCENE_DEFINE_DEBUG_COMMAND(var, cmd)  \
-    bool kexRenderScene:: ## var = false;  \
+    bool kexRenderScene:: var = false;  \
     COMMAND(cmd)    \
     {   \
         if(kex::cCommands->GetArgc() < 1)   \
@@ -30,7 +30,7 @@
             return; \
         }   \
         \
-        kexRenderScene:: ## var ^= 1;   \
+        kexRenderScene:: var ^= 1;   \
     }
 
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bPrintStats, statscene);
