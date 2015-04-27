@@ -557,12 +557,12 @@ void kexSoundSource::Stop(void)
         alGetSourcei(handle, AL_BUFFERS_QUEUED, &queued);
 
         while(queued > 0)
-	    {
-	        ALuint buffer;
-    	    
-	        alSourceUnqueueBuffers(handle, 1, &buffer);
-	        queued--;
-	    }
+        {
+            ALuint buffer;
+            
+            alSourceUnqueueBuffers(handle, 1, &buffer);
+            queued--;
+        }
     }
 }
 
@@ -720,15 +720,20 @@ kexSoundOAL::~kexSoundOAL(void)
 
 int kexSoundOAL::MusicThread(void *data)
 {
-    while(!kexSoundOAL::bShutdownThread)
+    while(1)
     {
         int processed = 0;
         kexSoundSource *src;
         ALint state;
 
         kex::cTimer->Sleep(1);
-
         kex::cThread->LockMutex(kexSoundOAL::musicMutex);
+
+        if(kexSoundOAL::bShutdownThread == true)
+        {
+            kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
+            break;
+        }
 
         if(kexSoundOAL::musicSource == NULL)
         {
@@ -755,15 +760,15 @@ int kexSoundOAL::MusicThread(void *data)
         else
         {
             while(processed > 0)
-	        {
-	            ALuint buffer;
+            {
+                ALuint buffer;
 
                 if(src->bInUse == false)
                 {
                     break;
                 }
-        	    
-	            alSourceUnqueueBuffers(src->handle, 1, &buffer);
+                
+                alSourceUnqueueBuffers(src->handle, 1, &buffer);
 
                 if(!src->ogg->FillBuffer(buffer, src->bLooping))
                 {
@@ -774,9 +779,9 @@ int kexSoundOAL::MusicThread(void *data)
                     break;
                 }
 
-	            alSourceQueueBuffers(src->handle, 1, &buffer);
-	            processed--;
-	        }
+                alSourceQueueBuffers(src->handle, 1, &buffer);
+                processed--;
+            }
         }
 
         kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
