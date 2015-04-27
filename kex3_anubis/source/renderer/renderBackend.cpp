@@ -250,7 +250,7 @@ void kexRenderBackend::ResetViewPort(void)
 // kexRenderBackend::SetOrtho
 //
 
-void kexRenderBackend::SetOrtho(const float w, const float h)
+void kexRenderBackend::SetOrtho(const float x, const float y, const float w, const float h)
 {
     kexMatrix mtx;
 
@@ -260,7 +260,7 @@ void kexRenderBackend::SetOrtho(const float w, const float h)
     dglMatrixMode(GL_MODELVIEW);
     dglLoadIdentity();
 
-    mtx.SetOrtho(0, w, h, 0, -1, 1);
+    mtx.SetOrtho(x, w, h, y, -1, 1);
     dglLoadMatrixf(mtx.ToFloatPtr());
 }
 
@@ -270,7 +270,7 @@ void kexRenderBackend::SetOrtho(const float w, const float h)
 
 void kexRenderBackend::SetOrtho(void)
 {
-    SetOrtho((float)kex::cSystem->VideoWidth(), (float)kex::cSystem->VideoHeight());
+    SetOrtho(0, 0, (float)kex::cSystem->VideoWidth(), (float)kex::cSystem->VideoHeight());
 }
 
 //

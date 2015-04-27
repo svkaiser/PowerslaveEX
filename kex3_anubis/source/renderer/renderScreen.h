@@ -18,7 +18,7 @@
 class kexRenderScreen
 {
 public:
-    void                SetOrtho(void);
+    void                SetOrtho(const bool bNoAspectCorrection = false);
     void                CoordsToRenderScreenCoords(float &x, float &y);
     void                SetAspectDimentions(float &x, float &y, float &width, float &height);
     void                DrawTexture(kexTexture *texture, const float x, const float y,

@@ -217,7 +217,6 @@ void kexOverWorld::DrawSprite(const float sx, const float sy, const byte color, 
         v1 = info->v[0];
         v2 = info->v[1];
 
-        kexRender::cScreen->SetAspectDimentions(x, y, w, h);
         sprite->Texture()->Bind();
 
         vl->AddQuad(x, y, 0, w, h, u1, v1, u2, v2, color, color, color, 255);

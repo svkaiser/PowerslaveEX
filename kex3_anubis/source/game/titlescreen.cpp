@@ -270,7 +270,7 @@ MENUITEM(OptionExit, "Exit", -100, 186, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM_LABEL(SoundVolume, "Sound FX Volume", -100, 110, 1);
+MENUITEM_LABEL(SoundVolume, "Sound FX Volume", -150, 110, 1);
 MENUITEM_SLIDER(SoundVolSlider, -100, 128, kexSound::cvarVolume, 1);
 
 //-----------------------------------------------------------------------------
@@ -305,7 +305,7 @@ MENUITEM(AudioExit, "Exit", 420, 182, 1,
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 },
 {
-    titleMenu[TSI_SFXVOLUME]->item->LerpTo(-100);
+    titleMenu[TSI_SFXVOLUME]->item->LerpTo(-150);
     titleMenu[TSI_SFXSLIDER]->item->LerpTo(420);
     titleMenu[TSI_MUSICVOLUME]->item->LerpTo(-100);
     titleMenu[TSI_MUSICSLIDER]->item->LerpTo(420);

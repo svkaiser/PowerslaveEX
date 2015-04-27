@@ -153,7 +153,7 @@ teamdoll_5
         // ##000    0    0
         sprites
         {
-            { "artifacts/loboteam", 18,   -29, -106,    0 }
+            { "artifacts/loboteam", 17,   -29, -106,    0 }
             { "artifacts/loboteam", 1,    -29,  -42,    0 }
         }
 
@@ -393,7 +393,7 @@ teamdoll_20
         // ##000    0    0
         sprites
         {
-            { "artifacts/loboteam", 17,   -29, -106,    0 }
+            { "artifacts/loboteam", 18,   -29, -106,    0 }
             { "artifacts/loboteam", 1,    -29,  -42,    0 }
         }
 

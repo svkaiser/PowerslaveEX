@@ -129,7 +129,7 @@ public:
     void                            Shutdown(void);
     void                            SetDefaultState(void);
     void                            SetOrtho(void);
-    void                            SetOrtho(const float w, const float h);
+    void                            SetOrtho(const float x, const float y, const float w, const float h);
     void                            SwapBuffers(void);
     void                            ClearBuffer(const glClearBit_t bit = GLCB_ALL);
     void                            SetState(const int bits, bool bEnable);

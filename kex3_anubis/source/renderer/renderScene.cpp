@@ -404,7 +404,7 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
     int secnum;
     int start, end;
     kexVec3 origin;
-    unsigned int scanCount;
+    uint scanCount;
     float w, h;
     
     if(bPrintStats)
@@ -419,7 +419,7 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
     w = (float)kex::cSystem->VideoWidth();
     h = (float)kex::cSystem->VideoHeight();
 
-    for(unsigned int i = 0; i < world->NumSectors(); ++i)
+    for(uint i = 0; i < world->NumSectors(); ++i)
     {
         world->Sectors()[i].x1 = w;
         world->Sectors()[i].x2 = 0;
@@ -607,7 +607,7 @@ void kexRenderScene::DrawSky(kexRenderView &view)
     
     kexRender::cTextures->whiteTexture->Bind();
     
-    for(unsigned int i = 0; i < visibleSkyFaces.CurrentLength(); ++i)
+    for(uint i = 0; i < visibleSkyFaces.CurrentLength(); ++i)
     {
         mapFace_t *face = &world->Faces()[visibleSkyFaces[i]];
         mapVertex_t *v = &world->Vertices()[face->vertexStart];
@@ -989,7 +989,7 @@ void kexRenderScene::DrawWater(kexRenderView &view)
     kexRender::cBackend->SetState(GLSTATE_CULL, true);
     kexRender::cBackend->SetDepthMask(0);
     
-    for(unsigned int i = 0; i < waterFaces.CurrentLength(); ++i)
+    for(uint i = 0; i < waterFaces.CurrentLength(); ++i)
     {
         mapFace_t *face = &world->Faces()[waterFaces[i]];
         
@@ -1035,7 +1035,7 @@ void kexRenderScene::DrawSprite(kexRenderView &view, mapSector_t *sector, kexAct
         if(rotation <  0) rotation += 8;
     }
 
-    for(unsigned int i = 0; i < frame->spriteSet[rotation].Length(); ++i)
+    for(uint i = 0; i < frame->spriteSet[rotation].Length(); ++i)
     {
         int c = 0xff;
         int r, g, b;
@@ -1107,14 +1107,9 @@ void kexRenderScene::DrawSprite(kexRenderView &view, mapSector_t *sector, kexAct
         if(actor->Flags() & AF_FLASH)
         {
             vl->DrawElements(false);
-            
-            kexRender::cBackend->SetDepth(GLFUNC_EQUAL);
             kexRender::cBackend->SetBlend(GLSRC_ONE, GLDST_ONE);
-            
             vl->DrawElements();
-            
             kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-            kexRender::cBackend->SetDepth(GLFUNC_LEQUAL);
         }
         else
         {
@@ -1244,44 +1239,6 @@ void kexRenderScene::DrawStretchSprite(kexRenderView &view, mapSector_t *sector,
 }
 
 //
-// kexRenderScene::DrawActorList
-//
-
-void kexRenderScene::DrawActorList(kexRenderView &view, mapSector_t *sector)
-{
-    for(kexActor *actor = sector->actorList.Next();
-        actor != NULL;
-        actor = actor->SectorLink().Next())
-    {
-        if(actor->Anim() == NULL || actor == kexGame::cLocal->Player()->Actor())
-        {
-            continue;
-        }
-
-        if(actor->Flags() & AF_HIDDEN)
-        {
-            continue;
-        }
-        
-        if(!view.TestBoundingBox(actor->Bounds() + actor->Origin()))
-        {
-            continue;
-        }
-        
-        kexRender::cBackend->SetState(GLSTATE_CULL, !(actor->Flags() & AF_STRETCHY));
-
-        if(actor->Flags() & AF_STRETCHY)
-        {
-            DrawStretchSprite(view, sector, actor);
-        }
-        else
-        {
-            DrawSprite(view, sector, actor);
-        }
-    }
-}
-
-//
 // kexRenderScene::SortPolys
 //
 
@@ -1293,6 +1250,17 @@ int kexRenderScene::SortPolys(const int *p1, const int *p2)
     if(poly1->texture < poly2->texture) return  1;
     if(poly1->texture > poly2->texture) return -1;
 
+    return 0;
+}
+
+//
+// kexRenderScene::SortSprites
+//
+
+int kexRenderScene::SortSprites(const visSprite_t *vis1, const visSprite_t *vis2)
+{
+    if(vis1->dist < vis2->dist) return  1;
+    if(vis1->dist > vis2->dist) return -1;
     return 0;
 }
 
@@ -1311,7 +1279,7 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
 
     polyList.Reset();
 
-    for(unsigned int i = 0; i < visibleSectors.CurrentLength(); ++i)
+    for(uint i = 0; i < visibleSectors.CurrentLength(); ++i)
     {
         DrawSector(view, &world->Sectors()[visibleSectors[i]]);
     }
@@ -1367,21 +1335,87 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
 
 void kexRenderScene::DrawActors(kexRenderView &view)
 {
+    kexMatrix mtx(view.Pitch(), 1);
+    kexVec3 org;
+    float viewPitch;
+
+    mtx = mtx * kexMatrix(-view.Yaw()-kexMath::pi, 2);
+
     if(bPrintStats)
     {
         drawActorTime = kex::cTimer->GetPerformanceCounter();
     }
+
+    visSprites.Reset();
+
+    for(uint i = 0; i < visibleSectors.CurrentLength(); ++i)
+    {
+        mapSector_t *sector = &world->Sectors()[visibleSectors[i]];
+
+        for(kexActor *actor = sector->actorList.Next();
+            actor != NULL;
+            actor = actor->SectorLink().Next())
+        {
+            visSprite_t *visSprite;
+
+            if(actor->Anim() == NULL || actor == kexGame::cLocal->Player()->Actor())
+            {
+                continue;
+            }
+
+            if(actor->Flags() & AF_HIDDEN)
+            {
+                continue;
+            }
+            
+            if(!view.TestBoundingBox(actor->Bounds() + actor->Origin()))
+            {
+                continue;
+            }
+
+            visSprite = visSprites.Get();
+            visSprite->actor = actor;
+
+            org = actor->Origin() - view.Origin();
+            org *= mtx;
+
+            visSprite->dist = org.UnitSq();
+        }
+    }
+
+    visSprites.Sort(SortSprites);
     
-    spriteMatrix = kexMatrix(-view.Pitch(), 1) * kexMatrix(view.Yaw(), 2);
+    viewPitch = -view.Pitch().an;
+
+    if(viewPitch < -1.565f)
+    {
+        viewPitch = -1.565f;
+    }
+
+    spriteMatrix = kexMatrix(viewPitch, 1) * kexMatrix(view.Yaw(), 2);
     spriteMatrix.RotateX(kexMath::pi);
     
     kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
-    
-    for(int i = (int)visibleSectors.CurrentLength()-1; i >= 0; i--)
+    kexRender::cBackend->SetDepthMask(0);
+
+    for(uint i = 0; i < visSprites.CurrentLength(); ++i)
     {
-        DrawActorList(view, &world->Sectors()[visibleSectors[i]]);
+        kexActor *actor = visSprites[i].actor;
+
+        kexRender::cBackend->SetState(GLSTATE_CULL, !(actor->Flags() & AF_STRETCHY));
+
+        if(actor->Flags() & AF_STRETCHY)
+        {
+            DrawStretchSprite(view, actor->Sector(), actor);
+        }
+        else
+        {
+            DrawSprite(view, actor->Sector(), actor);
+        }
     }
-    
+
+    kexRender::cBackend->SetDepthMask(1);
+
     if(bPrintStats)
     {
         drawActorTime = kex::cTimer->GetPerformanceCounter() - drawActorTime;

@@ -125,14 +125,11 @@ void kexMenuQuitConfirm::Update(void)
 
 void kexMenuQuitConfirm::Display(void)
 {
-    float w, h;
-    
     kexRender::cScreen->SetOrtho();
     
-    w = (float)kex::cSystem->VideoWidth();
-    h = (float)kex::cSystem->VideoHeight();
-    
-    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 128);
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
+        (float)kexRender::cScreen->SCREEN_WIDTH,
+        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
     
     kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
     kexGame::cMenuPanel->DrawInset(40, 72, 238, 32);
@@ -450,12 +447,9 @@ void kexMenuInput::Display(void)
     
     if(bindTime > 0 && selectedBind)
     {
-        float w, h;
-        
-        w = (float)kex::cSystem->VideoWidth();
-        h = (float)kex::cSystem->VideoHeight();
-        
-        kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 128);
+        kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
+            (float)kexRender::cScreen->SCREEN_WIDTH,
+            (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
         
         kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
         kexGame::cMenuPanel->DrawInset(40, 72, 238, 80);
@@ -621,14 +615,11 @@ void kexMenuTravel::Update(void)
 
 void kexMenuTravel::Display(void)
 {
-    float w, h;
-    
     kexRender::cScreen->SetOrtho();
     
-    w = (float)kex::cSystem->VideoWidth();
-    h = (float)kex::cSystem->VideoHeight();
-    
-    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 255);
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
+        (float)kexRender::cScreen->SCREEN_WIDTH,
+        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 255);
     
     kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
     kexGame::cMenuPanel->DrawInset(40, 72, 238, 32);
@@ -732,7 +723,7 @@ void kexMenuStartupNotice::Update(void)
 
 void kexMenuStartupNotice::Display(void)
 {
-    float w, h, y;
+    float y;
     static const char *noticeStrings[] =
     {
         "--NOTICE--",
@@ -753,11 +744,11 @@ void kexMenuStartupNotice::Display(void)
 
     kexRender::cScreen->SetOrtho();
     
-    w = (float)kex::cSystem->VideoWidth();
-    h = (float)kex::cSystem->VideoHeight();
     y = 50;
     
-    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0, w, h, 0, 0, 0, 128);
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
+        (float)kexRender::cScreen->SCREEN_WIDTH,
+        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
     
     kexGame::cMenuPanel->DrawPanel(32, 32, 256, 176, 4);
     kexGame::cMenuPanel->DrawInset(40, 40, 238, 120);

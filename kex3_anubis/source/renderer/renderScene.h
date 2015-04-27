@@ -65,7 +65,14 @@ public:
     static bool             bShowBounds;
 
 private:
+    typedef struct
+    {
+        kexActor *actor;
+        float dist;
+    } visSprite_t;
+
     static int              SortPolys(const int *p1, const int *p2);
+    static int              SortSprites(const visSprite_t *vis1, const visSprite_t *vis2);
 
     void                    Prepare(kexRenderView &view);
     void                    DrawSky(kexRenderView &view);
@@ -75,7 +82,6 @@ private:
     void                    DrawFace(kexRenderView &view, mapSector_t *sector, int faceID);
     void                    DrawPortal(kexRenderView &view, mapFace_t *face, byte r, byte g, byte b);
     void                    DrawPolygon(mapFace_t *face, mapPoly_t *poly);
-    void                    DrawActorList(kexRenderView &view, mapSector_t *sector);
     void                    DrawSprite(kexRenderView &view, mapSector_t *sector, kexActor *actor);
     void                    DrawStretchSprite(kexRenderView &view, mapSector_t *sector, kexActor *actor);
     void                    DrawWater(kexRenderView &view);
@@ -86,7 +92,6 @@ private:
     bool                    ClipFaceToPlane(kexRenderView &view, kexPlane &plane, mapFace_t *face,
                                             float &bx1, float &bx2, float &by1, float &by2);
     
-    kexStack<int>           waterFaces;
     kexMatrix               spriteMatrix;
     kexWorld                *world;
     int                     clipY;
@@ -95,6 +100,8 @@ private:
     kexStack<int>           visibleSectors;
     kexStack<int>           visibleSkyFaces;
     kexStack<int>           polyList;
+    kexStack<int>           waterFaces;
+    kexStack<visSprite_t>   visSprites;
     kexRenderDLight         dLights;
     uint64_t                floodFillTime;
     uint64_t                drawSectorTime;

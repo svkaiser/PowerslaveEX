@@ -206,7 +206,7 @@ void kexFont::DrawString(const char *string, float x, float y, float scale,
         tx1     = (at->x / w) + 0.001f;
         tx2     = (tx1 + at->w / w) - 0.002f;
         ty1     = (at->y / h);
-        ty2     = (ty1 + at->h / h);
+        ty2     = (ty1 + at->h / h) - 0.001f;
         check   = (char*)string+i;
 
         kexRender::cVertList->AddVertex(vx1, vy1, 0, tx1, ty1, rgba1);

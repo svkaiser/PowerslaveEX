@@ -120,7 +120,7 @@ void kexSession::DrawCursor(void)
     mh = (float)cursorTexture->Height();
     
     kexRender::cBackend->SetOrtho();
-    kexRender::cScreen->DrawStretchPic(cursorTexture, mx, my, mw, mh);
+    kexRender::cScreen->DrawTexture(cursorTexture, mx, my, mw, mh);
 }
 
 //

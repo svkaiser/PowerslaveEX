@@ -50,6 +50,7 @@ void kexHud::Init(void)
     backImage       = kexRender::cTextures->Cache("gfx/hud.png", TC_CLAMP, TF_NEAREST);
     airSupplyFront  = kexRender::cTextures->Cache("gfx/airsupply_front.png", TC_CLAMP, TF_NEAREST);
     airSupplyBack   = kexRender::cTextures->Cache("gfx/airsupply_back.png", TC_CLAMP, TF_NEAREST);
+    fillPic         = kexRender::cTextures->Cache("gfx/menu/menu_bg.png", TC_REPEAT, TF_NEAREST);
 }
 
 //
@@ -125,6 +126,8 @@ void kexHud::DrawFlash(void)
         return;
     }
 
+    kexRender::cScreen->SetOrtho(true);
+
     kexRender::cTextures->whiteTexture->Bind();
 
     if(damageFlashTicks > 0)
@@ -148,6 +151,9 @@ void kexHud::DrawFlash(void)
     }
 
     vl->DrawElements();
+
+    // change back
+    kexRender::cScreen->SetOrtho();
 }
 
 //
@@ -342,13 +348,38 @@ void kexHud::DrawDots(void)
 }
 
 //
+// kexHud::DrawFillPic
+//
+
+void kexHud::DrawFillPic(void)
+{
+    kexCpuVertList *vl = kexRender::cVertList;
+    float width = (float)kexRender::cScreen->SCREEN_WIDTH;
+    float x = 0;
+    float y = 0;
+    float w = width;
+    float h = (float)kexRender::cScreen->SCREEN_HEIGHT;
+
+    kexRender::cScreen->SetAspectDimentions(x, y, w, h);
+    w = ((float)kexRender::cScreen->SCREEN_WIDTH - w);
+    kexRender::cScreen->DrawFillPic(fillPic, -x, 216, width - (width - w), 32);
+    kexRender::cScreen->DrawFillPic(fillPic, width, 216, width - w, 32);
+
+    kexRender::cTextures->whiteTexture->Bind();
+
+    vl->AddQuad(-x, 216, width + w, 1, 156, 100, 70, 255);
+    vl->AddQuad(-x, 217, width + w, 1, 80, 40, 10, 255);
+    vl->DrawElements();
+}
+
+//
 // kexHud::DrawBackPic
 //
 
 void kexHud::DrawBackPic(void)
 {
     kexCpuVertList *vl = kexRender::cVertList;
-    
+
     backImage->Bind();
     
     vl->AddQuad(0, 192, 0, 64, 64, 0, 0, 0.25f, 1, 255, 255, 255, 255);
@@ -433,6 +464,8 @@ void kexHud::Display(void)
     
     kexRender::cVertList->BindDrawPointers();
     
+    DrawFillPic();
+
     DrawAmmoBar();
 
     DrawHealthBar();

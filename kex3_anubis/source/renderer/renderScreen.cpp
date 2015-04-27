@@ -28,9 +28,19 @@ const int kexRenderScreen::SCREEN_HEIGHT    = 240;
 // kexRenderScreen::SetOrtho
 //
 
-void kexRenderScreen::SetOrtho(void)
+void kexRenderScreen::SetOrtho(const bool bNoAspectCorrection)
 {
-    kexRender::cBackend->SetOrtho((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT);
+    float x = 0;
+    float y = 0;
+    float w = (float)SCREEN_WIDTH;
+    float h = (float)SCREEN_HEIGHT;
+    
+    if(bNoAspectCorrection == false)
+    {
+        SetAspectDimentions(x, y, w, h);
+    }
+
+    kexRender::cBackend->SetOrtho(-x, -y, (float)SCREEN_WIDTH+x, (float)SCREEN_HEIGHT+y);
 }
 
 //
@@ -39,8 +49,17 @@ void kexRenderScreen::SetOrtho(void)
 
 void kexRenderScreen::CoordsToRenderScreenCoords(float &x, float &y)
 {
-    x = (x / (float)kex::cSystem->VideoWidth()) * (float)SCREEN_WIDTH;
-    y = (y / (float)kex::cSystem->VideoHeight()) * (float)SCREEN_HEIGHT;
+    float sx = 0;
+    float sy = 0;
+    float w = (float)SCREEN_WIDTH;
+    float h = (float)SCREEN_HEIGHT;
+    float sw = w;
+    float sh = h;
+
+    SetAspectDimentions(sx, sy, sw, sh);
+
+    x = ((x / (float)kex::cSystem->VideoWidth()) * (w + (w - sw))) - sx;
+    y = ((y / (float)kex::cSystem->VideoHeight()) * (h + (h - sh))) - sy;
 }
 
 //
@@ -113,8 +132,6 @@ void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const floa
     tex_x = x;
     tex_y = y;
     
-    SetAspectDimentions(tex_x, tex_y, texwidth, texheight);
-    
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     kexRender::cBackend->SetState(GLSTATE_CULL, true);
     kexRender::cBackend->SetState(GLSTATE_BLEND, true);
@@ -161,6 +178,16 @@ void kexRenderScreen::DrawTexture(const char *name, const float x, const float y
 void kexRenderScreen::DrawStretchPic(kexTexture *texture, const float x, const float y,
                                      const float width, const float height)
 {
+    float sx = 0;
+    float sy = 0;
+    float sw = (float)SCREEN_WIDTH;
+    float sh = (float)SCREEN_HEIGHT;
+
+    SetAspectDimentions(sx, sy, sw, sh);
+
+    sw = (float)SCREEN_WIDTH - sw;
+    sh = (float)SCREEN_HEIGHT - sh;
+
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     kexRender::cBackend->SetState(GLSTATE_CULL, true);
     kexRender::cBackend->SetState(GLSTATE_BLEND, true);
@@ -169,7 +196,7 @@ void kexRenderScreen::DrawStretchPic(kexTexture *texture, const float x, const f
     kexRender::cBackend->SetCull(GLCULL_BACK);
     
     texture->Bind();
-    DrawQuad(x, width, y, height);
+    DrawQuad(x-sx, width+sw, y-sy, height+sh);
 }
 
 //
@@ -197,6 +224,16 @@ void kexRenderScreen::DrawStretchPic(kexTexture *texture, const float x, const f
                                      const float width, const float height,
                                      byte r, byte g, byte b, byte a)
 {
+    float sx = 0;
+    float sy = 0;
+    float sw = (float)SCREEN_WIDTH;
+    float sh = (float)SCREEN_HEIGHT;
+
+    SetAspectDimentions(sx, sy, sw, sh);
+
+    sw = (float)SCREEN_WIDTH - sw;
+    sh = (float)SCREEN_HEIGHT - sh;
+
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     kexRender::cBackend->SetState(GLSTATE_CULL, true);
     kexRender::cBackend->SetState(GLSTATE_BLEND, true);
@@ -205,7 +242,7 @@ void kexRenderScreen::DrawStretchPic(kexTexture *texture, const float x, const f
     kexRender::cBackend->SetCull(GLCULL_BACK);
     
     texture->Bind();
-    DrawQuad(x, width, y, height, 0, 1, 0, 1, r, g, b, a);
+    DrawQuad(x-sx, width+sw, y-sy, height+sh, 0, 1, 0, 1, r, g, b, a);
 }
 
 //
@@ -224,8 +261,6 @@ void kexRenderScreen::DrawFillPic(kexTexture *texture, const float x, const floa
     texheight = h;
     tex_x = x;
     tex_y = y;
-    
-    SetAspectDimentions(tex_x, tex_y, texwidth, texheight);
     
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     kexRender::cBackend->SetState(GLSTATE_CULL, true);

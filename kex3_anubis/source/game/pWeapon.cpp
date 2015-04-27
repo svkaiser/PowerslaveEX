@@ -284,8 +284,6 @@ void kexPlayerWeapon::DrawAnimFrame(spriteAnim_t *sprAnim)
         v1 = info->v[0];
         v2 = info->v[1];
 
-        kexRender::cScreen->SetAspectDimentions(x, y, w, h);
-
         sprite->Texture()->Bind();
 
         x += bob_x + weaponInfo->offsetX;
@@ -352,8 +350,6 @@ void kexPlayerWeapon::DrawFlame(void)
         u2 = info->u[1 ^ spriteSet->bFlipped];
         v1 = info->v[0];
         v2 = info->v[1];
-        
-        kexRender::cScreen->SetAspectDimentions(x, y, w, h);
         
         sprite->Texture()->Bind();
         
