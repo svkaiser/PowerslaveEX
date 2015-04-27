@@ -37,6 +37,8 @@ public:
 
     void                SetLanguage(const languages_t lang) { language = lang; }
 
+    static kexCvar      cvarLanguage;
+
 private:
     kexStrList          strings[NUMLANGUAGES];
     languages_t         language;

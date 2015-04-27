@@ -63,7 +63,7 @@ void kexHud::Reset(void)
 
     for(int i = 0; i < MAXMESSAGES; ++i)
     {
-        messages[i].msg = NULL;
+        messages[i].msg.Clear();
         messages[i].ticks = 0;
     }
 }

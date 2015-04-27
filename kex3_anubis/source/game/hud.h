@@ -37,7 +37,7 @@ private:
 
     typedef struct
     {
-        const char *msg;
+        kexStr msg;
         int ticks;
     } hudMessage_t;
 

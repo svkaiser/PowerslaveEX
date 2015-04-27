@@ -80,3 +80,371 @@ feather_loop
         }
     }
 }
+
+teamdoll_1
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 5,    -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_2
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 21,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_3
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 4,    -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_4
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 23,    -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_5
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 18,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_6
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 12,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_7
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 10,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_8
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 22,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_9
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 16,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_10
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 7,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_11
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 0,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_12
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 20,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_13
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 19,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_14
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 14,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_15
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 13,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_16
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 11,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_17
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 15,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_18
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 2,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_19
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 6,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_20
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 17,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_21
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 9,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_22
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 3,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}
+
+teamdoll_23
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "artifacts/loboteam", 8,   -29, -106,    0 }
+            { "artifacts/loboteam", 1,    -29,  -42,    0 }
+        }
+
+    }
+
+}

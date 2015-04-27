@@ -108,6 +108,8 @@ public:
 
     int16_t                     &Artifacts(void) { return artifacts; }
     int16_t                     &QuestItems(void) { return questItems; }
+    uint                        &TeamDolls(void) { return teamDolls; }
+
     const uint16_t              Buttons(void) const { return cmd.Buttons(); }
 
     kexActor                    *AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitch,
@@ -163,7 +165,7 @@ private:
     int16_t                     questItems;
     int16_t                     airSupply;
     int16_t                     airSupplyTime;
-    int                         teamDolls;
+    uint                        teamDolls;
     int                         lockTime;
     int                         shakeTime;
     kexVec2                     shakeVector;

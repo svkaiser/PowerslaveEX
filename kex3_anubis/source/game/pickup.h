@@ -184,4 +184,24 @@ private:
     int                             bits;
 END_KEX_CLASS();
 
+//-----------------------------------------------------------------------------
+//
+// kexTeamDollPickup
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexTeamDollPickup, kexPickup);
+public:
+    kexTeamDollPickup(void);
+    ~kexTeamDollPickup(void);
+
+    virtual void                    Tick(void);
+    virtual void                    OnTouch(kexActor *instigator);
+
+    void                            Spawn(void);
+
+private:
+    int                             bits;
+END_KEX_CLASS();
+
 #endif

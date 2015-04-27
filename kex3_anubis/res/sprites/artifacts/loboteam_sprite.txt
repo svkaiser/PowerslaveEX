@@ -69,3 +69,4 @@ sprite 21 240 64 60 64
 // working\loboteam\sprite2325.tga
 sprite 22 300 64 60 64
 
+sprite 23 360 64 60 64

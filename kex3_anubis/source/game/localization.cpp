@@ -19,6 +19,8 @@
 #include "game.h"
 #include "localization.h"
 
+kexCvar kexTranslation::cvarLanguage("g_language", CVF_INT|CVF_CONFIG, "0", LNG_ENGLISH, NUMLANGUAGES-1, "Language Localization");
+
 //
 // kexTranslation::kexTranslation
 //
@@ -42,6 +44,8 @@ kexTranslation::~kexTranslation(void)
 
 const char *kexTranslation::GetString(const int index)
 {
+    language = static_cast<languages_t>(cvarLanguage.GetInt());
+
     if(index < 0 || index > (int)strings[language].Length())
     {
         return NULL;

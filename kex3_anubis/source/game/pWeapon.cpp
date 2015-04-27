@@ -316,7 +316,6 @@ void kexPlayerWeapon::DrawFlame(void)
     const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
     spriteAnim_t *sprAnim;
     int frm = 0;
-    byte clr[4];
     
     if(weaponInfo->flame == NULL)
     {
@@ -336,8 +335,6 @@ void kexPlayerWeapon::DrawFlame(void)
     kexSprite       *sprite;
     spriteInfo_t    *info;
     
-    clr[3] = 255;
-    
     for(unsigned int i = 0; i < frame->spriteSet[0].Length(); ++i)
     {
         spriteSet = &frame->spriteSet[0][i];
@@ -348,7 +345,6 @@ void kexPlayerWeapon::DrawFlame(void)
         float y = (float)spriteSet->y;
         float w = (float)info->atlas.w;
         float h = (float)info->atlas.h;
-        word c = 0xff;
         
         float u1, u2, v1, v2;
         
@@ -366,20 +362,6 @@ void kexPlayerWeapon::DrawFlame(void)
         x += (owner->Actor()->Roll()*64);
         y += 8;
         
-        if(!(frame->flags & SFF_FULLBRIGHT))
-        {
-            c = (owner->Actor()->Sector()->lightLevel << 1);
-            
-            if(c > 255)
-            {
-                c = 255;
-            }
-        }
-        
-        clr[0] = (byte)c;
-        clr[1] = (byte)c;
-        clr[2] = (byte)c;
-        
         kexVec3 start(x, y + h, 0);
         kexVec3 end(x + (owner->Actor()->Roll()*128), y, 0);
         kexVec3 mid(x, y + h - (h * 0.5f), 0);
@@ -396,10 +378,10 @@ void kexPlayerWeapon::DrawFlame(void)
             start = pt;
             kexMath::CubicCurve(start, end, (1.0f / 16) * (float)i, mid, &pt);
             
-            vl->AddVertex(start, u1, fv1, clr);
-            vl->AddVertex(start + vw, u2, fv1, clr);
-            vl->AddVertex(pt, u1, fv2, clr);
-            vl->AddVertex(pt + vw, u2, fv2, clr);
+            vl->AddVertex(start, u1, fv1);
+            vl->AddVertex(start + vw, u2, fv1);
+            vl->AddVertex(pt, u1, fv2);
+            vl->AddVertex(pt + vw, u2, fv2);
             
             fv1 = fv2;
             

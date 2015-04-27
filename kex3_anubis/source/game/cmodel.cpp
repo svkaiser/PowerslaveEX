@@ -694,7 +694,7 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
 
             if(moveActor->Flags() & AF_NODROPOFF)
             {
-                if(moveActor->InstanceOf(&kexAI::info) && s->floorFace->flags && FF_LAVA)
+                if(moveActor->InstanceOf(&kexAI::info) && s->floorFace->flags & FF_LAVA)
                 {
                     // avoid entering into lava
                     CollideFace(face);

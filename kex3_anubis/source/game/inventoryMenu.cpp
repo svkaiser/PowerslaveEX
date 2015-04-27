@@ -84,6 +84,7 @@ void kexInventoryMenu::Init(void)
         questTextures[i] = kexRender::cTextures->Cache(str, TC_CLAMP, TF_NEAREST);
     }
 
+    teamDollTexture = kexRender::cTextures->Cache("gfx/menu/menuteamdoll.png", TC_CLAMP, TF_NEAREST);
     questCompleted = kexRender::cTextures->Cache("gfx/menu/menutransmitter_on.png", TC_CLAMP, TF_NEAREST);
     mapClosedTexture = kexRender::cTextures->Cache("gfx/menu/menumap_closed.png", TC_CLAMP, TF_NEAREST);
     mapOpenTexture = kexRender::cTextures->Cache("gfx/menu/menumap_open.png", TC_CLAMP, TF_NEAREST);

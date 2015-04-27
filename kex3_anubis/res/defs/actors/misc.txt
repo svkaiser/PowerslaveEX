@@ -18,6 +18,7 @@ AI_Magic8Ball 13
     solid                   1
     shootable               1
     lookAllAround           1
+    noLavaDamage            1
 }
 
 Obj_WarpPryamid 33

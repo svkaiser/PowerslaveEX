@@ -52,6 +52,7 @@ private:
     kexTexture                  *mapOpenTexture;
     kexTexture                  *questTextures[8];
     kexTexture                  *questCompleted;
+    kexTexture                  *teamDollTexture;
     kexFont                     *font;
     kexMenuPanel::buttonSet_t   buttonSet;
     bool                        bActive;

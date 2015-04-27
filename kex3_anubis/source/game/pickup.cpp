@@ -690,3 +690,81 @@ void kexQuestPickup::Spawn(void)
         Remove();
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// kexTeamDollPickup
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexTeamDollPickup, kexPickup)
+
+//
+// kexTeamDollPickup::kexTeamDollPickup
+//
+
+kexTeamDollPickup::kexTeamDollPickup(void)
+{
+    this->bits = 0;
+}
+
+//
+// kexTeamDollPickup::~kexTeamDollPickup
+//
+
+kexTeamDollPickup::~kexTeamDollPickup(void)
+{
+}
+
+//
+// kexTeamDollPickup::Tick
+//
+
+void kexTeamDollPickup::Tick(void)
+{
+    kexPickup::Tick();
+}
+
+//
+// kexTeamDollPickup::OnTouch
+//
+
+void kexTeamDollPickup::OnTouch(kexActor *instigator)
+{
+    kexPlayer *player;
+
+    if(Removing())
+    {
+        return;
+    }
+
+    if(!instigator->InstanceOf(&kexPuppet::info) || bits < 0)
+    {
+        return;
+    }
+
+    player = static_cast<kexPuppet*>(instigator)->Owner();
+
+    if(!(player->TeamDolls() & BIT(bits)))
+    {
+        player->TeamDolls() |= BIT(bits);
+        kexPickup::OnTouch(instigator);
+    }
+}
+
+//
+// kexTeamDollPickup::Spawn
+//
+
+void kexTeamDollPickup::Spawn(void)
+{
+    if(definition)
+    {
+        definition->GetInt("type", bits, 0);
+    }
+
+    if(kexGame::cLocal->Player()->TeamDolls() & BIT(bits))
+    {
+        Remove();
+    }
+}

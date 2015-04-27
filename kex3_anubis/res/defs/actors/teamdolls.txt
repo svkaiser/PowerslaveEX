@@ -1,0 +1,321 @@
+TD_Doll01 147
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_1"
+    fullbright              1
+    touchable               1
+    type                    0
+    pickupMessage           "Brian McNeely"
+}
+
+TD_Doll02 148
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_2"
+    fullbright              1
+    touchable               1
+    type                    1
+    pickupMessage           "Kevin Chung"
+}
+
+TD_Doll03 149
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_3"
+    fullbright              1
+    touchable               1
+    type                    2
+    pickupMessage           "Ezra Dreisbach"
+}
+
+TD_Doll04 150
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_4"
+    fullbright              1
+    touchable               1
+    type                    3
+    pickupMessage           "Mark Coates"
+}
+
+TD_Doll05 151
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_5"
+    fullbright              1
+    touchable               1
+    type                    4
+    pickupMessage           "Paul Lange"
+}
+
+TD_Doll06 152
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_6"
+    fullbright              1
+    touchable               1
+    type                    5
+    pickupMessage           "Pat Schreiber"
+}
+
+TD_Doll07 153
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_7"
+    fullbright              1
+    touchable               1
+    type                    6
+    pickupMessage           "Tom Kristensen"
+}
+
+TD_Doll08 154
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_8"
+    fullbright              1
+    touchable               1
+    type                    7
+    pickupMessage           "Jeffrey S. Blazier"
+}
+
+TD_Doll09 155
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_9"
+    fullbright              1
+    touchable               1
+    type                    8
+    pickupMessage           "William Vallieres"
+}
+
+TD_Doll10 156
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_10"
+    fullbright              1
+    touchable               1
+    type                    9
+    pickupMessage           "Dominick Meissner"
+}
+
+TD_Doll11 157
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_11"
+    fullbright              1
+    touchable               1
+    type                    10
+    pickupMessage           "Paul Schreiber"
+}
+
+TD_Doll12 158
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_12"
+    fullbright              1
+    touchable               1
+    type                    11
+    pickupMessage           "David Lawson"
+}
+
+TD_Doll13 159
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_13"
+    fullbright              1
+    touchable               1
+    type                    12
+    pickupMessage           "Paul Haugerud"
+}
+
+TD_Doll14 160
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_14"
+    fullbright              1
+    touchable               1
+    type                    13
+    pickupMessage           "Kurt Pfeifer"
+}
+
+TD_Doll15 161
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_15"
+    fullbright              1
+    touchable               1
+    type                    14
+    pickupMessage           "Troy Jacobson"
+}
+
+TD_Doll16 162
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_16"
+    fullbright              1
+    touchable               1
+    type                    15
+    pickupMessage           "Eric Klokstad"
+}
+
+TD_Doll17 163
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_17"
+    fullbright              1
+    touchable               1
+    type                    16
+    pickupMessage           "Paul Knutzen"
+}
+
+TD_Doll18 164
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_18"
+    fullbright              1
+    touchable               1
+    type                    17
+    pickupMessage           "John Van Deusen"
+}
+
+TD_Doll19 165
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_19"
+    fullbright              1
+    touchable               1
+    type                    18
+    pickupMessage           "John Yuill"
+}
+
+TD_Doll20 166
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_20"
+    fullbright              1
+    touchable               1
+    type                    19
+    pickupMessage           "Joe Kresoja M.I.A."
+}
+
+TD_Doll21 167
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_21"
+    fullbright              1
+    touchable               1
+    type                    20
+    pickupMessage           "Scott Branston"
+}
+
+TD_Doll22 168
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_22"
+    fullbright              1
+    touchable               1
+    type                    21
+    pickupMessage           "Richard Nichols M.I.A."
+}
+
+TD_Doll23 169
+{
+    classname               "kexTeamDollPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "artifacts/teamdoll_23"
+    fullbright              1
+    touchable               1
+    type                    22
+    pickupMessage           "John Schwab M.I.A."
+}
