@@ -63,6 +63,7 @@ public:
     static bool             bShowWaterPortals;
     static bool             bShowCollision;
     static bool             bShowBounds;
+    static bool             bWireframe;
 
 private:
     typedef struct

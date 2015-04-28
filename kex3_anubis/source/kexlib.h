@@ -116,6 +116,7 @@ typedef union
 #endif
 
 #define ARRLEN(array) (sizeof(array) / sizeof(*array))
+#define OFFSETOF(type, member) ((size_t) &(((type*)0)->member))
 
 #if defined(KEX_WIN32) && !defined(__GNUC__)
 #define KDECL __cdecl

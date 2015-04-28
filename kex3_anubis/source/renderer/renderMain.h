@@ -32,4 +32,6 @@ public:
     static kexRenderPostProcess *cPostProcess;
 };
 
+#include "vertexBuffer.h"
+
 #endif

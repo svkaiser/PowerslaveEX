@@ -38,6 +38,7 @@ RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowPortals, showportals);
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowWaterPortals, showwaterportals);
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowCollision, showcollision);
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowBounds, showbounds);
+RENDERSCENE_DEFINE_DEBUG_COMMAND(bWireframe, wireframe);
 
 //
 // kexRenderScene::kexRenderScene
@@ -902,7 +903,11 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
     int tcoords[4] = { 0, 0, 0, 0 };
     int curIdx = 0;
     
-    if(world->Textures()[poly->texture])
+    if(bWireframe)
+    {
+        kexRender::cTextures->whiteTexture->Bind();
+    }
+    else if(world->Textures()[poly->texture])
     {
         world->Textures()[poly->texture]->Bind();
     }
@@ -1296,6 +1301,11 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
         polySortTime = kex::cTimer->GetPerformanceCounter() - polySortTime;
     }
 
+    if(bWireframe)
+    {
+        kexRender::cBackend->SetPolyMode(GLPOLY_LINE);
+    }
+
     for(uint i = 0; i < polyList.CurrentLength(); ++i)
     {
         mapPoly_t *poly = &world->Polys()[polyList[i]];
@@ -1321,6 +1331,11 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
         }
 
         DrawPolygon(face, poly);
+    }
+
+    if(bWireframe)
+    {
+        kexRender::cBackend->SetPolyMode(GLPOLY_FILL);
     }
     
     if(bPrintStats)

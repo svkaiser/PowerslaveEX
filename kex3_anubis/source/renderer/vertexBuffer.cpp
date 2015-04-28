@@ -16,7 +16,8 @@
 //
 
 #include "renderMain.h"
-#include "vertexBuffer.h"
+
+#define VERT_OFFSET(n)  reinterpret_cast<void*>(OFFSETOF(drawVert_t, n))
 
 //
 // kexVertBuffer::kexVertBuffer
@@ -26,6 +27,8 @@ kexVertBuffer::kexVertBuffer(void)
 {
     this->vboID = 0;
     this->iboID = 0;
+    this->vertexSize = 0;
+    this->indiceSize = 0;
 }
 
 //
@@ -41,10 +44,41 @@ kexVertBuffer::~kexVertBuffer(void)
 // kexVertBuffer::Allocate
 //
 
-void kexVertBuffer::Allocate(drawVert_t *drawVerts, uint size, word *indices, uint indiceSize)
+void kexVertBuffer::Allocate(drawVert_t *drawVerts, uint size, const bufferUsage_t vertexUsage,
+                             word *indices, uint indiceSize, const bufferUsage_t indiceUsage)
 {
+    GLenum v, i;
+
     if(!has_GL_ARB_vertex_buffer_object)
     {
+        return;
+    }
+
+    switch(vertexUsage)
+    {
+    case RBU_STATIC:
+        v = GL_STATIC_DRAW_ARB;
+        break;
+
+    case RBU_DYNAMIC:
+        v = GL_DYNAMIC_DRAW_ARB;
+        break;
+
+    default:
+        return;
+    }
+
+    switch(indiceUsage)
+    {
+    case RBU_STATIC:
+        i = GL_STATIC_DRAW_ARB;
+        break;
+
+    case RBU_DYNAMIC:
+        i = GL_DYNAMIC_DRAW_ARB;
+        break;
+
+    default:
         return;
     }
     
@@ -52,22 +86,32 @@ void kexVertBuffer::Allocate(drawVert_t *drawVerts, uint size, word *indices, ui
     dglGenBuffersARB(1, &iboID);
     
     dglGetError();
+
+    dglBindBufferARB(GL_ARRAY_BUFFER_ARB, vboID);
+    dglBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, iboID);
     
-    dglBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(drawVert_t) * size, drawVerts, GL_STATIC_DRAW_ARB);
-    
+    dglBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(drawVert_t) * size, drawVerts, v);
+    this->vertexSize = size;
+
     if(dglGetError() == GL_OUT_OF_MEMORY)
     {
+        Delete();
         kex::cSystem->Error("kexVertBuffer::Allocate: Failed to allocate vertex buffer\n");
         return;
     }
     
-    dglBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, sizeof(word) * indiceSize, indices, GL_STATIC_DRAW_ARB);
+    dglBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, sizeof(word) * indiceSize, indices, i);
+    this->indiceSize = indiceSize;
     
     if(dglGetError() == GL_OUT_OF_MEMORY)
     {
+        Delete();
         kex::cSystem->Error("kexVertBuffer::Allocate: Failed to allocate element buffer\n");
         return;
     }
+
+    dglBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+    dglBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
 }
 
 //
@@ -95,9 +139,14 @@ void kexVertBuffer::UnBind(void)
     {
         return;
     }
+
+    dglDisableClientState(GL_INDEX_ARRAY);
     
     dglBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
     dglBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
+
+    // switch back to array pointers
+    kexRender::cVertList->BindDrawPointers();
 }
 
 //
@@ -134,18 +183,34 @@ void kexVertBuffer::Latch(void)
     {
         return;
     }
+
+    dglEnableClientState(GL_INDEX_ARRAY);
     
-    dglIndexPointer(GL_UNSIGNED_SHORT, 0, 0);
-    dglTexCoordPointer(2, GL_FLOAT, sizeof(float)*2, 0);
-    dglVertexPointer(3, GL_FLOAT, sizeof(float)*3, 0);
-    dglColorPointer(4, GL_UNSIGNED_BYTE, sizeof(byte)*4, 0);
+    dglIndexPointer(GL_UNSIGNED_SHORT, sizeof(word), 0);
+    dglTexCoordPointer(2, GL_FLOAT, sizeof(drawVert_t), VERT_OFFSET(texCoords));
+    dglVertexPointer(3, GL_FLOAT, sizeof(drawVert_t), VERT_OFFSET(vertex));
+    dglColorPointer(4, GL_UNSIGNED_BYTE, sizeof(drawVert_t), VERT_OFFSET(rgba));
 }
 
 //
-// kexVertBuffer::MapBuffer
+// kexVertBuffer::Draw
 //
 
-kexVertBuffer::drawVert_t *kexVertBuffer::MapBuffer(void)
+void kexVertBuffer::Draw(void)
+{
+    if(!has_GL_ARB_vertex_buffer_object || indiceSize == 0)
+    {
+        return;
+    }
+
+    dglDrawElements(GL_TRIANGLES, indiceSize, GL_UNSIGNED_SHORT, 0);
+}
+
+//
+// kexVertBuffer::MapVertexBuffer
+//
+
+kexVertBuffer::drawVert_t *kexVertBuffer::MapVertexBuffer(void)
 {
     if(!has_GL_ARB_vertex_buffer_object)
     {
@@ -153,4 +218,46 @@ kexVertBuffer::drawVert_t *kexVertBuffer::MapBuffer(void)
     }
     
     return (drawVert_t*)dglMapBufferARB(GL_ARRAY_BUFFER_ARB, GL_WRITE_ONLY_ARB);
+}
+
+//
+// kexVertBuffer::UnMapVertexBuffer
+//
+
+void kexVertBuffer::UnMapVertexBuffer(void)
+{
+    if(!has_GL_ARB_vertex_buffer_object)
+    {
+        return;
+    }
+
+    dglUnmapBufferARB(GL_ARRAY_BUFFER_ARB);
+}
+
+//
+// kexVertBuffer::MapIndiceBuffer
+//
+
+word *kexVertBuffer::MapIndiceBuffer(void)
+{
+    if(!has_GL_ARB_vertex_buffer_object)
+    {
+        return NULL;
+    }
+    
+    return (word*)dglMapBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, GL_WRITE_ONLY_ARB);
+}
+
+//
+// kexVertBuffer::UnMapIndiceBuffer
+//
+
+void kexVertBuffer::UnMapIndiceBuffer(void)
+{
+    if(!has_GL_ARB_vertex_buffer_object)
+    {
+        return;
+    }
+
+    dglUnmapBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB);
 }
