@@ -170,6 +170,7 @@ private:
     static kexThread::kThread_t     musicThread;
     static kexThread::kMutex_t      musicMutex;
     static bool                     bShutdownThread;
+    static bool                     bMusicActive;
     static kexSoundSource           *musicSource;
 
     kexSoundSource                  *GetAvailableSource(void);
@@ -188,6 +189,7 @@ kexSound *kex::cSound = &soundSystem;
 const int kexSoundOAL::SND_MAX_SOURCES = 64;
 kexHeapBlock kexSoundOAL::hb_sound("sound", false, NULL, NULL);
 bool kexSoundOAL::bShutdownThread = false;
+bool kexSoundOAL::bMusicActive = false;
 kexSoundSource *kexSoundOAL::musicSource = NULL;
 kexThread::kThread_t kexSoundOAL::musicThread = NULL;
 kexThread::kMutex_t kexSoundOAL::musicMutex = NULL;
@@ -544,6 +546,8 @@ bool kexSoundSource::Generate(void)
 void kexSoundSource::Stop(void)
 {
     alSourceStop(handle);
+    bInUse      = false;
+    bPlaying    = false;
 
     if(wave)
     {
@@ -738,7 +742,7 @@ int kexSoundOAL::MusicThread(void *data)
         if(kexSoundOAL::musicSource == NULL)
         {
             kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
-            continue;
+            break;
         }
 
         src = kexSoundOAL::musicSource;
@@ -1011,6 +1015,8 @@ void kexSoundOAL::PlayMusic(const char *name, const bool bLoop)
         return;
     }
 
+    kex::cSystem->DPrintf("-------- Initialized music thread --------\n");
+
     kex::cThread->SetThreadPriority(musicThread, kexThread::TP_MED);
     kex::cThread->LockMutex(kexSoundOAL::musicMutex);
 
@@ -1026,9 +1032,12 @@ void kexSoundOAL::PlayMusic(const char *name, const bool bLoop)
 
     if(!src->ogg->OpenFile(name))
     {
+        kex::cSystem->DPrintf("-------- No music file found --------\n");
+
         delete src->ogg;
         src->ogg = NULL;
         kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
+        StopMusic();
         return;
     }
 
@@ -1048,6 +1057,7 @@ void kexSoundOAL::PlayMusic(const char *name, const bool bLoop)
     alSourcePlay(src->handle);
 
     kexSoundOAL::musicSource = src;
+    bMusicActive = true;
     kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
 }
 
@@ -1062,9 +1072,24 @@ void kexSoundOAL::StopMusic(void)
         return;
     }
 
+    kex::cSystem->DPrintf("-------- Stopping music thread --------\n");
+
     kex::cThread->LockMutex(kexSoundOAL::musicMutex);
     kexSoundOAL::bShutdownThread = true;
+
+    for(int i = 0; i < activeSources; i++)
+    {
+        if(sources[i].ogg == NULL)
+        {
+            continue;
+        }
+
+        sources[i].Stop();
+    }
+
     kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
+
+    kex::cSystem->DPrintf("-------- Waiting for music thread --------\n");
 
     kex::cThread->WaitThread(kexSoundOAL::musicThread, NULL);
 
@@ -1075,9 +1100,12 @@ void kexSoundOAL::StopMusic(void)
             continue;
         }
 
-        sources[i].Stop();
         sources[i].Free();
     }
+
+    bMusicActive = false;
+
+    kex::cSystem->DPrintf("-------- Music stopped --------\n");
 
     kexSoundOAL::musicSource = NULL;
     kexSoundOAL::musicThread = NULL;

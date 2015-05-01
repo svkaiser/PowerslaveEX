@@ -84,10 +84,8 @@ bool kexPuppet::OnCollide(kexCModel *cmodel)
             }
             else
             {
-                owner->LockTime() = 60;
+                playerFlags |= PF_ELECTROCUTE;
                 InflictDamage(NULL, 50);
-                velocity.Clear();
-                movement.Clear();
             }
         }
         if(face->flags & FF_LAVA)
@@ -116,8 +114,14 @@ bool kexPuppet::OnCollide(kexCModel *cmodel)
 
 void kexPuppet::OnDamage(kexActor *instigator)
 {
-    if(owner->LockTime() > 0)
+    if(playerFlags & PF_ELECTROCUTE)
     {
+        playerFlags &= ~PF_ELECTROCUTE;
+
+        owner->LockTime() = 60;
+        velocity.Clear();
+        movement.Clear();
+
         kexGame::cLocal->PlayLoop()->ElectrocuteFlash();
         PlaySound("sounds/pelectrocute.wav");
         return;

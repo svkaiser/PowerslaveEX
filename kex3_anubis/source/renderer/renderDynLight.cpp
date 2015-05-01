@@ -73,6 +73,12 @@ void kexRenderDLight::AddLight(kexDLight *light)
     mapSector_t *startSector;
     sectorList_t *sectorList;
 
+    if(light->Sector() == NULL || numDLights >= MAX_DLIGHTS)
+    {
+        light->Remove();
+        return;
+    }
+
     sectorList = &w->ScanSectors();
     sectorList->Reset();
 
@@ -125,14 +131,16 @@ void kexRenderDLight::AddLight(kexDLight *light)
 }
 
 //
-// kexRenderDLight::Draw
+// kexRenderDLight::RenderLitPolygon
 //
 
-void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
+void kexRenderDLight::RenderLitPolygon(mapPoly_t *poly, int &tris)
 {
     kexWorld *w = kexGame::cLocal->World();
     kexCpuVertList *vl = kexRender::cVertList;
-    int xi, yi, tris;
+    mapFace_t *face = &w->Faces()[poly->faceRef];
+    mapSector_t *sector = &w->Sectors()[face->sectorOwner];
+    int xi, yi;
     float n1, n2, v1, v2;
     float radius, rHalf;
     int passes;
@@ -140,141 +148,159 @@ void kexRenderDLight::Draw(kexRenderScene *rScene, kexStack<int> &polygons)
     mapVertex_t *verts;
     kexVec3 lightOrg;
 
+    sector->floodCount = 0;
+    verts = w->Vertices();
+
+    for(int j = 0; j < MAX_DLIGHTS; ++j)
+    {
+        int indices[4] = { 0, 0, 0, 0 };
+        int curIdx = 0;
+        kexVec3 vPoint;
+        kexVec3 vStart;
+        float dist;
+        float px, py;
+        int r, g, b, a;
+        mapVertex_t *vertex;
+        kexDLight *light;
+
+        if(!(lightMarks[sector - w->Sectors()] & BIT(j)))
+        {
+            continue;
+        }
+
+        if(dLightList[j] == NULL)
+        {
+            continue;
+        }
+
+        light = dLightList[j];
+
+        lightOrg = light->Origin();
+        radius = light->Radius() * 4;
+        passes = light->Passes();
+        rgb = light->Color();
+
+        rHalf = radius * 0.5f;
+
+        dist = face->plane.Distance(lightOrg) - face->plane.d;
+
+        if(dist > radius || dist < 0)
+        {
+            continue;
+        }
+
+        dist = (radius / (dist * dist)) * 16;
+        kexMath::Clamp(dist, 0, 1);
+
+        for(int idx = 0; idx < 4; idx++)
+        {
+            if(poly->indices[idx] == 0xff || poly->tcoords[idx] == -1)
+            {
+                continue;
+            }
+            
+            indices[curIdx] = poly->indices[idx];
+            curIdx++;
+        }
+
+        if(curIdx == 0)
+        {
+            continue;
+        }
+
+        vStart = verts[face->vertStart + indices[(curIdx-1)]].origin;
+
+        switch(face->plane.BestAxis())
+        {
+        case kexPlane::AXIS_XY:
+            xi = 0;
+            yi = 1;
+            break;
+
+        case kexPlane::AXIS_XZ:
+            xi = 0;
+            yi = 2;
+            break;
+
+        case kexPlane::AXIS_YZ:
+            xi = 1;
+            yi = 2;
+            break;
+        }
+
+        n1 = lightOrg[xi];
+        n2 = lightOrg[yi];
+        v1 = vStart[xi];
+        v2 = vStart[yi];
+
+        px = ((v1 - n1) / rHalf) + 0.5f;
+        py = ((v2 - n2) / rHalf) + 0.5f;
+
+        r = (byte)(rgb[0] * dist);
+        g = (byte)(rgb[1] * dist);
+        b = (byte)(rgb[2] * dist);
+        a = 255;
+
+        if(light->FadeTime() > -1)
+        {
+            r = (byte)(r * light->FadeFrac());
+            g = (byte)(g * light->FadeFrac());
+            b = (byte)(b * light->FadeFrac());
+        }
+
+        for(int idx = (curIdx-1); idx >= 0; idx--)
+        {
+            vertex = &verts[face->vertStart + indices[idx]];
+            vPoint = vertex->origin;
+
+            float tu = px + ((vPoint[xi] - v1) / rHalf);
+            float tv = py + ((vPoint[yi] - v2) / rHalf);
+
+            vl->AddVertex(vPoint, tu, tv, r, g, b, a);
+        }
+        
+        for(int p = 0; p < passes+1; ++p)
+        {
+            vl->AddTriangle(tris+0, tris+2, tris+1);
+            if(curIdx == 4)
+            {
+                vl->AddTriangle(tris+0, tris+3, tris+2);
+            }
+        }
+        
+        tris += curIdx;
+    }
+}
+
+//
+// kexRenderDLight::Draw
+//
+
+void kexRenderDLight::Draw(kexRenderScene *rScene)
+{
+    kexWorld *w = kexGame::cLocal->World();
+    kexCpuVertList *vl = kexRender::cVertList;
+    int tris;
+    uint count;
+
     kexRender::cBackend->SetDepth(GLFUNC_EQUAL);
     kexRender::cBackend->SetBlend(GLSRC_DST_COLOR, GLDST_ONE);
     kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
     kexRender::cTextures->lightTexture->Bind();
 
     tris = 0;
-    verts = w->Vertices();
+    count = rScene->polyList.CurrentLength();
 
-    for(uint i = 0; i < polygons.CurrentLength(); ++i)
+    for(uint i = 0; i < count; ++i)
     {
-        mapPoly_t *poly = &w->Polys()[polygons[i]];
-        mapFace_t *face = &w->Faces()[poly->faceRef];
-        mapSector_t *sector = &w->Sectors()[face->sectorOwner];
+        mapPoly_t *poly = &w->Polys()[rScene->polyList[i]];
 
-        sector->floodCount = 0;
-
-        for(int j = 0; j < MAX_DLIGHTS; ++j)
+        if(lightMarks[w->Faces()[poly->faceRef].sectorOwner] == 0)
         {
-            int indices[4] = { 0, 0, 0, 0 };
-            int curIdx = 0;
-            kexVec3 vPoint;
-            kexVec3 vStart;
-            float dist;
-            float px, py;
-            int r, g, b, a;
-            mapVertex_t *vertex;
-            kexDLight *light;
-
-            if(!(lightMarks[sector - w->Sectors()] & BIT(j)))
-            {
-                continue;
-            }
-
-            if(dLightList[j] == NULL)
-            {
-                continue;
-            }
-
-            light = dLightList[j];
-
-            lightOrg = light->Origin();
-            radius = light->Radius() * 4;
-            passes = light->Passes();
-            rgb = light->Color();
-
-            rHalf = radius * 0.5f;
-
-            dist = face->plane.Distance(lightOrg) - face->plane.d;
-
-            if(dist > radius || dist < 0)
-            {
-                continue;
-            }
-
-            dist = (radius / (dist * dist)) * 16;
-            kexMath::Clamp(dist, 0, 1);
-
-            for(int idx = 0; idx < 4; idx++)
-            {
-                if(poly->indices[idx] == 0xff || poly->tcoords[idx] == -1)
-                {
-                    continue;
-                }
-                
-                indices[curIdx] = poly->indices[idx];
-                curIdx++;
-            }
-
-            if(curIdx == 0)
-            {
-                continue;
-            }
-
-            vStart = verts[face->vertStart + indices[(curIdx-1)]].origin;
-
-            switch(face->plane.BestAxis())
-            {
-            case kexPlane::AXIS_XY:
-                xi = 0;
-                yi = 1;
-                break;
-
-            case kexPlane::AXIS_XZ:
-                xi = 0;
-                yi = 2;
-                break;
-
-            case kexPlane::AXIS_YZ:
-                xi = 1;
-                yi = 2;
-                break;
-            }
-
-            n1 = lightOrg[xi];
-            n2 = lightOrg[yi];
-            v1 = vStart[xi];
-            v2 = vStart[yi];
-
-            px = ((v1 - n1) / rHalf) + 0.5f;
-            py = ((v2 - n2) / rHalf) + 0.5f;
-
-            r = (byte)(rgb[0] * dist);
-            g = (byte)(rgb[1] * dist);
-            b = (byte)(rgb[2] * dist);
-            a = 255;
-
-            if(light->FadeTime() > -1)
-            {
-                r = (byte)(r * light->FadeFrac());
-                g = (byte)(g * light->FadeFrac());
-                b = (byte)(b * light->FadeFrac());
-            }
-
-            for(int idx = (curIdx-1); idx >= 0; idx--)
-            {
-                vertex = &verts[face->vertStart + indices[idx]];
-                vPoint = vertex->origin;
-
-                float tu = px + ((vPoint[xi] - v1) / rHalf);
-                float tv = py + ((vPoint[yi] - v2) / rHalf);
-
-                vl->AddVertex(vPoint, tu, tv, r, g, b, a);
-            }
-            
-            for(int p = 0; p < passes+1; ++p)
-            {
-                vl->AddTriangle(tris+0, tris+2, tris+1);
-                if(curIdx == 4)
-                {
-                    vl->AddTriangle(tris+0, tris+3, tris+2);
-                }
-            }
-            
-            tris += curIdx;
+            continue;
         }
+
+        RenderLitPolygon(poly, tris);
     }
 
     if(tris > 0)

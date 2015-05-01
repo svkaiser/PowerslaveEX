@@ -39,6 +39,17 @@ typedef enum
 
 typedef struct
 {
+    int triStart;
+    int vertStart;
+    int count;
+    int texture;
+    int sector;
+    int numVert;
+    int numTris;
+} bufferIndex_t;
+
+typedef struct
+{
     word                    faceStart;
     word                    faceEnd;
     word                    lightLevel;
@@ -61,6 +72,7 @@ typedef struct
     struct mapFace_s        *floorFace;
     struct mapFace_s        *ceilingFace;
     kexLinklist<kexActor>   actorList;
+    kexArray<bufferIndex_t> bufferIndex;
 } mapSector_t;
 
 typedef kexStack<mapSector_t*> sectorList_t;
@@ -82,7 +94,8 @@ typedef enum
     FF_HIDDEN           = BIT(12),
     FF_PORTAL           = BIT(13),
     FF_UNDERWATER       = BIT(14),
-    FF_MAPPED           = BIT(15)
+    FF_MAPPED           = BIT(15),
+    FF_DYNAMIC          = BIT(16)
 } faceFlags_t;
 
 typedef enum
@@ -106,7 +119,7 @@ typedef struct mapFace_s
     short               sector;
     float               angle;
     kexPlane            plane;
-    word                flags;
+    uint                flags;
     short               tag;
     word                vertStart;
     word                vertEnd;
@@ -237,6 +250,7 @@ private:
     void                    SpawnMapActor(mapActor_t *mapActor);
     void                    BuildPortals(unsigned int count);
     void                    SetupFloatingPlatforms(mapEvent_t *ev, mapSector_t *sector, const char *className);
+    bool                    EventIsASwitch(const int eventID);
     
     void                    ReadTextures(kexBinFile &mapfile, const unsigned int count);
     void                    ReadVertices(kexBinFile &mapfile, const unsigned int count);

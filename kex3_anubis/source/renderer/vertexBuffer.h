@@ -67,7 +67,7 @@ public:
 
     typedef struct
     {
-        kexArray<word> drawIndices;
+        kexArray<uint> drawIndices;
 
         void AddTriangle(const int t0, const int t1, const int t2)
         {
@@ -79,16 +79,19 @@ public:
     } drawIndiceList_t;
     
     void                Allocate(drawVert_t *drawVerts, uint size, const bufferUsage_t vertexUsage,
-                                 word *indices, uint indiceSize, const bufferUsage_t indiceUsage);
+                                 uint *indices, uint indiceSize, const bufferUsage_t indiceUsage);
     void                Bind(void);
     void                UnBind(void);
     void                Latch(void);
     void                Draw(void);
+    void                Draw(const uint count, const uint offset);
     void                Delete(void);
     drawVert_t          *MapVertexBuffer(void);
     void                UnMapVertexBuffer(void);
-    word                *MapIndiceBuffer(void);
+    uint                *MapIndiceBuffer(void);
     void                UnMapIndiceBuffer(void);
+    const uint          GetVertexBufferSize(void);
+    const uint          GetIndiceBufferSize(void);
 
     const uint          VertexSize(void) { return vertexSize; }
     const uint          IndiceSize(void) { return indiceSize; }

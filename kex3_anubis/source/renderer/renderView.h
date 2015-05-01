@@ -56,6 +56,7 @@ public:
     void                SetupFromPlayer(kexPlayer *player);
     void                Setup(void);
     kexVec3             ProjectPoint(const kexVec3 &point, kexVec4 *projVector = NULL);
+    kexVec3             UnProjectPoint(const kexVec3 &point);
     bool                TestBoundingBox(const kexBBox &bbox);
     bool                TestSphere(const kexVec3 &org, const float radius);
     bool                TestPointNearPlane(const kexVec3 &org);
@@ -63,6 +64,7 @@ public:
     bool                BoxDistance(const kexBBox &box, const float distance);
 
     static const float  Z_NEAR;
+    static const float  Z_FAR;
 
 private:
     void                SetupMatrices(void);

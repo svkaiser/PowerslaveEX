@@ -190,7 +190,9 @@ void kexPlayLoop::Start(void)
     }
     
     hud.SetPlayer(game->Player());
+
     renderScene.SetWorld(game->World());
+    renderScene.InitVertexBuffer();
     renderScene.DLights().Init();
 
     kexGame::cScriptManager->LoadLevelScript(game->ActiveMap()->script.c_str());
@@ -232,6 +234,8 @@ void kexPlayLoop::Stop(void)
     }
     
     kex::cSound->StopMusic();
+
+    renderScene.DestroyVertexBuffer();
 
     kexGame::cScriptManager->DestroyLevelScripts();
     kexGame::cLocal->World()->UnloadMap();

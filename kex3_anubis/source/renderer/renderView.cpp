@@ -22,6 +22,7 @@
 kexCvar cvarFOV("r_fov", CVF_FLOAT|CVF_CONFIG, "74.0", "Field of view");
 
 const float kexRenderView::Z_NEAR = 0.1f;
+const float kexRenderView::Z_FAR = -0.999f;
 
 //
 // kexRenderView::ProjectPoint
@@ -67,6 +68,29 @@ kexVec3 kexRenderView::ProjectPoint(const kexVec3 &point, kexVec4 *projVector)
 }
 
 //
+// kexRenderView::UnProjectPoint
+//
+
+kexVec3 kexRenderView::UnProjectPoint(const kexVec3 &point)
+{
+    kexMatrix inv = kexMatrix::Invert(clipMatrix);
+    kexVec4 pt;
+
+    pt.x = point.x / (float)kex::cSystem->VideoWidth() * 2.0f - 1.0f;
+    pt.y = point.y / (float)kex::cSystem->VideoHeight() * 2.0f - 1.0f;
+    pt.z = 2.0f * point.z - 1.0f;
+    pt.w = 1.0f;
+
+    pt = pt * inv;
+    pt.w = 1.0f / pt.w;
+
+    kexVec3 out = pt.ToVec3();
+    out /= pt.w;
+
+    return out;
+}
+
+//
 // kexRenderView::SetupMatrices
 //
 
@@ -80,7 +104,7 @@ void kexRenderView::SetupMatrices(void)
     fov = cvarFOV.GetFloat();
 
     // setup projection matrix
-    projectionView.SetViewProjection(kex::cSystem->VideoRatio(), fov, Z_NEAR, -1);
+    projectionView.SetViewProjection(kex::cSystem->VideoRatio(), fov, Z_NEAR, Z_FAR);
 
     // setup rotation quaternion
     kexQuat qyaw(yaw, kexVec3::vecUp);
@@ -134,7 +158,7 @@ void kexRenderView::SetupFromPlayer(kexPlayer *player)
     }
 
     MakeClipPlanes();
-    TransformPoints(origin, forward, fov, kex::cSystem->VideoRatio(), 0.1f, 8192);
+    TransformPoints(origin, forward, fov, kex::cSystem->VideoRatio(), Z_NEAR, 8192);
 }
 
 //

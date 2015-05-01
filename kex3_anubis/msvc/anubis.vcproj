@@ -334,6 +334,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\source\renderer\renderPortal.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\source\renderer\renderPostProcess.cpp"
 					>
 				</File>

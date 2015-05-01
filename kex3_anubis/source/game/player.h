@@ -26,7 +26,8 @@ typedef enum
     PF_INWATERSURFACE   = BIT(4),
     PF_JUMPWASHELD      = BIT(5),
     PF_NEEDTOGASP       = BIT(6),
-    PF_FLOATING         = BIT(7)
+    PF_FLOATING         = BIT(7),
+    PF_ELECTROCUTE      = BIT(8)
 } playerFlags_t;
 
 class kexActor;

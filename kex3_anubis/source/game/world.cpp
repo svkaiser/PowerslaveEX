@@ -17,8 +17,8 @@
 
 #include "kexlib.h"
 #include "game.h"
-#include "renderMain.h"
 #include "mover.h"
+#include "renderScene.h"
 
 kexHeapBlock kexWorld::hb_world("world", false, NULL, NULL);
 
@@ -159,6 +159,7 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].floorFace        = &faces[sectors[i].faceEnd+2];
 
         sectors[i].actorList.Reset();
+        sectors[i].bufferIndex.Init();
         
         for(int j = sectors[i].faceStart; j < sectors[i].faceEnd+3; ++j)
         {
@@ -202,6 +203,11 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
         f->x2           = 0;
         f->y1           = 0;
         f->y2           = 0;
+
+        if(f->flags & (FF_WATER|FF_TOGGLE) || EventIsASwitch(f->tag))
+        {
+            f->flags |= FF_DYNAMIC;
+        }
         
         kexAngle::Clamp(f->angle);
         
@@ -352,6 +358,14 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
             default:
                 break;
             }
+        }
+    }
+
+    for(unsigned int i = 0; i < numFaces; ++i)
+    {
+        if(EventIsASwitch(faces[i].tag))
+        {
+            faces[i].flags |= FF_DYNAMIC;
         }
     }
 }
@@ -651,6 +665,23 @@ void kexWorld::SetupFloatingPlatforms(mapEvent_t *ev, mapSector_t *sector, const
 }
 
 //
+// kexWorld::EventIsASwitch
+//
+
+bool kexWorld::EventIsASwitch(const int eventID)
+{
+    if(eventID < 0 || eventID > (int)numEvents)
+    {
+        return false;
+    }
+
+    return (events[eventID].type == 200 ||
+            events[eventID].type == 201 ||
+            events[eventID].type == 202 ||
+            events[eventID].type == 203);
+}
+
+//
 // kexWorld::MoveSector
 //
 
@@ -700,6 +731,13 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                 {
                     mapVertex_t *v = &vertices[k];
                     v->origin.z += moveAmount;
+
+                    if(kexRenderScene::cvarRenderUseVBO.GetBool())
+                    {
+                        bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
+                        bufUpdate->index = k;
+                        bufUpdate->newVec = v->origin;
+                    }
                 }
                 
                 vertices[f->vertexStart+0].origin.z += moveAmount;
@@ -738,6 +776,13 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
         {
             mapVertex_t *v = &vertices[j];
             v->origin.z += moveAmount;
+
+            if(kexRenderScene::cvarRenderUseVBO.GetBool())
+            {
+                bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
+                bufUpdate->index = j;
+                bufUpdate->newVec = v->origin;
+            }
         }
         
         vertices[face->vertexStart+0].origin.z += moveAmount;
@@ -956,10 +1001,7 @@ void kexWorld::ResetWallSwitchFromTag(const int tag)
             continue;
         }
 
-        if(events[i].type != 200 &&
-           events[i].type != 201 &&
-           events[i].type != 202 &&
-           events[i].type != 203)
+        if(!EventIsASwitch(i))
         {
             continue;
         }

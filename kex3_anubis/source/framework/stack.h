@@ -223,7 +223,7 @@ d_inline const type &kexStack<type>::operator[](unsigned int index) const
 template<class type>
 void kexStack<type>::Sort(compare_t *function)
 {
-    if(data == NULL)
+    if(data == NULL || aidx <= 1)
     {
         return;
     }
