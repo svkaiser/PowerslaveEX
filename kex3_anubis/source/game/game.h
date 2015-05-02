@@ -53,6 +53,7 @@ typedef enum
     GBE_MENU_SELECT     = BIT(4),
     GBE_MENU_CANCEL     = BIT(5),
     GBE_MENU_BACK       = BIT(6),
+    GBE_MENU_ACTIVATE   = BIT(7),
     NUMGAMEBUTTONEVENTS
 } gameButtonEvents_t;
 
@@ -242,7 +243,7 @@ public:
     unsigned int                    &ButtonEvent(void) { return buttonEvent; }
 
     void                            SetMenu(const menus_t menu);
-    void                            ClearMenu(void);
+    void                            ClearMenu(const bool bClearAll = false);
     kexObject                       *ConstructObject(const char *className);
     kexActor                        *SpawnActor(const int type, const float x, const float y, const float z,
                                                 const float yaw, const int sector = -1);
@@ -296,6 +297,7 @@ private:
     mapInfo_t                       *activeMap;
     kexArray<bool>                  bMapUnlockList;
     kexArray<bool>                  bCursorEnabled;
+    kexArray<menus_t>               menuStack;
     unsigned int                    buttonEvent;
 };
 

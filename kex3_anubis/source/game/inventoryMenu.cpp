@@ -113,7 +113,7 @@ void kexInventoryMenu::Reset(void)
     flashCount = 0;
     focusedTransmitter = -1;
     bFlashArtifact = false;
-    buttonSet.pressedIndex = -1;
+    buttonSet.pressedIndex = 0;
 }
 
 //

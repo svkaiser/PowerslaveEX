@@ -18,19 +18,71 @@
 typedef enum
 {
     MENU_QUITCONFIRM    = 0,
-    MENU_INPUT,
+    MENU_BINDINGS,
     MENU_TRAVEL,
     MENU_STARTUP_NOTICE,
+    MENU_PAUSE,
+    MENU_OPTIONS,
+    MENU_MAINCONFIRM,
+    MENU_INPUT,
     NUMMENUS
 } menus_t;
 
+//-----------------------------------------------------------------------------
+//
+// kexMenuObject
+//
+//-----------------------------------------------------------------------------
+
+class kexMenu;
+class kexMenuObject;
+
+typedef void(kexMenu::*selectCallback_t)(kexMenuObject*);
+
+BEGIN_EXTENDED_KEX_CLASS(kexMenuObject, kexObject);
+public:
+    kexMenuObject(void);
+
+    virtual void                    Draw(void) = 0;
+    virtual void                    Tick(void) = 0;
+    virtual void                    Select(const bool b) = 0;
+    virtual bool                    CheckMouseSelect(const float mx, const float my) = 0;
+
+    typedef enum
+    {
+        MITA_LEFT   = 0,
+        MITA_CENTER,
+        MITA_RIGHT
+    } menuItemTextAlign_t;
+
+    float                           x;
+    float                           y;
+    kexStr                          label;
+    menuItemTextAlign_t             textAlignment;
+    uint                            index;
+    bool                            bSelected;
+    kexMenu                         *menu;
+
+    selectCallback_t                Callback;
+END_KEX_CLASS();
+
 BEGIN_EXTENDED_KEX_CLASS(kexMenu, kexObject);
 public:
+    kexMenu(void);
+
     virtual void                Init(void);
     virtual void                Display(void);
     virtual void                Reset(void);
     virtual void                Update(void);
     virtual bool                ProcessInput(inputEvent_t *ev);
+
+    kexMenuObject               *AllocateMenuObject(const char *className);
+    void                        DrawItems(void);
+    void                        UpdateItems(void);
+
+    kexArray<kexMenuObject*>    menuObjects;
+    uint                        itemIndex;
+    int                         selectedItem;
 END_KEX_CLASS();
 
 #define DEFINE_MENU_CLASS(name)   \

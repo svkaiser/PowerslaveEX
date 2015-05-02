@@ -316,6 +316,7 @@ COMMAND(menu_left)      { gameLocal.ButtonEvent() |= GBE_MENU_LEFT; }
 COMMAND(menu_select)    { gameLocal.ButtonEvent() |= GBE_MENU_SELECT; }
 COMMAND(menu_cancel)    { gameLocal.ButtonEvent() |= GBE_MENU_CANCEL; }
 COMMAND(menu_back)      { gameLocal.ButtonEvent() |= GBE_MENU_BACK; }
+COMMAND(menu_activate)  { gameLocal.ButtonEvent() |= GBE_MENU_ACTIVATE; }
 
 //
 // kexGameLocal::kexGameLocal
@@ -715,6 +716,13 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
 void kexGameLocal::SetMenu(const menus_t menu)
 {
     activeMenu = menus[menu];
+    menuStack.Push(menu);
+
+    if(menuStack.Length() >= 2)
+    {
+        return;
+    }
+
     bCursorEnabled.Push(!kex::cInput->MouseGrabbed() && kex::cSession->CursorVisible());
 
     kex::cInput->ToggleMouseGrab(false);
@@ -725,13 +733,33 @@ void kexGameLocal::SetMenu(const menus_t menu)
 // kexGameLocal::ClearMenu
 //
 
-void kexGameLocal::ClearMenu(void)
+void kexGameLocal::ClearMenu(const bool bClearAll)
 {
     unsigned int len = bCursorEnabled.Length();
 
+    if(bClearAll)
+    {
+        menuStack.Empty();
+        bCursorEnabled.Empty();
+
+        kex::cInput->ToggleMouseGrab(true);
+        kex::cInput->CenterMouse();
+        kex::cSession->ToggleCursor(false);
+
+        activeMenu = NULL;
+        return;
+    }
+
+    menuStack.Pop();
+    if(menuStack.Length() != 0)
+    {
+        activeMenu = menus[menuStack.GetLast()];
+        return;
+    }
+
     activeMenu = NULL;
 
-    if(len != 0 && bCursorEnabled[len-1] == false)
+    if(len != 0 && bCursorEnabled.GetLast() == false)
     {
         kex::cInput->ToggleMouseGrab(true);
         kex::cInput->CenterMouse();

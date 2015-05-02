@@ -274,6 +274,12 @@ void kexPlayLoop::Draw(void)
 
 void kexPlayLoop::Tick(void)
 {
+    if(kexGame::cLocal->ButtonEvent() & GBE_MENU_ACTIVATE)
+    {
+        kexGame::cLocal->SetMenu(MENU_PAUSE);
+        return;
+    }
+
     if(fadeInTicks > 0)
     {
         if(bFadeOut)

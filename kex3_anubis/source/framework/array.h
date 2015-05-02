@@ -29,6 +29,8 @@ public:
     void                Push(type o);
     void                Pop(void);
     type                *Grow(void);
+    type                GetFirst(void);
+    type                GetLast(void);
     void                Empty(void);
     void                Init(void);
     void                Resize(unsigned int size);
@@ -87,6 +89,7 @@ template<class type>
 void kexArray<type>::Resize(unsigned int size)
 {
     type *tmp;
+    unsigned int cnt;
 
     if(size == length)
     {
@@ -111,7 +114,16 @@ void kexArray<type>::Resize(unsigned int size)
     tmp = data;
     data = new type[size];
 
-    for(unsigned int i = 0; i < length; i++)
+    if(length <= size)
+    {
+        cnt = length;
+    }
+    else
+    {
+        cnt = size;
+    }
+
+    for(unsigned int i = 0; i < cnt; i++)
     {
         data[i] = tmp[i];
     }
@@ -153,6 +165,26 @@ type *kexArray<type>::Grow(void)
 {
     Resize(length+1);
     return &data[length-1];
+}
+
+//
+// kexArray::GetFirst
+//
+template<class type>
+type kexArray<type>::GetFirst(void)
+{
+    assert(length > 0);
+    return data[0];
+}
+
+//
+// kexArray::GetLast
+//
+template<class type>
+type kexArray<type>::GetLast(void)
+{
+    assert(length > 0);
+    return data[length-1];
 }
 
 //
