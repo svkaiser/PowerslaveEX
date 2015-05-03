@@ -35,11 +35,6 @@ typedef enum
     TSI_GAMEPAD,
     TSI_GRAPHICS,
     TSI_AUDIO,
-    TSI_SFXVOLUME,
-    TSI_SFXSLIDER,
-    TSI_MUSICVOLUME,
-    TSI_MUSICSLIDER,
-    TSI_EXIT_AUDIO,
     TSI_EXIT_OPTIONS,
     TSI_EXIT_INPUT,
 
@@ -70,12 +65,6 @@ static menuGroup_t *titleMenu[NUMTITLESCREENITEMS];
     lerpblock   \
     static void Callback_ ## name(kexMenuItem *item)    \
     block
-
-#define MENUITEM_LABEL(name, label, x, y, center)   \
-    static menuGroup_t menuGroup_ ## name = { new kexMenuItemLabel(label, x, y, center), NULL }
-
-#define MENUITEM_SLIDER(name, x, y, cvar, center)   \
-    static menuGroup_t menuGroup_ ## name = { new kexMenuItemSlider(x, y, center, cvar), NULL }
 
 //-----------------------------------------------------------------------------
 //
@@ -215,25 +204,10 @@ MENUITEM(Graphics, "Graphics", -100, 150, 1,
 
 MENUITEM(Audio, "Audio", 420, 168, 1,
 {
-    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_AUDIO)
-    {
-        return;
-    }
-    
-    titleMenu[TSI_SFXVOLUME]->item->LerpTo(160);
-    titleMenu[TSI_SFXSLIDER]->item->LerpTo(160);
-    titleMenu[TSI_MUSICVOLUME]->item->LerpTo(160);
-    titleMenu[TSI_MUSICSLIDER]->item->LerpTo(160);
-    titleMenu[TSI_EXIT_AUDIO]->item->LerpTo(160);
 },
 {
-    titleMenu[TSI_OPTIONS]->item->LerpTo(-100, 64);
-    titleMenu[TSI_GAMEPLAY]->item->LerpTo(-100);
-    titleMenu[TSI_INPUT]->item->LerpTo(420);
-    titleMenu[TSI_GRAPHICS]->item->LerpTo(-100);
-    titleMenu[TSI_AUDIO]->item->LerpTo(160, 64);
-    titleMenu[TSI_AUDIO]->item->Toggle(false);
-    titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(-100);
+    kexGame::cLocal->SetMenu(MENU_AUDIO);
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -266,54 +240,6 @@ MENUITEM(OptionExit, "Exit", -100, 186, 1,
 
 //-----------------------------------------------------------------------------
 //
-// Audio: SFX Volume
-//
-//-----------------------------------------------------------------------------
-
-MENUITEM_LABEL(SoundVolume, "Sound FX Volume", -150, 110, 1);
-MENUITEM_SLIDER(SoundVolSlider, -100, 128, kexSound::cvarVolume, 1);
-
-//-----------------------------------------------------------------------------
-//
-// Audio: Music Volume
-//
-//-----------------------------------------------------------------------------
-
-MENUITEM_LABEL(MusicVolume, "Music Volume", 420, 146, 1);
-MENUITEM_SLIDER(MusicVolSlider, -100, 164, kexSound::cvarMusicVolume, 1);
-
-//-----------------------------------------------------------------------------
-//
-// Audio: Exit
-//
-//-----------------------------------------------------------------------------
-
-MENUITEM(AudioExit, "Exit", 420, 182, 1,
-{
-    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_EXIT_AUDIO)
-    {
-        return;
-    }
-    
-    titleMenu[TSI_OPTIONS]->item->LerpTo(160, 64);
-    titleMenu[TSI_GAMEPLAY]->item->LerpTo(160);
-    titleMenu[TSI_INPUT]->item->LerpTo(160);
-    titleMenu[TSI_GRAPHICS]->item->LerpTo(160);
-    titleMenu[TSI_AUDIO]->item->LerpTo(160, 168);
-    titleMenu[TSI_AUDIO]->item->Toggle(true);
-    titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(160);
-    kexGame::cLocal->TitleScreen()->DeselectAllItems();
-},
-{
-    titleMenu[TSI_SFXVOLUME]->item->LerpTo(-150);
-    titleMenu[TSI_SFXSLIDER]->item->LerpTo(420);
-    titleMenu[TSI_MUSICVOLUME]->item->LerpTo(-100);
-    titleMenu[TSI_MUSICSLIDER]->item->LerpTo(420);
-    titleMenu[TSI_EXIT_AUDIO]->item->LerpTo(-100);
-});
-
-//-----------------------------------------------------------------------------
-//
 // Input: Bindings
 //
 //-----------------------------------------------------------------------------
@@ -322,7 +248,7 @@ MENUITEM(Bindings, "Bindings", -100, 114, 1,
 {
 },
 {
-    kexGame::cLocal->SetMenu(MENU_INPUT);
+    kexGame::cLocal->SetMenu(MENU_BINDINGS);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
@@ -336,6 +262,7 @@ MENUITEM(Mouse, "Mouse", 420, 132, 1,
 {
 },
 {
+    kexGame::cLocal->SetMenu(MENU_MOUSE);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
@@ -349,6 +276,7 @@ MENUITEM(Gamepad, "Gamepad", -100, 150, 1,
 {
 },
 {
+    kexGame::cLocal->SetMenu(MENU_JOYSTICK);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
@@ -404,11 +332,6 @@ kexTitleScreen::kexTitleScreen(void)
     titleMenu[TSI_GAMEPAD] = &menuGroup_Gamepad;
     titleMenu[TSI_GRAPHICS] = &menuGroup_Graphics;
     titleMenu[TSI_AUDIO] = &menuGroup_Audio;
-    titleMenu[TSI_SFXVOLUME] = &menuGroup_SoundVolume;
-    titleMenu[TSI_SFXSLIDER] = &menuGroup_SoundVolSlider;
-    titleMenu[TSI_MUSICVOLUME] = &menuGroup_MusicVolume;
-    titleMenu[TSI_MUSICSLIDER] = &menuGroup_MusicVolSlider;
-    titleMenu[TSI_EXIT_AUDIO] = &menuGroup_AudioExit;
     titleMenu[TSI_EXIT_OPTIONS] = &menuGroup_OptionExit;
     titleMenu[TSI_EXIT_INPUT] = &menuGroup_InputExit;
 }

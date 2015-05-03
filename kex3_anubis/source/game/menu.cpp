@@ -21,6 +21,8 @@
 #include "menu.h"
 #include "localization.h"
 
+#define ALLOC_MENU_OBJECT(className)    static_cast<className*>(AllocateMenuObject(#className))
+
 //-----------------------------------------------------------------------------
 //
 // kexMenuObject
@@ -37,11 +39,62 @@ kexMenuObject::kexMenuObject(void)
 {
     this->x = 0;
     this->y = 0;
+    this->w = 100;
+    this->h = 64;
     this->label = " ";
     this->textAlignment = MITA_CENTER;
     this->index = 0;
     this->bSelected = false;
     this->Callback = NULL;
+}
+
+//
+// kexMenuObject::Reset
+//
+
+void kexMenuObject::Reset(void)
+{
+    bSelected = false;
+}
+
+//
+// kexMenuObject::DrawLabel
+//
+
+void kexMenuObject::DrawLabel(void)
+{
+    static kexFont *font = NULL;
+
+    if(font == NULL)
+    {
+        if(!(font = kexFont::Get("smallfont")))
+        {
+            return;
+        }
+    }
+
+    labelWidth = font->StringWidth(label.c_str(), 1, 0);
+    labelHeight = font->StringHeight(label.c_str(), 1, 0);
+
+    switch(textAlignment)
+    {
+    case MITA_LEFT:
+        kexGame::cLocal->DrawSmallString(label.c_str(), x+8, y, 1, false);
+        break;
+
+    case MITA_RIGHT:
+        kexGame::cLocal->DrawSmallString(label.c_str(), (w-labelWidth)+10, y, 1, false);
+        break;
+
+    case MITA_CENTER:
+        kexGame::cLocal->DrawSmallString(label.c_str(),
+                                         (w + (x * 2)) * 0.5f,
+                                         ((h + (y * 2)) * 0.5f) - 4, 1, true);
+        break;
+
+    default:
+        break;
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -56,11 +109,7 @@ public:
 
     virtual void                    Draw(void);
     virtual void                    Tick(void);
-    virtual void                    Select(const bool b);
     virtual bool                    CheckMouseSelect(const float mx, const float my);
-
-    float                           w;
-    float                           h;
 END_KEX_CLASS();
 
 DECLARE_KEX_CLASS(kexMenuObjectPanelSelect, kexMenuObject)
@@ -71,8 +120,6 @@ DECLARE_KEX_CLASS(kexMenuObjectPanelSelect, kexMenuObject)
 
 kexMenuObjectPanelSelect::kexMenuObjectPanelSelect(void)
 {
-    this->w = 0;
-    this->h = 0;
 }
 
 //
@@ -81,9 +128,6 @@ kexMenuObjectPanelSelect::kexMenuObjectPanelSelect(void)
 
 void kexMenuObjectPanelSelect::Draw(void)
 {
-    static kexFont *font = NULL;
-    float len;
-
     kexGame::cMenuPanel->DrawInset(x, y, w, h);
 
     if(bSelected)
@@ -92,34 +136,7 @@ void kexMenuObjectPanelSelect::Draw(void)
                                         x+2, y+2, 192, 32, 32, 128, w-3, h-4);
     }
 
-    if(font == NULL)
-    {
-        if(!(font = kexFont::Get("smallfont")))
-        {
-            return;
-        }
-    }
-
-    switch(textAlignment)
-    {
-    case MITA_LEFT:
-        kexGame::cLocal->DrawSmallString(label.c_str(), x+8, y, 1, false);
-        break;
-
-    case MITA_RIGHT:
-        len = font->StringWidth(label.c_str(), 1, 0);
-        kexGame::cLocal->DrawSmallString(label.c_str(), (w-len)+10, y, 1, false);
-        break;
-
-    case MITA_CENTER:
-        kexGame::cLocal->DrawSmallString(label.c_str(),
-                                         (w + (x * 2)) * 0.5f,
-                                         ((h + (y * 2)) * 0.5f) - 4, 1, true);
-        break;
-
-    default:
-        break;
-    }
+    DrawLabel();
 }
 
 //
@@ -129,7 +146,7 @@ void kexMenuObjectPanelSelect::Draw(void)
 bool kexMenuObjectPanelSelect::CheckMouseSelect(const float mx, const float my)
 {
     if(mx >= x+1 && mx <= (x+1) + (w-1) &&
-       my >= y-1 && my <= y + (h-1))
+       my >= y-1 && my <= (y-1) + (h-1))
     {
         bSelected = true;
         return true;
@@ -154,14 +171,6 @@ void kexMenuObjectPanelSelect::Tick(void)
     }
 }
 
-//
-// kexMenuObjectPanelSelect::Select
-//
-
-void kexMenuObjectPanelSelect::Select(const bool b)
-{
-}
-
 //-----------------------------------------------------------------------------
 //
 // kexMenuObjectButton
@@ -174,11 +183,8 @@ public:
 
     virtual void                    Draw(void);
     virtual void                    Tick(void);
-    virtual void                    Select(const bool b);
     virtual bool                    CheckMouseSelect(const float mx, const float my);
-
-    float                           w;
-    float                           h;
+    virtual void                    Reset(void);
 
     bool                            bPressed;
 END_KEX_CLASS();
@@ -191,8 +197,6 @@ DECLARE_KEX_CLASS(kexMenuObjectButton, kexMenuObject)
 
 kexMenuObjectButton::kexMenuObjectButton(void)
 {
-    this->w = 0;
-    this->h = 0;
     this->bPressed = false;
 }
 
@@ -329,11 +333,127 @@ void kexMenuObjectButton::Tick(void)
 }
 
 //
-// kexMenuObjectButton::Select
+// kexMenuObject::Reset
 //
 
-void kexMenuObjectButton::Select(const bool b)
+void kexMenuObjectButton::Reset(void)
 {
+    bPressed = false;
+    kexMenuObject::Reset();
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuObjectSlidebar
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexMenuObjectSlidebar, kexMenuObject);
+public:
+    kexMenuObjectSlidebar(void);
+
+    virtual void                    Draw(void);
+    virtual void                    Tick(void);
+    virtual bool                    CheckMouseSelect(const float mx, const float my);
+
+    kexCvar                         *cvar;
+    float                           amount;
+END_KEX_CLASS();
+
+DECLARE_KEX_CLASS(kexMenuObjectSlidebar, kexMenuObject)
+
+//
+// kexMenuObjectSlidebar::kexMenuObjectSlidebar
+//
+
+kexMenuObjectSlidebar::kexMenuObjectSlidebar(void)
+{
+    this->w = 0;
+    this->h = 0;
+    this->cvar = NULL;
+    this->amount = 0.1f;
+}
+
+//
+// kexMenuObjectSlidebar::Draw
+//
+
+void kexMenuObjectSlidebar::Draw(void)
+{
+    kexCpuVertList *vl = kexRender::cVertList;
+    float range, frac;
+
+    DrawLabel();
+
+    range = cvar->GetMax() - cvar->GetMin();
+    frac = (cvar->GetFloat() - cvar->GetMin()) / range;
+
+    kexRender::cTextures->whiteTexture->Bind();
+    vl->AddQuad(x-1, (y+(labelHeight*2))-1, w+2, h+2, 70, 36, 18, 255);
+    vl->AddQuad(x, y+(labelHeight*2), w, h, 0, 0, 0, 255);
+    vl->AddQuad(x+1, (y+(labelHeight*2))+1, (w-2)*frac, h-2, bSelected ? 224 : 96, 16, 16, 255);
+    vl->DrawElements();
+
+    kexGame::cLocal->DrawSmallString(cvar->GetValue(), 160, (y+(labelHeight*2))+2, 0.5f, true);
+}
+
+//
+// kexMenuObjectSlidebar::CheckMouseSelect
+//
+
+bool kexMenuObjectSlidebar::CheckMouseSelect(const float mx, const float my)
+{
+    float x1 = x+1;
+    float x2 = w-2;
+    float y1 = (y+(labelHeight*2))+1;
+    float y2 = h-2;
+
+    bSelected = (mx >= x1 && mx <= x1 + x2 && my >= y1 && my <= y1 + y2);
+    return bSelected;
+}
+
+//
+// kexMenuObjectSlidebar::Tick
+//
+
+void kexMenuObjectSlidebar::Tick(void)
+{
+    if(bSelected)
+    {
+        float val;
+
+        if(kexGame::cLocal->ButtonEvent() & GBE_MENU_LEFT)
+        {
+            val = cvar->GetFloat() - amount;
+            kexMath::Clamp(val, cvar->GetMin(), cvar->GetMax());
+
+            cvar->Set(val);
+            kexGame::cLocal->PlaySound("sounds/select.wav");
+        }
+
+        if(kexGame::cLocal->ButtonEvent() & GBE_MENU_RIGHT)
+        {
+            val = cvar->GetFloat() + amount;
+            kexMath::Clamp(val, cvar->GetMin(), cvar->GetMax());
+
+            cvar->Set(val);
+            kexGame::cLocal->PlaySound("sounds/select.wav");
+        }
+
+        if(kexGame::cLocal->ButtonEvent() & GBE_MENU_SELECT)
+        {
+            float mx = (float)kex::cInput->MouseX();
+            float my = (float)kex::cInput->MouseY();
+            
+            kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+            
+            val = (mx-x)/(w-2);
+            kexMath::Clamp(val, 0, 1);
+            
+            cvar->Set(cvar->GetMin() + ((cvar->GetMax() - cvar->GetMin()) * val));
+            kexGame::cLocal->PlaySound("sounds/select.wav");
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -384,6 +504,10 @@ void kexMenu::Display(void)
 
 void kexMenu::Reset(void)
 {
+    for(uint i = 0; i < menuObjects.Length(); ++i)
+    {
+        menuObjects[i]->Reset();
+    }
 }
 
 //
@@ -392,6 +516,13 @@ void kexMenu::Reset(void)
 
 bool kexMenu::ProcessInput(inputEvent_t *ev)
 {
+    if(kexGame::cLocal->ButtonEvent() & (GBE_MENU_ACTIVATE|GBE_MENU_BACK))
+    {
+        kexGame::cLocal->ButtonEvent() = 0;
+        kexGame::cLocal->ClearMenu();
+        return true;
+    }
+
     return false;
 }
 
@@ -1188,7 +1319,6 @@ public:
     virtual void                    Init(void);
     virtual void                    Display(void);
     virtual void                    Update(void);
-    virtual bool                    ProcessInput(inputEvent_t *ev);
 
 private:
     void                            OnResume(kexMenuObject *menuObject);
@@ -1217,7 +1347,7 @@ void kexMenuPause::Init(void)
 
     for(int i = 0; i < ARRLEN(labels); ++i)
     {
-        item = static_cast<kexMenuObjectPanelSelect*>(AllocateMenuObject("kexMenuObjectPanelSelect"));
+        item = ALLOC_MENU_OBJECT(kexMenuObjectPanelSelect);
         item->x = 88;
         item->y = 88 + (16 * (float)i);
         item->w = 142;
@@ -1301,22 +1431,6 @@ void kexMenuPause::Display(void)
     kexGame::cLocal->DrawSmallString(kexGame::cLocal->Translation()->GetString(48), 160, 60, 1, true);
 }
 
-//
-// kexMenuPause::ProcessInput
-//
-
-bool kexMenuPause::ProcessInput(inputEvent_t *ev)
-{
-    if(kexGame::cLocal->ButtonEvent() & GBE_MENU_BACK)
-    {
-        kexGame::cLocal->ButtonEvent() = 0;
-        kexGame::cLocal->ClearMenu();
-        return true;
-    }
-    
-    return false;
-}
-
 //-----------------------------------------------------------------------------
 //
 // kexMenuOptions
@@ -1328,11 +1442,10 @@ public:
     virtual void                    Init(void);
     virtual void                    Display(void);
     virtual void                    Update(void);
-    virtual bool                    ProcessInput(inputEvent_t *ev);
 
 private:
     void                            OnBack(kexMenuObject *menuObject);
-    void                            OnInput(kexMenuObject *menuObject);
+    void                            OnSelect(kexMenuObject *menuObject);
 END_MENU_CLASS();
 
 DECLARE_MENU_CLASS(kexMenuOptions, MENU_OPTIONS);
@@ -1355,18 +1468,17 @@ void kexMenuOptions::Init(void)
 
     for(int i = 0; i < ARRLEN(labels); ++i)
     {
-        item = static_cast<kexMenuObjectPanelSelect*>(AllocateMenuObject("kexMenuObjectPanelSelect"));
+        item = ALLOC_MENU_OBJECT(kexMenuObjectPanelSelect);
         item->x = 88;
         item->y = 88 + (16 * (float)i);
         item->w = 142;
         item->h = 16;
         item->label = labels[i];
         item->textAlignment = kexMenuObject::MITA_CENTER;
+        item->Callback = static_cast<selectCallback_t>(&kexMenuOptions::OnSelect);
     }
 
-    menuObjects[1]->Callback = static_cast<selectCallback_t>(&kexMenuOptions::OnInput);
-
-    button = static_cast<kexMenuObjectButton*>(AllocateMenuObject("kexMenuObjectButton"));
+    button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
 
     button->x = 112;
     button->y = 160;
@@ -1397,12 +1509,22 @@ void kexMenuOptions::OnBack(kexMenuObject *menuObject)
 }
 
 //
-// kexMenuOptions::OnInput
+// kexMenuOptions::OnAudio
 //
 
-void kexMenuOptions::OnInput(kexMenuObject *menuObject)
+void kexMenuOptions::OnSelect(kexMenuObject *menuObject)
 {
-    kexGame::cLocal->SetMenu(MENU_INPUT);
+    switch(menuObject->index)
+    {
+    case 1:
+        kexGame::cLocal->SetMenu(MENU_INPUT);
+        break;
+
+    case 3:
+        kexGame::cLocal->SetMenu(MENU_AUDIO);
+        break;
+    }
+
     kexGame::cLocal->PlaySound("sounds/select.wav");
 }
 
@@ -1426,22 +1548,6 @@ void kexMenuOptions::Display(void)
     kexGame::cLocal->DrawSmallString("Options", 160, 60, 1, true);
 }
 
-//
-// kexMenuOptions::ProcessInput
-//
-
-bool kexMenuOptions::ProcessInput(inputEvent_t *ev)
-{
-    if(kexGame::cLocal->ButtonEvent() & GBE_MENU_BACK)
-    {
-        kexGame::cLocal->ButtonEvent() = 0;
-        kexGame::cLocal->ClearMenu();
-        return true;
-    }
-    
-    return false;
-}
-
 //-----------------------------------------------------------------------------
 //
 // kexMenuInput
@@ -1453,11 +1559,10 @@ public:
     virtual void                    Init(void);
     virtual void                    Display(void);
     virtual void                    Update(void);
-    virtual bool                    ProcessInput(inputEvent_t *ev);
 
 private:
     void                            OnBack(kexMenuObject *menuObject);
-    void                            OnBindings(kexMenuObject *menuObject);
+    void                            OnSelect(kexMenuObject *menuObject);
 END_MENU_CLASS();
 
 DECLARE_MENU_CLASS(kexMenuInput, MENU_INPUT);
@@ -1479,18 +1584,17 @@ void kexMenuInput::Init(void)
 
     for(int i = 0; i < ARRLEN(labels); ++i)
     {
-        item = static_cast<kexMenuObjectPanelSelect*>(AllocateMenuObject("kexMenuObjectPanelSelect"));
+        item = ALLOC_MENU_OBJECT(kexMenuObjectPanelSelect);
         item->x = 88;
         item->y = 88 + (16 * (float)i);
         item->w = 142;
         item->h = 16;
         item->label = labels[i];
         item->textAlignment = kexMenuObject::MITA_CENTER;
+        item->Callback = static_cast<selectCallback_t>(&kexMenuInput::OnSelect);
     }
 
-    menuObjects[0]->Callback = static_cast<selectCallback_t>(&kexMenuInput::OnBindings);
-
-    button = static_cast<kexMenuObjectButton*>(AllocateMenuObject("kexMenuObjectButton"));
+    button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
 
     button->x = 112;
     button->y = 160;
@@ -1521,12 +1625,26 @@ void kexMenuInput::OnBack(kexMenuObject *menuObject)
 }
 
 //
-// kexMenuInput::OnBindings
+// kexMenuInput::OnSelect
 //
 
-void kexMenuInput::OnBindings(kexMenuObject *menuObject)
+void kexMenuInput::OnSelect(kexMenuObject *menuObject)
 {
-    kexGame::cLocal->SetMenu(MENU_BINDINGS);
+    switch(menuObject->index)
+    {
+    case 0:
+        kexGame::cLocal->SetMenu(MENU_BINDINGS);
+        break;
+
+    case 1:
+        kexGame::cLocal->SetMenu(MENU_MOUSE);
+        break;
+
+    case 2:
+        kexGame::cLocal->SetMenu(MENU_JOYSTICK);
+        break;
+    }
+
     kexGame::cLocal->PlaySound("sounds/select.wav");
 }
 
@@ -1550,20 +1668,318 @@ void kexMenuInput::Display(void)
     kexGame::cLocal->DrawSmallString("Input", 160, 60, 1, true);
 }
 
+//-----------------------------------------------------------------------------
 //
-// kexMenuInput::ProcessInput
+// kexMenuAudio
+//
+//-----------------------------------------------------------------------------
+
+DEFINE_MENU_CLASS(kexMenuAudio);
+public:
+    virtual void                    Init(void);
+    virtual void                    Display(void);
+    virtual void                    Update(void);
+
+private:
+    void                            OnBack(kexMenuObject *menuObject);
+END_MENU_CLASS();
+
+DECLARE_MENU_CLASS(kexMenuAudio, MENU_AUDIO);
+
+//
+// kexMenuAudio::Init
 //
 
-bool kexMenuInput::ProcessInput(inputEvent_t *ev)
+void kexMenuAudio::Init(void)
 {
-    if(kexGame::cLocal->ButtonEvent() & GBE_MENU_BACK)
-    {
-        kexGame::cLocal->ButtonEvent() = 0;
-        kexGame::cLocal->ClearMenu();
-        return true;
-    }
+    kexMenuObjectButton *button;
+    kexMenuObjectSlidebar *slider;
+
+    button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
+    button->x = 112;
+    button->y = 160;
+    button->w = 96;
+    button->h = 24;
+    button->label = "Back";
+    button->textAlignment = kexMenuObject::MITA_CENTER;
+    button->Callback = static_cast<selectCallback_t>(&kexMenuAudio::OnBack);
+
+    slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
+    slider->x = 96;
+    slider->y = 88;
+    slider->w = 128;
+    slider->h = 8;
+    slider->label = "Sound Volume";
+    slider->cvar = &kexSound::cvarVolume;
+    slider->textAlignment = kexMenuObject::MITA_CENTER;
+
+    slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
+    slider->x = 96;
+    slider->y = 120;
+    slider->w = 128;
+    slider->h = 8;
+    slider->label = "Music Volume";
+    slider->cvar = &kexSound::cvarMusicVolume;
+    slider->textAlignment = kexMenuObject::MITA_CENTER;
+}
+
+//
+// kexMenuAudio::Update
+//
+
+void kexMenuAudio::Update(void)
+{
+    UpdateItems();
+}
+
+//
+// kexMenuAudio::OnBack
+//
+
+void kexMenuAudio::OnBack(kexMenuObject *menuObject)
+{
+    kexGame::cLocal->ClearMenu();
+    kexGame::cLocal->PlaySound("sounds/select.wav");
+}
+
+//
+// kexMenuAudio::Display
+//
+
+void kexMenuAudio::Display(void)
+{
+    kexRender::cScreen->SetOrtho();
     
-    return false;
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
+        (float)kexRender::cScreen->SCREEN_WIDTH,
+        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
+
+    kexGame::cMenuPanel->DrawPanel(80, 48, 160, 148, 4);
+    kexGame::cMenuPanel->DrawInset(88, 56, 142, 16);
+
+    DrawItems();
+
+    kexGame::cLocal->DrawSmallString("Audio", 160, 60, 1, true);
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuMouse
+//
+//-----------------------------------------------------------------------------
+
+DEFINE_MENU_CLASS(kexMenuMouse);
+public:
+    virtual void                    Init(void);
+    virtual void                    Display(void);
+    virtual void                    Update(void);
+
+private:
+    void                            OnBack(kexMenuObject *menuObject);
+END_MENU_CLASS();
+
+DECLARE_MENU_CLASS(kexMenuMouse, MENU_MOUSE);
+
+//
+// kexMenuMouse::Init
+//
+
+void kexMenuMouse::Init(void)
+{
+    kexMenuObjectButton *button;
+    kexMenuObjectSlidebar *slider;
+
+    button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
+    button->x = 112;
+    button->y = 160;
+    button->w = 96;
+    button->h = 24;
+    button->label = "Back";
+    button->textAlignment = kexMenuObject::MITA_CENTER;
+    button->Callback = static_cast<selectCallback_t>(&kexMenuMouse::OnBack);
+
+    slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
+    slider->x = 96;
+    slider->y = 64;
+    slider->w = 128;
+    slider->h = 8;
+    slider->label = "Horizontal Sensitivity";
+    slider->cvar = &kexPlayerCmd::cvarMSensitivityX;
+    slider->textAlignment = kexMenuObject::MITA_CENTER;
+
+    slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
+    slider->x = 96;
+    slider->y = 96;
+    slider->w = 128;
+    slider->h = 8;
+    slider->label = "Vertical Sensitivity";
+    slider->cvar = &kexPlayerCmd::cvarMSensitivityY;
+    slider->textAlignment = kexMenuObject::MITA_CENTER;
+
+    slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
+    slider->x = 96;
+    slider->y = 128;
+    slider->w = 128;
+    slider->h = 8;
+    slider->label = "Smooth Threshold";
+    slider->cvar = &kexPlayerCmd::cvarMSmooth;
+    slider->amount = 1;
+    slider->textAlignment = kexMenuObject::MITA_CENTER;
+}
+
+//
+// kexMenuMouse::Update
+//
+
+void kexMenuMouse::Update(void)
+{
+    UpdateItems();
+}
+
+//
+// kexMenuMouse::OnBack
+//
+
+void kexMenuMouse::OnBack(kexMenuObject *menuObject)
+{
+    kexGame::cLocal->ClearMenu();
+    kexGame::cLocal->PlaySound("sounds/select.wav");
+}
+
+//
+// kexMenuMouse::Display
+//
+
+void kexMenuMouse::Display(void)
+{
+    kexRender::cScreen->SetOrtho();
+    
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
+        (float)kexRender::cScreen->SCREEN_WIDTH,
+        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
+
+    kexGame::cMenuPanel->DrawPanel(64, 24, 192, 172, 4);
+    kexGame::cMenuPanel->DrawInset(72, 32, 174, 16);
+
+    DrawItems();
+
+    kexGame::cLocal->DrawSmallString("Mouse", 160, 36, 1, true);
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuJoystick
+//
+//-----------------------------------------------------------------------------
+
+DEFINE_MENU_CLASS(kexMenuJoystick);
+public:
+    virtual void                    Init(void);
+    virtual void                    Display(void);
+    virtual void                    Update(void);
+
+private:
+    void                            OnBack(kexMenuObject *menuObject);
+END_MENU_CLASS();
+
+DECLARE_MENU_CLASS(kexMenuJoystick, MENU_JOYSTICK);
+
+//
+// kexMenuJoystick::Init
+//
+
+void kexMenuJoystick::Init(void)
+{
+    kexMenuObjectButton *button;
+    kexMenuObjectSlidebar *slider;
+
+    button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
+    button->x = 112;
+    button->y = 176;
+    button->w = 96;
+    button->h = 24;
+    button->label = "Back";
+    button->textAlignment = kexMenuObject::MITA_CENTER;
+    button->Callback = static_cast<selectCallback_t>(&kexMenuJoystick::OnBack);
+
+    slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
+    slider->x = 96;
+    slider->y = 48;
+    slider->w = 128;
+    slider->h = 8;
+    slider->amount = 0.125f;
+    slider->label = "X-Axis Look Sensitivity";
+    slider->cvar = &kexPlayerCmd::cvarJoyStickLookSensitivityX;
+    slider->textAlignment = kexMenuObject::MITA_CENTER;
+
+    slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
+    slider->x = 96;
+    slider->y = 80;
+    slider->w = 128;
+    slider->h = 8;
+    slider->amount = 0.125f;
+    slider->label = "Y-Axis Look Sensitivity";
+    slider->cvar = &kexPlayerCmd::cvarJoyStickLookSensitivityY;
+    slider->textAlignment = kexMenuObject::MITA_CENTER;
+
+    slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
+    slider->x = 96;
+    slider->y = 112;
+    slider->w = 128;
+    slider->h = 8;
+    slider->amount = 0.5f;
+    slider->label = "Move Sensitivity";
+    slider->cvar = &kexPlayerCmd::cvarJoyStickMoveSensitivity;
+    slider->textAlignment = kexMenuObject::MITA_CENTER;
+
+    slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
+    slider->x = 96;
+    slider->y = 144;
+    slider->w = 128;
+    slider->h = 8;
+    slider->amount = 500;
+    slider->label = "Turn Accel Threshold";
+    slider->cvar = &kexPlayerCmd::cvarJoyStickThreshold;
+    slider->textAlignment = kexMenuObject::MITA_CENTER;
+}
+
+//
+// kexMenuJoystick::Update
+//
+
+void kexMenuJoystick::Update(void)
+{
+    UpdateItems();
+}
+
+//
+// kexMenuJoystick::OnBack
+//
+
+void kexMenuJoystick::OnBack(kexMenuObject *menuObject)
+{
+    kexGame::cLocal->ClearMenu();
+    kexGame::cLocal->PlaySound("sounds/select.wav");
+}
+
+//
+// kexMenuJoystick::Display
+//
+
+void kexMenuJoystick::Display(void)
+{
+    kexRender::cScreen->SetOrtho();
+    
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
+        (float)kexRender::cScreen->SCREEN_WIDTH,
+        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
+
+    kexGame::cMenuPanel->DrawPanel(64, 8, 192, 204, 4);
+    kexGame::cMenuPanel->DrawInset(72, 16, 174, 16);
+
+    DrawItems();
+
+    kexGame::cLocal->DrawSmallString("Gamepad", 160, 20, 1, true);
 }
 
 //-----------------------------------------------------------------------------
@@ -1577,7 +1993,6 @@ public:
     virtual void                    Init(void);
     virtual void                    Display(void);
     virtual void                    Update(void);
-    virtual bool                    ProcessInput(inputEvent_t *ev);
 
 private:
     void                            OnYes(kexMenuObject *menuObject);
@@ -1594,8 +2009,8 @@ void kexMenuMainMenuConfirm::Init(void)
 {
     kexMenuObjectButton *item1, *item2;
     
-    item1 = static_cast<kexMenuObjectButton*>(AllocateMenuObject("kexMenuObjectButton"));
-    item2 = static_cast<kexMenuObjectButton*>(AllocateMenuObject("kexMenuObjectButton"));
+    item1 = ALLOC_MENU_OBJECT(kexMenuObjectButton);
+    item2 = ALLOC_MENU_OBJECT(kexMenuObjectButton);
 
     item1->x = 40;
     item1->y = 120;
@@ -1640,22 +2055,6 @@ void kexMenuMainMenuConfirm::Display(void)
     kexGame::cLocal->DrawSmallString("Quit to Main Menu?", 160, 82, 1, true);
 
     DrawItems();
-}
-
-//
-// kexMenuMainMenuConfirm::ProcessInput
-//
-
-bool kexMenuMainMenuConfirm::ProcessInput(inputEvent_t *ev)
-{
-    if(kexGame::cLocal->ButtonEvent() & GBE_MENU_BACK)
-    {
-        kexGame::cLocal->ButtonEvent() = 0;
-        kexGame::cLocal->ClearMenu();
-        return true;
-    }
-
-    return false;
 }
 
 //
@@ -1906,225 +2305,4 @@ kexMenuItem &kexMenuItem::operator=(const kexMenuItem &item)
     this->bLerping      = item.bLerping;
 
     return *this;
-}
-
-//-----------------------------------------------------------------------------
-//
-// kexMenuItemLabel
-//
-//-----------------------------------------------------------------------------
-
-DECLARE_KEX_CLASS(kexMenuItemLabel, kexMenuItem)
-
-//
-// kexMenuItemLabel::kexMenuItemLabel
-//
-
-kexMenuItemLabel::kexMenuItemLabel(void)
-{
-    this->x             = 0;
-    this->y             = 0;
-    this->scale         = 1;
-    this->bLerping      = false;
-    this->bHighLighted  = false;
-    this->bInteract     = false;
-    this->bDisabled     = false;
-    this->destX         = 0;
-    this->destY         = 0;
-    this->time          = 0;
-    this->highlightTime = 0;
-    this->lerpCallback  = NULL;
-}
-
-//
-// kexMenuItemLabel::kexMenuItemLabel
-//
-
-kexMenuItemLabel::kexMenuItemLabel(const char *label, const float x, const float y, const float scale)
-{
-    this->x             = x;
-    this->y             = y;
-    this->scale         = scale;
-    this->bLerping      = false;
-    this->bInteract     = false;
-    this->destX         = 0;
-    this->destY         = 0;
-    this->time          = 0;
-    this->label         = label;
-    this->highlightTime = 0;
-    this->lerpCallback  = NULL;
-}
-
-//
-// kexMenuItemLabel::~kexMenuItemLabel
-//
-
-kexMenuItemLabel::~kexMenuItemLabel(void)
-{
-}
-
-//
-// kexMenuItemLabel::Tick
-//
-
-void kexMenuItemLabel::Tick(void)
-{
-    if(bLerping)
-    {
-        Move();
-    }
-}
-
-//
-// kexMenuItemLabel::Draw
-//
-
-void kexMenuItemLabel::Draw(void)
-{
-    DrawBigString(label.c_str(), x, y, scale, true, false);
-}
-
-//-----------------------------------------------------------------------------
-//
-// kexMenuItemSlider
-//
-//-----------------------------------------------------------------------------
-
-DECLARE_KEX_CLASS(kexMenuItemSlider, kexMenuItem)
-#define MAX_MENU_SLIDER_BARS    24
-
-//
-// kexMenuItemSlider::kexMenuItemSlider
-//
-
-kexMenuItemSlider::kexMenuItemSlider(void)
-{
-    this->x             = 0;
-    this->y             = 0;
-    this->scale         = 1;
-    this->bLerping      = false;
-    this->bHighLighted  = false;
-    this->bInteract     = true;
-    this->bDisabled     = false;
-    this->destX         = 0;
-    this->destY         = 0;
-    this->time          = 0;
-    this->highlightTime = 0;
-    this->lerpCallback  = NULL;
-}
-
-//
-// kexMenuItemSlider::kexMenuItemSlider
-//
-
-kexMenuItemSlider::kexMenuItemSlider(const float x, const float y, const float scale, kexCvar &cvar)
-{
-    this->x             = x;
-    this->y             = y;
-    this->scale         = scale;
-    this->bLerping      = false;
-    this->bInteract     = true;
-    this->destX         = 0;
-    this->destY         = 0;
-    this->time          = 0;
-    this->label         = "";
-    this->highlightTime = 0;
-    this->numBars       = 0;
-    this->lerpCallback  = NULL;
-    this->cvar          = &cvar;
-}
-
-//
-// kexMenuItemSlider::~kexMenuItemSlider
-//
-
-kexMenuItemSlider::~kexMenuItemSlider(void)
-{
-}
-
-//
-// kexMenuItemSlider::Select
-//
-
-void kexMenuItemSlider::Select(const bool b)
-{
-    kexMenuItem::Select(b);
-}
-
-//
-// kexMenuItemSlider::OnCursor
-//
-
-bool kexMenuItemSlider::OnCursor(void)
-{
-    float width = 2.5f * MAX_MENU_SLIDER_BARS;
-    float height = kexGame::cLocal->BigFont()->StringHeight(label.c_str(), scale, 0) * 0.5f;
-    float sy = y + height;
-    float mx = (float)kex::cInput->MouseX();
-    float my = (float)kex::cInput->MouseY();
-    
-    kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
-    
-    return !(mx < (x - width) || my < (sy - height) ||
-             mx > (x + width) || my > (sy + height));
-}
-
-//
-// kexMenuItemSlider::Tick
-//
-
-void kexMenuItemSlider::Tick(void)
-{
-    int bars = 0;
-    
-    kexMenuItem::Tick();
-    
-    if(bSelected)
-    {
-        float width = (kexGame::cLocal->BigFont()->StringWidth(label.c_str(), scale, 0) * 0.5f);
-        float mx = (float)kex::cInput->MouseX();
-        float my = (float)kex::cInput->MouseY();
-        float val;
-        
-        kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
-        
-        val = ((mx-x)/width) * 0.5f + 0.5f;
-        kexMath::Clamp(val, 0, 1);
-        
-        cvar->Set(cvar->GetMax() * val);
-        
-        bars = (int)kexMath::Floor(MAX_MENU_SLIDER_BARS * val);
-        kexMath::Clamp(bars, 0, MAX_MENU_SLIDER_BARS);
-
-        if(numBars != bars)
-        {
-            kexGame::cLocal->PlaySound("sounds/select.wav");
-        }
-
-        numBars = bars;
-    }
-    else
-    {
-        bars = (int)kexMath::Floor(MAX_MENU_SLIDER_BARS * (cvar->GetFloat() / cvar->GetMax()));
-    }
-    
-    label.Clear();
-    
-    for(int i = 0; i < bars; ++i)
-    {
-        label += "/";
-    }
-    for(int i = bars; i < MAX_MENU_SLIDER_BARS; ++i)
-    {
-        label += ".";
-    }
-}
-
-//
-// kexMenuItemSlider::Draw
-//
-
-void kexMenuItemSlider::Draw(void)
-{
-    DrawBigString(label, x, y, scale, true, bHighLighted);
 }

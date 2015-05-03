@@ -25,6 +25,9 @@ typedef enum
     MENU_OPTIONS,
     MENU_MAINCONFIRM,
     MENU_INPUT,
+    MENU_AUDIO,
+    MENU_MOUSE,
+    MENU_JOYSTICK,
     NUMMENUS
 } menus_t;
 
@@ -45,8 +48,10 @@ public:
 
     virtual void                    Draw(void) = 0;
     virtual void                    Tick(void) = 0;
-    virtual void                    Select(const bool b) = 0;
     virtual bool                    CheckMouseSelect(const float mx, const float my) = 0;
+    virtual void                    Reset(void);
+
+    void                            DrawLabel(void);
 
     typedef enum
     {
@@ -57,6 +62,10 @@ public:
 
     float                           x;
     float                           y;
+    float                           w;
+    float                           h;
+    float                           labelWidth;
+    float                           labelHeight;
     kexStr                          label;
     menuItemTextAlign_t             textAlignment;
     uint                            index;
@@ -154,45 +163,6 @@ protected:
     float                           startY;
     float                           destX;
     float                           destY;
-END_KEX_CLASS();
-
-//-----------------------------------------------------------------------------
-//
-// kexMenuItemLabel
-//
-//-----------------------------------------------------------------------------
-
-BEGIN_EXTENDED_KEX_CLASS(kexMenuItemLabel, kexMenuItem);
-    public:
-    kexMenuItemLabel(void);
-    kexMenuItemLabel(const char *label, const float x, const float y, const float scale);
-    ~kexMenuItemLabel(void);
-
-    virtual void                    Draw(void);
-    virtual void                    Tick(void);
-END_KEX_CLASS();
-
-//-----------------------------------------------------------------------------
-//
-// kexMenuItemSlider
-//
-//-----------------------------------------------------------------------------
-
-BEGIN_EXTENDED_KEX_CLASS(kexMenuItemSlider, kexMenuItem);
-public:
-    kexMenuItemSlider(void);
-    kexMenuItemSlider(const float x, const float y, const float scale, kexCvar &cvar);
-    ~kexMenuItemSlider(void);
-
-    virtual void                    Draw(void);
-    virtual void                    Tick(void);
-    virtual void                    Select(const bool b);
-
-private:
-    virtual bool                    OnCursor(void);
-
-    kexCvar                         *cvar;
-    int                             numBars;
 END_KEX_CLASS();
 
 #endif

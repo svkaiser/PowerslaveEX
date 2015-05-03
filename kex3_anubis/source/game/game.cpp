@@ -715,7 +715,13 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
 
 void kexGameLocal::SetMenu(const menus_t menu)
 {
+    if(activeMenu != NULL)
+    {
+        activeMenu->Reset();
+    }
+
     activeMenu = menus[menu];
+    activeMenu->Reset();
     menuStack.Push(menu);
 
     if(menuStack.Length() >= 2)
@@ -736,6 +742,8 @@ void kexGameLocal::SetMenu(const menus_t menu)
 void kexGameLocal::ClearMenu(const bool bClearAll)
 {
     unsigned int len = bCursorEnabled.Length();
+
+    activeMenu->Reset();
 
     if(bClearAll)
     {

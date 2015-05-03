@@ -53,8 +53,7 @@ typedef enum
     GBE_MENU_SELECT     = BIT(4),
     GBE_MENU_CANCEL     = BIT(5),
     GBE_MENU_BACK       = BIT(6),
-    GBE_MENU_ACTIVATE   = BIT(7),
-    NUMGAMEBUTTONEVENTS
+    GBE_MENU_ACTIVATE   = BIT(7)
 } gameButtonEvents_t;
 
 typedef enum
