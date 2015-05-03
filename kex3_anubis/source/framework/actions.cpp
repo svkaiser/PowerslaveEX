@@ -537,9 +537,19 @@ void kexInputAction::ExecuteCommand(int key, bool keyup, const int eventType)
                 heldActions[cmd->action->keyid] = !keyup;
             }
         }
-        else if(!keyup)
+        else
         {
-            kex::cCommands->Execute(cmd->command);
+            if(cmd->command[0] != '*')
+            {
+                if(!keyup)
+                {
+                    kex::cCommands->Execute(cmd->command);
+                }
+            }
+            else
+            {
+                kex::cCommands->Execute(cmd->command+1);
+            }
         }
     }
 }
