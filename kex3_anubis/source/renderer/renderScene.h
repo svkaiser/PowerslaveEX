@@ -129,7 +129,10 @@ private:
     kexStack<int>               waterFaces;
     kexStack<visSprite_t>       visSprites;
     kexStack<bufferIndex_t>     bufferList;
+
+    // used to keep track of shared vertices for moving sectors.
     kexArray<int>               *vertexBufferLookup;
+
     kexRenderDLight             dLights;
     uint64_t                    floodFillTime;
     uint64_t                    drawSectorTime;

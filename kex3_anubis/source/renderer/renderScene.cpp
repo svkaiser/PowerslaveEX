@@ -79,6 +79,9 @@ void kexRenderScene::InitVertexBuffer(void)
 
     vertexBufferLookup = new kexArray<int>[world->NumVertices()];
 
+    // thanks to the unfortunate requirement of treating
+    // shared vertices as a unique instance, we need to add
+    // extra padding to the total number of vertices in the level
     worldVertexBuffer.Allocate(NULL, world->NumVertices()*3, kexVertBuffer::RBU_STATIC,
                                NULL, world->NumPolys()*8, kexVertBuffer::RBU_STATIC);
 }
@@ -287,16 +290,23 @@ void kexRenderScene::DrawSky(kexRenderView &view)
 //
 // kexRenderScene::BuildSectorBuffer
 //
+// Builds a batch of triangles per unique texture that will
+// be used for the vertex buffer
+//
 
 void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
 {
+    static kexStack<int> scanTextures;
+
     bufferIndex_t *bufferIndex = NULL;
-    kexArray<int> textures;
-    kexArray<int> polys;
     mapTexCoords_t *tcoord = world->TexCoords();
     mapVertex_t *vertex;
+    uint scanTexturesIdx = 0;
+    int curTexture = 0;
 
-    // figure out how many unique textures there are
+    scanTextures.Reset();
+
+    // get the initial texture
     for(int j = sector->faceStart; j < sector->faceEnd+3; ++j)
     {
         mapFace_t *face = &world->Faces()[j];
@@ -311,134 +321,167 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
             continue;
         }
 
-        for(int k = face->polyStart; k <= face->polyEnd; ++k)
-        {
-            mapPoly_t *poly = &world->Polys()[k];
-            bool bSkip = false;
-
-            polys.Push(k);
-
-            for(uint i = 0; i < textures.Length(); ++i)
-            {
-                if(textures[i] == poly->texture)
-                {
-                    bSkip = true;
-                    break;
-                }
-            }
-
-            if(bSkip)
-            {
-                continue;
-            }
-
-            textures.Push(poly->texture);
-        }
+        // found one
+        scanTextures.Set(world->Polys()[face->polyStart].texture);
+        sector->bufferIndex.Resize(sector->bufferIndex.Length()+1);
+        break;
     }
 
-    if(textures.Length() == 0)
+    if(scanTextures.CurrentLength() == 0)
     {
-        // this really shouldn't happen...
+        // no textures at all? what?
         return;
     }
 
-    for(uint x = 0; x < textures.Length(); ++x)
+    // start off with the initial texture and batch up all polygons
+    // containing that same texture. if there are more unique textures
+    // found, then add them to scanTextures for the next iteration until
+    // there are no more unique textures to scan
+    do
     {
-        int texture = textures[x];
+        curTexture = scanTextures[scanTexturesIdx];
+        bufferIndex = &sector->bufferIndex[scanTexturesIdx];
 
-        bufferIndex = sector->bufferIndex.Grow();
-
+        // setup new buffer
         bufferIndex->triStart = indiceCount*sizeof(uint);
         bufferIndex->vertStart = vertexCount;
         bufferIndex->count = 0;
         bufferIndex->numVert = 0;
         bufferIndex->numTris = 0;
-        bufferIndex->texture = texture;
+        bufferIndex->texture = curTexture;
         bufferIndex->sector = sector - world->Sectors();
 
-        for(uint i = 0; i < polys.Length(); ++i)
+        // scan all walls
+        for(int j = sector->faceStart; j < sector->faceEnd+3; ++j)
         {
-            mapPoly_t *poly = &world->Polys()[polys[i]];
-            mapFace_t *face = &world->Faces()[poly->faceRef];
-            int indices[4] = { 0, 0, 0, 0 };
-            int tcoords[4] = { 0, 0, 0, 0 };
-            int curIdx = 0;
+            mapFace_t *face = &world->Faces()[j];
 
-            if(poly->texture != texture)
+            if(face->polyStart == -1 || face->polyEnd == -1)
             {
                 continue;
             }
 
-            for(int idx = 0; idx < 4; idx++)
+            if(face->flags & (FF_DYNAMIC|FF_INVISIBLE))
             {
-                if(poly->indices[idx] == 0xff || poly->tcoords[idx] == -1)
+                continue;
+            }
+
+            // scan all polygons
+            for(int k = face->polyStart; k <= face->polyEnd; ++k)
+            {
+                mapPoly_t *poly = &world->Polys()[k];
+                bool bHasTexture = false;
+                int indices[4] = { 0, 0, 0, 0 };
+                int tcoords[4] = { 0, 0, 0, 0 };
+                int curIdx = 0;
+
+                for(uint i = 0; i < scanTextures.CurrentLength(); ++i)
                 {
+                    if(scanTextures[i] == poly->texture)
+                    {
+                        bHasTexture = true;
+                        break;
+                    }
+                }
+
+                if(!bHasTexture)
+                {
+                    // found a new texture. add it to the list
+                    sector->bufferIndex.Resize(sector->bufferIndex.Length()+1);
+                    bufferIndex = &sector->bufferIndex[scanTexturesIdx];
+                    scanTextures.Set(poly->texture);
+                }
+
+                if(poly->texture != curTexture)
+                {
+                    // doesn't match the texture we're scanning for
                     continue;
                 }
-                
-                indices[curIdx] = poly->indices[idx];
-                tcoords[curIdx] = poly->tcoords[idx];
-                curIdx++;
-            }
 
-            for(int idx = (curIdx-1); idx >= 0; idx--)
-            {
-                kexVec3 vPoint;
-                int lookup;
-                int r, g, b;
+                // build triangles/vertices from polygon data
+                for(int idx = 0; idx < 4; idx++)
+                {
+                    if(poly->indices[idx] == 0xff || poly->tcoords[idx] == -1)
+                    {
+                        continue;
+                    }
+                    
+                    indices[curIdx] = poly->indices[idx];
+                    tcoords[curIdx] = poly->tcoords[idx];
+                    curIdx++;
+                }
 
-                lookup = face->vertStart + indices[idx];
-                vertex = &world->Vertices()[lookup];
+                // setup vertices
+                for(int idx = (curIdx-1); idx >= 0; idx--)
+                {
+                    kexVec3 vPoint;
+                    int lookup;
+                    int r, g, b;
 
-                vPoint = vertex->origin;
-                r = vertex->rgba[0];
-                g = vertex->rgba[1];
-                b = vertex->rgba[2];
+                    lookup = face->vertStart + indices[idx];
+                    vertex = &world->Vertices()[lookup];
 
-                vertexBufferLookup[lookup].Push(vertexCount);
+                    vPoint = vertex->origin;
+                    r = vertex->rgba[0];
+                    g = vertex->rgba[1];
+                    b = vertex->rgba[2];
 
-                drawVerts[vertexCount].vertex = vPoint;
-                drawVerts[vertexCount].texCoords.x = tcoord->uv[tcoords[idx]].s;
-                drawVerts[vertexCount].texCoords.y = 1.0f - tcoord->uv[tcoords[idx]].t;
-                drawVerts[vertexCount].rgba[0] = r;
-                drawVerts[vertexCount].rgba[1] = g;
-                drawVerts[vertexCount].rgba[2] = b;
-                drawVerts[vertexCount].rgba[3] = 255;
+                    //
+                    // TODO
+                    // vertices that are shared with other quads may not be
+                    // pointing to the same texture coordinate index, so
+                    // each vertex will need to be a unqiue instance.
+                    // If there was a way to process the shared vertices, then
+                    // I could of easily cut the amount of processed vertices by half
+                    //
+                    vertexBufferLookup[lookup].Push(vertexCount);
 
-                vertexCount++;
-                bufferIndex->numVert++;
-            }
+                    drawVerts[vertexCount].vertex = vPoint;
+                    drawVerts[vertexCount].texCoords.x = tcoord->uv[tcoords[idx]].s;
+                    drawVerts[vertexCount].texCoords.y = 1.0f - tcoord->uv[tcoords[idx]].t;
+                    drawVerts[vertexCount].rgba[0] = r;
+                    drawVerts[vertexCount].rgba[1] = g;
+                    drawVerts[vertexCount].rgba[2] = b;
+                    drawVerts[vertexCount].rgba[3] = 255;
 
-            drawIndices[indiceCount++] = drawTris+0;
-            drawIndices[indiceCount++] = drawTris+2;
-            drawIndices[indiceCount++] = drawTris+1;
+                    vertexCount++;
+                    bufferIndex->numVert++;
+                }
 
-            bufferIndex->count += 3;
-            bufferIndex->numTris++;
-
-            if(curIdx == 4)
-            {
+                // mark down triangle indices
                 drawIndices[indiceCount++] = drawTris+0;
-                drawIndices[indiceCount++] = drawTris+3;
                 drawIndices[indiceCount++] = drawTris+2;
+                drawIndices[indiceCount++] = drawTris+1;
 
                 bufferIndex->count += 3;
                 bufferIndex->numTris++;
-            }
 
-            drawTris += curIdx;
+                if(curIdx == 4)
+                {
+                    drawIndices[indiceCount++] = drawTris+0;
+                    drawIndices[indiceCount++] = drawTris+3;
+                    drawIndices[indiceCount++] = drawTris+2;
 
-            if(drawTris >= INT_MAX)
-            {
-                kex::cSystem->Error("kexRenderScene::BuildSectorBuffer: Triangle Indice Overflow\n");
-                return;
-            }
+                    bufferIndex->count += 3;
+                    bufferIndex->numTris++;
+                }
+
+                drawTris += curIdx;
+
+                if(drawTris >= INT_MAX)
+                {
+                    kex::cSystem->Error("kexRenderScene::BuildSectorBuffer: Triangle Indice Overflow\n");
+                    return;
+                }
+            } 
         }
-    }
+    } while(++scanTexturesIdx < sector->bufferIndex.Length());
 }
 
 //
 // kexRenderScene::UpdateBuffer
+//
+// Used to update moving sectors
 //
 
 void kexRenderScene::UpdateBuffer(void)
@@ -493,13 +536,13 @@ void kexRenderScene::DrawSector(kexRenderView &view, mapSector_t *sector)
         kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 64, 64);
     }
 
-    if(cvarRenderUseVBO.GetBool() && sector->bufferIndex.Length() == 0)
+    if(cvarRenderUseVBO.GetBool())
     {
-        BuildSectorBuffer(sector);
-    }
+        if(sector->bufferIndex.Length() == 0)
+        {
+            BuildSectorBuffer(sector);
+        }
 
-    if(cvarRenderUseVBO.GetBool() == true)
-    {
         for(uint i = 0; i < sector->bufferIndex.Length(); ++i)
         {
             bufferList.Set(sector->bufferIndex[i]);
@@ -1084,6 +1127,7 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
         drawSectorTime = kex::cTimer->GetPerformanceCounter();
     }
 
+    // bind and map vertex buffer for writing
     if(cvarRenderUseVBO.GetBool() == true)
     {
         worldVertexBuffer.Bind();
@@ -1099,6 +1143,7 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
     polyList.Reset();
     dynamicPolyList.Reset();
 
+    // process sectors here
     for(uint i = 0; i < visibleSectors.CurrentLength(); ++i)
     {
         DrawSector(view, &world->Sectors()[visibleSectors[i]]);
@@ -1106,6 +1151,7 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
 
     if(cvarRenderUseVBO.GetBool() == true)
     {
+        // did any sectors moved? if so then we need to update the vertex buffer
         if(bufferUpdateList.CurrentLength() != 0)
         {
             UpdateBuffer();
@@ -1144,6 +1190,7 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
         kexRender::cBackend->SetPolyMode(GLPOLY_LINE);
     }
 
+    // do the actual drawing here
     if(cvarRenderUseVBO.GetBool() == false)
     {
         DrawIndividualPolygons(polyList);
@@ -1155,6 +1202,7 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
         worldVertexBuffer.UnBind();
     }
 
+    // draw dynamic geometry
     DrawIndividualPolygons(dynamicPolyList);
 
     kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
