@@ -652,14 +652,20 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         {
             float z;
             float d;
+            float minz = 0;
             kexVec3 vOrg = actor->Origin();
+
+            if(actor->InstanceOf(&kexAI::info) && static_cast<kexAI*>(actor)->AIFlags() & AIF_FLYING)
+            {
+                minz = -actor->StepHeight();
+            }
             
             // adjust z-height of the testing sphere. this will closely mimic
             // doing a trace against a capsule
             d = kexMath::Sqrt(vOrg.DistanceSq(start) / end.DistanceSq(start));
             z = ((end.z - start.z) * d + start.z) - vOrg.z;
             
-            kexMath::Clamp(z, 0, actor->Height());
+            kexMath::Clamp(z, minz, actor->Height());
             r = actor->Radius();
             
             if(TraceSphere(r, vOrg + kexVec3(0, 0, z)))

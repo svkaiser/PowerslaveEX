@@ -164,14 +164,15 @@ public:
     static const int                SND_MAX_SOURCES;
     static kexHeapBlock             hb_sound;
 
+    static kexSoundSource           *musicSource;
+    static kexThread::kMutex_t      musicMutex;
+
 private:
     static int                      MusicThread(void *data);
 
     static kexThread::kThread_t     musicThread;
-    static kexThread::kMutex_t      musicMutex;
     static bool                     bShutdownThread;
     static bool                     bMusicActive;
-    static kexSoundSource           *musicSource;
 
     kexSoundSource                  *GetAvailableSource(void);
 
@@ -554,6 +555,11 @@ void kexSoundSource::Stop(void)
         alSourceUnqueueBuffers(handle, 1, wave->GetBuffer());
     }
 
+    if(this == kexSoundOAL::musicSource)
+    {
+        kex::cThread->LockMutex(kexSoundOAL::musicMutex);
+    }
+
     if(ogg != NULL)
     {
         int queued = 0;
@@ -567,6 +573,11 @@ void kexSoundSource::Stop(void)
             alSourceUnqueueBuffers(handle, 1, &buffer);
             queued--;
         }
+    }
+
+    if(this == kexSoundOAL::musicSource)
+    {
+        kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
     }
 }
 
@@ -591,8 +602,18 @@ void kexSoundSource::Free(void)
 
     if(ogg)
     {
+        if(this == kexSoundOAL::musicSource)
+        {
+            kex::cThread->LockMutex(kexSoundOAL::musicMutex);
+        }
+
         delete ogg;
         ogg = NULL;
+
+        if(this == kexSoundOAL::musicSource)
+        {
+            kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
+        }
     }
 
     refObject   = NULL;

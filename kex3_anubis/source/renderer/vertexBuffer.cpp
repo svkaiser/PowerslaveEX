@@ -48,6 +48,8 @@ void kexVertBuffer::Allocate(drawVert_t *drawVerts, uint size, const bufferUsage
                              uint *indices, uint indiceSize, const bufferUsage_t indiceUsage)
 {
     GLenum v, i;
+    uint vertSize;
+    uint newSize;
 
     if(!has_GL_ARB_vertex_buffer_object)
     {
@@ -89,8 +91,11 @@ void kexVertBuffer::Allocate(drawVert_t *drawVerts, uint size, const bufferUsage
 
     dglBindBufferARB(GL_ARRAY_BUFFER_ARB, vboID);
     dglBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, iboID);
+
+    vertSize = sizeof(drawVert_t) - 1;
+    newSize = (size + vertSize) & ~vertSize;
     
-    dglBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(drawVert_t) * size, drawVerts, v);
+    dglBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(drawVert_t) * newSize, drawVerts, v);
     this->vertexSize = size;
 
     if(dglGetError() == GL_OUT_OF_MEMORY)

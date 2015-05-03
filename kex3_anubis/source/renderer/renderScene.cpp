@@ -411,6 +411,12 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
                     curIdx++;
                 }
 
+                if(curIdx <= 2)
+                {
+                    // bad polygon?
+                    continue;
+                }
+
                 // setup vertices
                 for(int idx = (curIdx-1); idx >= 0; idx--)
                 {
@@ -1088,6 +1094,11 @@ void kexRenderScene::DrawGroupedPolygons(void)
 {
     mapSector_t *prevSector = NULL;
 
+    if(bufferList.CurrentLength() == 0)
+    {
+        return;
+    }
+
     if(cvarRenderWireframe.GetBool())
     {
         kexRender::cTextures->whiteTexture->Bind();
@@ -1227,7 +1238,6 @@ void kexRenderScene::DrawActors(kexRenderView &view)
     kexMatrix mtx(view.Pitch(), 1);
     kexVec3 org;
     float viewPitch;
-    mapSector_t *prevSector = NULL;
 
     mtx = mtx * kexMatrix(-view.Yaw()-kexMath::pi, 2);
 
@@ -1292,12 +1302,6 @@ void kexRenderScene::DrawActors(kexRenderView &view)
         kexActor *actor = visSprites[i].actor;
 
         kexRender::cBackend->SetState(GLSTATE_CULL, !(actor->Flags() & AF_STRETCHY));
-
-        if(actor->Sector() != prevSector)
-        {
-            SetSectorScissor(actor->Sector());
-            prevSector = actor->Sector();
-        }
 
         if(actor->Flags() & AF_STRETCHY)
         {

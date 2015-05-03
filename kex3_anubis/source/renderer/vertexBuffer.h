@@ -38,6 +38,7 @@ public:
         kexVec3 vertex;
         kexVec2 texCoords;
         byte rgba[4];
+        byte padding[8];
     } drawVert_t;
 
     typedef struct
