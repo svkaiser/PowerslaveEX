@@ -34,6 +34,7 @@ DECLARE_KEX_CLASS(kexProjectile, kexActor)
 kexProjectile::kexProjectile(void)
 {
     this->damage = 0;
+    this->initialSector = -1;
     this->projectileFlags = 0;
     this->homingTurnAngles = 0.03125f;
     this->homingMaxPitch = 0.125f;
@@ -347,16 +348,15 @@ void kexProjectile::UpdateVelocity(void)
 }
 
 //
-// kexProjectile::CheckFloorAndCeilings
+// kexProjectile::BumpedCeiling
 //
 
-void kexProjectile::CheckFloorAndCeilings(void)
+bool kexProjectile::BumpedCeiling(void)
 {
-    kexVec3 position = (origin + velocity);
-
     if(sector->ceilingFace->flags & FF_SOLID)
     {
         kexPlane::planeSide_t ceilingSide;
+        kexVec3 position = (origin + velocity);
         kexVec3 cPosition = position + kexVec3(0, 0, height);
 
         ceilingSide = sector->ceilingFace->plane.PointOnSide(cPosition);
@@ -365,53 +365,82 @@ void kexProjectile::CheckFloorAndCeilings(void)
         if(ceilingSide == kexPlane::PSIDE_BACK || ceilingSide == kexPlane::PSIDE_ON ||
             cPosition.z >= ceilingHeight)
         {
-            if(flags & AF_BOUNCY)
-            {
-                velocity.Project(sector->ceilingFace->plane.Normal(), 2);
-            }
-            else if(projectileFlags & PF_IMPACTWALLSONLY)
-            {
-                AdjustAlongFace(sector->ceilingFace);
-            }
-            else
-            {
-                OnImpact(NULL);
-            }
-            return;
+            return true;
         }
     }
-    
+
+    return false;
+}
+
+//
+// kexProjectile::BumpedFloor
+//
+
+bool kexProjectile::BumpedFloor(void)
+{
     if(sector->floorFace->flags & FF_SOLID)
     {
         kexPlane::planeSide_t floorSide;
+        kexVec3 position = (origin + velocity);
         floorSide = sector->floorFace->plane.PointOnSide(position);
 
         // bump floor
         if(floorSide == kexPlane::PSIDE_BACK || floorSide == kexPlane::PSIDE_ON ||
             position.z <= floorHeight)
         {
-            if(flags & AF_BOUNCY)
-            {
-                if(flags & AF_EXPIRES)
-                {
-                    if(--health == 0)
-                    {
-                        OnImpact(NULL);
-                        return;
-                    }
-                }
-                velocity.Project(sector->floorFace->plane.Normal(), 2);
-            }
-            else if(projectileFlags & PF_IMPACTWALLSONLY)
-            {
-                AdjustAlongFace(sector->floorFace);
-            }
-            else
-            {
-                OnImpact(NULL);
-            }
-            return;
+            return true;
         }
+    }
+
+    return false;
+}
+
+//
+// kexProjectile::CheckFloorAndCeilings
+//
+
+void kexProjectile::CheckFloorAndCeilings(void)
+{
+    if(BumpedCeiling())
+    {
+        if(flags & AF_BOUNCY)
+        {
+            velocity.Project(sector->ceilingFace->plane.Normal(), 2);
+        }
+        else if(projectileFlags & PF_IMPACTWALLSONLY)
+        {
+            AdjustAlongFace(sector->ceilingFace);
+        }
+        else
+        {
+            OnImpact(NULL);
+        }
+        return;
+    }
+    
+    if(BumpedFloor())
+    {
+        if(flags & AF_BOUNCY)
+        {
+            if(flags & AF_EXPIRES)
+            {
+                if(--health == 0)
+                {
+                    OnImpact(NULL);
+                    return;
+                }
+            }
+            velocity.Project(sector->floorFace->plane.Normal(), 2);
+        }
+        else if(projectileFlags & PF_IMPACTWALLSONLY)
+        {
+            AdjustAlongFace(sector->floorFace);
+        }
+        else
+        {
+            OnImpact(NULL);
+        }
+        return;
     }
 
     kexActor::CheckFloorAndCeilings();
@@ -423,11 +452,13 @@ void kexProjectile::CheckFloorAndCeilings(void)
 
 void kexProjectile::UpdateMovement(void)
 {
+    kexCModel *cm = kexGame::cLocal->CModel();
+
     kexActor::UpdateMovement();
 
-    if(kexGame::cLocal->CModel()->Fraction() != 1)
+    if(cm->Fraction() != 1)
     {
-        mapFace_t *face = kexGame::cLocal->CModel()->ContactFace();
+        mapFace_t *face = cm->ContactFace();
 
         if(flags & AF_BOUNCY && face)
         {
@@ -435,7 +466,19 @@ void kexProjectile::UpdateMovement(void)
             return;
         }
 
-        OnImpact(kexGame::cLocal->CModel()->ContactActor());
+        if(initialSector >= 0)
+        {
+            if(face && velocity.Dot(face->plane.Normal()) >= 0)
+            {
+                return;
+            }
+            else
+            {
+                projectileFlags &= ~PF_NOCLIPINITIALSECTOR;
+            }
+        }
+
+        OnImpact(cm->ContactActor());
         return;
     }
     else
@@ -447,6 +490,11 @@ void kexProjectile::UpdateMovement(void)
         for(kexActor *actor = sector->actorList.Next(); actor != NULL; actor = actor->SectorLink().Next())
         {
             if(actor == this || actor == target || !(actor->Flags() & AF_SOLID))
+            {
+                continue;
+            }
+
+            if(!(bounds + origin).IntersectingBox(actor->Bounds() + actor->Origin()))
             {
                 continue;
             }
@@ -473,11 +521,18 @@ void kexProjectile::UpdateMovement(void)
 
     if(velocity.UnitSq() <= 0.05f || (origin - prevOrigin).UnitSq() <= 0.05f)
     {
+        projectileFlags &= ~PF_NOCLIPINITIALSECTOR;
         OnImpact(NULL);
         return;
     }
 
-    if(!kexGame::cLocal->CModel()->PointWithinSectorEdges(origin, sector))
+    if(initialSector >= 0 && projectileFlags & PF_NOCLIPINITIALSECTOR &&
+        SectorIndex() != initialSector)
+    {
+        projectileFlags &= ~PF_NOCLIPINITIALSECTOR;
+    }
+
+    if(!cm->PointWithinSectorEdges(origin, sector))
     {
         kex::cSystem->Warning("Projectile (type %i) out of sector bounds\n", type);
         OnImpact(NULL);
@@ -492,6 +547,11 @@ void kexProjectile::UpdateMovement(void)
 void kexProjectile::OnImpact(kexActor *contactActor)
 {
     if(projectileFlags & PF_IMPACTED)
+    {
+        return;
+    }
+
+    if(!contactActor && (projectileFlags & PF_NOCLIPINITIALSECTOR))
     {
         return;
     }
@@ -529,6 +589,8 @@ void kexProjectile::OnImpact(kexActor *contactActor)
 
 void kexProjectile::Spawn(void)
 {
+    float r, h;
+
     if(definition)
     {
         definition->GetInt("damage", damage, 0);
@@ -559,6 +621,12 @@ void kexProjectile::Spawn(void)
     {
         projectileFlags |= PF_AIMING;
     }
+
+    r = (radius * 0.5f) * scale;
+    h = (height * 0.5f) * scale;
+    
+    bounds.min.Set(-r, -r, -h);
+    bounds.max.Set(r, r, h);
 }
 
 //-----------------------------------------------------------------------------
@@ -730,37 +798,23 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
     mapVertex_t *v = kexGame::cLocal->World()->Vertices();
     int secID, projType;
     float speed;
-    int avg = 0;
     kexVec3 vOrigin;
-    kexVec3 vFaceOrg;
-    kexActor *proj;
+    kexProjectile *proj;
 
     secID = sector - kexGame::cLocal->World()->Sectors();
-
-    for(int i = face->polyStart; i <= face->polyEnd; ++i)
-    {
-        mapPoly_t *p = &kexGame::cLocal->World()->Polys()[i];
-
-        if(p->texture != poly->texture)
-        {
-            continue;
-        }
-
-        vFaceOrg += v[face->vertStart + p->indices[0]].origin;
-        vFaceOrg += v[face->vertStart + p->indices[1]].origin;
-        vFaceOrg += v[face->vertStart + p->indices[2]].origin;
-
-        avg += 3;
-    }
     
     vOrigin = (v[face->vertStart + poly->indices[0]].origin +
                v[face->vertStart + poly->indices[1]].origin +
-               v[face->vertStart + poly->indices[2]].origin) / 3;
+               v[face->vertStart + poly->indices[2]].origin);
 
-    if(avg > 0)
+    if(poly->indices[3] != 0xff)
     {
-        vFaceOrg /= (float)avg;
-        vOrigin.Lerp(vFaceOrg, 0.5f);
+        vOrigin += v[face->vertStart + poly->indices[3]].origin;
+        vOrigin /= 4;
+    }
+    else
+    {
+        vOrigin /= 3;
     }
 
     vOrigin += (face->plane.Normal() * 32);
@@ -782,10 +836,10 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
         return;
     }
 
-    proj = kexGame::cActorFactory->Spawn(projType,
-                                         vOrigin.x, vOrigin.y, vOrigin.z,
-                                         face->plane.Normal().ToYaw(),
-                                         secID);
+    proj = static_cast<kexProjectile*>(kexGame::cActorFactory->Spawn(projType,
+                                       vOrigin.x, vOrigin.y, vOrigin.z,
+                                       face->plane.Normal().ToYaw(),
+                                       secID));
 
     if(proj == NULL)
     {
@@ -795,6 +849,8 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
     proj->SetTarget(this);
     proj->Velocity() = (face->plane.Normal() * speed);
     proj->PlaySound("sounds/fballshoot.wav");
+    proj->ProjectileFlags() |= PF_NOCLIPINITIALSECTOR;
+    proj->InitialSector() = secID;
 }
 
 //
@@ -920,6 +976,11 @@ void kexFireballFactory::Tick(void)
             {
                 static_cast<kexFireballSpawner*>(actor)->fireDelay = fireDelay;
                 fireDelay += 8;
+
+                if(fireDelay > intervals)
+                {
+                    fireDelay = intervals;
+                }
             }
         }
     }

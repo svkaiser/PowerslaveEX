@@ -227,8 +227,8 @@ void kexActor::Spawn(void)
     
     velocity.Clear();
 
-    r = (radius * scale) * 0.5f;
-    h = (height * scale) * 0.5f;
+    r = (radius * 0.5f) * scale;
+    h = (height * 0.5f) * scale;
     
     bounds.min.Set(-r, -r, -h);
     bounds.max.Set(r, r, h);

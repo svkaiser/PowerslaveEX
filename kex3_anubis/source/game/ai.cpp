@@ -1048,6 +1048,8 @@ void kexAI::UpdateMovement(void)
 
 void kexAI::Spawn(void)
 {
+    float r, h;
+
     if(definition)
     {
         kexStr animName;
@@ -1091,4 +1093,10 @@ void kexAI::Spawn(void)
     {
         turnSpeed = 1;
     }
+
+    r = (radius * 0.5f) * scale;
+    h = (height * 0.5f) * scale;
+    
+    bounds.min.Set(-r, -r, 0);
+    bounds.max.Set(r, r, h);
 }

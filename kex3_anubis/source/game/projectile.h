@@ -19,12 +19,13 @@
 
 typedef enum
 {
-    PF_IMPACTWALLSONLY  = BIT(0),
-    PF_HOMING           = BIT(1),
-    PF_IMPACTED         = BIT(2),
-    PF_AIMONSPAWN       = BIT(3),
-    PF_AIMING           = BIT(4),
-    PF_NOHOMINGTHRUST   = BIT(5)
+    PF_IMPACTWALLSONLY      = BIT(0),
+    PF_HOMING               = BIT(1),
+    PF_IMPACTED             = BIT(2),
+    PF_AIMONSPAWN           = BIT(3),
+    PF_AIMING               = BIT(4),
+    PF_NOHOMINGTHRUST       = BIT(5),
+    PF_NOCLIPINITIALSECTOR  = BIT(6)
 } projectileFlags_t;
 
 //-----------------------------------------------------------------------------
@@ -48,6 +49,11 @@ public:
     unsigned int                    &ProjectileFlags(void) { return projectileFlags; }
     void                            SetHomingTarget(kexActor *actor);
 
+    bool                            BumpedCeiling(void);
+    bool                            BumpedFloor(void);
+
+    int                             &InitialSector(void) { return initialSector; }
+
 private:
     virtual void                    UpdateVelocity(void);
     virtual void                    CheckFloorAndCeilings(void);
@@ -60,6 +66,7 @@ private:
     bool                            CheckSeekTarget(kexVec3 &start, kexActor *actor);
 
     int                             damage;
+    int                             initialSector;
     unsigned int                    projectileFlags;
     float                           homingTurnAngles;
     float                           homingMaxPitch;

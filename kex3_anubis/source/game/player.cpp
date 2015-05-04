@@ -732,6 +732,8 @@ void kexPuppet::Tick(void)
 
 void kexPuppet::Spawn(void)
 {
+    float r, h;
+
     owner = kexGame::cLocal->Player();
     kexGame::cLocal->Player()->SetActor(this);
 
@@ -743,6 +745,12 @@ void kexPuppet::Spawn(void)
     flags       = (AF_SOLID|AF_SHOOTABLE);
     lavaTicks   = 0;
     slimeTicks  = 0;
+
+    r = radius * 0.5f;
+    h = height;
+    
+    bounds.min.Set(-r, -r, 0);
+    bounds.max.Set(r, r, h);
 }
 
 //-----------------------------------------------------------------------------
