@@ -1,0 +1,139 @@
+"textures/misc/slime041.png"
+{
+    speed       5
+    texture_1   "textures/misc/slime041b.png"
+    texture_2   "textures/misc/slime041c.png"
+    texture_3   "textures/misc/slime041d.png"
+}
+
+"textures/misc/water039.png"
+{
+    speed       5
+    texture_1   "textures/misc/water039b.png"
+    texture_2   "textures/misc/water039c.png"
+}
+
+"textures/misc/slime042.png"
+{
+    speed       5
+    texture_1   "textures/misc/slime042b.png"
+    texture_2   "textures/misc/slime042c.png"
+}
+
+"textures/misc/water040.png"
+{
+    speed       4
+    texture_1   "textures/misc/water040b.png"
+    texture_2   "textures/misc/water040c.png"
+    texture_3   "textures/misc/water040d.png"
+}
+
+"textures/misc/water113.png"
+{
+    speed       4
+    texture_1   "textures/misc/water113b.png"
+    texture_2   "textures/misc/water113c.png"
+    texture_3   "textures/misc/water113d.png"
+}
+
+"textures/canyon/canyon063.png"
+{
+    speed       5
+    texture_1   "textures/canyon/canyon063b.png"
+    texture_2   "textures/canyon/canyon063c.png"
+    texture_3   "textures/canyon/canyon063d.png"
+}
+
+"textures/canyon/canyon064.png"
+{
+    speed       5
+    texture_1   "textures/canyon/canyon064b.png"
+    texture_2   "textures/canyon/canyon064c.png"
+}
+
+"textures/colony/colony325.png"
+{
+    speed       5
+    texture_1   "textures/colony/colony325b.png"
+    texture_2   "textures/colony/colony325c.png"
+    texture_3   "textures/colony/colony325d.png"
+}
+
+"textures/colony/colony326.png"
+{
+    speed       5
+    texture_1   "textures/colony/colony326b.png"
+    texture_2   "textures/colony/colony326c.png"
+    texture_3   "textures/colony/colony326d.png"
+}
+
+"textures/colony/colony327.png"
+{
+    speed       5
+    texture_1   "textures/colony/colony327b.png"
+    texture_2   "textures/colony/colony327c.png"
+    texture_3   "textures/colony/colony327d.png"
+}
+
+"textures/magma/magma412.png"
+{
+    speed       5
+    texture_1   "textures/magma/magma412b.png"
+    texture_2   "textures/magma/magma412c.png"
+    texture_3   "textures/magma/magma412d.png"
+}
+
+"textures/magma/magma413.png"
+{
+    speed       5
+    texture_1   "textures/magma/magma413b.png"
+    texture_2   "textures/magma/magma413c.png"
+}
+
+"textures/pass/pass529.png"
+{
+    speed       5
+    texture_1   "textures/pass/pass529b.png"
+    texture_2   "textures/pass/pass529c.png"
+    texture_3   "textures/pass/pass529d.png"
+}
+
+"textures/tomb/tomb934.png"
+{
+    speed       3
+    texture_1   "textures/tomb/tomb934b.png"
+    texture_2   "textures/tomb/tomb934c.png"
+    texture_3   "textures/tomb/tomb934d.png"
+    texture_4   "textures/tomb/tomb934e.png"
+    texture_5   "textures/tomb/tomb934d.png"
+    texture_6   "textures/tomb/tomb934c.png"
+    texture_7   "textures/tomb/tomb934b.png"
+}
+
+"textures/misc/forcefield369.png"
+{
+    speed       4
+    texture_1   "textures/misc/forcefield369b.png"
+    texture_2   "textures/misc/forcefield369c.png"
+    texture_3   "textures/misc/forcefield369d.png"
+    texture_4   "textures/misc/forcefield369e.png"
+    texture_5   "textures/misc/forcefield369f.png"
+}
+
+"textures/switch/switch415.png"
+{
+    speed       2
+    texture_1   "textures/switch/switch416.png"
+}
+
+"textures/switch/switch226.png"
+{
+    speed       2
+    texture_1   "textures/switch/switch227.png"
+}
+
+"textures/switch/switch115.png"
+{
+    speed       2
+    texture_1   "textures/switch/switch116.png"
+}

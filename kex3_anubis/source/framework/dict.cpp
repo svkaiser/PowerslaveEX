@@ -238,6 +238,25 @@ bool kexDict::GetInt(const kexStr &key, int &out, const int defaultValue)
 // kexDict::GetInt
 //
 
+bool kexDict::GetInt(const char *key, uint8_t &out, const int defaultValue)
+{
+    kexHashKey *k;
+
+    out = defaultValue;
+
+    if(!(k = Find(key)))
+    {
+        return false;
+    }
+
+    out = (uint8_t)atoi(k->GetString());
+    return true;
+}
+
+//
+// kexDict::GetInt
+//
+
 bool kexDict::GetInt(const char *key, int16_t &out, const int defaultValue)
 {
     kexHashKey *k;

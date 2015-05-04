@@ -235,6 +235,7 @@ public:
     kexSpriteAnimManager            *SpriteAnimManager(void) { return spriteAnimManager; }
     const weaponInfo_t              *WeaponInfo(const int id) const { return &weaponInfo[id]; }
     kexIndexDefManager              &ActorDefs(void) { return actorDefs; }
+    kexDefManager                   &AnimPicDefs(void) { return animPicDefs; }
     kexArray<mapInfo_t>             &MapInfoList(void) { return mapInfoList; }
     kexArray<bool>                  &MapUnlockList(void) { return bMapUnlockList; }
     kexMenu                         *ActiveMenu(void) { return activeMenu; }
@@ -288,6 +289,7 @@ private:
     kexIndexDefManager              actorDefs;
     kexIndexDefManager              weaponDefs;
     kexIndexDefManager              mapDefs;
+    kexDefManager                   animPicDefs;
     kexStr                          pendingMap;
     weaponInfo_t                    weaponInfo[NUMPLAYERWEAPONS];
     kexTexture                      loadingPic;

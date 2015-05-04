@@ -180,6 +180,15 @@ typedef struct
     float               angle;
 } mapActor_t;
 
+typedef struct
+{
+    float               speed;
+    float               time;
+    uint16_t            numFrames;
+    uint16_t            frame;
+    kexTexture          **textures;
+} animPic_t;
+
 class kexWorld
 {
 public:
@@ -206,6 +215,8 @@ public:
     void                    MarkSectorInPVS(const int secnum);
     bool                    SectorInPVS(const int secnum);
 
+    void                    UpdateAnimPics(void);
+
     const bool              MapLoaded(void) const { return bMapLoaded; }
 
     d_inline const uint     NumVertices(void) const { return numVertices; }
@@ -227,6 +238,7 @@ public:
     d_inline mapTexCoords_t *TexCoords(void) { return texCoords; }
     d_inline mapEvent_t     *Events(void) { return events; }
     d_inline mapActor_t     *Actors(void) { return actors; }
+    d_inline animPic_t      *AnimPics(void) { return animPics; }
 
     kexSDNode<kexActor>     &AreaNodes(void) { return areaNodes; }
 
@@ -286,6 +298,7 @@ private:
     mapTexCoords_t          *texCoords;
     mapEvent_t              *events;
     mapActor_t              *actors;
+    animPic_t               *animPics;
 
     sectorList_t            scanSectors;
     kexSDNode<kexActor>     areaNodes;

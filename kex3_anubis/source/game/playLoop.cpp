@@ -309,6 +309,7 @@ void kexPlayLoop::Tick(void)
     {
         renderScene.DLights().Clear();
 
+        kexGame::cLocal->World()->UpdateAnimPics();
         kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
 

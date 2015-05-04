@@ -28,6 +28,8 @@ kexHeapBlock kexWorld::hb_world("world", false, NULL, NULL);
 
 kexWorld::kexWorld(void)
 {
+    this->skyTexture    = NULL;
+    this->textures      = NULL;
     this->vertices      = NULL;
     this->sectors       = NULL;
     this->faces         = NULL;
@@ -35,6 +37,7 @@ kexWorld::kexWorld(void)
     this->texCoords     = NULL;
     this->events        = NULL;
     this->actors        = NULL;
+    this->animPics      = NULL;
     this->bMapLoaded    = false;
 }
 
@@ -53,6 +56,13 @@ kexWorld::~kexWorld(void)
 void kexWorld::ReadTextures(kexBinFile &mapfile, const unsigned int count)
 {
     int len;
+
+    if(count == 0)
+    {
+        return;
+    }
+
+    animPics = (animPic_t*)Mem_Calloc(sizeof(animPic_t) * count, hb_world);
 
     len = mapfile.Read16();
 
@@ -87,6 +97,8 @@ void kexWorld::ReadTextures(kexBinFile &mapfile, const unsigned int count)
 
         if(len > 0)
         {
+            kexDict *dict;
+
             for(int j = 0; j < len; ++j)
             {
                 char c = (char)mapfile.Read8();
@@ -94,6 +106,42 @@ void kexWorld::ReadTextures(kexBinFile &mapfile, const unsigned int count)
             }
 
             textures[i] = kexRender::cTextures->Cache(str.c_str(), TC_REPEAT, TF_NEAREST);
+
+            if((dict = kexGame::cLocal->AnimPicDefs().GetEntry(str.c_str())))
+            {
+                kexStrList pics;
+                int idx = 1;
+
+                dict->GetFloat("speed", animPics[i].speed);
+
+                while(1)
+                {
+                    kexStr picStr;
+
+                    if(!dict->GetString(kexStr::Format("texture_%i", idx), picStr))
+                    {
+                        break;
+                    }
+
+                    pics.Push(picStr);
+                    idx++;
+                }
+
+                if(pics.Length() > 0)
+                {
+                    animPics[i].textures =
+                        (kexTexture**)Mem_Calloc(sizeof(kexTexture*) * (pics.Length()+1), hb_world);
+
+                    animPics[i].numFrames = (uint16_t)pics.Length() + 1;
+                    animPics[i].textures[0] = textures[i];
+
+                    for(uint j = 0; j < pics.Length(); ++j)
+                    {
+                        animPics[i].textures[j+1] =
+                            kexRender::cTextures->Cache(pics[j].c_str(), TC_REPEAT, TF_NEAREST);
+                    }
+                }
+            }
         }
         else
         {
@@ -644,6 +692,35 @@ void kexWorld::UnloadMap(void)
     
     kexGame::cLocal->CModel()->Reset();
     Mem_Purge(hb_world);
+}
+
+//
+// kexWorld::UpdateAnimPics
+//
+
+void kexWorld::UpdateAnimPics(void)
+{
+    for(uint i = 0; i < numTextures; ++i)
+    {
+        if(animPics[i].textures == NULL)
+        {
+            continue;
+        }
+
+        animPics[i].time += 0.5f;
+
+        if(animPics[i].time >= animPics[i].speed)
+        {
+            animPics[i].time = 0;
+
+            if(++animPics[i].frame >= animPics[i].numFrames)
+            {
+                animPics[i].frame = 0;
+            }
+
+            textures[i] = animPics[i].textures[animPics[i].frame];
+        }
+    }
 }
 
 //

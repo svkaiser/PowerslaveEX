@@ -28,6 +28,7 @@ public:
 
 private:
     virtual void                    Parse(kexLexer *lexer);
+    void                            ParseBlock(kexDict *defEntry, kexLexer *lexer);
 };
 
 class kexIndexDefManager : public kexDefManager

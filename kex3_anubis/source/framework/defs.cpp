@@ -32,14 +32,44 @@ kexDefManager::~kexDefManager(void)
 }
 
 //
+// kexDefManager::ParseBlock
+//
+
+void kexDefManager::ParseBlock(kexDict *defEntry, kexLexer *lexer)
+{
+    kexStr key;
+    kexStr val;
+
+    lexer->ExpectNextToken(TK_LBRACK);
+    while(1)
+    {
+        lexer->Find();
+        if(lexer->TokenType() == TK_RBRACK || lexer->TokenType() == TK_EOF)
+        {
+            break;
+        }
+
+        key = lexer->Token();
+
+        lexer->Find();
+        if(lexer->TokenType() == TK_RBRACK || lexer->TokenType() == TK_EOF)
+        {
+            break;
+        }
+
+        val = lexer->Token();
+
+        defEntry->Add(key.c_str(), val.c_str());
+    }
+}
+
+//
 // kexDefManager::Parse
 //
 
 void kexDefManager::Parse(kexLexer *lexer)
 {
     kexDict *defEntry;
-    kexStr key;
-    kexStr val;
 
     while(lexer->CheckState())
     {
@@ -49,31 +79,17 @@ void kexDefManager::Parse(kexLexer *lexer)
         {
         case TK_EOF:
             return;
+
         case TK_IDENIFIER:
             defEntry = defs.Add(lexer->Token());
-
-            lexer->ExpectNextToken(TK_LBRACK);
-            while(1)
-            {
-                lexer->Find();
-                if(lexer->TokenType() == TK_RBRACK || lexer->TokenType() == TK_EOF)
-                {
-                    break;
-                }
-
-                key = lexer->Token();
-
-                lexer->Find();
-                if(lexer->TokenType() == TK_RBRACK || lexer->TokenType() == TK_EOF)
-                {
-                    break;
-                }
-
-                val = lexer->Token();
-
-                defEntry->Add(key.c_str(), val.c_str());
-            }
+            ParseBlock(defEntry, lexer);
             break;
+
+        case TK_STRING:
+            defEntry = defs.Add(lexer->Token());
+            ParseBlock(defEntry, lexer);
+            break;
+
         default:
             break;
         }

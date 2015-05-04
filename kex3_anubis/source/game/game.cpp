@@ -391,6 +391,7 @@ void kexGameLocal::Init(void)
     actorDefs.LoadFilesInDirectory("defs/actors/");
     weaponDefs.LoadFile("defs/weaponInfo.txt");
     mapDefs.LoadFile("defs/mapInfo.txt");
+    animPicDefs.LoadFile("defs/animPicInfo.txt");
     
     kexGame::cMenuPanel->Init();
     kexGame::cScriptManager->Init();
