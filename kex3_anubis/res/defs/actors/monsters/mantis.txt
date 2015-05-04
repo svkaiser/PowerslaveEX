@@ -6,6 +6,7 @@ AI_Mantis 5
     stepHeight              4
     scale                   3
     health                  400
+    noEnterWater            1
     moveSpeed               0
     spawnAnim               "monsters/mantis_spawn"
     chaseAnim               "monsters/mantis_chase"

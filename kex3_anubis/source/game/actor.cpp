@@ -181,6 +181,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("noDropOff"))        flags |= AF_NODROPOFF;
         if(definition->GetBool("expires"))          flags |= AF_EXPIRES;
         if(definition->GetBool("noExitWater"))      flags |= AF_NOEXITWATER;
+        if(definition->GetBool("noEnterWater"))     flags |= AF_NOENTERWATER;
         if(definition->GetBool("hidden"))           flags |= AF_HIDDEN;
         if(definition->GetBool("stretchy"))         flags |= AF_STRETCHY;
         if(definition->GetBool("verticalFriction")) flags |= AF_VERTICALFRICTION;
@@ -211,7 +212,7 @@ void kexActor::Spawn(void)
     
     if(sector)
     {
-        floorHeight = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector, true);
+        floorHeight = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector, !(flags & AF_NOENTERWATER));
         ceilingHeight = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector, true);
         
         if(sector->flags & SF_WATER)

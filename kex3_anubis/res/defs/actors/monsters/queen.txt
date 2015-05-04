@@ -6,6 +6,7 @@ AI_Queen 4
     stepHeight              48
     scale                   1.5
     health                  3600
+    noEnterWater            1
     moveSpeed               0
     spawnAnim               "monsters/queen_idle"
     chaseAnim               "monsters/queen_chase"
@@ -30,6 +31,7 @@ AI_Queen_Snake -1
     stepHeight              48
     scale                   1.5
     health                  200
+    noEnterWater            1
     moveSpeed               16
     spawnAnim               "monsters/queen_snake_idle"
     chaseAnim               "monsters/queen_snake_chase"

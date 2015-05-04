@@ -195,7 +195,7 @@ Proj_Laser 201
     height                  32
     stepHeight              0
     scale                   1.0
-    spawnAnim               "projectiles/anubis_fireball_loop"
+    spawnAnim               "projectiles/anubis_fireball_single_sided"
     deathAnim               "projectiles/anubis_fireball_explode"
     fullbright              1
     moveable                1

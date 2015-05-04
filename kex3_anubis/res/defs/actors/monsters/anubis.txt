@@ -6,6 +6,7 @@ AI_Anubis 1
     stepHeight              48
     scale                   1.5
     health                  100
+    noEnterWater            1
     moveSpeed               8
     spawnAnim               "monsters/anubis_idle"
     chaseAnim               "monsters/anubis_chase"

@@ -10,6 +10,7 @@ TD_Doll01 147
     touchable               1
     type                    0
     pickupMessage           "Brian McNeely"
+    pickupSound             "sounds/lobo02.wav"
 }
 
 TD_Doll02 148
@@ -108,6 +109,7 @@ TD_Doll08 154
     touchable               1
     type                    7
     pickupMessage           "Jeffrey S. Blazier"
+    pickupSound             "sounds/lobo01.wav"
 }
 
 TD_Doll09 155

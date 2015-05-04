@@ -698,6 +698,20 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
             float ceilingz = GetCeilingHeight(end, s);
             float floorz = GetFloorHeight(end, s);
 
+            // prevent flagged actors from entering a sector with water.
+            // though at least still let flying AI objects enter the sector
+            if(moveActor->Flags() & AF_NOENTERWATER &&
+                !(moveActor->InstanceOf(&kexAI::info) &&
+                static_cast<kexAI*>(moveActor)->AIFlags() & AIF_FLYING))
+            {
+                if(s->floorFace->flags & FF_WATER)
+                {
+                    // avoid entering into water
+                    CollideFace(face);
+                    continue;
+                }
+            }
+
             if(moveActor->Flags() & AF_NODROPOFF)
             {
                 if(moveActor->InstanceOf(&kexAI::info) && s->floorFace->flags & FF_LAVA)
@@ -740,17 +754,6 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
         if(i <= sector->faceEnd)
         {
             CollideFace(face);
-        }
-        else
-        {
-            if(i == sector->faceEnd+1 && moveActor->Flags() & AF_CEILINGFRICTION)
-            {
-                TraceFacePlane(face, actorHeight, actorRadius);
-            }
-            else if(moveActor->Flags() & AF_FLOORFRICTION)
-            {
-                TraceFacePlane(face, 0, actorRadius);
-            }
         }
     }
 }
@@ -1036,7 +1039,7 @@ void kexCModel::CheckSurroundingSectors(void)
                 if(PointOnFaceSide(end, face, actorRadius) < 0)
                 {
                     ceilingz = GetCeilingHeight(end, s, true);
-                    floorz = GetFloorHeight(end, s, true);
+                    floorz = GetFloorHeight(end, s, !(moveActor->Flags() & AF_NOENTERWATER));
                     
                     diff = end.z - floorz;
                     
@@ -1244,6 +1247,19 @@ void kexCModel::AdvanceActorToSector(void)
 
         if(PointInsideSector(end, sectorList[i], 0, offset))
         {
+            if(sectorList[i]->ceilingFace->flags & FF_WATER)
+            {
+                if(moveActor->Flags() & AF_NOENTERWATER &&
+                    (moveActor->InstanceOf(&kexAI::info) &&
+                    static_cast<kexAI*>(moveActor)->AIFlags() & AIF_FLYING))
+                {
+                    if(&sectors[sectorList[i]->ceilingFace->sector] == sector)
+                    {
+                        continue;
+                    }
+                }
+            }
+
             // handle special cases for flat/thin, see-through floors
             if(sectorList[i]->ceilingFace->flags & FF_SOLID &&
                sectorList[i]->ceilingFace->flags & FF_PORTAL)
@@ -1260,7 +1276,7 @@ void kexCModel::AdvanceActorToSector(void)
     }
     
     // clamp z-axis to floor and ceiling
-    float floorz = GetFloorHeight(end, sector, true);
+    float floorz = GetFloorHeight(end, sector, !(moveActor->Flags() & AF_NOENTERWATER));
     float ceilingz = GetCeilingHeight(end, sector, !(moveActor->Flags() & AF_NOEXITWATER));
     
     bWater2 = (sector->flags & SF_WATER) != 0;

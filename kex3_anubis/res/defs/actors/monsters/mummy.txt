@@ -6,6 +6,7 @@ AI_Mummy 6
     stepHeight              48
     scale                   1.5
     health                  130
+    noEnterWater            1
     moveSpeed               4
     spawnAnim               "monsters/mummy_idle"
     chaseAnim               "monsters/mummy_chase"

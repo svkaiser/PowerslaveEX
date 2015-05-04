@@ -512,6 +512,10 @@ void kexRenderScene::UpdateBuffer(void)
             }
 
             drawVerts[idx].vertex = bufferUpdateList[i].newVec;
+            drawVerts[idx].rgba[0] = bufferUpdateList[i].newColor[0];
+            drawVerts[idx].rgba[1] = bufferUpdateList[i].newColor[1];
+            drawVerts[idx].rgba[2] = bufferUpdateList[i].newColor[2];
+            drawVerts[idx].rgba[3] = bufferUpdateList[i].newColor[3];
         }
     }
 
@@ -636,6 +640,45 @@ void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int face
     
     face->flags |= FF_MAPPED;
     face->flags &= ~FF_HIDDEN;
+
+    if(cvarRenderUseVBO.GetBool() && sector->flags & SF_WATER)
+    {
+        kexVec3 vPoint;
+        int r, g, b;
+
+        for(int k = face->vertStart; k <= face->vertEnd; ++k)
+        {
+            bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
+            mapVertex_t *vtx = &world->Vertices()[k];
+
+            vPoint = vtx->origin;
+
+            r = vtx->rgba[0];
+            g = vtx->rgba[1];
+            b = vtx->rgba[2];
+
+            int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(vPoint.x + vPoint.z, vPoint.y + vPoint.z);
+            float max = (((float)r + (float)g + (float)b) / 3) / 3;
+            float c = ((float)v / (float)kexGame::cLocal->PlayLoop()->MaxWaterMagnitude()) * max;
+
+            kexMath::Clamp(c, -max, max);
+
+            r += (int)c;
+            g += (int)c;
+            b += (int)c;
+
+            kexMath::Clamp(r, 0, 255);
+            kexMath::Clamp(g, 0, 255);
+            kexMath::Clamp(b, 0, 255);
+
+            bufUpdate->index = k;
+            bufUpdate->newVec = vtx->origin;
+            bufUpdate->newColor[0] = r;
+            bufUpdate->newColor[1] = g;
+            bufUpdate->newColor[2] = b;
+            bufUpdate->newColor[3] = vtx->rgba[3];
+        }
+    }
     
     for(int k = face->polyStart; k <= face->polyEnd; ++k)
     {

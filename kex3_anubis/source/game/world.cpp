@@ -814,6 +814,10 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                         bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
                         bufUpdate->index = k;
                         bufUpdate->newVec = v->origin;
+                        bufUpdate->newColor[0] = v->rgba[0];
+                        bufUpdate->newColor[1] = v->rgba[1];
+                        bufUpdate->newColor[2] = v->rgba[2];
+                        bufUpdate->newColor[3] = v->rgba[3];
                     }
                 }
                 
@@ -859,6 +863,10 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                 bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
                 bufUpdate->index = j;
                 bufUpdate->newVec = v->origin;
+                bufUpdate->newColor[0] = v->rgba[0];
+                bufUpdate->newColor[1] = v->rgba[1];
+                bufUpdate->newColor[2] = v->rgba[2];
+                bufUpdate->newColor[3] = v->rgba[3];
             }
         }
         
@@ -1504,7 +1512,7 @@ void kexWorld::ExplodeWallEvent(mapSector_t *sector)
 //
 
 void kexWorld::CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source, const kexVec3 &origin,
-                                         const float radius, const int damage)
+                                         const float radius, const int damage, bool bCanIgnite)
 {
     kexVec3 end;
     float dist;
@@ -1550,7 +1558,7 @@ void kexWorld::CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source, 
 
         if(dmgAmount > 0)
         {
-            if(actor->InstanceOf(&kexAI::info))
+            if(bCanIgnite && actor->InstanceOf(&kexAI::info))
             {
                 static_cast<kexAI*>(actor)->Ignite(source);
             }
@@ -1588,7 +1596,7 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
     memset(pvsMask, 0, pvsSize);
     MarkSectorInPVS(source->Sector() - sectors);
     
-    CheckActorsForRadialBlast(source->Sector(), source, start, radius, damage);
+    CheckActorsForRadialBlast(source->Sector(), source, start, radius, damage, bCanDestroyWalls);
     
     do
     {
@@ -1639,7 +1647,7 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
                     continue;
                 }
                 
-                CheckActorsForRadialBlast(next, source, start, radius, damage);
+                CheckActorsForRadialBlast(next, source, start, radius, damage, bCanDestroyWalls);
                 MarkSectorInPVS(face->sector);
                 
                 if(bounds.IntersectingBox(next->bounds))

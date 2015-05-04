@@ -29,6 +29,7 @@ typedef struct
 {
     int index;
     kexVec3 newVec;
+    byte newColor[4];
 } bufferUpdate_t;
 
 typedef kexStack<bufferUpdate_t> bufferUpdateList_t;

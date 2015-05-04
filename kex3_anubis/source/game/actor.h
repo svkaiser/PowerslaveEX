@@ -39,8 +39,7 @@ typedef enum
 
 typedef enum
 {
-    AF_FLOORFRICTION    = BIT(0),
-    AF_CEILINGFRICTION  = BIT(1),
+    AF_NOENTERWATER     = BIT(0),
     AF_SOLID            = BIT(2),
     AF_NOADVANCEFRAMES  = BIT(3),
     AF_RANDOMIZATION    = BIT(4),

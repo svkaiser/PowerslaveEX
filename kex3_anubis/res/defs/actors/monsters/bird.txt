@@ -6,6 +6,7 @@ AI_Bird 3
     stepHeight              48
     scale                   1.0
     health                  10
+    noEnterWater            1
     moveSpeed               8
     spawnAnim               "monsters/bird_fly_calm"
     chaseAnim               "monsters/bird_fly_chase"

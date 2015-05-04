@@ -558,6 +558,12 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
             
             s = &kexGame::cLocal->World()->Sectors()[face->sector];
 
+            if(flags & AF_NOENTERWATER && s->floorFace->flags & FF_WATER)
+            {
+                // avoid water
+                return false;
+            }
+
             if(s->floorFace->flags & FF_LAVA)
             {
                 // avoid lava
@@ -816,6 +822,11 @@ void kexAI::ChangeDirection(void)
 
 void kexAI::Ignite(kexGameObject *igniteTarget)
 {
+    if(aiFlags & AIF_NOLAVADAMAGE)
+    {
+        return;
+    }
+
     aiFlags |= AIF_ONFIRE;
     
     // spawn flames

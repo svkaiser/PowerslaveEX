@@ -79,8 +79,7 @@ void kexScriptObjActor::Init(void)
     e->RegisterObjectMethod("kAI", "uint &AIFlags(void)", asMETHODPR(kexAI, AIFlags, (void), unsigned int&), asCALL_THISCALL);
 
     e->RegisterEnum("EnumActorFlags");
-    e->RegisterEnumValue("EnumActorFlags", "AF_FLOORFRICTION", AF_FLOORFRICTION);
-    e->RegisterEnumValue("EnumActorFlags", "AF_CEILINGFRICTION", AF_CEILINGFRICTION);
+    e->RegisterEnumValue("EnumActorFlags", "AF_NOENTERWATER", AF_NOENTERWATER);
     e->RegisterEnumValue("EnumActorFlags", "AF_SOLID", AF_SOLID);
     e->RegisterEnumValue("EnumActorFlags", "AF_NOADVANCEFRAMES", AF_NOADVANCEFRAMES);
     e->RegisterEnumValue("EnumActorFlags", "AF_RANDOMIZATION", AF_RANDOMIZATION);

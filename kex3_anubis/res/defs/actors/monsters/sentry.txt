@@ -6,6 +6,7 @@ AI_Sentry 10
     stepHeight              48
     scale                   1.5
     health                  180
+    noEnterWater            1
     moveSpeed               8
     spawnAnim               "monsters/sentry_idle"
     chaseAnim               "monsters/sentry_chase"

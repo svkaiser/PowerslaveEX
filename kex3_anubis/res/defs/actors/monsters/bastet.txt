@@ -6,6 +6,7 @@ AI_Bastet 2
     stepHeight              48
     scale                   1.5
     health                  150
+    noEnterWater            1
     moveSpeed               16
     spawnAnim               "monsters/bastet_idle"
     chaseAnim               "monsters/bastet_chase"

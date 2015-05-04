@@ -247,7 +247,7 @@ public:
 private:
     void                    CheckActorsForRadialBlast(mapSector_t *sector, kexActor *source,
                                                       const kexVec3 &origin,
-                                                      const float radius, const int damage);
+                                                      const float radius, const int damage, bool bCanIgnite);
     void                    UseLockedDoor(kexPlayer *player, mapEvent_t *ev);
     void                    UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev);
     void                    TriggerEvent(mapEvent_t *ev);
