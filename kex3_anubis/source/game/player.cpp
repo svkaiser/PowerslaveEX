@@ -71,6 +71,11 @@ kexPuppet::~kexPuppet(void)
 
 bool kexPuppet::OnCollide(kexCModel *cmodel)
 {
+    if(playerFlags & PF_DEAD)
+    {
+        return true;
+    }
+
     if(cmodel->ContactFace())
     {
         mapFace_t *face = cmodel->ContactFace();
