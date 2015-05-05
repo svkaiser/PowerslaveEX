@@ -27,7 +27,9 @@ typedef enum
     PF_JUMPWASHELD      = BIT(5),
     PF_NEEDTOGASP       = BIT(6),
     PF_FLOATING         = BIT(7),
-    PF_ELECTROCUTE      = BIT(8)
+    PF_ELECTROCUTE      = BIT(8),
+    PF_DEAD             = BIT(9),
+    PF_GOD              = BIT(10)
 } playerFlags_t;
 
 class kexActor;
@@ -62,6 +64,7 @@ private:
     void                            GroundMove(kexPlayerCmd *cmd);
     void                            FlyMove(kexPlayerCmd *cmd);
     void                            WaterMove(kexPlayerCmd *cmd);
+    void                            DeadMove(kexPlayerCmd *cmd);
     void                            CheckFallDamage(void);
     void                            SlimeDamage(void);
     void                            LavaDamage(mapFace_t *face);
@@ -98,15 +101,22 @@ public:
     bool                        GiveKey(const int key);
     bool                        IncreaseMaxHealth(const int bits);
     bool                        CheckKey(const int key) { return (keys & BIT(key)) != 0; }
+    void                        SetAmmo(const int value, const int weaponID) { ammo[weaponID] = value; }
+    void                        SetWeapon(const bool value, const int weaponID) { weapons[weaponID] = value; }
+
     void                        HoldsterWeapon(void);
+    void                        CycleNextWeapon(const bool bCheckAmmo = false);
+    void                        CyclePrevWeapon(const bool bCheckAmmo = false);
+
+    bool                        HasAmmo(const int weaponID);
 
     kexPlayerCmd                &Cmd(void) { return cmd; }
     kexPuppet                   *Actor(void) { return actor; }
     void                        SetActor(kexPuppet *_actor) { actor = _actor; }
     void                        ClearActor(void) { actor = NULL; }
-    const int16_t               Ankahs(void) const { return ankahs; }
-    const int16_t               AnkahFlags(void) const { return ankahFlags; }
 
+    int16_t                     &Ankahs(void) { return ankahs; }
+    int16_t                     &AnkahFlags(void) { return ankahFlags; }
     int16_t                     &Artifacts(void) { return artifacts; }
     int16_t                     &QuestItems(void) { return questItems; }
     uint                        &TeamDolls(void) { return teamDolls; }
@@ -139,8 +149,6 @@ private:
     void                        UpdateWeaponBob(void);
     void                        UpdateViewBob(void);
     void                        UpdateWeaponSprite(void);
-    void                        CycleNextWeapon(void);
-    void                        CyclePrevWeapon(void);
 
     kexPlayerCmd                cmd;
 

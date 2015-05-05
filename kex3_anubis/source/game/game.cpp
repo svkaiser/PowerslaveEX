@@ -81,14 +81,49 @@ COMMAND(noclip)
 
     if(puppet->PlayerFlags() & PF_NOCLIP)
     {
-        kex::cSystem->Printf("no clipping off\n");
+        game->PlayLoop()->Print("no clipping off");
         puppet->PlayerFlags() &= ~PF_NOCLIP;
         puppet->FindSector(puppet->Origin());
     }
     else
     {
-        kex::cSystem->Printf("no clipping on\n");
+        game->PlayLoop()->Print("no clipping on");
         puppet->PlayerFlags() |= PF_NOCLIP;
+        puppet->Velocity().Clear();
+    }
+}
+
+//
+// god
+//
+
+COMMAND(god)
+{
+    kexGameLocal *game = kexGame::cLocal;
+    kexPuppet *puppet;
+
+    if(kex::cCommands->GetArgc() < 1)
+    {
+        return;
+    }
+
+    if(game->GameState() != GS_LEVEL || game->Player()->Actor() == NULL)
+    {
+        return;
+    }
+
+    puppet = game->Player()->Actor();
+
+    if(puppet->PlayerFlags() & PF_GOD)
+    {
+        game->PlayLoop()->Print("god mode off");
+        puppet->PlayerFlags() &= ~PF_GOD;
+        puppet->FindSector(puppet->Origin());
+    }
+    else
+    {
+        game->PlayLoop()->Print("god mode on");
+        puppet->PlayerFlags() |= PF_GOD;
         puppet->Velocity().Clear();
     }
 }
@@ -116,12 +151,12 @@ COMMAND(fly)
 
     if(puppet->PlayerFlags() & PF_FLY)
     {
-        kex::cSystem->Printf("fly mode off\n");
+        game->PlayLoop()->Print("fly mode off");
         puppet->PlayerFlags() &= ~PF_FLY;
     }
     else
     {
-        kex::cSystem->Printf("fly mode on\n");
+        game->PlayLoop()->Print("fly mode on");
         puppet->PlayerFlags() |= PF_FLY;
         puppet->Velocity().Clear();
     }
@@ -164,6 +199,7 @@ COMMAND(summon)
 
 COMMAND(give)
 {
+    kexGameLocal *game = kexGame::cLocal;
     int argc = kex::cCommands->GetArgc();
     
     if(gameLocal.GameState() != GS_LEVEL || gameLocal.Player()->Actor() == NULL)
@@ -184,7 +220,7 @@ COMMAND(give)
             gameLocal.Player()->GiveWeapon(i, false);
         }
         
-        kex::cSystem->Printf("Got all weapons!\n");
+        game->PlayLoop()->Print("Got all weapons!");
     }
     else if(!kexStr::Compare(kex::cCommands->GetArgv(1), "weapon"))
     {
@@ -204,7 +240,7 @@ COMMAND(give)
             }
             
             gameLocal.Player()->GiveWeapon(weap);
-            kex::cSystem->Printf("Got weapon ## %i!\n", weap);
+            kex::cSystem->Printf("Got weapon %i!", weap);
         }
     }
     else if(!kexStr::Compare(kex::cCommands->GetArgv(1), "keys"))
@@ -214,7 +250,7 @@ COMMAND(give)
         gameLocal.Player()->GiveKey(2);
         gameLocal.Player()->GiveKey(3);
 
-        kex::cSystem->Printf("Got all keys!\n");
+        game->PlayLoop()->Print("Got all keys!");
     }
     else if(!kexStr::Compare(kex::cCommands->GetArgv(1), "artifact"))
     {
@@ -234,7 +270,8 @@ COMMAND(give)
             }
             
             gameLocal.Player()->Artifacts() |= BIT(arti);
-            kex::cSystem->Printf("Got %s!\n", kexGame::cLocal->Translation()->GetString(100+arti));
+            game->PlayLoop()->Print(kexStr::Format("Got %s!",
+                kexGame::cLocal->Translation()->GetString(100+arti)));
         }
     }
     else
@@ -432,6 +469,8 @@ void kexGameLocal::Start(void)
 
     loadingPic.Delete();
     player->Reset();
+
+    SavePersistentData();
 }
 
 //
@@ -708,6 +747,50 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
     }
 
     return gameLoop->ProcessInput(ev);
+}
+
+//
+// kexGameLocal::SavePersistentData
+//
+
+void kexGameLocal::SavePersistentData(void)
+{
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        persistentData.ammo[i] = player->GetAmmo(i);
+        persistentData.weapons[i] = player->WeaponOwned(i);
+    }
+
+    persistentData.ankahs = player->Ankahs();
+    persistentData.ankahFlags = player->AnkahFlags();
+    persistentData.artifacts = player->Artifacts();
+    persistentData.questItems = player->QuestItems();
+    persistentData.teamDolls = player->TeamDolls();
+    persistentData.health = player->Actor() ? player->Actor()->Health() : player->Health();
+    persistentData.currentWeapon = player->CurrentWeapon();
+}
+
+//
+// kexGameLocal::RestorePersistentData
+//
+
+void kexGameLocal::RestorePersistentData(void)
+{
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        player->SetWeapon(persistentData.weapons[i], i);
+        player->SetAmmo(persistentData.ammo[i], i);
+    }
+
+    player->Ankahs() = persistentData.ankahs;
+    player->AnkahFlags() = persistentData.ankahFlags;
+    player->Artifacts() = persistentData.artifacts;
+    player->QuestItems() = persistentData.questItems;
+    player->TeamDolls() = persistentData.teamDolls;
+    player->Health() = persistentData.health;
+
+    player->PendingWeapon() = persistentData.currentWeapon;
+    player->ChangeWeapon();
 }
 
 //

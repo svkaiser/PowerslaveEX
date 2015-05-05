@@ -217,7 +217,14 @@ void kexPlayerWeapon::UpdateSprite(void)
             }
             else if(state == WS_HOLDSTER)
             {
-                ChangeAnim(WS_RAISE);
+                if(!(owner->Actor()->PlayerFlags() & PF_DEAD))
+                {
+                    ChangeAnim(WS_RAISE);
+                }
+                else
+                {
+                    frameID = (int16_t)anim->NumFrames()-1;
+                }
                 return;
             }
         }
@@ -237,7 +244,23 @@ void kexPlayerWeapon::UpdateSprite(void)
         }
         if(owner->Cmd().Buttons() & BC_ATTACK)
         {
+            if(!owner->HasAmmo(owner->CurrentWeapon()))
+            {
+                ChangeAnim(WS_LOWER);
+                owner->CycleNextWeapon(true);
+                return;
+            }
+
             ChangeAnim(WS_FIRE);
+        }
+        break;
+
+    case WS_FIRE:
+        if(!owner->HasAmmo(owner->CurrentWeapon()))
+        {
+            owner->Actor()->StopLoopingSounds();
+            ChangeAnim(WS_LOWER);
+            owner->CycleNextWeapon(true);
         }
         break;
 

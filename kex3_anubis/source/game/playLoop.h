@@ -36,6 +36,7 @@ public:
     const int                   GetWaterVelocityPoint(const float x, const float y);
     void                        ZoomAutomap(const float amount);
     void                        RequestExit(const char *map);
+    void                        RestartLevel(void);
     
     kexRenderView               &View(void) { return renderView; }
     kexRenderScene              &RenderScene(void) { return renderScene; }
@@ -74,10 +75,13 @@ private:
     int                         waterAccelPoints[16][16];
     int                         waterVelocityPoints[16][16];
     int                         waterMaxMagnitude;
+    int                         restartDelayTicks;
     bool                        bShowAutomap;
     bool                        bMapAll;
     bool                        bPaused;
     bool                        bFadeOut;
+    bool                        bNoFadeOutPause;
+    bool                        bRestartLevel;
     float                       automapZoom;
     const char                  *mapChange;
 };

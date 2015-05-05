@@ -114,6 +114,29 @@ bool kexPuppet::OnCollide(kexCModel *cmodel)
 
 void kexPuppet::OnDamage(kexActor *instigator)
 {
+    if(playerFlags & PF_DEAD)
+    {
+        return;
+    }
+
+    if(health <= 0 && !(playerFlags & PF_GOD))
+    {
+        kexGame::cLocal->PlayLoop()->DamageFlash();
+        playerFlags |= PF_DEAD;
+
+        if(flags & AF_INWATER && !(playerFlags & PF_INWATERSURFACE))
+        {
+            PlaySound("sounds/pdrown.wav");
+        }
+        else if(instigator)
+        {
+            PlaySound("sounds/pdeath03.wav");
+        }
+
+        owner->HoldsterWeapon();
+        return;
+    }
+
     if(playerFlags & PF_ELECTROCUTE)
     {
         playerFlags &= ~PF_ELECTROCUTE;
@@ -187,6 +210,11 @@ void kexPuppet::CheckFallDamage(void)
     }
 
     InflictDamage(NULL, (int)(-amt * 16.0f));
+
+    if(playerFlags & PF_DEAD)
+    {
+        PlaySound("sounds/pxdeath.wav");
+    }
 }
 
 //
@@ -215,6 +243,12 @@ void kexPuppet::SlimeDamage(void)
                 InflictDamage(NULL, 375);
             }
         }
+
+        if(playerFlags & PF_DEAD)
+        {
+            PlaySound("sounds/psizzle.wav");
+            PlaySound("sounds/pdeath02.wav");
+        }
     }
 }
 
@@ -232,6 +266,12 @@ void kexPuppet::LavaDamage(mapFace_t *face)
     {
         int damage = (owner->Artifacts() & PA_ANKLETS) ? 50 : health;
         InflictDamage(NULL, damage);
+
+        if(playerFlags & PF_DEAD)
+        {
+            PlaySound("sounds/psizzle.wav");
+            PlaySound("sounds/pdeath02.wav");
+        }
     }
 }
 
@@ -686,6 +726,42 @@ void kexPuppet::FlyMove(kexPlayerCmd *cmd)
 }
 
 //
+// kexPuppet::DeadMove
+//
+
+void kexPuppet::DeadMove(kexPlayerCmd *cmd)
+{
+    pitch -= kexMath::Deg2Rad(4);
+    roll -= kexMath::Deg2Rad(4);
+
+    kexMath::Clamp(pitch.an, kexMath::Deg2Rad(-90), kexMath::Deg2Rad(90));
+    kexMath::Clamp(roll.an, kexMath::Deg2Rad(-45), kexMath::Deg2Rad(45));
+
+    velocity.x *= friction;
+    velocity.y *= friction;
+
+    if(origin.z > floorHeight)
+    {
+        velocity.z -= gravity;
+    }
+
+    // bump floor
+    if(origin.z + velocity.z <= floorHeight)
+    {
+        origin.z = floorHeight;
+        velocity.z = 0;
+    }
+
+    movement = velocity;
+    
+    if(!kexGame::cLocal->CModel()->MoveActor(this))
+    {
+        velocity.Clear();
+        movement.Clear();
+    }
+}
+
+//
 // kexPuppet::ScheduleWarpForNextMap
 //
 
@@ -702,6 +778,13 @@ void kexPuppet::ScheduleWarpForNextMap(const kexVec3 &destination)
 void kexPuppet::Tick(void)
 {
     kexPlayerCmd *cmd = &owner->Cmd();
+
+    if(playerFlags & PF_DEAD)
+    {
+        DeadMove(cmd);
+        gameTicks++;
+        return;
+    }
     
     roll = (0 - roll) * 0.35f + roll;
 
@@ -835,6 +918,7 @@ void kexPlayer::Ready(void)
     landTime = 0;
     stepViewZ = 0;
     keys = 0;
+    viewZ = 64.0f;
     airSupply = 64;
     airSupplyTime = 0;
     lockTime = 0;
@@ -1207,10 +1291,26 @@ bool kexPlayer::IncreaseMaxHealth(const int bits)
 }
 
 //
+// kexPlayer::HasAmmo
+//
+
+bool kexPlayer::HasAmmo(const int weaponID)
+{
+    int max = kexGame::cLocal->WeaponInfo(weaponID)->maxAmmo;
+
+    if(max <= 0)
+    {
+        return true;
+    }
+
+    return (GetAmmo(weaponID) > 0 && max > 0);
+}
+
+//
 // kexPlayer::CycleNextWeapon
 //
 
-void kexPlayer::CycleNextWeapon(void)
+void kexPlayer::CycleNextWeapon(const bool bCheckAmmo)
 {
     int setWeapon = pendingWeapon;
 
@@ -1219,6 +1319,11 @@ void kexPlayer::CycleNextWeapon(void)
         if(++setWeapon >= NUMPLAYERWEAPONS)
         {
             setWeapon = PW_MACHETE;
+        }
+
+        if(bCheckAmmo && !HasAmmo(setWeapon))
+        {
+            continue;
         }
 
         if(weapons[setWeapon] == true)
@@ -1234,7 +1339,7 @@ void kexPlayer::CycleNextWeapon(void)
 // kexPlayer::CyclePrevWeapon
 //
 
-void kexPlayer::CyclePrevWeapon(void)
+void kexPlayer::CyclePrevWeapon(const bool bCheckAmmo)
 {
     int setWeapon = pendingWeapon;
 
@@ -1243,6 +1348,11 @@ void kexPlayer::CyclePrevWeapon(void)
         if(--setWeapon < 0)
         {
             setWeapon = NUMPLAYERWEAPONS-1;
+        }
+
+        if(bCheckAmmo && !HasAmmo(setWeapon))
+        {
+            continue;
         }
 
         if(weapons[setWeapon] == true)
@@ -1269,6 +1379,14 @@ void kexPlayer::HoldsterWeapon(void)
 
 void kexPlayer::Tick(void)
 {
+    if(actor->PlayerFlags() & PF_DEAD)
+    {
+        viewZ = (2 - viewZ) * 0.35f + viewZ;
+        landTime = 0;
+        weapon.Update();
+        return;
+    }
+
     UpdateAirSupply();
 
     if(shakeTime > 0)

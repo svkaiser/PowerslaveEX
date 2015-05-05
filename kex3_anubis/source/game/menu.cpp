@@ -1186,6 +1186,8 @@ bool kexMenuTravel::ProcessInput(inputEvent_t *ev)
             return true;
         }
 
+        kexGame::cLocal->SavePersistentData();
+
         kexGame::cLocal->MapUnlockList()[kexGame::cLocal->ActiveMap()->refID] = true;
         kexGame::cLocal->MapUnlockList()[nextMap] = true;
         kexGame::cLocal->SetGameState(GS_OVERWORLD);

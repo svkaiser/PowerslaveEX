@@ -169,7 +169,10 @@ void kexPlayLoop::Init(void)
     bShowAutomap = false;
     bPaused = false;
     bFadeOut = false;
+    bNoFadeOutPause = false;
+    bRestartLevel = false;
     mapChange = NULL;
+    restartDelayTicks = 0;
 }
 
 //
@@ -188,6 +191,12 @@ void kexPlayLoop::Start(void)
         game->SetGameState(GS_TITLE);
         return;
     }
+
+    if(bRestartLevel)
+    {
+        kexGame::cLocal->RestorePersistentData();
+        bRestartLevel = false;
+    }
     
     hud.SetPlayer(game->Player());
 
@@ -197,7 +206,7 @@ void kexPlayLoop::Start(void)
 
     kexGame::cScriptManager->LoadLevelScript(game->ActiveMap()->script.c_str());
     kexGame::cScriptManager->CallDelayedMapScript(0, game->Player()->Actor(), 0);
-    
+
     game->Player()->Ready();
     hud.Reset();
     inventoryMenu.Reset();
@@ -207,6 +216,7 @@ void kexPlayLoop::Start(void)
 
     automapZoom = 2048;
     fadeInTicks = 0xff;
+    restartDelayTicks = 60;
     
     bShowAutomap = false;
     bMapAll = false;
@@ -280,6 +290,14 @@ void kexPlayLoop::Tick(void)
         return;
     }
 
+    if(!bFadeOut && kexGame::cLocal->Player()->Actor()->PlayerFlags() & PF_DEAD)
+    {
+        if(--restartDelayTicks <= 0)
+        {
+            RestartLevel();
+        }
+    }
+
     if(fadeInTicks > 0)
     {
         if(bFadeOut)
@@ -301,8 +319,11 @@ void kexPlayLoop::Tick(void)
             }
         }
 
-        ticks++;
-        return;
+        if(!bNoFadeOutPause)
+        {
+            ticks++;
+            return;
+        }
     }
 
     if(ticks > 4 && !bPaused && !inventoryMenu.IsActive())
@@ -334,6 +355,11 @@ void kexPlayLoop::Tick(void)
 
 bool kexPlayLoop::ProcessInput(inputEvent_t *ev)
 {
+    if(kexGame::cLocal->Player()->Actor()->PlayerFlags() & PF_DEAD)
+    {
+        return false;
+    }
+
     if(inventoryMenu.IsActive())
     {
         return inventoryMenu.ProcessInput(ev);
@@ -395,6 +421,23 @@ void kexPlayLoop::RequestExit(const char *map)
     mapChange = map;
     fadeInTicks = 1;
     bFadeOut = true;
+    bNoFadeOutPause = false;
+    bRestartLevel = false;
+
+    kexGame::cLocal->SavePersistentData();
+}
+
+//
+// kexPlayLoop::RestartLevel
+//
+
+void kexPlayLoop::RestartLevel(void)
+{
+    mapChange = kexGame::cLocal->ActiveMap()->map;
+    fadeInTicks = 1;
+    bFadeOut = true;
+    bNoFadeOutPause = true;
+    bRestartLevel = true;
 }
 
 //

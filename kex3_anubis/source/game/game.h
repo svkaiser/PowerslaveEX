@@ -188,6 +188,8 @@ public:
     void                            RemoveAllGameObjects(void);
     void                            ChangeMap(const char *name);
     void                            PlaySound(const char *name);
+    void                            SavePersistentData(void);
+    void                            RestorePersistentData(void);
 
     typedef struct
     {
@@ -218,6 +220,19 @@ public:
         int16_t             refID;
         int16_t             nextMap[4];
     } mapInfo_t;
+
+    typedef struct
+    {
+        int16_t             ankahs;
+        int16_t             ankahFlags;
+        bool                weapons[NUMPLAYERWEAPONS];
+        int16_t             ammo[NUMPLAYERWEAPONS];
+        int16_t             artifacts;
+        int16_t             questItems;
+        uint                teamDolls;
+        int16_t             health;
+        playerWeapons_t     currentWeapon;
+    } persistentData_t;
     
     kexTitleScreen                  *TitleScreen(void) { return titleScreen; }
     kexPlayLoop                     *PlayLoop(void) { return playLoop; }
@@ -300,6 +315,7 @@ private:
     kexArray<bool>                  bCursorEnabled;
     kexArray<menus_t>               menuStack;
     unsigned int                    buttonEvent;
+    persistentData_t                persistentData;
 };
 
 //-----------------------------------------------------------------------------
