@@ -30,6 +30,11 @@ public:
     virtual int         LockMutex(kMutex_t mutex, const bool bTimeOut = false);
     virtual int         UnlockMutex(kMutex_t mutex);
     virtual void        DestroyMutex(kMutex_t mutex);
+
+    virtual kCond_t     AllocCondition(void);
+    virtual void        ConditionDestroy(kCond_t cond);
+    virtual int         ConditionBroadcast(kCond_t cond);
+    virtual int         ConditionWait(kCond_t cond, kMutex_t mutex, uint32_t timeoutMS = 0);
 };
 
 static kexThreadSDL thread;
@@ -131,4 +136,45 @@ int kexThreadSDL::UnlockMutex(kMutex_t mutex)
 void kexThreadSDL::DestroyMutex(kMutex_t mutex)
 {
     SDL_DestroyMutex((SDL_mutex*)mutex);
+}
+
+//
+// kexThreadSDL::AllocCondition
+//
+
+kexThread::kCond_t kexThreadSDL::AllocCondition(void)
+{
+    return SDL_CreateCond();
+}
+
+//
+// kexThreadSDL::ConditionDestroy
+//
+
+void kexThreadSDL::ConditionDestroy(kCond_t cond)
+{
+    SDL_DestroyCond((SDL_cond*)cond);
+}
+
+//
+// kexThreadSDL::ConditionBroadcast
+//
+
+int kexThreadSDL::ConditionBroadcast(kCond_t cond)
+{
+    return SDL_CondBroadcast((SDL_cond*)cond);
+}
+
+//
+// kexThreadSDL::ConditionWait
+//
+
+int kexThreadSDL::ConditionWait(kCond_t cond, kMutex_t mutex, uint32_t timeoutMS)
+{
+    if(timeoutMS == 0)
+    {
+        return SDL_CondWait((SDL_cond*)cond, (SDL_mutex*)mutex);
+    }
+
+    return SDL_CondWaitTimeout((SDL_cond*)cond, (SDL_mutex*)mutex, timeoutMS);
 }

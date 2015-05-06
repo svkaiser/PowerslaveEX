@@ -201,6 +201,7 @@ void kexTexture::Upload(const byte *data, texClampMode_t clamp, texFilterMode_t 
 
 void kexTexture::Upload(kexImage &image, texClampMode_t clamp, texFilterMode_t filter)
 {
+    colorMode = image.ColorMode();
     Upload(image.Data(), clamp, filter);
 }
 

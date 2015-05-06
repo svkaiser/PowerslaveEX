@@ -346,6 +346,18 @@ void kexRenderBackend::ClearBuffer(const glClearBit_t bit)
 }
 
 //
+// kexRenderBackend::ClearBindedTexture
+//
+
+void kexRenderBackend::ClearBindedTexture(void)
+{
+    int unit = glState.currentUnit;
+    glState.textureUnits[unit].currentTexture = 0;
+
+    dglBindTexture(GL_TEXTURE_2D, 0);
+}
+
+//
 // kexRenderBackend::SetScissorRect
 //
 

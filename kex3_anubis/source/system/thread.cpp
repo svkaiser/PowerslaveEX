@@ -86,3 +86,38 @@ int kexThread::UnlockMutex(kMutex_t mutex)
 void kexThread::DestroyMutex(kMutex_t mutex)
 {
 }
+
+//
+// kexThread::AllocCondition
+//
+
+kexThread::kCond_t kexThread::AllocCondition(void)
+{
+    return NULL;
+}
+
+//
+// kexThread::ConditionDestroy
+//
+
+void kexThread::ConditionDestroy(kCond_t cond)
+{
+}
+
+//
+// kexThread::ConditionBroadcast
+//
+
+int kexThread::ConditionBroadcast(kCond_t cond)
+{
+    return -1;
+}
+
+//
+// kexThread::ConditionWait
+//
+
+int kexThread::ConditionWait(kCond_t cond, kMutex_t mutex, uint32_t timeoutMS)
+{
+    return -1;
+}

@@ -132,6 +132,7 @@ public:
     void                            SetOrtho(const float x, const float y, const float w, const float h);
     void                            SwapBuffers(void);
     void                            ClearBuffer(const glClearBit_t bit = GLCB_ALL);
+    void                            ClearBindedTexture(void);
     void                            SetState(const int bits, bool bEnable);
     void                            SetState(unsigned int flags);
     void                            SetAlphaFunc(int func, float val);

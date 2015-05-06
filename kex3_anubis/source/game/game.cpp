@@ -446,11 +446,16 @@ void kexGameLocal::Init(void)
 
 void kexGameLocal::Start(void)
 {
+    kex::cMoviePlayer->StartVideoStream("movies/LOBOTOMY.avi");
+    kex::cTimer->Sleep(500);
+    kex::cMoviePlayer->StartVideoStream("movies/INTRO1.avi");
+
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");
 
     loadingPic.LoadFromFile("gfx/loadback.png", TC_CLAMP, TF_NEAREST);
 
+    kexRender::cBackend->ClearBuffer();
     kexRender::cScreen->SetOrtho();
     kexRender::cScreen->DrawTexture(&loadingPic, 0, 0, 255, 255, 255, 255);
     DrawSmallString("Loading", 160, 120, 1, true);

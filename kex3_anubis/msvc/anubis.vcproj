@@ -40,8 +40,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects;.\..\ogg\libogg\include\;.\..\ogg\libvorbis\include\"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+				AdditionalIncludeDirectories=".\;.\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects;.\..\source\movie\;.\..\ogg\libogg\include\;.\..\ogg\libvorbis\include\;.\..\ffmpeg\include\"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;__STDC_CONSTANT_MACROS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -59,7 +59,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib .\..\ogg\libogg\win32\VS2008\Win32\Debug\libogg_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Debug\libvorbis_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Debug\libvorbisfile_static.lib .\..\angelscript\angelscript\lib\angelscriptd.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
+				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\libpngd.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Debug\ZLib\zlibd.lib .\..\ogg\libogg\win32\VS2008\Win32\Debug\libogg_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Debug\libvorbis_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Debug\libvorbisfile_static.lib .\..\angelscript\angelscript\lib\angelscriptd.lib .\..\ffmpeg\windows\avcodec.lib .\..\ffmpeg\windows\avdevice.lib .\..\ffmpeg\windows\avfilter.lib .\..\ffmpeg\windows\avformat.lib .\..\ffmpeg\windows\avutil.lib .\..\ffmpeg\windows\postproc.lib .\..\ffmpeg\windows\swresample.lib .\..\ffmpeg\windows\swscale.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="MSVCRT"
 				GenerateDebugInformation="true"
@@ -117,8 +117,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects;.\..\ogg\libogg\include\;.\..\ogg\libvorbis\include\"
-				PreprocessorDefinitions="WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+				AdditionalIncludeDirectories=".\;.\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects;.\..\source\movie\;.\..\ogg\libogg\include\;.\..\ogg\libvorbis\include\;.\..\ffmpeg\include\"
+				PreprocessorDefinitions="WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;__STDC_CONSTANT_MACROS"
 				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -136,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Release\libpng.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Release\ZLib\zlib.lib .\..\ogg\libogg\win32\VS2008\Win32\Release\libogg_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Release\libvorbis_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Release\libvorbisfile_static.lib .\..\angelscript\angelscript\lib\angelscript.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
+				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Release\libpng.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Release\ZLib\zlib.lib .\..\ogg\libogg\win32\VS2008\Win32\Release\libogg_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Release\libvorbis_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Release\libvorbisfile_static.lib .\..\angelscript\angelscript\lib\angelscript.lib .\..\ffmpeg\windows\avcodec.lib .\..\ffmpeg\windows\avdevice.lib .\..\ffmpeg\windows\avfilter.lib .\..\ffmpeg\windows\avformat.lib .\..\ffmpeg\windows\avutil.lib .\..\ffmpeg\windows\postproc.lib .\..\ffmpeg\windows\swresample.lib .\..\ffmpeg\windows\swscale.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
 				LinkIncremental="0"
 				IgnoreDefaultLibraryNames="msvcrtd"
 				GenerateDebugInformation="false"
@@ -602,6 +602,14 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="movie"
+				>
+				<File
+					RelativePath="..\source\movie\movie.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -995,6 +1003,14 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="movie"
+				>
+				<File
+					RelativePath="..\source\movie\movie.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

@@ -18,12 +18,16 @@
 class kexTimer
 {
 public:
+    typedef uint32_t (KDECL *timerFunction_t)(uint32_t interval, void *data);
+
     virtual void            Init(void);
     virtual void            Sleep(unsigned long usecs);
     virtual int             GetMS(void);
     virtual uint64_t        GetPerformanceCounter(void);
-    virtual double        MeasurePerformance(const uint64_t value);
+    virtual double          MeasurePerformance(const uint64_t value);
     virtual int             GetTicks(void);
+    virtual int             AddTimer(const int delay, timerFunction_t function, void *data);
+    virtual void            RemoveTimer(const int id);
 };
 
 #endif

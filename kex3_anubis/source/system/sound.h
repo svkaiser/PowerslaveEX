@@ -33,6 +33,8 @@ public:
     virtual kexObject       *GetRefObject(const int handle);
     virtual void            PlayMusic(const char *name, const bool bLoop = true);
     virtual void            StopMusic(void);
+    virtual void            HookToMovieAudioStream(const int sampleRate, const int channels);
+    virtual void            UnHookMovieAudioStream(void);
 
     static kexCvar          cvarSampleRate;
     static kexCvar          cvarSliceTime;

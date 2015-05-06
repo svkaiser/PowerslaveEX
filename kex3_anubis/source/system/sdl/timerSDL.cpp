@@ -27,6 +27,8 @@ public:
     virtual uint64_t        GetPerformanceCounter(void);
     virtual double          MeasurePerformance(const uint64_t value);
     virtual int             GetTicks(void);
+    virtual int             AddTimer(const int delay, timerFunction_t function, void *data);
+    virtual void            RemoveTimer(const int id);
 };
 
 static kexTimerSDL timer;
@@ -94,4 +96,22 @@ uint64_t kexTimerSDL::GetPerformanceCounter(void)
 double kexTimerSDL::MeasurePerformance(const uint64_t value)
 {
     return (1000.0 * (double)value) / (double)SDL_GetPerformanceFrequency();
+}
+
+//
+// kexTimerSDL::AddTimer
+//
+
+int kexTimerSDL::AddTimer(const int delay, timerFunction_t function, void *data)
+{
+    return SDL_AddTimer(delay, function, data);
+}
+
+//
+// kexTimerSDL::RemoveTimer
+//
+
+void kexTimerSDL::RemoveTimer(const int id)
+{
+    SDL_RemoveTimer(id);
 }

@@ -68,3 +68,20 @@ double kexTimer::MeasurePerformance(const uint64_t value)
 {
     return 0;
 }
+
+//
+// kexTimer::AddTimer
+//
+
+int kexTimer::AddTimer(const int delay, timerFunction_t function, void *data)
+{
+    return -1;
+}
+
+//
+// kexTimer::RemoveTimer
+//
+
+void kexTimer::RemoveTimer(const int id)
+{
+}

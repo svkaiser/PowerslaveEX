@@ -50,16 +50,17 @@ public:
     void                    BindDepthBuffer(const bool bReadDepth = true);
     void                    Delete(void);
 
-    const int               Width(void) const { return width; }
-    const int               Height(void) const { return height; }
-    const int               OriginalWidth(void) const { return origwidth; }
-    const int               OriginalHeight(void) const { return origheight; }
+    int                     &Width(void) { return width; }
+    int                     &Height(void) { return height; }
+    int                     &OriginalWidth(void) { return origwidth; }
+    int                     &OriginalHeight(void) { return origheight; }
     dtexture                *TextureID(void) { return &texid; }
     bool                    IsLoaded(void) const { return bLoaded; }
     texClampMode_t          GetClampMode(void) { return clampMode; }
     void                    SetClampMode(texClampMode_t cm) { clampMode = cm; }
     texFilterMode_t         GetFilterMode(void) { return filterMode; }
     void                    SetFilterMode(texFilterMode_t fm) { filterMode = fm; }
+    void                    SetColorMode(texColorMode_t cm) { colorMode = cm; }
 
     kexStr                  filePath;
     kexTexture              *next;

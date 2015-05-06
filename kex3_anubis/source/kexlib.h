@@ -191,6 +191,7 @@ typedef union
 #include "glcontext.h"
 #include "sound.h"
 #include "defs.h"
+#include "movie.h"
 
 class kex
 {
@@ -212,6 +213,7 @@ public:
     static kexConsole           *cConsole;
     static kexParser            *cParser;
     static kexGLContext         *cGLContext;
+    static kexMoviePlayer       *cMoviePlayer;
 };
 
 #endif

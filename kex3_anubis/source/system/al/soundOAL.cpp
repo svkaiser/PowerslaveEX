@@ -153,6 +153,8 @@ public:
     virtual void                    Stop(const int handle);
     virtual void                    PlayMusic(const char *name, const bool bLoop = true);
     virtual void                    StopMusic(void);
+    virtual void                    HookToMovieAudioStream(const int sampleRate, const int channels);
+    virtual void                    UnHookMovieAudioStream(void);
     virtual void                    UpdateSource(const int handle, const int volume, const int sep);
     virtual void                    Update(void);
     virtual const int               NumSources(void) const;
@@ -167,8 +169,13 @@ public:
     static kexSoundSource           *musicSource;
     static kexThread::kMutex_t      musicMutex;
 
+    static ALuint                   movieAudioBuffers[MOVIE_AUDIO_BUFFER_COUNT];
+    static ALuint                   movieAudioSampleRate;
+    static ALenum                   movieAudioChannels;
+
 private:
     static int                      MusicThread(void *data);
+    static int                      MovieAudioThread(void *data);
 
     static kexThread::kThread_t     musicThread;
     static bool                     bShutdownThread;
@@ -194,6 +201,9 @@ bool kexSoundOAL::bMusicActive = false;
 kexSoundSource *kexSoundOAL::musicSource = NULL;
 kexThread::kThread_t kexSoundOAL::musicThread = NULL;
 kexThread::kMutex_t kexSoundOAL::musicMutex = NULL;
+ALuint kexSoundOAL::movieAudioBuffers[MOVIE_AUDIO_BUFFER_COUNT];
+ALuint kexSoundOAL::movieAudioSampleRate;
+ALenum kexSoundOAL::movieAudioChannels;
 
 //
 // printsoundinfo
@@ -546,6 +556,8 @@ bool kexSoundSource::Generate(void)
 
 void kexSoundSource::Stop(void)
 {
+    int queued = 0;
+
     alSourceStop(handle);
     bInUse      = false;
     bPlaying    = false;
@@ -560,19 +572,14 @@ void kexSoundSource::Stop(void)
         kex::cThread->LockMutex(kexSoundOAL::musicMutex);
     }
 
-    if(ogg != NULL)
+    alGetSourcei(handle, AL_BUFFERS_QUEUED, &queued);
+
+    while(queued > 0)
     {
-        int queued = 0;
-
-        alGetSourcei(handle, AL_BUFFERS_QUEUED, &queued);
-
-        while(queued > 0)
-        {
-            ALuint buffer;
-            
-            alSourceUnqueueBuffers(handle, 1, &buffer);
-            queued--;
-        }
+        ALuint buffer;
+        
+        alSourceUnqueueBuffers(handle, 1, &buffer);
+        queued--;
     }
 
     if(this == kexSoundOAL::musicSource)
@@ -804,6 +811,114 @@ int kexSoundOAL::MusicThread(void *data)
 
                     kexSoundOAL::musicSource = NULL;
                     break;
+                }
+
+                alSourceQueueBuffers(src->handle, 1, &buffer);
+                processed--;
+            }
+        }
+
+        kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
+    }
+
+    kex::cTimer->Sleep(100);
+    return 0;
+}
+
+//
+// kexSoundOAL::MovieAudioThread
+//
+
+int kexSoundOAL::MovieAudioThread(void *data)
+{
+    kexSoundOAL::bShutdownThread = false;
+
+    while(1)
+    {
+        int processed = 0;
+        kexSoundSource *src;
+        ALint state;
+
+        kex::cTimer->Sleep(1);
+        kex::cThread->LockMutex(kexSoundOAL::musicMutex);
+
+        if(kexSoundOAL::bShutdownThread == true)
+        {
+            kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
+            break;
+        }
+
+        if(kexSoundOAL::musicSource == NULL)
+        {
+            kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
+            break;
+        }
+
+        src = kexSoundOAL::musicSource;
+
+        alGetSourcei(src->handle, AL_BUFFERS_PROCESSED, &processed);
+
+        if(processed <= 0)
+        {
+            int queued;
+
+            alGetSourcei(src->handle, AL_BUFFERS_QUEUED, &queued);
+            alGetSourcei(src->handle, AL_SOURCE_STATE, &state);
+
+            if(state != AL_PLAYING)
+            {
+                if(queued == MOVIE_AUDIO_BUFFER_COUNT)
+                {
+                    alSourcePlay(src->handle);
+                }
+                else if(state == AL_STOPPED || state == AL_INITIAL)
+                {
+                    byte *data;
+                    bool bFinished;
+                    int numBuffers = 0;
+
+                    for(int i = 0; i < MOVIE_AUDIO_BUFFER_COUNT; ++i)
+                    {
+                        data = kex::cMoviePlayer->GetAudioBufferInQueue(bFinished);
+
+                        if(data)
+                        {
+                            alBufferData(movieAudioBuffers[i], movieAudioChannels, data,
+                                MOVIE_AUDIO_BUFFER_SIZE, movieAudioSampleRate);
+                            alSourceQueueBuffers(src->handle, 1, &movieAudioBuffers[i]);
+                            numBuffers++;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            while(processed > 0)
+            {
+                ALuint buffer;
+                byte *data;
+                bool bFinished;
+
+                if(src->bInUse == false)
+                {
+                    break;
+                }
+                
+                alSourceUnqueueBuffers(src->handle, 1, &buffer);
+
+                data = kex::cMoviePlayer->GetAudioBufferInQueue(bFinished);
+
+                if(bFinished)
+                {
+                    kexSoundOAL::musicSource->Stop();
+                    kexSoundOAL::musicSource->Free();
+                    break;
+                }
+                else
+                {
+                    alBufferData(buffer, movieAudioChannels, data,
+                        MOVIE_AUDIO_BUFFER_SIZE, movieAudioSampleRate);
                 }
 
                 alSourceQueueBuffers(src->handle, 1, &buffer);
@@ -1129,6 +1244,89 @@ void kexSoundOAL::StopMusic(void)
 
     kexSoundOAL::musicSource = NULL;
     kexSoundOAL::musicThread = NULL;
+}
+
+//
+// kexSoundOAL::HookToMovieAudioStream
+//
+
+void kexSoundOAL::HookToMovieAudioStream(const int sampleRate, const int channels)
+{
+    kexSoundSource *src;
+
+    if(!bInitialized)
+    {
+        return;
+    }
+
+    StopMusic();
+
+    if(!(src = GetAvailableSource()))
+    {
+        sources[0].Stop();
+        sources[0].Free();
+
+        src = &sources[0];
+    }
+
+    alGenBuffers(MOVIE_AUDIO_BUFFER_COUNT, movieAudioBuffers);
+
+    src->volume = cvarMusicVolume.GetFloat();
+    src->pan = 0;
+    src->pitch = 1;
+    src->Looping() = false;
+    src->refObject = NULL;
+    src->bPlaying = true;
+    src->bInUse = true;
+
+    movieAudioSampleRate = sampleRate;
+
+    movieAudioChannels = channels == 2 ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
+
+    alSourcei(src->handle, AL_SOURCE_RELATIVE, AL_TRUE);
+    alSourcei(src->handle, AL_LOOPING, false);
+
+    src->UpdateParameters();
+
+    kexSoundOAL::musicSource = src;
+
+    if(!(kexSoundOAL::musicThread = kex::cThread->CreateThread("kthread_movie_audio",
+        NULL, kexSoundOAL::MovieAudioThread)))
+    {
+        kex::cSystem->Warning("kexSoundOAL::PlayMusic: Failed to create movie audio thread");
+        kexSoundOAL::musicSource->Stop();
+        kexSoundOAL::musicSource->Free();
+        return;
+    }
+
+     kex::cThread->SetThreadPriority(musicThread, kexThread::TP_MED);
+}
+
+//
+// kexSoundOAL::UnHookMovieAudioStream
+//
+
+void kexSoundOAL::UnHookMovieAudioStream(void)
+{
+    if(kexSoundOAL::musicThread == NULL)
+    {
+        return;
+    }
+
+    kex::cThread->LockMutex(kexSoundOAL::musicMutex);
+    kexSoundOAL::bShutdownThread = true;
+
+    kexSoundOAL::musicSource->Stop();
+
+    kex::cThread->UnlockMutex(kexSoundOAL::musicMutex);
+    kex::cThread->WaitThread(kexSoundOAL::musicThread, NULL);
+
+    kexSoundOAL::musicSource->Free();
+
+    kexSoundOAL::musicSource = NULL;
+    kexSoundOAL::musicThread = NULL;
+
+    alDeleteBuffers(MOVIE_AUDIO_BUFFER_COUNT, movieAudioBuffers);
 }
 
 //

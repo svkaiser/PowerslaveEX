@@ -22,6 +22,7 @@ public:
     typedef int (KDECL *threadFunction_t)(void *data);
     typedef void* kThread_t;
     typedef void* kMutex_t;
+    typedef void* kCond_t;
     
     typedef enum
     {
@@ -39,6 +40,11 @@ public:
     virtual int         LockMutex(kMutex_t mutex, const bool bTimeOut = false);
     virtual int         UnlockMutex(kMutex_t mutex);
     virtual void        DestroyMutex(kMutex_t mutex);
+
+    virtual kCond_t     AllocCondition(void);
+    virtual void        ConditionDestroy(kCond_t cond);
+    virtual int         ConditionBroadcast(kCond_t cond);
+    virtual int         ConditionWait(kCond_t cond, kMutex_t mutex, uint32_t timeoutMS = 0);
 };
 
 #endif
