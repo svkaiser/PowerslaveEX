@@ -119,28 +119,34 @@ void kexRenderScene::DrawSky(kexRenderView &view)
     
     kexRender::cTextures->whiteTexture->Bind();
     
-    for(uint i = 0; i < visibleSkyFaces.CurrentLength(); ++i)
+    if(cvarRenderWireframe.GetBool())
     {
-        mapFace_t *face = &world->Faces()[visibleSkyFaces[i]];
-        mapVertex_t *v = &world->Vertices()[face->vertexStart];
+        for(uint i = 0; i < visibleSkyFaces.CurrentLength(); ++i)
+        {
+            mapFace_t *face = &world->Faces()[visibleSkyFaces[i]];
+            mapVertex_t *v = &world->Vertices()[face->vertexStart];
 
-        vl->AddVertex(v[0].origin, 0, 0);
-        vl->AddVertex(v[1].origin, 0, 0);
-        vl->AddVertex(v[2].origin, 0, 0);
-        vl->AddVertex(v[3].origin, 0, 0);
-        
-        vl->AddTriangle(tris+0, tris+2, tris+1);
-        vl->AddTriangle(tris+0, tris+3, tris+2);
-        tris += 4;
+            vl->AddVertex(v[0].origin, 0, 0);
+            vl->AddVertex(v[1].origin, 0, 0);
+            vl->AddVertex(v[2].origin, 0, 0);
+            vl->AddVertex(v[3].origin, 0, 0);
+            
+            vl->AddTriangle(tris+0, tris+2, tris+1);
+            vl->AddTriangle(tris+0, tris+3, tris+2);
+            tris += 4;
+        }
     }
     
-    if(tris == 0)
+    if(visibleSkyFaces.CurrentLength() == 0)
     {
         return;
     }
     
-    kexRender::cBackend->SetColorMask(0);
-    vl->DrawElements();
+    if(cvarRenderWireframe.GetBool())
+    {
+        kexRender::cBackend->SetColorMask(0);
+        vl->DrawElements();
+    }
     
     kexTexture *skyTexture;
 
@@ -156,8 +162,11 @@ void kexRenderScene::DrawSky(kexRenderView &view)
     skyTexture->Bind();
     tris = 0;
     
-    kexRender::cBackend->SetColorMask(1);
-    kexRender::cBackend->SetDepth(GLFUNC_GEQUAL);
+    if(cvarRenderWireframe.GetBool())
+    {
+        kexRender::cBackend->SetColorMask(1);
+        kexRender::cBackend->SetDepth(GLFUNC_GEQUAL);
+    }
     
     for(int i = 0; i < 17; i++)
     {
@@ -283,8 +292,12 @@ void kexRenderScene::DrawSky(kexRenderView &view)
     triCount += vl->IndiceCount();
     
     vl->DrawElements();
-    kexRender::cBackend->ClearBuffer(GLCB_DEPTH);
-    kexRender::cBackend->SetDepth(GLFUNC_LEQUAL);
+
+    if(cvarRenderWireframe.GetBool())
+    {
+        kexRender::cBackend->ClearBuffer(GLCB_DEPTH);
+        kexRender::cBackend->SetDepth(GLFUNC_LEQUAL);
+    }
 }
 
 //
