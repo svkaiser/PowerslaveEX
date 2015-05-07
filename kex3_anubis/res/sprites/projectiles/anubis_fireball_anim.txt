@@ -611,3 +611,62 @@ anubis_fireball_explode
     }
 
 }
+
+anubis_fireball_single_sided
+{
+    // frames:    6
+    frame
+    {
+        sprites
+            {
+                { "projectiles/anubis_fireball", 16,    -12,  -20,    0 }
+            }
+
+    }
+
+    frame
+    {
+        sprites
+            {
+                { "projectiles/anubis_fireball", 16,    -12,  -20,    0 }
+            }
+
+    }
+
+    frame
+    {
+        sprites
+            {
+                { "projectiles/anubis_fireball", 21,    -11,  -21,    0 }
+            }
+
+    }
+
+    frame
+    {
+        sprites
+            {
+                { "projectiles/anubis_fireball", 21,    -11,  -21,    0 }
+            }
+
+    }
+
+    frame
+    {
+        sprites
+            {
+                { "projectiles/anubis_fireball", 22,    -11,  -23,    0 }
+            }
+
+    }
+
+    frame
+    {
+        sprites
+            {
+                { "projectiles/anubis_fireball", 22,    -11,  -23,    0 }
+            }
+
+    }
+
+}

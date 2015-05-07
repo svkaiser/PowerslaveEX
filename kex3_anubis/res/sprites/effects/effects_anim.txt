@@ -1469,6 +1469,15 @@ bubble_loop
     }
 }
 
+explodePuff
+{
+    frame
+    {
+        goto "effects/magicPuff"
+        delay 0
+    }
+}
+
 vasePuff
 {
     frame

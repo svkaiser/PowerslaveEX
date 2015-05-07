@@ -31,7 +31,20 @@ Fx_Gibs01 60
     fullbright              1
 }
 
-Fx_VaseExplodePuff 62
+Fx_ExplodePuff 62
+{
+    classname               "kexActor"
+    radius                  32
+    height                  32
+    stepHeight              32
+    scale                   2.0
+    animSpeed               0.25
+    spawnAnim               "effects/explodePuff"
+    fullbright              1
+    color                   "0.5 0.5 0.25"
+}
+
+Fx_VaseExplodePuff -1
 {
     classname               "kexActor"
     radius                  32

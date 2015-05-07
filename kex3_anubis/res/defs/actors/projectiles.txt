@@ -54,6 +54,7 @@ Proj_Cobra_Green 20
     impactWallsOnly         1
     homing                  1
     noHomingThrust          1
+    homingMaxPitch          1.0
 }
 
 Proj_Flame 21
@@ -69,7 +70,7 @@ Proj_Flame 21
     moveable                1
     randomizeFrames         1
     gravity                 0
-    damage                  10
+    damage                  5
     lifeTime                30
 }
 
@@ -186,6 +187,10 @@ Proj_Cobra_Red -1
     homing                  1
     noHomingThrust          1
     homingMaxPitch          1.0
+    spawnLight              1
+    lightColor              "0.75 0.375 0.375"
+    lightRadius             512
+    lightPasses             2
 }
 
 Proj_Laser 201
