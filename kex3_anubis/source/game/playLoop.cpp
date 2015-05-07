@@ -329,6 +329,7 @@ void kexPlayLoop::Tick(void)
     if(ticks > 4 && !bPaused && !inventoryMenu.IsActive())
     {
         renderScene.DLights().Clear();
+        kexRenderScene::bufferUpdateList.Reset();
 
         kexGame::cLocal->World()->UpdateAnimPics();
         kexGame::cLocal->UpdateGameObjects();
