@@ -187,6 +187,10 @@ int kexSession::GetNextTickCount(void)
     }
 
     framemsec = kexMath::Sec2MSec(kex::cTimer->GetMS());
+    if(ticsToRun > 60)
+    {
+        ticsToRun = 1;
+    }
     return ticsToRun;
 }
 
