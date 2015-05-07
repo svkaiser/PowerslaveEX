@@ -1384,15 +1384,15 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
     sector->validcount = validcount;
     sectorCount = 0;
 
-    if(bTestActors)
-    {
-        // check for actors in initial sector
-        TraceActorsInSector(sector);
-    }
-
     do
     {
         mapSector_t *s = sectorList[sectorCount++];
+
+        if(bTestActors)
+        {
+            // check for actors in this sector
+            TraceActorsInSector(s);
+        }
 
         for(int i = s->faceStart; i < s->faceEnd+3; ++i)
         {
@@ -1406,12 +1406,6 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
 
             if(face->flags & FF_PORTAL && face->sector >= 0)
             {
-                if(bTestActors)
-                {
-                    // test actors in next sector
-                    TraceActorsInSector(&sectors[face->sector]);
-                }
-
                 if(sectors[face->sector].validcount == validcount)
                 {
                     // we already checked this sector
