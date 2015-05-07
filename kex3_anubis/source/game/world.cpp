@@ -1601,6 +1601,7 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
     do
     {
         mapSector_t *sector = scanSectors[scanCount++];
+        bool bWallsDestroyed = false;
         
         if(sector->floodCount == 0)
         {
@@ -1617,23 +1618,32 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
             {
                 if(!(face->flags & FF_PORTAL))
                 {
-                    kexBBox bounds;
-
-                    if(face->sector >= 0 && face->flags & FF_TOGGLE)
+                    if( face->sector >= 0 && face->flags & FF_TOGGLE && bCanDestroyWalls &&
+                        face->plane.Distance(start) - face->plane.d < (radius * 0.5f))
                     {
-                        bounds = sectors[face->sector].bounds;
-                    }
-                    else
-                    {
-                        bounds = face->bounds;
-                    }
+                        mapSector_t *s = &sectors[face->sector];
 
-                    if(bounds.max.x > bounds.max.x) bounds.max.x = bounds.max.x;
-                    if(bounds.max.y > bounds.max.y) bounds.max.y = bounds.max.y;
-                    if(bounds.max.z > bounds.max.z) bounds.max.z = bounds.max.z;
-                    if(bounds.min.x < bounds.min.x) bounds.min.x = bounds.min.x;
-                    if(bounds.min.y < bounds.min.y) bounds.min.y = bounds.min.y;
-                    if(bounds.min.z < bounds.min.z) bounds.min.z = bounds.min.z;
+                        ExplodeWall(face);
+
+                        for(int j = s->faceStart; j < s->faceEnd+3; ++j)
+                        {
+                            mapFace_t *f = &faces[j];
+
+                            if(!(f->flags & FF_TOGGLE))
+                            {
+                                continue;
+                            }
+
+                            if(f->sector != face->sectorOwner)
+                            {
+                                continue;
+                            }
+
+                            ExplodeWall(f);
+                        }
+
+                        bWallsDestroyed = true;
+                    }
                 }
                 continue;
             }
@@ -1658,9 +1668,11 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
             }
         }
 
-        if(bCanDestroyWalls)
+        if(bCanDestroyWalls && bWallsDestroyed &&
+            sector->event >= 0 && events[sector->event].type == 66)
         {
-            ExplodeWallEvent(sector);
+            SendRemoteTrigger(sector, &events[sector->event]);
+            sector->event = -1;
         }
         
     } while(scanCount < scanSectors.CurrentLength());
