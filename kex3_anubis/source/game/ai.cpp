@@ -195,22 +195,25 @@ void kexAI::OnDamage(kexActor *instigator)
         return;
     }
 
-    // we took damage but we're not active yet. target whoever damaged us
-    if(!target && instigator != this && (instigator->Flags() & AF_SHOOTABLE ||
-        instigator->InstanceOf(&kexProjectile::info)))
+    if(instigator)
     {
-        if(instigator && instigator->InstanceOf(&kexProjectile::info))
+        // we took damage but we're not active yet. target whoever damaged us
+        if(!target && instigator != this && (instigator->Flags() & AF_SHOOTABLE ||
+            instigator->InstanceOf(&kexProjectile::info)))
         {
-            SetTarget(instigator->Target());
-        }
-        else
-        {
-            SetTarget(instigator);
-        }
+            if(instigator && instigator->InstanceOf(&kexProjectile::info))
+            {
+                SetTarget(instigator->Target());
+            }
+            else
+            {
+                SetTarget(instigator);
+            }
 
-        if(state == AIS_IDLE && anim != chaseAnim)
-        {
-            StartChasing();
+            if(state == AIS_IDLE && anim != chaseAnim)
+            {
+                StartChasing();
+            }
         }
     }
     
@@ -233,6 +236,7 @@ void kexAI::ClearBurn(void)
             continue;
         }
 
+        igniteFlames[i]->RemoveRef();
         igniteFlames[i]->SetTarget(NULL);
         igniteFlames[i]->Remove();
         igniteFlames[i] = NULL;
@@ -252,6 +256,7 @@ void kexAI::ClearBurn(void)
 void kexAI::UpdateBurn(void)
 {
     int cnt = 0;
+    int igniteTicksTotal = 0;
 
     if(!(aiFlags & AIF_ONFIRE) || state == AIS_PAIN)
     {
@@ -268,6 +273,7 @@ void kexAI::UpdateBurn(void)
         // flame expired?
         if(--igniteTicks[i] < 0)
         {
+            igniteFlames[i]->RemoveRef();
             igniteFlames[i]->SetTarget(NULL);
             igniteFlames[i]->Remove();
             igniteFlames[i] = NULL;
@@ -275,18 +281,18 @@ void kexAI::UpdateBurn(void)
             continue;
         }
 
+        igniteTicksTotal += igniteTicks[i];
         cnt++;
-
-        if((kexRand::Int() & 0xff) <= 7)
-        {
-            InflictDamage(static_cast<kexActor*>(igniteFlames[i]->Target()), 9);
-        }
     }
 
     if(cnt == 0)
     {
         // all flames have expired
         aiFlags &= ~AIF_ONFIRE;
+    }
+    else if((igniteTicksTotal & 7) == 0)
+    {
+        InflictDamage(static_cast<kexActor*>(NULL), 9);
     }
 }
 
@@ -299,11 +305,7 @@ bool kexAI::CanSeeTarget(kexActor *actor)
     kexVec3 start = origin + kexVec3(0, 0, height * 0.5f);
     kexVec3 end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
     
-    kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0);
-
-    // trace must contact the target only and not a wall
-    return (kexGame::cLocal->CModel()->ContactFace() == NULL &&
-            kexGame::cLocal->CModel()->ContactActor() == actor);
+    return !kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0, false);
 }
 
 //
@@ -836,20 +838,23 @@ void kexAI::Ignite(kexGameObject *igniteTarget)
         {
             float x, y, z;
             kexActor *ignite;
+            float heightDiff;
             
             igniteTicks[i] = kexRand::Max(64) + 64;
+            heightDiff = (height * (float)kexRand::Byte()) / 384.0f;
+
+            if(heightDiff < stepHeight)
+            {
+                heightDiff = stepHeight;
+            }
             
             x = origin.x + (kexRand::Float() * (radius*0.5f));
             y = origin.y + (kexRand::Float() * (radius*0.5f));
-            z = origin.z + (kexRand::Float() * (height*0.5f));
-
-            if(z < origin.z + stepHeight && stepHeight < height)
-            {
-                z = origin.z + stepHeight;
-            }
+            z = origin.z + heightDiff;
             
             ignite = kexGame::cActorFactory->Spawn(AT_IGNITEFLAME, x, y, z, 0, SectorIndex());
             ignite->SetTarget(igniteTarget);
+            ignite->AddRef();
             
             igniteFlames[i] = ignite;
             break;
