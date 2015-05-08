@@ -550,11 +550,6 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
     {
         this->flags &= ~AF_INWATER;
     }
-
-    if(oldSector != sector)
-    {
-        kexGame::cLocal->World()->EnterSectorSpecial(this, sector);
-    }
 }
 
 //
@@ -651,11 +646,6 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
     if(!(sector->flags & SF_WATER))
     {
         this->flags &= ~AF_INWATER;
-    }
-
-    if(oldSector != sector)
-    {
-        kexGame::cLocal->World()->EnterSectorSpecial(this, sector);
     }
 }
 
@@ -811,6 +801,7 @@ void kexPuppet::Tick(void)
         GroundMove(cmd);
     }
 
+    kexGame::cLocal->World()->EnterSectorSpecial(this, sector);
     gameTicks++;
 }
 

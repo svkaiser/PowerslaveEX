@@ -1088,6 +1088,15 @@ void kexWorld::ResetWallSwitchFromTag(const int tag)
 
         if(!EventIsASwitch(i))
         {
+            if(events[i].type == 23)
+            {
+                sector = &sectors[events[i].sector];
+
+                if(sector->objectThinker != NULL)
+                {
+                    static_cast<kexFloor*>(sector->objectThinker)->Reset();
+                }
+            }
             continue;
         }
 
@@ -1235,6 +1244,16 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
 
     ev = &events[sector->event];
 
+    if(ev->type != 50)
+    {
+        if(sector->floorFace->plane.Distance(actor->Origin()) -
+            sector->floorFace->plane.d > actor->StepHeight())
+        {
+            // must be on the ground
+            return;
+        }
+    }
+
     switch(ev->type)
     {
     case 21:
@@ -1243,7 +1262,6 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
     case 23:
         actor->PlaySound("sounds/switch.wav");
         kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
-        SendRemoteTrigger(sector, ev);
         break;
     case 24:
         kexGame::cActorFactory->SpawnMover("kexLift", ev->type, ev->sector);

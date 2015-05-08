@@ -377,14 +377,13 @@ void kexFloor::Tick(void)
     {
         return;
     }
-    
-    if(state == FS_LOWERED)
-    {
-        return;
-    }
 
-    if(state == FS_DOWN)
+    switch(state)
     {
+    case FS_LOWERED:
+        return;
+
+    case FS_DOWN:
         if(currentHeight <= destHeight)
         {
             if(type != 23)
@@ -395,7 +394,17 @@ void kexFloor::Tick(void)
             }
             else
             {
+                kexWorld *w = kexGame::cLocal->World();
+
                 state = FS_LOWERED;
+                sector->objectThinker = this;
+
+                w->SendRemoteTrigger(sector, &w->Events()[sector->event]);
+
+                if(sector->event <= -1)
+                {
+                    Remove();
+                }
             }
             return;
         }
@@ -413,10 +422,57 @@ void kexFloor::Tick(void)
         {
             currentHeight = destHeight;
         }
-        
-        kexGame::cLocal->World()->MoveSector(sector, false, currentHeight - lastHeight);
-        UpdateFloorOrigin();
+        break;
+
+    case FS_UP:
+        if(currentHeight >= destHeight)
+        {
+            if(type != 23)
+            {
+                StopLoopingSounds();
+                PlaySound("sounds/stonestop.wav");
+            }
+            sector->objectThinker = NULL;
+            Remove();
+            return;
+        }
+        else
+        {
+            if(type != 23)
+            {
+                PlayLoopingSound("sounds/platstart.wav");
+            }
+        }
+
+        currentHeight += moveSpeed;
+
+        if(currentHeight > destHeight)
+        {
+            currentHeight = destHeight;
+        }
+        break;
+
+    default:
+        return;
     }
+
+    kexGame::cLocal->World()->MoveSector(sector, false, currentHeight - lastHeight);
+    UpdateFloorOrigin();
+}
+
+//
+// kexFloor::Reset
+//
+
+void kexFloor::Reset(void)
+{
+    if(state != FS_LOWERED)
+    {
+        return;
+    }
+    
+    destHeight = baseHeight;
+    state = FS_UP;
 }
 
 //

@@ -160,6 +160,11 @@ void kexPlayerWeapon::UpdateBob(void)
         bobTime = 0;
         bob_x = (0 - bob_x) * 0.25f + bob_x;
         bob_y = (0 - bob_y) * 0.25f + bob_y;
+
+        if(actor->Velocity().z > 0.1f)
+        {
+            bob_y += (actor->Velocity().z * 0.25f);
+        }
     }
 }
 

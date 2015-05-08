@@ -209,6 +209,7 @@ public:
     void                    MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount);
     void                    ResetWallSwitchFromTag(const int tag);
     void                    FireRemoteEventFromTag(const int tag);
+    void                    SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event);
     void                    MoveScriptedSector(const int tag, const float height,
                                                const float speed, const bool bCeiling);
     void                    ClearSectorPVS(void);
@@ -251,7 +252,6 @@ private:
     void                    UseLockedDoor(kexPlayer *player, mapEvent_t *ev);
     void                    UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev);
     void                    TriggerEvent(mapEvent_t *ev);
-    void                    SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event);
     void                    SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev);
     void                    TeleportEvent(kexActor *actor, mapEvent_t *event);
     void                    ExplodeWallEvent(mapSector_t *sector);

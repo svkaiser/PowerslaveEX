@@ -94,6 +94,7 @@ public:
 
     virtual void            Tick(void);
     void                    Spawn(void);
+    void                    Reset(void);
 
 private:
     typedef enum
