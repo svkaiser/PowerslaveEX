@@ -152,6 +152,7 @@ MENUITEM(Gameplay, "Gameplay", -100, 114, 1,
 {
 },
 {
+    kexGame::cLocal->SetMenu(MENU_GAMEPLAY);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
@@ -193,6 +194,7 @@ MENUITEM(Graphics, "Graphics", -100, 150, 1,
 {
 },
 {
+    kexGame::cLocal->SetMenu(MENU_GRAPHICS);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 

@@ -66,6 +66,8 @@ public:
     static const float  Z_NEAR;
     static const float  Z_FAR;
 
+    static kexCvar      cvarFOV;
+
 private:
     void                SetupMatrices(void);
     void                MakeClipPlanes(void);

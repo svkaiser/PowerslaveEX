@@ -28,6 +28,8 @@ typedef enum
     MENU_AUDIO,
     MENU_MOUSE,
     MENU_JOYSTICK,
+    MENU_GRAPHICS,
+    MENU_GAMEPLAY,
     NUMMENUS
 } menus_t;
 

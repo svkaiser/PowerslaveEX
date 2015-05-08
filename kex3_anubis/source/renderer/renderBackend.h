@@ -165,6 +165,7 @@ public:
     const int                       ValidFrameNum(void) const { return validFrameNum; }
 
     static const int                MAX_TEXTURE_UNITS   = 4;
+    static kexCvar                  cvarRenderFinish;
 
     bool                            bPrintStats;
 

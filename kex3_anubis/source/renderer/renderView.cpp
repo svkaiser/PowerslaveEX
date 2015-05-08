@@ -19,7 +19,7 @@
 #include "game.h"
 #include "renderView.h"
 
-kexCvar cvarFOV("r_fov", CVF_FLOAT|CVF_CONFIG, "74.0", "Field of view");
+kexCvar kexRenderView::cvarFOV("r_fov", CVF_FLOAT|CVF_CONFIG, "74.0", "Field of view");
 
 const float kexRenderView::Z_NEAR = 0.1f;
 const float kexRenderView::Z_FAR = -0.999f;

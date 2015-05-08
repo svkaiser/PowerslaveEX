@@ -51,6 +51,15 @@ public:
     virtual const char                      *GetClipboardText(void);
     virtual void                            GetAvailableDisplayModes(kexArray<videoDisplayInfo_t> &list);
 
+    static kexCvar                          cvarFixedTime;
+    static kexCvar                          cvarVidWidth;
+    static kexCvar                          cvarVidHeight;
+    static kexCvar                          cvarVidWindowed;
+    static kexCvar                          cvarVidVSync;
+    static kexCvar                          cvarVidDepthSize;
+    static kexCvar                          cvarVidStencilSize;
+    static kexCvar                          cvarVidBuffSize;
+
     int                                     VideoWidth(void) { return videoWidth; }
     int                                     VideoHeight(void) { return videoHeight; }
     float                                   VideoRatio(void) { return videoRatio; }

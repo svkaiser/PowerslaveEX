@@ -28,10 +28,11 @@ public:
     void                        RenderBloom(void);
     void                        ReloadFBOs(void);
 
-private:
     static kexCvar              cvarRenderFXAA;
     static kexCvar              cvarRenderBloom;
     static kexCvar              cvarBloomThreshold;
+
+private:
 
     kexShaderObj                fxaaShader;
     kexShaderObj                blurShader;

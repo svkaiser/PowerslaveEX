@@ -142,6 +142,7 @@ public:
     playerWeapons_t             &PendingWeapon(void) { return pendingWeapon; }
 
     static const int16_t        maxHealth;
+    static kexCvar              cvarAutoAim;
 
 private:
     void                        UpdateAirSupply(void);

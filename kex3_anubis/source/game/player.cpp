@@ -22,7 +22,7 @@
 #include "kexlib.h"
 #include "game.h"
 
-kexCvar cvarAutoAim("g_autoaim", CVF_BOOL|CVF_CONFIG, "1", "Enable auto aiming");
+kexCvar kexPlayer::cvarAutoAim("g_autoaim", CVF_BOOL|CVF_CONFIG, "1", "Enable auto aiming");
 
 #define PMOVE_MIN               0.125f
 #define PMOVE_SPEED             0.976f

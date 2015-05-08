@@ -55,15 +55,6 @@ private:
     SDL_GLContext                           glContext;
 };
 
-kexCvar cvarFixedTime("fixedtime", CVF_INT|CVF_CONFIG, "0", "TODO");
-kexCvar cvarVidWidth("v_width", CVF_INT|CVF_CONFIG, "640", "TODO");
-kexCvar cvarVidHeight("v_height", CVF_INT|CVF_CONFIG, "480", "TODO");
-kexCvar cvarVidWindowed("v_windowed", CVF_BOOL|CVF_CONFIG, "1", "TODO");
-kexCvar cvarVidVSync("v_vsync", CVF_BOOL|CVF_CONFIG, "1", "TODO");
-kexCvar cvarVidDepthSize("v_depthsize", CVF_INT|CVF_CONFIG, "24", "TODO");
-kexCvar cvarVidStencilSize("v_stencilsize", CVF_INT|CVF_CONFIG, "8", "TODO");
-kexCvar cvarVidBuffSize("v_buffersize", CVF_INT|CVF_CONFIG, "32", "TODO");
-
 static kexSystemSDL systemLocal;
 kexSystem *kex::cSystem = &systemLocal;
 
@@ -281,8 +272,25 @@ void kexSystemSDL::GetAvailableDisplayModes(kexArray<kexSystem::videoDisplayInfo
     for(int i = 0; i < numDisplays; ++i)
     {
         kexSystem::videoDisplayInfo_t *info;
+        bool bSkip = false;
 
         if(SDL_GetDisplayMode(0, i, &mode) < 0)
+        {
+            continue;
+        }
+
+        for(uint j = 0; j < list.Length(); ++j)
+        {
+            if( mode.w == list[j].width &&
+                mode.h == list[j].height &&
+                mode.refresh_rate == list[j].refresh)
+            {
+                bSkip = true;
+                break;
+            }
+        }
+
+        if(bSkip)
         {
             continue;
         }
