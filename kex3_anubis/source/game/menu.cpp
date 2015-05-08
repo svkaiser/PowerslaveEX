@@ -2412,6 +2412,9 @@ private:
     void                            OnResolution(kexMenuObject *menuObject);
     void                            OnFOV(kexMenuObject *menuObject);
 
+    kexArray<kexSystem::videoDisplayInfo_t> resList;
+    int                             selectedDisplayItem;
+
     kexMenuObjectOptionScroll       *videoResolutions;
     kexMenuObjectOptionScroll       *fov;
     kexMenuObjectOptionToggle       *toggleWindowed;
@@ -2429,9 +2432,9 @@ DECLARE_MENU_CLASS(kexMenuGraphics, MENU_GRAPHICS);
 void kexMenuGraphics::Init(void)
 {
     kexMenuObjectButton *button;
-    kexArray<kexSystem::videoDisplayInfo_t> resList;
 
     kex::cSystem->GetAvailableDisplayModes(resList);
+    selectedDisplayItem = -1;
 
     button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
     button->x = 112;
@@ -2509,6 +2512,35 @@ void kexMenuGraphics::Init(void)
 
 void kexMenuGraphics::Update(void)
 {
+    if(selectedDisplayItem <= -1)
+    {
+        for(uint i = 0; i < resList.Length(); ++i)
+        {
+            if(resList[i].width == kex::cSystem->VideoWidth() &&
+               resList[i].height == kex::cSystem->VideoHeight())
+            {
+                if(kexSystem::cvarVidWindowed.GetBool() == false)
+                {
+                    if(resList[i].refresh != kexSystem::cvarVidRefresh.GetInt())
+                    {
+                        continue;
+                    }
+                }
+
+                videoResolutions->selectedItem = i;
+                selectedDisplayItem = i;
+                break;
+            }
+        }
+    }
+    else
+    {
+        selectedDisplayItem = videoResolutions->selectedItem;
+
+        kexMath::Clamp(selectedDisplayItem, 0, resList.Length()-1);
+        videoResolutions->selectedItem = selectedDisplayItem;
+    }
+
     UpdateItems();
 }
 
@@ -2528,6 +2560,8 @@ void kexMenuGraphics::OnBack(kexMenuObject *menuObject)
 
 void kexMenuGraphics::OnResolution(kexMenuObject *menuObject)
 {
+    kexMenuObjectOptionScroll *scroll = static_cast<kexMenuObjectOptionScroll*>(menuObject);
+    kex::cSystem->cvarVidDisplayRestart.Set((int)scroll->selectedItem);
 }
 
 //
@@ -2584,6 +2618,14 @@ void kexMenuGraphics::Display(void)
     kexGame::cLocal->DrawSmallString("FXAA Antialiasing", 16, 96, 1, false);
     kexGame::cLocal->DrawSmallString("Bloom", 16, 114, 1, false);
     kexGame::cLocal->DrawSmallString("Force OpenGL Finish", 16, 132, 1, false);
+
+    switch(selectedItem)
+    {
+    case 1:
+    case 2:
+        kexGame::cLocal->DrawSmallString("This option requires a restart", 160, 176, 1, true);
+        break;
+    }
 
     kexGame::cLocal->DrawSmallString("Graphics", 160, 20, 1, true);
 }

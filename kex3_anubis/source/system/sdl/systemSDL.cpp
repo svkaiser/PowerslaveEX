@@ -50,6 +50,7 @@ public:
 
 private:
     void                                    InitVideo(void);
+    void                                    SaveUpdatedVideoDisplay(void);
 
     SDL_Window                              *window;
     SDL_GLContext                           glContext;
@@ -98,12 +99,36 @@ kexSystemSDL::~kexSystemSDL(void)
 }
 
 //
+// kexSystemSDL::SaveUpdatedVideoDisplay
+//
+
+void kexSystemSDL::SaveUpdatedVideoDisplay(void)
+{
+    int displayRestart = cvarVidDisplayRestart.GetInt();
+
+    if(displayRestart >= 0)
+    {
+        kexArray<kexSystem::videoDisplayInfo_t> displayList;
+        GetAvailableDisplayModes(displayList);
+
+        if(displayRestart < (int)displayList.Length())
+        {
+            cvarVidWidth.Set(displayList[displayRestart].width);
+            cvarVidHeight.Set(displayList[displayRestart].height);
+            cvarVidRefresh.Set(displayList[displayRestart].refresh);
+        }
+    }
+}
+
+//
 // kexSystemSDL::Shutdown
 //
 
 void kexSystemSDL::Shutdown(void)
 {
     bShuttingDown = true;
+
+    SaveUpdatedVideoDisplay();
     
     kex::cSound->Shutdown();
     kex::cSession->Shutdown();
@@ -247,6 +272,22 @@ void kexSystemSDL::InitVideo(void)
     if(window == NULL)
     {
         kex::cSystem->Error("kexSystem::InitVideo: Failed to create window");
+    }
+
+    if(!bWindowed)
+    {
+        SDL_DisplayMode mode, bestMode;
+
+        mode.w = videoWidth;
+        mode.h = videoHeight;
+        mode.refresh_rate = cvarVidRefresh.GetInt();
+
+        SDL_GetClosestDisplayMode(0, &mode, &bestMode);
+
+        if(SDL_SetWindowDisplayMode(window, &bestMode) <= -1)
+        {
+            kex::cSystem->Error("kexSystem::InitVideo: Failed to set display mode");
+        }
     }
 
     if((glContext = SDL_GL_CreateContext(window)) == NULL)

@@ -21,10 +21,12 @@ kexCvar kexSystem::cvarFixedTime("fixedtime", CVF_INT|CVF_CONFIG, "0", "TODO");
 kexCvar kexSystem::cvarVidWidth("v_width", CVF_INT|CVF_CONFIG, "640", "TODO");
 kexCvar kexSystem::cvarVidHeight("v_height", CVF_INT|CVF_CONFIG, "480", "TODO");
 kexCvar kexSystem::cvarVidWindowed("v_windowed", CVF_BOOL|CVF_CONFIG, "1", "TODO");
+kexCvar kexSystem::cvarVidRefresh("v_refresh", CVF_INT|CVF_CONFIG, "60", "Video refresh rate (fullscreen only)");
 kexCvar kexSystem::cvarVidVSync("v_vsync", CVF_BOOL|CVF_CONFIG, "1", "TODO");
 kexCvar kexSystem::cvarVidDepthSize("v_depthsize", CVF_INT|CVF_CONFIG, "24", "TODO");
 kexCvar kexSystem::cvarVidStencilSize("v_stencilsize", CVF_INT|CVF_CONFIG, "8", "TODO");
 kexCvar kexSystem::cvarVidBuffSize("v_buffersize", CVF_INT|CVF_CONFIG, "32", "TODO");
+kexCvar kexSystem::cvarVidDisplayRestart("v_displayrestart", CVF_INT, "-1", "TODO");
 
 //
 // quit

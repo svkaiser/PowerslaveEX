@@ -55,10 +55,12 @@ public:
     static kexCvar                          cvarVidWidth;
     static kexCvar                          cvarVidHeight;
     static kexCvar                          cvarVidWindowed;
+    static kexCvar                          cvarVidRefresh;
     static kexCvar                          cvarVidVSync;
     static kexCvar                          cvarVidDepthSize;
     static kexCvar                          cvarVidStencilSize;
     static kexCvar                          cvarVidBuffSize;
+    static kexCvar                          cvarVidDisplayRestart;
 
     int                                     VideoWidth(void) { return videoWidth; }
     int                                     VideoHeight(void) { return videoHeight; }
