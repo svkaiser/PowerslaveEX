@@ -390,6 +390,10 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
                 MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
 
+            case 25:
+                kexGame::cActorFactory->SpawnMover("kexFloor", events[i].type, events[i].sector);
+                break;
+
             case 41:
             case 44:
             case 45:
@@ -1008,7 +1012,7 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
         kexGame::cActorFactory->SpawnMover("kexDoor", ev->type, ev->sector);
         break;
     case 21:
-        kexGame::cActorFactory->SpawnMover("kexLift", ev->type, ev->sector);
+        kexGame::cActorFactory->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
         break;
     case 22:
         kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
@@ -1094,7 +1098,7 @@ void kexWorld::ResetWallSwitchFromTag(const int tag)
 
                 if(sector->objectThinker != NULL)
                 {
-                    static_cast<kexFloor*>(sector->objectThinker)->Reset();
+                    static_cast<kexFloor*>(sector->objectThinker)->Trigger();
                 }
             }
             continue;
@@ -1215,6 +1219,9 @@ void kexWorld::TriggerEvent(mapEvent_t *ev)
     case 24:
         kexGame::cActorFactory->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
         break;
+    case 25:
+        static_cast<kexFloor*>(sectors[ev->sector].objectThinker)->Trigger();
+        break;
     case 48:
         static_cast<kexDropPad*>(sectors[ev->sector].objectThinker)->Reset();
         break;
@@ -1275,6 +1282,9 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
     case 52:
         kexGame::cScriptManager->CallDelayedMapScript(ev->tag+1, actor, 0);
         sector->event = -1;
+        break;
+    case 53:
+        ArtifactEvent(actor, ev);
         break;
     case 63:
         kexGame::cScriptManager->CallDelayedMapScript(ev->tag+1, actor, 0);
@@ -1380,6 +1390,81 @@ void kexWorld::TeleportEvent(kexActor *actor, mapEvent_t *event)
         }
 
         break;
+    }
+}
+
+//
+// kexWorld::ArtifactEvent
+//
+
+void kexWorld::ArtifactEvent(kexActor *actor, mapEvent_t *event)
+{
+    mapActor_t *actorTemplate = NULL;
+    kexVec3 org;
+    kexPlayer *player;
+    mapFace_t *face;
+    int artiBit;
+
+    if(!actor->InstanceOf(&kexPuppet::info))
+    {
+        return;
+    }
+
+    player = static_cast<kexPuppet*>(actor)->Owner();
+    artiBit = event->tag-1;
+
+    if(!(player->Artifacts() & BIT(artiBit)))
+    {
+        return;
+    }
+
+    for(unsigned int j = 0; j < numActors; ++j)
+    {
+        kexDict *def;
+
+        if((def = kexGame::cLocal->ActorDefs().GetEntry(actors[j].type)))
+        {
+            int artifactBit;
+
+            if(def->GetInt("type", artifactBit))
+            {
+                if(artifactBit == (artiBit))
+                {
+                    actorTemplate = &actors[j];
+                    break;
+                }
+            }
+        }
+    }
+
+    if(!actorTemplate)
+    {
+        return;
+    }
+
+    for(unsigned int i = 0; i < numEvents; ++i)
+    {
+        kexActor *obj;
+
+        mapEvent_t *ev = &events[i];
+
+        if(ev == event || ev->type != 54 || ev->tag != event->tag || ev->sector <= -1)
+        {
+            continue;
+        }
+
+        face = sectors[ev->sector].floorFace;
+        org = (vertices[face->vertexStart+0].origin +
+               vertices[face->vertexStart+1].origin +
+               vertices[face->vertexStart+2].origin) / 3;
+
+        player->Artifacts() &= ~BIT(artiBit);
+        kexGame::cLocal->World()->FireRemoteEventFromTag(1000 + artiBit);
+
+        obj = kexGame::cLocal->SpawnActor(actorTemplate->type, org.x, org.y, org.z + 16, 0, ev->sector);
+
+        obj->PlaySound("sounds/ding02.wav");
+        kexGame::cLocal->SpawnDynamicLight(obj, 512, kexVec3(1, 1, 1), 32.0f);
     }
 }
 

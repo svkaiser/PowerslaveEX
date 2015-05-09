@@ -390,14 +390,21 @@ void kexFloor::Tick(void)
             {
                 StopLoopingSounds();
                 PlaySound("sounds/stonestop.wav");
-                Remove();
+
+                if(type == 25)
+                {
+                    state = FS_LOWERED;
+                }
+                else
+                {
+                    Remove();
+                }
             }
             else
             {
                 kexWorld *w = kexGame::cLocal->World();
 
                 state = FS_LOWERED;
-                sector->objectThinker = this;
 
                 w->SendRemoteTrigger(sector, &w->Events()[sector->event]);
 
@@ -432,8 +439,15 @@ void kexFloor::Tick(void)
                 StopLoopingSounds();
                 PlaySound("sounds/stonestop.wav");
             }
-            sector->objectThinker = NULL;
-            Remove();
+            if(type == 25)
+            {
+                state = FS_IDLE;
+            }
+            else
+            {
+                sector->objectThinker = NULL;
+                Remove();
+            }
             return;
         }
         else
@@ -461,18 +475,30 @@ void kexFloor::Tick(void)
 }
 
 //
-// kexFloor::Reset
+// kexFloor::Trigger
 //
 
-void kexFloor::Reset(void)
+void kexFloor::Trigger(void)
 {
-    if(state != FS_LOWERED)
+    if(sector->objectThinker == NULL)
     {
         return;
     }
-    
-    destHeight = baseHeight;
-    state = FS_UP;
+
+    switch(state)
+    {
+    case FS_LOWERED:
+    case FS_DOWN:
+        destHeight = baseHeight;
+        state = FS_UP;
+        break;
+
+    case FS_IDLE:
+    case FS_UP:
+        destHeight = (float)sector->floorHeight - lip;
+        state = FS_DOWN;
+        break;
+    }
 }
 
 //
@@ -488,10 +514,21 @@ void kexFloor::Spawn(void)
     case 22:
         lip = 0;
         moveSpeed = 4;
+        state = FS_DOWN;
         break;
+
     case 23:
         lip = 0;
         moveSpeed = 2;
+        state = FS_DOWN;
+        sector->objectThinker = this;
+        break;
+
+    case 25:
+        lip = 0;
+        moveSpeed = 2;
+        state = FS_IDLE;
+        sector->objectThinker = this;
         break;
 
     default:
@@ -501,8 +538,6 @@ void kexFloor::Spawn(void)
     }
 
     sector->flags |= SF_SPECIAL;
-    
-    state = FS_DOWN;
     
     baseHeight = sector->floorFace->plane.d;
     currentHeight = baseHeight;
