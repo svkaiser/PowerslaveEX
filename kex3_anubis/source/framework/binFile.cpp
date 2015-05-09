@@ -58,6 +58,26 @@ bool kexBinFile::Open(const char *file, kexHeapBlock &heapBlock)
 }
 
 //
+// kexBinFile::OpenExternal
+//
+
+bool kexBinFile::OpenExternal(const char *file)
+{
+    int len = kex::cPakFiles->OpenExternalFile(file, (byte**)(&buffer));
+
+    if(len > 0)
+    {
+        bOpened = true;
+        handle = NULL;
+        bufferOffset = 0;
+        bufferLength = len;
+        return true;
+    }
+
+    return false;
+}
+
+//
 // kexBinFile::OpenStream
 //
 

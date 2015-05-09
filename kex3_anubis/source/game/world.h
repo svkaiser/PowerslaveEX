@@ -209,6 +209,7 @@ public:
     void                    MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount);
     void                    ResetWallSwitchFromTag(const int tag);
     void                    FireRemoteEventFromTag(const int tag);
+    void                    FireActorEventFromTag(const int tag);
     void                    SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event);
     void                    MoveScriptedSector(const int tag, const float height,
                                                const float speed, const bool bCeiling);

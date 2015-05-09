@@ -17,8 +17,6 @@
 
 #include "kexlib.h"
 
-extern kexCvar cvarBasePath;
-
 typedef struct
 {
     int16_t     u1;
@@ -201,7 +199,7 @@ void kexDataConvert::DumpBuildLevelData(const char *file)
     int numVerts;
     FILE *f;
 
-    fPath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), file);
+    fPath = kexStr::Format("%s\\%s", kex::cvarBasePath.GetValue(), file);
     fPath.NormalizeSlashes();
 
     kex::cSystem->Printf("Reading %s\n", file);
@@ -324,7 +322,7 @@ void kexDataConvert::DumpSaturnLevelData(const char *file)
     int missingFaces = 0;
     FILE *f;
 
-    fPath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), file);
+    fPath = kexStr::Format("%s\\%s", kex::cvarBasePath.GetValue(), file);
     fPath.NormalizeSlashes();
 
     kex::cSystem->Printf("Reading %s\n", file);

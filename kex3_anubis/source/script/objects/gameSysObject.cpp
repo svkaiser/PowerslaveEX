@@ -39,10 +39,13 @@ void kexScriptObjGame::Init(void)
     e->RegisterObjectMethod("kGame", "void CallDelayedMapScript(const int, kActor@, const float)", asMETHODPR(kexScriptObjGame, CallDelayedMapScript, (const int, kexActor*, const float), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void HaltMapScript(const int)", asMETHODPR(kexScriptObjGame, HaltMapScript, (const int), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void FireRemoteEventFromTag(const int)", asMETHODPR(kexScriptObjGame, FireRemoteEventFromTag, (const int), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kGame", "void FireActorEventFromTag(const int)", asMETHODPR(kexScriptObjGame, FireActorEventFromTag, (const int), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kGame", "void PlaySound(const kStr &in)", asMETHODPR(kexScriptObjGame, PlaySound, (const kexStr&), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void PlayMusic(const kStr &in, const bool)", asMETHODPR(kexScriptObjGame, PlayMusic, (const kexStr&, const bool), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void StopMusic(void)", asMETHODPR(kexScriptObjGame, StopMusic, (void), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void MoveScriptedSector(const int, const float, const float, const bool)", asMETHODPR(kexScriptObjGame, MoveScriptedSector, (const int, const float, const float, const bool), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void ChangeMap(const kStr &in)", asMETHODPR(kexScriptObjGame, ChangeMap, (const kexStr&), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kGame", "void EndGame(const bool)", asMETHODPR(kexScriptObjGame, EndGame, (const bool), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void SpawnLight(kActor@, const float, const kVec3 &in, const float, const int)", asMETHODPR(kexScriptObjGame, SpawnLight, (kexActor *source, const float radius, const kexVec3 &color, const float fadeTime, const int passes), void), asCALL_THISCALL);
 
     e->RegisterGlobalProperty("kPlayLoop PlayLoop", kexGame::cLocal->PlayLoop());
@@ -52,6 +55,10 @@ void kexScriptObjGame::Init(void)
     e->RegisterObjectMethod("kPlayer", "int &LockTime(void)", asMETHODPR(kexPlayer, LockTime, (void), int&), asCALL_THISCALL);
     e->RegisterObjectMethod("kPlayer", "void HoldsterWeapon(void)", asMETHODPR(kexPlayer, HoldsterWeapon, (void), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kPlayer", "const int16 Buttons(void) const", asMETHODPR(kexPlayer, Buttons, (void) const, const uint16_t), asCALL_THISCALL);
+    e->RegisterObjectMethod("kPlayer", "int16 &Artifacts(void)", asMETHODPR(kexPlayer, Artifacts, (void), int16_t&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kPlayer", "int16 &QuestItems(void)", asMETHODPR(kexPlayer, QuestItems, (void), int16_t&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kPlayer", "uint &TeamDolls(void)", asMETHODPR(kexPlayer, TeamDolls, (void), uint&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kPlayer", "int &ShakeTime(void)", asMETHODPR(kexPlayer, ShakeTime, (void), int&), asCALL_THISCALL);
 
     e->RegisterEnum("EnumPlayerButtons");
     e->RegisterEnumValue("EnumPlayerButtons", "BC_ATTACK", BC_ATTACK);
@@ -106,6 +113,24 @@ void kexScriptObjGame::FireRemoteEventFromTag(const int tag)
 }
 
 //
+// kexScriptObjGame::FireActorEventFromTag
+//
+
+void kexScriptObjGame::FireActorEventFromTag(const int tag)
+{
+    kexGame::cLocal->World()->FireActorEventFromTag(tag);
+}
+
+//
+// kexScriptObjGame::PlaySound
+//
+
+void kexScriptObjGame::PlaySound(const kexStr &str)
+{
+    kexGame::cLocal->PlaySound(str.c_str());
+}
+
+//
 // kexScriptObjGame::PlayMusic
 //
 
@@ -130,6 +155,15 @@ void kexScriptObjGame::StopMusic(void)
 void kexScriptObjGame::ChangeMap(const kexStr &map)
 {
     kexGame::cLocal->ChangeMap(map.c_str());
+}
+
+//
+// kexScriptObjGame::EndGame
+//
+
+void kexScriptObjGame::EndGame(const bool bGoodEnding)
+{
+    kexGame::cLocal->SetGameState(bGoodEnding ? GS_ENDING_GOOD : GS_ENDING_BAD);
 }
 
 //

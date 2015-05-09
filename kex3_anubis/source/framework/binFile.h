@@ -28,6 +28,7 @@ public:
     ~kexBinFile(void);
 
     bool                Open(const char *file, kexHeapBlock &heapBlock = hb_static);
+    bool                OpenExternal(const char *file);
     bool                OpenStream(const char *file);
     bool                Create(const char *file);
     void                Close(void);

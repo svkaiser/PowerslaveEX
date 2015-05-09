@@ -15,6 +15,9 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
+#define GAME_VERSION        1
+#define GAME_SUBVERSION     0
+
 class kexFont;
 class kexTitleScreen;
 class kexTranslation;
@@ -64,6 +67,8 @@ typedef enum
     GS_LEVEL,
     GS_CHANGELEVEL,
     GS_MAPEDITOR,
+    GS_ENDING_BAD,
+    GS_ENDING_GOOD,
     NUMGAMESTATES
 } gameState_t;
 
@@ -104,53 +109,6 @@ typedef enum
     PA_EAGLE        = BIT(7)
 } playerArtifacts_t;
 
-typedef enum
-{
-    PT_TRANSMITTER1 = BIT(0),
-    PT_TRANSMITTER2 = BIT(1),
-    PT_TRANSMITTER3 = BIT(2),
-    PT_TRANSMITTER4 = BIT(3),
-    PT_TRANSMITTER5 = BIT(4),
-    PT_TRANSMITTER6 = BIT(5),
-    PT_TRANSMITTER7 = BIT(6),
-    PT_TRANSMITTER8 = BIT(7)
-} playerTransmitter_t;
-
-typedef enum
-{
-    PK_TIME         = BIT(0),
-    PK_WAR          = BIT(1),
-    PK_POWER        = BIT(2),
-    PK_EARTH        = BIT(3)
-} playerKeys_t;
-
-typedef enum
-{
-    TD_DOLL01       = BIT(0),
-    TD_DOLL02       = BIT(1),
-    TD_DOLL03       = BIT(2),
-    TD_DOLL04       = BIT(3),
-    TD_DOLL05       = BIT(4),
-    TD_DOLL06       = BIT(5),
-    TD_DOLL07       = BIT(6),
-    TD_DOLL08       = BIT(7),
-    TD_DOLL09       = BIT(8),
-    TD_DOLL10       = BIT(9),
-    TD_DOLL11       = BIT(10),
-    TD_DOLL12       = BIT(11),
-    TD_DOLL13       = BIT(12),
-    TD_DOLL14       = BIT(13),
-    TD_DOLL15       = BIT(14),
-    TD_DOLL16       = BIT(15),
-    TD_DOLL17       = BIT(16),
-    TD_DOLL18       = BIT(17),
-    TD_DOLL19       = BIT(18),
-    TD_DOLL20       = BIT(19),
-    TD_DOLL21       = BIT(20),
-    TD_DOLL22       = BIT(21),
-    TD_DOLL23       = BIT(22)
-} teamDolls_t;
-
 #include "object.h"
 #include "actor.h"
 #include "world.h"
@@ -190,6 +148,8 @@ public:
     void                            PlaySound(const char *name);
     void                            SavePersistentData(void);
     void                            RestorePersistentData(void);
+    bool                            SaveGame(const int slot);
+    bool                            LoadGame(const int slot);
 
     typedef struct
     {

@@ -1,0 +1,208 @@
+//
+// Copyright(C) 2014-2015 Samuel Villarreal
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// DESCRIPTION:
+//      Level Script For TOMBEND.MAP
+//
+
+bool bScript1Triggered = false;
+bool bLookAtRamses = false;
+kActor @ramses;
+kActor @ramsesBody;
+
+kVec3 ramsesOrigin(0, 3136, -224);
+
+//
+// EndRamsesEvent
+//
+
+void EndRamsesEvent(kActor @instigator)
+{
+    if(Player.QuestItems() != 0xFF)
+    {
+        Game.EndGame(false);
+        return;
+    }
+    
+    ramses.ChangeAnim("misc/ramses_vanish");
+    Game.MoveScriptedSector(0, -320, 6, true);
+    
+    Game.StopMusic();
+    Game.PlayMusic("music/egypt2.ogg", true);
+    
+    Player.ShakeTime() = 32;
+    Game.PlaySound("sounds/quake.wav");
+    
+    Game.FireRemoteEventFromTag(1020);
+    Game.CallDelayedMapScript(2, instigator, 1.0f);
+}
+
+//
+// script 0
+//
+
+$script 0
+{
+    Game.MoveScriptedSector(0, 64, -1, true);
+}
+
+//
+// script 1
+//
+
+$script 1
+{
+    if(bScript1Triggered)
+    {
+        return;
+    }
+    
+    bScript1Triggered = true;
+    
+    Game.StopMusic();
+    
+    instigator.Velocity().Clear();
+    instigator.Movement().Clear();
+    
+    @ramsesBody = Game.SpawnActor("Obj_Ramses_Body_Rest",
+                                  ramsesOrigin.x,
+                                  ramsesOrigin.y,
+                                  ramsesOrigin.z + 512.0f, 0);
+    
+    Player.HoldsterWeapon();
+    Game.CallDelayedMapScript(4, instigator, 0.0f);
+    Game.CallDelayedMapScript(6, instigator, 0.5f);
+    Game.CallDelayedMapScript(5, instigator, 3.5f);
+}
+
+//
+// script 2
+//
+
+$script 2
+{
+    Game.FireActorEventFromTag(1010);
+    Game.CallDelayedMapScript(3, instigator, 0);
+}
+
+//
+// script 3
+//
+
+$script 3
+{
+    float waitTime = (Math::RandFloat() * 2.13f) + 0.3333f;
+    Player.ShakeTime() = (Math::RandByte() & 0x3F);
+    
+    Game.PlaySound("sounds/quake.wav");
+    
+    delay(waitTime);
+    $restart;
+}
+
+//
+// script 4
+//
+
+$script 4
+{
+    float yaw = 0;
+    float pitch = 0;
+    
+    Player.LockTime() = 8;
+    
+    if(bLookAtRamses == true)
+    {
+        kVec3 dir;
+        
+        dir = ((ramsesOrigin + kVec3(0, 0, 160.0f)) - instigator.Origin()).Normalize();
+        yaw = dir.ToYaw();
+        pitch = -dir.ToPitch();
+    }
+    
+    instigator.Yaw() = (yaw - instigator.Yaw()) * 0.0625f + instigator.Yaw();
+    instigator.Pitch() = (pitch - instigator.Pitch()) * 0.0625f + instigator.Pitch();
+    
+    instigator.Origin().Lerp(kVec3(0.0f, 2816.0f, -224.0f), 0.0625f);
+    
+    $restart;
+}
+
+//
+// script 5
+//
+
+$script 5
+{
+    float dialogTime;
+    
+    Game.HaltMapScript(6);
+    ramsesBody.Remove();
+    
+    @ramses = Game.SpawnActor("Obj_Ramses", ramsesOrigin.x, ramsesOrigin.y, ramsesOrigin.z + 160.0f, 0);
+    bLookAtRamses = true;
+    
+    if(Player.QuestItems() == 0xFF)
+    {
+        Game.PlayMusic("music/ramses/ra14.ogg", false);
+        dialogTime = 43.0f;
+    }
+    else
+    {
+        Game.PlayMusic("music/ramses/ra13.ogg", false);
+        dialogTime = 47.0f;
+    }
+    
+    Game.CallDelayedMapScript(7, instigator, 2.0f);
+    Game.CallDelayedMapScript(8, instigator, dialogTime);
+}
+
+//
+// script 6
+//
+
+$script 6
+{
+    ramsesBody.Origin().z -= 4.0f;
+    $restart;
+}
+
+//
+// script 7
+//
+
+$script 7
+{
+    if((Player.Buttons() & (BC_USE|BC_ATTACK|BC_JUMP)) != 0)
+    {
+        Game.HaltMapScript(4);
+        Game.HaltMapScript(8);
+        
+        EndRamsesEvent(instigator);
+        return;
+    }
+    
+    $restart;
+}
+
+//
+// script 8
+//
+
+$script 8
+{
+    Game.HaltMapScript(4);
+    Game.HaltMapScript(7);
+    
+    EndRamsesEvent(instigator);
+}

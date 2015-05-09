@@ -74,7 +74,6 @@ kexSpriteMake::~kexSpriteMake(void)
 void kexSpriteMake::GenerateSprite(const char *path, const char *outname,
                                    const int texWidth, const int texHeight)
 {
-    extern kexCvar cvarBasePath;
     kexArray<kexImage*> images;
     kexBinFile tgaFile;
     kexStr outPath;
@@ -119,7 +118,7 @@ void kexSpriteMake::GenerateSprite(const char *path, const char *outname,
     kexImage output(outWidth, outHeight, TCR_RGBA);
     MakeTexture(output, images);
 
-    kexStr outFile = kexStr::Format("%s/%s.png", cvarBasePath.GetValue(), outname);
+    kexStr outFile = kexStr::Format("%s/%s.png", kex::cvarBasePath.GetValue(), outname);
     outFile.NormalizeSlashes();
 
     // save atlas texture
@@ -148,7 +147,6 @@ void kexSpriteMake::GenerateSprite(const char *path, const char *outname,
 
 void kexSpriteMake::GenerateSpriteInfo(const char *outname)
 {
-    extern kexCvar cvarBasePath;
     kexStr buffer;
 
     assert(spriteInfos.Length() == spriteFiles.Length());
@@ -162,7 +160,7 @@ void kexSpriteMake::GenerateSpriteInfo(const char *outname)
                                  spriteInfos[i].w, spriteInfos[i].h);
     }
 
-    kexStr outFile = kexStr::Format("%s/%s_sprite.txt", cvarBasePath.GetValue(), outname);
+    kexStr outFile = kexStr::Format("%s/%s_sprite.txt", kex::cvarBasePath.GetValue(), outname);
     outFile.NormalizeSlashes();
 
     buffer.WriteToFile(outFile.c_str());

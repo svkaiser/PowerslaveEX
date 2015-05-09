@@ -28,6 +28,8 @@ public:
     void                        Tick(void);
     bool                        ProcessInput(inputEvent_t *ev);
 
+    int16_t                     &SelectedMap(void) { return selectedMap; }
+
 private:
     void                        DrawSprite(const float sx, const float sy, const byte color,
                                            spriteAnim_t *anim);

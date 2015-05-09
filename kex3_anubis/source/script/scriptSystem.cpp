@@ -608,9 +608,8 @@ bool kexScriptManager::LoadLevelScript(const char *name)
     if(cvarDumpMapScripts.GetBool())
     {
         kexStr fPath;
-        extern kexCvar cvarBasePath;
 
-        fPath = kexStr::Format("%s\\scriptout.txt", cvarBasePath.GetValue());
+        fPath = kexStr::Format("%s\\scriptout.txt", kex::cvarBasePath.GetValue());
         fPath.NormalizeSlashes();
 
         scriptBuffer.WriteToFile(fPath);

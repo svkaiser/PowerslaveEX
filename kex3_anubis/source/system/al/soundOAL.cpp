@@ -449,8 +449,6 @@ bool kexOggFile::FillBuffer(ALuint &buffer, const bool bLoop)
 
 bool kexOggFile::OpenFile(const char *name)
 {
-    extern kexCvar cvarBasePath;
-
     kexStr fPath;
 
     if(name[0] == 0)
@@ -458,7 +456,7 @@ bool kexOggFile::OpenFile(const char *name)
         return false;
     }
 
-    fPath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), name);
+    fPath = kexStr::Format("%s\\%s", kex::cvarBasePath.GetValue(), name);
     fPath.NormalizeSlashes();
 
     binFile = new kexBinFile;

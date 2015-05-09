@@ -1108,10 +1108,20 @@ void kexScriptedMover::Tick(void)
     if(moveHeight >= 0)
     {
         currentHeight += moveSpeed;
+
+        if(currentHeight > moveHeight)
+        {
+            currentHeight = moveHeight;
+        }
     }
     else
     {
         currentHeight -= moveSpeed;
+
+        if(currentHeight < moveHeight)
+        {
+            currentHeight = moveHeight;
+        }
     }
 
     move = currentHeight - lastHeight;

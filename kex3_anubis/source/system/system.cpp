@@ -149,8 +149,7 @@ void kexSystem::ReadConfigFile(const char *file)
 
 void kexSystem::WriteConfigFile(void)
 {
-    extern kexCvar cvarBasePath;
-    kexStr str(kexStr::Format("%s\\config.cfg", cvarBasePath.GetValue()));
+    kexStr str(kexStr::Format("%s\\config.cfg", kex::cvarBasePath.GetValue()));
     str.NormalizeSlashes();
     
     FILE *f = fopen(str.c_str(), "w");

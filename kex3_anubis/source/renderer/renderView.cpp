@@ -148,14 +148,15 @@ void kexRenderView::SetupFromPlayer(kexPlayer *player)
     origin = actor->Origin();
     origin.z += player->ViewZ() + player->Bob() + player->LandTime() + player->StepViewZ();
 
+    if(player->ShakeTime() > 0 && (int)player->Actor()->Velocity().z == 0)
+    {
+        yaw += kexMath::Deg2Rad(player->ShakeVector().x * 0.125f);
+        origin.z += player->ShakeVector().y * 0.5f;
+    }
+
     kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
     
     SetupMatrices();
-
-    if(player->ShakeTime() > 0 && (int)player->Actor()->Velocity().z == 0)
-    {
-        modelView.AddTranslation(player->ShakeVector().x, 0, player->ShakeVector().y);
-    }
 
     MakeClipPlanes();
     TransformPoints(origin, forward, fov, kex::cSystem->VideoRatio(), Z_NEAR, 8192);

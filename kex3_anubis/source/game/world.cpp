@@ -1299,18 +1299,13 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
 }
 
 //
-// kexWorld::SendMapActorEvent
+// kexWorld::FireActorEventFromTag
 //
 
-void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
+void kexWorld::FireActorEventFromTag(const int tag)
 {
     kexFireballFactory *fbFactory;
     float extraDelay = 0;
-
-    if(sector != NULL && (ev->sector < 0 || &sectors[ev->sector] != sector))
-    {
-        return;
-    }
 
     for(unsigned int j = 0; j < numActors; ++j)
     {
@@ -1319,7 +1314,7 @@ void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
             continue;
         }
 
-        if(actors[j].tag == ev->tag)
+        if(actors[j].tag == tag)
         {
             mapSector_t *sec = &sectors[actors[j].sector];
 
@@ -1342,7 +1337,7 @@ void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
             }
         }
 
-        if(actors[j].tag+1 == ev->tag)
+        if(actors[j].tag+1 == tag)
         {
             mapSector_t *sec = &sectors[actors[j].sector];
 
@@ -1354,6 +1349,20 @@ void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
             sec->objectThinker->Remove();
         }
     }
+}
+
+//
+// kexWorld::SendMapActorEvent
+//
+
+void kexWorld::SendMapActorEvent(mapSector_t *sector, mapEvent_t *ev)
+{
+    if(sector != NULL && (ev->sector < 0 || &sectors[ev->sector] != sector))
+    {
+        return;
+    }
+
+    FireActorEventFromTag(ev->tag);
 }
 
 //

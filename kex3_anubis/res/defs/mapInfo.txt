@@ -242,4 +242,5 @@ Map_Tomb2       22
     title           "$str_000"
     map             "maps/TOMBEND.MAP"
     musicTrack      "music/egypt2.ogg"
+    script          "scripts/map/TOMBEND_script.txt"
 }

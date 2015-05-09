@@ -16,6 +16,7 @@
 //
 
 bool bScript1Triggered = false;
+bool bPlayAlternateDialog = false;
 bool bCasketOpened = false;
 kActor @ramses;
 
@@ -51,6 +52,8 @@ $script 0
 
 $script 1
 {
+    float dialogTime;
+    
     if(bScript1Triggered)
     {
         return;
@@ -59,7 +62,17 @@ $script 1
     bScript1Triggered = true;
     
     Game.StopMusic();
-    Game.PlayMusic("music/ramses/ra12.ogg", false);
+    
+    if(bPlayAlternateDialog == false)
+    {
+        Game.PlayMusic("music/ramses/ra1.ogg", false);
+        dialogTime = 116.0f;
+    }
+    else
+    {
+        Game.PlayMusic("music/ramses/ra2.ogg", false);
+        dialogTime = 18.0f;
+    }
     
     instigator.Velocity().Clear();
     instigator.Movement().Clear();
@@ -78,7 +91,7 @@ $script 1
     @ramses = Game.SpawnActor("Obj_Ramses", ramsesOrigin.x, ramsesOrigin.y, ramsesOrigin.z, 0, 14);
     
     Game.CallDelayedMapScript(4, instigator, 2.0f);
-    Game.CallDelayedMapScript(5, instigator, 116.0f);
+    Game.CallDelayedMapScript(5, instigator, dialogTime);
 }
 
 //
@@ -107,6 +120,7 @@ $script 2
 $script 3
 {
     bScript1Triggered = false;
+    bPlayAlternateDialog = true;
 }
 
 //

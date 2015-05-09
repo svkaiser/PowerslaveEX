@@ -28,8 +28,6 @@ kexPakFile *kex::cPakFiles = &pakFileLocal;
 
 #define FILE_MAX_HASH_SIZE  32768
 
-kexCvar cvarBasePath("kf_basepath", CVF_STRING|CVF_CONFIG, "", "Base file path to look for files");
-
 //
 // kexPakFile::kexPakFile
 //
@@ -99,7 +97,7 @@ void kexPakFile::LoadZipFile(const char *file)
     const char *filepath;
     kexStr fPath;
 
-    filepath = cvarBasePath.GetValue();
+    filepath = kex::cvarBasePath.GetValue();
 
     fPath = filepath;
     fPath = fPath + "/" + file;
@@ -263,7 +261,7 @@ void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
         DIR *dir;
         struct dirent *ent;
         int idx;
-        kexStr path = kexStr(cvarBasePath.GetValue()) + "/" + search;
+        kexStr path = kexStr(kex::cvarBasePath.GetValue()) + "/" + search;
         path.NormalizeSlashes();
 
         if((dir = opendir(path.c_str())) != NULL)
@@ -345,7 +343,7 @@ int kexPakFile::OpenExternalFile(const char *name, byte **buffer) const
     kexStr fPath;
     kexBinFile fp;
 
-    fPath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), name);
+    fPath = kexStr::Format("%s\\%s", kex::cvarBasePath.GetValue(), name);
     fPath.NormalizeSlashes();
 
     // must call OpenStream here and not Open, otherwise it'll recurse infinitely
@@ -375,9 +373,9 @@ int kexPakFile::OpenExternalFile(const char *name, byte **buffer) const
 
 void kexPakFile::Init(void)
 {
-    if(!strlen(cvarBasePath.GetValue()))
+    if(!strlen(kex::cvarBasePath.GetValue()))
     {
-        cvarBasePath.Set(kex::cSystem->GetBaseDirectory());
+        kex::cvarBasePath.Set(kex::cSystem->GetBaseDirectory());
     }
 
     kex::cSystem->Printf("File System Initialized\n");

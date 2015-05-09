@@ -197,6 +197,7 @@ class kex
 {
 public:
     static kexCvar              cvarDeveloper;
+    static kexCvar              cvarBasePath;
     
     static kexSystem            *cSystem;
     static kexTimer             *cTimer;

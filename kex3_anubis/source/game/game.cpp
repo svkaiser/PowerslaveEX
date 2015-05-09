@@ -41,6 +41,12 @@ kexGameLocal *kexGame::cLocal = &gameLocal;
 kexMenu *kexGameLocal::menus[NUMMENUS];
 bool kexGameLocal::bShowSoundStats = false;
 
+//=============================================================================
+//
+// Commands
+//
+//=============================================================================
+
 //
 // map
 //
@@ -343,6 +349,52 @@ COMMAND(statsound)
 }
 
 //
+// savegame
+//
+
+COMMAND(savegame)
+{
+    int argc = kex::cCommands->GetArgc();
+    int slot;
+    
+    if(argc != 2)
+    {
+        kex::cSystem->Printf("savegame <slot>\n");
+        return;
+    }
+
+    slot = atoi(kex::cCommands->GetArgv(1));
+
+    if(gameLocal.SaveGame(slot))
+    {
+        kex::cSystem->Printf("Game saved\n");
+    }
+}
+
+//
+// loadgame
+//
+
+COMMAND(loadgame)
+{
+    int argc = kex::cCommands->GetArgc();
+    int slot;
+    
+    if(argc != 2)
+    {
+        kex::cSystem->Printf("loadgame <slot>\n");
+        return;
+    }
+
+    slot = atoi(kex::cCommands->GetArgv(1));
+
+    if(gameLocal.LoadGame(slot))
+    {
+        kex::cSystem->Printf("Game loaded\n");
+    }
+}
+
+//
 // generic button events (client-side only)
 //
 
@@ -354,6 +406,12 @@ COMMAND(menu_select)    { gameLocal.ButtonEvent() |= GBE_MENU_SELECT; }
 COMMAND(menu_cancel)    { gameLocal.ButtonEvent() |= GBE_MENU_CANCEL; }
 COMMAND(menu_back)      { gameLocal.ButtonEvent() |= GBE_MENU_BACK; }
 COMMAND(menu_activate)  { gameLocal.ButtonEvent() |= GBE_MENU_ACTIVATE; }
+
+//=============================================================================
+//
+// kexGameLocal
+//
+//=============================================================================
 
 //
 // kexGameLocal::kexGameLocal
@@ -446,9 +504,12 @@ void kexGameLocal::Init(void)
 
 void kexGameLocal::Start(void)
 {
-    kex::cMoviePlayer->StartVideoStream("movies/LOBOTOMY.avi");
-    kex::cTimer->Sleep(500);
-    kex::cMoviePlayer->StartVideoStream("movies/INTRO1.avi");
+    if(kex::cSystem->CheckParam("-skipintromovies") <= 0)
+    {
+        kex::cMoviePlayer->StartVideoStream("movies/LOBOTOMY.avi");
+        kex::cTimer->Sleep(500);
+        kex::cMoviePlayer->StartVideoStream("movies/INTRO1.avi");
+    }
 
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");
@@ -657,6 +718,18 @@ void kexGameLocal::Tick(void)
                 extern kexMapEditor mapEditorLocal;
                 gameLoop = &mapEditorLocal;
                 break;
+
+            case GS_ENDING_BAD:
+                kex::cMoviePlayer->StartVideoStream("movies/BADEND1.avi");
+                kex::cMoviePlayer->StartVideoStream("movies/CREDU1.avi");
+                gameLoop = titleScreen;
+                break;
+
+            case GS_ENDING_GOOD:
+                kex::cMoviePlayer->StartVideoStream("movies/GOODEND1.avi");
+                kex::cMoviePlayer->StartVideoStream("movies/CREDU1.avi");
+                gameLoop = titleScreen;
+                break;
                 
             default:
                 gameLoop = &gameLoopStub;
@@ -754,49 +827,11 @@ bool kexGameLocal::ProcessInput(inputEvent_t *ev)
     return gameLoop->ProcessInput(ev);
 }
 
+//=============================================================================
 //
-// kexGameLocal::SavePersistentData
+// Menus
 //
-
-void kexGameLocal::SavePersistentData(void)
-{
-    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
-    {
-        persistentData.ammo[i] = player->GetAmmo(i);
-        persistentData.weapons[i] = player->WeaponOwned(i);
-    }
-
-    persistentData.ankahs = player->Ankahs();
-    persistentData.ankahFlags = player->AnkahFlags();
-    persistentData.artifacts = player->Artifacts();
-    persistentData.questItems = player->QuestItems();
-    persistentData.teamDolls = player->TeamDolls();
-    persistentData.health = player->Actor() ? player->Actor()->Health() : player->Health();
-    persistentData.currentWeapon = player->CurrentWeapon();
-}
-
-//
-// kexGameLocal::RestorePersistentData
-//
-
-void kexGameLocal::RestorePersistentData(void)
-{
-    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
-    {
-        player->SetWeapon(persistentData.weapons[i], i);
-        player->SetAmmo(persistentData.ammo[i], i);
-    }
-
-    player->Ankahs() = persistentData.ankahs;
-    player->AnkahFlags() = persistentData.ankahFlags;
-    player->Artifacts() = persistentData.artifacts;
-    player->QuestItems() = persistentData.questItems;
-    player->TeamDolls() = persistentData.teamDolls;
-    player->Health() = persistentData.health;
-
-    player->PendingWeapon() = persistentData.currentWeapon;
-    player->ChangeWeapon();
-}
+//=============================================================================
 
 //
 // kexGameLocal::SetMenu
@@ -865,6 +900,12 @@ void kexGameLocal::ClearMenu(const bool bClearAll)
 
     bCursorEnabled.Pop();
 }
+
+//=============================================================================
+//
+// Sound management
+//
+//=============================================================================
 
 //
 // kexGameLocal::PlaySound
@@ -938,29 +979,11 @@ void kexGameLocal::PrintSoundStats(void)
     kexRender::cUtils->AddDebugLineSpacing();
 }
 
+//=============================================================================
 //
-// kexGameLocal::ConstructObject
+// Map loading/changing
 //
-
-kexObject *kexGameLocal::ConstructObject(const char *className)
-{
-    kexObject *obj;
-    kexRTTI *objType;
-    
-    if(!(objType = kexObject::Get(className)))
-    {
-        kex::cSystem->Error("kexGameLocal::ConstructObject: unknown class (\"%s\")\n", className);
-        return NULL;
-    }
-        
-    if(!(obj = objType->Create()))
-    {
-        kex::cSystem->Error("kexGameLocal::ConstructObject: could not spawn (\"%s\")\n", className);
-        return NULL;
-    }
-    
-    return obj;
-}
+//=============================================================================
 
 //
 // kexGameLocal::ChangeMap
@@ -996,6 +1019,12 @@ void kexGameLocal::LoadNewMap(void)
     SetGameState(GS_LEVEL);
 }
 
+//=============================================================================
+//
+// Common string drawing
+//
+//=============================================================================
+
 //
 // kexGameLocal::DrawSmallString
 //
@@ -1018,6 +1047,36 @@ void kexGameLocal::DrawBigString(const char *string, float x, float y, float sca
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     bigFont->DrawString(string, x+1, y+1, scale, center, RGBA(0, 0, 0, 0xff));
     bigFont->DrawString(string, x, y, scale, center, RGBA(r, g, b, 0xff));
+}
+
+//=============================================================================
+//
+// Game object management
+//
+//=============================================================================
+
+//
+// kexGameLocal::ConstructObject
+//
+
+kexObject *kexGameLocal::ConstructObject(const char *className)
+{
+    kexObject *obj;
+    kexRTTI *objType;
+    
+    if(!(objType = kexObject::Get(className)))
+    {
+        kex::cSystem->Error("kexGameLocal::ConstructObject: unknown class (\"%s\")\n", className);
+        return NULL;
+    }
+        
+    if(!(obj = objType->Create()))
+    {
+        kex::cSystem->Error("kexGameLocal::ConstructObject: could not spawn (\"%s\")\n", className);
+        return NULL;
+    }
+    
+    return obj;
 }
 
 //
@@ -1130,4 +1189,174 @@ kexDLight *kexGameLocal::SpawnDynamicLight(kexActor *source, const float radius,
     obj->SetTarget(source);
 
     return obj;
+}
+
+//=============================================================================
+//
+// Game saving/loading/restoring
+//
+//=============================================================================
+
+//
+// kexGameLocal::SavePersistentData
+//
+
+void kexGameLocal::SavePersistentData(void)
+{
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        persistentData.ammo[i] = player->GetAmmo(i);
+        persistentData.weapons[i] = player->WeaponOwned(i);
+    }
+
+    persistentData.ankahs = player->Ankahs();
+    persistentData.ankahFlags = player->AnkahFlags();
+    persistentData.artifacts = player->Artifacts();
+    persistentData.questItems = player->QuestItems();
+    persistentData.teamDolls = player->TeamDolls();
+    persistentData.health = player->Actor() ? player->Actor()->Health() : player->Health();
+    persistentData.currentWeapon = player->CurrentWeapon();
+}
+
+//
+// kexGameLocal::RestorePersistentData
+//
+
+void kexGameLocal::RestorePersistentData(void)
+{
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        player->SetWeapon(persistentData.weapons[i], i);
+        player->SetAmmo(persistentData.ammo[i], i);
+    }
+
+    player->Ankahs() = persistentData.ankahs;
+    player->AnkahFlags() = persistentData.ankahFlags;
+    player->Artifacts() = persistentData.artifacts;
+    player->QuestItems() = persistentData.questItems;
+    player->TeamDolls() = persistentData.teamDolls;
+    player->Health() = persistentData.health;
+
+    player->PendingWeapon() = persistentData.currentWeapon;
+    player->ChangeWeapon();
+}
+
+//
+// kexGameLocal::SaveGame
+//
+
+bool kexGameLocal::SaveGame(const int slot)
+{
+    kexStr filepath;
+    kexBinFile saveFile;
+    int padLength;
+
+    assert(slot >= 0);
+
+    filepath = kexStr::Format("%s\\saves\\save_%03d.sav", kex::cvarBasePath.GetValue(), slot);
+    filepath.NormalizeSlashes();
+
+    if(!saveFile.Create(filepath.c_str()))
+    {
+        return false;
+    }
+
+    saveFile.Write32(GAME_VERSION);
+    saveFile.Write32(GAME_SUBVERSION);
+
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        saveFile.Write16(player->GetAmmo(i));
+    }
+
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        saveFile.Write8(player->WeaponOwned(i));
+    }
+
+    saveFile.Write16(player->Ankahs());
+    saveFile.Write16(player->AnkahFlags());
+    saveFile.Write16(player->Artifacts());
+    saveFile.Write16(player->QuestItems());
+    saveFile.Write32(player->TeamDolls());
+    saveFile.Write16(player->Actor() ? player->Actor()->Health() : player->Health());
+    saveFile.Write16(static_cast<int16_t>(player->CurrentWeapon()));
+    saveFile.Write16(overWorld->SelectedMap());
+    saveFile.Write32(bMapUnlockList.Length());
+
+    for(uint i = 0; i < bMapUnlockList.Length(); ++i)
+    {
+        saveFile.Write8(bMapUnlockList[i]);
+    }
+
+    padLength = ((saveFile.Length() + 0xF) & ~0xF) - saveFile.Length();
+
+    for(int i = 0; i < padLength; ++i)
+    {
+        saveFile.Write8(0xFF);
+    }
+
+    return true;
+}
+
+//
+// kexGameLocal::LoadGame
+//
+
+bool kexGameLocal::LoadGame(const int slot)
+{
+    kexStr filepath;
+    kexBinFile loadFile;
+    int version, subVersion;
+    uint numMaps;
+
+    assert(slot >= 0);
+
+    filepath = kexStr::Format("saves\\save_%03d.sav", slot);
+    filepath.NormalizeSlashes();
+
+    if(!loadFile.OpenExternal(filepath.c_str()))
+    {
+        return false;
+    }
+
+    version = loadFile.Read32();
+    subVersion = loadFile.Read32();
+
+    if(version != GAME_VERSION || subVersion != GAME_SUBVERSION)
+    {
+        return false;
+    }
+
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        persistentData.ammo[i] = loadFile.Read16();
+    }
+
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        persistentData.weapons[i] = (loadFile.Read8() == 1);
+    }
+
+    persistentData.ankahs = loadFile.Read16();
+    persistentData.ankahFlags = loadFile.Read16();
+    persistentData.artifacts = loadFile.Read16();
+    persistentData.questItems = loadFile.Read16();
+    persistentData.teamDolls = loadFile.Read32();
+    persistentData.health = loadFile.Read16();
+    persistentData.currentWeapon = static_cast<playerWeapons_t>(loadFile.Read16());
+
+    overWorld->SelectedMap() = loadFile.Read16();
+    numMaps = loadFile.Read32();
+
+    assert(numMaps == bMapUnlockList.Length());
+
+    for(uint i = 0; i < bMapUnlockList.Length(); ++i)
+    {
+        bMapUnlockList[i] = (loadFile.Read8() == 1);
+    }
+
+    RestorePersistentData();
+    SetGameState(GS_OVERWORLD);
+    return true;
 }

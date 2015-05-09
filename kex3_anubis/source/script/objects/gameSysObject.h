@@ -24,9 +24,12 @@ public:
     void                CallDelayedMapScript(const int scriptID, kexActor *instigator, const float delay);
     void                HaltMapScript(const int scriptID);
     void                FireRemoteEventFromTag(const int tag);
+    void                FireActorEventFromTag(const int tag);
+    void                PlaySound(const kexStr &str);
     void                PlayMusic(const kexStr &str, const bool bLoop);
     void                StopMusic(void);
     void                ChangeMap(const kexStr &map);
+    void                EndGame(const bool bGoodEnding);
     void                SpawnLight(kexActor *source, const float radius,
                                    const kexVec3 &color, const float fadeTime, const int passes);
     void                MoveScriptedSector(const int tag, const float height,

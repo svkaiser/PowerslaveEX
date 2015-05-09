@@ -23,3 +23,20 @@ ramses_body_idle
         }
     }
 }
+
+ramses_body_rest
+{
+    // frames:    1
+    frame
+    {
+        // ##000    0    0
+        sprites
+        {
+            { "misc/ramses_body_rest", 0,   -158,  -53,    0 }
+            { "misc/ramses_body_rest", 1,    -94,  -53,    0 }
+            { "misc/ramses_body_rest", 2,    -30,  -53,    0 }
+            { "misc/ramses_body_rest", 3,     34,  -53,    0 }
+            { "misc/ramses_body_rest", 4,     98,  -53,    0 }
+        }
+    }
+}

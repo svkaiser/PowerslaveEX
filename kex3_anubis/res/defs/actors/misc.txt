@@ -58,8 +58,19 @@ Obj_Ramses_Body 101
     scale                   0.5
     solid                   1
     mapDestination          22
-    destinationPosition     "12 2273 -256"
+    destinationPosition     "0, 3136, -224"
     spawnAnim               "misc/ramses_body_idle"
+}
+
+Obj_Ramses_Body_Rest -1
+{
+    classname               "kexActor"
+    radius                  16
+    height                  32
+    stepHeight              0
+    scale                   1.5
+    spawnAnim               "misc/ramses_body_rest"
+    fullbright              1
 }
 
 Obj_Debris 123

@@ -947,8 +947,6 @@ bool kexMoviePlayerFFMpeg::SetupCodecContext(AVCodecContext **context, AVCodec *
 
 bool kexMoviePlayerFFMpeg::LoadVideo(const char *filename)
 {
-    extern kexCvar cvarBasePath;
-
     int i;
     int videoSize;
     int audioSize;
@@ -970,7 +968,7 @@ bool kexMoviePlayerFFMpeg::LoadVideo(const char *filename)
     videoClock = 0;
     audioClock = 0;
 
-    filepath = kexStr::Format("%s\\%s", cvarBasePath.GetValue(), filename);
+    filepath = kexStr::Format("%s\\%s", kex::cvarBasePath.GetValue(), filename);
     filepath.NormalizeSlashes();
 
     if(avformat_open_input(&formatCtx, filepath.c_str(), NULL, NULL))
@@ -1310,11 +1308,6 @@ static int IteratePacketsThread(void *data)
 void kexMoviePlayerFFMpeg::StartVideoStream(const char *filename)
 {
     static bool bInitialized = false;
-
-    if(kex::cSystem->CheckParam("-skipmovies") > 0)
-    {
-        return;
-    }
 
     // initialize ffmpeg if it hasn't already
     if(!bInitialized)

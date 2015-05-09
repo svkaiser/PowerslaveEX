@@ -19,6 +19,7 @@
 #include "kexlib.h"
 
 kexCvar kex::cvarDeveloper("developer", CVF_BOOL|CVF_CONFIG, "0", "Developer mode");
+kexCvar kex::cvarBasePath("kf_basepath", CVF_STRING|CVF_CONFIG, "", "Base file path to look for files");
 
 //
 // main

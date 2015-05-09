@@ -919,7 +919,6 @@ void kexRenderBackend::SetReadBuffer(const GLenum state)
 
 void kexRenderBackend::ScreenShot(void)
 {
-    extern kexCvar cvarBasePath;
     int shotnum = 0;
     kexBinFile file;
     kexStr filePath;
@@ -927,7 +926,7 @@ void kexRenderBackend::ScreenShot(void)
 
     while(shotnum < 1000)
     {
-        filePath = kexStr(kexStr::Format("%s\\shot%03d.png", cvarBasePath.GetValue(), shotnum));
+        filePath = kexStr(kexStr::Format("%s\\shot%03d.png", kex::cvarBasePath.GetValue(), shotnum));
         filePath.NormalizeSlashes();
 
         if(!file.Exists(filePath.c_str()))
