@@ -329,7 +329,7 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
             continue;
         }
 
-        if(face->flags & (FF_DYNAMIC|FF_INVISIBLE))
+        if(face->flags & FF_DYNAMIC)
         {
             continue;
         }
@@ -374,7 +374,7 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
                 continue;
             }
 
-            if(face->flags & (FF_DYNAMIC|FF_INVISIBLE))
+            if(face->flags & FF_DYNAMIC)
             {
                 continue;
             }
