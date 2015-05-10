@@ -931,6 +931,7 @@ ramses_talk
     frame
     {
         // ##000    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 191,    -48, -106,    0 }
@@ -944,6 +945,7 @@ ramses_talk
     frame
     {
         // ##001    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 199,    -48, -106,    0 }
@@ -957,6 +959,7 @@ ramses_talk
     frame
     {
         // ##002    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 138,    -48, -106,    0 }
@@ -970,6 +973,7 @@ ramses_talk
     frame
     {
         // ##003    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 134,    -48, -106,    0 }
@@ -983,6 +987,7 @@ ramses_talk
     frame
     {
         // ##004    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 112,    -48, -106,    0 }
@@ -996,6 +1001,7 @@ ramses_talk
     frame
     {
         // ##005    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 233,    -48, -106,    0 }
@@ -1009,6 +1015,7 @@ ramses_talk
     frame
     {
         // ##006    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 215,    -48, -106,    0 }
@@ -1022,6 +1029,7 @@ ramses_talk
     frame
     {
         // ##007    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 252,    -48, -106,    0 }
@@ -1035,6 +1043,7 @@ ramses_talk
     frame
     {
         // ##008    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 156,    -48, -106,    0 }
@@ -1048,6 +1057,7 @@ ramses_talk
     frame
     {
         // ##009    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 262,    -48, -106,    0 }
@@ -1061,6 +1071,7 @@ ramses_talk
     frame
     {
         // ##010    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 195,    -48, -106,    0 }
@@ -1074,6 +1085,7 @@ ramses_talk
     frame
     {
         // ##011    0    0
+        delay -1
         sprites
         {
             { "misc/ramses", 237,    -48, -106,    0 }

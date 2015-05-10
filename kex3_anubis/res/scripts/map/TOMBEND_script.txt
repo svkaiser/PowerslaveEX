@@ -17,6 +17,7 @@
 
 bool bScript1Triggered = false;
 bool bLookAtRamses = false;
+float bobTime = 0.0f;
 kActor @ramses;
 kActor @ramsesBody;
 
@@ -33,6 +34,10 @@ void EndRamsesEvent(kActor @instigator)
         Game.EndGame(false);
         return;
     }
+    
+    Game.HaltMapScript(9);
+    Game.HaltMapScript(10);
+    Game.HaltMapScript(11);
     
     ramses.ChangeAnim("misc/ramses_vanish");
     Game.MoveScriptedSector(0, -320, 6, true);
@@ -165,6 +170,9 @@ $script 5
     
     Game.CallDelayedMapScript(7, instigator, 2.0f);
     Game.CallDelayedMapScript(8, instigator, dialogTime);
+    Game.CallDelayedMapScript(9, instigator, 2.0f);
+    Game.CallDelayedMapScript(10, instigator, 2.0f);
+    Game.CallDelayedMapScript(11, instigator, 2.0f);
 }
 
 //
@@ -205,4 +213,71 @@ $script 8
     Game.HaltMapScript(7);
     
     EndRamsesEvent(instigator);
+}
+
+//
+// script 9
+//
+
+$script 9
+{
+    if((Math::RandByte() & 1) == 0)
+    {
+        ramses.SetFrameID(0);
+    }
+    else
+    {
+        ramses.SetFrameID(6);
+    }
+    
+    delay(2.0f + (Math::RandFloat() * 2.0f));
+    $restart;
+}
+
+//
+// script 10
+//
+
+$script 10
+{
+    int frame;
+    
+    delay(4.0f + (Math::RandFloat() * 4.0f));
+    frame = ramses.FrameID();
+    
+    if(frame == 6)
+    {
+        ramses.SetFrameID(9);
+    }
+    else
+    {
+        ramses.SetFrameID(3);
+    }
+    
+    delay(0.125f);
+    
+    if(frame == 6)
+    {
+        ramses.SetFrameID(6);
+    }
+    else
+    {
+        ramses.SetFrameID(0);
+    }
+    
+    $restart;
+}
+
+//
+// script 11
+//
+
+$script 11
+{
+    float time = bobTime / 4.0f;
+    
+    ramses.Origin().z = (ramsesOrigin.z + 160.0f) + (8.0f * Math::Sin(time * 0.1f));
+    bobTime += 1.0f;
+    
+    $restart;
 }

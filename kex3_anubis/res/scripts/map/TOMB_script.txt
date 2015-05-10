@@ -18,6 +18,7 @@
 bool bScript1Triggered = false;
 bool bPlayAlternateDialog = false;
 bool bCasketOpened = false;
+float bobTime = 0.0f;
 kActor @ramses;
 
 kVec3 ramsesOrigin(-1104, -2464, -704);
@@ -29,12 +30,102 @@ kVec3 ramsesOrigin(-1104, -2464, -704);
 void EndRamsesEvent(kActor @instigator)
 {
     ramses.ChangeAnim("misc/ramses_vanish");
-        
+    
+    Game.HaltMapScript(6);
+    Game.HaltMapScript(7);
+    Game.HaltMapScript(8);
+    
     Game.StopMusic();
     Game.PlayMusic("music/egypt2.ogg", true);
     
     Game.FireRemoteEventFromTag(1020);
     Game.CallDelayedMapScript(3, instigator, 4.0f);
+}
+
+//
+// GetRamsesDialog
+//
+
+float GetRamsesDialog(void)
+{
+    int16 arti = Player.Artifacts();
+    
+    if(arti == 0x3F)
+    {
+        Game.PlayMusic("music/ramses/ra11.ogg", false);
+        return 27.0f;
+    }
+    else if((arti & 0x10) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra10.ogg", false);
+        return 26.0f;
+    }
+    else if((arti & 0x8) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra8.ogg", false);
+        return 24.0f;
+    }
+    else if((arti & 0x4) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra6.ogg", false);
+        return 25.0f;
+    }
+    else if((arti & 0x2) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra4.ogg", false);
+        return 32.0f;
+    }
+    else if((arti & 0x1) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra3.ogg", false);
+        return 36.0f;
+    }
+    
+    Game.PlayMusic("music/ramses/ra1.ogg", false);
+    return 116.0f;
+}
+
+//
+// GetAltRamsesDialog
+//
+
+float GetAltRamsesDialog(void)
+{
+    int16 arti = Player.Artifacts();
+    
+    if(arti == 0x3F)
+    {
+        Game.PlayMusic("music/ramses/ra12.ogg", false);
+        return 27.0f;
+    }
+    else if((arti & 0x10) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra10.ogg", false);
+        return 26.0f;
+    }
+    else if((arti & 0x8) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra9.ogg", false);
+        return 18.0f;
+    }
+    else if((arti & 0x4) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra7.ogg", false);
+        return 28.0f;
+    }
+    else if((arti & 0x2) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra5.ogg", false);
+        return 29.0f;
+    }
+    else if((arti & 0x1) != 0)
+    {
+        Game.PlayMusic("music/ramses/ra3.ogg", false);
+        return 36.0f;
+    }
+    
+    Game.PlayMusic("music/ramses/ra2.ogg", false);
+    return 18.0f;
 }
 
 //
@@ -63,17 +154,6 @@ $script 1
     
     Game.StopMusic();
     
-    if(bPlayAlternateDialog == false)
-    {
-        Game.PlayMusic("music/ramses/ra1.ogg", false);
-        dialogTime = 116.0f;
-    }
-    else
-    {
-        Game.PlayMusic("music/ramses/ra2.ogg", false);
-        dialogTime = 18.0f;
-    }
-    
     instigator.Velocity().Clear();
     instigator.Movement().Clear();
     
@@ -90,8 +170,22 @@ $script 1
     
     @ramses = Game.SpawnActor("Obj_Ramses", ramsesOrigin.x, ramsesOrigin.y, ramsesOrigin.z, 0, 14);
     
+    delay(1.0f);
+    
+    if(bPlayAlternateDialog == false)
+    {
+        dialogTime = GetRamsesDialog();
+    }
+    else
+    {
+        dialogTime = GetAltRamsesDialog();
+    }
+    
     Game.CallDelayedMapScript(4, instigator, 2.0f);
     Game.CallDelayedMapScript(5, instigator, dialogTime);
+    Game.CallDelayedMapScript(6, instigator, 1.0f);
+    Game.CallDelayedMapScript(7, instigator, 1.0f);
+    Game.CallDelayedMapScript(8, instigator, 1.0f);
 }
 
 //
@@ -151,4 +245,71 @@ $script 5
     Game.HaltMapScript(4);
     
     EndRamsesEvent(instigator);
+}
+
+//
+// script 6
+//
+
+$script 6
+{
+    if((Math::RandByte() & 1) == 0)
+    {
+        ramses.SetFrameID(0);
+    }
+    else
+    {
+        ramses.SetFrameID(6);
+    }
+    
+    delay(2.0f + (Math::RandFloat() * 2.0f));
+    $restart;
+}
+
+//
+// script 7
+//
+
+$script 7
+{
+    int frame;
+    
+    delay(4.0f + (Math::RandFloat() * 4.0f));
+    frame = ramses.FrameID();
+    
+    if(frame == 6)
+    {
+        ramses.SetFrameID(9);
+    }
+    else
+    {
+        ramses.SetFrameID(3);
+    }
+    
+    delay(0.125f);
+    
+    if(frame == 6)
+    {
+        ramses.SetFrameID(6);
+    }
+    else
+    {
+        ramses.SetFrameID(0);
+    }
+    
+    $restart;
+}
+
+//
+// script 8
+//
+
+$script 8
+{
+    float time = bobTime / 4.0f;
+    
+    ramses.Origin().z = ramsesOrigin.z + (8.0f * Math::Sin(time * 0.1f));
+    bobTime += 1.0f;
+    
+    $restart;
 }
