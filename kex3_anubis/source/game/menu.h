@@ -31,6 +31,8 @@ typedef enum
     MENU_GRAPHICS,
     MENU_GAMEPLAY,
     MENU_LOADGAME,
+    MENU_NEWGAME,
+    MENU_OVERWRITE_SAVE,
     NUMMENUS
 } menus_t;
 
@@ -103,6 +105,11 @@ BEGIN_EXTENDED_KEX_CLASS(name, kexMenu);  \
 public: \
 name(void)
 
+#define DEFINE_MENU_CLASS_EXTENDED(name, parent)   \
+BEGIN_EXTENDED_KEX_CLASS(name, parent);  \
+public: \
+name(void)
+
 #define END_MENU_CLASS  END_KEX_CLASS
 
 #define DECLARE_MENU_CLASS(name, id)    \
@@ -113,60 +120,12 @@ name::name(void)    \
 kexGameLocal::menus[id] = this;   \
 }
 
-class kexMenuItem;
-typedef void(*menuItemLerpDone_t)(kexMenuItem*);
-
-//-----------------------------------------------------------------------------
-//
-// kexMenuItem
-//
-//-----------------------------------------------------------------------------
-
-BEGIN_EXTENDED_KEX_CLASS(kexMenuItem, kexObject);
-public:
-    kexMenuItem(void);
-    kexMenuItem(const char *label, const float x, const float y, const float scale,
-                menuItemLerpDone_t callback = NULL);
-    ~kexMenuItem(void);
-
-    virtual void                    Draw(void);
-    virtual void                    Tick(void);
-    virtual void                    Select(const bool b) { bSelected = b; }
-
-    void                            DrawSmallString(const char *string, float x, float y, float scale,
-                                                    bool center, bool flash);
-    void                            DrawBigString(const char *string, float x, float y, float scale,
-                                                  bool center, bool flash);
-    void                            LerpTo(const float destx, const float desty);
-    void                            LerpTo(const float destx);
-
-    const bool                      IsHighlighted(void) const { return bHighLighted; }
-    void                            Toggle(const bool b) { bDisabled = !b; }
-
-    virtual kexMenuItem             &operator=(const kexMenuItem &item);
-
-    float                           x;
-    float                           y;
-    float                           scale;
-
-    menuItemLerpDone_t              lerpCallback;
-
-protected:
-    void                            Move(void);
-    virtual bool                    OnCursor(void);
-
-    float                           highlightTime;
-    kexStr                          label;
-    bool                            bDisabled;
-    bool                            bSelected;
-    bool                            bInteract;
-    bool                            bLerping;
-    bool                            bHighLighted;
-    float                           time;
-    float                           startX;
-    float                           startY;
-    float                           destX;
-    float                           destY;
-END_KEX_CLASS();
+#define DECLARE_MENU_CLASS_EXTENDED(name, parent, id)    \
+DECLARE_KEX_CLASS(name, parent)  \
+static name local_ ## name;   \
+name::name(void)    \
+{   \
+kexGameLocal::menus[id] = this;   \
+}
 
 #endif

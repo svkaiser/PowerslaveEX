@@ -141,7 +141,7 @@ public:
     void                            Tick(void);
     void                            Draw(void);
     bool                            ProcessInput(inputEvent_t *ev);
-    void                            StartNewGame(void);
+    void                            StartNewGame(const int slot = -1);
     void                            UpdateGameObjects(void);
     void                            RemoveGameObject(kexGameObject *go);
     void                            RemoveAllGameObjects(void);
@@ -150,6 +150,7 @@ public:
     void                            SavePersistentData(void);
     void                            RestorePersistentData(void);
     bool                            SaveGame(const int slot);
+    bool                            SaveGame(void);
     bool                            LoadGame(const int slot);
 
     typedef struct
@@ -221,6 +222,7 @@ public:
     kexMenu                         *ActiveMenu(void) { return activeMenu; }
     mapInfo_t                       *ActiveMap(void) { return activeMap; }
     unsigned int                    &ButtonEvent(void) { return buttonEvent; }
+    const int                       CurrentSaveSlot(void) const { return currentSaveSlot; }
 
     void                            SetMenu(const menus_t menu);
     void                            ClearMenu(const bool bClearAll = false);
@@ -281,6 +283,7 @@ private:
     kexArray<menus_t>               menuStack;
     unsigned int                    buttonEvent;
     persistentData_t                persistentData;
+    int                             currentSaveSlot;
 };
 
 //-----------------------------------------------------------------------------

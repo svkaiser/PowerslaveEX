@@ -17,6 +17,7 @@
 
 #include "kexlib.h"
 #include "game.h"
+#include "overWorld.h"
 
 DECLARE_KEX_CLASS(kexTravelObject, kexActor)
 
@@ -71,17 +72,28 @@ void kexTravelObject::OnTouch(kexActor *instigator)
         PlaySound(warpSounds[kexRand::Max(warpSounds.Length())].c_str());
     }
 
-    if(mapDestination <= -1)
+    if(mapDestination >= 0)
+    {
+        kexGame::cLocal->OverWorld()->SelectedMap() = mapDestination;
+        kexGame::cLocal->PlayLoop()->RequestExit(kexGame::cLocal->MapInfoList()[mapDestination].map);
+        static_cast<kexPuppet*>(instigator)->ScheduleWarpForNextMap(destinationPosition);
+        reTriggerTime = 10000;
+    }
+    else if(mapDestination == -2)
+    {
+        kexGame::cLocal->OverWorld()->SelectedMap() = 0;
+        kexGame::cLocal->PlayLoop()->RequestExit(GS_ENDING_GOOD);
+    }
+    else if(mapDestination == -3)
+    {
+        kexGame::cLocal->OverWorld()->SelectedMap() = 0;
+        kexGame::cLocal->PlayLoop()->RequestExit(GS_ENDING_BAD);
+    }
+    else
     {
         reTriggerTime = 120;
         currentObject = this;
         kexGame::cLocal->SetMenu(MENU_TRAVEL);
-    }
-    else
-    {
-        kexGame::cLocal->PlayLoop()->RequestExit(kexGame::cLocal->MapInfoList()[mapDestination].map);
-        static_cast<kexPuppet*>(instigator)->ScheduleWarpForNextMap(destinationPosition);
-        reTriggerTime = 10000;
     }
 }
 
@@ -103,7 +115,7 @@ void kexTravelObject::Spawn(void)
     
     if(kexGame::cLocal->MapInfoList().Length() != 0)
     {
-        kexMath::Clamp(mapDestination, -1, kexGame::cLocal->MapInfoList().Length());
+        kexMath::Clamp(mapDestination, -3, kexGame::cLocal->MapInfoList().Length());
     }
     else
     {

@@ -281,7 +281,7 @@ bool kexProjectile::CheckSeekTarget(kexVec3 &start, kexActor *actor)
 
     kexVec3 end = actor->Origin() + kexVec3(0, 0, actor->Height() * 0.5f);
 
-    if(kexGame::cLocal->CModel()->Trace(this, sector, start, end, radius*2, false))
+    if(kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0, false))
     {
         return false;
     }

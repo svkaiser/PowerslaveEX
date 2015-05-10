@@ -438,6 +438,8 @@ kexGameLocal::kexGameLocal(void)
     this->spriteManager     = new kexSpriteManager;
     this->spriteAnimManager = new kexSpriteAnimManager;
 
+    this->currentSaveSlot   = -1;
+
     memset(weaponInfo, 0, sizeof(weaponInfo_t) * NUMPLAYERWEAPONS);
 }
 
@@ -555,7 +557,7 @@ void kexGameLocal::Start(void)
 // kexGameLocal::StartNewGame
 //
 
-void kexGameLocal::StartNewGame(void)
+void kexGameLocal::StartNewGame(const int slot)
 {
     for(uint i = 0; i < bMapUnlockList.Length(); ++i)
     {
@@ -566,6 +568,11 @@ void kexGameLocal::StartNewGame(void)
     overWorld->SelectedMap() = 0;
 
     SavePersistentData();
+
+    if(slot >= 0)
+    {
+        SaveGame(slot);
+    }
 }
 
 //
@@ -1327,7 +1334,22 @@ bool kexGameLocal::SaveGame(const int slot)
         saveFile.Write8(0xFF);
     }
 
+    currentSaveSlot = slot;
     return true;
+}
+
+//
+// kexGameLocal::SaveGame
+//
+
+bool kexGameLocal::SaveGame(void)
+{
+    if(currentSaveSlot < 0)
+    {
+        return false;
+    }
+
+    return SaveGame(currentSaveSlot);
 }
 
 //
@@ -1436,6 +1458,8 @@ bool kexGameLocal::LoadGame(const int slot)
     {
         bMapUnlockList[i] = (loadFile.Read8() == 1);
     }
+
+    currentSaveSlot = slot;
 
     RestorePersistentData();
     SetGameState(GS_OVERWORLD);

@@ -217,6 +217,7 @@ void kexPlayLoop::Start(void)
     automapZoom = 2048;
     fadeInTicks = 0xff;
     restartDelayTicks = 60;
+    requestedGameState = GS_NONE;
     
     bShowAutomap = false;
     bMapAll = false;
@@ -249,6 +250,8 @@ void kexPlayLoop::Stop(void)
 
     kexGame::cScriptManager->DestroyLevelScripts();
     kexGame::cLocal->World()->UnloadMap();
+
+    kex::cSession->ForceSingleFrame();
 }
 
 //
@@ -302,7 +305,14 @@ void kexPlayLoop::Tick(void)
     {
         if(bFadeOut)
         {
-            fadeInTicks += 4;
+            if(requestedGameState != GS_NONE)
+            {
+                fadeInTicks += 2;
+            }
+            else
+            {
+                fadeInTicks += 4;
+            }
 
             if(fadeInTicks > 255)
             {
@@ -314,7 +324,17 @@ void kexPlayLoop::Tick(void)
                 }
                 else
                 {
-                    kexGame::cLocal->SetGameState(GS_OVERWORLD);
+                    switch(requestedGameState)
+                    {
+                    case GS_ENDING_GOOD:
+                    case GS_ENDING_BAD:
+                        kexGame::cLocal->SetGameState(requestedGameState);
+                        break;
+
+                    default:
+                        kexGame::cLocal->SetGameState(GS_OVERWORLD);
+                        break;
+                    }
                 }
             }
         }
@@ -426,6 +446,23 @@ void kexPlayLoop::RequestExit(const char *map)
     bRestartLevel = false;
 
     kexGame::cLocal->SavePersistentData();
+    kexGame::cLocal->SaveGame();
+}
+
+//
+// kexPlayLoop::RequestExit
+//
+
+void kexPlayLoop::RequestExit(const gameState_t gameState)
+{
+    mapChange = NULL;
+    fadeInTicks = 1;
+    bFadeOut = true;
+    bNoFadeOutPause = false;
+    bRestartLevel = false;
+    requestedGameState = gameState;
+
+    kexGame::cLocal->SaveGame();
 }
 
 //
@@ -450,7 +487,7 @@ void kexPlayLoop::DrawFadeIn(void)
     float w, h;
     byte fade;
 
-    if((!bFadeOut && fadeInTicks <= 0) || (bFadeOut && fadeInTicks >= 255))
+    if(!bFadeOut && fadeInTicks <= 0)
     {
         return;
     }

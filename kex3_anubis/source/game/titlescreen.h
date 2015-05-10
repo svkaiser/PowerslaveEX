@@ -17,6 +17,62 @@
 
 #include "menu.h"
 
+class kexTitleMenuItem;
+typedef void(*menuItemLerpDone_t)(kexTitleMenuItem*);
+
+//-----------------------------------------------------------------------------
+//
+// kexTitleMenuItem
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexTitleMenuItem, kexObject);
+public:
+    kexTitleMenuItem(void);
+    kexTitleMenuItem(const char *label, const float x, const float y, const float scale,
+                     menuItemLerpDone_t callback = NULL);
+    ~kexTitleMenuItem(void);
+
+    virtual void                    Draw(void);
+    virtual void                    Tick(void);
+    virtual void                    Select(const bool b) { bSelected = b; }
+
+    void                            DrawSmallString(const char *string, float x, float y, float scale,
+                                                    bool center, bool flash);
+    void                            DrawBigString(const char *string, float x, float y, float scale,
+                                                  bool center, bool flash);
+    void                            LerpTo(const float destx, const float desty);
+    void                            LerpTo(const float destx);
+
+    const bool                      IsHighlighted(void) const { return bHighLighted; }
+    void                            Toggle(const bool b) { bDisabled = !b; }
+
+    virtual kexTitleMenuItem        &operator=(const kexTitleMenuItem &item);
+
+    float                           x;
+    float                           y;
+    float                           scale;
+
+    menuItemLerpDone_t              lerpCallback;
+
+protected:
+    void                            Move(void);
+    virtual bool                    OnCursor(void);
+
+    float                           highlightTime;
+    kexStr                          label;
+    bool                            bDisabled;
+    bool                            bSelected;
+    bool                            bInteract;
+    bool                            bLerping;
+    bool                            bHighLighted;
+    float                           time;
+    float                           startX;
+    float                           startY;
+    float                           destX;
+    float                           destY;
+END_KEX_CLASS();
+
 class kexTitleScreen : public kexGameLoop
 {
 public:
@@ -32,6 +88,8 @@ public:
     void                        FadeDone(void);
     void                        DeselectAllItems(void);
     void                        FadeOut(int state);
+    void                        StartLoadGame(const int slot);
+    void                        StartNewGame(const int slot);
 
     const int                   SelectedItem(void) const { return selectedItem; }
     void                        SetState(const int s) { state = s; }
@@ -44,6 +102,7 @@ private:
     bool                        bFading;
     kexTexture                  *titlePic;
     int                         selectedItem;
+    int                         loadGameSlot;
 };
 
 #endif

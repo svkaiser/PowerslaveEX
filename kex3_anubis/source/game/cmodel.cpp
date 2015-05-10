@@ -603,6 +603,7 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
         // performing ray-trace tests.
         if(moveActor)
         {
+            float underLip, z, height;
             bool bTestOnly = false;
             bool bTestProjectile = false;
             bool bIsAProjectile = moveActor->InstanceOf(&kexProjectile::info);
@@ -613,8 +614,17 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
                 continue;
             }
 
-            if(end.z > actor->Origin().z + actor->Height() ||
-                actorHeight + end.z < actor->Origin().z)
+            underLip = actor->Radius() - actor->StepHeight();
+
+            if(underLip < 0)
+            {
+                underLip = 0;
+            }
+
+            z = actor->Origin().z;
+            height = actor->Height() + underLip;
+
+            if(end.z > z + height || actorHeight + end.z < (z - underLip))
             {
                 // either over or under actor
                 continue;
@@ -633,8 +643,7 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
                 bTestOnly = true;
             }
             
-            if(TraceSphere(r, actor->Origin().ToVec2(), actor->Origin().z + actor->Height(),
-                           0, bTestOnly))
+            if(TraceSphere(r, actor->Origin().ToVec2(), z + height, 0, bTestOnly))
             {   
                 if(actor->Flags() & AF_TOUCHABLE)
                 {

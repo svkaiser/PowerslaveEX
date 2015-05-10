@@ -941,8 +941,15 @@ void kexRenderScene::DrawSprite(kexRenderView &view, mapSector_t *sector, kexAct
 
     if(bShowCollision && actor->Flags() & AF_SOLID)
     {
-        kexRender::cUtils->DrawRadius(org.x, org.y, org.z - (actor->Height()*0.5f),
-                                      actor->Radius(), actor->Height() + actor->StepHeight(),
+        float underLip = actor->Radius() - actor->StepHeight();
+
+        if(underLip < 0)
+        {
+            underLip = 0;
+        }
+
+        kexRender::cUtils->DrawRadius(org.x, org.y, org.z - underLip,
+                                      actor->Radius(), actor->Height() + underLip,
                                       255, 128, 64);
         kexRender::cUtils->DrawSphere(org.x, org.y, org.z + actor->StepHeight(),
                                       actor->Radius(), 255, 32, 32);

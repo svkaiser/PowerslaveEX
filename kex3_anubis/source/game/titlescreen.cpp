@@ -20,7 +20,244 @@
 #include "game.h"
 #include "titlescreen.h"
 
-typedef void(*menuItemSelect_t)(kexMenuItem*);
+//-----------------------------------------------------------------------------
+//
+// kexTitleMenuItem
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexTitleMenuItem, kexObject)
+
+//
+// kexTitleMenuItem::kexTitleMenuItem
+//
+
+kexTitleMenuItem::kexTitleMenuItem(void)
+{
+    this->x             = 0;
+    this->y             = 0;
+    this->scale         = 1;
+    this->bLerping      = false;
+    this->bHighLighted  = false;
+    this->bInteract     = true;
+    this->bDisabled     = false;
+    this->destX         = 0;
+    this->destY         = 0;
+    this->time          = 0;
+    this->highlightTime = 0;
+    this->lerpCallback  = NULL;
+}
+
+//
+// kexTitleMenuItem::kexTitleMenuItem
+//
+
+kexTitleMenuItem::kexTitleMenuItem(const char *label, const float x, const float y,
+                                   const float scale, menuItemLerpDone_t callback)
+{
+    this->x             = x;
+    this->y             = y;
+    this->scale         = scale;
+    this->bLerping      = false;
+    this->bInteract     = true;
+    this->destX         = 0;
+    this->destY         = 0;
+    this->time          = 0;
+    this->label         = label;
+    this->highlightTime = 0;
+    this->lerpCallback  = callback;
+}
+
+//
+// kexTitleMenuItem::~kexTitleMenuItem
+//
+
+kexTitleMenuItem::~kexTitleMenuItem(void)
+{
+}
+
+//
+// kexTitleMenuItem::LerpTo
+//
+
+void kexTitleMenuItem::LerpTo(const float destx, const float desty)
+{
+    this->bLerping = true;
+    this->startX = x;
+    this->startY = y;
+    this->destX = destx;
+    this->destY = desty;
+    this->time = 1;
+    this->bInteract = false;
+    this->bHighLighted = false;
+    this->highlightTime = 0;
+}
+
+//
+// kexTitleMenuItem::LerpTo
+//
+
+void kexTitleMenuItem::LerpTo(const float destx)
+{
+    LerpTo(destx, y);
+}
+
+//
+// kexTitleMenuItem::Move
+//
+
+void kexTitleMenuItem::Move(void)
+{
+    float c = 1.0f - time;
+
+    x = c * (destX - startX) + startX;
+    y = c * (destY - startY) + startY;
+
+    time -= 0.03f;
+
+    if(time <= 0)
+    {
+        bLerping = false;
+        bInteract = true;
+        x = destX;
+        y = destY;
+
+        if(lerpCallback)
+        {
+            lerpCallback(this);
+        }
+    }
+}
+
+//
+// kexTitleMenuItem::OnCursor
+//
+
+bool kexTitleMenuItem::OnCursor(void)
+{
+    float width = kexGame::cLocal->BigFont()->StringWidth(label.c_str(), scale, 0) * 0.5f;
+    float height = kexGame::cLocal->BigFont()->StringHeight(label.c_str(), scale, 0) * 0.5f;
+    float sy = y + height;
+    float mx = (float)kex::cInput->MouseX();
+    float my = (float)kex::cInput->MouseY();
+
+    kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
+
+    return !(mx < (x - width) || my < (sy - height) ||
+             mx > (x + width) || my > (sy + height));
+}
+
+//
+// kexTitleMenuItem::Tick
+//
+
+void kexTitleMenuItem::Tick(void)
+{
+    static kexTitleMenuItem *lastItem;
+
+    if(bLerping)
+    {
+        Move();
+    }
+
+    if(bInteract && !bSelected && !bDisabled)
+    {
+        if(!(bHighLighted = OnCursor()))
+        {
+            highlightTime = 0;
+
+            if(lastItem == this)
+            {
+                lastItem = NULL;
+            }
+        }
+        else
+        {
+            highlightTime += 1.0f;
+        }
+    }
+
+    if(bHighLighted && lastItem != this)
+    {
+        lastItem = this;
+        kexGame::cLocal->PlaySound("sounds/menu_highlight.wav");
+    }
+}
+
+//
+// kexTitleMenuItem::DrawSmallString
+//
+
+void kexTitleMenuItem::DrawSmallString(const char *string, float x, float y,
+                                       float scale, bool center, bool flash)
+{
+    byte c = (flash || bSelected || bDisabled) ? 255 : 224;
+    kexFont *font = kexGame::cLocal->SmallFont();
+
+    kexGame::cLocal->DrawSmallString(string, x, y, scale, center, c, c, c);
+
+    if(flash)
+    {
+        byte pulse = (byte)(kexMath::Sin(highlightTime * 0.1f) * 64.0f) + 64;
+
+        kexRender::cBackend->SetBlend(GLSRC_ONE, GLDST_ONE);
+        font->DrawString(string, x, y, scale, center, RGBA(pulse, pulse, pulse, 0xff));
+    }
+}
+
+//
+// kexTitleMenuItem::DrawBigString
+//
+
+void kexTitleMenuItem::DrawBigString(const char *string, float x, float y,
+                                     float scale, bool center, bool flash)
+{
+    byte c = (flash || bSelected || bDisabled) ? 255 : 224;
+    kexFont *font = kexGame::cLocal->BigFont();
+
+    kexGame::cLocal->DrawBigString(string, x, y, scale, center, c, c, c);
+
+    if(flash)
+    {
+        byte pulse = (byte)(kexMath::Sin(highlightTime * 0.1f) * 64.0f) + 64;
+
+        kexRender::cBackend->SetBlend(GLSRC_ONE, GLDST_ONE);
+        font->DrawString(string, x, y, scale, center, RGBA(pulse, pulse, pulse, 0xff));
+    }
+}
+
+//
+// kexTitleMenuItem::Draw
+//
+
+void kexTitleMenuItem::Draw(void)
+{
+    DrawBigString(label.c_str(), x, y, scale, true, bHighLighted);
+}
+
+//
+// kexTitleMenuItem::operator=
+//
+
+kexTitleMenuItem &kexTitleMenuItem::operator=(const kexTitleMenuItem &item)
+{
+    this->x             = item.x;
+    this->y             = item.y;
+    this->scale         = item.scale;
+    this->label         = item.label;
+    this->bInteract     = item.bInteract;
+    this->bLerping      = item.bLerping;
+
+    return *this;
+}
+
+//-----------------------------------------------------------------------------
+//
+// Titlescreen menu structure
+//
+//-----------------------------------------------------------------------------
+
+typedef void(*menuItemSelect_t)(kexTitleMenuItem*);
 
 typedef enum
 {
@@ -45,25 +282,26 @@ typedef enum
 {
     TSS_IDLE    = 0,
     TSS_NEWGAME,
+    TSS_LOADGAME,
 
     NUMTITLESCREENSTATES
 } titleScreenState_t;
 
 typedef struct
 {
-    kexMenuItem         *item;
+    kexTitleMenuItem    *item;
     menuItemSelect_t    callback;
 } menuGroup_t;
 
 static menuGroup_t *titleMenu[NUMTITLESCREENITEMS];
 
 #define MENUITEM(name, label, x, y, center, lerpblock, block)   \
-    static void LerpCallback_ ## name(kexMenuItem *item);   \
-    static void Callback_ ## name(kexMenuItem *item);   \
-    static menuGroup_t menuGroup_ ## name = { new kexMenuItem(label, x, y, center, LerpCallback_ ## name), Callback_ ## name };   \
-    static void LerpCallback_ ## name(kexMenuItem *item)    \
+    static void LerpCallback_ ## name(kexTitleMenuItem *item);   \
+    static void Callback_ ## name(kexTitleMenuItem *item);   \
+    static menuGroup_t menuGroup_ ## name = { new kexTitleMenuItem(label, x, y, center, LerpCallback_ ## name), Callback_ ## name };   \
+    static void LerpCallback_ ## name(kexTitleMenuItem *item)    \
     lerpblock   \
-    static void Callback_ ## name(kexMenuItem *item)    \
+    static void Callback_ ## name(kexTitleMenuItem *item)    \
     block
 
 //-----------------------------------------------------------------------------
@@ -82,10 +320,8 @@ MENUITEM(NewGame, "New Game", -100, 128, 1,
     kexGame::cLocal->TitleScreen()->FadeOut(TSS_NEWGAME);
 },
 {
-    titleMenu[TSI_NEWGAME]->item->LerpTo(-100);
-    titleMenu[TSI_LOADGAME]->item->LerpTo(420);
-    titleMenu[TSI_OPTIONS]->item->LerpTo(-100);
-    titleMenu[TSI_QUIT]->item->LerpTo(420);
+    kexGame::cLocal->SetMenu(MENU_NEWGAME);
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -96,6 +332,12 @@ MENUITEM(NewGame, "New Game", -100, 128, 1,
 
 MENUITEM(LoadGame, "Load Game", 420, 146, 1,
 {
+    if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_LOADGAME)
+    {
+        return;
+    }
+
+    kexGame::cLocal->TitleScreen()->FadeOut(TSS_LOADGAME);
 },
 {
     kexGame::cLocal->SetMenu(MENU_LOADGAME);
@@ -412,7 +654,7 @@ void kexTitleScreen::DeselectAllItems(void)
 {
     for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
     {
-        kexMenuItem *item = titleMenu[i]->item;
+        kexTitleMenuItem *item = titleMenu[i]->item;
         item->Select(false);
     }
 }
@@ -431,10 +673,16 @@ void kexTitleScreen::FadeDone(void)
         titleMenu[TSI_OPTIONS]->item->LerpTo(160);
         titleMenu[TSI_QUIT]->item->LerpTo(160);
         break;
+
     case TSS_NEWGAME:
-        kexGame::cLocal->StartNewGame();
+        kexGame::cLocal->StartNewGame(loadGameSlot);
         kexGame::cLocal->SetGameState(GS_OVERWORLD);
         break;
+        
+    case TSS_LOADGAME:
+        kexGame::cLocal->LoadGame(loadGameSlot);
+        break;
+
     default:
         break;
     }
@@ -485,7 +733,7 @@ void kexTitleScreen::Draw(void)
 
     for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
     {
-        kexMenuItem *item = titleMenu[i]->item;
+        kexTitleMenuItem *item = titleMenu[i]->item;
         item->Draw();
     }
 }
@@ -498,7 +746,7 @@ void kexTitleScreen::Tick(void)
 {
     for(unsigned int i = 0; i < ARRLEN(titleMenu); ++i)
     {
-        kexMenuItem *item = titleMenu[i]->item;
+        kexTitleMenuItem *item = titleMenu[i]->item;
         item->Tick();
     }
 }
@@ -548,4 +796,34 @@ bool kexTitleScreen::ProcessInput(inputEvent_t *ev)
     }
 
     return false;
+}
+
+//
+// kexTitleScreen::StartLoadGame
+//
+
+void kexTitleScreen::StartLoadGame(const int slot)
+{
+    titleMenu[TSI_NEWGAME]->item->LerpTo(-100);
+    titleMenu[TSI_LOADGAME]->item->LerpTo(420);
+    titleMenu[TSI_OPTIONS]->item->LerpTo(-100);
+    titleMenu[TSI_QUIT]->item->LerpTo(420);
+
+    selectedItem = TSI_LOADGAME;
+    loadGameSlot = slot;
+}
+
+//
+// kexTitleScreen::StartNewGame
+//
+
+void kexTitleScreen::StartNewGame(const int slot)
+{
+    titleMenu[TSI_NEWGAME]->item->LerpTo(-100);
+    titleMenu[TSI_LOADGAME]->item->LerpTo(420);
+    titleMenu[TSI_OPTIONS]->item->LerpTo(-100);
+    titleMenu[TSI_QUIT]->item->LerpTo(420);
+
+    selectedItem = TSI_NEWGAME;
+    loadGameSlot = slot;
 }

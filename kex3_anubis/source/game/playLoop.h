@@ -36,6 +36,7 @@ public:
     const int                   GetWaterVelocityPoint(const float x, const float y);
     void                        ZoomAutomap(const float amount);
     void                        RequestExit(const char *map);
+    void                        RequestExit(const gameState_t gameState);
     void                        RestartLevel(void);
     
     kexRenderView               &View(void) { return renderView; }
@@ -66,6 +67,7 @@ private:
     void                        DrawAutomapActors(kexRenderView &view);
     void                        DrawAutomapWalls(kexRenderView &view);
 
+    gameState_t                 requestedGameState;
     int                         ticks;
     short                       fadeInTicks;
     kexHud                      hud;
