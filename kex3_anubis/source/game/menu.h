@@ -30,6 +30,7 @@ typedef enum
     MENU_JOYSTICK,
     MENU_GRAPHICS,
     MENU_GAMEPLAY,
+    MENU_LOADGAME,
     NUMMENUS
 } menus_t;
 
@@ -84,6 +85,7 @@ public:
     virtual void                Init(void);
     virtual void                Display(void);
     virtual void                Reset(void);
+    virtual void                OnShow(void);
     virtual void                Update(void);
     virtual bool                ProcessInput(inputEvent_t *ev);
 

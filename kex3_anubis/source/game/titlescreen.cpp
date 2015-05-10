@@ -98,6 +98,7 @@ MENUITEM(LoadGame, "Load Game", 420, 146, 1,
 {
 },
 {
+    kexGame::cLocal->SetMenu(MENU_LOADGAME);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
@@ -138,8 +139,8 @@ MENUITEM(Quit, "Quit", 420, 182, 1,
 {
 },
 {
-    kexGame::cLocal->TitleScreen()->DeselectAllItems();
     kexGame::cLocal->SetMenu(MENU_QUITCONFIRM);
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -431,6 +432,7 @@ void kexTitleScreen::FadeDone(void)
         titleMenu[TSI_QUIT]->item->LerpTo(160);
         break;
     case TSS_NEWGAME:
+        kexGame::cLocal->StartNewGame();
         kexGame::cLocal->SetGameState(GS_OVERWORLD);
         break;
     default:

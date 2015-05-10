@@ -1,6 +1,7 @@
 Map_Tomb1       0
 {
     title           "$str_000"
+    saveTitle       "$str_022"
     overworld_x     326
     overworld_y     208
     map             "maps/TOMB.MAP"
@@ -12,6 +13,7 @@ Map_Tomb1       0
 Map_Karnak      1
 {
     title           "$str_001"
+    saveTitle       "$str_023"
     overworld_x     404
     overworld_y     294
     map             "maps/KARNAK.MAP"
@@ -25,6 +27,7 @@ Map_Karnak      1
 Map_Sanctuary   2
 {
     title           "$str_002"
+    saveTitle       "$str_024"
     overworld_x     558
     overworld_y     286
     map             "maps/SANCTUAR.MAP"
@@ -36,6 +39,7 @@ Map_Sanctuary   2
 Map_Pass        3
 {
     title           "$str_003"
+    saveTitle       "$str_025"
     overworld_x     366
     overworld_y     190
     map             "maps/PASS.MAP"
@@ -47,6 +51,7 @@ Map_Pass        3
 Map_Shrine      4
 {
     title           "$str_004"
+    saveTitle       "$str_026"
     overworld_x     376
     overworld_y     154
     map             "maps/SHRINE.MAP"
@@ -58,6 +63,7 @@ Map_Shrine      4
 Map_Mines       5
 {
     title           "$str_005"
+    saveTitle       "$str_027"
     overworld_x     384
     overworld_y     402
     map             "maps/MINES.MAP"
@@ -70,6 +76,7 @@ Map_Mines       5
 Map_Palace      6
 {
     title           "$str_006"
+    saveTitle       "$str_028"
     overworld_x     482
     overworld_y     408
     map             "maps/SETPALAC.MAP"
@@ -81,6 +88,7 @@ Map_Palace      6
 Map_Arena1      7
 {
     title           "$str_007"
+    saveTitle       "$str_029"
     overworld_x     558
     overworld_y     412
     map             "maps/SETARENA.MAP"
@@ -91,6 +99,7 @@ Map_Arena1      7
 Map_Cavern      8
 {
     title           "$str_008"
+    saveTitle       "$str_030"
     overworld_x     258
     overworld_y     438
     map             "maps/CAVERN.MAP"
@@ -102,6 +111,7 @@ Map_Cavern      8
 Map_Gorge       9
 {
     title           "$str_009"
+    saveTitle       "$str_031"
     overworld_x     156
     overworld_y     460
     map             "maps/GORGE.MAP"
@@ -113,6 +123,7 @@ Map_Gorge       9
 Map_Thoth       10
 {
     title           "$str_010"
+    saveTitle       "$str_032"
     overworld_x     64
     overworld_y     404
     map             "maps/THOTH.MAP"
@@ -124,6 +135,7 @@ Map_Thoth       10
 Map_Marsh       11
 {
     title           "$str_011"
+    saveTitle       "$str_033"
     overworld_x     550
     overworld_y     164
     map             "maps/MARSH.MAP"
@@ -135,6 +147,7 @@ Map_Marsh       11
 Map_Sunken      12
 {
     title           "$str_012"
+    saveTitle       "$str_034"
     overworld_x     546
     overworld_y     60
     map             "maps/SUNKEN.MAP"
@@ -146,6 +159,7 @@ Map_Sunken      12
 Map_Camp        13
 {
     title           "$str_013"
+    saveTitle       "$str_035"
     overworld_x     402
     overworld_y     64
     map             "maps/SLAVCAMP.MAP"
@@ -157,6 +171,7 @@ Map_Camp        13
 Map_Path        14
 {
     title           "$str_014"
+    saveTitle       "$str_036"
     overworld_x     288
     overworld_y     66
     map             "maps/SELPATH.MAP"
@@ -168,6 +183,7 @@ Map_Path        14
 Map_Burrow      15
 {
     title           "$str_015"
+    saveTitle       "$str_037"
     overworld_x     226
     overworld_y     88
     map             "maps/SELBUROW.MAP"
@@ -178,6 +194,7 @@ Map_Burrow      15
 Map_Magma       16
 {
     title           "$str_016"
+    saveTitle       "$str_038"
     overworld_x     232
     overworld_y     188
     map             "maps/MAGMA.MAP"
@@ -189,6 +206,7 @@ Map_Magma       16
 Map_Peak        17
 {
     title           "$str_017"
+    saveTitle       "$str_039"
     overworld_x     226
     overworld_y     266
     map             "maps/PEAK.MAP"
@@ -199,6 +217,7 @@ Map_Peak        17
 Map_Chaos       18
 {
     title           "$str_018"
+    saveTitle       "$str_040"
     overworld_x     32
     overworld_y     300
     map             "maps/CHAOS.MAP"
@@ -210,6 +229,7 @@ Map_Chaos       18
 Map_Colony      19
 {
     title           "$str_019"
+    saveTitle       "$str_041"
     overworld_x     54
     overworld_y     166
     map             "maps/COLONY.MAP"
@@ -221,6 +241,7 @@ Map_Colony      19
 Map_Entry       20
 {
     title           "$str_020"
+    saveTitle       "$str_042"
     overworld_x     54
     overworld_y     70
     map             "maps/KILENTRY.MAP"
@@ -232,6 +253,7 @@ Map_Entry       20
 Map_Arena2      21
 {
     title           "$str_021"
+    saveTitle       "$str_043"
     map             "maps/KILARENA.MAP"
     musicTrack      "music/arena2.ogg"
     script          "scripts/map/KILARENA_script.txt"
@@ -240,6 +262,7 @@ Map_Arena2      21
 Map_Tomb2       22
 {
     title           "$str_000"
+    saveTitle       "$str_022"
     map             "maps/TOMBEND.MAP"
     musicTrack      "music/egypt2.ogg"
     script          "scripts/map/TOMBEND_script.txt"

@@ -464,6 +464,8 @@ kexGameLocal::~kexGameLocal(void)
 
 void kexGameLocal::Init(void)
 {
+    bool bHasUserConfig;
+
     kex::cActions->AddAction(IA_ATTACK, "attack");
     kex::cActions->AddAction(IA_JUMP, "jump");
     kex::cActions->AddAction(IA_FORWARD, "forward");
@@ -478,10 +480,21 @@ void kexGameLocal::Init(void)
     kex::cActions->AddAction(IA_MAPZOOMIN, "mapzoomin");
     kex::cActions->AddAction(IA_MAPZOOMOUT, "mapzoomout");
     
-    kex::cSystem->ReadConfigFile("config.cfg");
+    bHasUserConfig = kex::cSystem->ReadConfigFile("config.cfg");
 
     kex::cPakFiles->LoadUserFiles();
     kex::cPakFiles->LoadZipFile("game.kpf");
+
+    if(!bHasUserConfig)
+    {
+        char *buffer = NULL;
+
+        if(kex::cPakFiles->OpenFile("default.cfg", (byte**)(&buffer), hb_static) > 0)
+        {
+            kex::cCommands->Execute(buffer);
+            Mem_Free(buffer);
+        }
+    }
 
     actorDefs.LoadFilesInDirectory("defs/actors/");
     weaponDefs.LoadFile("defs/weaponInfo.txt");
@@ -534,7 +547,23 @@ void kexGameLocal::Start(void)
     InitMapDefs();
 
     loadingPic.Delete();
+
+    StartNewGame();
+}
+
+//
+// kexGameLocal::StartNewGame
+//
+
+void kexGameLocal::StartNewGame(void)
+{
+    for(uint i = 0; i < bMapUnlockList.Length(); ++i)
+    {
+        bMapUnlockList[i] = false;
+    }
+
     player->Reset();
+    overWorld->SelectedMap() = 0;
 
     SavePersistentData();
 }
@@ -637,6 +666,7 @@ void kexGameLocal::InitMapDefs(void)
         
         dict->GetString("map", mapInfo->map);
         dict->GetString("title", mapInfo->title);
+        dict->GetString("saveTitle", mapInfo->saveTitle);
         dict->GetString("musicTrack", mapInfo->musicTrack);
         dict->GetString("script", mapInfo->script);
         dict->GetFloat("overworld_x", mapInfo->overworldX);
@@ -846,6 +876,7 @@ void kexGameLocal::SetMenu(const menus_t menu)
 
     activeMenu = menus[menu];
     activeMenu->Reset();
+    activeMenu->OnShow();
     menuStack.Push(menu);
 
     if(menuStack.Length() >= 2)
@@ -1295,6 +1326,56 @@ bool kexGameLocal::SaveGame(const int slot)
     {
         saveFile.Write8(0xFF);
     }
+
+    return true;
+}
+
+//
+// kexGameLocal::LoadPersistentData
+//
+
+bool kexGameLocal::LoadPersistentData(persistentData_t *data, int &currentMap, const int slot)
+{
+    kexStr filepath;
+    kexBinFile loadFile;
+    int version, subVersion;
+
+    assert(slot >= 0);
+
+    filepath = kexStr::Format("saves\\save_%03d.sav", slot);
+    filepath.NormalizeSlashes();
+
+    if(!loadFile.OpenExternal(filepath.c_str()))
+    {
+        return false;
+    }
+
+    version = loadFile.Read32();
+    subVersion = loadFile.Read32();
+
+    if(version != GAME_VERSION || subVersion != GAME_SUBVERSION)
+    {
+        return false;
+    }
+
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        data->ammo[i] = loadFile.Read16();
+    }
+
+    for(int i = 0; i < NUMPLAYERWEAPONS; ++i)
+    {
+        data->weapons[i] = (loadFile.Read8() == 1);
+    }
+
+    data->ankahs = loadFile.Read16();
+    data->ankahFlags = loadFile.Read16();
+    data->artifacts = loadFile.Read16();
+    data->questItems = loadFile.Read16();
+    data->teamDolls = loadFile.Read32();
+    data->health = loadFile.Read16();
+    data->currentWeapon = static_cast<playerWeapons_t>(loadFile.Read16());
+    currentMap = loadFile.Read16();
 
     return true;
 }

@@ -46,7 +46,7 @@ public:
     virtual void                            Warning(const char *string, ...);
     virtual void                            DPrintf(const char *string, ...);
     virtual void                            Error(const char *string, ...);
-    virtual void                            ReadConfigFile(const char *file);
+    virtual bool                            ReadConfigFile(const char *file);
     virtual void                            WriteConfigFile(void);
     virtual const char                      *GetClipboardText(void);
     virtual void                            GetAvailableDisplayModes(kexArray<videoDisplayInfo_t> &list);

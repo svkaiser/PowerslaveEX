@@ -929,7 +929,7 @@ void kexRenderBackend::ScreenShot(void)
         filePath = kexStr(kexStr::Format("%s\\shot%03d.png", kex::cvarBasePath.GetValue(), shotnum));
         filePath.NormalizeSlashes();
 
-        if(!file.Exists(filePath.c_str()))
+        if(!kexBinFile::Exists(filePath.c_str()))
         {
             file.Create(filePath.c_str());
             break;

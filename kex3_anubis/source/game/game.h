@@ -141,6 +141,7 @@ public:
     void                            Tick(void);
     void                            Draw(void);
     bool                            ProcessInput(inputEvent_t *ev);
+    void                            StartNewGame(void);
     void                            UpdateGameObjects(void);
     void                            RemoveGameObject(kexGameObject *go);
     void                            RemoveAllGameObjects(void);
@@ -171,6 +172,7 @@ public:
     typedef struct
     {
         kexStr              title;
+        kexStr              saveTitle;
         kexStr              musicTrack;
         kexStr              map;
         kexStr              script;
@@ -193,10 +195,13 @@ public:
         int16_t             health;
         playerWeapons_t     currentWeapon;
     } persistentData_t;
+
+    bool                            LoadPersistentData(persistentData_t *data, int &currentMap, const int slot);
     
     kexTitleScreen                  *TitleScreen(void) { return titleScreen; }
     kexPlayLoop                     *PlayLoop(void) { return playLoop; }
     kexTranslation                  *Translation(void) { return translation; }
+    kexOverWorld                    *OverWorld(void) { return overWorld; }
     kexWorld                        *World(void) { return world; }
     kexFont                         *SmallFont(void) { return smallFont; }
     kexFont                         *BigFont(void) { return bigFont; }

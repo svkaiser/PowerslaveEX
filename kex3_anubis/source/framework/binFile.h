@@ -32,8 +32,9 @@ public:
     bool                OpenStream(const char *file);
     bool                Create(const char *file);
     void                Close(void);
-    bool                Exists(const char *file);
     int                 Length(void);
+
+    static bool         Exists(const char *file);
 
     uint                ReadStream(uint offset, byte *buffer, uint length);
 

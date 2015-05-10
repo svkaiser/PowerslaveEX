@@ -126,7 +126,7 @@ int kexSystem::CheckParam(const char *check)
 // kexSystem::ReadConfigFile
 //
 
-void kexSystem::ReadConfigFile(const char *file)
+bool kexSystem::ReadConfigFile(const char *file)
 {
     char *buffer;
     int len;
@@ -136,11 +136,13 @@ void kexSystem::ReadConfigFile(const char *file)
     if(len == -1)
     {
         Warning("Warning: %s not found\n", file);
-        return;
+        return false;
     }
     
     kex::cCommands->Execute(buffer);
     Mem_Free(buffer);
+
+    return true;
 }
 
 //

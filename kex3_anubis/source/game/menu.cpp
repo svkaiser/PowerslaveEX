@@ -19,6 +19,7 @@
 #include "game.h"
 #include "renderMain.h"
 #include "menu.h"
+#include "overWorld.h"
 #include "localization.h"
 
 #define ALLOC_MENU_OBJECT(className)    static_cast<className*>(AllocateMenuObject(#className))
@@ -735,6 +736,123 @@ void kexMenuObjectOptionToggle::OnRight(void)
 
 //-----------------------------------------------------------------------------
 //
+// kexMenuObjectLoadPanel
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexMenuObjectLoadPanel, kexMenuObjectPanelSelect);
+public:
+    kexMenuObjectLoadPanel(void);
+
+    virtual void                    Draw(void);
+    virtual void                    Tick(void);
+
+    int                             artifactFlags;
+    int                             saveSlot;
+    bool                            bSaveExists;
+    kexStr                          mapTitle;
+
+private:
+    void                            DrawArtifact(const int pic, const float tx, const float ty,
+                                                 const bool bEnable);
+
+    kexTexture                      *artifactTextures[6];
+END_KEX_CLASS();
+
+DECLARE_KEX_CLASS(kexMenuObjectLoadPanel, kexMenuObjectPanelSelect)
+
+//
+// kexMenuObjectLoadPanel::kexMenuObjectLoadPanel
+//
+
+kexMenuObjectLoadPanel::kexMenuObjectLoadPanel(void)
+{
+    kexStr str;
+
+    artifactFlags = 0;
+    bSaveExists = false;
+
+    for(int i = 0; i < 6; ++i)
+    {
+        str = kexStr("gfx/menu/menuartifact_") + i + kexStr(".png");
+        artifactTextures[i] = kexRender::cTextures->Cache(str, TC_CLAMP, TF_NEAREST);
+    }
+
+    h = 32;
+}
+
+//
+// kexMenuObjectLoadPanel::DrawArtifact
+//
+
+void kexMenuObjectLoadPanel::DrawArtifact(const int pic, const float tx, const float ty,
+                                          const bool bEnable)
+{
+    float tw, th;
+    byte c, a;
+
+    assert(pic >= 0 && pic < 6);
+
+    tw = (float)artifactTextures[pic]->OriginalWidth() * 0.35f;
+    th = (float)artifactTextures[pic]->OriginalHeight() * 0.35f;
+
+    if(!bEnable)
+    {
+        c = 0;
+        a = 192;
+    }
+    else
+    {
+        c = 255;
+        a = 255;
+    }
+
+    kexRender::cScreen->DrawTexture(artifactTextures[pic], x+tx, y+ty, c, c, c, a, tw, th);
+}
+
+//
+// kexMenuObjectLoadPanel::Draw
+//
+
+void kexMenuObjectLoadPanel::Draw(void)
+{
+    float tx = 88;
+
+    kexMenuObjectPanelSelect::Draw();
+
+    if(bSaveExists)
+    {
+        for(int i = 0; i < 6; i++)
+        {
+            DrawArtifact(i, tx, 8, (artifactFlags & BIT(i)) != 0);
+            tx += (float)artifactTextures[i]->OriginalWidth() * 0.35f;
+        }
+
+        kexGame::cLocal->DrawBigString(mapTitle.c_str(), x+8, y+12, 0.625f, false);
+    }
+    else
+    {
+        kexGame::cLocal->DrawBigString("Empty Slot", x+8, y+12, 0.625f, false);
+    }
+}
+
+//
+// kexMenuObjectLoadPanel::Tick
+//
+
+void kexMenuObjectLoadPanel::Tick(void)
+{
+    if(bSaveExists && bSelected && kexGame::cLocal->ButtonEvent() & GBE_MENU_SELECT)
+    {
+        kexGame::cLocal->PlaySound("sounds/menu_select.wav");
+
+        kexGame::cLocal->ClearMenu();
+        kexGame::cLocal->LoadGame(saveSlot);
+    }
+}
+
+//-----------------------------------------------------------------------------
+//
 // kexMenu
 //
 //-----------------------------------------------------------------------------
@@ -785,6 +903,14 @@ void kexMenu::Reset(void)
     {
         menuObjects[i]->Reset();
     }
+}
+
+//
+// kexMenu::OnShow
+//
+
+void kexMenu::OnShow(void)
+{
 }
 
 //
@@ -1464,7 +1590,7 @@ bool kexMenuTravel::ProcessInput(inputEvent_t *ev)
         }
 
         kexGame::cLocal->SavePersistentData();
-
+        kexGame::cLocal->OverWorld()->SelectedMap() = nextMap;
         kexGame::cLocal->MapUnlockList()[kexGame::cLocal->ActiveMap()->refID] = true;
         kexGame::cLocal->MapUnlockList()[nextMap] = true;
         kexGame::cLocal->SetGameState(GS_OVERWORLD);
@@ -2788,6 +2914,136 @@ bool kexMenuGameplay::ProcessInput(inputEvent_t *ev)
         return true;
     }
 
+    return kexMenu::ProcessInput(ev);
+}
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuLoadGame
+//
+//-----------------------------------------------------------------------------
+
+DEFINE_MENU_CLASS(kexMenuLoadGame);
+public:
+    virtual void                    Init(void);
+    virtual void                    Display(void);
+    virtual void                    Update(void);
+    virtual void                    OnShow(void);
+    virtual bool                    ProcessInput(inputEvent_t *ev);
+
+private:
+    void                            OnBack(kexMenuObject *menuObject);
+
+    kexMenuObjectLoadPanel          *loadItems[5];
+END_MENU_CLASS();
+
+DECLARE_MENU_CLASS(kexMenuLoadGame, MENU_LOADGAME);
+
+//
+// kexMenuLoadGame::Init
+//
+
+void kexMenuLoadGame::Init(void)
+{
+    kexMenuObjectButton *button; 
+
+    for(int i = 0; i < 5; ++i)
+    {
+        loadItems[i] = ALLOC_MENU_OBJECT(kexMenuObjectLoadPanel);
+        loadItems[i]->x = 48;
+        loadItems[i]->y = 32 + (32 * (float)i);
+        loadItems[i]->w = 222;
+        loadItems[i]->saveSlot = i;
+        loadItems[i]->textAlignment = kexMenuObject::MITA_CENTER;
+    }
+
+    button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
+    button->x = 112;
+    button->y = 204;
+    button->w = 96;
+    button->h = 24;
+    button->label = "Back";
+    button->textAlignment = kexMenuObject::MITA_CENTER;
+    button->Callback = static_cast<selectCallback_t>(&kexMenuLoadGame::OnBack);
+}
+
+//
+// kexMenuLoadGame::Update
+//
+
+void kexMenuLoadGame::Update(void)
+{
+    UpdateItems();
+}
+
+//
+// kexMenuLoadGame::OnShow
+//
+
+void kexMenuLoadGame::OnShow(void)
+{
+    kexGameLocal *game = kexGame::cLocal;
+    kexTranslation *translation;
+    kexStr filepath;
+    int map;
+
+    translation = game->Translation();
+
+    for(int i = 0; i < 5; ++i)
+    {
+        kexGameLocal::persistentData_t data;
+
+        filepath = kexStr::Format("%s\\saves\\save_%03d.sav", kex::cvarBasePath.GetValue(), i);
+        filepath.NormalizeSlashes();
+
+        loadItems[i]->artifactFlags = 0;
+
+        if((loadItems[i]->bSaveExists = kexBinFile::Exists(filepath.c_str())))
+        {
+            game->LoadPersistentData(&data, map, i);
+
+            loadItems[i]->artifactFlags = data.artifacts;
+            loadItems[i]->mapTitle = translation->TranslateString(game->MapInfoList()[map].saveTitle);
+        }
+    }
+}
+
+//
+// kexMenuLoadGame::OnBack
+//
+
+void kexMenuLoadGame::OnBack(kexMenuObject *menuObject)
+{
+    kexGame::cLocal->ClearMenu();
+    kexGame::cLocal->PlaySound("sounds/select.wav");
+}
+
+//
+// kexMenuLoadGame::Display
+//
+
+void kexMenuLoadGame::Display(void)
+{
+    kexRender::cScreen->SetOrtho();
+    
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
+        (float)kexRender::cScreen->SCREEN_WIDTH,
+        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
+
+    kexGame::cMenuPanel->DrawPanel(40, 0, 240, 240, 4);
+    kexGame::cMenuPanel->DrawInset(48, 8, 222, 16);
+
+    DrawItems();
+
+    kexGame::cLocal->DrawSmallString("Load Game", 160, 12, 1, true);
+}
+
+//
+// kexMenuLoadGame::ProcessInput
+//
+
+bool kexMenuLoadGame::ProcessInput(inputEvent_t *ev)
+{
     return kexMenu::ProcessInput(ev);
 }
 
