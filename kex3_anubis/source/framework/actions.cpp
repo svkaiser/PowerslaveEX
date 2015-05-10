@@ -548,7 +548,7 @@ void kexInputAction::ExecuteCommand(int key, bool keyup, const int eventType)
             }
             else
             {
-                kex::cCommands->Execute(cmd->command+1);
+                kex::cCommands->Execute(kexStr::Format("%s %i", cmd->command+1, keyup));
             }
         }
     }

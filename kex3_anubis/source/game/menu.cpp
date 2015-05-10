@@ -25,7 +25,7 @@
 
 #define ALLOC_MENU_OBJECT(className)    static_cast<className*>(AllocateMenuObject(#className))
 
-#define DEFINE_PROMPT_MENU(cls, menu, title, yes, no, onYesBlock) \
+#define DEFINE_PROMPT_MENU(cls, menu, title, yes, no, opaque, onYesBlock) \
 DEFINE_MENU_CLASS_EXTENDED(cls, kexMenuPromptBase); \
 public: \
     virtual void                    Init(void); \
@@ -45,6 +45,7 @@ void cls::Init(void)    \
     kexMenuPromptBase::Init();  \
     menuObjects[0]->label = yes;    \
     menuObjects[1]->label = no; \
+    bTransparentBackground = opaque;    \
 }   \
 \
 void cls::Display(void) \
@@ -358,7 +359,7 @@ void kexMenuObjectButton::Tick(void)
     {
         bPressed = true;
     }
-    else if(bPressed == true)
+    else if(bPressed == true && kexGame::cLocal->ButtonEvent() & GBE_MENU_DESELECT)
     {
         bPressed = false;
 
@@ -1123,6 +1124,7 @@ public:
 protected:
     selectCallback_t            onYes;
     selectCallback_t            onNo;
+    bool                        bTransparentBackground;
 END_KEX_CLASS();
 
 DECLARE_KEX_CLASS(kexMenuPromptBase, kexMenu)
@@ -1182,7 +1184,7 @@ void kexMenuPromptBase::Display(void)
     
     kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
         (float)kexRender::cScreen->SCREEN_WIDTH,
-        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
+        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, bTransparentBackground ? 128 : 255);
     
     kexGame::cMenuPanel->DrawPanel(32, 64, 256, 96, 4);
     kexGame::cMenuPanel->DrawInset(40, 72, 238, 32);
@@ -1196,7 +1198,7 @@ void kexMenuPromptBase::Display(void)
 //
 //-----------------------------------------------------------------------------
 
-DEFINE_PROMPT_MENU(kexMenuQuitConfirm, MENU_QUITCONFIRM, "Are you sure you want to quit?", "Yes", "No",
+DEFINE_PROMPT_MENU(kexMenuQuitConfirm, MENU_QUITCONFIRM, "Are you sure you want to quit?", "Yes", "No", true,
 {
     kex::cCommands->Execute("quit");
 });
@@ -1289,7 +1291,7 @@ const kexMenuBindings::inputBinds_t kexMenuBindings::inputBinds4[] =
     { "Menu Right",     -1,                 "menu_right" },
     { "Menu Down",      -1,                 "menu_down" },
     { "Menu Left",      -1,                 "menu_left" },
-    { "Menu Select",    -1,                 "menu_select" },
+    { "Menu Select",    -1,                 "*menu_select" },
     { "Menu Cancel",    -1,                 "menu_cancel" },
     { "Menu Back",      -1,                 "menu_back" },
     { NULL,             -1,                 NULL }
@@ -1611,7 +1613,7 @@ bool kexMenuBindings::ProcessInput(inputEvent_t *ev)
 //
 //-----------------------------------------------------------------------------
 
-DEFINE_PROMPT_MENU(kexMenuTravel, MENU_TRAVEL, kexGame::cLocal->Translation()->GetString(127), "Travel", "Remain",
+DEFINE_PROMPT_MENU(kexMenuTravel, MENU_TRAVEL, kexGame::cLocal->Translation()->GetString(127), "Travel", "Remain", false,
 {
     int angBit;
     int nextMap;
@@ -2467,7 +2469,7 @@ void kexMenuJoystick::Display(void)
 //
 //-----------------------------------------------------------------------------
 
-DEFINE_PROMPT_MENU(kexMenuMainMenuConfirm, MENU_MAINCONFIRM, "Quit to Main Menu?", "Yes", "No",
+DEFINE_PROMPT_MENU(kexMenuMainMenuConfirm, MENU_MAINCONFIRM, "Quit to Main Menu?", "Yes", "No", true,
 {
     kexGame::cLocal->PlaySound("sounds/select.wav");
     kexGame::cLocal->ClearMenu(true);
@@ -3100,7 +3102,7 @@ void kexMenuNewGame::Display(void)
 //
 //-----------------------------------------------------------------------------
 
-DEFINE_PROMPT_MENU(kexMenuOverwriteConfirm, MENU_OVERWRITE_SAVE, "Overwrite save game?", "Yes", "No",
+DEFINE_PROMPT_MENU(kexMenuOverwriteConfirm, MENU_OVERWRITE_SAVE, "Overwrite save game?", "Yes", "No", true,
 {
     kexMenuObjectNewGamePanel *item = static_cast<kexMenuObjectNewGamePanel*>(menuObject);
 

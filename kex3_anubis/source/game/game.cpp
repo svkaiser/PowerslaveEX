@@ -402,10 +402,24 @@ COMMAND(menu_up)        { gameLocal.ButtonEvent() |= GBE_MENU_UP; }
 COMMAND(menu_right)     { gameLocal.ButtonEvent() |= GBE_MENU_RIGHT; }
 COMMAND(menu_down)      { gameLocal.ButtonEvent() |= GBE_MENU_DOWN; }
 COMMAND(menu_left)      { gameLocal.ButtonEvent() |= GBE_MENU_LEFT; }
-COMMAND(menu_select)    { gameLocal.ButtonEvent() |= GBE_MENU_SELECT; }
 COMMAND(menu_cancel)    { gameLocal.ButtonEvent() |= GBE_MENU_CANCEL; }
 COMMAND(menu_back)      { gameLocal.ButtonEvent() |= GBE_MENU_BACK; }
 COMMAND(menu_activate)  { gameLocal.ButtonEvent() |= GBE_MENU_ACTIVATE; }
+COMMAND(menu_select)
+{
+    int argc = kex::cCommands->GetArgc();
+
+    if(argc == 2)
+    {
+        if(atoi(kex::cCommands->GetArgv(1)) == 1)
+        {
+            gameLocal.ButtonEvent() |= GBE_MENU_DESELECT;
+            return;
+        }
+    }
+
+    gameLocal.ButtonEvent() |= GBE_MENU_SELECT;
+}
 
 //=============================================================================
 //
