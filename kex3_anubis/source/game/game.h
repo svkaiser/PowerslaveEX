@@ -158,6 +158,7 @@ public:
     {
         int             maxAmmo;
         bool            bPersistent;
+        bool            bDisableUnderwater;
         float           offsetX;
         float           offsetY;
         spriteAnim_t    *raise;

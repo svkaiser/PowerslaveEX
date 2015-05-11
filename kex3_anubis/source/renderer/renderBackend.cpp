@@ -318,7 +318,7 @@ void kexRenderBackend::SwapBuffers(void)
 // kexRenderBackend::ClearBuffer
 //
 
-void kexRenderBackend::ClearBuffer(const glClearBit_t bit)
+void kexRenderBackend::ClearBuffer(const int bit)
 {
     int clearBit = 0;
 

@@ -623,6 +623,7 @@ void kexGameLocal::InitWeaponDefs(void)
         }
         
         dict->GetBool("persistant", weapon->bPersistent, false);
+        dict->GetBool("disableUnderwater", weapon->bDisableUnderwater, false);
         dict->GetInt("maxAmmo", weapon->maxAmmo, 1);
         dict->GetFloat("offsetX", weapon->offsetX, 0);
         dict->GetFloat("offsetY", weapon->offsetY, 0);

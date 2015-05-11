@@ -76,7 +76,7 @@ void kexHud::Reset(void)
 void kexHud::DrawAmmoBar(void)
 {
     kexCpuVertList *vl = kexRender::cVertList;
-    playerWeapons_t weapon = player->CurrentWeapon();
+    playerWeapons_t weapon = player->PendingWeapon();
     
     float max = (float)kexGame::cLocal->WeaponInfo(weapon)->maxAmmo;
     float width = 1;

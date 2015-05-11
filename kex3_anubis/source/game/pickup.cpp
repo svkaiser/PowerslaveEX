@@ -242,7 +242,7 @@ void kexAmmoPickup::OnTouch(kexActor *instigator)
 
     if(weaponSlotToGive <= -1)
     {
-        weapon = player->CurrentWeapon();
+        weapon = player->PendingWeapon();
     }
     else
     {

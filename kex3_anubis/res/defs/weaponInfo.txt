@@ -15,6 +15,7 @@ Wep_Pistol 1
     maxAmmo                 60
     offsetX                 160
     offsetY                 232
+    disableUnderwater       1
     idleAnim                "weapons/pistol_idle"
     raiseAnim               "weapons/pistol_raise"
     lowerAnim               "weapons/pistol_lower"
@@ -26,6 +27,7 @@ Wep_M60 2
     maxAmmo                 50
     offsetX                 160
     offsetY                 132
+    disableUnderwater       1
     idleAnim                "weapons/m60_idle"
     raiseAnim               "weapons/m60_raise"
     lowerAnim               "weapons/m60_lower"
@@ -57,6 +59,7 @@ Wep_FlameThrower 4
     maxAmmo                 60
     offsetX                 160
     offsetY                 132
+    disableUnderwater       1
     idleAnim                "weapons/flamethrower_idle"
     raiseAnim               "weapons/flamethrower_raise"
     lowerAnim               "weapons/flamethrower_lower"

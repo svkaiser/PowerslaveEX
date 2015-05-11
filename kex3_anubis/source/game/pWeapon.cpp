@@ -174,11 +174,27 @@ void kexPlayerWeapon::UpdateBob(void)
 
 void kexPlayerWeapon::UpdateSprite(void)
 {
+    const kexGameLocal::weaponInfo_t *weaponInfo = kexGame::cLocal->WeaponInfo(owner->CurrentWeapon());
+    const kexGameLocal::weaponInfo_t *pendingWeapon = kexGame::cLocal->WeaponInfo(owner->PendingWeapon());
     spriteFrame_t *frame;
+    bool bUnderwater = false;
 
     if(anim == NULL)
     {
         return;
+    }
+
+    if(owner->Actor()->Flags() & AF_INWATER &&
+        !(static_cast<kexPuppet*>(owner->Actor())->PlayerFlags() & PF_INWATERSURFACE))
+    {
+        bUnderwater = true;
+
+        if(weaponInfo->bDisableUnderwater && state != WS_HOLDSTER)
+        {
+            // we can't use this weapon underwater, put it away
+            ChangeAnim(WS_HOLDSTER);
+            return;
+        }
     }
 
     frame = &anim->frames[frameID];
@@ -216,13 +232,31 @@ void kexPlayerWeapon::UpdateSprite(void)
             // if lowering weapon, then switch to pending weapon
             if(state == WS_LOWER)
             {
+                if(bUnderwater && weaponInfo != pendingWeapon && pendingWeapon->bDisableUnderwater)
+                {
+                    // can't switch to this weapon while underwater, so stay on the last frame
+                    frameID = (int16_t)anim->NumFrames()-1;
+                    return;
+                }
+
                 owner->ChangeWeapon();
                 ChangeAnim(WS_RAISE);
                 return;
             }
             else if(state == WS_HOLDSTER)
             {
-                if(!(owner->Actor()->PlayerFlags() & PF_DEAD))
+                if(bUnderwater)
+                {
+                    if(weaponInfo != pendingWeapon && !pendingWeapon->bDisableUnderwater)
+                    {
+                        // we can now switch to a weapon that can be used underwater
+                        owner->ChangeWeapon();
+                        ChangeAnim(WS_RAISE);
+                        return;
+                    }
+                }
+
+                if(!(owner->Actor()->PlayerFlags() & PF_DEAD) && !bUnderwater)
                 {
                     ChangeAnim(WS_RAISE);
                 }
