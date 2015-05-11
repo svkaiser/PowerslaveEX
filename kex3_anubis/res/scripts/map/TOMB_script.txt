@@ -169,6 +169,7 @@ $script 1
     delay(0.5f);
     
     @ramses = Game.SpawnActor("Obj_Ramses", ramsesOrigin.x, ramsesOrigin.y, ramsesOrigin.z, 0, 14);
+    bobTime = 0.0f;
     
     delay(1.0f);
     
