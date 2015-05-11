@@ -33,6 +33,7 @@ typedef enum
     MENU_LOADGAME,
     MENU_NEWGAME,
     MENU_OVERWRITE_SAVE,
+    MENU_ABOUT,
     NUMMENUS
 } menus_t;
 

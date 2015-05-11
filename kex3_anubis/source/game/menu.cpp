@@ -2500,6 +2500,7 @@ private:
     kexMenuObjectOptionScroll       *videoResolutions;
     kexMenuObjectOptionScroll       *fov;
     kexMenuObjectOptionToggle       *toggleWindowed;
+    kexMenuObjectOptionToggle       *toggleVSync;
     kexMenuObjectOptionToggle       *toggleFxaa;
     kexMenuObjectOptionToggle       *toggleBloom;
     kexMenuObjectOptionToggle       *toggleGLFinish;
@@ -2551,9 +2552,17 @@ void kexMenuGraphics::Init(void)
     toggleWindowed->textAlignment = kexMenuObject::MITA_CENTER;
     toggleWindowed->cvar = &kexSystem::cvarVidWindowed;
 
+    toggleVSync = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
+    toggleVSync->x = 176;
+    toggleVSync->y = 76;
+    toggleVSync->w = 40;
+    toggleVSync->itemTextOffset = 8;
+    toggleVSync->textAlignment = kexMenuObject::MITA_CENTER;
+    toggleVSync->cvar = &kexSystem::cvarVidVSync;
+
     fov = ALLOC_MENU_OBJECT(kexMenuObjectOptionScroll);
     fov->x = 176;
-    fov->y = 76;
+    fov->y = 94;
     fov->w = 48;
     fov->itemTextOffset = 8;
     fov->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2565,7 +2574,7 @@ void kexMenuGraphics::Init(void)
 
     toggleFxaa = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
     toggleFxaa->x = 176;
-    toggleFxaa->y = 94;
+    toggleFxaa->y = 112;
     toggleFxaa->w = 40;
     toggleFxaa->itemTextOffset = 8;
     toggleFxaa->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2573,7 +2582,7 @@ void kexMenuGraphics::Init(void)
 
     toggleBloom = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
     toggleBloom->x = 176;
-    toggleBloom->y = 112;
+    toggleBloom->y = 130;
     toggleBloom->w = 40;
     toggleBloom->itemTextOffset = 8;
     toggleBloom->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2581,7 +2590,7 @@ void kexMenuGraphics::Init(void)
 
     toggleGLFinish = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
     toggleGLFinish->x = 176;
-    toggleGLFinish->y = 130;
+    toggleGLFinish->y = 148;
     toggleGLFinish->w = 40;
     toggleGLFinish->itemTextOffset = 8;
     toggleGLFinish->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2696,10 +2705,11 @@ void kexMenuGraphics::Display(void)
 
     kexGame::cLocal->DrawSmallString("Video Resolution", 16, 42, 1, false);
     kexGame::cLocal->DrawSmallString("Windowed", 16, 60, 1, false);
-    kexGame::cLocal->DrawSmallString("FOV", 16, 78, 1, false);
-    kexGame::cLocal->DrawSmallString("FXAA Antialiasing", 16, 96, 1, false);
-    kexGame::cLocal->DrawSmallString("Bloom", 16, 114, 1, false);
-    kexGame::cLocal->DrawSmallString("Force OpenGL Finish", 16, 132, 1, false);
+    kexGame::cLocal->DrawSmallString("VSync", 16, 78, 1, false);
+    kexGame::cLocal->DrawSmallString("FOV", 16, 96, 1, false);
+    kexGame::cLocal->DrawSmallString("FXAA Antialiasing", 16, 114, 1, false);
+    kexGame::cLocal->DrawSmallString("Bloom", 16, 132, 1, false);
+    kexGame::cLocal->DrawSmallString("Force Open GL Sync", 16, 150, 1, false);
 
     switch(selectedItem)
     {
@@ -2720,6 +2730,7 @@ bool kexMenuGraphics::ProcessInput(inputEvent_t *ev)
 {
     if( videoResolutions->ProcessInput(ev) ||
         toggleWindowed->ProcessInput(ev) ||
+        toggleVSync->ProcessInput(ev) ||
         fov->ProcessInput(ev) ||
         toggleFxaa->ProcessInput(ev) ||
         toggleBloom->ProcessInput(ev) ||
@@ -3110,3 +3121,104 @@ DEFINE_PROMPT_MENU(kexMenuOverwriteConfirm, MENU_OVERWRITE_SAVE, "Overwrite save
     kexGame::cLocal->PlaySound("sounds/menu_select.wav");
     kexGame::cLocal->TitleScreen()->StartNewGame(item->saveSlot);
 });
+
+//-----------------------------------------------------------------------------
+//
+// kexMenuAbout
+//
+//-----------------------------------------------------------------------------
+
+DEFINE_MENU_CLASS(kexMenuAbout);
+public:
+    virtual void                    Init(void);
+    virtual void                    Display(void);
+    virtual void                    Update(void);
+    virtual bool                    ProcessInput(inputEvent_t *ev);
+
+private:
+    void                            OnBack(kexMenuObject *menuObject);
+    kexTexture                      *aboutTexture;
+END_MENU_CLASS();
+
+DECLARE_MENU_CLASS(kexMenuAbout, MENU_ABOUT);
+
+//
+// kexMenuAbout::Init
+//
+
+void kexMenuAbout::Init(void)
+{
+    kexMenuObjectButton *button;
+
+    button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
+    button->x = 112;
+    button->y = 188;
+    button->w = 96;
+    button->h = 24;
+    button->label = "Back";
+    button->textAlignment = kexMenuObject::MITA_CENTER;
+    button->Callback = static_cast<selectCallback_t>(&kexMenuAbout::OnBack);
+
+    aboutTexture = kexRender::cTextures->Cache("gfx/about.png", TC_CLAMP, TF_NEAREST);
+}
+
+//
+// kexMenuAbout::Update
+//
+
+void kexMenuAbout::Update(void)
+{
+    UpdateItems();
+}
+
+//
+// kexMenuAbout::OnBack
+//
+
+void kexMenuAbout::OnBack(kexMenuObject *menuObject)
+{
+    kexGame::cLocal->ClearMenu();
+    kexGame::cLocal->PlaySound("sounds/select.wav");
+}
+
+//
+// kexMenuAbout::Display
+//
+
+void kexMenuAbout::Display(void)
+{
+    kexRender::cScreen->SetOrtho();
+    
+    kexRender::cScreen->DrawStretchPic(kexRender::cTextures->whiteTexture, 0, 0,
+        (float)kexRender::cScreen->SCREEN_WIDTH,
+        (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
+
+    kexGame::cMenuPanel->DrawPanel(32, 8, 256, 216, 4);
+    kexGame::cMenuPanel->DrawInset(40, 16, 238, 16);
+
+    kexGame::cMenuPanel->DrawInset(126, 36, 68, 68);
+    kexRender::cScreen->DrawTexture(aboutTexture, 128, 34, 64, 68);
+
+    kexGame::cMenuPanel->DrawInset(55, 108, 208, 76);
+
+    DrawItems();
+
+    kexGame::cLocal->DrawSmallString("About Powerslave EX", 160, 20, 1, true);
+
+    kexGame::cLocal->DrawSmallString("Programming:", 63, 112, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Samuel Villarreal", 156, 112, 0.75f, false);
+
+    kexGame::cLocal->DrawSmallString("Special Thanks:", 63, 128, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("James Haley", 156, 128, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Geoff Wakefield", 156, 136, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Lobotomy Software", 156, 144, 0.75f, false);
+}
+
+//
+// kexMenuAbout::ProcessInput
+//
+
+bool kexMenuAbout::ProcessInput(inputEvent_t *ev)
+{
+    return kexMenu::ProcessInput(ev);
+}

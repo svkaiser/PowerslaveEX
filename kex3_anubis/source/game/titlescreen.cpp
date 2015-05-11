@@ -264,6 +264,7 @@ typedef enum
     TSI_NEWGAME     = 0,
     TSI_LOADGAME,
     TSI_OPTIONS,
+    TSI_ABOUT,
     TSI_QUIT,
     TSI_GAMEPLAY,
     TSI_INPUT,
@@ -310,7 +311,7 @@ static menuGroup_t *titleMenu[NUMTITLESCREENITEMS];
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(NewGame, "New Game", -100, 128, 1,
+MENUITEM(NewGame, "New Game", -100, 110, 1,
 {
     if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_NEWGAME)
     {
@@ -330,7 +331,7 @@ MENUITEM(NewGame, "New Game", -100, 128, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(LoadGame, "Load Game", 420, 146, 1,
+MENUITEM(LoadGame, "Load Game", 420, 128, 1,
 {
     if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_LOADGAME)
     {
@@ -350,7 +351,7 @@ MENUITEM(LoadGame, "Load Game", 420, 146, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(Options, "Options", 420, 164, 1,
+MENUITEM(Options, "Options", -100, 146, 1,
 {
     if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_OPTIONS)
     {
@@ -368,7 +369,22 @@ MENUITEM(Options, "Options", 420, 164, 1,
     titleMenu[TSI_LOADGAME]->item->LerpTo(420);
     titleMenu[TSI_OPTIONS]->item->LerpTo(160, 64);
     titleMenu[TSI_OPTIONS]->item->Toggle(false);
-    titleMenu[TSI_QUIT]->item->LerpTo(-100);
+    titleMenu[TSI_ABOUT]->item->LerpTo(-100);
+    titleMenu[TSI_QUIT]->item->LerpTo(420);
+});
+
+//-----------------------------------------------------------------------------
+//
+// About
+//
+//-----------------------------------------------------------------------------
+
+MENUITEM(About, "About", 420, 164, 1,
+{
+},
+{
+    kexGame::cLocal->SetMenu(MENU_ABOUT);
+    kexGame::cLocal->TitleScreen()->DeselectAllItems();
 });
 
 //-----------------------------------------------------------------------------
@@ -377,7 +393,7 @@ MENUITEM(Options, "Options", 420, 164, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(Quit, "Quit", 420, 182, 1,
+MENUITEM(Quit, "Quit", -100, 182, 1,
 {
 },
 {
@@ -470,8 +486,9 @@ MENUITEM(OptionExit, "Exit", -100, 186, 1,
     
     titleMenu[TSI_NEWGAME]->item->LerpTo(160);
     titleMenu[TSI_LOADGAME]->item->LerpTo(160);
-    titleMenu[TSI_OPTIONS]->item->LerpTo(160, 164);
+    titleMenu[TSI_OPTIONS]->item->LerpTo(160, 146);
     titleMenu[TSI_OPTIONS]->item->Toggle(true);
+    titleMenu[TSI_ABOUT]->item->LerpTo(160);
     titleMenu[TSI_QUIT]->item->LerpTo(160);
     kexGame::cLocal->TitleScreen()->DeselectAllItems();
 },
@@ -569,6 +586,7 @@ kexTitleScreen::kexTitleScreen(void)
     titleMenu[TSI_NEWGAME] = &menuGroup_NewGame;
     titleMenu[TSI_LOADGAME] = &menuGroup_LoadGame;
     titleMenu[TSI_OPTIONS] = &menuGroup_Options;
+    titleMenu[TSI_ABOUT] = &menuGroup_About;
     titleMenu[TSI_QUIT] = &menuGroup_Quit;
     titleMenu[TSI_GAMEPLAY] = &menuGroup_Gameplay;
     titleMenu[TSI_INPUT] = &menuGroup_Input;
@@ -671,6 +689,7 @@ void kexTitleScreen::FadeDone(void)
         titleMenu[TSI_NEWGAME]->item->LerpTo(160);
         titleMenu[TSI_LOADGAME]->item->LerpTo(160);
         titleMenu[TSI_OPTIONS]->item->LerpTo(160);
+        titleMenu[TSI_ABOUT]->item->LerpTo(160);
         titleMenu[TSI_QUIT]->item->LerpTo(160);
         break;
 
@@ -807,7 +826,8 @@ void kexTitleScreen::StartLoadGame(const int slot)
     titleMenu[TSI_NEWGAME]->item->LerpTo(-100);
     titleMenu[TSI_LOADGAME]->item->LerpTo(420);
     titleMenu[TSI_OPTIONS]->item->LerpTo(-100);
-    titleMenu[TSI_QUIT]->item->LerpTo(420);
+    titleMenu[TSI_ABOUT]->item->LerpTo(420);
+    titleMenu[TSI_QUIT]->item->LerpTo(-100);
 
     selectedItem = TSI_LOADGAME;
     loadGameSlot = slot;
@@ -822,7 +842,8 @@ void kexTitleScreen::StartNewGame(const int slot)
     titleMenu[TSI_NEWGAME]->item->LerpTo(-100);
     titleMenu[TSI_LOADGAME]->item->LerpTo(420);
     titleMenu[TSI_OPTIONS]->item->LerpTo(-100);
-    titleMenu[TSI_QUIT]->item->LerpTo(420);
+    titleMenu[TSI_ABOUT]->item->LerpTo(420);
+    titleMenu[TSI_QUIT]->item->LerpTo(-100);
 
     selectedItem = TSI_NEWGAME;
     loadGameSlot = slot;

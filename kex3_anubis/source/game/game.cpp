@@ -277,7 +277,7 @@ COMMAND(give)
             
             gameLocal.Player()->Artifacts() |= BIT(arti);
             game->PlayLoop()->Print(kexStr::Format("Got %s!",
-                kexGame::cLocal->Translation()->GetString(100+arti)));
+                gameLocal.Translation()->GetString(100+arti)));
         }
     }
     else
@@ -312,12 +312,24 @@ COMMAND(weapon)
         return;
     }
 
-    if(!kexGame::cLocal->Player()->WeaponOwned(wpn))
+    if(!gameLocal.Player()->WeaponOwned(wpn))
     {
         return;
     }
     
-    kexGame::cLocal->Player()->PendingWeapon() = wpn;
+    gameLocal.Player()->PendingWeapon() = wpn;
+}
+
+//
+// unlockmaps
+//
+
+COMMAND(unlockmaps)
+{
+    for(uint i = 0; i < gameLocal.MapUnlockList().Length(); ++i)
+    {
+        gameLocal.MapUnlockList()[i] = true;
+    }
 }
 
 //
@@ -692,7 +704,7 @@ void kexGameLocal::InitMapDefs(void)
         dict->GetString("script", mapInfo->script);
         dict->GetFloat("overworld_x", mapInfo->overworldX);
         dict->GetFloat("overworld_y", mapInfo->overworldY);
-        dict->GetInt("transmitter", mapInfo->transmitterBit);
+        dict->GetInt("transmitter", mapInfo->transmitterBit, -1);
         dict->GetInt("nextmap_north", nextMap[0], -1);
         dict->GetInt("nextmap_east", nextMap[1], -1);
         dict->GetInt("nextmap_south", nextMap[2], -1);

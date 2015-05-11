@@ -398,6 +398,7 @@ void kexPlayLoop::FadeToBlack(void)
     int fade = 0xff;
     float w, h;
     float y;
+    int time;
     kexFBO fadeScreen;
 
     fadeScreen.InitColorAttachment(0);
@@ -418,8 +419,18 @@ void kexPlayLoop::FadeToBlack(void)
     kexRender::cBackend->SetOrtho();
     kexRender::cVertList->BindDrawPointers();
 
+    time = kex::cTimer->GetMS();
+
     while(fade > 0)
     {
+        int elapsed = kex::cTimer->GetMS() - time;
+
+        if(elapsed < 16)
+        {
+            kex::cTimer->Sleep(1);
+            continue;
+        }
+
         kexRender::cBackend->ClearBuffer();
 
         kexRender::cVertList->AddQuad(0, y, 0, w, h, 0, 1, 1, 0, fade, fade, fade, 255);
@@ -428,6 +439,7 @@ void kexPlayLoop::FadeToBlack(void)
         kexRender::cBackend->SwapBuffers();
 
         fade -= 8;
+        time = kex::cTimer->GetMS();
     }
 
     fadeScreen.UnBindImage();

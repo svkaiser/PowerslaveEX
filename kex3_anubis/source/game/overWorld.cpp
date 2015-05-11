@@ -424,6 +424,14 @@ void kexOverWorld::Tick(void)
 
     kexMath::Clamp(camera_x, sx, (float)pic.OriginalWidth() - sx);
     kexMath::Clamp(camera_y, sy, (float)pic.OriginalHeight() - sy);
+
+    if(map->transmitterBit >= 0 && !(kexGame::cLocal->Player()->QuestItems() & BIT(map->transmitterBit)))
+    {
+        if((kex::cSession->GetTicks() & 0x3F) == 0)
+        {
+            kexGame::cLocal->PlaySound("sounds/om_transmitter.wav");
+        }
+    }
     
     if(buttons & GBE_MENU_SELECT)
     {
@@ -434,28 +442,28 @@ void kexOverWorld::Tick(void)
     }
     else if(buttons & GBE_MENU_UP)
     {
-        if(map->nextMap[0] >= 0)
+        if(map->nextMap[0] >= 0 && kexGame::cLocal->MapUnlockList()[map->nextMap[0]])
         {
             selectedMap = map->nextMap[0];
         }
     }
     else if(buttons & GBE_MENU_RIGHT)
     {
-        if(map->nextMap[1] >= 0)
+        if(map->nextMap[1] >= 0 && kexGame::cLocal->MapUnlockList()[map->nextMap[1]])
         {
             selectedMap = map->nextMap[1];
         }
     }
     else if(buttons & GBE_MENU_DOWN)
     {
-        if(map->nextMap[2] >= 0)
+        if(map->nextMap[2] >= 0 && kexGame::cLocal->MapUnlockList()[map->nextMap[2]])
         {
             selectedMap = map->nextMap[2];
         }
     }
     else if(buttons & GBE_MENU_LEFT)
     {
-        if(map->nextMap[3] >= 0)
+        if(map->nextMap[3] >= 0 && kexGame::cLocal->MapUnlockList()[map->nextMap[3]])
         {
             selectedMap = map->nextMap[3];
         }
