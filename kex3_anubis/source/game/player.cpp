@@ -214,7 +214,7 @@ void kexPuppet::CheckFallDamage(void)
         return;
     }
 
-    InflictDamage(NULL, (int)(-amt * 16.0f));
+    InflictDamage(NULL, (int)(-amt * 16.0f) * (owner->Ankahs()+1));
 
     if(playerFlags & PF_DEAD)
     {
