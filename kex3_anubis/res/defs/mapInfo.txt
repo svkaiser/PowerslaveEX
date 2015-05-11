@@ -44,6 +44,7 @@ Map_Pass        3
     overworld_y     190
     map             "maps/PASS.MAP"
     musicTrack      "music/peak.ogg"
+    transmitter     0
     nextmap_north   4
     nextmap_south   1
 }
@@ -68,6 +69,7 @@ Map_Mines       5
     overworld_y     402
     map             "maps/MINES.MAP"
     musicTrack      "music/cave.ogg"
+    transmitter     1
     nextmap_north   1
     nextmap_west    8
     nextmap_east    6
@@ -81,6 +83,7 @@ Map_Palace      6
     overworld_y     408
     map             "maps/SETPALAC.MAP"
     musicTrack      "music/temple2.ogg"
+    transmitter     2
     nextmap_west    5
     nextmap_east    7
 }
@@ -116,6 +119,7 @@ Map_Gorge       9
     overworld_y     460
     map             "maps/GORGE.MAP"
     musicTrack      "music/peak.ogg"
+    transmitter     3
     nextmap_west    10
     nextmap_east    8
 }
@@ -140,6 +144,7 @@ Map_Marsh       11
     overworld_y     164
     map             "maps/MARSH.MAP"
     musicTrack      "music/marsh.ogg"
+    transmitter     5
     nextmap_north   12
     nextmap_south   2
 }
@@ -164,6 +169,7 @@ Map_Camp        13
     overworld_y     64
     map             "maps/SLAVCAMP.MAP"
     musicTrack      "music/temple2.ogg"
+    transmitter     6
     nextmap_west    14
     nextmap_east    12
 }
@@ -199,6 +205,7 @@ Map_Magma       16
     overworld_y     188
     map             "maps/MAGMA.MAP"
     musicTrack      "music/magma.ogg"
+    transmitter     7
     nextmap_east    4
     nextmap_south   17
 }
@@ -222,6 +229,7 @@ Map_Chaos       18
     overworld_y     300
     map             "maps/CHAOS.MAP"
     musicTrack      "music/magma.ogg"
+    transmitter     8
     nextmap_north   19
     nextmap_south   10
 }

@@ -82,7 +82,7 @@ float GetRamsesDialog(void)
     }
     
     Game.PlayMusic("music/ramses/ra1.ogg", false);
-    return 116.0f;
+    return 120.0f;
 }
 
 //

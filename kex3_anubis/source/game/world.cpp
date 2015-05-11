@@ -1536,7 +1536,7 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
         }
     }
 
-    if(bClearEventRef && sector)
+    if(bClearEventRef && sector && event->type != 23)
     {
         sector->event = -1;
     }
