@@ -21,8 +21,8 @@
 #include "renderView.h"
 #include "renderScene.h"
 
-kexCvar kexRenderScene::cvarRenderUseVBO("r_usevertexbuffers", CVF_BOOL|CVF_CONFIG, "1", "Enables vertex buffer objects for rendering the scene");
 kexCvar kexRenderScene::cvarRenderWireframe("r_wireframe", CVF_BOOL, "0", "Renders scene in wireframe mode");
+kexCvar kexRenderScene::cvarRenderFixSpriteClipping("r_fixspriteclipping", CVF_BOOL|CVF_CONFIG, "1", "Performs an extra render pass to fix sprite clipping");
 
 bufferUpdateList_t kexRenderScene::bufferUpdateList;
 
@@ -43,6 +43,7 @@ RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowPortals, showportals);
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowWaterPortals, showwaterportals);
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowCollision, showcollision);
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowBounds, showbounds);
+RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowDynamic, showdynamic);
 
 //
 // kexRenderScene::kexRenderScene
@@ -76,6 +77,9 @@ void kexRenderScene::InitVertexBuffer(void)
     drawIndices = NULL;
 
     bufferUpdateList.Reset();
+    kexVertBuffer::bUseVertexBuffers = kexVertBuffer::cvarRenderUseVBO.GetBool();
+
+    BuildSky();
 
     vertexBufferLookup = new kexArray<int>[world->NumVertices()];
 
@@ -94,7 +98,169 @@ void kexRenderScene::DestroyVertexBuffer(void)
 {
     delete[] vertexBufferLookup;
     vertexBufferLookup = NULL;
+
     worldVertexBuffer.Delete();
+    skyBuffer.Delete();
+}
+
+//
+// kexRenderScene::BuildSky
+//
+// Constructs a vertex buffer for the sky dome
+//
+
+void kexRenderScene::BuildSky(void)
+{
+    float s, c;
+    float x = 0;
+    float y = 0;
+    float z = 1280;
+    int t = 0;
+    int u = 0;
+    float radius = 8192;
+    float height = 6144;
+    float px[10], py[10], pz[10];
+    float lx[10], ly[10], lz[10];
+    int tris = 0;
+    float ang = 0;
+
+    skyVerts.drawVerts.Empty();
+    skyIndices.drawIndices.Empty();
+
+    for(int i = 0; i < 17; i++)
+    {
+        float z1;
+        float ang2;
+        
+        s = kexMath::Sin(kexMath::Deg2Rad(ang));
+        c = kexMath::Cos(kexMath::Deg2Rad(ang));
+        
+        z1 = z + height * c;
+        ang += 22.5f;
+        
+        if(!(i % 8))
+        {
+            px[0] = x;
+            py[0] = y + radius * s;
+            pz[0] = z1;
+            
+            if(i != 0)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    skyVerts.AddVertex(px[0], py[0], pz[0], 0, 0);
+                    skyVerts.AddVertex(lx[j], ly[j], lz[j], 0, 0);
+                    skyVerts.AddVertex(lx[1+j], ly[1+j], lz[1+j], 0, 0);
+
+                    if(i == 8)
+                    {
+                        skyIndices.AddTriangle(tris+2, tris+1, tris+0);
+                        tris += 3;
+                    }
+                    else
+                    {
+                        skyIndices.AddTriangle(tris+0, tris+1, tris+2);
+                        tris += 3;
+                    }
+                }
+            }
+            
+            continue;
+        }
+        
+        ang2 = 45;
+        
+        for(int j = 0; j < 9; j++)
+        {
+            float x2, y2, z2;
+            
+            x2 = x + kexMath::Sin(kexMath::Deg2Rad(ang2)) * radius * s;
+            y2 = y + kexMath::Cos(kexMath::Deg2Rad(ang2)) * radius * s;
+            z2 = z1;
+            
+            ang2 += 22.5f;
+            
+            px[1+j] = x2;
+            py[1+j] = y2;
+            pz[1+j] = z2;
+        }
+        
+        if(i == 1 || i == 9)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                skyVerts.AddVertex(px[0], py[0], pz[0], 0, 0);
+                skyVerts.AddVertex(px[1+j], py[1+j], pz[1+j], 0, 0);
+                skyVerts.AddVertex(px[2+j], py[2+j], pz[2+j], 0, 0);
+                
+                if(i >= 9)
+                {
+                    skyIndices.AddTriangle(tris+2, tris+1, tris+0);
+                    tris += 3;
+                }
+                else
+                {
+                    skyIndices.AddTriangle(tris+0, tris+1, tris+2);
+                    tris += 3;
+                }
+            }
+        }
+        else
+        {
+            float tv1 = (float)t / 6;
+            float tv2 = ((float)t + 1) / 6;
+            
+            for(int j = 0; j < 8; j++)
+            {
+                float tu1 = (float)u / 4;
+                float tu2 = ((float)u + 1) / 4;
+                
+                if(i >= 9)
+                {
+                    skyVerts.AddVertex(lx[1+j], ly[1+j], lz[1+j], tu2, 1.0f - tv1);
+                    skyVerts.AddVertex(lx[j], ly[j], lz[j], tu1, 1.0f - tv1);
+                    skyVerts.AddVertex(px[2+j], py[2+j], pz[2+j], tu2, 1.0f - tv2);
+                    skyVerts.AddVertex(px[1+j], py[1+j], pz[1+j], tu1, 1.0f - tv2);
+                }
+                else
+                {
+                    skyVerts.AddVertex(lx[j], ly[j], lz[j], tu1, tv1);
+                    skyVerts.AddVertex(lx[1+j], ly[1+j], lz[1+j], tu2, tv1);
+                    skyVerts.AddVertex(px[1+j], py[1+j], pz[1+j], tu1, tv2);
+                    skyVerts.AddVertex(px[2+j], py[2+j], pz[2+j], tu2, tv2);
+                }
+                
+                skyIndices.AddTriangle(tris+0, tris+2, tris+1);
+                skyIndices.AddTriangle(tris+1, tris+2, tris+3);
+
+                tris += 4;
+                
+                u++;
+            }
+            
+            t = (t + 1) % 6;
+        }
+        
+        for(int j = 0; j < 9; j++)
+        {
+            lx[j] = px[1+j];
+            ly[j] = py[1+j];
+            lz[j] = pz[1+j];
+        }
+    }
+
+    skyBuffer.Allocate(&skyVerts.drawVerts[0], skyVerts.drawVerts.Length(),
+                       kexVertBuffer::RBU_STATIC,
+                       &skyIndices.drawIndices[0], skyIndices.drawIndices.Length(),
+                       kexVertBuffer::RBU_STATIC);
+
+    if(kexVertBuffer::Available())
+    {
+        // if VBOs are available then we don't need to hold on to this data since
+        // that data is already stored on the GPU
+        skyVerts.drawVerts.Empty();
+        skyIndices.drawIndices.Empty();
+    }
 }
 
 //
@@ -104,18 +270,8 @@ void kexRenderScene::DestroyVertexBuffer(void)
 void kexRenderScene::DrawSky(kexRenderView &view)
 {
     kexCpuVertList *vl = kexRender::cVertList;
-    float s, c;
-    float x = view.Origin().x;
-    float y = view.Origin().y;
-    float z = view.Origin().z + 1280;
-    int t = 0;
-    int u = 0;
-    float radius = 8192;
-    float height = 6144;
-    float px[10], py[10], pz[10];
-    float lx[10], ly[10], lz[10];
+    kexMatrix mtx;
     int tris = 0;
-    float ang = 0;
     
     kexRender::cTextures->whiteTexture->Bind();
     
@@ -168,130 +324,16 @@ void kexRenderScene::DrawSky(kexRenderView &view)
         kexRender::cBackend->SetDepth(GLFUNC_GEQUAL);
     }
     
-    for(int i = 0; i < 17; i++)
-    {
-        float z1;
-        float ang2;
-        
-        s = kexMath::Sin(kexMath::Deg2Rad(ang));
-        c = kexMath::Cos(kexMath::Deg2Rad(ang));
-        
-        z1 = z + height * c;
-        ang += 22.5f;
-        
-        if(!(i % 8))
-        {
-            px[0] = x;
-            py[0] = y + radius * s;
-            pz[0] = z1;
-            
-            if(i != 0)
-            {
-                for(int j = 0; j < 8; j++)
-                {
-                    vl->AddVertex(px[0], py[0], pz[0], 0, 0);
-                    vl->AddVertex(lx[j], ly[j], lz[j], 0, 0);
-                    vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], 0, 0);
-                    if(i == 8)
-                    {
-                        vl->AddTriangle(tris+2, tris+1, tris+0);
-                        tris += 3;
-                    }
-                    else
-                    {
-                        vl->AddTriangle(tris+0, tris+1, tris+2);
-                        tris += 3;
-                    }
-                }
-            }
-            
-            continue;
-        }
-        
-        ang2 = 45;
-        
-        for(int j = 0; j < 9; j++)
-        {
-            float x2, y2, z2;
-            
-            x2 = x + kexMath::Sin(kexMath::Deg2Rad(ang2)) * radius * s;
-            y2 = y + kexMath::Cos(kexMath::Deg2Rad(ang2)) * radius * s;
-            z2 = z1;
-            
-            ang2 += 22.5f;
-            
-            px[1+j] = x2;
-            py[1+j] = y2;
-            pz[1+j] = z2;
-        }
-        
-        if(i == 1 || i == 9)
-        {
-            for(int j = 0; j < 8; j++)
-            {
-                vl->AddVertex(px[0], py[0], pz[0], 0, 0);
-                vl->AddVertex(px[1+j], py[1+j], pz[1+j], 0, 0);
-                vl->AddVertex(px[2+j], py[2+j], pz[2+j], 0, 0);
-                
-                if(i >= 9)
-                {
-                    vl->AddTriangle(tris+2, tris+1, tris+0);
-                    tris += 3;
-                }
-                else
-                {
-                    vl->AddTriangle(tris+0, tris+1, tris+2);
-                    tris += 3;
-                }
-            }
-        }
-        else
-        {
-            float tv1 = (float)t / 6;
-            float tv2 = ((float)t + 1) / 6;
-            
-            for(int j = 0; j < 8; j++)
-            {
-                float tu1 = (float)u / 4;
-                float tu2 = ((float)u + 1) / 4;
-                
-                if(i >= 9)
-                {
-                    vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], tu2, 1.0f - tv1);
-                    vl->AddVertex(lx[j], ly[j], lz[j], tu1, 1.0f - tv1);
-                    vl->AddVertex(px[2+j], py[2+j], pz[2+j], tu2, 1.0f - tv2);
-                    vl->AddVertex(px[1+j], py[1+j], pz[1+j], tu1, 1.0f - tv2);
-                }
-                else
-                {
-                    vl->AddVertex(lx[j], ly[j], lz[j], tu1, tv1);
-                    vl->AddVertex(lx[1+j], ly[1+j], lz[1+j], tu2, tv1);
-                    vl->AddVertex(px[1+j], py[1+j], pz[1+j], tu1, tv2);
-                    vl->AddVertex(px[2+j], py[2+j], pz[2+j], tu2, tv2);
-                }
-                
-                vl->AddTriangle(tris+0, tris+2, tris+1);
-                vl->AddTriangle(tris+1, tris+2, tris+3);
-                tris += 4;
-                
-                u++;
-            }
-            
-            t = (t + 1) % 6;
-        }
-        
-        for(int j = 0; j < 9; j++)
-        {
-            lx[j] = px[1+j];
-            ly[j] = py[1+j];
-            lz[j] = pz[1+j];
-        }
-    }
-    
-    vertCount += vl->VertexCount();
-    triCount += vl->IndiceCount();
-    
-    vl->DrawElements();
+    mtx.SetTranslation(view.Origin());
+    dglPushMatrix();
+    dglMultMatrixf(mtx.ToFloatPtr());
+
+    skyBuffer.Bind();
+    skyBuffer.Latch();
+    skyBuffer.Draw();
+    skyBuffer.UnBind();
+
+    dglPopMatrix();
 
     if(cvarRenderWireframe.GetBool())
     {
@@ -317,7 +359,69 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
     uint scanTexturesIdx = 0;
     int curTexture = 0;
 
+    //
+    // here we build a seperate vertex buffer list for portals
+    // this is used for the sprite clipping problem in which
+    // the portal faces will be drawn on to the stencil buffer
+    // in attempt to mask out occluded sprites
+    //
+    bufferIndex = &sector->portalBuffer;
+
+    bufferIndex->triStart = indiceCount*sizeof(uint);
+    bufferIndex->vertStart = vertexCount;
+    bufferIndex->count = 0;
+    bufferIndex->numVert = 0;
+    bufferIndex->numTris = 0;
+    bufferIndex->texture = -1;
+    bufferIndex->sector = sector - world->Sectors();
+
+    for(int j = sector->faceStart; j < sector->faceEnd+3; ++j)
+    {
+        mapFace_t *face = &world->Faces()[j];
+
+        if(face->flags & FF_DYNAMIC)
+        {
+            continue;
+        }
+
+        if(face->flags & FF_WATER)
+        {
+            continue;
+        }
+
+        if((face->polyStart == -1 || face->polyEnd == -1) && face->flags & FF_PORTAL && face->sector >= 0)
+        {
+            const int vertOrder[4] = { 0, 1, 3, 2 };
+
+            for(int i = 0; i < 4; ++i)
+            {
+                drawVerts[vertexCount].vertex = world->Vertices()[face->vertexStart+vertOrder[i]].origin;
+                drawVerts[vertexCount].texCoords.x = 0;
+                drawVerts[vertexCount].texCoords.y = 0;
+                drawVerts[vertexCount].rgba[0] = 0;
+                drawVerts[vertexCount].rgba[1] = 0;
+                drawVerts[vertexCount].rgba[2] = 0;
+                drawVerts[vertexCount].rgba[3] = 255;
+
+                vertexCount++;
+                bufferIndex->numVert++;
+            }
+
+            drawIndices[indiceCount++] = drawTris+0;
+            drawIndices[indiceCount++] = drawTris+2;
+            drawIndices[indiceCount++] = drawTris+1;
+            drawIndices[indiceCount++] = drawTris+0;
+            drawIndices[indiceCount++] = drawTris+3;
+            drawIndices[indiceCount++] = drawTris+2;
+
+            bufferIndex->count += 6;
+            bufferIndex->numTris += 2;
+            drawTris += 4;
+        }
+    }
+
     scanTextures.Reset();
+    bufferIndex = NULL;
 
     // get the initial texture
     for(int j = sector->faceStart; j < sector->faceEnd+3; ++j)
@@ -554,22 +658,14 @@ void kexRenderScene::DrawSector(kexRenderView &view, mapSector_t *sector)
         sector->flags &= ~SF_DEBUG;
     }
 
-    if(bShowBounds)
+    if(sector->bufferIndex.Length() == 0)
     {
-        kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 64, 64);
+        BuildSectorBuffer(sector);
     }
 
-    if(cvarRenderUseVBO.GetBool())
+    for(uint i = 0; i < sector->bufferIndex.Length(); ++i)
     {
-        if(sector->bufferIndex.Length() == 0)
-        {
-            BuildSectorBuffer(sector);
-        }
-
-        for(uint i = 0; i < sector->bufferIndex.Length(); ++i)
-        {
-            bufferList.Set(sector->bufferIndex[i]);
-        }
+        bufferList.Set(sector->bufferIndex[i]);
     }
     
     for(int j = start; j < end+3; ++j)
@@ -587,6 +683,7 @@ void kexRenderScene::DrawPortal(kexRenderView &view, mapFace_t *face, byte r, by
     mapVertex_t *v = &world->Vertices()[face->vertexStart];
     mapSector_t *sector = &world->Sectors()[face->sectorOwner];
 
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
     kexRender::cBackend->SetScissorRect((int)sector->x1, (int)sector->y1,
                                         (int)sector->x2, (int)sector->y2);
     
@@ -614,16 +711,6 @@ void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int face
     }
     
     face->validcount = 0;
-
-    if(face->flags & FF_WATER && bShowWaterPortals)
-    {
-        DrawPortal(view, face, 0, 0, 255);
-    }
-    
-    if(face->flags & FF_PORTAL && bShowPortals)
-    {
-        DrawPortal(view, face, 255, 0, 255);
-    }
     
     if(face->polyStart == -1 || face->polyEnd == -1)
     {
@@ -639,11 +726,6 @@ void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int face
     {
         return;
     }
-
-    if(bShowBounds)
-    {
-        kexRender::cUtils->DrawBoundingBox(face->bounds, 64, 255, 0);
-    }
     
     if(face->flags & FF_WATER)
     {
@@ -654,7 +736,7 @@ void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int face
     face->flags |= FF_MAPPED;
     face->flags &= ~FF_HIDDEN;
 
-    if(cvarRenderUseVBO.GetBool() && sector->flags & SF_WATER)
+    if(sector->flags & SF_WATER)
     {
         kexVec3 vPoint;
         int r, g, b;
@@ -670,19 +752,7 @@ void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int face
             g = vtx->rgba[1];
             b = vtx->rgba[2];
 
-            int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(vPoint.x + vPoint.z, vPoint.y + vPoint.z);
-            float max = (((float)r + (float)g + (float)b) / 3) / 3;
-            float c = ((float)v / (float)kexGame::cLocal->PlayLoop()->MaxWaterMagnitude()) * max;
-
-            kexMath::Clamp(c, -max, max);
-
-            r += (int)c;
-            g += (int)c;
-            b += (int)c;
-
-            kexMath::Clamp(r, 0, 255);
-            kexMath::Clamp(g, 0, 255);
-            kexMath::Clamp(b, 0, 255);
+            ShadeWaterColor(vPoint, r, g, b);
 
             bufUpdate->index = k;
             bufUpdate->newVec = vtx->origin;
@@ -697,8 +767,7 @@ void kexRenderScene::DrawFace(kexRenderView &view, mapSector_t *sector, int face
     {
         polyList.Set(k);
 
-        if(cvarRenderUseVBO.GetBool() == true &&
-            face->flags & FF_DYNAMIC && !(face->flags & FF_WATER))
+        if(face->flags & FF_DYNAMIC && !(face->flags & FF_WATER))
         {
             dynamicPolyList.Set(k);
         }
@@ -759,19 +828,7 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 
         if(world->Sectors()[face->sectorOwner].flags & SF_WATER || face->flags & FF_WATER)
         {
-            int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(vPoint.x + vPoint.z, vPoint.y + vPoint.z);
-            float max = (((float)r + (float)g + (float)b) / 3) / 3;
-            float c = ((float)v / (float)kexGame::cLocal->PlayLoop()->MaxWaterMagnitude()) * max;
-
-            kexMath::Clamp(c, -max, max);
-
-            r += (int)c;
-            g += (int)c;
-            b += (int)c;
-
-            kexMath::Clamp(r, 0, 255);
-            kexMath::Clamp(g, 0, 255);
-            kexMath::Clamp(b, 0, 255);
+            ShadeWaterColor(vPoint, r, g, b);
         }
 
         if(face->flags & FF_WATER && face->sector >= 0)
@@ -822,6 +879,27 @@ void kexRenderScene::DrawWater(kexRenderView &view)
     }
     
     kexRender::cBackend->SetDepthMask(1);
+}
+
+//
+// kexRenderScene::ShadeWaterColor
+//
+
+void kexRenderScene::ShadeWaterColor(kexVec3 &origin, int &r, int &g, int &b)
+{
+    int v = kexGame::cLocal->PlayLoop()->GetWaterVelocityPoint(origin.x + origin.z, origin.y + origin.z);
+    float max = (((float)r + (float)g + (float)b) / 3) / 3;
+    float c = ((float)v / (float)kexGame::cLocal->PlayLoop()->MaxWaterMagnitude()) * max;
+
+    kexMath::Clamp(c, -max, max);
+
+    r += (int)c;
+    g += (int)c;
+    b += (int)c;
+
+    kexMath::Clamp(r, 0, 255);
+    kexMath::Clamp(g, 0, 255);
+    kexMath::Clamp(b, 0, 255);
 }
 
 //
@@ -1128,6 +1206,8 @@ void kexRenderScene::SetSectorScissor(mapSector_t *sector)
 //
 // kexRenderScene::DrawIndividualPolygons
 //
+// Draws polygons using vertex pointers
+//
 
 void kexRenderScene::DrawIndividualPolygons(kexStack<int> &polys)
 {
@@ -1151,6 +1231,8 @@ void kexRenderScene::DrawIndividualPolygons(kexStack<int> &polys)
 
 //
 // kexRenderScene::DrawGroupedPolygons
+//
+// Draws polygons using the vertex buffer
 //
 
 void kexRenderScene::DrawGroupedPolygons(void)
@@ -1191,6 +1273,68 @@ void kexRenderScene::DrawGroupedPolygons(void)
 }
 
 //
+// kexRenderScene::DrawDebug
+//
+
+void kexRenderScene::DrawDebug(kexRenderView &view)
+{
+    if(!bShowWaterPortals && !bShowPortals && !bShowBounds && !bShowDynamic)
+    {
+        return;
+    }
+
+    for(uint i = 0; i < visibleSectors.CurrentLength(); ++i)
+    {
+        mapSector_t *sector = &world->Sectors()[visibleSectors[i]];
+
+        if(!view.TestBoundingBox(sector->bounds))
+        {
+            continue;
+        }
+
+        for(int j = sector->faceStart; j < sector->faceEnd+3; ++j)
+        {
+            mapFace_t *face = &world->Faces()[j];
+
+            if(!view.TestBoundingBox(face->bounds))
+            {
+                continue;
+            }
+
+            if(bShowBounds)
+            {
+                kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+                kexRender::cUtils->DrawBoundingBox(face->bounds, 64, 255, 0);
+            }
+
+            if(face->flags & FF_PORTAL && bShowPortals)
+            {
+                DrawPortal(view, face, 255, 0, 255);
+            }
+
+            if(face->flags & FF_WATER && bShowWaterPortals)
+            {
+                DrawPortal(view, face, 0, 0, 255);
+            }
+
+            if(face->flags & FF_DYNAMIC && bShowDynamic)
+            {
+                DrawPortal(view, face, 0, 255, 255);
+            }
+        }
+
+        if(bShowBounds)
+        {
+            kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+            kexRender::cUtils->DrawBoundingBox(sector->bounds, 255, 64, 64);
+        }
+    }
+
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
+    kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
+}
+
+//
 // kexRenderScene::DrawSectors
 //
 
@@ -1202,16 +1346,13 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
     }
 
     // bind and map vertex buffer for writing
-    if(cvarRenderUseVBO.GetBool() == true)
-    {
-        worldVertexBuffer.Bind();
+    worldVertexBuffer.Bind();
 
-        drawVerts = worldVertexBuffer.MapVertexBuffer();
-        drawIndices = worldVertexBuffer.MapIndiceBuffer();
+    drawVerts = worldVertexBuffer.MapVertexBuffer();
+    drawIndices = worldVertexBuffer.MapIndiceBuffer();
 
-        assert(drawVerts != NULL);
-        assert(drawIndices != NULL);
-    }
+    assert(drawVerts != NULL);
+    assert(drawIndices != NULL);
 
     bufferList.Reset();
     polyList.Reset();
@@ -1223,35 +1364,26 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
         DrawSector(view, &world->Sectors()[visibleSectors[i]]);
     }
 
-    if(cvarRenderUseVBO.GetBool() == true)
+    // did any sectors moved? if so then we need to update the vertex buffer
+    if(bufferUpdateList.CurrentLength() != 0)
     {
-        // did any sectors moved? if so then we need to update the vertex buffer
-        if(bufferUpdateList.CurrentLength() != 0)
-        {
-            UpdateBuffer();
-        }
-
-        worldVertexBuffer.UnMapVertexBuffer();
-        worldVertexBuffer.UnMapIndiceBuffer();
-
-        drawVerts = NULL;
-        drawIndices = NULL;
+        UpdateBuffer();
     }
+
+    worldVertexBuffer.UnMapVertexBuffer();
+    worldVertexBuffer.UnMapIndiceBuffer();
+
+    drawVerts = NULL;
+    drawIndices = NULL;
 
     if(bPrintStats)
     {
         polySortTime = kex::cTimer->GetPerformanceCounter();
     }
-    
-    if(cvarRenderUseVBO.GetBool() == true)
-    {
-        bufferList.Sort(kexRenderScene::SortBufferLists);
-    }
-    else
-    {
-        polyList.Sort(kexRenderScene::SortPolys);
-    }
 
+    // we need to avoid binding a unique texture as little as possible. here we
+    // need to sort the geometry by texture indexes
+    bufferList.Sort(kexRenderScene::SortBufferLists);
     dynamicPolyList.Sort(kexRenderScene::SortPolys);
     
     if(bPrintStats)
@@ -1265,16 +1397,9 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
     }
 
     // do the actual drawing here
-    if(cvarRenderUseVBO.GetBool() == false)
-    {
-        DrawIndividualPolygons(polyList);
-    }
-    else
-    {
-        worldVertexBuffer.Latch();
-        DrawGroupedPolygons();
-        worldVertexBuffer.UnBind();
-    }
+    worldVertexBuffer.Latch();
+    DrawGroupedPolygons();
+    worldVertexBuffer.UnBind();
 
     // draw dynamic geometry
     DrawIndividualPolygons(dynamicPolyList);
@@ -1311,6 +1436,9 @@ void kexRenderScene::DrawActors(kexRenderView &view)
 
     visSprites.Reset();
 
+    //
+    // we need to sort the sprites by distance
+    //
     for(uint i = 0; i < visibleSectors.CurrentLength(); ++i)
     {
         mapSector_t *sector = &world->Sectors()[visibleSectors[i]];
@@ -1355,9 +1483,13 @@ void kexRenderScene::DrawActors(kexRenderView &view)
         viewPitch = -1.565f;
     }
 
+    // setup our view matrix so sprites will always be facing the render view
     spriteMatrix = kexMatrix(viewPitch, 1) * kexMatrix(view.Yaw(), 2);
     spriteMatrix.RotateX(kexMath::pi);
     
+    // actors can have multiple sprites attached (depending on the animation)
+    // and this could result in z-fighting. Just disable the depth mask since
+    // we already have our sprites sorted out by distance
     kexRender::cBackend->SetDepthMask(0);
 
     for(uint i = 0; i < visSprites.CurrentLength(); ++i)
@@ -1376,6 +1508,11 @@ void kexRenderScene::DrawActors(kexRenderView &view)
         }
     }
 
+    if(cvarRenderFixSpriteClipping.GetBool())
+    {
+        FixSpriteClipping(view);
+    }
+
     kexRender::cBackend->SetDepthMask(1);
     kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
 
@@ -1383,6 +1520,99 @@ void kexRenderScene::DrawActors(kexRenderView &view)
     {
         drawActorTime = kex::cTimer->GetPerformanceCounter() - drawActorTime;
     }
+}
+
+//
+// kexRenderScene::FixSpriteClipping
+//
+// This is probably a very poor way of addressing this
+// issue of sprites clipping inside walls/floors but it
+// gets the job done for now.
+//
+// Color writing is disabled and world geometry is drawn
+// to the stencil buffer and then again with front face
+// culling enabled. Front faces drawn will increment the
+// stencil bits. Sprites are then redrawn and tested
+// against the stencil buffer. For every unique sector
+// the stencil buffer is cleared.
+//
+
+void kexRenderScene::FixSpriteClipping(kexRenderView &view)
+{
+    mapSector_t *prevSector = NULL;
+
+    kexRender::cBackend->SetClearStencil(0);
+    kexRender::cBackend->SetState(GLSTATE_STENCILTEST, true);
+    kexRender::cBackend->SetState(GLSTATE_CULL, true);
+
+    for(uint i = 0; i < visSprites.CurrentLength(); ++i)
+    {
+        kexActor *actor = visSprites[i].actor;
+
+        if(actor->Flags() & AF_STRETCHY)
+        {
+            // we don't care about strechy sprites
+            continue;
+        }
+
+        // new sector?
+        if(prevSector != actor->Sector())
+        {
+            prevSector = actor->Sector();
+
+            // rebind the vertex buffer
+            worldVertexBuffer.Bind();
+            worldVertexBuffer.Latch();
+
+            // setup stencil. ignore failed depth tests
+            kexRender::cBackend->ClearBuffer(GLCB_STENCIL);
+            kexRender::cBackend->SetStencil(GLFUNC_ALWAYS, 128, GLSO_REPLACE, GLSO_KEEP, GLSO_REPLACE);
+
+            // enable depth test and disable writing to color buffer
+            kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
+            kexRender::cBackend->SetColorMask(0);
+
+            kexRender::cTextures->whiteTexture->Bind();
+
+            kexRender::cBackend->SetCull(GLCULL_BACK);
+
+            // draw geometry
+            for(uint j = 0; j < prevSector->bufferIndex.Length(); j++)
+            {
+                bufferIndex_t *bufIndex = &prevSector->bufferIndex[j];
+                worldVertexBuffer.Draw(bufIndex->count, bufIndex->triStart);
+            }
+
+            // draw the back sides of portal faces
+            kexRender::cBackend->SetCull(GLCULL_FRONT);
+            worldVertexBuffer.Draw(prevSector->portalBuffer.count, prevSector->portalBuffer.triStart);
+
+            // draw back sides of world geometry and increment stencil bits
+            kexRender::cBackend->SetStencil(GLFUNC_ALWAYS, 128, GLSO_KEEP, GLSO_KEEP, GLSO_INCR);
+
+            for(uint j = 0; j < prevSector->bufferIndex.Length(); j++)
+            {
+                bufferIndex_t *bufIndex = &prevSector->bufferIndex[j];
+                worldVertexBuffer.Draw(bufIndex->count, bufIndex->triStart);
+            }
+
+            kexRender::cBackend->SetColorMask(1);
+            kexRender::cBackend->SetCull(GLCULL_BACK);
+
+            worldVertexBuffer.UnBind();
+        }
+
+        //
+        // redraw sprites
+        //
+        kexRender::cBackend->SetCull(GLCULL_BACK);
+        kexRender::cBackend->SetStencil(GLFUNC_EQUAL, 128, GLSO_KEEP, GLSO_KEEP, GLSO_KEEP);
+        kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
+
+        DrawSprite(view, actor->Sector(), actor);
+    }
+
+    kexRender::cBackend->SetState(GLSTATE_STENCILTEST, false);
 }
 
 //
@@ -1430,18 +1660,15 @@ void kexRenderScene::PrintStats(void)
     kexRender::cUtils->PrintStatsText("Visible Sectors", "%i", visibleSectors.CurrentLength());
     kexRender::cUtils->PrintStatsText("Visible Polygons", "%i", polyList.CurrentLength());
 
-    if(cvarRenderUseVBO.GetBool() == true)
-    {
-        uint vCount, iCount;
+    uint vCount, iCount;
 
-        worldVertexBuffer.Bind();
-        vCount = worldVertexBuffer.GetVertexBufferSize() / sizeof(kexVertBuffer::drawVert_t);
-        iCount = worldVertexBuffer.GetIndiceBufferSize() / sizeof(uint);
-        worldVertexBuffer.UnBind();
+    worldVertexBuffer.Bind();
+    vCount = worldVertexBuffer.GetVertexBufferSize() / sizeof(kexVertBuffer::drawVert_t);
+    iCount = worldVertexBuffer.GetIndiceBufferSize() / sizeof(uint);
+    worldVertexBuffer.UnBind();
 
-        kexRender::cUtils->PrintStatsText("Total VBO (Vertices)", "%i/%i", vertexCount, vCount);
-        kexRender::cUtils->PrintStatsText("Total VBO (Triangles)", "%i/%i", indiceCount, iCount);
-    }
+    kexRender::cUtils->PrintStatsText("Total VBO (Vertices)", "%i/%i", vertexCount, vCount);
+    kexRender::cUtils->PrintStatsText("Total VBO (Triangles)", "%i/%i", indiceCount, iCount);
     
     kexRender::cUtils->AddDebugLineSpacing();
     
@@ -1479,6 +1706,8 @@ void kexRenderScene::DrawView(kexRenderView &view, mapSector_t *sector)
     dLights.Draw(this);
 
     DrawWater(view);
+
+    DrawDebug(view);
     
     DrawActors(view);
     

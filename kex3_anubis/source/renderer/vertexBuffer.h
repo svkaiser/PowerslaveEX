@@ -79,6 +79,9 @@ public:
 
     } drawIndiceList_t;
     
+    static kexCvar      cvarRenderUseVBO;
+    static bool         bUseVertexBuffers;
+
     void                Allocate(drawVert_t *drawVerts, uint size, const bufferUsage_t vertexUsage,
                                  uint *indices, uint indiceSize, const bufferUsage_t indiceUsage);
     void                Bind(void);
@@ -94,6 +97,8 @@ public:
     const uint          GetVertexBufferSize(void);
     const uint          GetIndiceBufferSize(void);
 
+    static bool         Available(void);
+
     const uint          VertexSize(void) { return vertexSize; }
     const uint          IndiceSize(void) { return indiceSize; }
 
@@ -102,6 +107,10 @@ private:
     uint                iboID;
     uint                vertexSize;
     uint                indiceSize;
+    drawVert_t          *clientVertex;
+    uint                *clientIndices;
+    bool                bClientVertexAllocated;
+    bool                bClientIndicesAllocated;
 };
 
 #endif

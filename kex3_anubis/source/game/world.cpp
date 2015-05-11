@@ -811,18 +811,16 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                 for(int k = f->vertStart; k <= f->vertEnd; ++k)
                 {
                     mapVertex_t *v = &vertices[k];
+                    bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
+
                     v->origin.z += moveAmount;
 
-                    if(kexRenderScene::cvarRenderUseVBO.GetBool())
-                    {
-                        bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
-                        bufUpdate->index = k;
-                        bufUpdate->newVec = v->origin;
-                        bufUpdate->newColor[0] = v->rgba[0];
-                        bufUpdate->newColor[1] = v->rgba[1];
-                        bufUpdate->newColor[2] = v->rgba[2];
-                        bufUpdate->newColor[3] = v->rgba[3];
-                    }
+                    bufUpdate->index = k;
+                    bufUpdate->newVec = v->origin;
+                    bufUpdate->newColor[0] = v->rgba[0];
+                    bufUpdate->newColor[1] = v->rgba[1];
+                    bufUpdate->newColor[2] = v->rgba[2];
+                    bufUpdate->newColor[3] = v->rgba[3];
                 }
                 
                 vertices[f->vertexStart+0].origin.z += moveAmount;
@@ -860,18 +858,16 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
         for(int j = face->vertStart; j <= face->vertEnd; ++j)
         {
             mapVertex_t *v = &vertices[j];
+            bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
+
             v->origin.z += moveAmount;
 
-            if(kexRenderScene::cvarRenderUseVBO.GetBool())
-            {
-                bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
-                bufUpdate->index = j;
-                bufUpdate->newVec = v->origin;
-                bufUpdate->newColor[0] = v->rgba[0];
-                bufUpdate->newColor[1] = v->rgba[1];
-                bufUpdate->newColor[2] = v->rgba[2];
-                bufUpdate->newColor[3] = v->rgba[3];
-            }
+            bufUpdate->index = j;
+            bufUpdate->newVec = v->origin;
+            bufUpdate->newColor[0] = v->rgba[0];
+            bufUpdate->newColor[1] = v->rgba[1];
+            bufUpdate->newColor[2] = v->rgba[2];
+            bufUpdate->newColor[3] = v->rgba[3];
         }
         
         vertices[face->vertexStart+0].origin.z += moveAmount;

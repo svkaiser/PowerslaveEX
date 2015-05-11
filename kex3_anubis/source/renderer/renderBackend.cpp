@@ -144,6 +144,11 @@ void kexRenderBackend::SetDefaultState(void)
 {
     glState.glStateBits     = 0;
     glState.alphaFunction   = -1;
+    glState.stencilFunction = -1;
+    glState.stencilRef      = -1;
+    glState.stencilOp[0]    = -1;
+    glState.stencilOp[1]    = -1;
+    glState.stencilOp[2]    = -1;
     glState.blendDest       = -1;
     glState.blendSrc        = -1;
     glState.cullType        = -1;
@@ -373,6 +378,142 @@ void kexRenderBackend::SetScissorRect(const int x, const int y, const int w, con
     vh = kex::cSystem->VideoHeight();
 
     dglScissor(x, vh-h, w-x, vh-(y+(vh-h)));
+}
+
+//
+// kexRenderBackend::SetClearStencil
+//
+
+void kexRenderBackend::SetClearStencil(const int value)
+{
+    dglClearStencil(value);
+}
+
+//
+// kexRenderBackend::SetStencil
+//
+
+void kexRenderBackend::SetStencil(const int func, const int ref,
+                                  const int opFail, const int opZFail, const int opZPass)
+{
+    int pFunc = glState.stencilFunction ^ func;
+
+    if(pFunc != 0 || glState.stencilRef != ref)
+    {
+        int glFunc = GL_ALWAYS;
+
+        switch(func)
+        {
+        case GLFUNC_EQUAL:
+            glFunc = GL_EQUAL;
+            break;
+
+        case GLFUNC_ALWAYS:
+            glFunc = GL_ALWAYS;
+            break;
+
+        case GLFUNC_LEQUAL:
+            glFunc = GL_LEQUAL;
+            break;
+
+        case GLFUNC_GEQUAL:
+            glFunc = GL_GEQUAL;
+            break;
+
+        case GLFUNC_NOTEQUAL:
+            glFunc = GL_NOTEQUAL;
+            break;
+
+        case GLFUNC_GREATER:
+            glFunc = GL_GREATER;
+            break;
+
+        case GLFUNC_LESS:
+            glFunc = GL_LESS;
+            break;
+
+        case GLFUNC_NEVER:
+            glFunc = GL_NEVER;
+            break;
+        }
+
+        dglStencilFunc(glFunc, ref, 0xff);
+
+        glState.stencilFunction = func;
+        glState.stencilRef = ref;
+        glState.numStateChanges++;
+    }
+
+    if( glState.stencilOp[0] != opFail ||
+        glState.stencilOp[1] != opZFail ||
+        glState.stencilOp[2] != opZPass)
+    {
+        int glOp1 = GL_REPLACE, glOp2 = GL_REPLACE, glOp3 = GL_REPLACE;
+
+        switch(opFail)
+        {
+        case GLSO_REPLACE:
+            glOp1 = GL_REPLACE;
+            break;
+
+        case GLSO_KEEP:
+            glOp1 = GL_KEEP;
+            break;
+
+        case GLSO_INCR:
+            glOp1 = GL_INCR;
+            break;
+
+        case GLSO_DECR:
+            glOp1 = GL_DECR;
+            break;
+        }
+
+        switch(opZFail)
+        {
+        case GLSO_REPLACE:
+            glOp2 = GL_REPLACE;
+            break;
+
+        case GLSO_KEEP:
+            glOp2 = GL_KEEP;
+            break;
+
+        case GLSO_INCR:
+            glOp2 = GL_INCR;
+            break;
+
+        case GLSO_DECR:
+            glOp2 = GL_DECR;
+            break;
+        }
+
+        switch(opZPass)
+        {
+        case GLSO_REPLACE:
+            glOp3 = GL_REPLACE;
+            break;
+
+        case GLSO_KEEP:
+            glOp3 = GL_KEEP;
+            break;
+
+        case GLSO_INCR:
+            glOp3 = GL_INCR;
+            break;
+
+        case GLSO_DECR:
+            glOp3 = GL_DECR;
+            break;
+        }
+
+        glState.stencilOp[0] = opFail;
+        glState.stencilOp[1] = opZFail;
+        glState.stencilOp[2] = opZPass;
+
+        dglStencilOp(glOp1, glOp2, glOp3);
+        glState.numStateChanges++;
+    }
 }
 
 //

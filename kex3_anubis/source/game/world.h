@@ -73,6 +73,7 @@ typedef struct
     struct mapFace_s        *ceilingFace;
     kexLinklist<kexActor>   actorList;
     kexArray<bufferIndex_t> bufferIndex;
+    bufferIndex_t           portalBuffer;
 } mapSector_t;
 
 typedef kexStack<mapSector_t*> sectorList_t;

@@ -99,6 +99,14 @@ typedef enum
     GLCB_ALL        = (GLCB_COLOR|GLCB_DEPTH|GLCB_STENCIL)
 } glClearBit_t;
 
+typedef enum
+{
+    GLSO_REPLACE    = 0,
+    GLSO_KEEP,
+    GLSO_INCR,
+    GLSO_DECR
+} glStencilOp_t;
+
 typedef struct
 {
     float   x;
@@ -144,6 +152,9 @@ public:
     void                            SetColorMask(int enable);
     void                            SetTextureUnit(int unit);
     void                            SetScissorRect(const int x, const int y, const int w, const int h);
+    void                            SetClearStencil(const int value);
+    void                            SetStencil(const int func, const int ref,
+                                               const int opFail, const int opZFail, const int opZPass);
     void                            DisableShaders(void);
     const int                       GetDepthSizeComponent(void);
     void                            RestoreFrameBuffer(void);
@@ -187,6 +198,9 @@ public:
         int                         colormask;
         int                         alphaFunction;
         float                       alphaFuncThreshold;
+        int                         stencilFunction;
+        int                         stencilRef;
+        int                         stencilOp[3];
         int                         currentUnit;
         rhandle                     currentProgram;
         dtexture                    currentFBO;

@@ -2503,6 +2503,8 @@ private:
     kexMenuObjectOptionToggle       *toggleVSync;
     kexMenuObjectOptionToggle       *toggleFxaa;
     kexMenuObjectOptionToggle       *toggleBloom;
+    kexMenuObjectOptionToggle       *toggleSpriteClip;
+    kexMenuObjectOptionToggle       *toggleVBO;
     kexMenuObjectOptionToggle       *toggleGLFinish;
 END_MENU_CLASS();
 
@@ -2521,7 +2523,7 @@ void kexMenuGraphics::Init(void)
 
     button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
     button->x = 112;
-    button->y = 188;
+    button->y = 204;
     button->w = 96;
     button->h = 24;
     button->label = "Back";
@@ -2530,7 +2532,7 @@ void kexMenuGraphics::Init(void)
 
     videoResolutions = ALLOC_MENU_OBJECT(kexMenuObjectOptionScroll);
     videoResolutions->x = 176;
-    videoResolutions->y = 40;
+    videoResolutions->y = 32;
     videoResolutions->w = 120;
     videoResolutions->itemTextOffset = 8;
     videoResolutions->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2546,7 +2548,7 @@ void kexMenuGraphics::Init(void)
 
     toggleWindowed = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
     toggleWindowed->x = 176;
-    toggleWindowed->y = 58;
+    toggleWindowed->y = 50;
     toggleWindowed->w = 40;
     toggleWindowed->itemTextOffset = 8;
     toggleWindowed->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2554,7 +2556,7 @@ void kexMenuGraphics::Init(void)
 
     toggleVSync = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
     toggleVSync->x = 176;
-    toggleVSync->y = 76;
+    toggleVSync->y = 68;
     toggleVSync->w = 40;
     toggleVSync->itemTextOffset = 8;
     toggleVSync->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2562,7 +2564,7 @@ void kexMenuGraphics::Init(void)
 
     fov = ALLOC_MENU_OBJECT(kexMenuObjectOptionScroll);
     fov->x = 176;
-    fov->y = 94;
+    fov->y = 86;
     fov->w = 48;
     fov->itemTextOffset = 8;
     fov->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2574,7 +2576,7 @@ void kexMenuGraphics::Init(void)
 
     toggleFxaa = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
     toggleFxaa->x = 176;
-    toggleFxaa->y = 112;
+    toggleFxaa->y = 104;
     toggleFxaa->w = 40;
     toggleFxaa->itemTextOffset = 8;
     toggleFxaa->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2582,15 +2584,31 @@ void kexMenuGraphics::Init(void)
 
     toggleBloom = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
     toggleBloom->x = 176;
-    toggleBloom->y = 130;
+    toggleBloom->y = 122;
     toggleBloom->w = 40;
     toggleBloom->itemTextOffset = 8;
     toggleBloom->textAlignment = kexMenuObject::MITA_CENTER;
     toggleBloom->cvar = &kexRenderPostProcess::cvarRenderBloom;
 
+    toggleSpriteClip = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
+    toggleSpriteClip->x = 176;
+    toggleSpriteClip->y = 140;
+    toggleSpriteClip->w = 40;
+    toggleSpriteClip->itemTextOffset = 8;
+    toggleSpriteClip->textAlignment = kexMenuObject::MITA_CENTER;
+    toggleSpriteClip->cvar = &kexRenderScene::cvarRenderFixSpriteClipping;
+
+    toggleVBO = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
+    toggleVBO->x = 176;
+    toggleVBO->y = 158;
+    toggleVBO->w = 40;
+    toggleVBO->itemTextOffset = 8;
+    toggleVBO->textAlignment = kexMenuObject::MITA_CENTER;
+    toggleVBO->cvar = &kexVertBuffer::cvarRenderUseVBO;
+
     toggleGLFinish = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
     toggleGLFinish->x = 176;
-    toggleGLFinish->y = 148;
+    toggleGLFinish->y = 176;
     toggleGLFinish->w = 40;
     toggleGLFinish->itemTextOffset = 8;
     toggleGLFinish->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2698,28 +2716,34 @@ void kexMenuGraphics::Display(void)
         (float)kexRender::cScreen->SCREEN_WIDTH,
         (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
 
-    kexGame::cMenuPanel->DrawPanel(0, 8, 320, 216, 4);
-    kexGame::cMenuPanel->DrawInset(8, 16, 302, 16);
+    kexGame::cMenuPanel->DrawPanel(0, 0, 320, 240, 4);
+    kexGame::cMenuPanel->DrawInset(8, 8, 302, 16);
 
     DrawItems();
 
-    kexGame::cLocal->DrawSmallString("Video Resolution", 16, 42, 1, false);
-    kexGame::cLocal->DrawSmallString("Windowed", 16, 60, 1, false);
-    kexGame::cLocal->DrawSmallString("VSync", 16, 78, 1, false);
-    kexGame::cLocal->DrawSmallString("FOV", 16, 96, 1, false);
-    kexGame::cLocal->DrawSmallString("FXAA Antialiasing", 16, 114, 1, false);
-    kexGame::cLocal->DrawSmallString("Bloom", 16, 132, 1, false);
-    kexGame::cLocal->DrawSmallString("Force Open GL Sync", 16, 150, 1, false);
+    kexGame::cLocal->DrawSmallString("Video Resolution", 16, 34, 1, false);
+    kexGame::cLocal->DrawSmallString("Windowed", 16, 52, 1, false);
+    kexGame::cLocal->DrawSmallString("VSync", 16, 70, 1, false);
+    kexGame::cLocal->DrawSmallString("FOV", 16, 88, 1, false);
+    kexGame::cLocal->DrawSmallString("FXAA Antialiasing", 16, 106, 1, false);
+    kexGame::cLocal->DrawSmallString("Bloom", 16, 124, 1, false);
+    kexGame::cLocal->DrawSmallString("Fix Sprite Clipping", 16, 142, 1, false);
+    kexGame::cLocal->DrawSmallString("Use Vertex Buffers", 16, 160, 1, false);
+    kexGame::cLocal->DrawSmallString("Force Open GL Sync", 16, 178, 1, false);
 
     switch(selectedItem)
     {
     case 1:
     case 2:
-        kexGame::cLocal->DrawSmallString("This option requires a restart", 160, 176, 1, true);
+        kexGame::cLocal->DrawSmallString("This option requires a restart", 160, 192, 1, true);
+        break;
+
+    case 8:
+        kexGame::cLocal->DrawSmallString("This option requires a level restart", 160, 192, 1, true);
         break;
     }
 
-    kexGame::cLocal->DrawSmallString("Graphics", 160, 20, 1, true);
+    kexGame::cLocal->DrawSmallString("Graphics", 160, 12, 1, true);
 }
 
 //
@@ -2734,6 +2758,8 @@ bool kexMenuGraphics::ProcessInput(inputEvent_t *ev)
         fov->ProcessInput(ev) ||
         toggleFxaa->ProcessInput(ev) ||
         toggleBloom->ProcessInput(ev) ||
+        toggleSpriteClip->ProcessInput(ev) ||
+        toggleVBO->ProcessInput(ev) ||
         toggleGLFinish->ProcessInput(ev))
     {
         return true;
