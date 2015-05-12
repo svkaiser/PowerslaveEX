@@ -1550,7 +1550,7 @@ void kexRenderScene::FixSpriteClipping(kexRenderView &view)
     {
         kexActor *actor = visSprites[i].actor;
 
-        if(actor->Flags() & AF_STRETCHY)
+        if(actor->Flags() & (AF_STRETCHY|AF_NOSPRITECLIPFIX))
         {
             // we don't care about strechy sprites
             continue;

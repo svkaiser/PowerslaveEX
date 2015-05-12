@@ -16,6 +16,7 @@ AI_Mantis 5
     shootable               0
     moveable                1
     noDropOff               1
+    noSpriteClipFix         1
     lookAllAround           1
     hidden                  1
     noLavaDamage            1
