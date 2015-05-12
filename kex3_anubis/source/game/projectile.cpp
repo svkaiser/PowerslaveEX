@@ -824,7 +824,7 @@ void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
     case AT_FIREBALLSPAWNER:
         kexGame::cActorFactory->Spawn(AT_FIREBALLPUFF, vOrigin.x, vOrigin.y, vOrigin.z, 0, secID);
         projType = AT_FIREBALL;
-        speed = 8;
+        speed = 12;
         break;
 
     case AT_LASERSPAWNER:
@@ -974,13 +974,13 @@ void kexFireballFactory::Tick(void)
             actor->OnActivate(NULL);
             if(actor->InstanceOf(&kexFireballSpawner::info))
             {
-                static_cast<kexFireballSpawner*>(actor)->fireDelay = fireDelay;
-                fireDelay += 8;
-
                 if(fireDelay > intervals)
                 {
-                    fireDelay = intervals;
+                    fireDelay = (fireDelay - intervals);
                 }
+
+                static_cast<kexFireballSpawner*>(actor)->fireDelay = fireDelay;
+                fireDelay += 8;
             }
         }
     }
