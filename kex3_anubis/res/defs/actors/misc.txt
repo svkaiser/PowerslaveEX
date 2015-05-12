@@ -58,7 +58,7 @@ Obj_Ramses_Body 101
     scale                   0.5
     solid                   1
     mapDestination          22
-    destinationPosition     "0, 3136, -224"
+    destinationPosition     "0, 2816, -224"
     spawnAnim               "misc/ramses_body_idle"
 }
 

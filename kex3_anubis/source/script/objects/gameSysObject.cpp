@@ -57,6 +57,7 @@ void kexScriptObjGame::Init(void)
     e->RegisterObjectMethod("kPlayer", "const int16 Buttons(void) const", asMETHODPR(kexPlayer, Buttons, (void) const, const uint16_t), asCALL_THISCALL);
     e->RegisterObjectMethod("kPlayer", "int16 &Artifacts(void)", asMETHODPR(kexPlayer, Artifacts, (void), int16_t&), asCALL_THISCALL);
     e->RegisterObjectMethod("kPlayer", "int16 &QuestItems(void)", asMETHODPR(kexPlayer, QuestItems, (void), int16_t&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kPlayer", "int16 &Abilities(void)", asMETHODPR(kexPlayer, Abilities, (void), int16_t&), asCALL_THISCALL);
     e->RegisterObjectMethod("kPlayer", "uint &TeamDolls(void)", asMETHODPR(kexPlayer, TeamDolls, (void), uint&), asCALL_THISCALL);
     e->RegisterObjectMethod("kPlayer", "int &ShakeTime(void)", asMETHODPR(kexPlayer, ShakeTime, (void), int&), asCALL_THISCALL);
 

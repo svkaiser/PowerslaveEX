@@ -32,6 +32,12 @@ typedef enum
     PF_GOD              = BIT(10)
 } playerFlags_t;
 
+typedef enum
+{
+    PAB_DOLPHIN         = BIT(0),
+    PAB_VULTURE         = BIT(1)
+} playerAbilities_t;
+
 class kexActor;
 class kexPlayer;
 
@@ -119,6 +125,7 @@ public:
     int16_t                     &AnkahFlags(void) { return ankahFlags; }
     int16_t                     &Artifacts(void) { return artifacts; }
     int16_t                     &QuestItems(void) { return questItems; }
+    int16_t                     &Abilities(void) { return abilities; }
     uint                        &TeamDolls(void) { return teamDolls; }
 
     const uint16_t              Buttons(void) const { return cmd.Buttons(); }
@@ -173,6 +180,7 @@ private:
     int16_t                     artifacts;
     int16_t                     keys;
     int16_t                     questItems;
+    int16_t                     abilities;
     int16_t                     airSupply;
     int16_t                     airSupplyTime;
     uint                        teamDolls;

@@ -48,6 +48,35 @@ void A_RandomItem(kActor @actor)
 }
 
 //
+// A_SpawnBouncyBalls
+//
+
+void A_SpawnBouncyBalls(kActor @actor, const float offset)
+{
+    kVec3 dir;
+    
+    for(int i = 0; i < 20; ++i)
+    {
+         kActor @obj = actor.SpawnActor("Proj_Ra_Fire", 0, 0, offset);
+    
+        if(obj is null)
+        {
+            continue;
+        }
+        
+        float an = Math::RandCFloat() * 3.14f;
+        float amt = Math::RandCFloat() * 16.0f;
+        
+        dir.x = Math::Sin(an) * amt;
+        dir.y = Math::Cos(an) * amt;
+        dir.z = Math::RandFloat() * 24.0f;
+        
+        obj.Health() = 1;
+        obj.Velocity() = dir;
+    }
+}
+
+//
 // A_SpawnCobraFromVase
 //
 
@@ -80,26 +109,46 @@ void A_RandomVaseItem(kActor @actor)
     float y = actor.Origin().y;
     float z = actor.Origin().z + actor.Height();
     kActor @obj;
-        
+
     switch(r)
     {
     case 0:
-        Game.SpawnActor("AI_Spider", x, y, z, 0, actor.SectorIndex());
-        return;
+        if(Player.Artifacts() >= 16 && (Math::RandByte() & 7) >= 3)
+        {
+            @obj = Game.SpawnActor("Fx_AmmoSpawn", x, y, z, 0, actor.SectorIndex());
+        }
+        else
+        {
+            Game.SpawnActor("AI_Spider", x, y, z, 0, actor.SectorIndex());
+            return;
+        }
+        break;
+        
     case 1:
         if(Player.Artifacts() >= 1)
         {
             Game.SpawnActor("AI_Wasp", x, y, z, 0, actor.SectorIndex());
+            return;
         }
-        return;
+        // fall through
+        
     case 2:
+        if(Player.Artifacts() >= 16)
+        {
+            A_SpawnBouncyBalls(actor, 64.0f);
+            return;
+        }
+        // fall through
+        
     case 3:
         @obj = Game.SpawnActor("Fx_AmmoSpawn", x, y, z, 0, actor.SectorIndex());
         break;
+        
     case 4:
     case 5:
         @obj = Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
         break;
+        
     case 6:
         if(Player.Artifacts() >= 4)
         {

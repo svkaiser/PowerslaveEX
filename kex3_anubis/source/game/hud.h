@@ -48,6 +48,7 @@ private:
     void                DrawBackPic(void);
     void                DrawFillPic(void);
     void                DrawCompass(void);
+    void                DrawAbilityIcons(void);
     void                DrawFlash(void);
     void                DrawMessages(void);
     void                DrawMessage(const char *msg, const float x, const float y);
@@ -59,6 +60,8 @@ private:
     kexTexture          *airSupplyFront;
     kexTexture          *airSupplyBack;
     kexTexture          *fillPic;
+    kexTexture          *dolphinPic;
+    kexTexture          *vulturePic;
     kexPlayer           *player;
     float               currentHealth;
     hudMessage_t        messages[MAXMESSAGES];

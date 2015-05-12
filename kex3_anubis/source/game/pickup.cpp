@@ -746,8 +746,27 @@ void kexTeamDollPickup::OnTouch(kexActor *instigator)
 
     if(!(player->TeamDolls() & BIT(bits)))
     {
+        int dollsCollected = 0;
+
         player->TeamDolls() |= BIT(bits);
         kexGame::cLocal->PlayLoop()->InventoryMenu().ShowArtifact(-1, pickupSound.Length() != 0);
+
+        for(int i = 0; i < 32; ++i)
+        {
+            if(player->TeamDolls() & BIT(i))
+            {
+                dollsCollected++;
+            }
+        }
+
+        if(dollsCollected >= 14)
+        {
+            player->Abilities() |= PAB_VULTURE;
+        }
+        else if(dollsCollected >= 10)
+        {
+            player->Abilities() |= PAB_DOLPHIN;
+        }
 
         kexPickup::OnTouch(instigator);
     }

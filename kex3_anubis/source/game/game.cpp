@@ -271,7 +271,7 @@ COMMAND(give)
             
             if(arti <= -1 || arti >= 6)
             {
-                kex::cSystem->Printf("give artifact <0 - 6>\n");
+                kex::cSystem->Printf("give artifact <0 - 5>\n");
                 return;
             }
             
@@ -280,9 +280,29 @@ COMMAND(give)
                 gameLocal.Translation()->GetString(100+arti)));
         }
     }
+    else if(!kexStr::Compare(kex::cCommands->GetArgv(1), "ability"))
+    {
+        if(argc != 3)
+        {
+            kex::cSystem->Printf("give ability <0 - 1>\n");
+            return;
+        }
+        else
+        {
+            int ability = atoi(kex::cCommands->GetArgv(2));
+            
+            if(ability <= -1 || ability >= 2)
+            {
+                kex::cSystem->Printf("give ability <0 - 1>\n");
+                return;
+            }
+            
+            gameLocal.Player()->Abilities() |= BIT(ability);
+        }
+    }
     else
     {
-        kex::cSystem->Printf("give <weapon#, weapons, keys, artifact#>\n");
+        kex::cSystem->Printf("give <weapon#, weapons, keys, artifact#, ability#>\n");
     }
 }
 
@@ -452,6 +472,7 @@ kexGameLocal::kexGameLocal(void)
     this->buttonEvent       = 0;
     this->gameState         = GS_NONE;
     this->pendingGameState  = GS_NONE;
+    this->bNoMonsters       = false;
     this->gameLoop          = &this->gameLoopStub;
 
     this->titleScreen       = new kexTitleScreen;
@@ -551,6 +572,8 @@ void kexGameLocal::Start(void)
         kex::cTimer->Sleep(500);
         kex::cMoviePlayer->StartVideoStream("movies/INTRO1.avi");
     }
+
+    bNoMonsters = kex::cSystem->CheckParam("-nomonsters");
 
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");
@@ -1284,6 +1307,7 @@ void kexGameLocal::SavePersistentData(void)
     persistentData.artifacts = player->Artifacts();
     persistentData.questItems = player->QuestItems();
     persistentData.teamDolls = player->TeamDolls();
+    persistentData.abilities = player->Abilities();
     persistentData.health = player->Actor() ? player->Actor()->Health() : player->Health();
     persistentData.currentWeapon = player->CurrentWeapon();
 }
@@ -1305,6 +1329,7 @@ void kexGameLocal::RestorePersistentData(void)
     player->Artifacts() = persistentData.artifacts;
     player->QuestItems() = persistentData.questItems;
     player->TeamDolls() = persistentData.teamDolls;
+    player->Abilities() = persistentData.abilities;
     player->Health() = persistentData.health;
 
     player->PendingWeapon() = persistentData.currentWeapon;
@@ -1348,6 +1373,7 @@ bool kexGameLocal::SaveGame(const int slot)
     saveFile.Write16(player->AnkahFlags());
     saveFile.Write16(player->Artifacts());
     saveFile.Write16(player->QuestItems());
+    saveFile.Write16(player->Abilities());
     saveFile.Write32(player->TeamDolls());
     saveFile.Write16(player->Actor() ? player->Actor()->Health() : player->Health());
     saveFile.Write16(static_cast<int16_t>(player->CurrentWeapon()));
@@ -1426,6 +1452,7 @@ bool kexGameLocal::LoadPersistentData(persistentData_t *data, int &currentMap, c
     data->ankahFlags = loadFile.Read16();
     data->artifacts = loadFile.Read16();
     data->questItems = loadFile.Read16();
+    data->abilities = loadFile.Read16();
     data->teamDolls = loadFile.Read32();
     data->health = loadFile.Read16();
     data->currentWeapon = static_cast<playerWeapons_t>(loadFile.Read16());
@@ -1477,6 +1504,7 @@ bool kexGameLocal::LoadGame(const int slot)
     persistentData.ankahFlags = loadFile.Read16();
     persistentData.artifacts = loadFile.Read16();
     persistentData.questItems = loadFile.Read16();
+    persistentData.abilities = loadFile.Read16();
     persistentData.teamDolls = loadFile.Read32();
     persistentData.health = loadFile.Read16();
     persistentData.currentWeapon = static_cast<playerWeapons_t>(loadFile.Read16());

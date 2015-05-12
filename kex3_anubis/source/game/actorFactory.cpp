@@ -90,6 +90,11 @@ kexActor *kexActorFactory::Spawn(const int type, const float x, const float y, c
         {
             className = "kexActor";
         }
+
+        if(kexGame::cLocal->NoMonstersEnabled() && className == "kexAI")
+        {
+            return NULL;
+        }
     }
     else
     {

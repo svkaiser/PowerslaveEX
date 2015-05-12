@@ -273,6 +273,11 @@ void kexRenderScene::DrawSky(kexRenderView &view)
     kexMatrix mtx;
     int tris = 0;
     
+    if(visibleSkyFaces.CurrentLength() == 0)
+    {
+        return;
+    }
+
     kexRender::cTextures->whiteTexture->Bind();
     
     if(cvarRenderWireframe.GetBool())
@@ -291,11 +296,6 @@ void kexRenderScene::DrawSky(kexRenderView &view)
             vl->AddTriangle(tris+0, tris+3, tris+2);
             tris += 4;
         }
-    }
-    
-    if(visibleSkyFaces.CurrentLength() == 0)
-    {
-        return;
     }
     
     if(cvarRenderWireframe.GetBool())

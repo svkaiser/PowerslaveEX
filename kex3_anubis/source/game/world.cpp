@@ -628,6 +628,12 @@ void kexWorld::SpawnMapActor(mapActor_t *mapActor)
     an  = kexMath::Deg2Rad((360 - (float)mapActor->angle) + 90);
     
     actor = kexGame::cActorFactory->Spawn(mapActor->type, x, y, z, an, mapActor->sector);
+
+    if(!actor)
+    {
+        return;
+    }
+
     actor->SetMapActor(mapActor);
 }
 
@@ -771,9 +777,17 @@ bool kexWorld::EventIsASwitch(const int eventID)
 
 void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount)
 {
+    static kexStack<int> updatedFaces;
+    updatedFaces.Reset();
+
     for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
     {
         mapFace_t *face = &faces[i];
+
+        if(face->flags & FF_UPDATED)
+        {
+            continue;
+        }
         
         if(face->flags & FF_PORTAL && face->sector >= 0)
         {
@@ -788,7 +802,7 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
             for(int j = s->faceStart; j < s->faceEnd+3; ++j)
             {
                 mapFace_t *f = &faces[j];
-                
+
                 if(f->flags & FF_PORTAL && f->sector == face->sectorOwner && j <= s->faceEnd)
                 {
                     if(bCeiling)
@@ -811,6 +825,11 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                     continue;
                 }
                 
+                if(f->flags & FF_UPDATED)
+                {
+                    continue;
+                }
+
                 for(int k = f->vertStart; k <= f->vertEnd; ++k)
                 {
                     mapVertex_t *v = &vertices[k];
@@ -832,6 +851,8 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                 vertices[f->vertexStart+3].origin.z += moveAmount;
                 
                 UpdateFacePlaneAndBounds(f);
+                f->flags |= FF_UPDATED;
+                updatedFaces.Set(j);
             }
             
             if(i <= sector->faceEnd)
@@ -857,6 +878,11 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
         {
             continue;
         }
+
+        if(face->flags & FF_UPDATED)
+        {
+            continue;
+        }
         
         for(int j = face->vertStart; j <= face->vertEnd; ++j)
         {
@@ -879,6 +905,8 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
         vertices[face->vertexStart+3].origin.z += moveAmount;
         
         UpdateFacePlaneAndBounds(face);
+        face->flags |= FF_UPDATED;
+        updatedFaces.Set(i);
     }
     
     UpdateSectorBounds(sector);
@@ -904,6 +932,12 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                 actor->Velocity().z += (moveAmount * 0.5f);
             }
         }
+    }
+
+    for(uint i = 0; i < updatedFaces.CurrentLength(); ++i)
+    {
+        mapFace_t *face = &Faces()[updatedFaces[i]];
+        face->flags &= ~FF_UPDATED;
     }
 }
 

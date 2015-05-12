@@ -132,13 +132,6 @@ void kexRenderScreen::DrawTexture(kexTexture *texture, const float x, const floa
     tex_x = x;
     tex_y = y;
     
-    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-    kexRender::cBackend->SetState(GLSTATE_CULL, true);
-    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
-    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-    kexRender::cBackend->SetCull(GLCULL_BACK);
-    
     texture->Bind();
     DrawQuad(tex_x, texwidth, tex_y, texheight, r, g, b, a);
 }
@@ -187,13 +180,6 @@ void kexRenderScreen::DrawStretchPic(kexTexture *texture, const float x, const f
 
     sw = (float)SCREEN_WIDTH - sw;
     sh = (float)SCREEN_HEIGHT - sh;
-
-    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-    kexRender::cBackend->SetState(GLSTATE_CULL, true);
-    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
-    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-    kexRender::cBackend->SetCull(GLCULL_BACK);
     
     texture->Bind();
     DrawQuad(x-sx, width+sw, y-sy, height+sh);
@@ -233,13 +219,6 @@ void kexRenderScreen::DrawStretchPic(kexTexture *texture, const float x, const f
 
     sw = (float)SCREEN_WIDTH - sw;
     sh = (float)SCREEN_HEIGHT - sh;
-
-    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-    kexRender::cBackend->SetState(GLSTATE_CULL, true);
-    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
-    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-    kexRender::cBackend->SetCull(GLCULL_BACK);
     
     texture->Bind();
     DrawQuad(x-sx, width+sw, y-sy, height+sh, 0, 1, 0, 1, r, g, b, a);
@@ -261,13 +240,6 @@ void kexRenderScreen::DrawFillPic(kexTexture *texture, const float x, const floa
     texheight = h;
     tex_x = x;
     tex_y = y;
-    
-    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
-    kexRender::cBackend->SetState(GLSTATE_CULL, true);
-    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
-    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
-    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-    kexRender::cBackend->SetCull(GLCULL_BACK);
     
     texture->Bind();
     DrawQuad(tex_x, texwidth, tex_y, texheight, 0,

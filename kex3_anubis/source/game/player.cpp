@@ -152,14 +152,17 @@ void kexPuppet::OnDamage(kexActor *instigator)
 
         if(flags & AF_INWATER && !(playerFlags & PF_ABOVESURFACE))
         {
+            kexGame::cLocal->PlayLoop()->DamageFlash();
             PlaySound("sounds/pdrown.wav");
         }
         else if(instigator)
         {
+            kexGame::cLocal->PlayLoop()->DamageFlash();
             PlaySound("sounds/pdeath03.wav");
         }
         else if(playerFlags & PF_ELECTROCUTE)
         {
+            kexGame::cLocal->PlayLoop()->ElectrocuteFlash();
             PlaySound("sounds/pdeath01.wav");
         }
 
@@ -318,31 +321,40 @@ void kexPuppet::Jump(kexPlayerCmd *cmd)
         {
             if(!(playerFlags & PF_JUMPING))
             {
-                if(origin.z - floorHeight >= 1)
+                if(origin.z - floorHeight >= 1 &&
+                    !(owner->Abilities() & PAB_VULTURE))
                 {
                     return;
                 }
+
                 // let the actor object know that
                 // it is now jumping
                 playerFlags |= (PF_JUMPING|PF_JUMPWASHELD);
 
-                switch(kexRand::Max(5))
+                if(owner->Abilities() & PAB_VULTURE)
                 {
-                case 0:
-                    PlaySound("sounds/pjump01.wav");
-                    break;
-                case 1:
-                    PlaySound("sounds/pjump02.wav");
-                    break;
-                case 2:
-                    PlaySound("sounds/pjump03.wav");
-                    break;
-                case 3:
-                    PlaySound("sounds/pjump04.wav");
-                    break;
-                case 4:
-                    PlaySound("sounds/pjump05.wav");
-                    break;
+                    PlaySound("sounds/fly.wav");
+                }
+                else
+                {
+                    switch(kexRand::Max(5))
+                    {
+                    case 0:
+                        PlaySound("sounds/pjump01.wav");
+                        break;
+                    case 1:
+                        PlaySound("sounds/pjump02.wav");
+                        break;
+                    case 2:
+                        PlaySound("sounds/pjump03.wav");
+                        break;
+                    case 3:
+                        PlaySound("sounds/pjump04.wav");
+                        break;
+                    case 4:
+                        PlaySound("sounds/pjump05.wav");
+                        break;
+                    }
                 }
             }
 
@@ -369,6 +381,13 @@ void kexPuppet::Jump(kexPlayerCmd *cmd)
     else
     {
         playerFlags &= ~PF_JUMPWASHELD;
+
+        if(owner->Abilities() & PAB_VULTURE)
+        {
+            playerFlags &= ~(PF_USERJUMPED|PF_JUMPING);
+            jumpTicks = 0;
+            return;
+        }
 
         // jump key/button was released, check if we're actually moving first
         if((velocity.z >= PMOVE_MIN || velocity.z <= -(PMOVE_MIN * 48)) || playerFlags & PF_JUMPING)
@@ -586,6 +605,7 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
 {
     kexVec3 forward, right;
     mapSector_t *oldSector;
+    float swimSpeed;
     
     yaw += cmd->Angles()[0];
     pitch += cmd->Angles()[1];
@@ -594,7 +614,8 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
     kexMath::Clamp(pitch.an, kexMath::Deg2Rad(-90), kexMath::Deg2Rad(90));
     kexMath::Clamp(roll.an, -0.1f, 0.1f);
 
-    kexVec3::ToAxis(&forward, NULL, &right, yaw, pitch, 0);
+    kexVec3::ToAxis(&forward, NULL, NULL, yaw, pitch, 0);
+    kexVec3::ToAxis(NULL, NULL, &right, yaw, 0, 0);
 
     velocity *= friction;
 
@@ -613,22 +634,52 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
         velocity.z = 0;
     }
 
+    if(owner->Abilities() & PAB_DOLPHIN)
+    {
+        swimSpeed = PMOVE_WATER_SPEED * 2;
+    }
+    else
+    {
+        swimSpeed = PMOVE_WATER_SPEED;
+    }
+
     if(cmd->Buttons() & BC_FORWARD)
     {
-        velocity += (forward * PMOVE_WATER_SPEED);
+        velocity += (forward * swimSpeed);
     }
     else if(cmd->Movement()[0] > 0)
     {
-        velocity += (forward * cmd->Movement()[0]) * PMOVE_WATER_SPEED;
+        velocity += (forward * cmd->Movement()[0]) * swimSpeed;
     }
 
     if(cmd->Buttons() & BC_BACKWARD)
     {
-        velocity -= (forward * (PMOVE_WATER_SPEED*0.5f));
+        velocity -= (forward * (swimSpeed*0.5f));
     }
     else if(cmd->Movement()[0] < 0)
     {
-        velocity += (forward * cmd->Movement()[0]) * (PMOVE_WATER_SPEED*0.5f);
+        velocity += (forward * cmd->Movement()[0]) * (swimSpeed*0.5f);
+    }
+
+    if(!(cmd->Buttons() & (BC_STRAFELEFT|BC_STRAFERIGHT)))
+    {
+        if(cmd->Movement()[1] != 0)
+        {
+            velocity.x += (right.x * cmd->Movement()[1]) * (swimSpeed*0.5f);
+            velocity.y += (right.y * cmd->Movement()[1]) * (swimSpeed*0.5f);
+        }
+    }
+
+    if(cmd->Buttons() & BC_STRAFELEFT)
+    {
+        velocity.x -= right.x * (swimSpeed*0.5f);
+        velocity.y -= right.y * (swimSpeed*0.5f);
+    }
+
+    if(cmd->Buttons() & BC_STRAFERIGHT)
+    {
+        velocity.x += right.x * (swimSpeed*0.5f);
+        velocity.y += right.y * (swimSpeed*0.5f);
     }
 
     if(sector->ceilingFace->flags & FF_WATER)
@@ -927,6 +978,7 @@ void kexPlayer::Reset(void)
     keys = 0;
     questItems = 0;
     teamDolls = 0;
+    abilities = 0;
 }
 
 //
@@ -1038,7 +1090,24 @@ void kexPlayer::UpdateAirSupply(void)
     {
         if(actor->PlayerFlags() & PF_NEEDTOGASP)
         {
-            actor->PlaySound("sounds/pwgasp.wav");
+            if(abilities & PAB_DOLPHIN)
+            {
+                if(kexRand::Byte() & 1)
+                {
+                    actor->PlaySound("sounds/dolphin01.wav");
+                }
+                else
+                {
+                    actor->PlaySound("sounds/dolphin02.wav");
+                }
+
+                actor->Velocity().z += PMOVE_SPEED_JUMP;
+            }
+            else
+            {
+                actor->PlaySound("sounds/pwgasp.wav");
+            }
+
             actor->PlayerFlags() &= ~PF_NEEDTOGASP;
         }
 
@@ -1053,6 +1122,11 @@ void kexPlayer::UpdateAirSupply(void)
 
     airSupplyTime++;
     maxAirSupplyTime = (artifacts & PA_MASK) ? 100 : 5;
+
+    if(abilities & PAB_DOLPHIN)
+    {
+        actor->PlayerFlags() |= PF_NEEDTOGASP;
+    }
     
     if(airSupplyTime >= maxAirSupplyTime)
     {
@@ -1072,7 +1146,10 @@ void kexPlayer::UpdateAirSupply(void)
             }
             else if(artifacts & PA_MASK && (airSupply & 3) == 2)
             {
-                actor->PlaySound("sounds/pwbreathe.wav");
+                if(!(abilities & PAB_DOLPHIN))
+                {
+                    actor->PlaySound("sounds/pwbreathe.wav");
+                }
             }
         }
         else

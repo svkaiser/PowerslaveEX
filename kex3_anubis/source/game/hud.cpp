@@ -51,6 +51,8 @@ void kexHud::Init(void)
     airSupplyFront  = kexRender::cTextures->Cache("gfx/airsupply_front.png", TC_CLAMP, TF_NEAREST);
     airSupplyBack   = kexRender::cTextures->Cache("gfx/airsupply_back.png", TC_CLAMP, TF_NEAREST);
     fillPic         = kexRender::cTextures->Cache("gfx/menu/menu_bg.png", TC_REPEAT, TF_NEAREST);
+    dolphinPic      = kexRender::cTextures->Cache("gfx/dolphin.png", TC_REPEAT, TF_NEAREST);
+    vulturePic      = kexRender::cTextures->Cache("gfx/vulture.png", TC_REPEAT, TF_NEAREST);
 }
 
 //
@@ -390,6 +392,46 @@ void kexHud::DrawBackPic(void)
 }
 
 //
+// kexHud::DrawAbilityIcons
+//
+
+void kexHud::DrawAbilityIcons(void)
+{
+    kexPlayer *player = kexGame::cLocal->Player();
+    byte pulse;
+
+    if(player->Abilities() == 0)
+    {
+        return;
+    }
+
+    if(player->Abilities() & PAB_DOLPHIN)
+    {
+        kexRender::cScreen->DrawTexture(dolphinPic, 25, 12);
+    }
+
+    if(player->Abilities() & PAB_VULTURE)
+    {
+        kexRender::cScreen->DrawTexture(vulturePic, 52, 12);
+    }
+
+    pulse = (byte)(kexMath::Sin((float)kex::cSession->GetTime() * 0.0035f) * 64.0f) + 64;
+    kexRender::cBackend->SetBlend(GLSRC_ONE, GLDST_ONE);
+
+    if(player->Abilities() & PAB_DOLPHIN)
+    {
+        kexRender::cScreen->DrawTexture(dolphinPic, 25, 12, pulse, pulse, pulse, 255);
+    }
+
+    if(player->Abilities() & PAB_VULTURE)
+    {
+        kexRender::cScreen->DrawTexture(vulturePic, 52, 12, pulse, pulse, pulse, 255);
+    }
+
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
+}
+
+//
 // kexHud::DrawAirSupply
 //
 
@@ -477,6 +519,8 @@ void kexHud::Display(void)
     DrawDots();
 
     DrawAirSupply();
+
+    DrawAbilityIcons();
 
     DrawFlash();
 

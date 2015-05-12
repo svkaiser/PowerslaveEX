@@ -21,5 +21,6 @@
 
 $script 1
 {
+    Player.Artifacts() = 0x3F;
     Game.ChangeMap("maps/KILENTRY.MAP");
 }

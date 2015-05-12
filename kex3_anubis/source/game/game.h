@@ -105,9 +105,7 @@ typedef enum
     PA_SHAWL        = BIT(2),
     PA_ANKLETS      = BIT(3),
     PA_SCEPTER      = BIT(4),
-    PA_FEATHER      = BIT(5),
-    PA_DOLPHIN      = BIT(6),
-    PA_EAGLE        = BIT(7)
+    PA_FEATHER      = BIT(5)
 } playerArtifacts_t;
 
 #include "object.h"
@@ -194,6 +192,7 @@ public:
         int16_t             ammo[NUMPLAYERWEAPONS];
         int16_t             artifacts;
         int16_t             questItems;
+        int16_t             abilities;
         uint                teamDolls;
         int16_t             health;
         playerWeapons_t     currentWeapon;
@@ -225,6 +224,7 @@ public:
     mapInfo_t                       *ActiveMap(void) { return activeMap; }
     unsigned int                    &ButtonEvent(void) { return buttonEvent; }
     const int                       CurrentSaveSlot(void) const { return currentSaveSlot; }
+    const bool                      NoMonstersEnabled(void) const { return bNoMonsters; }
 
     void                            SetMenu(const menus_t menu);
     void                            ClearMenu(const bool bClearAll = false);
@@ -250,6 +250,8 @@ private:
     void                            StopSounds(void);
     void                            UpdateSounds(void);
     void                            PrintSoundStats(void);
+
+    bool                            bNoMonsters;
     
     kexFont                         *smallFont;
     kexFont                         *bigFont;

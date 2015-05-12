@@ -97,7 +97,8 @@ typedef enum
     FF_PORTAL           = BIT(13),
     FF_UNDERWATER       = BIT(14),
     FF_MAPPED           = BIT(15),
-    FF_DYNAMIC          = BIT(16)
+    FF_DYNAMIC          = BIT(16),
+    FF_UPDATED          = BIT(17)
 } faceFlags_t;
 
 typedef enum
