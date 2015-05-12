@@ -373,10 +373,6 @@ int kexPakFile::OpenExternalFile(const char *name, byte **buffer) const
 
 void kexPakFile::Init(void)
 {
-    if(!strlen(kex::cvarBasePath.GetValue()))
-    {
-        kex::cvarBasePath.Set(kex::cSystem->GetBaseDirectory());
-    }
-
+    kex::cvarBasePath.Set(kex::cSystem->GetBaseDirectory());
     kex::cSystem->Printf("File System Initialized\n");
 }

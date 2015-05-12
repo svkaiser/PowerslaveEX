@@ -358,9 +358,9 @@ void kexOverWorld::DrawTitle(void)
 void kexOverWorld::Draw(void)
 {
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, false);
-    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
     kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
-    kexRender::cBackend->SetState(GLSTATE_BLEND, false);
+    kexRender::cBackend->SetState(GLSTATE_ALPHATEST, true);
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
 
     int c = GetFade();
 

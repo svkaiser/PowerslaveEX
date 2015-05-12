@@ -526,7 +526,7 @@ void kexFloor::Spawn(void)
 
     case 25:
         lip = 0;
-        moveSpeed = 2;
+        moveSpeed = 4;
         state = FS_IDLE;
         sector->objectThinker = this;
         break;

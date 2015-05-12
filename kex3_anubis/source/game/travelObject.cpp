@@ -66,7 +66,6 @@ void kexTravelObject::OnTouch(kexActor *instigator)
         return;
     }
 
-
     if(warpSounds.Length() != 0)
     {
         PlaySound(warpSounds[kexRand::Max(warpSounds.Length())].c_str());
@@ -95,6 +94,16 @@ void kexTravelObject::OnTouch(kexActor *instigator)
         currentObject = this;
         kexGame::cLocal->SetMenu(MENU_TRAVEL);
     }
+
+    if(mapDestination != -1)
+    {
+        kexGame::cLocal->Player()->Artifacts() |= giveArtifacts;
+
+        if(bRequestSave)
+        {
+            kexGame::cLocal->SaveGame();
+        }
+    }
 }
 
 //
@@ -111,7 +120,9 @@ void kexTravelObject::Spawn(void)
     }
     
     definition->GetInt("mapDestination", mapDestination, -1);
+    definition->GetInt("giveArtifacts", giveArtifacts, 0);
     definition->GetVector("destinationPosition", destinationPosition);
+    definition->GetBool("requestSave", bRequestSave);
     
     if(kexGame::cLocal->MapInfoList().Length() != 0)
     {
