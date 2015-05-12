@@ -42,6 +42,8 @@ public:
     kexRenderView               &View(void) { return renderView; }
     kexRenderScene              &RenderScene(void) { return renderScene; }
 
+    const bool                  RestartRequested(void) const { return bRestartLevel; }
+
     const int                   Ticks(void) const { return ticks; }
     const int                   MaxWaterMagnitude(void) { return waterMaxMagnitude; }
     void                        PickupFlash(void) { hud.SetPickupFlash(); }

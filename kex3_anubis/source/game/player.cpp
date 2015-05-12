@@ -84,8 +84,29 @@ bool kexPuppet::OnCollide(kexCModel *cmodel)
         {
             if(owner->Artifacts() & PA_SCEPTER)
             {
+                if(face->sector >= 0)
+                {
+                    kexWorld *world = kexGame::cLocal->World();
+                    mapSector_t *sector = &world->Sectors()[face->sector];
+
+                    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
+                    {
+                        mapFace_t *f = &world->Faces()[i];
+
+                        if(f->flags & FF_FORCEFIELD && f->sector == face->sectorOwner)
+                        {
+                            f->flags &= ~(FF_SOLID|FF_FORCEFIELD);
+                            f->flags |= (FF_INVISIBLE|FF_HIDDEN);
+                            f->polyStart = f->polyEnd = -1;
+                        }
+                    }
+                }
+
                 face->flags &= ~(FF_SOLID|FF_FORCEFIELD);
-                face->flags |= FF_INVISIBLE;
+                face->flags |= (FF_INVISIBLE|FF_HIDDEN);
+                face->polyStart = face->polyEnd = -1;
+
+                PlaySound("sounds/forcefieldoff.wav");
             }
             else
             {
@@ -137,6 +158,10 @@ void kexPuppet::OnDamage(kexActor *instigator)
         {
             PlaySound("sounds/pdeath03.wav");
         }
+        else if(playerFlags & PF_ELECTROCUTE)
+        {
+            PlaySound("sounds/pdeath01.wav");
+        }
 
         owner->HoldsterWeapon();
         return;
@@ -147,6 +172,7 @@ void kexPuppet::OnDamage(kexActor *instigator)
         playerFlags &= ~PF_ELECTROCUTE;
 
         owner->LockTime() = 60;
+        owner->ShakeTime() = 30;
         velocity.Clear();
         movement.Clear();
 

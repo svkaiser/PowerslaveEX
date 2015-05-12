@@ -184,18 +184,13 @@ void kexPlayLoop::Start(void)
     kexGameLocal *game = kexGame::cLocal;
 
     ticks = 0;
+    bRestartLevel = false;
     
     if(game->Player()->Actor() == NULL)
     {
         kex::cSystem->Warning("No player starts present\n");
         game->SetGameState(GS_TITLE);
         return;
-    }
-
-    if(bRestartLevel)
-    {
-        kexGame::cLocal->RestorePersistentData();
-        bRestartLevel = false;
     }
     
     hud.SetPlayer(game->Player());

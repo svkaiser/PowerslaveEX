@@ -1075,6 +1075,11 @@ void kexGameLocal::LoadNewMap(void)
         }
     }
 
+    if(playLoop->RestartRequested())
+    {
+        RestorePersistentData();
+    }
+
     if(!world->LoadMap(pendingMap.c_str()))
     {
         SetGameState(GS_TITLE);

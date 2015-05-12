@@ -144,7 +144,7 @@ Map_Marsh       11
     overworld_y     164
     map             "maps/MARSH.MAP"
     musicTrack      "music/marsh.ogg"
-    transmitter     5
+    transmitter     4
     nextmap_north   12
     nextmap_south   2
 }
@@ -169,7 +169,7 @@ Map_Camp        13
     overworld_y     64
     map             "maps/SLAVCAMP.MAP"
     musicTrack      "music/temple2.ogg"
-    transmitter     6
+    transmitter     5
     nextmap_west    14
     nextmap_east    12
 }
@@ -205,7 +205,7 @@ Map_Magma       16
     overworld_y     188
     map             "maps/MAGMA.MAP"
     musicTrack      "music/magma.ogg"
-    transmitter     7
+    transmitter     6
     nextmap_east    4
     nextmap_south   17
 }
@@ -229,7 +229,7 @@ Map_Chaos       18
     overworld_y     300
     map             "maps/CHAOS.MAP"
     musicTrack      "music/magma.ogg"
-    transmitter     8
+    transmitter     7
     nextmap_north   19
     nextmap_south   10
 }

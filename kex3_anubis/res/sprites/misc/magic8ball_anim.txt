@@ -294,7 +294,6 @@ magic8ball_explode
     frame
     {
         action A_Spawn("Fx_Explosion01", 0, 0, 32)
-        action A_RandomItem()
         action A_RadialBlast(512, 140, 1)
         delay 1
     }
@@ -311,13 +310,13 @@ magic8ball_explode_water
     frame
     {
         action A_Spawn("Fx_Explosion01_Water", 0, 0, 32)
-        action A_RandomItem()
         action A_RadialBlast(512, 140, 1)
         delay 1
     }
     
     frame
     {
+        action A_RandomItem()
         action A_Destroy()
         delay 1
     }

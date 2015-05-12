@@ -255,7 +255,7 @@ void kexWorld::ReadFaces(kexBinFile &mapfile, const unsigned int count)
         f->y1           = 0;
         f->y2           = 0;
 
-        if(f->flags & (FF_WATER|FF_TOGGLE) || EventIsASwitch(f->tag))
+        if(f->flags & (FF_WATER|FF_TOGGLE|FF_FORCEFIELD) || EventIsASwitch(f->tag))
         {
             f->flags |= FF_DYNAMIC;
         }
@@ -1069,7 +1069,18 @@ void kexWorld::UseWallSwitch(kexPlayer *player, mapFace_t *face, mapEvent_t *ev)
         return;
     }
 
-    player->Actor()->PlaySound("sounds/switch.wav");
+    switch(ev->type)
+    {
+    case 202:
+    case 203:
+        player->Actor()->PlaySound("sounds/switch2.wav");
+        break;
+
+    default:
+        player->Actor()->PlaySound("sounds/switch.wav");
+        break;
+    }
+    
     SendRemoteTrigger(&sectors[ev->sector], ev);
 }
 
@@ -1266,7 +1277,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         kexGame::cActorFactory->SpawnMover("kexLift", ev->type, ev->sector);
         break;
     case 23:
-        actor->PlaySound("sounds/switch.wav");
+        actor->PlaySound("sounds/fplate.wav");
         kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
         break;
     case 24:
