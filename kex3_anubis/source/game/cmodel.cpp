@@ -288,7 +288,9 @@ bool kexCModel::TestIntersectSector(mapFace_t *face, const float extent)
 
     hit.Lerp(start, end, frac);
 
-    if(!PointWithinSectorEdges(hit, &sectors[face->sectorOwner], extent))
+    // subtract by a small episilon unit; this is needed so that
+    // the AI's check sight trace won't fall through small gaps
+    if(!PointWithinSectorEdges(hit, &sectors[face->sectorOwner], extent - 4.096f))
     {
         return false;
     }

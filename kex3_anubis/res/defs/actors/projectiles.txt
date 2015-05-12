@@ -136,7 +136,7 @@ Proj_Fireball 26
     fullbright              1
     moveable                1
     gravity                 0
-    damage                  0
+    damage                  100
 }
 
 Proj_AmunBomb 40

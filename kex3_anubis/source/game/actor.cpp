@@ -624,12 +624,21 @@ void kexActor::CheckFloorAndCeilings(void)
 void kexActor::UpdateMovement(void)
 {
     mapSector_t *oldSector;
+    bool bNoSplash = false;
 
     UpdateVelocity();
     CheckFloorAndCeilings();
     
     oldSector = sector;
     movement = velocity;
+
+    if(sector->floorFace->flags & FF_WATER)
+    {
+        if(sector->floorFace->plane.Distance(origin) - sector->floorFace->plane.d < 0)
+        {
+            bNoSplash = true;
+        }
+    }
     
     if(movement.UnitSq() > 0)
     {
@@ -654,13 +663,16 @@ void kexActor::UpdateMovement(void)
 
         if(!(oldSector->flags & SF_WATER) && sector->flags & SF_WATER)
         {
-            float splashZ = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector);
-            
-            PlaySound("sounds/splash01.wav");
-            kexGame::cActorFactory->Spawn(AT_WATERSPLASH,
-                                          origin.x,
-                                          origin.y,
-                                          splashZ, 0, SectorIndex());
+            if(!bNoSplash)
+            {
+                float splashZ = kexGame::cLocal->CModel()->GetCeilingHeight(origin, sector);
+                
+                PlaySound("sounds/splash01.wav");
+                kexGame::cActorFactory->Spawn(AT_WATERSPLASH,
+                                              origin.x,
+                                              origin.y,
+                                              splashZ, 0, SectorIndex());
+            }
 
             flags |= AF_INWATER;
         }

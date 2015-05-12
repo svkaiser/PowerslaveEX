@@ -53,7 +53,7 @@ fireball_death
     {
         action A_PlayLocalSound("sounds/pbexplode.wav")
         action A_Spawn("Fx_FireballExplode", 0, 0, 0)
-        action A_RadialBlast(192, 100, 1)
+        action A_RadialBlast(192, 64, 1)
         action A_Destroy()
         delay 1
     }

@@ -1492,6 +1492,13 @@ void kexRenderScene::DrawActors(kexRenderView &view)
     // we already have our sprites sorted out by distance
     kexRender::cBackend->SetDepthMask(0);
 
+    if(cvarRenderFixSpriteClipping.GetBool())
+    {
+        FixSpriteClipping(view);
+    }
+
+    kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
+
     for(uint i = 0; i < visSprites.CurrentLength(); ++i)
     {
         kexActor *actor = visSprites[i].actor;
@@ -1506,11 +1513,6 @@ void kexRenderScene::DrawActors(kexRenderView &view)
         {
             DrawSprite(view, actor->Sector(), actor);
         }
-    }
-
-    if(cvarRenderFixSpriteClipping.GetBool())
-    {
-        FixSpriteClipping(view);
     }
 
     kexRender::cBackend->SetDepthMask(1);
@@ -1588,7 +1590,7 @@ void kexRenderScene::FixSpriteClipping(kexRenderView &view)
             worldVertexBuffer.Draw(prevSector->portalBuffer.count, prevSector->portalBuffer.triStart);
 
             // draw back sides of world geometry and increment stencil bits
-            kexRender::cBackend->SetStencil(GLFUNC_ALWAYS, 128, GLSO_KEEP, GLSO_KEEP, GLSO_INCR);
+            kexRender::cBackend->SetStencil(GLFUNC_ALWAYS, 128, GLSO_INCR, GLSO_INCR, GLSO_INCR);
 
             for(uint j = 0; j < prevSector->bufferIndex.Length(); j++)
             {
