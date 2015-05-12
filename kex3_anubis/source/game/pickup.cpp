@@ -585,8 +585,7 @@ void kexArtifactPickup::OnTouch(kexActor *instigator)
     if(!(player->Artifacts() & BIT(bits)))
     {
         player->Artifacts() |= BIT(bits);
-
-        kexGame::cLocal->PlayLoop()->InventoryMenu().ShowArtifact(bits);
+        kexGame::cLocal->PlayLoop()->InventoryMenu().ShowArtifact(bits, false);
 
         kexPickup::OnTouch(instigator);
         kexGame::cLocal->World()->FireRemoteEventFromTag(1000 + bits);
@@ -748,6 +747,8 @@ void kexTeamDollPickup::OnTouch(kexActor *instigator)
     if(!(player->TeamDolls() & BIT(bits)))
     {
         player->TeamDolls() |= BIT(bits);
+        kexGame::cLocal->PlayLoop()->InventoryMenu().ShowArtifact(-1, pickupSound.Length() != 0);
+
         kexPickup::OnTouch(instigator);
     }
 }

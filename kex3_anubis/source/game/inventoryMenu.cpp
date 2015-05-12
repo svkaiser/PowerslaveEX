@@ -113,6 +113,7 @@ void kexInventoryMenu::Reset(void)
     flashCount = 0;
     focusedTransmitter = -1;
     bFlashArtifact = false;
+    bNoDingSound = false;
     buttonSet.pressedIndex = 0;
 }
 
@@ -134,14 +135,21 @@ void kexInventoryMenu::UpdateFlash(void)
     {
         if(++flashCount >= 4)
         {
-            kexGame::cLocal->PlaySound("sounds/ding02.wav");
+            if(!bNoDingSound)
+            {
+                kexGame::cLocal->PlaySound("sounds/ding02.wav");
+            }
             flashBits = 0;
             flashCount = 0;
             bFlashArtifact = false;
+            bNoDingSound = false;
         }
         else
         {
-            kexGame::cLocal->PlaySound("sounds/ding01.wav");
+            if(!bNoDingSound)
+            {
+                kexGame::cLocal->PlaySound("sounds/ding01.wav");
+            }
         }
     }
 
@@ -159,18 +167,21 @@ void kexInventoryMenu::Update(void)
     switch(categorySelected)
     {
     case 2:
-        kexMath::Clamp(artifactSelected, 0, NUM_ARTIFACTS-1);
+        kexMath::Clamp(artifactSelected, 0, NUM_ARTIFACTS);
 
-        if(p->Artifacts() != 0 && !(p->Artifacts() & BIT(artifactSelected)))
+        if(artifactSelected < NUM_ARTIFACTS)
         {
-            for(int i = 0; i < NUM_ARTIFACTS; ++i)
+            if(p->Artifacts() != 0 && !(p->Artifacts() & BIT(artifactSelected)))
             {
-                int arti = (artifactSelected + i) % NUM_ARTIFACTS;
-
-                if(p->Artifacts() & BIT(arti))
+                for(int i = 0; i < NUM_ARTIFACTS; ++i)
                 {
-                    artifactSelected = arti;
-                    break;
+                    int arti = (artifactSelected + i) % NUM_ARTIFACTS;
+
+                    if(p->Artifacts() & BIT(arti))
+                    {
+                        artifactSelected = arti;
+                        break;
+                    }
                 }
             }
         }
@@ -234,24 +245,49 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                     return false;
                 }
 
-                if(artifactSelected < NUM_ARTIFACTS-1)
+                if(artifactSelected < NUM_ARTIFACTS)
                 {
+                    bool bGotArtifact = false;
+
                     for(int i = artifactSelected+1; i < NUM_ARTIFACTS; ++i)
                     {
                         if(p->Artifacts() & BIT(i))
                         {
                            if(kexGame::cMenuPanel->CursorOnRightArrow(RIGHT_ARROW_X, ARROW_OFFSET))
-                            {
-                                artifactSelected = i;
-                                kexGame::cLocal->PlaySound("sounds/select.wav");
-                            }
-                            break;
+                           {
+                               artifactSelected = i;
+                               bGotArtifact = true;
+                               kexGame::cLocal->PlaySound("sounds/select.wav");
+                           }
+                           break;
+                        }
+                    }
+
+                    if(!bGotArtifact && artifactSelected != NUM_ARTIFACTS && p->TeamDolls() != 0)
+                    {
+                        if(kexGame::cMenuPanel->CursorOnRightArrow(RIGHT_ARROW_X, ARROW_OFFSET))
+                        {
+                            artifactSelected = NUM_ARTIFACTS;
+                            kexGame::cLocal->PlaySound("sounds/select.wav");
                         }
                     }
                 }
 
                 if(artifactSelected > 0)
                 {
+                    if(artifactSelected == NUM_ARTIFACTS && p->Artifacts() != 0)
+                    {
+                        if(kexGame::cMenuPanel->CursorOnLeftArrow(LEFT_ARROW_X, ARROW_OFFSET))
+                        {
+                            artifactSelected = (NUM_ARTIFACTS-1);
+
+                            if(p->Artifacts() & BIT(artifactSelected))
+                            {
+                                kexGame::cLocal->PlaySound("sounds/select.wav");
+                                break;
+                            }
+                        }
+                    }
                     for(int i = artifactSelected-1; i >= 0; --i)
                     {
                         if(p->Artifacts() & BIT(i))
@@ -294,10 +330,11 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
 // kexInventoryMenu::ShowArtifact
 //
 
-void kexInventoryMenu::ShowArtifact(const int artifact)
+void kexInventoryMenu::ShowArtifact(const int artifact, const bool bNoDing)
 {
     categorySelected = 2;
-    artifactSelected = artifact;
+    artifactSelected = artifact <= -1 ? NUM_ARTIFACTS : artifact;
+    bNoDingSound = bNoDing;
     flashBits = 0;
     flashCount = 0;
     bFlashArtifact = true;
@@ -419,20 +456,27 @@ void kexInventoryMenu::DrawArtifacts(void)
     kexStrList labels;
     kexStr label;
 
-    if(p->Artifacts() == 0)
+    if(p->Artifacts() == 0 && p->TeamDolls() == 0)
     {
         font->DrawString(kexGame::cLocal->Translation()->GetString(64), 160, 164, 1, true);
         return;
     }
 
-    if(!(p->Artifacts() & BIT(artifactSelected)))
+    if(artifactSelected != NUM_ARTIFACTS)
     {
-        return;
+        if(!(p->Artifacts() & BIT(artifactSelected)))
+        {
+            return;
+        }
     }
 
     if(!bFlashArtifact)
     {
-        if(artifactSelected < NUM_ARTIFACTS-1)
+        if(artifactSelected != NUM_ARTIFACTS && p->TeamDolls() != 0)
+        {
+            kexGame::cMenuPanel->DrawRightArrow(RIGHT_ARROW_X, ARROW_OFFSET);
+        }
+        else if(artifactSelected < NUM_ARTIFACTS-1)
         {
             for(int i = artifactSelected+1; i < NUM_ARTIFACTS; ++i)
             {
@@ -445,23 +489,43 @@ void kexInventoryMenu::DrawArtifacts(void)
         }
         if(artifactSelected > 0)
         {
-            for(int i = artifactSelected-1; i >= 0; --i)
+            if(artifactSelected == NUM_ARTIFACTS && p->Artifacts() != 0)
             {
-                if(p->Artifacts() & BIT(i))
+                kexGame::cMenuPanel->DrawLeftArrow(LEFT_ARROW_X, ARROW_OFFSET);
+            }
+            else
+            {
+                for(int i = artifactSelected-1; i >= 0; --i)
                 {
-                    kexGame::cMenuPanel->DrawLeftArrow(LEFT_ARROW_X, ARROW_OFFSET);
-                    break;
+                    if(p->Artifacts() & BIT(i))
+                    {
+                        kexGame::cMenuPanel->DrawLeftArrow(LEFT_ARROW_X, ARROW_OFFSET);
+                        break;
+                    }
                 }
             }
         }
     }
 
-    if(!bFlashArtifact || (bFlashArtifact && (flashBits & 0x10) == 0))
+    if(artifactSelected != NUM_ARTIFACTS)
     {
-        DrawCenteredImage(artifactTextures[artifactSelected], PIC_X, PIC_Y);
+        if(!bFlashArtifact || (bFlashArtifact && (flashBits & 0x10) == 0))
+        {
+            DrawCenteredImage(artifactTextures[artifactSelected], PIC_X, PIC_Y);
+        }
+
+        label = kexGame::cLocal->Translation()->GetString(65 + artifactSelected);
+    }
+    else
+    {
+        if(!bFlashArtifact || (bFlashArtifact && (flashBits & 0x10) == 0))
+        {
+            DrawCenteredImage(teamDollTexture, PIC_X, PIC_Y);
+        }
+
+        label = kexGame::cLocal->Translation()->GetString(71);
     }
 
-    label = kexGame::cLocal->Translation()->GetString(65 + artifactSelected);
     label.Split(labels, '\n');
 
     for(unsigned int i = 0; i < labels.Length(); ++i)

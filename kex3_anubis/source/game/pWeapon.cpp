@@ -185,7 +185,7 @@ void kexPlayerWeapon::UpdateSprite(void)
     }
 
     if(owner->Actor()->Flags() & AF_INWATER &&
-        !(static_cast<kexPuppet*>(owner->Actor())->PlayerFlags() & PF_INWATERSURFACE))
+        !(static_cast<kexPuppet*>(owner->Actor())->PlayerFlags() & PF_ABOVESURFACE))
     {
         bUnderwater = true;
 

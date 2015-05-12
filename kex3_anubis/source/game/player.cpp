@@ -129,7 +129,7 @@ void kexPuppet::OnDamage(kexActor *instigator)
         kexGame::cLocal->PlayLoop()->DamageFlash();
         playerFlags |= PF_DEAD;
 
-        if(flags & AF_INWATER && !(playerFlags & PF_INWATERSURFACE))
+        if(flags & AF_INWATER && !(playerFlags & PF_ABOVESURFACE))
         {
             PlaySound("sounds/pdrown.wav");
         }
@@ -163,7 +163,7 @@ void kexPuppet::OnDamage(kexActor *instigator)
         return;
     }
 
-    if(flags & AF_INWATER && !(playerFlags & PF_INWATERSURFACE))
+    if(flags & AF_INWATER && !(playerFlags & PF_ABOVESURFACE))
     {
         switch(kexRand::Max(5))
         {
@@ -614,11 +614,11 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
         {
             float t = (waterheight < owner->ViewZ()) ? 0.035f : 0.075f;
             origin.z = ((waterZ - owner->ViewZ()) - origin.z) * t + origin.z;
-            playerFlags |= PF_INWATERSURFACE;
+            playerFlags |= PF_ABOVESURFACE;
         }
         else
         {
-            playerFlags &= ~PF_INWATERSURFACE;
+            playerFlags &= ~PF_ABOVESURFACE;
         }
     }
 
@@ -824,6 +824,7 @@ void kexPuppet::Spawn(void)
     flags       = (AF_SOLID|AF_SHOOTABLE);
     lavaTicks   = 0;
     slimeTicks  = 0;
+    playerFlags = PF_ABOVESURFACE;
 
     r = radius * 0.5f;
     h = height;
@@ -1007,7 +1008,7 @@ void kexPlayer::UpdateAirSupply(void)
 {
     int maxAirSupplyTime;
 
-    if(!(actor->Flags() & AF_INWATER) || actor->PlayerFlags() & PF_INWATERSURFACE)
+    if(!(actor->Flags() & AF_INWATER) || actor->PlayerFlags() & PF_ABOVESURFACE)
     {
         if(actor->PlayerFlags() & PF_NEEDTOGASP)
         {

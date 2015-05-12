@@ -48,6 +48,28 @@ void A_RandomItem(kActor @actor)
 }
 
 //
+// A_SpawnCobraFromVase
+//
+
+void A_SpawnCobraFromVase(kActor @actor)
+{
+    kActor @obj;
+    int angle;
+    float an;
+    float x = actor.Origin().x;
+    float y = actor.Origin().y;
+    float z = actor.Origin().z;
+    
+    angle = ((Math::RandByte() << 8) | Math::RandByte()) & 0xFFF;
+    
+    an = actor.Yaw() + Math::Deg2Rad(float(angle) / (2048.0f / 360.0f));
+    @obj = Game.SpawnActor("Proj_Cobra_Green", x, y, z + 20.0f, an, actor.SectorIndex());
+    
+    obj.Velocity().x = Math::Sin(an) * 16.0f;
+    obj.Velocity().y = Math::Cos(an) * 16.0f;
+}
+
+//
 // A_RandomVaseItem
 //
 
@@ -58,14 +80,17 @@ void A_RandomVaseItem(kActor @actor)
     float y = actor.Origin().y;
     float z = actor.Origin().z + actor.Height();
     kActor @obj;
-    
+        
     switch(r)
     {
     case 0:
         Game.SpawnActor("AI_Spider", x, y, z, 0, actor.SectorIndex());
         return;
     case 1:
-        Game.SpawnActor("AI_Wasp", x, y, z, 0, actor.SectorIndex());
+        if(Player.Artifacts() >= 1)
+        {
+            Game.SpawnActor("AI_Wasp", x, y, z, 0, actor.SectorIndex());
+        }
         return;
     case 2:
     case 3:
@@ -74,6 +99,14 @@ void A_RandomVaseItem(kActor @actor)
     case 4:
     case 5:
         @obj = Game.SpawnActor("Fx_HealthSpawn", x, y, z, 0, actor.SectorIndex());
+        break;
+    case 6:
+        if(Player.Artifacts() >= 4)
+        {
+            A_SpawnCobraFromVase(actor);
+            A_SpawnCobraFromVase(actor);
+            A_SpawnCobraFromVase(actor);
+        }
         break;
         
     default:

@@ -29,7 +29,7 @@ public:
     void                        Update(void);
     bool                        ProcessInput(inputEvent_t *ev);
     void                        Toggle(void);
-    void                        ShowArtifact(const int artifact);
+    void                        ShowArtifact(const int artifact, const bool bNoDing);
     void                        ShowTransmitter(const int item);
 
     const bool                  IsActive(void) { return bActive; }
@@ -57,6 +57,7 @@ private:
     kexMenuPanel::buttonSet_t   buttonSet;
     bool                        bActive;
     bool                        bFlashArtifact;
+    bool                        bNoDingSound;
     int                         flashBits;
     short                       flashCount;
     short                       categorySelected;
