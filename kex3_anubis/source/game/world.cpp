@@ -209,6 +209,9 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         sectors[i].actorList.Reset();
         sectors[i].bufferIndex.Init();
         
+        memset(&sectors[i].portalBuffer, 0, sizeof(bufferIndex_t));
+        sectors[i].portalBuffer.sector = -1;
+        
         for(int j = sectors[i].faceStart; j < sectors[i].faceEnd+3; ++j)
         {
             faces[j].sectorOwner = i;

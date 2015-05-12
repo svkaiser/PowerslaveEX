@@ -391,11 +391,9 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
 
         if((face->polyStart == -1 || face->polyEnd == -1) && face->flags & FF_PORTAL && face->sector >= 0)
         {
-            const int vertOrder[4] = { 0, 1, 2, 3 };
-
             for(int i = 0; i < 4; ++i)
             {
-                drawVerts[vertexCount].vertex = world->Vertices()[face->vertexStart+vertOrder[i]].origin;
+                drawVerts[vertexCount].vertex = world->Vertices()[face->vertexStart+i].origin;
                 drawVerts[vertexCount].texCoords.x = 0;
                 drawVerts[vertexCount].texCoords.y = 0;
                 drawVerts[vertexCount].rgba[0] = 0;
@@ -658,9 +656,10 @@ void kexRenderScene::DrawSector(kexRenderView &view, mapSector_t *sector)
         sector->flags &= ~SF_DEBUG;
     }
 
-    if(sector->bufferIndex.Length() == 0)
+    if(!(sector->flags & SF_PROCESSED))
     {
         BuildSectorBuffer(sector);
+        sector->flags |= SF_PROCESSED;
     }
 
     for(uint i = 0; i < sector->bufferIndex.Length(); ++i)

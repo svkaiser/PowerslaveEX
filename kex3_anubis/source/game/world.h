@@ -34,6 +34,7 @@ typedef enum
     SF_DEBUG                = BIT(0),
     SF_CLIPPED              = BIT(1),
     SF_SPECIAL              = BIT(2),
+    SF_PROCESSED            = BIT(3),
     SF_WATER                = BIT(8)
 } sectorFlags_t;
 
