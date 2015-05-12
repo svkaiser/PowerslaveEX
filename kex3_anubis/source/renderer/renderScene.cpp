@@ -391,7 +391,7 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
 
         if((face->polyStart == -1 || face->polyEnd == -1) && face->flags & FF_PORTAL && face->sector >= 0)
         {
-            const int vertOrder[4] = { 0, 1, 3, 2 };
+            const int vertOrder[4] = { 0, 1, 2, 3 };
 
             for(int i = 0; i < 4; ++i)
             {
@@ -408,11 +408,11 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
             }
 
             drawIndices[indiceCount++] = drawTris+0;
-            drawIndices[indiceCount++] = drawTris+2;
             drawIndices[indiceCount++] = drawTris+1;
-            drawIndices[indiceCount++] = drawTris+0;
-            drawIndices[indiceCount++] = drawTris+3;
             drawIndices[indiceCount++] = drawTris+2;
+            drawIndices[indiceCount++] = drawTris+0;
+            drawIndices[indiceCount++] = drawTris+2;
+            drawIndices[indiceCount++] = drawTris+3;
 
             bufferIndex->count += 6;
             bufferIndex->numTris += 2;
