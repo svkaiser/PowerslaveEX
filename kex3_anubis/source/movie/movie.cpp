@@ -1155,6 +1155,7 @@ void kexMoviePlayerFFMpeg::Shutdown(void)
     sws_freeContext(swsCtx);
 
     texture.Delete();
+    thread = NULL;
 }
 
 //
@@ -1308,6 +1309,7 @@ static int IteratePacketsThread(void *data)
 void kexMoviePlayerFFMpeg::StartVideoStream(const char *filename)
 {
     static bool bInitialized = false;
+    inputEvent_t *ev;
 
     // initialize ffmpeg if it hasn't already
     if(!bInitialized)
@@ -1316,6 +1318,25 @@ void kexMoviePlayerFFMpeg::StartVideoStream(const char *filename)
 
         av_register_all();
         bInitialized = true;
+    }
+
+    // clear out any remaining user inputs in the queue
+    while((ev = kex::cSession->EventQueue().Pop()) != NULL)
+    {
+        if(ev->type == ev_keydown)
+        {
+            switch(ev->data1)
+            {
+            case KKEY_ESCAPE:
+            case KKEY_RETURN:
+            case KKEY_SPACE:
+                // early out before we go through the trouble
+                // of loading the video
+                return;
+            default:
+                break;
+            }
+        }
     }
 
     globalPts = AV_NOPTS_VALUE;
@@ -1330,35 +1351,30 @@ void kexMoviePlayerFFMpeg::StartVideoStream(const char *filename)
 
     while((!bVideoFinished || (bHasAudio && !bAudioFinished)) && !bUserExit)
     {
-        inputEvent_t *ev;
+        kex::cInput->PollInput();
 
-        if(videoClock > 2)
+        while((ev = kex::cSession->EventQueue().Pop()) != NULL)
         {
-            kex::cInput->PollInput();
-
-            while((ev = kex::cSession->EventQueue().Pop()) != NULL)
+            if(ev->type == ev_keydown)
             {
-                if(ev->type == ev_keydown)
+                switch(ev->data1)
                 {
-                    switch(ev->data1)
+                case KKEY_ESCAPE:
+                case KKEY_RETURN:
+                case KKEY_SPACE:
+                    if(bUserPressed == false)
                     {
-                    case KKEY_ESCAPE:
-                    case KKEY_RETURN:
-                    case KKEY_SPACE:
-                        if(bUserPressed == false)
-                        {
-                            bUserExit = true;
-                            bUserPressed = true;
-                        }
-                        break;
-                    default:
-                        break;
+                        bUserExit = true;
+                        bUserPressed = true;
                     }
+                    break;
+                default:
+                    break;
                 }
-                else if(ev->type == ev_keyup)
-                {
-                    bUserPressed = false;
-                }
+            }
+            else if(ev->type == ev_keyup)
+            {
+                bUserPressed = false;
             }
         }
 
@@ -1372,4 +1388,5 @@ void kexMoviePlayerFFMpeg::StartVideoStream(const char *filename)
 
     // make sure everything is unbinded
     kexRender::cBackend->ClearBindedTexture();
+    kex::cTimer->Sleep(500);
 }

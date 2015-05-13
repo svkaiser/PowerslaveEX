@@ -907,17 +907,15 @@ int kexSoundOAL::MovieAudioThread(void *data)
 
                 data = kex::cMoviePlayer->GetAudioBufferInQueue(bFinished);
 
-                if(bFinished)
+                if(bFinished || !data)
                 {
                     kexSoundOAL::musicSource->Stop();
                     kexSoundOAL::musicSource->Free();
                     break;
                 }
-                else
-                {
-                    alBufferData(buffer, movieAudioChannels, data,
-                        MOVIE_AUDIO_BUFFER_SIZE, movieAudioSampleRate);
-                }
+
+                alBufferData(buffer, movieAudioChannels, data,
+                    MOVIE_AUDIO_BUFFER_SIZE, movieAudioSampleRate);
 
                 alSourceQueueBuffers(src->handle, 1, &buffer);
                 processed--;
@@ -1138,18 +1136,21 @@ void kexSoundOAL::PlayMusic(const char *name, const bool bLoop)
 {
     kexSoundSource *src;
 
-    if(!bInitialized || kexSoundOAL::musicThread != NULL)
+    if(!bInitialized)
     {
         return;
     }
 
-    if(!(src = GetAvailableSource()))
+    // movie player is still hogging this thread. kill it
+    if(kexSoundOAL::musicThread != NULL)
     {
-        sources[0].Stop();
-        sources[0].Free();
-
-        src = &sources[0];
+        UnHookMovieAudioStream();
     }
+
+    sources[0].Stop();
+    sources[0].Free();
+
+    src = &sources[0];
 
     src->ogg = new kexOggFile;
 
@@ -1257,15 +1258,16 @@ void kexSoundOAL::HookToMovieAudioStream(const int sampleRate, const int channel
         return;
     }
 
-    StopMusic();
-
-    if(!(src = GetAvailableSource()))
+    // thread is still busy playing music. kill it
+    if(kexSoundOAL::musicThread != NULL)
     {
-        sources[0].Stop();
-        sources[0].Free();
-
-        src = &sources[0];
+        StopMusic();
     }
+
+    sources[0].Stop();
+    sources[0].Free();
+
+    src = &sources[0];
 
     alGenBuffers(MOVIE_AUDIO_BUFFER_COUNT, movieAudioBuffers);
 

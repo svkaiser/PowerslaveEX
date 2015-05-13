@@ -569,7 +569,6 @@ void kexGameLocal::Start(void)
     if(kex::cSystem->CheckParam("-skipintromovies") <= 0)
     {
         kex::cMoviePlayer->StartVideoStream("movies/LOBOTOMY.avi");
-        kex::cTimer->Sleep(500);
         kex::cMoviePlayer->StartVideoStream("movies/INTRO1.avi");
     }
 
