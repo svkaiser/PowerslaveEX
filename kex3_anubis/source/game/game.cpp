@@ -573,7 +573,7 @@ void kexGameLocal::Start(void)
         kex::cMoviePlayer->StartVideoStream("movies/INTRO1.avi");
     }
 
-    bNoMonsters = kex::cSystem->CheckParam("-nomonsters");
+    bNoMonsters = (kex::cSystem->CheckParam("-nomonsters") > 0);
 
     smallFont   = kexFont::Alloc("smallfont");
     bigFont     = kexFont::Alloc("bigfont");

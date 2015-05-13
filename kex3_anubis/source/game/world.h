@@ -210,6 +210,7 @@ public:
     float                   GetHighestSurroundingFloor(mapSector_t *sector);
     float                   GetLowestSurroundingFloor(mapSector_t *sector);
     void                    MoveSector(mapSector_t *sector, bool bCeiling, const float moveAmount);
+    void                    MakeSectorDynamic(mapSector_t *sector, const bool bCeiling);
     void                    ResetWallSwitchFromTag(const int tag);
     void                    FireRemoteEventFromTag(const int tag);
     void                    FireActorEventFromTag(const int tag);

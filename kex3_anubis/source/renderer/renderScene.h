@@ -81,6 +81,8 @@ public:
     static bool                     bShowCollision;
     static bool                     bShowBounds;
     static bool                     bShowDynamic;
+    static bool                     bDrawDynamicOnly;
+    static bool                     bDrawStaticOnly;
 
     static kexCvar                  cvarRenderWireframe;
     static kexCvar                  cvarRenderFixSpriteClipping;

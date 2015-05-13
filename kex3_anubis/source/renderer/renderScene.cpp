@@ -44,6 +44,8 @@ RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowWaterPortals, showwaterportals);
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowCollision, showcollision);
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowBounds, showbounds);
 RENDERSCENE_DEFINE_DEBUG_COMMAND(bShowDynamic, showdynamic);
+RENDERSCENE_DEFINE_DEBUG_COMMAND(bDrawDynamicOnly, drawdynamiconly);
+RENDERSCENE_DEFINE_DEBUG_COMMAND(bDrawStaticOnly, drawstaticonly);
 
 //
 // kexRenderScene::kexRenderScene
@@ -86,8 +88,8 @@ void kexRenderScene::InitVertexBuffer(void)
     // thanks to the unfortunate requirement of treating
     // shared vertices as a unique instance, we need to add
     // extra padding to the total number of vertices in the level
-    worldVertexBuffer.Allocate(NULL, world->NumVertices()*3, kexVertBuffer::RBU_STATIC,
-                               NULL, world->NumPolys()*8, kexVertBuffer::RBU_STATIC);
+    worldVertexBuffer.Allocate(NULL, world->NumVertices()*3, kexVertBuffer::RBU_DYNAMIC,
+                               NULL, world->NumPolys()*8, kexVertBuffer::RBU_DYNAMIC);
 }
 
 //
@@ -863,6 +865,11 @@ void kexRenderScene::DrawPolygon(mapFace_t *face, mapPoly_t *poly)
 
 void kexRenderScene::DrawWater(kexRenderView &view)
 {
+    if(bDrawStaticOnly)
+    {
+        return;
+    }
+
     kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     kexRender::cBackend->SetState(GLSTATE_CULL, true);
     kexRender::cBackend->SetDepthMask(0);
@@ -1238,7 +1245,7 @@ void kexRenderScene::DrawGroupedPolygons(void)
 {
     mapSector_t *prevSector = NULL;
 
-    if(bufferList.CurrentLength() == 0)
+    if(bufferList.CurrentLength() == 0 || bDrawDynamicOnly)
     {
         return;
     }
@@ -1400,8 +1407,11 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
     DrawGroupedPolygons();
     worldVertexBuffer.UnBind();
 
-    // draw dynamic geometry
-    DrawIndividualPolygons(dynamicPolyList);
+    if(!bDrawStaticOnly)
+    {
+        // draw dynamic geometry
+        DrawIndividualPolygons(dynamicPolyList);
+    }
 
     kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
 

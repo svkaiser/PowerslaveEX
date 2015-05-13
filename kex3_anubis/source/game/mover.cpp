@@ -903,6 +903,8 @@ void kexDropPad::Reset(void)
 
 void kexDropPad::Spawn(void)
 {
+    kexWorld *world = kexGame::cLocal->World();
+
     assert(sector != NULL);
 
     switch(type)
@@ -921,6 +923,9 @@ void kexDropPad::Spawn(void)
     state = DPS_IDLE;
 
     linkedSector = &kexGame::cLocal->World()->Sectors()[sector->linkedSector];
+
+    world->MakeSectorDynamic(linkedSector, true);
+    world->MakeSectorDynamic(sector, false);
     
     baseHeight = -linkedSector->ceilingFace->plane.d;
     destHeight = (float)linkedSector->floorHeight;
@@ -1051,6 +1056,9 @@ void kexFloatingPlatform::Spawn(void)
         Remove();
         return;
     }
+
+    world->MakeSectorDynamic(linkedSector, true);
+    world->MakeSectorDynamic(sector, false);
 
     baseHeight = -linkedSector->ceilingFace->plane.d;
 }

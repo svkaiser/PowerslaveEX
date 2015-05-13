@@ -13,7 +13,7 @@ Wep_Machete 0
 Wep_Pistol 1
 {
     maxAmmo                 60
-    offsetX                 160
+    offsetX                 147
     offsetY                 232
     disableUnderwater       1
     idleAnim                "weapons/pistol_idle"

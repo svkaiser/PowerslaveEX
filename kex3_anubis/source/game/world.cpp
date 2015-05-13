@@ -372,28 +372,43 @@ void kexWorld::ReadEvents(kexBinFile &mapfile, const unsigned int count)
 
             switch(events[i].type)
             {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                MakeSectorDynamic(s, true);
+                break;
+
             case 8:
             case 9:
+                MakeSectorDynamic(s, true);
                 MoveSector(s, true, (float)(s->ceilingHeight - s->floorHeight));
                 break;
 
             case 21:
             case 22:
+                MakeSectorDynamic(s, false);
                 height = GetHighestSurroundingFloor(s);
                 MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
 
             case 23:
                 height = (float)s->floorHeight + 16;
+                MakeSectorDynamic(s, false);
                 MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
 
             case 24:
                 height = GetLowestSurroundingFloor(s);
+                MakeSectorDynamic(s, false);
                 MoveSector(s, false, -(s->floorFace->plane.d - height));
                 break;
 
             case 25:
+                MakeSectorDynamic(s, false);
                 kexGame::cActorFactory->SpawnMover("kexFloor", events[i].type, events[i].sector);
                 break;
 
@@ -772,6 +787,54 @@ bool kexWorld::EventIsASwitch(const int eventID)
 }
 
 //
+// kexWorld::MakeSectorDynamic
+//
+// This should be called on the sector that needs to be a movable
+//
+
+void kexWorld::MakeSectorDynamic(mapSector_t *sector, const bool bCeiling)
+{
+    for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
+    {
+        mapFace_t *face = &faces[i];
+        
+        if(face->flags & FF_PORTAL && face->sector >= 0)
+        {
+            mapSector_t *s = &sectors[face->sector];
+            
+            for(int j = s->faceStart; j < s->faceEnd+3; ++j)
+            {
+                mapFace_t *f = &faces[j];
+
+                if(f->tag == -1 || f->tag != sector->event || f->flags & FF_PORTAL)
+                {
+                    continue;
+                }
+
+                if(!(f->flags & FF_PORTAL))
+                {
+                    f->flags |= FF_DYNAMIC;
+                }
+            }
+            
+            if(i <= sector->faceEnd && !(face->flags & FF_PORTAL))
+            {
+                face->flags |= FF_DYNAMIC;
+            }
+
+            continue;
+        }
+
+        if(i != sector->faceEnd + (bCeiling ? 1 : 2))
+        {
+            continue;
+        }
+
+        face->flags |= FF_DYNAMIC;
+    }
+}
+
+//
 // kexWorld::MoveSector
 //
 
@@ -833,16 +896,7 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                 for(int k = f->vertStart; k <= f->vertEnd; ++k)
                 {
                     mapVertex_t *v = &vertices[k];
-                    bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
-
                     v->origin.z += moveAmount;
-
-                    bufUpdate->index = k;
-                    bufUpdate->newVec = v->origin;
-                    bufUpdate->newColor[0] = v->rgba[0];
-                    bufUpdate->newColor[1] = v->rgba[1];
-                    bufUpdate->newColor[2] = v->rgba[2];
-                    bufUpdate->newColor[3] = v->rgba[3];
                 }
                 
                 vertices[f->vertexStart+0].origin.z += moveAmount;
@@ -887,16 +941,7 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
         for(int j = face->vertStart; j <= face->vertEnd; ++j)
         {
             mapVertex_t *v = &vertices[j];
-            bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
-
             v->origin.z += moveAmount;
-
-            bufUpdate->index = j;
-            bufUpdate->newVec = v->origin;
-            bufUpdate->newColor[0] = v->rgba[0];
-            bufUpdate->newColor[1] = v->rgba[1];
-            bufUpdate->newColor[2] = v->rgba[2];
-            bufUpdate->newColor[3] = v->rgba[3];
         }
         
         vertices[face->vertexStart+0].origin.z += moveAmount;
@@ -1046,10 +1091,6 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
         break;
     case 21:
         kexGame::cActorFactory->SpawnMover("kexLiftImmediate", ev->type, ev->sector);
-        break;
-    case 22:
-        kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
-        face->tag = -1;
         break;
     case 200:
     case 201:
