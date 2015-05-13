@@ -2208,6 +2208,7 @@ private:
     void                            OnSmoothMouse(kexMenuObject *menuObject);
 
     kexMenuObjectOptionScroll       *scrollOption;
+    kexMenuObjectOptionToggle       *toggleInvert;
 END_MENU_CLASS();
 
 DECLARE_MENU_CLASS(kexMenuMouse, MENU_MOUSE);
@@ -2223,7 +2224,7 @@ void kexMenuMouse::Init(void)
 
     button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
     button->x = 112;
-    button->y = 160;
+    button->y = 185;
     button->w = 96;
     button->h = 24;
     button->label = "Back";
@@ -2232,7 +2233,7 @@ void kexMenuMouse::Init(void)
 
     slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
     slider->x = 96;
-    slider->y = 64;
+    slider->y = 46;
     slider->w = 128;
     slider->h = 8;
     slider->label = "Horizontal Sensitivity";
@@ -2241,7 +2242,7 @@ void kexMenuMouse::Init(void)
 
     slider = ALLOC_MENU_OBJECT(kexMenuObjectSlidebar);
     slider->x = 96;
-    slider->y = 96;
+    slider->y = 78;
     slider->w = 128;
     slider->h = 8;
     slider->label = "Vertical Sensitivity";
@@ -2250,7 +2251,7 @@ void kexMenuMouse::Init(void)
 
     scrollOption = ALLOC_MENU_OBJECT(kexMenuObjectOptionScroll);
     scrollOption->x = 128;
-    scrollOption->y = 128;
+    scrollOption->y = 110;
     scrollOption->w = 64;
     scrollOption->label = "Smooth Threshold";
     scrollOption->textAlignment = kexMenuObject::MITA_CENTER;
@@ -2259,6 +2260,15 @@ void kexMenuMouse::Init(void)
     scrollOption->items.Push("3");
     scrollOption->items.Push("4");
     scrollOption->Callback = static_cast<selectCallback_t>(&kexMenuMouse::OnSmoothMouse);
+
+    toggleInvert = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
+    toggleInvert->x = 140;
+    toggleInvert->y = 146;
+    toggleInvert->w = 40;
+    toggleInvert->label = "Invert Mouse Look";
+    toggleInvert->itemTextOffset = 8;
+    toggleInvert->textAlignment = kexMenuObject::MITA_CENTER;
+    toggleInvert->cvar = &kexPlayerCmd::cvarInvertLook;
 }
 
 //
@@ -2325,12 +2335,12 @@ void kexMenuMouse::Display(void)
         (float)kexRender::cScreen->SCREEN_WIDTH,
         (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
 
-    kexGame::cMenuPanel->DrawPanel(64, 24, 192, 172, 4);
-    kexGame::cMenuPanel->DrawInset(72, 32, 174, 16);
+    kexGame::cMenuPanel->DrawPanel(64, 14, 192, 212, 4);
+    kexGame::cMenuPanel->DrawInset(72, 22, 174, 16);
 
     DrawItems();
 
-    kexGame::cLocal->DrawSmallString("Mouse", 160, 36, 1, true);
+    kexGame::cLocal->DrawSmallString("Mouse", 160, 26, 1, true);
 }
 
 //
@@ -2339,7 +2349,8 @@ void kexMenuMouse::Display(void)
 
 bool kexMenuMouse::ProcessInput(inputEvent_t *ev)
 {
-    if(scrollOption->ProcessInput(ev))
+    if(scrollOption->ProcessInput(ev) ||
+        toggleInvert->ProcessInput(ev))
     {
         return true;
     }

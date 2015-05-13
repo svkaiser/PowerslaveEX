@@ -88,6 +88,11 @@ void kexPlayerCmd::BuildTurning(void)
     
     angles[0] = ((float)turnx * cvarMSensitivityX.GetFloat()) / 2048.0f;
     angles[1] = ((float)turny * cvarMSensitivityY.GetFloat()) / 2048.0f;
+
+    if(cvarInvertLook.GetBool())
+    {
+        angles[1] = -angles[1];
+    }
     
     history[historyCount & 3][0] = angles[0];
     history[historyCount & 3][1] = angles[1];
