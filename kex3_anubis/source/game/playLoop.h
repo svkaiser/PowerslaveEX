@@ -56,6 +56,8 @@ public:
     const bool                  IsPaused(void) const { return bPaused; }
     void                        TogglePause(const bool bToggle) { bPaused = bToggle; }
     kexInventoryMenu            &InventoryMenu(void) { return inventoryMenu; }
+
+    static bool                 bPrintStats;
     
 private:
     void                        FadeToBlack(void);
@@ -68,6 +70,7 @@ private:
                                                  const float size, const byte r, const byte g, const byte b);
     void                        DrawAutomapActors(kexRenderView &view);
     void                        DrawAutomapWalls(kexRenderView &view);
+    void                        PrintStats(void);
 
     gameState_t                 requestedGameState;
     int                         ticks;
@@ -88,6 +91,7 @@ private:
     bool                        bRestartLevel;
     float                       automapZoom;
     const char                  *mapChange;
+    uint64_t                    debugTickTime;
 };
 
 #endif

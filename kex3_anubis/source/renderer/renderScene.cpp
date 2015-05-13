@@ -1427,21 +1427,16 @@ void kexRenderScene::DrawSectors(kexRenderView &view)
 }
 
 //
-// kexRenderScene::DrawActors
+// kexRenderScene::PrepareSprites
 //
 
-void kexRenderScene::DrawActors(kexRenderView &view)
+void kexRenderScene::PrepareSprites(kexRenderView &view)
 {
     kexMatrix mtx(view.Pitch(), 1);
     kexVec3 org;
     float viewPitch;
 
     mtx = mtx * kexMatrix(-view.Yaw()-kexMath::pi, 2);
-
-    if(bPrintStats)
-    {
-        drawActorTime = kex::cTimer->GetPerformanceCounter();
-    }
 
     visSprites.Reset();
 
@@ -1495,15 +1490,31 @@ void kexRenderScene::DrawActors(kexRenderView &view)
     // setup our view matrix so sprites will always be facing the render view
     spriteMatrix = kexMatrix(viewPitch, 1) * kexMatrix(view.Yaw(), 2);
     spriteMatrix.RotateX(kexMath::pi);
+}
+
+//
+// kexRenderScene::DrawActors
+//
+
+void kexRenderScene::DrawActors(kexRenderView &view, const bool bInWaterOnly)
+{
+    uint64_t drawTime = 0;
+
+    if(bPrintStats)
+    {
+        drawTime = kex::cTimer->GetPerformanceCounter();
+    }
     
+    //
     // actors can have multiple sprites attached (depending on the animation)
     // and this could result in z-fighting. Just disable the depth mask since
     // we already have our sprites sorted out by distance
+    //
     kexRender::cBackend->SetDepthMask(0);
 
     if(cvarRenderFixSpriteClipping.GetBool())
     {
-        FixSpriteClipping(view);
+        FixSpriteClipping(view, bInWaterOnly);
     }
 
     kexRender::cBackend->SetState(GLSTATE_DEPTHTEST, true);
@@ -1511,6 +1522,22 @@ void kexRenderScene::DrawActors(kexRenderView &view)
     for(uint i = 0; i < visSprites.CurrentLength(); ++i)
     {
         kexActor *actor = visSprites[i].actor;
+        mapFace_t *face = actor->Sector()->ceilingFace;
+        int testBits = 0;
+
+        testBits |= (bInWaterOnly == true);
+        testBits ^= ((actor->Flags() & AF_INWATER) != 0);
+
+        if(face->flags & FF_WATER)
+        {
+            float d = (face->plane.Distance(view.Origin()) - face->plane.d)-32;
+            testBits ^= (FLOATSIGNBIT(d) ^ 1);
+        }
+
+        if(testBits)
+        {
+            continue;
+        }
 
         kexRender::cBackend->SetState(GLSTATE_CULL, !(actor->Flags() & AF_STRETCHY));
 
@@ -1529,7 +1556,7 @@ void kexRenderScene::DrawActors(kexRenderView &view)
 
     if(bPrintStats)
     {
-        drawActorTime = kex::cTimer->GetPerformanceCounter() - drawActorTime;
+        drawActorTime += kex::cTimer->GetPerformanceCounter() - drawTime;
     }
 }
 
@@ -1548,7 +1575,7 @@ void kexRenderScene::DrawActors(kexRenderView &view)
 // the stencil buffer is cleared.
 //
 
-void kexRenderScene::FixSpriteClipping(kexRenderView &view)
+void kexRenderScene::FixSpriteClipping(kexRenderView &view, const bool bInWaterOnly)
 {
     mapSector_t *prevSector = NULL;
 
@@ -1559,10 +1586,26 @@ void kexRenderScene::FixSpriteClipping(kexRenderView &view)
     for(uint i = 0; i < visSprites.CurrentLength(); ++i)
     {
         kexActor *actor = visSprites[i].actor;
+        mapFace_t *face = actor->Sector()->ceilingFace;
+        int testBits = 0;
 
         if(actor->Flags() & (AF_STRETCHY|AF_NOSPRITECLIPFIX))
         {
             // we don't care about strechy sprites
+            continue;
+        }
+
+        testBits |= (bInWaterOnly == true);
+        testBits ^= ((actor->Flags() & AF_INWATER) != 0);
+
+        if(face->flags & FF_WATER)
+        {
+            float d = (face->plane.Distance(view.Origin()) - face->plane.d)-32;
+            testBits ^= (FLOATSIGNBIT(d) ^ 1);
+        }
+
+        if(testBits)
+        {
             continue;
         }
 
@@ -1651,7 +1694,6 @@ void kexRenderScene::Prepare(kexRenderView &view)
     
     clipY = h - (int)((float)h / (240.0f / 24.0f));
     
-    kexRender::cVertList->BindDrawPointers();
     waterFaces.Reset();
 }
 
@@ -1693,6 +1735,7 @@ void kexRenderScene::PrintStats(void)
                                       kex::cTimer->MeasurePerformance(polySortTime));
     
     kexRender::cUtils->AddDebugLineSpacing();
+    drawActorTime = 0;
 }
 
 //
@@ -1716,11 +1759,15 @@ void kexRenderScene::DrawView(kexRenderView &view, mapSector_t *sector)
 
     dLights.Draw(this);
 
+    PrepareSprites(view);
+
+    DrawActors(view, true);
+
     DrawWater(view);
+    
+    DrawActors(view, false);
 
     DrawDebug(view);
-    
-    DrawActors(view);
     
     kexRender::cPostProcess->RenderFXAA();
     kexRender::cPostProcess->RenderBloom();

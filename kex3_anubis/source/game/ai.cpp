@@ -102,6 +102,7 @@ kexAI::kexAI(void)
     this->meleeExtraDist = 0;
     this->turnSpeed = 8;
     this->turnCount = 0;
+    this->sightDistance = 3000;
 
     for(int i = 0; i < 4; ++i)
     {
@@ -329,8 +330,8 @@ bool kexAI::CheckTargetSight(kexActor *actor)
         return false;
     }
     
-    if(kexMath::Fabs(origin.x - actor->Origin().x) >= 3000) return false;
-    if(kexMath::Fabs(origin.y - actor->Origin().y) >= 3000) return false;
+    if(kexMath::Fabs(origin.x - actor->Origin().x) >= sightDistance) return false;
+    if(kexMath::Fabs(origin.y - actor->Origin().y) >= sightDistance) return false;
 
     if(!(aiFlags & AIF_LOOKALLAROUND))
     {
@@ -1074,6 +1075,7 @@ void kexAI::Spawn(void)
         definition->GetFloat("moveSpeed", moveSpeed, 8);
         definition->GetFloat("meleeExtraDist", meleeExtraDist);
         definition->GetFloat("turnSpeed", turnSpeed, 8);
+        definition->GetFloat("sightDistance", sightDistance, 3000);
         definition->GetString("painSound", painSound);
         definition->GetString("sightSound", sightSound);
 

@@ -130,6 +130,7 @@ private:
     float                           meleeExtraDist;
     int                             igniteTicks[4];
     kexActor                        *igniteFlames[4];
+    float                           sightDistance;
     float                           turnSpeed;
     int                             turnCount;
 END_KEX_CLASS();

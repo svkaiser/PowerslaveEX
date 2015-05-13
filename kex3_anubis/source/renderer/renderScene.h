@@ -105,8 +105,9 @@ private:
     void                            Prepare(kexRenderView &view);
     void                            DrawSky(kexRenderView &view);
     void                            DrawSectors(kexRenderView &view);
-    void                            FixSpriteClipping(kexRenderView &view);
-    void                            DrawActors(kexRenderView &view);
+    void                            FixSpriteClipping(kexRenderView &view, const bool bInWaterOnly);
+    void                            PrepareSprites(kexRenderView &view);
+    void                            DrawActors(kexRenderView &view, const bool bInWaterOnly);
     void                            DrawSector(kexRenderView &view, mapSector_t *sector);
     void                            DrawFace(kexRenderView &view, mapSector_t *sector, int faceID);
     void                            DrawPortal(kexRenderView &view, mapFace_t *face, byte r, byte g, byte b);

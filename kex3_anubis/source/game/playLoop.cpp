@@ -143,12 +143,23 @@ COMMAND(puke)
 }
 
 //
+// statplayloop
+//
+
+COMMAND(statplayloop)
+{
+    kexPlayLoop::bPrintStats ^= 1;
+}
+
+//
 // kexPlayLoop::kexPlayLoop
 //
 
 kexPlayLoop::kexPlayLoop(void)
 {
 }
+
+bool kexPlayLoop::bPrintStats = false;
 
 //
 // kexPlayLoop::~kexPlayLoop
@@ -274,6 +285,8 @@ void kexPlayLoop::Draw(void)
     hud.Display();
 
     DrawFadeIn();
+
+    PrintStats();
 }
 
 //
@@ -286,6 +299,11 @@ void kexPlayLoop::Tick(void)
     {
         kexGame::cLocal->SetMenu(MENU_PAUSE);
         return;
+    }
+
+    if(bPrintStats)
+    {
+        debugTickTime = kex::cTimer->GetPerformanceCounter();
     }
 
     if(!bFadeOut && kexGame::cLocal->Player()->Actor()->PlayerFlags() & PF_DEAD)
@@ -363,6 +381,11 @@ void kexPlayLoop::Tick(void)
     }
     
     ticks++;
+
+    if(bPrintStats)
+    {
+        debugTickTime = kex::cTimer->GetPerformanceCounter() - debugTickTime;
+    }
 }
 
 //
@@ -904,4 +927,19 @@ void kexPlayLoop::DrawAutomap(void)
                      kexGame::cLocal->Player()->Actor()->Radius(), 255, 255, 255);
 
     dglLineWidth(1);
+}
+
+//
+// kexPlayLoop::PrintStats
+//
+
+void kexPlayLoop::PrintStats(void)
+{
+    if(!bPrintStats)
+    {
+        return;
+    }
+    
+    kexRender::cUtils->PrintStatsText("Playloop Time", "%fms", kex::cTimer->MeasurePerformance(debugTickTime));
+    kexRender::cUtils->AddDebugLineSpacing();
 }
