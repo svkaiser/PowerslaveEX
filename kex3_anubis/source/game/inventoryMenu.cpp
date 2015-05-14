@@ -109,6 +109,7 @@ void kexInventoryMenu::Reset(void)
     bActive = false;
     categorySelected = 0;
     artifactSelected = 0;
+    weaponSelected = 0;
     flashBits = 0;
     flashCount = 0;
     focusedTransmitter = -1;
@@ -235,6 +236,34 @@ bool kexInventoryMenu::ProcessInput(inputEvent_t *ev)
                         kexGame::cLocal->PlaySound("sounds/select.wav");
                         kexGame::cLocal->PlayLoop()->ToggleAutomap(true);
                         return true;
+                    }
+                }
+                break;
+
+            case 1:
+                for(int i = weaponSelected+1; i < NUMPLAYERWEAPONS; ++i)
+                {
+                    if(p->WeaponOwned(i))
+                    {
+                        if(kexGame::cMenuPanel->CursorOnRightArrow(RIGHT_ARROW_X, ARROW_OFFSET))
+                        {
+                            weaponSelected = i;
+                            kexGame::cLocal->PlaySound("sounds/select.wav");
+                        }
+                        break;
+                    }
+                }
+
+                for(int i = weaponSelected-1; i >= 0; --i)
+                {
+                    if(p->WeaponOwned(i))
+                    {
+                        if(kexGame::cMenuPanel->CursorOnLeftArrow(LEFT_ARROW_X, ARROW_OFFSET))
+                        {
+                           weaponSelected = i;
+                           kexGame::cLocal->PlaySound("sounds/select.wav");
+                        }
+                        break;
                     }
                 }
                 break;
@@ -454,7 +483,6 @@ void kexInventoryMenu::DrawArtifacts(void)
 {
     kexPlayer *p = kexGame::cLocal->Player();
     kexStrList labels;
-    kexStr label;
 
     if(p->Artifacts() == 0 && p->TeamDolls() == 0)
     {
@@ -514,19 +542,64 @@ void kexInventoryMenu::DrawArtifacts(void)
             DrawCenteredImage(artifactTextures[artifactSelected], PIC_X, PIC_Y);
         }
 
-        label = kexGame::cLocal->Translation()->GetString(65 + artifactSelected);
+        kexGame::cLocal->Translation()->GetFormattedString(65 + artifactSelected, labels);
     }
     else
     {
+        int numDolls = 0;
+
         if(!bFlashArtifact || (bFlashArtifact && (flashBits & 0x10) == 0))
         {
             DrawCenteredImage(teamDollTexture, PIC_X, PIC_Y);
         }
 
-        label = kexGame::cLocal->Translation()->GetString(71);
+        for(int i = 0; i < 32; ++i)
+        {
+            if(p->TeamDolls() & BIT(i))
+            {
+                numDolls++;
+            }
+        }
+
+        kexGame::cLocal->Translation()->GetFormattedString(71, labels, numDolls);
     }
 
-    label.Split(labels, '\n');
+    for(unsigned int i = 0; i < labels.Length(); ++i)
+    {
+        float height = font->StringHeight(labels[i], 1, 0);
+        font->DrawString(labels[i], 160, 164 + (height * (float)i), 1, true);
+    }
+}
+
+//
+// kexInventoryMenu::DrawWeapons
+//
+
+void kexInventoryMenu::DrawWeapons(void)
+{
+    kexPlayer *p = kexGame::cLocal->Player();
+    kexStrList labels;
+
+    for(int i = weaponSelected+1; i < NUMPLAYERWEAPONS; ++i)
+    {
+        if(p->WeaponOwned(i))
+        {
+            kexGame::cMenuPanel->DrawRightArrow(RIGHT_ARROW_X, ARROW_OFFSET);
+            break;
+        }
+    }
+
+    for(int i = weaponSelected-1; i >= 0; --i)
+    {
+        if(p->WeaponOwned(i))
+        {
+            kexGame::cMenuPanel->DrawLeftArrow(LEFT_ARROW_X, ARROW_OFFSET);
+            break;
+        }
+    }
+
+    kexGame::cLocal->Translation()->GetFormattedString(56 + weaponSelected, labels);
+    DrawCenteredImage(weaponTextures[weaponSelected], PIC_X, PIC_Y);
 
     for(unsigned int i = 0; i < labels.Length(); ++i)
     {
@@ -563,15 +636,35 @@ void kexInventoryMenu::DrawTransmitterItem(const int item, const float x, const 
 void kexInventoryMenu::DrawTransmitter(void)
 {
     kexGameLocal *game = kexGame::cLocal;
+    kexPlayer *p = game->Player();
     const char *title;
     kexStrList labels;
-    kexStr label;
 
     title = game->Translation()->GetString(72);
     font->DrawString(title, 160, 164, 1, true, RGBA(224, 224, 224, 255));
 
-    label = game->Translation()->GetString(75);
-    label.Split(labels, '\n');
+    if(p->QuestItems() == 0xFF)
+    {
+        game->Translation()->GetFormattedString(73, labels);
+    }
+    else if(p->QuestItems() != 0)
+    {
+        int numTransmitters = 0;
+
+        for(int i = 0; i < 8; ++i)
+        {
+            if(p->QuestItems() & BIT(i))
+            {
+                numTransmitters++;
+            }
+        }
+
+        game->Translation()->GetFormattedString(74, labels, numTransmitters);
+    }
+    else
+    {
+        game->Translation()->GetFormattedString(75, labels);
+    }
 
     for(unsigned int i = 0; i < labels.Length(); ++i)
     {
@@ -587,6 +680,11 @@ void kexInventoryMenu::DrawTransmitter(void)
     DrawTransmitterItem(5, 186, 98);
     DrawTransmitterItem(6, 208, 59);
     DrawTransmitterItem(7, 202, 51);
+
+    if(p->QuestItems() == 0xFF)
+    {
+        kexRender::cScreen->DrawTexture(questCompleted, 208, 59, 255, 255, 255, 255);
+    }
 }
 
 //
@@ -613,6 +711,10 @@ void kexInventoryMenu::Display(void)
     {
     case 0:
         DrawAutomap();
+        break;
+
+    case 1:
+        DrawWeapons();
         break;
 
     case 2:

@@ -42,6 +42,7 @@ private:
     void                        DrawTransmitterItem(const int item, const float x, const float y);
     void                        DrawTransmitter(void);
     void                        DrawArtifacts(void);
+    void                        DrawWeapons(void);
     void                        DrawCenteredImage(kexTexture *texture, const float x, const float y);
     void                        UpdateFlash(void);
 
@@ -62,6 +63,7 @@ private:
     short                       flashCount;
     short                       categorySelected;
     short                       artifactSelected;
+    short                       weaponSelected;
     short                       focusedTransmitter;
 };
 

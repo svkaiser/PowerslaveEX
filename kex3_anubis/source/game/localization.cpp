@@ -55,6 +55,38 @@ const char *kexTranslation::GetString(const int index)
 }
 
 //
+// kexTranslation::GetFormattedString
+//
+
+void kexTranslation::GetFormattedString(const int index, kexStrList &strList, const int value)
+{
+    kexStr str;
+
+    if(index < 0 || index > (int)strings[language].Length())
+    {
+        return;
+    }
+
+    str = GetString(index);
+    str.Split(strList, '\n');
+
+    if(strList.Length() == 0)
+    {
+        strList.Push(str);
+        return;
+    }
+
+    for(unsigned int i = 0; i < strList.Length(); ++i)
+    {
+        if(strList[i].IndexOf("%d") != -1)
+        {
+            str = kexStr::Format(strList[i], value);
+            strList[i] = str;
+        }
+    }
+}
+
+//
 // kexTranslation::TranslateString
 //
 
