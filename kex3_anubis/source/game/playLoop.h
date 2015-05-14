@@ -58,6 +58,7 @@ public:
     kexInventoryMenu            &InventoryMenu(void) { return inventoryMenu; }
 
     static bool                 bPrintStats;
+    static kexCvar              cvarCrosshair;
     
 private:
     void                        FadeToBlack(void);

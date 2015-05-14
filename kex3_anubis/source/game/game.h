@@ -242,6 +242,7 @@ public:
                                                        const kexVec3 &color, const float fadeTime = -1, const int passes = 2);
     static kexMenu                  *menus[NUMMENUS];
     static bool                     bShowSoundStats;
+    static kexCvar                  cvarShowMovieIntro;
     
 private:
     void                            LoadNewMap(void);

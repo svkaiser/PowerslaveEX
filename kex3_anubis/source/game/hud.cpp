@@ -51,8 +51,9 @@ void kexHud::Init(void)
     airSupplyFront  = kexRender::cTextures->Cache("gfx/airsupply_front.png", TC_CLAMP, TF_NEAREST);
     airSupplyBack   = kexRender::cTextures->Cache("gfx/airsupply_back.png", TC_CLAMP, TF_NEAREST);
     fillPic         = kexRender::cTextures->Cache("gfx/menu/menu_bg.png", TC_REPEAT, TF_NEAREST);
-    dolphinPic      = kexRender::cTextures->Cache("gfx/dolphin.png", TC_REPEAT, TF_NEAREST);
-    vulturePic      = kexRender::cTextures->Cache("gfx/vulture.png", TC_REPEAT, TF_NEAREST);
+    dolphinPic      = kexRender::cTextures->Cache("gfx/dolphin.png", TC_CLAMP, TF_NEAREST);
+    vulturePic      = kexRender::cTextures->Cache("gfx/vulture.png", TC_CLAMP, TF_NEAREST);
+    crossHairPic    = kexRender::cTextures->Cache("gfx/crosshair.png", TC_CLAMP, TF_NEAREST);
 }
 
 //
@@ -471,6 +472,36 @@ void kexHud::DrawAirSupply(void)
 }
 
 //
+// kexHud::DrawCrosshair
+//
+
+void kexHud::DrawCrosshair(void)
+{
+    float w, h;
+    float vw, vh;
+    float x, y;
+
+    if(!kexPlayLoop::cvarCrosshair.GetBool())
+    {
+        return;
+    }
+
+    w = (float)crossHairPic->OriginalWidth();
+    h = (float)crossHairPic->OriginalHeight();
+    vw = (float)kex::cSystem->VideoWidth();
+    vh = (float)kex::cSystem->VideoHeight();
+    x = vw * 0.5f;
+    y = vh * 0.5f;
+
+    kexRender::cBackend->SetOrtho();
+    crossHairPic->Bind();
+
+    kexRender::cVertList->BindDrawPointers();
+    kexRender::cVertList->AddQuad(x-(w*0.5f), y-(h*0.5f), w, h, 255, 255, 255, 128);
+    kexRender::cVertList->DrawElements();
+}
+
+//
 // kexHud::Update
 //
 
@@ -525,4 +556,6 @@ void kexHud::Display(void)
     DrawFlash();
 
     DrawMessages();
+
+    DrawCrosshair();
 }

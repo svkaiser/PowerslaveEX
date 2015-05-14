@@ -22,6 +22,8 @@
 #include "game.h"
 #include "localization.h"
 
+kexCvar kexPlayLoop::cvarCrosshair("g_showcrosshair", CVF_BOOL|CVF_CONFIG, "0", "Displays crosshair");
+
 //
 // gprint
 //

@@ -41,6 +41,8 @@ kexGameLocal *kexGame::cLocal = &gameLocal;
 kexMenu *kexGameLocal::menus[NUMMENUS];
 bool kexGameLocal::bShowSoundStats = false;
 
+kexCvar kexGameLocal::cvarShowMovieIntro("g_showintromovie", CVF_BOOL|CVF_CONFIG, "1", "Play intro movies on startup");
+
 //=============================================================================
 //
 // Commands
@@ -566,7 +568,8 @@ void kexGameLocal::Init(void)
 
 void kexGameLocal::Start(void)
 {
-    if(kex::cSystem->CheckParam("-skipintromovies") <= 0)
+    if(kex::cSystem->CheckParam("-skipintromovies") <= 0 &&
+        cvarShowMovieIntro.GetBool())
     {
         kex::cMoviePlayer->StartVideoStream("movies/LOBOTOMY.avi");
         kex::cMoviePlayer->StartVideoStream("movies/INTRO1.avi");

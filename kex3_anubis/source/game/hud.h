@@ -50,6 +50,7 @@ private:
     void                DrawCompass(void);
     void                DrawAbilityIcons(void);
     void                DrawFlash(void);
+    void                DrawCrosshair(void);
     void                DrawMessages(void);
     void                DrawMessage(const char *msg, const float x, const float y);
     void                DrawDot(const float x, const float y, bool bRedDot, bool bOn);
@@ -62,6 +63,7 @@ private:
     kexTexture          *fillPic;
     kexTexture          *dolphinPic;
     kexTexture          *vulturePic;
+    kexTexture          *crossHairPic;
     kexPlayer           *player;
     float               currentHealth;
     hudMessage_t        messages[MAXMESSAGES];

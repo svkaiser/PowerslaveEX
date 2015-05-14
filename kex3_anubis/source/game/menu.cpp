@@ -2798,6 +2798,8 @@ private:
 
     kexMenuObjectOptionScroll       *languages;
     kexMenuObjectOptionToggle       *toggleAutoAim;
+    kexMenuObjectOptionToggle       *toggleIntroMovies;
+    kexMenuObjectOptionToggle       *toggleCrosshair;
 END_MENU_CLASS();
 
 DECLARE_MENU_CLASS(kexMenuGameplay, MENU_GAMEPLAY);
@@ -2823,10 +2825,10 @@ void kexMenuGameplay::Init(void)
     button->Callback = static_cast<selectCallback_t>(&kexMenuGameplay::OnBack);
 
     languages = ALLOC_MENU_OBJECT(kexMenuObjectOptionScroll);
-    languages->x = 96;
+    languages->x = 188;
     languages->y = 70;
-    languages->w = 128;
-    languages->label = "Language";
+    languages->w = 80;
+    languages->itemTextOffset = 8;
     languages->textAlignment = kexMenuObject::MITA_CENTER;
     languages->Callback = static_cast<selectCallback_t>(&kexMenuGameplay::OnLanguage);
     languages->items.Push("English");
@@ -2835,12 +2837,28 @@ void kexMenuGameplay::Init(void)
     languages->items.Push("German");
 
     toggleAutoAim = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
-    toggleAutoAim->x = 144;
-    toggleAutoAim->y = 102;
-    toggleAutoAim->w = 32;
-    toggleAutoAim->label = "Auto Aim";
+    toggleAutoAim->x = 188;
+    toggleAutoAim->y = 88;
+    toggleAutoAim->w = 40;
+    toggleAutoAim->itemTextOffset = 8;
     toggleAutoAim->textAlignment = kexMenuObject::MITA_CENTER;
     toggleAutoAim->cvar = &kexPlayer::cvarAutoAim;
+
+    toggleIntroMovies = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
+    toggleIntroMovies->x = 188;
+    toggleIntroMovies->y = 106;
+    toggleIntroMovies->w = 40;
+    toggleIntroMovies->itemTextOffset = 8;
+    toggleIntroMovies->textAlignment = kexMenuObject::MITA_CENTER;
+    toggleIntroMovies->cvar = &kexGameLocal::cvarShowMovieIntro;
+
+    toggleCrosshair = ALLOC_MENU_OBJECT(kexMenuObjectOptionToggle);
+    toggleCrosshair->x = 188;
+    toggleCrosshair->y = 124;
+    toggleCrosshair->w = 40;
+    toggleCrosshair->itemTextOffset = 8;
+    toggleCrosshair->textAlignment = kexMenuObject::MITA_CENTER;
+    toggleCrosshair->cvar = &kexPlayLoop::cvarCrosshair;
 }
 
 //
@@ -2898,8 +2916,13 @@ void kexMenuGameplay::Display(void)
         (float)kexRender::cScreen->SCREEN_WIDTH,
         (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
 
-    kexGame::cMenuPanel->DrawPanel(64, 24, 192, 172, 4);
-    kexGame::cMenuPanel->DrawInset(72, 32, 174, 16);
+    kexGame::cMenuPanel->DrawPanel(32, 24, 256, 172, 4);
+    kexGame::cMenuPanel->DrawInset(40, 32, 238, 16);
+
+    kexGame::cLocal->DrawSmallString("Language", 48, 72, 1, false);
+    kexGame::cLocal->DrawSmallString("Auto Aiming", 48, 90, 1, false);
+    kexGame::cLocal->DrawSmallString("Play Intro Movies", 46, 110, 1, false);
+    kexGame::cLocal->DrawSmallString("Crosshair", 48, 126, 1, false);
 
     DrawItems();
 
@@ -2913,7 +2936,9 @@ void kexMenuGameplay::Display(void)
 bool kexMenuGameplay::ProcessInput(inputEvent_t *ev)
 {
     if( languages->ProcessInput(ev) ||
-        toggleAutoAim->ProcessInput(ev))
+        toggleAutoAim->ProcessInput(ev) ||
+        toggleIntroMovies->ProcessInput(ev) ||
+        toggleCrosshair->ProcessInput(ev))
     {
         return true;
     }
