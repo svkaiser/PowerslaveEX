@@ -1,0 +1,5 @@
+texture "sprites/items/map.png"
+
+// working\map\sprite0273.tga
+sprite 0 0 0 64 52
+

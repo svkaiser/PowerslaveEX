@@ -298,3 +298,19 @@ Item_Health_Ankah3 55
     bits                    2
     pickupMessage           "$str_108"
 }
+
+Item_Map 144
+{
+    classname               "kexMapPickup"
+    radius                  16
+    height                  32
+    stepHeight              32
+    scale                   1.25
+    spawnAnim               "items/map_item_anim"
+    pickupSound             "sounds/fammo.wav"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    touchable               1
+    pickupMessage           "$str_111"
+}

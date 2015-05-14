@@ -788,3 +788,64 @@ void kexTeamDollPickup::Spawn(void)
         Remove();
     }
 }
+
+//-----------------------------------------------------------------------------
+//
+// kexMapPickup
+//
+//-----------------------------------------------------------------------------
+
+DECLARE_KEX_CLASS(kexMapPickup, kexPickup)
+
+//
+// kexMapPickup::kexMapPickup
+//
+
+kexMapPickup::kexMapPickup(void)
+{
+}
+
+//
+// kexMapPickup::~kexMapPickup
+//
+
+kexMapPickup::~kexMapPickup(void)
+{
+}
+
+//
+// kexMapPickup::Tick
+//
+
+void kexMapPickup::Tick(void)
+{
+    kexPickup::Tick();
+}
+
+//
+// kexMapPickup::OnTouch
+//
+
+void kexMapPickup::OnTouch(kexActor *instigator)
+{
+    if(Removing())
+    {
+        return;
+    }
+
+    if(!instigator->InstanceOf(&kexPuppet::info))
+    {
+        return;
+    }
+
+    kexGame::cLocal->PlayLoop()->ToggleMapAll(true);
+    kexPickup::OnTouch(instigator);
+}
+
+//
+// kexMapPickup::Spawn
+//
+
+void kexMapPickup::Spawn(void)
+{
+}

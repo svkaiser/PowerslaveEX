@@ -157,6 +157,7 @@ Map_Sunken      12
     overworld_y     60
     map             "maps/SUNKEN.MAP"
     musicTrack      "music/cave.ogg"
+    script          "scripts/map/SUNKEN_script.txt"
     nextmap_west    13
     nextmap_south   11
 }

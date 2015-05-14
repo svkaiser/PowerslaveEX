@@ -72,11 +72,11 @@ void kexCModel::Reset(void)
 // clockwise order)
 //
 
-bool kexCModel::CheckEdgeSide(mapEdge_t *edge, mapFace_t *face,
+bool kexCModel::CheckEdgeSide(const kexVec3 &origin, mapEdge_t *edge, mapFace_t *face,
                               const float heightAdjust, const float extent)
 {
     kexVec3 ldir = *edge->v2 - *edge->v1;
-    kexVec3 pdir = (end + kexVec3(0, 0, heightAdjust)) - *edge->v1;
+    kexVec3 pdir = (origin + kexVec3(0, 0, heightAdjust)) - *edge->v1;
     kexVec3 cp = pdir.Cross(ldir);
 
     if(cp.Dot(face->plane.Normal()) < 0)
@@ -225,15 +225,15 @@ bool kexCModel::TraceFacePlane(mapFace_t *face, const float extent1, const float
         }
 
         // check to see if there's enough headroom to go under this face
-        if(CheckEdgeSide(face->BottomEdge(), face, actorHeight) ||
-           CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
+        if(CheckEdgeSide(end, face->BottomEdge(), face, actorHeight) ||
+           CheckEdgeSide(end, face->TopEdge(), face, moveActor->StepHeight()))
         {
             // didn't contact the face
             return false;
         }
 
-        if(CheckEdgeSide(face->LeftEdge(), face, 0, extent1) ||
-           CheckEdgeSide(face->RightEdge(), face, 0, extent1))
+        if(CheckEdgeSide(end, face->LeftEdge(), face, 0, extent1) ||
+           CheckEdgeSide(end, face->RightEdge(), face, 0, extent1))
         {
             return false;
         }
@@ -483,7 +483,7 @@ void kexCModel::PushFromRadialBounds(const kexVec2 &point, const float radius)
 
 bool kexCModel::CollideFace(mapFace_t *face)
 {
-    if(CheckEdgeSide(face->TopEdge(), face, moveActor->StepHeight()))
+    if(CheckEdgeSide(end, face->TopEdge(), face, moveActor->StepHeight()))
     {
         // walk over this face
         return false;
@@ -492,7 +492,7 @@ bool kexCModel::CollideFace(mapFace_t *face)
     // check to see if there's enough headroom to go under this face
     if(face->BottomEdge()->flags & EGF_TOPSTEP)
     {
-        if(CheckEdgeSide(face->BottomEdge(), face, actorHeight))
+        if(CheckEdgeSide(end, face->BottomEdge(), face, actorHeight))
         {
             // we're under the bottom edge of this face, so skip
             return false;
@@ -770,12 +770,26 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
 }
 
 //
+// kexCModel::ActorTouchingFace
+//
+// Returns true if the actor is touching any of the four edges of the face
+//
+
+bool kexCModel::ActorTouchingFace(kexActor *actor, mapFace_t *face)
+{
+    return (!CheckEdgeSide(actor->Origin(), face->BottomEdge(), face, actor->Height()*0.95f) &&
+            !CheckEdgeSide(actor->Origin(), face->TopEdge(), face, actor->StepHeight()) &&
+            !CheckEdgeSide(actor->Origin(), face->LeftEdge(), face, 0) &&
+            !CheckEdgeSide(actor->Origin(), face->RightEdge(), face, 0));
+}
+
+//
 // kexCModel::CheckActorPosition
 //
 
 bool kexCModel::CheckActorPosition(kexActor *actor, mapSector_t *initialSector)
 {
-    if(!PointWithinSectorEdges(actor->Origin(), actor->Sector()))
+    if(initialSector && !PointWithinSectorEdges(actor->Origin(), actor->Sector()))
     {
         actor->Origin() = actor->PrevOrigin();
         actor->SetSector(initialSector);
@@ -792,15 +806,12 @@ bool kexCModel::CheckActorPosition(kexActor *actor, mapSector_t *initialSector)
                 continue;
             }
             
-            float d = PointOnFaceSide(actor->Origin(), face, actorRadius);
+            float d = PointOnFaceSide(actor->Origin(), face, actor->Radius());
             
             // inside wall?
-            if(d < 0 && d > -actorRadius)
+            if(d < 0 && d > -actor->Radius())
             {
-                if(!CheckEdgeSide(face->BottomEdge(), face, actorHeight*0.95f) &&
-                   !CheckEdgeSide(face->TopEdge(), face, actor->StepHeight()) &&
-                   !CheckEdgeSide(face->LeftEdge(), face, 0) &&
-                   !CheckEdgeSide(face->RightEdge(), face, 0))
+                if(ActorTouchingFace(actor, face))
                 {
                     // eject out
                     actor->Origin() -= (face->plane.Normal() * d);
@@ -1043,8 +1054,8 @@ void kexCModel::CheckSurroundingSectors(void)
             sectorList.Set(s);
             s->validcount = validcount;
             
-            if(!CheckEdgeSide(face->BottomEdge(), face, actorRadius) &&
-               !CheckEdgeSide(face->TopEdge(), face, actorRadius))
+            if(!CheckEdgeSide(end, face->BottomEdge(), face, actorRadius) &&
+               !CheckEdgeSide(end, face->TopEdge(), face, actorRadius))
             {
                 // is the actor crossing this portal face?
                 if(PointOnFaceSide(end, face, actorRadius) < 0)

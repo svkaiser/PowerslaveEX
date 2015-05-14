@@ -30,6 +30,7 @@ public:
     void                StopMusic(void);
     void                ChangeMap(const kexStr &map);
     void                EndGame(const bool bGoodEnding);
+    const bool          LevelIsMapped(void) const;
     void                SpawnLight(kexActor *source, const float radius,
                                    const kexVec3 &color, const float fadeTime, const int passes);
     void                MoveScriptedSector(const int tag, const float height,

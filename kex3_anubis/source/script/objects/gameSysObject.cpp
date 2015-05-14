@@ -47,6 +47,7 @@ void kexScriptObjGame::Init(void)
     e->RegisterObjectMethod("kGame", "void ChangeMap(const kStr &in)", asMETHODPR(kexScriptObjGame, ChangeMap, (const kexStr&), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void EndGame(const bool)", asMETHODPR(kexScriptObjGame, EndGame, (const bool), void), asCALL_THISCALL);
     e->RegisterObjectMethod("kGame", "void SpawnLight(kActor@, const float, const kVec3 &in, const float, const int)", asMETHODPR(kexScriptObjGame, SpawnLight, (kexActor *source, const float radius, const kexVec3 &color, const float fadeTime, const int passes), void), asCALL_THISCALL);
+    e->RegisterObjectMethod("kGame", "const bool LevelIsMapped(void) const", asMETHODPR(kexScriptObjGame, LevelIsMapped, (void) const, const bool), asCALL_THISCALL);
 
     e->RegisterGlobalProperty("kPlayLoop PlayLoop", kexGame::cLocal->PlayLoop());
     e->RegisterObjectMethod("kPlayLoop", "const int Ticks(void) const", asMETHODPR(kexPlayLoop, Ticks, (void) const, const int), asCALL_THISCALL);
@@ -147,6 +148,15 @@ void kexScriptObjGame::PlayMusic(const kexStr &str, const bool bLoop)
 void kexScriptObjGame::StopMusic(void)
 {
     kex::cSound->StopMusic();
+}
+
+//
+// kexScriptObjGame::LevelIsMapped
+//
+
+const bool kexScriptObjGame::LevelIsMapped(void) const
+{
+    return kexGame::cLocal->PlayLoop()->LevelIsMapped();
 }
 
 //

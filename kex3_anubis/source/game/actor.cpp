@@ -220,6 +220,35 @@ void kexActor::Spawn(void)
         {
             flags |= AF_INWATER;
         }
+
+        if(flags & AF_MOVEABLE)
+        {
+            kexCModel *cm = kexGame::cLocal->CModel();
+
+            // check if the spawned actor is inside geometry
+            for(int i = sector->faceStart; i <= sector->faceEnd; ++i)
+            {
+                mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
+                float d;
+                
+                if(!(face->flags & FF_SOLID) || face->sector >= 0)
+                {
+                    continue;
+                }
+
+                d = cm->PointOnFaceSide(origin, face);
+
+                if(d <= radius)
+                {
+                    if(cm->ActorTouchingFace(this, face))
+                    {
+                        // eject out
+                        origin += (face->plane.Normal() * (radius - d));
+                        kex::cSystem->DPrintf("Actor (type %i) stuck inside geometry\n", type);
+                    }
+                }
+            }
+        }
     }
     
     if(anim == NULL)

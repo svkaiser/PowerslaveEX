@@ -231,6 +231,13 @@ void kexDoor::Tick(void)
             StopLoopingSounds();
             PlaySound("sounds/stonestop.wav");
 
+            if(type == 8 || type == 9)
+            {
+                world->Events()[sector->event].type = 7;
+                state = DS_IDLE;
+                return;
+            }
+
             Remove();
             return;
         }
@@ -314,11 +321,19 @@ void kexDoor::Spawn(void)
         break;
 
     case 8:
-    case 9:
         bDirection = false;
         waitDelay = -1;
         lip = 0;
         moveSpeed = 4;
+        destHeight = (float)sector->floorHeight;
+        raiseHeight = destHeight;
+        break;
+
+    case 9:
+        bDirection = false;
+        waitDelay = -1;
+        lip = 0;
+        moveSpeed = 1;
         destHeight = (float)sector->floorHeight;
         raiseHeight = destHeight;
         break;

@@ -36,12 +36,15 @@ public:
                                               const float extent = 0, const float floorOffset = 0);
     bool                    PointInsideFace(const kexVec3 &origin, mapFace_t *face,
                                             const float extent = 0);
+    bool                    CheckEdgeSide(const kexVec3 &origin, mapEdge_t *edge, mapFace_t *face,
+                                          const float heightAdjust, const float extent = 0);
 
     bool                    MoveActor(kexActor *actor);
     bool                    Trace(kexActor *actor, mapSector_t *sector,
                                   const kexVec3 &start_pos, const kexVec3 &end_pos,
                                   const float radius = 0, bool bTestActors = true);
     bool                    CheckActorPosition(kexActor *actor, mapSector_t *initialSector);
+    bool                    ActorTouchingFace(kexActor *actor, mapFace_t *face);
     void                    Reset(void);
 
     const int               ValidCount(void) const { return validcount; }
@@ -57,8 +60,6 @@ private:
     void                    CollideActorWithWorld(void);
     void                    AdvanceActorToSector(void);
     void                    SlideAgainstFaces(mapSector_t *sector);
-    bool                    CheckEdgeSide(mapEdge_t *edge, mapFace_t *face,
-                                          const float heightAdjust, const float extent = 0);
     void                    CheckSurroundingSectors(void);
     bool                    TraceFacePlane(mapFace_t *face, const float extent1 = 0, const float extent2 = 0,
                                            const bool bTestOnly = false);

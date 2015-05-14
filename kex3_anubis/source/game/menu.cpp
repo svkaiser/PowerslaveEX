@@ -3214,7 +3214,7 @@ void kexMenuAbout::Init(void)
 
     button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
     button->x = 112;
-    button->y = 188;
+    button->y = 204;
     button->w = 96;
     button->h = 24;
     button->label = "Back";
@@ -3255,25 +3255,34 @@ void kexMenuAbout::Display(void)
         (float)kexRender::cScreen->SCREEN_WIDTH,
         (float)kexRender::cScreen->SCREEN_HEIGHT, 0, 0, 0, 128);
 
-    kexGame::cMenuPanel->DrawPanel(32, 8, 256, 216, 4);
-    kexGame::cMenuPanel->DrawInset(40, 16, 238, 16);
+    kexGame::cMenuPanel->DrawPanel(32, 0, 256, 240, 4);
+    kexGame::cMenuPanel->DrawInset(40, 8, 238, 16);
 
-    kexGame::cMenuPanel->DrawInset(126, 36, 68, 68);
-    kexRender::cScreen->DrawTexture(aboutTexture, 128, 34, 64, 68);
+    kexGame::cMenuPanel->DrawInset(126, 28, 68, 68);
+    kexRender::cScreen->DrawTexture(aboutTexture, 128, 26, 64, 68);
 
-    kexGame::cMenuPanel->DrawInset(55, 108, 208, 76);
+    kexGame::cMenuPanel->DrawInset(40, 100, 238, 96);
 
     DrawItems();
 
-    kexGame::cLocal->DrawSmallString("About Powerslave EX", 160, 20, 1, true);
+    kexGame::cLocal->DrawSmallString("About Powerslave EX", 160, 12, 1, true);
 
-    kexGame::cLocal->DrawSmallString("Programming:", 63, 112, 0.75f, false);
-    kexGame::cLocal->DrawSmallString("Samuel Villarreal", 156, 112, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Programming:", 48, 104, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Samuel Villarreal", 168, 104, 0.75f, false);
 
-    kexGame::cLocal->DrawSmallString("Special Thanks:", 63, 128, 0.75f, false);
-    kexGame::cLocal->DrawSmallString("James Haley", 156, 128, 0.75f, false);
-    kexGame::cLocal->DrawSmallString("Geoff Wakefield", 156, 136, 0.75f, false);
-    kexGame::cLocal->DrawSmallString("Lobotomy Software", 156, 144, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Linux Port:", 48, 120, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Zohar Malamant", 168, 120, 0.75f, false);
+
+    kexGame::cLocal->DrawSmallString("Additional Art:", 48, 136, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Daniel Lazar", 168, 136, 0.75f, false);
+
+    kexGame::cLocal->DrawSmallString("Additional Design:", 48, 152, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Samuel Villarreal", 168, 152, 0.75f, false);
+
+    kexGame::cLocal->DrawSmallString("Special Thanks:", 48, 168, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("James Haley", 168, 168, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Geoff Wakefield", 168, 176, 0.75f, false);
+    kexGame::cLocal->DrawSmallString("Lobotomy Software", 168, 184, 0.75f, false);
 }
 
 //

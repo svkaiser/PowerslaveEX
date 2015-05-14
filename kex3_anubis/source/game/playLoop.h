@@ -53,6 +53,7 @@ public:
     const bool                  AutomapEnabled(void) { return bShowAutomap; }
     void                        ToggleAutomap(const bool bToggle) { bShowAutomap = bToggle; }
     void                        ToggleMapAll(const bool bToggle) { bMapAll = bToggle; }
+    const bool                  LevelIsMapped(void) const { return bMapAll; }
     const bool                  IsPaused(void) const { return bPaused; }
     void                        TogglePause(const bool bToggle) { bPaused = bToggle; }
     kexInventoryMenu            &InventoryMenu(void) { return inventoryMenu; }

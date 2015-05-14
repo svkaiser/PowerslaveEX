@@ -1067,7 +1067,10 @@ void kexWorld::UseWallSpecial(kexPlayer *player, mapFace_t *face)
     {
         if(sectors[ev->sector].flags & SF_SPECIAL)
         {
-            return;
+            if(ev->type != 7)
+            {
+                return;
+            }
         }
     }
 
@@ -1353,6 +1356,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
         break;
     case 23:
         actor->PlaySound("sounds/fplate.wav");
+        ResetWallSwitchFromTag(ev->tag+1);
         kexGame::cActorFactory->SpawnMover("kexFloor", ev->type, ev->sector);
         break;
     case 24:
@@ -1614,6 +1618,24 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
             case 22:
             case 24:
                 bClearEventRef = true;
+                break;
+            default:
+                break;
+            }
+        }
+        else if(ev->tag+1 == event->tag)
+        {
+            mapSector_t *sec = &sectors[ev->sector];
+
+            if(!(sec->flags & SF_SPECIAL) || sec->objectThinker == NULL)
+            {
+                continue;
+            }
+
+            switch(ev->type)
+            {
+            case 23:
+                static_cast<kexFloor*>(sec->objectThinker)->Trigger();
                 break;
             default:
                 break;

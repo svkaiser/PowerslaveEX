@@ -1,0 +1,11 @@
+map_item_anim
+{
+    frame
+    {
+        // ##013    0    0
+        sprites
+        {
+            { "items/map", 0,  -30,  -25,    0 }
+        }
+    }
+}

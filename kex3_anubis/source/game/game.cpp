@@ -102,10 +102,10 @@ COMMAND(noclip)
 }
 
 //
-// god
+// moses
 //
 
-COMMAND(god)
+COMMAND(moses)
 {
     kexGameLocal *game = kexGame::cLocal;
     kexPuppet *puppet;
@@ -281,6 +281,11 @@ COMMAND(give)
             game->PlayLoop()->Print(kexStr::Format("Got %s!",
                 gameLocal.Translation()->GetString(100+arti)));
         }
+    }
+    else if(!kexStr::Compare(kex::cCommands->GetArgv(1), "artifacts"))
+    {
+        gameLocal.Player()->Artifacts() = 0x3F;
+        game->PlayLoop()->Print("Got all artifacts!");
     }
     else if(!kexStr::Compare(kex::cCommands->GetArgv(1), "ability"))
     {

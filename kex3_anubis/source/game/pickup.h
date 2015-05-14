@@ -204,4 +204,21 @@ private:
     int                             bits;
 END_KEX_CLASS();
 
+//-----------------------------------------------------------------------------
+//
+// kexMapPickup
+//
+//-----------------------------------------------------------------------------
+
+BEGIN_EXTENDED_KEX_CLASS(kexMapPickup, kexPickup);
+public:
+    kexMapPickup(void);
+    ~kexMapPickup(void);
+
+    virtual void                    Tick(void);
+    virtual void                    OnTouch(kexActor *instigator);
+
+    void                            Spawn(void);
+END_KEX_CLASS();
+
 #endif
