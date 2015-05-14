@@ -273,37 +273,49 @@ void kexRenderScene::DrawSky(kexRenderView &view)
 {
     kexCpuVertList *vl = kexRender::cVertList;
     kexMatrix mtx;
-    int tris = 0;
+    float rect[4];
+    float sw, sh;
     
     if(visibleSkyFaces.CurrentLength() == 0)
     {
         return;
     }
 
-    kexRender::cTextures->whiteTexture->Bind();
-    
-    if(cvarRenderWireframe.GetBool())
-    {
-        for(uint i = 0; i < visibleSkyFaces.CurrentLength(); ++i)
-        {
-            mapFace_t *face = &world->Faces()[visibleSkyFaces[i]];
-            mapVertex_t *v = &world->Vertices()[face->vertexStart];
+    sw = (float)kex::cSystem->VideoWidth();
+    sh = (float)clipY;
 
-            vl->AddVertex(v[0].origin, 0, 0);
-            vl->AddVertex(v[1].origin, 0, 0);
-            vl->AddVertex(v[2].origin, 0, 0);
-            vl->AddVertex(v[3].origin, 0, 0);
-            
-            vl->AddTriangle(tris+0, tris+2, tris+1);
-            vl->AddTriangle(tris+0, tris+3, tris+2);
-            tris += 4;
-        }
-    }
-    
-    if(cvarRenderWireframe.GetBool())
+    rect[0] = sw;
+    rect[1] = sh;
+    rect[2] = 0;
+    rect[3] = 0;
+
+    for(uint i = 0; i < visibleSkyFaces.CurrentLength(); ++i)
     {
-        kexRender::cBackend->SetColorMask(0);
-        vl->DrawElements();
+        mapFace_t *face = &world->Faces()[visibleSkyFaces[i]];
+
+        if(!view.TestBoundingBox(face->bounds))
+        {
+            continue;
+        }
+
+        if(world->Sectors()[face->sectorOwner].flags & SF_NOSKYSCISSOR)
+        {
+            rect[0] = 0;
+            rect[1] = 0;
+            rect[2] = sw;
+            rect[3] = sh;
+            break;
+        }
+
+        if(rect[0] > face->x1) rect[0] = face->x1;
+        if(rect[1] > face->y1) rect[1] = face->y1;
+        if(rect[2] < face->x2) rect[2] = face->x2;
+        if(rect[3] < face->y2) rect[3] = face->y2;
+    }
+
+    if((rect[2] <= rect[0] || rect[3] <= rect[1]))
+    {
+        return;
     }
     
     kexTexture *skyTexture;
@@ -318,17 +330,18 @@ void kexRenderScene::DrawSky(kexRenderView &view)
     }
 
     skyTexture->Bind();
-    tris = 0;
-    
-    if(cvarRenderWireframe.GetBool())
-    {
-        kexRender::cBackend->SetColorMask(1);
-        kexRender::cBackend->SetDepth(GLFUNC_GEQUAL);
-    }
     
     mtx.SetTranslation(view.Origin());
     dglPushMatrix();
     dglMultMatrixf(mtx.ToFloatPtr());
+
+    if(rect[3] > sh)
+    {
+        rect[3] = sh;
+    }
+
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
+    kexRender::cBackend->SetScissorRect((int)rect[0], (int)rect[1], (int)rect[2], (int)rect[3]);
 
     skyBuffer.Bind();
     skyBuffer.Latch();
@@ -336,12 +349,6 @@ void kexRenderScene::DrawSky(kexRenderView &view)
     skyBuffer.UnBind();
 
     dglPopMatrix();
-
-    if(cvarRenderWireframe.GetBool())
-    {
-        kexRender::cBackend->ClearBuffer(GLCB_DEPTH);
-        kexRender::cBackend->SetDepth(GLFUNC_LEQUAL);
-    }
 }
 
 //

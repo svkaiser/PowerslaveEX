@@ -164,6 +164,8 @@ void kexVertBuffer::Allocate(drawVert_t *drawVerts, uint size, const bufferUsage
 
 void kexVertBuffer::Bind(void)
 {
+    kexRender::cVertList->ClearBinded();
+
     if(!Available())
     {
         return;

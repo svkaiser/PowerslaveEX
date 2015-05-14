@@ -26,6 +26,7 @@ kexCpuVertList *kexRender::cVertList = &cpuVertList;
 
 kexCpuVertList::kexCpuVertList(void)
 {
+    this->bBinded = false;
     Reset();
 }
 
@@ -49,9 +50,14 @@ void kexCpuVertList::Reset(void)
 
 void kexCpuVertList::BindDrawPointers(void)
 {
-    dglTexCoordPointer(2, GL_FLOAT, sizeof(float)*2, drawTexCoords);
-    dglVertexPointer(3, GL_FLOAT, sizeof(float)*3, drawVertices);
-    dglColorPointer(4, GL_UNSIGNED_BYTE, sizeof(byte)*4, drawRGB);
+    if(!bBinded)
+    {
+        dglTexCoordPointer(2, GL_FLOAT, sizeof(float)*2, drawTexCoords);
+        dglVertexPointer(3, GL_FLOAT, sizeof(float)*3, drawVertices);
+        dglColorPointer(4, GL_UNSIGNED_BYTE, sizeof(byte)*4, drawRGB);
+
+        bBinded = true;
+    }
 
     Reset();
 }

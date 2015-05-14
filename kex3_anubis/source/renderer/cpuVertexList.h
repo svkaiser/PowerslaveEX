@@ -63,6 +63,8 @@ public:
 
     float                   *DrawVertices(void) { return drawVertices; }
 
+    void                    ClearBinded(void) { bBinded = false; }
+
 private:
     word                    indiceCount;
     word                    vertexCount;
@@ -75,6 +77,8 @@ private:
     float                   *roverVertices;
     float                   *roverTexCoords;
     byte                    *roverRGB;
+
+    bool                    bBinded;
 };
 
 #endif
