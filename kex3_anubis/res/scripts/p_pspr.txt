@@ -169,10 +169,22 @@ void A_DestroyCobraJoints(kActor @actor)
 void A_CobraSlither(kActor @actor)
 {
     float t = actor.GameTicks();
+    float speed = 8.0f;
+    kActor @owner;
     
     kQuat rotation = kQuat(actor.Pitch(), -1, 0, 0) * kQuat(actor.Yaw(), 0, 0, -1);
     
-    actor.Velocity() = (kVec3(0, 8, 0) * rotation);
+    @owner = actor.GetTarget();
+    
+    if(!(owner is null))
+    {
+        if(owner.Type() == AT_SELKIS)
+        {
+            speed = 16.0f;
+        }
+    }
+    
+    actor.Velocity() = (kVec3(0, speed, 0) * rotation);
     actor.Velocity() -= (kVec3(4 * Math::Cos(t * 0.25f), 0, 0) * rotation);
 }
 

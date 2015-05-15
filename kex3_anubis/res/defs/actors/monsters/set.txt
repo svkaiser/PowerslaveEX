@@ -7,6 +7,7 @@ AI_Set 11
     scale                   1.5
     health                  3000
     noEnterWater            1
+    noInFighting            1
     moveSpeed               10
     spawnAnim               "monsters/set_idle"
     chaseAnim               "monsters/set_chase"

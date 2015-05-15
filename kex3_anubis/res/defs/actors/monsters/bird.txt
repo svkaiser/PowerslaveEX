@@ -18,6 +18,7 @@ AI_Bird 3
     painChance              0
     flying                  1
     flyAdjustViewLevel      1
+    noInFighting            1
     meleeExtraDist          16.0
     gravity                 0.0
     sightSound              "sounds/birdact.wav"

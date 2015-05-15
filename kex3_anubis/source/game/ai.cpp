@@ -135,6 +135,14 @@ void kexAI::Tick(void)
     
     if(curThinkTime <= 0)
     {
+        if(target && static_cast<kexActor*>(target)->Health() <= 0)
+        {
+            state = AIS_IDLE;
+            SetTarget(NULL);
+            ChangeAnim(spawnAnim);
+            return;
+        }
+
         switch(state)
         {
         case AIS_IDLE:
@@ -199,12 +207,19 @@ void kexAI::OnDamage(kexActor *instigator)
     if(instigator)
     {
         // we took damage but we're not active yet. target whoever damaged us
-        if(!target && instigator != this && (instigator->Flags() & AF_SHOOTABLE ||
+        if(target != instigator && instigator != this && (instigator->Flags() & AF_SHOOTABLE ||
             instigator->InstanceOf(&kexProjectile::info)))
         {
             if(instigator && instigator->InstanceOf(&kexProjectile::info))
             {
-                SetTarget(instigator->Target());
+                kexGameObject *targ = instigator->Target();
+
+                // make sure whatever shot that projectile is a ai or player
+                if(targ && ((targ->InstanceOf(&kexAI::info) && !(aiFlags & AIF_NOINFIGHTING)) ||
+                    targ->InstanceOf(&kexPuppet::info)))
+                {
+                    SetTarget(instigator->Target());
+                }
             }
             else
             {
@@ -326,6 +341,11 @@ bool kexAI::IsFacingTarget(kexActor *actor, const float fov)
 bool kexAI::CheckTargetSight(kexActor *actor)
 {
     if(bNoTargetEnemy)
+    {
+        return false;
+    }
+
+    if(actor->Health() <= 0)
     {
         return false;
     }
@@ -454,7 +474,12 @@ void kexAI::LookForTarget(void)
         return;
     }
     
-    kexActor *targ = kexGame::cLocal->Player()->Actor();
+    kexPuppet *targ = kexGame::cLocal->Player()->Actor();
+
+    if(targ->Health() <= 0 || targ->PlayerFlags() & PF_DEAD)
+    {
+        return;
+    }
     
     if(CheckTargetSight(targ))
     {
@@ -925,6 +950,14 @@ void kexAI::ChaseTarget(void)
         SetTarget(kexGame::cLocal->Player()->Actor());
     }
 
+    if(target && static_cast<kexActor*>(target)->Health() <= 0)
+    {
+        state = AIS_IDLE;
+        SetTarget(NULL);
+        ChangeAnim(spawnAnim);
+        return;
+    }
+
     if(aiFlags & AIF_RETREATTURN)
     {
         velocity.z = 0;
@@ -1085,6 +1118,7 @@ void kexAI::Spawn(void)
         if(definition->GetBool("retreatAfterMelee"))    aiFlags |= AIF_RETREATAFTERMELEE;
         if(definition->GetBool("flyAdjustViewLevel"))   aiFlags |= AIF_FLYADJUSTVIEWLEVEL;
         if(definition->GetBool("noLavaDamage"))         aiFlags |= AIF_NOLAVADAMAGE;
+        if(definition->GetBool("noInFighting"))         aiFlags |= AIF_NOINFIGHTING;
         
         if(definition->GetString("chaseAnim", animName))
         {

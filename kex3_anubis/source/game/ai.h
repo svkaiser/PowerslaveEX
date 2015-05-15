@@ -53,7 +53,8 @@ typedef enum
     AIF_RETREATAFTERMELEE   = BIT(5),
     AIF_RETREATTURN         = BIT(6),
     AIF_FLYADJUSTVIEWLEVEL  = BIT(7),
-    AIF_NOLAVADAMAGE        = BIT(8)
+    AIF_NOLAVADAMAGE        = BIT(8),
+    AIF_NOINFIGHTING        = BIT(9)
 } aiFlags_t;
 
 //-----------------------------------------------------------------------------

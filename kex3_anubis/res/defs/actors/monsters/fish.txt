@@ -20,6 +20,7 @@ AI_Fish 8
     flyAdjustViewLevel      1
     lookAllAround           1
     noLavaDamage            1
+    noInFighting            1
     meleeExtraDist          16.0
     gravity                 0.0
     sightSound              "sounds/fishact.wav"

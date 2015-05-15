@@ -19,6 +19,7 @@ AI_Queen 4
     lookAllAround           1
     noDropOff               1
     friction                1
+    noInFighting            1
     turnSpeed               16
     sightSound              "sounds/queenact01.wav"
 }
@@ -32,6 +33,7 @@ AI_Queen_Snake -1
     scale                   1.5
     health                  200
     noEnterWater            1
+    noInFighting            1
     moveSpeed               16
     spawnAnim               "monsters/queen_snake_idle"
     chaseAnim               "monsters/queen_snake_chase"
@@ -70,6 +72,7 @@ AI_Seedling -1
     health                  100
     stepHeight              256
     scale                   2.0
+    noInFighting            1
     spawnAnim               "monsters/seedling_idle"
     chaseAnim               "monsters/seedling_chase"
     meleeAnim               "monsters/seedling_attack"

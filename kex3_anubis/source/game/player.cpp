@@ -145,8 +145,15 @@ void kexPuppet::OnDamage(kexActor *instigator)
         return;
     }
 
-    if(health <= 0 && !(playerFlags & PF_GOD))
+    if(health <= 0)
     {
+        if(playerFlags & PF_GOD)
+        {
+            // set to 1 just so enemies stay active
+            health = 1;
+            return;
+        }
+
         kexGame::cLocal->PlayLoop()->DamageFlash();
         playerFlags |= PF_DEAD;
 

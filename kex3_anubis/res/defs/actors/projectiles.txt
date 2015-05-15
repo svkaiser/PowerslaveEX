@@ -54,6 +54,7 @@ Proj_Cobra_Green 20
     impactWallsOnly         1
     homing                  1
     noHomingThrust          1
+    homingTurnAngles        0.07
     homingMaxPitch          1.57
 }
 
