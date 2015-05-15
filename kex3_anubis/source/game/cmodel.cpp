@@ -731,6 +731,14 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
                 continue;
             }
 
+            if((sector->ceilingFace->flags & FF_SOLID && s->floorFace->flags & FF_SOLID) &&
+                moveActor->CeilingHeight() - floorz < actorHeight)
+            {
+                // couldn't squeeze through this portal
+                CollideFace(face);
+                continue;
+            }
+
             if(moveActor->Flags() & AF_NODROPOFF)
             {
                 if(moveActor->InstanceOf(&kexAI::info) && s->floorFace->flags & FF_LAVA)
