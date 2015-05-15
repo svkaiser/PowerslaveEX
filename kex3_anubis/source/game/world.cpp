@@ -187,6 +187,13 @@ void kexWorld::ReadSectors(kexBinFile &mapfile, const unsigned int count)
         return;
     }
 
+    for(unsigned int i = 0; i < numFaces; ++i)
+    {
+        mapFace_t *f = &faces[i];
+
+        f->sectorOwner = -1;
+    }
+
     for(unsigned int i = 0; i < count; ++i)
     {
         sectors[i].faceStart        = mapfile.Read16();
@@ -309,6 +316,11 @@ void kexWorld::ReadPolys(kexBinFile &mapfile, const unsigned int count)
     for(unsigned int i = 0; i < numFaces; ++i)
     {
         if(faces[i].polyStart <= -1 || faces[i].polyEnd <= -1)
+        {
+            continue;
+        }
+
+        if(faces[i].sectorOwner <= -1)
         {
             continue;
         }
