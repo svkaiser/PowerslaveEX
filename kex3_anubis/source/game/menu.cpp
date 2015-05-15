@@ -1766,6 +1766,7 @@ public:
     virtual void                    Update(void);
 
 private:
+    void                            OnResume(kexMenuObject *menuObject);
     void                            OnSelect(kexMenuObject *menuObject);
 END_MENU_CLASS();
 
@@ -1778,6 +1779,7 @@ DECLARE_MENU_CLASS(kexMenuPause, MENU_PAUSE);
 void kexMenuPause::Init(void)
 {
     kexMenuObjectPanelSelect *item;
+    kexMenuObjectButton *button;
     const char *labels[] =
     {
         "Options",
@@ -1796,6 +1798,15 @@ void kexMenuPause::Init(void)
         item->textAlignment = kexMenuObject::MITA_CENTER;
         item->Callback = static_cast<selectCallback_t>(&kexMenuPause::OnSelect);
     }
+
+    button = ALLOC_MENU_OBJECT(kexMenuObjectButton);
+    button->x = 112;
+    button->y = 140;
+    button->w = 96;
+    button->h = 24;
+    button->label = "Resume";
+    button->textAlignment = kexMenuObject::MITA_CENTER;
+    button->Callback = static_cast<selectCallback_t>(&kexMenuPause::OnResume);
 }
 
 //
@@ -1805,6 +1816,16 @@ void kexMenuPause::Init(void)
 void kexMenuPause::Update(void)
 {
     UpdateItems();
+}
+
+//
+// kexMenuPause::OnResume
+//
+
+void kexMenuPause::OnResume(kexMenuObject *menuObject)
+{
+    kexGame::cLocal->ClearMenu();
+    kexGame::cLocal->PlaySound("sounds/select.wav");
 }
 
 //
@@ -2746,11 +2767,11 @@ void kexMenuGraphics::Display(void)
     {
     case 1:
     case 2:
-        kexGame::cLocal->DrawSmallString("This option requires a restart", 160, 192, 1, true);
+        kexGame::cLocal->DrawSmallString("This option requires a restart", 160, 192, 1, true, 255, 32, 32);
         break;
 
     case 8:
-        kexGame::cLocal->DrawSmallString("This option requires a level restart", 160, 192, 1, true);
+        kexGame::cLocal->DrawSmallString("This option requires a level restart", 160, 192, 1, true, 255, 32, 32);
         break;
     }
 

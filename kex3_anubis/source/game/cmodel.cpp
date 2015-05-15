@@ -723,6 +723,14 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
                 }
             }
 
+            if(moveActor->Flags() & AF_NOEXITWATER &&
+                !(s->flags & SF_WATER) && !(s->floorFace->flags & FF_WATER))
+            {
+                // avoid exiting water
+                CollideFace(face);
+                continue;
+            }
+
             if(moveActor->Flags() & AF_NODROPOFF)
             {
                 if(moveActor->InstanceOf(&kexAI::info) && s->floorFace->flags & FF_LAVA)
