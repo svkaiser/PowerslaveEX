@@ -65,6 +65,11 @@ void kexHud::Reset(void)
     currentHealth = 0;
     currentMessage = 0;
 
+    damageFlashTicks = 0;
+    pickupFlashTicks = 0;
+    electrocuteFlashTicks = 0;
+    teleportFlashTicks = 0;
+
     for(int i = 0; i < MAXMESSAGES; ++i)
     {
         messages[i].msg.Clear();

@@ -43,15 +43,15 @@ static keyinfo_t keynames[] =
     { KKEY_7,               "7" },
     { KKEY_8,               "8" },
     { KKEY_9,               "9" },
-    { KKEY_SEMICOLON,       ";" },
-    { KKEY_LESS,            "<" },
-    { KKEY_EQUALS,          "=" },
-    { KKEY_GREATER,         ">" },
-    { KKEY_QUESTION,        "?" },
-    { KKEY_LEFTBRACKET,     "[" },
+    { KKEY_SEMICOLON,       "semicolon" },
+    { KKEY_LESS,            "less" },
+    { KKEY_EQUALS,          "equals" },
+    { KKEY_GREATER,         "greater" },
+    { KKEY_QUESTION,        "question mark" },
+    { KKEY_LEFTBRACKET,     "left brack" },
     { KKEY_BACKSLASH,       "backslash" },
-    { KKEY_RIGHTBRACKET,    "]" },
-    { KKEY_CARET,           "^" },
+    { KKEY_RIGHTBRACKET,    "right brack" },
+    { KKEY_CARET,           "caret" },
     { KKEY_a,               "a" },
     { KKEY_b,               "b" },
     { KKEY_c,               "c" },
@@ -127,6 +127,11 @@ static keyinfo_t keynames[] =
     { KKEY_RCTRL,           "rctrl" },
     { KKEY_RSHIFT,          "rshift" },
     { KKEY_RALT,            "ralt" },
+    { KKEY_MINUS,           "minus" },
+    { KKEY_COMMA,           "comma" },
+    { KKEY_PERIOD,          "period" },
+    { KKEY_SLASH,           "slash" },
+    { KKEY_QUOTE,           "quote" },
     { 0,                    NULL }
 };
 
@@ -366,7 +371,17 @@ const char *kexInputAction::GetJoystickKey(const int key)
 
 const int kexInputAction::GetKeyboardCode(const int key)
 {
-    return key;
+    keyinfo_t *pkey;
+
+    for(pkey = keynames; pkey->name; pkey++)
+    {
+        if(pkey->code == key)
+        {
+            return pkey->code;
+        }
+    }
+
+    return -1;
 }
 
 //
@@ -375,7 +390,17 @@ const int kexInputAction::GetKeyboardCode(const int key)
 
 const int kexInputAction::GetMouseCode(const int key)
 {
-    return key+NUMKEYBOARDKEYS;
+    keyinfo_t *pkey;
+
+    for(pkey = mousenames; pkey->name; pkey++)
+    {
+        if(pkey->code == (key+NUMKEYBOARDKEYS))
+        {
+            return pkey->code;
+        }
+    }
+
+    return -1;
 }
 
 //
@@ -384,7 +409,17 @@ const int kexInputAction::GetMouseCode(const int key)
 
 const int kexInputAction::GetJoystickCode(const int key)
 {
-    return key+NUMKEYBOARDKEYS+NUMMOUSEBUTTONS;
+    keyinfo_t *pkey;
+
+    for(pkey = joybuttonnames; pkey->name; pkey++)
+    {
+        if(pkey->code == (key+NUMKEYBOARDKEYS+NUMMOUSEBUTTONS))
+        {
+            return pkey->code;
+        }
+    }
+
+    return -1;
 }
 
 //
