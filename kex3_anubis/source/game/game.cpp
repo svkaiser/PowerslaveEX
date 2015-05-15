@@ -538,8 +538,8 @@ void kexGameLocal::Init(void)
     
     bHasUserConfig = kex::cSystem->ReadConfigFile("config.cfg");
 
-    kex::cPakFiles->LoadUserFiles();
     kex::cPakFiles->LoadZipFile("game.kpf");
+    kex::cPakFiles->LoadUserFiles();
 
     if(!bHasUserConfig)
     {
