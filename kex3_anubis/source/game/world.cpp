@@ -909,6 +909,20 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
                 {
                     mapVertex_t *v = &vertices[k];
                     v->origin.z += moveAmount;
+
+                    if(f->flags & FF_DYNAMIC)
+                    {
+                        continue;
+                    }
+
+                    bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
+
+                    bufUpdate->index = k;
+                    bufUpdate->newVec = v->origin;
+                    bufUpdate->newColor[0] = v->rgba[0];
+                    bufUpdate->newColor[1] = v->rgba[1];
+                    bufUpdate->newColor[2] = v->rgba[2];
+                    bufUpdate->newColor[3] = v->rgba[3];
                 }
                 
                 vertices[f->vertexStart+0].origin.z += moveAmount;
@@ -954,6 +968,20 @@ void kexWorld::MoveSector(mapSector_t *sector, bool bCeiling, const float moveAm
         {
             mapVertex_t *v = &vertices[j];
             v->origin.z += moveAmount;
+
+            if(face->flags & FF_DYNAMIC)
+            {
+                continue;
+            }
+
+            bufferUpdate_t *bufUpdate = kexRenderScene::bufferUpdateList.Get();
+
+            bufUpdate->index = j;
+            bufUpdate->newVec = v->origin;
+            bufUpdate->newColor[0] = v->rgba[0];
+            bufUpdate->newColor[1] = v->rgba[1];
+            bufUpdate->newColor[2] = v->rgba[2];
+            bufUpdate->newColor[3] = v->rgba[3];
         }
         
         vertices[face->vertexStart+0].origin.z += moveAmount;
