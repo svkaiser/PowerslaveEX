@@ -71,6 +71,7 @@ private:
     void                            FlyMove(kexPlayerCmd *cmd);
     void                            WaterMove(kexPlayerCmd *cmd);
     void                            DeadMove(kexPlayerCmd *cmd);
+    void                            TryClimbOutOfWater(void);
     void                            CheckFallDamage(void);
     void                            SlimeDamage(void);
     void                            LavaDamage(mapFace_t *face);

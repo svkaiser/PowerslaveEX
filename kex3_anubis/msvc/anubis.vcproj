@@ -120,7 +120,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				AdditionalIncludeDirectories=".\;.\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects;.\..\source\movie\;.\..\ogg\libogg\include\;.\..\ogg\libvorbis\include\;.\..\ffmpeg\include\"
-				PreprocessorDefinitions="WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;__STDC_CONSTANT_MACROS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;__STDC_CONSTANT_MACROS"
 				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

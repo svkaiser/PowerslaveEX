@@ -19,6 +19,7 @@
 
 int kexHeap::numHeapBlocks = 0;
 int kexHeap::currentHeapBlockID = -1;
+bool kexHeap::bDrawHeapInfo = false;
 
 kexHeapBlock *kexHeap::currentHeapBlock = NULL;
 kexHeapBlock *kexHeap::blockList = NULL;
@@ -32,18 +33,28 @@ kexHeapBlock hb_file("file", false, NULL, NULL);
 kexHeapBlock hb_object("object", false, NULL, NULL);
 
 //
+// statheap
+//
+
+COMMAND(statheap)
+{
+    kexHeap::bDrawHeapInfo ^= 1;
+}
+
+//
 // kexHeapBlock::kexHeapBlock
 //
 
 kexHeapBlock::kexHeapBlock(const char *name, bool bGarbageCollect,
                            blockFunc_t funcFree, blockFunc_t funcGC)
 {
-    this->name      = (char*)name;
-    this->freeFunc  = funcFree;
-    this->gcFunc    = funcGC;
-    this->blocks    = NULL;
-    this->bGC       = bGarbageCollect;
-    this->purgeID   = kexHeap::numHeapBlocks++;
+    this->name          = (char*)name;
+    this->freeFunc      = funcFree;
+    this->gcFunc        = funcGC;
+    this->blocks        = NULL;
+    this->bGC           = bGarbageCollect;
+    this->purgeID       = kexHeap::numHeapBlocks++;
+    this->numAllocated  = 0;
 
     // add heap block to main block list
     if(kexHeap::blockList)
@@ -126,6 +137,8 @@ void kexHeap::AddBlock(memBlock_t *block, kexHeapBlock *heapBlock)
     {
         block->next->prev = block;
     }
+
+    heapBlock->numAllocated++;
 }
 
 //
@@ -377,4 +390,56 @@ int kexHeap::Usage(const kexHeapBlock &heapBlock)
     }
 
     return bytes;
+}
+
+//
+// kexHeap::DrawHeapInfo
+//
+
+#include "renderMain.h"
+#include "renderFont.h"
+
+void kexHeap::DrawHeapInfo(void)
+{
+    memBlock_t *block;
+    int numBlocks;
+    unsigned int c;
+    byte *cb;
+    float y;
+
+    if(kexHeap::bDrawHeapInfo == false)
+    {
+        return;
+    }
+
+    cb = (byte*)&c;
+    y = kexRender::cUtils->debugLineNum;
+    
+#define PRINT_HEAP  kex::cConsole->Font()->DrawString
+
+    for(kexHeapBlock *heapBlock = kexHeap::blockList; heapBlock; heapBlock = heapBlock->next)
+    {
+        c = RGBA(0, 255, 0, 255);
+        PRINT_HEAP(kexStr::Format("%s", heapBlock->name), 32, y, 1, false, cb, cb);
+        
+        c = RGBA(255, 255, 0, 255);
+        PRINT_HEAP(kexStr::Format(": %ikb", kexHeap::Usage(*heapBlock) >> 10), 128, y, 1, false, cb, cb);
+        PRINT_HEAP(kexStr::Format(" allocated: %i", heapBlock->numAllocated), 192, y, 1, false, cb, cb);
+
+        numBlocks = 0;
+        for(block = heapBlock->blocks; block != NULL; block = block->next)
+        {
+            numBlocks++;
+        }
+
+        PRINT_HEAP(kexStr::Format(" freed: %i", heapBlock->numAllocated - numBlocks), 320, y, 1, false, cb, cb);
+
+        heapBlock->numAllocated = numBlocks;
+        y += 16;
+    }
+    
+    kexRender::cUtils->debugLineNum = y;
+    kexRender::cUtils->AddDebugLineSpacing();
+    
+#undef PRINT_HEAP
 }

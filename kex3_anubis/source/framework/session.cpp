@@ -93,6 +93,8 @@ void kexSession::DrawFrame(void)
     kex::cGame->Draw();
     kex::cConsole->Draw();
 
+    kexHeap::DrawHeapInfo();
+
     DrawCursor();
     
     kexRender::cBackend->SwapBuffers();

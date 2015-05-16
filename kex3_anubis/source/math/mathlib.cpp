@@ -184,6 +184,16 @@ void kexMath::Clamp(float &f, const float min, const float max)
 // kexMath::Clamp
 //
 
+void kexMath::Clamp(double &f, const double min, const double max)
+{
+    if(f < min) { f = min; }
+    if(f > max) { f = max; }
+}
+
+//
+// kexMath::Clamp
+//
+
 void kexMath::Clamp(int &i, const int min, const int max)
 {
     if(i < min) { i = min; }

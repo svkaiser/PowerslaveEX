@@ -131,7 +131,7 @@ const bool kexGameObject::GetSoundParameters(float &volume, float &pan)
     }
 
     kexMath::Clamp(volume, 0, 128);
-    kexMath::Clamp(pan, -128, 128);
+    kexMath::Clamp(pan, -128, 127);
 
     return true;
 }

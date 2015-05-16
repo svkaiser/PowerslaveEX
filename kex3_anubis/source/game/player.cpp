@@ -605,6 +605,147 @@ void kexPuppet::GroundMove(kexPlayerCmd *cmd)
 }
 
 //
+// kexPuppet::TryClimbOutOfWater
+//
+
+void kexPuppet::TryClimbOutOfWater(void)
+{
+    float vx, vy, vz;
+    sectorList_t *sectorList;
+    mapSector_t *startSector;
+
+    // must be swimming along the water surface and must actually
+    // be in water to begin with
+    if( !(playerFlags & PF_ABOVESURFACE) ||
+        !(flags & AF_INWATER) ||
+        !(sector->ceilingFace->flags & FF_WATER) ||
+        sector->ceilingFace->sector <= -1)
+    {
+        return;
+    }
+
+    vx = kexMath::Fabs(velocity.x);
+    vy = kexMath::Fabs(velocity.y);
+    vz = kexMath::Fabs(velocity.z);
+
+    // only attempt to climb out of water if xy velocity is dominant
+    if(vz >= vx && vz >= vy)
+    {
+        return;
+    }
+
+    // make absolutely sure we're in the right sector
+    startSector = &kexGame::cLocal->World()->Sectors()[sector->ceilingFace->sector];
+
+    if(!(startSector->floorFace->flags & FF_WATER))
+    {
+        // if ceilingface is flagged as water, then we know we're underwater
+        return;
+    }
+
+    if((float)startSector->floorHeight - floorHeight < height)
+    {
+        // we're in shallow water. don't bother trying to climb out
+        return;
+    }
+
+    // determine the vector from our current position to where we're
+    // expecting to climb out of
+    kexVec3 start = origin;
+    start.z = (float)startSector->floorHeight + stepHeight;
+
+    kexVec3 forward;
+    kexVec3::ToAxis(&forward, 0, 0, yaw, 0, 0);
+
+    kexVec3 end = start + (forward * (radius*1.05f));
+
+    // scan surrounding sectors
+    sectorList = kexGame::cLocal->World()->FloodFill(start, startSector, radius*1.05f);
+    for(unsigned int j = 0; j < sectorList->CurrentLength(); ++j)
+    {
+        if((*sectorList)[j] == sector)
+        {
+            continue;
+        }
+
+        // see if we can climb out
+        for(int i = (*sectorList)[j]->faceStart; i <= (*sectorList)[j]->faceEnd; ++i)
+        {
+            mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
+            float fHeight, amount;
+            mapSector_t *s;
+
+            if(face->sector <= -1)
+            {
+                // we can't climb solid walls
+                continue;
+            }
+
+            // must be moving towards this face
+            if(face->plane.Normal().Dot(velocity) >= 0)
+            {
+                continue;
+            }
+
+            // our movement vector must be crossing this face
+            if( face->plane.Distance(end) - face->plane.d >= 0 ||
+                face->plane.Distance(start) - face->plane.d < 0)
+            {
+                continue;
+            }
+
+            s = &kexGame::cLocal->World()->Sectors()[face->sector];
+
+            if(s->flags & SF_WATER || s->floorFace->flags & FF_WATER)
+            {
+                // this sector is not on land
+                continue;
+            }
+
+            if(s->floorFace->plane.c <= 0.5f)
+            {
+                // this floor is too steep
+                continue;
+            }
+
+            fHeight = kexGame::cLocal->CModel()->GetFloorHeight(end, s);
+
+            if(end.z - fHeight < 0)
+            {
+                // to high for us to climb out
+                continue;
+            }
+
+            if(!kexGame::cLocal->CModel()->PointWithinSectorEdges(end, s))
+            {
+                // end point is not actually inside the sector
+                continue;
+            }
+
+            // we've found land and we can climb out now
+            owner->StepViewZ() = origin.z - fHeight;
+            amount = s->floorFace->plane.c * (4*radius);
+
+            // nudge out and attempt to climb over.
+            // for slopes, nudge our movement forward a bit depending on steepness
+            movement.x += (forward.x * (amount * kexMath::Fabs(s->floorFace->plane.a)));
+            movement.y += (forward.y * (amount * kexMath::Fabs(s->floorFace->plane.b)));
+            origin.z += (fHeight - origin.z);
+
+            forward = origin;
+            forward.x = origin.x + movement.x;
+            forward.y = origin.y + movement.y;
+
+            floorHeight = kexGame::cLocal->CModel()->GetFloorHeight(forward, s);
+
+            // update sector
+            SetSector(s);
+            return;
+        }
+    }
+}
+
+//
 // kexPuppet::WaterMove
 //
 
@@ -720,6 +861,8 @@ void kexPuppet::WaterMove(kexPlayerCmd *cmd)
 
     oldSector = sector;
     movement = velocity;
+
+    TryClimbOutOfWater();
     
     if(!kexGame::cLocal->CModel()->MoveActor(this))
     {

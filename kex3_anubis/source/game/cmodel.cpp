@@ -1120,10 +1120,11 @@ void kexCModel::CheckSurroundingSectors(void)
             if(moveActor->InstanceOf(&kexPuppet::info))
             {
                 float step = (end.z - maxfloorz);
+                kexPuppet *puppet = static_cast<kexPuppet*>(moveActor);
 
-                if(step < 0)
+                if(step < 0 && puppet->Owner()->StepViewZ() >= 0)
                 {
-                    static_cast<kexPuppet*>(moveActor)->Owner()->StepViewZ() = step;
+                    puppet->Owner()->StepViewZ() = step;
                 }
             }
 
