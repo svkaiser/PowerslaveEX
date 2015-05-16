@@ -16,7 +16,7 @@
 #define __CONSOLE_H__
 
 #define CON_MAX_HISTORY     16
-#define CON_BUFFER_SIZE     64
+#define CON_BUFFER_SIZE     256
 #define CON_STATE_DOWN      0
 #define CON_STATE_UP        1
 #define CON_BLINK_TIME      350
