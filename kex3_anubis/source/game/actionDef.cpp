@@ -591,47 +591,51 @@ DECLARE_KEX_ACTION(kexActionSpawnProjectile)
     float offset        = this->args[4].f;
     float speed         = this->args[5].f;
     kexVec3 forward;
+    kexVec3 org;
     kexActor *proj, *targ;
+    float projPitch;
     float x, y, z;
-    
-    kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
+
+    // for AI actors, we need to adjust the aim pitch ourselves
+    if(!actor->InstanceOf(&kexPuppet::info))
+    {
+        if(!actor->Target() || speed == 0)
+        {
+            return;
+        }
+        
+        targ = static_cast<kexActor*>(actor->Target());
+        org = targ->Origin();
+        org.z += (targ->Height() * 0.5f);
+
+        kexVec3::ToAxis(&forward, 0, 0, yaw, pitch - ((org - actor->Origin()).ToPitch()), 0);
+    }
+    else
+    {
+        kexVec3::ToAxis(&forward, 0, 0, yaw, pitch, 0);
+    }
     
     x = forward.x * dist;
     y = forward.y * dist;
     z = forward.z * dist;
     
     proj = kexGame::cActorFactory->SpawnFromActor(defName, x, y, z + offset, actor, actor->Yaw());
+
+    if(!actor->InstanceOf(&kexPuppet::info))
+    {
+        // adjust pitch for AI's projectile
+        projPitch = -((org - proj->Origin()).ToPitch());
+    }
+    else
+    {
+        projPitch = actor->Pitch();
+    }
     
-    kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), actor->Pitch(), 0);
+    kexVec3::ToAxis(&forward, 0, 0, actor->Yaw(), projPitch, 0);
     
     proj->Velocity() = (forward * speed);
     proj->SetTarget(actor);
-    proj->Pitch() = actor->Pitch();
-
-    if(actor->InstanceOf(&kexPuppet::info))
-    {
-        return;
-    }
-    
-    if(!actor->Target() || speed == 0)
-    {
-        return;
-    }
-    
-    targ = static_cast<kexActor*>(actor->Target());
-    
-    x = targ->Origin().x - proj->Origin().x;
-    y = targ->Origin().y - proj->Origin().y;
-    
-    dist = kexMath::Sqrt(x * x + y * y) / speed;
-    
-    if(dist < 1)
-    {
-        dist = 1;
-    }
-    
-    offset = (targ->Origin().z + (targ->Height() * 0.5f));
-    proj->Velocity().z = (offset - proj->Origin().z) / dist;
+    proj->Pitch() = projPitch;
 }
 
 //-----------------------------------------------------------------------------

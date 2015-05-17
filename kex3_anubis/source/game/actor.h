@@ -133,6 +133,7 @@ public:
     void                            UpdateGameTicks(void) { gameTicks++; }
     kexAngle                        &CollidedWallAngle(void) { return collidedWallAngle; }
     kexVec3                         &CollidedWallNormal(void) { return collidedWallNormal; }
+    byte                            &Transparency(void) { return transparency; }
 
     kexSDNodeRef<kexActor>          &AreaLink(void) { return areaLink; }
 
@@ -175,6 +176,7 @@ protected:
     kexStr                          bounceSounds[3];
     kexActor                        *taggedActor;
     kexVec3                         color;
+    byte                            transparency;
     kexVec3                         prevOrigin;
     kexAngle                        collidedWallAngle;
     kexVec3                         collidedWallNormal;

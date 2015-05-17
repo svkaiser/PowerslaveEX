@@ -140,11 +140,11 @@ static keyinfo_t mousenames[] =
     { KMSB_LEFT+NUMKEYBOARDKEYS,        "mouse_left" },
     { KMSB_MIDDLE+NUMKEYBOARDKEYS,      "mouse_middle" },
     { KMSB_RIGHT+NUMKEYBOARDKEYS,       "mouse_right" },
+    { KMSB_WHEEL_UP+NUMKEYBOARDKEYS,    "mouse_wheel_up" },
+    { KMSB_WHEEL_DOWN+NUMKEYBOARDKEYS,  "mouse_wheel_down" },
     { KMSB_MISC1+NUMKEYBOARDKEYS,       "mouse_misc1" },
     { KMSB_MISC2+NUMKEYBOARDKEYS,       "mouse_misc2" },
     { KMSB_MISC3+NUMKEYBOARDKEYS,       "mouse_misc3" },
-    { KMSB_MISC4+NUMKEYBOARDKEYS,       "mouse_misc4" },
-    { KMSB_MISC5+NUMKEYBOARDKEYS,       "mouse_misc5" },
     { 0,                                NULL }
 };
 

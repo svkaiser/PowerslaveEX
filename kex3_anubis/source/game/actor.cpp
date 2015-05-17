@@ -56,6 +56,7 @@ kexActor::kexActor(void)
     this->gravity = 0.75f;
     this->floorOffset = 0;
     this->taggedActor = NULL;
+    this->transparency = 255;
     this->color.Set(1, 1, 1);
 }
 
@@ -164,6 +165,7 @@ void kexActor::Spawn(void)
         definition->GetFloat("gravity", gravity, 0.75f);
         definition->GetFloat("floorOffset", floorOffset, 0);
         definition->GetInt("health", health, 100);
+        definition->GetInt("transparency", transparency, 255);
 
         if(definition->GetVector("color", clr))
         {

@@ -218,7 +218,10 @@ void kexAI::OnDamage(kexActor *instigator)
                 if(targ && ((targ->InstanceOf(&kexAI::info) && !(aiFlags & AIF_NOINFIGHTING)) ||
                     targ->InstanceOf(&kexPuppet::info)))
                 {
-                    SetTarget(instigator->Target());
+                    if(instigator->Target() != this)
+                    {
+                        SetTarget(instigator->Target());
+                    }
                 }
             }
             else
@@ -564,6 +567,11 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
     {
         return (kexGame::cLocal->CModel()->ContactActor() == target);
     }
+
+    if(aiFlags & AIF_FLYING)
+    {
+        return true;
+    }
     
     // check for ledges
     if(flags & AF_NODROPOFF)
@@ -583,6 +591,11 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
             {
                 continue;
             }
+
+            if(face->flags & FF_BLOCKAIFALLERS)
+            {
+                return false;
+            }
             
             s = &kexGame::cLocal->World()->Sectors()[face->sector];
 
@@ -592,7 +605,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
                 return false;
             }
 
-            if(s->floorFace->flags & FF_LAVA)
+            if(!(aiFlags & AIF_NOLAVADAMAGE) && s->floorFace->flags & FF_LAVA)
             {
                 // avoid lava
                 return false;
@@ -601,7 +614,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
             fh1 = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector);
             fh2 = kexGame::cLocal->CModel()->GetFloorHeight(origin, s);
 
-            if(fh1 - fh2 > stepHeight || (!(flags & AF_INWATER) && s->flags & SF_WATER))
+            if(fh1 - fh2 > (stepHeight*16) || (!(flags & AF_INWATER) && s->flags & SF_WATER))
             {
                 // sector the ai is on is too high, so avoid this edge
                 return false;

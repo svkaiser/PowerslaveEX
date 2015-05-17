@@ -83,9 +83,9 @@ typedef kexStack<mapSector_t*> sectorList_t;
 typedef enum
 {
     FF_SOLID            = BIT(0),
-    FF_UNKNOWN1         = BIT(1),
+    FF_BLOCKAIFALLERS   = BIT(1),
     FF_SECRET           = BIT(2),
-    FF_UNKNOWN2         = BIT(3),
+    FF_BLOCKAIGROUND    = BIT(3),
     FF_INVISIBLE        = BIT(4),
     FF_LAVA             = BIT(5),
     FF_WATER            = BIT(6),

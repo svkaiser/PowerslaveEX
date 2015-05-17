@@ -712,7 +712,7 @@ void kexPlayLoop::DrawAutomapWalls(kexRenderView &view)
             byte r1, g1, b1;
             byte r2, g2, b2;
             
-            if(face->flags & FF_HIDDEN || (!(face->flags & FF_MAPPED) && !bMapAll) ||
+            if((face->flags & FF_HIDDEN && !bMapAll) || (!(face->flags & FF_MAPPED) && !bMapAll) ||
                (face->flags & FF_PORTAL && !(face->flags & FF_SOLID)))
             {
                 continue;
@@ -726,6 +726,36 @@ void kexPlayLoop::DrawAutomapWalls(kexRenderView &view)
             if(!(face->flags & FF_MAPPED) && bMapAll)
             {
                 kexRender::cVertList->AddLine(x1, y1, 0, x2, y2, 0, 128, 128, 128, 255);
+                continue;
+            }
+
+            if(face->tag >= 0)
+            {
+                switch(w->Events()[face->tag].type)
+                {
+                case 1:
+                    kexRender::cVertList->AddLine(x1, y1, 0, x2, y2, 0, 255, 32, 255, 255);
+                    continue;
+
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                    kexRender::cVertList->AddLine(x1, y1, 0, x2, y2, 0, 255, 255, 32, 255);
+                    continue;
+
+                case 200:
+                case 201:
+                case 202:
+                case 203:
+                    kexRender::cVertList->AddLine(x1, y1, 0, x2, y2, 0, 0, 255, 255, 255);
+                    continue;
+                }
+            }
+
+            if(face->flags & FF_FORCEFIELD)
+            {
+                kexRender::cVertList->AddLine(x1, y1, 0, x2, y2, 0, 0, 255, 0, 255);
                 continue;
             }
             

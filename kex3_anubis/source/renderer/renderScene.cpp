@@ -369,7 +369,7 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
     int curTexture = 0;
 
     //
-    // here we build a seperate vertex buffer list for portals
+    // here we build a seperate vertex buffer list for portals;
     // this is used for the sprite clipping problem in which
     // the portal faces will be drawn on to the stencil buffer
     // in attempt to mask out occluded sprites
@@ -388,12 +388,7 @@ void kexRenderScene::BuildSectorBuffer(mapSector_t *sector)
     {
         mapFace_t *face = &world->Faces()[j];
 
-        if(face->flags & FF_DYNAMIC)
-        {
-            continue;
-        }
-
-        if(face->flags & FF_WATER)
+        if(face->flags & (FF_DYNAMIC|FF_WATER))
         {
             continue;
         }
@@ -1009,10 +1004,10 @@ void kexRenderScene::DrawSprite(kexRenderView &view, mapSector_t *sector, kexAct
         kexMath::Clamp(g, 0, 255);
         kexMath::Clamp(b, 0, 255);
 
-        vl->AddVertex(p1, u1, v1, r, g, b, 255);
-        vl->AddVertex(p2, u2, v1, r, g, b, 255);
-        vl->AddVertex(p3, u1, v2, r, g, b, 255);
-        vl->AddVertex(p4, u2, v2, r, g, b, 255);
+        vl->AddVertex(p1, u1, v1, r, g, b, actor->Transparency());
+        vl->AddVertex(p2, u2, v1, r, g, b, actor->Transparency());
+        vl->AddVertex(p3, u1, v2, r, g, b, actor->Transparency());
+        vl->AddVertex(p4, u2, v2, r, g, b, actor->Transparency());
 
         vl->AddTriangle(0, 2, 1);
         vl->AddTriangle(1, 2, 3);
@@ -1134,8 +1129,8 @@ void kexRenderScene::DrawStretchSprite(kexRenderView &view, mapSector_t *sector,
         kexMath::Clamp(g, 0, 255);
         kexMath::Clamp(b, 0, 255);
 
-        vl->AddVertex(p1, u1, v1, r, g, b, 255);
-        vl->AddVertex(p2, u1, v2, r, g, b, 255);
+        vl->AddVertex(p1, u1, v1, r, g, b, actor->Transparency());
+        vl->AddVertex(p2, u1, v2, r, g, b, actor->Transparency());
 
         count++;
 

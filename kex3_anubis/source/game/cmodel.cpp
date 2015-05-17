@@ -691,6 +691,11 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
 //
 // kexCModel::SlideAgainstFaces
 //
+// Collides with solid wall faces and painstakingly checks
+// for every possible case for the actor squeezing through
+// a portal. If the actor can't pass through, then it will
+// collide with the portal as if it's a solid wall.
+//
 
 void kexCModel::SlideAgainstFaces(mapSector_t *sector)
 {
@@ -700,6 +705,13 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
 
         if(face->flags & FF_WATER)
         {
+            // we flat out ignore water faces completely
+            continue;
+        }
+
+        if(moveActor->InstanceOf(&kexAI::info) && face->flags & FF_BLOCKAIGROUND)
+        {
+            CollideFace(face);
             continue;
         }
 
@@ -731,24 +743,34 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
                 continue;
             }
 
+            // so here we have a portal that borders between two sectors that the object
+            // can fit in, height-wise, but we might have a case where the portal itself is
+            // too short to walk through. need to check for that
             if((sector->ceilingFace->flags & FF_SOLID && s->floorFace->flags & FF_SOLID) &&
                 moveActor->CeilingHeight() - floorz < actorHeight)
             {
-                // couldn't squeeze through this portal
+                // not enough room to cross through this portal
                 CollideFace(face);
                 continue;
             }
 
             if(moveActor->Flags() & AF_NODROPOFF)
             {
-                if(moveActor->InstanceOf(&kexAI::info) && s->floorFace->flags & FF_LAVA)
+                if(face->flags & FF_BLOCKAIFALLERS)
+                {
+                    CollideFace(face);
+                    continue;
+                }
+
+                if(moveActor->InstanceOf(&kexAI::info) && s->floorFace->flags & FF_LAVA &&
+                    !(static_cast<kexAI*>(moveActor)->AIFlags() & AIF_NOLAVADAMAGE))
                 {
                     // avoid entering into lava
                     CollideFace(face);
                     continue;
                 }
 
-                if(GetFloorHeight(start, moveActor->Sector()) - floorz > moveActor->StepHeight())
+                if(GetFloorHeight(start, moveActor->Sector()) - floorz > (moveActor->StepHeight()*16))
                 {
                     CollideFace(face);
                 }
