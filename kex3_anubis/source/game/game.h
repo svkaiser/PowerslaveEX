@@ -15,8 +15,8 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
-#define GAME_VERSION        1
-#define GAME_SUBVERSION     0
+#define GAME_VERSION        KEX_GAME_VERSION
+#define GAME_SUBVERSION     KEX_GAME_SUBVERSION
 
 class kexFont;
 class kexTitleScreen;

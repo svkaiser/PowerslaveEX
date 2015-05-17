@@ -265,7 +265,7 @@ void kexSystemSDL::InitVideo(void)
         flags |= SDL_WINDOW_FULLSCREEN;
     }
 
-    window = SDL_CreateWindow(kexStr::Format("Kex Engine (Anubis) - Version Date: %s", __DATE__),
+    window = SDL_CreateWindow(kexStr::Format("%s - Version Date: %s", KEX_GAME_TITLE, __DATE__),
                               SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                               videoWidth, videoHeight, flags);
     

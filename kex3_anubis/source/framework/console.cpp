@@ -495,26 +495,29 @@ void kexConsole::ParseInput(void)
 
 bool kexConsole::ProcessInput(const inputEvent_t *ev)
 {
-    if(ev->type == ev_mousedown ||
-        ev->type == ev_mouseup ||
+    if(ev->type == ev_mouseup ||
         ev->type == ev_mouse)
     {
         return false;
     }
 
-    if(ev->type == ev_mousewheel && state == CON_STATE_DOWN)
+    if(ev->type == ev_mousedown && state == CON_STATE_DOWN)
     {
         switch(ev->data1)
         {
-        case 1:
+        case KMSB_WHEEL_UP:
             LineScroll(1);
-            break;
-        case -1:
-            LineScroll(0);
-            break;
-        }
+            return true;
 
-        return true;
+        case KMSB_WHEEL_DOWN:
+            LineScroll(0);
+            return true;
+        }
+    }
+
+    if(ev->type == ev_mousedown)
+    {
+        return false;
     }
     
     bCapsDown = kex::cInput->CapslockOn();
@@ -628,6 +631,7 @@ void kexConsole::Draw(void)
     if(!bOverlay)
     {
         kexCpuVertList *vl = kexRender::cVertList;
+        kexStr versionStr;
 
         kexRender::cTextures->whiteTexture->Bind();
         vl->BindDrawPointers();
@@ -639,6 +643,15 @@ void kexConsole::Draw(void)
         vl->AddQuad(0, h, w, 1, 0, 128, 255, 255);
 
         vl->DrawElements();
+
+        versionStr = kexStr::Format("%s %i.%i (%s)",
+                                    KEX_ENGINE_TITLE,
+                                    KEX_ENGINE_VERSION,
+                                    KEX_ENGINE_SUBVERSION,
+                                    KEX_ENGINE_BRANCH);
+
+        color = RGBA(255, 0, 0, 255);
+        font->DrawString(versionStr, w - font->StringWidth(versionStr, 1, 0) - 8, h-34, 1, false, color);
 
         color = RGBA(255, 255, 255, 255);
         font->DrawString("> ", 0, h-15, 1, false);

@@ -218,8 +218,11 @@ void kexCommand::Execute(const char *buffer)
                     {
                         if(cmd_argc == 1)
                         {
-                            kex::cSystem->Printf("%s: %s (%s)\n", cvar->GetName(),
-                                                   cvar->GetValue(), cvar->GetDefaultValue());
+                            kex::cSystem->Printf("%s: %s (%s) - %s\n",
+                                                 cvar->GetName(),
+                                                 cvar->GetValue(),
+                                                 cvar->GetDefaultValue(),
+                                                 cvar->GetDescription());
                         }
                         else
                         {

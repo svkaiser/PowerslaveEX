@@ -806,8 +806,8 @@ void kexInputSDL::GetEvent(const SDL_Event *Event)
         {
             break;
         }
-        event.type = ev_mousewheel;
-        event.data1 = Event->wheel.y > 0 ? 1 : -1;
+        event.type = ev_mousedown;
+        event.data1 = Event->wheel.y > 0 ? KMSB_WHEEL_UP : KMSB_WHEEL_DOWN;
         event.data2 = event.data3 = 0;
         kex::cSession->EventQueue().Push(&event);
         break;

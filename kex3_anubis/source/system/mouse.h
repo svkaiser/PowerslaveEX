@@ -21,11 +21,11 @@ typedef enum
     KMSB_LEFT,
     KMSB_MIDDLE,
     KMSB_RIGHT,
+    KMSB_WHEEL_UP,
+    KMSB_WHEEL_DOWN,
     KMSB_MISC1,
     KMSB_MISC2,
     KMSB_MISC3,
-    KMSB_MISC4,
-    KMSB_MISC5,
     
     NUMMOUSEBUTTONS
 } mouseButtons_t;

@@ -15,6 +15,15 @@
 #ifndef __KEXLIB_H__
 #define __KEXLIB_H__
 
+#define KEX_ENGINE_TITLE        "Kex Engine"
+#define KEX_ENGINE_BRANCH       "Anubis"
+#define KEX_ENGINE_VERSION      3
+#define KEX_ENGINE_SUBVERSION   0
+
+#define KEX_GAME_TITLE          "Powerslave EX"
+#define KEX_GAME_VERSION        1
+#define KEX_GAME_SUBVERSION     0
+
 // narrow down the windows preprocessor bullshit down to just one macro define
 #if defined(__WIN32__) || defined(__WIN32) || defined(_WIN32_) || defined(_WIN32) || defined(WIN32)
 #define KEX_WIN32

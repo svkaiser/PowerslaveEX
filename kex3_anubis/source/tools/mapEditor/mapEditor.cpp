@@ -166,13 +166,13 @@ bool kexMapEditor::ProcessInput(inputEvent_t *ev)
         }
     }
     
-    if(ev->type == ev_mousewheel)
+    if(ev->type == ev_mousedown)
     {
-        if(ev->data1 == 1)
+        if(ev->data1 == KMSB_WHEEL_UP)
         {
             renderView.Origin().z -= (gridScale * 32);
         }
-        else if(ev->data1 == -1)
+        else if(ev->data1 == KMSB_WHEEL_DOWN)
         {
             renderView.Origin().z += (gridScale * 32);
         }
