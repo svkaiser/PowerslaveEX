@@ -705,11 +705,15 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
 
         if(face->flags & FF_WATER)
         {
-            // we flat out ignore water faces completely
+            if(moveActor->Flags() & AF_NOENTERWATER)
+            {
+                CollideFace(face);
+            }
             continue;
         }
 
-        if(moveActor->InstanceOf(&kexAI::info) && face->flags & FF_BLOCKAIGROUND)
+        if(moveActor->InstanceOf(&kexAI::info) && face->flags & FF_BLOCKAIGROUND &&
+            !(static_cast<kexAI*>(moveActor)->AIFlags() & AIF_FLYING))
         {
             CollideFace(face);
             continue;
