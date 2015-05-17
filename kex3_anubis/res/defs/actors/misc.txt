@@ -114,4 +114,5 @@ Obj_Ramses 170
     scale                   2.0
     spawnAnim               "misc/ramses_spawn"
     fullbright              1
+    transparency            128
 }

@@ -3,7 +3,7 @@ AI_Mantis 5
     classname               "kexAI"
     radius                  48
     height                  384
-    stepHeight              4
+    stepHeight              0.25
     scale                   3
     health                  400
     noEnterWater            1

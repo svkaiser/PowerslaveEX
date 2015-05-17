@@ -110,7 +110,7 @@ void A_RandomVaseItem(kActor @actor)
     float z = actor.Origin().z + actor.Height();
     kActor @obj;
     
-    if((Math::RandByte() & 7) == 3 && !actor.RandomDecision(30) && !Game.LevelIsMapped())
+    if((Math::RandByte() & 7) == 3 && !actor.RandomDecision(14) && !Game.LevelIsMapped())
     {
         Game.SpawnActor("Item_Map", x, y, z, 0, actor.SectorIndex());
         return;

@@ -539,10 +539,9 @@ void A_MantisAttack(kActor @actor)
         return;
     }
     
-    float an;
-    float dist;
-    float offset;
-    float x, y;
+    float an, pitch;
+    float c;
+    float speed;
     kVec3 tVec;
     kVec3 dir;
     kActor @proj;
@@ -557,23 +556,17 @@ void A_MantisAttack(kActor @actor)
     an = actor.Yaw() + (Math::RandCFloat() * 0.0625f);
     proj.Yaw() = an;
     
-    dir.x = Math::Sin(an) * 8.0f;
-    dir.y = Math::Cos(an) * 8.0f;
+    speed = 8.0f + (Math::RandFloat() * 8.0f);
     
     tVec = actor.GetTarget().Origin();
+    tVec.z += (actor.GetTarget().Height() * 0.5f);
     
-    x = tVec.x - proj.Origin().x;
-    y = tVec.y - proj.Origin().y;
+    pitch = (tVec - proj.Origin()).ToPitch() + (Math::RandCFloat() * 0.0625f);
+    c = Math::Cos(pitch);
     
-    dist = Math::Sqrt(x * x + y * y) / 8.0f;
-    
-    if(dist < 1)
-    {
-        dist = 1;
-    }
-    
-    offset = tVec.z + (actor.GetTarget().Height() * 0.5f);
-    dir.z = ((offset - proj.Origin().z) / dist) + Math::RandCFloat();
+    dir.x = (Math::Sin(an) * c) * speed;
+    dir.y = (Math::Cos(an) * c) * speed;
+    dir.z = Math::Sin(pitch) * speed;
     
     proj.SetTarget(actor);
     proj.Velocity() = dir;
@@ -965,10 +958,8 @@ void A_QueenFireProjectile(kActor @actor)
         return;
     }
     
-    float an;
-    float dist;
-    float offset;
-    float x, y;
+    float an, pitch;
+    float c;
     kVec3 tVec;
     kVec3 dir;
     kActor @proj;
@@ -983,23 +974,15 @@ void A_QueenFireProjectile(kActor @actor)
     an = ((actor.GetTarget().Origin() - actor.Origin()).Normalize()).ToYaw();
     proj.Yaw() = an;
     
-    dir.x = Math::Sin(an) * 32.0f;
-    dir.y = Math::Cos(an) * 32.0f;
-    
     tVec = actor.GetTarget().Origin();
+    tVec.z += (actor.GetTarget().Height() * 0.5f);
     
-    x = tVec.x - proj.Origin().x;
-    y = tVec.y - proj.Origin().y;
+    pitch = (tVec - proj.Origin()).ToPitch();
+    c = Math::Cos(pitch);
     
-    dist = Math::Sqrt(x * x + y * y) / 32.0f;
-    
-    if(dist < 1)
-    {
-        dist = 1;
-    }
-    
-    offset = tVec.z + (actor.GetTarget().Height() * 0.5f);
-    dir.z = ((offset - proj.Origin().z) / dist);
+    dir.x = (Math::Sin(an) * c) * 32.0f;
+    dir.y = (Math::Cos(an) * c) * 32.0f;
+    dir.z = Math::Sin(pitch) * 32.0f;
     
     proj.SetTarget(actor);
     proj.Velocity() = dir;

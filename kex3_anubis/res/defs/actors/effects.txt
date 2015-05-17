@@ -106,6 +106,7 @@ Fx_HealthSpawn 63
     spawnAnim               "effects/orb_spawn"
     fullbright              1
     color                   "1.0 0.285 0.285"
+    transparency            128
 }
 
 Fx_AmmoSpawn 64
@@ -118,6 +119,7 @@ Fx_AmmoSpawn 64
     spawnAnim               "effects/orb_spawn"
     fullbright              1
     color                   "0.285 0.285 1.0"
+    transparency            128
 }
 
 Fx_Explosion01 65
@@ -154,6 +156,7 @@ Fx_Bubble 125
     gravity                 -0.01
     damage                  0
     solid                   0
+    transparency            128
 }
 
 Fx_FireballShootPuff 200

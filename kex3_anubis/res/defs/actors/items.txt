@@ -71,6 +71,7 @@ Item_Health 40
     touchable               1
     moveable                1
     gravity                 0.25
+    transparency            128
     floorOffset             48
     giveAmount              20
     multiplier              2.5
@@ -89,6 +90,7 @@ Item_Ammo 41
     fullbright              1
     moveable                1
     gravity                 0.25
+    transparency            128
     touchable               1
     divisor                 16
     multiplier              2.5
