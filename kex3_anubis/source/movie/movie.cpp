@@ -640,7 +640,7 @@ bool kexMoviePlayerFFMpeg::VideoClockBehind(void)
 //=============================================================================
 
 //
-// kexMoviePlayerFFMpeg::illAudioBuffer
+// kexMoviePlayerFFMpeg::FillAudioBuffer
 //
 // Decodes an audio sample from the AVPacket pointer and then
 // pushes it into the queue list for the post mix callback function
@@ -1083,6 +1083,8 @@ FF_ENABLE_DEPRECATION_WARNINGS
 
 //
 // kexMoviePlayerFFMpeg::GetAudioBufferInQueue
+//
+// Called from kexSound class once the audio thread has been hooked
 //
 
 byte *kexMoviePlayerFFMpeg::GetAudioBufferInQueue(bool &bFinished)
