@@ -96,7 +96,7 @@
 			IntermediateDirectory="..\obj\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
-			WholeProgramOptimization="1"
+			WholeProgramOptimization="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -116,9 +116,11 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
+				InlineFunctionExpansion="2"
 				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
+				WholeProgramOptimization="true"
 				AdditionalIncludeDirectories=".\;.\..\SDL2\include;.\..\openal\include;.\..\zlib\;.\..\lpng1612;.\..\angelscript\angelscript\include;.\..\source;.\..\source\framework;.\..\source\win32;.\..\source\math;.\..\source\opengl;.\..\source\renderer;.\..\source\game;.\..\source\system;.\..\source\system\sdl;.\..\source\tools\;.\..\source\tools\mapEditor\;.\..\source\script;.\..\source\script\objects;.\..\source\movie\;.\..\ogg\libogg\include\;.\..\ogg\libvorbis\include\;.\..\ffmpeg\include\"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;__STDC_CONSTANT_MACROS"
 				MinimalRebuild="false"
@@ -140,7 +142,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=".\..\SDL2\lib\x86\SDL2.lib .\..\SDL2\lib\x86\SDL2main.lib .\..\openal\lib\eaxguid.lib .\..\openal\lib\openal32.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Release\libpng.lib .\..\lpng1612\projects\visualc71\Win32_LIB_Release\ZLib\zlib.lib .\..\ogg\libogg\win32\VS2008\Win32\Release\libogg_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Release\libvorbis_static.lib .\..\ogg\libvorbis\win32\VS2008\Win32\Release\libvorbisfile_static.lib .\..\angelscript\angelscript\lib\angelscript.lib .\..\ffmpeg\windows\avcodec.lib .\..\ffmpeg\windows\avdevice.lib .\..\ffmpeg\windows\avfilter.lib .\..\ffmpeg\windows\avformat.lib .\..\ffmpeg\windows\avutil.lib .\..\ffmpeg\windows\postproc.lib .\..\ffmpeg\windows\swresample.lib .\..\ffmpeg\windows\swscale.lib opengl32.lib glu32.lib ws2_32.lib winmm.lib"
-				LinkIncremental="2"
+				LinkIncremental="0"
 				IgnoreDefaultLibraryNames="MSVCRTD"
 				GenerateDebugInformation="false"
 				GenerateMapFile="true"
