@@ -61,6 +61,7 @@ void kexScriptObjGame::Init(void)
     e->RegisterObjectMethod("kPlayer", "int16 &Abilities(void)", asMETHODPR(kexPlayer, Abilities, (void), int16_t&), asCALL_THISCALL);
     e->RegisterObjectMethod("kPlayer", "uint &TeamDolls(void)", asMETHODPR(kexPlayer, TeamDolls, (void), uint&), asCALL_THISCALL);
     e->RegisterObjectMethod("kPlayer", "int &ShakeTime(void)", asMETHODPR(kexPlayer, ShakeTime, (void), int&), asCALL_THISCALL);
+    e->RegisterObjectMethod("kPlayer", "bool WeaponOwned(const int)", asMETHODPR(kexPlayer, WeaponOwned, (const int), bool), asCALL_THISCALL);
 
     e->RegisterEnum("EnumPlayerButtons");
     e->RegisterEnumValue("EnumPlayerButtons", "BC_ATTACK", BC_ATTACK);

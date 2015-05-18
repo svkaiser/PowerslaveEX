@@ -15,6 +15,19 @@
 //      Level Script For TOMB.MAP
 //
 
+enum weaponTypes
+{
+    WP_MACHETE   = 0,
+    WP_PISTOL,
+    WP_M90,
+    WP_BOMB,
+    WP_FLAMETHROWER,
+    WP_CSTAFF,
+    WP_RA,
+    WP_MANACLE,
+    NUMWEAPONS
+}
+
 bool bScript1Triggered = false;
 bool bPlayAlternateDialog = false;
 bool bCasketOpened = false;
@@ -50,82 +63,69 @@ float GetRamsesDialog(void)
 {
     int16 arti = Player.Artifacts();
     
-    if(arti == 0x3F)
+    if(arti == 0x3F) // has feather
     {
+        if(bPlayAlternateDialog)
+        {
+            Game.PlayMusic("music/ramses/ra12.ogg", false);
+            return 30.0f;
+        }
+        
         Game.PlayMusic("music/ramses/ra11.ogg", false);
-        return 27.0f;
+        return 30.0f;
     }
-    else if((arti & 0x10) != 0)
+    else if((arti & 0x10) != 0) // has scepter
     {
         Game.PlayMusic("music/ramses/ra10.ogg", false);
-        return 26.0f;
+        return 28.0f;
     }
-    else if((arti & 0x8) != 0)
+    else if((arti & 0x8) != 0) // has anklets
     {
+        if(Player.WeaponOwned(WP_CSTAFF))
+        {
+            Game.PlayMusic("music/ramses/ra9.ogg", false);
+            return 22.0f;
+        }
+        
         Game.PlayMusic("music/ramses/ra8.ogg", false);
         return 24.0f;
     }
-    else if((arti & 0x4) != 0)
+    else if((arti & 0x4) != 0) // has shawl
     {
+        if(Player.WeaponOwned(WP_FLAMETHROWER))
+        {
+            Game.PlayMusic("music/ramses/ra7.ogg", false);
+            return 30.0f;
+        }
+        
         Game.PlayMusic("music/ramses/ra6.ogg", false);
-        return 25.0f;
+        return 28.0f;
     }
-    else if((arti & 0x2) != 0)
+    else if((arti & 0x2) != 0) // has mask
     {
+        if(Player.WeaponOwned(WP_BOMB))
+        {
+            Game.PlayMusic("music/ramses/ra5.ogg", false);
+            return 31.0f;
+        }
+        
         Game.PlayMusic("music/ramses/ra4.ogg", false);
-        return 32.0f;
+        return 34.0f;
     }
-    else if((arti & 0x1) != 0)
+    else if((arti & 0x1) != 0) // has sandals
     {
         Game.PlayMusic("music/ramses/ra3.ogg", false);
-        return 36.0f;
+        return 38.0f;
+    }
+    
+    if(bPlayAlternateDialog)
+    {
+        Game.PlayMusic("music/ramses/ra2.ogg", false);
+        return 20.0f;
     }
     
     Game.PlayMusic("music/ramses/ra1.ogg", false);
     return 120.0f;
-}
-
-//
-// GetAltRamsesDialog
-//
-
-float GetAltRamsesDialog(void)
-{
-    int16 arti = Player.Artifacts();
-    
-    if(arti == 0x3F)
-    {
-        Game.PlayMusic("music/ramses/ra12.ogg", false);
-        return 27.0f;
-    }
-    else if((arti & 0x10) != 0)
-    {
-        Game.PlayMusic("music/ramses/ra10.ogg", false);
-        return 26.0f;
-    }
-    else if((arti & 0x8) != 0)
-    {
-        Game.PlayMusic("music/ramses/ra9.ogg", false);
-        return 18.0f;
-    }
-    else if((arti & 0x4) != 0)
-    {
-        Game.PlayMusic("music/ramses/ra7.ogg", false);
-        return 28.0f;
-    }
-    else if((arti & 0x2) != 0)
-    {
-        Game.PlayMusic("music/ramses/ra5.ogg", false);
-        return 29.0f;
-    }
-    else if((arti & 0x1) != 0)
-    {
-        Game.PlayMusic("music/ramses/ra3.ogg", false);
-        return 36.0f;
-    }
-    
-    Game.PlayMusic("music/ramses/ra2.ogg", false);
-    return 18.0f;
 }
 
 //
@@ -172,15 +172,7 @@ $script 1
     bobTime = 0.0f;
     
     delay(1.0f);
-    
-    if(bPlayAlternateDialog == false)
-    {
-        dialogTime = GetRamsesDialog();
-    }
-    else
-    {
-        dialogTime = GetAltRamsesDialog();
-    }
+    dialogTime = GetRamsesDialog();
     
     Game.CallDelayedMapScript(4, instigator, 2.0f);
     Game.CallDelayedMapScript(5, instigator, dialogTime);
