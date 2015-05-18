@@ -774,7 +774,7 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
                     continue;
                 }
 
-                if(GetFloorHeight(start, moveActor->Sector()) - floorz > (moveActor->StepHeight()*16))
+                if(GetFloorHeight(start, moveActor->Sector()) - floorz > moveActor->FallHeight())
                 {
                     CollideFace(face);
                 }

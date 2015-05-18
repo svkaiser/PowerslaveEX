@@ -111,6 +111,7 @@ public:
     float                           &Radius(void) { return radius; }
     float                           &Height(void) { return height; }
     float                           &StepHeight(void) { return stepHeight; }
+    float                           &FallHeight(void) { return fallHeight; }
     float                           &Scale(void) { return scale; }
     float                           &Friction(void) { return friction; }
     float                           &Gravity(void) { return gravity; }
@@ -149,6 +150,7 @@ protected:
     float                           height;
     float                           scale;
     float                           stepHeight;
+    float                           fallHeight;
     float                           friction;
     float                           gravity;
     int16_t                         health;

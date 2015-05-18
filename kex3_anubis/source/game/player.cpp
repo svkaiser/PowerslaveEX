@@ -1045,7 +1045,7 @@ void kexPuppet::Spawn(void)
 
     radius      = 95.25f;
     height      = 160;
-    stepHeight  = 48;
+    stepHeight  = 45;
     health      = 200;
     friction    = 0.9375f;
     flags       = (AF_SOLID|AF_SHOOTABLE);

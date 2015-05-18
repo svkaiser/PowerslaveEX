@@ -614,7 +614,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
             fh1 = kexGame::cLocal->CModel()->GetFloorHeight(origin, sector);
             fh2 = kexGame::cLocal->CModel()->GetFloorHeight(origin, s);
 
-            if(fh1 - fh2 > (stepHeight*16) || (!(flags & AF_INWATER) && s->flags & SF_WATER))
+            if(fh1 - fh2 > fallHeight || (!(flags & AF_INWATER) && s->flags & SF_WATER))
             {
                 // sector the ai is on is too high, so avoid this edge
                 return false;

@@ -40,6 +40,7 @@ kexActor::kexActor(void)
     this->height = 32;
     this->scale = 1;
     this->stepHeight = 16;
+    this->fallHeight = 512;
     this->flags = 0;
     this->anim = NULL;
     this->spawnAnim = NULL;
@@ -160,6 +161,7 @@ void kexActor::Spawn(void)
         definition->GetFloat("radius", radius, 16);
         definition->GetFloat("height", height, 32);
         definition->GetFloat("stepHeight", stepHeight, 16);
+        definition->GetFloat("fallHeight", fallHeight, 512);
         definition->GetFloat("animSpeed", animSpeed, 0.5f);
         definition->GetFloat("friction", friction, 0.5f);
         definition->GetFloat("gravity", gravity, 0.75f);
