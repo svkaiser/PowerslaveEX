@@ -84,7 +84,7 @@ long kexPakFile::HashFileName(const char *fname, int hashSize) const
 // kexPakFile::LoadZipFile
 //
 
-void kexPakFile::LoadZipFile(const char *file)
+void kexPakFile::LoadZipFile(const char *file, const bool bUseBasePath)
 {
     unzFile uf;
     unz_global_info gi;
@@ -97,10 +97,18 @@ void kexPakFile::LoadZipFile(const char *file)
     const char *filepath;
     kexStr fPath;
 
-    filepath = kex::cvarBasePath.GetValue();
+    if(bUseBasePath)
+    {
+        filepath = kex::cvarBasePath.GetValue();
 
-    fPath = filepath;
-    fPath = fPath + "/" + file;
+        fPath = filepath;
+        fPath = fPath + "/" + file;
+    }
+    else
+    {
+        fPath = file;
+    }
+
     fPath.NormalizeSlashes();
 
     kex::cSystem->Printf("kexPakFile::LoadZipFile: Loading %s\n", fPath.c_str());
@@ -238,14 +246,78 @@ int kexPakFile::OpenFile(const char *filename, byte **data, kexHeapBlock &hb) co
 
 void kexPakFile::LoadUserFiles(void)
 {
+    kexStrList list;
     int p;
 
     if((p = kex::cSystem->CheckParam("-file")))
     {
         while(++p != kex::cSystem->Argc() && kex::cSystem->Argv()[p][0] != '-')
         {
-            kex::cPakFiles->LoadZipFile(kex::cSystem->Argv()[p]);
+            LoadZipFile(kex::cSystem->Argv()[p]);
         }
+    }
+    else
+    {
+        // handle drag and drop files
+        for(int i = 1; i < kex::cSystem->Argc(); ++i)
+        {
+            if( kexStr::IndexOf(kex::cSystem->Argv()[i], ".kpf") != -1 ||
+                kexStr::IndexOf(kex::cSystem->Argv()[i], ".KPF") != -1)
+            {
+                kexStr fileName = kex::cSystem->Argv()[i];
+
+                LoadZipFile(kex::cSystem->Argv()[i], false);
+            }
+        }
+    }
+
+    // auto-load files from /mods directory
+    GetMatchingExternalFiles(list, "mods/");
+
+    for(unsigned int i = 0; i < list.Length(); ++i)
+    {
+        if( list[i].IndexOf(".kpf\0") == -1 &&
+            list[i].IndexOf(".KPF\0") == -1)
+        {
+            continue;
+        }
+        
+        LoadZipFile(list[i].c_str());
+    }
+}
+
+//
+// kexPakFile::GetMatchingExternalFiles
+//
+
+void kexPakFile::GetMatchingExternalFiles(kexStrList &list, const char *search)
+{
+    DIR *dir;
+    struct dirent *ent;
+    int idx;
+    kexStr path = kexStr(kex::cvarBasePath.GetValue()) + "/" + search;
+    path.NormalizeSlashes();
+
+    if((dir = opendir(path.c_str())) != NULL)
+    {
+        while((ent = readdir(dir)) != NULL)
+        {
+            idx = kexStr::IndexOf(ent->d_name, ".");
+
+            if(ent->d_name[0] == '.')
+            {
+                continue;
+            }
+
+            if(idx == -1 || idx == 0)
+            {
+                GetMatchingExternalFiles(list, (kexStr(search) + ent->d_name + "/").c_str());
+                continue;
+            }
+
+            list.Push(kexStr(search) + ent->d_name);
+        }
+        closedir(dir);
     }
 }
 
@@ -258,33 +330,7 @@ void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
     // for development mode, scan local directories that's not part of the pak file
     if(kex::cvarDeveloper.GetBool())
     {
-        DIR *dir;
-        struct dirent *ent;
-        int idx;
-        kexStr path = kexStr(kex::cvarBasePath.GetValue()) + "/" + search;
-        path.NormalizeSlashes();
-
-        if((dir = opendir(path.c_str())) != NULL)
-        {
-            while((ent = readdir(dir)) != NULL)
-            {
-                idx = kexStr::IndexOf(ent->d_name, ".");
-
-                if(ent->d_name[0] == '.')
-                {
-                    continue;
-                }
-
-                if(idx == -1 || idx == 0)
-                {
-                    GetMatchingFiles(list, (kexStr(search) + ent->d_name + "/").c_str());
-                    continue;
-                }
-
-                list.Push(kexStr(search) + ent->d_name);
-            }
-            closedir(dir);
-        }
+        GetMatchingExternalFiles(list, search);
     }
 
     // scan files inside pak files

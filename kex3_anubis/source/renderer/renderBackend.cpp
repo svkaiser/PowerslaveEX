@@ -18,7 +18,7 @@
 #include "kexlib.h"
 #include "renderMain.h"
 
-kexCvar kexRenderBackend::cvarRenderFinish("r_finish", CVF_BOOL|CVF_CONFIG, "0", "Force a GL command sync");
+kexCvar kexRenderBackend::cvarRenderFinish("r_finish", CVF_BOOL|CVF_CONFIG, "1", "Force a GL command sync");
 
 static kexRenderBackend renderBackend;
 kexRenderBackend *kexRender::cBackend = &renderBackend;

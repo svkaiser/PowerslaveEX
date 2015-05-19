@@ -27,10 +27,11 @@ public:
 
     void                Shutdown(void);
     void                LoadUserFiles(void);
-    void                LoadZipFile(const char *file);
+    void                LoadZipFile(const char *file, const bool bUseBasePath = true);
     int                 OpenFile(const char *filename, byte **data, kexHeapBlock &hb) const;
     int                 OpenExternalFile(const char *name, byte **buffer) const;
     void                GetMatchingFiles(kexStrList &list, const char *search);
+    void                GetMatchingExternalFiles(kexStrList &list, const char *search);
     void                Init(void);
 
 private:
