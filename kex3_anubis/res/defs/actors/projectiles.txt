@@ -190,6 +190,33 @@ Proj_Cobra_Red -1
     homingMaxPitch          1.0
     spawnLight              1
     lightColor              "0.75 0.375 0.375"
+    homingTurnAngles        0.052
+    lightRadius             512
+    lightPasses             2
+}
+
+Proj_Cobra_Red_Selkis -1
+{
+    classname               "kexProjectile"
+    radius                  16
+    height                  64
+    stepHeight              0
+    scale                   1.0
+    stepHeight              64
+    floorOffset             8
+    spawnAnim               "projectiles/cobra_red_spawn"
+    deathAnim               "projectiles/cobra_red_death"
+    fullbright              1
+    moveable                1
+    gravity                 0
+    damage                  0
+    impactWallsOnly         1
+    homing                  1
+    noHomingThrust          1
+    homingMaxPitch          1.0
+    spawnLight              1
+    lightColor              "0.75 0.375 0.375"
+    homingTurnAngles        0.028
     lightRadius             512
     lightPasses             2
 }

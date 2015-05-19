@@ -1604,7 +1604,7 @@ bool kexMenuBindings::ProcessInput(inputEvent_t *ev)
         break;
     }
     
-    return false;
+    return kexMenu::ProcessInput(ev);
 }
 
 //-----------------------------------------------------------------------------

@@ -45,6 +45,8 @@ public:
     void                            LerpTo(const float destx);
 
     const bool                      IsHighlighted(void) const { return bHighLighted; }
+    const bool                      Lerping(void) const { return bLerping; }
+    const bool                      IsDisabled(void) const { return bDisabled; }
     void                            Toggle(const bool b) { bDisabled = !b; }
 
     virtual kexTitleMenuItem        &operator=(const kexTitleMenuItem &item);
@@ -93,6 +95,7 @@ public:
 
     const int                   SelectedItem(void) const { return selectedItem; }
     void                        SetState(const int s) { state = s; }
+    int                         &CurrentMenu(void) { return currentMenu; }
 
 private:
     int                         state;
@@ -103,6 +106,7 @@ private:
     kexTexture                  *titlePic;
     int                         selectedItem;
     int                         loadGameSlot;
+    int                         currentMenu;
 };
 
 #endif

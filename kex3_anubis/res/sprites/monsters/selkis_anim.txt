@@ -1150,7 +1150,7 @@ selkis_shoot
     {
         // ##003   70  132
         action A_PlayLocalSound("sounds/sentryfire.wav")
-        action A_FireProjectile("Proj_Cobra_Red", 0, 0, 2, 144, 64)
+        action A_FireProjectile("Proj_Cobra_Red_Selkis", 0, 0, 2, 144, 64)
         fullbright
         rotation_N
         {

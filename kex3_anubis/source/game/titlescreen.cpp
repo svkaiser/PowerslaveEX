@@ -371,6 +371,8 @@ MENUITEM(Options, "Options", -100, 146, 1,
     titleMenu[TSI_OPTIONS]->item->Toggle(false);
     titleMenu[TSI_ABOUT]->item->LerpTo(-100);
     titleMenu[TSI_QUIT]->item->LerpTo(420);
+
+    kexGame::cLocal->TitleScreen()->CurrentMenu() = TSI_OPTIONS;
 });
 
 //-----------------------------------------------------------------------------
@@ -441,6 +443,8 @@ MENUITEM(Input, "Input", 420, 132, 1,
     titleMenu[TSI_GRAPHICS]->item->LerpTo(-100);
     titleMenu[TSI_AUDIO]->item->LerpTo(420);
     titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(-100);
+
+    kexGame::cLocal->TitleScreen()->CurrentMenu() = TSI_INPUT;
 });
 
 //-----------------------------------------------------------------------------
@@ -477,7 +481,7 @@ MENUITEM(Audio, "Audio", 420, 168, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(OptionExit, "Exit", -100, 186, 1,
+MENUITEM(OptionExit, "Back", -100, 186, 1,
 {
     if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_EXIT_OPTIONS)
     {
@@ -498,6 +502,8 @@ MENUITEM(OptionExit, "Exit", -100, 186, 1,
     titleMenu[TSI_GRAPHICS]->item->LerpTo(-100);
     titleMenu[TSI_AUDIO]->item->LerpTo(420);
     titleMenu[TSI_EXIT_OPTIONS]->item->LerpTo(-100);
+
+    kexGame::cLocal->TitleScreen()->CurrentMenu() = -1;
 });
 
 //-----------------------------------------------------------------------------
@@ -548,7 +554,7 @@ MENUITEM(Gamepad, "Gamepad", -100, 150, 1,
 //
 //-----------------------------------------------------------------------------
 
-MENUITEM(InputExit, "Exit", 420, 168, 1,
+MENUITEM(InputExit, "Back", 420, 168, 1,
 {
     if(kexGame::cLocal->TitleScreen()->SelectedItem() != TSI_EXIT_INPUT)
     {
@@ -569,6 +575,8 @@ MENUITEM(InputExit, "Exit", 420, 168, 1,
     titleMenu[TSI_MOUSE]->item->LerpTo(-100);
     titleMenu[TSI_GAMEPAD]->item->LerpTo(420);
     titleMenu[TSI_EXIT_INPUT]->item->LerpTo(-100);
+
+    kexGame::cLocal->TitleScreen()->CurrentMenu() = TSI_OPTIONS;
 });
 
 //
@@ -629,6 +637,7 @@ void kexTitleScreen::Start(void)
     bFading = true;
     bFadeIn = true;
     selectedItem = -1;
+    currentMenu = -1;
     kex::cInput->ToggleMouseGrab(false);
     kex::cSession->ToggleCursor(true);
 
@@ -810,6 +819,34 @@ bool kexTitleScreen::ProcessInput(inputEvent_t *ev)
             {
                 titleMenu[selectedItem]->item->Select(false);
                 selectedItem = -1;
+            }
+        }
+    }
+    else if(ev->type == ev_keydown)
+    {
+        if(ev->data1 == KKEY_ESCAPE && currentMenu != -1)
+        {
+            if( titleMenu[TSI_INPUT]->item->Lerping() ||
+                titleMenu[TSI_OPTIONS]->item->Lerping() ||
+                titleMenu[TSI_EXIT_OPTIONS]->item->Lerping() ||
+                titleMenu[TSI_EXIT_INPUT]->item->Lerping())
+            {
+                return false;
+            }
+
+            if(currentMenu == TSI_OPTIONS)
+            {
+                selectedItem = TSI_EXIT_OPTIONS;
+                titleMenu[TSI_EXIT_OPTIONS]->item->Select(true);
+                titleMenu[TSI_EXIT_OPTIONS]->callback(titleMenu[TSI_EXIT_OPTIONS]->item);
+                kexGame::cLocal->PlaySound("sounds/menu_select.wav");
+            }
+            else if(currentMenu == TSI_INPUT)
+            {
+                selectedItem = TSI_EXIT_INPUT;
+                titleMenu[TSI_EXIT_INPUT]->item->Select(true);
+                titleMenu[TSI_EXIT_INPUT]->callback(titleMenu[TSI_EXIT_INPUT]->item);
+                kexGame::cLocal->PlaySound("sounds/menu_select.wav");
             }
         }
     }
