@@ -37,6 +37,8 @@ kexPlayerCmd::kexPlayerCmd(void)
     Reset();
     joyturnthreshold = 0;
     joylookthreshold = 0;
+
+    memset(buttonHeldTime, 0, sizeof(uint) * NUMINPUTACTIONS);
 }
 
 //
@@ -72,8 +74,22 @@ void kexPlayerCmd::BuildButtons(void)
         if(kex::cActions->GetAction(i) != 0)
         {
             buttons |= (1 << i);
+            buttonHeldTime[i]++;
+        }
+        else
+        {
+            buttonHeldTime[i] = 0;
         }
     }
+}
+
+//
+// kexPlayerCmd::ButtonHeldTime
+//
+
+uint kexPlayerCmd::ButtonHeldTime(const int btn)
+{
+    return buttonHeldTime[btn];
 }
 
 //

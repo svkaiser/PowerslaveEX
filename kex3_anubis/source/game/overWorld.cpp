@@ -20,6 +20,7 @@
 #include "game.h"
 #include "overworld.h"
 #include "localization.h"
+#include "playerCmd.h"
 
 //
 // kexOverWorld::kexOverWorld
@@ -394,6 +395,7 @@ void kexOverWorld::Tick(void)
     float mx = (float)kex::cInput->MouseX();
     float my = (float)kex::cInput->MouseY();
     unsigned int buttons;
+    kexPlayerCmd *cmd;
     float nx;
     float ny;
         
@@ -415,6 +417,7 @@ void kexOverWorld::Tick(void)
     }
     
     buttons = kexGame::cLocal->ButtonEvent();
+    cmd = &kexGame::cLocal->Player()->Cmd();
 
     nx = map->overworldX;
     ny = map->overworldY;
@@ -440,28 +443,28 @@ void kexOverWorld::Tick(void)
         fadeTime = 0;
         curFadeTime = 0;
     }
-    else if(buttons & GBE_MENU_UP)
+    else if(buttons & GBE_MENU_UP || cmd->ButtonHeldTime(IA_FORWARD) == 1)
     {
         if(map->nextMap[0] >= 0 && kexGame::cLocal->MapUnlockList()[map->nextMap[0]])
         {
             selectedMap = map->nextMap[0];
         }
     }
-    else if(buttons & GBE_MENU_RIGHT)
+    else if(buttons & GBE_MENU_RIGHT || cmd->ButtonHeldTime(IA_STRAFERIGHT) == 1)
     {
         if(map->nextMap[1] >= 0 && kexGame::cLocal->MapUnlockList()[map->nextMap[1]])
         {
             selectedMap = map->nextMap[1];
         }
     }
-    else if(buttons & GBE_MENU_DOWN)
+    else if(buttons & GBE_MENU_DOWN || cmd->ButtonHeldTime(IA_BACKWARD) == 1)
     {
         if(map->nextMap[2] >= 0 && kexGame::cLocal->MapUnlockList()[map->nextMap[2]])
         {
             selectedMap = map->nextMap[2];
         }
     }
-    else if(buttons & GBE_MENU_LEFT)
+    else if(buttons & GBE_MENU_LEFT || cmd->ButtonHeldTime(IA_STRAFELEFT) == 1)
     {
         if(map->nextMap[3] >= 0 && kexGame::cLocal->MapUnlockList()[map->nextMap[3]])
         {

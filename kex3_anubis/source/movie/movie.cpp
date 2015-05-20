@@ -630,7 +630,8 @@ void kexMoviePlayerFFMpeg::DeleteAudioQueue(void)
 
 bool kexMoviePlayerFFMpeg::VideoClockBehind(void)
 {
-    return (bHasAudio && (videoClock < audioClock));
+    return (bHasAudio && (videoClock > 0 && audioClock > 0) &&
+        (videoClock < audioClock));
 }
 
 //=============================================================================

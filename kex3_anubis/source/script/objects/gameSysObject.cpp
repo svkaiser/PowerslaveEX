@@ -68,8 +68,6 @@ void kexScriptObjGame::Init(void)
     e->RegisterEnumValue("EnumPlayerButtons", "BC_JUMP", BC_JUMP);
     e->RegisterEnumValue("EnumPlayerButtons", "BC_FORWARD", BC_FORWARD);
     e->RegisterEnumValue("EnumPlayerButtons", "BC_BACKWARD", BC_BACKWARD);
-    e->RegisterEnumValue("EnumPlayerButtons", "BC_LEFT", BC_LEFT);
-    e->RegisterEnumValue("EnumPlayerButtons", "BC_RIGHT", BC_RIGHT);
     e->RegisterEnumValue("EnumPlayerButtons", "BC_STRAFELEFT", BC_STRAFELEFT);
     e->RegisterEnumValue("EnumPlayerButtons", "BC_STRAFERIGHT", BC_STRAFERIGHT);
     e->RegisterEnumValue("EnumPlayerButtons", "BC_WEAPONRIGHT", BC_WEAPONRIGHT);

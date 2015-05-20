@@ -526,8 +526,6 @@ void kexGameLocal::Init(void)
     kex::cActions->AddAction(IA_JUMP, "jump");
     kex::cActions->AddAction(IA_FORWARD, "forward");
     kex::cActions->AddAction(IA_BACKWARD, "backward");
-    kex::cActions->AddAction(IA_LEFT, "left");
-    kex::cActions->AddAction(IA_RIGHT, "right");
     kex::cActions->AddAction(IA_STRAFELEFT, "strafeleft");
     kex::cActions->AddAction(IA_STRAFERIGHT, "straferight");
     kex::cActions->AddAction(IA_WEAPNEXT, "+weapnext");

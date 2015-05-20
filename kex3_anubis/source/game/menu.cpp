@@ -1251,8 +1251,6 @@ const kexMenuBindings::inputBinds_t kexMenuBindings::inputBinds1[] =
     { "Jump",           IA_JUMP,            "jump" },
     { "Forward",        IA_FORWARD,         "forward" },
     { "Backward",       IA_BACKWARD,        "backward" },
-    { "Turn-L",         IA_LEFT,            "left" },
-    { "Turn-R",         IA_RIGHT,           "right" },
     { "Strafe-L",       IA_STRAFELEFT,      "strafeleft" },
     { "Strafe-R",       IA_STRAFERIGHT,     "straferight" },
     { "Interact",       IA_USE,             "+use" },
