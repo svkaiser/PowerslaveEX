@@ -1105,6 +1105,12 @@ void kexCModel::CheckSurroundingSectors(void)
                     ceilingz = GetCeilingHeight(end, s, true);
                     floorz = GetFloorHeight(end, s, !(moveActor->Flags() & AF_NOENTERWATER));
                     
+                    if(kexMath::Fabs(ceilingz - floorz) < actorHeight)
+                    {
+                        // no headroom
+                        continue;
+                    }
+
                     diff = end.z - floorz;
                     
                     // determine the closest floor that can be stepped on

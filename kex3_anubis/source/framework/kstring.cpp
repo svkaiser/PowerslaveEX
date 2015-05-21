@@ -614,6 +614,18 @@ char *kexStr::Format(const char *str, ...)
 }
 
 //
+// kexStr::FormatPath
+//
+
+kexStr kexStr::FormatPath(const char *str)
+{
+    kexStr path = Format("%s/%s", kex::cvarBasePath.GetValue(), str);
+    path.NormalizeSlashes();
+
+    return path;
+}
+
+//
 // kexStr::Substr
 //
 

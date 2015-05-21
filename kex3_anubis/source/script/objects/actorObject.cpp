@@ -40,6 +40,7 @@
     e->RegisterObjectMethod(asName, "float &Radius(void)", asMETHODPR(clsName, Radius, (void), float&), asCALL_THISCALL);    \
     e->RegisterObjectMethod(asName, "float &Height(void)", asMETHODPR(clsName, Height, (void), float&), asCALL_THISCALL);    \
     e->RegisterObjectMethod(asName, "float &StepHeight(void)", asMETHODPR(clsName, StepHeight, (void), float&), asCALL_THISCALL);    \
+    e->RegisterObjectMethod(asName, "float &FallHeight(void)", asMETHODPR(clsName, FallHeight, (void), float&), asCALL_THISCALL);    \
     e->RegisterObjectMethod(asName, "float &Friction(void)", asMETHODPR(clsName, Friction, (void), float&), asCALL_THISCALL);    \
     e->RegisterObjectMethod(asName, "float &Scale(void)", asMETHODPR(clsName, Scale, (void), float&), asCALL_THISCALL);  \
     e->RegisterObjectMethod(asName, "float &Ticks(void)", asMETHODPR(clsName, Ticks, (void), float&), asCALL_THISCALL);  \

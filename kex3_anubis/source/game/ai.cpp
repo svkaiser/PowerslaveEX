@@ -966,6 +966,7 @@ void kexAI::ChaseTarget(void)
     if(target && static_cast<kexActor*>(target)->Health() <= 0)
     {
         state = AIS_IDLE;
+        aiFlags |= AIF_LOOKALLAROUND;
         SetTarget(NULL);
         ChangeAnim(spawnAnim);
         return;

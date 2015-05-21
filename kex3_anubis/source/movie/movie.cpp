@@ -251,6 +251,8 @@ private:
 
     double                  remainingVideoTime;
     double                  remainingAudioTime;
+
+    bool                    bPlaying;
 };
 
 static kexMoviePlayerFFMpeg moviePlayerLocal;
@@ -294,6 +296,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
 
 kexMoviePlayerFFMpeg::kexMoviePlayerFFMpeg(void)
 {
+    this->bPlaying = false;
 }
 
 //
@@ -302,6 +305,7 @@ kexMoviePlayerFFMpeg::kexMoviePlayerFFMpeg(void)
 
 kexMoviePlayerFFMpeg::~kexMoviePlayerFFMpeg(void)
 {
+    Shutdown();
 }
 
 //=============================================================================
@@ -1137,12 +1141,15 @@ bool kexMoviePlayerFFMpeg::HasVideoStarted(void)
 
 void kexMoviePlayerFFMpeg::Shutdown(void)
 {
+    if(!bPlaying)
+    {
+        return;
+    }
+
     if(bHasAudio)
     {
         kex::cSound->UnHookMovieAudioStream();
     }
-
-    kex::cThread->WaitThread(thread, NULL);
 
     DeletePacketQueue(&videoPacketQueue);
     DeletePacketQueue(&audioPacketQueue);
@@ -1159,6 +1166,8 @@ void kexMoviePlayerFFMpeg::Shutdown(void)
 
     texture.Delete();
     thread = NULL;
+
+    bPlaying = false;
 }
 
 //
@@ -1276,6 +1285,8 @@ static int IteratePacketsThread(void *data)
             moviePlayerLocal.AudioCodecCtx()->channels);
     }
 
+    kex::cTimer->Sleep(100);
+
     while(av_read_frame(moviePlayerLocal.FormatCtx(), &packet) >= 0 && !moviePlayerLocal.UserExit())
     {
         if(packet.stream_index == moviePlayerLocal.VideoStreamIdx())
@@ -1351,6 +1362,9 @@ void kexMoviePlayerFFMpeg::StartVideoStream(const char *filename)
     }
 
     thread = kex::cThread->CreateThread("ffmpeg_thread", NULL, IteratePacketsThread);
+    kex::cThread->WaitThread(thread, NULL);
+
+    bPlaying = true;
 
     while((!bVideoFinished || (bHasAudio && !bAudioFinished)) && !bUserExit)
     {

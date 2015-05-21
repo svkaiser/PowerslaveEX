@@ -90,6 +90,7 @@ public:
     static int          IndexOf(const char *string, const char *pattern);
     static int          Hash(const char *s);
     static char         *Format(const char *str, ...);
+    static kexStr       FormatPath(const char *str);
 
 private:
     void                Resize(int size, bool bKeepString);
