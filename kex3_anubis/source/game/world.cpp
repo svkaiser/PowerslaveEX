@@ -1618,6 +1618,11 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
     {
         mapEvent_t *ev = &events[i];
 
+        if(!EventIsASwitch(event - events))
+        {
+            ResetWallSwitchFromTag(ev->tag);
+        }
+
         SendMapActorEvent(sector, ev);
 
         if(ev == event)
