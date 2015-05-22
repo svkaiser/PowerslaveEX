@@ -809,7 +809,7 @@ void kexMoviePlayerFFMpeg::ProcessNextVideoFrame(void)
     double pts = 0;
     bool behind = false;
 
-#if 0
+#if 1
     if(bHasAudio)
     {
         if(videoClock > audioClock || audioClock <= 0)
@@ -1100,6 +1100,12 @@ byte *kexMoviePlayerFFMpeg::GetAudioBufferInQueue(bool &bFinished)
     
     bFinished = false;
 
+    if(audioClock > 0 && videoClock <= 0)
+    {
+        // video clock needs to catch up
+        return NULL;
+    }
+
     if(!audioPacketQueue || bUserExit)
     {
         return NULL;
@@ -1276,17 +1282,6 @@ static int IteratePacketsThread(void *data)
 {
     AVPacket packet;
 
-    kex::cTimer->Sleep(500);
-
-    if(moviePlayerLocal.HasAudio())
-    {
-        kex::cSound->HookToMovieAudioStream(
-            moviePlayerLocal.AudioCodecCtx()->sample_rate,
-            moviePlayerLocal.AudioCodecCtx()->channels);
-    }
-
-    kex::cTimer->Sleep(100);
-
     while(av_read_frame(moviePlayerLocal.FormatCtx(), &packet) >= 0 && !moviePlayerLocal.UserExit())
     {
         if(packet.stream_index == moviePlayerLocal.VideoStreamIdx())
@@ -1363,6 +1358,13 @@ void kexMoviePlayerFFMpeg::StartVideoStream(const char *filename)
 
     thread = kex::cThread->CreateThread("ffmpeg_thread", NULL, IteratePacketsThread);
     kex::cThread->WaitThread(thread, NULL);
+
+    if(bHasAudio)
+    {
+        kex::cTimer->Sleep(500);
+        kex::cSound->HookToMovieAudioStream(audioCodecCtx->sample_rate, audioCodecCtx->channels);
+        kex::cTimer->Sleep(100);
+    }
 
     bPlaying = true;
 
