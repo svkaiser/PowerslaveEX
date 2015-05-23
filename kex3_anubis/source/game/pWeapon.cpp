@@ -303,6 +303,17 @@ void kexPlayerWeapon::UpdateSprite(void)
         }
         break;
 
+    case WS_HOLDSTER:
+    case WS_LOWER:
+        if(bUnderwater && pendingWeapon->bDisableUnderwater &&
+            owner->Cmd().Buttons() & BC_ATTACK)
+        {
+            // switch to default weapon if we can't use the pending weapon
+            // while underwater and firing
+            owner->PendingWeapon() = PW_MACHETE;
+        }
+        break;
+
     default:
         break;
     }
