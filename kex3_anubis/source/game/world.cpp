@@ -20,6 +20,9 @@
 #include "mover.h"
 #include "renderScene.h"
 
+static kexWorld worldLocal;
+kexWorld *kexGame::cWorld = &worldLocal;
+
 kexHeapBlock kexWorld::hb_world("world", false, NULL, NULL);
 
 //
@@ -1597,7 +1600,7 @@ void kexWorld::ArtifactEvent(kexActor *actor, mapEvent_t *event)
                vertices[face->vertexStart+2].origin) / 3;
 
         player->Artifacts() &= ~BIT(artiBit);
-        kexGame::cLocal->World()->FireRemoteEventFromTag(1000 + artiBit);
+        FireRemoteEventFromTag(1000 + artiBit);
 
         obj = kexGame::cLocal->SpawnActor(actorTemplate->type, org.x, org.y, org.z + 16, 0, ev->sector);
 
@@ -1975,7 +1978,7 @@ sectorList_t *kexWorld::FloodFill(const kexVec3 &start, mapSector_t *sector, con
 
         for(int i = sec->faceStart; i < sec->faceEnd+3; ++i)
         {
-            mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
+            mapFace_t *face = &faces[i];
             float d;
 
             if(!(face->flags & FF_PORTAL) || face->sector <= -1)

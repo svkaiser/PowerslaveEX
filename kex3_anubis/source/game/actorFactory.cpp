@@ -66,7 +66,7 @@ kexActor *kexActorFactory::Construct(const char *className, kexDict *def, const 
     }
     else
     {
-        actor->SetSector(&kexGame::cLocal->World()->Sectors()[sector]);
+        actor->SetSector(&kexGame::cWorld->Sectors()[sector]);
     }
     
     actor->CallSpawn();
@@ -222,12 +222,12 @@ kexMover *kexActorFactory::SpawnMover(const char *className, const int type, con
     kexMover *mover;
     mapSector_t *sec;
     
-    if(sector <= -1 || sector >= (int)kexGame::cLocal->World()->NumSectors())
+    if(sector <= -1 || sector >= (int)kexGame::cWorld->NumSectors())
     {
         return NULL;
     }
     
-    sec = &kexGame::cLocal->World()->Sectors()[sector];
+    sec = &kexGame::cWorld->Sectors()[sector];
     
     if(sec->flags & SF_SPECIAL)
     {
@@ -254,7 +254,7 @@ kexFireballFactory *kexActorFactory::SpawnFireballFactory(mapActor_t *mapActor)
 {
     kexFireballFactory *fbf;
     
-    if(mapActor->sector <= -1 || mapActor->sector >= (int)kexGame::cLocal->World()->NumSectors())
+    if(mapActor->sector <= -1 || mapActor->sector >= (int)kexGame::cWorld->NumSectors())
     {
         return NULL;
     }
@@ -265,7 +265,7 @@ kexFireballFactory *kexActorFactory::SpawnFireballFactory(mapActor_t *mapActor)
     }
     
     fbf->FireballType() = mapActor->type;
-    fbf->SetSector(&kexGame::cLocal->World()->Sectors()[mapActor->sector]);
+    fbf->SetSector(&kexGame::cWorld->Sectors()[mapActor->sector]);
     fbf->CallSpawn();
     
     return fbf;

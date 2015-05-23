@@ -110,7 +110,7 @@ void kexScriptObjGame::HaltMapScript(const int scriptID)
 
 void kexScriptObjGame::FireRemoteEventFromTag(const int tag)
 {
-    kexGame::cLocal->World()->FireRemoteEventFromTag(tag);
+    kexGame::cWorld->FireRemoteEventFromTag(tag);
 }
 
 //
@@ -119,7 +119,7 @@ void kexScriptObjGame::FireRemoteEventFromTag(const int tag)
 
 void kexScriptObjGame::FireActorEventFromTag(const int tag)
 {
-    kexGame::cLocal->World()->FireActorEventFromTag(tag);
+    kexGame::cWorld->FireActorEventFromTag(tag);
 }
 
 //
@@ -193,5 +193,5 @@ void kexScriptObjGame::SpawnLight(kexActor *source, const float radius,
 void kexScriptObjGame::MoveScriptedSector(const int tag, const float height,
                                           const float speed, const bool bCeiling)
 {
-    kexGame::cLocal->World()->MoveScriptedSector(tag, height, speed, bCeiling);
+    kexGame::cWorld->MoveScriptedSector(tag, height, speed, bCeiling);
 }

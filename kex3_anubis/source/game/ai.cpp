@@ -578,7 +578,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
     {
         for(int i = sector->faceStart; i <= sector->faceEnd; ++i)
         {
-            mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
+            mapFace_t *face = &kexGame::cWorld->Faces()[i];
             mapSector_t *s;
             float fh1, fh2;
             
@@ -597,7 +597,7 @@ bool kexAI::CheckDirection(const kexVec3 &dir)
                 return false;
             }
             
-            s = &kexGame::cLocal->World()->Sectors()[face->sector];
+            s = &kexGame::cWorld->Sectors()[face->sector];
 
             if(flags & AF_NOENTERWATER && s->floorFace->flags & FF_WATER)
             {
@@ -699,6 +699,19 @@ void kexAI::ChangeDirection(void)
     
     aiFlags |= AIF_TURNING;
     bAdjust = (timeBeforeTurning > 0);
+
+    // randomly decide to charge at the target
+    if(target && !RandomDecision(6) && CheckTargetSight(static_cast<kexActor*>(target)))
+    {
+        kexVec3 start = origin + kexVec3(0, 0, stepHeight);
+        kexVec3 end = target->Origin() + kexVec3(0, 0, static_cast<kexActor*>(target)->StepHeight());
+
+        if(!kexGame::cLocal->CModel()->Trace(this, sector, start, end, 0, false))
+        {
+            SetDesiredDirection(kexMath::ATan2(end.x - start.x, end.y - start.y));
+            return;
+        }
+    }
     
     // determine direction to change towards the target
     if(timeBeforeTurning <= 0)

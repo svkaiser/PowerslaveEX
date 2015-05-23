@@ -38,7 +38,7 @@ kexRenderDLight::kexRenderDLight(void)
 
 void kexRenderDLight::Init(void)
 {
-    uint numSectors = kexGame::cLocal->World()->NumSectors();
+    uint numSectors = kexGame::cWorld->NumSectors();
 
     if(numSectors == 0)
     {
@@ -57,7 +57,7 @@ void kexRenderDLight::Init(void)
 void kexRenderDLight::Clear(void)
 {
     numDLights = 0;
-    memset(lightMarks, 0, sizeof(uint) * kexGame::cLocal->World()->NumSectors());
+    memset(lightMarks, 0, sizeof(uint) * kexGame::cWorld->NumSectors());
 }
 
 //
@@ -67,7 +67,7 @@ void kexRenderDLight::Clear(void)
 void kexRenderDLight::AddLight(kexDLight *light)
 {
     uint sectorCount = 0;
-    kexWorld *w = kexGame::cLocal->World();
+    kexWorld *w = kexGame::cWorld;
     mapFace_t *faces;
     mapSector_t *sectors;
     mapSector_t *startSector;
@@ -136,7 +136,7 @@ void kexRenderDLight::AddLight(kexDLight *light)
 
 void kexRenderDLight::RenderLitPolygon(mapPoly_t *poly, int &tris)
 {
-    kexWorld *w = kexGame::cLocal->World();
+    kexWorld *w = kexGame::cWorld;
     kexCpuVertList *vl = kexRender::cVertList;
     mapFace_t *face = &w->Faces()[poly->faceRef];
     mapSector_t *sector = &w->Sectors()[face->sectorOwner];
@@ -278,7 +278,7 @@ void kexRenderDLight::RenderLitPolygon(mapPoly_t *poly, int &tris)
 
 void kexRenderDLight::Draw(kexRenderScene *rScene)
 {
-    kexWorld *w = kexGame::cLocal->World();
+    kexWorld *w = kexGame::cWorld;
     kexCpuVertList *vl = kexRender::cVertList;
     int tris;
     uint count;

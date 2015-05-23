@@ -261,7 +261,7 @@ DECLARE_KEX_ACTION(kexActionHitScan)
         else
         {
             kexGame::cActorFactory->Spawn(name, x, y, z, actor->Yaw(),
-                                          cm->ContactSector() - game->World()->Sectors());
+                                          cm->ContactSector() - kexGame::cWorld->Sectors());
         }
     }
 }
@@ -326,14 +326,13 @@ DECLARE_KEX_ACTION(kexActionPlayerMelee)
 
 DECLARE_KEX_ACTION(kexActionSpawn)
 {
-    kexGameLocal *game  = kexGame::cLocal;
     char *defName       = this->args[0].s;
     float x             = this->args[1].f + actor->Origin().x;
     float y             = this->args[2].f + actor->Origin().y;
     float z             = this->args[3].f + actor->Origin().z;
 
     kexGame::cActorFactory->Spawn(defName, x, y, z, actor->Yaw(),
-                                  actor->Sector() - game->World()->Sectors());
+                                  actor->Sector() - kexGame::cWorld->Sectors());
 }
 
 //-----------------------------------------------------------------------------
@@ -344,7 +343,6 @@ DECLARE_KEX_ACTION(kexActionSpawn)
 
 DECLARE_KEX_ACTION(kexActionTossActor)
 {
-    kexGameLocal *game  = kexGame::cLocal;
     kexActor *toss;
     char *defName       = this->args[0].s;
     float x             = this->args[1].f + actor->Origin().x;
@@ -356,7 +354,7 @@ DECLARE_KEX_ACTION(kexActionTossActor)
     float zSpreadMax    = this->args[7].f;
     
     toss = kexGame::cActorFactory->Spawn(defName, x, y, z, actor->Yaw(),
-                                         actor->Sector() - game->World()->Sectors());
+                                         actor->Sector() - kexGame::cWorld->Sectors());
     
     toss->Velocity().x += kexRand::Range(-xSpread, xSpread);
     toss->Velocity().y += kexRand::Range(-ySpread, ySpread);
@@ -412,12 +410,11 @@ DECLARE_KEX_ACTION(kexActionDestroyAtRest)
 
 DECLARE_KEX_ACTION(kexActionRadialBlast)
 {
-    kexGameLocal *game  = kexGame::cLocal;
     float radius        = this->args[0].f;
     int damage          = this->args[1].i;
     int destroyWalls    = this->args[2].i;
     
-    game->World()->RadialDamage(actor, radius, damage, (destroyWalls == 1));
+    kexGame::cWorld->RadialDamage(actor, radius, damage, (destroyWalls == 1));
 }
 
 //-----------------------------------------------------------------------------
@@ -714,7 +711,7 @@ DECLARE_KEX_ACTION(kexActionClearBurnState)
 
 DECLARE_KEX_ACTION(kexActionTriggerEvent)
 {
-    kexWorld *w = kexGame::cLocal->World();
+    kexWorld *w = kexGame::cWorld;
 
     if(actor->MapActor() == NULL)
     {

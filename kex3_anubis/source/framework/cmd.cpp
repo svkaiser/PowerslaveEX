@@ -400,6 +400,8 @@ COMMAND(listcmds)
     kexCommandItem *cmd;
     int i = 0;
 
+    kex::cSystem->CPrintf(COLOR_GREEN, "Available commands:\n");
+
     for(cmd = command.GetFunctions(); cmd; cmd = cmd->GetNext(), i++)
     {
         kex::cSystem->CPrintf(COLOR_CYAN, "%s\n", cmd->GetName());

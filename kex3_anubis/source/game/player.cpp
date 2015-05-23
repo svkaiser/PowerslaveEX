@@ -86,7 +86,7 @@ bool kexPuppet::OnCollide(kexCModel *cmodel)
             {
                 if(face->sector >= 0)
                 {
-                    kexWorld *world = kexGame::cLocal->World();
+                    kexWorld *world = kexGame::cWorld;
                     mapSector_t *sector = &world->Sectors()[face->sector];
 
                     for(int i = sector->faceStart; i < sector->faceEnd+3; ++i)
@@ -635,7 +635,7 @@ void kexPuppet::TryClimbOutOfWater(void)
     }
 
     // make absolutely sure we're in the right sector
-    startSector = &kexGame::cLocal->World()->Sectors()[sector->ceilingFace->sector];
+    startSector = &kexGame::cWorld->Sectors()[sector->ceilingFace->sector];
 
     if(!(startSector->floorFace->flags & FF_WATER))
     {
@@ -660,7 +660,7 @@ void kexPuppet::TryClimbOutOfWater(void)
     kexVec3 end = start + (forward * (radius*1.05f));
 
     // scan surrounding sectors
-    sectorList = kexGame::cLocal->World()->FloodFill(start, startSector, radius*1.05f);
+    sectorList = kexGame::cWorld->FloodFill(start, startSector, radius*1.05f);
     for(unsigned int j = 0; j < sectorList->CurrentLength(); ++j)
     {
         if((*sectorList)[j] == sector)
@@ -671,7 +671,7 @@ void kexPuppet::TryClimbOutOfWater(void)
         // see if we can climb out
         for(int i = (*sectorList)[j]->faceStart; i <= (*sectorList)[j]->faceEnd; ++i)
         {
-            mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
+            mapFace_t *face = &kexGame::cWorld->Faces()[i];
             float fHeight, amount;
             mapSector_t *s;
 
@@ -694,7 +694,7 @@ void kexPuppet::TryClimbOutOfWater(void)
                 continue;
             }
 
-            s = &kexGame::cLocal->World()->Sectors()[face->sector];
+            s = &kexGame::cWorld->Sectors()[face->sector];
 
             if(s->flags & SF_WATER || s->floorFace->flags & FF_WATER)
             {
@@ -1028,7 +1028,7 @@ void kexPuppet::Tick(void)
         GroundMove(cmd);
     }
 
-    kexGame::cLocal->World()->EnterSectorSpecial(this, sector);
+    kexGame::cWorld->EnterSectorSpecial(this, sector);
     gameTicks++;
 }
 
@@ -1163,7 +1163,7 @@ void kexPlayer::Ready(void)
             actor->FindSector(actor->Origin());
         }
         
-        kexGame::cLocal->World()->EnterSectorSpecial(actor, actor->Sector());
+        kexGame::cWorld->EnterSectorSpecial(actor, actor->Sector());
     }
 }
 
@@ -1330,7 +1330,7 @@ void kexPlayer::TryUse(void)
         
         if(useFace)
         {
-            kexGame::cLocal->World()->UseWallSpecial(this, useFace);
+            kexGame::cWorld->UseWallSpecial(this, useFace);
         }
     }
 }
@@ -1357,7 +1357,7 @@ kexActor *kexPlayer::AutoAim(const kexVec3 &start, kexAngle &yaw, kexAngle &pitc
     bestYaw = yaw;
     bestPitch = pitch;
     aimActor = NULL;
-    sectorList = kexGame::cLocal->World()->FloodFill(start, actor->Sector(), dist);
+    sectorList = kexGame::cWorld->FloodFill(start, actor->Sector(), dist);
 
     for(unsigned int i = 0; i < sectorList->CurrentLength(); ++i)
     {

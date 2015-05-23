@@ -477,7 +477,7 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
                 continue;
             }
             
-            if(face->sector >= 0)
+            if(face->sector >= 0 && face->flags & FF_PORTAL)
             {
                 mapSector_t *next = &world->Sectors()[face->sector];
                 bool bInside = false;

@@ -1159,8 +1159,8 @@ void kexRenderScene::DrawStretchSprite(kexRenderView &view, mapSector_t *sector,
 
 int kexRenderScene::SortPolys(const int *p1, const int *p2)
 {
-    mapPoly_t *poly1 = &kexGame::cLocal->World()->Polys()[*p1];
-    mapPoly_t *poly2 = &kexGame::cLocal->World()->Polys()[*p2];
+    mapPoly_t *poly1 = &kexGame::cWorld->Polys()[*p1];
+    mapPoly_t *poly2 = &kexGame::cWorld->Polys()[*p2];
 
     if(poly1->texture < poly2->texture) return  1;
     if(poly1->texture > poly2->texture) return -1;

@@ -208,7 +208,7 @@ void kexPlayLoop::Start(void)
     
     hud.SetPlayer(game->Player());
 
-    renderScene.SetWorld(game->World());
+    renderScene.SetWorld(kexGame::cWorld);
     renderScene.InitVertexBuffer();
     renderScene.DLights().Init();
 
@@ -257,7 +257,7 @@ void kexPlayLoop::Stop(void)
     renderScene.DestroyVertexBuffer();
 
     kexGame::cScriptManager->DestroyLevelScripts();
-    kexGame::cLocal->World()->UnloadMap();
+    kexGame::cWorld->UnloadMap();
 
     kex::cSession->ForceSingleFrame();
 }
@@ -366,7 +366,7 @@ void kexPlayLoop::Tick(void)
         renderScene.DLights().Clear();
         kexRenderScene::bufferUpdateList.Reset();
 
-        kexGame::cLocal->World()->UpdateAnimPics();
+        kexGame::cWorld->UpdateAnimPics();
         kexGame::cLocal->UpdateGameObjects();
         kexGame::cLocal->Player()->Tick();
 
@@ -641,7 +641,7 @@ void kexPlayLoop::WaterBubbles(void)
         return;
     }
 
-    world = kexGame::cLocal->World();
+    world = kexGame::cWorld;
     numVisSectors = renderScene.VisibleSectors().CurrentLength();
 
     if(numVisSectors == 0)
@@ -688,7 +688,7 @@ const int kexPlayLoop::GetWaterVelocityPoint(const float x, const float y)
 
 void kexPlayLoop::DrawAutomapWalls(kexRenderView &view)
 {
-    kexWorld *w = kexGame::cLocal->World();
+    kexWorld *w = kexGame::cWorld;
     float floorz = kexGame::cLocal->Player()->Actor()->FloorHeight();
     
     for(unsigned int i = 0; i < w->NumSectors(); ++i)
@@ -923,6 +923,8 @@ void kexPlayLoop::ZoomAutomap(const float amount)
 
 void kexPlayLoop::DrawAutomap(void)
 {
+    int h, clipY;
+
     if(bShowAutomap == false)
     {
         return;
@@ -946,7 +948,12 @@ void kexPlayLoop::DrawAutomap(void)
     
     kexRender::cBackend->SetState(GLSTATE_ALPHATEST, false);
     kexRender::cBackend->SetState(GLSTATE_BLEND, false);
-    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, true);
+
+    h = kex::cSystem->VideoHeight();
+    clipY = h - (int)((float)h / (240.0f / 24.0f));
+
+    kexRender::cBackend->SetScissorRect(0, 0, kex::cSystem->VideoWidth(), clipY);
     
     kexRender::cTextures->whiteTexture->Bind();
     kexRender::cVertList->BindDrawPointers();
@@ -959,6 +966,8 @@ void kexPlayLoop::DrawAutomap(void)
                      kexGame::cLocal->Player()->Actor()->Radius(), 255, 255, 255);
 
     dglLineWidth(1);
+
+    kexRender::cBackend->SetState(GLSTATE_SCISSOR, false);
 }
 
 //

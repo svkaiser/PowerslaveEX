@@ -159,7 +159,7 @@ void kexProjectile::AimThink(void)
 
         start = origin + kexVec3(0, 0, height * 0.5f);
         aimActor = NULL;
-        sectorList = kexGame::cLocal->World()->FloodFill(start, sector, 1024);
+        sectorList = kexGame::cWorld->FloodFill(start, sector, 1024);
 
         projectileFlags &= ~PF_AIMING;
 
@@ -305,7 +305,7 @@ void kexProjectile::SeekTargets(void)
     else
     {
         sectorList_t *sectorList;
-        sectorList = kexGame::cLocal->World()->FloodFill(start, sector, homingMaxSightDistance);
+        sectorList = kexGame::cWorld->FloodFill(start, sector, homingMaxSightDistance);
 
         for(unsigned int i = 0; i < sectorList->CurrentLength(); ++i)
         {
@@ -783,8 +783,8 @@ void kexFireballSpawner::Tick(void)
     {
         bEnabled = false;
 
-        mapFace_t *face = &kexGame::cLocal->World()->Faces()[mapActor->params2];
-        mapPoly_t *poly = &kexGame::cLocal->World()->Polys()[mapActor->params1];
+        mapFace_t *face = &kexGame::cWorld->Faces()[mapActor->params2];
+        mapPoly_t *poly = &kexGame::cWorld->Polys()[mapActor->params1];
         SpawnFireball(face, poly);
     }
 }
@@ -795,13 +795,13 @@ void kexFireballSpawner::Tick(void)
 
 void kexFireballSpawner::SpawnFireball(mapFace_t *face, mapPoly_t *poly)
 {
-    mapVertex_t *v = kexGame::cLocal->World()->Vertices();
+    mapVertex_t *v = kexGame::cWorld->Vertices();
     int secID, projType;
     float speed;
     kexVec3 vOrigin;
     kexProjectile *proj;
 
-    secID = sector - kexGame::cLocal->World()->Sectors();
+    secID = sector - kexGame::cWorld->Sectors();
     
     vOrigin = (v[face->vertStart + poly->indices[0]].origin +
                v[face->vertStart + poly->indices[1]].origin +

@@ -82,9 +82,9 @@ void kexMapEditor::Start(void)
     kex::cInput->ToggleMouseGrab(false);
     kex::cSession->ToggleCursor(true);
     
-    if(!kexGame::cLocal->World()->MapLoaded())
+    if(!kexGame::cWorld->MapLoaded())
     {
-        kexGame::cLocal->World()->LoadMap("maps/TOMB.MAP");
+        kexGame::cWorld->LoadMap("maps/TOMB.MAP");
     }
 }
 
@@ -97,9 +97,9 @@ void kexMapEditor::Stop(void)
     kex::cInput->ToggleMouseGrab(true);
     kex::cSession->ToggleCursor(false);
     
-    if(kexGame::cLocal->World()->MapLoaded())
+    if(kexGame::cWorld->MapLoaded())
     {
-        kexGame::cLocal->World()->UnloadMap();
+        kexGame::cWorld->UnloadMap();
     }
 }
 
@@ -266,7 +266,7 @@ void kexMapEditor::DrawXYGrid(const float spacing, const byte c)
 
 void kexMapEditor::DrawWorld(void)
 {
-    kexWorld *world = kexGame::cLocal->World();
+    kexWorld *world = kexGame::cWorld;
     
     if(!world->MapLoaded())
     {

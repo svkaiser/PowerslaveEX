@@ -79,7 +79,7 @@ void kexMover::SetSector(mapSector_t *s)
 
 void kexMover::UpdateFloorOrigin(void)
 {
-    mapVertex_t *v = kexGame::cLocal->World()->Vertices();
+    mapVertex_t *v = kexGame::cWorld->Vertices();
     
     origin = (v[sector->floorFace->vertexStart+0].origin +
               v[sector->floorFace->vertexStart+1].origin +
@@ -93,7 +93,7 @@ void kexMover::UpdateFloorOrigin(void)
 
 void kexMover::UpdateCeilingOrigin(void)
 {
-    mapVertex_t *v = kexGame::cLocal->World()->Vertices();
+    mapVertex_t *v = kexGame::cWorld->Vertices();
     
     origin = (v[sector->ceilingFace->vertexStart+0].origin +
               v[sector->ceilingFace->vertexStart+1].origin +
@@ -181,7 +181,7 @@ kexDoor::~kexDoor(void)
 void kexDoor::Tick(void)
 {
     float lastHeight = currentHeight;
-    kexWorld *world = kexGame::cLocal->World();
+    kexWorld *world = kexGame::cWorld;
 
     if(IsStale())
     {
@@ -417,7 +417,7 @@ void kexFloor::Tick(void)
             }
             else
             {
-                kexWorld *w = kexGame::cLocal->World();
+                kexWorld *w = kexGame::cWorld;
 
                 state = FS_LOWERED;
 
@@ -485,7 +485,7 @@ void kexFloor::Tick(void)
         return;
     }
 
-    kexGame::cLocal->World()->MoveSector(sector, false, currentHeight - lastHeight);
+    kexGame::cWorld->MoveSector(sector, false, currentHeight - lastHeight);
     UpdateFloorOrigin();
 }
 
@@ -691,7 +691,7 @@ void kexLift::Tick(void)
     
     moveAmount = currentHeight - lastHeight;
     
-    kexGame::cLocal->World()->MoveSector(sector, false, moveAmount);
+    kexGame::cWorld->MoveSector(sector, false, moveAmount);
     UpdateFloorOrigin();
 }
 
@@ -723,7 +723,7 @@ void kexLift::Spawn(void)
         moveSpeed = 4;
         bDirection = true;
         baseHeight = (float)sector->floorHeight;
-        destHeight = kexGame::cLocal->World()->GetHighestSurroundingFloor(sector);
+        destHeight = kexGame::cWorld->GetHighestSurroundingFloor(sector);
         break;
 
     default:
@@ -801,7 +801,7 @@ void kexDropPad::Tick(void)
 {
     float lastHeight = currentHeight;
     float moveAmount;
-    kexWorld *world = kexGame::cLocal->World();
+    kexWorld *world = kexGame::cWorld;
 
     switch(state)
     {
@@ -918,7 +918,7 @@ void kexDropPad::Reset(void)
 
 void kexDropPad::Spawn(void)
 {
-    kexWorld *world = kexGame::cLocal->World();
+    kexWorld *world = kexGame::cWorld;
 
     assert(sector != NULL);
 
@@ -937,7 +937,7 @@ void kexDropPad::Spawn(void)
 
     state = DPS_IDLE;
 
-    linkedSector = &kexGame::cLocal->World()->Sectors()[sector->linkedSector];
+    linkedSector = &kexGame::cWorld->Sectors()[sector->linkedSector];
 
     world->MakeSectorDynamic(linkedSector, true);
     world->MakeSectorDynamic(sector, false);
@@ -984,7 +984,7 @@ kexFloatingPlatform::~kexFloatingPlatform(void)
 
 void kexFloatingPlatform::Tick(void)
 {
-    kexWorld *world = kexGame::cLocal->World();
+    kexWorld *world = kexGame::cWorld;
     float a = (float)time * (moveSpeed * kexMath::Deg2Rad(1));
     float amt = (kexMath::Cos(a+angOffset+kexMath::pi) * (moveHeight*0.5f));
     float move = amt - currentHeight;
@@ -1004,7 +1004,7 @@ void kexFloatingPlatform::Tick(void)
 
 void kexFloatingPlatform::Spawn(void)
 {
-    kexWorld *world = kexGame::cLocal->World();
+    kexWorld *world = kexGame::cWorld;
 
     assert(sector != NULL);
     assert(sector->linkedSector >= 0);
@@ -1114,7 +1114,7 @@ void kexScriptedMover::Tick(void)
 {
     float lastHeight = currentHeight;
     float move;
-    kexWorld *world = kexGame::cLocal->World();
+    kexWorld *world = kexGame::cWorld;
 
     if(IsStale())
     {

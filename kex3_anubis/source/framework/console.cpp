@@ -36,6 +36,17 @@ COMMAND(clear)
 }
 
 //
+// help
+//
+
+COMMAND(help)
+{
+    kex::cCommands->Execute("listcmds");
+    kex::cSystem->Printf("\n");
+    kex::cCommands->Execute("listvars");
+}
+
+//
 // kexConsole::kexConsole
 //
 

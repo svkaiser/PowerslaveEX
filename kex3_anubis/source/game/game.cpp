@@ -486,7 +486,6 @@ kexGameLocal::kexGameLocal(void)
     this->playLoop          = new kexPlayLoop;
     this->overWorld         = new kexOverWorld;
     this->translation       = new kexTranslation;
-    this->world             = new kexWorld;
     this->player            = new kexPlayer;
     this->cmodel            = new kexCModel;
     this->spriteManager     = new kexSpriteManager;
@@ -507,7 +506,6 @@ kexGameLocal::~kexGameLocal(void)
     delete playLoop;
     delete overWorld;
     delete translation;
-    delete world;
     delete player;
     delete cmodel;
     delete spriteManager;
@@ -762,7 +760,7 @@ void kexGameLocal::Stop(void)
 {
     kex::cSystem->WriteConfigFile();
     
-    world->UnloadMap();
+    kexGame::cWorld->UnloadMap();
     spriteAnimManager->Shutdown();
     spriteManager->Shutdown();
 }
@@ -1108,7 +1106,7 @@ void kexGameLocal::LoadNewMap(void)
         RestorePersistentData();
     }
 
-    if(!world->LoadMap(pendingMap.c_str()))
+    if(!kexGame::cWorld->LoadMap(pendingMap.c_str()))
     {
         SetGameState(GS_TITLE);
         return;

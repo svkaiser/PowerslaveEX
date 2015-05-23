@@ -202,7 +202,6 @@ public:
     kexPlayLoop                     *PlayLoop(void) { return playLoop; }
     kexTranslation                  *Translation(void) { return translation; }
     kexOverWorld                    *OverWorld(void) { return overWorld; }
-    kexWorld                        *World(void) { return world; }
     kexFont                         *SmallFont(void) { return smallFont; }
     kexFont                         *BigFont(void) { return bigFont; }
     const int                       GetTicks(void) const { return ticks; }
@@ -258,7 +257,6 @@ private:
     kexPlayLoop                     *playLoop;
     kexOverWorld                    *overWorld;
     kexTranslation                  *translation;
-    kexWorld                        *world;
     kexCModel                       *cmodel;
     kexSpriteManager                *spriteManager;
     kexSpriteAnimManager            *spriteAnimManager;
@@ -301,6 +299,7 @@ class kexGame
 {
 public:
     static kexGameLocal         *cLocal;
+    static kexWorld             *cWorld;
     static kexScriptManager     *cScriptManager;
     static kexActionDefManager  *cActionDefManager;
     static kexActorFactory      *cActorFactory;

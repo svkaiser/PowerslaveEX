@@ -232,7 +232,7 @@ void kexActor::Spawn(void)
             // check if the spawned actor is inside geometry
             for(int i = sector->faceStart; i <= sector->faceEnd; ++i)
             {
-                mapFace_t *face = &kexGame::cLocal->World()->Faces()[i];
+                mapFace_t *face = &kexGame::cWorld->Faces()[i];
                 float d;
                 
                 if(!(face->flags & FF_SOLID) || face->sector >= 0)
@@ -287,9 +287,9 @@ bool kexActor::FindSector(const kexVec3 &pos)
 {
     mapSector_t *sector;
     
-    for(unsigned int i = 0; i < kexGame::cLocal->World()->NumSectors(); ++i)
+    for(unsigned int i = 0; i < kexGame::cWorld->NumSectors(); ++i)
     {
-        sector = &kexGame::cLocal->World()->Sectors()[i];
+        sector = &kexGame::cWorld->Sectors()[i];
         
         if(kexGame::cLocal->CModel()->PointWithinSectorEdges(pos, sector))
         {
@@ -319,12 +319,12 @@ void kexActor::SetSector(mapSector_t *s)
 
 void kexActor::SetSector(const unsigned int s)
 {
-    if(s >= kexGame::cLocal->World()->NumSectors())
+    if(s >= kexGame::cWorld->NumSectors())
     {
         return;
     }
 
-    sector = &kexGame::cLocal->World()->Sectors()[s];
+    sector = &kexGame::cWorld->Sectors()[s];
     LinkSector();
 }
 
@@ -334,7 +334,7 @@ void kexActor::SetSector(const unsigned int s)
 
 const int kexActor::SectorIndex(void)
 {
-    return (sector - kexGame::cLocal->World()->Sectors());
+    return (sector - kexGame::cWorld->Sectors());
 }
 
 //
@@ -752,7 +752,7 @@ void kexActor::LinkArea(void)
     box.min += origin;
     box.max += origin;
 
-    areaLink.Link(kexGame::cLocal->World()->AreaNodes(), box);
+    areaLink.Link(kexGame::cWorld->AreaNodes(), box);
 }
 
 //
