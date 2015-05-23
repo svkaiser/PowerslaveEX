@@ -23,7 +23,7 @@
 
 #include "renderMain.h"
 
-kexCvar kexVertBuffer::cvarRenderUseVBO("r_usevertexbuffers", CVF_BOOL|CVF_CONFIG, "0", "Enables vertex buffer objects for rendering the scene");
+kexCvar kexVertBuffer::cvarRenderUseVBO("r_usevertexbuffers", CVF_BOOL|CVF_CONFIG, "1", "Enables vertex buffer objects for rendering the scene");
 bool kexVertBuffer::bUseVertexBuffers = true;
 
 #define VERT_OFFSET(n)  reinterpret_cast<void*>(OFFSETOF(drawVert_t, n))
@@ -187,8 +187,6 @@ void kexVertBuffer::UnBind(void)
         kexRender::cVertList->BindDrawPointers();
         return;
     }
-
-    dglDisableClientState(GL_INDEX_ARRAY);
     
     dglBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
     dglBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
@@ -245,10 +243,7 @@ void kexVertBuffer::Latch(void)
         dglColorPointer(4, GL_UNSIGNED_BYTE, sizeof(drawVert_t), &clientVertex->rgba);
         return;
     }
-
-    dglEnableClientState(GL_INDEX_ARRAY);
     
-    dglIndexPointer(GL_UNSIGNED_INT, sizeof(uint), 0);
     dglTexCoordPointer(2, GL_FLOAT, sizeof(drawVert_t), VERT_OFFSET(texCoords));
     dglVertexPointer(3, GL_FLOAT, sizeof(drawVert_t), VERT_OFFSET(vertex));
     dglColorPointer(4, GL_UNSIGNED_BYTE, sizeof(drawVert_t), VERT_OFFSET(rgba));

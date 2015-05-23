@@ -105,10 +105,6 @@ void kexTexture::SetParameters(void)
         {
             dglTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, kexRender::cBackend->MaxAnisotropic());
         }
-        else
-        {
-            dglTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 0);
-        }
     }
 }
 

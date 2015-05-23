@@ -1501,6 +1501,7 @@ void kexMenuBindings::Display(void)
         kexGame::cLocal->DrawSmallString(kexStr::Format("Set bind for %s", selectedBind->action),
                                          160, 82, 1, true);
         kexGame::cLocal->DrawSmallString("Wait 5 seconds to cancel", 160, 92, 1, true);
+        kexGame::cLocal->DrawSmallString("Pressing bounded key will unbind", 160, 122, 1, true);
     }
 }
 

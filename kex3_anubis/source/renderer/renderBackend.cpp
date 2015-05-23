@@ -369,6 +369,7 @@ void kexRenderBackend::ClearBindedTexture(void)
 void kexRenderBackend::SetScissorRect(const int x, const int y, const int w, const int h)
 {
     int vh;
+    int sx, sy, sw, sh;
     
     if(!(glState.glStateBits & (1 << GLSTATE_SCISSOR)))
     {
@@ -377,7 +378,17 @@ void kexRenderBackend::SetScissorRect(const int x, const int y, const int w, con
     
     vh = kex::cSystem->VideoHeight();
 
-    dglScissor(x, vh-h, w-x, vh-(y+(vh-h)));
+    sx = x;
+    sy = vh-h;
+    sw = w-x;
+    sh = vh-(y+(vh-h));
+
+    if(sx < 0) sx = 0;
+    if(sy < 0) sy = 0;
+    if(sw < 0) sw = 0;
+    if(sh < 0) sh = 0;
+
+    dglScissor(sx, sy, sw, sh);
 }
 
 //
