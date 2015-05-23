@@ -556,7 +556,9 @@ void kexSoundSource::Stop(void)
 {
     int queued = 0;
 
+    alSourcei(handle, AL_LOOPING, AL_FALSE);
     alSourceStop(handle);
+
     bInUse      = false;
     bPlaying    = false;
 
