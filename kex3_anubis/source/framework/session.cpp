@@ -122,6 +122,8 @@ void kexSession::DrawCursor(void)
     mh = (float)cursorTexture->Height();
     
     kexRender::cBackend->SetOrtho();
+    kexRender::cBackend->SetState(GLSTATE_BLEND, true);
+    kexRender::cBackend->SetBlend(GLSRC_SRC_ALPHA, GLDST_ONE_MINUS_SRC_ALPHA);
     kexRender::cScreen->DrawTexture(cursorTexture, mx, my, mw, mh);
 }
 
