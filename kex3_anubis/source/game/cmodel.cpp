@@ -618,7 +618,7 @@ void kexCModel::TraceActorsInSector(mapSector_t *sector)
 
             underLip = actor->Radius() - actor->StepHeight();
 
-            if(underLip < 0)
+            if(underLip < 0 || bIsAProjectile)
             {
                 underLip = 0;
             }
