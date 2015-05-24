@@ -1621,7 +1621,7 @@ void kexWorld::SendRemoteTrigger(mapSector_t *sector, mapEvent_t *event)
     {
         mapEvent_t *ev = &events[i];
 
-        if(!EventIsASwitch(event - events) && event->type != 23)
+        if(!EventIsASwitch(event - events) && event->type != 23 && ev->tag == (event->tag+1))
         {
             ResetWallSwitchFromTag(ev->tag);
         }
