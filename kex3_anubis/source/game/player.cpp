@@ -28,8 +28,7 @@ kexCvar kexPlayer::cvarAutoAim("g_autoaim", CVF_BOOL|CVF_CONFIG, "1", "Enable au
 #define PMOVE_SPEED             0.976f
 #define PMOVE_WATER_SPEED       0.48828125f
 #define PMOVE_SPEED_JUMP        10.25f
-#define PMOVE_JUMP_BOOST        1.4878f
-#define PMOVE_MAX_JUMPTICKS     13
+#define PMOVE_JUMP_BOOST        15.25f
 
 const int16_t kexPlayer::maxHealth = 200;
 
@@ -367,12 +366,17 @@ void kexPuppet::Jump(kexPlayerCmd *cmd)
 
             // handle longer jumps if holding down
             // the jump key/button
-            if(jumpTicks < PMOVE_MAX_JUMPTICKS)
+            if(velocity.z > 0 || jumpTicks == 0)
             {
-                velocity.z = PMOVE_SPEED_JUMP;
                 if(owner->Artifacts() & PA_SANDALS)
                 {
-                    velocity.z *= PMOVE_JUMP_BOOST;
+                    velocity.z = PMOVE_JUMP_BOOST;
+                    velocity.z -= (0.34f * (float)jumpTicks);
+                }
+                else
+                {
+                    velocity.z = PMOVE_SPEED_JUMP;
+                    velocity.z -= (0.325f * (float)jumpTicks);
                 }
 
                 jumpTicks++;
@@ -1045,7 +1049,7 @@ void kexPuppet::Spawn(void)
 
     radius      = 95.25f;
     height      = 160;
-    stepHeight  = 45;
+    stepHeight  = 48;
     health      = 200;
     friction    = 0.9375f;
     flags       = (AF_SOLID|AF_SHOOTABLE);
