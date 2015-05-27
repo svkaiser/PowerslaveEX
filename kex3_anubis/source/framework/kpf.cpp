@@ -355,23 +355,21 @@ void kexPakFile::GetMatchingFiles(kexStrList &list, const char *search)
 
                 // check to make sure we don't open the same file twice if we
                 // already found it in the local directory
-                if(kex::cvarDeveloper.GetBool())
+                bool bFoundDupFile = false;
+
+                for(unsigned int j = 0; j < list.Length(); ++j)
                 {
-                    bool bFoundDupFile = false;
-
-                    for(unsigned int j = 0; j < list.Length(); ++j)
+                    if(list[j] == file->name)
                     {
-                        if(list[j] == file->name)
-                        {
-                            bFoundDupFile = true;
-                            break;
-                        }
+                        bFoundDupFile = true;
+                        break;
                     }
+                }
 
-                    if(bFoundDupFile)
-                    {
-                        continue;
-                    }
+                if(bFoundDupFile)
+                {
+                    kex::cSystem->DPrintf("Duplicate file found: %s\n", file->name);
+                    continue;
                 }
 
                 list.Push(file->name);

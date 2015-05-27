@@ -142,7 +142,6 @@ class kexVec2
 public:
     kexVec2(void);
     explicit kexVec2(const float x, const float y);
-    kexVec2(const struct b2Vec2 &bVec);
 
     void                    Set(const float x, const float y);
     void                    Clear(void);
@@ -183,7 +182,6 @@ public:
     kexVec2                 &operator=(const kexVec2 &vec);
     kexVec2                 &operator=(const kexVec3 &vec);
     kexVec2                 &operator=(const float *vecs);
-    kexVec2                 &operator=(const struct b2Vec2 &bVec);
     kexVec2                 &operator+=(const kexVec2 &vec);
     kexVec2                 &operator-=(const kexVec2 &vec);
     kexVec2                 &operator*=(const kexVec2 &vec);
@@ -206,17 +204,6 @@ public:
     float                   x;
     float                   y;
 };
-
-d_inline kexVec2::kexVec2(const struct b2Vec2 &bVec)
-{
-    *this = *reinterpret_cast<kexVec2*>(const_cast<b2Vec2*>(&bVec));
-}
-
-d_inline kexVec2 &kexVec2::operator=(const struct b2Vec2 &bVec)
-{
-    *this = *reinterpret_cast<kexVec2*>(const_cast<b2Vec2*>(&bVec));
-    return *this;
-}
 
 class kexVec3
 {
