@@ -108,7 +108,8 @@ void kexProjectile::HomingThink(void)
     {
         float speed;
 
-        if(homingActor->Removing() || homingActor->Health() <= 0)
+        if(homingActor->Removing() || homingActor->Health() <= 0 ||
+            homingActor->Flags() & AF_HIDDEN || !(homingActor->Flags() & AF_SHOOTABLE))
         {
             SetHomingTarget(NULL);
             return;
@@ -205,7 +206,8 @@ void kexProjectile::AimThink(void)
     }
     else if(homingActor)
     {
-        if(homingActor->Removing() || homingActor->Health() <= 0)
+        if(homingActor->Removing() || homingActor->Health() <= 0 ||
+            homingActor->Flags() & AF_HIDDEN || !(homingActor->Flags() & AF_SHOOTABLE))
         {
             SetHomingTarget(NULL);
             return;
