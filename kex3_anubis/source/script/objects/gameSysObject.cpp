@@ -18,6 +18,7 @@
 #include "kexlib.h"
 #include "game.h"
 #include "scriptSystem.h"
+#include "overworld.h"
 #include "gameSysObject.h"
 
 //
@@ -173,7 +174,12 @@ void kexScriptObjGame::ChangeMap(const kexStr &map)
 
 void kexScriptObjGame::EndGame(const bool bGoodEnding)
 {
-    kexGame::cLocal->SetGameState(bGoodEnding ? GS_ENDING_GOOD : GS_ENDING_BAD);
+    kex::cSound->StopMusic();
+
+    kexGame::cLocal->Player()->Artifacts() |= 0x3F;
+
+    kexGame::cLocal->OverWorld()->SelectedMap() = 0;
+    kexGame::cLocal->PlayLoop()->RequestExit(bGoodEnding ? GS_ENDING_GOOD : GS_ENDING_BAD);
 }
 
 //
