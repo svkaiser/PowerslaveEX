@@ -38,6 +38,8 @@ kexSession::kexSession(void)
     this->deltaTime     = 0;
     this->ticks         = 0;
     this->bShowCursor   = false;
+
+    this->eventQueue.Init(4096);
 }
 
 //
