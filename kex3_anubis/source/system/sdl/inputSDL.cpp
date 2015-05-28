@@ -846,6 +846,8 @@ void kexInputSDL::PollInput(void)
     while(SDL_PollEvent(&Event))
     {
         GetEvent(&Event);
+
+        SDL_PumpEvents();
     }
 
     ReadMouse();
