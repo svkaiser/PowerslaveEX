@@ -57,7 +57,8 @@ typedef enum
     AF_COLLIDEDWALL     = BIT(16),
     AF_STRETCHY         = BIT(17),
     AF_VERTICALFRICTION = BIT(18),
-    AF_NOSPRITECLIPFIX  = BIT(19)
+    AF_NOSPRITECLIPFIX  = BIT(19),
+    AF_NOEXITLAVA       = BIT(20)
 } actorFlags_t;
 
 //-----------------------------------------------------------------------------

@@ -192,6 +192,7 @@ void kexActor::Spawn(void)
         if(definition->GetBool("stretchy"))         flags |= AF_STRETCHY;
         if(definition->GetBool("verticalFriction")) flags |= AF_VERTICALFRICTION;
         if(definition->GetBool("noSpriteClipFix"))  flags |= AF_NOSPRITECLIPFIX;
+        if(definition->GetBool("noExitLava"))       flags |= AF_NOEXITLAVA;
 
         if(flags & AF_BOUNCY)
         {

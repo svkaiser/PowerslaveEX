@@ -20,6 +20,7 @@ AI_Mantis 5
     lookAllAround           1
     hidden                  1
     noLavaDamage            1
+    noExitLava              1
     noInFighting            1
     painChance              16
 }

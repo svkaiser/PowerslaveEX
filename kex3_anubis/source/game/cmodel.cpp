@@ -747,6 +747,13 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
                 continue;
             }
 
+            if(moveActor->Flags() & AF_NOEXITLAVA && !(s->floorFace->flags & FF_LAVA))
+            {
+                // avoid exiting lava
+                CollideFace(face);
+                continue;
+            }
+
             // so here we have a portal that borders between two sectors that the object
             // can fit in, height-wise, but we might have a case where the portal itself is
             // too short to walk through. need to check for that
