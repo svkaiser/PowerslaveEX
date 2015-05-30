@@ -182,7 +182,7 @@ void kexRenderDLight::RenderLitPolygon(mapPoly_t *poly, int &tris)
 
         rHalf = radius * 0.5f;
 
-        dist = face->plane.Distance(lightOrg) - face->plane.d;
+        dist = face->plane.Distance(lightOrg);
 
         if(dist > radius || dist < 0)
         {

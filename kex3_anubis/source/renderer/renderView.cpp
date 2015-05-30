@@ -294,7 +294,7 @@ bool kexRenderView::TestSphere(const kexVec3 &org, const float radius)
 {
     for(int i = 0; i < NUMFRUSTUMPLANES; i++)
     {
-        if(p[i].Distance(org) + p[i].d <= -radius)
+        if(p[i].Dot(org) + p[i].d <= -radius)
         {
             return false;
         }
@@ -309,7 +309,7 @@ bool kexRenderView::TestSphere(const kexVec3 &org, const float radius)
 
 bool kexRenderView::TestPointNearPlane(const kexVec3 &org)
 {
-    return ((p[FP_NEAR].Distance(org) + p[FP_NEAR].d) >= 0);
+    return ((p[FP_NEAR].Dot(org) + p[FP_NEAR].d) >= 0);
 }
 
 //
@@ -322,7 +322,7 @@ byte kexRenderView::SphereBits(const kexVec3 &org, const float radius)
     
     for(int i = 0; i < NUMFRUSTUMPLANES; i++)
     {
-        if(p[i].Distance(org) + p[i].d <= -radius)
+        if(p[i].Dot(org) + p[i].d <= -radius)
         {
             bits &= ~(1 << i);
         }
@@ -340,5 +340,5 @@ bool kexRenderView::BoxDistance(const kexBBox &box, const float distance)
 {
     kexPlane nearPlane = NearPlane();
 
-    return (nearPlane.Distance(box.Center()) + nearPlane.d) > distance;
+    return (nearPlane.Dot(box.Center()) + nearPlane.d) > distance;
 }

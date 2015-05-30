@@ -114,10 +114,10 @@ kexVec3 &kexPlane::Normal(void)
 }
 
 //
-// kexPlane::Distance
+// kexPlane::Dot
 //
 
-float kexPlane::Distance(const kexVec3 &point)
+float kexPlane::Dot(const kexVec3 &point)
 {
     return point.Dot(Normal());
 }
@@ -230,12 +230,21 @@ const kexPlane::planeAxis_t kexPlane::BestAxis(void) const
 
 const kexPlane::planeSide_t kexPlane::PointOnSide(const kexVec3 &point)
 {
-    float pd = Distance(point) - d;
+    float pd = Distance(point);
 
     if(pd > 0) return PSIDE_FRONT;
     if(pd < 0) return PSIDE_BACK;
 
     return PSIDE_ON;
+}
+
+//
+// kexPlane::Distance
+//
+
+float kexPlane::Distance(const kexVec3 &point)
+{
+    return Dot(point) - d;
 }
 
 //

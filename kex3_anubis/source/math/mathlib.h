@@ -389,6 +389,7 @@ public:
     kexVec3                 &Normal(void);
     kexPlane                &SetNormal(const kexVec3 &normal);
     kexPlane                &SetNormal(const kexVec3 &pt1, const kexVec3 &pt2, const kexVec3 &pt3);
+    float                   Dot(const kexVec3 &point);
     float                   Distance(const kexVec3 &point);
     kexPlane                &SetDistance(const kexVec3 &point);
     bool                    IsFacing(const float yaw);

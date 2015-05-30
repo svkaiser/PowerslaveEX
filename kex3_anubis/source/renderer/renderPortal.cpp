@@ -45,7 +45,7 @@ bool kexRenderScene::ClipFaceToPlane(kexRenderView &view, kexPlane &plane, mapFa
     for(int i = 0; i < 4; ++i)
     {
         v[i] = world->Vertices()[face->vertexStart+i].origin;
-        dist[i] = plane.Distance(v[i]) + plane.d;
+        dist[i] = plane.Dot(v[i]) + plane.d;
         sign[i] = dist[i] > 0;
         
         if(sign[i])
@@ -439,7 +439,7 @@ void kexRenderScene::FindVisibleSectors(kexRenderView &view, mapSector_t *sector
             {
                 mapFace_t *face = &world->Faces()[i];
 
-                dist = face->plane.Distance(origin) - face->plane.d;
+                dist = face->plane.Distance(origin);
 
                 if(face->flags & FF_PORTAL)
                 {

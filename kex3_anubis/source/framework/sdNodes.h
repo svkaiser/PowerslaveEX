@@ -265,7 +265,7 @@ int kexSDNode<type>::PointInNode(const kexVec3 &point, const float min)
             break;
         }
 
-        d = n->plane.Distance(point) - n->plane.d;
+        d = n->plane.Distance(point);
 
         if(d > min)
         {

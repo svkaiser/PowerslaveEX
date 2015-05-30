@@ -670,7 +670,7 @@ void kexActor::UpdateMovement(void)
 
     if(sector->floorFace->flags & FF_WATER)
     {
-        if(sector->floorFace->plane.Distance(origin) - sector->floorFace->plane.d < 0)
+        if(sector->floorFace->plane.Distance(origin) < 0)
         {
             bNoSplash = true;
         }

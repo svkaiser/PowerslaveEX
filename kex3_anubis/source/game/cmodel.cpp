@@ -790,7 +790,7 @@ void kexCModel::SlideAgainstFaces(mapSector_t *sector)
                     kexPlane *fp = &s->floorFace->plane;
                     kexPlane *cp = &s->ceilingFace->plane;
                     
-                    if(fp->Distance(start) - fp->d < 0 || cp->Distance(start) - cp->d > actorHeight)
+                    if(fp->Distance(start) < 0 || cp->Distance(start) > actorHeight)
                     {
                         // couldn't squeeze through this portal
                         CollideFace(face);
@@ -874,7 +874,7 @@ bool kexCModel::CheckActorPosition(kexActor *actor, mapSector_t *initialSector)
 
 float kexCModel::PointOnFaceSide(const kexVec3 &origin, mapFace_t *face, const float extent)
 {
-    return face->plane.Distance(origin) - (face->plane.d + extent);
+    return face->plane.Dot(origin) - (face->plane.d + extent);
 }
 
 //
@@ -1469,7 +1469,7 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
         {
             mapFace_t *face = &faces[i];
 
-            if(face->plane.Distance(moveDir) > 0)
+            if(face->plane.Dot(moveDir) > 0)
             {
                 // ray isn't facing the plane
                 continue;

@@ -1532,7 +1532,7 @@ void kexRenderScene::DrawActors(kexRenderView &view, const bool bInWaterOnly)
 
         if(face->flags & FF_WATER)
         {
-            float d = (face->plane.Distance(view.Origin()) - face->plane.d)-32;
+            float d = (face->plane.Distance(view.Origin()))-32;
             testBits ^= (FLOATSIGNBIT(d) ^ 1);
         }
 
@@ -1602,7 +1602,7 @@ void kexRenderScene::FixSpriteClipping(kexRenderView &view, const bool bInWaterO
 
         if(face->flags & FF_WATER)
         {
-            float d = (face->plane.Distance(view.Origin()) - face->plane.d)-32;
+            float d = (face->plane.Distance(view.Origin()))-32;
             testBits ^= (FLOATSIGNBIT(d) ^ 1);
         }
 

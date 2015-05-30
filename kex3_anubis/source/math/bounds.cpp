@@ -149,8 +149,8 @@ bool kexBBox::IntersectingBox(const kexBBox &box) const
 
 bool kexBBox::IntersectingBox2D(const kexBBox &box) const
 {
-    return !(box.max[0] < min[0] || box.max[2] < min[2] ||
-             box.min[0] > max[0] || box.min[2] > max[2]);
+    return !(box.max[0] < min[0] || box.max[1] < min[1] ||
+             box.min[0] > max[0] || box.min[1] > max[1]);
 }
 
 //
@@ -166,7 +166,7 @@ float kexBBox::DistanceToPlane(kexPlane &plane)
 
     c = Center();
 
-    distStart = plane.Distance(c);
+    distStart = plane.Dot(c);
     distEnd = kexMath::Fabs((max.x - c.x) * plane.a) +
               kexMath::Fabs((max.y - c.y) * plane.b) +
               kexMath::Fabs((max.z - c.z) * plane.c);

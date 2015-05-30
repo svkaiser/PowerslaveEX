@@ -692,8 +692,8 @@ void kexPuppet::TryClimbOutOfWater(void)
             }
 
             // our movement vector must be crossing this face
-            if( face->plane.Distance(end) - face->plane.d >= 0 ||
-                face->plane.Distance(start) - face->plane.d < 0)
+            if( face->plane.Distance(end) >= 0 ||
+                face->plane.Distance(start) < 0)
             {
                 continue;
             }

@@ -1384,8 +1384,7 @@ void kexWorld::EnterSectorSpecial(kexActor *actor, mapSector_t *sector)
 
     if(ev->type != 50)
     {
-        if(sector->floorFace->plane.Distance(actor->Origin()) -
-            sector->floorFace->plane.d > actor->StepHeight())
+        if(sector->floorFace->plane.Distance(actor->Origin()) > actor->StepHeight())
         {
             // must be on the ground
             return;
@@ -1886,7 +1885,7 @@ void kexWorld::RadialDamage(kexActor *source, const float radius, const int dama
                 if(!(face->flags & FF_PORTAL))
                 {
                     if( face->sector >= 0 && face->flags & FF_TOGGLE && bCanDestroyWalls &&
-                        face->plane.Distance(start) - face->plane.d < (radius * 0.5f))
+                        face->plane.Distance(start) < (radius * 0.5f))
                     {
                         mapSector_t *s = &sectors[face->sector];
 
