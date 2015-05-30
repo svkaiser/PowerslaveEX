@@ -390,14 +390,14 @@ void kexOverWorld::Draw(void)
 void kexOverWorld::Tick(void)
 {
     kexGameLocal::mapInfo_t *map = &kexGame::cLocal->MapInfoList()[selectedMap];
-    const float sx = (float)(kexRenderScreen::SCREEN_WIDTH >> 1);
-    const float sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
     float mx = (float)kex::cInput->MouseX();
     float my = (float)kex::cInput->MouseY();
     unsigned int buttons;
     kexPlayerCmd *cmd;
     float nx;
     float ny;
+    float sx;
+    float sy;
         
     kexRender::cScreen->CoordsToRenderScreenCoords(mx, my);
 
@@ -414,6 +414,19 @@ void kexOverWorld::Tick(void)
     if(bFading)
     {
         return;
+    }
+
+    switch(kexRender::cScreen->GetRatio())
+    {
+    case kexRenderScreen::SR_WIDESCREEN:
+        sx = (float)(374 >> 1); // ugh...
+        sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
+        break;
+
+    default:
+        sx = (float)(kexRenderScreen::SCREEN_WIDTH >> 1);
+        sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
+        break;
     }
     
     buttons = kexGame::cLocal->ButtonEvent();

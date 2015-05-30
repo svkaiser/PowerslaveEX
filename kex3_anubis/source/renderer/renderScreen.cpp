@@ -74,6 +74,27 @@ bool kexRenderScreen::PointOnPic(kexTexture *texture, const float x, const float
 }
 
 //
+// kexRenderScreen::GetRatio
+//
+
+const kexRenderScreen::screenRatio_t kexRenderScreen::GetRatio(void) const
+{
+    int aspect = (kex::cSystem->VideoWidth() << 16) / kex::cSystem->VideoHeight();
+    const int dims = (4 << 16) / 3;
+    
+    if(aspect == dims)
+    {
+        return SR_NORMAL;
+    }
+    else if(aspect > dims)
+    {
+        return SR_WIDESCREEN;
+    }
+    
+    return SR_NARROWSCREEN;
+}
+
+//
 // kexRenderScreen::SetAspectDimentions
 //
 // Sets up the dimentions that confines to the aspect ratio

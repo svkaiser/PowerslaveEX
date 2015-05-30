@@ -18,7 +18,15 @@
 class kexRenderScreen
 {
 public:
+    typedef enum
+    {
+        SR_NORMAL       = 0,
+        SR_WIDESCREEN,
+        SR_NARROWSCREEN
+    } screenRatio_t;
+
     void                SetOrtho(const bool bNoAspectCorrection = false);
+    const screenRatio_t GetRatio(void) const;
     void                CoordsToRenderScreenCoords(float &x, float &y);
     void                SetAspectDimentions(float &x, float &y, float &width, float &height);
     void                DrawTexture(kexTexture *texture, const float x, const float y,
