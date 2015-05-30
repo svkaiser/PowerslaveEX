@@ -1494,10 +1494,23 @@ bool kexCModel::Trace(kexActor *actor, mapSector_t *sector,
                 // next sector if its a water surface
                 if(face->flags & FF_WATER || TraceFacePlane(face, 0, radius, true))
                 {
+                    mapSector_t *next = &sectors[face->sector];
+
+                    if(face->flags & FF_WATER)
+                    {
+                        if( face->plane.Distance(start) >= 0 &&
+                            face->plane.Distance(end) >= 0)
+                        {
+                            // start and end points are both in front
+                            // of the water surface
+                            continue;
+                        }
+                    }
+
                     // add to list if the ray passes through the portal
-                    sectorList.Set(&sectors[face->sector]);
-                    sectors[face->sector].validcount = validcount;
-                    contactSector = &sectors[face->sector];
+                    sectorList.Set(next);
+                    next->validcount = validcount;
+                    contactSector = next;
                 }
             }
             else if(face->flags & FF_SOLID)

@@ -199,6 +199,15 @@ kexActor *kexActorFactory::SpawnFromActor(const char *name, const float x, const
     
     actor->Origin().Lerp(end, kexGame::cLocal->CModel()->Fraction());
     actor->SetSector(kexGame::cLocal->CModel()->ContactSector());
+
+    actor->PrevOrigin() = actor->Origin();
+
+    if(!kexGame::cLocal->CModel()->CheckActorPosition(actor, actor->Sector()))
+    {
+        actor->Origin().x = source->Origin().x;
+        actor->Origin().y = source->Origin().y;
+        actor->SetSector(source->Sector());
+    }
     
     return actor;
 }
