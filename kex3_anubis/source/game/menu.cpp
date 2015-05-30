@@ -2654,6 +2654,8 @@ void kexMenuGraphics::Init(void)
 
 void kexMenuGraphics::Update(void)
 {
+    float fovVal = kexRenderView::cvarFOV.GetFloat();
+
     if(selectedDisplayItem <= -1)
     {
         for(uint i = 0; i < resList.Length(); ++i)
@@ -2682,6 +2684,11 @@ void kexMenuGraphics::Update(void)
         kexMath::Clamp(selectedDisplayItem, 0, resList.Length()-1);
         videoResolutions->selectedItem = selectedDisplayItem;
     }
+
+    if(kexMath::FCmp(fovVal, 74.0f)) fov->selectedItem = 0;
+    if(kexMath::FCmp(fovVal, 90.0f)) fov->selectedItem = 1;
+    if(kexMath::FCmp(fovVal, 110.0f)) fov->selectedItem = 2;
+    if(kexMath::FCmp(fovVal, 120.0f)) fov->selectedItem = 3;
 
     UpdateItems();
 }
