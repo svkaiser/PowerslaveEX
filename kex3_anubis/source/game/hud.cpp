@@ -485,8 +485,18 @@ void kexHud::DrawCrosshair(void)
     float w, h;
     float vw, vh;
     float x, y;
+    int weaponState;
 
     if(!kexPlayLoop::cvarCrosshair.GetBool())
+    {
+        return;
+    }
+
+    weaponState = kexGame::cLocal->Player()->Weapon().State();
+
+    if( weaponState == WS_HOLDSTER ||
+        weaponState == WS_RAISE ||
+        weaponState == WS_LOWER)
     {
         return;
     }
