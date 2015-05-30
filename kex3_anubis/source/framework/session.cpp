@@ -230,6 +230,11 @@ void kexSession::RunGame(void)
 
         curtime += msec;
 
+        if(cvarClientFPS.GetInt() > 60)
+        {
+            cvarClientFPS.Set(60);
+        }
+
         if(curtime >= kexMath::FrameSec(cvarClientFPS.GetInt()))
         {
             deltaTime = kexMath::MSec2Sec((float)curtime);

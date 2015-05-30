@@ -59,6 +59,8 @@ kexActor::kexActor(void)
     this->taggedActor = NULL;
     this->transparency = 255;
     this->color.Set(1, 1, 1);
+    this->mapActor = NULL;
+    this->definition = NULL;
 }
 
 //
