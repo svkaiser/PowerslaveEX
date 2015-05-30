@@ -34,6 +34,8 @@ typedef enum
     IA_JUMP,
     IA_FORWARD,
     IA_BACKWARD,
+    IA_LEFT,
+    IA_RIGHT,
     IA_STRAFELEFT,
     IA_STRAFERIGHT,
     IA_WEAPNEXT,

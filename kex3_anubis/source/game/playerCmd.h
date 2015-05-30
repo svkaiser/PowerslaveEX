@@ -21,13 +21,15 @@ typedef enum
     BC_JUMP         = BIT(1),
     BC_FORWARD      = BIT(2),
     BC_BACKWARD     = BIT(3),
-    BC_STRAFELEFT   = BIT(4),
-    BC_STRAFERIGHT  = BIT(5),
-    BC_WEAPONRIGHT  = BIT(6),
-    BC_WEAPONLEFT   = BIT(7),
-    BC_USE          = BIT(8),
-    BC_MAPZOOMIN    = BIT(9),
-    BC_MAPZOOMOUT   = BIT(10)
+    BC_LEFT         = BIT(4),
+    BC_RIGHT        = BIT(5),
+    BC_STRAFELEFT   = BIT(6),
+    BC_STRAFERIGHT  = BIT(7),
+    BC_WEAPONRIGHT  = BIT(8),
+    BC_WEAPONLEFT   = BIT(9),
+    BC_USE          = BIT(10),
+    BC_MAPZOOMIN    = BIT(11),
+    BC_MAPZOOMOUT   = BIT(12)
 } buttonCommand_t;
 
 class kexPlayerCmd

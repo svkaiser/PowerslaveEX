@@ -99,9 +99,38 @@ uint kexPlayerCmd::ButtonHeldTime(const int btn)
 void kexPlayerCmd::BuildTurning(void)
 {
     static float history[4][2];
+    static float turnLerp[2];
     static int historyCount = 0;
     int smooth;
     
+    if(buttons & BC_LEFT)
+    {
+        turnLerp[0] = (0.078125f - turnLerp[0]) * 0.05f + turnLerp[0];
+    }
+    else
+    {
+        turnLerp[0] = (0 - turnLerp[0]) * 0.15f + turnLerp[0];
+
+        if(kexMath::Fabs(turnLerp[0]) <= 0.005f)
+        {
+            turnLerp[0] = 0;
+        }
+    }
+
+    if(buttons & BC_RIGHT)
+    {
+        turnLerp[1] = (0.078125f - turnLerp[1]) * 0.05f + turnLerp[1];
+    }
+    else
+    {
+        turnLerp[1] = (0 - turnLerp[1]) * 0.15f + turnLerp[1];
+
+        if(kexMath::Fabs(turnLerp[1]) <= 0.005f)
+        {
+            turnLerp[1] = 0;
+        }
+    }
+
     angles[0] = ((float)turnx * cvarMSensitivityX.GetFloat()) / 2048.0f;
     angles[1] = ((float)turny * cvarMSensitivityY.GetFloat()) / 2048.0f;
 
@@ -125,6 +154,9 @@ void kexPlayerCmd::BuildTurning(void)
     
     angles[0] /= cvarMSmooth.GetFloat();
     angles[1] /= cvarMSmooth.GetFloat();
+
+    angles[0] -= turnLerp[0];
+    angles[0] += turnLerp[1];
     
     historyCount++;
 }
