@@ -31,6 +31,7 @@ public:
     int16_t                     &SelectedMap(void) { return selectedMap; }
 
 private:
+    void                        GetScreenOffsets(float &sx, float &sy);
     void                        DrawSprite(const float sx, const float sy, const byte color,
                                            spriteAnim_t *anim);
     void                        DrawCursor(const int fade);

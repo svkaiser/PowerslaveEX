@@ -59,8 +59,8 @@ void kexOverWorld::Init(void)
 
 void kexOverWorld::Start(void)
 {
-    const float sx = (float)(kexRenderScreen::SCREEN_WIDTH >> 1);
-    const float sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
+    float sx;
+    float sy;
 
     if(kexGame::cLocal->MapInfoList().Length() == 0)
     {
@@ -76,6 +76,8 @@ void kexOverWorld::Start(void)
 
     camera_x = kexGame::cLocal->MapInfoList()[selectedMap].overworldX;
     camera_y = kexGame::cLocal->MapInfoList()[selectedMap].overworldY;
+
+    GetScreenOffsets(sx, sy);
 
     kexMath::Clamp(camera_x, sx, (float)pic.OriginalWidth() - sx);
     kexMath::Clamp(camera_y, sy, (float)pic.OriginalHeight() - sy);
@@ -100,6 +102,26 @@ void kexOverWorld::Stop(void)
 
     kex::cInput->ToggleMouseGrab(true);
     kex::cSession->ToggleCursor(false);
+}
+
+//
+// kexOverWorld::GetScreenOffsets
+//
+
+void kexOverWorld::GetScreenOffsets(float &sx, float &sy)
+{
+    switch(kexRender::cScreen->GetRatio())
+    {
+    case kexRenderScreen::SR_WIDESCREEN:
+        sx = (float)(374 >> 1); // ugh...
+        sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
+        break;
+
+    default:
+        sx = (float)(kexRenderScreen::SCREEN_WIDTH >> 1);
+        sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
+        break;
+    }
 }
 
 //
@@ -416,18 +438,7 @@ void kexOverWorld::Tick(void)
         return;
     }
 
-    switch(kexRender::cScreen->GetRatio())
-    {
-    case kexRenderScreen::SR_WIDESCREEN:
-        sx = (float)(374 >> 1); // ugh...
-        sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
-        break;
-
-    default:
-        sx = (float)(kexRenderScreen::SCREEN_WIDTH >> 1);
-        sy = (float)(kexRenderScreen::SCREEN_HEIGHT >> 1);
-        break;
-    }
+    GetScreenOffsets(sx, sy);
     
     buttons = kexGame::cLocal->ButtonEvent();
     cmd = &kexGame::cLocal->Player()->Cmd();
