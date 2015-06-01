@@ -253,4 +253,5 @@ Proj_Soul -1
     damage                  40
     impactWallsOnly         1
     homing                  1
+    stunTarget              1
 }

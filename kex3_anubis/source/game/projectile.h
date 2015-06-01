@@ -25,7 +25,8 @@ typedef enum
     PF_AIMONSPAWN           = BIT(3),
     PF_AIMING               = BIT(4),
     PF_NOHOMINGTHRUST       = BIT(5),
-    PF_NOCLIPINITIALSECTOR  = BIT(6)
+    PF_NOCLIPINITIALSECTOR  = BIT(6),
+    PF_STUNTARGET           = BIT(7)
 } projectileFlags_t;
 
 //-----------------------------------------------------------------------------

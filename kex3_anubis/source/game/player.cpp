@@ -176,6 +176,17 @@ void kexPuppet::OnDamage(kexActor *instigator)
         return;
     }
 
+    if(instigator && instigator->InstanceOf(&kexProjectile::info) &&
+        static_cast<kexProjectile*>(instigator)->ProjectileFlags() & PF_STUNTARGET)
+    {
+        kexGame::cLocal->PlayLoop()->DamageFlash();
+        PlaySound("sounds/pshock.wav");
+
+        playerFlags |= PF_STUNNED;
+        owner->LockTime() = 60;
+        owner->ShakeTime() = 30;
+    }
+
     if(playerFlags & PF_ELECTROCUTE)
     {
         playerFlags &= ~PF_ELECTROCUTE;
@@ -1016,7 +1027,14 @@ void kexPuppet::Tick(void)
 
     if(owner->LockTime() > 0)
     {
-        return;
+        if(playerFlags & PF_STUNNED && origin.z > floorHeight)
+        {
+            // nothing
+        }
+        else
+        {
+            return;
+        }
     }
     
     if(playerFlags & (PF_NOCLIP|PF_FLY))
@@ -1656,13 +1674,25 @@ void kexPlayer::Tick(void)
 
     if(lockTime > 0)
     {
-        if(weapon.State() == WS_HOLDSTER)
+        if(actor->PlayerFlags() & PF_STUNNED && actor->Origin().z > actor->FloorHeight())
         {
-            weapon.Update();
+            lockTime--;
         }
+        else
+        {
+            if(weapon.State() == WS_HOLDSTER)
+            {
+                weapon.Update();
+            }
 
-        lockTime--;
-        return;
+            lockTime--;
+            return;
+        }
+    }
+
+    if(lockTime <= 0 && actor->PlayerFlags() & PF_STUNNED)
+    {
+        actor->PlayerFlags() &= ~PF_STUNNED;
     }
 
     if(cmd.Buttons() & BC_WEAPONLEFT)

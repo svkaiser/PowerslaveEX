@@ -604,6 +604,7 @@ void kexProjectile::Spawn(void)
         if(definition->GetBool("homing"))           projectileFlags |= PF_HOMING;
         if(definition->GetBool("aimOnSpawn"))       projectileFlags |= PF_AIMONSPAWN;
         if(definition->GetBool("noHomingThrust"))   projectileFlags |= PF_NOHOMINGTHRUST;
+        if(definition->GetBool("stunTarget"))       projectileFlags |= PF_STUNTARGET;
 
         if(definition->GetBool("spawnLight"))
         {

@@ -29,7 +29,8 @@ typedef enum
     PF_FLOATING         = BIT(7),
     PF_ELECTROCUTE      = BIT(8),
     PF_DEAD             = BIT(9),
-    PF_GOD              = BIT(10)
+    PF_GOD              = BIT(10),
+    PF_STUNNED          = BIT(11)
 } playerFlags_t;
 
 typedef enum
