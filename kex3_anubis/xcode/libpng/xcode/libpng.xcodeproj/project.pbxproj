@@ -284,7 +284,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 			};
 			buildConfigurationList = 4FADC24608B4156D00ABE55E /* Build configuration list for PBXProject "libpng" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -458,6 +458,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "-lz";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.libpng;
 				PRODUCT_NAME = libpng;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -478,6 +479,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "-lz";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.libpng;
 				PRODUCT_NAME = libpng;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -489,6 +491,7 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1.6.13;
 				DYLIB_CURRENT_VERSION = 1.6.13;
+				ENABLE_TESTABILITY = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;

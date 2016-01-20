@@ -212,7 +212,6 @@ DECLARE_KEX_ACTION(kexActionPrintf)
 
 DECLARE_KEX_ACTION(kexActionHitScan)
 {
-    kexGameLocal *game  = kexGame::cLocal;
     kexCModel *cm       = kexGame::cLocal->CModel();
     float dist          = this->args[0].f;
     float hSpan         = this->args[1].f;

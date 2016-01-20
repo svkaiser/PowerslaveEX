@@ -271,7 +271,6 @@ void kexRenderScene::BuildSky(void)
 
 void kexRenderScene::DrawSky(kexRenderView &view)
 {
-    kexCpuVertList *vl = kexRender::cVertList;
     kexMatrix mtx;
     float rect[4];
     float sw, sh;
