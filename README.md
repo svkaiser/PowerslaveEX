@@ -16,7 +16,7 @@ The solution file is compatible with the Express releases.
 Compiling on MacOS 10.x:
 -------------------
 
-There was plans to do a MacOSX port but cancelled when project halted. The XCODE project files can be found in kex3_anubis/xcode/
+There were plans to do a MacOSX port but cancelled when the project got halted. The XCODE project files can be found in kex3_anubis/xcode/
 
 Dependencies
 -------------------
