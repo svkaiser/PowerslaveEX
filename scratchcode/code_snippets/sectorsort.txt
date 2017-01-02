@@ -1,0 +1,71 @@
+mapSector_t *sortSectors[1000];
+
+uint t2 = visibleSectors.CurrentLength();
+int s0;
+
+for(int i = 0; i < t2; ++i)
+{
+    sortSectors[i+1] = &world->Sectors()[visibleSectors[i]];
+}
+
+int a3 = 1;
+int a2 = a3;
+
+mapSector_t **t3 = &sortSectors[1];
+mapSector_t **t1 = &sortSectors[0];
+
+do
+{
+    mapSector_t *t0 = *t1;
+    mapSector_t **a1 = &sortSectors[a3];
+
+    do
+    {
+        mapSector_t *a0 = *(a1-1);
+
+        float v1 = t0->dist;
+        float v0 = a0->dist;
+
+        if(v0 < v1)
+        {
+            *a1 = a0;
+            a2--;
+            a1--;
+        }
+        else
+        {
+            break;
+        }
+        
+    } while(a2 > 0);
+
+    t1++;
+
+    if(a2 != a3)
+    {
+        *(t3 + a2) = t0;
+    }
+
+    a3++;
+    a2 = a3;
+} while(a3 < t2);
+
+int dword_8007AD34 = 0;
+
+mapSector_t **t4 = &sortSectors[t2];
+int t7 = 0;
+a3 = 0;
+
+if(t2 <= 0)
+{
+}
+
+dword_8007AD34++;
+s0 = t7 + 1;
+
+if(s0 < t2)
+{
+}
+
+t4--;
+t2--;

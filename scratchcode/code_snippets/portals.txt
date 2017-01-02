@@ -1,0 +1,207 @@
+void R_ScanSectors(mapSector_t *sector)
+{
+    int s0;
+    bool v0;
+    
+    sector->markType = 2;
+    sector->renderFlags |= 1;
+    validcount++;
+    
+    numScanSectors = 1;
+    scanSectors[0] = sector;
+    
+    do
+    {
+        mapSector_t *s;
+        
+        v0 = true;
+        s0 = 0;
+        
+        if(numScanSectors <= 0)
+        {
+            continue;
+        }
+        
+        do
+        {
+            s = scanSectors[s0++];
+            if(!(s->renderFlags & 1))
+            {
+                continue;
+            }
+            
+            s->renderFlags &= ~0x1;
+            
+            R_FloodPortals(s);
+            v0 = false;
+            
+        } while(s0 < numScanSectors);
+        
+    } while(v0 == true);
+}
+
+void R_FloodPortals(mapSector_t *sector)
+{
+    int faceEnd = sector->faceEnd + 3;
+    int faceStart = sector->faceStart;
+    
+    if(sector->validcount != validcount)
+    {
+        sector->validcount = validcount;
+        
+        for(int i = faceStart; i < faceEnd; ++i)
+        {
+            mapFace_t *face = &faces[i];
+            float dist = face->plane.Distance(view.Origin());
+            
+            if(!(face->flags & FF_PORTAL))
+            {
+                continue;
+            }
+            
+            if(dist <= 0)
+            {
+                // if(t7 (sector) != t6 (othersector?) continue;
+            }
+            
+            // setup clip span here
+        }
+    }
+
+    for(int i = faceStart; i < faceEnd; ++i)
+    {
+        mapFace_t *face = &faces[i];
+        
+        if(face->sector >= 0)
+        {
+            mapSector_t *s = &sectors[face->sector];
+            
+            if(s->markType == 2)
+            {
+                continue;
+            }
+            
+            // check portal face against this face
+            // if....continue;
+            
+            if(face->flags & FF_SOLID)
+            {
+                face->flags |= 0x800; // ???
+            }
+            
+            // if culled { continue; }
+            
+            if(s->markType == 0)
+            {
+                s->markType = 1;
+                scanSectors[numScanSectors++] = s;
+                
+                s->field_24 = face->u11; // ???
+            }
+            else
+            {
+                if(face->u11 < s->field_24)
+                {
+                    s->field_24 = face->u11; // ???
+                }
+            }
+            
+            s->renderFlags |= 0x1;
+            continue;
+        }
+        else
+        {
+            // check portal face against this face
+            // if....continue;
+        }
+    }
+}
+
+bool R_SetupClipSpan(mapFace_t *face, mapSector_t *sec)
+{
+    float x1, x2, x3, x4, y1, y2, y3, y4;
+    
+    /*
+      1 ----------- 4
+        |         |
+        |         |
+        |         |
+        |         |
+        |         |
+      2 ----------- 3
+    */
+    
+    // get points
+    // ....
+    
+    if((y1 == y4) || (x1 == x4) || (y2 == y3) || (x2 == x3))
+    {
+        return false;
+    }
+    
+    if((y1 == y2) || (x1 == x2) || (y3 == y4) || (x3 == x4))
+    {
+        return false;
+    }
+    
+    face->x1 = (x2 < x1) ? x2 : x1;
+    if(x3 < face->x1) face->x1 = x3;
+    if(x4 < face->x1) face->x1 = x4;
+    if(face->x1 < 0) face->x1 = 0;
+    
+    face->x2 = (x1 < x2) ? x2 : x1;
+    if(face->x2 < x3) face->x2 = x3;
+    if(face->x2 < x4) face->x2 = x4;
+    
+    if(face->x1 > 320) face->x2 = 320;
+    
+    face->y1 = (y2 < y1) ? y2 : y1;
+    if(y3 < face->y1) face->y1 = y3;
+    if(y4 < face->y1) face->y1 = y4;
+    if(face->y1 < 0) face->y1 = 0;
+    
+    face->y2 = (y1 < y2) ? y2 : y1;
+    if(face->y2 < y3) face->y2 = y3;
+    if(face->y2 < y4) face->y2 = y4;
+    
+    if(face->y2 > 240) face->y2 = 240;
+    
+    if(face->sector >= 0)
+    {
+        mapSector_t *sector = &sectors[face->sector];
+        bool bClipped = false;
+        
+        if(face->x1 < 0)
+        {
+            return false;
+        }
+    
+        if(face->x2 < sec->x1) return false;
+        if(face->x1 > sec->x2) return false;
+        if(face->y2 < sec->y1) return false;
+        if(face->y1 > sec->y2) return false;
+        
+        float a1 = face->x1;
+        float a3 = face->x2;
+        float t0 = face->y1;
+        float t1 = face->y2;
+        
+        if(a1 < sec->x1) a1 = sec->x1;
+        if(a3 > sec->x2) a3 = sec->x2;
+        if(t0 < sec->y1) t0 = sec->y1;
+        if(t1 > sec->y2) t1 = sec->y2;
+        
+        if(a1 < sector->x1) { sector->x1 = a1; bClipped = true; }
+        if(a3 > sector->x2) { sector->x2 = a3; bClipped = true; }
+        if(t0 < sector->y1) { sector->y1 = t0; bClipped = true; }
+        if(t1 > sector->y2) { sector->y2 = t1; bClipped = true; }
+        
+        if(bClipped)
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+

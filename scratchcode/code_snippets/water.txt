@@ -1,0 +1,144 @@
+byte waterParticleForce[1024];
+byte waterParticleOffsets[1024];
+
+void R_InitWaterRipples(void)
+{
+    byte *s4 = waterParticleForce;
+    byte *s5 = waterParticleOffsets;
+    int s3 = 0;
+    
+    for(int i = 0; i < 16; i++)
+    {
+        byte *s1 = s5;
+        byte *s0 = s4;
+        
+        for(int j = 0; j < 16; j++)
+        {
+            int v0 = kexRand::Max(255);
+            *(int*)s0 = 0;
+            
+            v0 += -128;
+            
+            int v1 = v0 << 12;
+            v0 = v1;
+            
+            if(v1 < 0)
+            {
+                v0 = -v0;
+            }
+            
+            *(int*)s1 = v1;
+            
+            if(s3 < v0)
+            {
+                s3 = v0;
+            }
+            
+            s1 += 4;
+            s0 += 4;
+        }
+        
+        s5 += 64;
+        s4 += 64;
+    }
+    
+    printf("maxwater magnitude %d\n", s3);
+}
+
+void R_WaterAnimation(void)
+{
+    byte *t6 = waterParticleForce;
+    byte *t8 = waterParticleOffsets;
+    byte *t5 = t8;
+    
+    for(int t2 = 0; t2 < 16; t2++)
+    {
+        int v0 = t2 + 1;
+        v0 = v0 & 15;
+        v0 = v0 << 6;
+        
+        byte *t7 = t8 + v0;
+        
+        v0 = t2 - 1;
+        v0 = v0 & 15;
+        v0 = v0 << 6;
+        
+        byte *t4 = t8 + v0;
+        byte *t1 = t5;
+        byte *t3 = t6;
+        
+        for(int t0 = 0; t0 < 16; t0++)
+        {
+            int a1 = t0 << 2;
+            byte *v0p = t7 + a1;
+            byte *a2 = t4 + a1;
+            
+            int a3 = t0 + 1;
+            int a0 = t0 - 1;
+            int _t0 = a3;
+            
+            a0 = a0 & 15;
+            a0 = a0 << 2;
+            
+            int v1 = *(int*)v0p;
+            int v0 = *(int*)a2;
+            
+            byte *a0p = t1 + a0;
+            
+            v1 = v1 + v0;
+            v0 = _t0 & 15;
+            v0 = v0 << 2;
+            
+            v0p = t1 + v0;
+            
+            v0 = *(int*)v0p;
+            a0 = *(int*)a0p;
+            
+            v1 = v1 + v0;
+            v1 = v1 + a0;
+            
+            v0p = t1 + a1;
+            
+            byte *a1p = t3 + a1;
+            
+            v0 = *(int*)v0p;
+            a0 = *(int*)a1p;
+            
+            v0 = v0 << 2;
+            
+            v1 = v1 - v0;
+            v1 = v1 + a0;
+            
+            *(int*)a1p = v1;
+        }
+        
+        t6 += 64;
+        t5 += 64;
+    }
+    
+    byte *a3 = waterParticleForce;
+    byte *a2 = waterParticleOffsets;
+    
+    for(int t2 = 0; t2 < 16; t2++)
+    {
+        byte *a0 = a2;
+        byte *a1 = a3;
+        
+        for(int t0 = 0; t0 < 16; t0++)
+        {
+            int v0 = *(int*)a1;
+            a1 += 4;
+            
+            int v1 = *(int*)a0;
+            v0 = v0 >> 9;
+            
+            v0 = v0 + v1;
+            *(int*)a0 = v0;
+            
+            a0 += 4;
+        }
+        
+        a2 += 64;
+        a3 += 64;
+    }
+}

@@ -1,0 +1,75 @@
+static int randomseed1 = 0;
+static int randomseed2 = 0x11111111;
+static int randomseed3 = 0x1010101;
+
+int M_RandomSeed(void)
+{
+    int i;
+    int s1, s2, s3;
+    int a, b, c;
+    
+    a = randomseed1;
+    b = randomseed2;
+    c = randomseed3;
+    
+    s1 = a << 31;
+    s1 ^= (a << 6);
+    s1 ^= (a << 4);
+    s1 ^= (a << 2);
+    s1 ^= (a << 1);
+    s1 ^= a;
+    s1 <<= 31;
+    s1 |= (a << 1);
+    
+    s2 = b << 30;
+    s2 ^= (s2 << 2);
+    s2 &= 1;
+    s2 <<= 30;
+    s2 |= (b << 1);
+    
+    s3 = c << 28;
+    s3 ^= (c << 1);
+    s3 &= 1;
+    s3 <<= 28;
+    s3 |= (c << 1);
+    
+    randomseed1 = s1;
+    randomseed2 = s2;
+    randomseed3 = s3;
+    
+    if(s1 == 0)
+    {
+        s3 &= 1;
+        s3 |= ((s1 & s2) | s3);
+        
+        s1 = s3 & 1;
+    }
+    else
+    {
+        s1 = s2 & 1;
+    }
+    
+    return s1;
+}
+
+int M_Random(void)
+{
+    int bit1 = M_RandomSeed();
+    int bit2 = M_RandomSeed();
+    int bit3 = M_RandomSeed();
+    int bit4 = M_RandomSeed();
+    int bit5 = M_RandomSeed();
+    int bit6 = M_RandomSeed();
+    int bit7 = M_RandomSeed();
+    int bit8 = M_randomSeed();
+    int r;
+    
+    r  = (bit1 << 7);
+    r |= (bit2 << 6);
+    r |= (bit3 << 5);
+    r |= (bit4 << 4);
+    r |= (bit5 << 3);
+    r |= (bit6 << 2);
+    r |= (bit7 << 1);
+    r |= (bit8 << 0);
+}
