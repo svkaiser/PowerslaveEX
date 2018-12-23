@@ -262,8 +262,8 @@ void kexInputSDL::ReadMouse(void)
     inputEvent_t ev;
 
     btn = SDL_GetMouseState(&mouse_x, &mouse_y);
-    
-    if(!bGrabMouse)
+
+    if(!bGrabMouse || !bWindowFocused)
     {
         return;
     }
@@ -282,11 +282,6 @@ void kexInputSDL::ReadMouse(void)
     }
 
     lastmbtn = btn;
-
-    if(MouseShouldBeGrabbed())
-    {
-        CenterMouse();
-    }
 }
 
 //
@@ -818,6 +813,7 @@ void kexInputSDL::GetEvent(const SDL_Event *Event)
         case SDL_WINDOWEVENT_FOCUS_GAINED:
         case SDL_WINDOWEVENT_ENTER:
             UpdateFocus();
+			UpdateGrab();
             break;
         case SDL_WINDOWEVENT_FOCUS_LOST:
             bWindowFocused = false;
@@ -842,6 +838,9 @@ void kexInputSDL::GetEvent(const SDL_Event *Event)
 void kexInputSDL::PollInput(void)
 {
     SDL_Event Event;
+
+    UpdateFocus();
+    UpdateGrab();
 
     while(SDL_PollEvent(&Event))
     {
